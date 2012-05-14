@@ -1,0 +1,1 @@
+java -jar berryserver.jar -s high -p 500

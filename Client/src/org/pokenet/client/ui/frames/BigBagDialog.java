@@ -527,7 +527,7 @@ class ItemPopup extends Frame{
 			m_give = new Button("Give");
 			m_give.setSize(100,25);
 			m_give.setLocation(0, m_use.getY() + 25);
-			m_give.setEnabled(false);
+			//m_give.setEnabled(false);
 			m_give.addActionListener(new ActionListener(){
 				public void actionPerformed (ActionEvent e){
 					giveItem(m_id);
@@ -620,6 +620,7 @@ class ItemPopup extends Frame{
 		m_team = new TeamPopup(this, id, false, false);
 		m_team.setLocation(m_give.getAbsoluteX() + getWidth(), m_give.getAbsoluteY() - 15);
 		getDisplay().add(m_team);
+		
 	}
 }
 

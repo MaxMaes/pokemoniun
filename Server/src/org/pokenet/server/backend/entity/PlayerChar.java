@@ -638,6 +638,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 			m_friends = new ArrayList<String>();
 		if(m_friends.size() < 10) {
 			m_friends.add(username);
+			//TODO: Add friend to the database friendlist.
 			m_tcpSession.write("Fa" + username);
 		}
 	}
@@ -654,6 +655,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 		for(int i = 0; i < m_friends.size(); i++) {
 			if(m_friends.get(i).equalsIgnoreCase(username)) {
 				m_friends.remove(i);
+				//TODO: Remove friend from the database friendlist.
 				m_tcpSession.write("Fr" + username);
 				return;
 			}

@@ -1,5 +1,6 @@
 package org.pokenet.client.ui;
 
+import java.io.Console;
 import java.util.HashMap;
 
 import mdes.slick.sui.Display;
@@ -31,6 +32,8 @@ import org.pokenet.client.ui.frames.ShopDialog;
 import org.pokenet.client.ui.frames.TownMap;
 import org.pokenet.client.ui.frames.TradeDialog;
 
+import sun.security.util.Debug;
+
 /**
  * The main ui on screen
  * @author shadowkanji
@@ -61,12 +64,14 @@ public class Ui extends Frame {
     private ConfirmationDialog m_evolveDialog;
     private BigBagDialog m_bag;
     private PlayerInfoDialog m_stats;
+    private GameClient gc;
 	
 	/**
 	 * Default constructor
 	 */
-	public Ui(Display display) {
+	public Ui(Display display,GameClient gc) {
 		m_instance = this;
+		this.gc = gc;
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		this.setSize(800, 66);
@@ -132,7 +137,7 @@ public class Ui extends Frame {
 	 * Starts the HUD buttons
 	 */
 	public void startButtons(){
-		m_buttons = new ImageButton[8];
+		m_buttons = new ImageButton[9];
 		
 		m_buttons[0] = HUDButtonFactory.getButton("stats");
         m_buttons[0].addActionListener(new ActionListener() {
@@ -197,14 +202,30 @@ public class Ui extends Frame {
         	}
         });
         m_buttons[7].setToolTipText("Help");
-
-        for (int i = 0; i < m_buttons.length; i++){
-        	m_buttons[i].pack();
-        	getContentPane().add(m_buttons[i]);
-        	m_buttons[i].setLocation(5 + (32 * i) + (5 * i), 7);
-        }
+        
+        m_buttons[8] = HUDButtonFactory.getButton("disconnect");
+        m_buttons[8].addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		disconnect();
+        	}
+        });
+		m_buttons[8].setToolTipText("Disconnect");
+		
+		 for (int i = 0; i < m_buttons.length; i++){
+	        	m_buttons[i].pack();
+	        	getContentPane().add(m_buttons[i]);
+	        	m_buttons[i].setLocation(5 + (32 * i) + (5 * i), 7);
+	        }
 	}
 	
+	protected void disconnect() 
+	{
+		gc.reset();
+		System.out.println("Disconnected");
+	}
+
 	/**
 	 * Adds a message to its appropriate chat window
 	 * @param m
@@ -212,7 +233,7 @@ public class Ui extends Frame {
 	public void messageReceived(String m) {
 		switch(m.charAt(0)) {
 		case 'n':
-			//NPC Speeech
+			//NPC Speech
 			String [] speech = m.substring(1).split(",");
 			String result = "";
 			for(int i = 0; i < speech.length; i++) {

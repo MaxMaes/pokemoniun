@@ -65,6 +65,11 @@ public class HUDButtonFactory {
                         rollovers.put("friends", getRolloverImage("friends"));
                         downs.put("friends", getDownImage("friends"));
                         
+                        // -- Disconnect Buttons --
+                        normals.put("disconnect", getNormalImage("disconnect"));
+                        rollovers.put("disconnect", getRolloverImage("disconnect"));
+                        downs.put("disconnect", getDownImage("disconnect"));
+                        
                         font = GameClient.getFontSmall();
                         //LoadingList.setDeferredLoading(false);
                 } catch (SlickException e) {

@@ -13,6 +13,7 @@ import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 
 import org.apache.mina.core.RuntimeIoException;
+import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.IoFuture;
 import org.apache.mina.core.future.IoFutureListener;
@@ -70,6 +71,10 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame {
 	//Some variables needed
+	
+	
+	private TcpProtocolHandler m_tcpProtocolHandler;
+	
 	private static GameClient m_instance;
 	private static AppGameContainer gc;
 	private ClientMapMatrix m_mapMatrix;
@@ -233,7 +238,7 @@ public class GameClient extends BasicGame {
 		m_itemdb.reinitialise();
 
 		/*
-		 * Move Leraning Manager
+		 * Move Learning Manager
 		 */
 		m_moveLearningManager = new MoveLearningManager();
 		m_moveLearningManager.start();
@@ -248,6 +253,12 @@ public class GameClient extends BasicGame {
 //		LoadingList.setDeferredLoading(false);
 
 	}
+	
+	public TcpProtocolHandler getTcpProtocolHandler()
+	{
+		return m_tcpProtocolHandler;
+	}
+
 
 	private void loadSprites() {
 		try {
@@ -319,7 +330,7 @@ public class GameClient extends BasicGame {
 					if(options != null)
 						m_weather.setEnabled(!Boolean.parseBoolean(options.get("disableWeather")));
 					
-					m_ui = new Ui(m_display); 
+					m_ui = new Ui(m_display,this); 
 					m_ui.setAllVisible(false);	
 				}
 				
@@ -751,6 +762,19 @@ public class GameClient extends BasicGame {
 			} catch (Exception e) {}
 		}
 	}
+	/**
+	 * Disconnects from the current game/chat server
+	 */
+	public void disconnect()
+	{
+		CloseFuture cfTcp = m_packetGen.getUdpSession().close(true);
+		cfTcp.awaitUninterruptibly();
+		assert cfTcp.isClosed():"Warning the TCP session was not closed";
+			
+		CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
+		cfUdp.awaitUninterruptibly();
+		assert cfUdp.isClosed():"Warning the UDP session was not closed";
+	}
 
 
 	/**
@@ -765,7 +789,8 @@ public class GameClient extends BasicGame {
 		connector.getFilterChain().addLast("codec",
 				new ProtocolCodecFilter(
 						new TextLineCodecFactory(Charset.forName("US-ASCII"))));
-		connector.setHandler(new TcpProtocolHandler(this));
+		m_tcpProtocolHandler = new TcpProtocolHandler(this);
+		connector.setHandler(m_tcpProtocolHandler);
 		ConnectFuture cf = connector.connect(new InetSocketAddress(HOST, 7002));
 		cf.addListener(new IoFutureListener() {
 			public void operationComplete(IoFuture s) {
@@ -1036,6 +1061,7 @@ public class GameClient extends BasicGame {
 	 * Resets the client back to the z
 	 */
 	public void reset() {
+		disconnect();
 		m_packetGen = null;
 		HOST = "";
 		try {

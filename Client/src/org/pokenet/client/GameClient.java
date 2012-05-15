@@ -929,7 +929,12 @@ public class GameClient extends BasicGame {
 				}
 			};
 			m_confirm = new ConfirmationDialog("Are you sure you want to exit?",yes,no);
-			getUi().getDisplay().add(m_confirm);
+			if(getUi() != null)	{
+				getUi().getDisplay().add(m_confirm);
+			}
+			else{
+				System.out.println("Attempting close before client loaded, ignoring");
+			}
 		}		
 		return m_close;
 	}

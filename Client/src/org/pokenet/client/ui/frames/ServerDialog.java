@@ -1,7 +1,6 @@
 package org.pokenet.client.ui.frames;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,7 +66,6 @@ public class ServerDialog extends Frame
 			m_servers = new Button[5];
 			m_host = new String[5];
 			InputStream stream;
-			//Web based serverlist
 			URL url = new URL("http://pokemonium.com/launcher/servers.txt");
 			stream = url.openStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(stream));

@@ -1,0 +1,16 @@
+﻿Release Notes:
+[FIX] NullPointer when closing client before it was loaded.
+[FIX] NullPointer at startup regarding server hosts.
+[FIX] IllegalThreadStateException when time is set multiple times.
+[FIX] Client doesn't crash when an unimplemented language is selected.
+[FIX] Non-available servers are no longer clickable.
+[FIX] Client-sided movement should be smooth and fixed now.
+
+[ADD] Added Logout button to the UI.
+[ADD] Serverlist is retrieved from the web.
+[ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
+
+[BUG] NullPointerException on certain logouts.
+[BUG] Pressing enter to login logs you out immediately afterwards.
+
+[???] Fixed a few warnings.

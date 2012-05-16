@@ -407,7 +407,8 @@ public class GameClient extends BasicGame
 				{
 					handleKeyPress(lastPressedKey);
 				}
-				if(lastPressedKey == Input.KEY_ESCAPE || lastPressedKey == Input.KEY_TAB)
+				if(lastPressedKey != Input.KEY_W && lastPressedKey != Input.KEY_A && lastPressedKey != Input.KEY_S
+						&& lastPressedKey != Input.KEY_D) 
 				{
 					lastPressedKey = -2;
 				}
@@ -583,8 +584,9 @@ public class GameClient extends BasicGame
 		{
 			if(m_login.isVisible())
 			{
-				if(key == (Input.KEY_ENTER) || key == (Input.KEY_NUMPADENTER))
-					m_login.enterKeyDefault();
+				if(key == (Input.KEY_ENTER) || key == (Input.KEY_NUMPADENTER)){
+					System.out.println("ENTER");
+					m_login.enterKeyDefault();}
 				if(key == (Input.KEY_TAB))
 					m_login.tabKeyDefault();
 			}

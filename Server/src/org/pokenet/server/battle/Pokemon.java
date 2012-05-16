@@ -72,8 +72,6 @@ import org.simpleframework.xml.ElementArray;
  */
 public class Pokemon extends PokemonSpecies {
 
-	private static final long                 serialVersionUID = 2636950446169268200L;
-
 	// Transient statistics.
 	@Element
 	transient private String                  m_dateCaught;

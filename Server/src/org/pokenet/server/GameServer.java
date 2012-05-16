@@ -52,7 +52,6 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer {
 	private static GameServer m_instance;
-	private static final long serialVersionUID = 1L;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers, m_movementThreads;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;

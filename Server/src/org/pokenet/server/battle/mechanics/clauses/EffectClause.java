@@ -25,8 +25,6 @@ public abstract class EffectClause extends Clause {
     public boolean equals(Object o2) {
         if (!(o2 instanceof EffectClause))
             return false;
-        if (o2 == null)
-            return false;
         return ((EffectClause)o2).m_effect.equals(m_effect);
     }
     

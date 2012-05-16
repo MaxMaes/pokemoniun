@@ -365,9 +365,8 @@ public abstract class BattleField {
 	  * Returns the first instance of an effect of a certain class that is
 	  * applied to the BattleField.
 	  */
-	 @SuppressWarnings("unchecked")
 	 public FieldEffect getEffectByType(Class type) {
-		 ArrayList list = getEffectsByType(type);
+		 ArrayList<FieldEffect> list = getEffectsByType(type);
 		 if (list.size() == 0) {
 			 return null;
 		 }
@@ -378,7 +377,6 @@ public abstract class BattleField {
 	  * Returns a list of the effects of a certain class that are applied to
 	  * this BattleField.
 	  */
-	 @SuppressWarnings("unchecked")
 	 public ArrayList<FieldEffect> getEffectsByType(Class type) {
 		 ArrayList<FieldEffect> ret = new ArrayList<FieldEffect>();
 		 Iterator<FieldEffect> i = m_effects.iterator();
@@ -387,7 +385,7 @@ public abstract class BattleField {
 			 if ((effect == null) || (!effect.isActive())) {
 				 continue;
 			 }
-			 if (type.isAssignableFrom(effect.getClass())) {
+			 if (type.getClass().isAssignableFrom(effect.getClass())) {
 				 ret.add(effect);
 			 }
 		 }
@@ -617,7 +615,6 @@ public abstract class BattleField {
 	 /**
 	  * Tick status effects at the end of a turn.
 	  */
-	 @SuppressWarnings("unchecked")
 	 private void tickStatuses(Pokemon[] active) {
 		 sortBySpeed(active);
 
@@ -633,10 +630,10 @@ public abstract class BattleField {
 				 Pokemon poke = active[j];
 				 if (poke.isFainted()) continue;
 
-				 List v = poke.getStatusesByTier(i);
-				 Iterator k = v.iterator();
+				 List<StatusEffect> v = poke.getStatusesByTier(i);
+				 Iterator<StatusEffect> k = v.iterator();
 				 while (k.hasNext()) {
-					 ((StatusEffect)k.next()).tick(poke);
+					 k.next().tick(poke);
 				 }
 			 }
 		 }

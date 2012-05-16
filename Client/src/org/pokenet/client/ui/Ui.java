@@ -1,14 +1,11 @@
 package org.pokenet.client.ui;
 
-import java.io.Console;
 import java.util.HashMap;
-
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
@@ -31,8 +28,6 @@ import org.pokenet.client.ui.frames.RequestDialog;
 import org.pokenet.client.ui.frames.ShopDialog;
 import org.pokenet.client.ui.frames.TownMap;
 import org.pokenet.client.ui.frames.TradeDialog;
-
-import sun.security.util.Debug;
 
 /**
  * The main ui on screen

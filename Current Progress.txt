@@ -11,6 +11,5 @@
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
 
 [BUG] NullPointerException on certain logouts.
-[BUG] Pressing enter to login logs you out immediately afterwards.
 
 [???] Fixed a few warnings.

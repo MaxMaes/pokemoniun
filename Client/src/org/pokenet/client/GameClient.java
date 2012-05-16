@@ -101,7 +101,6 @@ public class GameClient extends BasicGame
 	private static boolean m_disableMaps = false;
 	public static String UDPCODE = "";
 	private int lastPressedKey;
-	private int keyFilter;
 	
 	public static DeferredResource m_nextResource;
 	private boolean m_started;
@@ -650,6 +649,7 @@ public class GameClient extends BasicGame
 				/* && m_loading != null && !m_loading.isVisible() */
 				&& !BattleManager.isBattling() && m_ourPlayer.canMove())
 				{
+					System.out.println("Handling move" + new java.util.Random().nextInt());
 					if(key == (Input.KEY_DOWN) || key == (Input.KEY_S))
 					{
 						if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
@@ -1274,6 +1274,7 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 		}
+		m_soundPlayer.setTrack("introandgym");
 		m_login.setVisible(true);
 		m_login.showLanguageSelect();
 	}

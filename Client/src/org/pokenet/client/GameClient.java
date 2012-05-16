@@ -65,8 +65,7 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	// Some variables needed
-
+	// Some variables needed	
 	private TcpProtocolHandler m_tcpProtocolHandler;
 
 	private static GameClient m_instance;
@@ -101,7 +100,9 @@ public class GameClient extends BasicGame
 	private static SoundManager m_soundPlayer;
 	private static boolean m_disableMaps = false;
 	public static String UDPCODE = "";
-
+	private int lastPressedKey;
+	private int keyFilter;
+	
 	public static DeferredResource m_nextResource;
 	private boolean m_started;
 
@@ -358,7 +359,7 @@ public class GameClient extends BasicGame
 			}
 			else
 			{
-				gc.getInput().enableKeyRepeat(50, 300);
+				gc.getInput().enableKeyRepeat();
 
 			}
 			/*
@@ -399,6 +400,19 @@ public class GameClient extends BasicGame
 			{
 				this.connect();
 			}
+			
+			if(lastPressedKey > -2)
+			{
+				if(gc.getInput().isKeyDown(lastPressedKey))
+				{
+					handleKeyPress(lastPressedKey);
+				}
+				if(lastPressedKey == Input.KEY_ESCAPE || lastPressedKey == Input.KEY_TAB)
+				{
+					lastPressedKey = -2;
+				}
+			}
+			
 			/*
 			 * Check if we need to loads maps
 			 */
@@ -562,15 +576,8 @@ public class GameClient extends BasicGame
 		}
 
 	}
-
-	/** Accepts the user input.
-	 * 
-	 * @param key
-	 *            The integer representing the key pressed.
-	 * @param c
-	 *            ??? */
-	@Override
-	public void keyPressed(int key, char c)
+	
+	private void handleKeyPress(int key)
 	{
 		if(m_started)
 		{
@@ -580,6 +587,21 @@ public class GameClient extends BasicGame
 					m_login.enterKeyDefault();
 				if(key == (Input.KEY_TAB))
 					m_login.tabKeyDefault();
+			}
+			
+			if(key == Input.KEY_ENTER)
+			{
+				if(m_confirm != null)
+				{
+					try
+					{
+						System.exit(0);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 
 			if(key == (Input.KEY_ESCAPE))
@@ -615,7 +637,9 @@ public class GameClient extends BasicGame
 				}
 				else
 				{
-					System.exit(0);
+					m_confirm.setVisible(false);
+					getDisplay().remove(m_confirm);
+					m_confirm = null;
 				}
 			}
 			if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.isBattling() && !m_isNewMap)
@@ -737,8 +761,19 @@ public class GameClient extends BasicGame
 					}
 				}
 			}
-		}
+		}		
+	}
 
+	/** Accepts the user input.
+	 * 
+	 * @param key
+	 *            The integer representing the key pressed.
+	 * @param c
+	 *            ??? */
+	@Override
+	public void keyPressed(int key, char c)
+	{
+		lastPressedKey = key;
 	}
 
 	@Override

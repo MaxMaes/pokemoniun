@@ -1,1 +1,1 @@
-java -jar berryserver.jar -s high -p 500
+java -jar betaserver.jar -s low -p 500

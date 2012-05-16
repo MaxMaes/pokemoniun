@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import mdes.slick.sui.Button;
@@ -66,10 +67,9 @@ public class ServerDialog extends Frame
 			m_servers = new Button[5];
 			m_host = new String[5];
 			InputStream stream;
-			/*Web based serverlist
-			URL url = new URL("http://pokeglobal.sourceforge.net/servers.txt");
-			stream = url.openStream();*/
-			stream = new FileInputStream(respath + "res/servers.txt");
+			//Web based serverlist
+			URL url = new URL("http://pokemonium.com/launcher/servers.txt");
+			stream = url.openStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(stream));
 			m_servers[0] = new Button(in.readLine());
 			m_servers[0].setSize(280, 24);
@@ -152,6 +152,10 @@ public class ServerDialog extends Frame
 				}
 				m_servers[i].setForeground(m_black);
 			}
+		}
+		catch(MalformedURLException mue)
+		{
+			System.out.println("There seems to be a problem with loading the serverlist.");
 		}
 		catch(IOException ioe)
 		{

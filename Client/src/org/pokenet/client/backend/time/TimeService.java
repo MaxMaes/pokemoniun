@@ -80,7 +80,7 @@ public class TimeService extends Label implements Runnable
 			this.pack();
 			try
 			{
-				Thread.sleep(6000);
+				Thread.sleep(60000);
 			}
 			catch(InterruptedException ie)
 			{

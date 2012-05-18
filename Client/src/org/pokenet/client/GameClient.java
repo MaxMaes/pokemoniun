@@ -57,15 +57,17 @@ import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
 
-/** The game client
+/**
+ * The game client
  * 
  * @author shadowkanji
  * @author ZombieBear
- * @author Nushio */
+ * @author Nushio
+ */
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	// Some variables needed	
+	// Some variables needed
 	private TcpProtocolHandler m_tcpProtocolHandler;
 
 	private static GameClient m_instance;
@@ -101,7 +103,7 @@ public class GameClient extends BasicGame
 	private static boolean m_disableMaps = false;
 	public static String UDPCODE = "";
 	private int lastPressedKey;
-	
+
 	public static DeferredResource m_nextResource;
 	private boolean m_started;
 
@@ -157,9 +159,11 @@ public class GameClient extends BasicGame
 
 	}
 
-	/** Default constructor
+	/**
+	 * Default constructor
 	 * 
-	 * @param title */
+	 * @param title
+	 */
 	public GameClient(String title)
 	{
 		super(title);
@@ -167,7 +171,6 @@ public class GameClient extends BasicGame
 	}
 
 	/** Called before the window is created */
-	@SuppressWarnings("deprecation")
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
@@ -249,7 +252,7 @@ public class GameClient extends BasicGame
 		m_mapMatrix = new ClientMapMatrix();
 		m_animator = new Animator(m_mapMatrix);
 
-		gc.getInput().enableKeyRepeat(50, 300);
+		gc.getInput().enableKeyRepeat();
 		// LoadingList.setDeferredLoading(false);
 
 	}
@@ -299,7 +302,6 @@ public class GameClient extends BasicGame
 	}
 
 	/** Updates the game window */
-	@SuppressWarnings("deprecation")
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
@@ -399,20 +401,19 @@ public class GameClient extends BasicGame
 			{
 				this.connect();
 			}
-			
+
 			if(lastPressedKey > -2)
 			{
 				if(gc.getInput().isKeyDown(lastPressedKey))
 				{
 					handleKeyPress(lastPressedKey);
 				}
-				if(lastPressedKey != Input.KEY_W && lastPressedKey != Input.KEY_A && lastPressedKey != Input.KEY_S
-						&& lastPressedKey != Input.KEY_D) 
+				if(lastPressedKey != Input.KEY_W && lastPressedKey != Input.KEY_A && lastPressedKey != Input.KEY_S && lastPressedKey != Input.KEY_D)
 				{
 					lastPressedKey = -2;
 				}
 			}
-			
+
 			/*
 			 * Check if we need to loads maps
 			 */
@@ -576,20 +577,22 @@ public class GameClient extends BasicGame
 		}
 
 	}
-	
+
 	private void handleKeyPress(int key)
 	{
 		if(m_started)
 		{
 			if(m_login.isVisible())
 			{
-				if(key == (Input.KEY_ENTER) || key == (Input.KEY_NUMPADENTER)){
+				if(key == (Input.KEY_ENTER) || key == (Input.KEY_NUMPADENTER))
+				{
 					System.out.println("ENTER");
-					m_login.enterKeyDefault();}
+					m_login.enterKeyDefault();
+				}
 				if(key == (Input.KEY_TAB))
 					m_login.tabKeyDefault();
 			}
-			
+
 			if(key == Input.KEY_ENTER)
 			{
 				if(m_confirm != null)
@@ -763,15 +766,15 @@ public class GameClient extends BasicGame
 					}
 				}
 			}
-		}		
+		}
 	}
 
-	/** Accepts the user input.
+	/**
+	 * Accepts the user input.
 	 * 
-	 * @param key
-	 *            The integer representing the key pressed.
-	 * @param c
-	 *            ??? */
+	 * @param key The integer representing the key pressed.
+	 * @param c ???
+	 */
 	@Override
 	public void keyPressed(int key, char c)
 	{
@@ -1081,17 +1084,21 @@ public class GameClient extends BasicGame
 			m_login.showLogin();
 	}
 
-	/** Returns the map matrix
+	/**
+	 * Returns the map matrix
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public ClientMapMatrix getMapMatrix()
 	{
 		return m_mapMatrix;
 	}
 
-	/** If you don't know what this does, you shouldn't be programming!
+	/**
+	 * If you don't know what this does, you shouldn't be programming!
 	 * 
-	 * @param args */
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		boolean fullscreen = false;
@@ -1116,9 +1123,11 @@ public class GameClient extends BasicGame
 		}
 	}
 
-	/** When the close button is pressed...
+	/**
+	 * When the close button is pressed...
 	 * 
-	 * @param args */
+	 * @param args
+	 */
 	public boolean closeRequested()
 	{
 		if(m_confirm == null)
@@ -1162,17 +1171,21 @@ public class GameClient extends BasicGame
 		return m_close;
 	}
 
-	/** Returns the font in large
+	/**
+	 * Returns the font in large
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static Font getFontLarge()
 	{
 		return m_fontLarge;
 	}
 
-	/** Returns the font in small
+	/**
+	 * Returns the font in small
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static Font getFontSmall()
 	{
 		return m_fontSmall;
@@ -1183,73 +1196,91 @@ public class GameClient extends BasicGame
 		return m_trueTypeFont;
 	}
 
-	/** Sets the server host. The server will connect once m_host is not equal to ""
+	/**
+	 * Sets the server host. The server will connect once m_host is not equal to ""
 	 * 
-	 * @param s */
+	 * @param s
+	 */
 	public static void setHost(String s)
 	{
 		HOST = s;
 	}
 
-	/** Returns this instance of game client
+	/**
+	 * Returns this instance of game client
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static GameClient getInstance()
 	{
 		return m_instance;
 	}
 
-	/** Returns the packet generator
+	/**
+	 * Returns the packet generator
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public PacketGenerator getPacketGenerator()
 	{
 		return m_packetGen;
 	}
 
-	/** Returns the login screen
+	/**
+	 * Returns the login screen
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public LoginScreen getLoginScreen()
 	{
 		return m_login;
 	}
 
-	/** Returns the loading screen
+	/**
+	 * Returns the loading screen
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public LoadingScreen getLoadingScreen()
 	{
 		return m_loading;
 	}
 
-	/** Returns the weather service
+	/**
+	 * Returns the weather service
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public WeatherService getWeatherService()
 	{
 		return m_weather;
 	}
 
-	/** Returns the time service
+	/**
+	 * Returns the time service
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public TimeService getTimeService()
 	{
 		return m_time;
 	}
 
-	/** Stores the player's id
+	/**
+	 * Stores the player's id
 	 * 
-	 * @param id */
+	 * @param id
+	 */
 	public void setPlayerId(int id)
 	{
 		m_playerId = id;
 	}
 
-	/** Returns this player's id
+	/**
+	 * Returns this player's id
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public int getPlayerId()
 	{
 		return m_playerId;
@@ -1279,10 +1310,12 @@ public class GameClient extends BasicGame
 		m_login.showLanguageSelect();
 	}
 
-	/** Sets the map and loads them on next update() call
+	/**
+	 * Sets the map and loads them on next update() call
 	 * 
 	 * @param x
-	 * @param y */
+	 * @param y
+	 */
 	public void setMap(int x, int y)
 	{
 		m_mapX = x;
@@ -1293,17 +1326,21 @@ public class GameClient extends BasicGame
 		m_soundPlayer.setTrackByLocation(m_mapMatrix.getMapName(x, y));
 	}
 
-	/** Returns our player
+	/**
+	 * Returns our player
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public OurPlayer getOurPlayer()
 	{
 		return m_ourPlayer;
 	}
 
-	/** Sets our player
+	/**
+	 * Sets our player
 	 * 
-	 * @param pl */
+	 * @param pl
+	 */
 	public void setOurPlayer(OurPlayer pl)
 	{
 		m_ourPlayer = pl;
@@ -1343,9 +1380,11 @@ public class GameClient extends BasicGame
 		}
 	}
 
-	/** Returns the sound player
+	/**
+	 * Returns the sound player
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static SoundManager getSoundPlayer()
 	{
 		return m_soundPlayer;
@@ -1363,17 +1402,21 @@ public class GameClient extends BasicGame
 		return m_display;
 	}
 
-	/** Returns the language selection
+	/**
+	 * Returns the language selection
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static String getLanguage()
 	{
 		return m_language;
 	}
 
-	/** Sets the language selection
+	/**
+	 * Sets the language selection
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static String setLanguage(String lang)
 	{
 		m_language = lang;
@@ -1381,25 +1424,31 @@ public class GameClient extends BasicGame
 		return m_language;
 	}
 
-	/** Changes the playing track
+	/**
+	 * Changes the playing track
 	 * 
-	 * @param fileKey */
+	 * @param fileKey
+	 */
 	public static void changeTrack(String fileKey)
 	{
 		m_soundPlayer.setTrack(fileKey);
 	}
 
-	/** Returns false if the user has disabled surrounding map loading
+	/**
+	 * Returns false if the user has disabled surrounding map loading
 	 * 
-	 * @return */
+	 * @return
+	 */
 	public static boolean disableMaps()
 	{
 		return m_disableMaps;
 	}
 
-	/** Sets if the client should load surrounding maps
+	/**
+	 * Sets if the client should load surrounding maps
 	 * 
-	 * @param b */
+	 * @param b
+	 */
 	public static void setDisableMaps(boolean b)
 	{
 		m_disableMaps = b;
@@ -1407,10 +1456,6 @@ public class GameClient extends BasicGame
 
 	/** Slick Native library finder. */
 	/*
-	 * static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath);
-	 * 
-	 * Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); }
-	 * 
-	 * if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } }
+	 * static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } }
 	 */
 }

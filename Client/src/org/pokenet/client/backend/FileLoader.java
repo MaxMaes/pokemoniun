@@ -5,31 +5,50 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import org.pokenet.client.GameClient;
 
 /**
  * A simple file loader to make our lives easier
+ * 
  * @author ZombieBear
- *
  */
-public class FileLoader {
-	
+public class FileLoader
+{
 	/**
-	 *  Loads a file as an InputStream
-	 * @param path
-	 * @return an InputStream of a file
+	 * Loads a file as an InputStream.
+	 * 
+	 * @param path The path to the wanted file.
+	 * @return Returns an InputStream of a file.
 	 * @throws FileNotFoundException 
 	 */
-	public static InputStream loadFile(String path) throws FileNotFoundException {
-		return new FileInputStream(path);
+	public static InputStream loadFile(String path) throws FileNotFoundException
+	{
+		try
+		{
+			return new FileInputStream(path);
+		}
+		finally
+		{
+			GameClient.setLanguage("english");
+		}
 	}
-	
+
 	/**
-	 * Loads a text file and gets it ready for parsing
-	 * @param path
-	 * @return a BufferedReader for a text file
-	 * @throws FileNotFoundException 
+	 * Loads a text file and gets it ready for parsing.
+	 * 
+	 * @param path The path to the wanted file.
+	 * @return Returns a BufferedReader for a text file
+	 * @throws FileNotFoundException
 	 */
-	public static BufferedReader loadTextFile(String path) throws FileNotFoundException {
-		return new BufferedReader(new InputStreamReader(loadFile(path)));
+	public static BufferedReader loadTextFile(String path) throws FileNotFoundException
+	{
+		try
+		{
+			return new BufferedReader(new InputStreamReader(loadFile(path)));
+		}
+		finally
+		{
+			GameClient.setLanguage("english");
+		}
 	}
 }

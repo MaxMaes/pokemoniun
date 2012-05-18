@@ -3,8 +3,10 @@
 [FIX] NullPointer at startup regarding server hosts.
 [FIX] IllegalThreadStateException when time is set multiple times.
 [FIX] Client doesn't crash when an unimplemented language is selected.
+[FIX] NPE's no longer appear when a file is not found (related to above).
 [FIX] Non-available servers are no longer clickable.
 [FIX] Client-sided movement should be smooth and fixed now.
+[FIX] Potions are now in the right backpack.
 
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.

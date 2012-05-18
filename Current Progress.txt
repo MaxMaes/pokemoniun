@@ -7,6 +7,7 @@
 [FIX] Non-available servers are no longer clickable.
 [FIX] Client-sided movement should be smooth and fixed now.
 [FIX] Potions are now in the right backpack.
+[FIX] Giovani (8th gym leader in kanto) now gives the correct badge.
 
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.

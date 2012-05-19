@@ -4,6 +4,7 @@
 [FIX] IllegalThreadStateException when time is set multiple times.
 [FIX] Client doesn't crash when an unimplemented language is selected.
 [FIX] NPE's no longer appear when a file is not found (related to above).
+[FIX] Nullpointer on lvl up at refresh party call.
 [FIX] Non-available servers are no longer clickable.
 [FIX] Client-sided movement should be smooth and fixed now.
 [FIX] Potions are now in the right backpack.
@@ -15,5 +16,6 @@
 
 [BUG] NullPointerException on certain logouts.
 [BUG] Database isn't updated after the logout.(could be the cause of above).
+[BUG] Game skips language select after fixing languages.
 
 [???] Fixed a few warnings.

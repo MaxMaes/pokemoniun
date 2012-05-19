@@ -21,16 +21,19 @@ public class FileLoader
 	 * @return Returns an InputStream of a file.
 	 * @throws FileNotFoundException 
 	 */
-	public static InputStream loadFile(String path) throws FileNotFoundException
+	public static InputStream loadFile(String path)
 	{
 		try
 		{
 			return new FileInputStream(path);
 		}
-		finally
+		catch(FileNotFoundException fnfe)
 		{
-			GameClient.setLanguage("english");
+			System.out.println("Path to the wanted file: " + path);
+			if(path.contains("language") && !path.contains("english"))
+				GameClient.setLanguage("english");
 		}
+		return null;
 	}
 
 	/**
@@ -40,15 +43,8 @@ public class FileLoader
 	 * @return Returns a BufferedReader for a text file
 	 * @throws FileNotFoundException
 	 */
-	public static BufferedReader loadTextFile(String path) throws FileNotFoundException
+	public static BufferedReader loadTextFile(String path)
 	{
-		try
-		{
-			return new BufferedReader(new InputStreamReader(loadFile(path)));
-		}
-		finally
-		{
-			GameClient.setLanguage("english");
-		}
+		return new BufferedReader(new InputStreamReader(loadFile(path)));
 	}
 }

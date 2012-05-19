@@ -96,7 +96,8 @@ public class GameClient extends BasicGame
 	private Color m_daylight;
 	private static String m_language = "english";
 	private static boolean m_languageChosen = false;
-	private ConfirmationDialog m_confirm;
+	private ConfirmationDialog m_exitConfirm;
+	private ConfirmationDialog m_dcConfirm;
 	private PlayerPopupDialog m_playerDialog;
 	private MoveLearningManager m_moveLearningManager;
 	private static SoundManager m_soundPlayer;
@@ -257,10 +258,7 @@ public class GameClient extends BasicGame
 
 	}
 
-	public TcpProtocolHandler getTcpProtocolHandler()
-	{
-		return m_tcpProtocolHandler;
-	}
+
 
 	private void loadSprites()
 	{
@@ -344,7 +342,7 @@ public class GameClient extends BasicGame
 					if(options != null)
 						m_weather.setEnabled(!Boolean.parseBoolean(options.get("disableWeather")));
 
-					m_ui = new Ui(m_display, this);
+					m_ui = new Ui(m_display);
 					m_ui.setAllVisible(false);
 				}
 
@@ -595,22 +593,23 @@ public class GameClient extends BasicGame
 
 			if(key == Input.KEY_ENTER)
 			{
-				if(m_confirm != null)
-				{
-					try
+					if(m_exitConfirm != null)
 					{
-						System.exit(0);
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
+						try
+						{
+							System.exit(0);
+						}
+						catch(Exception e)
+						{
+							e.printStackTrace();
+						}
 					}
 				}
 			}
 
 			if(key == (Input.KEY_ESCAPE))
 			{
-				if(m_confirm == null)
+				if(m_exitConfirm == null)
 				{
 					ActionListener yes = new ActionListener()
 					{
@@ -624,26 +623,25 @@ public class GameClient extends BasicGame
 							{
 								e.printStackTrace();
 							}
-
 						}
 					};
 					ActionListener no = new ActionListener()
 					{
 						public void actionPerformed(ActionEvent arg0)
 						{
-							m_confirm.setVisible(false);
-							getDisplay().remove(m_confirm);
-							m_confirm = null;
+							m_exitConfirm.setVisible(false);
+							getDisplay().remove(m_exitConfirm);
+							m_exitConfirm = null;
 						}
 					};
-					m_confirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
-					getUi().getDisplay().add(m_confirm);
+					m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
+					getUi().getDisplay().add(m_exitConfirm);
 				}
 				else
 				{
-					m_confirm.setVisible(false);
-					getDisplay().remove(m_confirm);
-					m_confirm = null;
+					m_exitConfirm.setVisible(false);
+					getDisplay().remove(m_exitConfirm);
+					m_exitConfirm = null;
 				}
 			}
 			if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.isBattling() && !m_isNewMap)
@@ -741,6 +739,10 @@ public class GameClient extends BasicGame
 					{
 						m_ui.toggleHelp();
 					}
+					else if(key == (Input.KEY_9))
+					{
+						m_ui.disconnect();
+					}
 				}
 			}
 			if((key == (Input.KEY_SPACE) || key == (Input.KEY_E)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()) && !getDisplay().containsChild(getUi().getShop()))
@@ -767,7 +769,6 @@ public class GameClient extends BasicGame
 				}
 			}
 		}
-	}
 
 	/**
 	 * Accepts the user input.
@@ -942,13 +943,20 @@ public class GameClient extends BasicGame
 	/** Disconnects from the current game/chat server */
 	public void disconnect()
 	{
-		CloseFuture cfTcp = m_packetGen.getUdpSession().close(true);
-		cfTcp.awaitUninterruptibly();
-		assert cfTcp.isClosed(): "Warning the TCP session was not closed";
 
-		CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
-		cfUdp.awaitUninterruptibly();
-		assert cfUdp.isClosed(): "Warning the UDP session was not closed";
+		if(m_packetGen != null)
+		{
+			CloseFuture cfTcp = m_packetGen.getUdpSession().close(true);
+
+			cfTcp.awaitUninterruptibly();
+			assert cfTcp.isClosed(): "Warning the TCP session was not closed";
+		}
+	
+			CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
+			cfUdp.awaitUninterruptibly();
+			assert cfUdp.isClosed(): "Warning the UDP session was not closed";
+			
+			System.out.println("Disconnected");
 	}
 
 	/** Connects to a selected server */
@@ -1122,6 +1130,52 @@ public class GameClient extends BasicGame
 			e.printStackTrace();
 		}
 	}
+	
+	/** When the disconnect button is pressed...
+	 * 
+	 * @param args */
+	public void disconnectRequest()
+	{
+		if(m_dcConfirm == null)
+		{
+			ActionListener yes = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent arg0)
+				{
+					try
+					{
+						m_packetGen.writeTcpMessage("rl"+m_ourPlayer.getUsername());
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+			};
+			ActionListener no = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent arg0)
+				{
+					m_dcConfirm.setVisible(false);
+					getDisplay().remove(m_dcConfirm);
+					m_dcConfirm = null;
+				}
+			};
+			m_dcConfirm = new ConfirmationDialog("Are you sure you want to logout?", yes, no);
+			if(getUi() != null)
+			{
+				getUi().getDisplay().add(m_dcConfirm);
+			}
+			else
+			{
+				System.out.println("Attempting close before client loaded, ignoring");
+			}
+		}
+		else
+		{
+			m_dcConfirm.setVisible(true);
+		}
+	}
 
 	/**
 	 * When the close button is pressed...
@@ -1130,7 +1184,7 @@ public class GameClient extends BasicGame
 	 */
 	public boolean closeRequested()
 	{
-		if(m_confirm == null)
+		if(m_exitConfirm == null)
 		{
 			ActionListener yes = new ActionListener()
 			{
@@ -1152,16 +1206,16 @@ public class GameClient extends BasicGame
 			{
 				public void actionPerformed(ActionEvent arg0)
 				{
-					m_confirm.setVisible(false);
-					getDisplay().remove(m_confirm);
-					m_confirm = null;
+					m_exitConfirm.setVisible(false);
+					getDisplay().remove(m_exitConfirm);
+					m_exitConfirm = null;
 					m_close = false;
 				}
 			};
-			m_confirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
+			m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
 			if(getUi() != null)
 			{
-				getUi().getDisplay().add(m_confirm);
+				getUi().getDisplay().add(m_exitConfirm);
 			}
 			else
 			{
@@ -1289,7 +1343,6 @@ public class GameClient extends BasicGame
 	/** Resets the client back to the z */
 	public void reset()
 	{
-		disconnect();
 		m_packetGen = null;
 		HOST = "";
 		try

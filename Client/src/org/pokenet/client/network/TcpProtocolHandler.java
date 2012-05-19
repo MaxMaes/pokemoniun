@@ -924,6 +924,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				switch(message.charAt(2)) {
 				case '0':
 					//The player logged out
+					
 					break;
 				case '1':
 					//Players must stand beside each other to battle

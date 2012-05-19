@@ -59,14 +59,12 @@ public class Ui extends Frame {
     private ConfirmationDialog m_evolveDialog;
     private BigBagDialog m_bag;
     private PlayerInfoDialog m_stats;
-    private GameClient gc;
 	
 	/**
 	 * Default constructor
 	 */
-	public Ui(Display display,GameClient gc) {
+	public Ui(Display display) {
 		m_instance = this;
-		this.gc = gc;
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		this.setSize(800, 66);
@@ -215,10 +213,9 @@ public class Ui extends Frame {
 	        }
 	}
 	
-	protected void disconnect() 
+	public void disconnect() 
 	{
-		gc.reset();
-		System.out.println("Disconnected");
+		GameClient.getInstance().disconnectRequest();
 	}
 
 	/**

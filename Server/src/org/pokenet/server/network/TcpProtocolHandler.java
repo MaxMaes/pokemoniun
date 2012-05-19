@@ -227,6 +227,11 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				String player = message.substring(2);
 				//A request was sent
 				switch(message.charAt(1)) {
+				case 'l':
+					//Logout Request rlUSERNAME
+					if(m_players.containsKey(player))
+						sessionClosed(m_players.get(player).getTcpSession());
+					break;
 				case 'b':
 					//Battle Request rbUSERNAME
 					if(m_players.containsKey(player)) {

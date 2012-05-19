@@ -14,6 +14,8 @@
 [ADD] Serverlist is retrieved from the web.
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
 
+[(possible)ADD] Auto-Updater, needs some further discussions.
+
 [BUG] NullPointerException on certain logouts.
 [BUG] Database isn't updated after the logout.(could be the cause of above).
 [BUG] Game skips language select after fixing languages.

@@ -14,5 +14,6 @@
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
 
 [BUG] NullPointerException on certain logouts.
+[BUG] Database isn't updated after the logout.(could be the cause of above).
 
 [???] Fixed a few warnings.

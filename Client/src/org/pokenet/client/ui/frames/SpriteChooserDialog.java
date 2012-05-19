@@ -40,8 +40,15 @@ public class SpriteChooserDialog extends Frame
 			m_sprites.add(String.valueOf(i));
 		}
 		/* Handle blocked sprites */
-		InputStream in;
-		in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
+		InputStream in = null;
+		try 
+		{
+			in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 		Scanner s = new Scanner(in);
 		while(s.hasNextLine())
 		{
@@ -132,7 +139,12 @@ public class SpriteChooserDialog extends Frame
 		{
 			try
 			{
-				m_stream = FileLoader.loadFile(m_mustLoadSprite);
+				try {
+					m_stream = FileLoader.loadFile(m_mustLoadSprite);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				m_spriteDisplay.setImage(new Image(m_stream, m_mustLoadSprite, false));
 			}
 			catch(SlickException e)

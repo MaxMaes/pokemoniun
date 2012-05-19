@@ -943,20 +943,17 @@ public class GameClient extends BasicGame
 	/** Disconnects from the current game/chat server */
 	public void disconnect()
 	{
-
 		if(m_packetGen != null)
 		{
 			CloseFuture cfTcp = m_packetGen.getUdpSession().close(true);
 
 			cfTcp.awaitUninterruptibly();
 			assert cfTcp.isClosed(): "Warning the TCP session was not closed";
-		}
 	
 			CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
 			cfUdp.awaitUninterruptibly();
 			assert cfUdp.isClosed(): "Warning the UDP session was not closed";
-			
-			System.out.println("Disconnected");
+		}
 	}
 
 	/** Connects to a selected server */

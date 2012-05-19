@@ -224,13 +224,20 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				}
 				break;
 			case 'r':
-				String player = message.substring(2);
+				String player = message.substring(2);;
 				//A request was sent
 				switch(message.charAt(1)) {
 				case 'l':
+					System.out.println("test1");
 					//Logout Request rlUSERNAME
 					if(m_players.containsKey(player))
+					{ 
+						System.out.println("test2");
 						sessionClosed(m_players.get(player).getTcpSession());
+						TcpProtocolHandler.writeMessage(m_players.get(player).getTcpSession(),
+								new RequestMessage(RequestType.RESPONSE,p.getName()));
+						System.out.println("test3");
+					}
 					break;
 				case 'b':
 					//Battle Request rbUSERNAME
@@ -542,7 +549,8 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 		/*
 		 * Attempt to save the player's data
 		 */
-		try {
+		try 
+		{
 			PlayerChar p = (PlayerChar) session.getAttribute("player");
 			if(p != null) {
 				if(p.isBattling()) {

@@ -95,6 +95,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 		translated = Translator.translate("_LOGIN");
 		Player p;
 		String message = (String) m;
+		System.out.println("test0");
 		System.out.println("INFO: " + message);
 		String [] details;
 		switch(message.charAt(0)) {
@@ -918,13 +919,15 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 			}
 			break;
 		case 'r':
+			System.out.println("test1");
 			switch(message.charAt(1)) {
 			case '!':
 				//A notification regarding the request
 				switch(message.charAt(2)) {
 				case '0':
 					//The player logged out
-					
+					GameClient.getInstance().disconnect();
+					GameClient.getInstance().reset();
 					break;
 				case '1':
 					//Players must stand beside each other to battle

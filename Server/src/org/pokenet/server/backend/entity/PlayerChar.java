@@ -78,6 +78,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	private Shop m_currentShop = null;
 	private int m_repel = 0;
 	private long m_lastTrade = 0;
+	private MySqlManager m_database = new MySqlManager();
 	/*
 	 * Stores movement of other players to be sent in bulk to client
 	 */
@@ -736,6 +737,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 			{
 				m_friends.remove(i);
 				// TODO: Remove friend from the database friendlist.
+				//m_database.query();
 				m_tcpSession.write("Fr" + username);
 				return;
 			}

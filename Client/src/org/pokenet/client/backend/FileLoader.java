@@ -19,7 +19,6 @@ public class FileLoader
 	 * 
 	 * @param path The path to the wanted file.
 	 * @return Returns an InputStream of a file.
-	 * @throws FileNotFoundException 
 	 */
 	public static InputStream loadFile(String path)
 	{
@@ -29,7 +28,6 @@ public class FileLoader
 		}
 		catch(FileNotFoundException fnfe)
 		{
-			System.out.println("Path to the wanted file: " + path);
 			if(path.contains("language") && !path.contains("english"))
 				GameClient.setLanguage("english");
 		}
@@ -41,7 +39,6 @@ public class FileLoader
 	 * 
 	 * @param path The path to the wanted file.
 	 * @return Returns a BufferedReader for a text file
-	 * @throws FileNotFoundException
 	 */
 	public static BufferedReader loadTextFile(String path)
 	{

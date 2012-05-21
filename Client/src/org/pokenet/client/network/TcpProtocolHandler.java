@@ -95,7 +95,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 		translated = Translator.translate("_LOGIN");
 		Player p;
 		String message = (String) m;
-		System.out.println("test0");
+		//System.out.println("test0");
 		System.out.println("INFO: " + message);
 		String [] details;
 		switch(message.charAt(0)) {

@@ -21,7 +21,7 @@ import org.pokenet.client.backend.Translator;
 public class LoginDialog extends Frame {
 	private TextField m_username, m_password;
 	private Label m_userLabel, m_passLabel;
-	private Button m_login, m_register;
+	private Button m_login, m_register, m_back;
 	private Color m_white;
 	
 	/**
@@ -73,6 +73,22 @@ public class LoginDialog extends Frame {
 		m_passLabel.setFont(GameClient.getFontSmall());
 		m_passLabel.setForeground(m_white);
 		this.add(m_passLabel);
+		
+		m_back = new Button("Back");
+		m_back.setSize(64, 32);
+		m_back.setLocation(m_userLabel.getX(), m_password.getY() + m_password.getHeight() + 8);
+		m_back.setVisible(true);
+		m_back.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				GameClient.getInstance().returnToServerSelect();
+				GameClient.getInstance().getLoginScreen().setServerRevision("?");
+				GameClient.getInstance().disconnect();
+			}
+		});
+		
+		this.add(m_back);
 		
 		m_login = new Button(translated.get(7));
 		m_login.setSize(64, 32);

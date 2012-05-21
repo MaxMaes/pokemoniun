@@ -14,11 +14,13 @@
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
+[ADD] Back buttons on the login screen and server select screen.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
 [BUG] NullPointerException on certain logouts.
 [BUG] Database isn't updated after the logout.(could be the cause of above).
 [BUG] Game skips language select after fixing languages.
+[BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet
 
 [???] Fixed a few warnings.

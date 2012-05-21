@@ -1504,6 +1504,24 @@ public class GameClient extends BasicGame
 	{
 		m_loadSurroundingMaps = load;
 	}
+	
+	/**
+	 * Sets values to return to language select, called from server select
+	 */
+	public void returnToLanguageSelect()
+	{
+		m_language = "";
+		m_languageChosen = false;
+	}
+	
+	/**
+	 * Sets values to return to server select, called from login screen
+	 */
+	public void returnToServerSelect()
+	{
+		m_host = "";
+		//disconnect();
+	}
 
 	public boolean chatServerIsActive()
 	{

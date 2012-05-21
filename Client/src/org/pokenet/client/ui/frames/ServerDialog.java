@@ -28,7 +28,7 @@ public class ServerDialog extends Frame
 	private String[] m_host;
 	private Label m_info;
 	private Color m_black;
-	private Button privateServer;
+	private Button privateServer, m_back;
 	private TextField privateIP;
 
 	/** Default constructor **/
@@ -38,7 +38,7 @@ public class ServerDialog extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_black = new Color(0, 0, 0);
 		List<String> translate = Translator.translate("_LOGIN");
-		this.setSize(316, 280);
+		this.setSize(316, 300);
 		this.setLocation(400 - 160, 280);
 		this.setTitle(translate.get(0));
 		this.setBackground(new Color(0, 0, 0, 140));
@@ -177,6 +177,20 @@ public class ServerDialog extends Frame
 		});
 		this.add(privateServer);
 		this.setVisible(false);
+		
+		m_back = new Button();
+		m_back.setText("Back");
+		m_back.setSize(128, 24);
+		m_back.setLocation(94, 235);
+		this.setVisible(true);
+		m_back.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent evt)
+			{
+				GameClient.getInstance().returnToLanguageSelect();
+			}
+		});
+		this.add(m_back);
 	}
 
 	public String getPrivateServer()

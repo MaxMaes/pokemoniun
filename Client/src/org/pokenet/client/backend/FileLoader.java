@@ -29,7 +29,7 @@ public class FileLoader
 		catch(FileNotFoundException fnfe)
 		{
 			if(path.contains("language") && !path.contains("english"))
-				GameClient.setLanguage("english");
+				GameClient.getInstance().setLanguage("english");
 		}
 		return null;
 	}

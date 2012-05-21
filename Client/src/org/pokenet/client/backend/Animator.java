@@ -37,44 +37,44 @@ public class Animator {
 
 	/**
 	 * Animates players moving
-	 * @param p
+	 * @param player
 	 */
-	private void animatePlayer(Player p) {
+	private void animatePlayer(Player player) {
 		/*
 		 * Check if we need to move the player
 		 */
-		if(p.requiresMovement()) {
-			switch(p.getNextMovement()) {
+		if(player.requiresMovement()) {
+			switch(player.getNextMovement()) {
 			case Down:
-				if(p.getDirection() == Direction.Down)
-					p.setServerY(p.getY() + 32);
+				if(player.getDirection() == Direction.Down)
+					player.setServerY(player.getY() + 32);
 				else {
-					p.setDirection(Direction.Down);
-					p.loadSpriteImage();
+					player.setDirection(Direction.Down);
+					player.loadSpriteImage();
 				}
 				break;
 			case Left:
-				if(p.getDirection() == Direction.Left)
-					p.setServerX(p.getX() - 32);
+				if(player.getDirection() == Direction.Left)
+					player.setServerX(player.getX() - 32);
 				else {
-					p.setDirection(Direction.Left);
-					p.loadSpriteImage();
+					player.setDirection(Direction.Left);
+					player.loadSpriteImage();
 				}
 				break;
 			case Right:
-				if(p.getDirection() == Direction.Right)
-					p.setServerX(p.getX() + 32);
+				if(player.getDirection() == Direction.Right)
+					player.setServerX(player.getX() + 32);
 				else {
-					p.setDirection(Direction.Right);
-					p.loadSpriteImage();
+					player.setDirection(Direction.Right);
+					player.loadSpriteImage();
 				}
 				break;
 			case Up:
-				if(p.getDirection() == Direction.Up)
-					p.setServerY(p.getY() - 32);
+				if(player.getDirection() == Direction.Up)
+					player.setServerY(player.getY() - 32);
 				else {
-					p.setDirection(Direction.Up);
-					p.loadSpriteImage();
+					player.setDirection(Direction.Up);
+					player.loadSpriteImage();
 				}
 				break;
 			}
@@ -82,20 +82,20 @@ public class Animator {
 		/*
 		 * Keep the screen following the player, i.e. move the map also
 		 */
-		if (p.isOurPlayer()) {
-			if (p.getX() > p.getServerX()) {
+		if (player.isOurPlayer()) {
+			if (player.getX() > player.getServerX()) {
 				m_mapMatrix.getCurrentMap().setXOffset(
 						(m_mapMatrix.getCurrentMap().getXOffset() + ANIMATION_INCREMENT),
 						true);
-			} else if (p.getX() < p.getServerX()) {
+			} else if (player.getX() < player.getServerX()) {
 				m_mapMatrix.getCurrentMap().setXOffset(
 						(m_mapMatrix.getCurrentMap().getXOffset() - ANIMATION_INCREMENT),
 						true);
-			} else if (p.getY() > p.getServerY()) {
+			} else if (player.getY() > player.getServerY()) {
 				m_mapMatrix.getCurrentMap().setYOffset(
 						(m_mapMatrix.getCurrentMap().getYOffset() + ANIMATION_INCREMENT),
 						true);
-			} else if (p.getY() < p.getServerY()) {
+			} else if (player.getY() < player.getServerY()) {
 				m_mapMatrix.getCurrentMap().setYOffset(
 						(m_mapMatrix.getCurrentMap().getYOffset() - ANIMATION_INCREMENT),
 						true);
@@ -104,60 +104,60 @@ public class Animator {
 		/*
 		 * Move the player on screen
 		 */
-		if (p.getX() > p.getServerX()) {
+		if (player.getX() > player.getServerX()) {
 			// Choose the sprite according to the player's position
-			if(p.getX() % 32 == 0) {
-				p.setDirection(Direction.Left);
-				p.m_leftOrRight = !p.m_leftOrRight;
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), true, p.m_leftOrRight, p.getSprite()));
+			if(player.getX() % 32 == 0) {
+				player.setDirection(Direction.Left);
+				player.m_leftOrRight = !player.m_leftOrRight;
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), true, player.m_leftOrRight, player.getSprite()));
 			}
 			
-			p.setX(p.getX() - ANIMATION_INCREMENT);
-			if(p.getX() > p.getServerX() && p.getX() % 32 == 0) {
+			player.setX(player.getX() - ANIMATION_INCREMENT);
+			if(player.getX() > player.getServerX() && player.getX() % 32 == 0) {
 				/* If the player is still behind the server, make sure the stopped animation is shown */
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), false, p.m_leftOrRight, p.getSprite()));
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
 			}
-		} else if (p.getX() < p.getServerX()) {
-			if(p.getX() % 32 == 0) {
-				p.setDirection(Direction.Right);
-				p.m_leftOrRight = !p.m_leftOrRight;
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), true, p.m_leftOrRight, p.getSprite()));
+		} else if (player.getX() < player.getServerX()) {
+			if(player.getX() % 32 == 0) {
+				player.setDirection(Direction.Right);
+				player.m_leftOrRight = !player.m_leftOrRight;
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), true, player.m_leftOrRight, player.getSprite()));
 			}
-			p.setX(p.getX() + ANIMATION_INCREMENT);
-			if(p.getX() < p.getServerX() && p.getX() % 32 == 0) {
+			player.setX(player.getX() + ANIMATION_INCREMENT);
+			if(player.getX() < player.getServerX() && player.getX() % 32 == 0) {
 				/* If the player is still behind the server, make sure the stopped animation is shown */
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), false, p.m_leftOrRight, p.getSprite()));
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
 			}
-		} else if (p.getY() > p.getServerY()) {
-			if((p.getY() + 8) % 32 == 0) {
-				p.setDirection(Direction.Up);
-				p.m_leftOrRight = !p.m_leftOrRight;
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), true, p.m_leftOrRight, p.getSprite()));
+		} else if (player.getY() > player.getServerY()) {
+			if((player.getY() + 8) % 32 == 0) {
+				player.setDirection(Direction.Up);
+				player.m_leftOrRight = !player.m_leftOrRight;
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), true, player.m_leftOrRight, player.getSprite()));
 			}
-			p.setY(p.getY() - ANIMATION_INCREMENT);
-			if(p.getY() > p.getServerY() && (p.getY() + 8) % 32 == 0) {
+			player.setY(player.getY() - ANIMATION_INCREMENT);
+			if(player.getY() > player.getServerY() && (player.getY() + 8) % 32 == 0) {
 				/* If the player is still behind the server, make sure the stopped animation is shown */
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), false, p.m_leftOrRight, p.getSprite()));
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
 			}
-		} else if (p.getY() < p.getServerY()) {
-			if((p.getY() + 8) % 32 == 0) {
-				p.setDirection(Direction.Down);
-				p.m_leftOrRight = !p.m_leftOrRight;
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), true, p.m_leftOrRight, p.getSprite()));
+		} else if (player.getY() < player.getServerY()) {
+			if((player.getY() + 8) % 32 == 0) {
+				player.setDirection(Direction.Down);
+				player.m_leftOrRight = !player.m_leftOrRight;
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), true, player.m_leftOrRight, player.getSprite()));
 			}
-			p.setY(p.getY() + ANIMATION_INCREMENT);
-			if(p.getY() < p.getServerY() && (p.getY() + 8) % 32 == 0) {
+			player.setY(player.getY() + ANIMATION_INCREMENT);
+			if(player.getY() < player.getServerY() && (player.getY() + 8) % 32 == 0) {
 				/* If the player is still behind the server, make sure the stopped animation is shown */
-				p.setCurrentImage(Player.getSpriteFactory().getSprite(p.getDirection(), false, p.m_leftOrRight, p.getSprite()));
+				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
 			}
 		}
 		/*
 		 * The player is now in sync with the server, stop moving/animating them
 		 */
-		if (p.getX() == p.getServerX() && p.getY() == p.getServerY()) {
-			p.setDirection(p.getDirection());
-			p.setAnimating(false);
-			p.loadSpriteImage();
+		if (player.getX() == player.getServerX() && player.getY() == player.getServerY()) {
+			player.setDirection(player.getDirection());
+			player.setAnimating(false);
+			player.loadSpriteImage();
 		}
 	}
 }

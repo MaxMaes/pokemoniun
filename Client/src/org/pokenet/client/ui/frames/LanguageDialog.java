@@ -57,7 +57,7 @@ public class LanguageDialog extends Frame {
 			m_languages[0].setVisible(true);
 			m_languages[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("english");
+					GameClient.getInstance().setLanguage("english");
 				}
 			});
 			this.add(m_languages[0]);
@@ -68,7 +68,7 @@ public class LanguageDialog extends Frame {
 			m_languages[1].setVisible(true);
 			m_languages[1].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("spanish");
+					GameClient.getInstance().setLanguage("spanish");
 				}
 			});
 			this.add(m_languages[1]);
@@ -79,7 +79,7 @@ public class LanguageDialog extends Frame {
 			m_languages[2].setVisible(true);
 			m_languages[2].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("french");
+					GameClient.getInstance().setLanguage("french");
 				}
 			});
 			this.add(m_languages[2]);
@@ -90,7 +90,7 @@ public class LanguageDialog extends Frame {
 			m_languages[3].setVisible(true);
 			m_languages[3].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("portuguese");
+					GameClient.getInstance().setLanguage("portuguese");
 					
 				}
 			});
@@ -102,7 +102,7 @@ public class LanguageDialog extends Frame {
 			m_languages[4].setVisible(true);
 			m_languages[4].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("finnish");
+					GameClient.getInstance().setLanguage("finnish");
 					
 				}
 			});
@@ -114,7 +114,7 @@ public class LanguageDialog extends Frame {
 			m_languages[5].setVisible(true);
 			m_languages[5].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("italian");
+					GameClient.getInstance().setLanguage("italian");
 					
 				}
 			});
@@ -126,7 +126,7 @@ public class LanguageDialog extends Frame {
 			m_languages[6].setVisible(true);
 			m_languages[6].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("dutch");
+					GameClient.getInstance().setLanguage("dutch");
 					
 				}
 			});
@@ -138,7 +138,7 @@ public class LanguageDialog extends Frame {
 			m_languages[7].setVisible(true);
 			m_languages[7].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.setLanguage("german");
+					GameClient.getInstance().setLanguage("german");
 					
 				}
 			});
@@ -149,8 +149,6 @@ public class LanguageDialog extends Frame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-		
 		this.setVisible(true);
 	}
 	

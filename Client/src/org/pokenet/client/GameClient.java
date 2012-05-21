@@ -1,6 +1,7 @@
 package org.pokenet.client;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.util.ConcurrentModificationException;
@@ -114,8 +115,8 @@ public class GameClient extends BasicGame
 	Color m_loadColor = new Color(70, 70, 255);
 
 	private boolean m_close = false; // Used to tell the game to close or not.
-	private Image[] m_spriteImageArray = new Image[240]; /* WARNING: Replace with actual number of sprites */
-	public boolean m_chatServerIsActive;
+	private static Image[] m_spriteImageArray = new Image[240]; /* WARNING: Replace with actual number of sprites */
+	private boolean m_chatServerIsActive;
 	private static Image m_loadImage; // Made these static to prevent memory leak.
 	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 
@@ -199,7 +200,7 @@ public class GameClient extends BasicGame
 
 		m_instance = this;
 		gc.getGraphics().setWorldClip(-32, -32, 832, 832);
-		gc.setShowFPS(false);
+		gc.setShowFPS(false); // Toggle this to show FPS
 		m_display = new Display(gc);
 
 		/*
@@ -273,7 +274,6 @@ public class GameClient extends BasicGame
 	{
 		try
 		{
-			String location;
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";
@@ -284,15 +284,13 @@ public class GameClient extends BasicGame
 			{
 				try
 				{
-
-					location = respath + "res/characters/" + String.valueOf(i) + ".png";
+					final String location = respath + "res/characters/" + i + ".png";
 					m_spriteImageArray[i + 5] = new Image(location);
-
 				}
 				catch(Exception e)
 				{
-					location = respath + "res/characters/" + String.valueOf(i) + ".png";
-					m_spriteImageArray[i + 5] = new Image(location);
+					// location = respath + "res/characters/" + String.valueOf(i) + ".png";
+					// m_spriteImageArray[i + 5] = new Image(location);
 				}
 			}
 		}
@@ -312,28 +310,22 @@ public class GameClient extends BasicGame
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
-		if(m_nextResource != null)
-		{
-			try
-			{
-				m_nextResource.load();
-
-			}
-			catch(Exception e)
-			{
-				// throw new SlickException("Failed to load: " + m_nextResource.getDescription(), e);
-				System.err.println("Failed to load: " + m_nextResource.getDescription() + "\n" + "... WARNING: the game may or may not work because of this");
-			}
-
-			m_nextResource = null;
-		}
-
 		if(LoadingList.get().getRemainingResources() > 0)
 		{
 			m_nextResource = LoadingList.get().getNext();
+			try
+			{
+				m_nextResource.load();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			return;
 		}
 		else
 		{
+
 			if(!m_started)
 			{
 				m_started = true;
@@ -357,10 +349,9 @@ public class GameClient extends BasicGame
 
 			}
 		}
-
 		if(m_started)
 		{
-			// make sure we can't move while chaging maps
+			// make sure we can't move while changing maps
 			if(m_loading.isVisible())
 			{
 				gc.getInput().disableKeyRepeat();
@@ -476,11 +467,12 @@ public class GameClient extends BasicGame
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 		g.drawImage(m_loadImage, 0, 0);
+		g.setColor(Color.white);
 
 		if(m_nextResource != null)
 		{
-			g.setColor(Color.white);
-			g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
+			g.drawString("Loading,  please wait ...", 10, gc.getHeight() - 90);
+			// g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
 		}
 
 		int total = LoadingList.get().getTotalResources();
@@ -488,8 +480,6 @@ public class GameClient extends BasicGame
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
 		if(!m_started)
 		{
-
-			g.setColor(Color.white);
 			g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
 
 			float bar = loaded / (float) total;
@@ -504,8 +494,7 @@ public class GameClient extends BasicGame
 			// g.fillRoundRect(15, gc.getHeight() - 120, bar*(maxWidth - 10), 20, 10);
 
 		}
-
-		if(m_started)
+		else
 		{
 
 			/* Clip the screen, no need to render what we're not seeing */
@@ -1128,7 +1117,6 @@ public class GameClient extends BasicGame
 			gc = new AppGameContainer(new GameClient(GAME_TITLE), 800, 600, fullscreen);
 			gc.setTargetFrameRate(50);
 			gc.start();
-
 		}
 		catch(Exception e)
 		{
@@ -1477,11 +1465,10 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static String setLanguage(String lang)
+	public void setLanguage(String lang)
 	{
 		m_language = lang;
 		m_languageChosen = true;
-		return m_language;
 	}
 
 	/**
@@ -1512,6 +1499,11 @@ public class GameClient extends BasicGame
 	public void setLoadSurroundingMaps(boolean load)
 	{
 		m_loadSurroundingMaps = load;
+	}
+
+	public boolean chatServerIsActive()
+	{
+		return m_chatServerIsActive;
 	}
 
 	/** Slick Native library finder. */

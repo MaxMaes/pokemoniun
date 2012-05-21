@@ -59,13 +59,10 @@ public class BattleWindow extends Frame
 	public List<Button> m_pokeButtons = new ArrayList<Button>();
 	public List<Label> m_pokeInfo = new ArrayList<Label>();
 	public List<Label> m_pokeStatus = new ArrayList<Label>();
-	public static HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
+	private static HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 
 	// Image Loading tools
 	private static String m_path = "res/battle/";
-	InputStream f;
-
-	private Label m_bg = new Label();
 
 	/**
 	 * Default constructor
@@ -179,11 +176,15 @@ public class BattleWindow extends Frame
 		this.setBackground(new Color(0, 0, 0, 0));
 		String respath = System.getProperty("res.path");
 		if(respath == null)
+		{
 			respath = "";
+		}
+		
+		Label m_bg = new Label();
 		try
 		{
-			f = FileLoader.loadFile(respath + "res/ui/bg.png");
-			m_bg = new Label(new Image(f, respath + "res/ui/bg.png", false));
+			InputStream input = FileLoader.loadFile(respath + "res/ui/bg.png");
+			m_bg = new Label(new Image(input, respath + "res/ui/bg.png", false));
 		}
 		catch(SlickException e)
 		{
@@ -543,5 +544,10 @@ public class BattleWindow extends Frame
 		}
 		GameClient.getInstance().getPacketGenerator().writeTcpMessage("bm" + i);
 		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+	}
+	
+	public HashMap<String, Image> getStatusIcons()
+	{
+		return m_statusIcons;
 	}
 }

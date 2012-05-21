@@ -257,7 +257,7 @@ public class Ui extends Frame
 			// The following is for in case the chat server is down...
 			case 'l':
 				// Local Chat
-				if(!GameClient.getInstance().m_chatServerIsActive)
+				if(!GameClient.getInstance().chatServerIsActive())
 					if(m.substring(1).toLowerCase().contains(GameClient.getInstance().getOurPlayer().getUsername().toLowerCase())
 							&& !m.substring(1).contains("<" + GameClient.getInstance().getOurPlayer().getUsername() + ">"))
 						m_chat.addChatLine(0, "!" + m.substring(1));
@@ -267,13 +267,13 @@ public class Ui extends Frame
 			case 'p':
 				// Private Chat
 				String[] details = m.substring(1).split(",");
-				if(!GameClient.getInstance().m_chatServerIsActive)
+				if(!GameClient.getInstance().chatServerIsActive())
 					m_chat.addChat(details[0], true);
 				m_chat.addWhisperLine(details[0], details[1]);
 				break;
 			case 's':
 				// Server Announcement
-				if(!GameClient.getInstance().m_chatServerIsActive)
+				if(!GameClient.getInstance().chatServerIsActive())
 					m_chat.addSystemMessage(m.substring(1));
 				break;
 		}

@@ -222,8 +222,8 @@ public class BattleManager {
 				m_battle.m_pokeInfo.get(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:"
 						+ m_ourPokes[i].getCurHP() + "/" + m_ourPokes[i].getMaxHP());
 				try{
-					if (m_ourStatuses.containsKey(i) && m_battle.m_statusIcons.containsKey(m_ourStatuses.get(i))){
-						m_battle.m_pokeStatus.get(i).setImage(m_battle.m_statusIcons.get(m_ourStatuses.get(i)));
+					if (m_ourStatuses.containsKey(i) && m_battle.getStatusIcons().containsKey(m_ourStatuses.get(i))){
+						m_battle.m_pokeStatus.get(i).setImage(m_battle.getStatusIcons().get(m_ourStatuses.get(i)));
 					} else {
 						m_battle.m_pokeStatus.get(i).setImage(null);
 					}

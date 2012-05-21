@@ -341,7 +341,38 @@ public class Trade implements Runnable
 						}
 						else if(currentEvolution.getType() == EvolutionTypes.TradeItem)
 						{
-							/* TODO: Evolve pokemon that requires carrying an item and trading. Check to see if they carry the right item to evolve. */
+							/* TODO: TEST THIS CODE! Coded same way as evo stones, so if that is fixed, same fix will work here if this doesnt work already */
+							if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("DRAGON SCALE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DRAGONSCALE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEATOOTH")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEATOOTH"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("METAL COAT")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("METALCOAT"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("KING'S ROCK")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("KINGSROCK"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("UP-GRADE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("UP_GRADE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
 							break;
 						}
 					}

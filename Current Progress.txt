@@ -15,6 +15,7 @@
 [ADD] Serverlist is retrieved from the web.
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
 [ADD] Back buttons on the login screen and server select screen.
+[ADD] Trading with items -> Untested, works same way as evo stones. If this doesnt work already, the evo stone fix will probably work here as well.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 

@@ -111,7 +111,7 @@ public class ClientMapMatrix
 	public void loadMaps(int mapX, int mapY, Graphics g)
 	{
 		/* Loads the main map and surrounding maps */
-		if(mapX >= -30 && !GameClient.disableMaps())
+		if(mapX >= -30 && !GameClient.getInstance().loadSurroundingMaps())
 		{
 			/* Exterior, load surrounding maps */
 			if(getCurrentMap() != null)

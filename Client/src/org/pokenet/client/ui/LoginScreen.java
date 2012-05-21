@@ -48,7 +48,7 @@ public class LoginScreen extends Window {
 		if(respath==null)
 			respath="";
 		try {
-			InputStream f;
+			InputStream input;
 //			m_bgColor = new Color(255, 255, 255, 70);
 			List<String> translated = new ArrayList<String>();
 			translated = Translator.translate("_LOGIN");
@@ -61,36 +61,36 @@ public class LoginScreen extends Window {
 					if(cal.get(Calendar.DAY_OF_MONTH) >= 7
 							&& cal.get(Calendar.DAY_OF_MONTH) <= 14) {
 						/* Valentines day! */
-						f = new FileInputStream(respath+"res/pokenet_valentines.png");
+						input = new FileInputStream(respath+"res/pokenet_valentines.png");
 					} else {
-						f = new FileInputStream(respath+"res/pokenet_venonat.png");
+						input = new FileInputStream(respath+"res/pokenet_venonat.png");
 					}
 			} else if(cal.get(Calendar.MONTH) == 2 
 					&& cal.get(Calendar.DAY_OF_MONTH) > 14) {
 				/* If second half of March, show Easter login */
-				f = new FileInputStream(respath+"res/pokenet_easter.png");
+				input = new FileInputStream(respath+"res/pokenet_easter.png");
 			} else if(cal.get(Calendar.MONTH) == 3 
 					&& cal.get(Calendar.DAY_OF_MONTH) < 26) {
 				/* If before April 26, show Easter login */
-				f = new FileInputStream(respath+"res/pokenet_easter.png");
+				input = new FileInputStream(respath+"res/pokenet_easter.png");
 			} else if(cal.get(Calendar.MONTH) == 9) {
 				/* Halloween */
-				f = new FileInputStream(respath+"res/pokenet_halloween.png");
+				input = new FileInputStream(respath+"res/pokenet_halloween.png");
 			} else if(cal.get(Calendar.MONTH) == 11) {
 				/* Christmas! */
-				f = new FileInputStream(respath+"res/pokenet_xmas.png");
+				input = new FileInputStream(respath+"res/pokenet_xmas.png");
 			} else if(cal.get(Calendar.MONTH) == 0) {
 				/* January - Venonat Time! */
-				f = new FileInputStream(respath+"res/pokenet_venonat.png");
+				input = new FileInputStream(respath+"res/pokenet_venonat.png");
 			} else if(cal.get(Calendar.MONTH) >= 5 
 					&& cal.get(Calendar.MONTH) <= 7) {
 				/* Summer login */
-				f = new FileInputStream(respath+"res/pokenet_summer.png");
+				input = new FileInputStream(respath+"res/pokenet_summer.png");
 			} else {
 				/* Show normal login screen */
-				f = new FileInputStream(respath+"res/pokenet_normal.png");
+				input = new FileInputStream(respath+"res/pokenet_normal.png");
 			}
-			m_bg = new Label(new Image(f, "bg", false));
+			m_bg = new Label(new Image(input, "bg", false));
 			m_bg.pack();
 			m_bg.setLocation(0, 0);
 			m_bg.setVisible(true);
@@ -168,7 +168,7 @@ public class LoginScreen extends Window {
 	 * Sets the server version to be displayed
 	 * @param rev
 	 */
-	public void setServerRevision(String rev) {
+	public void setServerRevision(final String rev) {
 		m_serverRev.setText("Server Version: r" + rev);
 		m_serverRev.pack();
 		m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth() + 16, 

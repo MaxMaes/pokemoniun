@@ -59,10 +59,10 @@ public class BattleWindow extends Frame
 	public List<Button> m_pokeButtons = new ArrayList<Button>();
 	public List<Label> m_pokeInfo = new ArrayList<Label>();
 	public List<Label> m_pokeStatus = new ArrayList<Label>();
-	public HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
+	public static HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 
 	// Image Loading tools
-	private String m_path = "res/battle/";
+	private static String m_path = "res/battle/";
 	InputStream f;
 
 	private Label m_bg = new Label();
@@ -96,39 +96,11 @@ public class BattleWindow extends Frame
 		LoadingList.setDeferredLoading(true);
 		try
 		{
-			m_statusIcons.put("Poison", new Image(m_path + "PSN" + ".png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			m_statusIcons.put("Sleep", new Image(m_path + "SLP" + ".png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			m_statusIcons.put("Freze", new Image(m_path + "FRZ" + ".png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			m_statusIcons.put("Burn", new Image(m_path + "BRN" + ".png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			m_statusIcons.put("Paralysis", new Image(m_path + "PAR" + ".png", false));
+			m_statusIcons.put("Poison", new Image(m_path + "PSN.png", false));
+			m_statusIcons.put("Sleep", new Image(m_path + "SLP.png", false));
+			m_statusIcons.put("Freze", new Image(m_path + "FRZ.png", false));
+			m_statusIcons.put("Burn", new Image(m_path + "BRN.png", false));
+			m_statusIcons.put("Paralysis", new Image(m_path + "PAR.png", false));
 		}
 		catch(SlickException e)
 		{

@@ -27,12 +27,12 @@ public class ItemDatabase {
 	/**
 	 * Adds an item to the database
 	 * @param id
-	 * @param i
+	 * @param item
 	 */
-	public void addItem(int id, Item i) {
+	public void addItem(int id, Item item) {
 		if(m_items == null)
 			m_items = new HashMap<Integer, Item>();
-		m_items.put(id, i);
+		m_items.put(id, item);
 	}
 	
 	/**
@@ -81,8 +81,8 @@ public class ItemDatabase {
 	 * Sets the instance
 	 * @param i
 	 */
-	public void setInstance(ItemDatabase i) {
-		m_instance = i;
+	public void setInstance(ItemDatabase instance) {
+		m_instance = instance;
 	}
 	
 	/**

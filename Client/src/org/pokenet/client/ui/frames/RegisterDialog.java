@@ -105,18 +105,21 @@ public class RegisterDialog extends Frame{
 		m_day.setSize(32, 24);
 		m_day.setLocation(4, 172);
 		m_day.setVisible(true);
+		m_day.setMaxChars(2); // Days 01-31
 		this.add(m_day);
 		
 		m_month = new TextField();
 		m_month.setSize(32, 24);
 		m_month.setLocation(40, 172);
 		m_month.setVisible(true);
+		m_month.setMaxChars(2); // Month 01-12
 		this.add(m_month);
 		
 		m_year = new TextField();
 		m_year.setSize(52, 24);
 		m_year.setLocation(76, 172);
 		m_year.setVisible(true);
+		m_year.setMaxChars(4); // Years 0000 - 9999
 		this.add(m_year);
 		
 		m_e = new Label(translated.get(12));

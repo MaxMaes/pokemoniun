@@ -112,7 +112,7 @@ public class OptionsDialog extends Frame {
 						
 						m_options.remove("disableMaps");
 						m_options.put("disableMaps", Boolean.toString(m_disableMaps.isSelected()));
-						GameClient.setDisableMaps(m_disableMaps.isSelected());
+						GameClient.getInstance().setLoadSurroundingMaps(m_disableMaps.isSelected());
 						
 						m_options.remove("disableWeather");
 						m_options.put("disableWeather", Boolean.toString(m_disableWeather.isSelected()));

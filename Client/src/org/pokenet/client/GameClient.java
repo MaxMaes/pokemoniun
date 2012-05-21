@@ -67,6 +67,9 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
+	private static final String GAME_TITLE = "Pokenet: Valiant Venonat";
+	private static final String CHATHOST = "localhost";
+
 	// Some variables needed
 	private TcpProtocolHandler m_tcpProtocolHandler;
 
@@ -80,10 +83,10 @@ public class GameClient extends BasicGame
 	private Animator m_animator;
 	private static HashMap<String, String> options;
 	// Static variables
-	private static String m_filepath = "";
+	private static String m_filepath;
 	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont;
-	private static String HOST;
-	private static String CHATHOST = "localhost";
+	private static String m_host;
+
 	// UI
 	private LoadingScreen m_loading;
 	private LoginScreen m_login;
@@ -101,11 +104,11 @@ public class GameClient extends BasicGame
 	private PlayerPopupDialog m_playerDialog;
 	private MoveLearningManager m_moveLearningManager;
 	private static SoundManager m_soundPlayer;
-	private static boolean m_disableMaps = false;
+	private static boolean m_loadSurroundingMaps = false;
 	public static String UDPCODE = "";
 	private int lastPressedKey;
 
-	public static DeferredResource m_nextResource;
+	private static DeferredResource m_nextResource;
 	private boolean m_started;
 
 	Color m_loadColor = new Color(70, 70, 255);
@@ -113,8 +116,8 @@ public class GameClient extends BasicGame
 	private boolean m_close = false; // Used to tell the game to close or not.
 	private Image[] m_spriteImageArray = new Image[240]; /* WARNING: Replace with actual number of sprites */
 	public boolean m_chatServerIsActive;
-	private Image m_loadImage;
-	private Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
+	private static Image m_loadImage; // Made these static to prevent memory leak.
+	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 
 	/** Load options */
 	static
@@ -124,34 +127,40 @@ public class GameClient extends BasicGame
 			try
 			{
 				m_filepath = System.getProperty("res.path");
-				System.out.println("Path: " + m_filepath);
-				if(m_filepath == null)
-					m_filepath = "";
+				// System.out.println("Path: " + m_filepath);
 			}
 			catch(Exception e)
 			{
 				m_filepath = "";
 			}
+			// This is a better way.
+			finally
+			{
+				if(m_filepath == null)
+				{
+					m_filepath = "";
+				}
+			}
 			options = new FileMuffin().loadFile("options.dat");
 			if(options == null)
 			{
 				options = new HashMap<String, String>();
-				options.put("soundMuted", String.valueOf(true));
-				options.put("disableMaps", String.valueOf(false));
-				options.put("disableWeather", String.valueOf(false));
+				options.put(Options.SOUND_MUTED, String.valueOf(true));
+				options.put(Options.DISABLE_MAPS, String.valueOf(false));
+				options.put(Options.DISABLE_WEATHER, String.valueOf(false));
 			}
-			m_instance = new GameClient("Pokenet: Valiant Venonat");
+			m_instance = new GameClient(GAME_TITLE);
 			m_soundPlayer = new SoundManager();
-			m_soundPlayer.mute(Boolean.parseBoolean(options.get("soundMuted")));
+			m_soundPlayer.mute(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
 			m_soundPlayer.start();
 			// m_soundPlayer.setTrack("introandgym");
-			m_disableMaps = Boolean.parseBoolean(options.get("disableMaps"));
+			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			m_instance = new GameClient("Pokenet: Valiant Venonat");
-			m_disableMaps = false;
+			m_instance = new GameClient(GAME_TITLE);
+			m_loadSurroundingMaps = false;
 			m_soundPlayer = new SoundManager();
 			m_soundPlayer.mute(false);
 			m_soundPlayer.start();
@@ -176,13 +185,15 @@ public class GameClient extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		// gc.getGraphics().setBackground(Color.white);
-		m_loadImage = new Image("res/load.jpg");
-		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() / m_loadImage.getWidth());
-		m_loadImage = m_loadImage.getScaledCopy(800.0f / m_loadImage.getWidth());
 
+		// Load the images.
+		m_loadImage = new Image("res/load.jpg");
 		m_loadBarLeft = new Image("res/ui/loadbar/left.png");
 		m_loadBarRight = new Image("res/ui/loadbar/right.png");
 		m_loadBarMiddle = new Image("res/ui/loadbar/middle.png");
+
+		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() / m_loadImage.getWidth());
+		m_loadImage = m_loadImage.getScaledCopy(800.0f / m_loadImage.getWidth());
 
 		LoadingList.setDeferredLoading(true);
 
@@ -220,7 +231,7 @@ public class GameClient extends BasicGame
 		// m_time = new TimeService();
 		// m_weather = new WeatherService();
 		// if(options != null)
-		// m_weather.setEnabled(!Boolean.parseBoolean(options.get("disableWeather")));
+		// m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
 
 		/*
 		 * Add the ui components
@@ -257,8 +268,6 @@ public class GameClient extends BasicGame
 		// LoadingList.setDeferredLoading(false);
 
 	}
-
-
 
 	private void loadSprites()
 	{
@@ -340,7 +349,7 @@ public class GameClient extends BasicGame
 					m_weather = new WeatherService();
 					m_time = new TimeService();
 					if(options != null)
-						m_weather.setEnabled(!Boolean.parseBoolean(options.get("disableWeather")));
+						m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
 
 					m_ui = new Ui(m_display);
 					m_ui.setAllVisible(false);
@@ -384,7 +393,7 @@ public class GameClient extends BasicGame
 			/*
 			 * Check if language was chosen.
 			 */
-			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && ((HOST != null && HOST.equalsIgnoreCase("")) || m_packetGen == null))
+			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && ((m_host != null && m_host.equalsIgnoreCase("")) || m_packetGen == null))
 			{
 				m_login.showServerSelect();
 			}
@@ -395,7 +404,7 @@ public class GameClient extends BasicGame
 			/*
 			 * Check if we need to connect to a selected server
 			 */
-			if(HOST != null && !HOST.equalsIgnoreCase("") && m_packetGen == null)
+			if(m_host != null && !m_host.equalsIgnoreCase("") && m_packetGen == null)
 			{
 				this.connect();
 			}
@@ -485,7 +494,8 @@ public class GameClient extends BasicGame
 
 			float bar = loaded / (float) total;
 			g.drawImage(m_loadBarLeft, 13, gc.getHeight() - 120);
-			g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0, m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
+			g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
+					m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
 			g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
 
 			// non-imagy loading bar
@@ -515,7 +525,8 @@ public class GameClient extends BasicGame
 						thisMap = m_mapMatrix.getMap(x, y);
 						if(thisMap != null && thisMap.isRendering())
 						{
-							thisMap.render(thisMap.getXOffset() / 2, thisMap.getYOffset() / 2, 0, 0, (gc.getScreenWidth() - thisMap.getXOffset()) / 32, (gc.getScreenHeight() - thisMap.getYOffset()) / 32, false);
+							thisMap.render(thisMap.getXOffset() / 2, thisMap.getYOffset() / 2, 0, 0, (gc.getScreenWidth() - thisMap.getXOffset()) / 32,
+									(gc.getScreenHeight() - thisMap.getYOffset()) / 32, false);
 						}
 					}
 				}
@@ -593,7 +604,27 @@ public class GameClient extends BasicGame
 
 			if(key == Input.KEY_ENTER)
 			{
-					if(m_exitConfirm != null)
+				if(m_exitConfirm != null)
+				{
+					try
+					{
+						System.exit(0);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if(key == (Input.KEY_ESCAPE))
+		{
+			if(m_exitConfirm == null)
+			{
+				ActionListener yes = new ActionListener()
+				{
+					public void actionPerformed(ActionEvent arg0)
 					{
 						try
 						{
@@ -604,170 +635,152 @@ public class GameClient extends BasicGame
 							e.printStackTrace();
 						}
 					}
-				}
+				};
+				ActionListener no = new ActionListener()
+				{
+					public void actionPerformed(ActionEvent arg0)
+					{
+						m_exitConfirm.setVisible(false);
+						getDisplay().remove(m_exitConfirm);
+						m_exitConfirm = null;
+					}
+				};
+				m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
+				getUi().getDisplay().add(m_exitConfirm);
 			}
-
-			if(key == (Input.KEY_ESCAPE))
+			else
 			{
-				if(m_exitConfirm == null)
-				{
-					ActionListener yes = new ActionListener()
-					{
-						public void actionPerformed(ActionEvent arg0)
-						{
-							try
-							{
-								System.exit(0);
-							}
-							catch(Exception e)
-							{
-								e.printStackTrace();
-							}
-						}
-					};
-					ActionListener no = new ActionListener()
-					{
-						public void actionPerformed(ActionEvent arg0)
-						{
-							m_exitConfirm.setVisible(false);
-							getDisplay().remove(m_exitConfirm);
-							m_exitConfirm = null;
-						}
-					};
-					m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
-					getUi().getDisplay().add(m_exitConfirm);
-				}
-				else
-				{
-					m_exitConfirm.setVisible(false);
-					getDisplay().remove(m_exitConfirm);
-					m_exitConfirm = null;
-				}
+				m_exitConfirm.setVisible(false);
+				getDisplay().remove(m_exitConfirm);
+				m_exitConfirm = null;
 			}
-			if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.isBattling() && !m_isNewMap)
+		}
+		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.isBattling() && !m_isNewMap)
+		{
+			if(m_ourPlayer != null && !m_isNewMap
+			/* && m_loading != null && !m_loading.isVisible() */
+			&& !BattleManager.isBattling() && m_ourPlayer.canMove())
 			{
-				if(m_ourPlayer != null && !m_isNewMap
-				/* && m_loading != null && !m_loading.isVisible() */
-				&& !BattleManager.isBattling() && m_ourPlayer.canMove())
+				if(key == (Input.KEY_DOWN) || key == (Input.KEY_S))
 				{
-					if(key == (Input.KEY_DOWN) || key == (Input.KEY_S))
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
 					{
-						if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
-						{
-							m_packetGen.move(Direction.Down);
-							m_ourPlayer.queueMovement(Direction.Down);
-						}
-						else if(m_ourPlayer.getDirection() != Direction.Down)
-						{
-							m_packetGen.move(Direction.Down);
-							m_ourPlayer.queueMovement(Direction.Down);
-						}
+						m_packetGen.move(Direction.Down);
+						m_ourPlayer.queueMovement(Direction.Down);
 					}
-					else if(key == (Input.KEY_UP) || key == (Input.KEY_W))
+					else if(m_ourPlayer.getDirection() != Direction.Down)
 					{
-						if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
-						{
-							m_packetGen.move(Direction.Up);
-							m_ourPlayer.queueMovement(Direction.Up);
-						}
-						else if(m_ourPlayer.getDirection() != Direction.Up)
-						{
-							m_packetGen.move(Direction.Up);
-							m_ourPlayer.queueMovement(Direction.Up);
-						}
-					}
-					else if(key == (Input.KEY_LEFT) || key == (Input.KEY_A))
-					{
-						if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
-						{
-							m_packetGen.move(Direction.Left);
-							m_ourPlayer.queueMovement(Direction.Left);
-						}
-						else if(m_ourPlayer.getDirection() != Direction.Left)
-						{
-							m_packetGen.move(Direction.Left);
-							m_ourPlayer.queueMovement(Direction.Left);
-						}
-					}
-					else if(key == (Input.KEY_RIGHT) || key == (Input.KEY_D))
-					{
-						if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
-						{
-							m_packetGen.move(Direction.Right);
-							m_ourPlayer.queueMovement(Direction.Right);
-						}
-						else if(m_ourPlayer.getDirection() != Direction.Right)
-						{
-							m_packetGen.move(Direction.Right);
-							m_ourPlayer.queueMovement(Direction.Right);
-						}
-					}
-					else if(key == Input.KEY_C)
-					{
-						m_ui.toggleChat();
-					}
-					else if(key == (Input.KEY_1))
-					{
-						m_ui.toggleStats();
-					}
-					else if(key == (Input.KEY_2))
-					{
-						m_ui.togglePokemon();
-					}
-					else if(key == (Input.KEY_3))
-					{
-						m_ui.toggleBag();
-					}
-					else if(key == (Input.KEY_4))
-					{
-						m_ui.toggleMap();
-					}
-					else if(key == (Input.KEY_5))
-					{
-						m_ui.toggleFriends();
-					}
-					else if(key == (Input.KEY_6))
-					{
-						m_ui.toggleRequests();
-					}
-					else if(key == (Input.KEY_7))
-					{
-						m_ui.toggleOptions();
-					}
-					else if(key == (Input.KEY_8))
-					{
-						m_ui.toggleHelp();
-					}
-					else if(key == (Input.KEY_9))
-					{
-						m_ui.disconnect();
+						m_packetGen.move(Direction.Down);
+						m_ourPlayer.queueMovement(Direction.Down);
 					}
 				}
-			}
-			if((key == (Input.KEY_SPACE) || key == (Input.KEY_E)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()) && !getDisplay().containsChild(getUi().getShop()))
-			{
-				if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
+				else if(key == (Input.KEY_UP) || key == (Input.KEY_W))
 				{
-					m_packetGen.writeTcpMessage("Ct");
-				}
-				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech()) && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
-				{
-					BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
-				}
-				else
-				{
-					try
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
 					{
-						m_ui.getNPCSpeech().advance();
+						m_packetGen.move(Direction.Up);
+						m_ourPlayer.queueMovement(Direction.Up);
 					}
-					catch(Exception e)
+					else if(m_ourPlayer.getDirection() != Direction.Up)
 					{
-						m_ui.nullSpeechFrame();
-						// m_packetGen.write("F");
+						m_packetGen.move(Direction.Up);
+						m_ourPlayer.queueMovement(Direction.Up);
 					}
+				}
+				else if(key == (Input.KEY_LEFT) || key == (Input.KEY_A))
+				{
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
+					{
+						m_packetGen.move(Direction.Left);
+						m_ourPlayer.queueMovement(Direction.Left);
+					}
+					else if(m_ourPlayer.getDirection() != Direction.Left)
+					{
+						m_packetGen.move(Direction.Left);
+						m_ourPlayer.queueMovement(Direction.Left);
+					}
+				}
+				else if(key == (Input.KEY_RIGHT) || key == (Input.KEY_D))
+				{
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
+					{
+						m_packetGen.move(Direction.Right);
+						m_ourPlayer.queueMovement(Direction.Right);
+					}
+					else if(m_ourPlayer.getDirection() != Direction.Right)
+					{
+						m_packetGen.move(Direction.Right);
+						m_ourPlayer.queueMovement(Direction.Right);
+					}
+				}
+				else if(key == Input.KEY_C)
+				{
+					m_ui.toggleChat();
+				}
+				else if(key == (Input.KEY_1))
+				{
+					m_ui.toggleStats();
+				}
+				else if(key == (Input.KEY_2))
+				{
+					m_ui.togglePokemon();
+				}
+				else if(key == (Input.KEY_3))
+				{
+					m_ui.toggleBag();
+				}
+				else if(key == (Input.KEY_4))
+				{
+					m_ui.toggleMap();
+				}
+				else if(key == (Input.KEY_5))
+				{
+					m_ui.toggleFriends();
+				}
+				else if(key == (Input.KEY_6))
+				{
+					m_ui.toggleRequests();
+				}
+				else if(key == (Input.KEY_7))
+				{
+					m_ui.toggleOptions();
+				}
+				else if(key == (Input.KEY_8))
+				{
+					m_ui.toggleHelp();
+				}
+				else if(key == (Input.KEY_9))
+				{
+					m_ui.disconnect();
 				}
 			}
 		}
+		if((key == (Input.KEY_SPACE) || key == (Input.KEY_E)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
+				&& !getDisplay().containsChild(getUi().getShop()))
+		{
+			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
+			{
+				m_packetGen.writeTcpMessage("Ct");
+			}
+			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
+					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+			{
+				BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+			}
+			else
+			{
+				try
+				{
+					m_ui.getNPCSpeech().advance();
+				}
+				catch(Exception e)
+				{
+					m_ui.nullSpeechFrame();
+					// m_packetGen.write("F");
+				}
+			}
+		}
+	}
 
 	/**
 	 * Accepts the user input.
@@ -876,7 +889,8 @@ public class GameClient extends BasicGame
 			// place where the user just right-clicked
 			for(Player p : m_mapMatrix.getPlayers())
 			{
-				if((x >= p.getX() + m_mapMatrix.getCurrentMap().getXOffset() && x <= p.getX() + 32 + m_mapMatrix.getCurrentMap().getXOffset()) && (y >= p.getY() + m_mapMatrix.getCurrentMap().getYOffset() && y <= p.getY() + 40 + m_mapMatrix.getCurrentMap().getYOffset()))
+				if((x >= p.getX() + m_mapMatrix.getCurrentMap().getXOffset() && x <= p.getX() + 32 + m_mapMatrix.getCurrentMap().getXOffset())
+						&& (y >= p.getY() + m_mapMatrix.getCurrentMap().getYOffset() && y <= p.getY() + 40 + m_mapMatrix.getCurrentMap().getYOffset()))
 				{
 					// Brings up a popup menu with player options
 					if(!p.isOurPlayer())
@@ -916,7 +930,8 @@ public class GameClient extends BasicGame
 				{
 					m_packetGen.writeTcpMessage("Ct");
 				}
-				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech()) && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
+						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 				{
 					BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 				}
@@ -948,7 +963,7 @@ public class GameClient extends BasicGame
 
 			cfTcp.awaitUninterruptibly();
 			assert cfTcp.isClosed(): "Warning the TCP session was not closed";
-	
+
 			CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
 			cfUdp.awaitUninterruptibly();
 			assert cfUdp.isClosed(): "Warning the UDP session was not closed";
@@ -966,7 +981,7 @@ public class GameClient extends BasicGame
 		connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		m_tcpProtocolHandler = new TcpProtocolHandler(this);
 		connector.setHandler(m_tcpProtocolHandler);
-		ConnectFuture cf = connector.connect(new InetSocketAddress(HOST, 7002));
+		ConnectFuture cf = connector.connect(new InetSocketAddress(m_host, 7002));
 		cf.addListener(new IoFutureListener<IoFuture>()
 		{
 			public void operationComplete(IoFuture s)
@@ -980,21 +995,15 @@ public class GameClient extends BasicGame
 					else
 					{
 						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-						HOST = "";
+						m_host = "";
 						m_packetGen = null;
 					}
-				}
-				catch(RuntimeIoException e)
-				{
-					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					HOST = "";
-					m_packetGen = null;
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					HOST = "";
+					m_host = "";
 					m_packetGen = null;
 				}
 			}
@@ -1005,7 +1014,7 @@ public class GameClient extends BasicGame
 		NioDatagramConnector udp = new NioDatagramConnector();
 		udp.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		udp.setHandler(new UdpProtocolHandler(this));
-		cf = udp.connect(new InetSocketAddress(HOST, 7005));
+		cf = udp.connect(new InetSocketAddress(m_host, 7005));
 		cf.addListener(new IoFutureListener<IoFuture>()
 		{
 			public void operationComplete(IoFuture s)
@@ -1019,21 +1028,21 @@ public class GameClient extends BasicGame
 					else
 					{
 						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-						HOST = "";
+						m_host = "";
 						m_packetGen = null;
 					}
 				}
 				catch(RuntimeIoException e)
 				{
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					HOST = "";
+					m_host = "";
 					m_packetGen = null;
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					HOST = "";
+					m_host = "";
 					m_packetGen = null;
 				}
 			}
@@ -1084,7 +1093,7 @@ public class GameClient extends BasicGame
 		/*
 		 * Show login screen
 		 */
-		if(!HOST.equals(""))
+		if(!m_host.equals(""))
 			m_login.showLogin();
 	}
 
@@ -1108,7 +1117,7 @@ public class GameClient extends BasicGame
 		boolean fullscreen = false;
 		try
 		{
-			fullscreen = Boolean.parseBoolean(options.get("fullScreen"));
+			fullscreen = Boolean.parseBoolean(options.get(Options.FULLSCREEN));
 		}
 		catch(Exception e)
 		{
@@ -1116,7 +1125,7 @@ public class GameClient extends BasicGame
 		}
 		try
 		{
-			gc = new AppGameContainer(new GameClient("Pokenet: Valiant Venonat"), 800, 600, fullscreen);
+			gc = new AppGameContainer(new GameClient(GAME_TITLE), 800, 600, fullscreen);
 			gc.setTargetFrameRate(50);
 			gc.start();
 
@@ -1126,10 +1135,12 @@ public class GameClient extends BasicGame
 			e.printStackTrace();
 		}
 	}
-	
-	/** When the disconnect button is pressed...
+
+	/**
+	 * When the disconnect button is pressed...
 	 * 
-	 * @param args */
+	 * @param args
+	 */
 	public void disconnectRequest()
 	{
 		if(m_dcConfirm == null)
@@ -1140,7 +1151,7 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
-						m_packetGen.writeTcpMessage("rl"+m_ourPlayer.getUsername());
+						m_packetGen.writeTcpMessage("rl" + m_ourPlayer.getUsername());
 					}
 					catch(Exception e)
 					{
@@ -1253,7 +1264,7 @@ public class GameClient extends BasicGame
 	 */
 	public static void setHost(String s)
 	{
-		HOST = s;
+		m_host = s;
 	}
 
 	/**
@@ -1340,7 +1351,7 @@ public class GameClient extends BasicGame
 	public void reset()
 	{
 		m_packetGen = null;
-		HOST = "";
+		m_host = "";
 		try
 		{
 			if(BattleManager.getInstance() != null)
@@ -1488,9 +1499,9 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static boolean disableMaps()
+	public boolean loadSurroundingMaps()
 	{
-		return m_disableMaps;
+		return m_loadSurroundingMaps;
 	}
 
 	/**
@@ -1498,13 +1509,21 @@ public class GameClient extends BasicGame
 	 * 
 	 * @param b
 	 */
-	public static void setDisableMaps(boolean b)
+	public void setLoadSurroundingMaps(boolean load)
 	{
-		m_disableMaps = b;
+		m_loadSurroundingMaps = load;
 	}
 
 	/** Slick Native library finder. */
 	/*
 	 * static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } }
 	 */
+
+	final class Options
+	{
+		public static final String FULLSCREEN = "fullscreen";
+		public static final String SOUND_MUTED = "soundMuted";
+		public static final String DISABLE_MAPS = "disableMaps";
+		public static final String DISABLE_WEATHER = "disableWeather";
+	}
 }

@@ -14,8 +14,8 @@ public class IdleTimer implements Runnable {
 			 */
 			TcpProtocolHandler.kickIdlePlayers();
 			try {
-				Thread.sleep(30000);
-			} catch (Exception e) {}
+				Thread.sleep(10 * 1000); // Sleep for 10 seconds
+			} catch (InterruptedException e) {}
 			
 		}
 	}

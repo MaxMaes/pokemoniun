@@ -88,7 +88,7 @@ public class TradeChar extends NonPlayerChar implements Tradeable {
 	}
 
 	public int getMoney() {
-		return 999999;
+		return -1;
 	}
 
 	public Pokemon[] getParty() {
@@ -131,6 +131,6 @@ public class TradeChar extends NonPlayerChar implements Tradeable {
 	}
 
 	public String getIpAddress() {
-		return "";
+		return null;
 	}
 }

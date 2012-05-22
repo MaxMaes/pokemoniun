@@ -51,8 +51,8 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	@Override
 	public void sessionCreated(IoSession session)
 	{
-		// Tell the client which revision the server is on
-		session.write("R" + GameServer.REVISION);
+		// Tell the client which version the server is on
+		session.write("V" + GameServer.VERSION);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 			 * Player is logged in, allow interaction with their player object
 			 */
 			PlayerChar p = (PlayerChar) session.getAttribute("player");
-			p.lastPacket = System.currentTimeMillis();
+			p.setLastPacket(System.currentTimeMillis());
 			switch(message.charAt(0))
 			{
 				case 'U':
@@ -717,10 +717,13 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	{
 		synchronized(m_players)
 		{
-			for(PlayerChar p : m_players.values())
+			for(PlayerChar player : m_players.values())
 			{
-				if(System.currentTimeMillis() - p.lastPacket >= 900000)
-					p.forceLogout();
+				long afk = System.currentTimeMillis() - player.getLastPacket();
+				if(afk > (15 * 60 * 1000)) // 15 minutes
+				{
+					player.forceLogout();
+				}
 			}
 		}
 	}

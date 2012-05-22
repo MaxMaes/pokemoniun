@@ -83,7 +83,7 @@ public class LoginDialog extends Frame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				GameClient.getInstance().returnToServerSelect();
-				GameClient.getInstance().getLoginScreen().setServerRevision("?");
+				GameClient.getInstance().getLoginScreen().setServerVersion("?");
 				GameClient.getInstance().disconnect();
 			}
 		});

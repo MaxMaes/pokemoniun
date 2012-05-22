@@ -168,7 +168,7 @@ public class LoginScreen extends Window {
 	 * Sets the server version to be displayed
 	 * @param rev
 	 */
-	public void setServerRevision(final String rev) {
+	public void setServerVersion(final String rev) {
 		m_serverRev.setText("Server Version: r" + rev);
 		m_serverRev.pack();
 		m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth() + 16, 

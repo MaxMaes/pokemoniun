@@ -13,18 +13,18 @@ import java.io.InputStreamReader;
  */
 public class ConsoleReader {
 
-	private BufferedReader br; // the input stream
+	private BufferedReader m_bufferedReader; // the input stream
 
-	static String buffer = "";
-	static int p = 1; // buffer[p..] contains next input
+	private static String buffer;
+	private static int p = 1; // buffer[p..] contains next input
 
 	/**
 	 * Constructor
-	 * @param f - the name of the file
+	 * @param file - the name of the file
 	 */
-	public ConsoleReader(String f) {
+	public ConsoleReader(String file) {
 		try { 
-			br = new BufferedReader(new FileReader(f));
+			m_bufferedReader = new BufferedReader(new FileReader(file));
 		} 
 		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
@@ -33,7 +33,7 @@ public class ConsoleReader {
 	 * Constructor
 	 */
 	public ConsoleReader() { // default: keyboard input
-		br = new BufferedReader(new InputStreamReader(System.in));
+		m_bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 	}       
 
 	/**
@@ -45,7 +45,7 @@ public class ConsoleReader {
 		while (buffer != null && (p>= buffer.length() || 
 				Character.isWhitespace(buffer.charAt(p)))) {
 			if (p>= buffer.length()) {
-				buffer = br.readLine();
+				buffer = m_bufferedReader.readLine();
 				p = 0;
 			}
 			else p++;
@@ -115,7 +115,7 @@ public class ConsoleReader {
 			while (buffer != null && (p>= buffer.length() || 
 					Character.isWhitespace(buffer.charAt(p)))) {
 				if (p>= buffer.length()) {
-					buffer = br.readLine();
+					buffer = m_bufferedReader.readLine();
 					p = 0;
 				}
 				else p++;
@@ -143,7 +143,7 @@ public class ConsoleReader {
 		//Consume and return a character (which may be an end-of-line).
 		try { 
 			if (buffer != null && p>buffer.length()) {
-				buffer = br.readLine();
+				buffer = m_bufferedReader.readLine();
 				p = 0;
 			}
 			if (buffer == null) 
@@ -184,7 +184,7 @@ public class ConsoleReader {
 		// null returned on end of file
 		try {
 			if (buffer!= null && p>buffer.length()) {
-				buffer = br.readLine();
+				buffer = m_bufferedReader.readLine();
 				p = 0;
 			}   
 			if (buffer == null) return null; 
@@ -236,7 +236,7 @@ public class ConsoleReader {
 			while (buffer != null && (p>= buffer.length() || 
 					Character.isWhitespace(buffer.charAt(p)))) {
 				if (p>= buffer.length()) {
-					buffer = br.readLine(); 
+					buffer = m_bufferedReader.readLine(); 
 					p = 0;
 				}
 				else p++;
@@ -256,7 +256,7 @@ public class ConsoleReader {
 		// This version just provides alternative spelling
 		if (available()>0) return false;
 		try { 
-			buffer = br.readLine(); 
+			buffer = m_bufferedReader.readLine(); 
 		} 
 		catch (IOException ioe) {
 			System.err.println("ConsoleReader: IO Exception in EndOfFile");
@@ -270,7 +270,7 @@ public class ConsoleReader {
 	 */
 	public void close() { // close file
 		try {
-			br.close();
+			m_bufferedReader.close();
 		} 
 		catch(IOException e) { 
 			e.printStackTrace();

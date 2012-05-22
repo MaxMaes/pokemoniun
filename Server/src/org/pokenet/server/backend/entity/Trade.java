@@ -24,7 +24,7 @@ public class Trade implements Runnable
 {
 	/* Stores the offers */
 	private HashMap<Tradeable, TradeOffer[]> m_offers;
-	public boolean m_isExecuting = false;
+	private boolean m_isExecuting = false;
 	private ArrayList<String> m_queries = new ArrayList<String>();
 
 	/**
@@ -38,13 +38,14 @@ public class Trade implements Runnable
 		m_offers = new HashMap<Tradeable, TradeOffer[]>();
 		m_offers.put(player1, null);
 		m_offers.put(player2, null);
-		/* Block players of same IP address from trading */
-		if(player1.getIpAddress().equalsIgnoreCase(player2.getIpAddress()))
+		
+		// Prevent players from trading on the same IP.
+		if(player1.getIpAddress().equals(player2.getIpAddress()))
 		{
 			if(player1 instanceof PlayerChar)
 			{
 				PlayerChar p = (PlayerChar) player1;
-				p.getTcpSession().write("!Trading cannot be done with that player");
+				p.getTcpSession().write("You're not allowed to trade with a player that's on the same IP.");
 			}
 			endTrade();
 			return;
@@ -114,9 +115,8 @@ public class Trade implements Runnable
 	{
 		if(t instanceof PlayerChar)
 		{
-			PlayerChar p = (PlayerChar) t;
-			if(p.getMoney() < money)
-				return;
+			PlayerChar player = (PlayerChar) t;
+			if(player.getMoney() < money) return;
 		}
 		TradeOffer[] offer = new TradeOffer[2];
 		offer[0] = new TradeOffer();
@@ -148,6 +148,7 @@ public class Trade implements Runnable
 	{
 		Iterator<Tradeable> it = m_offers.keySet().iterator();
 		Tradeable otherPlayer = null;
+		
 		/* Find the other player */
 		while(it.hasNext())
 		{

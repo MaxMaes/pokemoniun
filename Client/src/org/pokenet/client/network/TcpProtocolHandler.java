@@ -100,9 +100,9 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 		String [] details;
 		switch(message.charAt(0)) 
 		{
-		case 'R':
-			//Server Revision Info
-			GameClient.getInstance().getLoginScreen().setServerRevision(message.substring(1));
+		case 'V':
+			//Server version
+			GameClient.getInstance().getLoginScreen().setServerVersion(message.substring(1));
 			break;
 		case '!':
 			//Server notification

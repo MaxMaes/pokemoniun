@@ -6,7 +6,7 @@ package org.pokenet.server.network.message;
  *
  */
 public class PokenetMessage {
-	protected String m_message = "";
+	protected String m_message;
 	
 	/**
 	 * Returns the message

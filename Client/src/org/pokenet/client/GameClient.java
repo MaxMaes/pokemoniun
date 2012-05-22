@@ -178,7 +178,6 @@ public class GameClient extends BasicGame
 	public GameClient(String title)
 	{
 		super(title);
-
 	}
 
 	/** Called before the window is created */

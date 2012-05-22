@@ -32,11 +32,7 @@ public class Memory implements Serializable {
      * Return whether two memories are semantically equal.
      */
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        
-        if (!obj.getClass().getName().equals(getClass().getName())) {
+        if (obj == null || !obj.getClass().getName().equals(getClass().getName())) {
             return false;
         }
         Memory mem = (Memory)obj;

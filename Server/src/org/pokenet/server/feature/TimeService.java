@@ -74,7 +74,7 @@ public class TimeService implements Runnable {
 			 * DAY HOUR MINUTES
 			 * where day is a number from 0 - 6
 			 */
-			URL url = new URL("http://pokedev.org/time.php");
+			URL url = new URL("http://pokedev.org/time.php"); // DAFUQ?
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringTokenizer s = new StringTokenizer(in.readLine());
 			m_day = Integer.parseInt(s.nextToken());

@@ -86,7 +86,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	/*
 	 * Kicking timer
 	 */
-	public long lastPacket = System.currentTimeMillis();
+	private long lastPacket = System.currentTimeMillis();
 	/*
 	 * Fishing timer
 	 */
@@ -1914,5 +1914,14 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 		{
 			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, getBag().getItems().get(i).getItemNumber(), getBag().getItems().get(i).getQuantity()));
 		}
+	}
+	
+	public void setLastPacket(long time) {
+		lastPacket = time;
+	}
+	
+	public long getLastPacket()
+	{
+		return lastPacket;
 	}
 }

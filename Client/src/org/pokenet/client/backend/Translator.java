@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.Language;
 
 public class Translator
 {
@@ -39,8 +40,9 @@ public class Translator
 		}
 		catch(FileNotFoundException fnfe)
 		{
+			// This should not happen anymore, but to be 9000% safe we keep it.
 			System.out.println("INFO: This language is not available yet, reverting to English!");
-			GameClient.getInstance().setLanguage("english");
+			GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
 		finally
 		{

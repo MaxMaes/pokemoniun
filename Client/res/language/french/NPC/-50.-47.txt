@@ -1,3 +1,2 @@
 Welcome to the PokeMart.
-Please take your time to choose your goods.
 Please report this bug!

@@ -1,49 +1,49 @@
-Equipe Pokemon
+Pokemon Team
 Level:
-Nome:
+Name:
 HP:
-Ataque:
-Defesa:
-Sp. Ataque:
-Sp. Defesa:
-Velocidade:
-Habilidade:
-Exp:
+Attack:
+Defense:
+Sp. Attack:
+Sp. Defense: 
+Speed:
+Ability:
+Exp: 
 Nature:
-Tipo um:
-Tipo dois:
-Genero:
-Opcoes
-Tela Cheia
-Mudo
-Salvar
-As mudancas terao efeito quando voce reniciar.
-Pokenet: Ajuda online
-Os botoes de movimento sao as WASD e/ou Setas /nMovement/n/n
-Espaco /nTalk/n/n
-Use Espaco para conversar com a NPC(OU/nPersonagem nao jogador)./n
-Use o /w USERNAME TEXT/ncommando para chamar outros/njogadores.
-Digite o comando / playercount em local de bate-papo para ver quantos jogadores estao online. / N
-Se voce tiver insiguias use/nshift para surfar.
+Type one:
+Type two:
+Gender:
+Options
+Full Screen view
+Mute
+Save
+Changes may not take effect until you restart.
+Pokenet Help
+Arrow keys or WASD keys/nMovement/n/n
+Spacebar/nTalk/n/n
+Right-click/nInteract with other players/n/n
+Use the whisper option to start a private chat. 
+Type the /playercount command into local chat to see how many players are online./n
+For more information, go to www.pokemonium.net
 Chat: Local
-Voce deve aceitar os termos do servico para se registar.
-Homem
-Mulher
-Duvidoso
-Lv.
-PvP Batalhas/Trocas
-Cancelar
-Aceitar
-Recusar
-Enviar Oferta:
-Sua Oferta:
-Oferta dele:
-teste
-Aguarde...
-Enviando Pedido
-Pedido Recebido
-Troca:
-Dinheiro apenas
-Batalha
-Troca
-Desativar Circundantes Mapas
+You must accept Terms of Service (ToS) before registering.
+Male
+Female
+None
+Lv. 
+PvP Battles/Trades
+Cancel
+Accept
+Decline
+Send Offer
+Your Offer:
+Their Offer:
+test
+Waiting...
+Send a Request
+Requests Received
+Trade: 
+Money only
+Battle
+Trade
+Disable Surrounding Maps

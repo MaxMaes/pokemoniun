@@ -6,6 +6,9 @@ import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+import org.pokenet.client.constants.Music;
+import org.pokenet.client.constants.Options;
+import org.pokenet.client.constants.Language;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
@@ -53,7 +56,7 @@ import org.pokenet.client.network.TcpProtocolHandler;
 import org.pokenet.client.network.UdpProtocolHandler;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.LoginScreen;
-import org.pokenet.client.ui.Ui;
+import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
@@ -70,6 +73,7 @@ public class GameClient extends BasicGame
 {
 	private static final String GAME_TITLE = "Pokenet: Valiant Venonat";
 	private static final String CHATHOST = "localhost";
+	private static final int FPS = 50;
 
 	// Some variables needed
 	private TcpProtocolHandler m_tcpProtocolHandler;
@@ -96,9 +100,9 @@ public class GameClient extends BasicGame
 
 	private WeatherService m_weather;// = new WeatherService();
 	private TimeService m_time;// = new TimeService();
-	private Ui m_ui;
+	private UserInterface m_ui;
 	private Color m_daylight;
-	private static String m_language = "english";
+	private static String m_language = Language.ENGLISH;
 	private static boolean m_languageChosen = false;
 	private ConfirmationDialog m_exitConfirm;
 	private ConfirmationDialog m_dcConfirm;
@@ -322,31 +326,27 @@ public class GameClient extends BasicGame
 			}
 			return;
 		}
-		else
+		else if(!m_started)
 		{
-
-			if(!m_started)
+			m_started = true;
+			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
+			// music.loop();
+			// sound.play();
+			if(m_ui == null)
 			{
-				m_started = true;
-				m_soundPlayer.setTrack("introandgym");
-				// music.loop();
-				// sound.play();
-				if(m_ui == null)
-				{
-					LoadingList.setDeferredLoading(false);
+				LoadingList.setDeferredLoading(false);
 
-					setPlayerSpriteFactory();
+				setPlayerSpriteFactory();
 
-					m_weather = new WeatherService();
-					m_time = new TimeService();
-					if(options != null)
-						m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
+				m_weather = new WeatherService();
+				m_time = new TimeService();
+				if(options != null)
+					m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
 
-					m_ui = new Ui(m_display);
-					m_ui.setAllVisible(false);
-				}
-
+				m_ui = new UserInterface(m_display);
+				m_ui.setAllVisible(false);
 			}
+
 		}
 		if(m_started)
 		{
@@ -386,10 +386,6 @@ public class GameClient extends BasicGame
 			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && ((m_host != null && m_host.equalsIgnoreCase("")) || m_packetGen == null))
 			{
 				m_login.showServerSelect();
-			}
-			else if(m_language == null || m_language.equalsIgnoreCase(""))
-			{
-				m_login.showLanguageSelect();
 			}
 			/*
 			 * Check if we need to connect to a selected server
@@ -1114,7 +1110,7 @@ public class GameClient extends BasicGame
 		try
 		{
 			gc = new AppGameContainer(new GameClient(GAME_TITLE), 800, 600, fullscreen);
-			gc.setTargetFrameRate(50);
+			gc.setTargetFrameRate(FPS);
 			gc.start();
 		}
 		catch(Exception e)
@@ -1356,7 +1352,7 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 		}
-		m_soundPlayer.setTrack("introandgym");
+		m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		m_login.setVisible(true);
 		m_login.showLanguageSelect();
 	}
@@ -1398,7 +1394,7 @@ public class GameClient extends BasicGame
 	}
 
 	/** Returns the user interface */
-	public Ui getUi()
+	public UserInterface getUi()
 	{
 		return m_ui;
 	}
@@ -1503,23 +1499,23 @@ public class GameClient extends BasicGame
 	{
 		m_loadSurroundingMaps = load;
 	}
-	
+
 	/**
 	 * Sets values to return to language select, called from server select
 	 */
 	public void returnToLanguageSelect()
 	{
-		m_language = "";
+		m_language = Language.ENGLISH;
 		m_languageChosen = false;
 	}
-	
+
 	/**
 	 * Sets values to return to server select, called from login screen
 	 */
 	public void returnToServerSelect()
 	{
 		m_host = "";
-		//disconnect();
+		// disconnect();
 	}
 
 	public boolean chatServerIsActive()
@@ -1531,12 +1527,4 @@ public class GameClient extends BasicGame
 	/*
 	 * static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } }
 	 */
-
-	final class Options
-	{
-		public static final String FULLSCREEN = "fullscreen";
-		public static final String SOUND_MUTED = "soundMuted";
-		public static final String DISABLE_MAPS = "disableMaps";
-		public static final String DISABLE_WEATHER = "disableWeather";
-	}
 }

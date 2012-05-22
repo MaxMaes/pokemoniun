@@ -1,49 +1,49 @@
-Equipo Pokemon
-Nivel:
-Nombre:
+Pokemon Team
+Level:
+Name:
 HP:
-Ataque:
-Defensa:
-Ataque Sp:
-Defensa Sp:
-Velocidad:
-Habilidad:
-Exp:
-Naturaleza:
-Tipo uno:
-Tipo dos:
-Genero:
-Opciones
-Pantalla Completa
-Mudo
-Guardar
-Los cambios se aplican al reiniciar esta aplicacion.
-Pokenet: Ayuda
-Teclas Flecha o WASD/nMovimiento/n/n
-Barra Espaciadora/nHablar/n/n
-Click-derecho/nInteractua con otros jugadores/n/n
-Usa la opcion 'privado' para comenzar un chat privado.
-Usa el comando /playercount para contar los jugadores en linea./n
-Para mas informacion, ingresa a www.pokedev.org
+Attack:
+Defense:
+Sp. Attack:
+Sp. Defense: 
+Speed:
+Ability:
+Exp: 
+Nature:
+Type one:
+Type two:
+Gender:
+Options
+Full Screen view
+Mute
+Save
+Changes may not take effect until you restart.
+Pokenet Help
+Arrow keys or WASD keys/nMovement/n/n
+Spacebar/nTalk/n/n
+Right-click/nInteract with other players/n/n
+Use the whisper option to start a private chat. 
+Type the /playercount command into local chat to see how many players are online./n
+For more information, go to www.pokemonium.net
 Chat: Local
-Debes aceptar los Terminos (TdS) antes de registrarte. 
-Macho
-Hembra
-Ninguno
-Nv. 
-Peleas/Cambios
-Cancelar
-Aceptar
-Negar
-Enviar Oferta
-Tu Oferta:
-Su Oferta:
-prueba
-Esperando...
-Enviar Peticion
-Peticiones Recibidas
-Cambio: 
-Solo dinero
-Pelea
-Cambio
-Deshabilitar Entorno Mapas
+You must accept Terms of Service (ToS) before registering.
+Male
+Female
+None
+Lv. 
+PvP Battles/Trades
+Cancel
+Accept
+Decline
+Send Offer
+Your Offer:
+Their Offer:
+test
+Waiting...
+Send a Request
+Requests Received
+Trade: 
+Money only
+Battle
+Trade
+Disable Surrounding Maps

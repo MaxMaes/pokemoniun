@@ -3,7 +3,7 @@ package org.pokenet.client.network;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.ui.Ui;
+import org.pokenet.client.ui.UserInterface;
 
 /**
  * Handles chat messages
@@ -38,7 +38,7 @@ public class ChatProtocolHandler extends IoHandlerAdapter {
 			//Friends online list - fUSERNAME,USERNAME,USERNAME,etc.
 			details = message.substring(1).split(",");
 			for (String friend : details){
-				Ui.getInstance().getFriendsList().setFriendOnline(friend, true);
+				UserInterface.getInstance().getFriendsList().setFriendOnline(friend, true);
 			}
 			break;
 		case 'F':
@@ -54,27 +54,27 @@ public class ChatProtocolHandler extends IoHandlerAdapter {
 			break;
 		case 'a':
 			//Friend added - aUSERNAME
-			Ui.getInstance().getFriendsList().addFriend(message.substring(1));
+			UserInterface.getInstance().getFriendsList().addFriend(message.substring(1));
 			break;
 		case 'r':
 			//Friend removed - rUSERNAME
-			Ui.getInstance().getFriendsList().removeFriend(message.substring(1));
+			UserInterface.getInstance().getFriendsList().removeFriend(message.substring(1));
 			break;
 		case 'j':
 			//Joined chatroom - jROOMNUMBER,ROOMNAME
 			details = message.substring(1).split(",");
-			Ui.getInstance().getChat().addChat(details[1], false);
+			UserInterface.getInstance().getChat().addChat(details[1], false);
 			break;
 		case 'p':
 			//Private chat - pUSERNAME,MESSAGE
 			details = message.substring(1).split(",");
-			Ui.getInstance().getChat().addChat(details[0], true);
-			Ui.getInstance().getChat().addWhisperLine(details[0], details[1]);
+			UserInterface.getInstance().getChat().addChat(details[0], true);
+			UserInterface.getInstance().getChat().addWhisperLine(details[0], details[1]);
 			break;
 		case 'c':
 			//Chatroom chat - cROOMNUMBER,MESSAGE  (NOTE: MESSAGE = <Username> Hi guys!)
 			details = message.substring(1).split(",");
-			Ui.getInstance().getChat().addChatLine(Integer.parseInt(details[0]),
+			UserInterface.getInstance().getChat().addChatLine(Integer.parseInt(details[0]),
 					details[1]);
 			break;
 		case 'C':
@@ -86,11 +86,11 @@ public class ChatProtocolHandler extends IoHandlerAdapter {
 		case 'R':
 			//Add room to list of available rooms - RROOMNUMBER,ROOMNAME
 			details = message.substring(1).split(",");
-			Ui.getInstance().getChat().addChat(details[1], false);
+			UserInterface.getInstance().getChat().addChat(details[1], false);
 			break;
 		case '!':
 			//Announcement - !MESSAGE
-			Ui.getInstance().getChat().addSystemMessage(
+			UserInterface.getInstance().getChat().addSystemMessage(
 					message.substring(1));
 			break;
 		}

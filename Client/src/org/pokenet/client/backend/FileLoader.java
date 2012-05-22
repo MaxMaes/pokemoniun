@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.Language;
 
 /**
  * A simple file loader to make our lives easier
@@ -28,8 +29,8 @@ public class FileLoader
 		}
 		catch(FileNotFoundException fnfe)
 		{
-			if(path.contains("language") && !path.contains("english"))
-				GameClient.getInstance().setLanguage("english");
+			if(path.contains("language") && !path.contains(Language.ENGLISH))
+				GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
 		return null;
 	}

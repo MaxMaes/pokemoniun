@@ -1,10 +1,10 @@
-Cidade Violeta: A Cidade dos Aromas Nostalgicos
-Ginasio da Cidade Violeta 
-Lider: Falkner 
-O elegante mestre dos Pokemons voadores.
-Academia de Pokemons do Earl
-Torre Bellsprout: 
-Experimente o jeito Pokemon.
-O circulo ao lado dos itens nas lojas indica quantos itens ha no estoque
-Se o circulo estiver branco, significa que o item esta esgotado
-Algumas lojas demoram mais para repor o estoque
+Violet City - The city of nostalgic scents
+Violet City Gym 
+Leader: Falkner 
+The elegant master of flying-Pokemon.
+Earl's Pokemon Academy
+Sprout Tower: 
+Experience the way of Pokemon.
+The circle next to items in marts show how much of that item is in stock
+If the circle is white, it means they are out of stock
+Some stores take longer to refill their stock

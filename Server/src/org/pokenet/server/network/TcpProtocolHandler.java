@@ -52,7 +52,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	public void sessionCreated(IoSession session)
 	{
 		// Tell the client which version the server is on
-		session.write("V" + GameServer.VERSION);
+		session.write("R" + GameServer.REVISION);
 	}
 
 	/**

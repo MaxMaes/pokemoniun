@@ -8,6 +8,7 @@ import mdes.slick.sui.event.ActionListener;
 
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.Language;
 
 /**
  * Handles language selection
@@ -57,7 +58,7 @@ public class LanguageDialog extends Frame {
 			m_languages[0].setVisible(true);
 			m_languages[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("english");
+					GameClient.getInstance().setLanguage(Language.ENGLISH);
 				}
 			});
 			this.add(m_languages[0]);
@@ -68,7 +69,7 @@ public class LanguageDialog extends Frame {
 			m_languages[1].setVisible(true);
 			m_languages[1].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("spanish");
+					GameClient.getInstance().setLanguage(Language.SPANISH);
 				}
 			});
 			this.add(m_languages[1]);
@@ -79,7 +80,7 @@ public class LanguageDialog extends Frame {
 			m_languages[2].setVisible(true);
 			m_languages[2].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("french");
+					GameClient.getInstance().setLanguage(Language.FRENCH);
 				}
 			});
 			this.add(m_languages[2]);
@@ -90,7 +91,7 @@ public class LanguageDialog extends Frame {
 			m_languages[3].setVisible(true);
 			m_languages[3].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("portuguese");
+					GameClient.getInstance().setLanguage(Language.PORTUGESE);
 					
 				}
 			});
@@ -102,7 +103,7 @@ public class LanguageDialog extends Frame {
 			m_languages[4].setVisible(true);
 			m_languages[4].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("finnish");
+					GameClient.getInstance().setLanguage(Language.FINNISH);
 					
 				}
 			});
@@ -126,7 +127,7 @@ public class LanguageDialog extends Frame {
 			m_languages[6].setVisible(true);
 			m_languages[6].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("dutch");
+					GameClient.getInstance().setLanguage(Language.DUTCH);
 					
 				}
 			});
@@ -138,7 +139,7 @@ public class LanguageDialog extends Frame {
 			m_languages[7].setVisible(true);
 			m_languages[7].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GameClient.getInstance().setLanguage("german");
+					GameClient.getInstance().setLanguage(Language.GERMAN);
 					
 				}
 			});

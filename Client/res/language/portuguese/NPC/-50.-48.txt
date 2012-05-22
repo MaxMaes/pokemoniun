@@ -1,2 +1,2 @@
-Bem vindo a PokeLoja.
-Por favor reporte esse bug!
+Welcome to the PokeMart.
+Please report this bug!

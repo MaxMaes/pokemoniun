@@ -1,3 +1,4 @@
-Por favor reporte esse bug!
-Deixe-me curar seus Pokemon... Agora voce esta preparado para continuar sua jornada!
-Bem vindo ao sistema de armazenamento Pokemon.
+Please report this bug!
+Let me heal your Pokemon for you... Now you're all set for your journey!
+Welcome to the Pokemon storage system.
+I will change your sprite for 500p.

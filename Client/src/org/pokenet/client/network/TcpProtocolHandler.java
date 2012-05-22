@@ -16,6 +16,7 @@ import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.Player;
 import org.pokenet.client.backend.entity.Player.Direction;
 import org.pokenet.client.backend.time.WeatherService.Weather;
+import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.frames.SpriteChooserDialog;
 
 /**
@@ -100,7 +101,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 		String [] details;
 		switch(message.charAt(0)) 
 		{
-		case 'V':
+		case 'R':
 			//Server version
 			GameClient.getInstance().getLoginScreen().setServerVersion(message.substring(1));
 			break;
@@ -222,10 +223,11 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 					pokes[i] = -1;
 				}
 			}
-			if (GameClient.getInstance().getUi().getStorageBox() == null){
-				GameClient.getInstance().getUi().useStorageBox(pokes);
+			UserInterface ui = GameClient.getInstance().getUi();
+			if (ui.getStorageBox() == null){
+				ui.useStorageBox(pokes);
 			} else {
-				GameClient.getInstance().getUi().getStorageBox().changeBox(pokes);
+				ui.getStorageBox().changeBox(pokes);
 			}
 			break;
 		case 'b':

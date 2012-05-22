@@ -2,7 +2,10 @@ package org.pokenet.server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -45,9 +48,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  * @author Nushio
  *
  */
-public class GameServer {
-	public static final int VERSION = 1;
-	
+public class GameServer {	
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers, m_movementThreads;
@@ -59,6 +60,43 @@ public class GameServer {
 	private int m_highest;
 	private JLabel m_pAmount, m_pHighest;
 	private JFrame m_gui;
+	
+	/* The revision of the game server */ 
+	// would be more helpful if this was the SVN version.. so it auto updated
+	public static int REVISION = getSVNRev();//1786;
+	
+	/**
+	 * .Gets the SVN revision for the server
+	 *
+	 * @return the value on the third line of .svn/entries
+	 */
+	private static int getSVNRev() {
+		int rev = 0;
+		boolean foundRevision = false;
+		
+	    try {
+	    	BufferedReader input =  new BufferedReader(new FileReader(".svn/entries"));
+	    	try {
+	    		String line = null; 
+	     
+	    		while (( line = input.readLine()) != null && !foundRevision){
+	    			if(line.equals("dir")){
+	    				rev = Integer.parseInt(input.readLine()); // this hopefully is the revision number
+	    				foundRevision = true;
+	    			}
+	    		}
+	    	} finally {
+	    		input.close();
+	      	}	
+	    }
+	    catch (IOException ex){
+	    	ex.printStackTrace();
+	    	// probably no svn file... oh well.
+	    	rev = 1868; 
+	    }
+	    
+	    return rev;
+	}
 	
 	/**
 	 * Load pre-existing settings if any

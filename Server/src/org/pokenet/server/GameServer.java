@@ -70,6 +70,8 @@ public class GameServer {
 	 *
 	 * @return the value on the third line of .svn/entries
 	 */
+	
+	// TODO: Rewrite this.
 	private static int getSVNRev() {
 		int rev = 0;
 		boolean foundRevision = false;

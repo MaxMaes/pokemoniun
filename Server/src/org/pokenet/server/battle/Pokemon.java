@@ -2290,4 +2290,25 @@ public class Pokemon extends PokemonSpecies {
 	public String getOriginalTrainer() {
 		return m_originalTrainer;
 	}
+	
+	public static boolean isStarterPokemon(int index)
+	{
+		switch(index)
+		{
+			case 1:
+			case 4:
+			case 7:
+			case 152:
+			case 155:
+			case 158:
+			case 252:
+			case 255:
+			case 258:
+			case 387:
+			case 390:
+			case 393:
+				return true;
+		}
+		return false;
+	}
 }

@@ -1896,7 +1896,31 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(this.getParty()[i] != null)
 		{
-			m_tcpSession.write("Pi" + i + PokemonSpecies.getDefaultData().getPokemonByName(this.getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + this.getParty()[i].getName() + "," + this.getParty()[i].getHealth() + "," + this.getParty()[i].getGender() + "," + (this.getParty()[i].isShiny() ? 1 : 0) + "," + this.getParty()[i].getStat(0) + "," + this.getParty()[i].getStat(1) + "," + this.getParty()[i].getStat(2) + "," + this.getParty()[i].getStat(3) + "," + this.getParty()[i].getStat(4) + "," + this.getParty()[i].getStat(5) + "," + this.getParty()[i].getTypes()[0] + "," + (this.getParty()[i].getTypes().length > 1 && this.getParty()[i].getTypes()[1] != null ? this.getParty()[i].getTypes()[1] + "," : ",") + this.getParty()[i].getExp() + "," + this.getParty()[i].getLevel() + "," + this.getParty()[i].getAbilityName() + "," + this.getParty()[i].getNature().getName() + "," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + "," + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "") + "," + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + "," + (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : ""));
+			m_tcpSession.write("Pi" + i + PokemonSpecies.getDefaultData().getPokemonByName(this.getParty()[i].getSpeciesName()).getSpeciesNumber() + 
+					"," + this.getParty()[i].getName() + 
+					"," + this.getParty()[i].getHealth() + 
+					"," + this.getParty()[i].getGender() + 
+					"," + (this.getParty()[i].isShiny() ? 1 : 0) + 
+					"," + this.getParty()[i].getStat(0) + 
+					"," + this.getParty()[i].getStat(1) + 
+					"," + this.getParty()[i].getStat(2) + 
+					"," + this.getParty()[i].getStat(3) + 
+					"," + this.getParty()[i].getStat(4) + 
+					"," + this.getParty()[i].getStat(5) + 
+					"," + this.getParty()[i].getTypes()[0] + 
+					"," + (this.getParty()[i].getTypes().length > 1 && this.getParty()[i].getTypes()[1] != null ? this.getParty()[i].getTypes()[1] + "," : ",") 
+					+ this.getParty()[i].getExp() +
+					"," + this.getParty()[i].getLevel() + 
+					"," + this.getParty()[i].getAbilityName() + 
+					"," + this.getParty()[i].getNature().getName() +
+					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + 
+					"," + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "") + 
+					"," + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + 
+					"," + (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : "") +
+					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") +
+					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") +
+					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") +
+					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : ""));
 			/* Update move pp */
 			for(int j = 0; j < 4; j++)
 			{

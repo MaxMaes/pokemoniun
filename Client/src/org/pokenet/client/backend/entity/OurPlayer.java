@@ -260,13 +260,32 @@ public class OurPlayer extends Player {
 			 * Moves
 			 */
 			String [] moves = new String[4];
-			for(int j = 0; j < 4; j++) {
+			String [] movetypes = new String[4];
+			for(int j = 0; j < 4; j++) 
+			{
 				if(j < info.length - 17 && info[j + 17] != null)
+				{
 					moves[j] = info[j + 17];
+				}
 				else
+				{
 					moves[j] = "";
+				}
 			}
 			m_pokemon[i].setMoves(moves);
+			
+			for(int j = 0; j < 4; j++)
+			{
+				if(j < info.length - 21 && info[j + 21] != null)
+				{
+					movetypes[j] = info[j+21];
+				}
+				else
+				{
+					movetypes[j] = "";
+				}
+			}
+			m_pokemon[i].setMoveTypes(movetypes);
 		}
 	}
 	

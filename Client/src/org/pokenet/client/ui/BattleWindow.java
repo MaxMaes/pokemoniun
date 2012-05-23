@@ -40,6 +40,10 @@ public class BattleWindow extends Frame
 	public Label pp2;
 	public Label pp3;
 	public Label pp4;
+	public Label move1Type;
+	public Label move2Type;
+	public Label move3Type;
+	public Label move4Type;
 	public Button pokeCancelBtn;
 	public Button pokeBtn1;
 	public Button pokeBtn2;
@@ -59,6 +63,7 @@ public class BattleWindow extends Frame
 	public List<Button> m_pokeButtons = new ArrayList<Button>();
 	public List<Label> m_pokeInfo = new ArrayList<Label>();
 	public List<Label> m_pokeStatus = new ArrayList<Label>();
+	public List<Label> m_moveTypeLabels = new ArrayList<Label>();
 	private static HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 
 	// Image Loading tools
@@ -217,6 +222,11 @@ public class BattleWindow extends Frame
 		pp1 = new Label();
 		pp1.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp1.setBounds(0, move1.getHeight() - 20, move1.getWidth() - 5, 20);
+		move1Type = new Label();
+		move1Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		move1Type.setBounds(2, move1.getHeight()-20, move1.getWidth()-5, 20);
+		move1Type.setText("ICE");
+		move1.add(move1Type);
 		move1.add(pp1);
 		attackPane.add(move2);
 		move2.setLocation(130, 10);
@@ -231,6 +241,11 @@ public class BattleWindow extends Frame
 		pp2 = new Label();
 		pp2.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp2.setBounds(0, move2.getHeight() - 20, move2.getWidth() - 5, 20);
+		move2Type = new Label();
+		move2Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		move2Type.setBounds(2, move2.getHeight()-20, move2.getWidth()-5, 20);
+		move2Type.setText("DRAGON");
+		move2.add(move2Type);
 		move2.add(pp2);
 		attackPane.add(move3);
 		move3.setLocation(7, 65);
@@ -245,7 +260,13 @@ public class BattleWindow extends Frame
 		pp3 = new Label();
 		pp3.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp3.setBounds(0, move3.getHeight() - 20, move3.getWidth() - 5, 20);
+		move3Type = new Label();
+		move3Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		move3Type.setBounds(2, move3.getHeight()-20, move3.getWidth()-5, 20);
+		move3Type.setText("PSYCHIC");
+		move3.add(move3Type);
 		move3.add(pp3);
+		
 		attackPane.add(move4);
 		move4.setLocation(130, 65);
 		move4.setSize(116, 51);
@@ -259,6 +280,11 @@ public class BattleWindow extends Frame
 		pp4 = new Label();
 		pp4.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp4.setBounds(0, move4.getHeight() - 20, move4.getWidth() - 5, 20);
+		move4Type = new Label();
+		move4Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
+		move4Type.setBounds(2, move4.getHeight()-20, move4.getWidth()-5, 20);
+		move4Type.setText("SO-OP");
+		move4.add(move4Type);
 		move4.add(pp4);
 
 		pp1.setFont(GameClient.getFontSmall());
@@ -269,6 +295,14 @@ public class BattleWindow extends Frame
 		pp2.setForeground(Color.white);
 		pp3.setForeground(Color.white);
 		pp4.setForeground(Color.white);
+		move1Type.setFont(GameClient.getFontSmall());
+		move2Type.setFont(GameClient.getFontSmall());
+		move3Type.setFont(GameClient.getFontSmall());
+		move4Type.setFont(GameClient.getFontSmall());
+		move1Type.setForeground(Color.white);
+		move2Type.setForeground(Color.white);
+		move3Type.setForeground(Color.white);
+		move4Type.setForeground(Color.white);
 		m_moveButtons.add(move1);
 		m_moveButtons.add(move2);
 		m_moveButtons.add(move3);
@@ -277,6 +311,11 @@ public class BattleWindow extends Frame
 		m_ppLabels.add(pp2);
 		m_ppLabels.add(pp3);
 		m_ppLabels.add(pp4);
+		m_moveTypeLabels.add(move1Type);
+		m_moveTypeLabels.add(move2Type);
+		m_moveTypeLabels.add(move3Type);
+		m_moveTypeLabels.add(move4Type);
+		
 		btnRun = BattleButtonFactory.getSmallButton("Run");
 		btnRun.addActionListener(new ActionListener()
 		{

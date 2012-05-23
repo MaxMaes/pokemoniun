@@ -32,6 +32,7 @@ public class Pokemon {
        
         //moves and pp
         private String[] m_moves = new String[4];
+        private String[] m_movetypes = new String[4];
         private int[] m_movemaxPP = new int[4];
         private int[] m_movecurPP = new int[4];
        
@@ -129,7 +130,7 @@ public class Pokemon {
                         }
                         else{
                         	if(getSpriteNumber() > 389)
-            					index = String.valueOf(getSpriteNumber() - 3);
+            					index = String.valueOf(getSpriteNumber() - 5);
             				else
             					index = String.valueOf(getSpriteNumber());
                         }
@@ -356,6 +357,22 @@ public class Pokemon {
          */
         public void setMoveCurPP(int move, int pp) {
                 this.m_movecurPP[move] = pp;
+        }
+        
+        /**
+         * Sets the type for the specified move
+         * @param move The move to be returned
+         */
+        public void setMoveTypes(String[] movetypes){
+        	this.m_movetypes = movetypes;
+        }
+        
+        /**
+         * Gets the type for the specified move
+         * @param move The move to be returned
+         */
+        public String getMoveType(int move){
+        	return this.m_movetypes[move];
         }
         
         /**

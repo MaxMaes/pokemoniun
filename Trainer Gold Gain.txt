@@ -1,0 +1,7 @@
+Falkner: 45, 45, 15, 21, 15, 60, 45, 30
+
+Random Trainers: 18, 34, 19, 21,
+
+Gym Trainer Ecruteak: 80, 64, 20, 22, 
+
+Gym Trainers Fuchsia: 136

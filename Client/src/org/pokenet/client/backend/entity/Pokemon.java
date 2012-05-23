@@ -71,7 +71,7 @@ public class Pokemon {
         			index = "0" + String.valueOf(m_spriteNum);
         		} else {
         			if(getSpriteNumber() > 389)
-    					index = String.valueOf(getSpriteNumber() - 3);
+    					index = String.valueOf(getSpriteNumber() - 5);
     				else
     					index = String.valueOf(getSpriteNumber());
         		}

@@ -16,7 +16,7 @@ import org.pokenet.server.network.codec.PokenetCodecFactory;
  * Handles all networking
  * @author shadowkanji
  */
-public class NetworkService {
+public class NetworkManager {
 	private TcpProtocolHandler m_tcpProtocolHandler;
 	private UdpProtocolHandler m_udpProtocolHandler;
 	private LoginManager m_loginManager;
@@ -29,7 +29,7 @@ public class NetworkService {
 	/**
 	 * Default constructor
 	 */
-	public NetworkService() {
+	public NetworkManager() {
 		m_logoutManager = new LogoutManager();
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);

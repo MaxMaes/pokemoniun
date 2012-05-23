@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.network.message.PokenetMessage;
 
 /**
@@ -13,13 +13,13 @@ import org.pokenet.server.network.message.PokenetMessage;
  *
  */
 public class UdpProtocolHandler extends IoHandlerAdapter {
-	private static HashMap<Integer, PlayerChar> m_playerList;
+	private static HashMap<Integer, Player> m_playerList;
 	
 	/**
 	 * Default Constructor
 	 */
 	public UdpProtocolHandler() {
-		m_playerList = new HashMap<Integer, PlayerChar>();
+		m_playerList = new HashMap<Integer, Player>();
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class UdpProtocolHandler extends IoHandlerAdapter {
 	 * Adds a player to the udp player list
 	 * @param p
 	 */
-	public static void addPlayer(PlayerChar p) {
+	public static void addPlayer(Player p) {
 		synchronized(m_playerList) {
 			m_playerList.put(p.getId(), p);
 		}
@@ -51,7 +51,7 @@ public class UdpProtocolHandler extends IoHandlerAdapter {
 	 * Removes a player from the udp player list
 	 * @param p
 	 */
-	public static void removePlayer(PlayerChar p) {
+	public static void removePlayer(Player p) {
 		synchronized(m_playerList) {
 			m_playerList.remove(p.getId());
 		}

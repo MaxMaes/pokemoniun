@@ -1,6 +1,6 @@
 package org.pokenet.server.battle.impl;
 
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
@@ -33,7 +33,7 @@ import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
  * 
  */
 public class PvPBattleField extends BattleField {
-	private PlayerChar[] m_players;
+	private Player[] m_players;
 	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
 
@@ -44,12 +44,12 @@ public class PvPBattleField extends BattleField {
 	 * @param p1
 	 * @param p2
 	 */
-	public PvPBattleField(BattleMechanics mech, PlayerChar p1, PlayerChar p2) {
+	public PvPBattleField(BattleMechanics mech, Player p1, Player p2) {
 		super(mech, new Pokemon[][] { p1.getParty(), p2.getParty() });
 		/*
 		 * Store the players
 		 */
-		m_players = new PlayerChar[2];
+		m_players = new Player[2];
 		m_players[0] = p1;
 		m_players[1] = p2;
 		/*
@@ -91,7 +91,7 @@ public class PvPBattleField extends BattleField {
 	 * @param p
 	 * @param receiver
 	 */
-	private void sendPokemonData(PlayerChar p, PlayerChar receiver) {
+	private void sendPokemonData(Player p, Player receiver) {
 		for (int i = 0; i < p.getParty().length; i++) {
 			if (p.getParty()[i] != null) {
 				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), 
@@ -153,28 +153,28 @@ public class PvPBattleField extends BattleField {
 	}
 
 	@Override
-	public void informPokemonHealthChanged(Pokemon poke, int change) {
-		if (m_players != null && poke != null) {
-			if (poke.compareTo(getActivePokemon()[0]) == 0) {
+	public void informPokemonHealthChanged(Pokemon pokemon, int change) {
+		if (m_players != null && pokemon != null) {
+			if (pokemon.equals(getActivePokemon()[0])) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new HealthChangeMessage(0 , change));
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new HealthChangeMessage(1 , change));
-			} else if(poke.compareTo(getActivePokemon()[1]) == 0) {
+			} else if(pokemon.equals(getActivePokemon()[1])) {
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new HealthChangeMessage(0 , change));
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new HealthChangeMessage(1 , change));
 			} else {
-				int index = getPokemonPartyIndex(0, poke);
+				int index = getPokemonPartyIndex(0, pokemon);
 				if(index > -1) {
-					m_players[0].getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
+					m_players[0].getTcpSession().write("Ph" + String.valueOf(index) + pokemon.getHealth());
 					//TODO: Add support for enemy pokemon healing for pokemon in pokeballs
 					return;
 				}
-				index = getPokemonPartyIndex(1, poke);
+				index = getPokemonPartyIndex(1, pokemon);
 				if(index > -1) {
-					m_players[1].getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
+					m_players[1].getTcpSession().write("Ph" + String.valueOf(index) + pokemon.getHealth());
 					//TODO: Add support for enemy pokemon healing for pokemon in pokeballs
 					return;
 				}
@@ -183,56 +183,56 @@ public class PvPBattleField extends BattleField {
 	}
 
 	@Override
-	public void informStatusApplied(Pokemon poke, StatusEffect eff) {
+	public void informStatusApplied(Pokemon pokemon, StatusEffect eff) {
 		if(m_finished)
 			return;
-		if (m_players != null && poke != null) {
-			if (poke.compareTo(getActivePokemon()[0]) == 0) {
+		if (m_players != null && pokemon != null) {
+			if (pokemon.equals(getActivePokemon()[0])) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
-			} else if(poke.compareTo(getActivePokemon()[1]) == 0) {
+			} else if(pokemon.equals(getActivePokemon()[1])) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
 			}
 		}
 	}
 
 	@Override
-	public void informStatusRemoved(Pokemon poke, StatusEffect eff) {
+	public void informStatusRemoved(Pokemon pokemon, StatusEffect eff) {
 		if(m_finished)
 			return;
-		if (poke != null && m_players != null) {
-			if (poke.compareTo(getActivePokemon()[0]) == 0 &&
+		if (pokemon != null && m_players != null) {
+			if (pokemon.equals(getActivePokemon()[0]) &&
 					!getActivePokemon()[0].isFainted()) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
-			} else if(poke.compareTo(getActivePokemon()[1]) == 0 &&
+			} else if(pokemon.equals(getActivePokemon()[1]) &&
 					!getActivePokemon()[1].isFainted()) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
 				TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
 			}
 		}
@@ -322,7 +322,7 @@ public class PvPBattleField extends BattleField {
 		/* Handle forced switches */
 		if(m_isWaiting && m_replace != null && m_replace[trainer]) {
 			if(!move.isMoveTurn()) {
-				if(getActivePokemon()[trainer].compareTo(this.getParty(trainer)[move.getId()]) != 0) {
+				if(!getActivePokemon()[trainer].equals(this.getParty(trainer)[move.getId()])) {
 					this.switchInPokemon(trainer, move.getId());
 					m_replace[trainer] = false;
 					m_isWaiting = false;

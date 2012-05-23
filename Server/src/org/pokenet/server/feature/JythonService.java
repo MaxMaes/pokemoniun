@@ -1,6 +1,6 @@
 package org.pokenet.server.feature;
 
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 
 /**
  * Handles all scripting. This is one of the few services which isn't (and shouldn't) run as a thread.
@@ -36,7 +36,7 @@ public class JythonService {
 	 * Runs a quest script on a specific player
 	 * @param player
 	 */
-	public void runQuestScript(PlayerChar player) {
+	public void runQuestScript(Player player) {
 		
 	}
 }

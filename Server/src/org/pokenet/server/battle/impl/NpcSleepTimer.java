@@ -3,7 +3,7 @@ package org.pokenet.server.battle.impl;
 import java.util.Random;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.NonPlayerChar;
+import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.map.ServerMap;
 
 /**
@@ -17,7 +17,7 @@ public class NpcSleepTimer implements Runnable {
 	public void run() {
 		System.out.println("INFO: Npc sleep timer started");
 		Random r = new Random();
-		NonPlayerChar n = null;
+		NPC n = null;
 		ServerMap m = null;
 		while(m_running) {
 			/*

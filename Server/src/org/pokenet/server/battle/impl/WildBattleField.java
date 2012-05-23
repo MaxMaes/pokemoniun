@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.pokenet.server.backend.ItemProcessor.PokeBall;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.DataService;
@@ -46,7 +46,7 @@ import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewar
  * @author shadowkanji
  */
 public class WildBattleField extends BattleField {
-	private final PlayerChar   m_player;
+	private final Player   m_player;
 	private Pokemon            m_wildPoke;
 	private final BattleTurn[] m_turn                 = new BattleTurn[2];
 	private int                m_runCount;
@@ -60,7 +60,7 @@ public class WildBattleField extends BattleField {
 	 * @param p
 	 * @param wild
 	 */
-	public WildBattleField(BattleMechanics m, PlayerChar p, Pokemon wild) {
+	public WildBattleField(BattleMechanics m, Player p, Pokemon wild) {
 		super(m, new Pokemon[][] { p.getParty(), new Pokemon[] { wild } });
 		/* Send information to client */
 		p.setBattling(true);
@@ -242,8 +242,8 @@ public class WildBattleField extends BattleField {
 		/* Handle forced switches */
 		if (m_isWaiting && m_replace != null && m_replace[trainer]) {
 			if (!move.isMoveTurn()) {
-				if (getActivePokemon()[trainer].compareTo(this.getParty(trainer)[move
-				                                                                 .getId()]) != 0) {
+				if (!getActivePokemon()[trainer].equals(this.getParty(trainer)[move
+				                                                                 .getId()])) {
 					this.switchInPokemon(trainer, move.getId());
 					m_replace[trainer] = false;
 					m_isWaiting = false;

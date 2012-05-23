@@ -9,10 +9,10 @@ import org.pokenet.server.network.message.TradeNpcSpeechMessage;
  * @author shadowkanji
  *
  */
-public class TradeChar extends NonPlayerChar implements Tradeable {
+public class TradeChar extends NPC implements Tradeable {
 	private Trade m_trade = null;
 	private boolean m_tradeAccepted = false;
-	private PlayerChar m_player;
+	private Player m_player;
 	/*
 	 * Requested Pokemon data
 	 */
@@ -53,7 +53,7 @@ public class TradeChar extends NonPlayerChar implements Tradeable {
 	}
 	
 	@Override
-	public void talkToPlayer(PlayerChar p) {
+	public void talkToPlayer(Player p) {
 		m_player = p;
 		if(m_trade == null) {
 			/* Can trade */

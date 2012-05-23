@@ -11,7 +11,7 @@ import org.pokenet.server.GameServer;
  * @author ZombieBear
  *
  */
-public class HMObject extends NonPlayerChar {
+public class HMObject extends NPC {
 	public enum objectType {
 		ROCKSMASH_ROCK, CUT_TREE, STRENGTH_BOULDER, WHIRLPOOL
 	}
@@ -86,7 +86,7 @@ public class HMObject extends NonPlayerChar {
 	}
 	
 	@Override
-	public void talkToPlayer(PlayerChar p) {
+	public void talkToPlayer(Player p) {
 		// Handle event
 		if (p.getTrainingLevel() >= getNecessaryTrainerLevel(getType())) {
 			switch (m_HMType){

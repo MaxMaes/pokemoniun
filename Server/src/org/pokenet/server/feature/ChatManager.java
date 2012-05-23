@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.PlayerChar.Language;
+import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.ChatMessage;

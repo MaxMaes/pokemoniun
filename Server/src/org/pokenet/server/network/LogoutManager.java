@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -18,7 +18,7 @@ import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
  *
  */
 public class LogoutManager implements Runnable {
-	private Queue<PlayerChar> m_logoutQueue;
+	private Queue<Player> m_logoutQueue;
 	private Thread m_thread;
 	private boolean m_isRunning;
 	private MySqlManager m_database;
@@ -28,7 +28,7 @@ public class LogoutManager implements Runnable {
 	 */
 	public LogoutManager() {
 		m_database = new MySqlManager();
-		m_logoutQueue = new LinkedList<PlayerChar>();
+		m_logoutQueue = new LinkedList<Player>();
 		m_thread = null;
 	}
 	
@@ -44,7 +44,7 @@ public class LogoutManager implements Runnable {
 	 * Attempts to logout a player by saving their data. Returns true on success
 	 * @param player
 	 */
-	private boolean attemptLogout(PlayerChar player) {
+	private boolean attemptLogout(Player player) {
 		//Remove player from their map if it hasn't been done already
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);
@@ -71,7 +71,7 @@ public class LogoutManager implements Runnable {
 	 * Queues a player to be logged out
 	 * @param player
 	 */
-	public void queuePlayer(PlayerChar player) {
+	public void queuePlayer(Player player) {
 		if(m_thread == null || !m_thread.isAlive())
 			start();
 		if(!m_logoutQueue.contains(player))
@@ -85,7 +85,7 @@ public class LogoutManager implements Runnable {
 		while(m_isRunning) {
 			synchronized(m_logoutQueue) {
 				if(m_logoutQueue.peek() != null) {
-					PlayerChar p = m_logoutQueue.poll();
+					Player p = m_logoutQueue.poll();
 					synchronized(p) {
 						if(p != null) {
 							if(!attemptLogout(p)) {
@@ -131,7 +131,7 @@ public class LogoutManager implements Runnable {
 	 * @param p
 	 * @return
 	 */
-	private boolean savePlayer(PlayerChar p) {
+	private boolean savePlayer(Player p) {
 		try {
 			/*
 			 * First, check if they have logged in somewhere else.

@@ -1,7 +1,7 @@
 package org.pokenet.server.battle.impl;
 
-import org.pokenet.server.backend.entity.NonPlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.NPC;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
@@ -36,8 +36,8 @@ import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewar
  *
  */
 public class NpcBattleField extends BattleField {
-	private PlayerChar m_player;
-	private NonPlayerChar m_npc;
+	private Player m_player;
+	private NPC m_npc;
 	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
 
@@ -47,7 +47,7 @@ public class NpcBattleField extends BattleField {
 	 * @param p
 	 * @param n
 	 */
-	public NpcBattleField(BattleMechanics mech, PlayerChar p, NonPlayerChar n) {
+	public NpcBattleField(BattleMechanics mech, Player p, NPC n) {
 		super(mech, new Pokemon[][] { p.getParty(), n.getParty(p) });
 		/* Store the player and npc */
 		m_player = p;
@@ -71,7 +71,7 @@ public class NpcBattleField extends BattleField {
 	 * Sends pokemon data to the client
 	 * @param receiver
 	 */
-	private void sendPokemonData(PlayerChar receiver) {
+	private void sendPokemonData(Player receiver) {
 		for (int i = 0; i < this.getParty(1).length; i++) {
 			if (this.getParty(1)[i] != null) {
 				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), 
@@ -153,39 +153,39 @@ public class NpcBattleField extends BattleField {
 	}
 
 	@Override
-	public void informStatusApplied(Pokemon poke, StatusEffect eff) {
+	public void informStatusApplied(Pokemon pokemon, StatusEffect eff) {
 		if(m_finished)
 			return;
 		if (m_player != null) {
-			if (getActivePokemon()[0].compareTo(poke) == 0)
+			if (getActivePokemon()[0].equals(pokemon))
 				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
-			else if(poke.compareTo(getActivePokemon()[1]) == 0)
+			else if(pokemon.equals(getActivePokemon()[1]))
 				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), false));
 		}
 	}
 
 	@Override
-	public void informStatusRemoved(Pokemon poke, StatusEffect eff) {
+	public void informStatusRemoved(Pokemon pokemon, StatusEffect eff) {
 		if(m_finished)
 			return;
 		if (m_player != null) {
-			if (getActivePokemon()[0].compareTo(poke) == 0 &&
+			if (getActivePokemon()[0].equals(pokemon) &&
 					!getActivePokemon()[0].isFainted())
 				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
 						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
-			else if(poke.compareTo(getActivePokemon()[1]) == 0 &&
+			else if(pokemon.equals(getActivePokemon()[1]) &&
 					!getActivePokemon()[1].isFainted())
 				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
 						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
+								pokemon.getSpeciesName(), 
 								eff.getName(), true));
 		}
 	}
@@ -283,7 +283,7 @@ public class NpcBattleField extends BattleField {
 		/* Handle forced switches */
 		if(m_isWaiting && m_replace != null && m_replace[trainer]) {
 			if(!move.isMoveTurn()) {
-				if(getActivePokemon()[trainer].compareTo(this.getParty(trainer)[move.getId()]) != 0) {
+				if(!getActivePokemon()[trainer].equals(this.getParty(trainer)[move.getId()])) {
 					this.switchInPokemon(trainer, move.getId());
 					m_replace[trainer] = false;
 					m_isWaiting = false;
@@ -456,7 +456,7 @@ public class NpcBattleField extends BattleField {
 						int index = 0;
 						while(this.getParty(1)[index] == null ||
 								this.getParty(1)[index].isFainted() ||
-								this.getParty(1)[index].compareTo(getActivePokemon()[1]) == 0) {
+								this.getParty(1)[index].equals(getActivePokemon()[1])) {
 							try {
 								Thread.sleep(100);
 							} catch (Exception e) {}

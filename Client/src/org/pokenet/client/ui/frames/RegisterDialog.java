@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mdes.slick.sui.Button;
+import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.TextField;
@@ -518,6 +519,7 @@ public class RegisterDialog extends Frame{
 	 * Registers the player
 	 */
 	private void register() {
+		final Display display = GameClient.getInstance().getDisplay();
 		List<String> translated = Translator.translate("_LOGIN");
 		if(m_username.getText() != null
 				&& m_username.getText().length() >= 4 && m_username.getText().length() <= 12) {
@@ -537,19 +539,19 @@ public class RegisterDialog extends Frame{
 									m_password.getText(), m_email.getText(), bday, m_starter, (m_gender == 0 ? 11: 20),
 									m_region);
 						} else {
-							GameClient.messageDialog(translated.get(28), GameClient.getInstance().getDisplay());
+							GameClient.messageDialog(translated.get(28), display);
 						}
 					} else {
-						GameClient.messageDialog(translated.get(29), GameClient.getInstance().getDisplay());
+						GameClient.messageDialog(translated.get(29), display);
 					}
 				} else {
-					GameClient.messageDialog(translated.get(30), GameClient.getInstance().getDisplay());
+					GameClient.messageDialog(translated.get(30), display);
 				}
 			} else {
-				GameClient.messageDialog(translated.get(31), GameClient.getInstance().getDisplay());
+				GameClient.messageDialog(translated.get(31), display);
 			}
 		} else {
-			GameClient.messageDialog(translated.get(32), GameClient.getInstance().getDisplay());
+			GameClient.messageDialog(translated.get(32), display);
 		}
 	}
 	

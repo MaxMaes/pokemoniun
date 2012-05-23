@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.pokenet.server.backend.entity.HMObject;
-import org.pokenet.server.backend.entity.NonPlayerChar;
+import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.TradeChar;
 import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.backend.map.ServerMap;
@@ -36,7 +36,7 @@ public class DataLoader implements Runnable {
 	public void run() {
 		try {
 			Scanner reader = new Scanner(m_file);
-			NonPlayerChar npc = null;
+			NPC npc = null;
 			WarpTile warp = null;
 			HMObject hmObject = null;
 			TradeChar t = null;
@@ -46,7 +46,7 @@ public class DataLoader implements Runnable {
 			while(reader.hasNextLine()) {
 				line = reader.nextLine();
 				if(line.equalsIgnoreCase("[npc]")) {
-					npc = new NonPlayerChar();
+					npc = new NPC();
 					npc.setName(reader.nextLine());
 					direction = reader.nextLine();
 					if(direction.equalsIgnoreCase("UP")) {

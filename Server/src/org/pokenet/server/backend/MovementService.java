@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.backend.map.ServerMapMatrix;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
@@ -83,12 +83,12 @@ public class MovementService {
 		 * First move all players out of their maps
 		 */
 		if(!forceSkip) {
-			HashMap<String, PlayerChar> players;
+			HashMap<String, Player> players;
 			for(int x = 0; x < 100; x++) {
 				for(int y = 0; y < 100; y++) {
 					if(m_mapMatrix.getMapByRealPosition(x, y) != null) {
 						players = m_mapMatrix.getMapByRealPosition(x, y).getPlayers();
-						for(PlayerChar p : players.values()) {
+						for(Player p : players.values()) {
 							p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
 							p.setMap(m_tempMap, null);
 						}

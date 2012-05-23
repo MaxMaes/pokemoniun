@@ -33,7 +33,7 @@ import org.pokenet.server.network.message.shop.ShopSellMessage;
  * 
  * @author shadowkanji
  */
-public class PlayerChar extends Char implements Battleable, Tradeable
+public class Player extends Character implements Battleable, Tradeable
 {
 	/*
 	 * An enum to store request types
@@ -109,7 +109,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	private HashMap<String, RequestType> m_requests;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
-	public PlayerChar(String username)
+	public Player(String username)
 	{
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
@@ -404,7 +404,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 			/* If the player is on the same map and within 3 squares of the player, start the battle */
 			if(this.getMap().getPvPType() == PvPType.ENFORCED)
 			{
-				PlayerChar otherPlayer = TcpProtocolHandler.getPlayer(username);
+				Player otherPlayer = TcpProtocolHandler.getPlayer(username);
 				if(otherPlayer != null && this.getMap() == otherPlayer.getMap())
 				{
 					if(otherPlayer.getX() >= this.getX() - 96 || otherPlayer.getX() <= this.getX() + 96 || otherPlayer.getY() >= this.getY() - 96 || otherPlayer.getY() <= this.getY() + 96)
@@ -443,7 +443,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	 */
 	public void requestAccepted(String username)
 	{
-		PlayerChar otherPlayer = TcpProtocolHandler.getPlayer(username);
+		Player otherPlayer = TcpProtocolHandler.getPlayer(username);
 		if(otherPlayer != null)
 		{
 			if(m_requests.containsKey(username))
@@ -1450,10 +1450,10 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 		clearRequests();
 		/* Send the map switch packet to the client */
 		m_tcpSession.write("ms" + direction + map.getX() + "," + map.getY() + "," + (map.isWeatherForced() ? map.getWeatherId() : TimeService.getWeatherId()));
-		Char c;
+		Character c;
 		String packet = "mi";
 		/* Send all player information to the client */
-		for(PlayerChar p : map.getPlayers().values())
+		for(Player p : map.getPlayers().values())
 		{
 			c = p;
 			packet = packet + c.getName() + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",";
@@ -1871,16 +1871,16 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	/**
 	 * Returns the index of the pokemon in the player's party.
 	 * 
-	 * @param p The pokemon.
+	 * @param pokemon The pokemon.
 	 * @return The index of the pokemon in the party of the player.
 	 */
-	public int getPokemonIndex(Pokemon p)
+	public int getPokemonIndex(Pokemon pokemon)
 	{
 		for(int i = 0; i < m_pokemon.length; i++)
 		{
 			if(m_pokemon[i] != null)
 			{
-				if(p.compareTo(m_pokemon[i]) == 0)
+				if(pokemon.equals(m_pokemon[i]))
 					return i;
 			}
 		}

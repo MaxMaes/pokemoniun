@@ -1,6 +1,6 @@
 package org.pokenet.server.network.message;
 
-import org.pokenet.server.backend.entity.Char;
+import org.pokenet.server.backend.entity.Character;
 
 /**
  * A character movement message
@@ -15,7 +15,7 @@ public class MoveMessage extends PokenetMessage {
 	 * @param mY 
 	 * @param mX 
 	 */
-	public MoveMessage(Char c, boolean directionChange) {
+	public MoveMessage(Character c, boolean directionChange) {
 		if(directionChange) {
 			switch(c.getFacing()) {
 			case Up:

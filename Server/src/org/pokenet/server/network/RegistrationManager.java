@@ -14,7 +14,7 @@ import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
-import org.pokenet.server.feature.CheatService;
+import org.pokenet.server.feature.CheatManager;
 
 /**
  * Handles registrations
@@ -137,7 +137,7 @@ public class RegistrationManager implements Runnable
 			if(!Pokemon.isStarterPokemon(pokemonIndex))
 			{
 				session.write("r4");
-				CheatService.report("Player is trying to register with a non-starter pokemon!");
+				CheatManager.report(null, "trying to register with a non-starter pokemon.");
 				return;
 			}
 			/*
@@ -145,7 +145,9 @@ public class RegistrationManager implements Runnable
 			 */
 			String badges = "";
 			for(int i = 0; i < 50; i++)
-				badges = badges + "0";
+			{
+				badges += "0";
+			}
 			/*
 			 * Generate starting position
 			 */
@@ -215,12 +217,12 @@ public class RegistrationManager implements Runnable
 			/*
 			 * Create the players party
 			 */
-			Pokemon p = this.createStarter(pokemonIndex);
-			p.setOriginalTrainer(info[0]);
-			p.setDateCaught(new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()));
-			this.saveNewPokemon(p, m_database);
+			Pokemon pokemon = this.createStarter(pokemonIndex);
+			pokemon.setOriginalTrainer(info[0]);
+			pokemon.setDateCaught(new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()));
+			this.saveNewPokemon(pokemon, m_database);
 
-			m_database.query("INSERT INTO pn_party (member, pokemon0, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5) VALUES ('" + +playerId + "','" + p.getDatabaseID()
+			m_database.query("INSERT INTO pn_party (member, pokemon0, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5) VALUES ('" + +playerId + "','" + pokemon.getDatabaseID()
 					+ "','-1','-1','-1','-1','-1')");
 			data = m_database.query("SELECT * FROM pn_party WHERE member='" + playerId + "'");
 			data.first();
@@ -438,7 +440,7 @@ public class RegistrationManager implements Runnable
 				species = PokemonSpecies.getDefaultData().getPokemonByName("Piplup");
 				break;
 			default:
-				species = PokemonSpecies.getDefaultData().getPokemonByName("Mudkip");
+				species = PokemonSpecies.getDefaultData().getPokemonByName("Mudkip"); // Mudkip default; dafuq?
 		}
 
 		ArrayList<MoveListEntry> possibleMoves = new ArrayList<MoveListEntry>();

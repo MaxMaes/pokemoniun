@@ -9,9 +9,9 @@ import java.util.Queue;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.PokemonBox;
-import org.pokenet.server.backend.entity.PlayerChar.Language;
+import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -112,7 +112,7 @@ public class LoginManager implements Runnable {
 					 * Attach the session to the existing player if they exist, if not, just log them in
 					 */
 					if(TcpProtocolHandler.containsPlayer(username)) {
-						PlayerChar p = TcpProtocolHandler.getPlayer(username);
+						Player p = TcpProtocolHandler.getPlayer(username);
 						p.getTcpSession().setAttribute("player", null);
 						p.setLastLoginTime(time);
 						p.getTcpSession().close(true);
@@ -321,7 +321,7 @@ public class LoginManager implements Runnable {
 		/*
 		 * Attempt to log the player in
 		 */
-		PlayerChar p = getPlayerObject(result);
+		Player p = getPlayerObject(result);
 		p.setLastLoginTime(time);
 		p.setTcpSession(session);
 		p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
@@ -350,7 +350,7 @@ public class LoginManager implements Runnable {
 	 * @param p
 	 * @param session
 	 */
-	private void initialiseClient(PlayerChar p, IoSession session) {
+	private void initialiseClient(Player p, IoSession session) {
 		session.write("ls" + p.getId() + "," + TimeService.getTime());
 		//Add them to the map
 		p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY()), null);
@@ -374,9 +374,9 @@ public class LoginManager implements Runnable {
 	 * @param data
 	 * @return
 	 */
-	private PlayerChar getPlayerObject(ResultSet result) {
+	private Player getPlayerObject(ResultSet result) {
 		try {
-			PlayerChar p = new PlayerChar(result.getString("username"));
+			Player p = new Player(result.getString("username"));
 			Pokemon [] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
 			

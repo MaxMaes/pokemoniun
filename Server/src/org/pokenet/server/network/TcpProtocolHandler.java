@@ -7,8 +7,8 @@ import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.ItemProcessor;
-import org.pokenet.server.backend.entity.PlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar.RequestType;
+import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.backend.entity.Player.RequestType;
 import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.impl.PvPBattleField;
@@ -24,7 +24,7 @@ import org.pokenet.server.network.message.RequestMessage;
  */
 public class TcpProtocolHandler extends IoHandlerAdapter
 {
-	private static HashMap<String, PlayerChar> m_players;
+	private static HashMap<String, Player> m_players;
 	private LoginManager m_loginManager;
 	private LogoutManager m_logoutManager;
 	private RegistrationManager m_regManager;
@@ -45,7 +45,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 
 	static
 	{
-		m_players = new HashMap<String, PlayerChar>();
+		m_players = new HashMap<String, Player>();
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		 */
 		try
 		{
-			PlayerChar p = (PlayerChar) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("player");
 			if(p != null)
 			{
 				if(p.isBattling())
@@ -131,7 +131,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 			/*
 			 * Player is logged in, allow interaction with their player object
 			 */
-			PlayerChar p = (PlayerChar) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("player");
 			p.setLastPacket(System.currentTimeMillis());
 			switch(message.charAt(0))
 			{
@@ -358,7 +358,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 									// Ban player
 									if(m_players.containsKey(message.substring(2)))
 									{
-										PlayerChar o = m_players.get(message.substring(2));
+										Player o = m_players.get(message.substring(2));
 										MySqlManager m = new MySqlManager();
 										if(m.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
 										{
@@ -382,7 +382,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 									// Warp to player
 									if(m_players.containsKey(message.substring(2)))
 									{
-										PlayerChar o = m_players.get(message.substring(2));
+										Player o = m_players.get(message.substring(2));
 										p.setX(o.getX());
 										p.setY(o.getY());
 										p.setMap(o.getMap(), null);
@@ -392,7 +392,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 									// Mute player
 									if(m_players.containsKey(message.substring(2)))
 									{
-										PlayerChar o = m_players.get(message.substring(2));
+										Player o = m_players.get(message.substring(2));
 										o.setMuted(true);
 										o.getTcpSession().write("!You have been muted.");
 									}
@@ -401,7 +401,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 									// Unmute player
 									if(m_players.containsKey(message.substring(2)))
 									{
-										PlayerChar o = m_players.get(message.substring(2));
+										Player o = m_players.get(message.substring(2));
 										o.setMuted(false);
 										o.getTcpSession().write("!You have been unmuted.");
 									}
@@ -409,7 +409,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 								case 'k':
 									if(m_players.containsKey(message.substring(2)))
 									{
-										PlayerChar o = m_players.get(message.substring(2));
+										Player o = m_players.get(message.substring(2));
 										o.getTcpSession().write("!You have been kicked from the server.");
 										o.getTcpSession().close(true);
 									}
@@ -601,7 +601,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		 */
 		try
 		{
-			PlayerChar p = (PlayerChar) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("player");
 			if(p != null)
 			{
 				if(p.isBattling())
@@ -641,8 +641,8 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		/*
 		 * Queue all players to be saved
 		 */
-		Iterator<PlayerChar> it = m_players.values().iterator();
-		PlayerChar p;
+		Iterator<Player> it = m_players.values().iterator();
+		Player p;
 		while(it.hasNext())
 		{
 			p = it.next();
@@ -661,7 +661,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	 * 
 	 * @param p
 	 */
-	public static void addPlayer(PlayerChar p)
+	public static void addPlayer(Player p)
 	{
 		synchronized(m_players)
 		{
@@ -674,7 +674,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	 * 
 	 * @param p
 	 */
-	public static void removePlayer(PlayerChar p)
+	public static void removePlayer(Player p)
 	{
 		synchronized(m_players)
 		{
@@ -688,7 +688,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	 * @param username
 	 * @return
 	 */
-	public static PlayerChar getPlayer(String username)
+	public static Player getPlayer(String username)
 	{
 		synchronized(m_players)
 		{
@@ -717,11 +717,12 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	{
 		synchronized(m_players)
 		{
-			for(PlayerChar player : m_players.values())
+			for(Player player : m_players.values())
 			{
 				long afk = System.currentTimeMillis() - player.getLastPacket();
 				if(afk > (15 * 60 * 1000)) // 15 minutes
 				{
+					System.out.println("Player: " + player.getName() + " got kicked because he was " + (afk / (60 * 1000)) + " minutes AFK.");
 					player.forceLogout();
 				}
 			}

@@ -1,7 +1,7 @@
 package org.pokenet.server.battle.impl;
 
-import org.pokenet.server.backend.entity.NonPlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.NPC;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.battle.DataService;
 
@@ -11,15 +11,15 @@ import org.pokenet.server.battle.DataService;
  *
  */
 public class NpcBattleLauncher implements Runnable {
-	private NonPlayerChar m_npc;
-	private PlayerChar m_player;
+	private NPC m_npc;
+	private Player m_player;
 	
 	/**
 	 * Constructor
 	 * @param n
 	 * @param p
 	 */
-	public NpcBattleLauncher(NonPlayerChar n, PlayerChar p) {
+	public NpcBattleLauncher(NPC n, Player p) {
 		m_npc = n;
 		/* Ensure the NPC cannot battle anyone else */
 		m_npc.setLastBattleTime(System.currentTimeMillis());

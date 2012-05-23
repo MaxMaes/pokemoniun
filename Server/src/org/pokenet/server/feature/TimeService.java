@@ -11,6 +11,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.network.TcpProtocolHandler;
 
 /**
  * Handles game time and weather
@@ -106,10 +107,16 @@ public class TimeService implements Runnable {
 				generateWeather();
 				m_lastWeatherUpdate = System.currentTimeMillis();
 			}
+			/*
+			 * Loop through all players and check for idling
+			 * If they've idled, disconnect them
+			 */
+			TcpProtocolHandler.kickIdlePlayers();
 			try {
-				Thread.sleep(60000);
+				Thread.sleep(10 * 1000); // Sleep for 10 seconds
 			} catch (Exception e) {}
 		}
+		
 		System.out.println("INFO: Time Service stopped");
 	}
 	

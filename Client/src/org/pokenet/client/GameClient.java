@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import org.pokenet.client.constants.Music;
@@ -123,6 +124,9 @@ public class GameClient extends BasicGame
 	private boolean m_chatServerIsActive;
 	private static Image m_loadImage; // Made these static to prevent memory leak.
 	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
+	
+	private static final DecimalFormat percentage = new DecimalFormat("###.##");
+	private static final long startTime = System.currentTimeMillis();
 
 	/** Load options */
 	static
@@ -345,8 +349,8 @@ public class GameClient extends BasicGame
 
 				m_ui = new UserInterface(m_display);
 				m_ui.setAllVisible(false);
+				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start untill you get the language select screen)");
 			}
-
 		}
 		if(m_started)
 		{
@@ -464,12 +468,6 @@ public class GameClient extends BasicGame
 		g.drawImage(m_loadImage, 0, 0);
 		g.setColor(Color.white);
 
-		if(m_nextResource != null)
-		{
-			g.drawString("Loading,  please wait ...", 10, gc.getHeight() - 90);
-			// g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
-		}
-
 		int total = LoadingList.get().getTotalResources();
 		int maxWidth = gc.getWidth() - 20;
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
@@ -482,12 +480,17 @@ public class GameClient extends BasicGame
 			g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
 					m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
 			g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
+			
+			if(m_nextResource != null)
+			{
+				g.drawString("Loading,  please wait ... " + percentage.format(bar * 100) + "%", 10, gc.getHeight() - 90);
+				// g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
+			}
 
 			// non-imagy loading bar
 			// g.setColor(m_loadColor);
 			// g.setAntiAlias(true);
 			// g.fillRoundRect(15, gc.getHeight() - 120, bar*(maxWidth - 10), 20, 10);
-
 		}
 		else
 		{

@@ -314,7 +314,9 @@ public class AppGameContainer extends GameContainer {
 	 */
 	public void start() throws SlickException {
 		try {
+			long time = System.currentTimeMillis();
 			setup();
+			System.out.println("Setting up the AppGameContainer took " + (System.currentTimeMillis() - time) + " ms. (time from start untill your screen is initialized)");
 			
 			getDelta();
 			while (running()) {

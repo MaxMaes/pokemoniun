@@ -97,7 +97,7 @@ public final class Log {
 	 * @param e The exception causing the error
 	 */
 	public static void error(String message, Throwable e) {
-		logSystem.error(message, e);
+		//logSystem.error(message, e);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public final class Log {
 	 * @param e The exception causing the error
 	 */
 	public static void error(Throwable e) {
-		logSystem.error(e);
+		//logSystem.error(e);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public final class Log {
 	 * @param message The message describing the error
 	 */
 	public static void error(String message) {
-		logSystem.error(message);
+		//logSystem.error(message);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public final class Log {
 	 * @param message The message describing the warning
 	 */
 	public static void warn(String message) {
-		logSystem.warn(message);
+		//logSystem.warn(message);
 	}
 	
 	/**
@@ -134,7 +134,7 @@ public final class Log {
 	 * @param e The issue causing the warning
 	 */
 	public static void warn(String message, Throwable e) {
-		logSystem.warn(message, e);
+		//logSystem.warn(message, e);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public final class Log {
 	 */
 	public static void info(String message) {
 		if (verbose || forcedVerbose) {
-			logSystem.info(message);
+			//logSystem.info(message);
 		}
 	}
 
@@ -155,7 +155,7 @@ public final class Log {
 	 */
 	public static void debug(String message) {
 		if (verbose || forcedVerbose) {
-			logSystem.debug(message);
+			//logSystem.debug(message);
 		}
 	}
 }

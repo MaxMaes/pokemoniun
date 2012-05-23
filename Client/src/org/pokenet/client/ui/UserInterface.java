@@ -724,8 +724,6 @@ public class UserInterface extends Frame
 	{
 		if(m_teamInfo != null)
 			m_teamInfo.update(GameClient.getInstance().getOurPlayer().getPokemon());
-		else
-			m_teamInfo = new PartyInfoDialog(GameClient.getInstance().getOurPlayer().getPokemon());
 	}
 
 	/**

@@ -363,7 +363,7 @@ public class LoginManager implements Runnable {
 		//Send money
 		p.updateClientMoney();
 		//Send their friend list to them
-//		p.updateClientFriends();
+		p.updateClientFriends();
 		//Send badges
 		p.updateClientBadges();
 		p.initializeClientSkills();
@@ -376,7 +376,7 @@ public class LoginManager implements Runnable {
 	 */
 	private PlayerChar getPlayerObject(ResultSet result) {
 		try {
-			PlayerChar p = new PlayerChar();
+			PlayerChar p = new PlayerChar(result.getString("username"));
 			Pokemon [] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
 			

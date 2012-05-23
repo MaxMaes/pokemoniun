@@ -1,5 +1,7 @@
 package org.pokenet.server.backend.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,6 +81,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	private int m_repel = 0;
 	private long m_lastTrade = 0;
 	private MySqlManager m_database = new MySqlManager();
+	private String m_username = "";
 	/*
 	 * Stores movement of other players to be sent in bulk to client
 	 */
@@ -106,8 +109,9 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	private HashMap<String, RequestType> m_requests;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
-	public PlayerChar()
+	public PlayerChar(String username)
 	{
+		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
 
@@ -707,15 +711,16 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	 * 
 	 * @param username The username to add.
 	 */
-	public void addFriend(String username)
+	public void addFriend(String friend)
 	{
 		if(m_friends == null)
 			m_friends = new ArrayList<String>();
 		if(m_friends.size() < 10)
 		{
-			m_friends.add(username);
-			// TODO: Add friend to the database friendlist.
-			m_tcpSession.write("Fa" + username);
+			m_friends.add(friend);
+			// TODO: Dummy Code, should work perfectly fine.
+			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+			m_tcpSession.write("Fa" + friend);
 		}
 	}
 
@@ -724,21 +729,21 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	 * 
 	 * @param username The username to remove.
 	 */
-	public void removeFriend(String username)
+	public void removeFriend(String friend)
 	{
 		if(m_friends == null)
 		{
 			m_friends = new ArrayList<String>();
 			return;
-		}
+		}          
 		for(int i = 0; i < m_friends.size(); i++)
 		{
-			if(m_friends.get(i).equalsIgnoreCase(username))
+			if(m_friends.get(i).equalsIgnoreCase(friend))
 			{
 				m_friends.remove(i);
-				// TODO: Remove friend from the database friendlist.
-				//m_database.query();
-				m_tcpSession.write("Fr" + username);
+				// TODO: Dummy Code, should work perfectly fine.
+				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
+				m_tcpSession.write("Fr" + friend);
 				return;
 			}
 		}
@@ -1831,6 +1836,29 @@ public class PlayerChar extends Char implements Battleable, Tradeable
 	public void updateClientSprite()
 	{
 		TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(m_id, m_sprite));
+	}
+	
+	/** Sends all friends to the client. */
+	public void updateClientFriends()
+	{
+		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "')");
+		// TODO: Dummy code, needs testing!
+		try
+		{
+			while(friends.next())
+			{
+				m_friends.add(friends.getString(0));
+			}
+		}
+		catch(SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			m_tcpSession.write("Fa" + m_friends.get(i));
+			System.out.println(m_friends.get(i));
+		}
 	}
 
 	/** Sets the battlefield for this player */

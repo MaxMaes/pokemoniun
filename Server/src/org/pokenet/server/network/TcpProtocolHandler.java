@@ -508,7 +508,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						case 'a':
 							// Add a friend
 							if(m_players.containsKey(friend))
-								;
+								break;
 							p.addFriend(message.substring(2));
 							break;
 						case 'r':

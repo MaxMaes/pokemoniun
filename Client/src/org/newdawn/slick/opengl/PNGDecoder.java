@@ -557,27 +557,27 @@ public class PNGDecoder {
         
         switch (colorType) {
         case COLOR_GREYSCALE:
-            /* if(bitdepth != 8) {
+            if(bitdepth != 8) {
                 throw new IOException("Unsupported bit depth: " + bitdepth);
-            } */
+            }
             bytesPerPixel = 1;
             break;
         case COLOR_GREYALPHA:
-            /* if(bitdepth != 8) {
+            if(bitdepth != 8) {
                 throw new IOException("Unsupported bit depth: " + bitdepth);
-            } */
+            }
             bytesPerPixel = 2;
             break;
         case COLOR_TRUECOLOR:
-            /* if(bitdepth != 8) {
+            if(bitdepth != 8) {
                 throw new IOException("Unsupported bit depth: " + bitdepth);
-            } */
+            }
             bytesPerPixel = 3;
             break;
         case COLOR_TRUEALPHA:
-            /* if(bitdepth != 8) {
+            if(bitdepth != 8) {
                 throw new IOException("Unsupported bit depth: " + bitdepth);
-            } */
+            }
             bytesPerPixel = 4;
             break;
         case COLOR_INDEXED:

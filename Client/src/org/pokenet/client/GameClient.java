@@ -1105,6 +1105,7 @@ public class GameClient extends BasicGame
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			fullscreen = false;
 		}
 		try

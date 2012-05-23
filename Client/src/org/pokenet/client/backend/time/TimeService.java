@@ -80,12 +80,9 @@ public class TimeService extends Label implements Runnable
 			this.pack();
 			try
 			{
-				Thread.sleep(60000);
+				Thread.sleep(10 * 1000); // Sleep for 10 seconds
 			}
-			catch(InterruptedException ie)
-			{
-				ie.printStackTrace();
-			}
+			catch(InterruptedException ie) { }
 		}
 	}
 

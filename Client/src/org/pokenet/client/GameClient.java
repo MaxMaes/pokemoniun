@@ -465,7 +465,7 @@ public class GameClient extends BasicGame
 	/** Renders to the game window */
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		g.drawImage(m_loadImage, 0, 0);
+		g.setBackground(Color.black);
 		g.setColor(Color.white);
 
 		int total = LoadingList.get().getTotalResources();
@@ -473,6 +473,7 @@ public class GameClient extends BasicGame
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
 		if(!m_started)
 		{
+			g.drawImage(m_loadImage, 0, 0);
 			g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
 
 			float bar = loaded / (float) total;

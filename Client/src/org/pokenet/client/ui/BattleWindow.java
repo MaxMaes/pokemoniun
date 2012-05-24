@@ -593,7 +593,7 @@ public class BattleWindow extends Frame
 	 * 
 	 * @param i
 	 */
-	private void useMove(int i)
+	public void useMove(int i)
 	{
 		disableMoves();
 		if(BattleManager.getInstance().getCurPoke().getMoveCurPP()[i] != 0)

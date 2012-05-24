@@ -742,7 +742,31 @@ public class GameClient extends BasicGame
 				{
 					m_ui.disconnect();
 				}
+				else if(key == (Input.KEY_R))
+				{
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 97);
+				}
 			}
+		}
+		if(key == Input.KEY_1 && BattleManager.isBattling()
+				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		{
+			BattleManager.getInstance().getBattleWindow().useMove(0);
+		}
+		if(key == Input.KEY_2 && BattleManager.isBattling()
+				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		{
+			BattleManager.getInstance().getBattleWindow().useMove(1);
+		}
+		if(key == Input.KEY_3 && BattleManager.isBattling()
+				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		{
+			BattleManager.getInstance().getBattleWindow().useMove(2);
+		}
+		if(key == Input.KEY_4 && BattleManager.isBattling()
+				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		{
+			BattleManager.getInstance().getBattleWindow().useMove(3);
 		}
 		if((key == (Input.KEY_SPACE) || key == (Input.KEY_E)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
 				&& !getDisplay().containsChild(getUi().getShop()))

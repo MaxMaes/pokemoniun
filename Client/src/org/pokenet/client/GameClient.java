@@ -39,6 +39,7 @@ import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
 import org.pokenet.client.backend.ItemDatabase;
+import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
@@ -1139,6 +1140,7 @@ public class GameClient extends BasicGame
 	 */
 	public static void main(String[] args)
 	{	
+		//new KeyManager();
 		ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {
 			System.out.println("Missing resources, game not starting");

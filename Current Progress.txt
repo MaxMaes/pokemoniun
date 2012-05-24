@@ -25,7 +25,7 @@
 [ADD] Dummy code for EXP bar.
 [ADD] More than awesome Bulbasaur spritesheet for character.
 [ADD] Hotkeyed pokemon attacks to buttons 1-2-3-4
-[ADD] Hotkeyed OLD ROD to 'R'
+[ADD] Hotkeyed OLD ROD to 'R', GOOD ROD to 'T', GREAT ROD to 'Y, ULTRA ROD to 'U'
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 

@@ -10,6 +10,9 @@
 [FIX] Potions are now in the right backpack.
 [FIX] Giovani (8th gym leader in kanto) now gives the correct badge.
 [FIX] Move buttons now get disabled correctly when switching pokemon.
+[FIX] Generation IV sprites -> needs verifying.
+[FIX] SpeechFrame no longer leaves a ghost behind.
+[FIX] Total experience is now correctly displayed in the Pokemon window.
 
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.
@@ -17,13 +20,13 @@
 [ADD] Back buttons on the login screen and server select screen.
 [ADD] Trading with items -> Untested, works same way as evo stones. If this doesnt work already, the evo stone fix will probably work here as well.
 [ADD] Cheatdetection system, since the client is open source we need a cheatdetection system on the server side.
+[ADD] Black background instead of the loading screen when inside the game.
 [ADD] Pokemon movetype is now displayed in the battle interface.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
 [BUG] NullPointerException on certain logouts.
 [BUG] Database isn't updated after the logout.(could be the cause of above).
-[BUG] Game skips language select after fixing languages.
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet
 
 [???] Fixed a few warnings.

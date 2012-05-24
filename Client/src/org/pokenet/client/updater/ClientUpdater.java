@@ -34,9 +34,7 @@ public class ClientUpdater
 		System.out.println("Checking for updates ...");
 		String respath = System.getProperty("res.path");
 		if(respath == null)
-		{
 			respath = "";
-		}
 		File resourcesFolder = new File(respath + "res");
 		checkFiles(resourcesFolder);
 		
@@ -52,13 +50,9 @@ public class ClientUpdater
 		for(File file : files)
 		{
 			if(file.isDirectory())
-			{
 				checkFiles(file); // Calls same method again.
-			}
 			else
-			{
 				getHash(file);
-			}
 		}
 	}
 

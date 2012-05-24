@@ -154,20 +154,40 @@ public class BattleWindow extends Frame
 			move1.setEnabled(true);
 			pp1.setEnabled(true);
 		}
+		else
+		{
+			move1.setEnabled(false);
+			pp1.setEnabled(false);
+		}
 		if(!move2.getText().equals(""))
 		{
 			move2.setEnabled(true);
 			pp2.setEnabled(true);
+		}
+		else
+		{
+			move1.setEnabled(false);
+			pp1.setEnabled(false);
 		}
 		if(!move3.getText().equals(""))
 		{
 			move3.setEnabled(true);
 			pp3.setEnabled(true);
 		}
+		else
+		{
+			move1.setEnabled(false);
+			pp1.setEnabled(false);
+		}
 		if(!move4.getText().equals(""))
 		{
 			move4.setEnabled(true);
 			pp4.setEnabled(true);
+		}
+		else
+		{
+			move1.setEnabled(false);
+			pp1.setEnabled(false);
 		}
 		cancel.setVisible(false);
 	}

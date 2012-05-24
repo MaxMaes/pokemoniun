@@ -83,6 +83,7 @@ public class PacketGenerator {
 	 * @param message
 	 */
 	public void writeTcpMessage(String message) {
+		System.out.println(message);
 		m_tcpSession.write(message);
 	}
 	
@@ -91,6 +92,7 @@ public class PacketGenerator {
 	 * @param message
 	 */
 	public void writeUdpMessage(String message) {
+		System.out.println(message);
 		m_udpSession.write(message);
 	}
 	

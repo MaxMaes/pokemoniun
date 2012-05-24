@@ -11,6 +11,7 @@ import org.pokenet.client.backend.entity.Enums.Poketype;
 public class OurPokemon extends Pokemon {
 	private Image m_backSprite;
 	private int m_exp;
+	private int m_explvl;
 	private int m_atk;
 	private int m_def;
 	private int m_speed;
@@ -35,6 +36,24 @@ public class OurPokemon extends Pokemon {
 		return m_exp;
 	}
 
+	/**
+	 * Sets Exp to next level
+	 * 
+	 * @param exprmn
+	 */
+	public void setExpLvl(int exprmn)
+	{
+		m_explvl = exprmn;
+	}
+	
+	/**
+	 * Gets Exp to Level
+	 */
+	public int getExpLvl()
+	{
+		return this.m_explvl;
+	}
+	
 	/**
 	 * Sets Exp
 	 * 

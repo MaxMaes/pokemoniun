@@ -227,9 +227,9 @@ public class BattleManager
 			{
 				m_battle.m_moveButtons.get(i).setText("");
 				m_battle.m_ppLabels.get(i).setText("");
-				m_battle.m_moveButtons.get(i).setEnabled(false);
 			}
 		}
+		m_battle.enableMoves();
 	}
 
 	/**

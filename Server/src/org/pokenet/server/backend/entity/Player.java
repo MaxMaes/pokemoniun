@@ -1913,6 +1913,7 @@ public class Player extends Character implements Battleable, Tradeable
 					"," + this.getParty()[i].getLevel() + 
 					"," + this.getParty()[i].getAbilityName() + 
 					"," + this.getParty()[i].getNature().getName() +
+					"," + this.getParty()[i].getBaseExp() +
 					"," + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + 
 					"," + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "") + 
 					"," + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + 

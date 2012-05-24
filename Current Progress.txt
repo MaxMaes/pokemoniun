@@ -22,11 +22,14 @@
 [ADD] Cheatdetection system, since the client is open source we need a cheatdetection system on the server side.
 [ADD] Black background instead of the loading screen when inside the game.
 [ADD] Pokemon movetype is now displayed in the battle interface.
+[ADD] Dummy code for EXP bar.
+[ADD] More than awesome Bulbasaur spritesheet for character.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
 [BUG] NullPointerException on certain logouts.
 [BUG] Database isn't updated after the logout.(could be the cause of above).
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet
+[BUG] Both pokemon use struggle when a berry is used during battle.
 
 [???] Fixed a few warnings.

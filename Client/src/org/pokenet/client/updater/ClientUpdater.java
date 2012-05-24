@@ -1,13 +1,21 @@
 package org.pokenet.client.updater;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+
 /*
- * How this updater works: Download a file from the server which has a list of MD5 hashes of all the resource files. Loop through all the resource files and generate a MD5 hash of those files. Put those generated MD5 hashes in a file and compare it with the file that was grabbed from the server. When there is a MD5 hash that doesn't equal, download the file from the server and restart the client. When all the hashes equal, just start the game. NOTE: for now, the server file with all the hashes listed will be local.
+ * For now this class checks if all resources are here, will be used later to check for changes and updates.
  */
 
 /**
@@ -16,6 +24,8 @@ import java.security.NoSuchAlgorithmException;
 public class ClientUpdater
 {
 	private MessageDigest digest;
+	private String respath;
+	private List<String> hashes;
 
 	public ClientUpdater()
 	{
@@ -27,33 +37,37 @@ public class ClientUpdater
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public void start()
-	{
-		System.out.println("Checking for updates ...");
-		String respath = System.getProperty("res.path");
+		respath = System.getProperty("res.path");
 		if(respath == null)
+		{
 			respath = "";
-		File resourcesFolder = new File(respath + "res");
-		checkFiles(resourcesFolder);
-		
-		// TODO: Compare 2 text files with the hashes.
+		}
+		hashes = new ArrayList<String>();
 	}
 
 	/*
 	 * If there are too many folders/files, this may cause a stackoverflow. Tested with 8693 files in 67 folders, total size 52.6MB no problem
 	 */
-	public void checkFiles(File folder)
+	public List<String> loopThroughFiles(File folder)
 	{
 		File[] files = folder.listFiles();
 		for(File file : files)
 		{
 			if(file.isDirectory())
-				checkFiles(file); // Calls same method again.
+				loopThroughFiles(file); // Calls same method again.
 			else
-				getHash(file);
+				String hash = file.getPath() + ";" + getHash(file);
+				hashes.add(hash);
+				System.out.println(hash);
 		}
+		return hashes;
+	}
+
+	private void dump()
+	{
+		File resourcesFolder = new File(respath + "res");
+		List<String> hashes = loopThroughFiles(resourcesFolder);
+		dumpToFile(hashes);
 	}
 
 	private String getHash(File file)
@@ -71,7 +85,6 @@ public class ClientUpdater
 			byte[] md5sum = digest.digest();
 			BigInteger bigInt = new BigInteger(1, md5sum);
 			output = bigInt.toString(16); // 16 is to convert it to hex.
-			System.out.println("MD5: " + output); // TODO: Write this to a file instead of printing it out.
 			is.close();
 		}
 		catch(Exception ex)
@@ -79,5 +92,84 @@ public class ClientUpdater
 			ex.printStackTrace();
 		}
 		return output;
+	}
+
+	private void dumpToFile(List<String> hashes)
+	{
+		try
+		{
+			FileWriter fstream = new FileWriter("resources.dump");
+			BufferedWriter out = new BufferedWriter(fstream);
+			for(String hash : hashes)
+			{
+				out.write(hash + "\n");
+			}
+			out.close();
+		}
+		catch(Exception e)
+		{// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+	}
+
+	/*
+	 * For now we read from a local file, will read from a remote file later.
+	 */
+	private List<String> readDumpFile()
+	{
+		List<String> read = new ArrayList<String>();
+		try
+		{
+			FileInputStream fstream = new FileInputStream("resources.dump");
+			
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String line;
+			while((line = br.readLine()) != null)
+			{
+				read.add(line);
+			}
+			in.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("Error: " + e.getMessage());
+		}
+		return read;
+	}
+	
+	public boolean checkFiles()
+	{
+		System.out.println("Checking resource files ...");
+		long time = System.currentTimeMillis();
+		List<String> fileList = readDumpFile();
+		boolean filesFound = true;
+		for(String file : fileList)
+		{
+			String[] line = file.split(";");
+			File f = new File(line[0]);
+			if(!f.exists() || !getHash(f).equals(line[1]))
+			{
+				System.out.println("File " + line[0] + " with hash " + line[1] +" not found (make sure you run the dumper first when you've added a new resource file).");
+				filesFound = false;
+			}
+		}
+		if(filesFound) {
+			System.out.println("Done checking resource files in " + (System.currentTimeMillis() - time) + "ms.");
+		} else {
+			System.out.println("Some resources may be missing, game not starting.");
+		}
+		return filesFound;
+	}
+
+	/*
+	 * Run from this main to dump a hash file from the current resource files.
+	 */
+	public static void main(String[] args)
+	{
+		long time = System.currentTimeMillis();
+		ClientUpdater updater = new ClientUpdater();
+		updater.dump();
+		System.out.println("Done dumping in " + (System.currentTimeMillis() - time) + "ms.");
 	}
 }

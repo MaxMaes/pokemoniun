@@ -1104,7 +1104,10 @@ public class GameClient extends BasicGame
 	public static void main(String[] args)
 	{	
 		ClientUpdater updater = new ClientUpdater();
-		//updater.start(); // TODO: Finish it.
+		if(!updater.checkFiles()) {
+			System.out.println("Missing resources, game not starting");
+			System.exit(1);
+		}
 		
 		boolean fullscreen = false;
 		try

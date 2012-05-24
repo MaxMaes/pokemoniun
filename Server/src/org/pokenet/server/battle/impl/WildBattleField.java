@@ -21,6 +21,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
 import org.pokenet.server.feature.TimeService;
+import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.battle.BattleEndMessage;
 import org.pokenet.server.network.message.battle.BattleExpMessage;
@@ -695,6 +696,7 @@ public class WildBattleField extends BattleField {
 				double levelExp = DataService.getBattleMechanics().getExpForLevel(p,
 						p.getLevel() + 1)
 						- p.getExp();
+				/* Pokemon level up! */
 				if (levelExp <= 0) {
 					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(
 							p.getSpeciesName());
@@ -762,6 +764,8 @@ public class WildBattleField extends BattleField {
 					TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 							new BattleLevelChangeMessage(p.getSpeciesName(), level));
 					m_player.updateClientPokemonStats(index);
+					
+					// TODO: Save Pokemon when he leveled up ? MySqlManager.savePokemon(p, p.getTrainerName())
 				}
 			}
 		}

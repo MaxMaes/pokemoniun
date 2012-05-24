@@ -152,7 +152,9 @@ public class NetworkManager {
 		//Stop all threads (do not use thread.stop() )
 		//Unbind network address
 		for(int i = 0; i < m_chatManager.length; i++)
+		{
              m_chatManager[i].stop();
+		}
 		m_tcpAcceptor.unbind();
 		m_tcpProtocolHandler.logoutAll();
 	}

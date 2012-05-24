@@ -1,6 +1,7 @@
 package org.pokenet.server.feature;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -58,10 +59,9 @@ public class FishDatabase {
 				try {
 					/* Read all the data from the text file */
 					Scanner s = new Scanner(new File("./res/fishing.txt"));
-					String pokemon = "";
 					ArrayList<FishPokemon> fishies = new ArrayList<FishPokemon>();
 					while(s.hasNextLine()) {
-						pokemon = s.nextLine();
+						String pokemon = s.nextLine();
 						fishies = new ArrayList<FishPokemon>();
 						/* Parse the data in the order EXPERIENCE, LEVELREQ, RODREQ*/
 						StringTokenizer st = new StringTokenizer(pokemon);
@@ -75,9 +75,10 @@ public class FishDatabase {
 						}
 						addEntry(pokeName, fishies);
 					}
-					s.close();
 					System.out.println("INFO: Fishing database reinitialised");
-				} catch (Exception e) {
+				} catch(FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				}
 			}

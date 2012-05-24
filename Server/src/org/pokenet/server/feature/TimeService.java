@@ -103,7 +103,7 @@ public class TimeService implements Runnable {
 			}
 				m_hour = m_hour == 23 ? 0 : m_hour + 1;
 			//Check if weather should be updated
-			if(System.currentTimeMillis() - m_lastWeatherUpdate >= 3600000) {
+			if(System.currentTimeMillis() - m_lastWeatherUpdate > (60 * 60 * 1000)) { // Every hour, LOL what? Maybe change to more frequent.
 				generateWeather();
 				m_lastWeatherUpdate = System.currentTimeMillis();
 			}
@@ -171,6 +171,7 @@ public class TimeService implements Runnable {
 			break;
 		default:
 			m_weather = Weather.NORMAL;
+			break;
 		}
 	}
 	

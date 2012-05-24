@@ -7,9 +7,6 @@ import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
-import org.pokenet.client.constants.Music;
-import org.pokenet.client.constants.Options;
-import org.pokenet.client.constants.Language;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
@@ -51,6 +48,9 @@ import org.pokenet.client.backend.entity.Player.Direction;
 import org.pokenet.client.backend.time.TimeService;
 import org.pokenet.client.backend.time.WeatherService;
 import org.pokenet.client.backend.time.WeatherService.Weather;
+import org.pokenet.client.constants.Language;
+import org.pokenet.client.constants.Music;
+import org.pokenet.client.constants.Options;
 import org.pokenet.client.network.ChatProtocolHandler;
 import org.pokenet.client.network.PacketGenerator;
 import org.pokenet.client.network.TcpProtocolHandler;
@@ -61,6 +61,7 @@ import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
+import org.pokenet.client.updater.ClientUpdater;
 
 /**
  * The game client
@@ -1101,7 +1102,10 @@ public class GameClient extends BasicGame
 	 * @param args
 	 */
 	public static void main(String[] args)
-	{
+	{	
+		ClientUpdater updater = new ClientUpdater();
+		//updater.start(); // TODO: Finish it.
+		
 		boolean fullscreen = false;
 		try
 		{

@@ -1,0 +1,2 @@
+Step on the badge to teleport to the corresponding city.
+There are badge requirments for each teleport panel.

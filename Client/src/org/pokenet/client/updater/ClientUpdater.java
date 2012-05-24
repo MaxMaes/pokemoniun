@@ -54,11 +54,15 @@ public class ClientUpdater
 		for(File file : files)
 		{
 			if(file.isDirectory())
+			{
 				loopThroughFiles(file); // Calls same method again.
+			}
 			else
+			{
 				String hash = file.getPath() + ";" + getHash(file);
 				hashes.add(hash);
 				System.out.println(hash);
+			}
 		}
 		return hashes;
 	}
@@ -121,7 +125,7 @@ public class ClientUpdater
 		try
 		{
 			FileInputStream fstream = new FileInputStream("resources.dump");
-			
+
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String line;
@@ -137,7 +141,7 @@ public class ClientUpdater
 		}
 		return read;
 	}
-	
+
 	public boolean checkFiles()
 	{
 		System.out.println("Checking resource files ...");
@@ -150,13 +154,16 @@ public class ClientUpdater
 			File f = new File(line[0]);
 			if(!f.exists() || !getHash(f).equals(line[1]))
 			{
-				System.out.println("File " + line[0] + " with hash " + line[1] +" not found (make sure you run the dumper first when you've added a new resource file).");
+				System.out.println("File " + line[0] + " with hash " + line[1] + " not found (make sure you run the dumper first when you've added a new resource file).");
 				filesFound = false;
 			}
 		}
-		if(filesFound) {
+		if(filesFound)
+		{
 			System.out.println("Done checking resource files in " + (System.currentTimeMillis() - time) + "ms.");
-		} else {
+		}
+		else
+		{
 			System.out.println("Some resources may be missing, game not starting.");
 		}
 		return filesFound;

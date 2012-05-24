@@ -26,6 +26,7 @@
 [ADD] More than awesome Bulbasaur spritesheet for character.
 [ADD] Hotkeyed pokemon attacks to buttons 1-2-3-4
 [ADD] Hotkeyed OLD ROD to 'R', GOOD ROD to 'T', GREAT ROD to 'Y, ULTRA ROD to 'U'
+[ADD] Trainers now give more base gold.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
@@ -33,5 +34,3 @@
 [BUG] Database isn't updated after the logout.(could be the cause of above).
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet
 [BUG] Both pokemon use struggle when a berry is used during battle.
-
-[???] Fixed a few warnings.

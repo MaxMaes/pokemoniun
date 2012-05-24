@@ -888,7 +888,7 @@ public class Player extends Character implements Battleable, Tradeable
 				else
 				{
 					m_tcpSession.write("FU");	// Notify client you pulled up a fish too strong for you
-					this.addFishingExp(10);		// Conciliatory exp for "hooking" something even if it got away
+					this.addFishingExp(15);		// Conciliatory exp for "hooking" something even if it got away
 				}
 			}
 			else

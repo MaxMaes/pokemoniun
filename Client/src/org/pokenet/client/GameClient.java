@@ -74,7 +74,7 @@ import org.pokenet.client.updater.ClientUpdater;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static final String GAME_TITLE = "Pokenet: Valiant Venonat";
+	private static final String GAME_TITLE = "Pokemonium";
 	private static final String CHATHOST = "localhost";
 	private static final int FPS = 50;
 
@@ -1140,12 +1140,11 @@ public class GameClient extends BasicGame
 	 */
 	public static void main(String[] args)
 	{	
-		//new KeyManager();
-		ClientUpdater updater = new ClientUpdater();
+		/*ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {
 			System.out.println("Missing resources, game not starting");
 			System.exit(1);
-		}
+		} TODO: Work on the updater. (not included in current release)*/
 		
 		boolean fullscreen = false;
 		try

@@ -94,7 +94,7 @@ public class KeyManager
 				
 				else if(data[0].equals("ULTRA"))
 					for(String st : keydata)
-						keys.put(Action.ROD_GREAT, stringToInt(st));
+						keys.put(Action.ROD_ULTRA, stringToInt(st));
 				
 				else if(data[0].equals("ATTACK1"))
 					for(String st : keydata)
@@ -111,6 +111,9 @@ public class KeyManager
 				else if(data[0].equals("ATTACK4"))
 					for(String st : keydata)
 						keys.put(Action.POKEMOVE_4, stringToInt(st));
+				else if(data[0].equals("TALK"))
+					for(String st : keydata)
+						keys.put(Action.INTERACTION, stringToInt(st));
 			}
 		}
 		catch(FileNotFoundException fnfe)
@@ -119,7 +122,7 @@ public class KeyManager
 		}
 		finally
 		{
-			// TODO: Default implementation of keys
+			System.out.println("INFO: Keys Loaded");
 		}
 	}
 
@@ -256,7 +259,8 @@ public class KeyManager
 			return Input.KEY_SLASH;
 		else if(st.equals("DEL"))
 			return Input.KEY_DELETE;
-
+		else if(st.equals("SPACE"))
+			return Input.KEY_SPACE;
 		return null;
 	}
 

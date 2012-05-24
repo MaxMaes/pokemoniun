@@ -436,12 +436,16 @@ public class BigBagDialog extends Frame {
 		destroyPopup();
 		if (m_curCategory == 0 || m_curCategory == 3){
 			if (ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
-					.getCategory().equals("Evolution")){
+					.getCategory().equalsIgnoreCase("Field")){
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(
-						m_itemBtns.get(i).getName()), true, false);				
+						m_itemBtns.get(i).getName()), true, false);	
+				//System.out.println("win " + i);
 			} else {
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(
 						m_itemBtns.get(i).getName()), false, false);
+				//System.out.println("fail " + i);
+				//System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
+				//		.getCategory());
 			}
 			m_popup.setLocation(m_itemBtns.get(i).getAbsoluteX(), m_itemBtns.get(i).getAbsoluteY() 
 					+ m_itemBtns.get(i).getHeight() - getTitleBar().getHeight());
@@ -452,6 +456,7 @@ public class BigBagDialog extends Frame {
 			m_popup.setLocation(m_itemBtns.get(i).getAbsoluteX(), m_itemBtns.get(i).getAbsoluteY() 
 					+ m_itemBtns.get(i).getHeight() - getTitleBar().getHeight());
 			getDisplay().add(m_popup);
+			//System.out.println("check " + i);
 		}
 	}
 	
@@ -602,8 +607,10 @@ class ItemPopup extends Frame{
 			m_team = new TeamPopup(this, id, true, isBattle);
 			m_team.setLocation(m_use.getAbsoluteX() + getWidth(), m_use.getAbsoluteY() - 15);
 			getDisplay().add(m_team);
+			//System.out.println("i use");
 		} else {
 			GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + id);
+			//System.out.println("no use");
 			destroyPopup();
 		}
 	}

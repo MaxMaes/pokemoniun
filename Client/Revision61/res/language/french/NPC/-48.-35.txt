@@ -1,2 +1,0 @@
-I am trying to develop a new technique which lets Pokemon 
-relearn moves they have forgotten.

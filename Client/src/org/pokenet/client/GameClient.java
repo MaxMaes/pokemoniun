@@ -746,6 +746,18 @@ public class GameClient extends BasicGame
 				{
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 97);
 				}
+				else if(key == (Input.KEY_T))
+				{
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 98);
+				}
+				else if(key == (Input.KEY_Y))
+				{
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 99);
+				}
+				else if(key == (Input.KEY_U))
+				{
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 100);
+				}
 			}
 		}
 		if(key == Input.KEY_1 && BattleManager.isBattling()

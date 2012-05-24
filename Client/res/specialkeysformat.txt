@@ -1,5 +1,6 @@
 ESCAPE
 TAB
+DEL
 LCTRL
 RCTRL
 BACKSPACE
@@ -23,3 +24,9 @@ HOME
 PgUp
 PgDn
 End
+
+NON MAPPABLE KEYS
+\
+'
+"
+`

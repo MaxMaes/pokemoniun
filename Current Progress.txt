@@ -26,6 +26,7 @@
 [ADD] More than awesome Bulbasaur spritesheet for character.
 [ADD] Hotkeyed pokemon attacks to buttons 1-2-3-4
 [ADD] Hotkeyed OLD ROD to 'R', GOOD ROD to 'T', GREAT ROD to 'Y, ULTRA ROD to 'U'
+[ADD] keys.ini file. You can set some custom controls here! It's located at res/keys.ini
 [ADD] Trainers now give more base gold.
 
 [(possible)ADD] Auto-Updater, needs some further discussions.

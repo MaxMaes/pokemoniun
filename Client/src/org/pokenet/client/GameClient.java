@@ -40,6 +40,7 @@ import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.KeyManager;
+import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
@@ -651,7 +652,7 @@ public class GameClient extends BasicGame
 			/* && m_loading != null && !m_loading.isVisible() */
 			&& !BattleManager.isBattling() && m_ourPlayer.canMove())
 			{
-				if(key == (Input.KEY_DOWN) || key == (Input.KEY_S))
+				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
 					{
@@ -664,7 +665,7 @@ public class GameClient extends BasicGame
 						m_ourPlayer.queueMovement(Direction.Down);
 					}
 				}
-				else if(key == (Input.KEY_UP) || key == (Input.KEY_W))
+				else if(key == KeyManager.getKey(Action.WALK_UP))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
 					{
@@ -677,7 +678,7 @@ public class GameClient extends BasicGame
 						m_ourPlayer.queueMovement(Direction.Up);
 					}
 				}
-				else if(key == (Input.KEY_LEFT) || key == (Input.KEY_A))
+				else if(key == KeyManager.getKey(Action.WALK_LEFT))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
 					{
@@ -690,7 +691,7 @@ public class GameClient extends BasicGame
 						m_ourPlayer.queueMovement(Direction.Left);
 					}
 				}
-				else if(key == (Input.KEY_RIGHT) || key == (Input.KEY_D))
+				else if(key == KeyManager.getKey(Action.WALK_RIGHT))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
 					{
@@ -743,45 +744,45 @@ public class GameClient extends BasicGame
 				{
 					m_ui.disconnect();
 				}
-				else if(key == (Input.KEY_R))
+				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 97);
 				}
-				else if(key == (Input.KEY_T))
+				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 98);
 				}
-				else if(key == (Input.KEY_Y))
+				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 99);
 				}
-				else if(key == (Input.KEY_U))
+				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 100);
 				}
 			}
 		}
-		if(key == Input.KEY_1 && BattleManager.isBattling()
+		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.isBattling()
 				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 		{
 			BattleManager.getInstance().getBattleWindow().useMove(0);
 		}
-		if(key == Input.KEY_2 && BattleManager.isBattling()
+		if(key == KeyManager.getKey(Action.POKEMOVE_2) && BattleManager.isBattling()
 				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 		{
 			BattleManager.getInstance().getBattleWindow().useMove(1);
 		}
-		if(key == Input.KEY_3 && BattleManager.isBattling()
+		if(key == KeyManager.getKey(Action.POKEMOVE_3) && BattleManager.isBattling()
 				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 		{
 			BattleManager.getInstance().getBattleWindow().useMove(2);
 		}
-		if(key == Input.KEY_4 && BattleManager.isBattling()
+		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.isBattling()
 				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 		{
 			BattleManager.getInstance().getBattleWindow().useMove(3);
 		}
-		if((key == (Input.KEY_SPACE) || key == (Input.KEY_E)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
+		if((key == KeyManager.getKey(Action.INTERACTION)) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
 				&& !getDisplay().containsChild(getUi().getShop()))
 		{
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
@@ -1140,6 +1141,7 @@ public class GameClient extends BasicGame
 	 */
 	public static void main(String[] args)
 	{	
+		KeyManager.initialize();
 		/*ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {
 			System.out.println("Missing resources, game not starting");

@@ -968,7 +968,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				m_game.getLoginScreen().showLogin();
 				break;
 			case '1':
-				//Account server offline
+				//Account server offline < yeah right, server just wasn't able to connect to the database.
 				GameClient.messageDialog(translated.get(24), GameClient.getInstance().getDisplay());
 				m_game.getLoginScreen().getRegistration().enableRegistration();
 				m_game.getLoadingScreen().setVisible(false);

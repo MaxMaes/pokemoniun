@@ -22,6 +22,8 @@ public class ServiceManager
 	private JythonService m_jythonService;
 	private SpriteList m_sprites;
 	private ItemDatabase m_itemdatabase;
+	
+	private final long start = System.currentTimeMillis();
 
 	/**
 	 * Default constructor
@@ -114,7 +116,7 @@ public class ServiceManager
 		m_networkService.start();
 		m_timeService.start();
 
-		System.out.println("INFO: Service Manager startup completed.");
+		System.out.println("INFO: Service Manager startup completed in " + (System.currentTimeMillis() - start) + "ms.");
 	}
 
 	/**

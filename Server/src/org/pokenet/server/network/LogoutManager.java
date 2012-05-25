@@ -1,16 +1,10 @@
 package org.pokenet.server.network;
 
-import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
-import org.pokenet.server.battle.DataService;
-import org.pokenet.server.battle.Pokemon;
-import org.pokenet.server.battle.PokemonSpecies;
-import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
 
 /**
  * Handles logging players out

@@ -243,6 +243,7 @@ public class RegistrationManager implements Runnable
 		}
 		else
 		{
+			System.err.println("Cannot register a new user because I cannot connect to the database.");
 			session.resumeRead();
 			session.resumeWrite();
 			session.write("r1");

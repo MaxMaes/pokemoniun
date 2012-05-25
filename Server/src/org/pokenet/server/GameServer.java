@@ -92,7 +92,8 @@ public class GameServer {
 	      	}	
 	    }
 	    catch (IOException ex){
-	    	ex.printStackTrace();
+	    	//ex.printStackTrace();
+	    	System.err.println("Cannot find .svn/entries to read the SVN revision.");
 	    	// probably no svn file... oh well.
 	    	rev = 1880;
 	    }

@@ -58,7 +58,7 @@ import org.simpleframework.xml.ElementArray;
  */
 public class Pokemon extends PokemonSpecies
 {
-
+	// TODO: Split up this class as it represents a Pokemon in a battle, we simply want a Pokemon class.
 	// Transient statistics.
 	@Element
 	transient private String m_dateCaught;

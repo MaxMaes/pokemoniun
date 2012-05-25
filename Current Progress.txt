@@ -31,7 +31,6 @@
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
-[BUG] NullPointerException on certain logouts.
-[BUG] Database isn't updated after the logout.(could be the cause of above).
-[BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet
+[BUG] Database isn't updated after the logout (Untested).
+[BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.

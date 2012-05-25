@@ -63,7 +63,7 @@ public class GameServer {
 	
 	/* The revision of the game server */ 
 	// would be more helpful if this was the SVN version.. so it auto updated
-	public static int REVISION = getSVNRev();//1786;
+	public static int REVISION = getSVNRev();
 	
 	/**
 	 * .Gets the SVN revision for the server
@@ -94,7 +94,7 @@ public class GameServer {
 	    catch (IOException ex){
 	    	ex.printStackTrace();
 	    	// probably no svn file... oh well.
-	    	rev = 1868; 
+	    	rev = 1880;
 	    }
 	    
 	    return rev;

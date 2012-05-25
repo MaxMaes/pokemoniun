@@ -127,7 +127,7 @@ public class DataService {
 		Ini ini = null;
 		/* Load updated POLR db */
 		try {
-			ini = new Ini(new FileInputStream("./res/pokemon.ini"));
+			ini = new Ini(new FileInputStream("res/pokemon.ini"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;

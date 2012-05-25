@@ -107,10 +107,10 @@ public class GameServer {
  	 * Password is line after serverName
 	 */
 	private void loadSettings(){
-		File foo = new File("res/settings.txt");
-		if(foo.exists()) {
+		File settings = new File("res/settings.txt");
+		if(settings.exists()) {
 			try {
-				Scanner s = new Scanner(foo);
+				Scanner s = new Scanner(settings);
 				m_dbServer = s.nextLine();
 				m_dbName = s.nextLine();
 				m_dbUsername = s.nextLine();

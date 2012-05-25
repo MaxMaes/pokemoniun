@@ -749,7 +749,7 @@ public class Pokemon extends PokemonSpecies
 		/*
 		 * Get all starter moves
 		 */
-		for(int i = 0; i < ps.getStarterMoves().length; i++) // TODO: IMPORTANT: We get a nullpointer here when I walk through the grass and I get no wild battle.
+		for(int i = 0; i < ps.getStarterMoves().length; i++) // TODO: IMPORTANT: We get a nullpointer here when I walk through the grass and I get no wild battle, this probably cause by the not loading ini file?
 		{
 			possibleMoves.add(moveList.getMove(ps.getStarterMoves()[i]));
 		}

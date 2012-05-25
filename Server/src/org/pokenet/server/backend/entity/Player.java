@@ -719,7 +719,10 @@ public class Player extends Character implements Battleable, Tradeable
 		{
 			m_friends.add(friend);
 			// TODO: Dummy Code, should work perfectly fine.
+			m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+			m_database.selectDatabase(GameServer.getDatabaseName());
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+			m_database.close();
 			m_tcpSession.write("Fa" + friend);
 		}
 	}
@@ -742,7 +745,10 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				m_friends.remove(i);
 				// TODO: Dummy Code, should work perfectly fine.
+				m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+				m_database.selectDatabase(GameServer.getDatabaseName());
 				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
+				m_database.close();
 				m_tcpSession.write("Fr" + friend);
 				return;
 			}
@@ -1841,26 +1847,28 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Sends all friends to the client. */
 	public void updateClientFriends()
 	{
-		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "')");
+		m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+		m_database.selectDatabase(GameServer.getDatabaseName());
+		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
 		// TODO: Dummy code, needs testing!
-		if(friends != null) {
-			try
+		try
+		{
+			m_friends = new ArrayList<String>();
+			while(friends.next())
 			{
-				while(friends.next())
-				{
-					m_friends.add(friends.getString(0));
-				}
-			}
-			catch(SQLException sqle)
-			{
-				sqle.printStackTrace();
-			}
-			for(int i = 0; i < m_friends.size(); i++)
-			{
-				m_tcpSession.write("Fa" + m_friends.get(i));
-				System.out.println(m_friends.get(i));
+				m_friends.add(friends.getString(0));
 			}
 		}
+		catch(SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			m_tcpSession.write("Fa" + m_friends.get(i));
+			System.out.println(m_friends.get(i));
+		}
+		m_database.close();
 	}
 
 	/** Sets the battlefield for this player */

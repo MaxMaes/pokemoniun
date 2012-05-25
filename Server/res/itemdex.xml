@@ -1523,7 +1523,7 @@
 			<description>Restores 20 HP</description>
 			<id>807</id>
 			<category>Food</category>
-			<shop>s</shop>
+			<shop>0</shop>
 			<price>100</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1535,7 +1535,7 @@
 			<description>Restores 50 HP</description>
 			<id>808</id>
 			<category>Food</category>
-			<shop>s</shop>
+			<shop>0</shop>
 			<price>500</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1547,7 +1547,7 @@
 			<description>Restores 200 HP</description>
 			<id>809</id>
 			<category>Food</category>
-			<shop>0s</shop>
+			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>

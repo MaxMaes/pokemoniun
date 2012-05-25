@@ -75,7 +75,7 @@ import org.pokenet.client.updater.ClientUpdater;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static final String GAME_TITLE = "Pokemonium";
+	private static final String GAME_TITLE = "Pokemonium 1.3.0";
 	private static final String CHATHOST = "localhost";
 	private static final int FPS = 50;
 

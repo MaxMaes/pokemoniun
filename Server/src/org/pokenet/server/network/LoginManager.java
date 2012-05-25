@@ -157,6 +157,7 @@ public class LoginManager implements Runnable {
 						session.write("l3");
 						return;
 					}catch(Exception e){
+						e.printStackTrace();
 						//The server they were on went down and they are trying to login elsewhere
 						this.login(username, l, session, result);
 					}

@@ -1843,21 +1843,23 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "')");
 		// TODO: Dummy code, needs testing!
-		try
-		{
-			while(friends.next())
+		if(friends != null) {
+			try
 			{
-				m_friends.add(friends.getString(0));
+				while(friends.next())
+				{
+					m_friends.add(friends.getString(0));
+				}
 			}
-		}
-		catch(SQLException sqle)
-		{
-			sqle.printStackTrace();
-		}
-		for(int i = 0; i < m_friends.size(); i++)
-		{
-			m_tcpSession.write("Fa" + m_friends.get(i));
-			System.out.println(m_friends.get(i));
+			catch(SQLException sqle)
+			{
+				sqle.printStackTrace();
+			}
+			for(int i = 0; i < m_friends.size(); i++)
+			{
+				m_tcpSession.write("Fa" + m_friends.get(i));
+				System.out.println(m_friends.get(i));
+			}
 		}
 	}
 

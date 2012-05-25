@@ -852,7 +852,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				break;
 			case 'u':
 				//Unknown problem occurred
-				GameClient.messageDialog("An unknown problem occurred!", GameClient.getInstance().getDisplay());
+				GameClient.messageDialog("An unknown problem occurred!", GameClient.getInstance().getDisplay()); // Why was this not in the language files, looked ages for it :(
 				m_game.getLoadingScreen().setVisible(false);
 				m_game.getLoginScreen().enableLogin();
 				break;

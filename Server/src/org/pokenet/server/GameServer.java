@@ -107,7 +107,6 @@ public class GameServer {
  	 * Password is line after serverName
 	 */
 	private void loadSettings(){
-		
 		File foo = new File("res/settings.txt");
 		if(foo.exists()) {
 			try {

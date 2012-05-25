@@ -269,6 +269,7 @@ public class RegistrationManager implements Runnable
 					}
 					catch(Exception e)
 					{
+						System.err.println("Cannot register the session.");
 						e.printStackTrace();
 						session.resumeRead();
 						session.resumeWrite();

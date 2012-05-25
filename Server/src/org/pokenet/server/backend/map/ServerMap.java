@@ -899,27 +899,24 @@ public class ServerMap {
 			//Generate a Pokemon from the water
 			species = getWildSpeciesWater();
 			range = m_waterPokemonLevels.get(species);
-			return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
 		} 
 		else if(player.isFishing()) {
 			//Generate a pokemon caught by fishing
 			species = getWildSpeciesFish();
 			range = m_fishPokemonLevels.get(species);
-			return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
 		}
 		else {
 			if(TimeService.isNight()) {
 				//Generate a nocturnal Pokemon
 				species = getWildSpeciesNight();
 				range = m_nightPokemonLevels.get(species);
-				return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
 			} else {
 				//Generate a day Pokemon
 				species = getWildSpeciesDay();
-				range = m_dayPokemonLevels.get(species);
-				return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
+				range = m_dayPokemonLevels.get(species);			
 			}
 		}
+		return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
 	}
 	
 	/**

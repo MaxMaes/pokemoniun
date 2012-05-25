@@ -225,7 +225,6 @@ public class BattleWindow extends Frame
 		move1Type = new Label();
 		move1Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move1Type.setBounds(2, move1.getHeight()-20, move1.getWidth()-5, 20);
-		move1Type.setText("ICE");
 		move1.add(move1Type);
 		move1.add(pp1);
 		attackPane.add(move2);
@@ -244,7 +243,6 @@ public class BattleWindow extends Frame
 		move2Type = new Label();
 		move2Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move2Type.setBounds(2, move2.getHeight()-20, move2.getWidth()-5, 20);
-		move2Type.setText("DRAGON");
 		move2.add(move2Type);
 		move2.add(pp2);
 		attackPane.add(move3);
@@ -263,7 +261,6 @@ public class BattleWindow extends Frame
 		move3Type = new Label();
 		move3Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move3Type.setBounds(2, move3.getHeight()-20, move3.getWidth()-5, 20);
-		move3Type.setText("PSYCHIC");
 		move3.add(move3Type);
 		move3.add(pp3);
 		
@@ -283,7 +280,6 @@ public class BattleWindow extends Frame
 		move4Type = new Label();
 		move4Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move4Type.setBounds(2, move4.getHeight()-20, move4.getWidth()-5, 20);
-		move4Type.setText("SO-OP");
 		move4.add(move4Type);
 		move4.add(pp4);
 

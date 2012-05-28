@@ -1,8 +1,10 @@
 package org.pokenet.client.backend;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -62,63 +64,115 @@ public class KeyManager
 				}
 				
 				data = s.split("=");
-				keydata = data[1].split(",");
-				
-				if(data[0].equals("UP"))
-					for(String st : keydata)
-						keys.put(Action.WALK_UP, stringToInt(st));
-				
-				else if(data[0].equals("LEFT"))
-					for(String st : keydata)
-						keys.put(Action.WALK_LEFT, stringToInt(st));
-				
-				else if(data[0].equals("RIGHT"))
-					for(String st : keydata)
-						keys.put(Action.WALK_RIGHT, stringToInt(st));
-				
-				else if(data[0].equals("DOWN"))
-					for(String st : keydata)
-						keys.put(Action.WALK_DOWN, stringToInt(st));
-				
-				else if(data[0].equals("OLD"))
-					for(String st : keydata)
-						keys.put(Action.ROD_OLD, stringToInt(st));
-				
-				else if(data[0].equals("GOOD"))
-					for(String st : keydata)
-						keys.put(Action.ROD_GOOD, stringToInt(st));
-				
-				else if(data[0].equals("GREAT"))
-					for(String st : keydata)
-						keys.put(Action.ROD_GREAT, stringToInt(st));
-				
-				else if(data[0].equals("ULTRA"))
-					for(String st : keydata)
-						keys.put(Action.ROD_ULTRA, stringToInt(st));
-				
-				else if(data[0].equals("ATTACK1"))
-					for(String st : keydata)
-						keys.put(Action.POKEMOVE_1, stringToInt(st));
-				
-				else if(data[0].equals("ATTACK2"))
-					for(String st : keydata)
-						keys.put(Action.POKEMOVE_2, stringToInt(st));
-				
-				else if(data[0].equals("ATTACK3"))
-					for(String st : keydata)
-						keys.put(Action.POKEMOVE_3, stringToInt(st));
-				
-				else if(data[0].equals("ATTACK4"))
-					for(String st : keydata)
-						keys.put(Action.POKEMOVE_4, stringToInt(st));
-				else if(data[0].equals("TALK"))
-					for(String st : keydata)
-						keys.put(Action.INTERACTION, stringToInt(st));
+				if(data.length > 1)
+				{
+					keydata = data[1].split(",");
+					if(data[0].equals("UP"))
+						for(String st : keydata)
+							keys.put(Action.WALK_UP, stringToInt(st));
+					
+					else if(data[0].equals("LEFT"))
+						for(String st : keydata)
+							keys.put(Action.WALK_LEFT, stringToInt(st));
+					
+					else if(data[0].equals("RIGHT"))
+						for(String st : keydata)
+							keys.put(Action.WALK_RIGHT, stringToInt(st));
+					
+					else if(data[0].equals("DOWN"))
+						for(String st : keydata)
+							keys.put(Action.WALK_DOWN, stringToInt(st));
+					
+					else if(data[0].equals("OLD"))
+						for(String st : keydata)
+							keys.put(Action.ROD_OLD, stringToInt(st));
+					
+					else if(data[0].equals("GOOD"))
+						for(String st : keydata)
+							keys.put(Action.ROD_GOOD, stringToInt(st));
+					
+					else if(data[0].equals("GREAT"))
+						for(String st : keydata)
+							keys.put(Action.ROD_GREAT, stringToInt(st));
+					
+					else if(data[0].equals("ULTRA"))
+						for(String st : keydata)
+							keys.put(Action.ROD_ULTRA, stringToInt(st));
+					
+					else if(data[0].equals("ATTACK1"))
+						for(String st : keydata)
+							keys.put(Action.POKEMOVE_1, stringToInt(st));
+					
+					else if(data[0].equals("ATTACK2"))
+						for(String st : keydata)
+							keys.put(Action.POKEMOVE_2, stringToInt(st));
+					
+					else if(data[0].equals("ATTACK3"))
+						for(String st : keydata)
+							keys.put(Action.POKEMOVE_3, stringToInt(st));
+					
+					else if(data[0].equals("ATTACK4"))
+						for(String st : keydata)
+							keys.put(Action.POKEMOVE_4, stringToInt(st));
+					else if(data[0].equals("TALK"))
+						for(String st : keydata)
+							keys.put(Action.INTERACTION, stringToInt(st));
+				}
 			}
 		}
 		catch(FileNotFoundException fnfe)
 		{
 			System.out.println("INFO: Keys.ini not found! Setting default settings");
+			try
+			{
+				  // Create file 
+				  FileWriter fstream = new FileWriter("res/keys.ini");
+				  BufferedWriter out = new BufferedWriter(fstream);
+				  out.write("//see specialkeys.txt for formats of keys like left shift, right control, etc");
+				  out.newLine();
+				  out.write("[MOVEMENT]");
+				  out.newLine();
+				  out.write("UP=W");
+				  out.newLine();
+				  out.write("LEFT=A");
+				  out.newLine();
+				  out.write("RIGHT=D");
+				  out.newLine();
+				  out.write("DOWN=S");
+				  out.newLine();
+				  out.write("RODS]");
+				  out.newLine();
+				  out.write("OLD=R");
+				  out.newLine();
+				  out.write("GOOD=T");
+				  out.newLine();
+				  out.write("GREAT=Y");
+				  out.newLine();
+				  out.write("ULTRA=U");
+				  out.newLine();
+				  out.write("[MOVES]");
+				  out.newLine();
+				  out.write("ATTACK1=1");
+				  out.newLine();
+				  out.write("ATTACK2=2");
+				  out.newLine();
+				  out.write("ATTACK3=3");
+				  out.newLine();
+				  out.write("ATTACK4=4");
+				  out.newLine();
+				  out.write("[INTERACTION]");
+				  out.newLine();
+				  out.write("TALK=SPACE");
+				  out.newLine();
+				  out.close();
+
+			}
+			catch (Exception e)
+			{
+				  System.err.println("Error: " + e.getMessage());
+			}
+			
+			initialize();
 		}
 		finally
 		{

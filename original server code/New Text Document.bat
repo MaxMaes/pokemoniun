@@ -1,0 +1,1 @@
+java -jar Pokenet.jar -s high -p 500

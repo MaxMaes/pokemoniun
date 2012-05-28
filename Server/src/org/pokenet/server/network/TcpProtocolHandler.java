@@ -251,7 +251,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					break;
 				case 'r':
 					String player = message.substring(2);
-					;
 					// A request was sent
 					switch(message.charAt(1))
 					{
@@ -508,8 +507,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						case 'a':
 							// Add a friend
 							if(m_players.containsKey(friend))
-								break;
-							p.addFriend(message.substring(2));
+								p.addFriend(message.substring(2));
 							break;
 						case 'r':
 							// Remove a friend
@@ -517,6 +515,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							break;
 					}
 					break;
+					//TODO: Write give case.
 				case 'I':
 					// Use an item, applies inside and outside of battle
 					details = message.substring(1).split(",");

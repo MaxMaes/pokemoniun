@@ -34,3 +34,4 @@
 [BUG] Database isn't updated after the logout (Untested).
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.
+[BUG] On relog items get incremently multiplied by the quantity that they actually have. 1x10 -> relog -> 2x10 -> relog -> 3x10. This effect is only visually.

@@ -305,13 +305,10 @@ public class GameServer
 			m_stop.setEnabled(true);
 		}
 		// Check if we can connect to the database BEFORE we start the server :)
-		if(MySqlManager.getInstance().connect(m_dbServer, m_dbUsername, m_dbPassword)) {
-			m_serviceManager = new ServiceManager();
-			m_serviceManager.start();
-		} else {
-			System.out.println("Cannot connect to the database, please check your settings.");
-			System.exit(-1);
-		}
+		MySqlManager.getInstance();
+		
+		m_serviceManager = new ServiceManager();
+		m_serviceManager.start();
 	}
 
 	/** Stops the game server */

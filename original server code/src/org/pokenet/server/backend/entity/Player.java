@@ -55,7 +55,6 @@ public class Player extends Character implements Battleable, Tradeable {
 	private boolean m_isBoxing = false;
 	private boolean m_isSpriting = false;
 	private IoSession m_tcpSession = null;
-	private IoSession m_udpSession = null;
 	private int m_money;
 	private ArrayList<String> m_friends;
 	private long m_lastLogin;
@@ -191,15 +190,8 @@ public class Player extends Character implements Battleable, Tradeable {
 			if(m_boxes[box].getPokemon(slot).getDatabaseID() > -1) {
 				/* This box exists and the pokemon exists in the database */
 				int id = m_boxes[box].getPokemon(slot).getDatabaseID();
-				MySqlManager m = new MySqlManager();
-				if(m.connect(GameServer.getDatabaseHost(), 
-						GameServer.getDatabaseUsername(),
-						GameServer.getDatabasePassword())) {
-					m.selectDatabase(GameServer.getDatabaseName());
-					m.query("DELETE FROM pn_pokemon WHERE id='" + id + "'");
-					m.close();
-					m_boxes[box].setPokemon(slot, null);
-				}
+				m_database.query("DELETE FROM `pn_pokemon` WHERE `id` = '" + id + "'");
+				m_boxes[box].setPokemon(slot, null);
 			} else {
 				/*
 				 * This Pokemon or box has not been saved to the
@@ -650,9 +642,6 @@ public class Player extends Character implements Battleable, Tradeable {
 		if(m_friends.size() < 10)
 		{
 			m_friends.add(friend);
-			// TODO: Dummy Code, should work perfectly fine.
-			m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
-			m_database.selectDatabase(GameServer.getDatabaseName());
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
 			m_database.close();
 			m_tcpSession.write("Fa" + friend);
@@ -676,11 +665,7 @@ public class Player extends Character implements Battleable, Tradeable {
 			if(m_friends.get(i).equalsIgnoreCase(friend))
 			{
 				m_friends.remove(i);
-				// TODO: Dummy Code, should work perfectly fine.
-				m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
-				m_database.selectDatabase(GameServer.getDatabaseName());
 				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
-				m_database.close();
 				m_tcpSession.write("Fr" + friend);
 				return;
 			}
@@ -795,18 +780,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	}
 
 	/**
-	 * Returns the UDP session for this player
-	 * @return
-	 */
-	public IoSession getUdpSession() {
-		return m_udpSession;
-	}
-
-	/**
 	 * Fishes for a pokemon.
 	 */
 	public void fish(int rod) {
-		if(this.lastFishingTime + 1000 < System.currentTimeMillis()) {
+		if((lastFishingTime + 1000) < System.currentTimeMillis()) {
 			if(this.getMap().caughtFish(this, this.getFacing(), rod)) {
 				Pokemon p = this.getMap().getWildPokemon(this);
 				//If we have both the required level to fish this thing up and the rod to do it
@@ -1631,10 +1608,7 @@ public class Player extends Character implements Battleable, Tradeable {
 	/** Sends all friends to the client. */
 	public void updateClientFriends()
 	{
-		m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
-		m_database.selectDatabase(GameServer.getDatabaseName());
 		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
-		// TODO: Dummy code, needs testing!
 		try
 		{
 			m_friends = new ArrayList<String>();
@@ -1652,7 +1626,6 @@ public class Player extends Character implements Battleable, Tradeable {
 			m_tcpSession.write("Fa" + m_friends.get(i));
 			System.out.println(m_friends.get(i));
 		}
-		m_database.close();
 	}
 
 	/**

@@ -27,7 +27,7 @@ public class LogoutManager implements Runnable {
 	 * Default constructor
 	 */
 	public LogoutManager() {
-		m_database = new MySqlManager();
+		m_database = MySqlManager.getInstance();
 		m_logoutQueue = new LinkedList<Player>();
 		m_thread = null;
 	}
@@ -50,18 +50,9 @@ public class LogoutManager implements Runnable {
 			player.getMap().removeChar(player);
 		TcpProtocolHandler.removePlayer(player);
 		GameServer.getInstance().updatePlayerCount();
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return false;
-		m_database.selectDatabase(GameServer.getDatabaseName());
-		//Store all player information
-		if(!savePlayer(player)) {
-			m_database.close();
-			return false;
-		}
+		
 		//Finally, store that the player is logged out and close connection
 		m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE id='" + player.getId() + "'");
-		m_database.close();
 		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		return true;
 	}

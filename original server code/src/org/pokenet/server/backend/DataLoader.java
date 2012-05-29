@@ -17,8 +17,8 @@ import org.pokenet.server.backend.map.WarpTile;
  *
  */
 public class DataLoader implements Runnable {
-	private File m_file;
-	private ServerMap m_map;
+	private final File m_file;
+	private final ServerMap m_map;
 	
 	/**
 	 * Constructor

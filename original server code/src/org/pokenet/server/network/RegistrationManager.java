@@ -31,7 +31,7 @@ public class RegistrationManager implements Runnable {
 	 * Constructor
 	 */
 	public RegistrationManager() {
-		m_database = new MySqlManager();
+		m_database = MySqlManager.getInstance();
 		m_thread = null;
 		m_queue = new LinkedList<IoSession>();
 	}
@@ -78,135 +78,123 @@ public class RegistrationManager implements Runnable {
 			session.write("r4");
 			return;
 		}
-		m_database = new MySqlManager();
-		if(m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword())) {
-			m_database.selectDatabase(GameServer.getDatabaseName());
-			int s = Integer.parseInt(info[4]);
-			/*
-			 * Check if the user exists
-			 */
-			ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
-			data.first();
-			try {				
-				if(data != null && data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0]))) {
-					session.resumeRead();
-					session.resumeWrite();
-					session.write("r2");
-					return;
-				}
-			} catch (Exception e) {}
-			/*
-			 * Check if an account is already registered with the email
-			 */
-			data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
-			data.first();
-			try {				
-				if(data != null && data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2]))) {
-					session.resumeRead();
-					session.resumeWrite();
-					session.write("r5");
-					return;
-				}
-				if(info[2].length() > 52) {
-					session.resumeRead();
-					session.resumeWrite();
-					session.write("r6");
-					return;
-				}
-			} catch (Exception e) {}
-			/*
-			 * Check if user is not trying to register their starter as a non-starter Pokemon
-			 */
-			if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258
-					|| s == 387 || s == 390 || s == 393)) {
-				session.write("r4");
+		int s = Integer.parseInt(info[4]);
+		/*
+		 * Check if the user exists
+		 */
+		ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
+		data.first();
+		try {				
+			if(data != null && data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0]))) {
+				session.resumeRead();
+				session.resumeWrite();
+				session.write("r2");
 				return;
 			}
-			/*
-			 * Generate badge string
-			 */
-			String badges = "";
-			for(int i = 0; i < 50; i++)
-				badges = badges + "0";
-			/*
-			 * Generate starting position
-			 */
-			int mapX = 0;
-			int mapY = 0;
-			int x = 256;
-			int y = 440;
-			switch(region) {
-			case 0:
-				/* Kanto */
-				mapX = 3;
-				mapY = 1;
-				x = 512;
-				y = 440;
-				break;
-			case 1:
-				/* Johto */
-				mapX = 0;
-				mapY = 0;
-				x = 256;
-				y = 440;
-				break;
-			default:
-				/* Prevent breaking the system */
-				mapX = 0;
-				mapY = 0;
-				x = 256;
-				y = 440;
-				break;
+		} catch (Exception e) {}
+		/*
+		 * Check if an account is already registered with the email
+		 */
+		data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
+		data.first();
+		try {				
+			if(data != null && data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2]))) {
+				session.resumeRead();
+				session.resumeWrite();
+				session.write("r5");
+				return;
 			}
-			/*
-			 * Insert player into database
-			 */
-			m_database.query("INSERT INTO pn_members (username, password, dob, email, lastLoginTime, lastLoginServer, " +
-					"sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, " +
-					"x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE " +
-					"('" + MySqlManager.parseSQL(info[0]) + "', '" + MySqlManager.parseSQL(info[1]) + "', '" + MySqlManager.parseSQL(info[3]) + "', '" + MySqlManager.parseSQL(info[2]) + "', " +
-							"'0', 'null', '" + MySqlManager.parseSQL(info[5]) + "', '0', '0', " +
-									"'0', '0', '0', '0', '0', '" + x + "', '" + y + "', " +
-									"'" + mapX + "', '" + mapY + "', '" + badges + "', '" + x + "', '" + y + "', '" 
-									+ mapX + "', '" + mapY + "', 'false', '0', 'false')");
-			/*
-			 * Retrieve the player's unique id
-			 */
-			data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
-			data.first();
-			int playerId = data.getInt("id");
-			//Player's bag is now created "on the fly" as soon as player gets his first item. 
-			/*
-			 * Create the players party
-			 */
-			Pokemon p = this.createStarter(s);
-			p.setOriginalTrainer(info[0]);
-			p.setDateCaught(new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()));
-			this.saveNewPokemon(p, m_database);
-			
-			m_database.query("INSERT INTO pn_party (member, pokemon0, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5) VALUES ('" +
-					+ playerId + "','" + p.getDatabaseID() + "','-1','-1','-1','-1','-1')");
-			data = m_database.query("SELECT * FROM pn_party WHERE member='" + playerId + "'");
-			data.first();
-			/*
-			 * Attach pokemon to the player
-			 */
-			m_database.query("UPDATE pn_members SET party='" + data.getInt("id") + "' WHERE id='" + playerId + "'");
-			/* Attach a bag of 5 pokeballs to the player */
-			m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + playerId + "', '35', '5')");
-			/*
-			 * Finish
-			 */
-			m_database.close();
-			
-			session.resumeRead();
-			session.resumeWrite();
-			session.write("rs");
-		} else {
-			session.resumeRead();
-			session.resumeWrite();
-			session.write("r1");
+			if(info[2].length() > 52) {
+				session.resumeRead();
+				session.resumeWrite();
+				session.write("r6");
+				return;
+			}
+		} catch (Exception e) {}
+		/*
+		 * Check if user is not trying to register their starter as a non-starter Pokemon
+		 */
+		if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258
+				|| s == 387 || s == 390 || s == 393)) {
+			session.write("r4");
+			return;
 		}
+		/*
+		 * Generate badge string
+		 */
+		String badges = "";
+		for(int i = 0; i < 50; i++)
+			badges = badges + "0";
+		/*
+		 * Generate starting position
+		 */
+		int mapX = 0;
+		int mapY = 0;
+		int x = 256;
+		int y = 440;
+		switch(region) {
+		case 0:
+			/* Kanto */
+			mapX = 3;
+			mapY = 1;
+			x = 512;
+			y = 440;
+			break;
+		case 1:
+			/* Johto */
+			mapX = 0;
+			mapY = 0;
+			x = 256;
+			y = 440;
+			break;
+		default:
+			/* Prevent breaking the system */
+			mapX = 0;
+			mapY = 0;
+			x = 256;
+			y = 440;
+			break;
+		}
+		/*
+		 * Insert player into database
+		 */
+		m_database.query("INSERT INTO pn_members (username, password, dob, email, lastLoginTime, lastLoginServer, " +
+				"sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, " +
+				"x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE " +
+				"('" + MySqlManager.parseSQL(info[0]) + "', '" + MySqlManager.parseSQL(info[1]) + "', '" + MySqlManager.parseSQL(info[3]) + "', '" + MySqlManager.parseSQL(info[2]) + "', " +
+						"'0', 'null', '" + MySqlManager.parseSQL(info[5]) + "', '0', '0', " +
+								"'0', '0', '0', '0', '0', '" + x + "', '" + y + "', " +
+								"'" + mapX + "', '" + mapY + "', '" + badges + "', '" + x + "', '" + y + "', '" 
+								+ mapX + "', '" + mapY + "', 'false', '0', 'false')");
+		/*
+		 * Retrieve the player's unique id
+		 */
+		data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
+		data.first();
+		int playerId = data.getInt("id");
+		//Player's bag is now created "on the fly" as soon as player gets his first item. 
+		/*
+		 * Create the players party
+		 */
+		Pokemon p = this.createStarter(s);
+		p.setOriginalTrainer(info[0]);
+		p.setDateCaught(new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()));
+		this.saveNewPokemon(p, m_database);
+		
+		m_database.query("INSERT INTO pn_party (member, pokemon0, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5) VALUES ('" +
+				+ playerId + "','" + p.getDatabaseID() + "','-1','-1','-1','-1','-1')");
+		data = m_database.query("SELECT * FROM pn_party WHERE member='" + playerId + "'");
+		data.first();
+		/*
+		 * Attach pokemon to the player
+		 */
+		m_database.query("UPDATE pn_members SET party='" + data.getInt("id") + "' WHERE id='" + playerId + "'");
+		/* Attach a bag of 5 pokeballs to the player */
+		m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + playerId + "', '35', '5')");
+
+		session.resumeRead();
+		session.resumeWrite();
+		session.write("rs");
 	}
 
 	/**

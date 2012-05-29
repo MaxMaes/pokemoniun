@@ -375,14 +375,10 @@ public class Trade implements Runnable{
 
 	public void run() {
 		/*Record Trade on History Table*/
-		MySqlManager m_database = new MySqlManager();
-		if(m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword())){
-			m_database.selectDatabase(GameServer.getDatabaseName());
-			while(!m_queries.isEmpty()){
-				m_database.query(m_queries.get(0));
-				m_queries.remove(0);
-			}
+		MySqlManager m_database = MySqlManager.getInstance();
+		while(!m_queries.isEmpty()){
+			m_database.query(m_queries.get(0));
+			m_queries.remove(0);
 		}
-		m_database.close();
 	}
 }

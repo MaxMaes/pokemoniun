@@ -331,134 +331,116 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					}
 					else if(p.getAdminLevel() > 0)
 					{
-						try
+						switch(message.charAt(1))
 						{
-							switch(message.charAt(1))
-							{
-								case 'a':
-									// Server announcement
+							case 'a':
+								// Server announcement
+								for(String s : m_players.keySet())
+								{
+									m_players.get(s).getTcpSession().write("q" + message.substring(2));
+								}
+								break;
+							case 'l':
+								// Send an alert
+								if(p.getAdminLevel() > 1)
 									for(String s : m_players.keySet())
 									{
-										m_players.get(s).getTcpSession().write("q" + message.substring(2));
+										m_players.get(s).getTcpSession().write("!" + message.substring(2));
 									}
-									break;
-								case 'l':
-									// Send an alert
-									if(p.getAdminLevel() > 1)
-										for(String s : m_players.keySet())
-										{
-											m_players.get(s).getTcpSession().write("!" + message.substring(2));
-										}
-									break;
-								case 'b':
-									// Ban player
-									if(m_players.containsKey(message.substring(2)))
-									{
-										Player o = m_players.get(message.substring(2));
-										MySqlManager m = new MySqlManager();
-										if(m.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-										{
-											m.selectDatabase(GameServer.getDatabaseName());
-											m.query("INSERT INTO pn_bans (ip) VALUE ('" + o.getIpAddress() + "')");
-											m.close();
-										}
-									}
-									break;
-								case 'B':
-									// Unban ip
-									MySqlManager m = new MySqlManager();
-									if(m.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-									{
-										m.selectDatabase(GameServer.getDatabaseName());
-										m.query("DELETE FROM pn_bans WHERE ip='" + message.substring(2) + "'");
-										m.close();
-									}
-									break;
-								case 'W':
-									// Warp to player
-									if(m_players.containsKey(message.substring(2)))
-									{
-										Player o = m_players.get(message.substring(2));
-										p.setX(o.getX());
-										p.setY(o.getY());
-										p.setMap(o.getMap(), null);
-									}
-									break;
-								case 'm':
-									// Mute player
-									if(m_players.containsKey(message.substring(2)))
-									{
-										Player o = m_players.get(message.substring(2));
-										o.setMuted(true);
-										o.getTcpSession().write("!You have been muted.");
-									}
-									break;
-								case 'u':
-									// Unmute player
-									if(m_players.containsKey(message.substring(2)))
-									{
-										Player o = m_players.get(message.substring(2));
-										o.setMuted(false);
-										o.getTcpSession().write("!You have been unmuted.");
-									}
-									break;
-								case 'k':
-									if(m_players.containsKey(message.substring(2)))
-									{
-										Player o = m_players.get(message.substring(2));
-										o.getTcpSession().write("!You have been kicked from the server.");
-										o.getTcpSession().close(true);
-									}
-									break;
-								case 'w':
-									// Change weather on current map
-									switch(message.charAt(2))
-									{
-										case 'n':
-											// Normal
-											GameServer.getServiceManager().getTimeService().setForcedWeather(0);
-											break;
-										case 'r':
-											// Rain
-											GameServer.getServiceManager().getTimeService().setForcedWeather(1);
-											break;
-										case 's':
-											// Snow/Hail
-											GameServer.getServiceManager().getTimeService().setForcedWeather(2);
-											break;
-										case 'f':
-											// Fog
-											GameServer.getServiceManager().getTimeService().setForcedWeather(3);
-											break;
-										case 'S':
-											// Sandstorm
-											GameServer.getServiceManager().getTimeService().setForcedWeather(4);
-											break;
-										case 'R':
-											// Random
-											GameServer.getServiceManager().getTimeService().setForcedWeather(9);
-											break;
-									}
-								case 's':
-									if(p.getAdminLevel() == 2)
-									{
-										GameServer.getServiceManager().stop();
-										return;
-									}
-									break;
-								case 'n':
-									// Announce message to server
-									if(p.getAdminLevel() == 2)
-									{
-										// TODO: add code?
-										String mes = message.substring(3);
-										GameServer.getServiceManager().getNetworkService().getChatManager().queueLocalChatMessage("<SERVER> " + mes, p.getMapX(), p.getMapY(), p.getLanguage());
-									}
-									break;
-							}
-						}
-						catch(Exception e)
-						{
+								break;
+							case 'b':
+								// Ban player
+								if(m_players.containsKey(message.substring(2)))
+								{
+									Player playerToBeBanned = m_players.get(message.substring(2));
+									MySqlManager.getInstance().query("INSERT INTO `pn_bans` (ip) VALUE ('" + playerToBeBanned.getIpAddress() + "')");
+								}
+								break;
+							case 'B':
+								// Unban ip
+								MySqlManager.getInstance().query("DELETE FROM pn_bans WHERE ip='" + message.substring(2) + "'");
+								break;
+							case 'W':
+								// Warp to player
+								if(m_players.containsKey(message.substring(2)))
+								{
+									Player o = m_players.get(message.substring(2));
+									p.setX(o.getX());
+									p.setY(o.getY());
+									p.setMap(o.getMap(), null);
+								}
+								break;
+							case 'm':
+								// Mute player
+								if(m_players.containsKey(message.substring(2)))
+								{
+									Player o = m_players.get(message.substring(2));
+									o.setMuted(true);
+									o.getTcpSession().write("!You have been muted.");
+								}
+								break;
+							case 'u':
+								// Unmute player
+								if(m_players.containsKey(message.substring(2)))
+								{
+									Player o = m_players.get(message.substring(2));
+									o.setMuted(false);
+									o.getTcpSession().write("!You have been unmuted.");
+								}
+								break;
+							case 'k':
+								if(m_players.containsKey(message.substring(2)))
+								{
+									Player o = m_players.get(message.substring(2));
+									o.getTcpSession().write("!You have been kicked from the server.");
+									o.getTcpSession().close(true);
+								}
+								break;
+							case 'w':
+								// Change weather on current map
+								switch(message.charAt(2))
+								{
+									case 'n':
+										// Normal
+										GameServer.getServiceManager().getTimeService().setForcedWeather(0);
+										break;
+									case 'r':
+										// Rain
+										GameServer.getServiceManager().getTimeService().setForcedWeather(1);
+										break;
+									case 's':
+										// Snow/Hail
+										GameServer.getServiceManager().getTimeService().setForcedWeather(2);
+										break;
+									case 'f':
+										// Fog
+										GameServer.getServiceManager().getTimeService().setForcedWeather(3);
+										break;
+									case 'S':
+										// Sandstorm
+										GameServer.getServiceManager().getTimeService().setForcedWeather(4);
+										break;
+									case 'R':
+										// Random
+										GameServer.getServiceManager().getTimeService().setForcedWeather(9);
+										break;
+								}
+							case 's':
+								if(p.getAdminLevel() == 2)
+								{
+									GameServer.getServiceManager().stop();
+									return;
+								}
+								break;
+							case 'n':
+								// Announce message to server
+								if(p.getAdminLevel() == 2)
+								{
+									// TODO: add code?
+									String mes = message.substring(3);
+									GameServer.getServiceManager().getNetworkService().getChatManager().queueLocalChatMessage("<SERVER> " + mes, p.getMapX(), p.getMapY(), p.getLanguage());
+								}
+								break;
 						}
 					}
 					break;

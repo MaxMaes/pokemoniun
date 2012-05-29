@@ -39,7 +39,7 @@ public class LoginManager implements Runnable {
 	 * @param manager
 	 */
 	public LoginManager(LogoutManager manager) {
-		m_database = new MySqlManager();
+		m_database = MySqlManager.getInstance();
 		m_loginQueue = new LinkedList<Object []>();
 		m_passChangeQueue = new LinkedList<Object []>();
 		m_thread = null;
@@ -73,17 +73,6 @@ public class LoginManager implements Runnable {
 			//Check if we haven't reach the player limit
 			if(TcpProtocolHandler.getPlayerCount() >= GameServer.getMaxPlayers()) {
 				session.write("l2");
-				return;
-			}
-			//First connect to the database
-			m_database = new MySqlManager();
-			if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword())) {
-				session.write("l1");
-				return;
-			}
-			//Select the database
-			if(!m_database.selectDatabase(GameServer.getDatabaseName())) {
-				session.write("l1");
 				return;
 			}
 			//Now, check they are not banned
@@ -284,25 +273,20 @@ public class LoginManager implements Runnable {
 	private void changePass(String username, String newPassword, String oldPassword, IoSession session) {
 		m_database = new MySqlManager();
 	
-		if(m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword())) {
-			if(m_database.selectDatabase(GameServer.getDatabaseName())) {
-				ResultSet result = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(username) + "'");
-				try {
-					if(result.first()){
-						// if we got a result, compare their old password to the one we have stored for them
-						if(result.getString("password").compareTo(oldPassword) == 0) {
-							// old password matches the one on file, therefore they got their old password correct, so it can be changed to their new one
-							m_database.query("UPDATE pn_members SET password='" + MySqlManager.parseSQL(newPassword) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-							// tell them their password was changed successfully
-							session.write("ps");
-							return;
-						}
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+		ResultSet result = m_database.query("SELECT * FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
+		try {
+			if(result.first()){
+				// if we got a result, compare their old password to the one we have stored for them
+				if(result.getString("password").compareTo(oldPassword) == 0) {
+					// old password matches the one on file, therefore they got their old password correct, so it can be changed to their new one
+					m_database.query("UPDATE `pn_members` SET `password` = '" + MySqlManager.parseSQL(newPassword) + "' WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
+					// tell them their password was changed successfully
+					session.write("ps");
+					return;
 				}
-				m_database.close();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		// tell them we failed to change their password
 		session.write("pe");

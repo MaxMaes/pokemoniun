@@ -10,14 +10,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.pokenet.server.GameServer;
+
 /**
  * Handles MySql connections
  * @author Daniel Morante
+ * @author XtremeJedi
  */
 public class MySqlManager {
 	private static MySqlManager mInstance;
     private Connection mysql_connection;
     private String mysql_connectionURL;
+    
+    public MySqlManager()
+    {
+    	String host = GameServer.getDatabaseHost();
+    	String username = GameServer.getDatabaseUsername();
+    	String password = GameServer.getDatabasePassword();
+    	final String database = GameServer.getDatabaseName();
+    	
+    	if(!connect(host, username, password)) 
+    	{
+    		// When we cannot connect to the database.
+    		System.out.println("Cannot connect to the database, please check your settings.");
+			System.exit(-1);
+    	} else {
+    		if(!selectDatabase(database))
+    		{
+    			// When we cannot select the database.
+    			System.out.println("Cannot select the database, please check your settings.");
+    			System.exit(-1);
+    		}
+    	}
+    }
     
     public static MySqlManager getInstance()
     {
@@ -30,17 +55,16 @@ public class MySqlManager {
     
     /**
      * Connects to the server. Returns true on success.
-     * @param server
+     * @param host
      * @param username
      * @param password
      * @return
      */
-    public boolean connect(String server, String username, String password) {
-    	System.out.println("Connecting to the database; " + username + "@" + server);
+    private boolean connect(String host, String username, String password) {
     	if(mysql_connection == null) { // We don't want to open twice, do we?
 	        try {
 	            //Open Connection
-	            mysql_connectionURL = "jdbc:mysql://" + server+"?autoReconnect=true";
+	            mysql_connectionURL = "jdbc:mysql://" + host + "?autoReconnect=true";
 	            mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
 	            if(!mysql_connection.isClosed())
 	            	return true;
@@ -59,8 +83,7 @@ public class MySqlManager {
      * @param database
      * @return
      */
-    public boolean selectDatabase(String database) {
-    	System.out.println("Selecting database; " + database);
+    private boolean selectDatabase(String database) {
     	try {
         	Statement stm = mysql_connection.createStatement();
         	stm.executeQuery("USE " + database);

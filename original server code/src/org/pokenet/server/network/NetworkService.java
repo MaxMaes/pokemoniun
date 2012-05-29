@@ -82,16 +82,8 @@ public class NetworkService {
 		 * Ensure anyone still marked as logged in on this server
 		 * is unmarked
 		 */
-		MySqlManager m = new MySqlManager();
-		if(m.connect(GameServer.getDatabaseHost(), 
-				GameServer.getDatabaseUsername(),
-				GameServer.getDatabasePassword())) {
-			m.selectDatabase(GameServer.getDatabaseName());
-			m.query("UPDATE pn_members SET lastLoginServer='null' WHERE lastLoginServer='"
+		MySqlManager.getInstance().query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '"
 					+ GameServer.getServerName() + "'");
-			m.close();
-		}
-		m = null;
 		/*
 		 * Start the login/logout managers
 		 */

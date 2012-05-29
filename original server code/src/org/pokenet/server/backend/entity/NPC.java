@@ -17,7 +17,7 @@ import org.pokenet.server.network.message.shop.ShopStockMessage;
  * @author shadowkanji
  *
  */
-public class NonPlayerChar extends Char {
+public class NPC extends Char {
 	/*
 	 * Trainers can have an more than 6 possible Pokemon.
 	 * When a battle is started with this NPC, it'll check the min party size.
@@ -38,7 +38,7 @@ public class NonPlayerChar extends Char {
 	/**
 	 * Constructor
 	 */
-	public NonPlayerChar() {}
+	public NPC() {}
 	
 	/**
 	 * Returns a string of this npcs speech ids
@@ -83,7 +83,7 @@ public class NonPlayerChar extends Char {
 	 * Challenges a player (NOTE: Should only be called from NpcBattleLauncher)
 	 * @param p
 	 */
-	public void challengePlayer(PlayerChar p) {
+	public void challengePlayer(Player p) {
 		String speech = this.getSpeech();
 		if(!speech.equalsIgnoreCase("")) {
 			TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
@@ -94,7 +94,7 @@ public class NonPlayerChar extends Char {
 	 * Talks to a player
 	 * @param p
 	 */
-	public void talkToPlayer(PlayerChar p) {
+	public void talkToPlayer(Player p) {
 		if(isTrainer()) {
 			if(canBattle()) {
 				String speech = this.getSpeech();
@@ -153,7 +153,7 @@ public class NonPlayerChar extends Char {
 	 * @param p
 	 * @return
 	 */
-	public boolean canSee(PlayerChar p) {
+	public boolean canSee(Player p) {
 		if(!p.isBattling() && !isGymLeader() && canBattle()) {
 			Random r = new Random();
 			switch(this.getFacing()) {
@@ -298,7 +298,7 @@ public class NonPlayerChar extends Char {
 	 * @param p
 	 * @return
 	 */
-	public Pokemon [] getParty(PlayerChar p) {
+	public Pokemon [] getParty(Player p) {
 		Pokemon [] party = new Pokemon[6];
 		Pokemon poke;
 		int level;

@@ -1,7 +1,7 @@
 package org.pokenet.server.battle.impl;
 
-import org.pokenet.server.backend.entity.NonPlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.NPC;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
@@ -36,8 +36,8 @@ import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewar
  *
  */
 public class NpcBattleField extends BattleField {
-	private PlayerChar m_player;
-	private NonPlayerChar m_npc;
+	private Player m_player;
+	private NPC m_npc;
 	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
 
@@ -47,7 +47,7 @@ public class NpcBattleField extends BattleField {
 	 * @param p
 	 * @param n
 	 */
-	public NpcBattleField(BattleMechanics mech, PlayerChar p, NonPlayerChar n) {
+	public NpcBattleField(BattleMechanics mech, Player p, NPC n) {
 		super(mech, new Pokemon[][] { p.getParty(), n.getParty(p) });
 		/* Store the player and npc */
 		m_player = p;
@@ -71,7 +71,7 @@ public class NpcBattleField extends BattleField {
 	 * Sends pokemon data to the client
 	 * @param receiver
 	 */
-	private void sendPokemonData(PlayerChar receiver) {
+	private void sendPokemonData(Player receiver) {
 		for (int i = 0; i < this.getParty(1).length; i++) {
 			if (this.getParty(1)[i] != null) {
 				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), 

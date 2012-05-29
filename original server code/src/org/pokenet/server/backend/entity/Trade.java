@@ -37,16 +37,16 @@ public class Trade implements Runnable{
 		m_offers.put(player2, null);
 		/* Block players of same IP address from trading */		
 		if(player1.getIpAddress().equalsIgnoreCase(player2.getIpAddress())) {		
-			if(player1 instanceof PlayerChar) {		
-				PlayerChar p = (PlayerChar) player1;		
+			if(player1 instanceof Player) {		
+				Player p = (Player) player1;		
 				p.getTcpSession().write("!Trading cannot be done with that player");		
 			}		
 			endTrade();		
 			return;		
 		}
-		if(player1 instanceof PlayerChar) {
+		if(player1 instanceof Player) {
 			/* Tell the client to open the trade window */
-			PlayerChar p = (PlayerChar) player1;
+			Player p = (Player) player1;
 			Char c = (Char) player2;
 			p.getTcpSession().write("Ts" + c.getName());
 			/*
@@ -80,9 +80,9 @@ public class Trade implements Runnable{
 				}
 			}
 		}
-		if(player2 instanceof PlayerChar) {
+		if(player2 instanceof Player) {
 			/* If player 2 is a PlayerChar, tell client to open trade window */
-			PlayerChar p = (PlayerChar) player2;
+			Player p = (Player) player2;
 			Char c = (Char) player1;
 			p.getTcpSession().write("Ts" + c.getName());
 			/*
@@ -124,8 +124,8 @@ public class Trade implements Runnable{
 	 * @param o
 	 */
 	public void setOffer(Tradeable t, int poke, int money) {
-		if(t instanceof PlayerChar) {
-			PlayerChar p = (PlayerChar) t;
+		if(t instanceof Player) {
+			Player p = (Player) t;
 			if(p.getMoney() < money)
 				return;
 		}
@@ -238,9 +238,9 @@ public class Trade implements Runnable{
 						if(o1[j].getId() >= 0 && o1[j].getId() <= 5) {
 							/* Store the Pokemon temporarily */
 							temp[0] = player1.getParty()[o1[j].getId()];
-							if(player1 instanceof PlayerChar && player2 instanceof PlayerChar) {
+							if(player1 instanceof Player && player2 instanceof Player) {
 								player1.getParty()[o1[j].getId()] = null;
-								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((PlayerChar) player1).getId()+"','1','"+((PlayerChar)player2).getId()+"','"+timestamp+"','"+temp[0].getDatabaseID()+"')");
+								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((Player) player1).getId()+"','1','"+((Player)player2).getId()+"','"+timestamp+"','"+temp[0].getDatabaseID()+"')");
 							}
 							
 						}
@@ -250,8 +250,8 @@ public class Trade implements Runnable{
 						if(o1[j].getQuantity() > 0) {
 							player1.setMoney(player1.getMoney() - o1[j].getQuantity());
 							player2.setMoney(player2.getMoney() + o1[j].getQuantity());
-							if(player1 instanceof PlayerChar && player2 instanceof PlayerChar) {
-								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((PlayerChar) player1).getId()+"','0','"+((PlayerChar)player2).getId()+"','"+timestamp+"','"+o1[j].getQuantity()+"')");
+							if(player1 instanceof Player && player2 instanceof Player) {
+								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((Player) player1).getId()+"','0','"+((Player)player2).getId()+"','"+timestamp+"','"+o1[j].getQuantity()+"')");
 							}
 						}
 						break;
@@ -271,9 +271,9 @@ public class Trade implements Runnable{
 						if(o2[j].getId() >= 0 && o2[j].getId() <= 5) {
 							/* Store the Pokemon temporarily */
 							temp[1] = player2.getParty()[o2[j].getId()];
-							if(player1 instanceof PlayerChar && player2 instanceof PlayerChar) {
+							if(player1 instanceof Player && player2 instanceof Player) {
 								player2.getParty()[o1[j].getId()] = null;
-								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((PlayerChar) player2).getId()+"','1','"+((PlayerChar)player1).getId()+"','"+timestamp+"','"+temp[1].getDatabaseID()+"')");
+								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((Player) player2).getId()+"','1','"+((Player)player1).getId()+"','"+timestamp+"','"+temp[1].getDatabaseID()+"')");
 							}
 						}
 						break;
@@ -282,8 +282,8 @@ public class Trade implements Runnable{
 						if(o2[j].getQuantity() > 0) {
 							player2.setMoney(player2.getMoney() - o2[j].getQuantity());
 							player1.setMoney(player1.getMoney() + o2[j].getQuantity());
-							if(player1 instanceof PlayerChar && player2 instanceof PlayerChar) {
-								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((PlayerChar) player2).getId()+"','0','"+((PlayerChar)player1).getId()+"','"+timestamp+"','"+o2[j].getQuantity()+"')");
+							if(player1 instanceof Player && player2 instanceof Player) {
+								m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('"+((Player) player2).getId()+"','0','"+((Player)player1).getId()+"','"+timestamp+"','"+o2[j].getQuantity()+"')");
 							}
 						}
 						break;
@@ -294,25 +294,25 @@ public class Trade implements Runnable{
 				
 				/* Execute the Pokemon swap */
 				if(temp[1] != null) {
-					if(player1 instanceof PlayerChar) {
-						PlayerChar p = (PlayerChar) player1;
+					if(player1 instanceof Player) {
+						Player p = (Player) player1;
 						p.addPokemon(temp[1]);
 					}
 				}
 				if(temp[0] != null) {
-					if(player2 instanceof PlayerChar) {
-						PlayerChar p = (PlayerChar) player2;
+					if(player2 instanceof Player) {
+						Player p = (Player) player2;
 						p.addPokemon(temp[0]);
 					}
 				}
 				
 				/*  Evolution checks */
 				for (Pokemon curPokemon : temp) { // do both pokemon
-					PlayerChar p;
+					Player p;
 					if(curPokemon == temp[0]){
-						p = (PlayerChar) player2;
+						p = (Player) player2;
 					} else {
-						p = (PlayerChar) player1;
+						p = (Player) player1;
 					}
 					
 					int index = p.getPokemonIndex(curPokemon);
@@ -336,12 +336,12 @@ public class Trade implements Runnable{
 				}
 				
 				/* Update the money */
-				if(player1 instanceof PlayerChar) {
-					PlayerChar p = (PlayerChar) player1;
+				if(player1 instanceof Player) {
+					Player p = (Player) player1;
 					p.updateClientMoney();
 				}
-				if(player2 instanceof PlayerChar) {
-					PlayerChar p = (PlayerChar) player2;
+				if(player2 instanceof Player) {
+					Player p = (Player) player2;
 					p.updateClientMoney();
 				}
 				

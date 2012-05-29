@@ -1,6 +1,6 @@
 package org.pokenet.server.battle.impl;
 
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
@@ -33,7 +33,7 @@ import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
  * 
  */
 public class PvPBattleField extends BattleField {
-	private PlayerChar[] m_players;
+	private Player[] m_players;
 	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
 
@@ -44,12 +44,12 @@ public class PvPBattleField extends BattleField {
 	 * @param p1
 	 * @param p2
 	 */
-	public PvPBattleField(BattleMechanics mech, PlayerChar p1, PlayerChar p2) {
+	public PvPBattleField(BattleMechanics mech, Player p1, Player p2) {
 		super(mech, new Pokemon[][] { p1.getParty(), p2.getParty() });
 		/*
 		 * Store the players
 		 */
-		m_players = new PlayerChar[2];
+		m_players = new Player[2];
 		m_players[0] = p1;
 		m_players[1] = p2;
 		/*
@@ -91,7 +91,7 @@ public class PvPBattleField extends BattleField {
 	 * @param p
 	 * @param receiver
 	 */
-	private void sendPokemonData(PlayerChar p, PlayerChar receiver) {
+	private void sendPokemonData(Player p, Player receiver) {
 		for (int i = 0; i < p.getParty().length; i++) {
 			if (p.getParty()[i] != null) {
 				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), 

@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.ModData;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
@@ -62,7 +62,7 @@ public abstract class BattleField {
 	/*
 	 * Store lists of spectators and effects
 	 */
-	private ArrayList<PlayerChar> m_spectators = new ArrayList<PlayerChar>();
+	private ArrayList<Player> m_spectators = new ArrayList<Player>();
 	protected ArrayList<FieldEffect> m_effects = new ArrayList<FieldEffect>();
 	/*
 	 * The Pokemon in this battlefield
@@ -97,7 +97,7 @@ public abstract class BattleField {
 	 * Adds a spectator to the battle
 	 * @param p
 	 */
-	public void addSpectator(PlayerChar p) {
+	public void addSpectator(Player p) {
 		m_spectators.add(p);
 	}
 
@@ -105,7 +105,7 @@ public abstract class BattleField {
 	 * Removes a spectator from the battle
 	 * @param p
 	 */
-	public void removeSpectator(PlayerChar p) {
+	public void removeSpectator(Player p) {
 		m_spectators.remove(p);
 	}
 

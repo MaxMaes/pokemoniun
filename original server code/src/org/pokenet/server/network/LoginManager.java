@@ -9,13 +9,13 @@ import java.util.Queue;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.entity.PokemonBox;
-import org.pokenet.server.backend.entity.PlayerChar.Language;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
-import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.Pokemon.ExpTypes;
+import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.feature.TimeService;
@@ -112,7 +112,7 @@ public class LoginManager implements Runnable {
 					 * Attach the session to the existing player if they exist, if not, just log them in
 					 */
 					if(TcpProtocolHandler.containsPlayer(username)) {
-						PlayerChar p = TcpProtocolHandler.getPlayer(username);
+						Player p = TcpProtocolHandler.getPlayer(username);
 						p.getTcpSession().setAttribute("player", null);
 						p.setLastLoginTime(time);
 						p.getTcpSession().close(true);
@@ -321,26 +321,25 @@ public class LoginManager implements Runnable {
 		/*
 		 * Attempt to log the player in
 		 */
-		PlayerChar p = getPlayerObject(result);
-		p.setLastLoginTime(time);
-		p.setTcpSession(session);
-		p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
+		Player player = getPlayerObject(result);
+		player.setLastLoginTime(time);
+		player.setTcpSession(session);
+		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/*
 		 * Update the database with login information
 		 */
 		m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-		session.setAttribute("player", p);
+		session.setAttribute("player", player);
 		/*
 		 * Send success packet to player, set their map and add them to a movement service
 		 */
-		this.initialiseClient(p, session);
+		this.initialiseClient(player, session);
 		/*
 		 * Add them to the list of players
 		 */
-		TcpProtocolHandler.addPlayer(p);
-		UdpProtocolHandler.addPlayer(p);
+		TcpProtocolHandler.addPlayer(player);
 		GameServer.getInstance().updatePlayerCount();
 		System.out.println("INFO: " + username + " logged in.");
 	}
@@ -350,7 +349,7 @@ public class LoginManager implements Runnable {
 	 * @param p
 	 * @param session
 	 */
-	private void initialiseClient(PlayerChar p, IoSession session) {
+	private void initialiseClient(Player p, IoSession session) {
 		session.write("ls" + p.getId() + "," + TimeService.getTime());
 		//Add them to the map
 		p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY()), null);
@@ -374,9 +373,9 @@ public class LoginManager implements Runnable {
 	 * @param data
 	 * @return
 	 */
-	private PlayerChar getPlayerObject(ResultSet result) {
+	private Player getPlayerObject(ResultSet result) {
 		try {
-			PlayerChar p = new PlayerChar(result.getString("username"));
+			Player p = new Player(result.getString("username"));
 			Pokemon [] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
 			

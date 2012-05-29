@@ -21,6 +21,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 
 /**
@@ -299,16 +300,17 @@ public class GameServer
 			m_dbUsername = m_dbU.getText();
 			m_dbPassword = new String(m_dbP.getPassword());
 			m_serverName = m_name.getText();
-
-			m_serviceManager = new ServiceManager();
-			m_serviceManager.start();
+			
 			m_start.setEnabled(false);
 			m_stop.setEnabled(true);
 		}
-		else
-		{
+		// Check if we can connect to the database BEFORE we start the server :)
+		if(MySqlManager.getInstance().connect(m_dbServer, m_dbUsername, m_dbPassword)) {
 			m_serviceManager = new ServiceManager();
 			m_serviceManager.start();
+		} else {
+			System.out.println("Cannot connect to the database, please check your settings.");
+			System.exit(-1);
 		}
 	}
 
@@ -326,12 +328,12 @@ public class GameServer
 			try
 			{
 				/* Let threads finish up */
-				Thread.sleep(10000);
+				Thread.sleep(10 * 1000);
 				/* Exit */
 				System.out.println("Exiting server...");
 				System.exit(0);
 			}
-			catch(Exception e)
+			catch(InterruptedException e)
 			{
 			}
 		}

@@ -4,7 +4,6 @@ import org.pokenet.server.backend.MovementService;
 import org.pokenet.server.backend.SpriteList;
 import org.pokenet.server.backend.item.ItemDatabase;
 import org.pokenet.server.battle.DataService;
-import org.pokenet.server.feature.JythonService;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.IdleTimer;
 import org.pokenet.server.network.NetworkService;
@@ -19,7 +18,6 @@ public class ServiceManager {
 	private MovementService m_movementService;
 	private DataService m_dataService;
 	private TimeService m_timeService;
-	private JythonService m_jythonService;
 	private IdleTimer m_idleTimer;
 	private SpriteList m_sprites;
 	private ItemDatabase m_itemdatabase;
@@ -31,7 +29,6 @@ public class ServiceManager {
 		/*
 		 * Initialize all the services
 		 */
-		m_jythonService = new JythonService();
 		m_timeService = new TimeService();
 		m_dataService = new DataService();
 		m_networkService = new NetworkService();
@@ -71,14 +68,6 @@ public class ServiceManager {
 	 */
 	public TimeService getTimeService() {
 		return m_timeService;
-	}
-	
-	/**
-	 * Returns the jython service
-	 * @return
-	 */
-	public JythonService getJythonService() {
-		return m_jythonService;
 	}
 	
 	/**

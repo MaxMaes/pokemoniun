@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.ModData;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
@@ -367,7 +367,7 @@ public class Pokemon extends PokemonSpecies {
 	 * @param p
 	 *          - The player that owns the Pokemon
 	 */
-	public void evolutionResponse(boolean allow, PlayerChar p) {
+	public void evolutionResponse(boolean allow, Player p) {
 		if (m_evolution != null) {
 			/* Get the index of the Pokemon in the player's party */
 			int index = p.getPokemonIndex(this);

@@ -1,6 +1,6 @@
 package org.pokenet.server.network.message;
 
-import org.pokenet.server.backend.entity.PlayerChar.RequestType;
+import org.pokenet.server.backend.entity.Player.RequestType;
 
 /**
  * A request packet

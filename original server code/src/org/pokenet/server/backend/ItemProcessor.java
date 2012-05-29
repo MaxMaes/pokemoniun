@@ -4,7 +4,7 @@ package org.pokenet.server.backend;
 import java.util.Random;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.item.Item;
 import org.pokenet.server.backend.item.Item.ItemAttribute;
 import org.pokenet.server.battle.BattleTurn;
@@ -33,7 +33,7 @@ public class ItemProcessor implements Runnable {
 		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL
 	};
 
-	private final PlayerChar m_player;
+	private final Player m_player;
 	private final String[]   m_details;
 
 	/**
@@ -42,7 +42,7 @@ public class ItemProcessor implements Runnable {
 	 * @param p
 	 * @param details
 	 */
-	public ItemProcessor(PlayerChar p, String[] details) {
+	public ItemProcessor(Player p, String[] details) {
 		m_player = p;
 		m_details = details;
 	}
@@ -70,7 +70,7 @@ public class ItemProcessor implements Runnable {
 	 *          - extra data received from client
 	 * @return
 	 */
-	public boolean useItem(PlayerChar p, int itemId, String[] data) {
+	public boolean useItem(Player p, int itemId, String[] data) {
 		/* Check that the bag contains the item */
 		if (p.getBag().containsItem(itemId) < 0) return false;
 		/* We have the item, so let us use it */

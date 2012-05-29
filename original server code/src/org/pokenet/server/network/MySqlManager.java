@@ -7,6 +7,7 @@ package org.pokenet.server.network;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -14,9 +15,18 @@ import java.sql.Statement;
  * @author Daniel Morante
  */
 public class MySqlManager {
+	private static MySqlManager mInstance;
     private Connection mysql_connection;
-    private ResultSet mysql_result;    
     private String mysql_connectionURL;
+    
+    public static MySqlManager getInstance()
+    {
+    	if(mInstance == null) 
+    	{
+    		mInstance = new MySqlManager();
+    	}
+    	return mInstance;
+    }
     
     /**
      * Connects to the server. Returns true on success.
@@ -26,18 +36,22 @@ public class MySqlManager {
      * @return
      */
     public boolean connect(String server, String username, String password) {
-        try {
-            //Open Connection
-            mysql_connectionURL = "jdbc:mysql://" + server+"?autoReconnect=true";
-            mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
-            if(!mysql_connection.isClosed())
-            	return true;
-            else
-            	return false;
-        } catch( Exception x ) {
-          x.printStackTrace();
-          return false;
-        }
+    	System.out.println("Connecting to the database; " + username + "@" + server);
+    	if(mysql_connection == null) { // We don't want to open twice, do we?
+	        try {
+	            //Open Connection
+	            mysql_connectionURL = "jdbc:mysql://" + server+"?autoReconnect=true";
+	            mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
+	            if(!mysql_connection.isClosed())
+	            	return true;
+	            else
+	            	return false;
+	        } catch(Exception x) {
+	        	x.printStackTrace();
+	        	return false;
+	        }
+    	}
+    	return true;
     }
     
     /**
@@ -46,6 +60,7 @@ public class MySqlManager {
      * @return
      */
     public boolean selectDatabase(String database) {
+    	System.out.println("Selecting database; " + database);
     	try {
         	Statement stm = mysql_connection.createStatement();
         	stm.executeQuery("USE " + database);
@@ -61,9 +76,11 @@ public class MySqlManager {
      * @return
      */
     public boolean close(){
-        try{
-            mysql_connection.close();
-            mysql_connection = null;
+        try {
+        	if(!mysql_connection.isClosed()) { // Maybe it's closed already?
+        		mysql_connection.close();
+        		mysql_connection = null;
+        	}
             return true;
         }
         catch (Exception x) {
@@ -78,8 +95,8 @@ public class MySqlManager {
      * @return
      */
     public ResultSet query(String query){
+    	System.out.println("Let's search for some data;	" + query);
         //Create Statement object
-        Statement stmt;
         
         /*
          * We want to keep things simple, so...
@@ -94,45 +111,41 @@ public class MySqlManager {
          * 
         */  
         
+    	ResultSet mysql_result = null;
         if (query.startsWith("SELECT")) {
             //Use the "executeQuery" function because we have to retrieve data
             //Return the data as a resultset
             try{
                 //Execute Query
-                stmt = mysql_connection.createStatement();
+                Statement stmt = mysql_connection.createStatement();
                 mysql_result = stmt.executeQuery(query);
             }
-            catch(Exception x) {
-                x.printStackTrace();
+            catch(SQLException e)
+            {
+            	e.printStackTrace();
             }
-            
-            //Return Result
-            return mysql_result;
         }
         else {
             //It's an UPDATE, INSERT, or DELETE statement
             //Use the"executeUpdaye" function and return a null result
             try{
                 //Execute Query
-                stmt = mysql_connection.createStatement();
+                Statement stmt = mysql_connection.createStatement();
                 stmt.executeUpdate(query);
             }
-            catch(Exception x) {
-                x.printStackTrace();
+            catch(SQLException e)
+            {
+            	e.printStackTrace();
             }
-            
-            //Return nothing
-            return null;
         }
+        return mysql_result;
     }    
     
     public static String parseSQL(String text)
 	{
-		try {
-			if(text == null) text = "";
-			text = text.replace("'", "''");
-			text = text.replace("\\", "\\\\");
-		} catch (Exception e) {}
+		if(text == null) text = "";
+		text = text.replace("'", "''");
+		text = text.replace("\\", "\\\\");
 		return  text;
 	}
 }

@@ -9,9 +9,9 @@ import java.util.Random;
 import org.pokenet.server.backend.DataLoader;
 import org.pokenet.server.backend.entity.Char;
 import org.pokenet.server.backend.entity.HMObject;
-import org.pokenet.server.backend.entity.NonPlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar;
-import org.pokenet.server.backend.entity.PlayerChar.Language;
+import org.pokenet.server.backend.entity.NPC;
+import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -45,8 +45,8 @@ public class ServerMap {
 	private ServerMapMatrix m_mapMatrix;
 	private Weather m_forcedWeather = null;
 	//Players and NPCs
-	private HashMap<String, PlayerChar> m_players;
-	private ArrayList<NonPlayerChar> m_npcs;
+	private HashMap<String, Player> m_players;
+	private ArrayList<NPC> m_npcs;
 	private ArrayList<WarpTile> m_warps;
 	private ArrayList<MapItem> m_items;
 	//The following stores information for day, night and water wild pokemon
@@ -99,8 +99,8 @@ public class ServerMap {
 			}
 		}
 		
-		m_players = new HashMap<String, PlayerChar>();
-		m_npcs = new ArrayList<NonPlayerChar>();
+		m_players = new HashMap<String, Player>();
+		m_npcs = new ArrayList<NPC>();
 		
 		/*
 		 * Load pvp settings
@@ -289,8 +289,8 @@ public class ServerMap {
      */
     public void sendChatMessage(String message, Language l) {
             synchronized(m_players) {
-                    Collection<PlayerChar> list = m_players.values();
-                    for(PlayerChar p: list) {
+                    Collection<Player> list = m_players.values();
+                    for(Player p: list) {
                             if(p.getLanguage() == l) {
                                     TcpProtocolHandler.writeMessage(
                                                     p.getTcpSession(),
@@ -332,7 +332,7 @@ public class ServerMap {
 	 * Allows a player to pick up an item
 	 * @param p
 	 */
-	public void pickupItem(PlayerChar p) {
+	public void pickupItem(Player p) {
 		
 	}
 	
@@ -404,18 +404,18 @@ public class ServerMap {
 	 * @param player
 	 */
 	public void addChar(Char c) {
-		if(c instanceof PlayerChar) {
-			m_players.put(c.getName(), (PlayerChar) c);
-		} else if(c instanceof NonPlayerChar || c instanceof HMObject) {
+		if(c instanceof Player) {
+			m_players.put(c.getName(), (Player) c);
+		} else if(c instanceof NPC || c instanceof HMObject) {
 			//Set the id of the npc
 			c.setId(-1 - m_npcs.size());
-			m_npcs.add((NonPlayerChar) c);
+			m_npcs.add((NPC) c);
 		}
 		synchronized(m_players) {
-			for(PlayerChar p : m_players.values()) {
+			for(Player p : m_players.values()) {
 				if(c.getId() != p.getId()) {
 					String name = c.getName();
-					if(c instanceof NonPlayerChar) {
+					if(c instanceof NPC) {
 						name = "!NPC!";
 					}
 					p.getTcpSession().write("ma" + name + "," + 
@@ -496,16 +496,16 @@ public class ServerMap {
 	 * @param c
 	 */
 	public void removeChar(Char c) {
-		if(c instanceof PlayerChar) {
+		if(c instanceof Player) {
 			synchronized(m_players) {
 				m_players.remove(c.getName());
 			}
-		} else if(c instanceof NonPlayerChar) {
-			m_npcs.remove((NonPlayerChar) c);
+		} else if(c instanceof NPC) {
+			m_npcs.remove((NPC) c);
 			m_npcs.trimToSize();
 		}
 		synchronized(m_players) {
-			for(PlayerChar p : m_players.values()) {
+			for(Player p : m_players.values()) {
 				p.getTcpSession().write("mr" + c.getId());
 			}
 		}
@@ -515,7 +515,7 @@ public class ServerMap {
 	 * Allows a player to talk to the npc in front of them, if any
 	 * @param p
 	 */
-	public void talkToNpc(PlayerChar p) {
+	public void talkToNpc(Player p) {
 		int x = 0, y = 0;
 		switch(p.getFacing()) {
 		case Up:
@@ -611,7 +611,7 @@ public class ServerMap {
 	 * @param d
 	 * @param rod
 	 */
-	public boolean caughtFish(PlayerChar c, Direction d, int rod) {
+	public boolean caughtFish(Player c, Direction d, int rod) {
 		int failureRate = 75;
 		//Subtract the rod's power from the failure rate.
 		failureRate -= rod;
@@ -636,7 +636,7 @@ public class ServerMap {
 	 * @param newY
 	 * @return
 	 */
-	public boolean facingWater(PlayerChar c, Direction d) {
+	public boolean facingWater(Player c, Direction d) {
 		int playerX = c.getX();
 		int playerY = c.getY();
 		int newX = 0;
@@ -687,8 +687,8 @@ public class ServerMap {
 						if(c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof PlayerChar) {
-								PlayerChar p = (PlayerChar) c;
+							if(c instanceof Player) {
+								Player p = (Player) c;
 								if(p.canSurf()) {
 									p.setSurfing(true);
 									return true;
@@ -720,8 +720,8 @@ public class ServerMap {
 						if(c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof PlayerChar) {
-								PlayerChar p = (PlayerChar) c;
+							if(c instanceof Player) {
+								Player p = (Player) c;
 								if(p.canSurf()) {
 									p.setSurfing(true);
 									return true;
@@ -753,8 +753,8 @@ public class ServerMap {
 						if(c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof PlayerChar) {
-								PlayerChar p = (PlayerChar) c;
+							if(c instanceof Player) {
+								Player p = (Player) c;
 								if(p.canSurf()) {
 									p.setSurfing(true);
 									return true;
@@ -786,8 +786,8 @@ public class ServerMap {
 						if(c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof PlayerChar) {
-								PlayerChar p = (PlayerChar) c;
+							if(c instanceof Player) {
+								Player p = (Player) c;
 								if(p.canSurf()) {
 									p.setSurfing(true);
 									return true;
@@ -819,8 +819,8 @@ public class ServerMap {
 	 * @param p
 	 * @return
 	 */
-	public boolean isNpcBattle(PlayerChar p) {
-		NonPlayerChar n = null;
+	public boolean isNpcBattle(Player p) {
+		NPC n = null;
 		for(int i = 0; i < m_npcs.size(); i++) {
 			n = m_npcs.get(i);
 			if(n != null && n.isTrainer() && !n.isGymLeader()) {
@@ -872,7 +872,7 @@ public class ServerMap {
 	 * Returns true if a wild pokemon was encountered.
 	 * @return
 	 */
-	public boolean isWildBattle(int x, int y, PlayerChar p) {
+	public boolean isWildBattle(int x, int y, Player p) {
 		if (m_random.nextInt(2874) < m_wildProbability * 16) {
 			if(p.isSurfing()) {
 				if(m_waterPokemonChances != null && m_waterPokemonLevels != null)
@@ -892,7 +892,7 @@ public class ServerMap {
 	 * Different players have different chances of encountering rarer Pokemon.
 	 * @return
 	 */
-	public Pokemon getWildPokemon(PlayerChar player) {
+	public Pokemon getWildPokemon(Player player) {
 		int [] range;
 		String species;
 		if(player.isSurfing()) {
@@ -988,8 +988,8 @@ public class ServerMap {
 	 */
 	public void sendToAll(PokenetMessage m) {
 		synchronized(m_players) {
-			Collection<PlayerChar> list = m_players.values();
-			for(PlayerChar p: list) {
+			Collection<Player> list = m_players.values();
+			for(Player p: list) {
 				TcpProtocolHandler.writeMessage(p.getTcpSession(), m);
 			}
 		}
@@ -999,7 +999,7 @@ public class ServerMap {
 	 * Returns the arraylist of players
 	 * @return
 	 */
-	public HashMap<String, PlayerChar> getPlayers() {
+	public HashMap<String, Player> getPlayers() {
 		return m_players;
 	}
 	
@@ -1007,7 +1007,7 @@ public class ServerMap {
 	 * Returns the arraylist of npcs
 	 * @return
 	 */
-	public ArrayList<NonPlayerChar> getNpcs() {
+	public ArrayList<NPC> getNpcs() {
 		return m_npcs;
 	}
 
@@ -1017,15 +1017,15 @@ public class ServerMap {
 	 * @param char1
 	 */
 	public void sendMovementToAll(Direction d, Char c) {
-		if(c instanceof PlayerChar) {
+		if(c instanceof Player) {
 			/*
 			 * If a player, send movement to everyone but themselves
 			 * Movement for themself is sent over TCP
 			 */
-			PlayerChar p = (PlayerChar) c;
+			Player p = (Player) c;
 			synchronized(m_players) {
-				Collection<PlayerChar> list = m_players.values();
-				for(PlayerChar pl: list) {
+				Collection<Player> list = m_players.values();
+				for(Player pl: list) {
 					if(p != pl) {
 						pl.queueOtherPlayerMovement(d, c.getId());
 					}
@@ -1036,8 +1036,8 @@ public class ServerMap {
 			 * Else, send the movement to everyone
 			 */
 			synchronized(m_players) {
-				Collection<PlayerChar> list = m_players.values();
-				for(PlayerChar pl: list) {
+				Collection<Player> list = m_players.values();
+				for(Player pl: list) {
 					pl.queueOtherPlayerMovement(d, c.getId());
 				}
 			}

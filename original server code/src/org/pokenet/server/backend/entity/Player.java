@@ -34,11 +34,11 @@ import org.pokenet.server.network.message.shop.ShopSellMessage;
  * @author shadowkanji
  *
  */
-public class PlayerChar extends Char implements Battleable, Tradeable {
+public class Player extends Char implements Battleable, Tradeable {
 	/*
 	 * An enum to store request types
 	 */
-	public enum RequestType { BATTLE, TRADE , RESPONSE};
+	public enum RequestType { BATTLE, TRADE, RESPONSE };
 	/*
 	 * An enum to store the player's selected language
 	 */
@@ -73,7 +73,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	private Shop m_currentShop = null;
 	private int m_repel = 0;
 	private long m_lastTrade = 0;
-	private MySqlManager m_database = new MySqlManager();
+	private MySqlManager m_database;
 	private String m_username = "";
 	/*
 	 * Stores movement of other players to be
@@ -110,8 +110,9 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	private HashMap<String, RequestType> m_requests;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
-	public PlayerChar(String username)
+	public Player(String username)
 	{
+		m_database = MySqlManager.getInstance();
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -361,7 +362,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 			 * within 3 squares of the player, start the battle
 			 */
 			if(this.getMap().getPvPType() == PvPType.ENFORCED) {
-				PlayerChar otherPlayer = TcpProtocolHandler.getPlayer(username);
+				Player otherPlayer = TcpProtocolHandler.getPlayer(username);
 				if(otherPlayer != null && this.getMap() == otherPlayer.getMap()) {
 					if(otherPlayer.getX() >= this.getX() - 96 || 
 							otherPlayer.getX() <= this.getX() + 96 ||
@@ -396,7 +397,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	 * @param username
 	 */
 	public void requestAccepted(String username) {
-		PlayerChar otherPlayer = TcpProtocolHandler.getPlayer(username);
+		Player otherPlayer = TcpProtocolHandler.getPlayer(username);
 		if(otherPlayer != null) {
 			if(m_requests.containsKey(username)) {
 				switch(m_requests.get(username)) {
@@ -422,6 +423,10 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 							m_battleField = new PvPBattleField(
 									DataService.getBattleMechanics(),this, otherPlayer);
 							return;
+						case ENFORCED:
+							break;
+						default:
+							break;
 						}
 					} else {
 						m_battleField = new PvPBattleField(
@@ -439,6 +444,8 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 						m_tcpSession.write("r!4");
 						otherPlayer.getTcpSession().write("r!4");
 					}
+					break;
+				default:
 					break;
 				}
 			}
@@ -1278,7 +1285,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 		Char c;
 		String packet = "mi";
 		//Send all player information to the client
-		for(PlayerChar p : map.getPlayers().values()) {
+		for(Player p : map.getPlayers().values()) {
 			c = p;
 			packet = packet + c.getName() + "," + 
 			c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + 

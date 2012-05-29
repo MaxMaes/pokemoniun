@@ -224,9 +224,9 @@ public class Char implements Positionable {
 				return true;
 			} else {
 				//Invalid movement
-				if(this instanceof PlayerChar) {
+				if(this instanceof Player) {
 					//If its a player, resync them
-					PlayerChar p = (PlayerChar) this;
+					Player p = (Player) this;
 					p.getTcpSession().write("U" + getX() + "," + getY());
 					return false;
 				}

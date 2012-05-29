@@ -77,8 +77,8 @@ public class LoginManager implements Runnable
 	 */
 	private void attemptLogin(IoSession session, char l, String username, String password)
 	{
-		try
-		{
+//		try
+//		{
 			// Check if we haven't reach the player limit
 			if(TcpProtocolHandler.getPlayerCount() >= GameServer.getMaxPlayers())
 			{
@@ -100,108 +100,157 @@ public class LoginManager implements Runnable
 			}
 			// Now, check they are not banned
 			ResultSet result = m_database.query("SELECT * FROM pn_bans WHERE ip='" + getIp(session) + "'");
-			if(result != null && result.first())
+			try
 			{
-				// This is player is banned, inform them
-				session.write("l4");
-				return;
+				if(result != null && result.first())
+				{
+					// This is player is banned, inform them
+					session.write("l4");
+					return;
+				}
+			}
+			catch(Exception e1)
+			{
+				// TODO Auto-generated catch block
+				System.out.println("\n1\n");
+				e1.printStackTrace();
+				session.write("lu");
+				/*
+				 * Something went wrong so make sure the player is registered as logged out
+				 */
+				System.out.println("SOMETHING WENT WRONG!!!, " + e1.getMessage());
+				m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+				m_database.close();
 			}
 			// Then find the member's information
 			result = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(username) + "'");
-			if(!result.first())
+			try
 			{
-				// Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames.
-				session.write("le");
-				return;
+				if(!result.first())
+				{
+					// Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames.
+					session.write("le");
+					return;
+				}
+			}
+			catch(Exception e1)
+			{
+				System.out.println("\n2\n");
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				session.write("lu");
+				/*
+				 * Something went wrong so make sure the player is registered as logged out
+				 */
+				System.out.println("SOMETHING WENT WRONG!!!, " + e1.getMessage());
+				m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+				m_database.close();
 			}
 			// Check if the password is correct
-			if(result.getString("password").compareTo(password) == 0)
+			try
 			{
-				// Remove the player from the map to prevent duplicates
-				GameServer.getServiceManager().getMovementService().removePlayer(username);
-				long time = System.currentTimeMillis();
-				// Now check if they are logged in anywhere else
-				if(result.getString("lastLoginServer").equalsIgnoreCase(GameServer.getServerName()))
+				if(result.getString("password").compareTo(password) == 0)
 				{
-					/*
-					 * They are already logged in on this server. Attach the session to the existing player if they exist, if not, just log them in
-					 */
-					if(TcpProtocolHandler.containsPlayer(username))
+					// Remove the player from the map to prevent duplicates
+					GameServer.getServiceManager().getMovementService().removePlayer(username);
+					long time = System.currentTimeMillis();
+					// Now check if they are logged in anywhere else
+					if(result.getString("lastLoginServer").equalsIgnoreCase(GameServer.getServerName()))
 					{
-						Player p = TcpProtocolHandler.getPlayer(username);
-						p.getTcpSession().setAttribute("player", null);
-						p.setLastLoginTime(time);
-						p.getTcpSession().close(true);
-						p.setTcpSession(session);
-						p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(l))]);
-						m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='"
-								+ MySqlManager.parseSQL(username) + "'");
-						m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-						m_database.query("UPDATE pn_members SET lastLanguageUsed='" + l + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-						session.setAttribute("player", p);
-						this.initialiseClient(p, session);
+						/*
+						 * They are already logged in on this server. Attach the session to the existing player if they exist, if not, just log them in
+						 */
+						if(TcpProtocolHandler.containsPlayer(username))
+						{
+							Player p = TcpProtocolHandler.getPlayer(username);
+							p.getTcpSession().setAttribute("player", null);
+							p.setLastLoginTime(time);
+							p.getTcpSession().close(true);
+							p.setTcpSession(session);
+							p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(l))]);
+							m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='"
+									+ MySqlManager.parseSQL(username) + "'");
+							m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+							m_database.query("UPDATE pn_members SET lastLanguageUsed='" + l + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+							session.setAttribute("player", p);
+							this.initialiseClient(p, session);
+						}
+						else
+						{
+							session.write("l3");
+							return;
+						}
+					}
+					else if(result.getString("lastLoginServer").equalsIgnoreCase("null"))
+					{
+						/*
+						 * They are not logged in elsewhere, log them in
+						 */
+						this.login(username, l, session, result);
 					}
 					else
 					{
-						session.write("l3");
-						return;
+						/*
+						 * They are logged in somewhere else. Check if the server is up, if it is, don't log them in. If not, log them in
+						 */
+						// if(InetAddress.getByName(result.getString("lastLoginServer")).isReachable(5000)) {
+						// session.write("l3");
+						// return;
+						// } else {
+						// //The server they were on went down and they are trying to login elsewhere
+						// this.login(username, l, session, result);
+						// }
+						try
+						{
+							/**
+							 * This is a dirty hack. The old method used isReachable(5000) to determine if the server was alive. isReachable doesn't work unless you run as root due to sending IMCP Echo packets being forbidden under normal user accounts. Instead, We open a socket to determine if server's alive. If it crashes, then server's down.
+							 */
+							Socket socket = new Socket(result.getString("lastLoginServer"), 7002);
+							socket.close();
+							session.write("l3");
+							return;
+						}
+						catch(Exception e)
+						{
+							e.printStackTrace();
+							//The server they were on went down and they are trying to login elsewhere
+							this.login(username, l, session, result);
+						}
 					}
-				}
-				else if(result.getString("lastLoginServer").equalsIgnoreCase("null"))
-				{
-					/*
-					 * They are not logged in elsewhere, log them in
-					 */
-					this.login(username, l, session, result);
 				}
 				else
 				{
-					/*
-					 * They are logged in somewhere else. Check if the server is up, if it is, don't log them in. If not, log them in
-					 */
-					// if(InetAddress.getByName(result.getString("lastLoginServer")).isReachable(5000)) {
-					// session.write("l3");
-					// return;
-					// } else {
-					// //The server they were on went down and they are trying to login elsewhere
-					// this.login(username, l, session, result);
-					// }
-					try
-					{
-						/**
-						 * This is a dirty hack. The old method used isReachable(5000) to determine if the server was alive. isReachable doesn't work unless you run as root due to sending IMCP Echo packets being forbidden under normal user accounts. Instead, We open a socket to determine if server's alive. If it crashes, then server's down.
-						 */
-						Socket socket = new Socket(result.getString("lastLoginServer"), 7002);
-						socket.close();
-						session.write("l3");
-						return;
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
-						//The server they were on went down and they are trying to login elsewhere
-						this.login(username, l, session, result);
-					}
+					// Password is wrong, say so.
+					session.write("le");
+					return;
 				}
 			}
-			else
+			catch(Exception e)
 			{
-				// Password is wrong, say so.
-				session.write("le");
-				return;
+				System.out.println("\n4\n");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				session.write("lu");
+				/*
+				 * Something went wrong so make sure the player is registered as logged out
+				 */
+				System.out.println("SOMETHING WENT WRONG!!!, " + e.getMessage());
+				m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+				m_database.close();
 			}
 			m_database.close();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			session.write("lu");
-			/*
-			 * Something went wrong so make sure the player is registered as logged out
-			 */
-			m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-			m_database.close();
-		}
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//			session.write("lu");
+//			/*
+//			 * Something went wrong so make sure the player is registered as logged out
+//			 */
+//			System.out.println("SOMETHING WENT WRONG!!!, " + e.getMessage());
+//			m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+//			m_database.close();
+//		}
 	}
 
 	/**

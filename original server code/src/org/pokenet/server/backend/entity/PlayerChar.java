@@ -38,7 +38,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	/*
 	 * An enum to store request types
 	 */
-	public enum RequestType { BATTLE, TRADE };
+	public enum RequestType { BATTLE, TRADE , RESPONSE};
 	/*
 	 * An enum to store the player's selected language
 	 */

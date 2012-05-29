@@ -21,6 +21,8 @@ public class RequestMessage extends PokenetMessage {
 		case TRADE:
 			m_message = "rt" + playerName;
 			break;
+		case RESPONSE:
+			m_message = "r!0";
 		}
 	}
 }

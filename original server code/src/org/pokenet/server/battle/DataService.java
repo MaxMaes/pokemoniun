@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.ini4j.Ini;
-import org.ini4j.Ini.Section;
+import org.ini4j.Profile.Section;
 import org.pokenet.server.backend.item.DropData;
 import org.pokenet.server.battle.Pokemon.ExpTypes;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;

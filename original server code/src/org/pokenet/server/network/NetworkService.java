@@ -124,5 +124,7 @@ public class NetworkService {
              m_chatManager[i].stop();
 		m_tcpAcceptor.unbind();
 		m_tcpProtocolHandler.logoutAll();
+		System.out.println("Logged out all players.");
+		MySqlManager.getInstance().close();
 	}
 }

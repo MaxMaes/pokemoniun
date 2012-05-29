@@ -50,9 +50,12 @@ public class LogoutManager implements Runnable {
 			player.getMap().removeChar(player);
 		TcpProtocolHandler.removePlayer(player);
 		GameServer.getInstance().updatePlayerCount();
-		
+		//Store all player information
+		if(!savePlayer(player)) {
+			return false;
+		}
 		//Finally, store that the player is logged out and close connection
-		m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE id='" + player.getId() + "'");
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
 		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		return true;
 	}
@@ -127,7 +130,7 @@ public class LogoutManager implements Runnable {
 			 * First, check if they have logged in somewhere else.
 			 * This is useful for when as server loses its internet connection
 			 */
-			ResultSet data = m_database.query("SELECT * FROM pn_members WHERE id='" + p.getId() +  "'");
+			ResultSet data = m_database.query("SELECT * FROM `pn_members` WHERE id='" + p.getId() +  "'");
 			data.first();
 			if(data.getLong("lastLoginTime") == p.getLastLoginTime()) {
 				/* Check they are not trading */

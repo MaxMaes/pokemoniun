@@ -155,15 +155,13 @@ public class LoginManager implements Runnable {
 				session.write("le");
 				return;
 			}
-			m_database.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.write("lu");
 			/*
 			 * Something went wrong so make sure the player is registered as logged out
 			 */
-			m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-			m_database.close();
+			m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
 		}
 	}
 	

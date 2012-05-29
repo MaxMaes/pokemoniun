@@ -98,17 +98,17 @@ public class MySqlManager {
      * Closes the connection to the mysql server. Returns true on success.
      * @return
      */
-    public boolean close(){
+    public boolean close() {
         try {
         	if(!mysql_connection.isClosed()) { // Maybe it's closed already?
-        		mysql_connection.close();
-        		mysql_connection = null;
+        		
         	}
             return true;
         }
-        catch (Exception x) {
-             x.printStackTrace();
-             return false;
+        catch (SQLException e)
+        {
+        	e.printStackTrace();
+        	return false;
         }
     }
     

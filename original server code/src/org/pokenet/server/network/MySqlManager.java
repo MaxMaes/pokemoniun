@@ -73,6 +73,7 @@ public class MySqlManager {
     	try {
         	Statement stm = mysql_connection.createStatement();
         	stm.executeQuery("USE " + database);
+        	stm.close();
         	return true;
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -132,6 +133,7 @@ public class MySqlManager {
                 //Use the"executeUpdaye" function and return a null result
             	stmt.executeUpdate(query);
             }
+            stmt.close(); // Omdat het kan.
     	} catch(SQLException e) {
     		e.printStackTrace();
     	}

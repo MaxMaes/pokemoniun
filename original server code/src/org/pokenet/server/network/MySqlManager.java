@@ -101,7 +101,7 @@ public class MySqlManager {
     public boolean close() {
         try {
         	if(!mysql_connection.isClosed()) { // Maybe it's closed already?
-        		
+        		mysql_connection.close();
         	}
             return true;
         }

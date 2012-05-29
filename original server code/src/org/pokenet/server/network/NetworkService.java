@@ -125,6 +125,7 @@ public class NetworkService {
 		m_tcpAcceptor.unbind();
 		m_tcpProtocolHandler.logoutAll();
 		System.out.println("Logged out all players.");
+		// Since we logged out everything, we can safely close the database.
 		MySqlManager.getInstance().close();
 	}
 }

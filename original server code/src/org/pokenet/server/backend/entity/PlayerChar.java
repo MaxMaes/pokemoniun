@@ -1651,8 +1651,11 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 							(this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + "," +
 							(this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "") + "," +
 							(this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + "," +
-							(this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : "")
-			);
+							(this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : "") + "," + 
+							(this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + "," + 
+							(this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + "," + 
+							(this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + "," + 
+							(this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : ""));
 			/* Update move pp */
 			for(int j = 0; j < 4; j++) {
 				updateClientPP(i, j);

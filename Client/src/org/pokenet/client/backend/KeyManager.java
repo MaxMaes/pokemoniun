@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -125,47 +126,7 @@ public class KeyManager
 			System.out.println("INFO: Keys.ini not found! Setting default settings");
 			try
 			{
-				  // Create file 
-				  FileWriter fstream = new FileWriter("res/keys.ini");
-				  BufferedWriter out = new BufferedWriter(fstream);
-				  out.write("//see specialkeys.txt for formats of keys like left shift, right control, etc");
-				  out.newLine();
-				  out.write("[MOVEMENT]");
-				  out.newLine();
-				  out.write("UP=W");
-				  out.newLine();
-				  out.write("LEFT=A");
-				  out.newLine();
-				  out.write("RIGHT=D");
-				  out.newLine();
-				  out.write("DOWN=S");
-				  out.newLine();
-				  out.write("RODS]");
-				  out.newLine();
-				  out.write("OLD=R");
-				  out.newLine();
-				  out.write("GOOD=T");
-				  out.newLine();
-				  out.write("GREAT=Y");
-				  out.newLine();
-				  out.write("ULTRA=U");
-				  out.newLine();
-				  out.write("[MOVES]");
-				  out.newLine();
-				  out.write("ATTACK1=1");
-				  out.newLine();
-				  out.write("ATTACK2=2");
-				  out.newLine();
-				  out.write("ATTACK3=3");
-				  out.newLine();
-				  out.write("ATTACK4=4");
-				  out.newLine();
-				  out.write("[INTERACTION]");
-				  out.newLine();
-				  out.write("TALK=SPACE");
-				  out.newLine();
-				  out.close();
-
+				  generateDefaultSettings();
 			}
 			catch (Exception e)
 			{
@@ -178,6 +139,50 @@ public class KeyManager
 		{
 			System.out.println("INFO: Keys Loaded");
 		}
+	}
+	
+	private static void generateDefaultSettings() throws IOException
+	{
+		// Create file 
+		  FileWriter fstream = new FileWriter("res/keys.ini");
+		  BufferedWriter out = new BufferedWriter(fstream);
+		  out.write("//see specialkeys.txt for formats of keys like left shift, right control, etc");
+		  out.newLine();
+		  out.write("[MOVEMENT]");
+		  out.newLine();
+		  out.write("UP=W");
+		  out.newLine();
+		  out.write("LEFT=A");
+		  out.newLine();
+		  out.write("RIGHT=D");
+		  out.newLine();
+		  out.write("DOWN=S");
+		  out.newLine();
+		  out.write("RODS]");
+		  out.newLine();
+		  out.write("OLD=R");
+		  out.newLine();
+		  out.write("GOOD=T");
+		  out.newLine();
+		  out.write("GREAT=Y");
+		  out.newLine();
+		  out.write("ULTRA=U");
+		  out.newLine();
+		  out.write("[MOVES]");
+		  out.newLine();
+		  out.write("ATTACK1=1");
+		  out.newLine();
+		  out.write("ATTACK2=2");
+		  out.newLine();
+		  out.write("ATTACK3=3");
+		  out.newLine();
+		  out.write("ATTACK4=4");
+		  out.newLine();
+		  out.write("[INTERACTION]");
+		  out.newLine();
+		  out.write("TALK=SPACE");
+		  out.newLine();
+		  out.close();
 	}
 
 	/**

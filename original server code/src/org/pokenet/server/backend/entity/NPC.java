@@ -17,7 +17,7 @@ import org.pokenet.server.network.message.shop.ShopStockMessage;
  * @author shadowkanji
  *
  */
-public class NPC extends Char {
+public class NPC extends Character {
 	/*
 	 * Trainers can have an more than 6 possible Pokemon.
 	 * When a battle is started with this NPC, it'll check the min party size.

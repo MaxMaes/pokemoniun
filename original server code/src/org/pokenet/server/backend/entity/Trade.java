@@ -47,7 +47,7 @@ public class Trade implements Runnable{
 		if(player1 instanceof Player) {
 			/* Tell the client to open the trade window */
 			Player p = (Player) player1;
-			Char c = (Char) player2;
+			Character c = (Character) player2;
 			p.getTcpSession().write("Ts" + c.getName());
 			/*
 			 * Send the pokemon data of player 2 to player 1
@@ -83,7 +83,7 @@ public class Trade implements Runnable{
 		if(player2 instanceof Player) {
 			/* If player 2 is a PlayerChar, tell client to open trade window */
 			Player p = (Player) player2;
-			Char c = (Char) player1;
+			Character c = (Character) player1;
 			p.getTcpSession().write("Ts" + c.getName());
 			/*
 			 * Send the Pokemon data of player 1 to player 2

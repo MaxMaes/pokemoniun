@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import org.pokenet.server.backend.DataLoader;
-import org.pokenet.server.backend.entity.Char;
+import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
@@ -403,7 +403,7 @@ public class ServerMap {
 	 * Adds a player to this map and notifies all other clients on the map.
 	 * @param player
 	 */
-	public void addChar(Char c) {
+	public void addChar(Character c) {
 		if(c instanceof Player) {
 			m_players.put(c.getName(), (Player) c);
 		} else if(c instanceof NPC || c instanceof HMObject) {
@@ -437,7 +437,7 @@ public class ServerMap {
 	 * @param tileX
 	 * @param tileY
 	 */
-	public void addChar(Char c, int tileX, int tileY) {
+	public void addChar(Character c, int tileX, int tileY) {
 		this.addChar(c);
 		c.setX(tileX * 32);
 		c.setY((tileY * 32) - 8);
@@ -495,7 +495,7 @@ public class ServerMap {
 	 * Removes a char from this map
 	 * @param c
 	 */
-	public void removeChar(Char c) {
+	public void removeChar(Character c) {
 		if(c instanceof Player) {
 			synchronized(m_players) {
 				m_players.remove(c.getName());
@@ -593,7 +593,7 @@ public class ServerMap {
 	 * @param c
 	 * @return
 	 */
-	private boolean isWarped(int x, int y, Char c) {
+	private boolean isWarped(int x, int y, Character c) {
 		if(m_warps != null) {
 			for(int i = 0; i < m_warps.size(); i++) {
 				if(m_warps.get(i).getX() == x && m_warps.get(i).getY() == y) {
@@ -671,7 +671,7 @@ public class ServerMap {
 	 * @param c
 	 * @param d
 	 */
-	public boolean moveChar(Char c, Direction d) {
+	public boolean moveChar(Character c, Direction d) {
 		int playerX = c.getX();
 		int playerY = c.getY();
 		int newX;
@@ -1016,7 +1016,7 @@ public class ServerMap {
 	 * @param moveMessage
 	 * @param char1
 	 */
-	public void sendMovementToAll(Direction d, Char c) {
+	public void sendMovementToAll(Direction d, Character c) {
 		if(c instanceof Player) {
 			/*
 			 * If a player, send movement to everyone but themselves

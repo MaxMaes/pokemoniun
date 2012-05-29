@@ -1,6 +1,6 @@
 package org.pokenet.server.backend.map;
 
-import org.pokenet.server.backend.entity.Char;
+import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.Positionable.Direction;
 
 /**
@@ -44,7 +44,7 @@ public class ServerMapMatrix {
 	 * @param origin
 	 * @param destination
 	 */
-	public void moveBetweenMaps(Char c, ServerMap origin, ServerMap dest) {
+	public void moveBetweenMaps(Character c, ServerMap origin, ServerMap dest) {
 		Direction dir = null;
 		/*
 		 * Reposition player so they're on the correct edge

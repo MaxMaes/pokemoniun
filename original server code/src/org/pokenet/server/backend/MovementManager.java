@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import org.pokenet.server.backend.entity.Char;
+import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.HMObject.objectType;
 
@@ -15,31 +15,31 @@ import org.pokenet.server.backend.entity.HMObject.objectType;
  *
  */
 public class MovementManager implements Runnable {
-	private Queue<Char> m_waiting;
-	private Queue<Char> m_moved;
+	private Queue<Character> m_waiting;
+	private Queue<Character> m_moved;
 	private Thread m_thread;
 	private boolean m_isRunning;
 	private int m_pLoad = 0;
 	/** Comparator for comparing chars */
-	private Comparator<Char> m_comp;
+	private Comparator<Character> m_comp;
 	
 	/**
 	 * Default constructor.
 	 */
 	public MovementManager() {
-		m_comp = new Comparator<Char>() {
-			public int compare(Char arg0, Char arg1) {
+		m_comp = new Comparator<Character>() {
+			public int compare(Character arg0, Character arg1) {
 				return arg0.getPriority() - arg1.getPriority();
 			}};
-		m_waiting = new PriorityQueue<Char>(11, m_comp);
-		m_moved = new PriorityQueue<Char>(1, m_comp);
+		m_waiting = new PriorityQueue<Character>(11, m_comp);
+		m_moved = new PriorityQueue<Character>(1, m_comp);
 	}
 	
 	/**
 	 * Adds a player to this movement service
 	 * @param player
 	 */
-	public void addPlayer(Char player) {
+	public void addPlayer(Character player) {
 		synchronized(m_waiting) {
 			m_pLoad++;
 			m_waiting.offer(player);
@@ -70,9 +70,9 @@ public class MovementManager implements Runnable {
 	public boolean removePlayer(String player) {
 		/* Check waiting list */
 		synchronized(m_waiting) {
-			Iterator<Char> it = m_waiting.iterator();
+			Iterator<Character> it = m_waiting.iterator();
 			while(it.hasNext()) {
-				Char c = it.next();
+				Character c = it.next();
 				if(c.getName().equalsIgnoreCase(player)) {
 					m_waiting.remove(c);
 					m_pLoad--;
@@ -82,9 +82,9 @@ public class MovementManager implements Runnable {
 		}
 		/* Check moved list */
 		synchronized(m_moved) {
-			Iterator<Char> it = m_moved.iterator();
+			Iterator<Character> it = m_moved.iterator();
 			while(it.hasNext()) {
-				Char c = it.next();
+				Character c = it.next();
 				if(c.getName().equalsIgnoreCase(player)) {
 					m_moved.remove(c);
 					m_pLoad--;
@@ -99,7 +99,7 @@ public class MovementManager implements Runnable {
 	 * Called by m_thread.start(). Loops through all players calling PlayerChar.move() if the player requested to be moved.
 	 */
 	public void run() {
-		Char tmp = null;
+		Character tmp = null;
 		//ArrayList<Char> tmpArray = null;
 		while(m_isRunning) {
 			/* Pull char of highest priority */
@@ -118,7 +118,7 @@ public class MovementManager implements Runnable {
 			synchronized(m_waiting) {
 				if(m_waiting.size() == 0) {
 					m_waiting = m_moved;
-					m_moved = new PriorityQueue<Char>(1, m_comp);
+					m_moved = new PriorityQueue<Character>(1, m_comp);
 				}
 			}
 			try {

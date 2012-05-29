@@ -1,7 +1,7 @@
 package org.pokenet.server.backend.map;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.Char;
+import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.Player;
 
 /**
@@ -89,7 +89,7 @@ public class WarpTile {
 	 * Warps a character
 	 * @param c
 	 */
-	public void warp(Char c) {
+	public void warp(Character c) {
 		if(c instanceof Player) {
 			Player p = (Player) c;
 			if(p.getBadgeCount() >= m_reqBadges) {

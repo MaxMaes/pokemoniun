@@ -11,7 +11,7 @@ import org.pokenet.server.network.message.SpriteChangeMessage;
  * @author shadowkanji
  *
  */
-public class Char implements Positionable {
+public class Character implements Positionable {
 	private Direction m_facing = Direction.Down;
 	protected int m_sprite, m_mapX, m_mapY, m_x, m_y, m_id;
 	private boolean m_isVisible, m_isSurfing;
@@ -256,7 +256,7 @@ public class Char implements Positionable {
 	 * @param c
 	 * @return
 	 */
-	public boolean equals(Char c) {
+	public boolean equals(Character c) {
 		return m_id == c.getId();
 	}
 

@@ -34,7 +34,7 @@ import org.pokenet.server.network.message.shop.ShopSellMessage;
  * @author shadowkanji
  *
  */
-public class Player extends Char implements Battleable, Tradeable {
+public class Player extends Character implements Battleable, Tradeable {
 	/*
 	 * An enum to store request types
 	 */
@@ -1282,7 +1282,7 @@ public class Player extends Char implements Battleable, Tradeable {
 		clearRequests();
 		//Send the map switch packet to the client
 		m_tcpSession.write("ms" + direction + map.getX() + "," + map.getY() + "," + (map.isWeatherForced() ? map.getWeatherId() : TimeService.getWeatherId()));
-		Char c;
+		Character c;
 		String packet = "mi";
 		//Send all player information to the client
 		for(Player p : map.getPlayers().values()) {

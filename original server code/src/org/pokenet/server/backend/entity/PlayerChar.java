@@ -1,5 +1,7 @@
 package org.pokenet.server.backend.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +48,7 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	private Bag m_bag;
 	private int m_battleId;
 	private Pokemon[] m_pokemon;
-	private PokemonBox [] m_boxes;
+	private PokemonBox[] m_boxes;
 	private boolean m_isBattling = false;
 	private boolean m_isShopping = false;
 	private boolean m_isTalking = false;
@@ -62,15 +64,17 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	private int m_skillFishExp = 0;
 	private int m_skillTrainingExp = 0;
 	private int m_skillCoordExp = 0;
-	private int  m_skillBreedExp = 0;
+	private int m_skillBreedExp = 0;
 	private int m_oldLevel;
 	private BattleField m_battleField = null;
 	private int m_healX, m_healY, m_healMapX, m_healMapY;
 	private int m_adminLevel = 0;
-	private boolean m_isMuted, m_isFishing; 
+	private boolean m_isMuted, m_isFishing;
 	private Shop m_currentShop = null;
 	private int m_repel = 0;
 	private long m_lastTrade = 0;
+	private MySqlManager m_database = new MySqlManager();
+	private String m_username = "";
 	/*
 	 * Stores movement of other players to be
 	 * sent in bulk to client
@@ -105,12 +109,10 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	 */
 	private HashMap<String, RequestType> m_requests;
 
-	
-	/**
-	 * Constructor
-	 * NOTE: Minimal initialisations should occur here
-	 */
-	public PlayerChar() {
+	/** Constructor NOTE: Minimal initialisations should occur here */
+	public PlayerChar(String username)
+	{
+		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
 	
@@ -630,31 +632,49 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	}
 
 	/**
-	 * Adds a friend to the friend list
-	 * @param username
+	 * Adds a friend to the friend list.
+	 * 
+	 * @param username The username to add.
 	 */
-	public void addFriend(String username) {
+	public void addFriend(String friend)
+	{
 		if(m_friends == null)
 			m_friends = new ArrayList<String>();
-		if(m_friends.size() < 10) {
-			m_friends.add(username);
-			m_tcpSession.write("Fa" + username);
+		if(m_friends.size() < 10)
+		{
+			m_friends.add(friend);
+			// TODO: Dummy Code, should work perfectly fine.
+			m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+			m_database.selectDatabase(GameServer.getDatabaseName());
+			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+			m_database.close();
+			m_tcpSession.write("Fa" + friend);
 		}
 	}
 
 	/**
-	 * Removes a friend from the friends list
-	 * @param username
+	 * Removes a friend from the friends list.
+	 * 
+	 * @param username The username to remove.
 	 */
-	public void removeFriend(String username) {
-		if(m_friends == null) {
+	public void removeFriend(String friend)
+	{
+		if(m_friends == null)
+		{
 			m_friends = new ArrayList<String>();
 			return;
-		}
-		for(int i = 0; i < m_friends.size(); i++) {
-			if(m_friends.get(i).equalsIgnoreCase(username)) {
+		}          
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			if(m_friends.get(i).equalsIgnoreCase(friend))
+			{
 				m_friends.remove(i);
-				m_tcpSession.write("Fr" + username);
+				// TODO: Dummy Code, should work perfectly fine.
+				m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+				m_database.selectDatabase(GameServer.getDatabaseName());
+				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username) + "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
+				m_database.close();
+				m_tcpSession.write("Fr" + friend);
 				return;
 			}
 		}
@@ -1599,6 +1619,33 @@ public class PlayerChar extends Char implements Battleable, Tradeable {
 	 */
 	public void updateClientSprite() {
 		TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(m_id, m_sprite));
+	}
+	
+	/** Sends all friends to the client. */
+	public void updateClientFriends()
+	{
+		m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword());
+		m_database.selectDatabase(GameServer.getDatabaseName());
+		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
+		// TODO: Dummy code, needs testing!
+		try
+		{
+			m_friends = new ArrayList<String>();
+			while(friends.next())
+			{
+				m_friends.add(friends.getString(0));
+			}
+		}
+		catch(SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			m_tcpSession.write("Fa" + m_friends.get(i));
+			System.out.println(m_friends.get(i));
+		}
+		m_database.close();
 	}
 
 	/**

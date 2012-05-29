@@ -376,7 +376,7 @@ public class LoginManager implements Runnable {
 	 */
 	private PlayerChar getPlayerObject(ResultSet result) {
 		try {
-			PlayerChar p = new PlayerChar();
+			PlayerChar p = new PlayerChar(result.getString("username"));
 			Pokemon [] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
 			

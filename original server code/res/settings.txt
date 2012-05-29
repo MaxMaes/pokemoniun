@@ -1,5 +1,0 @@
-localhost
-pokenet
-root
-Your Server Name
- 

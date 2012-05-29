@@ -85,7 +85,7 @@ public class ClientMap extends TiledMap {
 	 * @return
 	 */
 	public int getXOffset() {
-		return m_xOffset;
+		return m_xOffset; 
 	}
 
 	/**

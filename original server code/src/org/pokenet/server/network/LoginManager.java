@@ -300,27 +300,19 @@ public class LoginManager implements Runnable {
 	private void login(String username, char language, IoSession session, ResultSet result) {
 		//They are not logged in elsewhere, set the current login to the current server
 		long time = System.currentTimeMillis();
-		/*
-		 * Attempt to log the player in
-		 */
+		/* Attempt to log the player in */
 		Player player = getPlayerObject(result);
 		player.setLastLoginTime(time);
 		player.setTcpSession(session);
 		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
-		/*
-		 * Update the database with login information
-		 */
+		/* Update the database with login information */
 		m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		session.setAttribute("player", player);
-		/*
-		 * Send success packet to player, set their map and add them to a movement service
-		 */
+		/* Send success packet to player, set their map and add them to a movement servic */
 		this.initialiseClient(player, session);
-		/*
-		 * Add them to the list of players
-		 */
+		/* Add them to the list of players */
 		TcpProtocolHandler.addPlayer(player);
 		GameServer.getInstance().updatePlayerCount();
 		System.out.println("INFO: " + username + " logged in.");
@@ -344,7 +336,7 @@ public class LoginManager implements Runnable {
 		//Send money
 		p.updateClientMoney();
 		//Send their friend list to them
-//		p.updateClientFriends();
+		p.updateClientFriends();
 		//Send badges
 		p.updateClientBadges();
 		p.initializeClientSkills();

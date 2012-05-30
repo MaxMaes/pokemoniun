@@ -10,7 +10,7 @@
 [FIX] Potions are now in the right backpack.
 [FIX] Giovani (8th gym leader in kanto) now gives the correct badge.
 [FIX] Move buttons now get disabled correctly when switching pokemon.
-[FIX] Generation IV sprites -> needs verifying.
+*[FIX] Generation IV sprites -> needs verifying.
 *[FIX] SpeechFrame no longer leaves a ghost behind. (It doesn't with 1 or 2. But does with more than 2)
 [FIX] Total experience is now correctly displayed in the Pokemon window.
 [FIX] Database is updated after the logout.
@@ -18,7 +18,7 @@
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.
 [ADD] Double Escape doesn't close the game, Esc + Enter now does. Esc cancels quitting.
-[ADD] Back buttons on the login screen and server select screen. (The back button to language select doesn't function)
+*[ADD] Back buttons on the login screen and server select screen. (The back button to language select doesn't function)
 *[ADD] Trading with items -> Untested, works same way as evo stones. If this doesnt work already, the evo stone fix will probably work here as well.
 *[ADD] Cheatdetection system, since the client is open source we need a cheatdetection system on the server side.
 [ADD] Black background instead of the loading screen when inside the game.
@@ -31,10 +31,10 @@
 *[ADD] Trainers now give more base gold.
 *[ADD] Working FriendList that is saved inside the database.
 
-[(possible)ADD] Auto-Updater, needs some further discussions.
+*[(possible)ADD] Auto-Updater, needs some further discussions.
 
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.
-[BUG] On relog items get incremently multiplied by the quantity that they actually have. 1x10 -> relog -> 2x10 -> relog -> 3x10. This effect is only visually.
+*[BUG] On relog items get incremently multiplied by the quantity that they actually have. 1x10 -> relog -> 2x10 -> relog -> 3x10. This effect is only visually.
 
-*These features have to be reimplemented and/or checked
+*These features have to be reimplemented and/or verified.

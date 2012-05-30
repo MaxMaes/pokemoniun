@@ -637,6 +637,7 @@ public class Player extends Character implements Battleable, Tradeable {
 	 */
 	public void addFriend(String friend)
 	{
+		/* Open for optimization, code works. */
 		if(m_friends == null)
 			m_friends = new ArrayList<String>();
 		if(m_friends.size() < 10)
@@ -654,6 +655,7 @@ public class Player extends Character implements Battleable, Tradeable {
 	 */
 	public void removeFriend(String friend)
 	{
+		/* Open for optimization, code works. */
 		if(m_friends == null)
 		{
 			m_friends = new ArrayList<String>();
@@ -1607,6 +1609,7 @@ public class Player extends Character implements Battleable, Tradeable {
 	/** Sends all friends to the client. */
 	public void updateClientFriends()
 	{
+		/* Problem with getting friends from the query, query works. */
 		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
 		try
 		{

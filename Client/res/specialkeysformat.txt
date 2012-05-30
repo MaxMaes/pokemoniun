@@ -1,3 +1,9 @@
+//Arrow keys
+KEY_UP
+KEY_DOWN
+KEY_LEFT
+KEY_RIGHT
+//
 ESCAPE
 TAB
 DEL

@@ -408,7 +408,7 @@ public class GameClient extends BasicGame
 				{
 					handleKeyPress(lastPressedKey);
 				}
-				if(lastPressedKey != Input.KEY_W && lastPressedKey != Input.KEY_A && lastPressedKey != Input.KEY_S && lastPressedKey != Input.KEY_D)
+				if(lastPressedKey != KeyManager.getKey(Action.WALK_UP) && lastPressedKey != KeyManager.getKey(Action.WALK_LEFT) && lastPressedKey != KeyManager.getKey(Action.WALK_DOWN) && lastPressedKey != KeyManager.getKey(Action.WALK_RIGHT))
 				{
 					lastPressedKey = -2;
 				}

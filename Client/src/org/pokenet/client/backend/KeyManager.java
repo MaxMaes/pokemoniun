@@ -70,51 +70,124 @@ public class KeyManager
 					keydata = data[1].split(",");
 					if(data[0].equals("UP"))
 						for(String st : keydata)
-							keys.put(Action.WALK_UP, stringToInt(st));
+							if(checkNotNull(Action.WALK_UP, st))
+								keys.put(Action.WALK_UP, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("LEFT"))
 						for(String st : keydata)
-							keys.put(Action.WALK_LEFT, stringToInt(st));
+							if(checkNotNull(Action.WALK_LEFT, st))
+								keys.put(Action.WALK_LEFT, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("RIGHT"))
 						for(String st : keydata)
-							keys.put(Action.WALK_RIGHT, stringToInt(st));
+							if(checkNotNull(Action.WALK_RIGHT, st))
+								keys.put(Action.WALK_RIGHT, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("DOWN"))
 						for(String st : keydata)
-							keys.put(Action.WALK_DOWN, stringToInt(st));
+							if(checkNotNull(Action.WALK_DOWN, st))
+								keys.put(Action.WALK_DOWN, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("OLD"))
 						for(String st : keydata)
-							keys.put(Action.ROD_OLD, stringToInt(st));
+							if(checkNotNull(Action.ROD_OLD, st))
+								keys.put(Action.ROD_OLD, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("GOOD"))
 						for(String st : keydata)
-							keys.put(Action.ROD_GOOD, stringToInt(st));
+							if(checkNotNull(Action.ROD_GOOD, st))
+								keys.put(Action.ROD_GOOD, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("GREAT"))
 						for(String st : keydata)
-							keys.put(Action.ROD_GREAT, stringToInt(st));
+							if(checkNotNull(Action.ROD_GREAT, st))
+								keys.put(Action.ROD_GREAT, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("ULTRA"))
 						for(String st : keydata)
-							keys.put(Action.ROD_ULTRA, stringToInt(st));
+							if(checkNotNull(Action.ROD_ULTRA, st))
+								keys.put(Action.ROD_ULTRA, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("ATTACK1"))
 						for(String st : keydata)
-							keys.put(Action.POKEMOVE_1, stringToInt(st));
+							if(checkNotNull(Action.POKEMOVE_1, st))
+								keys.put(Action.POKEMOVE_1, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("ATTACK2"))
 						for(String st : keydata)
-							keys.put(Action.POKEMOVE_2, stringToInt(st));
+							if(checkNotNull(Action.POKEMOVE_2, st))
+								keys.put(Action.POKEMOVE_2, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("ATTACK3"))
 						for(String st : keydata)
-							keys.put(Action.POKEMOVE_3, stringToInt(st));
+							if(checkNotNull(Action.POKEMOVE_3, st))
+								keys.put(Action.POKEMOVE_3, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
 					
 					else if(data[0].equals("ATTACK4"))
 						for(String st : keydata)
-							keys.put(Action.POKEMOVE_4, stringToInt(st));
+							if(checkNotNull(Action.POKEMOVE_4, st))
+								keys.put(Action.POKEMOVE_4, stringToInt(st));
+							else
+							{
+								reset();
+								return;
+							}
+					
 					else if(data[0].equals("TALK"))
 						for(String st : keydata)
 							keys.put(Action.INTERACTION, stringToInt(st));
@@ -138,6 +211,40 @@ public class KeyManager
 		finally
 		{
 			System.out.println("INFO: Keys Loaded");
+		}
+	}
+	
+	private static void reset()
+	{
+		try
+		{
+			generateDefaultSettings();
+		}
+		catch(IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		initialize();
+	}
+	
+	private static boolean checkNotNull(Action action, String key)
+	{
+		if(stringToInt(key) == null)
+		{
+			try
+			{
+				generateDefaultSettings();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 	
@@ -192,13 +299,13 @@ public class KeyManager
 	 */
 	private static Integer stringToInt(String st)
 	{
-		if(st.equals("UP"))
+		if(st.equals("KEY_UP"))
 			return Input.KEY_UP;
-		else if(st.equals("LEFT"))
+		else if(st.equals("KEY_LEFT"))
 			return Input.KEY_LEFT;
-		else if(st.equals("RIGHT"))
+		else if(st.equals("KEY_RIGHT"))
 			return Input.KEY_RIGHT;
-		else if(st.equals("DOWN"))
+		else if(st.equals("KEY_DOWN"))
 			return Input.KEY_DOWN;
 		else if(st.equals("A"))
 			return Input.KEY_A;

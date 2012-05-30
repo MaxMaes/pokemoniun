@@ -13,6 +13,7 @@
 [FIX] Generation IV sprites -> needs verifying.
 *[FIX] SpeechFrame no longer leaves a ghost behind. (It doesn't with 1 or 2. But does with more than 2)
 [FIX] Total experience is now correctly displayed in the Pokemon window.
+[FIX] Database is updated after the logout.
 
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.
@@ -32,7 +33,6 @@
 
 [(possible)ADD] Auto-Updater, needs some further discussions.
 
-[BUG] Database isn't updated after the logout (Untested).
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.
 [BUG] On relog items get incremently multiplied by the quantity that they actually have. 1x10 -> relog -> 2x10 -> relog -> 3x10. This effect is only visually.

@@ -1558,6 +1558,7 @@ public class GameClient extends BasicGame
 	{
 		m_language = Language.ENGLISH;
 		m_languageChosen = false;
+		m_login.showLanguageSelect();
 	}
 
 	/**
@@ -1566,7 +1567,8 @@ public class GameClient extends BasicGame
 	public void returnToServerSelect()
 	{
 		m_host = "";
-		// disconnect();
+		getLoginScreen().setServerVersion("?");
+		disconnect();
 	}
 
 	public boolean chatServerIsActive()

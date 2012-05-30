@@ -24,7 +24,7 @@ Spacebar/nTalk/n/n
 Right-click/nInteract with other players/n/n
 Use the whisper option to start a private chat. 
 Type the /playercount command into local chat to see how many players are online./n
-For more information, go to www.pokemonium.net
+For more information, go to www.pokemonium.com
 Chat: Local
 You must accept Terms of Service (ToS) before registering.
 Male

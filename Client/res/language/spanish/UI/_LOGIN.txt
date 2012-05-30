@@ -1,42 +1,42 @@
-Pokemonium Server Selection
-Note: Your account will work on all servers
-Private Server
-About
-ToS
-Username:
-Password:
-Login
-Register
-Pokemonium Registration
-Confirm Password:
-D.O.B. (dd/mm/yyyy):
-Email:
-Confirm Email:
-Starter Pokemon:
-Gender:
-Male
-Female
-Terms of Service
-I agree to the ToS
-Cancel
-User or password are incorrect /nVerify you typed user and password correctly.
-The account server is currently offline. /nPlease try again later.
-Successful registration. You may now login on any server.
-The account server is currently offline./nPlease try again later.
-Username already taken.
-Unknown error occurred. Please try again later.
-Invalid data.
-You must accept Terms of Service (ToS) before registering.
-Date of birth invalid.
-Not a valid email.
-Passwords do not match.
-Username must have at least 4 characters and no more than 12.
-1. No swearing./n2. No spamming./n3. One account per person./n4. No scamming./n5. Do not talk in all capitals./n6. No botting./n7. No hacking./n/nBreaking any of these rules may/nresult in a ban. We would also like/nour members to note that thisis a/nbeta release, your account may be/ndeleted at anytime to facilitate improvements. Any bugs or issues should be reported to developers.
-About Pokenet
-Pokenet is a free, non-profit, open-source Pokemon MMORPG. 
-Pokenet is in no way affiliated with or officially supported by Nintendo.
-Pokemon is a registered trademark of Nintendo (1995 - Present)./n/n
-Contributors:
--DefaulT, Fshy, ZombieBear, Ryan, Pivot,/nIlentcape, Sienide, TMKCodes, Drawig,/nLordAdmiral, Psycho, Dragina,/nOblivion, Lastplacer, Firefly17, Gama,/nJacobe, Latias, Callagan, xkendrickx,/nMewtwo, PheonixClaw, JayJay, May, Nushio, PokeRemixStudio
-You have been disconnected from the game server.
-The e-mail address you have entered is already in use.
+Seleccion de Servidor Pokenet
+Nota: Tu cuenta funciona en todos los servidores
+Servidor Privado
+Acerca de
+Terminos de Servicio
+Usuario 
+Clave     
+Ingresar
+Registrar
+Registro Pokenet
+Confirmar Clave
+F.D.N. (dd/mm/aaaa)
+Email
+Confirma Email
+Pokemon Inicial 
+Genero
+Hombre
+Mujer
+Terminos de Servicio
+Acepto los TdS
+Cancelar
+Usuario o Clave Incorrecto/nVerifica que escribiste correctamente tu nombre de usuario y clave
+El servidor de la cuenta esta actualmente desconectado./nPor favor intenta de nuevo mas tarde.
+Registro exitoso. /nAhora puedes ingresar en cualquier servidor.
+El servidor de la cuenta esta actualmente desconectado./nPor favor intenta de nuevo mas tarde.
+El nombre de usuario ya ha sido tomado.
+Ha ocurrido un error desconocido. /nPor favor intenta de nuevo mas tarde.
+Datos invalidos. 
+Debes aceptar los Terminos de Servicio (TdS) para poder registrarte. 
+Fecha de Nacimiento invalida. 
+El Correo no es valido. 
+Las claves no coinciden. 
+El Nombre de Usuario debe tener por lo menos 4 letras, y no mas de 12. 
+1. No maldecir./n2. No spam./n3. Una cuenta por persona (Revisamos)./n4. No estafar./n5. No hables en mayusculas./n6. No uses bots./n7. No intentes hackear./n/nRomper cualquiera de estas/nreglas puede causar un ban. Recuerda que esto es/nun beta, tu cuenta puede sufir cambios o /nperdida de informacion. Cualquier problema, reportalo en el chat de Pokenet: www.pokeglobal.org/chat.php
+Sobre Pokenet
+Pokenet es un juego masivo online libre, gratuito y sin fines lucrativos.
+Pokenet no esta afiliado a Nintendo, ni es apoyado por el mismo. 
+Pokemon es una marca registrada de Nintendo (1995 - Presente). /n/n
+Contribuidores:
+Fshy, ZombieBear, Ryan, Pivot,/nIlentcape, Sienide, TMKCodes, Drawig,/nLordAdmiral, Psycho, Dragina,/nOblivion, Lastplacer, Firefly17, Gama,/nJacobe, Latias, Callagan, xkendrickx,/nMewtwo, PheonixClaw, JayJay, May, Nushio, PokeRemixStudio
+Haz sido desconectado del servidor. 
+El correo que introdujiste ya esta en uso.

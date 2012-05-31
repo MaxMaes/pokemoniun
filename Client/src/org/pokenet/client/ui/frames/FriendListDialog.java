@@ -160,7 +160,13 @@ public class FriendListDialog extends Frame
 	 */
 	public void removeFriend(String friend)
 	{
-		m_friends.remove(friend);
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			if(m_friends.get(i).equals(friend))
+			{
+				m_friends.remove(friend);
+			}
+		}
 		scroll(0);
 	}
 
@@ -171,7 +177,16 @@ public class FriendListDialog extends Frame
 	 */
 	public void addFriend(String friend)
 	{
-		m_friends.add(friend);
+		boolean knownFriend = false;
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			if(m_friends.get(i).equals(friend))
+				knownFriend = true;
+		}
+		if(!knownFriend)
+			m_friends.add(friend);
+		else
+			System.out.println("This friend is already present in your Friendlist!");
 		scroll(0);
 	}
 

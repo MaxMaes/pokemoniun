@@ -32,10 +32,11 @@ import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewar
 
 /**
  * A battlefield for NPC battles
+ * 
  * @author shadowkanji
- *
  */
-public class NpcBattleField extends BattleField {
+public class NpcBattleField extends BattleField
+{
 	private Player m_player;
 	private NPC m_npc;
 	private BattleTurn[] m_turn = new BattleTurn[2];
@@ -43,19 +44,20 @@ public class NpcBattleField extends BattleField {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param mech
 	 * @param p
 	 * @param n
 	 */
-	public NpcBattleField(BattleMechanics mech, Player p, NPC n) {
+	public NpcBattleField(BattleMechanics mech, Player p, NPC n)
+	{
 		super(mech, new Pokemon[][] { p.getParty(), n.getParty(p) });
 		/* Store the player and npc */
 		m_player = p;
 		m_npc = n;
 
 		/* Start the battle */
-		TcpProtocolHandler.writeMessage(p.getTcpSession(), 
-				new BattleInitMessage(false, getAliveCount(1)));
+		TcpProtocolHandler.writeMessage(p.getTcpSession(), new BattleInitMessage(false, getAliveCount(1)));
 		/* Send enemy's Pokemon data */
 		sendPokemonData(p);
 		/* Set the player's battle id */
@@ -66,59 +68,71 @@ public class NpcBattleField extends BattleField {
 		applyWeather();
 		requestMoves();
 	}
-	
+
 	/**
 	 * Sends pokemon data to the client
+	 * 
 	 * @param receiver
 	 */
-	private void sendPokemonData(Player receiver) {
-		for (int i = 0; i < this.getParty(1).length; i++) {
-			if (this.getParty(1)[i] != null) {
-				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), 
-						new EnemyDataMessage(i, getParty(1)[i]));
+	private void sendPokemonData(Player receiver)
+	{
+		for(int i = 0; i < this.getParty(1).length; i++)
+		{
+			if(this.getParty(1)[i] != null)
+			{
+				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), new EnemyDataMessage(i, getParty(1)[i]));
 			}
 		}
 	}
 
 	@Override
-	public void applyWeather() {
-		if (m_player.getMap().isWeatherForced()) {
-			switch (m_player.getMap().getWeather()) {
-			case NORMAL:
-				return;
-			case RAIN:
-				this.applyEffect(new RainEffect());
-				return;
-			case HAIL:
-				this.applyEffect(new HailEffect());
-				return;
-			case SANDSTORM:
-				this.applyEffect(new SandstormEffect());
-				return;
-			default:
-				return;
+	public void applyWeather()
+	{
+		if(m_player.getMap().isWeatherForced())
+		{
+			switch(m_player.getMap().getWeather())
+			{
+				case NORMAL:
+					return;
+				case RAIN:
+					this.applyEffect(new RainEffect());
+					return;
+				case HAIL:
+					this.applyEffect(new HailEffect());
+					return;
+				case SANDSTORM:
+					this.applyEffect(new SandstormEffect());
+					return;
+				default:
+					return;
 			}
-		} else {
+		}
+		else
+		{
 			FieldEffect f = TimeService.getWeatherEffect();
-			if (f != null) {
+			if(f != null)
+			{
 				this.applyEffect(f);
 			}
 		}
 	}
 
 	@Override
-	public void clearQueue() {
+	public void clearQueue()
+	{
 		m_turn[0] = null;
 		m_turn[1] = null;
 	}
 
 	@Override
-	public BattleTurn[] getQueuedTurns() {
+	public BattleTurn[] getQueuedTurns()
+	{
 		return m_turn;
 	}
 
 	@Override
-	public String getTrainerName(int idx) {
+	public String getTrainerName(int idx)
+	{
 		if(idx == 0)
 			return m_player.getName();
 		else
@@ -126,164 +140,160 @@ public class NpcBattleField extends BattleField {
 	}
 
 	@Override
-	public void informPokemonFainted(int trainer, int idx) {
-		if (m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new FaintMessage(getParty(trainer)[idx].getSpeciesName()));
+	public void informPokemonFainted(int trainer, int idx)
+	{
+		if(m_player != null)
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName()));
 	}
 
 	@Override
-	public void informPokemonHealthChanged(Pokemon poke, int change) {
-		if (m_player != null) {
-			if (getActivePokemon()[0] == poke) {
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new HealthChangeMessage(0 , change));
-			} else if(getActivePokemon()[1] == poke) {
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new HealthChangeMessage(1 , change));
-			} else {
+	public void informPokemonHealthChanged(Pokemon poke, int change)
+	{
+		if(m_player != null)
+		{
+			if(getActivePokemon()[0] == poke)
+			{
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(0, change));
+			}
+			else if(getActivePokemon()[1] == poke)
+			{
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(1, change));
+			}
+			else
+			{
 				int index = getPokemonPartyIndex(0, poke);
-				if(index > -1) {
+				if(index > -1)
+				{
 					m_player.getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
 					return;
 				}
-				//TODO: Add support for NPC pokemon healing for pokemon in pokeballs
+				// TODO: Add support for NPC pokemon healing for pokemon in pokeballs
 			}
 		}
 	}
 
 	@Override
-	public void informStatusApplied(Pokemon poke, StatusEffect eff) {
+	public void informStatusApplied(Pokemon pokemon, StatusEffect eff)
+	{
 		if(m_finished)
 			return;
-		if (m_player != null) {
-			if (getActivePokemon()[0].compareTo(poke) == 0)
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
-								eff.getName(), false));
-			else if(poke.compareTo(getActivePokemon()[1]) == 0)
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
-								eff.getName(), false));
+		if(m_player != null)
+		{
+			if(getActivePokemon()[0].equals(pokemon))
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), false));
+			else if(pokemon.equals(getActivePokemon()[1]))
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), false));
 		}
 	}
 
 	@Override
-	public void informStatusRemoved(Pokemon poke, StatusEffect eff) {
+	public void informStatusRemoved(Pokemon pokemon, StatusEffect eff)
+	{
 		if(m_finished)
 			return;
-		if (m_player != null) {
-			if (getActivePokemon()[0].compareTo(poke) == 0 &&
-					!getActivePokemon()[0].isFainted())
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new StatusChangeMessage(0, 
-								poke.getSpeciesName(), 
-								eff.getName(), true));
-			else if(poke.compareTo(getActivePokemon()[1]) == 0 &&
-					!getActivePokemon()[1].isFainted())
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new StatusChangeMessage(1, 
-								poke.getSpeciesName(), 
-								eff.getName(), true));
+		if(m_player != null)
+		{
+			if(getActivePokemon()[0].equals(pokemon) && !getActivePokemon()[0].isFainted())
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), true));
+			else if(pokemon.equals(getActivePokemon()[1]) && !getActivePokemon()[1].isFainted())
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), true));
 		}
 	}
 
 	@Override
-	public void informSwitchInPokemon(int trainer, Pokemon poke) {
-		if(m_player != null) {
-			if (trainer == 0) {
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new SwitchMessage(m_player.getName(),
-								poke.getSpeciesName(),
-								trainer,
-								getPokemonPartyIndex(trainer, poke)));
-			} else {
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-						new SwitchMessage(m_npc.getName(),
-								poke.getSpeciesName(),
-								trainer,
-								getPokemonPartyIndex(trainer, poke)));
+	public void informSwitchInPokemon(int trainer, Pokemon poke)
+	{
+		if(m_player != null)
+		{
+			if(trainer == 0)
+			{
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
+			}
+			else
+			{
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_npc.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
 			}
 		}
 	}
 
 	@Override
-	public void informUseMove(Pokemon poke, String name) {
-		if (m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new BattleMoveMessage(poke.getSpeciesName(), name));
+	public void informUseMove(Pokemon poke, String name)
+	{
+		if(m_player != null)
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name));
 	}
 
 	@Override
-	public void informVictory(int winner) {
+	public void informVictory(int winner)
+	{
 		m_finished = true;
-		int money = getParty(1)[0].getLevel() * (getMechanics().getRandom().nextInt(4) + 1);
-		if (winner == 0) {
-			/* Reward the player */
-
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new BattleRewardMessage(BattleRewardType.MONEY,
-					money));
-			m_player.setMoney(m_player.getMoney() + money);
-			/* End the battle */
-			m_player.removeTempStatusEffects();
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new BattleEndMessage(BattleEnd.WON));
-			/* Now add Trainer EXP */
+		int money = 30 * (getMechanics().getRandom().nextInt(5) + 1);	// The magic cookie is used as a base to reward gold (replace later).
+		if(winner == 0)
+		{ /*Ends the battle and the player gets rewarded with gold and experience. 
+			If the gym leader was already beaten the player gets triple the experience and 100 extra gold. 
+		 	If the enemy trainer was a Gym Leader the player is also rewarded with the badge.*/
 			int trainerExp = 0;
-			for(int i = 0; i < getParty(1).length; i++) {
+			for(int i = 0; i < getParty(1).length; i++)
+			{
 				if(getParty(1)[i] != null)
 					trainerExp += getParty(1)[i].getLevel() / 2;
 			}
-			/* If the player got a badge, triple the EXP gained */
 			if(m_npc.isGymLeader() && !m_player.hasBadge(m_npc.getBadge()))
-				trainerExp *= 2;
+			{
+				trainerExp *= 3;
+				money += 100;
+			}
 			if(trainerExp > 0)
 				m_player.addTrainingExp(trainerExp);
-			/* Give the player the badge if it's a gym leader */
-			if(m_npc.isGymLeader()) {
+			if(m_npc.isGymLeader())
 				m_player.addBadge(m_npc.getBadge());
-			}
-		} else {
-			if(m_player.getMoney() - money >= 0) {
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));
+			m_player.setMoney(m_player.getMoney() + money);
+			m_player.removeTempStatusEffects();
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.WON));
+		}
+		else
+		{
+			if(m_player.getMoney() - money >= 0)
+			{
 				m_player.setMoney(m_player.getMoney() - money);
-			} else {
+			}
+			else
+			{
 				m_player.setMoney(0);
 			}
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new BattleEndMessage(BattleEnd.LOST));
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.LOST));
 			m_player.lostBattle();
 		}
 		m_player.updateClientMoney();
 		m_player.setBattling(false);
 		m_player.setTalking(false);
 		dispose();
-		if (m_dispatch != null) {
-			/*
-			 * This very bad programming but shoddy does it and forces us to do
-			 * it
-			 */
-			/*Thread t = m_dispatch;
-			m_dispatch = null;
-			t.stop(); let the thread manually return.*/
+		if(m_dispatch != null)
+		{
+			/* This very bad programming but shoddy does it and forces us to do it */
+			/* Thread t = m_dispatch; 
+			 * m_dispatch = null; 
+			 * t.stop(); let the thread manually return. */
 		}
 	}
 
 	@Override
-	public void queueMove(int trainer, BattleTurn move)
-			throws MoveQueueException {
+	public void queueMove(int trainer, BattleTurn move) throws MoveQueueException
+	{
 		/* Check if move exists */
-		if(move.isMoveTurn() && move.getId() != -1 &&
-				getActivePokemon()[trainer].getMove(move.getId()) == null) {
+		if(move.isMoveTurn() && move.getId() != -1 && getActivePokemon()[trainer].getMove(move.getId()) == null)
+		{
 			requestMove(trainer);
 			return;
 		}
 		/* Handle forced switches */
-		if(m_isWaiting && m_replace != null && m_replace[trainer]) {
-			if(!move.isMoveTurn()) {
-				if(getActivePokemon()[trainer].compareTo(this.getParty(trainer)[move.getId()]) != 0) {
+		if(m_isWaiting && m_replace != null && m_replace[trainer])
+		{
+			if(!move.isMoveTurn())
+			{
+				if(!getActivePokemon()[trainer].equals(this.getParty(trainer)[move.getId()]))
+				{
 					this.switchInPokemon(trainer, move.getId());
 					m_replace[trainer] = false;
 					m_isWaiting = false;
@@ -294,33 +304,41 @@ public class NpcBattleField extends BattleField {
 			return;
 		}
 		/* Queue the move */
-		if(m_turn[trainer] == null) {
+		if(m_turn[trainer] == null)
+		{
 			/* Handle Pokemon being unhappy and ignoring you */
-			if(trainer == 0 && !getActivePokemon()[0].isFainted()) {
-				if(getActivePokemon()[0].getHappiness() <= 40) {
+			if(trainer == 0 && !getActivePokemon()[0].isFainted())
+			{
+				if(getActivePokemon()[0].getHappiness() <= 40)
+				{
 					/* Pokemon is unhappy, they'll do what they feel like */
 					showMessage(getActivePokemon()[0].getSpeciesName() + " is unhappy!");
 					int moveID = getMechanics().getRandom().nextInt(4);
-					while (getActivePokemon()[0].getMove(moveID) == null)
+					while(getActivePokemon()[0].getMove(moveID) == null)
 						moveID = getMechanics().getRandom().nextInt(4);
 					move = BattleTurn.getMoveTurn(moveID);
-				} else if(getActivePokemon()[0].getHappiness() < 70) {
+				}
+				else if(getActivePokemon()[0].getHappiness() < 70)
+				{
 					/* Pokemon is partially unhappy, 50% chance they'll listen to you */
-					if(getMechanics().getRandom().nextInt(2) == 1) {
+					if(getMechanics().getRandom().nextInt(2) == 1)
+					{
 						showMessage(getActivePokemon()[0].getSpeciesName() + " is unhappy!");
 						int moveID = getMechanics().getRandom().nextInt(4);
-						while (getActivePokemon()[0].getMove(moveID) == null)
+						while(getActivePokemon()[0].getMove(moveID) == null)
 							moveID = getMechanics().getRandom().nextInt(4);
 						move = BattleTurn.getMoveTurn(moveID);
 					}
 				}
 			}
-			if (move.getId() == -1) {
-				if (m_dispatch == null
-						&& ((trainer == 0 && m_turn[1] != null) ||
-								(trainer == 1 && m_turn[0] != null))) {
-					m_dispatch = new Thread(new Runnable() {
-						public void run() {
+			if(move.getId() == -1)
+			{
+				if(m_dispatch == null && ((trainer == 0 && m_turn[1] != null) || (trainer == 1 && m_turn[0] != null)))
+				{
+					m_dispatch = new Thread(new Runnable()
+					{
+						public void run()
+						{
 							executeTurn(m_turn);
 							m_dispatch = null;
 						}
@@ -328,59 +346,77 @@ public class NpcBattleField extends BattleField {
 					m_dispatch.start();
 					return;
 				}
-			} else {
+			}
+			else
+			{
 				// Handle a fainted pokemon
-				if (this.getActivePokemon()[trainer].isFainted()) {
-					if (!move.isMoveTurn() && this.getParty(trainer)[move.getId()] != null
-							&& this.getParty(trainer)[move.getId()].getHealth() > 0) {
+				if(this.getActivePokemon()[trainer].isFainted())
+				{
+					if(!move.isMoveTurn() && this.getParty(trainer)[move.getId()] != null && this.getParty(trainer)[move.getId()].getHealth() > 0)
+					{
 						switchInPokemon(trainer, move.getId());
 						requestMoves();
 						return;
-					} else {
+					}
+					else
+					{
 						// The player still has pokemon left
-						if (getAliveCount(trainer) > 0) {
+						if(getAliveCount(trainer) > 0)
+						{
 							requestPokemonReplacement(trainer);
 							return;
-						} else {
+						}
+						else
+						{
 							// the player has no pokemon left. Announce winner
-							if (trainer == 0)
+							if(trainer == 0)
 								this.informVictory(1);
 							else
 								this.informVictory(0);
 							return;
 						}
 					}
-				} else {
+				}
+				else
+				{
 					// The turn was used to attack!
-					if (move.isMoveTurn()) {
+					if(move.isMoveTurn())
+					{
 						// Handles Struggle
-						if (getActivePokemon()[trainer].mustStruggle())
+						if(getActivePokemon()[trainer].mustStruggle())
 							m_turn[trainer] = BattleTurn.getMoveTurn(-1);
-						else {
+						else
+						{
 							// The move has no more PP
-							if (this.getActivePokemon()[trainer].getPp(move
-									.getId()) <= 0) {
-								if (trainer == 0) {
-									TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-											new NoPPMessage(this.getActivePokemon()[trainer]
-												.getMoveName(move.getId())));
+							if(this.getActivePokemon()[trainer].getPp(move.getId()) <= 0)
+							{
+								if(trainer == 0)
+								{
+									TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer].getMoveName(move.getId())));
 									requestMove(0);
-								} else {
+								}
+								else
+								{
 									/* Get another move from the npc */
 									requestMove(1);
 								}
 								return;
-							} else {
+							}
+							else
+							{
 								// Assign the move to the turn
 								m_turn[trainer] = move;
 							}
 						}
-					} else {
-						if (this.getActivePokemon()[trainer].isActive() && 
-								this.getParty(trainer)[move.getId()] != null &&
-								this.getParty(trainer)[move.getId()].getHealth() > 0) {
+					}
+					else
+					{
+						if(this.getActivePokemon()[trainer].isActive() && this.getParty(trainer)[move.getId()] != null && this.getParty(trainer)[move.getId()].getHealth() > 0)
+						{
 							m_turn[trainer] = move;
-						} else {
+						}
+						else
+						{
 							requestMove(trainer);
 							return;
 						}
@@ -389,18 +425,23 @@ public class NpcBattleField extends BattleField {
 			}
 		}
 		/* Ensures the npc selected a move */
-		if(trainer == 0 && m_turn[0] != null && m_turn[1] == null) {
+		if(trainer == 0 && m_turn[0] != null && m_turn[1] == null)
+		{
 			requestMove(1);
 			return;
 		}
-		if (m_dispatch != null)
+		if(m_dispatch != null)
 			return;
-		// Both turns are ready to be performed 
-		if (m_turn[0] != null && m_turn[1] != null) {
-			m_dispatch = new Thread(new Runnable() {
-				public void run() {
+		// Both turns are ready to be performed
+		if(m_turn[0] != null && m_turn[1] != null)
+		{
+			m_dispatch = new Thread(new Runnable()
+			{
+				public void run()
+				{
 					executeTurn(m_turn);
-					for (int i = 0; i < m_participants; ++i) {
+					for(int i = 0; i < m_participants; ++i)
+					{
 						m_turn[i] = null;
 					}
 					m_dispatch = null;
@@ -411,55 +452,71 @@ public class NpcBattleField extends BattleField {
 	}
 
 	@Override
-	public void refreshActivePokemon() {
-		m_player.getTcpSession().write(
-				"bh0" + this.getActivePokemon()[0].getHealth());
-		m_player.getTcpSession().write(
-				"bh1" + this.getActivePokemon()[1].getHealth());
+	public void refreshActivePokemon()
+	{
+		m_player.getTcpSession().write("bh0" + this.getActivePokemon()[0].getHealth());
+		m_player.getTcpSession().write("bh1" + this.getActivePokemon()[1].getHealth());
 	}
 
 	@Override
-	public void requestAndWaitForSwitch(int party) {
+	public void requestAndWaitForSwitch(int party)
+	{
 		requestPokemonReplacement(party);
-		if (party == 0) {
+		if(party == 0)
+		{
 			/* Request a switch from the player */
-			if (!m_replace[party]) {
+			if(!m_replace[party])
+			{
 				return;
 			}
 			m_isWaiting = true;
-			do {
-				synchronized (m_dispatch) {
-					try {
+			do
+			{
+				synchronized(m_dispatch)
+				{
+					try
+					{
 						m_dispatch.wait(1000);
-					} catch (InterruptedException e) {
+					}
+					catch(InterruptedException e)
+					{
 
 					}
 				}
-			} while ((m_replace != null) && m_replace[party]);
+			}
+			while((m_replace != null) && m_replace[party]);
 		}
 	}
 
 	@Override
-	protected void requestMove(int trainer) {
-		if(trainer == 0) {
+	protected void requestMove(int trainer)
+	{
+		if(trainer == 0)
+		{
 			/* Request move from player */
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new BattleMoveRequest());
-		} else {
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveRequest());
+		}
+		else
+		{
 			/* Request move from npc */
-			try {
-				if(getActivePokemon()[1].hasTypeWeakness(getActivePokemon()[0])
-						&& this.getAliveCount(1) >= 3) {
+			try
+			{
+				if(getActivePokemon()[1].hasTypeWeakness(getActivePokemon()[0]) && this.getAliveCount(1) >= 3)
+				{
 					/* The npc should switch out a different Pokemon */
 					/* 50:50 chance they will switch */
-					if(this.getMechanics().getRandom().nextInt(3) == 0) {
+					if(this.getMechanics().getRandom().nextInt(3) == 0)
+					{
 						int index = 0;
-						while(this.getParty(1)[index] == null ||
-								this.getParty(1)[index].isFainted() ||
-								this.getParty(1)[index].compareTo(getActivePokemon()[1]) == 0) {
-							try {
+						while(this.getParty(1)[index] == null || this.getParty(1)[index].isFainted() || this.getParty(1)[index].compareTo(getActivePokemon()[1]) == 0)
+						{
+							try
+							{
 								Thread.sleep(100);
-							} catch (Exception e) {}
+							}
+							catch(Exception e)
+							{
+							}
 							index = getMechanics().getRandom().nextInt(6);
 						}
 						this.queueMove(1, BattleTurn.getSwitchTurn(index));
@@ -468,46 +525,62 @@ public class NpcBattleField extends BattleField {
 				}
 				/* If they did not switch, select a move */
 				int moveID = getMechanics().getRandom().nextInt(4);
-				while (getActivePokemon()[1].getMove(moveID) == null)
+				while(getActivePokemon()[1].getMove(moveID) == null)
 					moveID = getMechanics().getRandom().nextInt(4);
 				queueMove(1, BattleTurn.getMoveTurn(moveID));
-			} catch (Exception e) {
+			}
+			catch(Exception e)
+			{
 				e.printStackTrace();
 			}
 		}
 	}
 
 	@Override
-	protected void requestMoves() {
+	protected void requestMoves()
+	{
 		clearQueue();
 		requestMove(1);
 		requestMove(0);
 	}
 
 	@Override
-	protected void requestPokemonReplacement(int i) {
-		if(i == 0) {
+	protected void requestPokemonReplacement(int i)
+	{
+		if(i == 0)
+		{
 			/* Request Pokemon replacement from player */
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-					new SwitchRequest());
-		} else {
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchRequest());
+		}
+		else
+		{
 			/* Request Pokemon replacement from npc */
-			if(getAliveCount(1) == 0) {
+			if(getAliveCount(1) == 0)
+			{
 				informVictory(0);
-			} else {
-				try {
+			}
+			else
+			{
+				try
+				{
 					int index = 0;
 
-					while(this.getParty(1)[index] == null ||
-							this.getParty(1)[index].isFainted()) {
-						try {
+					while(this.getParty(1)[index] == null || this.getParty(1)[index].isFainted())
+					{
+						try
+						{
 							Thread.sleep(100);
-						} catch (Exception e) {}
+						}
+						catch(Exception e)
+						{
+						}
 						index = getMechanics().getRandom().nextInt(6);
 					}
 					this.switchInPokemon(1, BattleTurn.getSwitchTurn(index).getId());
-	                requestMoves();
-				} catch (Exception e) {
+					requestMoves();
+				}
+				catch(Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -515,20 +588,23 @@ public class NpcBattleField extends BattleField {
 	}
 
 	@Override
-	public void showMessage(String message) {
+	public void showMessage(String message)
+	{
 		if(m_finished)
 			return;
 		if(m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), 
-				new BattleMessage(message));
+			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMessage(message));
 	}
 
 	@Override
-	public void forceExecuteTurn() {
-		if(m_turn[0] == null) {
+	public void forceExecuteTurn()
+	{
+		if(m_turn[0] == null)
+		{
 			m_turn[0] = BattleTurn.getMoveTurn(-1);
 		}
-		if(m_turn[1] == null) {
+		if(m_turn[1] == null)
+		{
 			m_turn[1] = BattleTurn.getMoveTurn(-1);
 		}
 		executeTurn(m_turn);

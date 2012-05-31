@@ -1616,7 +1616,7 @@ public class Player extends Character implements Battleable, Tradeable {
 			m_friends = new ArrayList<String>();
 			while(friends.next())
 			{
-				m_friends.add(friends.getString(0));
+				m_friends.add(friends.getString(1));
 			}
 		}
 		catch(SQLException sqle)
@@ -1625,8 +1625,7 @@ public class Player extends Character implements Battleable, Tradeable {
 		}
 		for(int i = 0; i < m_friends.size(); i++)
 		{
-			m_tcpSession.write("Fa" + m_friends.get(i));
-			System.out.println(m_friends.get(i));
+			m_tcpSession.write("mFa" + m_friends.get(i));
 		}
 	}
 

@@ -36,14 +36,14 @@ public class Trade implements Runnable{
 		m_offers.put(player1, null);
 		m_offers.put(player2, null);
 		/* Block players of same IP address from trading */		
-		if(player1.getIpAddress().equalsIgnoreCase(player2.getIpAddress())) {		
+		/*if(player1.getIpAddress().equalsIgnoreCase(player2.getIpAddress())) {		
 			if(player1 instanceof Player) {		
 				Player p = (Player) player1;		
 				p.getTcpSession().write("!Trading cannot be done with that player");		
 			}		
 			endTrade();		
 			return;		
-		}
+		}*/
 		if(player1 instanceof Player) {
 			/* Tell the client to open the trade window */
 			Player p = (Player) player1;
@@ -327,11 +327,43 @@ public class Trade implements Runnable{
 							curPokemon.setEvolution(currentEvolution);
 							p.getTcpSession().write("PE" + index);
 							break;
-						} else if (currentEvolution.getType() == EvolutionTypes.TradeItem){
-							// TODO: trade item evolving
-							// need to check to see if they have the right item
+						} else if(currentEvolution.getType() == EvolutionTypes.TradeItem)
+						{
+							/* TODO: TEST THIS CODE! Coded same way as evo stones, so if that is fixed, same fix will work here if this doesnt work already */
+							/*if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("DRAGON SCALE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DRAGONSCALE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEATOOTH")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEATOOTH"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("METAL COAT")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("METALCOAT"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("KING'S ROCK")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("KINGSROCK"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("UP-GRADE")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("UP_GRADE"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}*/
 							break;
 						}
+						
 					}
 				}
 				

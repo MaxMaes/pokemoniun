@@ -4,7 +4,7 @@ package org.pokenet.server.backend;
 import java.util.Random;
 
 import org.pokenet.server.GameServer;
-import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.backend.entity.PlayerChar;
 import org.pokenet.server.backend.item.Item;
 import org.pokenet.server.backend.item.Item.ItemAttribute;
 import org.pokenet.server.battle.BattleTurn;
@@ -33,7 +33,7 @@ public class ItemProcessor implements Runnable {
 		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL
 	};
 
-	private final Player m_player;
+	private final PlayerChar m_player;
 	private final String[]   m_details;
 
 	/**
@@ -42,7 +42,7 @@ public class ItemProcessor implements Runnable {
 	 * @param p
 	 * @param details
 	 */
-	public ItemProcessor(Player p, String[] details) {
+	public ItemProcessor(PlayerChar p, String[] details) {
 		m_player = p;
 		m_details = details;
 	}
@@ -70,7 +70,7 @@ public class ItemProcessor implements Runnable {
 	 *          - extra data received from client
 	 * @return
 	 */
-	public boolean useItem(Player p, int itemId, String[] data) {
+	public boolean useItem(PlayerChar p, int itemId, String[] data) {
 		/* Check that the bag contains the item */
 		if (p.getBag().containsItem(itemId) < 0) return false;
 		/* We have the item, so let us use it */
@@ -212,17 +212,17 @@ public class ItemProcessor implements Runnable {
 							 * Check if the item is an evolution stone If so, evolve the
 							 * Pokemon
 							 */
-							if (i.getName().equalsIgnoreCase("FIRE STONE")
+							if (i.getId() == 164
 									&& evolution.getAttribute().equalsIgnoreCase("FIRESTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("WATER STONE")
+							} else if (i.getId() == 165
 									&& evolution.getAttribute().equalsIgnoreCase("WATERSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("THUNDERSTONE")
+							} else if (i.getId() == 166
 									&& evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
@@ -232,33 +232,28 @@ public class ItemProcessor implements Runnable {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("MOON STONE")
+							} else if (i.getId() == 168
 									&& evolution.getAttribute().equalsIgnoreCase("MOONSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("SUN STONE")
+							} else if (i.getId() == 167
 									&& evolution.getAttribute().equalsIgnoreCase("SUNSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("SHINY STONE")
+							} else if (i.getId() == 169
 									&& evolution.getAttribute().equalsIgnoreCase("SHINYSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("DUSK STONE")
+							} else if (i.getId() == 170
 									&& evolution.getAttribute().equalsIgnoreCase("DUSKSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("DAWN STONE")
+							} else if (i.getId() == 171
 									&& evolution.getAttribute().equalsIgnoreCase("DAWNSTONE")) {
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, p);
-								return true;
-							} else if (i.getName().equalsIgnoreCase("OVAL STONE")
-									&& evolution.getAttribute().equalsIgnoreCase("OVALSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;

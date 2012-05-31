@@ -4,7 +4,7 @@
 			<name>Potion</name>
 			<description>Basic healing item, 20hp</description>
 			<id>1</id>
-			<category>Potion</category>
+			<category>POTIONS</category>
 			<shop>1</shop>
 			<price>300</price>
 			<attributes>
@@ -15,7 +15,7 @@
 			<name>Super Potion</name>
 			<description>Next step from potion. 50hp</description>
 			<id>2</id>
-			<category>Potion</category>
+			<category>POTIONS</category>
 			<shop>1</shop>
 			<price>700</price>
 			<attributes>
@@ -26,7 +26,7 @@
 			<name>Hyper Potion</name>
 			<description>Will heal 200hp</description>
 			<id>3</id>
-			<category>Potion</category>
+			<category>POTIONS</category>
 			<shop>0</shop>
 			<price>1200</price>
 			<attributes>
@@ -37,7 +37,7 @@
 			<name>Max Potion</name>
 			<description>Will heal pokemon's health fully</description>
 			<id>4</id>
-			<category>Potion</category>
+			<category>POTIONS</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>

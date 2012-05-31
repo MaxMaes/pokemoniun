@@ -26,7 +26,7 @@ public class MySqlManager {
     {
     	final String host = GameServer.getDatabaseHost();
     	
-    	mysql_connectionURL = "jdbc:mysql://" + host + "?autoReconnect=true";
+    	mysql_connectionURL = "jdbc:mysql://" + host + "/" + GameServer.getDatabaseName() +"?autoReconnect=true";
     	if(!open())
     	{
     		System.out.println("Cannot connect to the database, please check your settings.");
@@ -119,7 +119,7 @@ public class MySqlManager {
      */
     public ResultSet query(String query){
     	System.out.println("Let's search for some data;	" + query);
-    	open();
+    	//open();
     	
     	ResultSet mysql_result = null;
     	try {
@@ -133,12 +133,12 @@ public class MySqlManager {
                 //Use the"executeUpdaye" function and return a null result
             	stmt.executeUpdate(query);
             }
-            stmt.close(); // Omdat het kan.
+            //stmt.close(); // Omdat het kan.
     	} catch(SQLException e) {
     		e.printStackTrace();
     	}
     	
-        close();
+        //close();
         return mysql_result;
     }    
     

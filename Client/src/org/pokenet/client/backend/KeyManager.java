@@ -265,7 +265,7 @@ public class KeyManager
 		  out.newLine();
 		  out.write("DOWN=S");
 		  out.newLine();
-		  out.write("RODS]");
+		  out.write("[RODS]");
 		  out.newLine();
 		  out.write("OLD=R");
 		  out.newLine();

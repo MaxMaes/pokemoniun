@@ -95,10 +95,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	{
 		String message = (String) msg;
 		String[] details;
-		if(!message.equals("L") && !message.equals("R") && !message.equals("D") && !message.equals("U"))
-		{
-			System.out.println(message);
-		}
 		if(session.getAttribute("player") == null)
 		{
 			/*
@@ -425,6 +421,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 										GameServer.getServiceManager().getTimeService().setForcedWeather(9);
 										break;
 								}
+								break;
 							case 's':
 								if(p.getAdminLevel() == 2)
 								{

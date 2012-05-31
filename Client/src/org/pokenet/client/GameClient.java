@@ -7,10 +7,12 @@ import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
@@ -56,14 +58,12 @@ import org.pokenet.client.constants.Options;
 import org.pokenet.client.network.ChatProtocolHandler;
 import org.pokenet.client.network.PacketGenerator;
 import org.pokenet.client.network.TcpProtocolHandler;
-import org.pokenet.client.network.UdpProtocolHandler;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.LoginScreen;
 import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
-import org.pokenet.client.updater.ClientUpdater;
 
 /**
  * The game client
@@ -986,11 +986,6 @@ public class GameClient extends BasicGame
 	{
 		if(m_packetGen != null)
 		{
-			CloseFuture cfTcp = m_packetGen.getUdpSession().close(true);
-
-			cfTcp.awaitUninterruptibly();
-			assert cfTcp.isClosed(): "Warning the TCP session was not closed";
-
 			CloseFuture cfUdp = m_packetGen.getTcpSession().close(true);
 			cfUdp.awaitUninterruptibly();
 			assert cfUdp.isClosed(): "Warning the UDP session was not closed";
@@ -1025,45 +1020,6 @@ public class GameClient extends BasicGame
 						m_host = "";
 						m_packetGen = null;
 					}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					m_host = "";
-					m_packetGen = null;
-				}
-			}
-		});
-		/*
-		 * Connect via UDP to game server
-		 */
-		NioDatagramConnector udp = new NioDatagramConnector();
-		udp.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII"))));
-		udp.setHandler(new UdpProtocolHandler(this));
-		cf = udp.connect(new InetSocketAddress(m_host, 7005));
-		cf.addListener(new IoFutureListener<IoFuture>()
-		{
-			public void operationComplete(IoFuture s)
-			{
-				try
-				{
-					if(s.getSession().isConnected())
-					{
-						m_packetGen.setUdpSession(s.getSession());
-					}
-					else
-					{
-						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-						m_host = "";
-						m_packetGen = null;
-					}
-				}
-				catch(RuntimeIoException e)
-				{
-					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					m_host = "";
-					m_packetGen = null;
 				}
 				catch(Exception e)
 				{

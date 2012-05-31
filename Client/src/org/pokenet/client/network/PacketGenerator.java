@@ -12,7 +12,6 @@ import org.pokenet.client.backend.entity.Player.Direction;
 public class PacketGenerator
 {
 	private IoSession m_tcpSession;
-	private IoSession m_udpSession;
 	private IoSession m_chatSession;
 	// private long m_lastMovement = 0;
 
@@ -20,17 +19,7 @@ public class PacketGenerator
 	private boolean updatePasswordHashMethod = false;
 	private String lastUsername;
 	private String lastPassword;
-
-	/**
-	 * Sets the UDP session
-	 * 
-	 * @param s
-	 */
-	public void setUdpSession(IoSession s)
-	{
-		m_udpSession = s;
-	}
-
+	
 	/**
 	 * Sets the TCP session
 	 * 
@@ -59,16 +48,6 @@ public class PacketGenerator
 	public IoSession getChatSession()
 	{
 		return m_chatSession;
-	}
-
-	/**
-	 * Returns the UDP session
-	 * 
-	 * @return
-	 */
-	public IoSession getUdpSession()
-	{
-		return m_udpSession;
 	}
 
 	/**
@@ -102,17 +81,6 @@ public class PacketGenerator
 	{
 		System.out.println(message);
 		m_tcpSession.write(message);
-	}
-
-	/**
-	 * Sends a packet over UDP
-	 * 
-	 * @param message
-	 */
-	public void writeUdpMessage(String message)
-	{
-		System.out.println(message);
-		m_udpSession.write(message);
 	}
 
 	/**

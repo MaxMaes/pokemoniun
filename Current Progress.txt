@@ -10,7 +10,6 @@
 [FIX] Potions are now in the right backpack.
 [FIX] Giovani (8th gym leader in kanto) now gives the correct badge.
 [FIX] Move buttons now get disabled correctly when switching pokemon.
-*[FIX] Generation IV sprites.
 [FIX] SpeechFrame no longer leaves a ghost behind. (It doesn't with 1 or 2. But does with more than 2)
 [FIX] Total experience is now correctly displayed in the Pokemon window.
 [FIX] Database is updated after the logout.
@@ -29,6 +28,10 @@
 [ADD] keys.ini file. You can set some custom controls here! It's located at res/keys.ini
 [ADD] Trainers now give more base gold if you beat them.
 [ADD] Friendlist is stored into database, further implementation follows. (First username has a prepending space)
+[ADD] Evolution stones should work, has been tested with Pikachu.
+[ADD] New loading screen.
+[ADD] New login screen.
+[ADD] New icons for the HUD bar.
 
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.

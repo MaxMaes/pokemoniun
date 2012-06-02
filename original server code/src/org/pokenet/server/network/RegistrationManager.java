@@ -162,7 +162,7 @@ public class RegistrationManager implements Runnable {
 				"sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, " +
 				"x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE " +
 				"('" + MySqlManager.parseSQL(info[0]) + "', '" + MySqlManager.parseSQL(info[1]) + "', '" + MySqlManager.parseSQL(info[3]) + "', '" + MySqlManager.parseSQL(info[2]) + "', " +
-						"'0', 'null', '" + MySqlManager.parseSQL(info[5]) + "', '0', '0', " +
+						"'0', 'null', '" + MySqlManager.parseSQL(info[5]) + "', '1000', '0', " +
 								"'0', '0', '0', '0', '0', '" + x + "', '" + y + "', " +
 								"'" + mapX + "', '" + mapY + "', '" + badges + "', '" + x + "', '" + y + "', '" 
 								+ mapX + "', '" + mapY + "', 'false', '0', 'false')");

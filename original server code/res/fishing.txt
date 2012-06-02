@@ -28,8 +28,4 @@ Wailord 500 75 50
 Octillery 575 80 50
 Gyarados 650 85 50
 Dratini 750 90 50
-Squirtle 800 95 50
-Mudkip 800 95 50
-Totodile 800 95 50
-Piplup 800 95 50
 Dragonair 1000 99 50

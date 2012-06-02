@@ -85,6 +85,7 @@ public class PlayerPopupDialog extends Frame{
 			public void actionPerformed(ActionEvent e){
 				GameClient.getInstance().getPacketGenerator().writeTcpMessage("Fa" + m_name.getText());
 				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());
+				GameClient.getInstance().getUi().getFriendsList().setFriendOnline(m_name.getText(), true);
 				destroy();
 			}
 		});

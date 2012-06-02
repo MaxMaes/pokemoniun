@@ -498,6 +498,11 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					System.out.println("Item used. " + message);
 					new Thread(new ItemProcessor(p, details)).start();
 					break;
+				case 'G':
+					/* Give an items to a pokemon, this can be used for berries and evolving pokemon TODO: Write implementation*/
+					/*details = message.substring(1).split(",");
+					System.out.println("Item Given. " + message);*/
+					break;
 				case 'i':
 					// Drop item
 					if(p.getBag().removeItem(Integer.parseInt(message.substring(1)), 1))

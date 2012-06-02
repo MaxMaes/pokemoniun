@@ -544,7 +544,7 @@ class ItemPopup extends Frame
 			m_give = new Button("Give");
 			m_give.setSize(100, 25);
 			m_give.setLocation(0, m_use.getY() + 25);
-			m_give.setEnabled(false);
+			//m_give.setEnabled(false);
 			m_give.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -745,14 +745,10 @@ class TeamPopup extends Frame
 	public void processItemUse(boolean use, int id, int pokeIndex, boolean isBattle)
 	{
 		if(use)
-		{
 			GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + id + "," + pokeIndex);
-		}
 		else
-		{
 			// TODO: Write "Give" packet
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("");
-		}
+			GameClient.getInstance().getPacketGenerator().writeTcpMessage("G" + id + "," + pokeIndex);
 		m_parent.destroyPopup();
 	}
 }

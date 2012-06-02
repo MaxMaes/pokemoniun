@@ -27,7 +27,7 @@
 [ADD] Hotkeyed OLD ROD to 'R', GOOD ROD to 'T', GREAT ROD to 'Y, ULTRA ROD to 'U'
 [ADD] keys.ini file. You can set some custom controls here! It's located at res/keys.ini
 [ADD] Trainers now give more base gold if you beat them.
-[ADD] Friendlist is stored into database, further implementation follows. (First username has a prepending space)
+[ADD] Friendlist is stored into database, further implementation follows.
 [ADD] Evolution stones should work, has been tested with Pikachu.
 [ADD] New loading screen.
 [ADD] New login screen.

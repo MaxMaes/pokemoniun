@@ -178,11 +178,8 @@ public class FriendListDialog extends Frame
 	public void addFriend(String friend)
 	{
 		boolean knownFriend = false;
-		for(int i = 0; i < m_friends.size(); i++)
-		{
-			if(m_friends.get(i).equals(friend))
-				knownFriend = true;
-		}
+		if(m_friends.contains(friend))
+			knownFriend = true;
 		if(!knownFriend)
 			m_friends.add(friend);
 		else
@@ -196,9 +193,9 @@ public class FriendListDialog extends Frame
 	 * @param friend The username of the friend.
 	 * @param isOnline True if the friend is online, otherwise false.
 	 */
-	public void setFriendOnline(String friend, boolean isOnline)
+	public void setFriendOnline(String friend, boolean online)
 	{
-		if(isOnline)
+		if(online)
 		{
 			if(!m_online.contains(friend))
 				m_online.add(friend);
@@ -232,7 +229,10 @@ class PopUp extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_name = new Label(friend);
 		m_name.setFont(GameClient.getFontSmall());
-		m_name.setForeground(Color.white);
+		if(online)
+			m_name.setForeground(Color.white);
+		else
+			m_name.setForeground(Color.black);
 		m_name.pack();
 		m_name.setLocation(0, 0);
 		getContentPane().add(m_name);
@@ -280,6 +280,14 @@ class PopUp extends Frame
 				m_confirm = new ConfirmationDialog("Are you sure you want to remove " + m_name.getText() + " from your friends?");
 				m_confirm.addYesListener(m_yes);
 				m_confirm.addNoListener(m_no);
+			}
+		});
+		m_whisper.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				GameClient.getInstance().getUi().getChat().addChat(m_name.getText(), true);
+				destroy();
 			}
 		});
 		m_cancel.addActionListener(new ActionListener()

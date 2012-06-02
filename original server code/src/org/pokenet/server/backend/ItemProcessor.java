@@ -58,6 +58,7 @@ public class ItemProcessor implements Runnable {
 				!GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(m_details[0])).getName().contains("Rod")) {
 			m_player.getBag().removeItem(Integer.parseInt(m_details[0]), 1);
 			m_player.getTcpSession().write("Ir" + m_details[0] + "," + 1);
+			/* TODO: Write support for giving items */
 		}
 	}
 
@@ -371,7 +372,7 @@ public class ItemProcessor implements Runnable {
                         	p.getTcpSession().write("Ii" + message);
                         return true;
                     } else if(i.getId() == 205) { //Leppa Berry
-                    	String message = "Leppa Berry had no effect"; // Move selection not completed, temp message TODO. Add support for this
+                    	String message = "Leppa Berry had no effect"; // Move selection not completed, temp message TODO: Add support for this
                         int ppSlot = Integer.parseInt(data[1]);
                         if(poke.getPp(ppSlot) + 10 <= poke.getMaxPp(ppSlot))
                         	poke.setPp(ppSlot, poke.getPp(ppSlot) + 10);

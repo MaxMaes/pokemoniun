@@ -32,6 +32,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer
 {
+	static final int SERVER_REVISION = 1881;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers, m_movementThreads;
@@ -45,11 +46,10 @@ public class GameServer
 	private JFrame m_gui;
 
 	/* The revision of the game server */
-	// would be more helpful if this was the SVN version.. so it auto updated
 	public static int REVISION = getSVNRev();
 
 	/**
-	 * .Gets the SVN revision for the server
+	 * Gets the SVN revision for the server.
 	 * 
 	 * @return the value on the third line of .svn/entries
 	 */
@@ -58,7 +58,6 @@ public class GameServer
 	{
 		int rev = 0;
 		boolean foundRevision = false;
-
 		try
 		{
 			BufferedReader input = new BufferedReader(new FileReader(".svn/entries"));
@@ -80,14 +79,11 @@ public class GameServer
 				input.close();
 			}
 		}
-		catch(IOException ex)
+		catch(IOException ioe)
 		{
-			// ex.printStackTrace();
 			System.err.println("Cannot find .svn/entries to read the SVN revision.");
-			// probably no svn file... oh well.
-			rev = 1880;
+			rev = SERVER_REVISION;
 		}
-
 		return rev;
 	}
 
@@ -114,7 +110,7 @@ public class GameServer
 		}
 	}
 
-	/** Asks for Database User/Pass, then asks to save NOTE: It doesnt save the database passwor */
+	/** Asks for Database User/Pass, then asks to save NOTE: It doesnt save the database password */
 	private void getConsoleSettings()
 	{
 		ConsoleReader r = new ConsoleReader();

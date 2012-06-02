@@ -227,7 +227,7 @@ public class ItemProcessor implements Runnable {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);
 								return true;
-							} else if (i.getName().equalsIgnoreCase("LEAF STONE")
+							} else if (i.getId() == 173
 									&& evolution.getAttribute().equalsIgnoreCase("LEAFSTONE")) {
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, p);

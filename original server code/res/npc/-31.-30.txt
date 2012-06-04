@@ -160,7 +160,7 @@ down
 2
 Rhyhorn,45,Dugtrio,42,Nidoqueen,44,Nidoking,45,Rhyhorn,50
 5
-8
+7
 13,14
 false
 false

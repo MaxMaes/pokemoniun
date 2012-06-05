@@ -2,10 +2,13 @@ package org.pokenet.client;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
+import java.util.Date;
 import java.util.HashMap;
 
 import mdes.slick.sui.Container;
@@ -1097,6 +1100,20 @@ public class GameClient extends BasicGame
 	 */
 	public static void main(String[] args)
 	{	
+		/*
+		 * Pipe errors to a file
+		 */
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date now = new Date(System.currentTimeMillis());
+		try
+		{
+			PrintStream p = new PrintStream(new File("logs/log" + sdf.format(now) + ".txt"));
+			System.setErr(p);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		KeyManager.initialize();
 		/*ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {

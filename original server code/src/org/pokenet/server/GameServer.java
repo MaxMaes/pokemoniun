@@ -8,13 +8,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -431,9 +435,11 @@ public class GameServer
 		/*
 		 * Pipe errors to a file
 		 */
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date now = new Date(System.currentTimeMillis());
 		try
 		{
-			PrintStream p = new PrintStream(new File("./errors.txt"));
+			PrintStream p = new PrintStream(new File("logs/log" + sdf.format(now) + ".txt"));
 			System.setErr(p);
 		}
 		catch(Exception e)

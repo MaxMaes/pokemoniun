@@ -209,6 +209,7 @@ public class BattleCanvas extends Container
 		add(playerLv);
 		add(playerStatus);
 		initPlayerHPBar();
+		initPlayerXPBar();
 	}
 
 	/**
@@ -374,19 +375,20 @@ public class BattleCanvas extends Container
 	 */
 	public void initPlayerXPBar()
 	{
-		// show xp bar
-		playerXP = new ProgressBar(0, (int) BattleManager.getInstance().getCurPoke().getExpLvl());
-		playerXP.setSize(72, 5);
+		// show xp bar, TODO: change 1000 to pokemon xp to level
+		playerXP = new ProgressBar(0, 1000);
+		playerXP.setSize(72, 3);
 		
 		playerXP.setForeground(Color.cyan);
 
 		updatePlayerXP(BattleManager.getInstance().getCurPoke().getExp());
 
-		playerXPBar.setLocation(playerLv.getX() + playerLv.getWidth() - 98, 125);
-		playerXP.setLocation(playerHPBar.getX() + 23, playerHPBar.getY() + 3);
+		playerXPBar.setLocation(playerHPBar.getX()-5, playerHPBar.getY() + 11);
+		playerXP.setLocation(playerXPBar.getX(), playerXPBar.getY());
 
-		add(playerXPBar);
 		add(playerXP);
+		add(playerXPBar);
+		
 	}
 
 	/**

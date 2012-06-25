@@ -13,6 +13,8 @@
 [FIX] SpeechFrame no longer leaves a ghost behind. (It doesn't with 1 or 2. But does with more than 2)
 [FIX] Total experience is now correctly displayed in the Pokemon window.
 [FIX] Database is updated after the logout.
+[FIX] Pokeballs(except the pokeball) have higher catch rates
+[FIX] Happiness is reduced by 10% when defeated in battle
 
 [ADD] Added Logout button to the UI.
 [ADD] Serverlist is retrieved from the web.
@@ -32,6 +34,7 @@
 [ADD] New loading screen.
 [ADD] New login screen.
 [ADD] New icons for the HUD bar.
+[ADD] spriteloader for future addons (like having pokemon walk behind you)
 
 [BUG] NPE when clicking back immidiatly after selecting server (due to that the packetgenerator object hasn't been initialized yet)
 [BUG] Both pokemon use struggle when a berry is used during battle.

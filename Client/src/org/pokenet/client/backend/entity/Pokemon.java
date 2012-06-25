@@ -72,7 +72,16 @@ public class Pokemon {
         			index = "0" + String.valueOf(m_spriteNum);
         		} else {
         			if(getSpriteNumber() > 389)
-    					index = String.valueOf(getSpriteNumber() - 3);
+        			{
+        				if(m_spriteNum < 402)
+        				{
+        					index = String.valueOf(m_spriteNum - 3);
+        				}
+        				else
+        				{
+        					index = String.valueOf(m_spriteNum - 5);
+        				}
+        			}
     				else
     					index = String.valueOf(getSpriteNumber());
         		}
@@ -130,9 +139,20 @@ public class Pokemon {
                         }
                         else{
                         	if(getSpriteNumber() > 389)
-            					index = String.valueOf(getSpriteNumber() - 3);
+                        	{
+                        		if(m_spriteNum < 402)
+                				{
+                					index = String.valueOf(m_spriteNum - 3);
+                				}
+                				else
+                				{
+                					index = String.valueOf(m_spriteNum - 5);
+                				}
+                        	}
             				else
+            				{
             					index = String.valueOf(getSpriteNumber());
+            				}
                         }
                        
                         path = respath+"res/pokemon/icons/" + index + ".gif";
@@ -450,9 +470,23 @@ public class Pokemon {
         		index = "00" + String.valueOf(i);
         	} else if (i < 100){
         		index = "0" + String.valueOf(i);
-        	} else {
-        		index = String.valueOf(i);
-        	}
+        	}  else {
+    			if(i > 389)
+    			{
+    				if(i < 402)
+    				{
+    					index = String.valueOf(i - 3);
+    				}
+    				else
+    				{
+    					index = String.valueOf(i - 5);
+    				}
+    			}
+				else
+				{
+					index = String.valueOf(i);
+				}
+    		}
                
                 path = respath+"res/pokemon/icons/" + index + ".gif";
                 return path;

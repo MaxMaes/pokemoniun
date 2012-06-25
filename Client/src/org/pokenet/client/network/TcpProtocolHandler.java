@@ -563,7 +563,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							}
 						}
 						m_game.getUi().update(false);
-						break;
+						break;/*
 					case 'D':
 						// Facing down
 						p = m_game.getMapMatrix().getPlayer(Integer.parseInt(message.substring(2)));
@@ -599,7 +599,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							p.setDirection(Direction.Up);
 							p.loadSpriteImage();
 						}
-						break;
+						break;*/
 					case 'S':
 						// Sprite change
 						details = message.substring(2).split(",");

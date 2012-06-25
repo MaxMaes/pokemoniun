@@ -97,7 +97,16 @@ public class OurPokemon extends Pokemon {
 				index = "0" + String.valueOf(getSpriteNumber());
 			} else {
 				if(getSpriteNumber() > 389)
-					index = String.valueOf(getSpriteNumber() - 3);
+				{
+					if(getSpriteNumber() < 402)
+    				{
+    					index = String.valueOf(getSpriteNumber() - 3);
+    				}
+    				else
+    				{
+    					index = String.valueOf(getSpriteNumber() - 5);
+    				}
+				}
 				else
 					index = String.valueOf(getSpriteNumber());
 			}

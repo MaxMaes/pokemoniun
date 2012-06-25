@@ -2292,4 +2292,67 @@ public class Pokemon extends PokemonSpecies {
 	public String getOriginalTrainer() {
 		return m_originalTrainer;
 	}
+	
+	/**
+	 * Returns the amount of EXP required for this pokemon reach a level
+	 * based on a pokemon's EXP type
+	 * @param poke
+	 * @param level
+	 * @return
+	 */
+	public double getExpForLevel(int level){
+		double exp = 0;
+		switch (this.getExpType()){
+		case MEDIUM: 
+			exp = (int)java.lang.Math.pow((double)level, 3);
+			break;
+		case ERRATIC: 
+			double p = 0;
+			switch (level % 3){
+			case 0:
+				p = 0;
+				break;
+			case 1:
+				p = 0.008;
+				break;
+			case 2:
+				p = 0.014;
+				break;
+			}
+			if (level <= 50){
+				exp = java.lang.Math.pow((double)level, 3) * ((100 - (double)level) / 50);
+			} else if (level <= 68){
+				exp = java.lang.Math.pow((double)level, 3) * ((150 - (double)level) / 50);
+			} else if (level <= 98){
+				exp = (java.lang.Math.pow((double)level, 3) *
+						(1.274 - ((1/50) * ((double)level / 3)) - p));
+			} else {
+				exp = java.lang.Math.pow((double)level, 3) * ((160 - (double)level) / 50);
+			}
+			break;
+		case FAST: 
+			exp = 4 * java.lang.Math.pow((double)level, 3) / 5;
+			break;
+		case FLUCTUATING: 
+			if (level <= 15){
+				exp = java.lang.Math.pow((double)level, 3) * 
+					((24 + (((double)level + 1) / 3)) / 50);
+			} else if ((double)level <= 35){
+				exp = java.lang.Math.pow((double)level, 3) * 
+				((14 + (double)level) / 50);
+			} else {
+				exp = java.lang.Math.pow((double)level, 3) * 
+				((32 + ((double)level / 2)) / 50);
+			}    		
+			break;
+		case PARABOLIC: 
+			exp = (6 * (java.lang.Math.pow((double)level, 3) / 5)) - 
+			(15 * java.lang.Math.pow((double)level, 2)) + (100 * (double)level) - 140;
+			break;
+		case SLOW: 
+			exp = 5 * java.lang.Math.pow((double)level, 3) / 4;;
+			break;
+		}
+		return exp;
+	}
 }

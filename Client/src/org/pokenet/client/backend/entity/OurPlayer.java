@@ -287,6 +287,7 @@ public class OurPlayer extends Player {
 				}
 			}
 			m_pokemon[i].setMoveTypes(movetypes);
+			m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
 		}
 	}
 	

@@ -6,7 +6,7 @@
 				<m_name>Potion</m_name>
 				<m_description>Basic healing item, 20hp</m_description>
 				<m_id>1</m_id>
-				<m_category>Food</m_category>
+				<m_category>Potions</m_category>
 				<m_shop>1</m_shop>
 				<m_price>300</m_price>
 				<m_attributes>
@@ -20,7 +20,7 @@
 				<m_name>Super Potion</m_name>
 				<m_description>Next step from potion. 50hp</m_description>
 				<m_id>2</m_id>
-				<m_category>Food</m_category>
+				<m_category>Potions</m_category>
 				<m_shop>1</m_shop>
 				<m_price>700</m_price>
 				<m_attributes>
@@ -34,7 +34,7 @@
 				<m_name>Hyper Potion</m_name>
 				<m_description>Will heal 200hp</m_description>
 				<m_id>3</m_id>
-				<m_category>Food</m_category>
+				<m_category>Potions</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1200</m_price>
 				<m_attributes>
@@ -63,7 +63,7 @@
 				<m_description>What happens when a max potion and a full heal
 					have a baby.</m_description>
 				<m_id>5</m_id>
-				<m_category>Potions</m_category>
+				<m_category>Medicine</m_category>
 				<m_shop>0</m_shop>
 				<m_price>3000</m_price>
 				<m_attributes>

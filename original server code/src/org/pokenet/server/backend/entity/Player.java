@@ -987,7 +987,7 @@ public class Player extends Character implements Battleable, Tradeable
 				}
 				return true;
 			}
-		}
+		
 		else
 		{
 			if(getPriority() > 0)

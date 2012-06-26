@@ -2,6 +2,7 @@ package org.pokenet.client.ui.base;
 
 import mdes.slick.sui.Label;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.gui.GUIContext;
 
@@ -14,6 +15,7 @@ public class ProgressBar extends Label {
         private int m_value;
         private int m_minVal;
         private int m_maxVal;
+        private Color textColor;
 
         /**
          * Default constructor
@@ -102,6 +104,14 @@ public class ProgressBar extends Label {
                 return m_value;
         }
         
+        public void setTextColor(Color c) {
+        		textColor = c;
+        }
+        
+        public Color getTextColor() {
+        	return textColor;
+        }
+        
         /**
          * Renders the progress bar
          */
@@ -114,12 +124,15 @@ public class ProgressBar extends Label {
                                 (barWidth > getWidth() ? getWidth() : barWidth),
                                 getHeight() - 1);
                 if (getText() != null && !getText().equals(""))
+                {
+                	g.setColor(getTextColor());
                         g.drawString(getText(), getAbsoluteX() +
                                         ((getWidth() / 2) -
                                                         (getFont().getWidth(getText()) / 2)),
                                         getAbsoluteY() +
                                                         ((getHeight() / 2) -
                                                                         (getFont().getHeight(getText()) / 2)));
+                }
         }
 }
 

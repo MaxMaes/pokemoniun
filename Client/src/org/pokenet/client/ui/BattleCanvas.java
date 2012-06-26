@@ -6,6 +6,7 @@ import java.util.List;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Label;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.LoadingList;
@@ -258,6 +259,7 @@ public class BattleCanvas extends Container
 	public void updatePlayerHP(int newValue)
 	{
 		playerHP.setValue(newValue);
+		//playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
 
 		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
 		{
@@ -400,6 +402,9 @@ public class BattleCanvas extends Container
 		// show hp bar
 		playerHP = new ProgressBar(0, (int) BattleManager.getInstance().getCurPoke().getMaxHP());
 		playerHP.setSize(72, 5);
+		//playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
+		//playerHP.setTextColor(Color.black);
+		//playerHP.setFont(GameClient.getFontSmall());
 
 		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
 		{

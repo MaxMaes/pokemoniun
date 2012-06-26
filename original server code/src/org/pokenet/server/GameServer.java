@@ -143,6 +143,8 @@ public class GameServer
 		m_instance = this;
 		if(autorun)
 		{
+			if(m_boolGui)
+				createGui();
 			loadSettings();
 			start();
 		}
@@ -277,6 +279,7 @@ public class GameServer
 				m_dbS.setText(s.nextLine());
 				m_dbN.setText(s.nextLine());
 				m_dbU.setText(s.nextLine());
+				m_dbP.setText(s.nextLine());
 				m_name.setText(s.nextLine());
 				s.close();
 			}
@@ -526,8 +529,12 @@ public class GameServer
 				{
 					m_boolGui = true;
 					if(line.hasOption("autorun"))
-						System.out.println("autorun doesn't work with GUI");
-					gs = new GameServer(false);
+					{
+						//System.out.println("autorun doesn't work with GUI");
+						gs = new GameServer(true);
+					}
+					else
+						gs = new GameServer(false);
 				}
 			}
 			catch(ParseException exp)

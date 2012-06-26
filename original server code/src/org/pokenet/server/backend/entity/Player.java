@@ -55,6 +55,7 @@ public class Player extends Character implements Battleable, Tradeable
 	private Language m_language;
 	private Bag m_bag;
 	private int m_battleId;
+	private int walk = 0;
 	private Pokemon[] m_pokemon;
 	private PokemonBox[] m_boxes;
 	private boolean m_isBattling = false;
@@ -575,7 +576,7 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 0; i < m_pokemon.length; i++)
 		{
 			if(m_pokemon[i] != null)
-				m_pokemon[i].setHappiness(20);
+				m_pokemon[i].setHappiness((int) (m_pokemon[i].getHappiness()*0.8));
 		}
 		/*
 		 * Now warp them to the last place they were healed
@@ -954,7 +955,7 @@ public class Player extends Character implements Battleable, Tradeable
 						m_repel--;
 					if(m_repel <= 0 && this.getMap().isWildBattle(m_x, m_y, this))
 					{
-						m_tcpSession.write("U" + getX() + "," + getY());
+						//m_tcpSession.write("U" + m_x + "," + m_y);
 						this.ensureHealthyPokemon();
 						m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, this.getMap().getWildPokemon(this));
 						m_movementQueue.clear();
@@ -963,6 +964,7 @@ public class Player extends Character implements Battleable, Tradeable
 					{
 						if(m_map.isNpcBattle(this))
 							m_movementQueue.clear();
+						}
 					}
 					/* If it wasn't a battle see should we increase happiness */
 					if(this.getX() % 32 == 0 || (this.getY() + 8) % 32 == 0)
@@ -974,6 +976,12 @@ public class Player extends Character implements Battleable, Tradeable
 							 */
 							if(m_pokemon[i] != null && m_pokemon[i].getHappiness() < 70)
 								m_pokemon[i].setHappiness(m_pokemon[i].getHappiness() + 1);
+						}
+						walk++;
+						if(walk >= 50)
+						{
+							m_tcpSession.write("U" + getX() + "," + getY());
+							walk = 0;
 						}
 					}
 				}

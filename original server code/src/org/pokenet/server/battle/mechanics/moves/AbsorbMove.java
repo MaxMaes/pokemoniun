@@ -48,7 +48,7 @@ public class AbsorbMove extends PokemonMove {
     public int use(BattleMechanics mech, Pokemon user, Pokemon target) {
         int damage = mech.calculateDamage(this, user, target);
         int health = target.getHealth();
-        target.changeHealth(-damage);
+        
         if (damage > health) {
             damage = health;
         }
@@ -64,6 +64,7 @@ public class AbsorbMove extends PokemonMove {
         }
         user.getField().showMessage(message);
         user.changeHealth(absorb);
+        target.changeHealth(-damage);
         return damage;
     }
 }

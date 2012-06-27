@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.ServerProperties;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.backend.map.ServerMap.PvPType;
 import org.pokenet.server.battle.BattleField;
@@ -17,6 +18,7 @@ import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
+import org.pokenet.server.feature.CheatManager;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
@@ -112,6 +114,7 @@ public class Player extends Character implements Battleable, Tradeable
 	public Player(String username)
 	{
 		m_username = username;
+		m_boxes = new PokemonBox[ServerProperties.MAX_POKEMON_BOXES];
 		m_requests = new HashMap<String, RequestType>();
 	}
 
@@ -231,13 +234,15 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void swapFromBox(int box, int boxSlot, int partySlot)
 	{
-		if(box < 0 || box > 8)
+		if(box < 0 || box >= ServerProperties.MAX_POKEMON_BOXES)
+		{
+			CheatManager.report(this, "Trying to reacht box " + box + ", impossible with max boxes " + ServerProperties.MAX_POKEMON_BOXES);
 			return;
+		}
 		/* Ensure the box exists */
 		if(m_boxes[box] == null)
 		{
 			m_boxes[box] = new PokemonBox();
-			m_boxes[box].setPokemon(new Pokemon[30]);
 		}
 		/* Make sure we're not depositing our only Pokemon */
 		if(getPartyCount() == 1)
@@ -387,7 +392,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public boolean canTrade()
 	{
-		return System.currentTimeMillis() - m_lastTrade > 60000 && getPartyCount() >= 2;
+		return System.currentTimeMillis() - m_lastTrade > 60 * 1000 && getPartyCount() >= 2;
 	}
 
 	/**
@@ -1368,7 +1373,7 @@ public class Player extends Character implements Battleable, Tradeable
 			if(m_boxes[i] != null)
 			{
 				/* Find space in an existing box */
-				for(int j = 0; j < m_boxes[i].getPokemon().length; j++)
+				for(int j = 0; j < ServerProperties.MAX_POKEMON_EACH_BOX; j++)
 				{
 					if(m_boxes[i].getPokemon(j) == null)
 					{
@@ -1381,7 +1386,6 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				/* We need a new box */
 				m_boxes[i] = new PokemonBox();
-				m_boxes[i].setPokemon(new Pokemon[30]);
 				m_boxes[i].setPokemon(0, p);
 				break;
 			}
@@ -1718,12 +1722,11 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_boxes[j] == null)
 		{
 			m_boxes[j] = new PokemonBox();
-			m_boxes[j].setPokemon(new Pokemon[30]);
 			m_tcpSession.write("B");
 		}
 		/* Else send all pokes in box */
 		String packet = "";
-		for(int i = 0; i < m_boxes[j].getPokemon().length; i++)
+		for(int i = 0; i < ServerProperties.MAX_POKEMON_EACH_BOX; i++)
 		{
 			if(m_boxes[j].getPokemon(i) != null)
 				packet = packet + m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";

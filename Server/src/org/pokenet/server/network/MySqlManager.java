@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.pokenet.server.ServerProperties;
 import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
@@ -247,35 +248,34 @@ public class MySqlManager {
 				/*
 				 * Finally, update all the boxes
 				 */
-				if (p.getBoxes() != null) {
-					for (int i = 0; i < 9; i++) {
-						if (p.getBoxes()[i] != null) {
-							/* Save all pokemon in box */
-							for (int j = 0; j < p.getBoxes()[i].getPokemon().length; j++) {
-								if (p.getBoxes()[i].getPokemon()[j] != null) {
-									if (p.getBoxes()[i].getPokemon()[j]
-											.getDatabaseID() < 1) {
-										/*
-										 * This is a new Pokemon, create it in
-										 * the database
-										 */
-										if (saveNewPokemon(
-												p.getBoxes()[i].getPokemon(j),
-												p.getName()) < 1)
-											return false;
-									} else {
-										/* Update an existing pokemon */
-										if (!savePokemon(
-												p.getBoxes()[i].getPokemon()[j],
-												p.getName())) {
-											return false;
-										}
+				for (int i = 0; i < ServerProperties.MAX_POKEMON_BOXES; i++) {
+					if (p.getBoxes()[i] != null) {
+						/* Save all pokemon in box */
+						for (int j = 0; j < ServerProperties.MAX_POKEMON_EACH_BOX; j++) {
+							if (p.getBoxes()[i].getPokemon(j) != null) {
+								if (p.getBoxes()[i].getPokemon(j)
+										.getDatabaseID() < 1) {
+									/*
+									 * This is a new Pokemon, create it in
+									 * the database
+									 */
+									if (saveNewPokemon(
+											p.getBoxes()[i].getPokemon(j),
+											p.getName()) < 1)
+										return false;
+								} else {
+									/* Update an existing pokemon */
+									if (!savePokemon(
+											p.getBoxes()[i].getPokemon(j),
+											p.getName())) {
+										return false;
 									}
 								}
 							}
 						}
 					}
 				}
+				
 				// Dispose of the player object
 				if (p.getMap() != null)
 					p.getMap().removeChar(p);

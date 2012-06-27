@@ -79,7 +79,7 @@ public class PacketGenerator
 	 */
 	public void writeTcpMessage(String message)
 	{
-		System.out.println(message);
+		//System.out.println(message);
 		m_tcpSession.write(message);
 	}
 

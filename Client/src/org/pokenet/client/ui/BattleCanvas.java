@@ -172,7 +172,7 @@ public class BattleCanvas extends Container
 	{
 		playerHP = new ProgressBar(0, 0);
 		enemyHP = new ProgressBar(0, 0);
-		playerXP = new ProgressBar(0, 0);
+		//playerXP = new ProgressBar(0, 0);
 		bgPic = new Label();
 		playerPoke = new Label();
 		enemyPoke = new Label();
@@ -211,7 +211,7 @@ public class BattleCanvas extends Container
 		add(playerLv);
 		add(playerStatus);
 		initPlayerHPBar();
-		initPlayerXPBar();
+		//initPlayerXPBar();
 	}
 
 	/**

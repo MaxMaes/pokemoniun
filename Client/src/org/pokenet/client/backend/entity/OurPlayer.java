@@ -256,7 +256,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setLevel(Integer.parseInt(info[14]));
 			m_pokemon[i].setAbility(info[15]);
 			m_pokemon[i].setNature(info[16]);
-			m_pokemon[i].setExpLvl(Integer.parseInt(info[24]));
+			m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
 			/*
 			 * Moves
 			 */
@@ -287,7 +287,7 @@ public class OurPlayer extends Player {
 				}
 			}
 			m_pokemon[i].setMoveTypes(movetypes);
-			m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
+			//m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
 		}
 	}
 	

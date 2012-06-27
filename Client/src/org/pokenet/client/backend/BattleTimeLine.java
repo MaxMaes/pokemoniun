@@ -96,7 +96,7 @@ public class BattleTimeLine {
     m_pokeName = data[0];
     m_exp = (int) Double.parseDouble(data[1]);
     m_expRemaining = (int) Double.parseDouble(data[2]);
-    m_canvas.updatePlayerXP(m_exp);
+    //m_canvas.updatePlayerXP(m_exp);
     addSpeech(m_translator.get(3));
   }
 

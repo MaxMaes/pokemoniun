@@ -109,7 +109,7 @@ public class LoginManager implements Runnable
 					return;
 				}
 			}
-			catch(Exception e1)
+			catch(SQLException e1)
 			{
 				// TODO Auto-generated catch block
 				System.out.println("\n1\n");
@@ -133,10 +133,10 @@ public class LoginManager implements Runnable
 					return;
 				}
 			}
-			catch(Exception e1)
+			catch(SQLException e1)
 			{
 				System.out.println("\n2\n");
-				// TODO Auto-generated catch block
+
 				e1.printStackTrace();
 				session.write("lu");
 				/*
@@ -456,7 +456,6 @@ public class LoginManager implements Runnable
 		 * Add them to the list of players
 		 */
 		TcpProtocolHandler.addPlayer(p);
-		UdpProtocolHandler.addPlayer(p);
 		GameServer.getInstance().updatePlayerCount();
 		System.out.println("INFO: " + username + " logged in.");
 	}

@@ -46,7 +46,6 @@ public class LogoutManager implements Runnable {
 		if (player.getMap() != null)
 			player.getMap().removeChar(player);
 		TcpProtocolHandler.removePlayer(player);
-		UdpProtocolHandler.removePlayer(player);
 		GameServer.getInstance().updatePlayerCount();
 		m_database = new MySqlManager();
 		if (!m_database.connect(GameServer.getDatabaseHost(),

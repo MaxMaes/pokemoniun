@@ -1,11 +1,10 @@
 package org.pokenet.server.network;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.transport.socket.DatagramSessionConfig;
 import org.apache.mina.transport.socket.nio.NioDatagramAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.pokenet.server.GameServer;
@@ -18,7 +17,6 @@ import org.pokenet.server.network.codec.PokenetCodecFactory;
  */
 public class NetworkManager {
 	private TcpProtocolHandler m_tcpProtocolHandler;
-	private UdpProtocolHandler m_udpProtocolHandler;
 	private LoginManager m_loginManager;
 	private LogoutManager m_logoutManager;
 	private IoAcceptor m_tcpAcceptor;
@@ -33,7 +31,6 @@ public class NetworkManager {
 		m_logoutManager = new LogoutManager();
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);
-		m_udpProtocolHandler = new UdpProtocolHandler();
 		m_chatManager = new ChatManager[3];
 	}
 	
@@ -121,24 +118,7 @@ public class NetworkManager {
 		try {
 			m_tcpAcceptor.bind(new InetSocketAddress(7002)); 
 			System.out.println("INFO: TCP acceptor started.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		/*
-		 * Bind the UDP port
-		 */
-		m_udpAcceptor = new NioDatagramAcceptor();
-		m_udpAcceptor.setHandler(m_udpProtocolHandler);
-		DefaultIoFilterChainBuilder chain = m_udpAcceptor.getFilterChain(); 
-
-		chain.addLast("codec", new ProtocolCodecFilter(new PokenetCodecFactory()));
-		DatagramSessionConfig dcfg = m_udpAcceptor.getSessionConfig(); 
-		dcfg.setReuseAddress(true);
-		try {
-			m_udpAcceptor.bind(new InetSocketAddress(7005)); 
-			System.out.println("INFO: UDP acceptor started.");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}

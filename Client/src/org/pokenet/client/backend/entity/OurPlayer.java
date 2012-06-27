@@ -256,7 +256,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setLevel(Integer.parseInt(info[14]));
 			m_pokemon[i].setAbility(info[15]);
 			m_pokemon[i].setNature(info[16]);
-			//m_pokemon[i].setExpLvl(Integer.parseInt(info[17]));
+			m_pokemon[i].setExpLvl(Integer.parseInt(info[24]));
 			/*
 			 * Moves
 			 */

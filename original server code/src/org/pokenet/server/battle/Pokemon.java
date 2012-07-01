@@ -2092,7 +2092,12 @@ public class Pokemon extends PokemonSpecies {
 		/*
 		 * m_pp = new int[4]; m_maxPp = new int[4]; m_ppUp = new int[4];
 		 */
-		/* Check validity of moves */
+		/* Check validity of moves
+		 * this is turned off by sadhi because this prevents anything from standard move to be learned
+		 * and he didn't want to write something else
+		 * and with this gone you could give out moves the pokemon doesn't learn as prizes
+		 */
+	/*
 		if(m_move[0] != null && !PokemonSpecies.getDefaultData().
 				canLearn(PokemonSpecies.getDefaultData().
 						getPokemonByName(this.getSpeciesName()), getMoveName(0))) {
@@ -2113,6 +2118,7 @@ public class Pokemon extends PokemonSpecies {
 						getPokemonByName(this.getSpeciesName()), getMoveName(3))) {
 			m_move[3] = null;
 		}
+		*/
 	}
 
 	/**

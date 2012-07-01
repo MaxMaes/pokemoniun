@@ -1,15 +1,12 @@
 package org.pokenet.client.backend;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Scanner;
+import org.ini4j.Ini;
+import org.ini4j.InvalidIniFormatException;
 import org.newdawn.slick.Input;
 
 public class KeyManager
@@ -30,183 +27,75 @@ public class KeyManager
 		try
 		{
 			String path = respath + "res/keys.ini";
-			InputStream in = new FileInputStream(path);
-			BufferedReader f = new BufferedReader(new InputStreamReader(in));
-			Scanner reader = new Scanner(f);
-			String s;
-			String[] data;
-			String[] keydata;
-			while(reader.hasNextLine())
-			{
-				s = reader.nextLine();
-				if(s.startsWith("//"))
-				{
-					s = reader.nextLine();
-				}
-				if(s.equalsIgnoreCase("[MOVEMENT]"))
-				{
-					s = reader.nextLine();
-				}
-				if(s.equalsIgnoreCase("[RODS]"))
-				{
-					s = reader.nextLine();
-				}
-				if(s.equalsIgnoreCase("[MOVES]"))
-				{
-					s = reader.nextLine();
-				}
-				if(s.equalsIgnoreCase("[INTERACTION]"))
-				{
-					s = reader.nextLine();
-				}
-				if(s == "")
-				{
-					s = reader.nextLine();
-				}
-				
-				data = s.split("=");
-				if(data.length > 1)
-				{
-					keydata = data[1].split(",");
-					if(data[0].equals("UP"))
-						for(String st : keydata)
-							if(checkNotNull(Action.WALK_UP, st))
-								keys.put(Action.WALK_UP, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("LEFT"))
-						for(String st : keydata)
-							if(checkNotNull(Action.WALK_LEFT, st))
-								keys.put(Action.WALK_LEFT, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("RIGHT"))
-						for(String st : keydata)
-							if(checkNotNull(Action.WALK_RIGHT, st))
-								keys.put(Action.WALK_RIGHT, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("DOWN"))
-						for(String st : keydata)
-							if(checkNotNull(Action.WALK_DOWN, st))
-								keys.put(Action.WALK_DOWN, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("OLD"))
-						for(String st : keydata)
-							if(checkNotNull(Action.ROD_OLD, st))
-								keys.put(Action.ROD_OLD, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("GOOD"))
-						for(String st : keydata)
-							if(checkNotNull(Action.ROD_GOOD, st))
-								keys.put(Action.ROD_GOOD, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("GREAT"))
-						for(String st : keydata)
-							if(checkNotNull(Action.ROD_GREAT, st))
-								keys.put(Action.ROD_GREAT, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("ULTRA"))
-						for(String st : keydata)
-							if(checkNotNull(Action.ROD_ULTRA, st))
-								keys.put(Action.ROD_ULTRA, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("ATTACK1"))
-						for(String st : keydata)
-							if(checkNotNull(Action.POKEMOVE_1, st))
-								keys.put(Action.POKEMOVE_1, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("ATTACK2"))
-						for(String st : keydata)
-							if(checkNotNull(Action.POKEMOVE_2, st))
-								keys.put(Action.POKEMOVE_2, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("ATTACK3"))
-						for(String st : keydata)
-							if(checkNotNull(Action.POKEMOVE_3, st))
-								keys.put(Action.POKEMOVE_3, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("ATTACK4"))
-						for(String st : keydata)
-							if(checkNotNull(Action.POKEMOVE_4, st))
-								keys.put(Action.POKEMOVE_4, stringToInt(st));
-							else
-							{
-								reset();
-								return;
-							}
-					
-					else if(data[0].equals("TALK"))
-						for(String st : keydata)
-							keys.put(Action.INTERACTION, stringToInt(st));
-				}
-			}
-		}
-		catch(FileNotFoundException fnfe)
-		{
-			System.out.println("INFO: Keys.ini not found! Setting default settings");
+			Ini ini = null;
 			try
 			{
-				  generateDefaultSettings();
+				ini = new Ini(new FileInputStream(path));
 			}
-			catch (Exception e)
+			catch(InvalidIniFormatException e)
 			{
-				  System.err.println("Error: " + e.getMessage());
+				System.out.println("ERROR: Malformed keys.ini, a new file will be generated");
+				reset();
+				return;
 			}
+			catch(IOException e)
+			{
+				System.out.println("ERROR: Error during the loading of keys.ini, could be missing. A new file will be generated");
+				reset();
+				return;
+			}
+			String s;
+
+			//INITIALIZE MOVEMENT KEYS
+			Ini.Section sec = ini.get("MOVEMENT");
+			s = sec.get("UP");
+			if(checkNotNull(Action.WALK_UP, s, true))
+				keys.put(Action.WALK_UP, stringToInt(s));
+			s = sec.get("DOWN");
+			if(checkNotNull(Action.WALK_DOWN, s, true))
+				keys.put(Action.WALK_DOWN, stringToInt(s));
+			s = sec.get("LEFT");
+			if(checkNotNull(Action.WALK_LEFT, s, true))
+				keys.put(Action.WALK_LEFT, stringToInt(s));
+			s = sec.get("RIGHT");
+			if(checkNotNull(Action.WALK_RIGHT, s, true))
+				keys.put(Action.WALK_RIGHT, stringToInt(s));
 			
-			initialize();
+			//INITIALIZE ROD KEYS
+			sec = ini.get("RODS");
+			s = sec.get("OLD");
+			if(checkNotNull(Action.ROD_OLD, s, true))
+				keys.put(Action.ROD_OLD, stringToInt(s));	
+			s = sec.get("GOOD");
+			if(checkNotNull(Action.ROD_GOOD, s, true))
+				keys.put(Action.ROD_GOOD, stringToInt(s));
+			s = sec.get("GREAT");
+			if(checkNotNull(Action.ROD_GREAT, s, true))
+				keys.put(Action.ROD_GREAT, stringToInt(s));
+			s = sec.get("ULTRA");
+			if(checkNotNull(Action.ROD_ULTRA, s, true))
+				keys.put(Action.ROD_ULTRA, stringToInt(s));
+
+			//INITIALIZE BATTLE KEYS
+			sec = ini.get("BATTLEMOVES");
+			s = sec.get("ATTACK1");
+			if(checkNotNull(Action.POKEMOVE_1, s, true))
+				keys.put(Action.POKEMOVE_1, stringToInt(s));		
+			s = sec.get("ATTACK2");
+			if(checkNotNull(Action.POKEMOVE_2, s, true))
+				keys.put(Action.POKEMOVE_2, stringToInt(s));	
+			s = sec.get("ATTACK3");
+			if(checkNotNull(Action.POKEMOVE_3, s, true))
+				keys.put(Action.POKEMOVE_3, stringToInt(s));	
+			s = sec.get("ATTACK4");
+			if(checkNotNull(Action.POKEMOVE_4, s, true))
+				keys.put(Action.POKEMOVE_4, stringToInt(s));	
+					
+			//INITIALIZE INTERACTION KEYS
+			sec = ini.get("INTERACTION");
+			s = sec.get("TALK");
+			if(checkNotNull(Action.POKEMOVE_1, s, true))
+				keys.put(Action.POKEMOVE_1, stringToInt(s));	
 		}
 		finally
 		{
@@ -228,13 +117,20 @@ public class KeyManager
 		initialize();
 	}
 	
-	private static boolean checkNotNull(Action action, String key)
+	private static boolean checkNotNull(Action action, String key, boolean resetOnNull)
 	{
 		if(stringToInt(key) == null)
 		{
 			try
 			{
-				generateDefaultSettings();
+				if(resetOnNull)
+				{
+					reset();
+				}
+				else
+				{
+					generateDefaultSettings();
+				}
 			}
 			catch(IOException e)
 			{
@@ -253,7 +149,7 @@ public class KeyManager
 		// Create file 
 		  FileWriter fstream = new FileWriter("res/keys.ini");
 		  BufferedWriter out = new BufferedWriter(fstream);
-		  out.write("//see specialkeys.txt for formats of keys like left shift, right control, etc");
+		  out.write(";see specialkeys.txt for formats of keys like left shift, right control, etc");
 		  out.newLine();
 		  out.write("[MOVEMENT]");
 		  out.newLine();
@@ -275,7 +171,7 @@ public class KeyManager
 		  out.newLine();
 		  out.write("ULTRA=U");
 		  out.newLine();
-		  out.write("[MOVES]");
+		  out.write("[BATTLEMOVES]");
 		  out.newLine();
 		  out.write("ATTACK1=1");
 		  out.newLine();

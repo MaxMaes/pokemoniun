@@ -94,8 +94,8 @@ public class KeyManager
 			//INITIALIZE INTERACTION KEYS
 			sec = ini.get("INTERACTION");
 			s = sec.get("TALK");
-			if(checkNotNull(Action.POKEMOVE_1, s, true))
-				keys.put(Action.POKEMOVE_1, stringToInt(s));	
+			if(checkNotNull(Action.INTERACTION, s, true))
+				keys.put(Action.INTERACTION, stringToInt(s));	
 		}
 		finally
 		{

@@ -229,6 +229,8 @@ public class OurPlayer extends Player {
 			/*
 			 * Set sprite, name, gender and hp
 			 */
+
+			System.out.println(info);
 			System.out.println(info.length);
 			m_pokemon[i] = new OurPokemon();
 			m_pokemon[i].setName(info[1]);
@@ -256,7 +258,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setLevel(Integer.parseInt(info[14]));
 			m_pokemon[i].setAbility(info[15]);
 			m_pokemon[i].setNature(info[16]);
-			m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
+			//m_pokemon[i].setExpLvl(Integer.parseInt(info[17]));
 			/*
 			 * Moves
 			 */
@@ -266,12 +268,17 @@ public class OurPlayer extends Player {
 			{
 				if(j < info.length - 17 && info[j + 17] != null)
 				{
+					
 					moves[j] = info[j + 17];
 				}
 				else
 				{
 					moves[j] = "";
 				}
+			}
+			if(info[17] == null || info[17].equals(""))
+			{
+				moves[0] = "Tackle";
 			}
 			m_pokemon[i].setMoves(moves);
 			
@@ -286,8 +293,13 @@ public class OurPlayer extends Player {
 					movetypes[j] = "";
 				}
 			}
+			if(info[17] == null || info[17].equals(""))
+			{
+				movetypes[0] = "Normal";
+				m_pokemon[i].setMoveMaxPP(0, 35);
+				m_pokemon[i].setMoveCurPP(0, 35);
+			}
 			m_pokemon[i].setMoveTypes(movetypes);
-			//m_pokemon[i].setExpLvl((int)Double.parseDouble(info[25]));
 		}
 	}
 	

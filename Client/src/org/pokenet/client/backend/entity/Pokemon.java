@@ -73,7 +73,7 @@ public class Pokemon {
         		} else {
         			if(getSpriteNumber() > 389)
         			{
-        				if(m_spriteNum < 402)
+        				if(m_spriteNum < 438)
         				{
         					index = String.valueOf(m_spriteNum - 3);
         				}
@@ -140,11 +140,12 @@ public class Pokemon {
                         else{
                         	if(getSpriteNumber() > 389)
                         	{
-                        		if(m_spriteNum < 402)
+                        		if(m_spriteNum < 438)
                 				{
                 					index = String.valueOf(m_spriteNum - 3);
                 				}
-                				else
+                				
+                        		else
                 				{
                 					index = String.valueOf(m_spriteNum - 5);
                 				}
@@ -473,7 +474,7 @@ public class Pokemon {
         	}  else {
     			if(i > 389)
     			{
-    				if(i < 402)
+    				if(i < 438)
     				{
     					index = String.valueOf(i - 3);
     				}

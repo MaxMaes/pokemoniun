@@ -517,8 +517,6 @@ public class LoginManager implements Runnable {
 						/* Avoid null pointers */
 						if (boxes[boxNumber] == null)
 							boxes[boxNumber] = new PokemonBox();
-						if (boxes[boxNumber].getPokemon() == null)
-							boxes[boxNumber].setPokemon(new Pokemon[30]);
 						/* If there's space in this box, add it to the box */
 						if (boxPosition < 30) {
 							boxes[boxNumber].setPokemon(boxPosition,
@@ -528,7 +526,6 @@ public class LoginManager implements Runnable {
 							boxPosition = 0;
 							boxNumber++;
 							if (boxNumber < 9) {
-								boxes[boxNumber].setPokemon(new Pokemon[30]);
 								boxes[boxNumber].setPokemon(boxPosition,
 										getPokemonObject(pokemons));
 							}

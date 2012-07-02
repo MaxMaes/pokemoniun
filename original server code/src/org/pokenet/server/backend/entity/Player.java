@@ -235,7 +235,6 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_boxes[box] == null)
 		{
 			m_boxes[box] = new PokemonBox();
-			m_boxes[box].setPokemon(new Pokemon[30]);
 		}
 		/* Make sure we're not depositing our only Pokemon */
 		if(getPartyCount() == 1)
@@ -1423,7 +1422,6 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				/* We need a new box */
 				m_boxes[i] = new PokemonBox();
-				m_boxes[i].setPokemon(new Pokemon[30]);
 				m_boxes[i].setPokemon(0, p);
 				break;
 			}
@@ -1772,7 +1770,6 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_boxes[j] == null)
 		{
 			m_boxes[j] = new PokemonBox();
-			m_boxes[j].setPokemon(new Pokemon[30]);
 			m_tcpSession.write("B");
 		}
 		/* Else send all pokes in box */

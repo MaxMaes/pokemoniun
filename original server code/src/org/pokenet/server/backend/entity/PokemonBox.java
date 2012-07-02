@@ -8,15 +8,7 @@ import org.pokenet.server.battle.Pokemon;
  *
  */
 public class PokemonBox {
-	private Pokemon [] m_pokemon;
-	
-	/**
-	 * Sets the pokemon in this box
-	 * @param pokes
-	 */
-	public void setPokemon(Pokemon [] pokes) {
-		m_pokemon = pokes;
-	}
+	private Pokemon[] m_pokemon = new Pokemon[30];
 	
 	/**
 	 * Returns all pokemon

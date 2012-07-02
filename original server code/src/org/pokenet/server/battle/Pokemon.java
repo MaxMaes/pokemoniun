@@ -72,61 +72,59 @@ import org.simpleframework.xml.ElementArray;
  */
 public class Pokemon extends PokemonSpecies {
 
-	private static final long                 serialVersionUID = 2636950446169268200L;
-
 	// Transient statistics.
 	@Element
-	transient private String                  m_dateCaught;
-	transient private int                     m_hp;
-	transient private final int[]             m_contestStat    = new int[5];
+	transient private String m_dateCaught;
+	transient private int m_hp;
+	transient private final int[] m_contestStat = new int[5];
 	@ElementArray
-	transient private int[]                   m_stat;
+	transient private int[] m_stat;
 	@ElementArray
-	transient private StatMultiplier[]        m_multiplier;
-	transient private StatMultiplier          m_accuracy;
-	transient private StatMultiplier          m_evasion;
+	transient private StatMultiplier[] m_multiplier;
+	transient private StatMultiplier m_accuracy;
+	transient private StatMultiplier m_evasion;
 	transient private ArrayList<StatusEffect> m_statuses;
 	@ElementArray
-	transient private int[]                   m_pp;
+	transient private int[] m_pp;
 	@ElementArray
-	transient private int[]                   m_maxPp;
+	transient private int[] m_maxPp;
 	@Element
-	transient private boolean                 m_fainted;
-	transient private BattleField             m_field;
-	transient private int                     m_party;
-	private ArrayList<String>                 m_movesLearning;
+	transient private boolean m_fainted;
+	transient private BattleField m_field;
+	transient private int m_party;
+	private ArrayList<String> m_movesLearning;
 	@Element
-	private double                            m_exp;
+	private double m_exp;
 	@Element
-	private int                               m_baseExp;
+	private int m_baseExp;
 	@Element
-	transient private int                     m_id;
-	transient private IntrinsicAbility        m_originalAbility;
-	transient private IntrinsicAbility        m_ability;
+	transient private int m_id;
+	transient private IntrinsicAbility m_originalAbility;
+	transient private IntrinsicAbility m_ability;
 	@Element(required = false)
-	transient private HoldItem                m_item;
-	transient private MoveListEntry           m_lastMove;
-	transient private boolean                 m_firstTurn      = false;
+	transient private HoldItem m_item;
+	transient private MoveListEntry m_lastMove;
+	transient private boolean m_firstTurn = false;
 	/**
 	 * The health of a substitute, or zero if no substitute is out.
 	 */
-	transient private int                     m_substitute;
+	transient private int m_substitute;
 	/* Stores the EXP growth rate of the Pokemon */
 	@Element
-	transient private ExpTypes                m_expType;
+	transient private ExpTypes m_expType;
 	@Element
-	private int                               m_happiness;
+	private int m_happiness;
 	/* Stores the evolution this Pokemon is waiting to evolve to */
-	private PokemonEvolution                     m_evolution      = null;
+	private PokemonEvolution m_evolution = null;
 
 	// Intrinsic statistics.
 	@Element
-	private int                               m_level          = -1;
+	private int m_level = -1;
 	@Element
-	private PokemonNature                     m_nature;
-	private MoveListEntry[]                   m_move;
+	private PokemonNature m_nature;
+	private MoveListEntry[] m_move;
 	@ElementArray
-	private int[]                             m_ppUp;                                 // Number
+	private int[] m_ppUp; // Number
 	// of
 	// PP
 	// Ups
@@ -135,54 +133,54 @@ public class Pokemon extends PokemonSpecies {
 	// each
 	// move.
 	@Element
-	private String                            m_abilityName;                          // Intrinsic
+	private String m_abilityName; // Intrinsic
 	// ability.
 	@Element
-	private String                            m_itemName;                             // Item
+	private String m_itemName; // Item
 	// initially
 	// held
 	// by
 	// the
 	// pokemon.
 	@Element
-	private boolean                           m_shiny          = false;
+	private boolean m_shiny = false;
 	@Element
-	private int                               m_gender         = GENDER_MALE;
+	private int m_gender = GENDER_MALE;
 	@Element
-	private String                            m_nickname;
+	private String m_nickname;
 
 	// Hidden statistics.
 	@ElementArray
-	private int                               m_iv[];
+	private int m_iv[];
 	@ElementArray
-	private int                               m_ev[];
+	private int m_ev[];
 
 	@Element
-	private String                            m_originalTrainer;
+	private String m_originalTrainer;
 	@SuppressWarnings("unused")
 	@Element
-	private long                              m_originalNo;
+	private long m_originalNo;
 
-	private int                               m_databaseID     = -1;
+	private int m_databaseID = -1;
 
 	// Battle mechanics.
-	private BattleMechanics                   m_mech;
+	private BattleMechanics m_mech;
 
 	/* Constants representing each statistic. */
-	public static final int                   S_HP             = 0;
-	public static final int                   S_ATTACK         = 1;
-	public static final int                   S_DEFENCE        = 2;
-	public static final int                   S_SPEED          = 3;
-	public static final int                   S_SPATTACK       = 4;
-	public static final int                   S_SPDEFENCE      = 5;
-	public static final int                   S_ACCURACY       = 6;
-	public static final int                   S_EVASION        = 7;
+	public static final int S_HP = 0;
+	public static final int S_ATTACK = 1;
+	public static final int S_DEFENCE = 2;
+	public static final int S_SPEED = 3;
+	public static final int S_SPATTACK = 4;
+	public static final int S_SPDEFENCE = 5;
+	public static final int S_ACCURACY = 6;
+	public static final int S_EVASION = 7;
 	/* Content stats */
-	public static final int                   S_BEAUTY         = 0;
-	public static final int                   S_CUTE           = 1;
-	public static final int                   S_SMART          = 2;
-	public static final int                   S_COOL           = 3;
-	public static final int                   S_TOUGH          = 4;
+	public static final int S_BEAUTY = 0;
+	public static final int S_CUTE = 1;
+	public static final int S_SMART = 2;
+	public static final int S_COOL = 3;
+	public static final int S_TOUGH = 4;
 
 	public enum ExpTypes {
 		MEDIUM, ERRATIC, FLUCTUATING, PARABOLIC, FAST, SLOW
@@ -195,13 +193,14 @@ public class Pokemon extends PokemonSpecies {
 	 * @return
 	 */
 	public String getContestStatsAsString() {
-		return m_contestStat[0] + "," + m_contestStat[1] + "," + m_contestStat[2]
-		                                                                       + "," + m_contestStat[3] + "," + m_contestStat[4];
+		return m_contestStat[0] + "," + m_contestStat[1] + ","
+				+ m_contestStat[2] + "," + m_contestStat[3] + ","
+				+ m_contestStat[4];
 	}
 
 	/**
-	 * Sets the contest stat of the pokemon. NOTE: Use S_BEAUTY, S_CUTE, etc. for
-	 * i
+	 * Sets the contest stat of the pokemon. NOTE: Use S_BEAUTY, S_CUTE, etc.
+	 * for i
 	 * 
 	 * @param i
 	 * @param amount
@@ -229,89 +228,117 @@ public class Pokemon extends PokemonSpecies {
 		switch (this.getTypes()[0].getType()) {
 		case 0:
 			/* NORMAL - Weak against Fighting */
-			if (b.getTypes()[0].getType() == 6) return true;
+			if (b.getTypes()[0].getType() == 6)
+				return true;
 			break;
 		case 1:
 			/* FIRE - Weak against Ground, Rock, Water */
-			if (b.getTypes()[0].getType() == 8 || b.getTypes()[0].getType() == 12
-					|| b.getTypes()[0].getType() == 2) return true;
+			if (b.getTypes()[0].getType() == 8
+					|| b.getTypes()[0].getType() == 12
+					|| b.getTypes()[0].getType() == 2)
+				return true;
 			break;
 		case 2:
 			/* WATER - Weak against Electric, Grass */
-			if (b.getTypes()[0].getType() == 3 || b.getTypes()[0].getType() == 4)
+			if (b.getTypes()[0].getType() == 3
+					|| b.getTypes()[0].getType() == 4)
 				return true;
 			break;
 		case 3:
 			/* ELECTRIC - Weak against Ground */
-			if (b.getTypes()[0].getType() == 8) return true;
+			if (b.getTypes()[0].getType() == 8)
+				return true;
 			break;
 		case 4:
 			/* GRASS - Weak against Bug, Fire, Flying, Ice, Poison */
-			if (b.getTypes()[0].getType() == 11 || b.getTypes()[0].getType() == 1
-					|| b.getTypes()[0].getType() == 9 || b.getTypes()[0].getType() == 5
-					|| b.getTypes()[0].getType() == 7) return true;
+			if (b.getTypes()[0].getType() == 11
+					|| b.getTypes()[0].getType() == 1
+					|| b.getTypes()[0].getType() == 9
+					|| b.getTypes()[0].getType() == 5
+					|| b.getTypes()[0].getType() == 7)
+				return true;
 			break;
 		case 5:
 			/* ICE - Weak against Fighting, Fire, Rock, Steel */
-			if (b.getTypes()[0].getType() == 6 || b.getTypes()[0].getType() == 1
-					|| b.getTypes()[0].getType() == 12 || b.getTypes()[0].getType() == 16)
+			if (b.getTypes()[0].getType() == 6
+					|| b.getTypes()[0].getType() == 1
+					|| b.getTypes()[0].getType() == 12
+					|| b.getTypes()[0].getType() == 16)
 				return true;
 			break;
 		case 6:
 			/* FIGHTING - Weak against Flying, Psychic */
-			if (b.getTypes()[0].getType() == 9 || b.getTypes()[0].getType() == 10)
+			if (b.getTypes()[0].getType() == 9
+					|| b.getTypes()[0].getType() == 10)
 				return true;
 			break;
 		case 7:
 			/* POISON - Weak against Ground, Psychic */
-			if (b.getTypes()[0].getType() == 8 || b.getTypes()[0].getType() == 10)
+			if (b.getTypes()[0].getType() == 8
+					|| b.getTypes()[0].getType() == 10)
 				return true;
 			break;
 		case 8:
 			/* GROUND - Weak against Ice, Grass, Water */
-			if (b.getTypes()[0].getType() == 5 || b.getTypes()[0].getType() == 4
-					|| b.getTypes()[0].getType() == 2) return true;
+			if (b.getTypes()[0].getType() == 5
+					|| b.getTypes()[0].getType() == 4
+					|| b.getTypes()[0].getType() == 2)
+				return true;
 			break;
 		case 9:
 			/* FLYING - Weak against Electric, Ice, Rock */
-			if (b.getTypes()[0].getType() == 3 || b.getTypes()[0].getType() == 5
-					|| b.getTypes()[0].getType() == 12) return true;
+			if (b.getTypes()[0].getType() == 3
+					|| b.getTypes()[0].getType() == 5
+					|| b.getTypes()[0].getType() == 12)
+				return true;
 			break;
 		case 10:
 			/* PSYCHIC - Weak against Bug, Dark, Ghost */
-			if (b.getTypes()[0].getType() == 11 || b.getTypes()[0].getType() == 15
-					|| b.getTypes()[0].getType() == 13) return true;
+			if (b.getTypes()[0].getType() == 11
+					|| b.getTypes()[0].getType() == 15
+					|| b.getTypes()[0].getType() == 13)
+				return true;
 			break;
 		case 11:
 			/* BUG - Weak against Flying, Fire, Rock */
-			if (b.getTypes()[0].getType() == 9 || b.getTypes()[0].getType() == 1
-					|| b.getTypes()[0].getType() == 12) return true;
+			if (b.getTypes()[0].getType() == 9
+					|| b.getTypes()[0].getType() == 1
+					|| b.getTypes()[0].getType() == 12)
+				return true;
 			break;
 		case 12:
 			/* ROCK - Weak against Fighting, Grass, Ground, Steel, Water */
-			if (b.getTypes()[0].getType() == 6 || b.getTypes()[0].getType() == 4
-					|| b.getTypes()[0].getType() == 8 || b.getTypes()[0].getType() == 16
-					|| b.getTypes()[0].getType() == 2) return true;
+			if (b.getTypes()[0].getType() == 6
+					|| b.getTypes()[0].getType() == 4
+					|| b.getTypes()[0].getType() == 8
+					|| b.getTypes()[0].getType() == 16
+					|| b.getTypes()[0].getType() == 2)
+				return true;
 			break;
 		case 13:
 			/* GHOST - Weak against Dark, Ghost */
-			if (b.getTypes()[0].getType() == 13 || b.getTypes()[0].getType() == 15)
+			if (b.getTypes()[0].getType() == 13
+					|| b.getTypes()[0].getType() == 15)
 				return true;
 			break;
 		case 14:
 			/* DRAGON - Weak against Dragon, Ice */
-			if (b.getTypes()[0].getType() == 14 || b.getTypes()[0].getType() == 5)
+			if (b.getTypes()[0].getType() == 14
+					|| b.getTypes()[0].getType() == 5)
 				return true;
 			break;
 		case 15:
 			/* DARK - Weak against Bug, Fighting */
-			if (b.getTypes()[0].getType() == 6 || b.getTypes()[0].getType() == 11)
+			if (b.getTypes()[0].getType() == 6
+					|| b.getTypes()[0].getType() == 11)
 				return true;
 			break;
 		case 16:
 			/* STEEL - Weak against Fire, Fighting, Ground */
-			if (b.getTypes()[0].getType() == 1 || b.getTypes()[0].getType() == 6
-					|| b.getTypes()[0].getType() == 8) return true;
+			if (b.getTypes()[0].getType() == 1
+					|| b.getTypes()[0].getType() == 6
+					|| b.getTypes()[0].getType() == 8)
+				return true;
 			break;
 		}
 		return false;
@@ -354,18 +381,21 @@ public class Pokemon extends PokemonSpecies {
 	public boolean hasMove(String move) {
 		for (int i = 0; i < m_move.length; i++) {
 			if (m_move[i] != null && m_move[i].getName() != null
-					&& m_move[i].getName().equalsIgnoreCase(move)) { return true; }
+					&& m_move[i].getName().equalsIgnoreCase(move)) {
+				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 * Handles the response from the client, whether they allowed evolution or not
+	 * Handles the response from the client, whether they allowed evolution or
+	 * not
 	 * 
 	 * @param allow
-	 *          - If the evolution is allowed
+	 *            - If the evolution is allowed
 	 * @param p
-	 *          - The player that owns the Pokemon
+	 *            - The player that owns the Pokemon
 	 */
 	public void evolutionResponse(boolean allow, Player p) {
 		if (m_evolution != null) {
@@ -374,12 +404,12 @@ public class Pokemon extends PokemonSpecies {
 
 			if (allow) {
 				/* The player is allowing evolution, evolve the Pokemon */
-				this.evolve(PokemonSpecies.getDefaultData().
-						getPokemonByName(m_evolution.getEvolveTo()));
+				this.evolve(PokemonSpecies.getDefaultData().getPokemonByName(
+						m_evolution.getEvolveTo()));
 			}
 			/* Retrieve the Pokemon data */
-			PokemonSpecies pokeData = PokemonSpecies.getDefaultData().
-			getPokemonByName(getSpeciesName());
+			PokemonSpecies pokeData = PokemonSpecies.getDefaultData()
+					.getPokemonByName(getSpeciesName());
 
 			setHappiness(m_happiness + 2);
 			calculateStats(false);
@@ -393,7 +423,8 @@ public class Pokemon extends PokemonSpecies {
 			for (int i = oldLevel + 1; i <= level; i++) {
 				if (pokeData.getLevelMoves().get(i) != null) {
 					move = pokeData.getLevelMoves().get(i);
-					if (move != null && !move.equalsIgnoreCase("") && !hasMove(move))
+					if (move != null && !move.equalsIgnoreCase("")
+							&& !hasMove(move))
 						m_movesLearning.add(move);
 				}
 			}
@@ -440,9 +471,13 @@ public class Pokemon extends PokemonSpecies {
 	 * Create a substitute to take hits for this pokemon.
 	 */
 	public boolean createSubstitute() {
-		if (hasSubstitute()) { return false; }
+		if (hasSubstitute()) {
+			return false;
+		}
 		int quarter = m_stat[S_HP] / 4;
-		if (quarter >= m_hp) { return false; }
+		if (quarter >= m_hp) {
+			return false;
+		}
 		changeHealth(-quarter);
 		m_substitute = quarter;
 		return true;
@@ -543,7 +578,7 @@ public class Pokemon extends PokemonSpecies {
 	 * Unserialises a Pokemon.
 	 */
 	private void readObject(ObjectInputStream in) throws IOException,
-	ClassNotFoundException {
+			ClassNotFoundException {
 		in.defaultReadObject();
 		if (m_ppUp == null) {
 			m_ppUp = new int[m_move.length];
@@ -566,9 +601,9 @@ public class Pokemon extends PokemonSpecies {
 
 	/** Creates a new instance of Pokemon */
 	public Pokemon(BattleMechanics mech, PokemonSpecies species,
-			PokemonNature nature, String ability, String item, int gender, int level,
-			int[] ivs, int[] evs, MoveListEntry[] moves, int[] ppUps, boolean validate)
-	throws StatException {
+			PokemonNature nature, String ability, String item, int gender,
+			int level, int[] ivs, int[] evs, MoveListEntry[] moves,
+			int[] ppUps, boolean validate) throws StatException {
 		super(species);
 		m_mech = mech;
 		m_iv = ivs;
@@ -591,11 +626,11 @@ public class Pokemon extends PokemonSpecies {
 	 * Create and validate a new pokemon.
 	 */
 	public Pokemon(BattleMechanics mech, PokemonSpecies species,
-			PokemonNature nature, String ability, String item, int gender, int level,
-			int[] ivs, int[] evs, MoveListEntry[] moves, int[] ppUps)
-	throws StatException {
-		this(mech, species, nature, ability, item, gender, level, ivs, evs, moves,
-				ppUps, true);
+			PokemonNature nature, String ability, String item, int gender,
+			int level, int[] ivs, int[] evs, MoveListEntry[] moves, int[] ppUps)
+			throws StatException {
+		this(mech, species, nature, ability, item, gender, level, ivs, evs,
+				moves, ppUps, true);
 	}
 
 	public BattleMechanics getMech() {
@@ -612,8 +647,8 @@ public class Pokemon extends PokemonSpecies {
 		Random gen = new Random();
 		m_iv = new int[] {
 				gen.nextInt(32), // IVs
-				gen.nextInt(32), gen.nextInt(32), gen.nextInt(32), gen.nextInt(32),
-				gen.nextInt(32) };
+				gen.nextInt(32), gen.nextInt(32), gen.nextInt(32),
+				gen.nextInt(32), gen.nextInt(32) };
 		m_ev = new int[] { 0, 0, 0, 0, 0, 0 };
 		m_nature = p.getNature();
 		m_gender = p.getGender();
@@ -644,12 +679,14 @@ public class Pokemon extends PokemonSpecies {
 		}
 		PokemonNature nature = PokemonNature.getNature(random.nextInt(25));
 		PokemonSpeciesData speciesData = data.getSpeciesData();
-		PokemonSpecies species = new PokemonSpecies(speciesData, random
-				.nextInt(speciesData.getSpeciesCount()));
-		String [] moveset = species.getStarterMoves();
-		if ((moveset == null) || (moveset.length == 0)) { return null; }
+		PokemonSpecies species = new PokemonSpecies(speciesData,
+				random.nextInt(speciesData.getSpeciesCount()));
+		String[] moveset = species.getStarterMoves();
+		if ((moveset == null) || (moveset.length == 0)) {
+			return null;
+		}
 		int moveCount = moveset.length;
-		String[] moves = (String [] ) species.getLevelMoves().values().toArray();
+		String[] moves = (String[]) species.getLevelMoves().values().toArray();
 		MoveListEntry[] entries = new MoveListEntry[(moveCount >= 4) ? 4
 				: moveCount];
 		Set<String> moveSet = new HashSet<String>();
@@ -681,11 +718,12 @@ public class Pokemon extends PokemonSpecies {
 			int[] choices = { GENDER_MALE, GENDER_FEMALE };
 			while (true) {
 				gender = choices[random.nextBoolean() ? 0 : 1];
-				if ((genders & gender) != 0) break;
+				if ((genders & gender) != 0)
+					break;
 			}
 		}
-		Pokemon p = new Pokemon(mech, species, nature, ability, item, gender, 100,
-				ivs, evs, entries, ppUp);
+		Pokemon p = new Pokemon(mech, species, nature, ability, item, gender,
+				100, ivs, evs, entries, ppUp);
 		// Give it a 5% chance of being shiny.
 		if (random.nextDouble() < 0.05) {
 			p.setShiny(true);
@@ -706,10 +744,12 @@ public class Pokemon extends PokemonSpecies {
 		/*
 		 * First obtain species data
 		 */
-		PokemonSpecies ps = PokemonSpecies.getDefaultData().getPokemonByName(species);
+		PokemonSpecies ps = PokemonSpecies.getDefaultData().getPokemonByName(
+				species);
 		MoveListEntry[] moves = new MoveListEntry[4];
 		/*
-		 * Generate a list of possible moves this Pokemon could have at this level
+		 * Generate a list of possible moves this Pokemon could have at this
+		 * level
 		 */
 		ArrayList<MoveListEntry> possibleMoves = new ArrayList<MoveListEntry>();
 		MoveList moveList = MoveList.getDefaultData();
@@ -729,22 +769,26 @@ public class Pokemon extends PokemonSpecies {
 				/* Check if this move is already in the list of possible moves */
 				for (int j = 0; j < possibleMoves.size(); j++) {
 					if (possibleMoves.get(j) != null
-							&& possibleMoves.get(j).getName() != null && m != null
+							&& possibleMoves.get(j).getName() != null
+							&& m != null
 							&& m.getName() != null
-							&& possibleMoves.get(j).getName().equalsIgnoreCase(m.getName())) {
+							&& possibleMoves.get(j).getName()
+									.equalsIgnoreCase(m.getName())) {
 						exists = true;
 						break;
 					}
 				}
 				/* If the move is not already in the list, add it to the list */
-				if (!exists) possibleMoves.add(m);
+				if (!exists)
+					possibleMoves.add(m);
 			}
 		}
 		/*
 		 * possibleMoves sometimes has null moves stored in it, get rid of them
 		 */
 		for (int i = 0; i < possibleMoves.size(); i++) {
-			if (possibleMoves.get(i) == null) possibleMoves.remove(i);
+			if (possibleMoves.get(i) == null)
+				possibleMoves.remove(i);
 		}
 		possibleMoves.trimToSize();
 		/*
@@ -771,21 +815,23 @@ public class Pokemon extends PokemonSpecies {
 		/*
 		 * Get all possible abilities
 		 */
-		String[] abilities = PokemonSpecies.getDefaultData().getPokemonByName(
-				species).getAbilities();
+		String[] abilities = PokemonSpecies.getDefaultData()
+				.getPokemonByName(species).getAbilities();
 		/* First select an ability randomly */
 		String ab = abilities[random.nextInt(abilities.length)];
 		/*
 		 * Now lets create the pokemon itself
 		 */
-		p = new Pokemon(DataService.getBattleMechanics(), ps, PokemonNature
-				.getNature(random.nextInt(PokemonNature.getNatureNames().length)), ab,
-				null, Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] {
-			random.nextInt(32), // IVs
-			random.nextInt(32), random.nextInt(32), random.nextInt(32),
-			random.nextInt(32), random.nextInt(32) },
-			new int[] { 0, 0, 0, 0, 0, 0 }, // EVs
-			moves, new int[] { 0, 0, 0, 0 });
+		p = new Pokemon(DataService.getBattleMechanics(), ps,
+				PokemonNature.getNature(random.nextInt(PokemonNature
+						.getNatureNames().length)), ab, null,
+				Pokemon.generateGender(ps.getPossibleGenders()), level,
+				new int[] {
+						random.nextInt(32), // IVs
+						random.nextInt(32), random.nextInt(32),
+						random.nextInt(32), random.nextInt(32),
+						random.nextInt(32) }, new int[] { 0, 0, 0, 0, 0, 0 }, // EVs
+				moves, new int[] { 0, 0, 0, 0 });
 		p.setBaseExp(ps.getBaseEXP());
 		p.setExpType(ps.getGrowthRate());
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
@@ -803,7 +849,8 @@ public class Pokemon extends PokemonSpecies {
 		case 2:
 			return 2;
 		case 3:
-			if (DataService.getBattleMechanics().getRandom().nextBoolean()) return 1;
+			if (DataService.getBattleMechanics().getRandom().nextBoolean())
+				return 1;
 			else
 				return 2;
 		default:
@@ -875,7 +922,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Return the name of this pokemon's ability.
 	 */
 	public String getAbilityName() {
-		if ((m_ability == null) || m_ability.isRemovable()) { return ""; }
+		if ((m_ability == null) || m_ability.isRemovable()) {
+			return "";
+		}
 		return m_ability.getName();
 	}
 
@@ -884,8 +933,9 @@ public class Pokemon extends PokemonSpecies {
 	 */
 	public IntrinsicAbility getAbility() {
 		if ((m_ability == null) && (m_abilityName != null)
-				&& (m_abilityName.length() != 0)) { return IntrinsicAbility
-			.getInstance(m_abilityName); }
+				&& (m_abilityName.length() != 0)) {
+			return IntrinsicAbility.getInstance(m_abilityName);
+		}
 		return m_ability;
 	}
 
@@ -912,7 +962,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Return the name of this pokemon's item.
 	 */
 	public String getItemName() {
-		if ((m_item == null) || m_item.isRemovable()) { return ""; }
+		if ((m_item == null) || m_item.isRemovable()) {
+			return "";
+		}
 		return m_item.getName();
 	}
 
@@ -920,7 +972,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Get this pokemon's item.
 	 */
 	public HoldItem getItem() {
-		if ((m_item != null) && m_item.isRemovable()) { return null; }
+		if ((m_item != null) && m_item.isRemovable()) {
+			return null;
+		}
 		return m_item;
 	}
 
@@ -948,25 +1002,34 @@ public class Pokemon extends PokemonSpecies {
 			if (move != null) {
 				++moveCount;
 				String name = move.getName();
-				if (set.contains(name)) { throw new ValidationException(
-				"This pokemon learns two of the same move."); }
+				if (set.contains(name)) {
+					throw new ValidationException(
+							"This pokemon learns two of the same move.");
+				}
 				set.add(name);
-				if (!canLearn(speciesData, name)) { throw new ValidationException(
-						"This pokemon cannot learn " + name + "."); }
-				if ((m_ppUp[i] > 3) || (m_ppUp[i] < 0)) { throw new ValidationException(
-						"Each move must have between zero and "
-						+ "three PP ups applied to it."); }
+				if (!canLearn(speciesData, name)) {
+					throw new ValidationException("This pokemon cannot learn "
+							+ name + ".");
+				}
+				if ((m_ppUp[i] > 3) || (m_ppUp[i] < 0)) {
+					throw new ValidationException(
+							"Each move must have between zero and "
+									+ "three PP ups applied to it.");
+				}
 			}
 		}
 		if (moveCount == 0) {
 			// Pokemon must have at least one move.
 			throw new ValidationException("This pokemon learns no moves.");
-		} else if (moveCount > 4) { throw new ValidationException(
-		"This pokemon learns move than four moves."); }
+		} else if (moveCount > 4) {
+			throw new ValidationException(
+					"This pokemon learns move than four moves.");
+		}
 
 		int genders = getPossibleGenders();
-		if (((genders & m_gender) == 0) && ((genders != 0) || (m_gender != 0))) { throw new ValidationException(
-		"This pokemon has an invalid gender."); }
+		if (((genders & m_gender) == 0) && ((genders != 0) || (m_gender != 0))) {
+			throw new ValidationException("This pokemon has an invalid gender.");
+		}
 
 		if (!canUseAbility(speciesData, m_abilityName)) {
 			String[] possibilities = getPossibleAbilities(speciesData);
@@ -976,21 +1039,26 @@ public class Pokemon extends PokemonSpecies {
 		}
 
 		if ((m_itemName != null)
-				&& !data.getHoldItemData().canUseItem(getSpeciesName(), m_itemName)) { throw new ValidationException(
-				"This pokemon's item is invalid."); }
+				&& !data.getHoldItemData().canUseItem(getSpeciesName(),
+						m_itemName)) {
+			throw new ValidationException("This pokemon's item is invalid.");
+		}
 	}
 
 	/**
 	 * Get the number of PP Ups that have been applied to the given move slot.
 	 */
 	public int getPpUpCount(int i) {
-		if ((i < 0) || (i >= m_ppUp.length)) { return -1; }
+		if ((i < 0) || (i >= m_ppUp.length)) {
+			return -1;
+		}
 		return m_ppUp[i];
 	}
 
 	/**
-	 * Calculate stats from a given set of IVs and EVs. The data given are assumed
-	 * to be valid; no checking is done for illegal values in this function.
+	 * Calculate stats from a given set of IVs and EVs. The data given are
+	 * assumed to be valid; no checking is done for illegal values in this
+	 * function.
 	 */
 	public void calculateStats(int base[], int[] ivs, int[] evs) {
 		m_iv = ivs;
@@ -1010,12 +1078,14 @@ public class Pokemon extends PokemonSpecies {
 	public void calculateStats(boolean reset) {
 		m_stat = new int[6];
 		m_multiplier = new StatMultiplier[m_stat.length];
-		if (reset) removeStatusEffects(true);
+		if (reset)
+			removeStatusEffects(true);
 		for (int i = 0; i < m_stat.length; ++i) {
 			m_stat[i] = m_mech.calculateStat(this, i);
 			m_multiplier[i] = new StatMultiplier(false);
 		}
-		if (reset) m_hp = m_stat[S_HP];
+		if (reset)
+			m_hp = m_stat[S_HP];
 	}
 
 	/**
@@ -1077,7 +1147,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Get this pokemon's teammates, including this pokemon.
 	 */
 	public Pokemon[] getTeammates() {
-		if (m_field == null) { return null; }
+		if (m_field == null) {
+			return null;
+		}
 		return m_field.getParty(m_party);
 	}
 
@@ -1085,7 +1157,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Get the name of this pokemon's trainer.
 	 */
 	public String getTrainerName() {
-		if (m_field == null) { return null; }
+		if (m_field == null) {
+			return null;
+		}
 		return m_field.getTrainerName(m_party);
 	}
 
@@ -1093,7 +1167,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Get the Pokemon that this Pokemon is fighting in a battle.
 	 */
 	public Pokemon getOpponent() {
-		if (m_field == null) { return null; }
+		if (m_field == null) {
+			return null;
+		}
 		Pokemon[] active = m_field.getActivePokemon();
 		return active[(m_party == 0) ? 1 : 0];
 	}
@@ -1103,7 +1179,9 @@ public class Pokemon extends PokemonSpecies {
 	 */
 	public boolean isType(PokemonType type) {
 		for (int i = 0; i < m_type.length; ++i) {
-			if (m_type[i].equals(type)) { return true; }
+			if (m_type[i].equals(type)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -1126,7 +1204,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Set a move's pp.
 	 */
 	public void setPp(int i, int value) {
-		if ((i < 0) || (i >= m_pp.length)) return;
+		if ((i < 0) || (i >= m_pp.length))
+			return;
 		m_pp[i] = value;
 	}
 
@@ -1134,7 +1213,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Get a move's pp.
 	 */
 	public int getPp(int i) {
-		if ((i < 0) || (i >= m_move.length) || (m_move[i] == null)) return -1;
+		if ((i < 0) || (i >= m_move.length) || (m_move[i] == null))
+			return -1;
 		return m_pp[i];
 	}
 
@@ -1142,7 +1222,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Get a move's max pp.
 	 */
 	public int getMaxPp(int i) {
-		if ((i < 0) || (i >= m_move.length) || (m_move[i] == null)) return -1;
+		if ((i < 0) || (i >= m_move.length) || (m_move[i] == null))
+			return -1;
 		return m_maxPp[i];
 	}
 
@@ -1153,7 +1234,8 @@ public class Pokemon extends PokemonSpecies {
 	 * @param value
 	 */
 	public void setMaxPP(int i, int value) {
-		if ((i < 0) || (i >= m_maxPp.length)) return;
+		if ((i < 0) || (i >= m_maxPp.length))
+			return;
 		m_maxPp[i] = value;
 	}
 
@@ -1164,7 +1246,8 @@ public class Pokemon extends PokemonSpecies {
 	 * @param value
 	 */
 	public void setPpUp(int i, int value) {
-		if ((i < 0) || (i >= m_ppUp.length)) return;
+		if ((i < 0) || (i >= m_ppUp.length))
+			return;
 		m_ppUp[i] = value;
 	}
 
@@ -1172,8 +1255,10 @@ public class Pokemon extends PokemonSpecies {
 	 * Get one of this pokemon's moves.
 	 */
 	public MoveListEntry getMove(int i) {
-		if (i == -1) return BattleField.getStruggle();
-		if ((i < -1) || (i >= m_move.length) || (m_move[i] == null)) return null;
+		if (i == -1)
+			return BattleField.getStruggle();
+		if ((i < -1) || (i >= m_move.length) || (m_move[i] == null))
+			return null;
 		return m_move[i];
 	}
 
@@ -1181,7 +1266,7 @@ public class Pokemon extends PokemonSpecies {
 	 * This method is called when the pokemon is just about to execute its turn.
 	 * 
 	 * @param turn
-	 *          the turn that is about to be executed
+	 *            the turn that is about to be executed
 	 */
 	public void executeTurn(BattleTurn turn) {
 		Iterator<StatusEffect> i = m_statuses.iterator();
@@ -1251,14 +1336,17 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Return the effect that vetoes the use of a particular one of this pokemon's
-	 * moves.
+	 * Return the effect that vetoes the use of a particular one of this
+	 * pokemon's moves.
 	 */
 	public StatusEffect getVetoingEffect(int idx) throws MoveQueueException {
-		if ((idx < 0) || (idx >= m_move.length)) { throw new MoveQueueException(
-		"No such move."); }
+		if ((idx < 0) || (idx >= m_move.length)) {
+			throw new MoveQueueException("No such move.");
+		}
 		MoveListEntry entry = m_move[idx];
-		if (entry == null) { throw new MoveQueueException("No such move."); }
+		if (entry == null) {
+			throw new MoveQueueException("No such move.");
+		}
 		synchronized (m_statuses) {
 			Iterator<StatusEffect> i = m_statuses.iterator();
 			while (i.hasNext()) {
@@ -1266,7 +1354,9 @@ public class Pokemon extends PokemonSpecies {
 				if ((j == null) || !j.isActive()) {
 					continue;
 				}
-				if (j.vetoesMove(this, entry)) { return j; }
+				if (j.vetoesMove(this, entry)) {
+					return j;
+				}
 			}
 		}
 		return null;
@@ -1276,14 +1366,18 @@ public class Pokemon extends PokemonSpecies {
 	 * Return whether this pokemon has a particular effect.
 	 */
 	public boolean hasEffect(StatusEffect eff) {
-		if (eff == null) { return false; }
+		if (eff == null) {
+			return false;
+		}
 		Iterator<StatusEffect> i = m_statuses.iterator();
 		while (i.hasNext()) {
 			StatusEffect j = i.next();
 			if ((j == null) || !j.isActive()) {
 				continue;
 			}
-			if (eff.equals(j)) { return true; }
+			if (eff.equals(j)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -1307,15 +1401,17 @@ public class Pokemon extends PokemonSpecies {
 				if ((eff == null) || !eff.isActive()) {
 					continue;
 				}
-				if (eff.getLock() == lock) { return eff; }
+				if (eff.getLock() == lock) {
+					return eff;
+				}
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Return the effect of a particular class applied to this pokemon, or null if
-	 * there is no such effect.
+	 * Return the effect of a particular class applied to this pokemon, or null
+	 * if there is no such effect.
 	 */
 	public StatusEffect getEffect(Class<?> type) {
 		synchronized (m_statuses) {
@@ -1325,7 +1421,9 @@ public class Pokemon extends PokemonSpecies {
 				if ((eff == null) || !eff.isActive()) {
 					continue;
 				}
-				if (type.isAssignableFrom(eff.getClass())) { return eff; }
+				if (type.isAssignableFrom(eff.getClass())) {
+					return eff;
+				}
 			}
 		}
 		return null;
@@ -1342,7 +1440,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Return whether this pokemon has a particular ability.
 	 */
 	public boolean hasAbility(String name) {
-		if (m_ability == null) { return false; }
+		if (m_ability == null) {
+			return false;
+		}
 		return (m_ability.isActive() && m_ability.getName().equals(name));
 	}
 
@@ -1350,7 +1450,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Return whether this pokemon has a particular item.
 	 */
 	public boolean hasItem(String name) {
-		if (m_item == null) { return false; }
+		if (m_item == null) {
+			return false;
+		}
 		return (m_item.isActive() && m_item.getName().equals(name));
 	}
 
@@ -1362,7 +1464,9 @@ public class Pokemon extends PokemonSpecies {
 			Iterator<StatusEffect> i = m_statuses.iterator();
 			while (i.hasNext()) {
 				StatusEffect eff = i.next();
-				if (eff.isActive() && eff.deactivates(this)) { return false; }
+				if (eff.isActive() && eff.deactivates(this)) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -1409,10 +1513,11 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Get a list of statuses that are not special, weather, abilities, or items.
+	 * Get a list of statuses that are not special, weather, abilities, or
+	 * items.
 	 * 
 	 * @param lock
-	 *          status lock to allow
+	 *            status lock to allow
 	 */
 	public List<StatusEffect> getNormalStatuses(int lock) {
 		List<StatusEffect> ret = new ArrayList<StatusEffect>();
@@ -1420,7 +1525,8 @@ public class Pokemon extends PokemonSpecies {
 			Iterator<StatusEffect> i = m_statuses.iterator();
 			while (i.hasNext()) {
 				StatusEffect effect = i.next();
-				if (!effect.isActive()) continue;
+				if (!effect.isActive())
+					continue;
 				// Note: HoldItem is a subclass of IntrinsicAbility.
 				if (!(effect instanceof IntrinsicAbility)) {
 					int effLock = effect.getLock();
@@ -1441,7 +1547,9 @@ public class Pokemon extends PokemonSpecies {
 			Iterator<StatusEffect> i = m_statuses.iterator();
 			while (i.hasNext()) {
 				StatusEffect effect = i.next();
-				if (effect.isActive() && !effect.canSwitch(this)) { return false; }
+				if (effect.isActive() && !effect.canSwitch(this)) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -1537,7 +1645,8 @@ public class Pokemon extends PokemonSpecies {
 			Iterator<StatusEffect> i = m_statuses.iterator();
 			while (i.hasNext()) {
 				StatusEffect effect = i.next();
-				if (!effect.isRemovable() && type.isAssignableFrom(effect.getClass())) {
+				if (!effect.isRemovable()
+						&& type.isAssignableFrom(effect.getClass())) {
 					unapplyEffect(effect);
 				}
 			}
@@ -1556,7 +1665,8 @@ public class Pokemon extends PokemonSpecies {
 		if ((m_abilityName != null) && (m_abilityName.length() != 0)) {
 			m_originalAbility = IntrinsicAbility.getInstance(m_abilityName);
 			if (m_originalAbility != null) {
-				m_ability = (IntrinsicAbility) addStatus(this, m_originalAbility);
+				m_ability = (IntrinsicAbility) addStatus(this,
+						m_originalAbility);
 			}
 		}
 
@@ -1577,9 +1687,9 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Get this pokemon's party. This will be in the range [0, <b>parties</b> - 1]
-	 * where <b>parties</b> is the number of parties on the battle field (probably
-	 * two).
+	 * Get this pokemon's party. This will be in the range [0, <b>parties</b> -
+	 * 1] where <b>parties</b> is the number of parties on the battle field
+	 * (probably two).
 	 */
 	public int getParty() {
 		return m_party;
@@ -1603,7 +1713,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Get the name of this pokemon's moves.
 	 */
 	public String getMoveName(int i) {
-		if (!(i < m_move.length) || (m_move[i] == null)) { return null; }
+		if (!(i < m_move.length) || (m_move[i] == null)) {
+			return null;
+		}
 		return m_move[i].getName();
 	}
 
@@ -1626,7 +1738,8 @@ public class Pokemon extends PokemonSpecies {
 				StatusEffect eff = (StatusEffect) i.next();
 				if (eff.isActive() && eff.isEffectivenessTransformer(enemy)) {
 					double actual = eff.getEffectiveness(move, pokemon, enemy);
-					if (actual != expected) return actual;
+					if (actual != expected)
+						return actual;
 				}
 			}
 		}
@@ -1642,7 +1755,7 @@ public class Pokemon extends PokemonSpecies {
 	 * Is this pokemon immobilised?
 	 * 
 	 * @param exception
-	 *          status not to check for
+	 *            status not to check for
 	 */
 	public boolean isImmobilised(Class<?> exception) {
 		synchronized (m_statuses) {
@@ -1673,7 +1786,7 @@ public class Pokemon extends PokemonSpecies {
 	 * Transform a move based on the status effects applied to the pokemon.
 	 * 
 	 * @param enemy
-	 *          whether this Pokemon is an enemy
+	 *            whether this Pokemon is an enemy
 	 */
 	protected MoveListEntry getTransformedMove(MoveListEntry move, boolean enemy) {
 		// For now, do this in no particular order.
@@ -1682,8 +1795,11 @@ public class Pokemon extends PokemonSpecies {
 			while (i.hasNext()) {
 				StatusEffect eff = i.next();
 				if (eff.isActive() && eff.isMoveTransformer(enemy)) {
-					move = eff.getMove(this, (MoveListEntry) move.clone(), enemy);
-					if (move == null) { return null; }
+					move = eff.getMove(this, (MoveListEntry) move.clone(),
+							enemy);
+					if (move == null) {
+						return null;
+					}
 				}
 			}
 		}
@@ -1691,8 +1807,8 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Get the last move used by this pokemon, or null if the pokemon has not used
-	 * a move since it has been out.
+	 * Get the last move used by this pokemon, or null if the pokemon has not
+	 * used a move since it has been out.
 	 */
 	public MoveListEntry getLastMove() {
 		return m_lastMove;
@@ -1709,15 +1825,19 @@ public class Pokemon extends PokemonSpecies {
 			m_firstTurn = false;
 			return ret;
 		}
-		if ((i >= m_move.length) || (m_move[i] == null)) return 0;
-		if (m_pp[i] == 0) return 0;
+		if ((i >= m_move.length) || (m_move[i] == null))
+			return 0;
+		if (m_pp[i] == 0)
+			return 0;
 
 		MoveListEntry entry = m_move[i];
 		PokemonMove move = m_move[i].getMove();
 
-		final int cost = (target.hasAbility("Pressure") && move.isAttack()) ? 2 : 1;
+		final int cost = (target.hasAbility("Pressure") && move.isAttack()) ? 2
+				: 1;
 		m_pp[i] -= cost;
-		if (m_pp[i] < 0) m_pp[i] = 0;
+		if (m_pp[i] < 0)
+			m_pp[i] = 0;
 
 		int ret = useMove(entry, target);
 		m_lastMove = entry;
@@ -1733,7 +1853,9 @@ public class Pokemon extends PokemonSpecies {
 		move = getTransformedMove(move, false);
 		if (move != null) {
 			if (target != this) {
-				if ((move = target.getTransformedMove(move, true)) == null) { return 0; }
+				if ((move = target.getTransformedMove(move, true)) == null) {
+					return 0;
+				}
 			}
 			m_field.informUseMove(this, move.getName());
 			int hp = target.getHealth();
@@ -1752,7 +1874,9 @@ public class Pokemon extends PokemonSpecies {
 	 * Check for accuracy and then use an arbitrary move.
 	 */
 	public int useMove(PokemonMove move, Pokemon target) {
-		if (!move.attemptHit(m_mech, this, target)) { return 0; }
+		if (!move.attemptHit(m_mech, this, target)) {
+			return 0;
+		}
 		return move.use(m_mech, this, target);
 	}
 
@@ -1778,12 +1902,15 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Change the health of this pokemon, optionally hitting through a substitute.
+	 * Change the health of this pokemon, optionally hitting through a
+	 * substitute.
 	 */
 	public void changeHealth(int hp, boolean throughSubstitute) {
-		if (m_fainted) return;
+		if (m_fainted)
+			return;
 		if (!hasSubstitute() || throughSubstitute || (hp > 0)) {
-			if (throughSubstitute && (hp < 0) && hasAbility("Magic Guard")) return;
+			if (throughSubstitute && (hp < 0) && hasAbility("Magic Guard"))
+				return;
 			int max = m_stat[S_HP];
 			int display = hp;
 			int result = m_hp + hp;
@@ -1802,12 +1929,14 @@ public class Pokemon extends PokemonSpecies {
 						m_field.showMessage(getName() + " endured the attack!");
 						live = true;
 					} else if ((m_hp == max) && hasItem("Focus Sash")) {
-						m_field.showMessage(getName() + " hung on using its Focus Sash!");
+						m_field.showMessage(getName()
+								+ " hung on using its Focus Sash!");
 						live = true;
 						setItem(null);
 					} else if (hasItem("Focus Band")) {
 						if (m_field.getRandom().nextDouble() <= 0.1) {
-							m_field.showMessage(getName() + " hung on using its Focus Band!");
+							m_field.showMessage(getName()
+									+ " hung on using its Focus Band!");
 							live = true;
 						}
 					}
@@ -1886,21 +2015,25 @@ public class Pokemon extends PokemonSpecies {
 			} catch (MoveQueueException e) {
 				continue;
 			}
-			if (getPp(i) > 0) { return false; }
+			if (getPp(i) > 0) {
+				return false;
+			}
 		}
 		return true;
 	}
 
 	/**
-	 * Check whether the effects present on this pokemon permit the application of
-	 * the given status effect to this pokemon.
+	 * Check whether the effects present on this pokemon permit the application
+	 * of the given status effect to this pokemon.
 	 */
 	public boolean allowsStatus(StatusEffect eff, Pokemon source) {
 		Iterator<StatusEffect> i = m_statuses.iterator();
 		while (i.hasNext()) {
 			StatusEffect clause = i.next();
-			if ((clause == null) || !clause.isActive()) continue;
-			if (!clause.allowsStatus(eff, source, this)) return false;
+			if ((clause == null) || !clause.isActive())
+				continue;
+			if (!clause.allowsStatus(eff, source, this))
+				return false;
 		}
 		return true;
 	}
@@ -1909,7 +2042,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Add a status effect to this pokemon.
 	 */
 	public StatusEffect addStatus(Pokemon source, StatusEffect eff) {
-		if (m_fainted) return null;
+		if (m_fainted)
+			return null;
 
 		// Make sure there isn't another copy of this effect applied already.
 		synchronized (m_statuses) {
@@ -1918,7 +2052,10 @@ public class Pokemon extends PokemonSpecies {
 				Object o = i.next();
 				if (o != null) {
 					StatusEffect j = (StatusEffect) o;
-					if (!j.isRemovable() && (eff.equals(j) || eff.isExclusiveWith(j))) { return null; }
+					if (!j.isRemovable()
+							&& (eff.equals(j) || eff.isExclusiveWith(j))) {
+						return null;
+					}
 				}
 			}
 		}
@@ -1926,7 +2063,8 @@ public class Pokemon extends PokemonSpecies {
 		StatusEffect applied = (StatusEffect) eff.clone();
 		applied.activate();
 		applied.setInducer(source);
-		if ((m_field != null) && !allowsStatus(applied, source)) return null;
+		if ((m_field != null) && !allowsStatus(applied, source))
+			return null;
 
 		if (applied.apply(this)) {
 			m_statuses.add(applied);
@@ -1939,10 +2077,11 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	/**
-	 * Add a status effect to this pokemon caused by item. 
+	 * Add a status effect to this pokemon caused by item.
 	 */
 	public StatusEffect addStatus(StatusEffect eff) {
-		if (m_fainted) return null;
+		if (m_fainted)
+			return null;
 
 		// Make sure there isn't another copy of this effect applied already.
 		synchronized (m_statuses) {
@@ -1951,7 +2090,10 @@ public class Pokemon extends PokemonSpecies {
 				Object o = i.next();
 				if (o != null) {
 					StatusEffect j = (StatusEffect) o;
-					if (!j.isRemovable() && (eff.equals(j) || eff.isExclusiveWith(j))) { return null; }
+					if (!j.isRemovable()
+							&& (eff.equals(j) || eff.isExclusiveWith(j))) {
+						return null;
+					}
 				}
 			}
 		}
@@ -1990,12 +2132,14 @@ public class Pokemon extends PokemonSpecies {
 	}
 
 	public int getIv(int i) throws StatException {
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		return m_iv[i];
 	}
 
 	public int getEv(int i) throws StatException {
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		return m_ev[i];
 	}
 
@@ -2007,27 +2151,35 @@ public class Pokemon extends PokemonSpecies {
 			if (m_multiplier == null) {
 				m_multiplier = new StatMultiplier[m_stat.length];
 			}
-			if (m_multiplier[i] == null) m_multiplier[i] = new StatMultiplier(false);
-			if (i < 0) throw new StatException();
-			if (i < 6) return m_multiplier[i];
-			if (i == S_ACCURACY) return m_accuracy;
-			if (i == S_EVASION) return m_evasion;
+			if (m_multiplier[i] == null)
+				m_multiplier[i] = new StatMultiplier(false);
+			if (i < 0)
+				throw new StatException();
+			if (i < 6)
+				return m_multiplier[i];
+			if (i == S_ACCURACY)
+				return m_accuracy;
+			if (i == S_EVASION)
+				return m_evasion;
 		}
 		throw new StatException();
 	}
 
 	public int getRawStat(int i) {
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		return m_stat[i];
 	}
 
 	public void setRawStat(int i, int newStat) {
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		m_stat[i] = newStat;
 	}
 
 	public int getStat(int i, double multiplier) {
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		if (m_stat == null) {
 			calculateStats(false);
 		}
@@ -2038,8 +2190,10 @@ public class Pokemon extends PokemonSpecies {
 		if (m_multiplier == null) {
 			m_multiplier = new StatMultiplier[m_stat.length];
 		}
-		if (m_multiplier[i] == null) m_multiplier[i] = new StatMultiplier(false);
-		if ((i < 0) || (i > 5)) throw new StatException();
+		if (m_multiplier[i] == null)
+			m_multiplier[i] = new StatMultiplier(false);
+		if ((i < 0) || (i > 5))
+			throw new StatException();
 		// Consider stat modifications.
 		return getStat(i, m_multiplier[i].getMultiplier());
 	}
@@ -2061,11 +2215,14 @@ public class Pokemon extends PokemonSpecies {
 	 */
 	public int compareTo(Pokemon p) {
 		if (this.getDateCaught() != null && p.getDateCaught() != null
-				&& p.getDateCaught().equalsIgnoreCase(this.getDateCaught())) return 0;
+				&& p.getDateCaught().equalsIgnoreCase(this.getDateCaught()))
+			return 0;
 		if (this.getDatabaseID() != -1 && p.getDatabaseID() != -1
-				&& p.getDatabaseID() == this.getDatabaseID()) return 0;
+				&& p.getDatabaseID() == this.getDatabaseID())
+			return 0;
 		if (p.getSpeciesName() == this.getSpeciesName()
-				&& p.getStat(0) == this.getStat(0) && p.getStat(1) == this.getStat(1))
+				&& p.getStat(0) == this.getStat(0)
+				&& p.getStat(1) == this.getStat(1))
 			return 0;
 		return -1;
 	}
@@ -2078,7 +2235,8 @@ public class Pokemon extends PokemonSpecies {
 	public void reinitialise() {
 		boolean hasNeg = false;
 		for (int i = 0; i < 6; i++) {
-			if (getEv(i) < 0) hasNeg = true;
+			if (getEv(i) < 0)
+				hasNeg = true;
 		}
 		if (hasNeg || getEvTotal() > 510) {
 			for (int i = 0; i < 6; i++) {
@@ -2092,33 +2250,27 @@ public class Pokemon extends PokemonSpecies {
 		/*
 		 * m_pp = new int[4]; m_maxPp = new int[4]; m_ppUp = new int[4];
 		 */
-		/* Check validity of moves
-		 * this is turned off by sadhi because this prevents anything from standard move to be learned
-		 * and he didn't want to write something else
-		 * and with this gone you could give out moves the pokemon doesn't learn as prizes
+		/*
+		 * Check validity of moves this is turned off by sadhi because this
+		 * prevents anything from standard move to be learned and he didn't want
+		 * to write something else and with this gone you could give out moves
+		 * the pokemon doesn't learn as prizes
 		 */
-	/*
-		if(m_move[0] != null && !PokemonSpecies.getDefaultData().
-				canLearn(PokemonSpecies.getDefaultData().
-						getPokemonByName(this.getSpeciesName()), getMoveName(0))) {
-			m_move[0] = null;
-		}
-		if(m_move[1] != null && !PokemonSpecies.getDefaultData().
-				canLearn(PokemonSpecies.getDefaultData().
-						getPokemonByName(this.getSpeciesName()), getMoveName(1))) {
-			m_move[1] = null;
-		}
-		if(m_move[2] != null && !PokemonSpecies.getDefaultData().
-				canLearn(PokemonSpecies.getDefaultData().
-						getPokemonByName(this.getSpeciesName()), getMoveName(2))) {
-			m_move[2] = null;
-		}
-		if(m_move[3] != null && !PokemonSpecies.getDefaultData().
-				canLearn(PokemonSpecies.getDefaultData().
-						getPokemonByName(this.getSpeciesName()), getMoveName(3))) {
-			m_move[3] = null;
-		}
-		*/
+		/*
+		 * if(m_move[0] != null && !PokemonSpecies.getDefaultData().
+		 * canLearn(PokemonSpecies.getDefaultData().
+		 * getPokemonByName(this.getSpeciesName()), getMoveName(0))) { m_move[0]
+		 * = null; } if(m_move[1] != null && !PokemonSpecies.getDefaultData().
+		 * canLearn(PokemonSpecies.getDefaultData().
+		 * getPokemonByName(this.getSpeciesName()), getMoveName(1))) { m_move[1]
+		 * = null; } if(m_move[2] != null && !PokemonSpecies.getDefaultData().
+		 * canLearn(PokemonSpecies.getDefaultData().
+		 * getPokemonByName(this.getSpeciesName()), getMoveName(2))) { m_move[2]
+		 * = null; } if(m_move[3] != null && !PokemonSpecies.getDefaultData().
+		 * canLearn(PokemonSpecies.getDefaultData().
+		 * getPokemonByName(this.getSpeciesName()), getMoveName(3))) { m_move[3]
+		 * = null; }
+		 */
 	}
 
 	/**
@@ -2158,9 +2310,10 @@ public class Pokemon extends PokemonSpecies {
 		m_type = species.getTypes();
 		try {
 			String[] abilities = PokemonSpecies.getDefaultData()
-			.getPossibleAbilities(getSpeciesName());
-			m_ability = IntrinsicAbility.getInstance(abilities[DataService
-			                                                   .getBattleMechanics().getRandom().nextInt(abilities.length)]);
+					.getPossibleAbilities(getSpeciesName());
+			m_ability = IntrinsicAbility
+					.getInstance(abilities[DataService.getBattleMechanics()
+							.getRandom().nextInt(abilities.length)]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -2226,7 +2379,8 @@ public class Pokemon extends PokemonSpecies {
 	 */
 	public void setEv(int i, int j) {
 
-		if (j < 256) m_ev[i] = j;
+		if (j < 256)
+			m_ev[i] = j;
 		else
 			m_ev[i] = 255;
 	}
@@ -2298,23 +2452,24 @@ public class Pokemon extends PokemonSpecies {
 	public String getOriginalTrainer() {
 		return m_originalTrainer;
 	}
-	
+
 	/**
-	 * Returns the amount of EXP required for this pokemon reach a level
-	 * based on a pokemon's EXP type
+	 * Returns the amount of EXP required for this pokemon reach a level based
+	 * on a pokemon's EXP type
+	 * 
 	 * @param poke
 	 * @param level
 	 * @return
 	 */
-	public double getExpForLevel(int level){
+	public double getExpForLevel(int level) {
 		double exp = 0;
-		switch (this.getExpType()){
-		case MEDIUM: 
-			exp = (int)java.lang.Math.pow((double)level, 3);
+		switch (this.getExpType()) {
+		case MEDIUM:
+			exp = (int) java.lang.Math.pow((double) level, 3);
 			break;
-		case ERRATIC: 
+		case ERRATIC:
 			double p = 0;
-			switch (level % 3){
+			switch (level % 3) {
 			case 0:
 				p = 0;
 				break;
@@ -2325,38 +2480,42 @@ public class Pokemon extends PokemonSpecies {
 				p = 0.014;
 				break;
 			}
-			if (level <= 50){
-				exp = java.lang.Math.pow((double)level, 3) * ((100 - (double)level) / 50);
-			} else if (level <= 68){
-				exp = java.lang.Math.pow((double)level, 3) * ((150 - (double)level) / 50);
-			} else if (level <= 98){
-				exp = (java.lang.Math.pow((double)level, 3) *
-						(1.274 - ((1/50) * ((double)level / 3)) - p));
+			if (level <= 50) {
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((100 - (double) level) / 50);
+			} else if (level <= 68) {
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((150 - (double) level) / 50);
+			} else if (level <= 98) {
+				exp = (java.lang.Math.pow((double) level, 3) * (1.274 - ((1 / 50) * ((double) level / 3)) - p));
 			} else {
-				exp = java.lang.Math.pow((double)level, 3) * ((160 - (double)level) / 50);
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((160 - (double) level) / 50);
 			}
 			break;
-		case FAST: 
-			exp = 4 * java.lang.Math.pow((double)level, 3) / 5;
+		case FAST:
+			exp = 4 * java.lang.Math.pow((double) level, 3) / 5;
 			break;
-		case FLUCTUATING: 
-			if (level <= 15){
-				exp = java.lang.Math.pow((double)level, 3) * 
-					((24 + (((double)level + 1) / 3)) / 50);
-			} else if ((double)level <= 35){
-				exp = java.lang.Math.pow((double)level, 3) * 
-				((14 + (double)level) / 50);
+		case FLUCTUATING:
+			if (level <= 15) {
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((24 + (((double) level + 1) / 3)) / 50);
+			} else if ((double) level <= 35) {
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((14 + (double) level) / 50);
 			} else {
-				exp = java.lang.Math.pow((double)level, 3) * 
-				((32 + ((double)level / 2)) / 50);
-			}    		
+				exp = java.lang.Math.pow((double) level, 3)
+						* ((32 + ((double) level / 2)) / 50);
+			}
 			break;
-		case PARABOLIC: 
-			exp = (6 * (java.lang.Math.pow((double)level, 3) / 5)) - 
-			(15 * java.lang.Math.pow((double)level, 2)) + (100 * (double)level) - 140;
+		case PARABOLIC:
+			exp = (6 * (java.lang.Math.pow((double) level, 3) / 5))
+					- (15 * java.lang.Math.pow((double) level, 2))
+					+ (100 * (double) level) - 140;
 			break;
-		case SLOW: 
-			exp = 5 * java.lang.Math.pow((double)level, 3) / 4;;
+		case SLOW:
+			exp = 5 * java.lang.Math.pow((double) level, 3) / 4;
+			;
 			break;
 		}
 		return exp;

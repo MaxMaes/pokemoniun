@@ -176,9 +176,9 @@ public class LogoutManager implements Runnable {
 				//Save all the Pokemon
 				for(int i = 0; i < 6; i++) {
 					if(p.getParty() != null && p.getParty()[i] != null) {
-						if(p.getParty()[i].getDatabaseID() < 1) {
+						if(p.getParty()[i].getDatabaseID() == -1) {
 							//This is a new Pokemon, add it to the database
-							if(saveNewPokemon(p.getParty()[i], p.getName(), m_database) < 1)
+							if(saveNewPokemon(p.getParty()[i], p.getName(), m_database) == -1)
 								return false;
 						} else {
 							//Old Pokemon, just update
@@ -207,22 +207,17 @@ public class LogoutManager implements Runnable {
 				/*
 				 * Finally, update all the boxes
 				 */
-				if(p.getBoxes() != null) {
-					for(int i = 0; i < 9; i++) {
-						if(p.getBoxes()[i] != null) {
-							/* Save all pokemon in box */
-							for(int j = 0; j < p.getBoxes()[i].getPokemon().length; j++) {
-								if(p.getBoxes()[i].getPokemon()[j] != null) {
-									if(p.getBoxes()[i].getPokemon()[j].getDatabaseID() < 1) {
-										/* This is a new Pokemon, create it in the database */
-										if(saveNewPokemon(p.getBoxes()[i].getPokemon(j), p.getName(), m_database) < 1)
-											return false;
-									} else {
-										/* Update an existing pokemon */
-										if(!savePokemon(p.getBoxes()[i].getPokemon()[j], p.getName())) {
-											return false;
-										}
-									}
+				for(int i = 0; i < 9; i++) {
+					for(int j = 0; j < 30; j++) {
+						if(p.getBox(i).getPokemon(j) != null) {
+							if(p.getBox(i).getPokemon(j).getDatabaseID() == -1) {
+								/* This is a new Pokemon, create it in the database */
+								if(saveNewPokemon(p.getBox(i).getPokemon(j), p.getName(), m_database) == -1)
+									return false;
+							} else {
+								/* Update an existing pokemon */
+								if(!savePokemon(p.getBox(i).getPokemon(j), p.getName())) {
+									return false;
 								}
 							}
 						}

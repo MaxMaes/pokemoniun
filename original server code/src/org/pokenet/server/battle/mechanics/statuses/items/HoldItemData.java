@@ -100,7 +100,6 @@ public class HoldItemData {
     /**
      *  Remove an exclusive item from a pokemon.
      */
-    @SuppressWarnings("unchecked")
 	public void removeExclusiveItem(String name, String pokemon) {
         Object o = m_exclusives.get(pokemon);
         if (o == null) {

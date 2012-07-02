@@ -6,13 +6,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.TradeOffer.TradeType;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonEvolution;
-import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
+import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.network.MySqlManager;
 
 /**

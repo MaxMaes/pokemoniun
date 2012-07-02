@@ -514,9 +514,6 @@ public class LoginManager implements Runnable {
 				} else {
 					/* Else, add it to box if space is available */
 					if (boxNumber < 9) {
-						/* Avoid null pointers */
-						if (boxes[boxNumber] == null)
-							boxes[boxNumber] = new PokemonBox();
 						/* If there's space in this box, add it to the box */
 						if (boxPosition < 30) {
 							boxes[boxNumber].setPokemon(boxPosition,
@@ -535,7 +532,10 @@ public class LoginManager implements Runnable {
 				}
 			}
 			p.setParty(party);
-			p.setBoxes(boxes);
+			for(int idx = 0; idx < 30; idx++)
+			{
+				p.setBox(idx, boxes[idx]);
+			}
 
 			// Attach bag
 			p.setBag(getBagObject(

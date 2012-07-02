@@ -257,6 +257,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							{
 								sessionClosed(m_players.get(player).getTcpSession());
 								TcpProtocolHandler.writeMessage(m_players.get(player).getTcpSession(), new RequestMessage(RequestType.RESPONSE, p.getName()));
+								// TODO: Save player to the database here.
 							}
 						case 'b':
 							// Battle Request rbUSERNAME

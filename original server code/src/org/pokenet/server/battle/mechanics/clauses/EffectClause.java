@@ -9,7 +9,6 @@ import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
  * 
  * @author Colin
  */
-@SuppressWarnings("unchecked")
 public abstract class EffectClause extends Clause {
 
 	private Class m_effect;

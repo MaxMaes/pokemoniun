@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.map.ServerMap;
@@ -16,7 +17,6 @@ import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
-import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.MySqlManager;
@@ -56,8 +56,8 @@ public class Player extends Character implements Battleable, Tradeable
 	private Bag m_bag;
 	private int m_battleId;
 	private int walk = 0;
-	private Pokemon[] m_pokemon;
-	private PokemonBox[] m_boxes;
+	private final Pokemon[] m_pokemon = new Pokemon[6];
+	private final PokemonBox[] m_boxes = new PokemonBox[9];
 	private boolean m_isBattling = false;
 	private boolean m_isShopping = false;
 	private boolean m_isTalking = false;
@@ -197,9 +197,6 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void releasePokemon(int box, int slot)
 	{
-		/* If the box doesn't exist, return */
-		if(m_boxes[box] == null)
-			return;
 		/* Check if the pokemon exists */
 		if(m_boxes[box].getPokemon(slot) != null)
 		{
@@ -231,11 +228,6 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(box < 0 || box > 8)
 			return;
-		/* Ensure the box exists */
-		if(m_boxes[box] == null)
-		{
-			m_boxes[box] = new PokemonBox();
-		}
 		/* Make sure we're not depositing our only Pokemon */
 		if(getPartyCount() == 1)
 		{
@@ -879,7 +871,10 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void setParty(Pokemon[] team)
 	{
-		m_pokemon = team;
+		for(int idx = 0; idx < 6; idx++)
+		{
+			m_pokemon[idx] = team[idx];
+		}
 	}
 
 	/**
@@ -1351,23 +1346,18 @@ public class Player extends Character implements Battleable, Tradeable
 	}
 
 	/**
-	 * Sets this player's boxes
-	 * 
-	 * @param boxes
-	 */
-	public void setBoxes(PokemonBox[] boxes)
-	{
-		m_boxes = boxes;
-	}
-
-	/**
 	 * Returns this player's boxes
 	 * 
 	 * @return
 	 */
-	public PokemonBox[] getBoxes()
+	public PokemonBox getBox(int idx)
 	{
-		return m_boxes;
+		return m_boxes[idx];
+	}
+	
+	public void setBox(int idx, PokemonBox box)
+	{
+		m_boxes[idx] = box;
 	}
 
 	/**
@@ -1409,7 +1399,7 @@ public class Player extends Character implements Battleable, Tradeable
 			if(m_boxes[i] != null)
 			{
 				/* Find space in an existing box */
-				for(int j = 0; j < m_boxes[i].getPokemon().length; j++)
+				for(int j = 0; j < 30; j++)
 				{
 					if(m_boxes[i].getPokemon(j) == null)
 					{
@@ -1531,8 +1521,6 @@ public class Player extends Character implements Battleable, Tradeable
 	public void dispose()
 	{
 		super.dispose();
-		m_pokemon = null;
-		m_boxes = null;
 		m_friends = null;
 		m_bag = null;
 		m_currentShop = null;
@@ -1774,7 +1762,7 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 		/* Else send all pokes in box */
 		String packet = "";
-		for(int i = 0; i < m_boxes[j].getPokemon().length; i++)
+		for(int i = 0; i < 30; i++)
 		{
 			if(m_boxes[j].getPokemon(i) != null)
 				packet = packet + m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";

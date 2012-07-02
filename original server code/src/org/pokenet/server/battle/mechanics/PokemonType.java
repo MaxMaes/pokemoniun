@@ -25,8 +25,6 @@ package org.pokenet.server.battle.mechanics;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.simpleframework.xml.Element;
-
 /**
  * This class represents the type of a pokemon or of a move.
  * @author Colin
@@ -35,8 +33,7 @@ public class PokemonType implements Serializable {
     
     private static final long serialVersionUID = 328662720352042529L;
     
-    @Element
-    private int m_type;
+    private final int m_type;
     private static ArrayList<PokemonType> m_typeList = new ArrayList<PokemonType>();
 
     /**
@@ -130,9 +127,6 @@ public class PokemonType implements Serializable {
     public static PokemonType[] getTypes() {
         return (PokemonType[])m_typeList.toArray(new PokemonType[m_typeList.size()]);
     }
-    
-    /** Constructor used for serialization */
-    public PokemonType() {}
     
     /**
      * Creates a new instance of PokemonType.

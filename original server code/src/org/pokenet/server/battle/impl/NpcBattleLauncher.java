@@ -1,5 +1,6 @@
 package org.pokenet.server.battle.impl;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Positionable.Direction;
@@ -30,6 +31,8 @@ public class NpcBattleLauncher implements Runnable {
 	 * Moves the player to the npc and starts the battle
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("NpcBattleLauncher started.");
 		try {
 			/*
 			 * Set that the player is battling so we can control their movement.
@@ -61,6 +64,8 @@ public class NpcBattleLauncher implements Runnable {
 			m_player.setBattling(false);
 			e.printStackTrace();
 		}
+		GameServer.THREADS--;
+		System.out.println("NpcBattleLauncher stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

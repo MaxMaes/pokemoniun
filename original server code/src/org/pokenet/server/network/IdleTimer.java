@@ -1,5 +1,7 @@
 package org.pokenet.server.network;
 
+import org.pokenet.server.GameServer;
+
 /**
  * A class which kicks players if they've been idle for too long
  */
@@ -7,6 +9,8 @@ public class IdleTimer implements Runnable {
 	private boolean m_isRunning = false;
 	
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("IdleTimer started.");
 		while(m_isRunning) {
 			/*
 			 * Loop through all players and check for idling
@@ -16,8 +20,9 @@ public class IdleTimer implements Runnable {
 			try {
 				Thread.sleep(30 * 1000);
 			} catch (Exception e) {}
-			
 		}
+        GameServer.THREADS--;
+		System.out.println("IdleTimer stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 	
 	/**

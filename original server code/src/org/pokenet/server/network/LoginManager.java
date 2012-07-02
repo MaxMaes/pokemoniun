@@ -251,6 +251,8 @@ public class LoginManager implements Runnable {
 	 * Called by Thread.start()
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("LoginManager started.");
 		Object[] o;
 		IoSession session;
 		String username;
@@ -297,7 +299,8 @@ public class LoginManager implements Runnable {
 			} catch (Exception e) {
 			}
 		}
-		m_thread = null;
+        GameServer.THREADS--;
+		System.out.println("LoginManager stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

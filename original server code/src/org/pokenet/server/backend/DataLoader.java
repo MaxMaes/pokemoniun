@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.TradeChar;
@@ -34,6 +35,8 @@ public class DataLoader implements Runnable {
 	 * Called by starting the thread
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("DataLoader started.");
 		try {
 			Scanner reader = new Scanner(m_file);
 			NPC npc = null;
@@ -152,5 +155,7 @@ public class DataLoader implements Runnable {
 			System.err.println("Error in " + m_map.getX() + "." + m_map.getY() + ".txt - Invalid NPC, " +
 					"HM Object or WarpTile");
 		}
+		GameServer.THREADS--;
+		System.out.println("DataLoader stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 }

@@ -4,6 +4,7 @@ package org.pokenet.server.battle.impl;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.ItemProcessor.PokeBall;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
@@ -279,8 +280,12 @@ public class WildBattleField extends BattleField {
 				if (m_dispatch == null && (trainer == 0 && m_turn[1] != null)) {
 					m_dispatch = new Thread(new Runnable() {
 						public void run() {
+							GameServer.THREADS++;
+							System.out.println("WildBattleField started.");
 							executeTurn(m_turn);
 							m_dispatch = null;
+							GameServer.THREADS--;
+							System.out.println("WildBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 						}
 					});
 					m_dispatch.start();
@@ -352,11 +357,15 @@ public class WildBattleField extends BattleField {
 		if (m_turn[0] != null && m_turn[1] != null) {
 			m_dispatch = new Thread(new Runnable() {
 				public void run() {
+					GameServer.THREADS++;
+					System.out.println("WildBattleField started.");
 					executeTurn(m_turn);
 					for (int i = 0; i < m_participants; ++i) {
 						m_turn[i] = null;
 					}
 					m_dispatch = null;
+					GameServer.THREADS--;
+					System.out.println("WildBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 				}
 			});
 			m_dispatch.start();

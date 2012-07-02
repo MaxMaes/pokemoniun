@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.TradeOffer.TradeType;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -405,11 +406,15 @@ public class Trade implements Runnable{
 	}
 
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("Trade started.");
 		/*Record Trade on History Table*/
 		MySqlManager m_database = MySqlManager.getInstance();
 		while(!m_queries.isEmpty()){
 			m_database.query(m_queries.get(0));
 			m_queries.remove(0);
 		}
+		GameServer.THREADS--;
+		System.out.println("Trade stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 }

@@ -14,6 +14,7 @@ public class TimeService extends Label implements Runnable
 {
 	private int m_hour, m_minutes, m_daylight, m_targetDaylight;
 	private Thread m_thread;
+	private boolean m_running = true;
 
 	/** Default constructor **/
 	public TimeService()
@@ -32,7 +33,7 @@ public class TimeService extends Label implements Runnable
 	{
 		String min;
 		String hour;
-		while(true)
+		while(m_running)
 		{
 			m_minutes = m_minutes == 59 ? 0 : m_minutes + 1;
 			if(m_minutes == 0)

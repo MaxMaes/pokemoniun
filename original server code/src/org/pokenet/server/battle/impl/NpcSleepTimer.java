@@ -15,7 +15,8 @@ public class NpcSleepTimer implements Runnable {
 	private boolean m_running;
 
 	public void run() {
-		System.out.println("INFO: Npc sleep timer started");
+		GameServer.THREADS++;
+		System.out.println("NpcSleepTimer started.");
 		Random r = new Random();
 		NPC n = null;
 		ServerMap m = null;
@@ -48,10 +49,11 @@ public class NpcSleepTimer implements Runnable {
 				}
 			}
 			try {
-				Thread.sleep(300000);
+				Thread.sleep(30 * 1000);
 			} catch (Exception e) {}
 		}
-		System.out.println("INFO: Npc sleep timer stopped");
+		GameServer.THREADS--;
+		System.out.println("NpcSleepTimer stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.HMObject.objectType;
@@ -99,6 +100,8 @@ public class MovementManager implements Runnable {
 	 * Called by m_thread.start(). Loops through all players calling PlayerChar.move() if the player requested to be moved.
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("MovementManager started.");
 		Character tmp = null;
 		//ArrayList<Char> tmpArray = null;
 		while(m_isRunning) {
@@ -125,6 +128,8 @@ public class MovementManager implements Runnable {
 				Thread.sleep(100);
 			} catch (Exception e) {}
 		}
+		GameServer.THREADS--;
+		System.out.println("MovementManager stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 	
 	/**

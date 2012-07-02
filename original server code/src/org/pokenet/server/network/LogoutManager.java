@@ -29,7 +29,6 @@ public class LogoutManager implements Runnable {
 	public LogoutManager() {
 		m_database = MySqlManager.getInstance();
 		m_logoutQueue = new LinkedList<Player>();
-		m_thread = null;
 	}
 	
 	/**
@@ -75,6 +74,8 @@ public class LogoutManager implements Runnable {
 	 * Called by m_thread.start()
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("LogoutManager started.");
 		while(m_isRunning) {
 			synchronized(m_logoutQueue) {
 				if(m_logoutQueue.peek() != null) {
@@ -96,7 +97,8 @@ public class LogoutManager implements Runnable {
 				Thread.sleep(500);
 			} catch (Exception e) {}
 		}
-		m_thread = null;
+        GameServer.THREADS--;
+		System.out.println("LogoutManager stopped (" + GameServer.THREADS + " threads remaining)");
 		System.out.println("INFO: All player data saved successfully.");
 	}
 	

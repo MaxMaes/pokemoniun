@@ -72,10 +72,12 @@ public class ChatManager implements Runnable {
          * Called by m_thread.start()
          */
         public void run() {
+        	GameServer.THREADS++;
+    		System.out.println("ChatManager started.");
                 Object [] o;
                 ServerMap m;
                 IoSession s;
-                while(true) {
+                while(m_isRunning) { // gg
                         //Send next local chat message
                         if(m_localQueue.peek() != null) {
                                 o = m_localQueue.poll();
@@ -96,6 +98,8 @@ public class ChatManager implements Runnable {
                                 Thread.sleep(250);
                         } catch (Exception e) {}
                 }
+                GameServer.THREADS--;
+        		System.out.println("ChatManager stopped (" + GameServer.THREADS + " threads remaining)");
         }
         
         /**

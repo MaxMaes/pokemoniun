@@ -9,6 +9,7 @@ import java.util.Queue;
 import java.util.Random;
 
 import org.apache.mina.core.session.IoSession;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -200,6 +201,8 @@ public class RegistrationManager implements Runnable {
 	 * Called by m_thread.start()
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("RegistrationManager started.");
 		IoSession session;
 		while(m_isRunning) {
 			synchronized(m_queue) {
@@ -219,6 +222,8 @@ public class RegistrationManager implements Runnable {
 				Thread.sleep(250);
 			} catch (Exception e) {}
 		}
+        GameServer.THREADS--;
+		System.out.println("RegistrationManager stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 	
 	/**

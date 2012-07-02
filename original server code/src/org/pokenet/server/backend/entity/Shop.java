@@ -44,6 +44,8 @@ public class Shop implements Runnable {
 	 * Updates stock levels
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("Shop started.");
 		while(m_isRunning) {
 			/*
 			 * Loop through all stock updating each quantity by 25
@@ -65,6 +67,8 @@ public class Shop implements Runnable {
 				Thread.sleep(m_delta);
 			} catch (Exception e) {}
 		}
+		GameServer.THREADS--;
+		System.out.println("Shop stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 	
 	/**

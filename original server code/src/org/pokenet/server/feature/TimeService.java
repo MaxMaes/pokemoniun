@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.StringTokenizer;
+
+import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
@@ -75,6 +77,8 @@ public class TimeService implements Runnable
 	 */
 	public void run()
 	{
+		GameServer.THREADS++;
+		System.out.println("TimeService started.");
 		try
 		{
 			/*
@@ -130,7 +134,8 @@ public class TimeService implements Runnable
 			{
 			}
 		}
-		System.out.println("INFO: Time Service stopped");
+        GameServer.THREADS--;
+		System.out.println("TimeService stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

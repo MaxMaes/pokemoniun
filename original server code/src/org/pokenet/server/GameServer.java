@@ -36,6 +36,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer
 {
+	public static int THREADS = 0;
 	static final int SERVER_REVISION = 1881;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;

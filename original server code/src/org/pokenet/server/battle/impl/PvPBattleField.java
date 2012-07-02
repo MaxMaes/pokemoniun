@@ -1,5 +1,6 @@
 package org.pokenet.server.battle.impl;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
 import org.pokenet.server.battle.BattleTurn;
@@ -360,8 +361,12 @@ public class PvPBattleField extends BattleField {
 								(trainer == 1 && m_turn[0] != null))) {
 					m_dispatch = new Thread(new Runnable() {
 						public void run() {
+							GameServer.THREADS++;
+							System.out.println("PvPBattleField started.");
 							executeTurn(m_turn);
 							m_dispatch = null;
+							GameServer.THREADS--;
+							System.out.println("PvPBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 						}
 					});
 					m_dispatch.start();
@@ -433,11 +438,15 @@ public class PvPBattleField extends BattleField {
 		if (m_turn[0] != null && m_turn[1] != null) {
 			m_dispatch = new Thread(new Runnable() {
 				public void run() {
+					GameServer.THREADS++;
+					System.out.println("PvPBattleField started.");
 					executeTurn(m_turn);
 					for (int i = 0; i < m_participants; ++i) {
 						m_turn[i] = null;
 					}
 					m_dispatch = null;
+					GameServer.THREADS--;
+					System.out.println("PvPBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 				}
 			});
 			m_dispatch.start();

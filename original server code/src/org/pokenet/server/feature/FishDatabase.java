@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import org.pokenet.server.GameServer;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
 
@@ -54,6 +55,8 @@ public class FishDatabase {
 	public void reinitialise() {
 		Thread t = new Thread(new Runnable() {
 			public void run() {
+				GameServer.THREADS++;
+				System.out.println("FishDatabase started.");
 				m_database = new HashMap<String, ArrayList<FishPokemon>>();
 				try {
 					/* Read all the data from the text file */
@@ -80,6 +83,8 @@ public class FishDatabase {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+                GameServer.THREADS--;
+        		System.out.println("FishDatabase stopped (" + GameServer.THREADS + " threads remaining)");
 			}
 		});
 		t.start();

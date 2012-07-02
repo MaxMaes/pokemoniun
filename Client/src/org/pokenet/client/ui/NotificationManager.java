@@ -31,11 +31,13 @@ public class NotificationManager implements Runnable {
 	 * Called when running
 	 */
 	public void run() {
+		System.out.println("NotificationMananer started.");
 		while(m_isRunning) {
 			try {
 				Thread.sleep(500);
 			} catch (Exception e) {}
 		}
+		System.out.println("NotificationMananer stopped.");
 	}
 	
 	/**

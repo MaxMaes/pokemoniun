@@ -1,5 +1,6 @@
 package org.pokenet.server.battle.impl;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
@@ -339,8 +340,12 @@ public class NpcBattleField extends BattleField
 					{
 						public void run()
 						{
+							GameServer.THREADS++;
+							System.out.println("NpcBattleField started.");
 							executeTurn(m_turn);
 							m_dispatch = null;
+							GameServer.THREADS--;
+							System.out.println("NpcBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 						}
 					});
 					m_dispatch.start();
@@ -439,12 +444,16 @@ public class NpcBattleField extends BattleField
 			{
 				public void run()
 				{
+					GameServer.THREADS++;
+					System.out.println("NpcBattleField started.");
 					executeTurn(m_turn);
 					for(int i = 0; i < m_participants; ++i)
 					{
 						m_turn[i] = null;
 					}
 					m_dispatch = null;
+					GameServer.THREADS--;
+					System.out.println("NpcBattleField stopped (" + GameServer.THREADS + " threads remaining)");
 				}
 			});
 			m_dispatch.start();

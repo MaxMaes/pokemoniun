@@ -51,6 +51,8 @@ public class ItemProcessor implements Runnable {
 	 * Executes the item usage
 	 */
 	public void run() {
+		GameServer.THREADS++;
+		System.out.println("ItemProcessor started.");
 		String[] data = new String[m_details.length - 1];
 		for (int i = 1; i < m_details.length; i++)
 			data[i - 1] = m_details[i];
@@ -60,6 +62,8 @@ public class ItemProcessor implements Runnable {
 			m_player.getTcpSession().write("Ir" + m_details[0] + "," + 1);
 			/* TODO: Write support for giving items */
 		}
+		GameServer.THREADS--;
+		System.out.println("ItemProcessor stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

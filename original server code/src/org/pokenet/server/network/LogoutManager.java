@@ -20,7 +20,7 @@ import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
 public class LogoutManager implements Runnable {
 	private Queue<Player> m_logoutQueue;
 	private Thread m_thread;
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private MySqlManager m_database;
 	
 	/**

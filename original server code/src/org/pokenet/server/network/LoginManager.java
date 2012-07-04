@@ -32,7 +32,7 @@ import org.pokenet.server.feature.TimeService;
 public class LoginManager implements Runnable {
 	private Queue<Object[]> m_loginQueue;
 	private Thread m_thread;
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private MySqlManager m_database;
 
 	private Queue<Object[]> m_passChangeQueue;

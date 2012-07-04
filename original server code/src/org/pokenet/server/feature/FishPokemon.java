@@ -9,16 +9,9 @@ import org.simpleframework.xml.Element;
  */
 public class FishPokemon {
 
-	@Element
-	private int m_experience;
-	@Element
-	private int m_levelReq;
-	@Element
-	private int m_rodReq;
-	/**
-	 * Constructor
-	 */
-	public FishPokemon() {}
+	private final int m_experience;
+	private final int m_levelReq;
+	private final int m_rodReq;
 	
 	/**
 	 * Alternative constructor
@@ -53,22 +46,6 @@ public class FishPokemon {
 	 */
 	public int getExperience() {
 		return m_experience;
-	}
-	
-	/**
-	 * Sets the experience gained from fishing this pogey
-	 * @param p
-	 */
-	public void setExperience(int p) {
-		m_experience = p;
-	}
-	
-	/**
-	 * Sets the level required to encounter/fish this pogey
-	 * @param i
-	 */
-	public void setLevelReq(int s) {
-		m_levelReq = s;
 	}
 }
 

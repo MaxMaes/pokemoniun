@@ -75,7 +75,7 @@ public class MySqlManager {
         	stm.executeQuery("USE " + database);
         	stm.close();
         	return true;
-    	} catch (Exception e) {
+    	} catch (SQLException e) {
     		e.printStackTrace();
     		return false;
     	}
@@ -118,7 +118,7 @@ public class MySqlManager {
      * @return
      */
     public ResultSet query(String query){
-    	System.out.println("Let's search for some data;	" + query);
+    	//System.out.println("Let's search for some data;	" + query);
     	//open();
     	
     	ResultSet mysql_result = null;

@@ -21,14 +21,15 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class TimeService implements Runnable
 {
-	private boolean m_isRunning;
-	private long m_lastWeatherUpdate;
+	private boolean m_isRunning = false;
+	private long m_lastWeatherUpdate = 0;
 	private int m_forcedWeather = 0;
 	private Thread m_thread;
-	private static int m_hour;
-	private static int m_minutes;
+	private static int m_hour = 0;
+	private static int m_minutes = 0;
 	private static int m_day = 0;
-	private static Weather m_weather;
+	private static Weather m_weather = Weather.NORMAL;
+	private Random random = new Random();
 
 	/*
 	 * NOTE: HAIL = SNOW
@@ -46,7 +47,8 @@ public class TimeService implements Runnable
 		/*
 		 * Generate random weather
 		 */
-		int weather = new Random().nextInt(4);
+		// This is just more random ;)
+		int weather = random.nextInt() % 5;
 		switch(weather)
 		{
 			case 0:
@@ -98,8 +100,6 @@ public class TimeService implements Runnable
 			/* Can't reach website, base time on local */
 			Calendar cal = Calendar.getInstance();
 			m_hour = cal.get(Calendar.HOUR_OF_DAY);
-			m_minutes = 0;
-			m_day = 0;
 		}
 		while(m_isRunning)
 		{
@@ -114,7 +114,7 @@ public class TimeService implements Runnable
 				}
 				else
 				{
-					m_hour += 1;
+					m_hour++;
 				}
 			}
 			m_hour = m_hour == 23 ? 0 : m_hour + 1;
@@ -143,7 +143,7 @@ public class TimeService implements Runnable
 	 */
 	public void incrementDay()
 	{
-		m_day = m_day == 6 ? 0 : m_day + 1;
+		m_day = (m_day == 6 ? 0 : m_day + 1);
 	}
 
 	/**

@@ -2359,7 +2359,7 @@ public class Pokemon extends PokemonSpecies {
 			m_exp = 100000000;
 			return;
 		}
-		m_exp = Double.valueOf(form.format(exp));
+		m_exp = exp;
 	}
 
 	/**

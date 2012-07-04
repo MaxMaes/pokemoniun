@@ -472,20 +472,26 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					}
 					break;
 				case 'F':
-					// Friend list
+					// Friend list TODO: Display online/offline friends
 					String friend = message.substring(2);
 					switch(message.charAt(1))
 					{
 						case 'a':
 							// Add a friend
 							if(m_players.containsKey(friend))
-								;
+								session.write("MFo" + message.substring(2));
 							p.addFriend(message.substring(2));
 							break;
 						case 'r':
 							// Remove a friend
 							p.removeFriend(message.substring(2));
 							break;
+						case 'o':
+							//Checks if player is online.
+							if(m_players.containsKey(friend))
+								session.write("MFo" + message.substring(2));
+							else
+								session.write("MFf" + message.substring(2));
 					}
 					break;
 				case 'I':

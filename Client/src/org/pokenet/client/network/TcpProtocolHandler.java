@@ -793,6 +793,12 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 								// A friend was removed
 								GameClient.getInstance().getUi().getFriendsList().removeFriend(message.substring(3));
 								break;
+							case 'o':
+								//Friend is online
+								GameClient.getInstance().getUi().getFriendsList().setFriendOnline(message.substring(3), true);
+							case 'f':
+								//Friend is offline
+								GameClient.getInstance().getUi().getFriendsList().setFriendOnline(message.substring(3), false);
 						}
 						break;
 					case 'r':

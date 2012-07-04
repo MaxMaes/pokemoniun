@@ -22,7 +22,8 @@ import org.pokenet.client.ui.base.ConfirmationDialog;
 @SuppressWarnings("deprecation")
 public class FriendListDialog extends Frame
 {
-	List<String> m_friends, m_online;
+	List<String> m_friends = new ArrayList<String>();
+	List<String> m_online = new ArrayList<String>();
 	Label[] m_shownFriends = new Label[10];
 	Button m_up, m_down;
 	int m_index;
@@ -31,8 +32,6 @@ public class FriendListDialog extends Frame
 	/** Default Constructor */
 	public FriendListDialog()
 	{
-		m_friends = new ArrayList<String>();
-		m_online = new ArrayList<String>();
 		m_index = 0;
 		initGUI();
 	}

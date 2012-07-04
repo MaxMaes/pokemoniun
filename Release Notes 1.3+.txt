@@ -1,0 +1,8 @@
+Release Notes:
+[FIX]
+
+[ADD]
+
+[BUG]Client crash on bag close*
+
+*These points have to be verified.

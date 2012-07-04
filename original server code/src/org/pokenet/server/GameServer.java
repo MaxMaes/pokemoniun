@@ -37,7 +37,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
 public class GameServer
 {
 	public static int THREADS = 0;
-	static final int SERVER_REVISION = 1881;
+	static final int SERVER_REVISION = 1885;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers = 500;
@@ -68,7 +68,7 @@ public class GameServer
 	// TODO: Rewrite this.
 	private static int getSVNRev()
 	{
-		int rev = 0;
+		int rev = SERVER_REVISION;
 		boolean foundRevision = false;
 		try
 		{
@@ -111,8 +111,8 @@ public class GameServer
 				m_dbServer = s.nextLine();
 				m_dbName = s.nextLine();
 				m_dbUsername = s.nextLine();
-				m_serverName = s.nextLine();
 				m_dbPassword = s.nextLine();
+				m_serverName = s.nextLine();
 				s.close();
 			}
 			catch(Exception e)

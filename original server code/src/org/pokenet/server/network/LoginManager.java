@@ -517,7 +517,7 @@ public class LoginManager implements Runnable {
 					/* Else, add it to box if space is available */
 					if (boxNumber < 9) {
 						/* If there's space in this box, add it to the box */
-						if (boxPosition < 30) {
+						if (boxPosition < 9) {
 							boxes[boxNumber].setPokemon(boxPosition,
 									getPokemonObject(pokemons));
 						} else {

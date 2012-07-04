@@ -1913,7 +1913,10 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 		for(int i = 0; i < m_friends.size(); i++)
 		{
-			m_tcpSession.write("mFa" + m_friends.get(i));
+			String friend = m_friends.get(i);
+			/*if(TcpProtocolHandler.containsPlayer(friend))
+				m_tcpSession.write("MFo" + friend);*/
+			m_tcpSession.write("mFa" + friend);
 		}
 	}
 

@@ -83,11 +83,10 @@ public class TimeService implements Runnable
 		System.out.println("TimeService started.");
 		try
 		{
-			/*
-			 * Parses time from a common server. The webpage should just have text (no html tags) in the form: DAY HOUR MINUTES where day is a number from 0 - 6
-			 */
+			/* Parses time from a common server. The webpage should just have text (no html tags) in the form: DAY HOUR MINUTES where day is a number from 0 - 6 */
 			URL url = new URL("http://pokemonium.com/time.php");
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			in.readLine();
 			StringTokenizer s = new StringTokenizer(in.readLine());
 			m_day = Integer.parseInt(s.nextToken());
 			m_hour = Integer.parseInt(s.nextToken());
@@ -96,10 +95,12 @@ public class TimeService implements Runnable
 		}
 		catch(Exception e)
 		{
+			/* Can throw a number of exceptions including IO and NumberFormat due to an empty line.*/
 			System.out.println("ERROR: Cannot reach time server, reverting to local time");
-			/* Can't reach website, base time on local */
 			Calendar cal = Calendar.getInstance();
 			m_hour = cal.get(Calendar.HOUR_OF_DAY);
+			m_minutes = cal.get(Calendar.MINUTE);
+			m_day = cal.get(Calendar.DAY_OF_WEEK);
 		}
 		while(m_isRunning)
 		{
@@ -128,7 +129,7 @@ public class TimeService implements Runnable
 			TcpProtocolHandler.kickIdlePlayers();
 			try
 			{
-				Thread.sleep(10 * 1000); // Sleep for 10 seconds since it goes faster.
+				Thread.sleep(10 * 1000); // Sleep for 10 seconds since it goes 6 times faster.
 			}
 			catch(Exception e)
 			{

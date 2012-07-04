@@ -100,19 +100,17 @@ public class MovementService {
 		 * Reload all the maps
 		 */
 		XMLMapTransformer loader = new XMLMapTransformer();
-		File nextMap;
-		ServerMap s;
 		for(int x = -50; x < 50; x++) {
 			for(int y = -50; y < 50; y++) {
-				nextMap = new File("res/maps/" + String.valueOf(x) + "." + String.valueOf(y) + ".tmx");
+				File nextMap = new File("res/maps/" + x + "." + y + ".tmx");
 				if(nextMap.exists()) {
 					try {
-						s = new ServerMap(loader.readMap(nextMap.getCanonicalPath()), x, y);
+						ServerMap s = new ServerMap(loader.readMap(nextMap.getCanonicalPath()), x, y);
 						s.setMapMatrix(m_mapMatrix);
 						s.loadData();
 						m_mapMatrix.setMap(s , x + 50, y + 50);
 						//Thread.sleep(100); // Why sleep?
-					} catch (Exception e) {
+					} catch (Exception ex) {
 						System.err.println("Error loading " + x + "." + y + ".tmx - Bad map file");
 						m_mapMatrix.setMap(null, x + 50, y + 50);
 					}

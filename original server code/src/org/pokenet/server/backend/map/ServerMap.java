@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
-import org.pokenet.server.backend.DataLoader;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.entity.Positionable.Direction;
+import org.pokenet.server.backend.entity.TradeChar;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.impl.NpcBattleLauncher;
@@ -20,8 +22,8 @@ import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.feature.TimeService.Weather;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.ChatMessage;
-import org.pokenet.server.network.message.PokenetMessage;
 import org.pokenet.server.network.message.ChatMessage.ChatMessageType;
+import org.pokenet.server.network.message.PokenetMessage;
 
 import tiled.core.Map;
 import tiled.core.TileLayer;
@@ -271,14 +273,136 @@ public class ServerMap {
 		/*
 		 * Load all npcs and warptiles
 		 */
-		File f = new File("res/npc/" + m_x + "." + m_y + ".txt");
-		if(f.exists()) {
-			try {
-				@SuppressWarnings("unused")
-				DataLoader d = new DataLoader(f, this);
-			} catch (Exception e) {
-				
-			}
+		final File file = new File("res/npc/" + m_x + "." + m_y + ".txt");
+		final ServerMap map = this;
+		if(file.exists()) {
+			Thread loader = new Thread(new Runnable() {
+				public void run() {
+					GameServer.THREADS++;
+					System.out.println("DataLoader started.");
+					try {
+						Scanner reader = new Scanner(file);
+						NPC npc = null;
+						WarpTile warp = null;
+						HMObject hmObject = null;
+						TradeChar t = null;
+						String line;
+						String [] details;
+						String direction = "Down";
+						while(reader.hasNextLine()) {
+							line = reader.nextLine();
+							if(line.equalsIgnoreCase("[npc]")) {
+								npc = new NPC();
+								npc.setName(reader.nextLine());
+								direction = reader.nextLine();
+								if(direction.equalsIgnoreCase("UP")) {
+									npc.setFacing(Direction.Up);
+								} else if(direction.equalsIgnoreCase("LEFT")) {
+									npc.setFacing(Direction.Left);
+								} else if(direction.equalsIgnoreCase("RIGHT")) {
+									npc.setFacing(Direction.Right);
+								} else {
+									npc.setFacing(Direction.Down);
+								}
+								npc.setSprite(Integer.parseInt(reader.nextLine()));
+								npc.setX((Integer.parseInt(reader.nextLine())) * 32);
+								npc.setY(((Integer.parseInt(reader.nextLine())) * 32) - 8);
+								//Load possible Pokemons
+								line = reader.nextLine();
+								if(!line.equalsIgnoreCase("NULL")) {
+									details = line.split(",");
+									HashMap<String, Integer> pokes = new HashMap<String, Integer>();
+									for(int i = 0; i < details.length; i = i + 2) {
+										pokes.put(details[i], Integer.parseInt(details[i + 1]));
+									}
+									npc.setPossiblePokemon(pokes);
+								}
+								//Set minimum party level
+								npc.setPartySize(Integer.parseInt(reader.nextLine()));
+								npc.setBadge(Integer.parseInt(reader.nextLine()));
+								//Add all speech, if any
+								line = reader.nextLine();
+								if(!line.equalsIgnoreCase("NULL")) {
+									details = line.split(",");
+									for(int i = 0; i < details.length; i++) {
+										npc.addSpeech(Integer.parseInt(details[i]));
+									}
+								}
+								npc.setHealer(Boolean.parseBoolean(reader.nextLine().toLowerCase()));
+								npc.setBox(Boolean.parseBoolean(reader.nextLine().toLowerCase()));
+								
+								//Setting ShopKeeper as an int. 
+								String shop = reader.nextLine();
+								try {
+									npc.setShopKeeper(Integer.parseInt(shop.trim()));
+								} catch(Exception e) {
+									try {
+										/* Must be an old shop */
+										if(Boolean.parseBoolean(shop.trim().toLowerCase())){
+											npc.setShopKeeper(1); //Its an old shop! Yay!
+										} else {
+											npc.setShopKeeper(0); //Its an old npc. Not a shop. 
+										}
+									} catch(Exception ex) { 
+										npc.setShopKeeper(0);//Dunno what the hell it is, but its not a shop. 
+									}
+								}
+							} else if(line.equalsIgnoreCase("[/npc]")) {
+								addChar(npc);
+							} else if(line.equalsIgnoreCase("[warp]")) {
+								warp = new WarpTile();
+								warp.setX(Integer.parseInt(reader.nextLine()));
+								warp.setY(Integer.parseInt(reader.nextLine()));
+								warp.setWarpX(Integer.parseInt(reader.nextLine()) * 32);
+								warp.setWarpY((Integer.parseInt(reader.nextLine()) * 32) - 8);
+								warp.setWarpMapX(Integer.parseInt(reader.nextLine()));
+								warp.setWarpMapY(Integer.parseInt(reader.nextLine()));
+								warp.setBadgeRequirement(Integer.parseInt(reader.nextLine()));
+							} else if(line.equalsIgnoreCase("[/warp]")) {
+								addWarp(warp);
+							} else if(line.equalsIgnoreCase("[hmobject]")) {
+								hmObject = new HMObject();
+								hmObject.setName(reader.nextLine());
+								hmObject.setType(HMObject.parseHMObject(hmObject.getName()));
+								hmObject.setX(Integer.parseInt(reader.nextLine()) * 32);
+								hmObject.setOriginalX(hmObject.getX());
+								hmObject.setY((Integer.parseInt(reader.nextLine()) * 32) - 8);
+								hmObject.setOriginalY(hmObject.getY());
+							} else if(line.equalsIgnoreCase("[/hmobject]")) {
+								hmObject.setMap(map, Direction.Down);
+							} else if(line.equalsIgnoreCase("[trade]")) {
+								t = new TradeChar();
+								t.setName(reader.nextLine());
+								direction = reader.nextLine();
+								if(direction.equalsIgnoreCase("UP")) {
+									t.setFacing(Direction.Up);
+								} else if(direction.equalsIgnoreCase("LEFT")) {
+									t.setFacing(Direction.Left);
+								} else if(direction.equalsIgnoreCase("RIGHT")) {
+									t.setFacing(Direction.Right);
+								} else {
+									t.setFacing(Direction.Down);
+								}
+								t.setSprite(Integer.parseInt(reader.nextLine()));
+								t.setX(Integer.parseInt(reader.nextLine())* 32);
+								t.setY((Integer.parseInt(reader.nextLine())* 32)-8);
+								t.setRequestedPokemon(reader.nextLine(), 
+										Integer.parseInt(reader.nextLine()), reader.nextLine());
+								t.setOfferedSpecies(reader.nextLine(), Integer.parseInt(reader.nextLine()));
+							} else if(line.equalsIgnoreCase("[/trade]")) {
+								addChar(t);
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.err.println("Error in " + getX() + "." + getY() + ".txt - Invalid NPC, " +
+								"HM Object or WarpTile");
+					}
+					GameServer.THREADS--;
+					System.out.println("DataLoader stopped (" + GameServer.THREADS + " threads remaining)");
+				}
+			});
+			loader.start();
 		}
 	}
 	

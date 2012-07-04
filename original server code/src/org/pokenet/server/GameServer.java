@@ -50,6 +50,12 @@ public class GameServer
 	private int m_highest = 0;
 	private JLabel m_pAmount, m_pHighest;
 	private JFrame m_gui;
+	
+	// RAM usage
+	private static long m_totalRAM = 0;
+	private static long m_usedRAM = 0;
+	private JLabel m_ramUsage;
+	private boolean m_running = true;
 
 	/* The revision of the game server */
 	public static int REVISION = getSVNRev();
@@ -176,9 +182,22 @@ public class GameServer
 	 */
 	private void createGui()
 	{
+		Thread ramUpdate = new Thread(new Runnable() {
+			
+			public void run() {
+				while(m_running) {
+					m_totalRAM = (Runtime.getRuntime().totalMemory() / 1024) / 1024;
+					m_usedRAM = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024) / 1024;
+					m_ramUsage.setText("RAM: " + m_usedRAM + " / " + m_totalRAM + " MB");
+					try {
+						Thread.sleep(10 * 1000); // Sleep for 10 seconds.
+					} catch(InterruptedException ex) {}
+				}
+			}
+		});
 		m_gui = new JFrame();
 		m_gui.setTitle("Pokenet Server");
-		m_gui.setSize(148, 340);
+		m_gui.setSize(148, 360);
 		m_gui.setDefaultCloseOperation(0); // DO_NOTHING_ON_CLOSE
 		m_gui.getContentPane().setLayout(null);
 		m_gui.setResizable(false);
@@ -189,16 +208,22 @@ public class GameServer
 		m_pAmount.setLocation(4, 4);
 		m_pAmount.setVisible(true);
 		m_gui.getContentPane().add(m_pAmount);
-
+		
+		m_ramUsage = new JLabel(m_usedRAM + " / " + m_totalRAM + " MB");
+		m_ramUsage.setSize(160, 16);
+		m_ramUsage.setLocation(4, 24);
+		m_ramUsage.setVisible(true);
+		m_gui.getContentPane().add(m_ramUsage);
+		
 		m_pHighest = new JLabel("[No record]");
 		m_pHighest.setSize(160, 16);
-		m_pHighest.setLocation(4, 24);
+		m_pHighest.setLocation(4, 44);
 		m_pHighest.setVisible(true);
 		m_gui.getContentPane().add(m_pHighest);
 
 		m_start = new JButton("Start Server");
 		m_start.setSize(128, 24);
-		m_start.setLocation(4, 48);
+		m_start.setLocation(4, 68);
 		m_start.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -209,7 +234,7 @@ public class GameServer
 		m_gui.getContentPane().add(m_start);
 		m_stop = new JButton("Stop Server");
 		m_stop.setSize(128, 24);
-		m_stop.setLocation(4, 74);
+		m_stop.setLocation(4, 94);
 		m_stop.setEnabled(false);
 		m_stop.addActionListener(new ActionListener()
 		{
@@ -221,7 +246,7 @@ public class GameServer
 		m_gui.getContentPane().add(m_stop);
 		m_set = new JButton("Save Settings");
 		m_set.setSize(128, 24);
-		m_set.setLocation(4, 100);
+		m_set.setLocation(4, 120);
 		m_set.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -232,7 +257,7 @@ public class GameServer
 		m_gui.getContentPane().add(m_set);
 		m_exit = new JButton("Quit");
 		m_exit.setSize(128, 24);
-		m_exit.setLocation(4, 290);
+		m_exit.setLocation(4, 310);
 		m_exit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -245,31 +270,31 @@ public class GameServer
 		m_dbS = new JTextField();
 		m_dbS.setSize(128, 24);
 		m_dbS.setText("MySQL Host");
-		m_dbS.setLocation(4, 128);
+		m_dbS.setLocation(4, 148);
 		m_gui.getContentPane().add(m_dbS);
 
 		m_dbN = new JTextField();
 		m_dbN.setSize(128, 24);
 		m_dbN.setText("MySQL Database Name");
-		m_dbN.setLocation(4, 160);
+		m_dbN.setLocation(4, 180);
 		m_gui.getContentPane().add(m_dbN);
 
 		m_dbU = new JTextField();
 		m_dbU.setSize(128, 24);
 		m_dbU.setText("MySQL Username");
-		m_dbU.setLocation(4, 192);
+		m_dbU.setLocation(4, 212);
 		m_gui.getContentPane().add(m_dbU);
 
 		m_dbP = new JPasswordField();
 		m_dbP.setSize(128, 24);
 		m_dbP.setText("Pass");
-		m_dbP.setLocation(4, 224);
+		m_dbP.setLocation(4, 244);
 		m_gui.getContentPane().add(m_dbP);
 
 		m_name = new JTextField();
 		m_name.setSize(128, 24);
 		m_name.setText("Your Server Name");
-		m_name.setLocation(4, 260);
+		m_name.setLocation(4, 280);
 		m_gui.getContentPane().add(m_name);
 		/* Load pre-existing settings if any */
 		File f = new File("res/settings.txt");
@@ -292,6 +317,7 @@ public class GameServer
 		}
 
 		m_gui.setVisible(true);
+		ramUpdate.start();
 	}
 
 	/** Starts the game server */
@@ -300,6 +326,7 @@ public class GameServer
 		/* Store locally */
 		if(m_boolGui)
 		{
+			m_running = true;
 			m_dbServer = m_dbS.getText();
 			m_dbName = m_dbN.getText();
 			m_dbUsername = m_dbU.getText();
@@ -322,6 +349,7 @@ public class GameServer
 		m_serviceManager.stop();
 		if(m_boolGui)
 		{
+			m_running = false;
 			m_start.setEnabled(true);
 			m_stop.setEnabled(false);
 		}

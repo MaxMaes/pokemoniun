@@ -108,8 +108,4 @@ public class ServiceManager {
 	public ItemDatabase getItemDatabase() {
 		return m_itemdatabase;
 	}
-
-	public void setItemDatabase(ItemDatabase mItemdatabase) {
-		m_itemdatabase = mItemdatabase;
-	}
 }

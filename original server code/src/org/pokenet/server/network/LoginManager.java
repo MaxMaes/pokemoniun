@@ -33,7 +33,7 @@ public class LoginManager implements Runnable {
 	private Queue<Object[]> m_loginQueue;
 	private Thread m_thread;
 	private boolean m_isRunning = false;
-	private MySqlManager m_database;
+	private final MySqlManager m_database;
 
 	private Queue<Object[]> m_passChangeQueue;
 
@@ -331,7 +331,6 @@ public class LoginManager implements Runnable {
 	 */
 	private void changePass(String username, String newPassword,
 			String oldPassword, IoSession session) {
-		m_database = new MySqlManager();
 
 		ResultSet result = m_database
 				.query("SELECT * FROM `pn_members` WHERE `username` = '"
@@ -535,7 +534,7 @@ public class LoginManager implements Runnable {
 				}
 			}
 			p.setParty(party);
-			for(int idx = 0; idx < 30; idx++)
+			for(int idx = 0; idx < 9; idx++) // FUUU, we only have 9 boxes, not 30 :S
 			{
 				p.setBox(idx, boxes[idx]);
 			}

@@ -14,30 +14,23 @@ import org.pokenet.server.network.codec.PokenetCodecFactory;
  * @author shadowkanji
  */
 public class NetworkService {
-	private TcpProtocolHandler m_tcpProtocolHandler;
-	private LoginManager m_loginManager;
-	private LogoutManager m_logoutManager;
-	private IoAcceptor m_tcpAcceptor;
-	private ChatManager [] m_chatManager;
+	private final TcpProtocolHandler m_tcpProtocolHandler;
+	private final LoginManager m_loginManager;
+	private final LogoutManager m_logoutManager;
+	private final IoAcceptor m_tcpAcceptor;
+	private final ChatManager [] m_chatManager = new ChatManager[3];
 	
 	
 	/**
 	 * Default constructor
 	 */
 	public NetworkService() {
+		m_tcpAcceptor = new NioSocketAcceptor();
 		m_logoutManager = new LogoutManager();
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);
-		m_chatManager = new ChatManager[3];
 	}
-	
-	/**
-	 * Returns the login manager
-	 * @return
-	 */
-	public LoginManager getLoginManager() {
-		return m_loginManager;
-	}
+
 	
 	/**
 	 * Returns the logout manager
@@ -60,24 +53,11 @@ public class NetworkService {
             return m_chatManager[smallest];
     }
 	
-	/**
-	 * Returns the connection manager (packet handler)
-	 * @return
-	 */
-	public TcpProtocolHandler getConnectionManager() {
-		return m_tcpProtocolHandler;
-	}
 	
 	/**
 	 * Start this network service by starting all threads.
 	 */
 	public void start() {
-		//Load MySQL JDBC Driver
-        try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		/*
 		 * Ensure anyone still marked as logged in on this server
 		 * is unmarked
@@ -101,7 +81,6 @@ public class NetworkService {
 		/*
 		 * Bind the TCP port
 		 */
-		m_tcpAcceptor = new NioSocketAcceptor();
 		m_tcpAcceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new PokenetCodecFactory()));
 		m_tcpAcceptor.setHandler(m_tcpProtocolHandler);
 		try {

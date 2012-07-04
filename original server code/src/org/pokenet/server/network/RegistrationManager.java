@@ -22,18 +22,16 @@ import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
  *
  */
 public class RegistrationManager implements Runnable {
-	private Queue<IoSession> m_queue;
+	private final Queue<IoSession> m_queue = new LinkedList<IoSession>();
 	private Thread m_thread;
-	private boolean m_isRunning;
-	private MySqlManager m_database;
+	private boolean m_isRunning = false;
+	private final MySqlManager m_database;
 	
 	/**
 	 * Constructor
 	 */
 	public RegistrationManager() {
 		m_database = MySqlManager.getInstance();
-		m_thread = null;
-		m_queue = new LinkedList<IoSession>();
 	}
 	
 	/**

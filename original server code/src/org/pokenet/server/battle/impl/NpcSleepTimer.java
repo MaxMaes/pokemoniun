@@ -49,8 +49,8 @@ public class NpcSleepTimer implements Runnable {
 				}
 			}
 			try {
-				Thread.sleep(30 * 1000);
-			} catch (Exception e) {}
+				Thread.sleep(30 * 1000); // 30 seconds
+			} catch (InterruptedException ex) {}
 		}
 		GameServer.THREADS--;
 		System.out.println("NpcSleepTimer stopped (" + GameServer.THREADS + " threads remaining)");

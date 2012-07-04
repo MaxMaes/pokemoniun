@@ -7,8 +7,6 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.pokenet.server.GameServer;
-import org.simpleframework.xml.ElementMap;
-import org.simpleframework.xml.Root;
 
 /**
  * Stores a database of pokemon caught by fishing
@@ -16,9 +14,8 @@ import org.simpleframework.xml.Root;
  * @author Fshy
  *
  */
-@Root
+
 public class FishDatabase {
-	@ElementMap
 	private HashMap<String, ArrayList<FishPokemon>> m_database;
 	
 	/**

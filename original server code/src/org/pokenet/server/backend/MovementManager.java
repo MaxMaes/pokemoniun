@@ -19,7 +19,7 @@ public class MovementManager implements Runnable {
 	private Queue<Character> m_waiting;
 	private Queue<Character> m_moved;
 	private Thread m_thread;
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private int m_pLoad = 0;
 	/** Comparator for comparing chars */
 	private Comparator<Character> m_comp;

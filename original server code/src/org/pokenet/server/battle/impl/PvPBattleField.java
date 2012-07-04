@@ -34,7 +34,7 @@ import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
  * 
  */
 public class PvPBattleField extends BattleField {
-	private Player[] m_players;
+	private Player[] m_players = new Player[2];
 	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
 
@@ -50,7 +50,6 @@ public class PvPBattleField extends BattleField {
 		/*
 		 * Store the players
 		 */
-		m_players = new Player[2];
 		m_players[0] = p1;
 		m_players[1] = p2;
 		/*

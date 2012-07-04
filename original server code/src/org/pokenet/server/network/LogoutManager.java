@@ -7,6 +7,7 @@ import java.util.Queue;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.backend.entity.PokemonBox;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -210,16 +211,19 @@ public class LogoutManager implements Runnable {
 				 * Finally, update all the boxes
 				 */
 				for(int i = 0; i < 9; i++) {
-					for(int j = 0; j < 30; j++) {
-						if(p.getBox(i).getPokemon(j) != null) {
-							if(p.getBox(i).getPokemon(j).getDatabaseID() == -1) {
-								/* This is a new Pokemon, create it in the database */
-								if(saveNewPokemon(p.getBox(i).getPokemon(j), p.getName(), m_database) == -1)
-									return false;
-							} else {
-								/* Update an existing pokemon */
-								if(!savePokemon(p.getBox(i).getPokemon(j), p.getName())) {
-									return false;
+					PokemonBox box = p.getBox(i);
+					if(box != null) {
+						for(int j = 0; j < 30; j++) {
+							if(box.getPokemon(j) != null) {
+								if(box.getPokemon(j).getDatabaseID() == -1) {
+									/* This is a new Pokemon, create it in the database */
+									if(saveNewPokemon(box.getPokemon(j), p.getName(), m_database) == -1)
+										return false;
+								} else {
+									/* Update an existing pokemon */
+									if(!savePokemon(box.getPokemon(j), p.getName())) {
+										return false;
+									}
 								}
 							}
 						}

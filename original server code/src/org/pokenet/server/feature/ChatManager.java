@@ -18,8 +18,7 @@ import org.pokenet.server.network.message.ChatMessage.ChatMessageType;
  */
 public class ChatManager implements Runnable {
         private Thread m_thread;
-        @SuppressWarnings("unused")
-        private boolean m_isRunning;
+        private boolean m_isRunning = false;
         /*
          * Local chat queue
          * [Message, x, y]

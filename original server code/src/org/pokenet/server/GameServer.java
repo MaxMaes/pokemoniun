@@ -25,7 +25,6 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 
 /**
@@ -336,8 +335,6 @@ public class GameServer
 			m_start.setEnabled(false);
 			m_stop.setEnabled(true);
 		}
-		// Check if we can connect to the database BEFORE we start the server :)
-		MySqlManager.getInstance();
 		
 		m_serviceManager = new ServiceManager();
 		m_serviceManager.start();

@@ -4,6 +4,7 @@ package org.pokenet.server.backend;
 import java.util.Random;
 
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.item.Item;
 import org.pokenet.server.backend.item.Item.ItemAttribute;
@@ -11,8 +12,8 @@ import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonEvolution;
-import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
+import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.ConfuseEffect;
@@ -52,7 +53,7 @@ public class ItemProcessor implements Runnable {
 	 */
 	public void run() {
 		GameServer.THREADS++;
-		System.out.println("ItemProcessor started.");
+		Log.debug("ItemProcessor started.");
 		String[] data = new String[m_details.length - 1];
 		for (int i = 1; i < m_details.length; i++)
 			data[i - 1] = m_details[i];
@@ -63,7 +64,7 @@ public class ItemProcessor implements Runnable {
 			/* TODO: Write support for giving items */
 		}
 		GameServer.THREADS--;
-		System.out.println("ItemProcessor stopped (" + GameServer.THREADS + " threads remaining)");
+		Log.debug("ItemProcessor stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

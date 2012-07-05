@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.entity.Positionable.Direction;
+import org.pokenet.server.backend.entity.Shop;
 import org.pokenet.server.backend.entity.TradeChar;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -28,15 +30,20 @@ import org.pokenet.server.network.message.PokenetMessage;
 import tiled.core.Map;
 import tiled.core.TileLayer;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 /**
  * Represents a map in the game world
+ * 
  * @author shadowkanji
- *
+ * 
  */
 public class ServerMap {
-	public enum PvPType { DISABLED, ENABLED, ENFORCED }
-	
-	//Stores the width, heigth, x, y and offsets of this map
+	public enum PvPType {
+		DISABLED, ENABLED, ENFORCED
+	}
+
+	// Stores the width, heigth, x, y and offsets of this map
 	private int m_width;
 	private int m_heigth;
 	private int m_x;
@@ -46,12 +53,13 @@ public class ServerMap {
 	private PvPType m_pvpType = PvPType.ENABLED;
 	private ServerMapMatrix m_mapMatrix;
 	private Weather m_forcedWeather = null;
-	//Players and NPCs
+	// Players and NPCs
 	private HashMap<String, Player> m_players;
 	private ArrayList<NPC> m_npcs;
 	private ArrayList<WarpTile> m_warps;
 	private ArrayList<MapItem> m_items;
-	//The following stores information for day, night and water wild pokemon
+	private final List<Shop> mShops = new ArrayList<Shop>();
+	// The following stores information for day, night and water wild pokemon
 	private HashMap<String, int[]> m_dayPokemonLevels;
 	private HashMap<String, Integer> m_dayPokemonChances;
 	private HashMap<String, int[]> m_nightPokemonLevels;
@@ -61,18 +69,19 @@ public class ServerMap {
 	private HashMap<String, int[]> m_fishPokemonLevels;
 	private HashMap<String, Integer> m_fishPokemonChances;
 	private int m_wildProbability;
-	//The following stores collision information
+	// The following stores collision information
 	private ServerTileLayer m_blocked = null;
 	private ServerTileLayer m_surf = null;
 	private ServerTileLayer m_grass = null;
 	private ServerTileLayer m_ledgesDown = null;
 	private ServerTileLayer m_ledgesLeft = null;
 	private ServerTileLayer m_ledgesRight = null;
-	//Misc
+	// Misc
 	private Random m_random = DataService.getBattleMechanics().getRandom();
-	
+
 	/**
 	 * Default constructor
+	 * 
 	 * @param map
 	 * @param x
 	 * @param y
@@ -85,33 +94,34 @@ public class ServerMap {
 		/*
 		 * Store all the map layers
 		 */
-		for(int i = 0; i < map.getTotalLayers(); i++) {
-			if(map.getLayer(i).getName().equalsIgnoreCase("Grass")) {
+		for (int i = 0; i < map.getTotalLayers(); i++) {
+			if (map.getLayer(i).getName().equalsIgnoreCase("Grass")) {
 				m_grass = new ServerTileLayer((TileLayer) map.getLayer(i));
-			} else if(map.getLayer(i).getName().equalsIgnoreCase("Collisions")) {
+			} else if (map.getLayer(i).getName().equalsIgnoreCase("Collisions")) {
 				m_blocked = new ServerTileLayer((TileLayer) map.getLayer(i));
-			} else if(map.getLayer(i).getName().equalsIgnoreCase("LedgesLeft")) {
+			} else if (map.getLayer(i).getName().equalsIgnoreCase("LedgesLeft")) {
 				m_ledgesLeft = new ServerTileLayer((TileLayer) map.getLayer(i));
-			} else if(map.getLayer(i).getName().equalsIgnoreCase("LedgesRight")) {
+			} else if (map.getLayer(i).getName()
+					.equalsIgnoreCase("LedgesRight")) {
 				m_ledgesRight = new ServerTileLayer((TileLayer) map.getLayer(i));
-			} else if(map.getLayer(i).getName().equalsIgnoreCase("LedgesDown")) {
+			} else if (map.getLayer(i).getName().equalsIgnoreCase("LedgesDown")) {
 				m_ledgesDown = new ServerTileLayer((TileLayer) map.getLayer(i));
-			} else if(map.getLayer(i).getName().equalsIgnoreCase("Water")) {
+			} else if (map.getLayer(i).getName().equalsIgnoreCase("Water")) {
 				m_surf = new ServerTileLayer((TileLayer) map.getLayer(i));
 			}
 		}
-		
+
 		m_players = new HashMap<String, Player>();
 		m_npcs = new ArrayList<NPC>();
-		
+
 		/*
 		 * Load pvp settings
 		 */
 		try {
 			String type = map.getProperties().getProperty("pvp");
-			if(type.equalsIgnoreCase("disabled")) {
+			if (type.equalsIgnoreCase("disabled")) {
 				m_pvpType = PvPType.DISABLED;
-			} else if(type.equalsIgnoreCase("enabled")) {
+			} else if (type.equalsIgnoreCase("enabled")) {
 				m_pvpType = PvPType.ENABLED;
 			} else {
 				m_pvpType = PvPType.ENFORCED;
@@ -119,71 +129,81 @@ public class ServerMap {
 		} catch (Exception e) {
 			m_pvpType = PvPType.ENABLED;
 		}
-		
+
 		/*
 		 * Add enforced weather if any
 		 */
 		try {
-			if(x < -30) {
-				if(x != -49 || y != -3) {
+			if (x < -30) {
+				if (x != -49 || y != -3) {
+					m_forcedWeather = Weather.NORMAL;
+				} else if (x != -36 || y != -49) {
 					m_forcedWeather = Weather.NORMAL;
 				}
-				else if(x!= -36 || y != -49) {
-					   m_forcedWeather = Weather.NORMAL;
-					}
-			} else if(map.getProperties().getProperty("forcedWeather") != null && 
-					!map.getProperties().getProperty("forcedWeather").equalsIgnoreCase("")) {
-				m_forcedWeather = Weather.valueOf(map.getProperties().getProperty("forcedWeather"));
+			} else if (map.getProperties().getProperty("forcedWeather") != null
+					&& !map.getProperties().getProperty("forcedWeather")
+							.equalsIgnoreCase("")) {
+				m_forcedWeather = Weather.valueOf(map.getProperties()
+						.getProperty("forcedWeather"));
 			}
 		} catch (Exception e) {
 			m_forcedWeather = null;
 		}
-		
+
 		/*
 		 * Load offsets
 		 */
 		try {
-			m_xOffsetModifier = Integer.parseInt(map.getProperties().getProperty("xOffsetModifier"));
+			m_xOffsetModifier = Integer.parseInt(map.getProperties()
+					.getProperty("xOffsetModifier"));
 		} catch (Exception e) {
 			m_xOffsetModifier = 0;
 		}
 		try {
-			m_yOffsetModifier = Integer.parseInt(map.getProperties().getProperty("yOffsetModifier"));
+			m_yOffsetModifier = Integer.parseInt(map.getProperties()
+					.getProperty("yOffsetModifier"));
 		} catch (Exception e) {
 			m_yOffsetModifier = 0;
 		}
-		
+
 		/*
 		 * Load wild pokemon
 		 */
 		try {
-			if(!map.getProperties().getProperty("wildProbabilty").equalsIgnoreCase("")) {
-				m_wildProbability = Integer.parseInt(map.getProperties().getProperty("wildProbabilty"));
+			if (!map.getProperties().getProperty("wildProbabilty")
+					.equalsIgnoreCase("")) {
+				m_wildProbability = Integer.parseInt(map.getProperties()
+						.getProperty("wildProbabilty"));
 			} else {
 				m_wildProbability = 28;
 			}
 		} catch (Exception e) {
 			m_wildProbability = 28;
 		}
-		
+
 		String[] species;
 		String[] levels;
-		//Daytime Pokemon
+		// Daytime Pokemon
 		try {
-			if(!map.getProperties().getProperty("dayPokemonChances").equalsIgnoreCase("")) {
-				species = map.getProperties().getProperty("dayPokemonChances").split(";");
-				levels = map.getProperties().getProperty("dayPokemonLevels").split(";");
-				if (!species[0].equals("") && !levels[0].equals("") && species.length == levels.length) {
+			if (!map.getProperties().getProperty("dayPokemonChances")
+					.equalsIgnoreCase("")) {
+				species = map.getProperties().getProperty("dayPokemonChances")
+						.split(";");
+				levels = map.getProperties().getProperty("dayPokemonLevels")
+						.split(";");
+				if (!species[0].equals("") && !levels[0].equals("")
+						&& species.length == levels.length) {
 					m_dayPokemonChances = new HashMap<String, Integer>();
-					m_dayPokemonLevels = new HashMap<String, int[]> ();
-						for (int i = 0; i < species.length; i++) {
-							String[] speciesInfo = species[i].split(",");
-							m_dayPokemonChances.put(speciesInfo[0], Integer.parseInt(speciesInfo[1]));
-							String[] levelInfo = levels[i].split("-");
-							m_dayPokemonLevels.put(speciesInfo[0], new int[] {
-									Integer.parseInt(levelInfo[0]),
-									Integer.parseInt(levelInfo[1]) });
-						}
+					m_dayPokemonLevels = new HashMap<String, int[]>();
+					for (int i = 0; i < species.length; i++) {
+						String[] speciesInfo = species[i].split(",");
+						m_dayPokemonChances.put(speciesInfo[0],
+								Integer.parseInt(speciesInfo[1]));
+						String[] levelInfo = levels[i].split("-");
+						m_dayPokemonLevels.put(speciesInfo[0],
+								new int[] { Integer.parseInt(levelInfo[0]),
+										Integer.parseInt(levelInfo[1]) });
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -192,22 +212,27 @@ public class ServerMap {
 			species = new String[] { "" };
 			levels = new String[] { "" };
 		}
-		//Nocturnal Pokemon
+		// Nocturnal Pokemon
 		try {
-			if(!map.getProperties().getProperty("nightPokemonChances").equalsIgnoreCase("")) {
-				species = map.getProperties().getProperty("nightPokemonChances").split(";");
-				levels = map.getProperties().getProperty("nightPokemonLevels").split(";");
-				if (!species[0].equals("") && !levels[0].equals("") && species.length == levels.length) {
+			if (!map.getProperties().getProperty("nightPokemonChances")
+					.equalsIgnoreCase("")) {
+				species = map.getProperties()
+						.getProperty("nightPokemonChances").split(";");
+				levels = map.getProperties().getProperty("nightPokemonLevels")
+						.split(";");
+				if (!species[0].equals("") && !levels[0].equals("")
+						&& species.length == levels.length) {
 					m_nightPokemonChances = new HashMap<String, Integer>();
-					m_nightPokemonLevels = new HashMap<String, int[]> ();
-						for (int i = 0; i < species.length; i++) {
-							String[] speciesInfo = species[i].split(",");
-							m_nightPokemonChances.put(speciesInfo[0], Integer.parseInt(speciesInfo[1]));
-							String[] levelInfo = levels[i].split("-");
-							m_nightPokemonLevels.put(speciesInfo[0], new int[] {
-									Integer.parseInt(levelInfo[0]),
-									Integer.parseInt(levelInfo[1]) });
-						}
+					m_nightPokemonLevels = new HashMap<String, int[]>();
+					for (int i = 0; i < species.length; i++) {
+						String[] speciesInfo = species[i].split(",");
+						m_nightPokemonChances.put(speciesInfo[0],
+								Integer.parseInt(speciesInfo[1]));
+						String[] levelInfo = levels[i].split("-");
+						m_nightPokemonLevels.put(speciesInfo[0],
+								new int[] { Integer.parseInt(levelInfo[0]),
+										Integer.parseInt(levelInfo[1]) });
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -216,22 +241,27 @@ public class ServerMap {
 			species = new String[] { "" };
 			levels = new String[] { "" };
 		}
-		//Surf Pokemon
+		// Surf Pokemon
 		try {
-			if(!map.getProperties().getProperty("waterPokemonChances").equalsIgnoreCase("")) {
-				species = map.getProperties().getProperty("waterPokemonChances").split(";");
-				levels = map.getProperties().getProperty("waterPokemonLevels").split(";");
-				if (!species[0].equals("") && !levels[0].equals("") && species.length == levels.length) {
+			if (!map.getProperties().getProperty("waterPokemonChances")
+					.equalsIgnoreCase("")) {
+				species = map.getProperties()
+						.getProperty("waterPokemonChances").split(";");
+				levels = map.getProperties().getProperty("waterPokemonLevels")
+						.split(";");
+				if (!species[0].equals("") && !levels[0].equals("")
+						&& species.length == levels.length) {
 					m_waterPokemonChances = new HashMap<String, Integer>();
-					m_waterPokemonLevels = new HashMap<String, int[]> ();
-						for (int i = 0; i < species.length; i++) {
-							String[] speciesInfo = species[i].split(",");
-							m_waterPokemonChances.put(speciesInfo[0], Integer.parseInt(speciesInfo[1]));
-							String[] levelInfo = levels[i].split("-");
-							m_waterPokemonLevels.put(speciesInfo[0], new int[] {
-									Integer.parseInt(levelInfo[0]),
-									Integer.parseInt(levelInfo[1]) });
-						}
+					m_waterPokemonLevels = new HashMap<String, int[]>();
+					for (int i = 0; i < species.length; i++) {
+						String[] speciesInfo = species[i].split(",");
+						m_waterPokemonChances.put(speciesInfo[0],
+								Integer.parseInt(speciesInfo[1]));
+						String[] levelInfo = levels[i].split("-");
+						m_waterPokemonLevels.put(speciesInfo[0],
+								new int[] { Integer.parseInt(levelInfo[0]),
+										Integer.parseInt(levelInfo[1]) });
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -240,22 +270,27 @@ public class ServerMap {
 			species = new String[] { "" };
 			levels = new String[] { "" };
 		}
-		//Fish Pokemon
+		// Fish Pokemon
 		try {
-			if(!map.getProperties().getProperty("fishPokemonChances").equalsIgnoreCase("")) {
-				species = map.getProperties().getProperty("fishPokemonChances").split(";");
-				levels = map.getProperties().getProperty("fishPokemonLevels").split(";");
-				if (!species[0].equals("") && !levels[0].equals("") && species.length == levels.length) {
+			if (!map.getProperties().getProperty("fishPokemonChances")
+					.equalsIgnoreCase("")) {
+				species = map.getProperties().getProperty("fishPokemonChances")
+						.split(";");
+				levels = map.getProperties().getProperty("fishPokemonLevels")
+						.split(";");
+				if (!species[0].equals("") && !levels[0].equals("")
+						&& species.length == levels.length) {
 					m_fishPokemonChances = new HashMap<String, Integer>();
-					m_fishPokemonLevels = new HashMap<String, int[]> ();
-						for (int i = 0; i < species.length; i++) {
-							String[] speciesInfo = species[i].split(",");
-							m_fishPokemonChances.put(speciesInfo[0], Integer.parseInt(speciesInfo[1]));
-							String[] levelInfo = levels[i].split("-");
-							m_fishPokemonLevels.put(speciesInfo[0], new int[] {
-									Integer.parseInt(levelInfo[0]),
-									Integer.parseInt(levelInfo[1]) });
-						}
+					m_fishPokemonLevels = new HashMap<String, int[]>();
+					for (int i = 0; i < species.length; i++) {
+						String[] speciesInfo = species[i].split(",");
+						m_fishPokemonChances.put(speciesInfo[0],
+								Integer.parseInt(speciesInfo[1]));
+						String[] levelInfo = levels[i].split("-");
+						m_fishPokemonLevels.put(speciesInfo[0],
+								new int[] { Integer.parseInt(levelInfo[0]),
+										Integer.parseInt(levelInfo[1]) });
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -265,7 +300,7 @@ public class ServerMap {
 			levels = new String[] { "" };
 		}
 	}
-	
+
 	/**
 	 * Loads all npc and warp tile data
 	 */
@@ -275,11 +310,11 @@ public class ServerMap {
 		 */
 		final File file = new File("res/npc/" + m_x + "." + m_y + ".txt");
 		final ServerMap map = this;
-		if(file.exists()) {
+		if (file.exists()) {
 			Thread loader = new Thread(new Runnable() {
 				public void run() {
 					GameServer.THREADS++;
-					System.out.println("DataLoader started.");
+					System.out.print(".");
 					try {
 						Scanner reader = new Scanner(file);
 						NPC npc = null;
@@ -287,163 +322,192 @@ public class ServerMap {
 						HMObject hmObject = null;
 						TradeChar t = null;
 						String line;
-						String [] details;
+						String[] details;
 						String direction = "Down";
-						while(reader.hasNextLine()) {
+						while (reader.hasNextLine()) {
 							line = reader.nextLine();
-							if(line.equalsIgnoreCase("[npc]")) {
+							if (line.equalsIgnoreCase("[npc]")) {
 								npc = new NPC();
 								npc.setName(reader.nextLine());
 								direction = reader.nextLine();
-								if(direction.equalsIgnoreCase("UP")) {
+								if (direction.equalsIgnoreCase("UP")) {
 									npc.setFacing(Direction.Up);
-								} else if(direction.equalsIgnoreCase("LEFT")) {
+								} else if (direction.equalsIgnoreCase("LEFT")) {
 									npc.setFacing(Direction.Left);
-								} else if(direction.equalsIgnoreCase("RIGHT")) {
+								} else if (direction.equalsIgnoreCase("RIGHT")) {
 									npc.setFacing(Direction.Right);
 								} else {
 									npc.setFacing(Direction.Down);
 								}
-								npc.setSprite(Integer.parseInt(reader.nextLine()));
+								npc.setSprite(Integer.parseInt(reader
+										.nextLine()));
 								npc.setX((Integer.parseInt(reader.nextLine())) * 32);
 								npc.setY(((Integer.parseInt(reader.nextLine())) * 32) - 8);
-								//Load possible Pokemons
+								// Load possible Pokemons
 								line = reader.nextLine();
-								if(!line.equalsIgnoreCase("NULL")) {
+								if (!line.equalsIgnoreCase("NULL")) {
 									details = line.split(",");
 									HashMap<String, Integer> pokes = new HashMap<String, Integer>();
-									for(int i = 0; i < details.length; i = i + 2) {
-										pokes.put(details[i], Integer.parseInt(details[i + 1]));
+									for (int i = 0; i < details.length; i = i + 2) {
+										pokes.put(details[i], Integer
+												.parseInt(details[i + 1]));
 									}
 									npc.setPossiblePokemon(pokes);
 								}
-								//Set minimum party level
-								npc.setPartySize(Integer.parseInt(reader.nextLine()));
+								// Set minimum party level
+								npc.setPartySize(Integer.parseInt(reader
+										.nextLine()));
 								npc.setBadge(Integer.parseInt(reader.nextLine()));
-								//Add all speech, if any
+								// Add all speech, if any
 								line = reader.nextLine();
-								if(!line.equalsIgnoreCase("NULL")) {
+								if (!line.equalsIgnoreCase("NULL")) {
 									details = line.split(",");
-									for(int i = 0; i < details.length; i++) {
-										npc.addSpeech(Integer.parseInt(details[i]));
+									for (int i = 0; i < details.length; i++) {
+										npc.addSpeech(Integer
+												.parseInt(details[i]));
 									}
 								}
-								npc.setHealer(Boolean.parseBoolean(reader.nextLine().toLowerCase()));
-								npc.setBox(Boolean.parseBoolean(reader.nextLine().toLowerCase()));
-								
-								//Setting ShopKeeper as an int. 
+								npc.setHealer(Boolean.parseBoolean(reader
+										.nextLine().toLowerCase()));
+								npc.setBox(Boolean.parseBoolean(reader
+										.nextLine().toLowerCase()));
+
+								// Setting ShopKeeper as an int.
 								String shop = reader.nextLine();
 								try {
-									npc.setShopKeeper(Integer.parseInt(shop.trim()));
-								} catch(Exception e) {
+									npc.setShopKeeper(Integer.parseInt(shop
+											.trim()));
+								} catch (NumberFormatException e) {
 									try {
 										/* Must be an old shop */
-										if(Boolean.parseBoolean(shop.trim().toLowerCase())){
-											npc.setShopKeeper(1); //Its an old shop! Yay!
+										if (Boolean.parseBoolean(shop.trim()
+												.toLowerCase())) {
+											npc.setShopKeeper(1); // Its an old
+																	// shop!
+																	// Yay!
+											mShops.add(npc.getShop());
 										} else {
-											npc.setShopKeeper(0); //Its an old npc. Not a shop. 
+											npc.setShopKeeper(0); // Its an old
+																	// npc. Not
+																	// a shop.
 										}
-									} catch(Exception ex) { 
-										npc.setShopKeeper(0);//Dunno what the hell it is, but its not a shop. 
+									} catch (ParseException ex) {
+										npc.setShopKeeper(0);// Dunno what the
+																// hell it is,
+																// but its not a
+																// shop.
 									}
 								}
-							} else if(line.equalsIgnoreCase("[/npc]")) {
+							} else if (line.equalsIgnoreCase("[/npc]")) {
 								addChar(npc);
-							} else if(line.equalsIgnoreCase("[warp]")) {
+							} else if (line.equalsIgnoreCase("[warp]")) {
 								warp = new WarpTile();
 								warp.setX(Integer.parseInt(reader.nextLine()));
 								warp.setY(Integer.parseInt(reader.nextLine()));
-								warp.setWarpX(Integer.parseInt(reader.nextLine()) * 32);
-								warp.setWarpY((Integer.parseInt(reader.nextLine()) * 32) - 8);
-								warp.setWarpMapX(Integer.parseInt(reader.nextLine()));
-								warp.setWarpMapY(Integer.parseInt(reader.nextLine()));
-								warp.setBadgeRequirement(Integer.parseInt(reader.nextLine()));
-							} else if(line.equalsIgnoreCase("[/warp]")) {
+								warp.setWarpX(Integer.parseInt(reader
+										.nextLine()) * 32);
+								warp.setWarpY((Integer.parseInt(reader
+										.nextLine()) * 32) - 8);
+								warp.setWarpMapX(Integer.parseInt(reader
+										.nextLine()));
+								warp.setWarpMapY(Integer.parseInt(reader
+										.nextLine()));
+								warp.setBadgeRequirement(Integer
+										.parseInt(reader.nextLine()));
+							} else if (line.equalsIgnoreCase("[/warp]")) {
 								addWarp(warp);
-							} else if(line.equalsIgnoreCase("[hmobject]")) {
+							} else if (line.equalsIgnoreCase("[hmobject]")) {
 								hmObject = new HMObject();
 								hmObject.setName(reader.nextLine());
-								hmObject.setType(HMObject.parseHMObject(hmObject.getName()));
-								hmObject.setX(Integer.parseInt(reader.nextLine()) * 32);
+								hmObject.setType(HMObject
+										.parseHMObject(hmObject.getName()));
+								hmObject.setX(Integer.parseInt(reader
+										.nextLine()) * 32);
 								hmObject.setOriginalX(hmObject.getX());
-								hmObject.setY((Integer.parseInt(reader.nextLine()) * 32) - 8);
+								hmObject.setY((Integer.parseInt(reader
+										.nextLine()) * 32) - 8);
 								hmObject.setOriginalY(hmObject.getY());
-							} else if(line.equalsIgnoreCase("[/hmobject]")) {
+							} else if (line.equalsIgnoreCase("[/hmobject]")) {
 								hmObject.setMap(map, Direction.Down);
-							} else if(line.equalsIgnoreCase("[trade]")) {
+							} else if (line.equalsIgnoreCase("[trade]")) {
 								t = new TradeChar();
 								t.setName(reader.nextLine());
 								direction = reader.nextLine();
-								if(direction.equalsIgnoreCase("UP")) {
+								if (direction.equalsIgnoreCase("UP")) {
 									t.setFacing(Direction.Up);
-								} else if(direction.equalsIgnoreCase("LEFT")) {
+								} else if (direction.equalsIgnoreCase("LEFT")) {
 									t.setFacing(Direction.Left);
-								} else if(direction.equalsIgnoreCase("RIGHT")) {
+								} else if (direction.equalsIgnoreCase("RIGHT")) {
 									t.setFacing(Direction.Right);
 								} else {
 									t.setFacing(Direction.Down);
 								}
 								t.setSprite(Integer.parseInt(reader.nextLine()));
-								t.setX(Integer.parseInt(reader.nextLine())* 32);
-								t.setY((Integer.parseInt(reader.nextLine())* 32)-8);
-								t.setRequestedPokemon(reader.nextLine(), 
-										Integer.parseInt(reader.nextLine()), reader.nextLine());
-								t.setOfferedSpecies(reader.nextLine(), Integer.parseInt(reader.nextLine()));
-							} else if(line.equalsIgnoreCase("[/trade]")) {
+								t.setX(Integer.parseInt(reader.nextLine()) * 32);
+								t.setY((Integer.parseInt(reader.nextLine()) * 32) - 8);
+								t.setRequestedPokemon(reader.nextLine(),
+										Integer.parseInt(reader.nextLine()),
+										reader.nextLine());
+								t.setOfferedSpecies(reader.nextLine(),
+										Integer.parseInt(reader.nextLine()));
+							} else if (line.equalsIgnoreCase("[/trade]")) {
 								addChar(t);
 							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
-						System.err.println("Error in " + getX() + "." + getY() + ".txt - Invalid NPC, " +
-								"HM Object or WarpTile");
+						System.err.println("Error in " + getX() + "." + getY()
+								+ ".txt - Invalid NPC, "
+								+ "HM Object or WarpTile");
 					}
 					GameServer.THREADS--;
-					System.out.println("DataLoader stopped (" + GameServer.THREADS + " threads remaining)");
 				}
 			});
 			loader.start();
 		}
 	}
-	
+
 	/**
-     * Sends a chat message to everyone of the same language
-     * @param message
-     * @param l
-     */
-    public void sendChatMessage(String message, Language l) {
-            synchronized(m_players) {
-                    Collection<Player> list = m_players.values();
-                    for(Player p: list) {
-                            if(p.getLanguage() == l) {
-                                    TcpProtocolHandler.writeMessage(
-                                                    p.getTcpSession(),
-                                                    new ChatMessage(ChatMessageType.LOCAL, message));
-                            }
-                    }
-            }
-    }
-	
+	 * Sends a chat message to everyone of the same language
+	 * 
+	 * @param message
+	 * @param l
+	 */
+	public void sendChatMessage(String message, Language l) {
+		synchronized (m_players) {
+			Collection<Player> list = m_players.values();
+			for (Player p : list) {
+				if (p.getLanguage() == l) {
+					TcpProtocolHandler.writeMessage(p.getTcpSession(),
+							new ChatMessage(ChatMessageType.LOCAL, message));
+				}
+			}
+		}
+	}
+
 	/**
 	 * Returns the pvp type of the map
+	 * 
 	 * @return
 	 */
 	public PvPType getPvPType() {
 		return m_pvpType;
 	}
-	
+
 	/**
 	 * Adds a warp tile to the map
+	 * 
 	 * @param w
 	 */
 	public void addWarp(WarpTile w) {
-		if(m_warps == null)
+		if (m_warps == null)
 			m_warps = new ArrayList<WarpTile>();
 		m_warps.add(w);
 	}
-	
+
 	/**
 	 * Adds an item to the map
+	 * 
 	 * @param x
 	 * @param y
 	 * @param id
@@ -451,53 +515,58 @@ public class ServerMap {
 	public void addItem(int x, int y, int id) {
 		m_items.add(new MapItem(x, y, id));
 	}
-	
+
 	/**
 	 * Allows a player to pick up an item
+	 * 
 	 * @param p
 	 */
 	public void pickupItem(Player p) {
-		
+
 	}
-	
+
 	/**
 	 * Returns true if this map has a forced weather
+	 * 
 	 * @return
 	 */
 	public boolean isWeatherForced() {
 		return m_forcedWeather != null;
 	}
-	
+
 	/**
 	 * Returns the enforced weather on this map
+	 * 
 	 * @return
 	 */
 	public Weather getWeather() {
 		return m_forcedWeather;
 	}
-	
+
 	/**
 	 * Sets forced weather
+	 * 
 	 * @param w
 	 */
 	public void setWeather(Weather w) {
 		m_forcedWeather = w;
 	}
-	
+
 	/**
 	 * Removes forced weather
 	 */
 	public void removeWeather() {
 		m_forcedWeather = null;
 	}
-	
+
 	/**
 	 * Returns the weather id for the enforced weather on this map
+	 * 
 	 * @return
 	 */
 	public int getWeatherId() {
-		if(m_forcedWeather != null) {
-			switch(m_forcedWeather) {
+		if (m_forcedWeather != null) {
+			switch (m_forcedWeather) {
 			case NORMAL:
 				return 0;
 			case RAIN:
@@ -514,49 +583,62 @@ public class ServerMap {
 		} else
 			return 0;
 	}
-	
+
 	/**
 	 * Sets the map matrix
+	 * 
 	 * @param matrix
 	 */
 	public void setMapMatrix(ServerMapMatrix matrix) {
 		m_mapMatrix = matrix;
 	}
-	
+
 	/**
 	 * Adds a player to this map and notifies all other clients on the map.
+	 * 
 	 * @param player
 	 */
 	public void addChar(Character c) {
-		if(c instanceof Player) {
+		if (c instanceof Player) {
 			m_players.put(c.getName(), (Player) c);
-		} else if(c instanceof NPC || c instanceof HMObject) {
-			//Set the id of the npc
+		} else if (c instanceof NPC || c instanceof HMObject) {
+			// Set the id of the npc
 			c.setId(-1 - m_npcs.size());
 			m_npcs.add((NPC) c);
 		}
-		synchronized(m_players) {
-			for(Player p : m_players.values()) {
-				if(c.getId() != p.getId()) {
+		synchronized (m_players) {
+			for (Player p : m_players.values()) {
+				if (c.getId() != p.getId()) {
 					String name = c.getName();
-					if(c instanceof NPC) {
+					if (c instanceof NPC) {
 						name = "!NPC!";
 					}
-					p.getTcpSession().write("ma" + name + "," + 
-							c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + 
-							(c.getFacing() == Direction.Down ? "D" : 
-								c.getFacing() == Direction.Up ? "U" :
-									c.getFacing() == Direction.Left ? "L" :
-										"R"));
+					p.getTcpSession()
+							.write("ma"
+									+ name
+									+ ","
+									+ c.getId()
+									+ ","
+									+ c.getSprite()
+									+ ","
+									+ c.getX()
+									+ ","
+									+ c.getY()
+									+ ","
+									+ (c.getFacing() == Direction.Down ? "D"
+											: c.getFacing() == Direction.Up ? "U"
+													: c.getFacing() == Direction.Left ? "L"
+															: "R"));
 				}
 
 			}
 		}
 	}
-	
+
 	/**
-	 * Adds a char and sets their x y based on a 32 by 32 pixel grid.
-	 * Allows easier adding of NPCs as the x,y can easily be counted via Tiled
+	 * Adds a char and sets their x y based on a 32 by 32 pixel grid. Allows
+	 * easier adding of NPCs as the x,y can easily be counted via Tiled
+	 * 
 	 * @param c
 	 * @param tileX
 	 * @param tileY
@@ -566,82 +648,90 @@ public class ServerMap {
 		c.setX(tileX * 32);
 		c.setY((tileY * 32) - 8);
 	}
-	
+
 	/**
 	 * Returns the x co-ordinate of this servermap in the map matrix
+	 * 
 	 * @return
 	 */
 	public int getX() {
 		return m_x;
 	}
-	
+
 	/**
 	 * Returns the y co-ordinate of this servermap in the map matrix
+	 * 
 	 * @return
 	 */
 	public int getY() {
 		return m_y;
 	}
-	
+
 	/**
 	 * Returns the width of this map
+	 * 
 	 * @return
 	 */
 	public int getWidth() {
 		return m_width;
 	}
-	
+
 	/**
 	 * Returns the height of this map
+	 * 
 	 * @return
 	 */
 	public int getHeight() {
 		return m_heigth;
 	}
-	
+
 	/**
 	 * Returns the x offset of this map
+	 * 
 	 * @return
 	 */
 	public int getXOffsetModifier() {
 		return m_xOffsetModifier;
 	}
-	
+
 	/**
 	 * Returns the y offset of this map
+	 * 
 	 * @return
 	 */
 	public int getYOffsetModifier() {
 		return m_yOffsetModifier;
 	}
-	
+
 	/**
 	 * Removes a char from this map
+	 * 
 	 * @param c
 	 */
 	public void removeChar(Character c) {
-		if(c instanceof Player) {
-			synchronized(m_players) {
+		if (c instanceof Player) {
+			synchronized (m_players) {
 				m_players.remove(c.getName());
 			}
-		} else if(c instanceof NPC) {
+		} else if (c instanceof NPC) {
 			m_npcs.remove((NPC) c);
 			m_npcs.trimToSize();
 		}
-		synchronized(m_players) {
-			for(Player p : m_players.values()) {
+		synchronized (m_players) {
+			for (Player p : m_players.values()) {
 				p.getTcpSession().write("mr" + c.getId());
 			}
 		}
 	}
-	
+
 	/**
 	 * Allows a player to talk to the npc in front of them, if any
+	 * 
 	 * @param p
 	 */
 	public void talkToNpc(Player p) {
 		int x = 0, y = 0;
-		switch(p.getFacing()) {
+		switch (p.getFacing()) {
 		case Up:
 			x = p.getX();
 			y = p.getY() - 32;
@@ -661,8 +751,8 @@ public class ServerMap {
 		default:
 			break;
 		}
-		for(int i = 0; i < m_npcs.size(); i++) {
-			if(m_npcs.get(i).getX() == x && m_npcs.get(i).getY() == y) {
+		for (int i = 0; i < m_npcs.size(); i++) {
+			if (m_npcs.get(i).getX() == x && m_npcs.get(i).getY() == y) {
 				if (!(m_npcs.get(i) instanceof HMObject))
 					p.setTalking(true);
 				m_npcs.get(i).talkToPlayer(p);
@@ -670,9 +760,10 @@ public class ServerMap {
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns true if there is an obstacle
+	 * 
 	 * @param x
 	 * @param y
 	 * @param d
@@ -681,46 +772,49 @@ public class ServerMap {
 	private boolean isBlocked(int x, int y, Direction d) {
 		if (m_blocked.getTileAt(x, y) == '1')
 			return true;
-		if(m_npcs.size() < 4) {
-			for(int i = 0; i < m_npcs.size(); i++) {
-				if(m_npcs.get(i).getX() == (x * 32) && m_npcs.get(i).getY() == ((y * 32) - 8))
+		if (m_npcs.size() < 4) {
+			for (int i = 0; i < m_npcs.size(); i++) {
+				if (m_npcs.get(i).getX() == (x * 32)
+						&& m_npcs.get(i).getY() == ((y * 32) - 8))
 					return true;
 			}
 		} else {
-			for(int i = 0; i <= m_npcs.size() / 2; i++) {
-				if(m_npcs.get(i).getX() == (x * 32) && m_npcs.get(i).getY() == ((y * 32) - 8))
+			for (int i = 0; i <= m_npcs.size() / 2; i++) {
+				if (m_npcs.get(i).getX() == (x * 32)
+						&& m_npcs.get(i).getY() == ((y * 32) - 8))
 					return true;
-				else if(m_npcs.get(m_npcs.size() - 1 - i).getX() == (x * 32) && 
-						m_npcs.get(m_npcs.size() - 1 - i).getY() == ((y * 32) - 8))
+				else if (m_npcs.get(m_npcs.size() - 1 - i).getX() == (x * 32)
+						&& m_npcs.get(m_npcs.size() - 1 - i).getY() == ((y * 32) - 8))
 					return true;
 			}
 		}
-		if(m_ledgesRight != null && m_ledgesRight.getTileAt(x, y) == '1') {
-			if(d != Direction.Right)
+		if (m_ledgesRight != null && m_ledgesRight.getTileAt(x, y) == '1') {
+			if (d != Direction.Right)
 				return true;
 		}
-		if(m_ledgesLeft != null && m_ledgesLeft.getTileAt(x, y) == '1') {
-			if(d != Direction.Left)
+		if (m_ledgesLeft != null && m_ledgesLeft.getTileAt(x, y) == '1') {
+			if (d != Direction.Left)
 				return true;
 		}
-		if(m_ledgesDown != null && m_ledgesDown.getTileAt(x, y) == '1') {
-			if(d != Direction.Down)
+		if (m_ledgesDown != null && m_ledgesDown.getTileAt(x, y) == '1') {
+			if (d != Direction.Down)
 				return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if the char was warped
+	 * 
 	 * @param x
 	 * @param y
 	 * @param c
 	 * @return
 	 */
 	private boolean isWarped(int x, int y, Character c) {
-		if(m_warps != null) {
-			for(int i = 0; i < m_warps.size(); i++) {
-				if(m_warps.get(i).getX() == x && m_warps.get(i).getY() == y) {
+		if (m_warps != null) {
+			for (int i = 0; i < m_warps.size(); i++) {
+				if (m_warps.get(i).getX() == x && m_warps.get(i).getY() == y) {
 					m_warps.get(i).warp(c);
 					return true;
 				}
@@ -728,33 +822,38 @@ public class ServerMap {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Returns true if a fishing attempt was deemed successful(Will the player pull up any pogey or find nothing?)
+	 * Returns true if a fishing attempt was deemed successful(Will the player
+	 * pull up any pogey or find nothing?)
+	 * 
 	 * @param c
 	 * @param d
 	 * @param rod
 	 */
 	public boolean caughtFish(Player c, Direction d, int rod) {
 		int failureRate = 75;
-		//Subtract the rod's power from the failure rate.
+		// Subtract the rod's power from the failure rate.
 		failureRate -= rod;
-		//If that tile is a water tile, determine if you pulled anything, if not, autofail(You can't fish on dry land)
-		if(facingWater(c, d)) { //If facing water
-			c.setFishing(true);		
-			if((int)(Math.random()* 101) > failureRate) {
+		// If that tile is a water tile, determine if you pulled anything, if
+		// not, autofail(You can't fish on dry land)
+		if (facingWater(c, d)) { // If facing water
+			c.setFishing(true);
+			if ((int) (Math.random() * 101) > failureRate) {
 				return true;
 			} else {
 				return false;
 			}
 		} else {
-			c.getTcpSession().write("Ff"); // Tell the player he can't fish on land
+			c.getTcpSession().write("Ff"); // Tell the player he can't fish on
+											// land
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if the player is facing water
+	 * 
 	 * @param c
 	 * @param newX
 	 * @param newY
@@ -765,8 +864,8 @@ public class ServerMap {
 		int playerY = c.getY();
 		int newX = 0;
 		int newY = 0;
-		//Determine what tile the player is facing		
-		switch(d) {
+		// Determine what tile the player is facing
+		switch (d) {
 		case Up:
 			newX = playerX / 32;
 			newY = ((playerY + 8) - 32) / 32;
@@ -784,14 +883,17 @@ public class ServerMap {
 			newY = (playerY + 8) / 32;
 			break;
 		}
-		if(m_surf != null && m_surf.getTileAt(newX, newY) == '1') { //If facing water
+		if (m_surf != null && m_surf.getTileAt(newX, newY) == '1') { // If
+																		// facing
+																		// water
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if the char is able to move
+	 * 
 	 * @param c
 	 * @param d
 	 */
@@ -801,19 +903,19 @@ public class ServerMap {
 		int newX;
 		int newY;
 
-		switch(d) {
+		switch (d) {
 		case Up:
 			newX = playerX / 32;
 			newY = ((playerY + 8) - 32) / 32;
 			if (playerY >= 1) {
 				if (!isBlocked(newX, newY, Direction.Up)) {
-					if(m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
-						if(c.isSurfing()) {
+					if (m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
+						if (c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof Player) {
+							if (c instanceof Player) {
 								Player p = (Player) c;
-								if(p.canSurf()) {
+								if (p.canSurf()) {
 									p.setSurfing(true);
 									return true;
 								} else {
@@ -822,14 +924,15 @@ public class ServerMap {
 							}
 						}
 					} else {
-						if(c.isSurfing())
+						if (c.isSurfing())
 							c.setSurfing(false);
-						if(!isWarped(newX, newY, c))
+						if (!isWarped(newX, newY, c))
 							return true;
 					}
 				}
 			} else {
-				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x, m_y - 1);
+				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x,
+						m_y - 1);
 				if (newMap != null) {
 					m_mapMatrix.moveBetweenMaps(c, this, newMap);
 				}
@@ -840,13 +943,13 @@ public class ServerMap {
 			newY = ((playerY + 8) + 32) / 32;
 			if (playerY + 40 < m_heigth * 32) {
 				if (!isBlocked(newX, newY, Direction.Down)) {
-					if(m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
-						if(c.isSurfing()) {
+					if (m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
+						if (c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof Player) {
+							if (c instanceof Player) {
 								Player p = (Player) c;
-								if(p.canSurf()) {
+								if (p.canSurf()) {
 									p.setSurfing(true);
 									return true;
 								} else {
@@ -855,14 +958,15 @@ public class ServerMap {
 							}
 						}
 					} else {
-						if(c.isSurfing())
+						if (c.isSurfing())
 							c.setSurfing(false);
-						if(!isWarped(newX, newY, c))
+						if (!isWarped(newX, newY, c))
 							return true;
 					}
 				}
 			} else {
-				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x, m_y + 1);
+				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x,
+						m_y + 1);
 				if (newMap != null) {
 					m_mapMatrix.moveBetweenMaps(c, this, newMap);
 				}
@@ -873,13 +977,13 @@ public class ServerMap {
 			newY = (playerY + 8) / 32;
 			if (playerX >= 32) {
 				if (!isBlocked(newX, newY, Direction.Left)) {
-					if(m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
-						if(c.isSurfing()) {
+					if (m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
+						if (c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof Player) {
+							if (c instanceof Player) {
 								Player p = (Player) c;
-								if(p.canSurf()) {
+								if (p.canSurf()) {
 									p.setSurfing(true);
 									return true;
 								} else {
@@ -888,14 +992,15 @@ public class ServerMap {
 							}
 						}
 					} else {
-						if(c.isSurfing())
+						if (c.isSurfing())
 							c.setSurfing(false);
-						if(!isWarped(newX, newY, c))
+						if (!isWarped(newX, newY, c))
 							return true;
 					}
 				}
 			} else {
-				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x - 1, m_y);
+				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x - 1,
+						m_y);
 				if (newMap != null) {
 					m_mapMatrix.moveBetweenMaps(c, this, newMap);
 				}
@@ -906,13 +1011,13 @@ public class ServerMap {
 			newY = (playerY + 8) / 32;
 			if (playerX + 32 < m_width * 32) {
 				if (!isBlocked(newX, newY, Direction.Right)) {
-					if(m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
-						if(c.isSurfing()) {
+					if (m_surf != null && m_surf.getTileAt(newX, newY) == '1') {
+						if (c.isSurfing()) {
 							return true;
 						} else {
-							if(c instanceof Player) {
+							if (c instanceof Player) {
 								Player p = (Player) c;
-								if(p.canSurf()) {
+								if (p.canSurf()) {
 									p.setSurfing(true);
 									return true;
 								} else {
@@ -921,14 +1026,15 @@ public class ServerMap {
 							}
 						}
 					} else {
-						if(c.isSurfing())
+						if (c.isSurfing())
 							c.setSurfing(false);
-						if(!isWarped(newX, newY, c))
+						if (!isWarped(newX, newY, c))
 							return true;
 					}
 				}
 			} else {
-				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x + 1, m_y);
+				ServerMap newMap = m_mapMatrix.getMapByGamePosition(m_x + 1,
+						m_y);
 				if (newMap != null) {
 					m_mapMatrix.moveBetweenMaps(c, this, newMap);
 				}
@@ -937,50 +1043,51 @@ public class ServerMap {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Starts an npc battle with the player if the player was challenged
+	 * 
 	 * @param p
 	 * @return
 	 */
 	public boolean isNpcBattle(Player p) {
 		NPC n = null;
-		for(int i = 0; i < m_npcs.size(); i++) {
+		for (int i = 0; i < m_npcs.size(); i++) {
 			n = m_npcs.get(i);
-			if(n != null && n.isTrainer() && !n.isGymLeader()) {
+			if (n != null && n.isTrainer() && !n.isGymLeader()) {
 				/*
-				 * For the npc to be able to challenge the player, the must be on the same
-				 * axis as the player, the x axis or the y axis
+				 * For the npc to be able to challenge the player, the must be
+				 * on the same axis as the player, the x axis or the y axis
 				 */
-				if(n.getX() == p.getX()) {
+				if (n.getX() == p.getX()) {
 					/* Same column */
-					if(n.getY() > p.getY()) {
+					if (n.getY() > p.getY()) {
 						/* NPC is above the player */
-						if(n.getFacing() == Direction.Up && n.canSee(p)) {
+						if (n.getFacing() == Direction.Up && n.canSee(p)) {
 							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
 							l.start();
 							return true;
 						}
 					} else {
 						/* NPC is below the player */
-						if(n.getFacing() == Direction.Down && n.canSee(p)) {
+						if (n.getFacing() == Direction.Down && n.canSee(p)) {
 							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
 							l.start();
 							return true;
 						}
 					}
-				} else if(n.getY() == p.getY()) {
+				} else if (n.getY() == p.getY()) {
 					/* Same row */
-					if(n.getX() > p.getX()) {
+					if (n.getX() > p.getX()) {
 						/* NPC is right of the player */
-						if(n.getFacing() == Direction.Left && n.canSee(p)) {
+						if (n.getFacing() == Direction.Left && n.canSee(p)) {
 							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
 							l.start();
 							return true;
 						}
 					} else {
 						/* NPC is left of the player */
-						if(n.getFacing() == Direction.Right && n.canSee(p)) {
+						if (n.getFacing() == Direction.Right && n.canSee(p)) {
 							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
 							l.start();
 							return true;
@@ -991,63 +1098,72 @@ public class ServerMap {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns true if a wild pokemon was encountered.
+	 * 
 	 * @return
 	 */
 	public boolean isWildBattle(int x, int y, Player p) {
 		if (m_random.nextInt(2874) < m_wildProbability * 16) {
-			if(p.isSurfing()) {
-				if(m_waterPokemonChances != null && m_waterPokemonLevels != null)
+			if (p.isSurfing()) {
+				if (m_waterPokemonChances != null
+						&& m_waterPokemonLevels != null)
 					return true;
 			} else {
-				if (m_grass != null && m_grass.getTileAt(x / 32, (y + 8) / 32) == '1')
-					if((m_dayPokemonChances != null && m_dayPokemonLevels != null) ||
-							(m_nightPokemonChances != null && m_nightPokemonLevels != null))
+				if (m_grass != null
+						&& m_grass.getTileAt(x / 32, (y + 8) / 32) == '1')
+					if ((m_dayPokemonChances != null && m_dayPokemonLevels != null)
+							|| (m_nightPokemonChances != null && m_nightPokemonLevels != null))
 						return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Returns a wild pokemon.
-	 * Different players have different chances of encountering rarer Pokemon.
+	 * Returns a wild pokemon. Different players have different chances of
+	 * encountering rarer Pokemon.
+	 * 
 	 * @return
 	 */
 	public Pokemon getWildPokemon(Player player) {
-		int [] range;
+		int[] range;
 		String species;
-		if(player.isSurfing()) {
-			//Generate a Pokemon from the water
+		if (player.isSurfing()) {
+			// Generate a Pokemon from the water
 			species = getWildSpeciesWater();
 			range = m_waterPokemonLevels.get(species);
-			return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
-		} 
-		else if(player.isFishing()) {
-			//Generate a pokemon caught by fishing
+			return Pokemon.getRandomPokemon(species,
+					(m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
+		} else if (player.isFishing()) {
+			// Generate a pokemon caught by fishing
 			species = getWildSpeciesFish();
 			range = m_fishPokemonLevels.get(species);
-			return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
-		}
-		else {
-			if(TimeService.isNight()) {
-				//Generate a nocturnal Pokemon
+			return Pokemon.getRandomPokemon(species,
+					(m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
+		} else {
+			if (TimeService.isNight()) {
+				// Generate a nocturnal Pokemon
 				species = getWildSpeciesNight();
 				range = m_nightPokemonLevels.get(species);
-				return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
+				return Pokemon.getRandomPokemon(species,
+						(m_random.nextInt((range[1] - range[0]) + 1))
+								+ range[0]);
 			} else {
-				//Generate a day Pokemon
+				// Generate a day Pokemon
 				species = getWildSpeciesDay();
 				range = m_dayPokemonLevels.get(species);
-				return Pokemon.getRandomPokemon(species, (m_random.nextInt((range[1] - range[0]) + 1)) + range[0]);
+				return Pokemon.getRandomPokemon(species,
+						(m_random.nextInt((range[1] - range[0]) + 1))
+								+ range[0]);
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns a wild species for day
+	 * 
 	 * @return
 	 */
 	private String getWildSpeciesDay() {
@@ -1060,9 +1176,10 @@ public class ServerMap {
 		} while (potentialSpecies.size() <= 0);
 		return potentialSpecies.get(m_random.nextInt(potentialSpecies.size()));
 	}
-	
+
 	/**
 	 * Returns a wild species for night
+	 * 
 	 * @return
 	 */
 	private String getWildSpeciesNight() {
@@ -1075,9 +1192,10 @@ public class ServerMap {
 		} while (potentialSpecies.size() <= 0);
 		return potentialSpecies.get(m_random.nextInt(potentialSpecies.size()));
 	}
-	
+
 	/**
 	 * Returns a wild species for water
+	 * 
 	 * @return
 	 */
 	private String getWildSpeciesWater() {
@@ -1090,9 +1208,10 @@ public class ServerMap {
 		} while (potentialSpecies.size() <= 0);
 		return potentialSpecies.get(m_random.nextInt(potentialSpecies.size()));
 	}
-	
+
 	/**
 	 * Returns a wild species for fishing
+	 * 
 	 * @return
 	 */
 	private String getWildSpeciesFish() {
@@ -1105,30 +1224,33 @@ public class ServerMap {
 		} while (potentialSpecies.size() <= 0);
 		return potentialSpecies.get(m_random.nextInt(potentialSpecies.size()));
 	}
-	
+
 	/**
 	 * Sends a packet to all players on the map
+	 * 
 	 * @param message
 	 */
 	public void sendToAll(PokenetMessage m) {
-		synchronized(m_players) {
+		synchronized (m_players) {
 			Collection<Player> list = m_players.values();
-			for(Player p: list) {
+			for (Player p : list) {
 				TcpProtocolHandler.writeMessage(p.getTcpSession(), m);
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns the arraylist of players
+	 * 
 	 * @return
 	 */
 	public HashMap<String, Player> getPlayers() {
 		return m_players;
 	}
-	
+
 	/**
 	 * Returns the arraylist of npcs
+	 * 
 	 * @return
 	 */
 	public ArrayList<NPC> getNpcs() {
@@ -1137,20 +1259,21 @@ public class ServerMap {
 
 	/**
 	 * Sends a movement packet to everyone
+	 * 
 	 * @param moveMessage
 	 * @param char1
 	 */
 	public void sendMovementToAll(Direction d, Character c) {
-		if(c instanceof Player) {
+		if (c instanceof Player) {
 			/*
-			 * If a player, send movement to everyone but themselves
-			 * Movement for themself is sent over TCP
+			 * If a player, send movement to everyone but themselves Movement
+			 * for themself is sent over TCP
 			 */
 			Player p = (Player) c;
-			synchronized(m_players) {
+			synchronized (m_players) {
 				Collection<Player> list = m_players.values();
-				for(Player pl: list) {
-					if(p != pl) {
+				for (Player pl : list) {
+					if (p != pl) {
 						pl.queueOtherPlayerMovement(d, c.getId());
 					}
 				}
@@ -1159,9 +1282,9 @@ public class ServerMap {
 			/*
 			 * Else, send the movement to everyone
 			 */
-			synchronized(m_players) {
+			synchronized (m_players) {
 				Collection<Player> list = m_players.values();
-				for(Player pl: list) {
+				for (Player pl : list) {
 					pl.queueOtherPlayerMovement(d, c.getId());
 				}
 			}

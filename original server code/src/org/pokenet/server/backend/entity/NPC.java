@@ -32,7 +32,7 @@ public class NPC extends Character {
 	private int m_isShop = 0;
 	private int m_badge = -1;
 	private ArrayList<Integer> m_speech;
-	private Shop m_shop = null;
+	private Shop m_shop;
 	private long m_lastBattle = 0;
 	
 	/**
@@ -225,10 +225,7 @@ public class NPC extends Character {
 	 * @return
 	 */
 	public boolean isShopKeeper() {
-		if(m_isShop>0)
-			return true;
-		else
-			return false;
+		return m_shop != null;
 	}
 	
 	/**
@@ -253,11 +250,8 @@ public class NPC extends Character {
 	 */
 	public void setShopKeeper(int b) {
 		m_isShop = b;
-		if(b>0) {
-			try{
+		if(b > 0) {
 			m_shop = new Shop(b);
-			m_shop.start();
-			} catch (Exception e){e.printStackTrace();}
 		}
 	}
 	
@@ -368,5 +362,10 @@ public class NPC extends Character {
 			}
 		}
 		return party;
+	}
+	
+	public Shop getShop()
+	{
+		return m_shop;
 	}
 }

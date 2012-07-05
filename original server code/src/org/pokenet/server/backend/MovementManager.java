@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.HMObject.objectType;
@@ -101,7 +102,7 @@ public class MovementManager implements Runnable {
 	 */
 	public void run() {
 		GameServer.THREADS++;
-		System.out.println("MovementManager started.");
+		Log.debug("MovementManager started.");
 		Character tmp = null;
 		//ArrayList<Char> tmpArray = null;
 		while(m_isRunning) {
@@ -129,7 +130,7 @@ public class MovementManager implements Runnable {
 			} catch (Exception e) {}
 		}
 		GameServer.THREADS--;
-		System.out.println("MovementManager stopped (" + GameServer.THREADS + " threads remaining)");
+		Log.debug("MovementManager stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 	
 	/**

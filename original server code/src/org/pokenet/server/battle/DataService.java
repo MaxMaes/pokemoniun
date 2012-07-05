@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.item.DropData;
 import org.pokenet.server.battle.Pokemon.ExpTypes;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
@@ -53,51 +54,51 @@ public class DataService {
 			m_moveSetData = stream.read(MoveSetData.class, new File(f.getCanonicalPath() + "/res/movesets.xml"));
 			initialiseSpecies();
 			PokemonSpecies.setDefaultData(m_speciesData);
-			System.out.println("INFO: Pokemon Databases loaded.");
-			/*
-			 * List of non-tradeable Pokemon
-			 */
-			m_nonTrades = new ArrayList<String>();
-			m_nonTrades.add("Bulbasaur");
-			m_nonTrades.add("Ivysaur");
-			m_nonTrades.add("Venusaur");
-			m_nonTrades.add("Squirtle");
-			m_nonTrades.add("Wartortle");
-			m_nonTrades.add("Blastoise");
-			m_nonTrades.add("Charmander");
-			m_nonTrades.add("Charmeleon");
-			m_nonTrades.add("Charizard");
-			m_nonTrades.add("Chikorita");
-			m_nonTrades.add("Bayleef");
-			m_nonTrades.add("Meganium");
-			m_nonTrades.add("Cyndaquil");
-			m_nonTrades.add("Quilava");
-			m_nonTrades.add("Typhlosion");
-			m_nonTrades.add("Totodile");
-			m_nonTrades.add("Croconaw");
-			m_nonTrades.add("Feraligatr");
-			m_nonTrades.add("Treecko");
-			m_nonTrades.add("Grovyle");
-			m_nonTrades.add("Sceptile");
-			m_nonTrades.add("Torchic");
-			m_nonTrades.add("Combusken");
-			m_nonTrades.add("Blaziken");
-			m_nonTrades.add("Mudkip");
-			m_nonTrades.add("Marshtomp");
-			m_nonTrades.add("Swampert");
-			m_nonTrades.add("Turtwig");
-			m_nonTrades.add("Grotle");
-			m_nonTrades.add("Torterra");
-			m_nonTrades.add("Chimchar");
-			m_nonTrades.add("Monferno");
-			m_nonTrades.add("Infernape");
-			m_nonTrades.add("Piplup");
-			m_nonTrades.add("Prinplup");
-			m_nonTrades.add("Empoleon");
-			System.out.println("INFO: Trade Block List established.");
+			Log.debug("Pokemon Databases loaded.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		/*
+		 * List of non-tradeable Pokemon
+		 */
+		m_nonTrades = new ArrayList<String>();
+		m_nonTrades.add("Bulbasaur");
+		m_nonTrades.add("Ivysaur");
+		m_nonTrades.add("Venusaur");
+		m_nonTrades.add("Squirtle");
+		m_nonTrades.add("Wartortle");
+		m_nonTrades.add("Blastoise");
+		m_nonTrades.add("Charmander");
+		m_nonTrades.add("Charmeleon");
+		m_nonTrades.add("Charizard");
+		m_nonTrades.add("Chikorita");
+		m_nonTrades.add("Bayleef");
+		m_nonTrades.add("Meganium");
+		m_nonTrades.add("Cyndaquil");
+		m_nonTrades.add("Quilava");
+		m_nonTrades.add("Typhlosion");
+		m_nonTrades.add("Totodile");
+		m_nonTrades.add("Croconaw");
+		m_nonTrades.add("Feraligatr");
+		m_nonTrades.add("Treecko");
+		m_nonTrades.add("Grovyle");
+		m_nonTrades.add("Sceptile");
+		m_nonTrades.add("Torchic");
+		m_nonTrades.add("Combusken");
+		m_nonTrades.add("Blaziken");
+		m_nonTrades.add("Mudkip");
+		m_nonTrades.add("Marshtomp");
+		m_nonTrades.add("Swampert");
+		m_nonTrades.add("Turtwig");
+		m_nonTrades.add("Grotle");
+		m_nonTrades.add("Torterra");
+		m_nonTrades.add("Chimchar");
+		m_nonTrades.add("Monferno");
+		m_nonTrades.add("Infernape");
+		m_nonTrades.add("Piplup");
+		m_nonTrades.add("Prinplup");
+		m_nonTrades.add("Empoleon");
+		Log.debug("Trade Block List established.");
 	}
 	
 	/**

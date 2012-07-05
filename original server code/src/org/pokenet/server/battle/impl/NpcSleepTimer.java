@@ -3,6 +3,7 @@ package org.pokenet.server.battle.impl;
 import java.util.Random;
 
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.map.ServerMap;
 
@@ -16,44 +17,45 @@ public class NpcSleepTimer implements Runnable {
 
 	public void run() {
 		GameServer.THREADS++;
-		System.out.println("NpcSleepTimer started.");
+		Log.debug("NpcSleepTimer started.");
 		Random r = new Random();
-		NPC n = null;
-		ServerMap m = null;
+		NPC npc;
+		ServerMap serverMap;
 		while(m_running) {
 			/*
 			 * Loop through every map
 			 */
 			for(int x = 0; x < 100; x++) {
 				for(int y = 0; y < 100; y++) {
-					m = GameServer.getServiceManager().
+					serverMap = GameServer.getServiceManager().
 						getMovementService().getMapMatrix().getMapByRealPosition(x, y);
-					if(m != null) {
+					if(serverMap != null) {
 						/*
 						 * Loop through every npc on the map
 						 * If they're sleeping, check if its time to wake them
 						 */
-						for(int i = 0; i < m.getNpcs().size(); i++) {
-							n = m.getNpcs().get(i);
-							if(n != null && !n.canBattle() && 
-									System.currentTimeMillis() - n.getLastBattleTime()
+						for(int i = 0; i < serverMap.getNpcs().size(); i++) {
+							npc = serverMap.getNpcs().get(i);
+							if(npc != null && !npc.canBattle() && 
+									System.currentTimeMillis() - npc.getLastBattleTime()
 									>= 300000 + r.nextInt(300000)) {
-								n.setLastBattleTime(0);
+								npc.setLastBattleTime(0);
+							}
+							if(npc.getShop() != null)
+							{
+								npc.getShop().updateStock();
 							}
 						}
-						try {
-							Thread.sleep(500);
-						} catch (Exception e) {}
 					}
-					n = null;
+					npc = null;
 				}
 			}
 			try {
-				Thread.sleep(30 * 1000); // 30 seconds
+				Thread.sleep(30 * 1000); // 30 seconds, maybe lower this?
 			} catch (InterruptedException ex) {}
 		}
 		GameServer.THREADS--;
-		System.out.println("NpcSleepTimer stopped (" + GameServer.THREADS + " threads remaining)");
+		Log.debug("NpcSleepTimer stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**

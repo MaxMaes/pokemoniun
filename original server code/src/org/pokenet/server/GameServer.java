@@ -261,6 +261,7 @@ public class GameServer
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				m_running = false;
 				exit();
 			}
 		});
@@ -348,7 +349,6 @@ public class GameServer
 		m_serviceManager.stop();
 		if(m_boolGui)
 		{
-			m_running = false;
 			m_start.setEnabled(true);
 			m_stop.setEnabled(false);
 		}

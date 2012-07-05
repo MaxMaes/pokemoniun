@@ -126,22 +126,21 @@ public class GameServer
 	private void getConsoleSettings()
 	{
 		ConsoleReader r = new ConsoleReader();
-		System.out.println("Please enter the required information.");
-		System.out.println("Database Server: ");
+		Log.debug("Please enter the required information.");
+		Log.debug("Database Server: ");
 		m_dbServer = r.readToken();
-		System.out.println("Database Name:");
+		Log.debug("Database Name:");
 		m_dbName = r.readToken();
-		System.out.println("Database Username:");
+		Log.debug("Database Username:");
 		m_dbUsername = r.readToken();
-		System.out.println("Database Password:");
+		Log.debug("Database Password:");
 		m_dbPassword = r.readToken();
-		System.out.println("This server's IP or hostname:");
+		Log.debug("This server's IP or hostname:");
 		m_serverName = r.readToken();
-		System.out.println("Save info? (y/N)");
+		Log.debug("Save info? (y/N)");
 		String answer = r.readToken();
 		if(answer.contains("y") || answer.contains("Y"))
 			saveSettings();
-		System.out.println();
 		System.err.println("WARNING: When using -nogui, the server should only be shut down using a master client");
 	}
 
@@ -166,7 +165,7 @@ public class GameServer
 			else
 			{
 				ConsoleReader r = new ConsoleReader();
-				System.out.println("Load Settings? y/N");
+				Log.debug("Load Settings? y/N");
 				String answer = r.readToken();
 				if(answer.contains("y") || answer.contains("Y"))
 					loadSettings();
@@ -190,7 +189,7 @@ public class GameServer
 					m_usedRAM = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024) / 1024;
 					m_ramUsage.setText("RAM: " + m_usedRAM + " / " + m_totalRAM + " MB");
 					try {
-						Thread.sleep(10 * 1000); // Sleep for 10 seconds.
+						Thread.sleep(100); // Sleep for 100ms
 					} catch(InterruptedException ex) {}
 				}
 			}
@@ -360,7 +359,7 @@ public class GameServer
 				/* Let threads finish up */
 				Thread.sleep(10 * 1000);
 				/* Exit */
-				System.out.println("Exiting server...");
+				Log.debug("Exiting server...");
 				System.exit(0);
 			}
 			catch(InterruptedException e)
@@ -438,11 +437,11 @@ public class GameServer
 		else
 		{
 			int amount = TcpProtocolHandler.getPlayerCount();
-			System.out.println(amount + " players online");
+			Log.debug(amount + " players online");
 			if(amount > m_highest)
 			{
 				m_highest = amount;
-				System.out.println("Highest: " + amount);
+				Log.debug("Highest: " + amount);
 			}
 		}
 
@@ -560,7 +559,7 @@ public class GameServer
 					m_boolGui = true;
 					if(line.hasOption("autorun"))
 					{
-						//System.out.println("autorun doesn't work with GUI");
+						//Log.debug("autorun doesn't work with GUI");
 						gs = new GameServer(true);
 					}
 					else

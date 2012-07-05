@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.backend.map.ServerMapMatrix;
@@ -117,7 +118,7 @@ public class MovementService {
 				}
 			}
 		}
-		System.out.println("INFO: Maps loaded");
+		Log.debug("Maps loaded");
 	}
 	
 	/**
@@ -137,7 +138,7 @@ public class MovementService {
 			m_movementManager[i] = new MovementManager();
 			m_movementManager[i].start();
 		}
-		System.out.println("INFO: Movement Service started");
+		Log.debug("Movement Service started");
 	}
 	
 	/**
@@ -148,6 +149,6 @@ public class MovementService {
 		for(int i = 0; i < m_movementManager.length; i++) {
 			m_movementManager[i].stop();
 		}
-		System.out.println("INFO: Movement Service stopped");
+		Log.debug("Movement Service stopped");
 	}
 }

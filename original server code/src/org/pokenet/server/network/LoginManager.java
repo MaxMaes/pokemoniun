@@ -52,23 +52,6 @@ public class LoginManager implements Runnable {
 	}
 
 	/**
-	 * Returns the ip address of a session
-	 * 
-	 * @param s
-	 * @return
-	 */
-	private String getIp(IoSession s) {
-		if (s != null) {
-			String ip = s.getRemoteAddress().toString();
-			ip = ip.substring(1);
-			ip = ip.substring(0, ip.indexOf(":"));
-			return ip;
-		} else {
-			return "";
-		}
-	}
-
-	/**
 	 * Attempts to login a player. Upon success, it sends a packet to the player
 	 * to inform them they are logged in.
 	 * 
@@ -92,7 +75,7 @@ public class LoginManager implements Runnable {
 		try {
 			PreparedStatement ps = DatabaseConnection.getConnection()
 					.prepareStatement("SELECT * FROM pn_bans WHERE ip = ?");
-			ps.setString(1, getIp(session));
+			ps.setString(1, TcpProtocolHandler.getIp(session));
 			ResultSet rs = ps.executeQuery();
 
 			if (rs != null && rs.first()) {
@@ -154,7 +137,7 @@ public class LoginManager implements Runnable {
 										+ "' WHERE username='"
 										+ MySqlManager.parseSQL(username) + "'");
 						m_database.query("UPDATE pn_members SET lastLoginIP='"
-								+ getIp(session) + "' WHERE username='"
+								+ TcpProtocolHandler.getIp(session) + "' WHERE username='"
 								+ MySqlManager.parseSQL(username) + "'");
 						m_database
 								.query("UPDATE pn_members SET lastLanguageUsed='"
@@ -400,7 +383,7 @@ public class LoginManager implements Runnable {
 							"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
 			ps.setString(1, GameServer.getServerName());
 			ps.setLong(2, time);
-			ps.setString(3, getIp(session));
+			ps.setString(3, TcpProtocolHandler.getIp(session));
 			ps.setLong(4, language);
 			ps.setString(5, username);
 			ps.executeUpdate();

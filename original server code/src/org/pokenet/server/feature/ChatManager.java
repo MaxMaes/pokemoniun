@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.network.TcpProtocolHandler;
@@ -72,7 +73,7 @@ public class ChatManager implements Runnable {
          */
         public void run() {
         	GameServer.THREADS++;
-    		System.out.println("ChatManager started.");
+    		Log.debug("ChatManager started.");
                 Object [] o;
                 ServerMap m;
                 IoSession s;
@@ -98,7 +99,7 @@ public class ChatManager implements Runnable {
                         } catch (Exception e) {}
                 }
                 GameServer.THREADS--;
-        		System.out.println("ChatManager stopped (" + GameServer.THREADS + " threads remaining)");
+        		Log.debug("ChatManager stopped (" + GameServer.THREADS + " threads remaining)");
         }
         
         /**

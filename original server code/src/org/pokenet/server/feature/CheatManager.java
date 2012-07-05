@@ -1,5 +1,6 @@
 package org.pokenet.server.feature;
 
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Player;
 
 public class CheatManager {
@@ -21,6 +22,6 @@ public class CheatManager {
 	
 	public void log(Player player, String message) 
 	{
-		System.out.println("[CheatManager] Player " + player.getName() + " (" + player.getIpAddress() + "), " + message);
+		Log.debug("[CheatManager] Player " + player.getName() + " (" + player.getIpAddress() + "), " + message);
 	}
 }

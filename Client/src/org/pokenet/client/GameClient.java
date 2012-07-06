@@ -1107,10 +1107,15 @@ public class GameClient extends BasicGame
 		Date now = new Date(System.currentTimeMillis());
 		try
 		{
-			PrintStream p = new PrintStream(new File("logs/log" + sdf.format(now) + ".txt"));
+			File log = new File("log" + sdf.format(now) + ".txt");
+			if(!log.exists())
+			{
+				log.createNewFile();
+			}
+			PrintStream p = new PrintStream(log);
 			System.setErr(p);
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}

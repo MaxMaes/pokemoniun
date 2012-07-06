@@ -1,6 +1,8 @@
 package org.pokenet.server.network;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -16,6 +18,7 @@ import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
+import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.network.message.ItemMessage;
 import org.pokenet.server.network.message.PokenetMessage;
 import org.pokenet.server.network.message.RequestMessage;
@@ -366,17 +369,31 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 						if (m_players.containsKey(message.substring(2))) {
 							Player playerToBeBanned = m_players.get(message
 									.substring(2));
-							MySqlManager.getInstance().query(
-									"INSERT INTO `pn_bans` (ip) VALUE ('"
-											+ playerToBeBanned.getIpAddress()
-											+ "')");
+							try
+							{
+								PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("INSERT INTO pn_bans (ip) VALUE (?)");
+								ps.setString(1, playerToBeBanned.getIpAddress());
+								ps.executeUpdate();
+								ps.close();
+							}
+							catch(SQLException e)
+							{
+								e.printStackTrace();
+							}
 						}
 						break;
 					case 'B':
-						// Unban ip
-						MySqlManager.getInstance().query(
-								"DELETE FROM pn_bans WHERE ip='"
-										+ message.substring(2) + "'");
+						try
+						{
+							PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("DELETE FROM pn_bans WHERE ip = ?");
+							ps.setString(1, message.substring(2));
+							ps.executeUpdate();
+							ps.close();
+						}
+						catch(SQLException e)
+						{
+							e.printStackTrace();
+						}
 						break;
 					case 'W':
 						// Warp to player

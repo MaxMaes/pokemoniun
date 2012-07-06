@@ -8,7 +8,7 @@ import org.pokenet.server.GameServer;
 
 public class DatabaseConnection {
     private static ThreadLocal<Connection> con = new ThreadLocalConnection();
-    private final static String url = "jdbc:mysql://" + GameServer.getDatabaseHost() + "/" + GameServer.getDatabaseName() + "?autoReconnect=true";
+    private final static String url = "jdbc:mysql://" + GameServer.getDatabaseHost() + ":3306/" + GameServer.getDatabaseName() + "?autoReconnect=true";
     private final static String user = GameServer.getDatabaseUsername();
     private final static String pass = GameServer.getDatabasePassword();
 

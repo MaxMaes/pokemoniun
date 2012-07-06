@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -11,14 +12,12 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -49,7 +48,7 @@ public class GameServer
 	private int m_highest = 0;
 	private JLabel m_pAmount, m_pHighest;
 	private JFrame m_gui;
-	
+
 	// RAM usage
 	private static long m_totalRAM = 0;
 	private static long m_usedRAM = 0;
@@ -180,16 +179,23 @@ public class GameServer
 	 */
 	private void createGui()
 	{
-		Thread ramUpdate = new Thread(new Runnable() {
-			
-			public void run() {
-				while(m_running) {
+		Thread ramUpdate = new Thread(new Runnable()
+		{
+
+			public void run()
+			{
+				while(m_running)
+				{
 					m_totalRAM = (Runtime.getRuntime().totalMemory() / 1024) / 1024;
 					m_usedRAM = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024) / 1024;
 					m_ramUsage.setText("RAM: " + m_usedRAM + " / " + m_totalRAM + " MB");
-					try {
+					try
+					{
 						Thread.sleep(100); // Sleep for 100ms
-					} catch(InterruptedException ex) {}
+					}
+					catch(InterruptedException ex)
+					{
+					}
 				}
 			}
 		});
@@ -206,13 +212,13 @@ public class GameServer
 		m_pAmount.setLocation(4, 4);
 		m_pAmount.setVisible(true);
 		m_gui.getContentPane().add(m_pAmount);
-		
+
 		m_ramUsage = new JLabel(m_usedRAM + " / " + m_totalRAM + " MB");
 		m_ramUsage.setSize(160, 16);
 		m_ramUsage.setLocation(4, 24);
 		m_ramUsage.setVisible(true);
 		m_gui.getContentPane().add(m_ramUsage);
-		
+
 		m_pHighest = new JLabel("[No record]");
 		m_pHighest.setSize(160, 16);
 		m_pHighest.setLocation(4, 44);
@@ -331,11 +337,11 @@ public class GameServer
 			m_dbUsername = m_dbU.getText();
 			m_dbPassword = new String(m_dbP.getPassword());
 			m_serverName = m_name.getText();
-			
+
 			m_start.setEnabled(false);
 			m_stop.setEnabled(true);
 		}
-		
+
 		m_serviceManager = new ServiceManager();
 		m_serviceManager.start();
 	}
@@ -468,10 +474,15 @@ public class GameServer
 		Date now = new Date(System.currentTimeMillis());
 		try
 		{
-			PrintStream p = new PrintStream(new File("logs/log" + sdf.format(now) + ".txt"));
+			File log = new File("log" + sdf.format(now) + ".txt");
+			if(!log.exists())
+			{
+				log.createNewFile();
+			}
+			PrintStream p = new PrintStream(log);
 			System.setErr(p);
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -556,7 +567,7 @@ public class GameServer
 					m_boolGui = true;
 					if(line.hasOption("autorun"))
 					{
-						//Log.debug("autorun doesn't work with GUI");
+						// Log.debug("autorun doesn't work with GUI");
 						gs = new GameServer(true);
 					}
 					else

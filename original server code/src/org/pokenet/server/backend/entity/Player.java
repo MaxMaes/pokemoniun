@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.map.ServerMap;
@@ -19,6 +18,7 @@ import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
+import org.pokenet.server.feature.CheatManager;
 import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.MySqlManager;
@@ -36,18 +36,21 @@ import org.pokenet.server.network.message.shop.ShopSellMessage;
  * 
  * @author shadowkanji
  */
-public class Player extends Character implements Battleable, Tradeable {
+public class Player extends Character implements Battleable, Tradeable
+{
 	/*
 	 * An enum to store request types
 	 */
-	public enum RequestType {
+	public enum RequestType
+	{
 		BATTLE, TRADE, RESPONSE
 	};
 
 	/*
 	 * An enum to store the player's selected language
 	 */
-	public enum Language {
+	public enum Language
+	{
 		ENGLISH, PORTUGESE, ITALIAN, FRENCH, FINNISH, SPANISH, GERMAN, DUTCH
 	}
 
@@ -99,9 +102,7 @@ public class Player extends Character implements Battleable, Tradeable {
 	private Trade m_trade = null;
 	private boolean m_isReadyToTrade = false;
 	/*
-	 * Badges are stored as bytes. 0 = not obtained, 1 = obtained Stored as
-	 * following: 0 - 7 Kanto Badges 8 - 15 Johto Badges 16 - 23 Hoenn Badges 24
-	 * - 31 Sinnoh Badges 32 - 35 Orange Islands 36 - 41
+	 * Badges are stored as bytes. 0 = not obtained, 1 = obtained Stored as following: 0 - 7 Kanto Badges 8 - 15 Johto Badges 16 - 23 Hoenn Badges 24 - 31 Sinnoh Badges 32 - 35 Orange Islands 36 - 41
 	 */
 	private byte[] m_badges;
 	/*
@@ -110,7 +111,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	private HashMap<String, RequestType> m_requests;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
-	public Player(String username) {
+	public Player(String username)
+	{
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -121,11 +123,14 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param d
 	 * @param player
 	 */
-	public void queueOtherPlayerMovement(Direction d, int player) {
+	public void queueOtherPlayerMovement(Direction d, int player)
+	{
 		String s = d.name().toUpperCase().charAt(0) + String.valueOf(player);
 		/* Queue the movement */
-		for (int i = 0; i < m_movements.length; i++) {
-			if (m_movements[i] == null) {
+		for(int i = 0; i < m_movements.length; i++)
+		{
+			if(m_movements[i] == null)
+			{
 				m_movements[i] = s;
 				return;
 			}
@@ -134,7 +139,8 @@ public class Player extends Character implements Battleable, Tradeable {
 		 * Unsuccessful, queue is full! Send queue and place at 0
 		 */
 		String message = "M";
-		for (int i = 0; i < m_movements.length; i++) {
+		for(int i = 0; i < m_movements.length; i++)
+		{
 			message = message + m_movements[i] + ",";
 			m_movements[i] = null;
 		}
@@ -148,13 +154,17 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public String getIpAddress() {
-		if (m_tcpSession != null) {
+	public String getIpAddress()
+	{
+		if(m_tcpSession != null)
+		{
 			String ip = m_tcpSession.getRemoteAddress().toString();
 			ip = ip.substring(1);
 			ip = ip.substring(0, ip.indexOf(":"));
 			return ip;
-		} else {
+		}
+		else
+		{
 			return "";
 		}
 	}
@@ -164,7 +174,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param steps
 	 */
-	public void setRepel(int steps) {
+	public void setRepel(int steps)
+	{
 		m_repel = steps;
 	}
 
@@ -173,7 +184,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getRepel() {
+	public int getRepel()
+	{
 		return m_repel;
 	}
 
@@ -183,20 +195,24 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param box
 	 * @param slot
 	 */
-	public void releasePokemon(int box, int slot) {
+	public void releasePokemon(int box, int slot)
+	{
 		/* Check if the pokemon exists */
-		if (m_boxes[box].getPokemon(slot) != null) {
-			if (m_boxes[box].getPokemon(slot).getDatabaseID() > -1) {
+		if(m_boxes[box].getPokemon(slot) != null)
+		{
+			if(m_boxes[box].getPokemon(slot).getDatabaseID() > -1)
+			{
 				/* This box exists and the pokemon exists in the database */
 				int id = m_boxes[box].getPokemon(slot).getDatabaseID();
-				try {
-					PreparedStatement ps = DatabaseConnection.getConnection()
-							.prepareStatement(
-									"DELETE FROM pn_pokemon WHERE id = ?");
+				try
+				{
+					PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("DELETE FROM pn_pokemon WHERE id = ?");
 					ps.setInt(1, id);
 					ps.executeUpdate();
 					ps.close();
-				} catch (SQLException e) {
+				}
+				catch(SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -211,22 +227,26 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param boxSlot
 	 * @param partySlot
 	 */
-	public void swapFromBox(int box, int boxSlot, int partySlot) {
-		if (box < 0 || box > 8)
+	public void swapFromBox(int box, int boxSlot, int partySlot)
+	{
+		if(box < 0 || box > 8)
 			return;
 		/* Make sure we're not depositing our only Pokemon */
-		if (getPartyCount() == 1) {
-			if (m_pokemon[partySlot] != null
-					&& m_boxes[box].getPokemon(boxSlot) == null)
+		if(getPartyCount() == 1)
+		{
+			if(m_pokemon[partySlot] != null && m_boxes[box].getPokemon(boxSlot) == null)
 				return;
 		}
 		/* Everything is okay, let's get swapping! */
 		Pokemon temp = m_pokemon[partySlot];
 		m_pokemon[partySlot] = m_boxes[box].getPokemon(boxSlot);
 		m_boxes[box].setPokemon(boxSlot, temp);
-		if (m_pokemon[partySlot] != null) {
+		if(m_pokemon[partySlot] != null)
+		{
 			updateClientParty(partySlot);
-		} else {
+		}
+		else
+		{
 			m_tcpSession.write("PN" + partySlot);
 		}
 	}
@@ -236,7 +256,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setSpriting(boolean b) {
+	public void setSpriting(boolean b)
+	{
 		m_isSpriting = b;
 	}
 
@@ -245,7 +266,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isSpriting() {
+	public boolean isSpriting()
+	{
 		return m_isSpriting;
 	}
 
@@ -254,7 +276,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public Language getLanguage() {
+	public Language getLanguage()
+	{
 		return m_language;
 	}
 
@@ -263,7 +286,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param l
 	 */
-	public void setLanguage(Language l) {
+	public void setLanguage(Language l)
+	{
 		m_language = l;
 	}
 
@@ -272,42 +296,49 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isTrading() {
+	public boolean isTrading()
+	{
 		return m_trade != null;
 	}
 
 	/**
 	 * Cancels this player's trade offer
 	 */
-	public void cancelTradeOffer() {
+	public void cancelTradeOffer()
+	{
 		m_trade.cancelOffer(this);
 	}
 
-	public void cancelTrade() {
+	public void cancelTrade()
+	{
 		m_trade.endTrade();
 	}
 
-	public void finishTrading() {
+	public void finishTrading()
+	{
 		m_isTalking = false;
 		m_isReadyToTrade = false;
 		m_trade = null;
-		if (m_tcpSession != null && m_tcpSession.isConnected())
+		if(m_tcpSession != null && m_tcpSession.isConnected())
 			m_tcpSession.write("Tf");
 		ensureHealthyPokemon();
 		m_lastTrade = System.currentTimeMillis();
 	}
 
-	public void receiveTradeOffer(TradeOffer[] o) {
+	public void receiveTradeOffer(TradeOffer[] o)
+	{
 		m_tcpSession.write("To" + o[0].getId() + "," + o[1].getId());
 	}
 
-	public void receiveTradeOfferCancelation() {
+	public void receiveTradeOfferCancelation()
+	{
 		m_tcpSession.write("Tc");
 	}
 
-	public void setTradeAccepted(boolean b) {
+	public void setTradeAccepted(boolean b)
+	{
 		m_isReadyToTrade = b;
-		if (b)
+		if(b)
 			m_trade.checkForExecution();
 	}
 
@@ -316,7 +347,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public Trade getTrade() {
+	public Trade getTrade()
+	{
 		return m_trade;
 	}
 
@@ -325,7 +357,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param t
 	 */
-	public void setTrade(Trade t) {
+	public void setTrade(Trade t)
+	{
 		m_trade = t;
 	}
 
@@ -334,7 +367,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean acceptedTradeOffer() {
+	public boolean acceptedTradeOffer()
+	{
 		return m_isReadyToTrade;
 	}
 
@@ -343,9 +377,9 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean canTrade() {
-		return System.currentTimeMillis() - m_lastTrade > 60000
-				&& getPartyCount() >= 2;
+	public boolean canTrade()
+	{
+		return System.currentTimeMillis() - m_lastTrade > 60000 && getPartyCount() >= 2;
 	}
 
 	/**
@@ -354,29 +388,29 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param username
 	 * @param r
 	 */
-	public void addRequest(String username, RequestType r) {
+	public void addRequest(String username, RequestType r)
+	{
 		/* Check if it is a battle request on a pvp enforced map */
-		if (r == RequestType.BATTLE) {
+		if(r == RequestType.BATTLE)
+		{
 			/*
-			 * If the player is on the same map and within 3 squares of the
-			 * player, start the battle
+			 * If the player is on the same map and within 3 squares of the player, start the battle
 			 */
-			if (this.getMap().getPvPType() == PvPType.ENFORCED) {
+			if(this.getMap().getPvPType() == PvPType.ENFORCED)
+			{
 				Player otherPlayer = TcpProtocolHandler.getPlayer(username);
-				if (otherPlayer != null
-						&& this.getMap() == otherPlayer.getMap()) {
-					if (otherPlayer.getX() >= this.getX() - 96
-							|| otherPlayer.getX() <= this.getX() + 96
-							|| otherPlayer.getY() >= this.getY() - 96
-							|| otherPlayer.getY() <= this.getY() + 96) {
+				if(otherPlayer != null && this.getMap() == otherPlayer.getMap())
+				{
+					if(otherPlayer.getX() >= this.getX() - 96 || otherPlayer.getX() <= this.getX() + 96 || otherPlayer.getY() >= this.getY() - 96 || otherPlayer.getY() <= this.getY() + 96)
+					{
 						/* This is a valid battle, start it */
 						ensureHealthyPokemon();
 						otherPlayer.ensureHealthyPokemon();
-						m_battleField = new PvPBattleField(
-								DataService.getBattleMechanics(), this,
-								otherPlayer);
+						m_battleField = new PvPBattleField(DataService.getBattleMechanics(), this, otherPlayer);
 						return;
-					} else {
+					}
+					else
+					{
 						m_tcpSession.write("r!3");
 					}
 				}
@@ -391,7 +425,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param username
 	 */
-	public void removeRequest(String username) {
+	public void removeRequest(String username)
+	{
 		m_requests.remove(username);
 	}
 
@@ -400,63 +435,70 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param username
 	 */
-	public void requestAccepted(String username) {
+	public void requestAccepted(String username)
+	{
 		Player otherPlayer = TcpProtocolHandler.getPlayer(username);
-		if (otherPlayer != null) {
-			if (m_requests.containsKey(username)) {
-				switch (m_requests.get(username)) {
-				case BATTLE:
-					/* First, ensure both players are on the same map */
-					if (otherPlayer.getMap() != this.getMap())
-						return;
-					/*
-					 * Based on the map's pvp type, check this battle is
-					 * possible If pvp is enforced, it will be started when the
-					 * offer is made
-					 */
-					if (this.getMap().getPvPType() != null) {
-						switch (this.getMap().getPvPType()) {
-						case DISABLED:
-							/* Some maps have pvp disabled */
-							otherPlayer.getTcpSession().write("r!2");
-							m_tcpSession.write("r!2");
+		if(otherPlayer != null)
+		{
+			if(m_requests.containsKey(username))
+			{
+				switch(m_requests.get(username))
+				{
+					case BATTLE:
+						/* First, ensure both players are on the same map */
+						if(otherPlayer.getMap() != this.getMap())
 							return;
-						case ENABLED:
-							/* This is a valid battle, start it */
-							ensureHealthyPokemon();
-							otherPlayer.ensureHealthyPokemon();
-							m_battleField = new PvPBattleField(
-									DataService.getBattleMechanics(), this,
-									otherPlayer);
-							return;
-						case ENFORCED:
-							break;
-						default:
-							break;
+						/*
+						 * Based on the map's pvp type, check this battle is possible If pvp is enforced, it will be started when the offer is made
+						 */
+						if(this.getMap().getPvPType() != null)
+						{
+							switch(this.getMap().getPvPType())
+							{
+								case DISABLED:
+									/* Some maps have pvp disabled */
+									otherPlayer.getTcpSession().write("r!2");
+									m_tcpSession.write("r!2");
+									return;
+								case ENABLED:
+									/* This is a valid battle, start it */
+									ensureHealthyPokemon();
+									otherPlayer.ensureHealthyPokemon();
+									m_battleField = new PvPBattleField(DataService.getBattleMechanics(), this, otherPlayer);
+									return;
+								case ENFORCED:
+									break;
+								default:
+									break;
+							}
 						}
-					} else {
-						m_battleField = new PvPBattleField(
-								DataService.getBattleMechanics(), this,
-								otherPlayer);
-					}
-					break;
-				case TRADE:
-					if (canTrade() && otherPlayer.canTrade()) {
-						/* Set the player as talking so they can't move */
-						m_isTalking = true;
-						/* Create the trade */
-						m_trade = new Trade(this, otherPlayer);
-						otherPlayer.setTrade(m_trade);
-					} else {
-						m_tcpSession.write("r!4");
-						otherPlayer.getTcpSession().write("r!4");
-					}
-					break;
-				default:
-					break;
+						else
+						{
+							m_battleField = new PvPBattleField(DataService.getBattleMechanics(), this, otherPlayer);
+						}
+						break;
+					case TRADE:
+						if(canTrade() && otherPlayer.canTrade())
+						{
+							/* Set the player as talking so they can't move */
+							m_isTalking = true;
+							/* Create the trade */
+							m_trade = new Trade(this, otherPlayer);
+							otherPlayer.setTrade(m_trade);
+						}
+						else
+						{
+							m_tcpSession.write("r!4");
+							otherPlayer.getTcpSession().write("r!4");
+						}
+						break;
+					default:
+						break;
 				}
 			}
-		} else {
+		}
+		else
+		{
 			m_tcpSession.write("r!0");
 		}
 	}
@@ -464,12 +506,15 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Clears the request list
 	 */
-	public void clearRequests() {
-		if (m_requests.size() > 0) {
-			for (String username : m_requests.keySet()) {
-				if (TcpProtocolHandler.containsPlayer(username)) {
-					TcpProtocolHandler.getPlayer(username).getTcpSession()
-							.write("rc" + this.getName());
+	public void clearRequests()
+	{
+		if(m_requests.size() > 0)
+		{
+			for(String username : m_requests.keySet())
+			{
+				if(TcpProtocolHandler.containsPlayer(username))
+				{
+					TcpProtocolHandler.getPlayer(username).getTcpSession().write("rc" + this.getName());
 				}
 			}
 			m_requests.clear();
@@ -481,7 +526,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param s
 	 */
-	public void setShop(Shop s) {
+	public void setShop(Shop s)
+	{
 		m_currentShop = s;
 	}
 
@@ -490,17 +536,20 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public Shop getShop() {
+	public Shop getShop()
+	{
 		return m_currentShop;
 	}
 
 	/**
 	 * Creates a new PlayerChar
 	 */
-	public void createNewPlayer() {
+	public void createNewPlayer()
+	{
 		// Set up all badges.
 		m_badges = new byte[42];
-		for (int i = 0; i < m_badges.length; i++) {
+		for(int i = 0; i < m_badges.length; i++)
+		{
 			m_badges[i] = 0;
 		}
 		m_isMuted = false;
@@ -509,7 +558,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Called when a player loses a battle
 	 */
-	public void lostBattle() {
+	public void lostBattle()
+	{
 		/*
 		 * Heal the players Pokemon
 		 */
@@ -517,47 +567,49 @@ public class Player extends Character implements Battleable, Tradeable {
 		/*
 		 * Make the Pokemon unhappy
 		 */
-		for (int i = 0; i < m_pokemon.length; i++) {
-			if (m_pokemon[i] != null)
-				m_pokemon[i]
-						.setHappiness((int) (m_pokemon[i].getHappiness() * 0.8));
+		for(int i = 0; i < m_pokemon.length; i++)
+		{
+			if(m_pokemon[i] != null)
+				m_pokemon[i].setHappiness((int) (m_pokemon[i].getHappiness() * 0.8));
 		}
 		/*
 		 * Now warp them to the last place they were healed
 		 */
 		m_x = m_healX;
 		m_y = m_healY;
-		if (m_tcpSession.isConnected() && !m_tcpSession.isClosing()) {
-			this.setMap(GameServer.getServiceManager().getMovementService()
-					.getMapMatrix()
-					.getMapByGamePosition(m_healMapX, m_healMapY), null);
-		} else {
+		if(m_tcpSession.isConnected() && !m_tcpSession.isClosing())
+		{
+			this.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(m_healMapX, m_healMapY), null);
+		}
+		else
+		{
 			m_mapX = m_healMapX;
 			m_mapY = m_healMapY;
 		}
 		/* Turn back to normal sprite */
-		if (isSurfing())
+		if(isSurfing())
 			setSurfing(false);
 	}
 
 	/**
 	 * Heals the player's pokemon
 	 */
-	public void healPokemon() {
-		for (Pokemon pokemon : getParty()) {
-			if (pokemon != null) {
+	public void healPokemon()
+	{
+		for(Pokemon pokemon : getParty())
+		{
+			if(pokemon != null)
+			{
 				pokemon.calculateStats(true);
 				pokemon.reinitialise();
 				pokemon.setIsFainted(false);
-				for (int i = 0; i < pokemon.getMoves().length; i++) {
-					if (pokemon.getMoves()[i] != null) {
+				for(int i = 0; i < pokemon.getMoves().length; i++)
+				{
+					if(pokemon.getMoves()[i] != null)
+					{
 						PokemonMove move = pokemon.getMoves()[i].getMove();
-						pokemon.setPp(i,
-								move.getPp() * (5 + pokemon.getPpUpCount(i))
-										/ 5);
-						pokemon.setMaxPP(i,
-								move.getPp() * (5 + pokemon.getPpUpCount(i))
-										/ 5);
+						pokemon.setPp(i, move.getPp() * (5 + pokemon.getPpUpCount(i)) / 5);
+						pokemon.setMaxPP(i, move.getPp() * (5 + pokemon.getPpUpCount(i)) / 5);
 					}
 				}
 			}
@@ -568,9 +620,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Removes temporary status effects such as StatChangeEffects
 	 */
-	public void removeTempStatusEffects() {
-		for (Pokemon pokemon : getParty()) {
-			if (pokemon != null) {
+	public void removeTempStatusEffects()
+	{
+		for(Pokemon pokemon : getParty())
+		{
+			if(pokemon != null)
+			{
 				pokemon.removeStatusEffects(false);
 			}
 		}
@@ -581,7 +636,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isBoxing() {
+	public boolean isBoxing()
+	{
 		return m_isBoxing;
 	}
 
@@ -590,7 +646,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setBoxing(boolean b) {
+	public void setBoxing(boolean b)
+	{
 		m_isBoxing = b;
 	}
 
@@ -599,7 +656,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isMuted() {
+	public boolean isMuted()
+	{
 		return m_isMuted;
 	}
 
@@ -608,18 +666,22 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setMuted(boolean b) {
+	public void setMuted(boolean b)
+	{
 		m_isMuted = b;
 	}
 
 	/**
-	 * If the player's first Pokemon in party has 0 HP, it puts the first
-	 * Pokemon in their party with more than 0 HP at the front
+	 * If the player's first Pokemon in party has 0 HP, it puts the first Pokemon in their party with more than 0 HP at the front
 	 */
-	public void ensureHealthyPokemon() {
-		if (m_pokemon[0] == null || m_pokemon[0].getHealth() == 0) {
-			for (int i = 1; i < 6; i++) {
-				if (m_pokemon[i] != null && m_pokemon[i].getHealth() > 0) {
+	public void ensureHealthyPokemon()
+	{
+		if(m_pokemon[0] == null || m_pokemon[0].getHealth() == 0)
+		{
+			for(int i = 1; i < 6; i++)
+			{
+				if(m_pokemon[i] != null && m_pokemon[i].getHealth() > 0)
+				{
 					swapPokemon(0, i);
 					return;
 				}
@@ -633,8 +695,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param a
 	 * @param b
 	 */
-	public void swapPokemon(int a, int b) {
-		if (a >= 0 && a < 6 && b >= 0 && b < 6) {
+	public void swapPokemon(int a, int b)
+	{
+		if(a >= 0 && a < 6 && b >= 0 && b < 6)
+		{
 			Pokemon temp = m_pokemon[a];
 			m_pokemon[a] = m_pokemon[b];
 			m_pokemon[b] = temp;
@@ -647,7 +711,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isTalking() {
+	public boolean isTalking()
+	{
 		return m_isTalking;
 	}
 
@@ -656,32 +721,35 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setTalking(boolean b) {
+	public void setTalking(boolean b)
+	{
 		m_isTalking = b;
 	}
 
 	/**
 	 * Adds a friend to the friend list.
 	 * 
-	 * @param username
-	 *            The username to add.
+	 * @param username The username to add.
 	 */
-	public void addFriend(String friend) {
+	public void addFriend(String friend)
+	{
 		/* Open for optimization, code works. */
-		if (m_friends == null)
+		if(m_friends == null)
 			m_friends = new ArrayList<String>();
-		if (m_friends.size() < 10) {
+		if(m_friends.size() < 10)
+		{
 			m_friends.add(friend);
-			try {
-				PreparedStatement ps = DatabaseConnection
-						.getConnection()
-						.prepareStatement(
-								"INSERT INTO pn_friends VALUES ((SELECT id FROM pn_members WHERE username = ?), (SELECT id FROM pn_members WHERE username = ?))");
+			try
+			{
+				PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+						"INSERT INTO pn_friends VALUES ((SELECT id FROM pn_members WHERE username = ?), (SELECT id FROM pn_members WHERE username = ?))");
 				ps.setString(1, m_username);
 				ps.setString(2, friend);
 				ps.executeUpdate();
 				ps.close();
-			} catch (SQLException e) {
+			}
+			catch(SQLException e)
+			{
 				e.printStackTrace();
 			}
 			m_tcpSession.write("Fa" + friend);
@@ -691,28 +759,32 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Removes a friend from the friends list.
 	 * 
-	 * @param username
-	 *            The username to remove.
+	 * @param username The username to remove.
 	 */
-	public void removeFriend(String friend) {
+	public void removeFriend(String friend)
+	{
 		/* Open for optimization, code works. */
-		if (m_friends == null) {
+		if(m_friends == null)
+		{
 			m_friends = new ArrayList<String>();
 			return;
 		}
-		for (int i = 0; i < m_friends.size(); i++) {
-			if (m_friends.get(i).equalsIgnoreCase(friend)) {
+		for(int i = 0; i < m_friends.size(); i++)
+		{
+			if(m_friends.get(i).equalsIgnoreCase(friend))
+			{
 				m_friends.remove(i);
-				try {
-					PreparedStatement ps = DatabaseConnection
-							.getConnection()
-							.prepareStatement(
-									"DELETE FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?) AND friendId = (SELECT id FROM pn_members WHERE username = ?)");
+				try
+				{
+					PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+							"DELETE FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?) AND friendId = (SELECT id FROM pn_members WHERE username = ?)");
 					ps.setString(1, m_username);
 					ps.setString(2, friend);
 					ps.executeUpdate();
 					ps.close();
-				} catch (SQLException e) {
+				}
+				catch(SQLException e)
+				{
 					e.printStackTrace();
 				}
 				m_tcpSession.write("Fr" + friend);
@@ -724,21 +796,24 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Returns the battlefield this player is on.
 	 */
-	public BattleField getBattleField() {
+	public BattleField getBattleField()
+	{
 		return m_battleField;
 	}
 
 	/**
 	 * Returns the battle id of this player on the battlefield
 	 */
-	public int getBattleId() {
+	public int getBattleId()
+	{
 		return m_battleId;
 	}
 
 	/**
 	 * Returns this player's opponent
 	 */
-	public Battleable getOpponent() {
+	public Battleable getOpponent()
+	{
 		// DO WE REALLY NEED THIS?
 		return null;
 	}
@@ -748,10 +823,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getPartyCount() {
+	public int getPartyCount()
+	{
 		int r = 0;
-		for (int i = 0; i < m_pokemon.length; i++) {
-			if (m_pokemon[i] != null)
+		for(int i = 0; i < m_pokemon.length; i++)
+		{
+			if(m_pokemon[i] != null)
 				r++;
 		}
 		return r;
@@ -762,10 +839,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHighestLevel() {
+	public int getHighestLevel()
+	{
 		int h = 0;
-		for (int i = 0; i < m_pokemon.length; i++) {
-			if (m_pokemon[i] != null && h < m_pokemon[i].getLevel())
+		for(int i = 0; i < m_pokemon.length; i++)
+		{
+			if(m_pokemon[i] != null && h < m_pokemon[i].getLevel())
 				h = m_pokemon[i].getLevel();
 		}
 		return h;
@@ -774,14 +853,16 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Returns the Pokemon party of this player
 	 */
-	public Pokemon[] getParty() {
+	public Pokemon[] getParty()
+	{
 		return m_pokemon;
 	}
 
 	/**
 	 * Returns true if this player is battling
 	 */
-	public boolean isBattling() {
+	public boolean isBattling()
+	{
 		return m_isBattling;
 	}
 
@@ -790,9 +871,11 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setBattling(boolean b) {
+	public void setBattling(boolean b)
+	{
 		m_isBattling = b;
-		if (!m_isBattling) {
+		if(!m_isBattling)
+		{
 			/*
 			 * If the player has finished battling kill their battlefield
 			 */
@@ -803,15 +886,18 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Sets this player's battle id on a battlefield
 	 */
-	public void setBattleId(int battleID) {
+	public void setBattleId(int battleID)
+	{
 		m_battleId = battleID;
 	}
 
 	/**
 	 * Set the pokemon party of this player
 	 */
-	public void setParty(Pokemon[] team) {
-		for (int idx = 0; idx < 6; idx++) {
+	public void setParty(Pokemon[] team)
+	{
+		for(int idx = 0; idx < 6; idx++)
+		{
 			m_pokemon[idx] = team[idx];
 		}
 	}
@@ -821,7 +907,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param session
 	 */
-	public void setTcpSession(IoSession session) {
+	public void setTcpSession(IoSession session)
+	{
 		m_tcpSession = session;
 	}
 
@@ -830,38 +917,41 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public IoSession getTcpSession() {
+	public IoSession getTcpSession()
+	{
 		return m_tcpSession;
 	}
 
 	/**
 	 * Fishes for a pokemon.
 	 */
-	public void fish(int rod) {
-		if ((lastFishingTime + 1000) < System.currentTimeMillis()) {
-			if (this.getMap().caughtFish(this, this.getFacing(), rod)) {
+	public void fish(int rod)
+	{
+		if((lastFishingTime + 1000) < System.currentTimeMillis())
+		{
+			if(this.getMap().caughtFish(this, this.getFacing(), rod))
+			{
 				Pokemon p = this.getMap().getWildPokemon(this);
 				// If we have both the required level to fish this thing up and
 				// the rod to do it
-				if (this.getFishingLevel() >= DataService.getFishDatabase()
-						.getFish(p.getSpeciesName()).getReqLevel()
-						&& rod >= DataService.getFishDatabase()
-								.getFish(p.getSpeciesName()).getReqRod()) {
-					this.addFishingExp(DataService.getFishDatabase()
-							.getFish(p.getSpeciesName()).getExperience());
+				if(this.getFishingLevel() >= DataService.getFishDatabase().getFish(p.getSpeciesName()).getReqLevel() && rod >= DataService.getFishDatabase().getFish(p.getSpeciesName()).getReqRod())
+				{
+					this.addFishingExp(DataService.getFishDatabase().getFish(p.getSpeciesName()).getExperience());
 					this.ensureHealthyPokemon();
-					m_battleField = new WildBattleField(
-							DataService.getBattleMechanics(), this, p);
+					m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, p);
 				}
 				// If you either have too low a fishing level or too weak a rod
-				else {
+				else
+				{
 					m_tcpSession.write("FU"); // Notify client you pulled up a
 												// fish too strong for you
 					this.addFishingExp(10); // Conciliatory exp for "hooking"
 											// something even if it got away
 				}
-			} else {
-				if (this.getMap().facingWater(this, getFacing()))
+			}
+			else
+			{
+				if(this.getMap().facingWater(this, getFacing()))
 					;
 				m_tcpSession.write("Fu"); // "Not even a nibble!" message
 				this.addFishingExp(1); // Complementary exp for trying to fish.
@@ -871,44 +961,47 @@ public class Player extends Character implements Battleable, Tradeable {
 	}
 
 	/**
-	 * Overrides char's move method. Adds a check for wild battles and clears
-	 * battle/trade request lists
+	 * Overrides char's move method. Adds a check for wild battles and clears battle/trade request lists
 	 */
 	@Override
-	public boolean move(Direction d) {
-		if (!m_isBattling && !m_isTalking && !m_isShopping && !m_isBoxing) {
-			if (super.move(d)) {
+	public boolean move(Direction d)
+	{
+		if(!m_isBattling && !m_isTalking && !m_isShopping && !m_isBoxing)
+		{
+			if(super.move(d))
+			{
 				// If the player moved
-				if (this.getMap() != null) {
-					if (m_repel > 0)
+				if(this.getMap() != null)
+				{
+					if(m_repel > 0)
 						m_repel--;
-					if (m_repel <= 0
-							&& this.getMap().isWildBattle(m_x, m_y, this)) {
+					if(m_repel <= 0 && this.getMap().isWildBattle(m_x, m_y, this))
+					{
 						// m_tcpSession.write("U" + m_x + "," + m_y);
 						this.ensureHealthyPokemon();
-						m_battleField = new WildBattleField(
-								DataService.getBattleMechanics(), this, this
-										.getMap().getWildPokemon(this));
+						m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, this.getMap().getWildPokemon(this));
 						m_movementQueue.clear();
-					} else {
-						if (m_map.isNpcBattle(this))
+					}
+					else
+					{
+						if(m_map.isNpcBattle(this))
 							m_movementQueue.clear();
 					}
 				}
 				/* If it wasn't a battle see should we increase happiness */
-				if (this.getX() % 32 == 0 || (this.getY() + 8) % 32 == 0) {
-					for (int i = 0; i < m_pokemon.length; i++) {
+				if(this.getX() % 32 == 0 || (this.getY() + 8) % 32 == 0)
+				{
+					for(int i = 0; i < m_pokemon.length; i++)
+					{
 						/*
-						 * Pokemon only have their happiness increased by
-						 * walking if it is below 70
+						 * Pokemon only have their happiness increased by walking if it is below 70
 						 */
-						if (m_pokemon[i] != null
-								&& m_pokemon[i].getHappiness() < 70)
-							m_pokemon[i].setHappiness(m_pokemon[i]
-									.getHappiness() + 1);
+						if(m_pokemon[i] != null && m_pokemon[i].getHappiness() < 70)
+							m_pokemon[i].setHappiness(m_pokemon[i].getHappiness() + 1);
 					}
 					walk++;
-					if (walk >= 50) {
+					if(walk >= 50)
+					{
 						m_tcpSession.write("U" + getX() + "," + getY());
 						walk = 0;
 					}
@@ -917,8 +1010,10 @@ public class Player extends Character implements Battleable, Tradeable {
 			return true;
 		}
 
-		else {
-			if (getPriority() > 0) {
+		else
+		{
+			if(getPriority() > 0)
+			{
 				// Someone has been trying to move in-battle! RESYNC
 				m_movementQueue.clear();
 				m_tcpSession.write("U" + getX() + "," + getY());
@@ -932,7 +1027,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param money
 	 */
-	public void setMoney(int money) {
+	public void setMoney(int money)
+	{
 		m_money = money;
 	}
 
@@ -941,7 +1037,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getMoney() {
+	public int getMoney()
+	{
 		return m_money;
 	}
 
@@ -950,21 +1047,23 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isFishing() {
+	public boolean isFishing()
+	{
 		return m_isFishing;
 	}
 
 	/**
-	 * Sets if this char is fishing or not and sends the sprite change
-	 * information to everyone
+	 * Sets if this char is fishing or not and sends the sprite change information to everyone
 	 * 
 	 * @param b
 	 */
-	public void setFishing(boolean b) {
+	public void setFishing(boolean b)
+	{
 		m_isFishing = b;
-		if (b == true)
+		if(b == true)
 			this.lastFishingTime = System.currentTimeMillis();
-		if (m_map != null) {
+		if(m_map != null)
+		{
 			// Tell clients to update this char to reflect whether player is
 			// fishing or not.
 		}
@@ -973,7 +1072,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Initializes the client's skill levels
 	 */
-	public void initializeClientSkills() {
+	public void initializeClientSkills()
+	{
 		m_tcpSession.write("cst" + getTrainingLevel());
 		m_tcpSession.write("csb" + getBreedingLevel());
 		m_tcpSession.write("csf" + getFishingLevel());
@@ -985,7 +1085,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setHerbalismExp(int exp) {
+	public void setHerbalismExp(int exp)
+	{
 		m_skillHerbExp = exp;
 	}
 
@@ -994,10 +1095,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addHerbalismExp(int exp) {
+	public void addHerbalismExp(int exp)
+	{
 		m_oldLevel = getHerbalismLevel();
 		m_skillHerbExp = m_skillHerbExp + exp;
-		if (getHerbalismLevel() > m_oldLevel && getHerbalismLevel() <= 100) {
+		if(getHerbalismLevel() > m_oldLevel && getHerbalismLevel() <= 100)
+		{
 			m_tcpSession.write("csh" + getHerbalismLevel());
 		}
 	}
@@ -1007,7 +1110,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHerbalismExp() {
+	public int getHerbalismExp()
+	{
 		return m_skillHerbExp;
 	}
 
@@ -1016,9 +1120,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHerbalismLevel() {
+	public int getHerbalismLevel()
+	{
 		int level = (int) Math.pow(m_skillHerbExp, (0.3333));
-		if (level <= 100)
+		if(level <= 100)
 			return level;
 		else
 			return 100;
@@ -1029,7 +1134,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setCraftingExp(int exp) {
+	public void setCraftingExp(int exp)
+	{
 		m_skillCraftExp = exp;
 	}
 
@@ -1038,10 +1144,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addCraftingExp(int exp) {
+	public void addCraftingExp(int exp)
+	{
 		m_oldLevel = getCraftingLevel();
 		m_skillCraftExp = m_skillCraftExp + exp;
-		if (getCraftingLevel() > m_oldLevel) {
+		if(getCraftingLevel() > m_oldLevel)
+		{
 			m_tcpSession.write("csC" + getCraftingLevel());
 		}
 	}
@@ -1051,7 +1159,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getCraftingExp() {
+	public int getCraftingExp()
+	{
 		return m_skillCraftExp;
 	}
 
@@ -1060,8 +1169,9 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getCraftingLevel() {
-		if (((int) Math.pow(m_skillCraftExp, (0.3333))) <= 100)
+	public int getCraftingLevel()
+	{
+		if(((int) Math.pow(m_skillCraftExp, (0.3333))) <= 100)
 			return (int) Math.pow(m_skillCraftExp, (0.3333));
 		else
 			return 100;
@@ -1072,7 +1182,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setFishingExp(int exp) {
+	public void setFishingExp(int exp)
+	{
 		m_skillFishExp = exp;
 	}
 
@@ -1081,10 +1192,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addFishingExp(int exp) {
+	public void addFishingExp(int exp)
+	{
 		m_oldLevel = getFishingLevel();
 		m_skillFishExp = m_skillFishExp + exp;
-		if (getFishingLevel() > m_oldLevel) {
+		if(getFishingLevel() > m_oldLevel)
+		{
 			m_tcpSession.write("csf" + getFishingLevel());
 		}
 	}
@@ -1094,7 +1207,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getFishingExp() {
+	public int getFishingExp()
+	{
 		return m_skillFishExp;
 	}
 
@@ -1103,9 +1217,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getFishingLevel() {
+	public int getFishingLevel()
+	{
 		int level = ((int) Math.pow(m_skillFishExp, (0.3333)));
-		if (level <= 100)
+		if(level <= 100)
 			return level;
 		else
 			return 100;
@@ -1116,7 +1231,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setTrainingExp(int exp) {
+	public void setTrainingExp(int exp)
+	{
 		m_skillTrainingExp = exp;
 	}
 
@@ -1125,10 +1241,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addTrainingExp(int exp) {
+	public void addTrainingExp(int exp)
+	{
 		m_oldLevel = getTrainingLevel();
 		m_skillTrainingExp = m_skillTrainingExp + exp;
-		if (getTrainingLevel() > m_oldLevel) {
+		if(getTrainingLevel() > m_oldLevel)
+		{
 			m_tcpSession.write("cst" + getTrainingLevel());
 		}
 	}
@@ -1138,7 +1256,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getTrainingExp() {
+	public int getTrainingExp()
+	{
 		return m_skillTrainingExp;
 	}
 
@@ -1147,9 +1266,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getTrainingLevel() {
+	public int getTrainingLevel()
+	{
 		int level = ((int) Math.pow((m_skillTrainingExp / 1.25), (0.3333)));
-		if (level <= 100)
+		if(level <= 100)
 			return level;
 		else
 			return 100;
@@ -1160,7 +1280,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setCoordinatingExp(int exp) {
+	public void setCoordinatingExp(int exp)
+	{
 		m_skillCoordExp = exp;
 	}
 
@@ -1169,10 +1290,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addCoordinatingExp(int exp) {
+	public void addCoordinatingExp(int exp)
+	{
 		m_oldLevel = getCoordinatingLevel();
 		m_skillCoordExp = m_skillCoordExp + exp;
-		if (getCoordinatingLevel() > m_oldLevel) {
+		if(getCoordinatingLevel() > m_oldLevel)
+		{
 			m_tcpSession.write("csc" + getCoordinatingLevel());
 		}
 	}
@@ -1182,7 +1305,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getCoordinatingExp() {
+	public int getCoordinatingExp()
+	{
 		return m_skillCoordExp;
 	}
 
@@ -1191,9 +1315,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getCoordinatingLevel() {
+	public int getCoordinatingLevel()
+	{
 		int level = ((int) Math.pow(m_skillCoordExp, (0.3333)));
-		if (level <= 100)
+		if(level <= 100)
 			return level;
 		else
 			return 100;
@@ -1205,7 +1330,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void setBreedingExp(int exp) {
+	public void setBreedingExp(int exp)
+	{
 		m_skillBreedExp = exp;
 	}
 
@@ -1214,10 +1340,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param exp
 	 */
-	public void addBreedingExp(int exp) {
+	public void addBreedingExp(int exp)
+	{
 		m_oldLevel = getBreedingLevel();
 		m_skillBreedExp = m_skillBreedExp + exp;
-		if (getBreedingLevel() > m_oldLevel) {
+		if(getBreedingLevel() > m_oldLevel)
+		{
 			m_tcpSession.write("csb" + getBreedingLevel());
 		}
 	}
@@ -1227,7 +1355,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getBreedingExp() {
+	public int getBreedingExp()
+	{
 		return m_skillBreedExp;
 	}
 
@@ -1236,9 +1365,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getBreedingLevel() {
+	public int getBreedingLevel()
+	{
 		int level = (int) Math.pow((m_skillBreedExp / 1.25), (0.3333));
-		if (level <= 100)
+		if(level <= 100)
 			return level;
 		else
 			return 100;
@@ -1249,11 +1379,13 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public PokemonBox getBox(int idx) {
+	public PokemonBox getBox(int idx)
+	{
 		return m_boxes[idx];
 	}
 
-	public void setBox(int idx, PokemonBox box) {
+	public void setBox(int idx, PokemonBox box)
+	{
 		m_boxes[idx] = box;
 	}
 
@@ -1262,7 +1394,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param p
 	 */
-	public void catchPokemon(Pokemon p) {
+	public void catchPokemon(Pokemon p)
+	{
 		Date d = new Date();
 		String date = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(d);
 		p.setDateCaught(date);
@@ -1277,26 +1410,35 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param p
 	 */
-	public void addPokemon(Pokemon p) {
+	public void addPokemon(Pokemon p)
+	{
 		/* See if there is space in the player's party */
-		for (int i = 0; i < 6; i++) {
-			if (m_pokemon[i] == null) {
+		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokemon[i] == null)
+			{
 				m_pokemon[i] = p;
 				updateClientParty(i);
 				return;
 			}
 		}
 		/* Else, find space in a box */
-		for (int i = 0; i < m_boxes.length; i++) {
-			if (m_boxes[i] != null) {
+		for(int i = 0; i < m_boxes.length; i++)
+		{
+			if(m_boxes[i] != null)
+			{
 				/* Find space in an existing box */
-				for (int j = 0; j < 30; j++) {
-					if (m_boxes[i].getPokemon(j) == null) {
+				for(int j = 0; j < 30; j++)
+				{
+					if(m_boxes[i].getPokemon(j) == null)
+					{
 						m_boxes[i].setPokemon(j, p);
 						return;
 					}
 				}
-			} else {
+			}
+			else
+			{
 				/* We need a new box */
 				m_boxes[i] = new PokemonBox();
 				m_boxes[i].setPokemon(0, p);
@@ -1310,7 +1452,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param t
 	 */
-	public void setLastLoginTime(long t) {
+	public void setLastLoginTime(long t)
+	{
 		m_lastLogin = t;
 	}
 
@@ -1319,7 +1462,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public long getLastLoginTime() {
+	public long getLastLoginTime()
+	{
 		return m_lastLogin;
 	}
 
@@ -1328,7 +1472,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public Bag getBag() {
+	public Bag getBag()
+	{
 		return m_bag;
 	}
 
@@ -1337,7 +1482,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setBag(Bag b) {
+	public void setBag(Bag b)
+	{
 		m_bag = b;
 	}
 
@@ -1345,89 +1491,64 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * Sets the map for this player
 	 */
 	@Override
-	public void setMap(ServerMap map, Direction dir) {
+	public void setMap(ServerMap map, Direction dir)
+	{
 		char direction = 'n';
-		if (dir != null) {
-			switch (dir) {
-			case Up:
-				direction = 'u';
-				break;
-			case Down:
-				direction = 'd';
-				break;
-			case Left:
-				direction = 'l';
-				break;
-			case Right:
-				direction = 'r';
-				break;
+		if(dir != null)
+		{
+			switch(dir)
+			{
+				case Up:
+					direction = 'u';
+					break;
+				case Down:
+					direction = 'd';
+					break;
+				case Left:
+					direction = 'l';
+					break;
+				case Right:
+					direction = 'r';
+					break;
 			}
 		}
 		super.setMap(map, dir);
 		// Clear the requests list
 		clearRequests();
 		// Send the map switch packet to the client
-		m_tcpSession.write("ms"
-				+ direction
-				+ map.getX()
-				+ ","
-				+ map.getY()
-				+ ","
-				+ (map.isWeatherForced() ? map.getWeatherId() : TimeService
-						.getWeatherId()));
+		m_tcpSession.write("ms" + direction + map.getX() + "," + map.getY() + "," + (map.isWeatherForced() ? map.getWeatherId() : TimeService.getWeatherId()));
 		Character c;
 		String packet = "mi";
 		// Send all player information to the client
-		for (Player p : map.getPlayers().values()) {
+		for(Player p : map.getPlayers().values())
+		{
 			c = p;
-			packet = packet
-					+ c.getName()
-					+ ","
-					+ c.getId()
-					+ ","
-					+ c.getSprite()
-					+ ","
-					+ c.getX()
-					+ ","
-					+ c.getY()
-					+ ","
-					+ (c.getFacing() == Direction.Down ? "D"
-							: c.getFacing() == Direction.Up ? "U" : c
-									.getFacing() == Direction.Left ? "L" : "R")
-					+ ",";
+			packet = packet + c.getName() + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
+					+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",";
 		}
 		// Send all npc information to the client
-		for (int i = 0; i < map.getNpcs().size(); i++) {
+		for(int i = 0; i < map.getNpcs().size(); i++)
+		{
 			c = map.getNpcs().get(i);
-			if (!c.getName().equalsIgnoreCase("NULL")) {
+			if(!c.getName().equalsIgnoreCase("NULL"))
+			{
 				/* Send no name to indicate NPC */
-				packet = packet
-						+ "!NPC!,"
-						+ c.getId()
-						+ ","
-						+ c.getSprite()
-						+ ","
-						+ c.getX()
-						+ ","
-						+ c.getY()
-						+ ","
-						+ (c.getFacing() == Direction.Down ? "D" : c
-								.getFacing() == Direction.Up ? "U" : c
-								.getFacing() == Direction.Left ? "L" : "R")
-						+ ",";
+				packet = packet + "!NPC!," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
+						+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",";
 			}
 		}
 		/*
 		 * Only send the packet if there were players on the map
 		 */
-		if (packet.length() > 2)
+		if(packet.length() > 2)
 			m_tcpSession.write(packet);
 	}
 
 	/**
 	 * Disposes of this player char
 	 */
-	public void dispose() {
+	public void dispose()
+	{
 		super.dispose();
 		m_friends = null;
 		m_bag = null;
@@ -1438,12 +1559,15 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Forces the player to be logged out
 	 */
-	public void forceLogout() {
-		if (m_tcpSession.isConnected()) {
+	public void forceLogout()
+	{
+		if(m_tcpSession.isConnected())
+		{
 			m_tcpSession.close(true);
-		} else {
-			GameServer.getServiceManager().getNetworkService()
-					.getLogoutManager().queuePlayer(this);
+		}
+		else
+		{
+			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(this);
 		}
 	}
 
@@ -1452,9 +1576,11 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param b
 	 */
-	public void setShopping(boolean b) {
+	public void setShopping(boolean b)
+	{
 		m_isShopping = b;
-		if (!b) {
+		if(!b)
+		{
 			m_currentShop = null;
 		}
 	}
@@ -1464,7 +1590,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean isShopping() {
+	public boolean isShopping()
+	{
 		return m_isShopping;
 	}
 
@@ -1474,7 +1601,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param badge
 	 * @return
 	 */
-	public boolean hasBadge(int badge) {
+	public boolean hasBadge(int badge)
+	{
 		return m_badges[badge] == 1;
 	}
 
@@ -1483,7 +1611,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param badges
 	 */
-	public void setBadges(byte[] badges) {
+	public void setBadges(byte[] badges)
+	{
 		m_badges = badges;
 	}
 
@@ -1492,8 +1621,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param num
 	 */
-	public void addBadge(int num) {
-		if (num >= 0 && num < m_badges.length) {
+	public void addBadge(int num)
+	{
+		if(num >= 0 && num < m_badges.length)
+		{
 			m_badges[num] = 1;
 			m_tcpSession.write("cBa" + num);
 		}
@@ -1504,14 +1635,19 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param badges
 	 */
-	public void generateBadges(String badges) {
+	public void generateBadges(String badges)
+	{
 		m_badges = new byte[42];
-		if (badges == null || badges.equalsIgnoreCase("")) {
-			for (int i = 0; i < 42; i++)
+		if(badges == null || badges.equalsIgnoreCase(""))
+		{
+			for(int i = 0; i < 42; i++)
 				m_badges[i] = 0;
-		} else {
-			for (int i = 0; i < 42; i++) {
-				if (badges.charAt(i) == '1')
+		}
+		else
+		{
+			for(int i = 0; i < 42; i++)
+			{
+				if(badges.charAt(i) == '1')
 					m_badges[i] = 1;
 				else
 					m_badges[i] = 0;
@@ -1524,7 +1660,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public byte[] getBadges() {
+	public byte[] getBadges()
+	{
 		return m_badges;
 	}
 
@@ -1533,7 +1670,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param adminLevel
 	 */
-	public void setAdminLevel(int adminLevel) {
+	public void setAdminLevel(int adminLevel)
+	{
 		m_adminLevel = adminLevel;
 	}
 
@@ -1542,7 +1680,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getAdminLevel() {
+	public int getAdminLevel()
+	{
 		return m_adminLevel;
 	}
 
@@ -1554,7 +1693,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param mapX
 	 * @param mapY
 	 */
-	public void setLastHeal(int x, int y, int mapX, int mapY) {
+	public void setLastHeal(int x, int y, int mapX, int mapY)
+	{
 		m_healX = x;
 		m_healY = y;
 		m_healMapX = mapX;
@@ -1566,7 +1706,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHealX() {
+	public int getHealX()
+	{
 		return m_healX;
 	}
 
@@ -1575,7 +1716,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHealY() {
+	public int getHealY()
+	{
 		return m_healY;
 	}
 
@@ -1584,7 +1726,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHealMapX() {
+	public int getHealMapX()
+	{
 		return m_healMapX;
 	}
 
@@ -1593,7 +1736,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getHealMapY() {
+	public int getHealMapY()
+	{
 		return m_healMapY;
 	}
 
@@ -1602,7 +1746,8 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public boolean canSurf() {
+	public boolean canSurf()
+	{
 		return (getTrainingLevel() >= 25);
 	}
 
@@ -1611,10 +1756,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @return
 	 */
-	public int getBadgeCount() {
+	public int getBadgeCount()
+	{
 		int result = 0;
-		for (int i = 0; i < m_badges.length; i++) {
-			if (m_badges[i] == 1)
+		for(int i = 0; i < m_badges.length; i++)
+		{
+			if(m_badges[i] == 1)
 				result++;
 		}
 		return result;
@@ -1623,29 +1770,31 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * This player talks to the npc in front of them
 	 */
-	public void talkToNpc() {
-		if (m_map != null)
+	public void talkToNpc()
+	{
+		if(m_map != null)
 			this.getMap().talkToNpc(this);
 	}
 
 	/**
 	 * Sends box information to client
 	 * 
-	 * @param i
-	 *            - Box number
+	 * @param i - Box number
 	 */
-	public void sendBoxInfo(int j) {
+	public void sendBoxInfo(int j)
+	{
 		/* If box is non-existant, create it and send small packet */
-		if (m_boxes[j] == null) {
+		if(m_boxes[j] == null)
+		{
 			m_boxes[j] = new PokemonBox();
 			m_tcpSession.write("B");
 		}
 		/* Else send all pokes in box */
 		String packet = "";
-		for (int i = 0; i < 30; i++) {
-			if (m_boxes[j].getPokemon(i) != null)
-				packet = packet + m_boxes[j].getPokemon(i).getSpeciesNumber()
-						+ ",";
+		for(int i = 0; i < 30; i++)
+		{
+			if(m_boxes[j].getPokemon(i) != null)
+				packet = packet + m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";
 			else
 				packet = packet + ",";
 		}
@@ -1658,37 +1807,41 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param id
 	 * @param q
 	 */
-	public void buyItem(int id, int q) {
+	public void buyItem(int id, int q)
+	{
 		/* If the player isn't shopping, ignore this */
-		if (m_currentShop == null)
+		if(m_currentShop == null)
+		{
+			CheatManager.getInstance().log(this, "Trying to buy an item from a shop that doesn't exist.");
 			return;
-		if (m_bag.hasSpace(id)) {
+		}
+		if(m_bag.hasSpace(id))
+		{
 			/* First, check if the player can afford this */
-			if (m_money - (q * m_currentShop.getPriceForItem(id)) >= 0) {
+			if(m_money - (q * m_currentShop.getPriceForItem(id)) >= 0)
+			{
 				/* Finally, if the item is in stock, buy it */
-				if (m_currentShop.buyItem(id, q)) {
+				if(m_currentShop.buyItem(id, q))
+				{
 					m_money = m_money - (q * m_currentShop.getPriceForItem(id));
 					m_bag.addItem(id, q);
 					this.updateClientMoney();
 					// Let player know he bought the item
-					TcpProtocolHandler.writeMessage(m_tcpSession,
-							new ShopBuyMessage(GameServer.getServiceManager()
-									.getItemDatabase().getItem(id).getId()));
+					TcpProtocolHandler.writeMessage(m_tcpSession, new ShopBuyMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getId()));
 					// Update player inventory
-					TcpProtocolHandler.writeMessage(m_tcpSession,
-							new ItemMessage(true, GameServer
-									.getServiceManager().getItemDatabase()
-									.getItem(id).getId(), 1));
+					TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, GameServer.getServiceManager().getItemDatabase().getItem(id).getId(), 1));
 				}
-			} else {
-				// Return You have no money, fool!
-				TcpProtocolHandler.writeMessage(m_tcpSession,
-						new ShopNoMoneyMessage());
 			}
-		} else {
+			else
+			{
+				// Return You have no money, fool!
+				TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoMoneyMessage());
+			}
+		}
+		else
+		{
 			// Send You cant carry any more items!
-			TcpProtocolHandler.writeMessage(m_tcpSession,
-					new ShopNoSpaceMessage());
+			TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoSpaceMessage());
 		}
 	}
 
@@ -1698,45 +1851,46 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param id
 	 * @param q
 	 */
-	public void sellItem(int id, int q) {
+	public void sellItem(int id, int q)
+	{
 		/* If the player isn't shopping, ignore this */
-		if (m_currentShop == null)
+		if(m_currentShop == null)
 			return;
-		if (m_bag.containsItem(id) > -1) { // Guy does have the item he's
-											// selling.
+		if(m_bag.containsItem(id) > -1)
+		{ // Guy does have the item he's
+			// selling.
 			m_money = m_money + m_currentShop.sellItem(id, q);
 			m_bag.removeItem(id, q);
 			// Tell the client to remove the item from the player's inventory
-			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(
-					false, GameServer.getServiceManager().getItemDatabase()
-							.getItem(id).getId(), q));
+			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(false, GameServer.getServiceManager().getItemDatabase().getItem(id).getId(), q));
 			// Update the client's money
 			this.updateClientMoney();
 			// Let player know he sold the item.
-			TcpProtocolHandler.writeMessage(m_tcpSession, new ShopSellMessage(
-					GameServer.getServiceManager().getItemDatabase()
-							.getItem(id).getId()));
-		} else {
+			TcpProtocolHandler.writeMessage(m_tcpSession, new ShopSellMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getId()));
+		}
+		else
+		{
 			// Return You don't have that item, fool!
-			TcpProtocolHandler.writeMessage(m_tcpSession,
-					new ShopNoItemMessage(GameServer.getServiceManager()
-							.getItemDatabase().getItem(id).getName()));
+			TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoItemMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getName()));
 		}
 	}
 
 	/**
 	 * Updates the player's money clientside
 	 */
-	public void updateClientMoney() {
+	public void updateClientMoney()
+	{
 		m_tcpSession.write("cM" + m_money);
 	}
 
 	/**
 	 * Sends all badges to client
 	 */
-	public void updateClientBadges() {
+	public void updateClientBadges()
+	{
 		String data = "";
-		for (int i = 0; i < m_badges.length; i++) {
+		for(int i = 0; i < m_badges.length; i++)
+		{
 			data = data + m_badges[i];
 		}
 		m_tcpSession.write("cBi" + data);
@@ -1745,8 +1899,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Sends all party information to the client
 	 */
-	public void updateClientParty() {
-		for (int i = 0; i < this.getParty().length; i++) {
+	public void updateClientParty()
+	{
+		for(int i = 0; i < this.getParty().length; i++)
+		{
 			updateClientParty(i);
 		}
 	}
@@ -1754,8 +1910,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Sends all bag information to the client
 	 */
-	public void updateClientBag() {
-		for (int i = 0; i < this.getBag().getItems().size(); i++) {
+	public void updateClientBag()
+	{
+		for(int i = 0; i < this.getBag().getItems().size(); i++)
+		{
 			updateClientBag(i);
 		}
 	}
@@ -1763,30 +1921,34 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Updates the client with their sprite
 	 */
-	public void updateClientSprite() {
-		TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(
-				m_id, m_sprite));
+	public void updateClientSprite()
+	{
+		TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(m_id, m_sprite));
 	}
 
 	/** Sends all friends to the client. */
-	public void updateClientFriends() {
+	public void updateClientFriends()
+	{
 		/* Problem with getting friends from the query, query works. */
-		ResultSet friends = MySqlManager.getInstance()
-				.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '"
-						+ MySqlManager.parseSQL(m_username) + "'))");
-		try {
+		ResultSet friends = MySqlManager.getInstance().query(
+				"SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
+		try
+		{
 			m_friends = new ArrayList<String>();
-			while (friends.next()) {
+			while(friends.next())
+			{
 				m_friends.add(friends.getString(1));
 			}
-		} catch (SQLException sqle) {
+		}
+		catch(SQLException sqle)
+		{
 			sqle.printStackTrace();
 		}
-		for (int i = 0; i < m_friends.size(); i++) {
+		for(int i = 0; i < m_friends.size(); i++)
+		{
 			String friend = m_friends.get(i);
 			/*
-			 * if(TcpProtocolHandler.containsPlayer(friend))
-			 * m_tcpSession.write("MFo" + friend);
+			 * if(TcpProtocolHandler.containsPlayer(friend)) m_tcpSession.write("MFo" + friend);
 			 */
 			m_tcpSession.write("mFa" + friend);
 		}
@@ -1795,8 +1957,9 @@ public class Player extends Character implements Battleable, Tradeable {
 	/**
 	 * Sets the battlefield for this player
 	 */
-	public void setBattleField(BattleField b) {
-		if (m_battleField == null)
+	public void setBattleField(BattleField b)
+	{
+		if(m_battleField == null)
 			m_battleField = b;
 	}
 
@@ -1806,10 +1969,13 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param p
 	 * @return
 	 */
-	public int getPokemonIndex(Pokemon p) {
-		for (int i = 0; i < m_pokemon.length; i++) {
-			if (m_pokemon[i] != null) {
-				if (p.compareTo(m_pokemon[i]) == 0)
+	public int getPokemonIndex(Pokemon p)
+	{
+		for(int i = 0; i < m_pokemon.length; i++)
+		{
+			if(m_pokemon[i] != null)
+			{
+				if(p.compareTo(m_pokemon[i]) == 0)
 					return i;
 			}
 		}
@@ -1821,83 +1987,31 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param index
 	 */
-	public void updateClientParty(int i) {
-		if (this.getParty()[i] != null) {
-			m_tcpSession.write("Pi"
-					+ i
-					+ PokemonSpecies
-							.getDefaultData()
-							.getPokemonByName(
-									this.getParty()[i].getSpeciesName())
-							.getSpeciesNumber()
-					+ ","
-					+ this.getParty()[i].getName()
-					+ ","
-					+ this.getParty()[i].getHealth()
-					+ ","
-					+ this.getParty()[i].getGender()
-					+ ","
-					+ (this.getParty()[i].isShiny() ? 1 : 0)
-					+ ","
-					+ this.getParty()[i].getStat(0)
-					+ ","
-					+ this.getParty()[i].getStat(1)
-					+ ","
-					+ this.getParty()[i].getStat(2)
-					+ ","
-					+ this.getParty()[i].getStat(3)
-					+ ","
-					+ this.getParty()[i].getStat(4)
-					+ ","
-					+ this.getParty()[i].getStat(5)
-					+ ","
-					+ this.getParty()[i].getTypes()[0]
-					+ ","
-					+ (this.getParty()[i].getTypes().length > 1
-							&& this.getParty()[i].getTypes()[1] != null ? this
-							.getParty()[i].getTypes()[1] + "," : ",")
-					+ this.getParty()[i].getExp()
-					+ ","
-					+ this.getParty()[i].getLevel()
-					+ ","
-					+ this.getParty()[i].getAbilityName()
-					+ ","
-					+ this.getParty()[i].getNature().getName()
-					+ ","
-					+ (this.getParty()[i].getMoves()[0] != null ? this
-							.getParty()[i].getMoveName(0) : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[1] != null ? this
-							.getParty()[i].getMoveName(1) : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[2] != null ? this
-							.getParty()[i].getMoveName(2) : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[3] != null ? this
-							.getParty()[i].getMoveName(3) : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[0] != null ? this
-							.getParty()[i].getMove(0).getMove().getType()
-							.toString() : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[1] != null ? this
-							.getParty()[i].getMove(1).getMove().getType()
-							.toString() : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[2] != null ? this
-							.getParty()[i].getMove(2).getMove().getType()
-							.toString() : "")
-					+ ","
-					+ (this.getParty()[i].getMoves()[3] != null ? this
-							.getParty()[i].getMove(3).getMove().getType()
-							.toString() : "") + ",");// +
-														// this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1));
+	public void updateClientParty(int i)
+	{
+		if(this.getParty()[i] != null)
+		{
+			m_tcpSession.write("Pi" + i + PokemonSpecies.getDefaultData().getPokemonByName(this.getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + this.getParty()[i].getName() + ","
+					+ this.getParty()[i].getHealth() + "," + this.getParty()[i].getGender() + "," + (this.getParty()[i].isShiny() ? 1 : 0) + "," + this.getParty()[i].getStat(0) + ","
+					+ this.getParty()[i].getStat(1) + "," + this.getParty()[i].getStat(2) + "," + this.getParty()[i].getStat(3) + "," + this.getParty()[i].getStat(4) + ","
+					+ this.getParty()[i].getStat(5) + "," + this.getParty()[i].getTypes()[0] + ","
+					+ (this.getParty()[i].getTypes().length > 1 && this.getParty()[i].getTypes()[1] != null ? this.getParty()[i].getTypes()[1] + "," : ",") + this.getParty()[i].getExp() + ","
+					+ this.getParty()[i].getLevel() + "," + this.getParty()[i].getAbilityName() + "," + this.getParty()[i].getNature().getName() + ","
+					+ (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + "," + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "")
+					+ "," + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + ","
+					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : "") + ","
+					+ (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ",");// +
+																																			// this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1));
 			/* Update move pp */
-			for (int j = 0; j < 4; j++) {
+			for(int j = 0; j < 4; j++)
+			{
 				updateClientPP(i, j);
 			}
 		}
-		if (this.getParty()[i] != null)
+		if(this.getParty()[i] != null)
 			System.out.println(this.getParty()[i].getExp());
 	}
 
@@ -1906,13 +2020,12 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param i
 	 */
-	public void updateClientPokemonStats(int i) {
-		if (m_pokemon[i] != null) {
-			m_tcpSession.write("PS" + i + m_pokemon[i].getHealth() + ","
-					+ m_pokemon[i].getStat(0) + "," + m_pokemon[i].getStat(1)
-					+ "," + m_pokemon[i].getStat(2) + ","
-					+ m_pokemon[i].getStat(3) + "," + m_pokemon[i].getStat(4)
-					+ "," + m_pokemon[i].getStat(5));
+	public void updateClientPokemonStats(int i)
+	{
+		if(m_pokemon[i] != null)
+		{
+			m_tcpSession.write("PS" + i + m_pokemon[i].getHealth() + "," + m_pokemon[i].getStat(0) + "," + m_pokemon[i].getStat(1) + "," + m_pokemon[i].getStat(2) + "," + m_pokemon[i].getStat(3)
+					+ "," + m_pokemon[i].getStat(4) + "," + m_pokemon[i].getStat(5));
 
 		}
 	}
@@ -1923,12 +2036,10 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * @param poke
 	 * @param move
 	 */
-	public void updateClientPP(int poke, int move) {
-		if (this.getParty()[poke] != null
-				&& this.getParty()[poke].getMove(move) != null)
-			m_tcpSession.write("Pp" + String.valueOf(poke)
-					+ String.valueOf(move) + this.getParty()[poke].getPp(move)
-					+ "," + this.getParty()[poke].getMaxPp(move));
+	public void updateClientPP(int poke, int move)
+	{
+		if(this.getParty()[poke] != null && this.getParty()[poke].getMove(move) != null)
+			m_tcpSession.write("Pp" + String.valueOf(poke) + String.valueOf(move) + this.getParty()[poke].getPp(move) + "," + this.getParty()[poke].getMaxPp(move));
 	}
 
 	/**
@@ -1936,11 +2047,11 @@ public class Player extends Character implements Battleable, Tradeable {
 	 * 
 	 * @param index
 	 */
-	public void updateClientBag(int i) {
-		if (this.getBag().getItems().get(i) != null) {
-			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true,
-					getBag().getItems().get(i).getItemNumber(), getBag()
-							.getItems().get(i).getQuantity()));
+	public void updateClientBag(int i)
+	{
+		if(this.getBag().getItems().get(i) != null)
+		{
+			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, getBag().getItems().get(i).getItemNumber(), getBag().getItems().get(i).getQuantity()));
 		}
 	}
 }

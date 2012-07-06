@@ -1,72 +1,86 @@
 package org.pokenet.server.feature;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 
 /**
  * Stores a database of pokemon caught by fishing
+ * 
  * @author shadowkanji
  * @author Fshy
- *
  */
 
-public class FishDatabase {
+public class FishDatabase
+{
 	private HashMap<String, ArrayList<FishPokemon>> m_database;
-	
+
 	/**
 	 * Adds an entry to the database
+	 * 
 	 * @param pokemon
 	 * @param fishes
 	 */
-	public void addEntry(String pokemon, ArrayList<FishPokemon> fishes) {
+	public void addEntry(String pokemon, ArrayList<FishPokemon> fishes)
+	{
 		if(m_database == null)
 			m_database = new HashMap<String, ArrayList<FishPokemon>>();
 		m_database.put(pokemon, fishes);
 	}
-	
+
 	/**
 	 * Removes an entry from the database
+	 * 
 	 * @param pokemon
 	 */
-	public void deleteEntry(String pokemon) {
-		if(m_database == null) {
+	public void deleteEntry(String pokemon)
+	{
+		if(m_database == null)
+		{
 			m_database = new HashMap<String, ArrayList<FishPokemon>>();
 			return;
 		}
 		m_database.remove(pokemon);
 	}
-	
-	public FishPokemon getFish(String pokemon) {
+
+	public FishPokemon getFish(String pokemon)
+	{
 		pokemon = pokemon.toUpperCase();
 		return m_database.get(pokemon).get(0);
-		}
-	
+	}
+
 	/**
 	 * Reinitialises the database
 	 */
-	public void reinitialise() {
-		Thread t = new Thread(new Runnable() {
-			public void run() {
+	public void reinitialise()
+	{
+		Thread t = new Thread(new Runnable()
+		{
+			public void run()
+			{
 				GameServer.THREADS++;
-				System.out.println("FishDatabase started.");
+				Log.debug("FishDatabase started.");
 				m_database = new HashMap<String, ArrayList<FishPokemon>>();
-				try {
+				try
+				{
 					/* Read all the data from the text file */
 					Scanner s = new Scanner(new File("./res/fishing.txt"));
 					String pokemon = "";
 					ArrayList<FishPokemon> fishies = new ArrayList<FishPokemon>();
-					while(s.hasNextLine()) {
+					while(s.hasNextLine())
+					{
 						pokemon = s.nextLine();
 						fishies = new ArrayList<FishPokemon>();
-						/* Parse the data in the order EXPERIENCE, LEVELREQ, RODREQ*/
+						/* Parse the data in the order EXPERIENCE, LEVELREQ, RODREQ */
 						StringTokenizer st = new StringTokenizer(pokemon);
 						String pokeName = st.nextToken().toUpperCase();
-						while(st.hasMoreTokens()) {
+						while(st.hasMoreTokens())
+						{
 							int levelreq = Integer.parseInt(st.nextToken());
 							int exp = Integer.parseInt(st.nextToken());
 							int rodreq = Integer.parseInt(st.nextToken());
@@ -76,12 +90,17 @@ public class FishDatabase {
 						addEntry(pokeName, fishies);
 					}
 					s.close();
-					System.out.println("INFO: Fishing database reinitialised");
-				} catch (Exception e) {
+				}
+				catch(NumberFormatException e)
+				{
 					e.printStackTrace();
 				}
-                GameServer.THREADS--;
-        		System.out.println("FishDatabase stopped (" + GameServer.THREADS + " threads remaining)");
+				catch(FileNotFoundException e)
+				{
+					e.printStackTrace();
+				}
+				GameServer.THREADS--;
+				Log.debug("FishDatabase stopped (" + GameServer.THREADS + " threads remaining)");
 			}
 		});
 		t.start();

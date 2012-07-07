@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Queue;
-
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.Log;
 import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.Language;
@@ -27,44 +27,41 @@ import org.pokenet.server.feature.TimeService;
  * Handles logging players in
  * 
  * @author shadowkanji
- * 
  */
-public class LoginManager implements Runnable {
+public class LoginManager implements Runnable
+{
 	private Queue<Object[]> m_loginQueue;
 	private Thread m_thread;
 	private boolean m_isRunning = false;
-	private final MySqlManager m_database;
 
 	private Queue<Object[]> m_passChangeQueue;
 
 	/**
-	 * Default constructor. Requires a logout manager to be passed in so the
-	 * server can check if player's data is not being saved as they are logging
-	 * in.
+	 * Default constructor. Requires a logout manager to be passed in so the server can check if player's data is not being saved as they are logging in.
 	 * 
 	 * @param manager
 	 */
-	public LoginManager(LogoutManager manager) {
-		m_database = MySqlManager.getInstance();
+	public LoginManager(LogoutManager manager)
+	{
 		m_loginQueue = new LinkedList<Object[]>();
 		m_passChangeQueue = new LinkedList<Object[]>();
 		m_thread = null;
 	}
 
 	/**
-	 * Attempts to login a player. Upon success, it sends a packet to the player
-	 * to inform them they are logged in.
+	 * Attempts to login a player. Upon success, it sends a packet to the player to inform them they are logged in.
 	 * 
 	 * @param session
 	 * @param l
 	 * @param username
 	 * @param password
 	 */
-	private void attemptLogin(IoSession session, char l, String username,
-			String password) {
+	private void attemptLogin(IoSession session, char l, String username, String password)
+	{
 
 		// Check if we haven't reach the player limit
-		if (TcpProtocolHandler.getPlayerCount() > GameServer.getMaxPlayers()) {
+		if(TcpProtocolHandler.getPlayerCount() > GameServer.getMaxPlayers())
+		{
 			session.write("l2");
 			return;
 		}
@@ -72,21 +69,26 @@ public class LoginManager implements Runnable {
 		// ResultSet result =
 		// m_database.query("SELECT * FROM pn_bans WHERE ip='" +
 		// getIp(session) + "'");
-		try {
-			PreparedStatement ps = DatabaseConnection.getConnection()
-					.prepareStatement("SELECT * FROM pn_bans WHERE ip = ?");
+		try
+		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE ip = ?");
 			ps.setString(1, TcpProtocolHandler.getIp(session));
 			ResultSet rs = ps.executeQuery();
 
-			if (rs != null && rs.first()) {
+			if(rs != null && rs.first())
+			{
 				// This is player is banned, inform them
 				session.write("l4");
+				rs.close();
+				ps.close();
 				return;
 			}
 
 			rs.close();
 			ps.close();
-		} catch (SQLException sqle) {
+		}
+		catch(SQLException sqle)
+		{
 			sqle.printStackTrace();
 		}
 
@@ -94,96 +96,96 @@ public class LoginManager implements Runnable {
 		// ResultSet result =
 		// m_database.query("SELECT * FROM pn_members WHERE username='" +
 		// MySqlManager.parseSQL(username) + "'");
-		try {
-			PreparedStatement ps = DatabaseConnection.getConnection()
-					.prepareStatement("SELECT * FROM pn_members WHERE username = ?");
+		try
+		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_members WHERE username = ?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.first()) {
+			if(!rs.first())
+			{
 				// Member doesn't exist, say user or pass wrong. We don't
 				// want someone to guess usernames.
 				session.write("le");
 				return;
 			}
 			// Check if the password is correct
-			if (rs.getString("password").compareTo(password) == 0) {
+			if(rs.getString("password").compareTo(password) == 0)
+			{
 				// Remove the player from the map to prevent duplicates
-				GameServer.getServiceManager().getMovementService()
-						.removePlayer(username);
+				GameServer.getServiceManager().getMovementService().removePlayer(username);
 				long time = System.currentTimeMillis();
 				// Now check if they are logged in anywhere else
-				if (rs.getString("lastLoginServer").equals(
-						GameServer.getServerName())) {
+				if(rs.getString("lastLoginServer").equals(GameServer.getServerName()))
+				{
 					/*
-					 * They are already logged in on this server. Attach the
-					 * session to the existing player if they exist, if not,
-					 * just log them in
+					 * They are already logged in on this server. Attach the session to the existing player if they exist, if not, just log them in
 					 */
-					if (TcpProtocolHandler.containsPlayer(username)) {
+					if(TcpProtocolHandler.containsPlayer(username))
+					{
 						Player p = TcpProtocolHandler.getPlayer(username);
 						p.getTcpSession().setAttribute("player", null);
 						p.setLastLoginTime(time);
 						p.getTcpSession().close(true);
 						p.setTcpSession(session);
-						p.setLanguage(Language.values()[Integer.parseInt(String
-								.valueOf(l))]);
-						m_database
-								.query("UPDATE pn_members SET lastLoginServer='"
-										+ MySqlManager.parseSQL(GameServer
-												.getServerName())
-										+ "', lastLoginTime='"
-										+ time
-										+ "' WHERE username='"
-										+ MySqlManager.parseSQL(username) + "'");
-						m_database.query("UPDATE pn_members SET lastLoginIP='"
-								+ TcpProtocolHandler.getIp(session) + "' WHERE username='"
-								+ MySqlManager.parseSQL(username) + "'");
-						m_database
-								.query("UPDATE pn_members SET lastLanguageUsed='"
-										+ l
-										+ "' WHERE username='"
-										+ MySqlManager.parseSQL(username) + "'");
+						p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(l))]);
+						
+						try
+						{
+							PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
+							ps1.setString(1, GameServer.getServerName());
+							ps1.setLong(2, time);
+							ps1.setString(3, TcpProtocolHandler.getIp(session));
+							ps1.setLong(4, l);
+							ps1.setString(5, username);
+							ps1.executeUpdate();
+							ps1.close();
+						}
+						catch(SQLException e)
+						{
+							e.printStackTrace();
+						}
 						session.setAttribute("player", p);
 						this.initialiseClient(p, session);
-					} else {
+					}
+					else
+					{
 						session.write("l3");
 						return;
 					}
-				} else if (rs.getString("lastLoginServer")
-						.equals("null")) {
+				}
+				else if(rs.getString("lastLoginServer").equals("null"))
+				{
 					/*
 					 * They are not logged in elsewhere, log them in
 					 */
 					login(username, l, session, rs);
-				} else {
+				}
+				else
+				{
 					/*
-					 * They are logged in somewhere else. Check if the server is
-					 * up, if it is, don't log them in. If not, log them in
+					 * They are logged in somewhere else. Check if the server is up, if it is, don't log them in. If not, log them in
 					 */
-					try {
+					try
+					{
 						/**
-						 * This is a dirty hack. The old method used
-						 * isReachable(5000) to determine if the server was
-						 * alive. isReachable doesn't work unless you run as
-						 * root due to sending IMCP Echo packets being forbidden
-						 * under normal user accounts.
-						 * 
-						 * Instead, We open a socket to determine if server's
-						 * alive. If it crashes, then server's down.
+						 * This is a dirty hack. The old method used isReachable(5000) to determine if the server was alive. isReachable doesn't work unless you run as root due to sending IMCP Echo packets being forbidden under normal user accounts. Instead, We open a socket to determine if server's alive. If it crashes, then server's down.
 						 */
-						Socket socket = new Socket(
-								rs.getString("lastLoginServer"), 7002);
+						Socket socket = new Socket(rs.getString("lastLoginServer"), 7002);
 						socket.close();
 						session.write("l3");
 						return;
-					} catch (IOException ex) {
+					}
+					catch(IOException ex)
+					{
 						// The server they were on went down and they are
 						// trying to login elsewhere
 						login(username, l, session, rs);
 					}
 				}
-			} else {
+			}
+			else
+			{
 				// Password is wrong, say so.
 				session.write("le");
 				return;
@@ -191,7 +193,9 @@ public class LoginManager implements Runnable {
 
 			rs.close();
 			ps.close();
-		} catch (SQLException sqle) {
+		}
+		catch(SQLException sqle)
+		{
 			sqle.printStackTrace();
 		}
 
@@ -203,11 +207,12 @@ public class LoginManager implements Runnable {
 	 * @param session
 	 * @param username
 	 * @param password
-	 * @param forceLogin
-	 *            - true if player wants to force login
+	 * @param forceLogin - true if player wants to force login
 	 */
-	public void queuePlayer(IoSession session, String username, String password) {
-		if (m_thread == null || !m_thread.isAlive()) {
+	public void queuePlayer(IoSession session, String username, String password)
+	{
+		if(m_thread == null || !m_thread.isAlive())
+		{
 			start();
 		}
 		m_loginQueue.offer(new Object[] { session, username, password });
@@ -221,19 +226,20 @@ public class LoginManager implements Runnable {
 	 * @param newPassword
 	 * @param oldPassword
 	 */
-	public void queuePasswordChange(IoSession session, String username,
-			String newPassword, String oldPassword) {
-		if (m_thread == null || !m_thread.isAlive()) {
+	public void queuePasswordChange(IoSession session, String username, String newPassword, String oldPassword)
+	{
+		if(m_thread == null || !m_thread.isAlive())
+		{
 			start();
 		}
-		m_passChangeQueue.offer(new Object[] { session, username, newPassword,
-				oldPassword });
+		m_passChangeQueue.offer(new Object[] { session, username, newPassword, oldPassword });
 	}
 
 	/**
 	 * Called by Thread.start()
 	 */
-	public void run() {
+	public void run()
+	{
 		GameServer.THREADS++;
 		System.out.println("LoginManager started.");
 		Object[] o;
@@ -242,10 +248,14 @@ public class LoginManager implements Runnable {
 		String password;
 		String newPassword;
 		char l;
-		while (m_isRunning) {
-			synchronized (m_loginQueue) {
-				try {
-					if (m_loginQueue.peek() != null) {
+		while(m_isRunning)
+		{
+			synchronized(m_loginQueue)
+			{
+				try
+				{
+					if(m_loginQueue.peek() != null)
+					{
 						o = m_loginQueue.poll();
 						session = (IoSession) o[0];
 						l = ((String) o[1]).charAt(0);
@@ -253,44 +263,58 @@ public class LoginManager implements Runnable {
 						password = (String) o[2];
 						this.attemptLogin(session, l, username, password);
 					}
-				} catch (Exception e) {
+				}
+				catch(Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
-			try {
+			try
+			{
 				Thread.sleep(500);
-			} catch (Exception e) {
+			}
+			catch(Exception e)
+			{
 			}
 
-			synchronized (m_passChangeQueue) {
-				try {
-					if (m_passChangeQueue.peek() != null) {
+			synchronized(m_passChangeQueue)
+			{
+				try
+				{
+					if(m_passChangeQueue.peek() != null)
+					{
 						o = m_passChangeQueue.poll();
 						session = (IoSession) o[0];
 						username = (String) o[1];
 						newPassword = (String) o[2];
 						password = (String) o[3];
-						this.changePass(username, newPassword, password,
-								session);
+						this.changePass(username, newPassword, password, session);
 					}
-				} catch (Exception e) {
+				}
+				catch(Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
-			try {
+			try
+			{
 				Thread.sleep(500);
-			} catch (Exception e) {
+			}
+			catch(Exception e)
+			{
 			}
 		}
-        GameServer.THREADS--;
+		GameServer.THREADS--;
 		System.out.println("LoginManager stopped (" + GameServer.THREADS + " threads remaining)");
 	}
 
 	/**
 	 * Starts the login manager
 	 */
-	public void start() {
-		if (m_thread == null || !m_thread.isAlive()) {
+	public void start()
+	{
+		if(m_thread == null || !m_thread.isAlive())
+		{
 			m_thread = new Thread(this);
 			m_isRunning = true;
 			m_thread.start();
@@ -300,7 +324,8 @@ public class LoginManager implements Runnable {
 	/**
 	 * Stops the login manager
 	 */
-	public void stop() {
+	public void stop()
+	{
 		m_isRunning = false;
 	}
 
@@ -312,31 +337,39 @@ public class LoginManager implements Runnable {
 	 * @param oldPassword
 	 * @param session
 	 */
-	private void changePass(String username, String newPassword,
-			String oldPassword, IoSession session) {
+	private void changePass(String username, String newPassword, String oldPassword, IoSession session)
+	{
 
-		ResultSet result = m_database
-				.query("SELECT * FROM `pn_members` WHERE `username` = '"
-						+ MySqlManager.parseSQL(username) + "'");
-		try {
-			if (result.first()) {
+		try
+		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE username = ?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			if(rs.first())
+			{
 				// if we got a result, compare their old password to the one we
 				// have stored for them
-				if (result.getString("password").compareTo(oldPassword) == 0) {
-					// old password matches the one on file, therefore they got
-					// their old password correct, so it can be changed to their
-					// new one
-					m_database.query("UPDATE `pn_members` SET `password` = '"
-							+ MySqlManager.parseSQL(newPassword)
-							+ "' WHERE `username` = '"
-							+ MySqlManager.parseSQL(username) + "'");
+				if(rs.getString("password").compareTo(oldPassword) == 0)
+				{
+
+					PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET password = ? WHERE username = ?");
+					ps1.setString(1, newPassword);
+					ps1.setString(2, username);
+					ps1.executeUpdate();
+					ps1.close();
 					// tell them their password was changed successfully
 					session.write("ps");
 					return;
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException sqle)
+		{
+			sqle.printStackTrace();
 		}
 		// tell them we failed to change their password
 		session.write("pe");
@@ -350,8 +383,8 @@ public class LoginManager implements Runnable {
 	 * @param session
 	 * @param result
 	 */
-	private void login(String username, char language, IoSession session,
-			ResultSet result) {
+	private void login(String username, char language, IoSession session, ResultSet result)
+	{
 		// They are not logged in elsewhere, set the current login to the
 		// current server
 		long time = System.currentTimeMillis();
@@ -359,28 +392,17 @@ public class LoginManager implements Runnable {
 		Player player = getPlayerObject(result);
 		player.setLastLoginTime(time);
 		player.setTcpSession(session);
-		player.setLanguage(Language.values()[Integer.parseInt(String
-				.valueOf(language))]);
+		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/* Update the database with login information */
 
 		/*
-		 * m_database.query("UPDATE pn_members SET lastLoginServer='" +
-		 * MySqlManager.parseSQL(GameServer.getServerName()) +
-		 * "', lastLoginTime='" + time + "' WHERE username='" +
-		 * MySqlManager.parseSQL(username) + "'");
-		 * m_database.query("UPDATE pn_members SET lastLoginIP='" +
-		 * getIp(session) + "' WHERE username='" +
-		 * MySqlManager.parseSQL(username) + "'");
-		 * m_database.query("UPDATE pn_members SET lastLanguageUsed='" +
-		 * language + "' WHERE username='" + MySqlManager.parseSQL(username) +
-		 * "'");
+		 * m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
 		 */
 
-		try {
-			PreparedStatement ps = DatabaseConnection
-					.getConnection()
-					.prepareStatement(
-							"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
+		try
+		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+					"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
 			ps.setString(1, GameServer.getServerName());
 			ps.setLong(2, time);
 			ps.setString(3, TcpProtocolHandler.getIp(session));
@@ -388,20 +410,21 @@ public class LoginManager implements Runnable {
 			ps.setString(5, username);
 			ps.executeUpdate();
 			ps.close();
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 
 		session.setAttribute("player", player);
 		/*
-		 * Send success packet to player, set their map and add them to a
-		 * movement servic
+		 * Send success packet to player, set their map and add them to a movement servic
 		 */
 		this.initialiseClient(player, session);
 		/* Add them to the list of players */
 		TcpProtocolHandler.addPlayer(player);
 		GameServer.getInstance().updatePlayerCount();
-		System.out.println("INFO: " + username + " logged in.");
+		Log.debug(username + " logged in.");
 	}
 
 	/**
@@ -410,15 +433,13 @@ public class LoginManager implements Runnable {
 	 * @param p
 	 * @param session
 	 */
-	private void initialiseClient(Player p, IoSession session) {
+	private void initialiseClient(Player p, IoSession session)
+	{
 		session.write("ls" + p.getId() + "," + TimeService.getTime());
 		// Add them to the map
-		p.setMap(GameServer.getServiceManager().getMovementService()
-				.getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY()),
-				null);
+		p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY()), null);
 		// Add them to a movement service
-		GameServer.getServiceManager().getMovementService()
-				.getMovementManager().addPlayer(p);
+		GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(p);
 		// Send their Pokemon information to them
 		p.updateClientParty();
 		// Send bag to them
@@ -438,8 +459,10 @@ public class LoginManager implements Runnable {
 	 * @param data
 	 * @return
 	 */
-	private Player getPlayerObject(ResultSet result) {
-		try {
+	private Player getPlayerObject(ResultSet result)
+	{
+		try
+		{
 			Player p = new Player(result.getString("username"));
 			Pokemon[] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
@@ -454,8 +477,7 @@ public class LoginManager implements Runnable {
 			p.setId(result.getInt("id"));
 			p.setAdminLevel(result.getInt("adminLevel"));
 			p.setMuted(result.getBoolean("muted"));
-			p.setLastHeal(result.getInt("healX"), result.getInt("healY"),
-					result.getInt("healMapX"), result.getInt("healMapY"));
+			p.setLastHeal(result.getInt("healX"), result.getInt("healY"), result.getInt("healMapX"), result.getInt("healMapY"));
 			p.setSurfing(Boolean.parseBoolean(result.getString("isSurfing")));
 			// Set money and skills
 			p.setSprite(result.getInt("sprite"));
@@ -467,70 +489,102 @@ public class LoginManager implements Runnable {
 			p.setCoordinatingExp(result.getInt("skCoord"));
 			p.setBreedingExp(result.getInt("skBreed"));
 			// Retrieve refences to all Pokemon
-			int partyId = result.getInt("party");
-			ResultSet partyData = m_database
-					.query("SELECT * FROM pn_party WHERE id='" + partyId + "'");
-				partyData.first();
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_party WHERE id = ?");
+			ps.setInt(1, result.getInt("party"));
+			ResultSet rs = ps.executeQuery();
+			rs.first();
 
-			ResultSet pokemons = m_database
-					.query("SELECT * FROM pn_pokemon WHERE currentTrainerName='"
-							+ p.getName() + "'");
+			PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_pokemon WHERE currentTrainerName = ?");
+			ps1.setString(1, p.getName());
+			ResultSet rs1 = ps1.executeQuery();
 			int boxNumber = 0;
 			int boxPosition = 0;
 			/*
-			 * Loop through all Pokemon belonging to this player and add them to
-			 * their party/box
+			 * Loop through all Pokemon belonging to this player and add them to their party/box
 			 */
-			while (pokemons.next()) {
+			while(rs1.next())
+			{
 				boolean isParty = false;
 				int partyIndex = -1;
 				/* Checks if Pokemon is in party */
-				for (int i = 0; i < 6; i++) {
-					if (partyData.getInt("pokemon" + i) == pokemons
-							.getInt("id")) {
+				for(int i = 0; i < 6; i++)
+				{
+					if(rs.getInt("pokemon" + i) == rs1.getInt("id"))
+					{
 						isParty = true;
 						partyIndex = i;
 						break;
 					}
 				}
 				/* If the pokemon is in party, add it to party */
-				if (isParty) {
-					party[partyIndex] = getPokemonObject(pokemons);
-				} else {
+				if(isParty)
+				{
+					party[partyIndex] = getPokemonObject(rs1);
+				}
+				else
+				{
 					/* Else, add it to box if space is available */
-					if (boxNumber < 9) {
+					if(boxNumber < 9)
+					{
 						/* If there's space in this box, add it to the box */
-						if (boxPosition < 9) {
-							boxes[boxNumber].setPokemon(boxPosition,
-									getPokemonObject(pokemons));
-						} else {
+						if(boxPosition < 9)
+						{
+							boxes[boxNumber] = new PokemonBox();
+							boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(rs1));
+						}
+						else
+						{
 							/* Else open up a new box and add it to box */
 							boxPosition = 0;
 							boxNumber++;
-							if (boxNumber < 9) {
-								boxes[boxNumber].setPokemon(boxPosition,
-										getPokemonObject(pokemons));
+							if(boxNumber < 9)
+							{
+								boxes[boxNumber] = new PokemonBox();
+								boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(rs1));
 							}
 						}
 						boxPosition++;
 					}
 				}
 			}
+			rs.close();
+			ps.close();
+			rs1.close();
+			ps1.close();
+			
 			p.setParty(party);
 			for(int idx = 0; idx < 9; idx++) // FUUU, we only have 9 boxes, not 30 :S
 			{
 				p.setBox(idx, boxes[idx]);
 			}
 
-			// Attach bag
-			p.setBag(getBagObject(
-					m_database.query("SELECT * FROM pn_bag WHERE member='"
-							+ result.getInt("id") + "'"), p.getId()));
+			try
+			{
+				PreparedStatement ps2 = DatabaseConnection.getConnection().prepareStatement(
+						"SELECT item, quantity FROM pn_bag WHERE member = ?");
+				ps2.setInt(1, result.getInt("id"));
+				ResultSet rs2 = ps2.executeQuery();
+				
+				Bag bag = new Bag(p.getId());
+				while(rs2.next())
+				{
+					bag.addItem(rs2.getInt("item"), rs2.getInt("quantity"));
+				}
+				p.setBag(bag);
+				ps2.close();
+				rs2.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
 
 			// Attach badges
 			p.generateBadges(result.getString("badges"));
 			return p;
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 			return null;
 		}
@@ -542,46 +596,28 @@ public class LoginManager implements Runnable {
 	 * @param data
 	 * @return
 	 */
-	private Pokemon getPokemonObject(ResultSet data) {
-		if (data != null) {
-			try {
+	private Pokemon getPokemonObject(ResultSet data)
+	{
+		if(data != null)
+		{
+			try
+			{
 				/*
 				 * First generate the Pokemons moves
 				 */
 				MoveListEntry[] moves = new MoveListEntry[4];
-				moves[0] = (data.getString("move0") != null
-						&& !data.getString("move0").equalsIgnoreCase("null") ? DataService
-						.getMovesList().getMove(data.getString("move0")) : null);
-				moves[1] = (data.getString("move1") != null
-						&& !data.getString("move1").equalsIgnoreCase("null") ? DataService
-						.getMovesList().getMove(data.getString("move1")) : null);
-				moves[2] = (data.getString("move2") != null
-						&& !data.getString("move2").equalsIgnoreCase("null") ? DataService
-						.getMovesList().getMove(data.getString("move2")) : null);
-				moves[3] = (data.getString("move3") != null
-						&& !data.getString("move3").equalsIgnoreCase("null") ? DataService
-						.getMovesList().getMove(data.getString("move3")) : null);
+				moves[0] = (data.getString("move0") != null && !data.getString("move0").equalsIgnoreCase("null") ? DataService.getMovesList().getMove(data.getString("move0")) : null);
+				moves[1] = (data.getString("move1") != null && !data.getString("move1").equalsIgnoreCase("null") ? DataService.getMovesList().getMove(data.getString("move1")) : null);
+				moves[2] = (data.getString("move2") != null && !data.getString("move2").equalsIgnoreCase("null") ? DataService.getMovesList().getMove(data.getString("move2")) : null);
+				moves[3] = (data.getString("move3") != null && !data.getString("move3").equalsIgnoreCase("null") ? DataService.getMovesList().getMove(data.getString("move3")) : null);
 				/*
 				 * Create the new Pokemon
 				 */
-				Pokemon p = new Pokemon(
-						DataService.getBattleMechanics(),
-						PokemonSpecies.getDefaultData().getPokemonByName(
-								data.getString("speciesName")),
-						PokemonNature.getNatureByName(data.getString("nature")),
-						data.getString("abilityName"),
-						data.getString("itemName"),
-						data.getInt("gender"),
-						data.getInt("level"),
-						new int[] { data.getInt("ivHP"), data.getInt("ivATK"),
-								data.getInt("ivDEF"), data.getInt("ivSPD"),
-								data.getInt("ivSPATK"), data.getInt("ivSPDEF") },
-						new int[] { data.getInt("evHP"), data.getInt("evATK"),
-								data.getInt("evDEF"), data.getInt("evSPD"),
-								data.getInt("evSPATK"), data.getInt("evSPDEF") },
-						moves, new int[] { data.getInt("ppUp0"),
-								data.getInt("ppUp1"), data.getInt("ppUp2"),
-								data.getInt("ppUp3") });
+				Pokemon p = new Pokemon(DataService.getBattleMechanics(), PokemonSpecies.getDefaultData().getPokemonByName(data.getString("speciesName")), PokemonNature.getNatureByName(data
+						.getString("nature")), data.getString("abilityName"), data.getString("itemName"), data.getInt("gender"), data.getInt("level"), new int[] { data.getInt("ivHP"),
+						data.getInt("ivATK"), data.getInt("ivDEF"), data.getInt("ivSPD"), data.getInt("ivSPATK"), data.getInt("ivSPDEF") }, new int[] { data.getInt("evHP"), data.getInt("evATK"),
+						data.getInt("evDEF"), data.getInt("evSPD"), data.getInt("evSPATK"), data.getInt("evSPDEF") }, moves, new int[] { data.getInt("ppUp0"), data.getInt("ppUp1"),
+						data.getInt("ppUp2"), data.getInt("ppUp3") });
 				p.reinitialise();
 				/*
 				 * Set exp, nickname, isShiny and exp gain type
@@ -627,30 +663,12 @@ public class LoginManager implements Runnable {
 				p.setPpUp(0, data.getInt("ppUp2"));
 				p.setPpUp(0, data.getInt("ppUp3"));
 				return p;
-			} catch (Exception e) {
+			}
+			catch(SQLException e)
+			{
 				e.printStackTrace();
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Returns a bag object
-	 * 
-	 * @param data
-	 * @return
-	 */
-	private Bag getBagObject(ResultSet data, int memberid) {
-		try {
-			Bag b = new Bag(memberid);
-			while (data.next()) {
-				b.addItem(data.getInt("item"), data.getInt("quantity"));
-			}
-			return b;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-
 	}
 }

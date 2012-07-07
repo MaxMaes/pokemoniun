@@ -15,7 +15,7 @@ public class DatabaseConnection {
     public static Connection getConnection() {
         return con.get();
     }
-
+    
     public static void release() throws SQLException {
         con.get().close();
         con.remove();

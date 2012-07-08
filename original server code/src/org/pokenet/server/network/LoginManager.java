@@ -291,9 +291,8 @@ public class LoginManager implements Runnable
 						this.changePass(username, newPassword, password, session);
 					}
 				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
+				catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
 			try
@@ -342,7 +341,7 @@ public class LoginManager implements Runnable
 
 		try
 		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE username = ?");
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_members WHERE username = ?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 

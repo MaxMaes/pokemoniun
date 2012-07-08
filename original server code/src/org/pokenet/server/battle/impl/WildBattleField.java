@@ -283,9 +283,9 @@ public class WildBattleField extends BattleField {
 							GameServer.THREADS++;
 							System.out.println("WildBattleField started.");
 							executeTurn(m_turn);
-							m_dispatch = null;
 							GameServer.THREADS--;
 							System.out.println("WildBattleField stopped (" + GameServer.THREADS + " threads remaining)");
+							m_dispatch = null;
 						}
 					});
 					m_dispatch.start();
@@ -363,9 +363,9 @@ public class WildBattleField extends BattleField {
 					for (int i = 0; i < m_participants; ++i) {
 						m_turn[i] = null;
 					}
-					m_dispatch = null;
 					GameServer.THREADS--;
 					System.out.println("WildBattleField stopped (" + GameServer.THREADS + " threads remaining)");
+					m_dispatch = null;
 				}
 			});
 			m_dispatch.start();

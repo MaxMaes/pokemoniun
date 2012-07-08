@@ -385,6 +385,7 @@ public class DataService {
                 		evo.setAttribute(stringEvolutions[j + 2]);
                 	if(ep < evos.length) {
                 		evos[ep] = evo;
+                		ep++;
                 	}
             	}
             }

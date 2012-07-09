@@ -87,7 +87,6 @@ public class Player extends Character implements Battleable, Tradeable
 	/*
 	 * Stores movement of other players to be sent in bulk to client
 	 */
-	//private String[] m_movements = new String[2]; // TODO: Remove this so that movement is instant, testing this tomorrow.
 	/*
 	 * Kicking timer
 	 */

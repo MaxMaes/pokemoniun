@@ -116,7 +116,8 @@ public class LoginManager implements Runnable
 				GameServer.getServiceManager().getMovementService().removePlayer(username);
 				long time = System.currentTimeMillis();
 				// Now check if they are logged in anywhere else
-				if(rs.getString("lastLoginServer").equals(GameServer.getServerName()))
+				String lastLoginServer = rs.getString("lastLoginServer");
+				if(lastLoginServer != null && lastLoginServer.equals(GameServer.getServerName()))
 				{
 					/*
 					 * They are already logged in on this server. Attach the session to the existing player if they exist, if not, just log them in
@@ -129,10 +130,11 @@ public class LoginManager implements Runnable
 						p.getTcpSession().close(true);
 						p.setTcpSession(session);
 						p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(l))]);
-						
+
 						try
 						{
-							PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
+							PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement(
+									"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
 							ps1.setString(1, GameServer.getServerName());
 							ps1.setLong(2, time);
 							ps1.setString(3, TcpProtocolHandler.getIp(session));
@@ -154,7 +156,7 @@ public class LoginManager implements Runnable
 						return;
 					}
 				}
-				else if(rs.getString("lastLoginServer").equals("null"))
+				else if(lastLoginServer == null || lastLoginServer.equals("null"))
 				{
 					/*
 					 * They are not logged in elsewhere, log them in
@@ -171,7 +173,7 @@ public class LoginManager implements Runnable
 						/**
 						 * This is a dirty hack. The old method used isReachable(5000) to determine if the server was alive. isReachable doesn't work unless you run as root due to sending IMCP Echo packets being forbidden under normal user accounts. Instead, We open a socket to determine if server's alive. If it crashes, then server's down.
 						 */
-						Socket socket = new Socket(rs.getString("lastLoginServer"), 7002);
+						Socket socket = new Socket(lastLoginServer, 7002);
 						socket.close();
 						session.write("l3");
 						return;
@@ -291,7 +293,8 @@ public class LoginManager implements Runnable
 						this.changePass(username, newPassword, password, session);
 					}
 				}
-				catch (Exception e) {
+				catch(Exception e)
+				{
 					// TODO: handle exception
 				}
 			}
@@ -550,7 +553,7 @@ public class LoginManager implements Runnable
 			ps.close();
 			rs1.close();
 			ps1.close();
-			
+
 			p.setParty(party);
 			for(int idx = 0; idx < 9; idx++) // FUUU, we only have 9 boxes, not 30 :S
 			{
@@ -559,11 +562,10 @@ public class LoginManager implements Runnable
 
 			try
 			{
-				PreparedStatement ps2 = DatabaseConnection.getConnection().prepareStatement(
-						"SELECT item, quantity FROM pn_bag WHERE member = ?");
+				PreparedStatement ps2 = DatabaseConnection.getConnection().prepareStatement("SELECT item, quantity FROM pn_bag WHERE member = ?");
 				ps2.setInt(1, result.getInt("id"));
 				ResultSet rs2 = ps2.executeQuery();
-				
+
 				Bag bag = new Bag(p.getId());
 				while(rs2.next())
 				{

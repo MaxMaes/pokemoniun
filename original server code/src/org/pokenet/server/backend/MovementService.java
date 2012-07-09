@@ -1,15 +1,11 @@
 package org.pokenet.server.backend;
 
 import java.io.File;
-import java.util.HashMap;
-
 import org.pokenet.server.GameServer;
 import org.pokenet.server.Log;
-import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.backend.map.ServerMapMatrix;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
-
 import tiled.io.xml.XMLMapTransformer;
 
 /**
@@ -20,7 +16,6 @@ import tiled.io.xml.XMLMapTransformer;
 public class MovementService {
 	private MovementManager [] m_movementManager;
 	private ServerMapMatrix m_mapMatrix;
-	private ServerMap m_tempMap;
 	private NpcSleepTimer m_sleepTimer;
 	
 	/**
@@ -79,27 +74,7 @@ public class MovementService {
 	 * Optionally, we can skip saving players in a temporary map.
 	 * @param forceSkip
 	 */
-	public void reloadMaps(boolean forceSkip) {
-		/*
-		 * First move all players out of their maps
-		 */
-		if(!forceSkip) {
-			HashMap<String, Player> players;
-			for(int x = 0; x < 100; x++) {
-				for(int y = 0; y < 100; y++) {
-					if(m_mapMatrix.getMapByRealPosition(x, y) != null) {
-						players = m_mapMatrix.getMapByRealPosition(x, y).getPlayers();
-						for(Player p : players.values()) {
-							p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
-							p.setMap(m_tempMap, null);
-						}
-					}
-				}
-			}
-		}
-		/*
-		 * Reload all the maps
-		 */
+	public void loadMaps() {
 		XMLMapTransformer loader = new XMLMapTransformer();
 		for(int x = -50; x < 50; x++) {
 			for(int y = -50; y < 50; y++) {
@@ -121,17 +96,10 @@ public class MovementService {
 	}
 	
 	/**
-	 * Reloads all maps while the server is still running.
-	 */
-	public void reloadMaps() {
-		this.reloadMaps(false);
-	}
-	
-	/**
 	 * Starts the movement service
 	 */
 	public void start() {
-		this.reloadMaps(true);
+		loadMaps();
 		m_sleepTimer.start();
 		for(int i = 0; i < m_movementManager.length; i++) {
 			m_movementManager[i] = new MovementManager();

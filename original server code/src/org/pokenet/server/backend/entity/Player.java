@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.map.ServerMap;
@@ -21,7 +22,6 @@ import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.feature.CheatManager;
 import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.feature.TimeService;
-import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.ItemMessage;
 import org.pokenet.server.network.message.SpriteChangeMessage;
@@ -67,7 +67,7 @@ public class Player extends Character implements Battleable, Tradeable
 	private boolean m_isSpriting = false;
 	private IoSession m_tcpSession = null;
 	private int m_money;
-	private ArrayList<String> m_friends;
+	private List<String> m_friends;
 	private long m_lastLogin;
 	private int m_skillHerbExp = 0;
 	private int m_skillCraftExp = 0;
@@ -87,7 +87,7 @@ public class Player extends Character implements Battleable, Tradeable
 	/*
 	 * Stores movement of other players to be sent in bulk to client
 	 */
-	private String[] m_movements = new String[7];
+	//private String[] m_movements = new String[2]; // TODO: Remove this so that movement is instant, testing this tomorrow.
 	/*
 	 * Kicking timer
 	 */
@@ -127,18 +127,18 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		String s = d.name().toUpperCase().charAt(0) + String.valueOf(player);
 		/* Queue the movement */
-		for(int i = 0; i < m_movements.length; i++)
+		/* for(int i = 0; i < m_movements.length; i++)
 		{
 			if(m_movements[i] == null)
 			{
 				m_movements[i] = s;
 				return;
 			}
-		}
+		} */
 		/*
 		 * Unsuccessful, queue is full! Send queue and place at 0
 		 */
-		String message = "M";
+		/* String message = "M";
 		for(int i = 0; i < m_movements.length; i++)
 		{
 			message = message + m_movements[i] + ",";
@@ -146,7 +146,11 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 		message = message.substring(0, message.length() - 1);
 		m_tcpSession.write(message);
-		m_movements[0] = s;
+		m_movements[0] = s; */
+		
+		String message = "M" + s;
+		m_tcpSession.write(message);
+		
 	}
 
 	/**
@@ -1929,20 +1933,26 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Sends all friends to the client. */
 	public void updateClientFriends()
 	{
-		/* Problem with getting friends from the query, query works. */
-		ResultSet friends = MySqlManager.getInstance().query(
-				"SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '" + MySqlManager.parseSQL(m_username) + "'))");
 		try
 		{
+			/* Problem with getting friends from the query, query works. */
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+					"SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?))");
+			ps.setString(1, m_username);
+			ResultSet rs = ps.executeQuery();
+			
 			m_friends = new ArrayList<String>();
-			while(friends.next())
+			while(rs.next())
 			{
-				m_friends.add(friends.getString(1));
+				m_friends.add(rs.getString("username"));
 			}
+			
+			ps.close();
+			rs.close();
 		}
-		catch(SQLException sqle)
+		catch(SQLException e)
 		{
-			sqle.printStackTrace();
+			e.printStackTrace();
 		}
 		for(int i = 0; i < m_friends.size(); i++)
 		{

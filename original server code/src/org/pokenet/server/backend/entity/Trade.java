@@ -330,7 +330,7 @@ public class Trade implements Runnable{
 						} else if(currentEvolution.getType() == EvolutionTypes.TradeItem)
 						{
 							/* TODO: TEST THIS CODE! Coded same way as evo stones, so if that is fixed, same fix will work here if this doesnt work already */
-							/*if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE")
+							if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE")
 									&& currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
 							{
 								curPokemon.setEvolution(currentEvolution);
@@ -360,7 +360,7 @@ public class Trade implements Runnable{
 							{
 								curPokemon.setEvolution(currentEvolution);
 								curPokemon.evolutionResponse(true, p);
-							}*/
+							}
 							break;
 						}
 						

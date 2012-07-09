@@ -15,9 +15,12 @@ import org.pokenet.server.backend.ItemProcessor;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.RequestType;
 import org.pokenet.server.backend.entity.Positionable.Direction;
+import org.pokenet.server.backend.item.Item;
+import org.pokenet.server.backend.item.ItemDatabase;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
+import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
 import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.network.message.ItemMessage;
 import org.pokenet.server.network.message.PokenetMessage;
@@ -543,10 +546,13 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				 * Give an items to a pokemon, this can be used for berries and
 				 * evolving pokemon TODO: Write implementation
 				 */
-				/*
-				 * details = message.substring(1).split(",");
-				 * System.out.println("Item Given. " + message);
-				 */
+				
+				//details = message.substring(1).split(",");
+				int pIndex = Integer.parseInt(message.split(",")[1]);
+				if (p.getParty()[pIndex] != null) {
+					p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
+					System.out.println(p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold");
+				}
 				break;
 			case 'i':
 				// Drop item

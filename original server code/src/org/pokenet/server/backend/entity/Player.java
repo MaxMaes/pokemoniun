@@ -980,7 +980,7 @@ public class Player extends Character implements Battleable, Tradeable
 						m_repel--;
 					if(m_repel <= 0 && this.getMap().isWildBattle(m_x, m_y, this))
 					{
-						// m_tcpSession.write("U" + m_x + "," + m_y);
+						m_tcpSession.write("U" + m_x + "," + m_y);
 						this.ensureHealthyPokemon();
 						m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, this.getMap().getWildPokemon(this));
 						m_movementQueue.clear();
@@ -999,15 +999,15 @@ public class Player extends Character implements Battleable, Tradeable
 						/*
 						 * Pokemon only have their happiness increased by walking if it is below 70
 						 */
-						if(m_pokemon[i] != null && m_pokemon[i].getHappiness() < 70)
+						if(m_pokemon[i] != null && m_pokemon[i].getHappiness() < 100)
 							m_pokemon[i].setHappiness(m_pokemon[i].getHappiness() + 1);
 					}
-					walk++;
-					if(walk >= 50)
-					{
-						m_tcpSession.write("U" + getX() + "," + getY());
-						walk = 0;
-					}
+//					walk++;
+//					if(walk >= 50)
+//					{
+//						m_tcpSession.write("U" + getX() + "," + getY());
+//						walk = 0;
+//					}
 				}
 			}
 			return true;

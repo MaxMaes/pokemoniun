@@ -745,7 +745,7 @@ public class WildBattleField extends BattleField {
 					if (evolve) continue;
 
 					/* This Pokemon just levelled up! */
-					p.setHappiness(p.getHappiness() + 2);
+					p.setHappiness(p.getHappiness() + 5);
 					p.calculateStats(false);
 
 					int level = DataService.getBattleMechanics().calculateLevel(p);

@@ -321,6 +321,7 @@ public class LogoutManager implements Runnable
 	 */
 	private int saveNewPokemon(Pokemon p, String currentTrainer)
 	{
+		int id = -1;
 		try
 		{
 			/*
@@ -376,6 +377,7 @@ public class LogoutManager implements Runnable
 
 			rs.first();
 			p.setDatabaseID(rs.getInt("id"));
+			id = rs.getInt("id");
 			rs.close();
 			ps.close();
 
@@ -437,14 +439,13 @@ public class LogoutManager implements Runnable
 			ps.setInt(52, p.getDatabaseID()); // Da fuq, 52 columns in the table pn_pokemon >; Wooohoo, did a quick count and it should be correct.
 			ps.executeUpdate();
 			ps.close();
-			
-			return rs.getInt("id");
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			return -1;
+			id = -1;
 		}
+		return id;
 	}
 
 	/**

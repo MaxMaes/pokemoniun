@@ -44,7 +44,6 @@ public class FriendListDialog extends Frame
 		setBackground(new Color(0, 0, 0, 85));
 		setTitle("Friends");
 		setSize(170, 180);
-
 		m_up = new SimpleArrowButton(SimpleArrowButton.FACE_UP);
 		m_up.addActionListener(new ActionListener()
 		{

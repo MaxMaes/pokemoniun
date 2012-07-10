@@ -1930,23 +1930,20 @@ public class Player extends Character implements Battleable, Tradeable
 		TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(m_id, m_sprite));
 	}
 
-	/** Sends all friends to the client. */
+	/** Selects all friends for this user in the database and sends them and their online status to the client */
 	public void updateClientFriends()
 	{
 		try
 		{
-			/* Problem with getting friends from the query, query works. */
 			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
 					"SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?))");
 			ps.setString(1, m_username);
 			ResultSet rs = ps.executeQuery();
-			
 			m_friends = new ArrayList<String>();
 			while(rs.next())
 			{
 				m_friends.add(rs.getString("username"));
 			}
-			
 			ps.close();
 			rs.close();
 		}
@@ -1957,10 +1954,11 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 0; i < m_friends.size(); i++)
 		{
 			String friend = m_friends.get(i);
-			/*
-			 * if(TcpProtocolHandler.containsPlayer(friend)) m_tcpSession.write("MFo" + friend);
-			 */
 			m_tcpSession.write("mFa" + friend);
+			if(TcpProtocolHandler.containsPlayer(friend)) 
+				m_tcpSession.write("MFo" + friend);
+			else
+				m_tcpSession.write("MFf" + friend);
 		}
 	}
 

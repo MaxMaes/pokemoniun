@@ -514,7 +514,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 				}
 				break;
 			case 'F':
-				// Friend list TODO: Display online/offline friends
+				// Friend list TODO: Test offline/online friends.
 				String friend = message.substring(2);
 				switch (message.charAt(1)) {
 				case 'a':
@@ -765,7 +765,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 	 * @param m
 	 */
 	public static void writeMessage(IoSession session, PokenetMessage m) {
-		if (session.isConnected())
+		if(session.isConnected())
 			session.write(m.getMessage());
 	}
 }

@@ -10,12 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.HashMap;
-
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
-
 import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
@@ -23,7 +21,6 @@ import org.apache.mina.core.future.IoFuture;
 import org.apache.mina.core.future.IoFutureListener;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.transport.socket.nio.NioDatagramConnector;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.AppGameContainer;
@@ -81,10 +78,9 @@ public class GameClient extends BasicGame
 	private static final String GAME_TITLE = "Pokemonium 1.3.0";
 	private static final String CHATHOST = "localhost";
 	private static final int FPS = 50;
-
+	
 	// Some variables needed
 	private TcpProtocolHandler m_tcpProtocolHandler;
-
 	private static GameClient m_instance;
 	private static AppGameContainer gc;
 	private ClientMapMatrix m_mapMatrix;
@@ -98,13 +94,11 @@ public class GameClient extends BasicGame
 	private static String m_filepath;
 	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont;
 	private static String m_host;
-
 	// UI
 	private LoadingScreen m_loading;
 	private LoginScreen m_login;
 	// The gui display layer
 	private Display m_display;
-
 	private WeatherService m_weather;// = new WeatherService();
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
@@ -119,18 +113,13 @@ public class GameClient extends BasicGame
 	private static boolean m_loadSurroundingMaps = false;
 	public static String UDPCODE = "";
 	private int lastPressedKey;
-
 	private static DeferredResource m_nextResource;
 	private boolean m_started;
-
-	Color m_loadColor = new Color(70, 70, 255);
-
 	private boolean m_close = false; // Used to tell the game to close or not.
 	private static Image[] m_spriteImageArray = new Image[240]; /* WARNING: Replace with actual number of sprites */
 	private boolean m_chatServerIsActive;
 	private static Image m_loadImage; // Made these static to prevent memory leak.
 	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
-	
 	private static final DecimalFormat percentage = new DecimalFormat("###.##");
 	private static final long startTime = System.currentTimeMillis();
 

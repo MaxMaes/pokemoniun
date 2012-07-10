@@ -1101,7 +1101,8 @@ public class Player extends Character implements Battleable, Tradeable
 	public void addHerbalismExp(int exp)
 	{
 		m_oldLevel = getHerbalismLevel();
-		m_skillHerbExp = m_skillHerbExp + exp;
+		m_skillHerbExp += exp;
+		// Check if we need to say to the client that we've leveld up :D
 		if(getHerbalismLevel() > m_oldLevel && getHerbalismLevel() <= 100)
 		{
 			m_tcpSession.write("csh" + getHerbalismLevel());

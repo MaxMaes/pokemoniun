@@ -19,6 +19,7 @@ public class OurPokemon extends Pokemon {
 	private int m_spdef;
 	private String m_ability;
 	private String m_nature;
+	private String m_item;
 
 	/**
 	 * Default Constructor
@@ -97,16 +98,24 @@ public class OurPokemon extends Pokemon {
 				index = "0" + String.valueOf(getSpriteNumber());
 			} else {
 				if(getSpriteNumber() > 389)
-				{
-					if(getSpriteNumber() < 438)
+    			{
+    				if(getSpriteNumber() < 413)
     				{
     					index = String.valueOf(getSpriteNumber() - 3);
     				}
     				else
     				{
-    					index = String.valueOf(getSpriteNumber() - 5);
+    					if(getSpriteNumber() > 479)
+        				{
+        					index = String.valueOf(getSpriteNumber() - 7);
+        				}
+    					else
+    					{
+    						index = String.valueOf(getSpriteNumber() - 5);
+    					}
+    					
     				}
-				}
+    			}
 				else
 					index = String.valueOf(getSpriteNumber());
 			}
@@ -269,6 +278,7 @@ public class OurPokemon extends Pokemon {
 		int sprite = Integer.parseInt(info[0]);
 		if(sprite > 389) {
 			sprite -= 2;
+			
 		} else {
 			sprite++;
 		}
@@ -313,5 +323,9 @@ public class OurPokemon extends Pokemon {
 		setMoves(moves);
 
 		return this;
+	}
+
+	public void setHoldItem(String item) {
+		m_item = item;		
 	}
 }

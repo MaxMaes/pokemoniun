@@ -15,8 +15,6 @@ import org.pokenet.server.backend.ItemProcessor;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.RequestType;
 import org.pokenet.server.backend.entity.Positionable.Direction;
-import org.pokenet.server.backend.item.Item;
-import org.pokenet.server.backend.item.ItemDatabase;
 import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
@@ -544,14 +542,27 @@ public class TcpProtocolHandler extends IoHandlerAdapter {
 			case 'G':
 				/*
 				 * Give an items to a pokemon, this can be used for berries and
-				 * evolving pokemon TODO: Write implementation
+				 * evolving pokemon TODO: check implementation
 				 */
 				
 				//details = message.substring(1).split(",");
 				int pIndex = Integer.parseInt(message.split(",")[1]);
 				if (p.getParty()[pIndex] != null) {
-					p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
-					System.out.println(p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold");
+					if(p.getParty()[pIndex].getItemName() == "" || p.getParty()[pIndex].getItemName() == null)
+					{
+						p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
+						p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0])+ ",1" + "," + (p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold"));
+						p.getBag().removeItem(Integer.parseInt(message.substring(1).split(",")[0]), 1);
+					}
+					else
+					{
+						String pI = p.getParty()[pIndex].getItemName();
+						p.getTcpSession().write("Iu" + GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId() + ",1");
+						p.getBag().addItem(GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId(), 1);
+						p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
+						p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0])+ ",1" + "," + (pI + " was switched with " + p.getParty()[pIndex].getItemName()));
+						p.getBag().removeItem(Integer.parseInt(message.substring(1).split(",")[0]), 1);
+					}
 				}
 				break;
 			case 'i':

@@ -300,6 +300,7 @@ public class OurPlayer extends Player {
 				m_pokemon[i].setMoveCurPP(0, 35);
 			}
 			m_pokemon[i].setMoveTypes(movetypes);
+			m_pokemon[i].setHoldItem(info[21]);
 		}
 	}
 	

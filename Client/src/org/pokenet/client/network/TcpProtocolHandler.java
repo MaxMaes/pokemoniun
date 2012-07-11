@@ -931,6 +931,13 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					case 'r': // Remove item from bag
 						details = message.substring(2).split(",");
 						m_game.getOurPlayer().removeItem(Integer.parseInt(details[0]), Integer.parseInt(details[1]));
+						try
+						{
+							GameClient.getInstance().getUi().talkToNPC(details[2]);
+						}
+						catch(Exception e)
+						{							
+						}
 						break;
 					case 'i': // Item used
 						try

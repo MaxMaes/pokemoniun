@@ -20,6 +20,7 @@ import org.pokenet.server.battle.Pokemon.ExpTypes;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
+import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
 import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.feature.TimeService;
 
@@ -529,9 +530,12 @@ public class LoginManager implements Runnable
 					if(boxNumber < 9)
 					{
 						/* If there's space in this box, add it to the box */
-						if(boxPosition < 9)
+						if(boxPosition < 30)
 						{
-							boxes[boxNumber] = new PokemonBox();
+							if(boxes[boxNumber] == null)
+							{
+								boxes[boxNumber] = new PokemonBox();
+							}
 							boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(rs1));
 						}
 						else
@@ -541,7 +545,10 @@ public class LoginManager implements Runnable
 							boxNumber++;
 							if(boxNumber < 9)
 							{
-								boxes[boxNumber] = new PokemonBox();
+								if(boxes[boxNumber] == null)
+								{
+									boxes[boxNumber] = new PokemonBox();
+								}
 								boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(rs1));
 							}
 						}
@@ -633,6 +640,7 @@ public class LoginManager implements Runnable
 				p.setDatabaseID(data.getInt("id"));
 				p.setDateCaught(data.getString("date"));
 				p.setIsFainted(Boolean.parseBoolean(data.getString("isFainted")));
+				p.setItem(new HoldItem(data.getString("itemName")));
 				/*
 				 * Contest stats (beauty, cute, etc.)
 				 */

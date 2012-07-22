@@ -514,21 +514,30 @@ public class LoginManager implements Runnable {
 					party[partyIndex] = getPokemonObject(pokemons);
 				} else {
 					/* Else, add it to box if space is available */
-					if (boxNumber < 9) {
-						/* Avoid null pointers */
-						if (boxes[boxNumber] == null)
-							boxes[boxNumber] = new PokemonBox();
+					/* Else, add it to box if space is available */
+					if(boxNumber < 9)
+					{
 						/* If there's space in this box, add it to the box */
-						if (boxPosition < 30) {
-							boxes[boxNumber].setPokemon(boxPosition,
-									getPokemonObject(pokemons));
-						} else {
+						if(boxPosition < 30)
+						{
+							if(boxes[boxNumber] == null)
+							{
+								boxes[boxNumber] = new PokemonBox();
+							}
+							boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(pokemons));
+						}
+						else
+						{
 							/* Else open up a new box and add it to box */
 							boxPosition = 0;
 							boxNumber++;
-							if (boxNumber < 9) {
-								boxes[boxNumber].setPokemon(boxPosition,
-										getPokemonObject(pokemons));
+							if(boxNumber < 9)
+							{
+								if(boxes[boxNumber] == null)
+								{
+									boxes[boxNumber] = new PokemonBox();
+								}
+								boxes[boxNumber].setPokemon(boxPosition, getPokemonObject(pokemons));
 							}
 						}
 						boxPosition++;

@@ -8,21 +8,13 @@ import org.pokenet.server.battle.Pokemon;
  *
  */
 public class PokemonBox {
-	private Pokemon [] m_pokemon;
-	
-	/**
-	 * Sets the pokemon in this box
-	 * @param pokes
-	 */
-	public void setPokemon(Pokemon [] pokes) {
-		m_pokemon = pokes;
-	}
+	private Pokemon[] m_pokemon = new Pokemon[30];
 	
 	/**
 	 * Returns all pokemon
 	 * @return
 	 */
-	public Pokemon [] getPokemon() {
+	public Pokemon[] getPokemon() {
 		return m_pokemon;
 	}
 	
@@ -38,9 +30,9 @@ public class PokemonBox {
 	/**
 	 * Sets a specific pokemon
 	 * @param index
-	 * @param p
+	 * @param pokemon
 	 */
-	public void setPokemon(int index, Pokemon p) {
-		m_pokemon[index] = p;
+	public void setPokemon(int index, Pokemon pokemon) {
+		m_pokemon[index] = pokemon;
 	}
 }

@@ -24,9 +24,7 @@ public class MySqlManager {
     
     public MySqlManager()
     {
-    	final String host = GameServer.getDatabaseHost();
-    	
-    	mysql_connectionURL = "jdbc:mysql://" + host + "/" + GameServer.getDatabaseName() +"?autoReconnect=true";
+    	mysql_connectionURL = "jdbc:mysql://" + GameServer.getDatabaseHost() + ":3306/" + GameServer.getDatabaseName() +"?autoReconnect=true";
     	if(!open())
     	{
     		System.out.println("Cannot connect to the database, please check your settings.");
@@ -65,23 +63,6 @@ public class MySqlManager {
     }
     
     /**
-     * Selects the current database. Returns true on success
-     * @param database
-     * @return
-     */
-    private boolean selectDatabase(String database) {
-    	try {
-        	Statement stm = mysql_connection.createStatement();
-        	stm.executeQuery("USE " + database);
-        	stm.close();
-        	return true;
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return false;
-    	}
-    }
-    
-    /**
      * Closes the connection to the mysql server. Returns true on success.
      * @return
      */
@@ -103,13 +84,8 @@ public class MySqlManager {
     {
     	final String username = GameServer.getDatabaseUsername();
     	final String password = GameServer.getDatabasePassword();
-    	final String database = GameServer.getDatabaseName();
     	
-    	if(connect(username, password) && selectDatabase(database))
-    	{
-    		return true;
-    	}
-    	return false;
+    	return connect(username, password);
     }
     
     /**

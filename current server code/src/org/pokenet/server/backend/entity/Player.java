@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.map.ServerMap;
@@ -51,20 +52,20 @@ public class Player extends Character implements Battleable, Tradeable
 		ENGLISH, PORTUGESE, ITALIAN, FRENCH, FINNISH, SPANISH, GERMAN, DUTCH
 	}
 
-	private Language m_language;
+	private Language m_language = Language.ENGLISH;
 	private Bag m_bag;
 	private int m_battleId;
-	private Pokemon[] m_pokemon;
-	private PokemonBox[] m_boxes;
+	private Pokemon[] m_pokemon = new Pokemon[6];
+	private PokemonBox[] m_boxes = new PokemonBox[9];
 	private boolean m_isBattling = false;
 	private boolean m_isShopping = false;
 	private boolean m_isTalking = false;
 	private boolean m_isBoxing = false;
 	private boolean m_isSpriting = false;
 	private IoSession m_tcpSession = null;
-	private int m_money;
-	private ArrayList<String> m_friends;
-	private long m_lastLogin;
+	private int m_money = 0;
+	private List<String> m_friends = new ArrayList<String>();
+	private long m_lastLogin = 0;
 	private int m_skillHerbExp = 0;
 	private int m_skillCraftExp = 0;
 	private int m_skillFishExp = 0;
@@ -75,16 +76,13 @@ public class Player extends Character implements Battleable, Tradeable
 	private BattleField m_battleField = null;
 	private int m_healX, m_healY, m_healMapX, m_healMapY;
 	private int m_adminLevel = 0;
-	private boolean m_isMuted, m_isFishing;
-	private Shop m_currentShop = null;
+	private boolean m_isMuted = false;
+	private boolean m_isFishing = false;
+	private Shop m_currentShop;
 	private int m_repel = 0;
 	private long m_lastTrade = 0;
 	private MySqlManager m_database;
 	private String m_username = "";
-	/*
-	 * Stores movement of other players to be sent in bulk to client
-	 */
-	private String[] m_movements = new String[7];
 	/*
 	 * Kicking timer
 	 */
@@ -123,28 +121,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void queueOtherPlayerMovement(Direction d, int player)
 	{
-		String s = d.name().toUpperCase().charAt(0) + String.valueOf(player);
-		/* Queue the movement */
-		for(int i = 0; i < m_movements.length; i++)
-		{
-			if(m_movements[i] == null)
-			{
-				m_movements[i] = s;
-				return;
-			}
-		}
-		/*
-		 * Unsuccessful, queue is full! Send queue and place at 0
-		 */
-		String message = "M";
-		for(int i = 0; i < m_movements.length; i++)
-		{
-			message = message + m_movements[i] + ",";
-			m_movements[i] = null;
-		}
-		message = message.substring(0, message.length() - 1);
+		String message = "M" + d.name().toUpperCase().charAt(0) + String.valueOf(player);
 		m_tcpSession.write(message);
-		m_movements[0] = s;
 	}
 
 	/**
@@ -206,15 +184,8 @@ public class Player extends Character implements Battleable, Tradeable
 				/* This box exists and the pokemon exists in the database */
 				int id = m_boxes[box].getPokemon(slot).getDatabaseID();
 				m_database.query("DELETE FROM `pn_pokemon` WHERE `id` = '" + id + "'");
-				m_boxes[box].setPokemon(slot, null);
 			}
-			else
-			{
-				/*
-				 * This Pokemon or box has not been saved to the database yet so just null it.
-				 */
-				m_boxes[box].setPokemon(slot, null);
-			}
+			m_boxes[box].setPokemon(slot, null);
 		}
 	}
 
@@ -233,7 +204,6 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_boxes[box] == null)
 		{
 			m_boxes[box] = new PokemonBox();
-			m_boxes[box].setPokemon(new Pokemon[30]);
 		}
 		/* Make sure we're not depositing our only Pokemon */
 		if(getPartyCount() == 1)
@@ -383,7 +353,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public boolean canTrade()
 	{
-		return System.currentTimeMillis() - m_lastTrade > 60000 && getPartyCount() >= 2;
+		return System.currentTimeMillis() - m_lastTrade > (60 * 1000) && getPartyCount() >= 2;
 	}
 
 	/**
@@ -737,9 +707,6 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void addFriend(String friend)
 	{
-		/* Open for optimization, code works. */
-		if(m_friends == null)
-			m_friends = new ArrayList<String>();
 		if(m_friends.size() < 10)
 		{
 			m_friends.add(friend);
@@ -1414,7 +1381,6 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				/* We need a new box */
 				m_boxes[i] = new PokemonBox();
-				m_boxes[i].setPokemon(new Pokemon[30]);
 				m_boxes[i].setPokemon(0, p);
 				break;
 			}
@@ -1759,11 +1725,12 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void sendBoxInfo(int j)
 	{
+		if(j < 0 || j > 8)
+			return;
 		/* If box is non-existant, create it and send small packet */
 		if(m_boxes[j] == null)
 		{
 			m_boxes[j] = new PokemonBox();
-			m_boxes[j].setPokemon(new Pokemon[30]);
 			m_tcpSession.write("B");
 		}
 		/* Else send all pokes in box */
@@ -1771,13 +1738,12 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 0; i < m_boxes[j].getPokemon().length; i++)
 		{
 			if(m_boxes[j].getPokemon(i) != null)
-				packet = packet + m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";
+				packet += m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";
 			else
-				packet = packet + ",";
+				packet += ",";
 		}
-		m_tcpSession.write("B" + packet);
+		m_tcpSession.write("B" + packet);	
 	}
-
 	/**
 	 * Allows the player to buy an item
 	 * 

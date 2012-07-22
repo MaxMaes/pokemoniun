@@ -1,8 +1,9 @@
-Release Notes:
-[FIX]
+Current Release Notes:
+[FIX]Server sided movement (need stress-test).
 
 [ADD]
 
 [BUG]Client crash on bag close*
+[BUG]100% CPU Usage after logging in and out mutliple times.
 
 *These points have to be verified.

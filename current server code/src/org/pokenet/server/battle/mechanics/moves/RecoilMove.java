@@ -65,8 +65,7 @@ public class RecoilMove extends PokemonMove {
 				return 0;
 			int health = target.getHealth();
 			int damage = mech.calculateDamage(this, user, target);
-			target.changeHealth(-damage);
-			health -= target.getHealth();
+			health -= (health - damage);
 			if (damage == 0)
 				return 0;
 
@@ -78,6 +77,7 @@ public class RecoilMove extends PokemonMove {
 					user.getField().showMessage(user.getName() + " was hit by recoil!");
 				user.changeHealth(-recoil, true);
 			}
+			target.changeHealth(-damage);
 			return damage;
 		} catch(NullPointerException npe) {
 			npe.printStackTrace();

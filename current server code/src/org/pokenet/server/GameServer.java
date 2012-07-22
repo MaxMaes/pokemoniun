@@ -32,7 +32,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer
 {
-	static final int SERVER_REVISION = 1881;
+	static final int SERVER_REVISION = 1883;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers, m_movementThreads;
@@ -56,7 +56,7 @@ public class GameServer
 	// TODO: Rewrite this.
 	private static int getSVNRev()
 	{
-		int rev = 0;
+		int rev = SERVER_REVISION;
 		boolean foundRevision = false;
 		try
 		{
@@ -99,8 +99,8 @@ public class GameServer
 				m_dbServer = s.nextLine();
 				m_dbName = s.nextLine();
 				m_dbUsername = s.nextLine();
-				m_serverName = s.nextLine();
 				m_dbPassword = s.nextLine();
+				m_serverName = s.nextLine();
 				s.close();
 			}
 			catch(Exception e)
@@ -139,6 +139,8 @@ public class GameServer
 		m_instance = this;
 		if(autorun)
 		{
+			if(m_boolGui)
+				createGui();
 			loadSettings();
 			start();
 		}
@@ -273,6 +275,7 @@ public class GameServer
 				m_dbS.setText(s.nextLine());
 				m_dbN.setText(s.nextLine());
 				m_dbU.setText(s.nextLine());
+				m_dbP.setText(s.nextLine());
 				m_name.setText(s.nextLine());
 				s.close();
 			}
@@ -520,8 +523,12 @@ public class GameServer
 				{
 					m_boolGui = true;
 					if(line.hasOption("autorun"))
-						System.out.println("autorun doesn't work with GUI");
-					gs = new GameServer(false);
+					{
+						//System.out.println("autorun doesn't work with GUI");
+						gs = new GameServer(true);
+					}
+					else
+						gs = new GameServer(false);
 				}
 			}
 			catch(ParseException exp)

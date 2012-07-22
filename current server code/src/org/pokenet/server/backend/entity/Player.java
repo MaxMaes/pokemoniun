@@ -574,7 +574,7 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 0; i < m_pokemon.length; i++)
 		{
 			if(m_pokemon[i] != null)
-				m_pokemon[i].setHappiness(20);
+				m_pokemon[i].setHappiness((int) (m_pokemon[i].getHappiness()*0.8));
 		}
 		/*
 		 * Now warp them to the last place they were healed
@@ -1919,7 +1919,10 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 		for(int i = 0; i < m_friends.size(); i++)
 		{
-			m_tcpSession.write("mFa" + m_friends.get(i));
+			String friend = m_friends.get(i);
+			/*if(TcpProtocolHandler.containsPlayer(friend))
+				m_tcpSession.write("MFo" + friend);*/
+			m_tcpSession.write("mFa" + friend);
 		}
 	}
 
@@ -1972,7 +1975,8 @@ public class Player extends Character implements Battleable, Tradeable
 					+ (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + ","
 					+ (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + ","
 					+ (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + ","
-					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : ""));
+					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ",");
+					//		+ this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1));
 			/* Update move pp */
 			for(int j = 0; j < 4; j++)
 			{

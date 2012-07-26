@@ -12,9 +12,9 @@ import org.newdawn.slick.gui.GUIContext;
  *
  */
 public class ProgressBar extends Label {
-        private int m_value;
-        private int m_minVal;
-        private int m_maxVal;
+        private float m_value;
+        private float m_minVal;
+        private float m_maxVal;
         private Color textColor;
 
         /**
@@ -22,7 +22,7 @@ public class ProgressBar extends Label {
          * @param min
          * @param max
          */
-        public ProgressBar(int m_min, int m_max){
+        public ProgressBar(float m_min, float m_max){
                 super();
                 m_value = m_maxVal;
                 m_minVal = m_min;
@@ -60,7 +60,7 @@ public class ProgressBar extends Label {
          * Returns minimum value
          * @return
          */
-        public int getMinimum() {
+        public float getMinimum() {
                 return m_minVal;
         }
         
@@ -76,7 +76,7 @@ public class ProgressBar extends Label {
          * Returns the maximum value
          * @return
          */
-        public int getMaximum() {
+        public float getMaximum() {
                 return m_maxVal;
         }
         
@@ -100,7 +100,7 @@ public class ProgressBar extends Label {
          * Returns the current value
          * @return
          */
-        public int getValue() {
+        public float getValue() {
                 return m_value;
         }
         
@@ -119,7 +119,12 @@ public class ProgressBar extends Label {
         public void render(GUIContext ctx, Graphics g) {
                 super.render(ctx, g);
                 g.setColor(getForeground());
-                int barWidth = (int)(m_value * (getWidth() / (m_maxVal - m_minVal)));
+                float val = ((float)m_maxVal-(float)m_value) / ((float)m_maxVal-(float)m_minVal);
+                int barWidth = (int) ((int)this.getWidth()-(this.getWidth() * val));
+  
+                System.out.println(this.getWidth() - barWidth);
+                                
+                
                 g.fillRect(getAbsoluteX(), getAbsoluteY(),
                                 (barWidth > getWidth() ? getWidth() : barWidth),
                                 getHeight() - 1);

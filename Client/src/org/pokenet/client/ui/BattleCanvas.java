@@ -379,12 +379,19 @@ public class BattleCanvas extends Container
 	public void initPlayerXPBar()
 	{
 		// show xp bar, TODO: get this working :/
-		playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), (int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
-		playerXP.setSize(72, 4);
+		playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), 
+				(int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+		//playerXP = new ProgressBar(0, 1);
+		playerXP.setSize(100, 4);
 		
 		playerXP.setForeground(xpColor);
 
 		updatePlayerXP(BattleManager.getInstance().getCurPoke().getExp());
+		//updatePlayerXP(1);
+		System.out.println((int)BattleManager.getInstance().getCurPoke().getExpLvl());
+		System.out.println((int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+		System.out.println((int)BattleManager.getInstance().getCurPoke().getExp());
+		
 
 		playerXPBar.setLocation(playerHPBar.getX()-5, playerHPBar.getY() + 11);
 		playerXP.setLocation(playerXPBar.getX(), playerXPBar.getY());
@@ -572,6 +579,7 @@ public class BattleCanvas extends Container
 	{
 		this.removeAll();
 		playerHP = null;
+		playerXP = null;
 		enemyHP = null;
 		bgPic = null;
 		playerPoke = null;

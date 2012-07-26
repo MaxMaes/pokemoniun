@@ -1941,8 +1941,10 @@ public class Player extends Character implements Battleable, Tradeable
 					+ (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + ","
 					+ (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + ","
 					+ (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + ","
-					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ",");
-					//		+ this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1));
+					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ","
+					+ this.getParty()[i].getItemName() + "," 
+					+ (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()) + ","
+					+ (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1));
 			/* Update move pp */
 			for(int j = 0; j < 4; j++)
 			{

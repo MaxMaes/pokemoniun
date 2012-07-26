@@ -12,6 +12,7 @@ public class OurPokemon extends Pokemon {
 	private Image m_backSprite;
 	private int m_exp;
 	private int m_explvl;
+	private int m_explvlup;
 	private int m_atk;
 	private int m_def;
 	private int m_speed;
@@ -34,21 +35,39 @@ public class OurPokemon extends Pokemon {
 	 * @return
 	 */
 	public int getExp() {
-		return m_exp;
+		return this.m_exp;
+	}
+	
+	/**
+	 * Sets the total Exp required to reach next level
+	 * 
+	 * @param exprmn
+	 */
+	public void setExpLvlUp(int exprmn)
+	{
+		this.m_explvlup = exprmn;
+	}
+	
+	/**
+	 * Gets Exp to the next Level
+	 */
+	public int getExpLvlUp()
+	{
+		return this.m_explvlup;
 	}
 
 	/**
-	 * Sets Exp to next level
+	 * Sets the total Exp required to reach current level
 	 * 
 	 * @param exprmn
 	 */
 	public void setExpLvl(int exprmn)
 	{
-		m_explvl = exprmn;
+		this.m_explvl = exprmn;
 	}
 	
 	/**
-	 * Gets Exp to Level
+	 * Gets Exp to current Level
 	 */
 	public int getExpLvl()
 	{

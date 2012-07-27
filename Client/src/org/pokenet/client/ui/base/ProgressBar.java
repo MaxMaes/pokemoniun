@@ -120,10 +120,7 @@ public class ProgressBar extends Label {
                 super.render(ctx, g);
                 g.setColor(getForeground());
                 float val = ((float)m_maxVal-(float)m_value) / ((float)m_maxVal-(float)m_minVal);
-                int barWidth = (int) ((int)this.getWidth()-(this.getWidth() * val));
-  
-                System.out.println(this.getWidth() - barWidth);
-                                
+                int barWidth = (int) ((int)this.getWidth()-(this.getWidth() * val));                               
                 
                 g.fillRect(getAbsoluteX(), getAbsoluteY(),
                                 (barWidth > getWidth() ? getWidth() : barWidth),

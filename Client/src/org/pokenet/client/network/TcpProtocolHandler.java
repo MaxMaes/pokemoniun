@@ -421,6 +421,8 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						// Level change
 						String[] levelData = message.substring(2).split(",");
 						m_game.getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setLevel(Integer.parseInt(levelData[1]));
+						m_game.getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setExpLvl(m_game.getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].getExpLvlUp());
+						m_game.getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setExpLvlUp(Integer.parseInt(levelData[2]));
 						m_game.getUi().update(false);
 						break;
 					case 'h':

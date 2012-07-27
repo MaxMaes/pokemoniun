@@ -756,7 +756,7 @@ public class WildBattleField extends BattleField {
 
 					/* Save the level and update the client */
 					p.setLevel(level);
-					m_player.getTcpSession().write("Pl" + index + "," + level);
+					m_player.getTcpSession().write("Pl" + index + "," + level + "," + (int)p.getExpForLevel(level+1));
 					TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 							new BattleLevelChangeMessage(p.getSpeciesName(), level));
 					m_player.updateClientPokemonStats(index);

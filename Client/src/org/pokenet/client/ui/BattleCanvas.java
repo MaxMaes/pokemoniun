@@ -378,8 +378,14 @@ public class BattleCanvas extends Container
 	 */
 	public void initPlayerXPBar()
 	{
-		playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), 
+		if(playerXP == null)
+			playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), 
 				(int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+		else
+		{
+			playerXP.setMinimum((int)BattleManager.getInstance().getCurPoke().getExpLvl());
+			playerXP.setMaximum((int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+		}
 		playerXP.setSize(100, 4);
 		
 		playerXP.setForeground(xpColor);

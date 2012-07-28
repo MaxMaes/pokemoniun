@@ -47,7 +47,7 @@ public class ChatDialog extends Frame {
 				if (m_inputBox.getText().charAt(0) == '/'){
 					ModerationManager.parseLine(m_inputBox.getText().substring(1));
 				} else {
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("Cl" 
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("Cw" 
 							+ m_inputBox.getText());
 				}
 			} else {

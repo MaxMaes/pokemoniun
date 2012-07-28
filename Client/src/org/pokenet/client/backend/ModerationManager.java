@@ -44,6 +44,10 @@ public class ModerationManager {
 		else if (x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount")) {
 			m_ioSession.writeTcpMessage("Mc");
 		}
+		// local chat
+		else if (x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("local ")) {
+			m_ioSession.writeTcpMessage("Cl" + x.substring(6));
+		}
 		// Change Weather
 		else if (x.length() >= 8 && x.substring(0, 8).equalsIgnoreCase("weather ")) {
 			// Normal

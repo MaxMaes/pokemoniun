@@ -562,6 +562,14 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					// Chat/Interact
 					switch(message.charAt(1))
 					{
+						case 'w':
+							// world chat
+							if(!p.isMuted())
+								for(String s : m_players.keySet())
+								{
+									m_players.get(s).getTcpSession().write("q" + "<" + p.getName() + "> " + message.substring(2));
+								}
+							break;
 						case 'l':
 							// Local chat
 							String mes = message.substring(2);

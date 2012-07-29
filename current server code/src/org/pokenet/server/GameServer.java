@@ -35,13 +35,14 @@ public class GameServer
 	static final int SERVER_REVISION = 1883;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
-	private static int m_maxPlayers, m_movementThreads;
+	private static int m_maxPlayers = 500; // default 500 players
+	private static int m_movementThreads = 12; // default to high
+	private int m_highest = -1;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
-	private static boolean m_boolGui;
+	private static boolean m_boolGui = false;
 	private JTextField m_dbS, m_dbN, m_dbU, m_name;
 	private JPasswordField m_dbP;
 	private JButton m_start, m_stop, m_set, m_exit;
-	private int m_highest;
 	private JLabel m_pAmount, m_pHighest;
 	private JFrame m_gui;
 
@@ -338,15 +339,8 @@ public class GameServer
 	/** Exits the game server application */
 	private void exit()
 	{
-		if(m_boolGui)
-			if(m_stop.isEnabled())
-			{
-				JOptionPane.showMessageDialog(null, "You must stop the server before exiting.");
-			}
-			else
-			{
-				System.exit(0);
-			}
+		if(m_boolGui && m_stop.isEnabled())
+			JOptionPane.showMessageDialog(null, "You must stop the server before exiting.");
 		else
 			System.exit(0);
 	}
@@ -494,13 +488,8 @@ public class GameServer
 				if(line.hasOption("players"))
 				{
 					m_maxPlayers = Integer.parseInt(line.getOptionValue("players"));
-					if(m_maxPlayers == 0 || m_maxPlayers == -1)
-						m_maxPlayers = 99999;
-				}
-				else
-				{
-					System.err.println("WARNING: No maximum player count provided. Will default to 500 players.");
-					m_maxPlayers = 500;
+					if(m_maxPlayers < 1)
+						m_maxPlayers = 500;
 				}
 				if(line.hasOption("help"))
 				{
@@ -509,27 +498,12 @@ public class GameServer
 					formatter.printHelp("java GameServer [param] <args>", options);
 				}
 				/* Create the server gui */
-				@SuppressWarnings("unused")
-				GameServer gs;
-				if(line.hasOption("nogui"))
-				{
-					m_boolGui = false;
-					if(line.hasOption("autorun"))
-						gs = new GameServer(true);
-					else
-						gs = new GameServer(false);
-				}
-				else
+				if(!line.hasOption("nogui"))
 				{
 					m_boolGui = true;
-					if(line.hasOption("autorun"))
-					{
-						//System.out.println("autorun doesn't work with GUI");
-						gs = new GameServer(true);
-					}
-					else
-						gs = new GameServer(false);
-				}
+				} // No else since it's set to default 'false'
+				boolean autorun = line.hasOption("autorun");
+				new GameServer(autorun);
 			}
 			catch(ParseException exp)
 			{

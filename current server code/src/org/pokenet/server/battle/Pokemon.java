@@ -912,7 +912,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Return the name of this pokemon's item.
 	 */
 	public String getItemName() {
-		if ((m_item == null) || m_item.isRemovable()) { return ""; }
+		//if ((m_item == null) || m_item.isRemovable()) { return ""; }
+		if (m_item == null) { return ""; }
 		return m_item.getName();
 	}
 
@@ -920,7 +921,8 @@ public class Pokemon extends PokemonSpecies {
 	 * Get this pokemon's item.
 	 */
 	public HoldItem getItem() {
-		if ((m_item != null) && m_item.isRemovable()) { return null; }
+		//if ((m_item != null) && m_item.isRemovable()) { return null; }
+		if (m_item == null) { return null; }
 		return m_item;
 	}
 

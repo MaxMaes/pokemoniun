@@ -749,6 +749,7 @@ class TeamPopup extends Frame
 		else
 			// TODO: Write "Give" packet
 			GameClient.getInstance().getPacketGenerator().writeTcpMessage("G" + id + "," + pokeIndex);
+			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
 		m_parent.destroyPopup();
 	}
 }

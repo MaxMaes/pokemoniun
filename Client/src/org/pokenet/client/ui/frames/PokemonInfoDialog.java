@@ -12,8 +12,8 @@ import org.pokenet.client.backend.entity.OurPokemon;
 
 public class PokemonInfoDialog extends Frame{
         private Label icon = new Label();
-        private Label data[] = new Label[14];
-        private Label labels[] = new Label[14];
+        private Label data[] = new Label[15];
+        private Label labels[] = new Label[15];
        
         public PokemonInfoDialog(OurPokemon poke){
                 initGUI(poke);
@@ -36,7 +36,7 @@ public class PokemonInfoDialog extends Frame{
                 this.setBackground(new Color(255,255,255,200));
                 int x = 70;
                 int y = 5;
-                for (int i = 0; i < 14; i++){
+                for (int i = 0; i < 15; i++){
                         data[i] = new Label();
                         labels[i] = new Label();
                         data[i].setX(x + 80);
@@ -61,6 +61,7 @@ public class PokemonInfoDialog extends Frame{
                 labels[11].setText(translated.get(12));
                 labels[12].setText(translated.get(13));
                 labels[13].setText(translated.get(14));
+                labels[14].setText("Hold item");
                 //labels[13].setText("Exp to next level:");
                 data[0].setText(String.valueOf(poke.getLevel()));
                 data[1].setText(poke.getName());
@@ -74,7 +75,7 @@ public class PokemonInfoDialog extends Frame{
                 data[8].setText(poke.getAbility());
                 data[9].setText(String.valueOf(poke.getExp()));
                 data[10].setText(poke.getNature());
-               
+                data[14].setText(poke.getHoldItem());
                 data[11].setText(String.valueOf(poke.getType1()));
                 if(poke.getType2() == null){
                         data[12].setText("");
@@ -96,7 +97,7 @@ public class PokemonInfoDialog extends Frame{
                 }
                 loadImage(poke);
                 setVisible(true);
-                setSize(270, 310);
+                setSize(270, 330);
                 setResizable(false);
                 setTitle(poke.getName());
         	} catch (Exception e) {e.printStackTrace();}

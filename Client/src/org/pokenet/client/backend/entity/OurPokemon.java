@@ -347,4 +347,8 @@ public class OurPokemon extends Pokemon {
 	public void setHoldItem(String item) {
 		m_item = item;		
 	}
+	
+	public String getHoldItem() {
+		return m_item;		
+	}
 }

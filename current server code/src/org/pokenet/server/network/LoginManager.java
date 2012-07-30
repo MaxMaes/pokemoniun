@@ -587,6 +587,18 @@ public class LoginManager implements Runnable {
 						&& !data.getString("move3").equalsIgnoreCase("null") ? DataService
 						.getMovesList().getMove(data.getString("move3")) : null);
 				/*
+				 * if the abilty is empty give it an ability
+				 */
+				String abi;
+				if(data.getString("abilityName").equals(""))
+				{
+					abi = PokemonSpecies.getDefaultData().getPokemonByName(data.getString("speciesName")).getAbilities()[0];
+				}
+				else
+				{
+					abi = data.getString("abilityName");
+				}
+				/*
 				 * Create the new Pokemon
 				 */
 				Pokemon p = new Pokemon(
@@ -594,7 +606,7 @@ public class LoginManager implements Runnable {
 						PokemonSpecies.getDefaultData().getPokemonByName(
 								data.getString("speciesName")),
 						PokemonNature.getNatureByName(data.getString("nature")),
-						data.getString("abilityName"),
+						abi,
 						data.getString("itemName"),
 						data.getInt("gender"),
 						data.getInt("level"),

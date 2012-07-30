@@ -76,7 +76,8 @@ public class Trade implements Runnable{
 							(player2Party[i].getMoves()[0] != null ? player2Party[i].getMoves()[0].getName() : "") + "," +
 							(player2Party[i].getMoves()[1] != null ? player2Party[i].getMoves()[1].getName() : "") + "," +
 							(player2Party[i].getMoves()[2] != null ? player2Party[i].getMoves()[2].getName() : "") + "," +
-							(player2Party[i].getMoves()[3] != null ? player2Party[i].getMoves()[3].getName() : ""));
+							(player2Party[i].getMoves()[3] != null ? player2Party[i].getMoves()[3].getName() : "") + "," +
+							player2Party[i].getItemName());
 				}
 			}
 		}
@@ -112,7 +113,8 @@ public class Trade implements Runnable{
 							(player1Party[i].getMoves()[0] != null ? player1Party[i].getMoves()[0].getName() : "") + "," +
 							(player1Party[i].getMoves()[1] != null ? player1Party[i].getMoves()[1].getName() : "") + "," +
 							(player1Party[i].getMoves()[2] != null ? player1Party[i].getMoves()[2].getName() : "") + "," +
-							(player1Party[i].getMoves()[3] != null ? player1Party[i].getMoves()[3].getName() : ""));
+							(player1Party[i].getMoves()[3] != null ? player1Party[i].getMoves()[3].getName() : "") + "," +
+							player1Party[i].getItemName());
 				}
 			}
 		}

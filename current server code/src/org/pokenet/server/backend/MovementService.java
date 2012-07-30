@@ -17,10 +17,10 @@ import tiled.io.xml.XMLMapTransformer;
  *
  */
 public class MovementService {
-	private MovementManager [] m_movementManager;
-	private ServerMapMatrix m_mapMatrix;
+	private final MovementManager[] m_movementManager;
+	private final ServerMapMatrix m_mapMatrix;
+	private final NpcSleepTimer m_sleepTimer;
 	private ServerMap m_tempMap;
-	private NpcSleepTimer m_sleepTimer;
 	
 	/**
 	 * Default constructor

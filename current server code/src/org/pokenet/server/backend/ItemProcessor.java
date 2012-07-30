@@ -34,7 +34,7 @@ public class ItemProcessor implements Runnable {
 	};
 
 	private final Player m_player;
-	private final String[]   m_details;
+	private final String[] m_details;
 
 	/**
 	 * Constructor

@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Bag {
 	private ArrayList<BagItem> m_items;
-	private int m_memberId;
-	public static int m_bagsize = 30;//30 is the artificial bag size, right?
+	private final int m_memberId;
+	private static final int m_bagsize = 30;//30 is the artificial bag size, right?
 	
 	/**
 	 * Default constructor
@@ -39,10 +39,10 @@ public class Bag {
 	 */
 	public boolean addItem(int itemNumber, int quantity) {
 		int bagIndex = containsItem(itemNumber);
-		if(bagIndex > -1){
+		if(bagIndex > -1) {
 			m_items.get(bagIndex).setQuantity(m_items.get(bagIndex).getQuantity()+quantity);
 			return true;
-		}else{
+		} else {
 			if(m_items.size()<30){
 				m_items.add(new BagItem(itemNumber,quantity));
 				return true;
@@ -111,27 +111,10 @@ public class Bag {
 	}
 	
 	/**
-	 * Sets the member id of this bag
-	 * @param id
-	 */
-	public void setMemberId(int id) {
-		m_memberId = id;
-	}
-	
-	/**
 	 * Returns this bag's member id
 	 * @return
 	 */
 	public int getMemberId() {
 		return m_memberId;
-	}
-	
-	/**
-	 * Returns true if the bag contains the item
-	 * @param itemId
-	 * @return
-	 */
-	public boolean contains(int itemId) {
-		return false;
 	}
 }

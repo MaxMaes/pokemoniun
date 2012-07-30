@@ -26,10 +26,10 @@ import org.pokenet.server.network.message.RequestMessage;
  */
 public class TcpProtocolHandler extends IoHandlerAdapter
 {
-	private static HashMap<String, Player> m_players;
-	private LoginManager m_loginManager;
-	private LogoutManager m_logoutManager;
-	private RegistrationManager m_regManager;
+	private static final HashMap<String, Player> m_players = new HashMap<String, Player>();
+	private final LoginManager m_loginManager;
+	private final LogoutManager m_logoutManager;
+	private final RegistrationManager m_regManager;
 
 	/**
 	 * Constructor
@@ -43,11 +43,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		m_logoutManager = logout;
 		m_regManager = new RegistrationManager();
 		m_regManager.start();
-	}
-
-	static
-	{
-		m_players = new HashMap<String, Player>();
 	}
 
 	@Override
@@ -652,11 +647,10 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		 * Queue all players to be saved
 		 */
 		Iterator<Player> it = m_players.values().iterator();
-		Player p;
 		while(it.hasNext())
 		{
-			p = it.next();
-			m_logoutManager.queuePlayer(p);
+			Player player = it.next();
+			m_logoutManager.queuePlayer(player);
 		}
 		/*
 		 * Since the method is called during a server shutdown, wait for all players to be logged out

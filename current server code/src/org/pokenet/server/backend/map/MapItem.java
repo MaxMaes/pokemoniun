@@ -6,9 +6,9 @@ package org.pokenet.server.backend.map;
  *
  */
 public class MapItem {
-	private int m_x;
-	private int m_y;
-	private int m_id;
+	private final int m_x;
+	private final int m_y;
+	private final int m_id;
 	
 	/**
 	 * Constructor
@@ -19,30 +19,6 @@ public class MapItem {
 	public MapItem(int x, int y, int id) {
 		m_x = x;
 		m_y = y;
-		m_id = id;
-	}
-
-	/**
-	 * Sets the x co-ordinate of the item on map
-	 * @param x
-	 */
-	public void setX(int x) {
-		m_x = x;
-	}
-	
-	/**
-	 * Sets the y co-ordinate of the item on map
-	 * @param y
-	 */
-	public void setY(int y) {
-		m_y = y;
-	}
-	
-	/**
-	 * Sets the item id of this item
-	 * @param id
-	 */
-	public void setId(int id) {
 		m_id = id;
 	}
 	

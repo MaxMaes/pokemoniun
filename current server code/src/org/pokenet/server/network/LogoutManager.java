@@ -20,7 +20,7 @@ import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
 public class LogoutManager implements Runnable {
 	private Queue<Player> m_logoutQueue;
 	private Thread m_thread;
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private MySqlManager m_database;
 	
 	/**
@@ -29,7 +29,6 @@ public class LogoutManager implements Runnable {
 	public LogoutManager() {
 		m_database = MySqlManager.getInstance();
 		m_logoutQueue = new LinkedList<Player>();
-		m_thread = null;
 	}
 	
 	/**
@@ -78,15 +77,14 @@ public class LogoutManager implements Runnable {
 		while(m_isRunning) {
 			synchronized(m_logoutQueue) {
 				if(m_logoutQueue.peek() != null) {
-					Player p = m_logoutQueue.poll();
-					synchronized(p) {
-						if(p != null) {
-							if(!attemptLogout(p)) {
-								m_logoutQueue.add(p);
+					Player player = m_logoutQueue.poll();
+					synchronized(player) {
+						if(player != null) {
+							if(!attemptLogout(player)) {
+								m_logoutQueue.add(player);
 							} else {
-								p.dispose();
-								System.out.println("INFO: " + p.getName() + " logged out.");
-								p = null;
+								player.dispose();
+								System.out.println("INFO: " + player.getName() + " logged out.");
 							}
 						}
 					}
@@ -94,7 +92,7 @@ public class LogoutManager implements Runnable {
 			}
 			try {
 				Thread.sleep(500);
-			} catch (Exception e) {}
+			} catch (InterruptedException e) {}
 		}
 		m_thread = null;
 		System.out.println("INFO: All player data saved successfully.");
@@ -445,8 +443,8 @@ catch (NullPointerException e) {
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 
 }

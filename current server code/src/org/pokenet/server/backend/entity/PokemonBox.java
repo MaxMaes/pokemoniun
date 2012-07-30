@@ -8,7 +8,12 @@ import org.pokenet.server.battle.Pokemon;
  *
  */
 public class PokemonBox {
-	private Pokemon[] m_pokemon = new Pokemon[30];
+	private final Pokemon[] m_pokemon;
+	
+	public PokemonBox()
+	{
+		m_pokemon = new Pokemon[30];
+	}
 	
 	/**
 	 * Returns all pokemon

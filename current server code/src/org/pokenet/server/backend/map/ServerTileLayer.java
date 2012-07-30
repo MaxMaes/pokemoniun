@@ -8,9 +8,9 @@ import tiled.core.TileLayer;
  *
  */
 public class ServerTileLayer {
-	private byte[][] m_tiles;
-	private int m_width = 0;
-	private int m_height = 0;
+	private final byte[][] m_tiles;
+	private final int m_width;
+	private final int m_height;
 	/**
 	 * Constructor
 	 * @param m
@@ -19,6 +19,7 @@ public class ServerTileLayer {
 		m_tiles = new byte[m.getWidth()][m.getHeight()];
 		m_width = m.getWidth();
 		m_height = m.getHeight();
+		
 		for(int x = 0; x < m.getWidth(); x++) {
 			for(int y = 0; y < m.getHeight(); y++) {
 				if(m.getTileAt(x, y) != null) {

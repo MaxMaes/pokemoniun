@@ -9,7 +9,7 @@ import org.pokenet.server.backend.entity.Positionable.Direction;
  *
  */
 public class ServerMapMatrix {
-	private ServerMap[][] m_mapMatrix;
+	private final ServerMap[][] m_mapMatrix;
 	
 	/**
 	 * Default constructor

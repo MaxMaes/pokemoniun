@@ -11,8 +11,8 @@ import org.pokenet.server.GameServer;
  *
  */
 public class Shop implements Runnable {
-	private HashMap<Integer, Integer> m_stock;
-	private HashMap<Integer, Integer> m_prices;
+	private final HashMap<Integer, Integer> m_stock;
+	private final HashMap<Integer, Integer> m_prices;
 	/*
 	 * Delta represents how often the stock should be updated
 	 * 

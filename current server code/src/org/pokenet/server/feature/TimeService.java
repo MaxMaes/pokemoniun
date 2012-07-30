@@ -19,7 +19,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class TimeService implements Runnable
 {
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private long m_lastWeatherUpdate;
 	private int m_forcedWeather = 0;
 	private Thread m_thread;
@@ -128,7 +128,7 @@ public class TimeService implements Runnable
 			{
 				Thread.sleep(10 * 1000); // Sleep for 10 seconds since it goes 6 times faster.
 			}
-			catch(Exception e)
+			catch(InterruptedException e)
 			{
 			}
 		}

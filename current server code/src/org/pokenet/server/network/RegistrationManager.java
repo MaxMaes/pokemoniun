@@ -9,7 +9,6 @@ import java.util.Queue;
 import java.util.Random;
 
 import org.apache.mina.core.session.IoSession;
-import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -24,7 +23,7 @@ import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 public class RegistrationManager implements Runnable {
 	private Queue<IoSession> m_queue;
 	private Thread m_thread;
-	private boolean m_isRunning;
+	private boolean m_isRunning = false;
 	private MySqlManager m_database;
 	
 	/**

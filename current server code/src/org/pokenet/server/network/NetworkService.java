@@ -14,11 +14,11 @@ import org.pokenet.server.network.codec.PokenetCodecFactory;
  * @author shadowkanji
  */
 public class NetworkService {
-	private TcpProtocolHandler m_tcpProtocolHandler;
-	private LoginManager m_loginManager;
-	private LogoutManager m_logoutManager;
+	private final TcpProtocolHandler m_tcpProtocolHandler;
+	private final LoginManager m_loginManager;
+	private final LogoutManager m_logoutManager;
 	private IoAcceptor m_tcpAcceptor;
-	private ChatManager [] m_chatManager;
+	private final ChatManager[] m_chatManager = new ChatManager[3];
 	
 	
 	/**
@@ -28,7 +28,6 @@ public class NetworkService {
 		m_logoutManager = new LogoutManager();
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);
-		m_chatManager = new ChatManager[3];
 	}
 	
 	/**
@@ -75,7 +74,7 @@ public class NetworkService {
 		//Load MySQL JDBC Driver
         try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		/*

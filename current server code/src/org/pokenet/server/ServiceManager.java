@@ -5,7 +5,6 @@ import org.pokenet.server.backend.SpriteList;
 import org.pokenet.server.backend.item.ItemDatabase;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.feature.TimeService;
-import org.pokenet.server.network.IdleTimer;
 import org.pokenet.server.network.NetworkService;
 
 /**
@@ -18,7 +17,6 @@ public class ServiceManager {
 	private MovementService m_movementService;
 	private DataService m_dataService;
 	private TimeService m_timeService;
-	private IdleTimer m_idleTimer;
 	private SpriteList m_sprites;
 	private ItemDatabase m_itemdatabase;
 	
@@ -34,7 +32,6 @@ public class ServiceManager {
 		m_networkService = new NetworkService();
 		m_itemdatabase = new ItemDatabase();
 		m_movementService = new MovementService();
-		m_idleTimer = new IdleTimer();
 		m_sprites = new SpriteList();
 	}
 	
@@ -91,7 +88,6 @@ public class ServiceManager {
 		m_movementService.start();
 		m_networkService.start();
 		m_timeService.start();
-		m_idleTimer.start();
 		System.out.println("INFO: Service Manager startup completed.");
 	}
 	
@@ -103,7 +99,6 @@ public class ServiceManager {
 		 * Stopping services is very delicate and must be done in the following order to avoid
 		 * leaving player objects in a non-concurrent state.
 		 */
-		m_idleTimer.stop();
 		m_timeService.stop();
 		m_movementService.stop();
 		m_networkService.stop();
@@ -112,9 +107,5 @@ public class ServiceManager {
 
 	public ItemDatabase getItemDatabase() {
 		return m_itemdatabase;
-	}
-
-	public void setItemDatabase(ItemDatabase mItemdatabase) {
-		m_itemdatabase = mItemdatabase;
 	}
 }

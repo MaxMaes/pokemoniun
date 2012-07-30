@@ -6,7 +6,7 @@ package org.pokenet.server.backend.entity;
  *
  */
 public class BagItem {
-	private int m_item;
+	private final int m_item;
 	private int m_quantity;
 	
 	/**

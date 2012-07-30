@@ -37,7 +37,7 @@ public class GameServer
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers = 500; // default 500 players
 	private static int m_movementThreads = 12; // default to high
-	private int m_highest = -1;
+	private static int m_highest = -1;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
 	private static boolean m_boolGui = false;
 	private JTextField m_dbS, m_dbN, m_dbU, m_name;
@@ -143,7 +143,6 @@ public class GameServer
 			if(m_boolGui)
 				createGui();
 			loadSettings();
-			start();
 		}
 		else
 		{
@@ -161,9 +160,9 @@ public class GameServer
 					loadSettings();
 				else
 					getConsoleSettings();
-				start();
 			}
 		}
+		start();
 	}
 
 	/**

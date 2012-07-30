@@ -24,9 +24,9 @@ public class DataLoader implements Runnable {
 	 * Constructor
 	 * @param f
 	 */
-	public DataLoader(File f, ServerMap m) {
-		m_file = f;
-		m_map = m;
+	public DataLoader(File file, ServerMap map) {
+		m_file = file;
+		m_map = map;
 		new Thread(this).start();
 	}
 
@@ -41,7 +41,7 @@ public class DataLoader implements Runnable {
 			HMObject hmObject = null;
 			TradeChar t = null;
 			String line;
-			String [] details;
+			String[] details;
 			String direction = "Down";
 			while(reader.hasNextLine()) {
 				line = reader.nextLine();

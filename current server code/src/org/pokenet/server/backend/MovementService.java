@@ -38,7 +38,7 @@ public class MovementService {
 	public void removePlayer(String username) {
 		for(int i = 0; i < m_movementManager.length; i++) {
 			if(m_movementManager[i].removePlayer(username)) {
-				return;
+				break;
 			}
 		}
 	}
@@ -54,12 +54,6 @@ public class MovementService {
 				if(m_movementManager[i].getProcessingLoad() < m_movementManager[smallest].getProcessingLoad())
 					smallest = i;
 			}
-		}
-		if(m_movementManager[smallest] == null) {
-			m_movementManager[smallest] = new MovementManager();
-		}
-		if(!m_movementManager[smallest].isRunning()) {
-			m_movementManager[smallest].start();
 		}
 		return m_movementManager[smallest];
 	}

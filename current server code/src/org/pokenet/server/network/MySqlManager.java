@@ -53,13 +53,11 @@ public class MySqlManager {
 	        mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
 	        if(!mysql_connection.isClosed()) {
 	           	return true;
-	        }else {
-	        	return false;
-    		}
+	        }
 		} catch(SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+    	return false;
     }
     
     /**
@@ -76,8 +74,8 @@ public class MySqlManager {
         catch (SQLException e)
         {
         	e.printStackTrace();
-        	return false;
         }
+        return false;
     }
     
     private boolean open()

@@ -88,18 +88,18 @@ public class WildBattleField extends BattleField {
 		if (m_player.getMap().isWeatherForced()) {
 			switch (m_player.getMap().getWeather()) {
 			case NORMAL:
-				return;
+				break;
 			case RAIN:
 				this.applyEffect(new RainEffect());
-				return;
+				break;
 			case HAIL:
 				this.applyEffect(new HailEffect());
-				return;
+				break;
 			case SANDSTORM:
 				this.applyEffect(new SandstormEffect());
-				return;
+				break;
 			default:
-				return;
+				break;
 			}
 		} else {
 			FieldEffect f = TimeService.getWeatherEffect();
@@ -509,7 +509,7 @@ public class WildBattleField extends BattleField {
 		while (m_dispatch != null) {
 			try {
 				Thread.sleep(500);
-			} catch (Exception e) {
+			} catch (InterruptedException e) {
 			}
 		}
 		switch (p) {
@@ -767,11 +767,11 @@ public class WildBattleField extends BattleField {
 
 	@Override
 	public void forceExecuteTurn() {
-		if (m_turn[0] == null) {
-			m_turn[0] = BattleTurn.getMoveTurn(-1);
-		}
-		if (m_turn[1] == null) {
-			m_turn[1] = BattleTurn.getMoveTurn(-1);
+		for(int turn = 0; turn < m_turn.length; turn++)
+		{
+			if (m_turn[turn] == null) {
+				m_turn[turn] = BattleTurn.getMoveTurn(-1);
+			}
 		}
 		executeTurn(m_turn);
 	}

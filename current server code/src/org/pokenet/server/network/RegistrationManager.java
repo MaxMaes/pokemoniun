@@ -24,14 +24,13 @@ public class RegistrationManager implements Runnable {
 	private Queue<IoSession> m_queue;
 	private Thread m_thread;
 	private boolean m_isRunning = false;
-	private MySqlManager m_database;
+	private final MySqlManager m_database;
 	
 	/**
 	 * Constructor
 	 */
 	public RegistrationManager() {
 		m_database = MySqlManager.getInstance();
-		m_thread = null;
 		m_queue = new LinkedList<IoSession>();
 	}
 	

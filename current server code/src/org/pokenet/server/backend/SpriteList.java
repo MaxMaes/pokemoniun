@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class SpriteList {
-	private ArrayList<Integer> m_sprites;
+	private final ArrayList<Integer> m_sprites;
 	
 	/**
 	 * Constructor

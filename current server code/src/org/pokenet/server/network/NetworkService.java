@@ -1,5 +1,6 @@
 package org.pokenet.server.network;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.apache.mina.core.service.IoAcceptor;
@@ -17,9 +18,8 @@ public class NetworkService {
 	private final TcpProtocolHandler m_tcpProtocolHandler;
 	private final LoginManager m_loginManager;
 	private final LogoutManager m_logoutManager;
+	private final ChatManager[] m_chatManager;
 	private IoAcceptor m_tcpAcceptor;
-	private final ChatManager[] m_chatManager = new ChatManager[3];
-	
 	
 	/**
 	 * Default constructor
@@ -28,6 +28,7 @@ public class NetworkService {
 		m_logoutManager = new LogoutManager();
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);
+		m_chatManager = new ChatManager[3];
 	}
 	
 	/**
@@ -58,14 +59,6 @@ public class NetworkService {
             }
             return m_chatManager[smallest];
     }
-	
-	/**
-	 * Returns the connection manager (packet handler)
-	 * @return
-	 */
-	public TcpProtocolHandler getConnectionManager() {
-		return m_tcpProtocolHandler;
-	}
 	
 	/**
 	 * Start this network service by starting all threads.
@@ -106,7 +99,7 @@ public class NetworkService {
 		try {
 			m_tcpAcceptor.bind(new InetSocketAddress(7002)); 
 			System.out.println("INFO: TCP acceptor started.");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}

@@ -8,9 +8,9 @@ import java.util.ArrayList;
  *
  */
 public class Bag {
-	private ArrayList<BagItem> m_items;
+	private final ArrayList<BagItem> m_items;
 	private final int m_memberId;
-	private static final int m_bagsize = 30;//30 is the artificial bag size, right?
+	private static final int m_bagsize = 30; //30 is the artificial bag size, right?
 	
 	/**
 	 * Default constructor
@@ -26,10 +26,11 @@ public class Bag {
 	 * @return
 	 */
 	public boolean hasSpace(int itemid) {
-			if(containsItem(itemid) >= 0 || m_items.size() < m_bagsize)
-				return true;
-			else
-				return false;
+		if(containsItem(itemid) >= 0 || m_items.size() < m_bagsize)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -40,16 +41,13 @@ public class Bag {
 	public boolean addItem(int itemNumber, int quantity) {
 		int bagIndex = containsItem(itemNumber);
 		if(bagIndex > -1) {
-			m_items.get(bagIndex).setQuantity(m_items.get(bagIndex).getQuantity()+quantity);
+			m_items.get(bagIndex).increaseQuantity(quantity);
 			return true;
-		} else {
-			if(m_items.size()<30){
-				m_items.add(new BagItem(itemNumber,quantity));
-				return true;
-			}else{
-				return false;
-			}
+		} else if(m_items.size() < 30){
+			m_items.add(new BagItem(itemNumber, quantity));
+			return true;
 		}
+		return false;
 	}
 	
 	/**
@@ -62,7 +60,7 @@ public class Bag {
 		for(int i = 0; i < m_items.size(); i++) {
 			if(m_items.get(i).getItemNumber() == itemNumber) {
 				if(m_items.get(i).getQuantity() - quantity > 0)
-					m_items.get(i).setQuantity(m_items.get(i).getQuantity() - quantity);
+					m_items.get(i).decreaseQuantity(quantity);
 				else
 					m_items.remove(i);
 				return true;

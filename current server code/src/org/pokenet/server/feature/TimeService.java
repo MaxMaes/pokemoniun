@@ -20,13 +20,13 @@ import org.pokenet.server.network.TcpProtocolHandler;
 public class TimeService implements Runnable
 {
 	private boolean m_isRunning = false;
-	private long m_lastWeatherUpdate;
+	private long m_lastWeatherUpdate = 0;
 	private int m_forcedWeather = 0;
-	private Thread m_thread;
-	private static int m_hour;
-	private static int m_minutes;
+	private static int m_hour = 0;
+	private static int m_minutes = 0;
 	private static int m_day = 0;
-	private static Weather m_weather;
+	private static Weather m_weather = Weather.NORMAL;
+	private Thread m_thread;
 
 	/*
 	 * NOTE: HAIL = SNOW
@@ -41,31 +41,7 @@ public class TimeService implements Runnable
 	 */
 	public TimeService()
 	{
-		/*
-		 * Generate random weather
-		 */
-		int weather = new Random().nextInt(4);
-		switch(weather)
-		{
-			case 0:
-				m_weather = Weather.NORMAL;
-				break;
-			case 1:
-				m_weather = Weather.RAIN;
-				break;
-			case 2:
-				m_weather = Weather.HAIL;
-				break;
-			case 3:
-				m_weather = Weather.FOG;
-				break;
-			case 4:
-				m_weather = Weather.SANDSTORM;
-				break;
-			default:
-				m_weather = Weather.NORMAL;
-				break;
-		}
+		generateWeather();
 		m_lastWeatherUpdate = System.currentTimeMillis();
 		m_thread = new Thread(this);
 	}
@@ -102,22 +78,28 @@ public class TimeService implements Runnable
 		while(m_isRunning)
 		{
 			/* Update the time. Time goes 6 times faster in Pokemonium. */
-			m_minutes = m_minutes == 59 ? 0 : m_minutes + 1;
-			if(m_minutes == 0)
+			if(m_minutes == 59)
 			{
 				if(m_hour == 23)
 				{
-					incrementDay();
+					if(m_day == 6)
+					{
+						m_day = 0;
+					} else {
+						m_day++;
+					}
 					m_hour = 0;
 				}
 				else
 				{
-					m_hour += 1;
+					m_hour++;
 				}
+				m_minutes = 0;
+			} else {
+				m_minutes++;
 			}
-			m_hour = m_hour == 23 ? 0 : m_hour + 1;
-			/* Check if weather should be updated every hour. Maybe change this to more frequently? */
-			if(System.currentTimeMillis() - m_lastWeatherUpdate > (60 * 60 * 1000))
+			/* Check if weather should be updated every 15 minutes (in real time) */
+			if(System.currentTimeMillis() - m_lastWeatherUpdate > (15 * 60 * 1000))
 			{
 				generateWeather();
 				m_lastWeatherUpdate = System.currentTimeMillis();
@@ -133,14 +115,6 @@ public class TimeService implements Runnable
 			}
 		}
 		System.out.println("INFO: Time Service stopped");
-	}
-
-	/**
-	 * Increments the day on the server
-	 */
-	public void incrementDay()
-	{
-		m_day = m_day == 6 ? 0 : m_day + 1;
 	}
 
 	/**
@@ -230,33 +204,13 @@ public class TimeService implements Runnable
 	}
 
 	/**
-	 * Returns the hour of the day (game time)
-	 * 
-	 * @return
-	 */
-	public static int getHourOfDay()
-	{
-		return m_hour;
-	}
-
-	/**
-	 * Returns the current minute (game time)
-	 * 
-	 * @return
-	 */
-	public static int getMinuteOfDay()
-	{
-		return m_minutes;
-	}
-
-	/**
 	 * Returns true if it is night time
 	 * 
 	 * @return
 	 */
 	public static boolean isNight()
 	{
-		return m_hour >= 20 || m_hour < 6;
+		return m_hour > 19 || m_hour < 6;
 	}
 
 	/**

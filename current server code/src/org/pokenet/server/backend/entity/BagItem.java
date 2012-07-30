@@ -23,8 +23,13 @@ public class BagItem {
 	 * Sets the quantity
 	 * @param q
 	 */
-	public void setQuantity(int q) {
-		m_quantity = q;
+	public void decreaseQuantity(int q) {
+		m_quantity -= q;
+	}
+	
+	public void increaseQuantity(int q)
+	{
+		m_quantity += q;
 	}
 
 	/**

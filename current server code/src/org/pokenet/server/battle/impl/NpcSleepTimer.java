@@ -17,15 +17,13 @@ public class NpcSleepTimer implements Runnable {
 	public void run() {
 		System.out.println("INFO: Npc sleep timer started");
 		Random r = new Random();
-		NPC n = null;
-		ServerMap m = null;
 		while(m_running) {
 			/*
 			 * Loop through every map
 			 */
 			for(int x = 0; x < 100; x++) {
 				for(int y = 0; y < 100; y++) {
-					m = GameServer.getServiceManager().
+					ServerMap m = GameServer.getServiceManager().
 						getMovementService().getMapMatrix().getMapByRealPosition(x, y);
 					if(m != null) {
 						/*
@@ -33,23 +31,23 @@ public class NpcSleepTimer implements Runnable {
 						 * If they're sleeping, check if its time to wake them
 						 */
 						for(int i = 0; i < m.getNpcs().size(); i++) {
-							n = m.getNpcs().get(i);
-							if(n != null && !n.canBattle() && 
-									System.currentTimeMillis() - n.getLastBattleTime()
-									>= 300000 + r.nextInt(300000)) {
-								n.setLastBattleTime(0);
+							NPC npc = m.getNpcs().get(i);
+							if(npc != null && !npc.canBattle() && 
+									System.currentTimeMillis() - npc.getLastBattleTime()
+									>= 5 * 60 * 1000 + r.nextInt(5 * 60 * 1000)) {
+								npc.setLastBattleTime(0);
 							}
 						}
 						try {
 							Thread.sleep(500);
-						} catch (Exception e) {}
+						} catch (InterruptedException e) {}
 					}
-					n = null;
 				}
 			}
+			// It takes 100 * 100 * 500ms to get here (83 minutes ...)
 			try {
-				Thread.sleep(300000);
-			} catch (Exception e) {}
+				Thread.sleep(5 * 60 * 1000); // 5 minutes
+			} catch (InterruptedException e) {}
 		}
 		System.out.println("INFO: Npc sleep timer stopped");
 	}

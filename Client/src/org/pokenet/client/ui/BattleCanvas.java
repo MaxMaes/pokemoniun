@@ -23,7 +23,7 @@ public class BattleCanvas extends Container
 {
 	private ProgressBar playerHP;
 	private ProgressBar enemyHP;
-	private ProgressBar playerXP;
+	private ProgressBar playerXP, playerXPEND;
 	private Color xpColor = new Color(0, 150, 200);
 	private Label bgPic;
 	private Label playerPoke;
@@ -33,7 +33,7 @@ public class BattleCanvas extends Container
 	private Label playerDataBG;
 	private Label enemyDataBG;
 	private Label playerHPBar;
-	private Label playerXPBar;
+	//private Label playerXPBar;
 	private Label enemyHPBar;
 	private Label playerLv;
 	private Label enemyLv;
@@ -119,8 +119,7 @@ public class BattleCanvas extends Container
 		try
 		{
 			enemyHPBar = new Label(new Image(m_path + "HPBar.png", false));
-			playerHPBar = new Label(new Image(m_path + "HPBar.png", false));
-			playerXPBar = new Label(new Image(m_path + "EXPBar.png", false));
+			playerHPBar = new Label(new Image(m_path + "HPEXPBar.png", false));
 		}
 		catch(SlickException e)
 		{
@@ -139,7 +138,7 @@ public class BattleCanvas extends Container
 		LoadingList.setDeferredLoading(false);
 		enemyHPBar.setSize(98, 11);
 		playerHPBar.setSize(98, 11);
-		playerXPBar.setSize(101, 4);
+		//playerXPBar.setSize(101, 4);
 	}
 
 	/**
@@ -172,7 +171,8 @@ public class BattleCanvas extends Container
 	{
 		playerHP = new ProgressBar(0, 0);
 		enemyHP = new ProgressBar(0, 0);
-		playerXP = new ProgressBar(0, 0);
+		playerXP = new ProgressBar(0, 0, true);
+		playerXPEND = new ProgressBar(0, 0, true);
 		bgPic = new Label();
 		playerPoke = new Label();
 		enemyPoke = new Label();
@@ -210,8 +210,9 @@ public class BattleCanvas extends Container
 		add(playerNameLabel);
 		add(playerLv);
 		add(playerStatus);
-		initPlayerHPBar();
 		initPlayerXPBar();
+		initPlayerHPBar();
+		
 	}
 
 	/**
@@ -249,6 +250,7 @@ public class BattleCanvas extends Container
 	public void updatePlayerXP(int newValue)
 	{
 		playerXP.setValue(newValue);
+		playerXPEND.setValue(newValue);
 	}
 
 	/**
@@ -378,27 +380,43 @@ public class BattleCanvas extends Container
 	 */
 	public void initPlayerXPBar()
 	{
+		@SuppressWarnings("unused")
+		float max = BattleManager.getInstance().getCurPoke().getExpLvlUp();
+		float min = BattleManager.getInstance().getCurPoke().getExpLvl();
+		float val = BattleManager.getInstance().getCurPoke().getExp();
+		float testVal = (float) (((max-min)/(float)101));
+		int xpMax = (int)(max-(testVal*1.0));
+		int xpENDMin = (int)(max-(testVal*8.0));
+		
 		if(playerXP == null)
+		{
+			/*playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), 
+				(int)BattleManager.getInstance().getCurPoke().getExpLvlUp(),
+				true);*/
 			playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), 
-				(int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+					xpMax,
+					true);
+			playerXPEND = new ProgressBar(xpENDMin, max, true);
+		}
 		else
 		{
 			playerXP.setMinimum((int)BattleManager.getInstance().getCurPoke().getExpLvl());
-			playerXP.setMaximum((int)BattleManager.getInstance().getCurPoke().getExpLvlUp());
+			playerXP.setMaximum(xpMax);
+			playerXPEND.setMinimum(xpENDMin);
+			playerXPEND.setMaximum((int)max);
 		}
-		playerXP.setSize(100, 4);
+		playerXP.setSize(99, 4);
+		playerXPEND.setSize(8, 9);
 		
 		playerXP.setForeground(xpColor);
+		playerXPEND.setForeground(xpColor);
 
 		updatePlayerXP(BattleManager.getInstance().getCurPoke().getExp());
 		
-
-		playerXPBar.setLocation(playerHPBar.getX()-5, playerHPBar.getY() + 11);
-		playerXP.setLocation(playerXPBar.getX(), playerXPBar.getY());
-
+		playerXP.setLocation(playerLv.getX() + playerLv.getWidth() - 103, 132);
+		playerXPEND.setLocation(playerLv.getX() + playerLv.getWidth() - 105, 125);
+		add(playerXPEND);
 		add(playerXP);
-		add(playerXPBar);
-		
 	}
 
 	/**
@@ -409,9 +427,6 @@ public class BattleCanvas extends Container
 		// show hp bar
 		playerHP = new ProgressBar(0, (int) BattleManager.getInstance().getCurPoke().getMaxHP());
 		playerHP.setSize(72, 5);
-		//playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
-		//playerHP.setTextColor(Color.black);
-		//playerHP.setFont(GameClient.getFontSmall());
 
 		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
 		{
@@ -429,8 +444,8 @@ public class BattleCanvas extends Container
 
 		updatePlayerHP(BattleManager.getInstance().getCurPoke().getCurHP());
 
-		playerHPBar.setLocation(playerLv.getX() + playerLv.getWidth() - 98, 125);
-		playerHP.setLocation(playerHPBar.getX() + 23, playerHPBar.getY() + 3);
+		playerHPBar.setLocation(playerLv.getX() + playerLv.getWidth() - 105, 119);
+		playerHP.setLocation(playerHPBar.getX() + 29, playerHPBar.getY() + 5);
 
 		add(playerHPBar);
 		add(playerHP);

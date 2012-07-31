@@ -16,9 +16,10 @@ public class ProgressBar extends Label {
         private float m_minVal;
         private float m_maxVal;
         private Color textColor;
+        private boolean reversed;
 
         /**
-         * Default constructor
+         * Default constructor, default left to right
          * @param min
          * @param max
          */
@@ -27,6 +28,22 @@ public class ProgressBar extends Label {
                 m_value = m_maxVal;
                 m_minVal = m_min;
                 m_maxVal = m_max;
+                reversed = false;
+                setOpaque(true);
+        }
+        
+        /**
+         * Constructor with option to reverse.
+         * @param min
+         * @param max
+         * @param reversed false = left -> right, true = left <- right
+         */
+        public ProgressBar(float m_min, float m_max, boolean reversed){
+                super();
+                m_value = m_maxVal;
+                m_minVal = m_min;
+                m_maxVal = m_max;
+                this.reversed = reversed;
                 setOpaque(true);
         }
         
@@ -122,9 +139,19 @@ public class ProgressBar extends Label {
                 float val = ((float)m_maxVal-(float)m_value) / ((float)m_maxVal-(float)m_minVal);
                 int barWidth = (int) ((int)this.getWidth()-(this.getWidth() * val));                               
                 
-                g.fillRect(getAbsoluteX(), getAbsoluteY(),
+                if(reversed)
+                {
+                	g.fillRect(((getAbsoluteX() + getWidth()) - (barWidth > getWidth() ? getWidth() : barWidth)), getAbsoluteY(),
+                            (barWidth > getWidth() ? getWidth() : barWidth),
+                            getHeight() - 1);
+                }
+                else
+                {
+                	g.fillRect(getAbsoluteX(), getAbsoluteY(),
                                 (barWidth > getWidth() ? getWidth() : barWidth),
                                 getHeight() - 1);
+                }
+                
                 if (getText() != null && !getText().equals(""))
                 {
                 	g.setColor(getTextColor());

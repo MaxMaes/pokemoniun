@@ -7,6 +7,7 @@ import java.util.Random;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.impl.NpcBattleField;
+import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.NpcSpeechMessage;
 import org.pokenet.server.network.message.SpriteSelectMessage;
@@ -31,7 +32,7 @@ public class NPC extends Character {
 	private boolean m_isHeal = false;
 	private int m_isShop = 0;
 	private int m_badge = -1;
-	private ArrayList<Integer> m_speech;
+	private final ArrayList<Integer> m_speech = new ArrayList<Integer>();
 	private Shop m_shop = null;
 	private long m_lastBattle = 0;
 	
@@ -47,7 +48,7 @@ public class NPC extends Character {
 	private String getSpeech() {
 		String result = "";
 		for(int i = 0; i < m_speech.size(); i++) {
-			result = result + m_speech.get(i) + ",";
+			result += m_speech.get(i) + ",";
 		}
 		return result;
 	}
@@ -64,10 +65,13 @@ public class NPC extends Character {
 	 * Sets the time this NPC last battled
 	 * @param l
 	 */
-	public void setLastBattleTime(long l) {
+	public void updateLastBattleTime() {
 		/* Only set this if they are not gym leaders */
 		if(!isGymLeader())
-			m_lastBattle = l;
+		{
+			m_lastBattle = System.currentTimeMillis();
+			NpcSleepTimer.addNPC(this);
+		}
 	}
 	
 	/**
@@ -77,6 +81,11 @@ public class NPC extends Character {
 	 */
 	public long getLastBattleTime() {
 		return m_lastBattle;
+	}
+	
+	public void resetLastBattleTime()
+	{
+		m_lastBattle = 0;
 	}
 	
 	/**
@@ -101,7 +110,7 @@ public class NPC extends Character {
 				if(!speech.equalsIgnoreCase("")) {
 					TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
 				}
-				setLastBattleTime(System.currentTimeMillis());
+				updateLastBattleTime();
 				p.setBattling(true);
 				p.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), p, this));
 				return;
@@ -183,8 +192,6 @@ public class NPC extends Character {
 	 * @param id
 	 */
 	public void addSpeech(int id) {
-		if(m_speech == null)
-			m_speech = new ArrayList<Integer>();
 		m_speech.add(id);
 	}
 	
@@ -227,8 +234,7 @@ public class NPC extends Character {
 	public boolean isShopKeeper() {
 		if(m_isShop>0)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	/**

@@ -1357,6 +1357,7 @@ public class GameClient extends BasicGame
 	{
 		m_packetGen = null;
 		m_host = "";
+		m_ourPlayer = null;
 		try
 		{
 			if(BattleManager.getInstance() != null)

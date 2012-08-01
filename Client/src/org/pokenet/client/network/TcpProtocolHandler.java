@@ -107,7 +107,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		Player p;
 		String message = (String) m;
 		// System.out.println("test0");
-		System.out.println("INFO: " + message);
+		GameClient.log("INFO: " + message);
 		String[] details;
 		switch(message.charAt(0))
 		{

@@ -1,1 +1,2 @@
 java -Djava.library.path=lib/native -jar Pokenet.jar > pokenet.log
+pause

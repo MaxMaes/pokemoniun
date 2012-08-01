@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.ini4j.Ini;
 import org.ini4j.InvalidIniFormatException;
 import org.newdawn.slick.Input;
+import org.pokenet.client.GameClient;
 
 public class KeyManager
 {
@@ -99,7 +100,7 @@ public class KeyManager
 		}
 		finally
 		{
-			System.out.println("INFO: Keys Loaded");
+			GameClient.log("INFO: Keys Loaded");
 		}
 	}
 	

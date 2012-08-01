@@ -41,7 +41,7 @@ public class Translator
 		catch(FileNotFoundException fnfe)
 		{
 			// This should not happen anymore, but to be 9000% safe we keep it.
-			System.out.println("INFO: This language is not available yet, reverting to English!");
+			GameClient.log("INFO: This language is not available yet, reverting to English!");
 			GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
 		finally

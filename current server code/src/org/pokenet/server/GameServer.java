@@ -162,6 +162,7 @@ public class GameServer
 					getConsoleSettings();
 			}
 		}
+		start(); // Why you removed this?
 	}
 
 	/**
@@ -511,7 +512,6 @@ public class GameServer
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp("java GameServer [param] <args>", options);
 			}
-
 		}
 		else
 		{

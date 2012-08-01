@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Item;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
@@ -71,9 +72,9 @@ public class ItemDatabase {
 				respath="";
 			InputStream source = FileLoader.loadFile(respath+"res/items/items.xml");
 			m_instance = serializer.read(ItemDatabase.class, source);
-			System.out.println("INFO: Items database loaded.");
+			GameClient.log("INFO: Items database loaded.");
 		} catch (Exception e) {
-			System.err.println("ERROR: Item database could not be loaded.");
+			GameClient.log("ERROR: Item database could not be loaded.");
 		}
 	}
 	

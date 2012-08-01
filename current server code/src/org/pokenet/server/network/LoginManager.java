@@ -486,7 +486,7 @@ public class LoginManager implements Runnable {
 			int partyId = result.getInt("party");
 			ResultSet partyData = m_database
 					.query("SELECT * FROM pn_party WHERE id='" + partyId + "'");
-			partyData.first();
+			partyData.first(); // Got a NULLpointer here.
 
 			ResultSet pokemons = m_database
 					.query("SELECT * FROM pn_pokemon WHERE currentTrainerName='"

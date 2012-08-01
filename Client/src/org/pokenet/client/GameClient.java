@@ -10,10 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.HashMap;
+
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
@@ -78,6 +80,8 @@ public class GameClient extends BasicGame
 	private static final String GAME_TITLE = "Pokemonium 1.3.0";
 	private static final String CHATHOST = "localhost";
 	private static final int FPS = 50;
+	
+	private static boolean debug = false;
 	
 	// Some variables needed
 	private TcpProtocolHandler m_tcpProtocolHandler;
@@ -1108,6 +1112,14 @@ public class GameClient extends BasicGame
 		{
 			e.printStackTrace();
 		}
+		// See if we need to debug
+		if(args.length > 0) {
+			if(args[0].equalsIgnoreCase("-debug") || args[0].equalsIgnoreCase("-d"))
+			{
+				debug = true;
+			}
+		}
+		
 		KeyManager.initialize();
 		/*ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {
@@ -1134,6 +1146,14 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	public static void log(String message)
+	{
+		if(debug)
+		{
+			System.out.println(message);
 		}
 	}
 

@@ -35,13 +35,13 @@ public class KeyManager
 			}
 			catch(InvalidIniFormatException e)
 			{
-				System.out.println("ERROR: Malformed keys.ini, a new file will be generated");
+				GameClient.log("ERROR: Malformed keys.ini, a new file will be generated");
 				reset();
 				return;
 			}
 			catch(IOException e)
 			{
-				System.out.println("ERROR: Error during the loading of keys.ini, could be missing. A new file will be generated");
+				GameClient.log("ERROR: Error during the loading of keys.ini, could be missing. A new file will be generated");
 				reset();
 				return;
 			}

@@ -1,36 +1,36 @@
-Pokemonium Server Selection
-Note: Your account will work on all servers
-Private Server
+Pokemonium Serverauswahl
+Note: Dein Acc. funktioniert auf allen Servern!
+Privater Server
 About
 ToS
 Username:
-Password:
+Passwort:
 Login
 Register
-Pokemonium Registration
-Confirm Password:
-D.O.B. (dd/mm/yyyy):
+Pokemonium Registrierung
+Passwort widerh.:
+Geb.(tt/mm/jjjj):
 Email:
-Confirm Email:
+Email widerh.:
 Starter Pokemon:
-Gender:
-Male
-Female
+Geschlecht:
+Maennl.
+Weibl.
 Terms of Service
-I agree to the ToS
-Cancel
-User or password are incorrect /nVerify you typed user and password correctly.
-The account server is currently offline. /nPlease try again later.
-Successful registration. You may now login on any server.
-The account server is currently offline./nPlease try again later.
-Username already taken.
-Unknown error occurred. Please try again later.
-Invalid data.
-You must accept Terms of Service (ToS) before registering.
-Date of birth invalid.
-Not a valid email.
-Passwords do not match.
-Username must have at least 4 characters and no more than 12.
+Den ToS zustimmen
+Abbruch
+Username oder Passwort sind fehlerhaft /nPruefe ob du Username und Passwort richtig eingegeben hast.
+Der Account-Server ist derzeit offline. /nVersuche es spaeter erneut.
+Registrierung erfolgreich. Du kannst dich nun auf einem Server einloggen.
+Der Account-Server ist derzeit offline./nVersuche es spaeter erneut.
+Username bereits vergeben.
+Unbekannter Fehler. Versuche es spaeter erneut.
+Ungueltige Daten.
+Du musst vor der Registrierung die Terms of Servic (ToS) akzeptieren.
+Geburtsdatum ungueltig.
+Keine gueltige Email.
+Passwoerter stimmen nicht ueberein.
+Username muss mindestens 4 Zeichen enthalten. Max. 12 Buchstaben.
 1. No swearing./n2. No spamming./n3. One account per person./n4. No scamming./n5. Do not talk in all capitals./n6. No botting./n7. No hacking./n/nBreaking any of these rules may/nresult in a ban. We would also like/nour members to note that thisis a/nbeta release, your account may be/ndeleted at anytime to facilitate improvements. Any bugs or issues should be reported to developers.
 About Pokenet
 Pokenet is a free, non-profit, open-source Pokemon MMORPG. 

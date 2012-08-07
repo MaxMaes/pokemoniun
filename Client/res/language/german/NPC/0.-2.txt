@@ -1,4 +1,4 @@
-Die Drachenhöhle wurde für die Öffentlichkeit geöffnet.
+Die Drachenhoehle wurde geoeffnet.
 Du kannst eintreten.
 Ebenholz City
 Ein ruhiger Ort in den Bergen!
@@ -8,4 +8,4 @@ Es gibt keine Dratinis in der Drachenhöhle
 Ebenholz City Pokemon-Arena
 Arenaleiterin: Sandra 
 Die gesegnete Drachen-Pokemon-Trainerin!
-Drachenhöhle voraus
+Drachenhoehle voraus

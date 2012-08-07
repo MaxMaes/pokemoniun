@@ -39,6 +39,7 @@ import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 public class BattleTurn implements Serializable, Cloneable {
     
     protected boolean m_useMove = false;
+    protected boolean m_useItem = false;
     protected int m_id = -1;
     
     private void writeObject(ObjectOutputStream out) throws IOException {
@@ -74,7 +75,7 @@ public class BattleTurn implements Serializable, Cloneable {
         }
     }
     
-    private BattleTurn() {
+    public BattleTurn() {
         // Prevent this class from being instanced directly.
     }
     
@@ -84,6 +85,18 @@ public class BattleTurn implements Serializable, Cloneable {
     
     public boolean isMoveTurn() {
         return m_useMove;
+    }
+    
+    public boolean isItemTurn(){
+    	return m_useItem;
+    }
+    
+    public boolean isSwitchTurn(){
+    	if(!m_useItem && !m_useMove)
+    	{
+    		return true;
+    	}
+    	return false;
     }
     
     /**
@@ -101,6 +114,18 @@ public class BattleTurn implements Serializable, Cloneable {
     }
     
     /**
+     * Get a BattleTurn object that represents the use of the
+     * identified item
+     */
+    public static BattleTurn getItemTurn(int i) {
+    	BattleTurn turn = new BattleTurn();
+    	turn.m_id = i;
+    	turn.m_useMove = false;
+    	turn.m_useItem = true;
+    	return turn;
+    }
+    
+    /**
      * Get a BattleTurn objects that represents switching in the
      * identified pokemon.
      */
@@ -108,6 +133,7 @@ public class BattleTurn implements Serializable, Cloneable {
         BattleTurn turn = new BattleTurn();
         turn.m_id = i;
         turn.m_useMove = false;
+        turn.m_useItem = false;
         return turn;
     }
     
@@ -118,6 +144,7 @@ public class BattleTurn implements Serializable, Cloneable {
         BattleTurn turn = new BattleTurn();
         turn.m_id = i;
         turn.m_useMove = true;
+        turn.m_useItem = false;
         return turn;
     }
 

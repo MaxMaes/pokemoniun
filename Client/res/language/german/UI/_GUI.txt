@@ -1,24 +1,24 @@
 Pokemon Team
 Level:
 Name:
-HP:
-Attack:
-Defense:
-Sp. Attack:
-Sp. Defense: 
-Speed:
-Ability:
-Exp: 
-Nature:
-Type one:
-Type two:
-Gender:
-Options
-Full Screen view
+KP:
+Angriff:
+Vert.:
+Sp. Angriff:
+Sp. Vert.: 
+Geschw.:
+Faehigkeit:
+Exp gesam.:
+Natur:
+1. Typ:
+2. Typ:
+Geschlecht:
+Optionen
+Full Screen
 Mute
 Save
-Changes may not take effect until you restart.
-Pokenet Help
+Die Aenderungen werden erst nach einem Neustart wirksam.
+Pokenet Hilfe
 Arrow keys or WASD keys/nMovement/n/n
 Spacebar/nTalk/n/n
 Right-click/nInteract with other players/n/n
@@ -27,23 +27,23 @@ Type the /playercount command into local chat to see how many players are online
 For more information, go to www.pokemonium.net
 Chat: Local
 You must accept Terms of Service (ToS) before registering.
-Male
-Female
+Maennlich
+Weiblich
 None
 Lv. 
-PvP Battles/Trades
-Cancel
-Accept
-Decline
-Send Offer
-Your Offer:
-Their Offer:
-test
-Waiting...
-Send a Request
-Requests Received
-Trade: 
-Money only
-Battle
-Trade
-Disable Surrounding Maps
+PvP Kampf/Handel
+Abbruch
+Akzept.
+Ablehnen
+Sende Offer
+Dein Offer:
+Spieler Offer:
+Test
+Warten...
+Sende Anfrage
+Anfrage erhalten
+Handel: 
+Nur Geld
+Kampf
+Handel
+Deaktiviere doppelte Karte

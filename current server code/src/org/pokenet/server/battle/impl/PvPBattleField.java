@@ -414,7 +414,12 @@ public class PvPBattleField extends BattleField {
 								m_turn[trainer] = move;
 							}
 						}
-					} else {
+					} 
+					else if(move.isItemTurn())
+					{
+						return;
+					}
+					else {
 						if (this.getActivePokemon()[trainer].isActive() && 
 								this.getParty(trainer)[move.getId()] != null &&
 								this.getParty(trainer)[move.getId()].getHealth() > 0) {
@@ -558,5 +563,17 @@ public class PvPBattleField extends BattleField {
 			m_turn[1] = BattleTurn.getMoveTurn(-1);
 		}
 		executeTurn(m_turn);
+	}
+
+	@Override
+	public void executeItemTurn(int i)
+	{
+		if(m_turn[0] == null) {
+			m_turn[0] = BattleTurn.getMoveTurn(-1);
+		}
+		if(m_turn[1] == null) {
+			m_turn[1] = BattleTurn.getMoveTurn(-1);
+		}
+		executeTurn(m_turn);		
 	}
 }

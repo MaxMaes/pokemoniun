@@ -1,27 +1,27 @@
-It's a list of winning trainers.
-From now on you will encounter two paths with a sign in front of them.
-One path leads to a trainer and the other to the next sign.
-The sign will ask you a question and provide two possible answers.
-It will also tell you which path stands for which answer.
-Choose the right path/answer and you can proceed to the next sign.
-Pokemon Quiz! There are two poison-type gyms in total?
-Yes: left, No: right
-Pokemon Quiz! Magnemite evolves two times in total?
-Pokemon Quiz! Rock-type moves are not effective against rock-type Pokemon?
-Pokemon Quiz! Quiet nature decreases defense?
-Pokemon Quiz! Swim is a HM move?
-I was a thief, but I went straight as a trainer.
-Yo! Champ in the making!
-The hotheaded Blaine is a fire Pokemon pro.
-Douse his spirits with water!
-You'd better take some Burn Heals, too.
-Do you know how hot Pokemon fire breath can get?
-I've studied Pokemon thoroughly. You can't win!
-I like using fire-type Pokemon. I just do.
-I know why Blaine became a trainer.
-I've been to many gyms, but this one best suits my style.
-Fire is weak against H2O.
-Hah! I am Blaine, the red-hot leader of Cinnabar gym!
-My fiery Pokemon are all rough and ready with intense heat!
-They incinerate all challengers!
-Hah! You better have Burn Heal!
+Eine Liste von Trainern die gewonnen haben.
+Von jetzt an wirst du immer auf zwei Wege treffen mit einem Schild davor.
+Ein Weg fuehrt dich zu einem Trainer, der andere zum naechsten Schild.
+Das Schild wird dir eine Frage stellen und es wird zwei moegliche Antworten geben.
+Es wird dir auch sagen welcher Weg fuer welche Antwort steht.
+Waehle den richtigen Weg/die richtige Antwort um mit dem naechsten Schild fortzufahren.
+Pokemon Quiz! Es gibt insgesamt zwei Gift-Typ Arenen, richtig oder falsch?
+Richtig: links, falsch: rechts
+Pokemon Quiz: Entwickelt sich Magnetilo insgesamt zwei mal?
+Pokemon Quiz: Gestein-Attacken sind nicht sehr effektiv gegen Gestein-Typ Pokemon?
+Pokemon Quiz: Ruhige Natur senkt die Verteidigung?
+Pokemon Quiz: Surfer ist eine VM Attacke?
+Ich war mal ein Dieb. Aber jetzt bin ich ein Trainer.
+Yo! Angehender Champion!
+Der hitzkoepfige Pyro ist ein Feuer-Pokemon Profi.
+Uebergiesse seinen Geist mit Wasser!
+Du solltest auch besser ein Paar Feuerheiler parat halten.
+Weisst du wie heiss der Atem eines Feuer-Pokemon werden kann?
+Ich habe Pokemon gruendlich studiert. Du kannst nicht gewinnen.
+Ich mag es Feuer-Pokemon zu einzusetzen.
+Ich weiss wieso Pyro ein Trainer geworden ist.
+Ich war schon in vielen Arenen, aber diese passt am besten zu mir.
+Feuer ist schwach gegen H2o.
+Hah! ich bin Pyro, der rot-heisse Leiter der Zinnoberinsel-Arena.
+Meine Feuer-Pokemon sind alle wild und bereit mit intensiver Hitze zuzuschlagen!
+Sie verbrennen jeden Herausforderer!
+Hah! Du hast besser ein paar Feuerheiler dabei!

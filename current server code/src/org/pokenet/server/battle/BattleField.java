@@ -574,7 +574,7 @@ public abstract class BattleField {
 			 return;
 		 }
 
-		 if (!turn.isMoveTurn()) {
+		 if (turn.isSwitchTurn()) {
 			 switchInPokemon(source, turn.getId());
 			 return;
 		 }
@@ -582,6 +582,11 @@ public abstract class BattleField {
 		 psource.executeTurn(turn);
 
 		 int move = turn.getId();
+		 
+		 if(turn.isItemTurn())
+		 {
+			 return;
+		 }
 
 		 MoveListEntry entry = psource.getMove(move);
 		 if (entry == null) return;
@@ -822,4 +827,6 @@ public abstract class BattleField {
 	 }
 
 	 public abstract void clearQueue();
+
+	public abstract void executeItemTurn(int i);
 }

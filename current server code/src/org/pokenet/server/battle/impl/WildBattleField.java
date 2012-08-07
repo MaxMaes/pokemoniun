@@ -336,7 +336,11 @@ public class WildBattleField extends BattleField {
 								m_turn[trainer] = move;
 							}
 						}
-					} else {
+					} else if(move.isItemTurn())
+					{
+						return;
+					}
+					else {
 						if (this.getActivePokemon()[trainer].isActive()
 								&& this.getParty(trainer)[move.getId()] != null
 								&& this.getParty(trainer)[move.getId()].getHealth() > 0) {
@@ -831,6 +835,18 @@ public class WildBattleField extends BattleField {
 		{
 			if (m_turn[turn] == null) {
 				m_turn[turn] = BattleTurn.getMoveTurn(-1);
+			}
+		}
+		executeTurn(m_turn);
+	}
+	
+	@Override
+	public void executeItemTurn(int i) {
+		for(int turn = 0; turn < m_turn.length; turn++)
+		{
+			if (m_turn[turn] == null) 
+			{
+				m_turn[turn] = BattleTurn.getItemTurn(i);
 			}
 		}
 		executeTurn(m_turn);

@@ -191,7 +191,7 @@ public class ItemProcessor implements Runnable {
 						p.getTcpSession().write("Ii" + message);
 					} else {
 						/* Player is in battle, take a hit from enemy */
-						p.getBattleField().forceExecuteTurn();
+						p.getBattleField().executeItemTurn(i.getId());
 					}
 					return true;
 				} else if (i.getCategory().equalsIgnoreCase("EVOLUTION")) {
@@ -268,7 +268,7 @@ public class ItemProcessor implements Runnable {
             			String message = "You used Antidote on "+poke.getName()+"/nThe Antidote restored "+poke.getName()+" status to normal";
             			poke.removeStatus(PoisonEffect.class);
             			if(p.isBattling())
-            				p.getBattleField().forceExecuteTurn();
+            				p.getBattleField().executeItemTurn(i.getId());
             			else
             				p.getTcpSession().write("Ii" + message);
             			return true;
@@ -276,7 +276,7 @@ public class ItemProcessor implements Runnable {
                     	String message = "You used Parlyz Heal on "+poke.getName()+"/nThe Parlyz Heal restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(ParalysisEffect.class);
                     	if(p.isBattling())
-                    		p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                     	else
                     		p.getTcpSession().write("Ii" + message);
                     	return true;
@@ -284,7 +284,7 @@ public class ItemProcessor implements Runnable {
                     	String message = "You used Awakening on "+poke.getName()+"/nThe Awakening restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(SleepEffect.class);
                     	if(p.isBattling())
-                    		p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                     	else
                     		p.getTcpSession().write("Ii" + message);
                     	return true;
@@ -292,7 +292,7 @@ public class ItemProcessor implements Runnable {
                     	String message = "You used Burn Heal on "+poke.getName()+"/nThe Burn Heal restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(BurnEffect.class);
                     	if(p.isBattling())
-                    		p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                     	else
                     		p.getTcpSession().write("Ii" + message);
                     	return true;
@@ -300,7 +300,7 @@ public class ItemProcessor implements Runnable {
                     	String message = "You used Ice Heal on "+poke.getName()+"/nThe Ice Heal restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(FreezeEffect.class);
                     	if(p.isBattling())
-                    		p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                     	else
                     		p.getTcpSession().write("Ii" + message);
                     	return true;
@@ -308,7 +308,7 @@ public class ItemProcessor implements Runnable {
                     	String message = "You used Full Heal on "+poke.getName()+"/nThe Full Heal restored "+poke.getName()+" status to normal";
                     	poke.removeStatusEffects(true);
                     	if(p.isBattling())
-                    		p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                     	else
                     		p.getTcpSession().write("Ii" + message);
                     	return true;
@@ -316,14 +316,14 @@ public class ItemProcessor implements Runnable {
 						// just like a FULL HEAL
 						poke.removeStatusEffects(true);
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}
 						return true;
 					} else if (i.getName().equalsIgnoreCase("OLD GATEAU")) {
 						// just like a FULL HEAL
 						poke.removeStatusEffects(true);
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}
 						return true;
 					}
@@ -335,7 +335,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Cheri Berry/nThe Cheri Berry restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(ParalysisEffect.class);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -343,7 +343,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Chesto Berry/nThe Chesto Berry restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(SleepEffect.class);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -351,7 +351,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Pecha Berry/nThe Pecha Berry restored "+poke.getName()+" status to normal";
                         poke.removeStatus(PoisonEffect.class);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -359,7 +359,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Rawst Berry/nThe Rawst Berry restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(BurnEffect.class);
                     	if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                    		p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -367,7 +367,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Aspear Berry/nThe Aspear Berry restored "+poke.getName()+" status to normal";
                         poke.removeStatus(FreezeEffect.class);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -379,7 +379,7 @@ public class ItemProcessor implements Runnable {
                         else
                         	poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -391,13 +391,13 @@ public class ItemProcessor implements Runnable {
                         	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 207) { //Persim Berry
                     	String message = poke.getName()+" ate the Persim Berry/nThe Persim Berry restored "+poke.getName()+" status to normal";
                     	poke.removeStatus(ConfuseEffect.class);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                         	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -405,7 +405,7 @@ public class ItemProcessor implements Runnable {
                     	String message = poke.getName()+" ate the Lum Berry/nThe Lum Berry restored "+poke.getName()+" status to normal";
                         poke.removeStatusEffects(true);
                         if(p.isBattling())
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         else
                            	p.getTcpSession().write("Ii" + message);
                         return true;
@@ -417,7 +417,7 @@ public class ItemProcessor implements Runnable {
                         	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                        	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 210) { //Figy Berry
                     	String message = poke.getName()+" ate the Figy Berry/nThe Figy Berry restored" +poke.getRawStat(0) / 8+" HP to " +poke.getName()+"!";
@@ -427,7 +427,7 @@ public class ItemProcessor implements Runnable {
                            	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                           	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 214) { //Wiki Berry
                     	String message = poke.getName()+" ate the Wiki Berry/nThe Wiki Berry restored" +poke.getRawStat(0) / 8+" HP to " +poke.getName()+"!";
@@ -437,7 +437,7 @@ public class ItemProcessor implements Runnable {
                            	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                           	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 212) { //Mago Berry
                     	String message = poke.getName()+" ate the Mago Berry/nThe Mago Berry restored" +poke.getRawStat(0) / 8+" HP to " +poke.getName()+"!";
@@ -447,7 +447,7 @@ public class ItemProcessor implements Runnable {
                            	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                           	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 213) { //Aguav Berry
                     	String message = poke.getName()+" ate the Aguav Berry/nThe Aguav Berry restored" +poke.getRawStat(0) / 8+" HP to " +poke.getName()+"!";
@@ -457,7 +457,7 @@ public class ItemProcessor implements Runnable {
                            	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                           	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     } else if(i.getId() == 214) { //Iapapa Berry
                     	String message = poke.getName()+" ate the Iapapa Berry/nThe Iapapa Berry restored" +poke.getRawStat(0) / 8+" HP to " +poke.getName()+"!";
@@ -467,7 +467,7 @@ public class ItemProcessor implements Runnable {
                            	p.getTcpSession().write("Ii" + message);
                         }
                         else
-                           	p.getBattleField().forceExecuteTurn();
+                        	p.getBattleField().executeItemTurn(i.getId());
                         return true;
                     }else if (i.getId() == 800) { //Voltorb Lollipop
 						String message = poke.getName()+" ate the Voltorb Lollipop/nThe Lollipop restored 50 HP to " +poke.getName()+"!";
@@ -478,7 +478,7 @@ public class ItemProcessor implements Runnable {
 							message+="/n"+poke.getName()+" was Paralyzed from the Lollipop!";
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else{
 							p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
 							p.getTcpSession().write("Ii" + message);
@@ -501,7 +501,7 @@ public class ItemProcessor implements Runnable {
 							}catch(Exception e){}//Already under a status effect. 
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else
 							p.getTcpSession().write("Ii" + message);
 						return true;
@@ -514,7 +514,7 @@ public class ItemProcessor implements Runnable {
 							message+="/n"+poke.getName()+" was burned from the candy!";
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else{
 							p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
 							p.getTcpSession().write("Ii"+message);
@@ -533,7 +533,7 @@ public class ItemProcessor implements Runnable {
 							message+="/n"+poke.getName()+" got Poisoned from the rotten candy!";
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else
 							p.getTcpSession().write("Ii"+message);
 						return true;
@@ -550,7 +550,7 @@ public class ItemProcessor implements Runnable {
 							message+="/n"+poke.getName()+" recovered 30HP.";
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else
 							p.getTcpSession().write("Ii"+message);
 						return true;
@@ -567,7 +567,7 @@ public class ItemProcessor implements Runnable {
 							message+="/nThe gummi was too sweet for "+poke.getName()+"./n"+poke.getName()+" fell asleep!";
 						}
 						if (p.isBattling()) {
-							p.getBattleField().forceExecuteTurn();
+							p.getBattleField().executeItemTurn(i.getId());
 						}else
 							p.getTcpSession().write("Ii"+message);
 						return true;

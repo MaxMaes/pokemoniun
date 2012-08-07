@@ -1,24 +1,25 @@
-It's a list of winning trainers.
-Yo! Champ in the making! 
-Fuchsia gym is a tricked-up place. It's riddled with invisible walls!
-The leader might appear close, but he's blocked off.
-You have to find gaps in the walls to reach him.
-Let's see you beat my special techniques!
-Strength isn't the key for Pokemon. Do you understand this?
-Pokemon is about strategy! I'll show you how strategy beat brute strength.
-I was a magician once upon a time.
-But I dreamt of becoming a ninja, so I joined this gym.
-I also study the way of the ninja with master Koga!
-Ninja have a long history of using animals!
-Stop right there!
-The famed invisible walls of Fuchsia gym have you frustrated?
-Koga and his daughter comes from a long line of ninjas.
-What did you descend from?
-Hello, my name is Koga. I am an Elite Four member from this region.
-The PokeNet League currently takes a break, so I came to visit my home.
-My daughter, the real gym leader here, uses this opportunity to 
-take a break from the gym and train her skills. 
-I am her substitute. I am aware that this is not an Elite Four challenge.
-So I won't use my strongest Pokemon against you. 
-But they are still on gym leader level, so don't take this lightly!
-This is an official gym battle. Give it your best!
+Ein Liste von Trainern die gewonnen haben.
+Yo! Angehender Champion!
+Fuchsanias Arena ist etwas knifflig. Sie hat unsichtbaren Waenden.
+Manchmal kommst du nah an den Leiter ran, aber eine Wand blockiert den Weg.
+Du musst Luecken in den Waenden finden um ihn zu erreichen.
+Mal sehen ob du meine spezial-Technik besiegen kannst!
+Staerke allein ist nicht der Schluessel zum Erfolg. Verstehst du das?
+Du brauchst eine Strategie! Ich zeige dir wie meine Strategie rohe Gewallt besiegt.
+Vor langer Zeit war ich ein Magier.
+Aber ich habe davon getraeumt ein Ninja zu werden, deshalb bin ich dieser Arena beigetreten.
+Ich studiere auch den Weg des Ninjas mit Meister Koga!
+Ninjas haben eine lange Geschichte!
+Bleib stehen!
+Die unsichtbaren Waende frustrieren dich, nicht wahr?
+Koga und seine Tochter stammen von beruehmten Ninjas ab.
+Was ist deine Abstammung?
+Hallo, mein Name ist Koga. Ich bin ein Top-Vier Mitglied dieser Region.
+Die PokeNet Liga hat eine Pause eingelegt, daher besuche ich hier mein zu Hause.
+Meine Tochter, die richtige Arenaleiterin, nutzt diese Gelegenheit ebenfalls
+um eine Pause von der Arena zu nehmen und ihre Faehigkeiten zu trainieren.
+Ich bin ihre Vertretung. Mir ist bewusst, dass das hier keine Top-Vier Herausforderung ist.
+Deshalb werde ich nicht meine staerksten Pokemon gegen dich einsetzen.
+Aber sie sind immer noch auf Arenaleiter-Level, also nimm das nicht auf die leichte Schulter.
+Das ist ein offizieller Arena-Kampf! Gib dein Bestes!
+

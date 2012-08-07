@@ -1,2 +1,2 @@
-Hello, I'm Mr. Psychic. Do you know the move Psychic?
-It's an attack that may also lower the target's sepcial stats.
+Hallo, ich bin Mr. Psycho. Kennst du die Attacke Psychokinese?
+Es ist eine Attacke, die die Sp. Ver. des Ziels senken kann.

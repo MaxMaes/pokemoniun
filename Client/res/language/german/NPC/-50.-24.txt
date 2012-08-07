@@ -1,9 +1,9 @@
-Hello! Welcome to the Celadon dept. store.
-Let me describe the store layout.
-1F: service counter
-2F: general store
-3F: TM store
-4F: evolutionary stones
-5F: drugstore
-6F: under construction
-Please report this bug!
+Hallo! Willkommen im Prismania City Kaufhaus.
+Lass mich dir die einzelnen Stockwerke erklaeren.
+1E: Service-Bereich
+2E: Laden
+3E: TM Laden
+4E: Evolutionssteine
+5E: Drogerie
+6E: In Bau
+Bitte melde diesen Fehler!

@@ -1,4 +1,4 @@
-Welcome to the PokeCenter. Let me heal your Pokemon for you...
-Please report this bug!
-Welcome to the Pokemon storage system.
-I will change your sprite for 500p.
+Willkommen im PokeCenter. Lass mich deine Pokemon heilen...
+Bitte melde diesen Fehler!
+Willkommen zum Pokemon Lagerungs-System.
+Ich werde dein Aussehen fuer 500p aendern.

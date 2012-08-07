@@ -52,7 +52,14 @@ public class WildBattleField extends BattleField {
 	private int                m_runCount;
 	Set<Pokemon>               m_participatingPokemon = new LinkedHashSet<Pokemon>();
 	private boolean            m_finished             = false;
-
+	//TODO fill lists
+	private String[] hp = {"CATERPIE,1","NIDORAN,1","NIDORINA,2","NIDOQUEEN,3","CLEFAIRY,2","CLEFABLE,3","JIGGLYPUFF,2","WIGGLYTUFF,3","SLOWPOKE,1","GRIMER,1","MUK,1","LICKITUNG,2","CHANSEY,2","KANGASKHAN,2","LAPRAS,2","DITTO,1","VAPOREON,2","SNORLAX,2","MEW,3","HOOTHOOT,1","NOCTOWL,2","CHINCHOU,1","LANTURN,2","IGGLYBUFF,1","MARILL,2","AZUMARILL,3","WOOPER,1","QUAGSIRE,2","WOBBUFFET,2","DUNSPARCE,1","PILOSWINE,1","PHANPY,1","BLISSEY,3","ENTEI,1","CELEBI,3","WURMPLE,1","SHROOMISH,1","SLAKOTH,1","SLAKING,3","SHEDINJA,2","WHISMUR,1","LOUDRED,2","EXPLOUD,3","MUKUHITA,1","HARIYAMA,2","AZURILL,1","DELCATTY,2","GULPIN,1","SWALOT,2","WAILMER,1","WAILORD,2","BARBOACH,1","WHISCASH,2","CASTFORM,1","TROPIUS,2","WYNAUT,1","SNORUNT,1","GLALIE,2","SPHEAL,1","SEALEO,2","WALREIN,3","RELICANTH,1","JIRACHI,3","BIDOOF,1","SHELLOS,1","GASTRODON,2","DRIFLOON,1","DRIFBLIM,2","SKUNTANK,2","HAPPINY,1","MUNCHLAX,1","LICKILICKY,3","GIRATINA,3","PHIONE,1","MANAPHY,3","SHAYMIN,3","ARCEUS,3"};
+	private String[] att = {"Beedrill,2","Ekans,1","Arbok,2","Nidoran-m,1","Nidorino,2","Nidoking,3","Paras,1","Parasect,2","Mankey,1","Primeape,2","Growlithe,1","Arcanine,2","Machop,1","Machoke,2","Machamp,3","Bellsprout,1","Weepingbell,2","Victreebel,3","Farfetchd,1","Doduo,1","Dodrio,2","Muk,1","Krabby,1","Kingler,2","Hitmonlee,2","Rhydon,2","Goldeen,1","Seaking,2","Scyther,1","Pinser,2","Tauros,1","Gyarados,2","Flareon,2","Kabutops,2","Dratini,1","Dragonair,2","Dragonite,3","Totodile,1","Croconaw,1","Feraligatr,2","Sentret,1","Spinarak,1","Ariados,2","Unown,1","Snubbull,1","GranBull,2","Qwilfish,1","Scizor,2","Heracross,2","Teddiursa,1","Ursaring,2","Swinub,1","Piloswine,1","Octillery,1","Kingdra,1","Donphan,1","Stantler,1","Tyrogue,1","Entei,2","Larvitar,1","Pupitar,2","Tyranitar,3","Combusken,1","Blaziken,3","Mudkip,1","Marshtomp,2","Swampert,3","Poochyena,1","Mightyena,2","Nuzleaf,2","Shiftry,3","Breloom,2","Sableye,1","Mawile,1","Caravanha,1","Sharpedo,2","Camerupt,1","Trapinch,1","Vibrava,1","Flygon,1","Cacturne,1","Zangoose,2","seviper,1","solrock,2","Corphish,1","Crawdaunt,2","Anorith,1","Armaldo,2","Shuppet,1","Banette,2","Absol,2","Huntail,1","Bagon,1","Salamence,3","Groudon,3","Rayquaza,2","Deoxys,1","Turtwig,1","Grotle,1","Torterra,2","Infernape,1","Staraptor,3","Bibarel,2","Kricketune,2","Shinx,1","Luxio,2","Luxray,3","Cranidos,1","Rampardos,2","Mothim,1","Honchkrow,2","Chatot,1","Gible,1","Gabite.2","Garchomp,3","Riolu,1","Lucario,1","Croagunk,1","Toxicroak,2","Carnivine,2","Snover,1","Abomasnow,1","Weavile,1","Rhyperior,3","electivire,3","Yanmega,2","Mamoswine,3","Gallade,3","Mesprit,1","Azelf,2","Regigigas,3"};
+	private String[] def = {"Squitle,1","WARTORTLE,1","METAPOD,2","KAKUNA,2","SANDSHREW,1","SANDSLASH,3","PARASECT,1","POLIWRATH,3","GEODUDE,1","GRAVELER,2","GOLEM,3","SLOWBRO,2","SHELLDER,2","CLOYSTER,2","ONIX,1","EXEGGCUTE,1","CUBONE,1","MAROWAK,2","KOFFING,1","WEEZING,2","RHYHORN,1","TANGELA,1","SEADRA,1","OMANYTE,1","OMASTAR,2","KABUTO,1","BAYLEEF,1","MEGANIUM,1","CROCONAW,1","FERALIGATR,1","SUDOWOODO,2","PINECO,1","FORRETRESS,2","GLIGAR,1","STEELIX,2","SHUCKLE,1","MAGCARGO,2","CORSOLA,1","SKARMORY,2","DONPHAN,1","MILTANK,2","SUICUNE,1","SILCOON,2","CASCOON,2","SEEDOT,1","PELIPPER,2","NINCADA,1","NOSEPASS,1","SABLEYE,1","MAWILE,1","ARON,1","LAIRON,1","AGGRON,3","TORKOAL,2","DUSCLOPS,1","CLAMPERL,1","HUNTAIL,1","RELICANTH,1","SHELGON,2","BELDUM,1","METANG,2","METAGROSS,3","REGIROCK,3","REGISTEEL,2","GROTLE,1","TORTERRA,1","KRICKETOT","SHIELDON,1","BASTIODON,2","VESPIQUEN,1","BRONZOR,1","BRONZONG,1","BONSLY,1","SPIRITOMB,1","HIPPOPOTAS,1","HIPPOWDON,2","SKORUPI,1","DRAPION,2","TANGROWTH,2","LEAFEON,2","GLISCOR,2","PROBOPASS,1","DUSKNOIR,1","UXIE,2"};
+	private String[] spatt = {"BULBASAUR,1"};
+	private String[] spdef = {"IVYSAUR,1"};
+	private String[] speed = {"CHARMANDER,1","ZUBAT,1","GOLBAT,2"};
+	
 	/**
 	 * Constructor
 	 * 
@@ -638,7 +645,7 @@ public class WildBattleField extends BattleField {
 			/*
 			 * Secondly, calculate EVs and exp
 			 */
-			int[] evs = m_wildPoke.getEffortPoints();
+			//int[] evs = m_wildPoke.getEffortPoints();
 
 			/*
 			 * Finally, add the EVs and exp to the participating Pokemon
@@ -648,34 +655,59 @@ public class WildBattleField extends BattleField {
 
 				/* Add the evs */
 				/* Ensure EVs don't go over limit, before or during addition */
-				int evTotal = p.getEvTotal();
-				if (evTotal < 510) {
-					for (int i = 0; i < evs.length; i++) {
-						/* Ensure we don't hit the EV limit */
-						if (evTotal + evs[i] < 510) {
-							if (p.getEv(i) < 255) {
-								if (p.getEv(i) + evs[i] < 255) {
-									/* Add the EV */
-									evTotal += evs[i];
-									p.setEv(i, p.getEv(i) + evs[i]);
-								} else {
-									/* Cap the EV at 255 */
-									evTotal += (255 - p.getEv(i));
-									p.setEv(i, 255);
-								}
-							}
-						} else {
-							/*
-							 * We're going to hit the EV total limit Only add what's allowed
-							 */
-							evs[i] = 510 - evTotal;
-							if (p.getEv(i) + evs[i] < 255) p.setEv(i, p.getEv(i) + evs[i]);
-							else
-								p.setEv(i, 255);
-							i = evs.length;
-						}
+				for(String s : hp)
+				{
+					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+					{
+						calcEV(p,0,Integer.parseInt(s.split(",")[1]));
 					}
 				}
+					for(String s : att)
+					{
+						if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+						{
+							calcEV(p,1,Integer.parseInt(s.split(",")[1]));
+						}
+					}
+				
+				
+					for(String s : def)
+					{
+						if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+						{
+							calcEV(p,2,Integer.parseInt(s.split(",")[1]));
+							
+						}
+					}
+				
+				
+					for(String s : spatt)
+					{
+						if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+						{
+							calcEV(p,4,Integer.parseInt(s.split(",")[1]));
+							
+						}
+					}
+				
+					for(String s : spdef)
+					{
+						if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+						{
+							calcEV(p,5,Integer.parseInt(s.split(",")[1]));
+							
+						}
+					}
+				
+					for(String s : speed)
+					{
+						if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
+						{
+							calcEV(p,3,Integer.parseInt(s.split(",")[1]));
+						}
+					}
+				
+
 
 				/* Gain exp/level up and update client */
 				p.setExp(p.getExp() + exp);
@@ -761,6 +793,34 @@ public class WildBattleField extends BattleField {
 							new BattleLevelChangeMessage(p.getSpeciesName(), level));
 					m_player.updateClientPokemonStats(index);
 				}
+			}
+		}
+	}
+	
+	private void calcEV(Pokemon p, int position, int ammount)
+	{
+		int evTotal = p.getEvTotal();
+		if (evTotal < 510)
+		{
+			if (evTotal + ammount < 255)
+			{
+				if(p.getEv(position) < 255)
+				{
+					if(p.getEv(position) + ammount < 255)
+					{
+						p.setEv(position, p.getEv(position) + ammount);
+					}
+					else
+					{
+						p.setEv(position, 255);
+					}
+				}
+			}
+			else
+			{
+				if (p.getEv(position) + (510 - evTotal) < 255) p.setEv(position, p.getEv(position) + (510 - evTotal));
+				else
+					p.setEv(position, 255);
 			}
 		}
 	}

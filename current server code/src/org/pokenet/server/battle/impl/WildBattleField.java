@@ -21,6 +21,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
 import org.pokenet.server.feature.TimeService;
+import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.battle.BattleEndMessage;
 import org.pokenet.server.network.message.battle.BattleExpMessage;
@@ -81,6 +82,12 @@ public class WildBattleField extends BattleField {
 		m_player = p;
 		m_wildPoke = wild;
 		m_participatingPokemon.add(p.getParty()[0]);
+		
+		//Check if this player has seen this wild pokemon before, if not, update pokedex
+		if(!m_player.isPokemonSeen(wild.getSpeciesNumber()+1))
+		{
+			m_player.setPokemonSeen(wild.getSpeciesNumber()+1);
+		}
 
 		/* Call methods */
 		// applyWeather();

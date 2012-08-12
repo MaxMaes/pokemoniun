@@ -19,6 +19,7 @@ public class OurPlayer extends Player {
 	private int m_breedingLvl = -1;
 	private int m_fishingLvl = -1;
 	private int m_coordinatingLvl = -1;
+	private int[] m_pokedex = new int[494];
 	
 	/**
 	 * Default constructor
@@ -368,5 +369,23 @@ public class OurPlayer extends Player {
 	@Override
 	public int getType(){
 		return 1;
+	}
+
+	public void initializePokedex(String[] details)
+	{
+		int value;
+		for(int id = 1; id < 494; id++)
+		{
+			value = Integer.parseInt(details[id]);
+			m_pokedex[id] = value;
+		}
+	}
+
+	public void updatePokedex(String[] details)
+	{
+		int id = Integer.parseInt(details[0]);
+		int value = Integer.parseInt(details[1]);
+				
+		m_pokedex[id] = value;
 	}
 }

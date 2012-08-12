@@ -102,6 +102,8 @@ public class PokemonSpecies {
 	@ElementArray
 	protected DropData [] m_drops;
 	
+	//private int m_number;
+	
 	public DropData [] getDropData() {
 		return m_drops;
 	}
@@ -478,4 +480,12 @@ public class PokemonSpecies {
 	public void setTMMoves(String [] mPossibleMoves) {
 		m_tmMoves = mPossibleMoves;
 	}
+
+	/*public void setPokemonNumber(int pokemonNumber)	{
+		m_number = pokemonNumber;		
+	}
+	
+	public int getPokemonNumber()	{
+		return m_number;		
+	}*/
 }

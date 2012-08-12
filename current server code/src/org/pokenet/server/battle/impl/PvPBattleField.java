@@ -74,6 +74,19 @@ public class PvPBattleField extends BattleField {
 				new BattleInitMessage(false, p2.getPartyCount()));
 		TcpProtocolHandler.writeMessage(p2.getTcpSession(), 
 				new BattleInitMessage(false, p1.getPartyCount()));
+		
+		//Check if p1 player has seen this enemy pokemon before, if not, update pokedex
+		if(!p1.isPokemonSeen(this.getActivePokemon()[1].getSpeciesNumber()+1))
+		{
+			p1.setPokemonSeen(this.getActivePokemon()[1].getSpeciesNumber()+1);
+		}
+		
+		//Check if p2 player has seen this enemy pokemon before, if not, update pokedex
+		if(!p2.isPokemonSeen(this.getActivePokemon()[0].getSpeciesNumber()+1))
+		{
+			p2.setPokemonSeen(this.getActivePokemon()[0].getSpeciesNumber()+1);
+		}
+		
 		/* Send the enemy's name to both players*/
 		p1.getTcpSession().write("bn" + p2.getName());
 		p2.getTcpSession().write("bn" + p1.getName());
@@ -241,6 +254,12 @@ public class PvPBattleField extends BattleField {
 	@Override
 	public void informSwitchInPokemon(int trainer, Pokemon poke) {
 		int pokeIndex = getPokemonPartyIndex(trainer, poke);
+		//Check if the enemy of the player switching has seen this pokemon before, if not, update the pokedex
+		if(!m_players[trainer].isPokemonSeen(poke.getSpeciesNumber()+1))
+		{
+			m_players[trainer].setPokemonSeen(poke.getSpeciesNumber()+1);
+		}
+
 		if(m_players != null) {
 			if (trainer == 0) {
 				TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), 

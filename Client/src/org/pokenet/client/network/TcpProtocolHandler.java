@@ -955,6 +955,18 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						break;
 				}
 				break;
+			case 'X': //Pokedex information
+				switch(message.charAt(1))
+				{
+					case 'i': //initialize the pokedex
+						details = message.substring(2).split(",");
+						GameClient.getInstance().getOurPlayer().initializePokedex(details);
+						break;
+					case 'u': //update the pokedex
+						details = message.substring(2).split(",");
+						GameClient.getInstance().getOurPlayer().updatePokedex(details);
+						break;
+				}
 			case 'r':
 				System.out.println("test1");
 				switch(message.charAt(1))

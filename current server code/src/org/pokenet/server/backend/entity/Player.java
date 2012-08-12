@@ -57,6 +57,7 @@ public class Player extends Character implements Battleable, Tradeable
 	private int m_battleId;
 	private Pokemon[] m_pokemon = new Pokemon[6];
 	private PokemonBox[] m_boxes = new PokemonBox[9];
+	private Pokedex m_pokedex;
 	private boolean m_isBattling = false;
 	private boolean m_isShopping = false;
 	private boolean m_isTalking = false;
@@ -1330,7 +1331,7 @@ public class Player extends Character implements Battleable, Tradeable
 	}
 
 	/**
-	 * Stores a caught Pokemon in the player's party or box
+	 * Stores a caught Pokemon in the player's party or box and adds it to the pokedex
 	 * 
 	 * @param p
 	 */
@@ -1343,6 +1344,8 @@ public class Player extends Character implements Battleable, Tradeable
 		p.setDatabaseID(-1);
 		addPokemon(p);
 		addTrainingExp(1000 / p.getRareness());
+		if(isPokemonCaught(p.getSpeciesNumber()+1))
+			setPokemonCaught(p.getSpeciesNumber()+1);
 	}
 
 	/**
@@ -1992,4 +1995,86 @@ public class Player extends Character implements Battleable, Tradeable
 			TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, getBag().getItems().get(i).getItemNumber(), getBag().getItems().get(i).getQuantity()));
 		}
 	}
+	
+	/**
+	 * Updates the whole pokedex for the player
+	 */
+	public void updateClientPokedex()
+	{
+		String message = "Xi,";
+		for(int i = 1; i < 494; i++)
+		{
+			message+=(m_pokedex.getPokedex()[i] + ",");
+		}
+		m_tcpSession.write(message);
+	}
+	
+	/**
+	 * Updates the clients pokedex for a specific id to value.
+	 * @param id the pokemons id
+	 * @param value the value to change it to
+	 */
+	public void updateClientPokedex(int id, int value)
+	{
+		m_tcpSession.write("Xu," + id + "," + value);
+	}
+
+	/**
+	 * Sets this players pokedex
+	 * @param px pokedex object
+	 */
+	public void setPokedex(Pokedex px)
+	{	
+		this.m_pokedex = px;
+	}
+
+	/**
+	 * Returns this players pokedex
+	 * @return this players pokedex
+	 */
+	public Pokedex getPokedex()
+	{
+		return this.m_pokedex;
+	}
+
+	/**
+	 * Sets that this pokemon has been seen
+	 * @param i the pokedexid of the pokemon
+	 */
+	public void setPokemonSeen(int i)
+	{
+		this.getPokedex().setPokemonSeen(i);
+		updateClientPokedex(i, 1);
+	}
+
+	/**
+	 * Checks if this pokemon has been seen (registered in the pokedex)
+	 * @param i pokedex id of the pokemon
+	 * @return returns true if this pokemon is registered as seen or caught
+	 */
+	public boolean isPokemonSeen(int i)
+	{
+		return this.getPokedex().isPokemonSeen(i);
+	}
+	
+	/**
+	 * Sets that this pokemon has been caught
+	 * @param i the pokedex id of the pokemon
+	 */
+	public void setPokemonCaught(int i)
+	{
+		this.getPokedex().setPokemonCaught(i);
+		updateClientPokedex(i, 2);
+	}
+	
+	/**
+	 * Checks if this pokemon has been caught (registered in the pokedex)
+	 * @param i the pokedex id of the pokemon
+	 * @return returns true if this pokemon is registered as caught
+	 */
+	public boolean isPokemonCaught(int i)
+	{
+		return this.getPokedex().isPokemonCaught(i);
+	}
+
 }

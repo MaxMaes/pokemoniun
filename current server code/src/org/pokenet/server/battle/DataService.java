@@ -139,35 +139,35 @@ public class DataService {
             if(name.equalsIgnoreCase("NIDORANfE")) {
             	name = "Nidoran-f";
             	species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             } else if(name.equalsIgnoreCase("NIDORANmA")) {
             	name = "Nidoran-m";
             	species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             } else if(name.equalsIgnoreCase("DEOXYS")) {
             	species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
                 species = m_speciesData.getPokemonByName("Deoxys-f");
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
                 species = m_speciesData.getPokemonByName("Deoxys-l");
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
                 species = m_speciesData.getPokemonByName("Deoxys-e");
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             } else if(name.equalsIgnoreCase("WORMADAM")) {
             	species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
                 species = m_speciesData.getPokemonByName("Wormadam-g");
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
                 species = m_speciesData.getPokemonByName("Wormadam-s");
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             } else if(name.equalsIgnoreCase("Porygonz")) {
             	name = "Porygonz";
             	species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             } else {
             	name = s.get("Name");
                 species = m_speciesData.getPokemonByName(name);
-                initialisePokemon(species, s);
+                initialisePokemon(species, s, i);
             }
 		}
 		/* Load TM info */
@@ -255,8 +255,9 @@ public class DataService {
 	 * @param species
 	 * @param s
 	 */
-	private void initialisePokemon(PokemonSpecies species, Section s) {
+	private void initialisePokemon(PokemonSpecies species, Section s, int pokemonNumber) {
 		if(species != null) {
+			//species.setPokemonNumber(pokemonNumber);
 			species.setInternalName(s.get("InternalName"));
             species.setKind(s.get("Kind"));
             species.setPokedexInfo(s.get("Pokedex"));

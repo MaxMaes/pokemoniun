@@ -1,9 +1,14 @@
 Current Release Notes:
-[FIX]Server sided movement (need stress-test).
+[FIX]Server sided movement.
+[FIX]Mac's now have all the features they didn't have.
 
-[ADD]
+[ADD]Global chat use /local for local chatting.
+[ADD]Exp bar in battles.
+[ADD]Trade item evolutions.*
+[ADD]Give function, pokemon can hold items.*
 
-[BUG]Client crash on bag close*
+[BUG]Client crash on bag close.*
 [BUG]100% CPU Usage after logging in and out mutliple times.
+[BUG]Pewter City seems to be somewhat broken.
 
 *These points have to be verified.

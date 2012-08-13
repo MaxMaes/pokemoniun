@@ -20,12 +20,12 @@ Save
 Changes may not take effect until you restart.
 Pokenet Help
 Arrow keys or WASD keys/nMovement/n/n
-Spacebar/nTalk/n/n
+Spacebar or E/nTalk/n/n
 Right-click/nInteract with other players/n/n
-Use the whisper option to start a private chat. 
-Type the /playercount command into local chat to see how many players are online./n
+Use the whisper option to start a private chat. Use /local to chat locally./n
+Type the /playercount command into chat to see how many players are online./n
 For more information, go to www.pokemonium.net
-Chat: Local
+Chat: Global
 You must accept Terms of Service (ToS) before registering.
 Male
 Female

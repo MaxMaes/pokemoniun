@@ -112,7 +112,7 @@ public class FriendListDialog extends Frame
 			if(m_online.contains(m_shownFriends[i]))
 				m_shownFriends[i].setForeground(Color.white);
 			else
-				m_shownFriends[i].setForeground(Color.gray);
+				m_shownFriends[i].setForeground(Color.black);
 			m_shownFriends[i].addMouseListener(new MouseAdapter()
 			{
 				@Override
@@ -129,9 +129,8 @@ public class FriendListDialog extends Frame
 					if(m_online.contains(m_shownFriends[j]))
 						m_shownFriends[j].setForeground(Color.white);
 					else
-						m_shownFriends[j].setForeground(Color.gray);
+						m_shownFriends[j].setForeground(Color.black);
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e)
 				{

@@ -1,6 +1,7 @@
 Current Release Notes:
 [FIX]Server sided movement.
 [FIX]Mac's now have all the features they didn't have.
+[FIX]Global chat now correctly displayed.
 
 [ADD]Global chat use /local for local chatting.
 [ADD]Exp bar in battles.
@@ -12,5 +13,8 @@ Current Release Notes:
 [BUG]Client crash on bag close.*
 [BUG]100% CPU Usage after logging in and out mutliple times.
 [BUG]Pewter City seems to be somewhat broken.
+[BUG]Receipiant doesn't have the name displayed when private chatting back.
+
+[REQ]Add functionality to press Enter to logout.
 
 *These points have to be verified.

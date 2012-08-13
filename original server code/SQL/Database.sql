@@ -144,7 +144,6 @@ DEFAULT CHARACTER SET=latin1 COLLATE=latin1_swedish_ci
 -- Records of pn_friends
 -- ----------------------------
 BEGIN;
-INSERT INTO `pn_friends` VALUES ('12135', '12123'), ('12135', '12125'), ('12135', '12137'), ('12135', '12138'), ('12135', '12142'), ('12135', '12463');
 COMMIT;
 
 -- ----------------------------
@@ -219,6 +218,8 @@ AUTO_INCREMENT=15069
 -- ----------------------------
 -- Records of pn_members
 -- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for `pn_mypokes`
@@ -275,6 +276,8 @@ AUTO_INCREMENT=15053
 -- ----------------------------
 -- Records of pn_party
 -- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for `pn_pokemon`
@@ -342,3 +345,23 @@ AUTO_INCREMENT=32164;
 -- ----------------------------
 -- Records of pn_pokemon
 -- ----------------------------
+BEGIN;
+COMMIT;
+
+--
+-- Table structure for table `pn_cheatlog`
+--
+DROP TABLE IF EXISTS `pn_cheatlog`;
+CREATE TABLE IF NOT EXISTS `pn_cheatlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `playerid` varchar(12) DEFAULT NULL,
+  `date` varchar(25) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of pn_cheatlog
+-- ----------------------------
+BEGIN;
+COMMIT;

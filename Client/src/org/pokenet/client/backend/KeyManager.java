@@ -10,6 +10,11 @@ import org.ini4j.InvalidIniFormatException;
 import org.newdawn.slick.Input;
 import org.pokenet.client.GameClient;
 
+/**
+ * Contains and manages the controls
+ * @author Myth1c
+ *
+ */
 public class KeyManager
 {
 	private static HashMap<Action, Integer> keys;

@@ -388,4 +388,9 @@ public class OurPlayer extends Player {
 				
 		m_pokedex[id] = value;
 	}
+	
+	public int[] getPokedex()
+	{
+		return this.m_pokedex;
+	}
 }

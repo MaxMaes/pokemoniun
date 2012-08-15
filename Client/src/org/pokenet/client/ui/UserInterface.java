@@ -1,6 +1,7 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
+import mdes.slick.sui.Component;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
@@ -24,6 +25,7 @@ import org.pokenet.client.ui.frames.OptionsDialog;
 import org.pokenet.client.ui.frames.PartyInfoDialog;
 import org.pokenet.client.ui.frames.PlayerInfoDialog;
 import org.pokenet.client.ui.frames.PokeStorageBoxFrame;
+import org.pokenet.client.ui.frames.PokedexDialog;
 import org.pokenet.client.ui.frames.RequestDialog;
 import org.pokenet.client.ui.frames.ShopDialog;
 import org.pokenet.client.ui.frames.TownMap;
@@ -60,6 +62,7 @@ public class UserInterface extends Frame
 	private ConfirmationDialog m_evolveDialog;
 	private BigBagDialog m_bag;
 	private PlayerInfoDialog m_stats;
+	private PokedexDialog m_pokedex;
 
 	/**
 	 * Default constructor
@@ -85,6 +88,9 @@ public class UserInterface extends Frame
 		m_map.setAlwaysOnTop(true);
 		m_map.setVisible(false);
 		m_display.add(m_map);
+		m_pokedex = new PokedexDialog();
+		m_pokedex.setVisible(false);
+		m_display.add(m_pokedex);
 		startButtons();
 		m_moneyLabel.setText("$0");
 		m_moneyLabel.pack();
@@ -126,7 +132,7 @@ public class UserInterface extends Frame
 	 */
 	public void startButtons()
 	{
-		m_buttons = new ImageButton[9];
+		m_buttons = new ImageButton[10];
 
 		m_buttons[0] = HUDButtonFactory.getButton("stats");
 		m_buttons[0].addActionListener(new ActionListener()
@@ -217,6 +223,16 @@ public class UserInterface extends Frame
 			}
 		});
 		m_buttons[8].setToolTipText("Disconnect");
+		
+		m_buttons[9] = HUDButtonFactory.getButton("pokedex");
+		m_buttons[9].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				togglePokedex();
+			}
+		});
+
 
 		for(int i = 0; i < m_buttons.length; i++)
 		{
@@ -224,6 +240,8 @@ public class UserInterface extends Frame
 			getContentPane().add(m_buttons[i]);
 			m_buttons[i].setLocation(5 + (32 * i) + (5 * i), 7);
 		}
+		
+		m_buttons[9].setToolTipText("Pokedex");
 	}
 
 	public void disconnect()
@@ -575,6 +593,23 @@ public class UserInterface extends Frame
 				m_chat = new ChatDialog();
 			m_chat.setLocation(0, GameClient.getInstance().getDisplay().getHeight() - m_chat.getHeight());
 			m_chat.setVisible(true);
+		}
+	}
+	
+	public void togglePokedex()
+	{
+		//TODO
+		if(m_pokedex.isVisible())
+		{
+			m_pokedex.setVisible(false);
+			hideHUDElements();
+		}
+		else
+		{
+			hideHUDElements();
+			m_chat.setVisible(false);
+			m_pokedex.setLocation(0, 20);
+			m_pokedex.setVisible(true);
 		}
 	}
 

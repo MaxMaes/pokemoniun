@@ -20,6 +20,11 @@ public class HUDButtonFactory {
                         rollovers = new HashMap<String, Image>();
                         downs = new HashMap<String, Image>();
                         
+                        // -- Pokedex Button -- TODO
+                        normals.put("pokedex", getNormalImage("pokedex/pokedex"));
+                        rollovers.put("pokedex", getRolloverImage("pokedex/pokedex"));
+                        downs.put("pokedex", getDownImage("pokedex/pokedex"));
+                        
                         // -- Player Info Button --
                         normals.put("stats", getNormalImage("stats"));
                         rollovers.put("stats", getRolloverImage("stats"));

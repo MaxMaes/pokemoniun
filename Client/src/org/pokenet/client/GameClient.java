@@ -46,6 +46,7 @@ import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
+import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
 import org.pokenet.client.backend.entity.OurPlayer;
@@ -96,7 +97,7 @@ public class GameClient extends BasicGame
 	private static HashMap<String, String> options;
 	// Static variables
 	private static String m_filepath;
-	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont;
+	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini;
 	private static String m_host;
 	// UI
 	private LoadingScreen m_loading;
@@ -214,6 +215,10 @@ public class GameClient extends BasicGame
 		 */
 		m_fontLarge = new AngelCodeFont(m_filepath + "res/fonts/dp.fnt", m_filepath + "res/fonts/dp.png");
 		m_fontSmall = new AngelCodeFont(m_filepath + "res/fonts/dp-small.fnt", m_filepath + "res/fonts/dp-small.png");
+		m_pokedexfontsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-small.fnt", m_filepath + "res/fonts/dex-small.png");
+		m_pokedexfontmedium = new AngelCodeFont(m_filepath + "res/fonts/dex-medium.fnt", m_filepath + "res/fonts/dex-medium.png");
+		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
+		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
 
 		// Player.loadSpriteFactory();
 
@@ -1121,6 +1126,7 @@ public class GameClient extends BasicGame
 		}
 		
 		KeyManager.initialize();
+		PokedexData.loadPokedexData();
 		/*ClientUpdater updater = new ClientUpdater();
 		if(!updater.checkFiles()) {
 			System.out.println("Missing resources, game not starting");
@@ -1265,6 +1271,38 @@ public class GameClient extends BasicGame
 	public static Font getFontLarge()
 	{
 		return m_fontLarge;
+	}
+	
+	/**
+	 * Returns the pokedex font in small
+	 */
+	public static Font getPokedexFontSmall()
+	{
+		return m_pokedexfontsmall;
+	}
+	
+	/**
+	 * Returns the pokedex font in medium
+	 */
+	public static Font getPokedexFontMedium()
+	{
+		return m_pokedexfontmedium;
+	}
+	
+	/**
+	 * Returns the pokedex font in large
+	 */
+	public static Font getPokedexFontLarge()
+	{
+		return m_pokedexfontlarge;
+	}
+	
+	/**
+	 * Returns the pokedex font in mini
+	 */
+	public static Font getPokedexFontMini()
+	{
+		return m_pokedexfontmini;
 	}
 
 	/**
@@ -1563,6 +1601,7 @@ public class GameClient extends BasicGame
 	{
 		return m_chatServerIsActive;
 	}
+	
 
 	/** Slick Native library finder. */
 	/*

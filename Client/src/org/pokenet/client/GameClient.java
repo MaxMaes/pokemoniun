@@ -97,7 +97,7 @@ public class GameClient extends BasicGame
 	private static HashMap<String, String> options;
 	// Static variables
 	private static String m_filepath;
-	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini;
+	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private static String m_host;
 	// UI
 	private LoadingScreen m_loading;
@@ -219,6 +219,8 @@ public class GameClient extends BasicGame
 		m_pokedexfontmedium = new AngelCodeFont(m_filepath + "res/fonts/dex-medium.fnt", m_filepath + "res/fonts/dex-medium.png");
 		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
 		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
+		m_pokedexfontbetweenminiandsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-betweenminiandsmall.fnt", m_filepath + "res/fonts/dex-betweenminiandsmall.png");
+		
 
 		// Player.loadSpriteFactory();
 
@@ -1304,7 +1306,14 @@ public class GameClient extends BasicGame
 	{
 		return m_pokedexfontmini;
 	}
-
+	
+	/**
+	 * Returns the pokedex font between small and mini;
+	 */
+	public static Font getPokedexFontBetweenSmallAndMini()
+	{
+		return m_pokedexfontbetweenminiandsmall;
+	}
 	/**
 	 * Returns the font in small
 	 * 

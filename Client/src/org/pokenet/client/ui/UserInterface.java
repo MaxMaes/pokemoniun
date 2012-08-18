@@ -857,7 +857,7 @@ public class UserInterface extends Frame
 		for(int i = 0; i < friends.length; i++)
 			m_friendsList.addFriend(friends[i]);
 	}
-
+	
 	/**
 	 * A pokemon wants to evolve
 	 * 

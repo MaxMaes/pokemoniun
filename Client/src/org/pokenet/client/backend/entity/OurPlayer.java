@@ -46,6 +46,7 @@ public class OurPlayer extends Player {
 		m_breedingLvl = original.getBreedingLevel();
 		m_fishingLvl = original.getFishingLevel();
 		m_coordinatingLvl = original.getCoordinatingLevel();
+		m_pokedex = original.getPokedex();
 	}
 	
 	public void set(Player p) {

@@ -8,7 +8,7 @@ Current Release Notes:
 [ADD]Trade item evolutions.*
 [ADD]Give function, pokemon can hold items.*
 [ADD]Items (such as potions, berries, etc) can now be used in battle without resulting in struggle.*
-[ADD]Ingame Pokedex! Right now it only records seen/caught and has no UI, but the data is there.*
+[ADD]Ingame Pokedex!*
 
 [BUG]Client crash on bag close.*
 [BUG]100% CPU Usage after logging in and out mutliple times.
@@ -16,5 +16,7 @@ Current Release Notes:
 [BUG]Receipiant doesn't have the name displayed when private chatting back.
 
 [REQ]Add functionality to press Enter to logout.
+[REQ]Add original trainer name on pokemon info
+[REQ]Add moves on pokemon info (party-viewer)
 
 *These points have to be verified.

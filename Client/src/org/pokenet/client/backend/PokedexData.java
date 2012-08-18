@@ -1,6 +1,7 @@
 package org.pokenet.client.backend;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
@@ -13,28 +14,94 @@ import org.ini4j.Ini.Section;
 public class PokedexData
 {
 	private static HashMap<Integer, String[]> dexdata;
-
+	private static HashMap<Integer, ArrayList<Integer>[]> locations;
+	private static HashMap<Integer, Object[]> locationids;
+	
 	public static void loadPokedexData()
 	{
 		dexdata = new HashMap<Integer, String[]>();
+		locations = new HashMap<Integer, ArrayList<Integer>[]>();
+		locationids = new HashMap<Integer, Object[]>();
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		Ini ini = null;
-		/* Load updated POLR db */
+		Ini pokemon = null;
+		Ini locations = null;
+		Ini locationid = null;
 		try
 		{
-			ini = new Ini(new FileInputStream(respath + "res/pokemon.ini"));
+			pokemon = new Ini(new FileInputStream(respath + "res/pokemon.ini"));
+			locations = new Ini(new FileInputStream(respath + "res/locations.ini"));
+			locationid = new Ini(new FileInputStream(respath + "res/locationids.ini"));
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			return;
 		}
-		for(int i = 0; i < 493; i++)
+		
+		for(int i = 0; i < 92; i++)
 		{
-			Ini.Section s = ini.get(String.valueOf(i + 1));
-			parsePokemonInfo(s, i+1);
+			Ini.Section s = locationid.get(String.valueOf(i));
+			Object[] data = new Object[3];
+			data[0] = s.get("Name");
+			data[1] = s.get("MapX");
+			data[2] = s.get("MapY");
+			
+			locationids.put(i, data);
+		}
+		
+		for(int i = 1; i < 494; i++)
+		{
+			Ini.Section s = pokemon.get(String.valueOf(i));
+			parsePokemonInfo(s, i);
+			s = locations.get(String.valueOf(i));
+			parseLocationInfo(s, i);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void parseLocationInfo(Section s, int i)
+	{
+		ArrayList<Integer>[] data = new ArrayList[4];
+		data[0] = new ArrayList<Integer>();
+		data[1] = new ArrayList<Integer>();
+		data[2] = new ArrayList<Integer>();
+		data[3] = new ArrayList<Integer>();
+		locations.put(i, data);
+		
+		String line = new String();
+		String[] details;
+		line = s.get("Day");
+		details = line.split(",");
+		for(String st : details)
+		{
+			if(!st.equals(""))
+				locations.get(i)[0].add(Integer.parseInt(st));
+		}
+		
+		line = s.get("Night");
+		details = line.split(",");
+		for(String st : details)
+		{
+			if(!st.equals(""))
+				locations.get(i)[1].add(Integer.parseInt(st));
+		}
+		
+		line = s.get("Fish");
+		details = line.split(",");
+		for(String st : details)
+		{
+			if(!st.equals(""))
+				locations.get(i)[2].add(Integer.parseInt(st));
+		}
+		
+		line = s.get("Surf");
+		details = line.split(",");
+		for(String st : details)
+		{
+			if(!st.equals(""))
+				locations.get(i)[3].add(Integer.parseInt(st));
 		}
 	}
 
@@ -71,8 +138,22 @@ public class PokedexData
 		dexdata.put(index, data);
 	}
 	
+	public static Object[] getLocationInfo(int id)
+	{
+		return locationids.get(id);
+	}
+	
+	public static ArrayList<Integer>[] getLocations(int id)
+	{
+		return locations.get(id);
+	}
+	
 	public static String getName(int id)
 	{
+		if(dexdata.get(id) == null)
+		{
+			return "";
+		}
 		return dexdata.get(id)[0];
 	}
 	

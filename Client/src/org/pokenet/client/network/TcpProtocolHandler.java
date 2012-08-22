@@ -963,7 +963,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						GameClient.getInstance().getOurPlayer().initializePokedex(details);
 						break;
 					case 'u': //update the pokedex
-						details = message.substring(2).split(",");
+						details = message.substring(3).split(",");
 						GameClient.getInstance().getOurPlayer().updatePokedex(details);
 						break;
 				}

@@ -884,4 +884,9 @@ public class UserInterface extends Frame
 		};
 		m_evolveDialog = new ConfirmationDialog(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getName() + " is trying to evolve.", yes, no);
 	}
+
+	public PokedexDialog getPokedex()
+	{
+		return m_pokedex;
+	}
 }

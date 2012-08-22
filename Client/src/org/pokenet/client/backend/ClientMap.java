@@ -2,6 +2,7 @@ package org.pokenet.client.backend;
 
 import java.util.Iterator;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -690,10 +691,22 @@ public class ClientMap extends TiledMap {
 					g.resetTransform();
 					// Draw player names
 					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
-						g.drawString(p.getUsername(), m_xOffset
-							+ (p.getX() - (g.getFont()
-									.getWidth(p.getUsername()) / 2)) + 16,
-							m_yOffset + p.getY() - 36);
+					{
+						// User titles for staff (could be developed further)
+						if(p.getUsername().equals("TesterMyth1c")){
+							g.drawString(p.getUsername(), m_xOffset
+									+ (p.getX() - (g.getFont()
+											.getWidth(p.getUsername()) / 2)) + 16,
+									m_yOffset + p.getY() - 40);
+							g.setColor(new Color(96, 168, 168));
+							g.drawString("<Dev>", m_xOffset + (p.getX() - (g.getFont().getWidth("<Dev>") / 2)) + 16, m_yOffset + p.getY() - 22);
+						} else {
+							g.drawString(p.getUsername(), m_xOffset
+									+ (p.getX() - (g.getFont()
+											.getWidth(p.getUsername()) / 2)) + 16,
+									m_yOffset + p.getY() - 36);
+						}
+					}
 				}
 			}
 		}

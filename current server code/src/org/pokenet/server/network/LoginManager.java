@@ -500,7 +500,8 @@ public class LoginManager implements Runnable {
 			 * Loop through all Pokemon belonging to this player and add them to
 			 * their party/box
 			 */
-			while (pokemons.next()) {
+			while (pokemons.next()) 
+			{
 				boolean isParty = false;
 				int partyIndex = -1;
 				/* Checks if Pokemon is in party */
@@ -571,6 +572,7 @@ public class LoginManager implements Runnable {
 				m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL(""+pokedexid) + " WHERE id = " + MySqlManager.parseSQL(""+memberID));
 				//WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
 				pokemons =  m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
+				pokemons.first();
 				String pokemonSpecie;
 				int pokemonNumber;
 				while(pokemons.next())

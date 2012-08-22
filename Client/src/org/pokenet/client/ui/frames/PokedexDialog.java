@@ -31,11 +31,13 @@ public class PokedexDialog extends Frame
 	private Label pokemonSelectionFrame;
 	private Label tabname;
 	private Label map;
-	private Label[] loreLabels = new Label[0];
-	private Label[] pokemonNameList = new Label[13];
-	private Label[] pokemonLocationLabels = new Label[0];
-	private Label[] pokemonMoveLabels = new Label[0];
-	private Label[] pokemonBiologyLabels = new Label[14];
+	private Label[] loreLabels;
+	private Label[] pokemonNameList;
+	private Label[] pokemonCaughtLabels;
+	private Label[] pokemonLocationLabels;
+	private Label[] pokemonMoveLabels;
+	private Label[] pokemonBiologyLabels;
+	
 	private int tabindex = 1;
 	private int selection = 1;
 	private int scrollindex = 0;
@@ -169,6 +171,11 @@ public class PokedexDialog extends Frame
 				pokemonBiologyLabels[i].setLocation(pokedexsprite.getX() + 125 , pokedexsprite.getY() + 132 + (11*(i%9)));
 			}
 			pokemonBiologyLabels[i].pack();
+		}
+		
+		for(int i = 0; i<pokemonBiologyLabels.length; i++)
+		{
+			add(pokemonBiologyLabels[i]);
 		}
 	}
 	
@@ -430,11 +437,11 @@ public class PokedexDialog extends Frame
 		
 		for(int i = 0; i < 13; i++)
 		{
+			pokemonCaughtLabels[i].setVisible(false);
 			if(first+i > max)
 			{
 				pokemonNameList[i].setText("");
 				pokemonNameList[i].pack();
-				pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, (pokedexsprite.getY() + 63 + (22*i)));
 			}
 			else
 			{
@@ -442,7 +449,6 @@ public class PokedexDialog extends Frame
 				{
 					pokemonNameList[i].setText("???");
 					pokemonNameList[i].pack();
-					pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, (pokedexsprite.getY() + 63 + (22*i)));
 				}
 				else
 				{
@@ -456,7 +462,10 @@ public class PokedexDialog extends Frame
 			
 					pokemonNameList[i].setText("#" + number + " " + PokedexData.getName(first + i));
 					pokemonNameList[i].pack();
-					pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, (pokedexsprite.getY() + 63 + (22*i)));
+					if(getPokemon(first+i) == 2)
+					{
+						pokemonCaughtLabels[i].setVisible(true);
+					}
 				}
 			}
 		}
@@ -508,6 +517,14 @@ public class PokedexDialog extends Frame
 			e.printStackTrace();
 		}
 		
+		loreLabels = new Label[0];
+		pokemonNameList = new Label[13];
+		pokemonCaughtLabels = new Label[13];
+		pokemonLocationLabels = new Label[0];
+		pokemonMoveLabels = new Label[0];
+		pokemonBiologyLabels = new Label[14];
+		
+		
 		for(int i = 0; i<14; i++)
 		{
 			pokemonBiologyLabels[i] = new Label();
@@ -518,6 +535,18 @@ public class PokedexDialog extends Frame
 		{
 			pokemonNameList[i] = new Label();
 			pokemonNameList[i].setFont(GameClient.getPokedexFontSmall());
+			pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, (pokedexsprite.getY() + 63 + (22*i)));
+			pokemonCaughtLabels[i] = new Label();
+			try
+			{
+				pokemonCaughtLabels[i].setImage(loadImage("res/ui/pokedex/pokemoncaught.png"));
+				pokemonCaughtLabels[i].pack();
+			}
+			catch(SlickException e)
+			{
+				e.printStackTrace();
+			}
+			pokemonCaughtLabels[i].setLocation(pokedexsprite.getX() + 299, (pokedexsprite.getY() + 60 + (22*i)));
 		}
 					
 		
@@ -541,7 +570,11 @@ public class PokedexDialog extends Frame
 			add(pokemonBiologyLabels[i]);
 		
 		for(int i = 0; i< 13; i++)
+		{
 			add(pokemonNameList[i]);
+			add(pokemonCaughtLabels[i]);
+		}
+		
 		
 		setResizable(false);
 	 }

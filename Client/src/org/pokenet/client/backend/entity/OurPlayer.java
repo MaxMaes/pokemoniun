@@ -379,6 +379,7 @@ public class OurPlayer extends Player {
 		{
 			value = Integer.parseInt(details[id]);
 			m_pokedex[id] = value;
+			GameClient.getInstance().getUi().getPokedex().initGUI();
 		}
 	}
 

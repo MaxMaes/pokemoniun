@@ -1,6 +1,7 @@
 package org.pokenet.client.backend;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.HashMap;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
@@ -13,11 +14,13 @@ import org.newdawn.slick.openal.AudioLoader;
  */
 public class SoundManager extends Thread
 {
-	private HashMap<String, AudioImpl> m_files;
-	private HashMap<String, String> m_fileList;
-	private HashMap<String, String> m_locations;
+	private HashMap<String, AudioImpl> m_files = new HashMap<String, AudioImpl>();
+	private HashMap<String, String> m_fileList = new HashMap<String, String>();
+	private HashMap<String, String> m_locations = new HashMap<String, String>();
 	protected String m_trackName;
-	private boolean m_tracksLoaded = false, m_trackChanged = true, m_isRunning = false;
+	private boolean m_tracksLoaded = false;
+	private boolean m_trackChanged = true;
+	private boolean m_isRunning = false;
 	private boolean m_mute = false;
 
 	private static String m_audioPath = "res/music/";
@@ -31,7 +34,6 @@ public class SoundManager extends Thread
 		if(respath == null)
 			respath = "";
 		m_audioPath = respath + m_audioPath;
-		m_files = new HashMap<String, AudioImpl>();
 		loadFileList();
 		loadLocations();
 	}
@@ -44,7 +46,6 @@ public class SoundManager extends Thread
 		try
 		{
 			BufferedReader stream = FileLoader.loadTextFile(m_audioPath + "index.txt");
-			m_fileList = new HashMap<String, String>();
 
 			String f;
 			while((f = stream.readLine()) != null)
@@ -63,7 +64,7 @@ public class SoundManager extends Thread
 				}
 			}
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 			System.err.println("Failed to load music");
@@ -81,7 +82,6 @@ public class SoundManager extends Thread
 		try
 		{
 			BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt");
-			m_locations = new HashMap<String, String>();
 
 			String f;
 			while((f = stream.readLine()) != null)
@@ -97,7 +97,7 @@ public class SoundManager extends Thread
 				}
 			}
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -133,6 +133,7 @@ public class SoundManager extends Thread
 	@Override
 	public void run()
 	{
+		// TODO: Another bug; m_isRunning is never set to false, so this loop never ends, GG
 		while(m_isRunning)
 		{
 			if(!m_mute)

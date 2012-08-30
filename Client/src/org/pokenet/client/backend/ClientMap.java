@@ -668,6 +668,8 @@ public class ClientMap extends TiledMap {
 									m_xOffset + p.getServerX() - 32,
 									m_yOffset + p.getServerY() + 8);
 							break;
+						case Down:
+							break;
 						}
 					}
 					if (m_curMap.isOnGrass(p) && p.getY() <= p.getServerY()) {

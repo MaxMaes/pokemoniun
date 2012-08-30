@@ -9,7 +9,6 @@ import java.util.List;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Item;
 import org.simpleframework.xml.ElementMap;
-import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -18,10 +17,11 @@ import org.simpleframework.xml.core.Persister;
  * @author shadowkanji
  * @author Nushio
  */
-@Root
+
+// TODO: This class is weird, needs recoding.
 public class ItemDatabase {
 	@ElementMap
-	private HashMap<Integer, Item> m_items;
+	private HashMap<Integer, Item> m_items = new HashMap<Integer, Item>();
 	
 	private static ItemDatabase m_instance;
 	
@@ -31,8 +31,6 @@ public class ItemDatabase {
 	 * @param item
 	 */
 	public void addItem(int id, Item item) {
-		if(m_items == null)
-			m_items = new HashMap<Integer, Item>();
 		m_items.put(id, item);
 	}
 	
@@ -76,14 +74,6 @@ public class ItemDatabase {
 		} catch (Exception e) {
 			GameClient.log("ERROR: Item database could not be loaded.");
 		}
-	}
-	
-	/**
-	 * Sets the instance
-	 * @param i
-	 */
-	public void setInstance(ItemDatabase instance) {
-		m_instance = instance;
 	}
 	
 	/**

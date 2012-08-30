@@ -116,7 +116,6 @@ public class GameClient extends BasicGame
 	private MoveLearningManager m_moveLearningManager;
 	private static SoundManager m_soundPlayer;
 	private static boolean m_loadSurroundingMaps = false;
-	public static String UDPCODE = "";
 	private int lastPressedKey;
 	private static DeferredResource m_nextResource;
 	private boolean m_started;
@@ -393,14 +392,14 @@ public class GameClient extends BasicGame
 			/*
 			 * Check if language was chosen.
 			 */
-			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && ((m_host != null && m_host.equalsIgnoreCase("")) || m_packetGen == null))
+			if(m_language != null && m_languageChosen && (m_host != null || m_packetGen == null))
 			{
 				m_login.showServerSelect();
 			}
 			/*
 			 * Check if we need to connect to a selected server
 			 */
-			if(m_host != null && !m_host.equalsIgnoreCase("") && m_packetGen == null)
+			if(m_host != null && m_packetGen == null)
 			{
 				this.connect();
 			}
@@ -1020,7 +1019,7 @@ public class GameClient extends BasicGame
 					else
 					{
 						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-						m_host = "";
+						m_host = null;
 						m_packetGen = null;
 					}
 				}
@@ -1028,7 +1027,7 @@ public class GameClient extends BasicGame
 				{
 					e.printStackTrace();
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					m_host = "";
+					m_host = null;
 					m_packetGen = null;
 				}
 			}
@@ -1079,7 +1078,7 @@ public class GameClient extends BasicGame
 		/*
 		 * Show login screen
 		 */
-		if(!m_host.equals(""))
+		if(m_host != null)
 			m_login.showLogin();
 	}
 
@@ -1423,7 +1422,7 @@ public class GameClient extends BasicGame
 	public void reset()
 	{
 		m_packetGen = null;
-		m_host = "";
+		m_host = null;
 		m_ourPlayer = null;
 		try
 		{
@@ -1601,7 +1600,7 @@ public class GameClient extends BasicGame
 	 */
 	public void returnToServerSelect()
 	{
-		m_host = "";
+		m_host = null;
 		getLoginScreen().setServerVersion("?");
 		disconnect();
 	}

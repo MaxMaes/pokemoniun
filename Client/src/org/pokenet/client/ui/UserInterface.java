@@ -1,12 +1,13 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
-import mdes.slick.sui.Component;
+
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
@@ -622,24 +623,24 @@ public class UserInterface extends Frame
 			m_display.remove(m_requestsForm);
 		if(m_bagForm != null)
 			m_bagForm.setVisible(false);
-		m_bagForm = null;
 		if(m_teamInfo != null)
 			m_teamInfo.setVisible(false);
-		m_teamInfo = null;
 		if(m_optionsForm != null)
 			m_optionsForm.setVisible(false);
-		m_optionsForm = null;
 		if(m_helpForm != null)
 			m_helpForm.setVisible(false);
-		m_helpForm = null;
 		if(m_map.isVisible())
 			m_map.setVisible(false);
 		if(m_friendsList.isVisible())
 			m_friendsList.setVisible(false);
 		if(m_stats != null && m_stats.isVisible())
 			m_stats.setVisible(false);
+		
+		m_bagForm = null;
+		m_teamInfo = null;
+		m_optionsForm = null;
+		m_helpForm = null;
 		m_stats = null;
-
 	}
 
 	/**

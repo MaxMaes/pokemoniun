@@ -351,13 +351,12 @@ public class PokedexDialog extends Frame
 	
 	public Image loadImage(String path) throws SlickException
 	{
-		boolean old = LoadingList.isDeferredLoading();
-		LoadingList.setDeferredLoading(false);
+		LoadingList.setDeferredLoading(true);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		Image i = new Image(FileLoader.loadFile(respath + path), path, false);
-		LoadingList.setDeferredLoading(old);
+		LoadingList.setDeferredLoading(false);
 		return i;
 	}
 	

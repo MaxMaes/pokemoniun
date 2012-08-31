@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
 import org.newdawn.slick.openal.AudioLoader;
+import org.pokenet.client.constants.Music;
 
 /**
  * Handles music throughout the game
@@ -17,7 +18,7 @@ public class SoundManager extends Thread
 	private HashMap<String, AudioImpl> m_files = new HashMap<String, AudioImpl>();
 	private HashMap<String, String> m_fileList = new HashMap<String, String>();
 	private HashMap<String, String> m_locations = new HashMap<String, String>();
-	protected String m_trackName;
+	private String m_trackName = Music.INTRO_AND_GYM;
 	private boolean m_tracksLoaded = false;
 	private boolean m_trackChanged = true;
 	private boolean m_isRunning = false;
@@ -189,6 +190,16 @@ public class SoundManager extends Thread
 			m_trackName = key;
 			m_trackChanged = true;
 		}
+	}
+	
+	/**
+	 * Get the track that's playing
+	 * 
+	 * @return m_trackName
+	 */
+	public String getTrack()
+	{
+		return m_trackName;
 	}
 
 	/**

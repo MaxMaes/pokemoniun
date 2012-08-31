@@ -63,7 +63,7 @@ public class BattleManager
 		m_ourPokes = m_player.getPokemon();
 		for(int i = 0; i < 6; i++)
 		{
-			if(m_ourPokes[i].getCurHP() > 0)
+			if(m_ourPokes[i].getCurrentHP() > 0)
 			{
 				m_curPokeIndex = i;
 				m_curPoke = m_ourPokes[i];
@@ -151,7 +151,7 @@ public class BattleManager
 		updateMoves();
 		updatePokePane();
 		m_timeLine.startBattle();
-		m_curTrack = GameClient.getSoundPlayer().m_trackName;
+		m_curTrack = GameClient.getSoundPlayer().getTrack();
 		System.out.println("Before Battle Music Name:" + m_curTrack);
 		GameClient.getInstance().getDisplay().add(m_battle);
 		GameClient.changeTrack(Music.PVNPC);
@@ -172,7 +172,7 @@ public class BattleManager
 		while(GameClient.getInstance().getDisplay().containsChild(m_battle))
 			;
 		GameClient.getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
-		if(GameClient.getSoundPlayer().m_trackName == Music.PVNPC)
+		if(GameClient.getSoundPlayer().getTrack() == Music.PVNPC)
 		{
 			GameClient.getSoundPlayer().setTrack(m_curTrack);
 		}
@@ -197,10 +197,10 @@ public class BattleManager
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			if(m_ourPokes[pokeIndex].getMoves()[i] != null)
+			if(m_ourPokes[pokeIndex].getMove(i) != null)
 			{
-				m_battle.m_moveButtons.get(i).setText(m_ourPokes[pokeIndex].getMoves()[i]);
-				m_battle.m_ppLabels.get(i).setText(m_ourPokes[pokeIndex].getMoveCurPP()[i] + "/" + m_ourPokes[pokeIndex].getMoveMaxPP()[i]);
+				m_battle.m_moveButtons.get(i).setText(m_ourPokes[pokeIndex].getMove(i));
+				m_battle.m_ppLabels.get(i).setText(m_ourPokes[pokeIndex].getMoveCurrentPP()[i] + "/" + m_ourPokes[pokeIndex].getMoveMaxPP()[i]);
 			}
 			else
 			{
@@ -217,10 +217,10 @@ public class BattleManager
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			if(m_curPoke != null && m_curPoke.getMoves()[i] != null && m_curPoke.getMoves()[i] != "")
+			if(m_curPoke != null && m_curPoke.getMove(i) != null && m_curPoke.getMove(i) != "")
 			{
-				m_battle.m_moveButtons.get(i).setText(m_curPoke.getMoves()[i]);
-				m_battle.m_ppLabels.get(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
+				m_battle.m_moveButtons.get(i).setText(m_curPoke.getMove(i));
+				m_battle.m_ppLabels.get(i).setText(m_curPoke.getMoveCurrentPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
 				m_battle.m_moveTypeLabels.get(i).setText(m_curPoke.getMoveType(i));
 			}
 			else
@@ -266,7 +266,7 @@ public class BattleManager
 			try
 			{
 				m_battle.m_pokeButtons.get(i).setText(m_ourPokes[i].getName());
-				m_battle.m_pokeInfo.get(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:" + m_ourPokes[i].getCurHP() + "/" + m_ourPokes[i].getMaxHP());
+				m_battle.m_pokeInfo.get(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:" + m_ourPokes[i].getCurrentHP() + "/" + m_ourPokes[i].getMaxHP());
 				try
 				{
 					if(m_ourStatuses.containsKey(i) && m_battle.getStatusIcons().containsKey(m_ourStatuses.get(i)))
@@ -281,7 +281,7 @@ public class BattleManager
 				catch(Exception e2)
 				{
 				}
-				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i)
+				if(m_ourPokes[i].getCurrentHP() <= 0 || m_curPokeIndex == i)
 					m_battle.m_pokeButtons.get(i).setEnabled(false);
 				else
 					m_battle.m_pokeButtons.get(i).setEnabled(true);
@@ -372,7 +372,7 @@ public class BattleManager
 		m_enemyPokes[index].setLevel(level);
 		m_enemyPokes[index].setGender(gender);
 		m_enemyPokes[index].setMaxHP(maxHP);
-		m_enemyPokes[index].setCurHP(curHP);
+		m_enemyPokes[index].setCurrentHP(curHP);
 		m_enemyPokes[index].setSpriteNumber(spriteNum + 1);
 		m_enemyPokes[index].setShiny(isShiny);
 

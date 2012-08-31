@@ -11,8 +11,8 @@ import org.pokenet.server.GameServer;
  *
  */
 public class Shop implements Runnable {
-	private final HashMap<Integer, Integer> m_stock;
-	private final HashMap<Integer, Integer> m_prices;
+	private final HashMap<Integer, Integer> m_stock = new HashMap<Integer, Integer>();
+	private final HashMap<Integer, Integer> m_prices = new HashMap<Integer, Integer>();
 	/*
 	 * Delta represents how often the stock should be updated
 	 * 
@@ -25,8 +25,6 @@ public class Shop implements Runnable {
 	private boolean m_isRunning = false;
 	
 	public Shop(int type) {
-		m_stock = new HashMap<Integer, Integer>();
-		m_prices = new HashMap<Integer, Integer>();
 		/*
 		 * Generate all the item stocks amd prices
 		 */
@@ -37,7 +35,7 @@ public class Shop implements Runnable {
 	    /*
 	     * Set delta to 20 minutes
 	     */
-	    m_delta = 1200000;
+	    m_delta = 20 * 60 * 1000;
 	}
 
 	/**

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 public class Bag {
-	private final ArrayList<BagItem> m_items;
+	private final ArrayList<BagItem> m_items = new ArrayList<BagItem>();
 	private final int m_memberId;
 	private static final int m_bagsize = 30; //30 is the artificial bag size, right?
 	
@@ -17,7 +17,6 @@ public class Bag {
 	 */
 	public Bag(int memberid) {
 		m_memberId = memberid;
-		m_items = new ArrayList<BagItem>();
 	}
 	
 	/**

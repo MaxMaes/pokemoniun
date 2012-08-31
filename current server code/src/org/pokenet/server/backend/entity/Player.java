@@ -180,10 +180,10 @@ public class Player extends Character implements Battleable, Tradeable
 		/* Check if the pokemon exists */
 		if(m_boxes[box].getPokemon(slot) != null)
 		{
-			if(m_boxes[box].getPokemon(slot).getDatabaseID() > -1)
+			int id = m_boxes[box].getPokemon(slot).getDatabaseID();
+			if(id > -1)
 			{
 				/* This box exists and the pokemon exists in the database */
-				int id = m_boxes[box].getPokemon(slot).getDatabaseID();
 				m_database.query("DELETE FROM `pn_pokemon` WHERE `id` = '" + id + "'");
 			}
 			m_boxes[box].setPokemon(slot, null);

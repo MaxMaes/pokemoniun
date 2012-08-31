@@ -13,6 +13,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
+import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.ui.base.ProgressBar;
 
 /**
@@ -119,18 +120,18 @@ public class BattleCanvas extends Container
 		LoadingList.setDeferredLoading(true);
 		try
 		{
-			enemyHPBar = new Label(new Image(m_path + "HPBar.png", false));
-			playerHPBar = new Label(new Image(m_path + "HPEXPBar.png", false));
+			enemyHPBar = new Label(new Image(m_path + "HPBar.png"));
+			playerHPBar = new Label(new Image(m_path + "HPEXPBar.png"));
 		}
 		catch(SlickException e)
 		{
 		}
 		try
 		{
-			m_pokeballIcons.put("empty", new Image(m_path + "ballempty" + ".png", false));
-			m_pokeballIcons.put("normal", new Image(m_path + "ballnormal" + ".png", false));
-			m_pokeballIcons.put("status", new Image(m_path + "ballstatus" + ".png", false));
-			m_pokeballIcons.put("fainted", new Image(m_path + "ballfainted" + ".png", false));
+			m_pokeballIcons.put("empty", new Image(m_path + "ballempty" + ".png"));
+			m_pokeballIcons.put("normal", new Image(m_path + "ballnormal" + ".png"));
+			m_pokeballIcons.put("status", new Image(m_path + "ballstatus" + ".png"));
+			m_pokeballIcons.put("fainted", new Image(m_path + "ballfainted" + ".png"));
 		}
 		catch(SlickException e)
 		{
@@ -266,16 +267,16 @@ public class BattleCanvas extends Container
 		playerHP.setValue(newValue);
 		//playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
 
-		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
+		if(BattleManager.getInstance().getCurPoke().getCurrentHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
 		{
 			playerHP.setForeground(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurPoke().getCurrentHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
+				&& BattleManager.getInstance().getCurPoke().getCurrentHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
 		{
 			playerHP.setForeground(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurPoke().getCurrentHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
 		{
 			playerHP.setForeground(Color.red);
 		}
@@ -290,16 +291,16 @@ public class BattleCanvas extends Container
 	{
 		enemyHP.setValue(newValue);
 
-		if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
+		if(BattleManager.getInstance().getCurEnemyPoke().getCurrentHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
 		{
 			enemyHP.setForeground(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurEnemyPoke().getCurrentHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
+				&& BattleManager.getInstance().getCurEnemyPoke().getCurrentHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
 		{
 			enemyHP.setForeground(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurEnemyPoke().getCurrentHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
 		{
 			enemyHP.setForeground(Color.red);
 		}
@@ -316,23 +317,9 @@ public class BattleCanvas extends Container
 			respath = "";
 		try
 		{
-			bgPic = new Label(new Image(respath + "res/ui/DP_darkgrass.png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			playerDataBG = new Label(new Image(respath + "res/battle/singlePlayerBox3.png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			enemyDataBG = new Label(new Image(respath + "res/battle/singleEnemyBox3.png", false));
+			bgPic = new Label(new Image(respath + "res/ui/DP_darkgrass.png"));
+			playerDataBG = new Label(new Image(respath + "res/battle/singlePlayerBox3.png"));
+			enemyDataBG = new Label(new Image(respath + "res/battle/singleEnemyBox3.png"));
 		}
 		catch(SlickException e)
 		{
@@ -353,23 +340,23 @@ public class BattleCanvas extends Container
 	public void initEnemyHPBar()
 	{
 		// show enemy hp bar
-		enemyHP = new ProgressBar(0, (int) BattleManager.getInstance().getCurEnemyPoke().getMaxHP());
+		Pokemon enemy = BattleManager.getInstance().getCurEnemyPoke();
+		enemyHP = new ProgressBar(0, (int) enemy.getMaxHP());
 		enemyHP.setSize(72, 5);
 
-		if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
+		if(enemy.getCurrentHP() > enemy.getMaxHP() / 2)
 		{
 			enemyHP.setForeground(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(enemy.getCurrentHP() < enemy.getMaxHP() / 2 && enemy.getCurrentHP() > enemy.getMaxHP() / 3)
 		{
 			enemyHP.setForeground(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(enemy.getCurrentHP() < enemy.getMaxHP() / 3)
 		{
 			enemyHP.setForeground(Color.red);
 		}
-		updateEnemyHP(BattleManager.getInstance().getCurEnemyPoke().getCurHP());
+		updateEnemyHP(enemy.getCurrentHP());
 
 		enemyHPBar.setLocation(enemyNameLabel.getX(), 40);
 		enemyHP.setLocation(enemyHPBar.getX() + 23, enemyHPBar.getY() + 3);
@@ -430,21 +417,21 @@ public class BattleCanvas extends Container
 		playerHP = new ProgressBar(0, (int) BattleManager.getInstance().getCurPoke().getMaxHP());
 		playerHP.setSize(72, 5);
 
-		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
+		if(BattleManager.getInstance().getCurPoke().getCurrentHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
 		{
 			playerHP.setForeground(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurPoke().getCurrentHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
+				&& BattleManager.getInstance().getCurPoke().getCurrentHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
 		{
 			playerHP.setForeground(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(BattleManager.getInstance().getCurPoke().getCurrentHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
 		{
 			playerHP.setForeground(Color.red);
 		}
 
-		updatePlayerHP(BattleManager.getInstance().getCurPoke().getCurHP());
+		updatePlayerHP(BattleManager.getInstance().getCurPoke().getCurrentHP());
 
 		playerHPBar.setLocation(playerLv.getX() + playerLv.getWidth() - 105, 119);
 		playerHP.setLocation(playerHPBar.getX() + 29, playerHPBar.getY() + 5);
@@ -497,7 +484,7 @@ public class BattleCanvas extends Container
 		LoadingList.setDeferredLoading(true);
 		try
 		{
-			m_statusIcons.put("Poison", new Image(m_path + "PSN" + ".png", false));
+			m_statusIcons.put("Poison", new Image(m_path + "PSN" + ".png"));
 		}
 		catch(SlickException e)
 		{
@@ -505,7 +492,7 @@ public class BattleCanvas extends Container
 		}
 		try
 		{
-			m_statusIcons.put("Sleep", new Image(m_path + "SLP" + ".png", false));
+			m_statusIcons.put("Sleep", new Image(m_path + "SLP" + ".png"));
 		}
 		catch(SlickException e)
 		{
@@ -513,7 +500,7 @@ public class BattleCanvas extends Container
 		}
 		try
 		{
-			m_statusIcons.put("Freze", new Image(m_path + "FRZ" + ".png", false));
+			m_statusIcons.put("Freze", new Image(m_path + "FRZ" + ".png"));
 		}
 		catch(SlickException e)
 		{
@@ -521,7 +508,7 @@ public class BattleCanvas extends Container
 		}
 		try
 		{
-			m_statusIcons.put("Burn", new Image(m_path + "BRN" + ".png", false));
+			m_statusIcons.put("Burn", new Image(m_path + "BRN" + ".png"));
 		}
 		catch(SlickException e)
 		{
@@ -529,7 +516,7 @@ public class BattleCanvas extends Container
 		}
 		try
 		{
-			m_statusIcons.put("Paralysis", new Image(m_path + "PAR" + ".png", false));
+			m_statusIcons.put("Paralysis", new Image(m_path + "PAR" + ".png"));
 		}
 		catch(SlickException e)
 		{

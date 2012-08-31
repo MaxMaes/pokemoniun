@@ -427,7 +427,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						break;
 					case 'h':
 						// HP Change - through item usage
-						m_game.getOurPlayer().getPokemon()[Integer.parseInt(String.valueOf(message.charAt(2)))].setCurHP(Integer.parseInt(message.substring(3)));
+						m_game.getOurPlayer().getPokemon()[Integer.parseInt(String.valueOf(message.charAt(2)))].setCurrentHP(Integer.parseInt(message.substring(3)));
 						m_game.getUi().update(false);
 						break;
 					case 'p':
@@ -557,7 +557,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						{
 							if(GameClient.getInstance().getOurPlayer().getPokemon()[i] != null)
 							{
-								GameClient.getInstance().getOurPlayer().getPokemon()[i].setCurHP(GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP());
+								GameClient.getInstance().getOurPlayer().getPokemon()[i].setCurrentHP(GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP());
 								for(int x = 0; x < 4; x++)
 								{
 									GameClient.getInstance().getOurPlayer().getPokemon()[i].setMoveCurPP(x, GameClient.getInstance().getOurPlayer().getPokemon()[i].getMoveMaxPP()[x]);

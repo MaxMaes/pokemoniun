@@ -14,7 +14,8 @@ import org.pokenet.server.network.message.SpriteChangeMessage;
 public class Character implements Positionable {
 	private Direction m_facing = Direction.Down;
 	protected int m_sprite, m_mapX, m_mapY, m_x, m_y, m_id;
-	private boolean m_isVisible, m_isSurfing;
+	private boolean m_isVisible = true;
+	private boolean m_isSurfing = false;
 	protected String m_name;
 	protected ServerMap m_map;
 	private boolean m_boostPriority = false;
@@ -188,7 +189,7 @@ public class Character implements Positionable {
 	 * @param d - Direction to be moved in
 	 */
 	public boolean move(Direction d) {
-		if(d != null && m_map != null) {
+		if(m_map != null) {
 			//Change direction if needs be
 			if(m_facing != d) {
 				setFacing(d);

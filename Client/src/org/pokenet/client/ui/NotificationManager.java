@@ -35,7 +35,9 @@ public class NotificationManager implements Runnable {
 		while(m_isRunning) {
 			try {
 				Thread.sleep(500);
-			} catch (Exception e) {}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		System.out.println("NotificationMananer stopped.");
 	}

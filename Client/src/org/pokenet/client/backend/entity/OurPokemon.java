@@ -306,7 +306,7 @@ public class OurPokemon extends Pokemon {
 		 */
 		setSpriteNumber(sprite);
 		setName(info[1]);
-		setCurHP(Integer.parseInt(info[5]));
+		setCurrentHP(Integer.parseInt(info[5]));
 		setGender(Integer.parseInt(info[3]));
 		if (info[4].equalsIgnoreCase("0"))
 			setShiny(false);

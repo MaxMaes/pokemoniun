@@ -209,7 +209,7 @@ public class OurPlayer extends Player {
 	 */
 	public void updatePokemon(int i, String [] info) {
 		if(m_pokemon[i] != null) {
-			m_pokemon[i].setCurHP(Integer.parseInt(info[0]));
+			m_pokemon[i].setCurrentHP(Integer.parseInt(info[0]));
 			m_pokemon[i].setMaxHP(Integer.parseInt(info[1]));
 			m_pokemon[i].setAtk(Integer.parseInt(info[2]));
 			m_pokemon[i].setDef(Integer.parseInt(info[3]));
@@ -236,7 +236,7 @@ public class OurPlayer extends Player {
 			System.out.println(info.length);
 			m_pokemon[i] = new OurPokemon();
 			m_pokemon[i].setName(info[1]);
-			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));
+			m_pokemon[i].setCurrentHP(Integer.parseInt(info[2]));
 			m_pokemon[i].setGender(Integer.parseInt(info[3]));
 			if(info[4].equalsIgnoreCase("0"))
 				m_pokemon[i].setShiny(false);

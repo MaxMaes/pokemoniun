@@ -464,7 +464,6 @@ public class LoginManager implements Runnable {
 			PokemonBox[] boxes = new PokemonBox[9];
 
 			p.setName(result.getString("username"));
-			p.setVisible(true);
 			// Set co-ordinates
 			p.setX(result.getInt("x"));
 			p.setY(result.getInt("y"));

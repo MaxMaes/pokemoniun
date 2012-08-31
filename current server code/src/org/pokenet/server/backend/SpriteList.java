@@ -11,14 +11,7 @@ import java.util.Scanner;
  *
  */
 public class SpriteList {
-	private final ArrayList<Integer> m_sprites;
-	
-	/**
-	 * Constructor
-	 */
-	public SpriteList() {
-		m_sprites = new ArrayList<Integer>();
-	}
+	private final ArrayList<Integer> m_sprites = new ArrayList<Integer>();
 	
 	/**
 	 * Returns the list of unbuyable sprites

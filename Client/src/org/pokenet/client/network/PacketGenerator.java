@@ -3,6 +3,7 @@ package org.pokenet.client.network;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Player.Direction;
+import org.pokenet.client.constants.Language;
 
 /**
  * Generates packets and sends them to the server
@@ -92,38 +93,38 @@ public class PacketGenerator
 	public void login(String username, String password)
 	{
 		// store values in case we need to attempt to update to the salted hashes
-		this.lastUsername = username;
-		this.lastPassword = password;
+		lastUsername = username;
+		lastPassword = password;
 		char language = '0';
-		if(GameClient.getLanguage().equalsIgnoreCase("english"))
+		if(GameClient.getLanguage() == Language.ENGLISH)
 		{
 			language = '0';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("portuguese"))
+		else if(GameClient.getLanguage() == Language.PORTUGESE)
 		{
 			language = '1';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("italian"))
+		else if(GameClient.getLanguage().equalsIgnoreCase("italian")) // Unused language?
 		{
 			language = '2';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("french"))
+		else if(GameClient.getLanguage() == Language.FRENCH)
 		{
 			language = '3';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("finnish"))
+		else if(GameClient.getLanguage() == Language.FINNISH)
 		{
 			language = '4';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("spanish"))
+		else if(GameClient.getLanguage() == Language.SPANISH)
 		{
 			language = '5';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("dutch"))
+		else if(GameClient.getLanguage() == Language.DUTCH)
 		{
 			language = '6';
 		}
-		else if(GameClient.getLanguage().equalsIgnoreCase("german"))
+		else if(GameClient.getLanguage() == Language.GERMAN)
 		{
 			language = '7';
 		}
@@ -212,8 +213,8 @@ public class PacketGenerator
 	{
 		// ended attempt to update their password hash, reset values to default
 		updatePasswordHashMethod = false;
-		lastUsername = "";
-		lastPassword = "";
+		lastUsername = null;
+		lastPassword = null;
 	}
 
 	/**
@@ -231,6 +232,7 @@ public class PacketGenerator
 	 * 
 	 * @return
 	 */
+	// Actually we'd better not store the given password.
 	public String getLastPassword()
 	{
 		return lastPassword;

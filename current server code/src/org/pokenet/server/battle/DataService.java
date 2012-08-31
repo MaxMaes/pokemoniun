@@ -2,6 +2,8 @@ package org.pokenet.server.battle;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,7 +33,7 @@ public class DataService {
 	private static MoveList m_moveList;
 	private static MoveSetData m_moveSetData;
 	private static FishDatabase m_fishingData;
-	private static ArrayList<String> m_nonTrades;
+	private static final ArrayList<String> m_nonTrades = new ArrayList<String>();
 	
 	/**
 	 * Default constructor. Loads data immediately.
@@ -57,7 +59,6 @@ public class DataService {
 			/*
 			 * List of non-tradeable Pokemon
 			 */
-			m_nonTrades = new ArrayList<String>();
 			m_nonTrades.add("Bulbasaur");
 			m_nonTrades.add("Ivysaur");
 			m_nonTrades.add("Venusaur");
@@ -120,15 +121,15 @@ public class DataService {
 		/* Load shoddy database */
 		try {
 			m_speciesData.loadSpeciesDatabase(new File("./res/dpspecies.db"));
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 			return;
 		}
 		Ini ini = null;
 		/* Load updated POLR db */
 		try {
 			ini = new Ini(new FileInputStream("./res/pokemon.ini"));
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
@@ -173,7 +174,7 @@ public class DataService {
 		/* Load TM info */
 		try {
 			ini = new Ini(new FileInputStream("./res/tms.ini"));
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
@@ -186,8 +187,8 @@ public class DataService {
 				PokemonSpecies species = m_speciesData.getPokemonByName(pokemons[i]);
 				if(species != null) {
 					for(int j = 0; j < species.getTMMoves().length; j++) {
-						if(species.getTMMoves()[j] == null) {
-							species.getTMMoves()[j] = tm;
+						if(species.getTMMove(j) == null) {
+							species.setTMMove(j, tm);
 							break;
 						}
 					}
@@ -197,9 +198,9 @@ public class DataService {
 		/* We originally gave 92 possible TMs for every Pokemon, lets trim that down */
 		for(int i = 0; i < m_speciesData.getSpeciesCount(); i++) {
 			int a = 0;
-			PokemonSpecies s = m_speciesData.getSpecies()[i];
+			PokemonSpecies s = m_speciesData.getSpecies(i);
 			for(int j = 0; j < s.getTMMoves().length; j++) {
-				if(s.getTMMoves()[j] != null) {
+				if(s.getTMMove(j) != null) {
 					a++;
 				} else {
 					break;
@@ -207,8 +208,8 @@ public class DataService {
 			}
 			String [] newTMList = new String[a];
 			for(int j = 0; j < newTMList.length; j++) {
-				if(s.getTMMoves()[j] != null) {
-					newTMList[j] = s.getTMMoves()[j];
+				if(s.getTMMove(j) != null) {
+					newTMList[j] = s.getTMMove(j);
 				}
 			}
 			s.setTMMoves(newTMList);
@@ -244,7 +245,7 @@ public class DataService {
 				m_speciesData.getPokemonByName(pokeName).setDropData(drops);
 			}
 			s.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
@@ -390,8 +391,6 @@ public class DataService {
             	}
             }
             species.setEvolutions(evos);
-            species.setTMMoves(new String [92]);
-            
 		}
 	}
 	

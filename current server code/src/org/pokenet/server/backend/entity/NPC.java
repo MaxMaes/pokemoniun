@@ -30,9 +30,10 @@ public class NPC extends Character {
 	private int m_minPartySize = 1;
 	private boolean m_isBox = false;
 	private boolean m_isHeal = false;
+	private int m_isShop = 0;
 	private int m_badge = -1;
 	private final ArrayList<Integer> m_speech = new ArrayList<Integer>();
-	private Shop m_shop;
+	private Shop m_shop = null;
 	private long m_lastBattle = 0;
 	
 	/**
@@ -145,7 +146,7 @@ public class NPC extends Character {
 				p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
 			}
 			/* Shop access */
-			if(m_shop != null) { // When it's not null, it's a shop
+			if(m_isShop>0) { //0 is not a shop, over 0 means some kind of shop. 
 				//Send shop packet to display shop window clientside
 				if(!p.isShopping()){ //Dont display if user's shopping
 					TcpProtocolHandler.writeMessage(p.getTcpSession(), new ShopStockMessage(m_shop.getStockData()));
@@ -231,7 +232,9 @@ public class NPC extends Character {
 	 * @return
 	 */
 	public boolean isShopKeeper() {
-		return m_shop != null;
+		if(m_isShop>0)
+			return true;
+		return false;
 	}
 	
 	/**
@@ -255,8 +258,13 @@ public class NPC extends Character {
 	 * @param b
 	 */
 	public void setShopKeeper(int b) {
-		m_shop = new Shop(b);
-		m_shop.start();
+		m_isShop = b;
+		if(b>0) {
+			try{
+			m_shop = new Shop(b);
+			m_shop.start();
+			} catch (Exception e){e.printStackTrace();}
+		}
 	}
 	
 	/**

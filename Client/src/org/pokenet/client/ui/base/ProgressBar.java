@@ -16,7 +16,7 @@ public class ProgressBar extends Label {
         private float m_minVal;
         private float m_maxVal;
         private Color textColor;
-        private boolean reversed = false;
+        private boolean reversed;
 
         /**
          * Default constructor, default left to right
@@ -24,7 +24,12 @@ public class ProgressBar extends Label {
          * @param max
          */
         public ProgressBar(float m_min, float m_max){
-                this(m_min, m_max, false);
+                super();
+                m_value = m_maxVal;
+                m_minVal = m_min;
+                m_maxVal = m_max;
+                reversed = false;
+                setOpaque(true);
         }
         
         /**

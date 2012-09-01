@@ -98,13 +98,13 @@ public class PokemonSpecies {
 	@ElementArray
 	protected PokemonEvolution [] m_evolutions;
 	@ElementArray
-	protected String [] m_tmMoves = new String [92];
+	protected String [] m_tmMoves;
 	@ElementArray
 	protected DropData [] m_drops;
 	
 	//private int m_number;
 	
-	public DropData[] getDropData() {
+	public DropData [] getDropData() {
 		return m_drops;
 	}
 	
@@ -477,17 +477,8 @@ public class PokemonSpecies {
 	public String [] getTMMoves() {
 		return m_tmMoves;
 	}
-	
-	public String getTMMove(int idx) {
-		return m_tmMoves[idx];
-	}
 	public void setTMMoves(String [] mPossibleMoves) {
 		m_tmMoves = mPossibleMoves;
-	}
-	
-	public void setTMMove(int idx, String possibleMove)
-	{
-		m_tmMoves[idx] = possibleMove;
 	}
 
 	/*public void setPokemonNumber(int pokemonNumber)	{

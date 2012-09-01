@@ -572,9 +572,9 @@ public class BattleWindow extends Frame
 	public void useMove(int i)
 	{
 		disableMoves();
-		if(BattleManager.getInstance().getCurPoke().getMoveCurrentPP()[i] != 0)
+		if(BattleManager.getInstance().getCurPoke().getMoveCurPP()[i] != 0)
 		{
-			BattleManager.getInstance().getCurPoke().setMoveCurPP(i, BattleManager.getInstance().getCurPoke().getMoveCurrentPP()[i] - 1);
+			BattleManager.getInstance().getCurPoke().setMoveCurPP(i, BattleManager.getInstance().getCurPoke().getMoveCurPP()[i] - 1);
 			BattleManager.getInstance().updateMoves();
 		}
 		GameClient.getInstance().getPacketGenerator().writeTcpMessage("bm" + i);

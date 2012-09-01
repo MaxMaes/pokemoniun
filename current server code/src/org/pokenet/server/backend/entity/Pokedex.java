@@ -8,7 +8,6 @@ public class Pokedex
 	private MySqlManager m_database;
 	private int m_id;
 	
-	// TODO: rewrite the ID, make it link with the userID
 	public Pokedex(int id, int[] pokedex)
 	{
 		m_database = MySqlManager.getInstance();
@@ -17,11 +16,20 @@ public class Pokedex
 	}
 	
 	/**
-	 * @return players pokedex
+	 * Retrieves this players pokedex
 	 */
 	public int[] getPokedex()
 	{
 		return this.m_pokedex;
+	}
+	
+	/**
+	 * Sets this player pokedex
+	 * @param pokedex Value to set
+	 */
+	public void setPokedex(int[] pokedex)
+	{
+		this.m_pokedex = pokedex;
 	}
 	
 	/**
@@ -51,7 +59,10 @@ public class Pokedex
 	 */
 	public boolean isPokemonSeen(int id)
 	{
-		return m_pokedex[id] > 0;
+		if(m_pokedex[id] >= 1)
+			return true;
+		else
+			return false;
 	}
 	
 	/**
@@ -61,7 +72,10 @@ public class Pokedex
 	 */
 	public boolean isPokemonCaught(int id)
 	{
-		return m_pokedex[id] == 2;
+		if(m_pokedex[id] == 2)
+			return true;
+		else
+			return false;
 	}
 	
 	

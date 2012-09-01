@@ -27,7 +27,7 @@ public class Pokemon {
         private boolean m_shiny;
        
         //level and types
-        private int m_level = 0;
+        private int m_level;
         private Enums.Poketype m_type1, m_type2;
        
         //moves and pp
@@ -116,11 +116,7 @@ public class Pokemon {
         			e.printStackTrace();
         		}
         		LoadingList.setDeferredLoading(false);
-        	}
-        	catch (SlickException e)
-        	{
-        		e.printStackTrace();
-        	}
+        	}catch (SlickException e){e.printStackTrace();}
         }
 
         /**
@@ -317,11 +313,11 @@ public class Pokemon {
         }
         
         /**
-         * Gets a specific move
-         * @return move
+         * Returns moves
+         * @return
          */
-        public String getMove(int idx) {
-        	return m_moves[idx];
+        public String[] getMoves() {
+                return m_moves;
         }
         
         /**
@@ -370,7 +366,7 @@ public class Pokemon {
          * Returns current PP for moves
          * @return
          */
-        public int[] getMoveCurrentPP() {
+        public int[] getMoveCurPP() {
                 return m_movecurPP;
         }
         
@@ -378,7 +374,7 @@ public class Pokemon {
          * Sets current PP for moves
          * @param movecurPP
          */
-        public void setMoveCurrentPP(int[] movecurPP) {
+        public void setMoveCurPP(int[] movecurPP) {
                 this.m_movecurPP = movecurPP;
         }
         
@@ -427,7 +423,7 @@ public class Pokemon {
          * Returns current HP
          * @return
          */
-        public int getCurrentHP() {
+        public int getCurHP() {
                 return m_curHP;
         }
         
@@ -435,7 +431,7 @@ public class Pokemon {
          * Set current HP
          * @param curHP
          */
-        public void setCurrentHP(int curHP) {
+        public void setCurHP(int curHP) {
                 this.m_curHP = curHP;
         }
         
@@ -446,8 +442,16 @@ public class Pokemon {
          */
         public void setSpriteNumber(int x) {
         	m_spriteNum = x;
-        	setSprite();
-        	setIcon();
+        	try{
+        		setSprite();
+        	} catch (Exception e){
+        		setSprite();
+        	}
+        	try{
+        		setIcon();
+        	} catch (Exception e){
+        		setIcon();
+        	}
         }
         
         /**

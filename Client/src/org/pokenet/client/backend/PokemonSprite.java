@@ -13,12 +13,54 @@ import org.pokenet.client.backend.entity.Player.Direction;
  * 
  */
 public class PokemonSprite {
-	private HashMap<Integer, SpriteSheet> normalSpriteSheets = new HashMap<Integer, SpriteSheet>();
+	private HashMap<Integer, SpriteSheet> normalSpriteSheets;
+
+	/**
+	 * Returns the requested sprite
+	 * @param dir
+	 * @param isLeftFoot
+	 * @param sprite
+	 * @return
+	 */
+	public Image getPokemonSprite(Direction dir, boolean isLeftFoot,
+			int sprite) {
+		SpriteSheet 
+			sheet = normalSpriteSheets.get(sprite);
+		
+		//if (isMoving) {
+			if (isLeftFoot) {
+				switch (dir) {
+				case Up:
+					return sheet.getSprite(0, 0);
+				case Down:
+					return sheet.getSprite(0, 2);
+				case Left:
+					return sheet.getSprite(0, 3);
+				case Right:
+					return sheet.getSprite(0, 1);
+				}
+			} else {
+				switch (dir) {
+				case Up:
+					return sheet.getSprite(1, 0);
+				case Down:
+					return sheet.getSprite(1, 2);
+				case Left:
+					return sheet.getSprite(1, 3);
+				case Right:
+					return sheet.getSprite(1, 1);
+				}
+			}
+		
+		return null;
+	}
 
 	/**
 	 * Initialises the database of pokemon sprites
 	 */
 	public PokemonSprite() {
+
+		normalSpriteSheets = new HashMap<Integer, SpriteSheet>();
 		try {
 			String location;
 			String respath = System.getProperty("res.path");
@@ -49,48 +91,6 @@ public class PokemonSprite {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Returns the requested sprite
-	 * @param dir
-	 * @param isLeftFoot
-	 * @param sprite
-	 * @return
-	 */
-	public Image getPokemonSprite(Direction dir, boolean isLeftFoot,
-			int sprite) {
-		SpriteSheet 
-			sheet = normalSpriteSheets.get(sprite);
-		
-		//if (isMoving) {
-			if (isLeftFoot) {
-				switch (dir) {
-				case Up:
-					return sheet.getSprite(0, 0);
-				case Down:
-					return sheet.getSprite(0, 2);
-				case Left:
-					return sheet.getSprite(0, 3);
-				case Right:
-					return sheet.getSprite(0, 1);
-				default:
-					return null;
-				}
-			} else {
-				switch (dir) {
-				case Up:
-					return sheet.getSprite(1, 0);
-				case Down:
-					return sheet.getSprite(1, 2);
-				case Left:
-					return sheet.getSprite(1, 3);
-				case Right:
-					return sheet.getSprite(1, 1);
-				default:
-					return null;
-				}
-			}
 	}
 
 	public PokemonSprite(Image[] imgArray1) {

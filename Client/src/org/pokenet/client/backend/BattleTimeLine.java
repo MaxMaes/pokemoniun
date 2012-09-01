@@ -57,7 +57,7 @@ public class BattleTimeLine {
     for (int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++) {
       int counter = 0;
       if (GameClient.getInstance().getOurPlayer().getPokemon()[i] != null &&
-    		  GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP() <= 0) {
+    		  GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() <= 0) {
         counter++;
       }
       if (counter < i) {
@@ -177,7 +177,7 @@ public class BattleTimeLine {
     m_dmg = Math.abs(Integer.parseInt(data[1]));
     if (i == 0) {
       m_pokeName = BattleManager.getInstance().getCurPoke().getName();
-      m_newHPValue = BattleManager.getInstance().getCurPoke().getCurrentHP()
+      m_newHPValue = BattleManager.getInstance().getCurPoke().getCurHP()
         + Integer.parseInt(data[1]);
       if (m_newHPValue < 0) {
         m_newHPValue = 0;
@@ -185,13 +185,13 @@ public class BattleTimeLine {
       {
     	  m_newHPValue = BattleManager.getInstance().getCurPoke().getMaxHP();
       }
-      BattleManager.getInstance().getCurPoke().setCurrentHP(m_newHPValue);
+      BattleManager.getInstance().getCurPoke().setCurHP(m_newHPValue);
       m_canvas.updatePlayerHP(BattleManager.getInstance().getCurPoke()
-        .getCurrentHP());
+        .getCurHP());
       data[0] = BattleManager.getInstance().getCurPoke().getName();
     } else {
       m_pokeName = BattleManager.getInstance().getCurEnemyPoke().getName();
-      m_newHPValue = BattleManager.getInstance().getCurEnemyPoke().getCurrentHP()
+      m_newHPValue = BattleManager.getInstance().getCurEnemyPoke().getCurHP()
         + Integer.parseInt(data[1]);
       if (m_newHPValue < 0) {
         m_newHPValue = 0;
@@ -199,9 +199,9 @@ public class BattleTimeLine {
       {
     	  m_newHPValue = BattleManager.getInstance().getCurEnemyPoke().getMaxHP();
       }
-      BattleManager.getInstance().getCurEnemyPoke().setCurrentHP(m_newHPValue);
+      BattleManager.getInstance().getCurEnemyPoke().setCurHP(m_newHPValue);
       m_canvas.updateEnemyHP(BattleManager.getInstance().getCurEnemyPoke()
-        .getCurrentHP());
+        .getCurHP());
       data[0] = BattleManager.getInstance().getCurEnemyPoke().getName();
     }
 

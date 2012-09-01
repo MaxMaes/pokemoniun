@@ -271,16 +271,16 @@ public class PartyInfoDialog extends Frame
 					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setForeground(Color.green);
-					m_hp[i].setValue(pokes[i].getCurrentHP());
-					if(pokes[i].getCurrentHP() > pokes[i].getMaxHP() / 2)
+					m_hp[i].setValue(pokes[i].getCurHP());
+					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
 					{
 						m_hp[i].setForeground(Color.green);
 					}
-					else if(pokes[i].getCurrentHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurrentHP() > pokes[i].getMaxHP() / 3)
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.orange);
 					}
-					else if(pokes[i].getCurrentHP() < pokes[i].getMaxHP() / 3)
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.red);
 					}
@@ -321,16 +321,16 @@ public class PartyInfoDialog extends Frame
 				if(pokes[i] != null)
 				{
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
-					m_hp[i].setValue(pokes[i].getCurrentHP());
-					if(pokes[i].getCurrentHP() > pokes[i].getMaxHP() / 2)
+					m_hp[i].setValue(pokes[i].getCurHP());
+					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
 					{
 						m_hp[i].setForeground(Color.green);
 					}
-					else if(pokes[i].getCurrentHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurrentHP() > pokes[i].getMaxHP() / 3)
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.orange);
 					}
-					else if(pokes[i].getCurrentHP() < pokes[i].getMaxHP() / 3)
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.red);
 					}

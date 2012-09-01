@@ -65,7 +65,7 @@ public class PokemonInfoDialog extends Frame{
                 //labels[13].setText("Exp to next level:");
                 data[0].setText(String.valueOf(poke.getLevel()));
                 data[1].setText(poke.getName());
-                data[2].setText(String.valueOf(poke.getCurrentHP()) + "/"
+                data[2].setText(String.valueOf(poke.getCurHP()) + "/"
                                 + String.valueOf(poke.getMaxHP()));
                 data[3].setText(String.valueOf(poke.getAtk()));
                 data[4].setText(String.valueOf(poke.getDef()));

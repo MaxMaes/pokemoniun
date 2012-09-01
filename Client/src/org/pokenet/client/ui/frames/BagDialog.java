@@ -26,14 +26,16 @@ public abstract class BagDialog extends Container {
         private Button[] m_itemButtons;
         private Button m_bag;
         private Button m_cancel;
+        Container[] m_container;
         
-        private List<PlayerItem> m_items = new ArrayList<PlayerItem>();
+        private List<PlayerItem> m_items;
 
         /**
          * Default Constructor
          * @param bag
          */
         public BagDialog(ArrayList<PlayerItem> bag) {
+        	m_items = new ArrayList<PlayerItem>();
         	//Assign Potion Fave
         	if(GameClient.getInstance().getOurPlayer().getItemQuantity(4)>0){
         		m_items.add(new PlayerItem(4,GameClient.getInstance().getOurPlayer().getItemQuantity(4)));

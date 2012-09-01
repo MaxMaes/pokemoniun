@@ -32,12 +32,12 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer
 {
-	public static final int SERVER_REVISION = 1883;
+	static final int SERVER_REVISION = 1883;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers = 500; // default 500 players
 	private static int m_movementThreads = 12; // default to high
-	private static int m_highest = 0;
+	private static int m_highest = -1;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
 	private static boolean m_boolGui = false;
 	private JTextField m_dbS, m_dbN, m_dbU, m_name;

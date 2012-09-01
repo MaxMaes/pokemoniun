@@ -116,6 +116,7 @@ public class GameClient extends BasicGame
 	private MoveLearningManager m_moveLearningManager;
 	private static SoundManager m_soundPlayer;
 	private static boolean m_loadSurroundingMaps = false;
+	public static String UDPCODE = "";
 	private int lastPressedKey;
 	private static DeferredResource m_nextResource;
 	private boolean m_started;
@@ -202,8 +203,6 @@ public class GameClient extends BasicGame
 		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() / m_loadImage.getWidth());
 		m_loadImage = m_loadImage.getScaledCopy(800.0f / m_loadImage.getWidth());
 
-		LoadingList.setDeferredLoading(true);
-
 		m_instance = this;
 		gc.getGraphics().setWorldClip(-32, -32, 832, 832);
 		gc.setShowFPS(false); // Toggle this to show FPS
@@ -212,6 +211,9 @@ public class GameClient extends BasicGame
 		/*
 		 * Setup variables
 		 */
+		boolean old = LoadingList.isDeferredLoading();
+		LoadingList.setDeferredLoading(false);
+		
 		m_fontLarge = new AngelCodeFont(m_filepath + "res/fonts/dp.fnt", m_filepath + "res/fonts/dp.png");
 		m_fontSmall = new AngelCodeFont(m_filepath + "res/fonts/dp-small.fnt", m_filepath + "res/fonts/dp-small.png");
 		m_pokedexfontsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-small.fnt", m_filepath + "res/fonts/dex-small.png");
@@ -219,6 +221,8 @@ public class GameClient extends BasicGame
 		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
 		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
 		m_pokedexfontbetweenminiandsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-betweenminiandsmall.fnt", m_filepath + "res/fonts/dex-betweenminiandsmall.png");
+
+		LoadingList.setDeferredLoading(old);
 		
 
 		// Player.loadSpriteFactory();
@@ -392,14 +396,14 @@ public class GameClient extends BasicGame
 			/*
 			 * Check if language was chosen.
 			 */
-			if(m_language != null && m_languageChosen && (m_host != null || m_packetGen == null))
+			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && ((m_host != null && m_host.equalsIgnoreCase("")) || m_packetGen == null))
 			{
 				m_login.showServerSelect();
 			}
 			/*
 			 * Check if we need to connect to a selected server
 			 */
-			if(m_host != null && m_packetGen == null)
+			if(m_host != null && !m_host.equalsIgnoreCase("") && m_packetGen == null)
 			{
 				this.connect();
 			}
@@ -1019,7 +1023,7 @@ public class GameClient extends BasicGame
 					else
 					{
 						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-						m_host = null;
+						m_host = "";
 						m_packetGen = null;
 					}
 				}
@@ -1027,7 +1031,7 @@ public class GameClient extends BasicGame
 				{
 					e.printStackTrace();
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
-					m_host = null;
+					m_host = "";
 					m_packetGen = null;
 				}
 			}
@@ -1078,7 +1082,7 @@ public class GameClient extends BasicGame
 		/*
 		 * Show login screen
 		 */
-		if(m_host != null)
+		if(!m_host.equals(""))
 			m_login.showLogin();
 	}
 
@@ -1422,7 +1426,7 @@ public class GameClient extends BasicGame
 	public void reset()
 	{
 		m_packetGen = null;
-		m_host = null;
+		m_host = "";
 		m_ourPlayer = null;
 		try
 		{
@@ -1600,7 +1604,7 @@ public class GameClient extends BasicGame
 	 */
 	public void returnToServerSelect()
 	{
-		m_host = null;
+		m_host = "";
 		getLoginScreen().setServerVersion("?");
 		disconnect();
 	}

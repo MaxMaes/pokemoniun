@@ -31,20 +31,22 @@ public class PokeStorageBoxFrame extends Frame
 	private int m_buttonChosen = 0;
 	private ComboBox m_changeBox;
 	private Button m_switchPoke, m_close, m_release;
-	private int m_boxNum = 1;
-	private int m_boxIndex = 0;
+	private int m_boxNum, m_boxIndex;
 
 	/**
 	 * Default constructor
 	 * 
 	 * @param boxIndex
 	 * @param pokes
+	 * @throws SlickException
 	 */
 	public PokeStorageBoxFrame(int[] pokes)
 	{
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_pokeNums = pokes;
+		m_boxIndex = 0;
+		m_boxNum = m_boxIndex + 1;
 
 		initGUI();
 
@@ -443,17 +445,17 @@ class TeamForBox extends Frame
 					m_pokeIcon[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
 					m_hp[i].setMaximum(GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP());
 					m_hp[i].setForeground(Color.green);
-					m_hp[i].setValue(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP());
-					if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2)
+					m_hp[i].setValue(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP());
+					if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2)
 					{
 						m_hp[i].setForeground(Color.green);
 					}
-					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2
-							&& GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
+					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2
+							&& GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.orange);
 					}
-					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurrentHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
+					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
 					{
 						m_hp[i].setForeground(Color.red);
 					}

@@ -24,7 +24,7 @@ import org.pokenet.client.GameClient;
  */
 @SuppressWarnings("deprecation")
 public class ComboBox extends Container{
-	private List<String> m_elements = new ArrayList<String>();
+	private List<String> m_elements;
 	private Label m_item;
 	private Button m_arrow;
 	private String m_selected;
@@ -36,6 +36,7 @@ public class ComboBox extends Container{
 	 */
 	public ComboBox(){
 		m_this = this;
+		m_elements = new ArrayList<String>();
 		m_arrow = new SimpleArrowButton(SimpleArrowButton.DOWN);
 		m_arrow.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

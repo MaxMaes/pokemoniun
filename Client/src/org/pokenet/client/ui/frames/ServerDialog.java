@@ -25,7 +25,7 @@ import org.pokenet.client.backend.Translator;
 public class ServerDialog extends Frame
 {
 	private Button[] m_servers;
-	private String[] m_host = new String[5];
+	private String[] m_host;
 	private Label m_info;
 	private Color m_black;
 	private Button privateServer, m_back;
@@ -64,6 +64,7 @@ public class ServerDialog extends Frame
 		try
 		{
 			m_servers = new Button[5];
+			m_host = new String[5];
 			InputStream stream;
 			URL url = new URL("http://pokemonium.com/launcher/servers.txt");
 			stream = url.openStream();
@@ -144,7 +145,7 @@ public class ServerDialog extends Frame
 			{
 				if(m_host[i] == null || m_host[i].equalsIgnoreCase("-"))
 				{
-					m_host[i] = null;
+					m_host[i] = "";
 					m_servers[i].setEnabled(false);
 				}
 				m_servers[i].setForeground(m_black);

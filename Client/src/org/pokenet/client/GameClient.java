@@ -203,6 +203,8 @@ public class GameClient extends BasicGame
 		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() / m_loadImage.getWidth());
 		m_loadImage = m_loadImage.getScaledCopy(800.0f / m_loadImage.getWidth());
 
+		LoadingList.setDeferredLoading(true);
+
 		m_instance = this;
 		gc.getGraphics().setWorldClip(-32, -32, 832, 832);
 		gc.setShowFPS(false); // Toggle this to show FPS
@@ -211,9 +213,6 @@ public class GameClient extends BasicGame
 		/*
 		 * Setup variables
 		 */
-		boolean old = LoadingList.isDeferredLoading();
-		LoadingList.setDeferredLoading(false);
-		
 		m_fontLarge = new AngelCodeFont(m_filepath + "res/fonts/dp.fnt", m_filepath + "res/fonts/dp.png");
 		m_fontSmall = new AngelCodeFont(m_filepath + "res/fonts/dp-small.fnt", m_filepath + "res/fonts/dp-small.png");
 		m_pokedexfontsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-small.fnt", m_filepath + "res/fonts/dex-small.png");
@@ -221,8 +220,6 @@ public class GameClient extends BasicGame
 		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
 		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
 		m_pokedexfontbetweenminiandsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-betweenminiandsmall.fnt", m_filepath + "res/fonts/dex-betweenminiandsmall.png");
-
-		LoadingList.setDeferredLoading(old);
 		
 
 		// Player.loadSpriteFactory();

@@ -49,7 +49,7 @@ public class PokedexDialog extends Frame
 	
 	public PokedexDialog()
 	{
-		trainerPokedex = new int[494]; 
+		trainerPokedex = new int[494]; // new int[max]; < ?
 		initGUI();
 	}
 	
@@ -351,13 +351,12 @@ public class PokedexDialog extends Frame
 	
 	public Image loadImage(String path) throws SlickException
 	{
-		boolean old = LoadingList.isDeferredLoading();
-		LoadingList.setDeferredLoading(false);
+		LoadingList.setDeferredLoading(true);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		Image i = new Image(FileLoader.loadFile(respath + path), path, false);
-		LoadingList.setDeferredLoading(old);
+		LoadingList.setDeferredLoading(false);
 		return i;
 	}
 	
@@ -439,31 +438,31 @@ public class PokedexDialog extends Frame
 		for(int i = 0; i < 13; i++)
 		{
 			pokemonCaughtLabels[i].setVisible(false);
-			if(first+i > max)
+			int index = first + i;
+			if(index > max)
 			{
 				pokemonNameList[i].setText("");
 				pokemonNameList[i].pack();
 			}
 			else
 			{
-				if(getPokemon(first+i) == 0)
+				String number = new String();
+				if(index < 10)
+					number = number + "00" + (index);
+				else if(index < 100)
+					number = number + "0" + (index);
+				else
+					number = "" + (index);
+				if(getPokemon(index) == 0)
 				{
-					pokemonNameList[i].setText("???");
+					pokemonNameList[i].setText("#" + number + "   ???");
 					pokemonNameList[i].pack();
 				}
 				else
 				{
-					String number = new String();
-					if(first + i < 10)
-						number = number + "00" + (first + i);
-					else if(first + i < 100)
-						number = number + "0" + (first + i);
-					else
-						number = "" + (first + i);
-			
-					pokemonNameList[i].setText("#" + number + " " + PokedexData.getName(first + i));
+					pokemonNameList[i].setText("#" + number + "   " + PokedexData.getName(index));
 					pokemonNameList[i].pack();
-					if(getPokemon(first+i) == 2)
+					if(getPokemon(index) == 2)
 					{
 						pokemonCaughtLabels[i].setVisible(true);
 					}

@@ -2,6 +2,7 @@ package org.pokenet.client.ui.frames;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -21,23 +22,6 @@ import mdes.slick.sui.event.ActionListener;
  */
 public class PokedexDialog extends Frame
 {
-	private NewImageButton up, down, left, right;
-	private NewImageButton inc1, inc5, inc10, inc50;
-	private Label pokedexsprite;
-	private Label pokemonsprite;
-	private Label pokemonname;
-	private Label pokemontypes;
-	private Label pokemonnumber;
-	private Label pokemonSelectionFrame;
-	private Label tabname;
-	private Label map;
-	private Label[] loreLabels;
-	private Label[] pokemonNameList;
-	private Label[] pokemonCaughtLabels;
-	private Label[] pokemonLocationLabels;
-	private Label[] pokemonMoveLabels;
-	private Label[] pokemonBiologyLabels;
-	
 	private int tabindex = 1;
 	private int selection = 1;
 	private int scrollindex = 0;
@@ -46,10 +30,45 @@ public class PokedexDialog extends Frame
 	private NewImageButton currIncButton;
 	private int max = 493; //Change this to the amount of pokemon we've got
 	
+	//UI Buttons
+	private NewImageButton up, down, left, right;
+	private NewImageButton inc1, inc5, inc10, inc50;
+	
+	//Text labels
+	private Label pokemonname;
+	private Label pokemontypes;
+	private Label pokemonnumber;
+	private Label tabname;
+	private Label[] loreLabels;
+	private Label[] pokemonNameList;
+	private Label[] pokemonMoveLabels;
+	private Label[] pokemonBiologyLabels;
+	
+	//Image labels
+	private Label pokedexsprite;
+	private Label pokemonsprite;
+	private Label pokemonSelectionFrame;
+	private Label map;
+	private Label[] pokemonCaughtLabels;
+	private Label[] pokemonLocationLabels;
+	
+	//Images
+	private Image caughtIcon = loadImage("res/ui/pokedex/pokemoncaught.png");
+	private Image pokedexSprite = loadImage("res/ui/pokedex/pokedex.png");
+	private Image selectionFrame = loadImage("res/ui/pokedex/pokemonselected.png");
+	private Image mapIcon = loadImage("res/ui/pokedex/kanto_johto_small.png");
+	private Image locationIcon = loadImage("res/ui/pokedex/pokemonlocationicon.png");
+	private Image incrementerSprite = loadImage("res/ui/pokedex/incrementer.png");
+	private Image incrementerPressedSprite = loadImage("res/ui/pokedex/incrementer_pressed.png");
+	private Image buttonRightSprite = loadImage("res/ui/pokedex/button_right.png");
+	private Image buttonLeftSprite = loadImage("res/ui/pokedex/button_left.png");
+	private Image buttonUpSprite = loadImage("res/ui/pokedex/button_up.png");
+	private Image buttonDownSprite = loadImage("res/ui/pokedex/button_down.png");
+	private Image[] pokemonIcons = loadPokemonIcons();
 	
 	public PokedexDialog()
 	{
-		trainerPokedex = new int[494]; // new int[max]; < ?
+		trainerPokedex = new int[max+1]; 
 		initGUI();
 	}
 	
@@ -111,9 +130,7 @@ public class PokedexDialog extends Frame
 			pokemonnumber.pack();
 			pokemonnumber.setLocation(pokedexsprite.getX()+178 - (pokemonnumber.getWidth()/2), pokemonname.getY() - 25);
 		
-			LoadingList.setDeferredLoading(true);
-			pokemonsprite.setImage(getSprite(selection, 2));
-			LoadingList.setDeferredLoading(false);
+			pokemonsprite.setImage(pokemonIcons[selection]);
 			pokemonsprite.setSize(80, 80);
 			pokemonsprite.setLocation(pokedexsprite.getX()+33, pokedexsprite.getY()+39);
 			add(pokemonsprite);
@@ -257,16 +274,9 @@ public class PokedexDialog extends Frame
 		pokemonLocationLabels = new Label[size];
 		for(int i = 0; i<pokemonLocationLabels.length; i++)
 		{
-			try
-			{
-				pokemonLocationLabels[i] = new Label();
-				pokemonLocationLabels[i].setImage(loadImage("res/ui/pokedex/pokemonlocationicon.png"));
-				pokemonLocationLabels[i].pack();
-			}
-			catch(SlickException e)
-			{
-				e.printStackTrace();
-			}
+			pokemonLocationLabels[i] = new Label();
+			pokemonLocationLabels[i].setImage(locationIcon);
+			pokemonLocationLabels[i].pack();
 			add(pokemonLocationLabels[i]);
 		}
 		
@@ -283,6 +293,18 @@ public class PokedexDialog extends Frame
 			pokemonLocationLabels[idx].setLocation(x , y);
 			idx++;
 		}
+	}
+	
+	public Image[] loadPokemonIcons()
+	{
+		Image[] sprites = new Image[max+1];
+		
+		for(int i = 1; i<(max+1); i++)
+		{
+			sprites[i] = getSprite(i, 2);
+		}
+		
+		return sprites;
 	}
 
 	/**
@@ -342,21 +364,30 @@ public class PokedexDialog extends Frame
     			i = new Image(path.toString(), false);
     			e.printStackTrace();
     		}
-    		LoadingList.setDeferredLoading(false);
+    		LoadingList.setDeferredLoading(old);
     	}
     	catch (SlickException e)
     	{e.printStackTrace();}
     	return i;
     }
 	
-	public Image loadImage(String path) throws SlickException
+	public Image loadImage(String path)
 	{
-		LoadingList.setDeferredLoading(true);
+		boolean old = LoadingList.isDeferredLoading();
+		LoadingList.setDeferredLoading(false);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		Image i = new Image(FileLoader.loadFile(respath + path), path, false);
-		LoadingList.setDeferredLoading(false);
+		Image i = null;
+		try
+		{
+			i = new Image(FileLoader.loadFile(respath + path), path, false);
+		}
+		catch(SlickException e)
+		{
+			e.printStackTrace();
+		}
+		LoadingList.setDeferredLoading(old);
 		return i;
 	}
 	
@@ -438,31 +469,31 @@ public class PokedexDialog extends Frame
 		for(int i = 0; i < 13; i++)
 		{
 			pokemonCaughtLabels[i].setVisible(false);
-			int index = first + i;
-			if(index > max)
+			if(first+i > max)
 			{
 				pokemonNameList[i].setText("");
 				pokemonNameList[i].pack();
 			}
 			else
 			{
-				String number = new String();
-				if(index < 10)
-					number = number + "00" + (index);
-				else if(index < 100)
-					number = number + "0" + (index);
-				else
-					number = "" + (index);
-				if(getPokemon(index) == 0)
+				if(getPokemon(first+i) == 0)
 				{
-					pokemonNameList[i].setText("#" + number + "   ???");
+					pokemonNameList[i].setText("???");
 					pokemonNameList[i].pack();
 				}
 				else
 				{
-					pokemonNameList[i].setText("#" + number + "   " + PokedexData.getName(index));
+					String number = new String();
+					if(first + i < 10)
+						number = number + "00" + (first + i);
+					else if(first + i < 100)
+						number = number + "0" + (first + i);
+					else
+						number = "" + (first + i);
+			
+					pokemonNameList[i].setText("#" + number + " " + PokedexData.getName(first + i));
 					pokemonNameList[i].pack();
-					if(getPokemon(index) == 2)
+					if(getPokemon(first+i) == 2)
 					{
 						pokemonCaughtLabels[i].setVisible(true);
 					}
@@ -491,14 +522,7 @@ public class PokedexDialog extends Frame
 		pokemonsprite.setLocation(pokedexsprite.getX()+33, pokedexsprite.getY()+39);
 		
 		map = new Label();
-		try
-		{
-			map.setImage(loadImage("res/ui/pokedex/kanto_johto_small.png"));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
+		map.setImage(mapIcon);
 		
 		map.pack();
 		map.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 132);
@@ -508,14 +532,7 @@ public class PokedexDialog extends Frame
 		tabname.setFont(GameClient.getPokedexFontLarge());
 		
 		pokemonSelectionFrame = new Label();
-		try
-		{
-			pokemonSelectionFrame.setImage(loadImage("res/ui/pokedex/pokemonselected.png"));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
+		pokemonSelectionFrame.setImage(selectionFrame);
 		
 		loreLabels = new Label[0];
 		pokemonNameList = new Label[13];
@@ -537,15 +554,8 @@ public class PokedexDialog extends Frame
 			pokemonNameList[i].setFont(GameClient.getPokedexFontSmall());
 			pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, (pokedexsprite.getY() + 63 + (22*i)));
 			pokemonCaughtLabels[i] = new Label();
-			try
-			{
-				pokemonCaughtLabels[i].setImage(loadImage("res/ui/pokedex/pokemoncaught.png"));
-				pokemonCaughtLabels[i].pack();
-			}
-			catch(SlickException e)
-			{
-				e.printStackTrace();
-			}
+			pokemonCaughtLabels[i].setImage(caughtIcon);
+			pokemonCaughtLabels[i].pack();
 			pokemonCaughtLabels[i].setLocation(pokedexsprite.getX() + 299, (pokedexsprite.getY() + 60 + (22*i)));
 		}
 					
@@ -581,239 +591,220 @@ public class PokedexDialog extends Frame
 	
 	private void initPokedexSprite()
 	{
-		try
+		pokedexsprite = new Label();
+		pokedexsprite.setImage(pokedexSprite);
+		pokedexsprite.setSize(519,377);
+		pokedexsprite.setLocation(0,20);
+		
+		up = new NewImageButton();
+		down = new NewImageButton();
+		left = new NewImageButton();
+		right = new NewImageButton();
+		
+		inc1 = new NewImageButton();
+		inc5 = new NewImageButton();
+		inc10 = new NewImageButton();
+		inc50 = new NewImageButton();
+		
+		down.setSize(30, 30);
+		down.setImages(buttonDownSprite, buttonDownSprite, buttonDownSprite);
+		down.setForeground(Color.white);
+		down.setLocation(pokedexsprite.getX() + pokedexsprite.getWidth() - buttonDownSprite.getWidth() - 8, pokedexsprite.getY() + pokedexsprite.getHeight() - buttonDownSprite.getHeight() - 47);
+		down.setActionListener(new ActionListener()
 		{
-			pokedexsprite = new Label();
-			pokedexsprite.setImage(loadImage("res/ui/pokedex/pokedex.png"));
-			pokedexsprite.setSize(519,377);
-			pokedexsprite.setLocation(0,20);
-			
-			up = new NewImageButton();
-			down = new NewImageButton();
-			left = new NewImageButton();
-			right = new NewImageButton();
-			
-			inc1 = new NewImageButton();
-			inc5 = new NewImageButton();
-			inc10 = new NewImageButton();
-			inc50 = new NewImageButton();
-			
-			Image downImage = loadImage("res/ui/pokedex/button_down.png");
-			down.setSize(30, 30);
-			down.setImages(downImage, downImage, downImage);
-			down.setForeground(Color.white);
-			down.setLocation(pokedexsprite.getX() + pokedexsprite.getWidth() - downImage.getWidth() - 8, pokedexsprite.getY() + pokedexsprite.getHeight() - downImage.getHeight() - 47);
-			down.setActionListener(new ActionListener()
+			@Override
+			public void actionPerformed(ActionEvent arg0)
 			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
+				if(arg0.getActionCommand().equals("Up"))
 				{
-					if(arg0.getActionCommand().equals("Up"))
+					if((selection + incrementer) <= 493)
 					{
-						if((selection + incrementer) <= 493)
+						selection+=incrementer;
+						if((selection-1)/13 != scrollindex)
 						{
-							selection+=incrementer;
-							if((selection-1)/13 != scrollindex)
-							{
-								scrollindex = (selection-1)/13;
-								updateNameList();
-							}
-							updatePokemonInfo();
-							updateSelectionFrame();
+							scrollindex = (selection-1)/13;
+							updateNameList();
 						}
-						else
+						updatePokemonInfo();
+						updateSelectionFrame();
+					}
+					else
+					{
+						selection = 493;
+						if((selection-1)/13 != scrollindex)
 						{
-							selection = 493;
-							if((selection-1)/13 != scrollindex)
-							{
-								scrollindex = (selection-1)/13;
-								updateNameList();
-							}
-							updatePokemonInfo();
-							updateSelectionFrame();
+							scrollindex = (selection-1)/13;
+							updateNameList();
 						}
+						updatePokemonInfo();
+						updateSelectionFrame();
 					}
 				}
-			});
-			
-			Image upImage = loadImage("res/ui/pokedex/button_up.png");
-			up.setImages(upImage, upImage, upImage);
-			up.setSize(30, 30);
-			up.setForeground(Color.white);
-			up.setLocation(down.getX(), down.getY() - down.getHeight() - 5);
-			up.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(arg0.getActionCommand().equals("Up"))
-					{
-						if((selection - incrementer) >= 1)
-						{
-							selection-=incrementer;
-							if((selection-1)/13 != scrollindex)
-							{
-								scrollindex = (selection-1)/13;
-								updateNameList();
-							}
-							updatePokemonInfo();
-							updateSelectionFrame();
-						}
-						else
-						{
-							selection = 1;
-							if((selection-1)/13 != scrollindex)
-							{
-								scrollindex = (selection-1)/13;
-								updateNameList();
-							}
-							updatePokemonInfo();
-							updateSelectionFrame();
-						}
-					}
-				}
-			});
-			
-			Image leftImage = loadImage("res/ui/pokedex/button_left.png");
-			left.setImages(leftImage, leftImage, leftImage);
-			left.setSize(20, 38);
-			left.setLocation(pokedexsprite.getX() + 32, pokedexsprite.getY() + pokedexsprite.getHeight() - leftImage.getHeight() - 76);
-			left.setForeground(Color.white);
-			left.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(arg0.getActionCommand().equals("Up"))
-					{
-						tabindex--;
-						if(tabindex < 1)
-							tabindex = 4;
-					
-						updateInfoTab();
-					}
-				}
-			});
-			
-			Image rightImage = loadImage("res/ui/pokedex/button_right.png");
-			right.setImages(rightImage, rightImage, rightImage);
-			right.setSize(20, 38);
-			right.setLocation(left.getX() + 177, left.getY());
-			right.setForeground(Color.white);
-			right.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(arg0.getActionCommand().equals("Up"))
-					{
-						tabindex++;
-						if(tabindex > 4)
-							tabindex = 1;
-					
-						updateInfoTab();
-					}
-				}
-			});
-			
-			Image inc1i = loadImage("res/ui/pokedex/incrementer.png");
-			Image inc1ipressed = loadImage("res/ui/pokedex/incrementer_pressed.png");
-			inc1.setImages(inc1ipressed,inc1i, inc1ipressed);
-			inc1.setFont(GameClient.getPokedexFontMini());
-			inc1.setText("1");
-			inc1.setSize(36,14);
-			inc1.setLocation(down.getX()-3, pokedexsprite.getY() + 70);
-			inc1.setForeground(Color.white);
-			currIncButton = inc1;
-			currIncButton.disable();
-			inc1.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(inc1.enabled())
-					{
-						currIncButton.enable();
-						currIncButton = inc1;
-						inc1.disable();
-						incrementer = 1;
-					}
-				}
-			});
-			
-			Image inc5i = loadImage("res/ui/pokedex/incrementer.png");
-			Image inc5ipressed = loadImage("res/ui/pokedex/incrementer_pressed.png");
-			inc5.setImages(inc5ipressed,inc5i, inc5ipressed);
-			inc5.setFont(GameClient.getPokedexFontMini());
-			inc5.setText("5");
-			inc5.setSize(36,14);
-			inc5.setLocation(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
-			inc5.setForeground(Color.white);
-			inc5.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(inc5.enabled())
-					{
-						currIncButton.enable();
-						currIncButton = inc5;
-						inc5.disable();
-						incrementer = 5;
-					}
-				}
-			});
-			
-			Image inc10i = loadImage("res/ui/pokedex/incrementer.png");
-			Image inc10ipressed = loadImage("res/ui/pokedex/incrementer_pressed.png");
-			inc10.setImages(inc10ipressed,inc10i, inc10ipressed);
-			inc10.setFont(GameClient.getPokedexFontMini());
-			inc10.setText("10");
-			inc10.setSize(36,14);
-			inc10.setLocation(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
-			inc10.setForeground(Color.white);
-			inc10.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(inc10.enabled())
-					{
-						currIncButton.enable();
-						currIncButton = inc10;
-						inc10.disable();
-						incrementer = 10;
-					}
-				}
-			});
-			
-			Image inc50i = loadImage("res/ui/pokedex/incrementer.png");
-			Image inc50ipressed = loadImage("res/ui/pokedex/incrementer_pressed.png");
-			inc50.setImages(inc50ipressed,inc50i, inc50ipressed);
-			inc50.setFont(GameClient.getPokedexFontMini());
-			inc50.setText("50");
-			inc50.setSize(36,14);
-			inc50.setLocation(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
-			inc50.setForeground(Color.white);
-			inc50.setActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					if(inc50.enabled())
-					{
-						currIncButton.enable();
-						currIncButton = inc50;
-						inc50.disable();
-						incrementer = 50;
-					}
-				}
-			});
-		}
-		catch(SlickException e)
+			}
+		});
+		
+		up.setImages(buttonUpSprite, buttonUpSprite, buttonUpSprite);
+		up.setSize(30, 30);
+		up.setForeground(Color.white);
+		up.setLocation(down.getX(), down.getY() - down.getHeight() - 5);
+		up.setActionListener(new ActionListener()
 		{
-			e.printStackTrace();
-		}
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(arg0.getActionCommand().equals("Up"))
+				{
+					if((selection - incrementer) >= 1)
+					{
+						selection-=incrementer;
+						if((selection-1)/13 != scrollindex)
+						{
+							scrollindex = (selection-1)/13;
+							updateNameList();
+						}
+						updatePokemonInfo();
+						updateSelectionFrame();
+					}
+					else
+					{
+						selection = 1;
+						if((selection-1)/13 != scrollindex)
+						{
+							scrollindex = (selection-1)/13;
+							updateNameList();
+						}
+						updatePokemonInfo();
+						updateSelectionFrame();
+					}
+				}
+			}
+		});
+		
+		left.setImages(buttonLeftSprite, buttonLeftSprite, buttonLeftSprite);
+		left.setSize(20, 38);
+		left.setLocation(pokedexsprite.getX() + 32, pokedexsprite.getY() + pokedexsprite.getHeight() - buttonLeftSprite.getHeight() - 76);
+		left.setForeground(Color.white);
+		left.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(arg0.getActionCommand().equals("Up"))
+				{
+					tabindex--;
+					if(tabindex < 1)
+						tabindex = 4;
+				
+					updateInfoTab();
+				}
+			}
+		});
+		
+		right.setImages(buttonRightSprite, buttonRightSprite, buttonRightSprite);
+		right.setSize(20, 38);
+		right.setLocation(left.getX() + 177, left.getY());
+		right.setForeground(Color.white);
+		right.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(arg0.getActionCommand().equals("Up"))
+				{
+					tabindex++;
+					if(tabindex > 4)
+						tabindex = 1;
+				
+					updateInfoTab();
+				}
+			}
+		});
+		
+		inc1.setImages(incrementerPressedSprite,incrementerSprite, incrementerPressedSprite);
+		inc1.setFont(GameClient.getPokedexFontMini());
+		inc1.setText("1");
+		inc1.setSize(36,14);
+		inc1.setLocation(down.getX()-3, pokedexsprite.getY() + 70);
+		inc1.setForeground(Color.white);
+		currIncButton = inc1;
+		currIncButton.disable();
+		inc1.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(inc1.enabled())
+				{
+					currIncButton.enable();
+					currIncButton = inc1;
+					inc1.disable();
+					incrementer = 1;
+				}
+			}
+		});
+		
+		inc5.setImages(incrementerPressedSprite,incrementerSprite, incrementerPressedSprite);
+		inc5.setFont(GameClient.getPokedexFontMini());
+		inc5.setText("5");
+		inc5.setSize(36,14);
+		inc5.setLocation(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
+		inc5.setForeground(Color.white);
+		inc5.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(inc5.enabled())
+				{
+					currIncButton.enable();
+					currIncButton = inc5;
+					inc5.disable();
+					incrementer = 5;
+				}
+			}
+		});
+		
+		inc10.setImages(incrementerPressedSprite,incrementerSprite, incrementerPressedSprite);
+		inc10.setFont(GameClient.getPokedexFontMini());
+		inc10.setText("10");
+		inc10.setSize(36,14);
+		inc10.setLocation(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
+		inc10.setForeground(Color.white);
+		inc10.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(inc10.enabled())
+				{
+					currIncButton.enable();
+					currIncButton = inc10;
+					inc10.disable();
+					incrementer = 10;
+				}
+			}
+		});
+		
+		inc50.setImages(incrementerPressedSprite,incrementerSprite, incrementerPressedSprite);
+		inc50.setFont(GameClient.getPokedexFontMini());
+		inc50.setText("50");
+		inc50.setSize(36,14);
+		inc50.setLocation(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
+		inc50.setForeground(Color.white);
+		inc50.setActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(inc50.enabled())
+				{
+					currIncButton.enable();
+					currIncButton = inc50;
+					inc50.disable();
+					incrementer = 50;
+				}
+			}
+		});
 		
 		add(pokedexsprite);
 		add(down);
@@ -841,6 +832,4 @@ public class PokedexDialog extends Frame
 		}
 		super.setVisible(toSet);
 	}
-
-
 }

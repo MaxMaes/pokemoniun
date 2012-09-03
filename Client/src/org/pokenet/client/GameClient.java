@@ -609,6 +609,14 @@ public class GameClient extends BasicGame
 						e.printStackTrace();
 					}
 				}
+				if(m_dcConfirm != null)
+				{
+					m_packetGen.writeTcpMessage("rl" + m_ourPlayer.getUsername());
+					disconnect();
+					reset();
+					m_dcConfirm.setVisible(false);
+					m_dcConfirm = null;
+				}
 			}
 		}
 

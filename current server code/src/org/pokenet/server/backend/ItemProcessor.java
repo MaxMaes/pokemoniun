@@ -30,7 +30,7 @@ import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 public class ItemProcessor implements Runnable {
 	/* An enum which handles Pokeball types */
 	public enum PokeBall {
-		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL
+		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL, LEVELBALL, LUREBALL
 	};
 
 	private final Player m_player;
@@ -622,7 +622,22 @@ public class ItemProcessor implements Runnable {
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
+				} else if (i.getName().equalsIgnoreCase("LEVEL BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.LEVELBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("LURE BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.LUREBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
 				}
+				
 			}
 			return false;
 		} catch (Exception e) {

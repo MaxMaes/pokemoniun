@@ -530,6 +530,7 @@ public class WildBattleField extends BattleField {
 			} catch (InterruptedException e) {
 			}
 		}
+		double catchRate = 1.0;
 		switch (p) {
 		case POKEBALL:
 			showMessage(m_player.getName() + " threw a Pokeball!");
@@ -594,6 +595,50 @@ public class WildBattleField extends BattleField {
 				return true;
 			} else
 				showMessage("...but it failed!");
+			break;
+		case LEVELBALL:
+			showMessage(m_player.getName() + " threw a Level Ball!");
+			int m_pokemonLevel = getActivePokemon()[0].getLevel();
+			int w_pokemonLevel = m_wildPoke.getLevel();
+			if(m_pokemonLevel <= w_pokemonLevel )
+				catchRate = 1.0;
+			else if(m_pokemonLevel > w_pokemonLevel && m_pokemonLevel < w_pokemonLevel*2)
+				catchRate = 2.0;
+			else if(m_pokemonLevel > w_pokemonLevel*2 && m_pokemonLevel < w_pokemonLevel*4)
+				catchRate = 4.0;
+			else if(m_pokemonLevel > w_pokemonLevel*4)
+				catchRate = 8.0;
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			}	else
+					showMessage("...but it failed!");
+			break;
+		case LUREBALL:
+			showMessage(m_player.getName() + " threw a Lure Ball!");
+			if(m_player.isFishing())
+				catchRate = 3.0;
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			}	else
+					showMessage("...but it failed!");
 			break;
 		}
 		return false;

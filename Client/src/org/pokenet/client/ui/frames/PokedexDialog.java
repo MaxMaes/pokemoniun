@@ -364,7 +364,6 @@ public class PokedexDialog extends Frame
     			i = new Image(path.toString(), false);
     			e.printStackTrace();
     		}
-    		LoadingList.setDeferredLoading(old);
     	}
     	catch (SlickException e)
     	{e.printStackTrace();}

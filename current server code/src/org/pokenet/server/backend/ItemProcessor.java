@@ -30,7 +30,10 @@ import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 public class ItemProcessor implements Runnable {
 	/* An enum which handles Pokeball types */
 	public enum PokeBall {
-		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL, LEVELBALL, LUREBALL
+		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL, SAFARIBALL, 								//1st gen
+		LEVELBALL, LUREBALL, MOONBALL, FRIENDBALL, LOVEBALL, HEAVYBALL, FASTBALL, SPORTBALL, 	//2nd gen
+		PREMIERBALL, REPEATBALL, TIMERBALL, NESTBALL, NETBALL, DIVEBALL, LUXERYBALL,			//3th gen
+		HEALBALL, QUICKBALL, DUSKBALL, CHERISHBALL, PARKBALL									//4th gen
 	};
 
 	private final Player m_player;
@@ -636,7 +639,135 @@ public class ItemProcessor implements Runnable {
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
+				} else if (i.getName().equalsIgnoreCase("MOON BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.MOONBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("FRIEND BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.FRIENDBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("LOVE BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.LOVEBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("HEAVY BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.HEAVYBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("FAST BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.FASTBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("SPORT BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.MOONBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("PREMIER BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.PREMIERBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("REPEAT BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.REPEATBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("TIMER BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.TIMERBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("NEST BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.NESTBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("NET BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.NETBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("DIVE BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.DIVEBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("LUXERY BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.LUXERYBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("HEAL BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.HEALBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("QUICK BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.QUICKBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("DUSK BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.DUSKBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("CHERISH BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.CHERISHBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
+				} else if (i.getName().equalsIgnoreCase("PARK BALL")) {
+					if (p.getBattleField() instanceof WildBattleField) {
+						WildBattleField w = (WildBattleField) p.getBattleField();
+						if (!w.throwPokeball(PokeBall.PARKBALL))
+							w.queueMove(0, BattleTurn.getMoveTurn(-1));
+						return true;
+					}
 				}
+				
+				
 				
 			}
 			return false;

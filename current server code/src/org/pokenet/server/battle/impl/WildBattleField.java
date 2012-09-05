@@ -536,7 +536,7 @@ public class WildBattleField extends BattleField {
 			showMessage(m_player.getName() + " threw a Pokeball!");
 			if (getMechanics().isCaught(
 					m_wildPoke,
-					m_wildPoke.getRareness(), 1.0, 1)) {
+					m_wildPoke.getRareness(), catchRate, 1)) {
 				m_wildPoke.calculateStats(false);
 				m_player.catchPokemon(m_wildPoke);
 				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
@@ -550,9 +550,10 @@ public class WildBattleField extends BattleField {
 			break;
 		case GREATBALL:
 			showMessage(m_player.getName() + " threw a Great Ball!");
+			catchRate = 1.5;
 			if (getMechanics().isCaught(
 					m_wildPoke,
-					m_wildPoke.getRareness(), 1.5, 1)) {
+					m_wildPoke.getRareness(), catchRate, 1)) {
 				m_wildPoke.calculateStats(false);
 				m_player.catchPokemon(m_wildPoke);
 				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
@@ -566,9 +567,10 @@ public class WildBattleField extends BattleField {
 			break;
 		case ULTRABALL:
 			showMessage(m_player.getName() + " threw an Ultra Ball!");
+			catchRate = 2.0;
 			if (getMechanics().isCaught(
 					m_wildPoke,
-					m_wildPoke.getRareness(), 2.0, 1)) {
+					m_wildPoke.getRareness(), catchRate, 1)) {
 				m_wildPoke.calculateStats(false);
 				m_player.catchPokemon(m_wildPoke);
 				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
@@ -582,9 +584,10 @@ public class WildBattleField extends BattleField {
 			break;
 		case MASTERBALL:
 			showMessage(m_player.getName() + " threw a Master Ball!");
+			catchRate = 255.0;
 			if (getMechanics().isCaught(
 					m_wildPoke,
-					m_wildPoke.getRareness(), 255.0, 1)) {
+					m_wildPoke.getRareness(), catchRate, 1)) {
 				m_wildPoke.calculateStats(false);
 				m_player.catchPokemon(m_wildPoke);
 				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
@@ -639,6 +642,140 @@ public class WildBattleField extends BattleField {
 				return true;
 			}	else
 					showMessage("...but it failed!");
+			break;
+		case MOONBALL:
+			showMessage(m_player.getName() + " threw a Moon Ball!");
+			int pokemonNumber = m_wildPoke.getSpeciesNumber()+1;
+			if(pokemonNumber == 29 || pokemonNumber == 30 || pokemonNumber == 31 || 		//Nidoran male family
+					pokemonNumber == 32 || pokemonNumber == 33 || pokemonNumber == 34 || 	//Nidoran female family
+					pokemonNumber == 35 || pokemonNumber == 36 || pokemonNumber == 173 ||  	//Clefairy family	
+					pokemonNumber == 39 || pokemonNumber == 40 || pokemonNumber == 174 ||	//Jigglypuff family
+					pokemonNumber == 300 || pokemonNumber == 301)							//Skitty family
+			{
+				catchRate = 4.0;
+			}
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			}	else
+					showMessage("...but it failed!");
+			break;
+		case FRIENDBALL:
+			showMessage(m_player.getName() + " threw a Friend Ball!");
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_wildPoke.setHappiness(200);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			} else
+				showMessage("...but it failed!");
+			break;
+		case LOVEBALL:
+			showMessage(m_player.getName() + " threw a Love Ball!");
+			if(((m_wildPoke.getGender() == Pokemon.GENDER_MALE && getActivePokemon()[0].getGender() == Pokemon.GENDER_FEMALE) && (m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName()))
+					|| 
+			   ((m_wildPoke.getGender() == Pokemon.GENDER_FEMALE && getActivePokemon()[0].getGender() == Pokemon.GENDER_MALE)  && (m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName())))
+			{
+				catchRate = 8.0;
+			}
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			} else
+				showMessage("...but it failed!");
+			break;
+		case HEAVYBALL:
+			showMessage(m_player.getName() + " threw a Heavy Ball!");
+			if(m_wildPoke.getWeight() < 204.796955)
+				catchRate = -20.0;
+			else if(m_wildPoke.getWeight() >= 204.796955 && m_wildPoke.getWeight() < 307.218112)
+				catchRate = 20.0;
+			else if(m_wildPoke.getWeight() >= 307.218112 && m_wildPoke.getWeight() < 409.59391)
+				catchRate = 30.0;
+			else if(m_wildPoke.getWeight() >= 409.59391)
+				catchRate = 40.0;
+			
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			} else
+				showMessage("...but it failed!");
+			break;
+		case FASTBALL:
+			showMessage(m_player.getName() + " threw a Fast Ball!");
+			int pokeID = m_wildPoke.getSpeciesNumber()+1;
+			if((m_wildPoke.getBase()[3] >= 100) 				// Speed stat
+			|| pokeID == 63 || pokeID == 58 || pokeID == 81 ||  // Pokemon that run from battle
+			pokeID == 122 || pokeID == 231 || pokeID == 195 ||  //
+			pokeID == 209 || pokeID == 114 || pokeID == 201	||
+			pokeID == 243 || pokeID == 244 || pokeID == 245 ||	// Roaming pokemon
+			pokeID == 380 || pokeID == 381 || pokeID == 144 ||
+			pokeID == 145 || pokeID == 146 || pokeID == 481 ||
+			pokeID == 488 ||
+			pokeID == 641 || pokeID == 642)						// Gen 5 roaming pokemon
+				catchRate = 4.0;
+			 	
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			} else
+				showMessage("...but it failed!");
+			break;
+		case SPORTBALL:
+			showMessage(m_player.getName() + " threw a Sport Ball!");
+			catchRate = 1.5;
+			if (getMechanics().isCaught(
+					m_wildPoke,
+					m_wildPoke.getRareness(), catchRate, 1)) {
+				m_wildPoke.calculateStats(false);
+				m_player.catchPokemon(m_wildPoke);
+				showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
+				TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+						new BattleEndMessage(BattleEnd.POKEBALL));
+				m_player.setBattling(false);
+				dispose();
+				return true;
+			} else
+				showMessage("...but it failed!");
 			break;
 		}
 		return false;

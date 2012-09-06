@@ -18,8 +18,7 @@ import org.pokenet.server.network.message.ChatMessage.ChatMessageType;
  */
 public class ChatManager implements Runnable {
         private Thread m_thread;
-        @SuppressWarnings("unused")
-        private boolean m_isRunning;
+        private boolean m_isRunning = false;
         /*
          * Local chat queue
          * [Message, x, y]
@@ -75,7 +74,7 @@ public class ChatManager implements Runnable {
                 Object [] o;
                 ServerMap m;
                 IoSession s;
-                while(true) {
+                while(m_isRunning) {
                         //Send next local chat message
                         if(m_localQueue.peek() != null) {
                                 o = m_localQueue.poll();
@@ -112,5 +111,4 @@ public class ChatManager implements Runnable {
         public void stop() {
                 m_isRunning = false;
         }
-
 }

@@ -503,7 +503,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					//details = message.substring(1).split(",");
 					int pIndex = Integer.parseInt(message.split(",")[1]);
 					if (p.getParty()[pIndex] != null) {
-						if(p.getParty()[pIndex].getItemName() == "" || p.getParty()[pIndex].getItemName() == null)
+						if(p.getParty()[pIndex].getItemName().equals("") || p.getParty()[pIndex].getItemName() == null)
 						{
 							p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
 							p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0])+ ",1" + "," + (p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold"));

@@ -79,6 +79,18 @@ public class PokedexDialog extends Frame
 
 	public void updatePokemonInfo()
 	{
+		String number = "#";
+		if(selection < 10)
+			number = number + "00" + selection;
+		else if(selection < 100)
+			number = number + "0" + selection;
+		else
+			number = "#" + selection;
+	
+		pokemonnumber.setText(number);
+		pokemonnumber.pack();
+		pokemonnumber.setLocation(pokedexsprite.getX()+178 - (pokemonnumber.getWidth()/2), pokemonname.getY() - 25);
+		
 		if(getPokemon(selection) < 1)
 		{
 			pokemonname.setText("???");
@@ -87,9 +99,6 @@ public class PokedexDialog extends Frame
 			pokemontypes.setText("???");
 			pokemontypes.pack();
 			pokemontypes.setLocation(pokedexsprite.getX()+178 - (pokemontypes.getWidth()/2), pokemonname.getY() + 17);
-			pokemonnumber.setText("???");
-			pokemonnumber.pack();
-			pokemonnumber.setLocation(pokedexsprite.getX()+178 - (pokemonnumber.getWidth()/2), pokemonname.getY() - 25);
 			remove(pokemonsprite);
 			for(int i = 0; i < pokemonMoveLabels.length; i++)
 			{
@@ -117,18 +126,6 @@ public class PokedexDialog extends Frame
 			pokemontypes.setText(PokedexData.getTypestring(selection));
 			pokemontypes.pack();
 			pokemontypes.setLocation(pokedexsprite.getX()+178 - (pokemontypes.getWidth()/2), pokemonname.getY() + 17);
-		
-			String number = "#";
-			if(selection < 10)
-				number = number + "00" + selection;
-			else if(selection < 100)
-				number = number + "0" + selection;
-			else
-				number = "#" + selection;
-		
-			pokemonnumber.setText(number);
-			pokemonnumber.pack();
-			pokemonnumber.setLocation(pokedexsprite.getX()+178 - (pokemonnumber.getWidth()/2), pokemonname.getY() - 25);
 		
 			pokemonsprite.setImage(pokemonIcons[selection]);
 			pokemonsprite.setSize(80, 80);
@@ -477,10 +474,18 @@ public class PokedexDialog extends Frame
 			{
 				if(getPokemon(first+i) == 0)
 				{
-					pokemonNameList[i].setText("???");
+					String number = new String();
+					if(first + i < 10)
+						number = number + "00" + (first + i);
+					else if(first + i < 100)
+						number = number + "0" + (first + i);
+					else
+						number = "" + (first + i);
+			
+					pokemonNameList[i].setText("#" + number + "                ???");
 					pokemonNameList[i].pack();
 				}
-				else
+				if(getPokemon(first+i) > 0)
 				{
 					String number = new String();
 					if(first + i < 10)

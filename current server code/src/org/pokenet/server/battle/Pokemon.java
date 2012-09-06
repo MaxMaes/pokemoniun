@@ -164,7 +164,7 @@ public class Pokemon extends PokemonSpecies {
 	private long                              m_originalNo;
 
 	private int                               m_databaseID     = -1;
-
+	private boolean							  m_caughtWithLuxeryBall = false;
 	// Battle mechanics.
 	private BattleMechanics                   m_mech;
 
@@ -1018,6 +1018,21 @@ public class Pokemon extends PokemonSpecies {
 			m_multiplier[i] = new StatMultiplier(false);
 		}
 		if (reset) m_hp = m_stat[S_HP];
+		if (reset) 
+		{
+			for (int i = 0; i < m_move.length; ++i) 
+			{
+				if (m_move[i] != null) 
+				{
+					m_move[i] = (MoveListEntry) m_move[i].clone();
+					PokemonMove move = m_move[i].getMove();
+					if (move != null) 
+					{
+						m_maxPp[i] = m_pp[i] = move.getPp() * (5 + m_ppUp[i]) / 5;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -2193,8 +2208,14 @@ public class Pokemon extends PokemonSpecies {
 	 * 
 	 * @param happiness
 	 */
-	public void setHappiness(int happiness) {
-		m_happiness = happiness <= 255 ? happiness : 255;
+	public void setHappiness(int happiness) 
+	{
+		int original = m_happiness;
+		int diff = happiness - original;
+		if(m_caughtWithLuxeryBall)
+			diff = diff*2;
+		
+		m_happiness = (happiness+diff) <= 255 ? (happiness+diff) : 255;
 	}
 
 	/**
@@ -2364,5 +2385,26 @@ public class Pokemon extends PokemonSpecies {
 			break;
 		}
 		return exp;
+	}
+
+	public void setCaughtWithLuxeryBall(int int1)
+	{
+		if(int1==0)
+			m_caughtWithLuxeryBall = false;
+		else
+			m_caughtWithLuxeryBall = true;
+	}
+	
+	public boolean isCaughtWithLuxeryBall()
+	{
+		return m_caughtWithLuxeryBall;
+	}
+	
+	public int isCaughtWithLuxeryBallInt()
+	{
+		if(m_caughtWithLuxeryBall)
+			return 1;
+		else
+			return 0;
 	}
 }

@@ -67,7 +67,7 @@ public class Pokedex
 	
 	/**
 	 * Checks if this pokemon is caught
-	 * @param id the id of the pokemon.
+	 * @param id the id of the pokemon (1 t/m max)
 	 * @return returns true if caught
 	 */
 	public boolean isPokemonCaught(int id)

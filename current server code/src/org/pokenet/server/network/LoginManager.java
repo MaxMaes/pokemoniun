@@ -673,6 +673,7 @@ public class LoginManager implements Runnable {
 				p.setDateCaught(data.getString("date"));
 				p.setIsFainted(Boolean.parseBoolean(data.getString("isFainted")));
 				p.setItem(new HoldItem(data.getString("itemName")));
+				p.setCaughtWithLuxeryBall(data.getInt("caughtWithLuxeryBall"));
 				/*
 				 * Contest stats (beauty, cute, etc.)
 				 */

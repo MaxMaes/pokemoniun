@@ -2076,5 +2076,4 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		return this.getPokedex().isPokemonCaught(i);
 	}
-
 }

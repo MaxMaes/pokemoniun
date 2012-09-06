@@ -263,7 +263,7 @@ public class LogoutManager implements Runnable {
 			 */
 			db.query("INSERT INTO pn_pokemon" +
 					"(name, speciesName, exp, baseExp, expType, isFainted, level, happiness, " +
-					"gender, nature, abilityName, itemName, isShiny, currentTrainerName, originalTrainerName, date, contestStats)" +
+					"gender, nature, abilityName, itemName, isShiny, currentTrainerName, originalTrainerName, date, contestStats, caughtWithLuxeryBall)" +
 					"VALUES (" +
 					"'" + MySqlManager.parseSQL(p.getName()) +"', " +
 					"'" + MySqlManager.parseSQL(p.getSpeciesName()) +"', " +
@@ -281,7 +281,8 @@ public class LogoutManager implements Runnable {
 					"'" + currentTrainer + "', " +
 					"'" + MySqlManager.parseSQL(p.getOriginalTrainer()) + "', " +
 					"'" + MySqlManager.parseSQL(p.getDateCaught()) + "', " +
-					"'" + p.getContestStatsAsString() + "')");
+					"'" + p.getContestStatsAsString() + "', " +
+					"'" + p.isCaughtWithLuxeryBallInt());
 			/*
 			 * Get the pokemon's database id and attach it to the pokemon.
 			 * This needs to be done so it can be attached to the player in the database later.

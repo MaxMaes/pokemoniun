@@ -31,9 +31,9 @@ public class ItemProcessor implements Runnable {
 	/* An enum which handles Pokeball types */
 	public enum PokeBall {
 		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL, SAFARIBALL, 								//1st gen
-		LEVELBALL, LUREBALL, MOONBALL, FRIENDBALL, LOVEBALL, HEAVYBALL, FASTBALL, SPORTBALL, 	//2nd gen
+		LEVELBALL, LUREBALL, MOONBALL, FRIENDBALL, LOVEBALL, HEAVYBALL, FASTBALL, PARKBALL, 	//2nd gen
 		PREMIERBALL, REPEATBALL, TIMERBALL, NESTBALL, NETBALL, DIVEBALL, LUXERYBALL,			//3th gen
-		HEALBALL, QUICKBALL, DUSKBALL, CHERISHBALL, PARKBALL									//4th gen
+		HEALBALL, QUICKBALL, DUSKBALL, CHERISHBALL												//4th gen
 	};
 
 	private final Player m_player;
@@ -674,10 +674,10 @@ public class ItemProcessor implements Runnable {
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
-				} else if (i.getName().equalsIgnoreCase("SPORT BALL")) {
+				} else if (i.getName().equalsIgnoreCase("PARK BALL")) {
 					if (p.getBattleField() instanceof WildBattleField) {
 						WildBattleField w = (WildBattleField) p.getBattleField();
-						if (!w.throwPokeball(PokeBall.MOONBALL))
+						if (!w.throwPokeball(PokeBall.PARKBALL))
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
@@ -758,17 +758,7 @@ public class ItemProcessor implements Runnable {
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
-				} else if (i.getName().equalsIgnoreCase("PARK BALL")) {
-					if (p.getBattleField() instanceof WildBattleField) {
-						WildBattleField w = (WildBattleField) p.getBattleField();
-						if (!w.throwPokeball(PokeBall.PARKBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				
-				
-				
+				} 
 			}
 			return false;
 		} catch (Exception e) {

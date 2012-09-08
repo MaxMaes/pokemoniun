@@ -5,6 +5,7 @@ import mdes.slick.sui.Label;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  * The loading screen
@@ -37,7 +38,7 @@ public class LoadingScreen extends Frame {
 			
 			this.setVisible(false);
 			this.setAlwaysOnTop(true);
-		} catch (Exception e) {
+		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}

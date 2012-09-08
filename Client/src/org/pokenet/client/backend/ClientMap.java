@@ -34,7 +34,7 @@ public class ClientMap extends TiledMap {
 	private ClientMapMatrix m_mapMatrix;
 	private int m_walkableLayer;
 	private String m_name;
-	private Image m_grassOverlay;
+	private static Image m_grassOverlay;
 
 	/**
 	 * Default constructor
@@ -45,13 +45,17 @@ public class ClientMap extends TiledMap {
 	 */
 	public ClientMap(String tileSetsLocation)
 			throws SlickException {
-		super(tileSetsLocation);
+		super(tileSetsLocation); // This takes a long time, we need to cache it in the memory.
+		
 		String respath = System.getProperty("res.path");
 		if(respath==null)
 			respath="";
 		try {
-			m_grassOverlay = new Image(respath+"res/ui/grass_overlay.png", false);
-		} catch (Exception e) {
+			if(m_grassOverlay == null)
+			{
+				m_grassOverlay = new Image(respath+"res/ui/grass_overlay.png", false);				
+			}
+		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 		m_xOffsetModifier = Integer.parseInt(getMapProperty("xOffsetModifier",

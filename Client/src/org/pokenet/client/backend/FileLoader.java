@@ -23,16 +23,17 @@ public class FileLoader
 	 */
 	public static InputStream loadFile(String path)
 	{
+		FileInputStream inputStream = null;
 		try
 		{
-			return new FileInputStream(path);
+			inputStream = new FileInputStream(path);
 		}
 		catch(FileNotFoundException fnfe)
 		{
 			if(path.contains("language") && !path.contains(Language.ENGLISH))
 				GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
-		return null;
+		return inputStream;
 	}
 
 	/**

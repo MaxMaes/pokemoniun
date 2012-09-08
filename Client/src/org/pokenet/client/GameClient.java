@@ -133,22 +133,10 @@ public class GameClient extends BasicGame
 	{
 		try
 		{
-			try
-			{
-				m_filepath = System.getProperty("res.path");
-				// System.out.println("Path: " + m_filepath);
-			}
-			catch(Exception e)
+			m_filepath = System.getProperty("res.path");
+			if(m_filepath == null)
 			{
 				m_filepath = "";
-			}
-			// This is a better way.
-			finally
-			{
-				if(m_filepath == null)
-				{
-					m_filepath = "";
-				}
 			}
 			options = new FileMuffin().loadFile("options.dat");
 			if(options == null)
@@ -165,7 +153,7 @@ public class GameClient extends BasicGame
 			// m_soundPlayer.setTrack("introandgym");
 			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 			m_instance = new GameClient(GAME_TITLE);

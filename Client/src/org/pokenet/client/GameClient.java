@@ -16,7 +16,6 @@ import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 
-import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.IoFuture;
@@ -58,7 +57,6 @@ import org.pokenet.client.backend.time.WeatherService.Weather;
 import org.pokenet.client.constants.Language;
 import org.pokenet.client.constants.Music;
 import org.pokenet.client.constants.Options;
-import org.pokenet.client.network.ChatProtocolHandler;
 import org.pokenet.client.network.PacketGenerator;
 import org.pokenet.client.network.TcpProtocolHandler;
 import org.pokenet.client.ui.LoadingScreen;
@@ -79,8 +77,7 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 public class GameClient extends BasicGame
 {
 	private static final String GAME_TITLE = "Pokemonium 1.3.0";
-	private static final String CHATHOST = "localhost";
-	private static final int FPS = 50;
+	private static final int FPS = 30;
 	
 	private static boolean debug = false;
 	
@@ -1026,49 +1023,6 @@ public class GameClient extends BasicGame
 					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
 					m_host = "";
 					m_packetGen = null;
-				}
-			}
-		});
-		/*
-		 * Connect via TCP to chat server
-		 */
-		NioSocketConnector chat = new NioSocketConnector();
-		chat.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII"))));
-		chat.setHandler(new ChatProtocolHandler());
-		ConnectFuture cf2 = connector.connect(new InetSocketAddress(CHATHOST, 7001));
-		cf2.addListener(new IoFutureListener<IoFuture>()
-		{
-			public void operationComplete(IoFuture s)
-			{
-				try
-				{
-					if(s.getSession() != null && s.getSession().isConnected())
-					{
-						m_packetGen.setChatSession(s.getSession());
-						m_chatServerIsActive = true;
-					}
-					else
-					{
-						// messageDialog("Chat has been disabled.\n" +
-						// "Could not connect to chat server.", getDisplay());
-						m_chatServerIsActive = false;
-						m_packetGen.setChatSession(null);
-					}
-				}
-				catch(RuntimeIoException e)
-				{
-					// messageDialog("Chat has been disabled.\n" +
-					// "Could not connect to chat server.", getDisplay());
-					m_chatServerIsActive = false;
-					m_packetGen.setChatSession(null);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					// messageDialog("Chat has been disabled.\n" +
-					// "Could not connect to chat server.", getDisplay());
-					m_chatServerIsActive = false;
-					m_packetGen.setChatSession(null);
 				}
 			}
 		});

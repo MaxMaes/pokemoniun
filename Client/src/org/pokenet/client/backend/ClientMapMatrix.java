@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.lwjgl.util.Timer;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
@@ -23,7 +23,6 @@ public class ClientMapMatrix
 	private ArrayList<Player> m_players;
 	private ArrayList<String> m_speech;
 	private HashMap<String, String> m_mapNames;
-	private Timer m_calibrationTimer = new Timer();
 	private char m_newMapPos;
 	
 	private ClientMap[][] m_loadedMaps = new ClientMap[100][100];
@@ -269,12 +268,6 @@ public class ClientMapMatrix
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-		}
-		// Sleep so the main thread can calibrate the map.
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		recalibrate();

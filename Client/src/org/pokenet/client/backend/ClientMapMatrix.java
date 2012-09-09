@@ -25,6 +25,8 @@ public class ClientMapMatrix
 	private HashMap<String, String> m_mapNames;
 	private Timer m_calibrationTimer = new Timer();
 	private char m_newMapPos;
+	
+	private ClientMap[][] m_loadedMaps = new ClientMap[100][100];
 
 	/**
 	 * Default constructor
@@ -51,15 +53,25 @@ public class ClientMapMatrix
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		System.out.println("Map: " + x + ", " + y);
+		//System.out.println("Map: " + x + ", " + y);
 		InputStream f = FileLoader.loadFile(respath + "res/maps/" + (mapX) + "." + (mapY) + ".tmx");
 		if(f != null)
 		{
 			try
 			{
-				m_mapMatrix[x][y] = new ClientMap(respath + "res/maps/" + (mapX) + "." + (mapY) + ".tmx");
-				if(m_mapMatrix[x][y] == null)
-					System.out.println("Client Map is null");
+				long start = System.currentTimeMillis();
+				// mapX and mapY +50 to prevent a negative value.
+				if(m_loadedMaps[mapX + 50][mapY + 50] == null)
+				{
+					m_mapMatrix[x][y] = new ClientMap(respath + "res/maps/" + (mapX) + "." + (mapY) + ".tmx");
+					if(m_mapMatrix[x][y] == null)
+						System.out.println("Client Map is null");
+					m_loadedMaps[mapX + 50][mapY + 50] = m_mapMatrix[x][y];
+					System.out.println("Loading map res/maps/" + (mapX) + "." + (mapY) + ".tmx from file, took " + (System.currentTimeMillis() - start) + "ms.");
+				} else {
+					m_mapMatrix[x][y] = m_loadedMaps[mapX + 50][mapY + 50];
+					System.out.println("Loading map res/maps/" + (mapX) + "." + (mapY) + ".tmx from cache, took " + (System.currentTimeMillis() - start) + "ms.");
+				}
 				m_mapMatrix[x][y].setMapMatrix(this);
 				m_mapMatrix[x][y].setMapX(x);
 				m_mapMatrix[x][y].setMapY(y);
@@ -71,14 +83,14 @@ public class ClientMapMatrix
 			catch(SlickException se)
 			{
 				m_mapMatrix[x][y] = null;
-				System.out.println((mapX) + "." + (mapY) + ".tmx could not be loaded");
+				//System.out.println((mapX) + "." + (mapY) + ".tmx could not be loaded");
 				se.printStackTrace();
 			}
 		}
 		else
 		{
 			m_mapMatrix[x][y] = null;
-			System.out.println(respath + (mapX) + "." + (mapY) + ".tmx could not be loaded");
+			//System.out.println(respath + (mapX) + "." + (mapY) + ".tmx could not be loaded");
 		}
 	}
 
@@ -131,7 +143,7 @@ public class ClientMapMatrix
 						for(int i = 0; i < 3; i++)
 						{
 							loadMap(mapX - 1 + i, mapY - 1, i, 0);
-							System.out.println("Load map( " + (mapX - 1 + i) + ", " + (mapY - 1) + ", " + i + ", 0)");
+							//System.out.println("Load map( " + (mapX - 1 + i) + ", " + (mapY - 1) + ", " + i + ", 0)");
 						}
 						break;
 					case 'd':
@@ -147,7 +159,7 @@ public class ClientMapMatrix
 						for(int i = 0; i < 3; i++)
 						{
 							loadMap(mapX - 1 + i, mapY + 1, i, 2);
-							System.out.println("Load map( " + (mapX - 1 + i) + ", " + (mapY + 1) + ", " + i + ", 2)");
+							//System.out.println("Load map( " + (mapX - 1 + i) + ", " + (mapY + 1) + ", " + i + ", 2)");
 						}
 						break;
 					case 'r':
@@ -163,7 +175,7 @@ public class ClientMapMatrix
 						for(int i = 0; i < 3; i++)
 						{
 							loadMap(mapX + 1, mapY - 1 + i, 2, i);
-							System.out.println("Load map( " + (mapX + 1) + ", " + (mapY - 1 + i) + ", 2, " + i + ")");
+							//System.out.println("Load map( " + (mapX + 1) + ", " + (mapY - 1 + i) + ", 2, " + i + ")");
 						}
 						break;
 					case 'l':
@@ -179,7 +191,7 @@ public class ClientMapMatrix
 						for(int i = 0; i < 3; i++)
 						{
 							loadMap(mapX - 1, mapY - 1 + i, 0, i);
-							System.out.println("Load map( " + (mapX - 1) + ", " + (mapY - 1 + i) + ", 0," + i + ")");
+							//System.out.println("Load map( " + (mapX - 1) + ", " + (mapY - 1 + i) + ", 0," + i + ")");
 						}
 						break;
 					case 'n':
@@ -259,10 +271,13 @@ public class ClientMapMatrix
 		{
 			e.printStackTrace();
 		}
-		/* Recalibrate the offsets */
-		for(m_calibrationTimer.reset(); m_calibrationTimer.getTime() < 2; Timer.tick())
-			;
-		this.recalibrate();
+		// Sleep so the main thread can calibrate the map.
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		recalibrate();
 	}
 
 	/**

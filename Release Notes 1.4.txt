@@ -3,6 +3,8 @@
 [ADD] 	All pokeballs (except for gen 4's Park ball and gen 4's Dream Ball) have been implemented. 
 	You can buy them in the pokemonium mall
 [ADD]	evs
+[ADD]	Add original trainer name on pokemon info
+[ADD]	Add moves on pokemon info (party-viewer)
 
 [FIX] 	Movement has been fixed an is way smoother now!
 [FIX]	No more loading between maps.
@@ -11,8 +13,6 @@
 
 
 //REQUESTS/TODO
-[REQ]Add original trainer name on pokemon info
-[REQ]Add moves on pokemon info (party-viewer)
 [REQ]Hoenn and Sinnoh
 [REQ]trainer cards
 [REQ]quests

@@ -305,6 +305,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setHoldItem(info[25]);
 			m_pokemon[i].setExpLvl(Integer.parseInt(info[26]));
 			m_pokemon[i].setExpLvlUp(Integer.parseInt(info[27]));
+			m_pokemon[i].setOriginalTrainer(info[28]);
 			
 		}
 	}

@@ -12,8 +12,8 @@ import org.pokenet.client.backend.entity.OurPokemon;
 
 public class PokemonInfoDialog extends Frame{
         private Label icon = new Label();
-        private Label data[] = new Label[15];
-        private Label labels[] = new Label[15];
+        private Label data[] = new Label[24];
+        private Label labels[] = new Label[24];
        
         public PokemonInfoDialog(OurPokemon poke){
                 initGUI(poke);
@@ -36,7 +36,7 @@ public class PokemonInfoDialog extends Frame{
                 this.setBackground(new Color(255,255,255,200));
                 int x = 70;
                 int y = 5;
-                for (int i = 0; i < 15; i++){
+                for (int i = 0; i < 24; i++){
                         data[i] = new Label();
                         labels[i] = new Label();
                         data[i].setX(x + 80);
@@ -61,7 +61,16 @@ public class PokemonInfoDialog extends Frame{
                 labels[11].setText(translated.get(12));
                 labels[12].setText(translated.get(13));
                 labels[13].setText(translated.get(14));
-                labels[14].setText("Hold item");
+                labels[14].setText("Hold item:");
+                labels[15].setText("OT-Name:");
+                labels[16].setText("Move 1:");
+                labels[17].setText("Type:");
+                labels[18].setText("Move 2:");
+                labels[19].setText("Type:");
+                labels[20].setText("Move 3:");
+                labels[21].setText("Type:");
+                labels[22].setText("Move 4:");
+                labels[23].setText("Type:");
                 //labels[13].setText("Exp to next level:");
                 data[0].setText(String.valueOf(poke.getLevel()));
                 data[1].setText(poke.getName());
@@ -75,7 +84,6 @@ public class PokemonInfoDialog extends Frame{
                 data[8].setText(poke.getAbility());
                 data[9].setText(String.valueOf(poke.getExp()));
                 data[10].setText(poke.getNature());
-                data[14].setText(poke.getHoldItem());
                 data[11].setText(String.valueOf(poke.getType1()));
                 if(poke.getType2() == null){
                         data[12].setText("");
@@ -88,6 +96,49 @@ public class PokemonInfoDialog extends Frame{
                         data[13].setText(translated.get(30));
                 }else
                         data[13].setText(translated.get(31));
+                
+                data[14].setText(poke.getHoldItem());
+                data[15].setText(poke.getOriginalTrainer());
+                if(!poke.getMoves()[0].equalsIgnoreCase(""))
+                {
+                	data[16].setText(poke.getMoves()[0] + "(" +poke.getMoveCurPP()[0] + "/" +  poke.getMoveMaxPP()[0] + ")");
+                	data[17].setText(poke.getMoveType(0));
+                }
+                else
+                {	
+                	data[16].setText("-");
+                	data[17].setText("-");
+                }
+                if(!poke.getMoves()[1].equalsIgnoreCase(""))
+                {
+                	data[18].setText(poke.getMoves()[1] + "(" +poke.getMoveCurPP()[1] + "/" +  poke.getMoveMaxPP()[1] + ")");
+                	data[19].setText(poke.getMoveType(0));
+                }
+                else
+                {
+                	data[18].setText("-");
+                	data[19].setText("-");
+                }
+                if(!poke.getMoves()[2].equalsIgnoreCase(""))
+                {
+                	data[20].setText(poke.getMoves()[2] + "(" +poke.getMoveCurPP()[2] + "/" +  poke.getMoveMaxPP()[2] + ")");
+                	data[21].setText(poke.getMoveType(0));
+                }
+                else
+                {
+                	data[20].setText("-");
+                	data[21].setText("-");
+                }
+                if(!poke.getMoves()[3].equalsIgnoreCase(""))
+                {
+                	data[22].setText(poke.getMoves()[3] + "(" +poke.getMoveCurPP()[3] + "/" +  poke.getMoveMaxPP()[3] + ")");
+                	data[23].setText(poke.getMoveType(0));
+                }
+                else
+                {
+                	data[22].setText("-");
+                	data[23].setText("-");
+                }
                
                 for (int i = 0; i < data.length; i++) {
                         data[i].pack();
@@ -97,7 +148,7 @@ public class PokemonInfoDialog extends Frame{
                 }
                 loadImage(poke);
                 setVisible(true);
-                setSize(270, 330);
+                setSize(270, 510);
                 setResizable(false);
                 setTitle(poke.getName());
         	} catch (Exception e) {e.printStackTrace();}

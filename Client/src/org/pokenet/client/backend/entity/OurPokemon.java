@@ -21,6 +21,7 @@ public class OurPokemon extends Pokemon {
 	private String m_ability;
 	private String m_nature;
 	private String m_item;
+	private String m_originalTrainer = "";
 
 	/**
 	 * Default Constructor
@@ -350,5 +351,15 @@ public class OurPokemon extends Pokemon {
 	
 	public String getHoldItem() {
 		return m_item;		
+	}
+
+	public void setOriginalTrainer(String string)
+	{
+		m_originalTrainer = string;
+	}
+	
+	public String getOriginalTrainer()
+	{
+		return m_originalTrainer;
 	}
 }

@@ -45,7 +45,7 @@ public class ClientMap extends TiledMap {
 	 */
 	public ClientMap(String tileSetsLocation)
 			throws SlickException {
-		super(tileSetsLocation); // This takes a long time, we need to cache it in the memory.
+		super(tileSetsLocation);
 		
 		String respath = System.getProperty("res.path");
 		if(respath==null)
@@ -671,6 +671,8 @@ public class ClientMap extends TiledMap {
 							m_grassOverlay.copy().draw(
 									m_xOffset + p.getServerX() - 32,
 									m_yOffset + p.getServerY() + 8);
+							break;
+						case Down:
 							break;
 						}
 					}

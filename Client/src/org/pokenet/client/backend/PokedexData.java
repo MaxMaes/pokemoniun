@@ -1,8 +1,10 @@
 package org.pokenet.client.backend;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
 
@@ -34,7 +36,7 @@ public class PokedexData
 			locations = new Ini(new FileInputStream(respath + "res/locations.ini"));
 			locationid = new Ini(new FileInputStream(respath + "res/locationids.ini"));
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			e.printStackTrace();
 			return;

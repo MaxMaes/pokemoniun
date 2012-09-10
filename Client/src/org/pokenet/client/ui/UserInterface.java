@@ -1,12 +1,13 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
-import mdes.slick.sui.Component;
+
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;

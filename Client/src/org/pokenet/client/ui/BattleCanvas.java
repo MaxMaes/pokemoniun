@@ -3,10 +3,11 @@ package org.pokenet.client.ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Label;
+
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.LoadingList;
@@ -380,10 +381,9 @@ public class BattleCanvas extends Container
 	 */
 	public void initPlayerXPBar()
 	{
-		@SuppressWarnings("unused")
 		float max = BattleManager.getInstance().getCurPoke().getExpLvlUp();
 		float min = BattleManager.getInstance().getCurPoke().getExpLvl();
-		float val = BattleManager.getInstance().getCurPoke().getExp();
+		//float val = BattleManager.getInstance().getCurPoke().getExp();
 		float testVal = (float) (((max-min)/(float)101));
 		int xpMax = (int)(max-(testVal*1.0));
 		int xpENDMin = (int)(max-(testVal*8.0));

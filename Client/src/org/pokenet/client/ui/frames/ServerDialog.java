@@ -141,7 +141,7 @@ public class ServerDialog extends Frame
 			/*
 			 * Finally, check which servers don't exist and disable their buttons
 			 */
-			for(int i = 0; i < 5; i++)
+			for(int i = 0; i < m_host.length; i++)
 			{
 				if(m_host[i] == null || m_host[i].equalsIgnoreCase("-"))
 				{
@@ -197,8 +197,7 @@ public class ServerDialog extends Frame
 	{
 		if(privateIP.getText().length() > 0)
 			return privateIP.getText();
-		else
-			return "localhost";
+		return "localhost";
 	}
 
 	public void goServer()

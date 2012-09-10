@@ -2,7 +2,12 @@ package org.pokenet.client.ui.frames;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
+
+import mdes.slick.sui.Frame;
+import mdes.slick.sui.Label;
+import mdes.slick.sui.event.ActionEvent;
+import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -11,10 +16,6 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.ui.base.NewImageButton;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
 /**
  * Pokedex dialog
  * @author Myth1c
@@ -28,7 +29,7 @@ public class PokedexDialog extends Frame
 	private int[] trainerPokedex;
 	private int incrementer = 1;
 	private NewImageButton currIncButton;
-	private int max = 493; //Change this to the amount of pokemon we've got
+	private static final int MAX = 493; //Change this to the amount of pokemon we've got
 	
 	//UI Buttons
 	private NewImageButton up, down, left, right;
@@ -68,7 +69,7 @@ public class PokedexDialog extends Frame
 	
 	public PokedexDialog()
 	{
-		trainerPokedex = new int[max+1]; 
+		trainerPokedex = new int[MAX+1]; 
 		initGUI();
 	}
 	
@@ -172,7 +173,7 @@ public class PokedexDialog extends Frame
 		pokemonBiologyLabels[6].setText("Genderrate: " + genderrate);
 		pokemonBiologyLabels[11].setText("Rareness: " + rareness);
 		pokemonBiologyLabels[12].setText("Steps to hatch: " + stepstohatch);
-		pokemonBiologyLabels[12].setText("Compatibility: " + compatibility);
+		pokemonBiologyLabels[12].setText("Compatibility: " + compatibility); // TODO: Myth1c, you're overriding number 12?
 
 		for(int i = 0; i < pokemonBiologyLabels.length; i++)
 		{
@@ -294,9 +295,9 @@ public class PokedexDialog extends Frame
 	
 	public Image[] loadPokemonIcons()
 	{
-		Image[] sprites = new Image[max+1];
+		Image[] sprites = new Image[MAX+1];
 		
-		for(int i = 1; i<(max+1); i++)
+		for(int i = 1; i<(MAX+1); i++)
 		{
 			sprites[i] = getSprite(i, 2);
 		}
@@ -465,7 +466,7 @@ public class PokedexDialog extends Frame
 		for(int i = 0; i < 13; i++)
 		{
 			pokemonCaughtLabels[i].setVisible(false);
-			if(first+i > max)
+			if(first+i > MAX)
 			{
 				pokemonNameList[i].setText("");
 				pokemonNameList[i].pack();

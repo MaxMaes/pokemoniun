@@ -44,7 +44,7 @@ public class ItemDatabase {
 	public Item getItem(int id) {
 		return m_items.get(id);
 	}
-	
+
 	/**
 	 * Returns an item based on its name
 	 * @param name

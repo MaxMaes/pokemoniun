@@ -91,7 +91,7 @@ public class FriendListDialog extends Frame
 			m_down.setEnabled(false);
 		else
 			m_down.setEnabled(true);
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < m_shownFriends.length; i++)
 		{
 			final int j = i;
 			if(m_shownFriends[i] != null)

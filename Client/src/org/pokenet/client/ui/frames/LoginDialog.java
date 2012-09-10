@@ -96,7 +96,7 @@ public class LoginDialog extends Frame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if(m_username.getText() != null & !m_username.getText().equalsIgnoreCase("") && m_password.getText() != null && !m_password.getText().equalsIgnoreCase(""))
+				if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
 				{
 					login();
 				}
@@ -175,7 +175,7 @@ public class LoginDialog extends Frame
 	 */
 	public void goLogin()
 	{
-		if(m_username.getText() != null & !m_username.getText().equalsIgnoreCase("") && m_password.getText() != null && !m_password.getText().equalsIgnoreCase(""))
+		if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
 			login();
 	}
 

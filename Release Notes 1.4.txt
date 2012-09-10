@@ -2,7 +2,7 @@
 [ADD] 	Pokemonium Mall
 [ADD] 	All pokeballs (except for gen 4's Park ball and gen 4's Dream Ball) have been implemented. 
 	You can buy them in the pokemonium mall
-[ADD]	evs (still working on sp def and sp atk)
+[ADD]	evs
 
 [FIX] 	Movement has been fixed an is way smoother now!
 [FIX]	No more loading between maps.

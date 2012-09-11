@@ -107,10 +107,10 @@ public class ProgressBar extends Label {
         
         /**
          * Sets the current value
-         * @param m_curVal
+         * @param currentHP
          */
-        public void setValue(int m_curVal){
-                m_value = m_curVal;
+        public void setValue(float currentHP){
+                m_value = currentHP;
         }
         
         /**

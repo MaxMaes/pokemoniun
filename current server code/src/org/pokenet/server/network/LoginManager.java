@@ -27,7 +27,7 @@ import org.pokenet.server.feature.TimeService;
 
 /**
  * Handles logging players in
- * 
+ *
  * @author shadowkanji
  * 
  */
@@ -564,23 +564,7 @@ public class LoginManager implements Runnable {
 			//If this returns 0, that means the player is a 'pre-1.4BETA player' and we need to assign one
 			if(pokedexid == 0)
 			{
-				int memberID = result.getInt("id");
-				m_database.query("INSERT INTO `pn_pokedex` VALUES(NULL, " + MySqlManager.parseSQL(""+memberID) + ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
-				ResultSet id = m_database.query("SELECT pokedexid FROM pn_pokedex WHERE memberid = " + MySqlManager.parseSQL(""+memberID));
-				id.first();
-				pokedexid = id.getInt("pokedexid");
-				m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL(""+pokedexid) + " WHERE id = " + MySqlManager.parseSQL(""+memberID));
-				//WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
-				pokemons =  m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
-				pokemons.first();
-				String pokemonSpecie;
-				int pokemonNumber;
-				while(pokemons.next())
-				{
-					pokemonSpecie = pokemons.getString("speciesName");
-					pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getSpecies() + 1;
-					m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
-				}
+				generateNewPokedex(pokedexid, result, pokemons, p);
 			}
 			ResultSet pokedexData = m_database.query("SELECT * FROM pn_pokedex WHERE pokedexid = '" + pokedexid + "'");
 			pokedexData.first();
@@ -598,6 +582,64 @@ public class LoginManager implements Runnable {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private void generateNewPokedex(int pokedexid, ResultSet result, ResultSet pokemons, Player p)
+	{
+		int memberID;
+		try
+		{
+			memberID = result.getInt("id");
+			m_database.query("INSERT INTO `pn_pokedex` VALUES(NULL, " + MySqlManager.parseSQL(""+memberID) + ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
+			ResultSet id = m_database.query("SELECT pokedexid FROM pn_pokedex WHERE memberid = " + MySqlManager.parseSQL(""+memberID));
+			id.first();
+			pokedexid = id.getInt("pokedexid");
+			m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL(""+pokedexid) + " WHERE id = " + MySqlManager.parseSQL(""+memberID));
+			//WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
+			pokemons =  m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
+			pokemons.first();
+			String pokemonSpecie;
+			int pokemonNumber;
+			int tempNumber;
+			while(pokemons.next())
+			{
+				pokemonSpecie = pokemons.getString("speciesName");
+				pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getSpecies() + 1;
+				if(		//3th stage starter evo's
+						pokemonNumber == 3 || pokemonNumber == 6 || pokemonNumber == 9 || 
+						pokemonNumber == 154 || pokemonNumber == 157 || pokemonNumber == 160 ||
+						pokemonNumber == 254 || pokemonNumber == 257 || pokemonNumber == 260 ||	
+						pokemonNumber == 389 || pokemonNumber == 392 || pokemonNumber == 395 ||
+						pokemonNumber == 497 || pokemonNumber == 500 || pokemonNumber == 503) 
+					for(int i = 0; i < 3; i++)
+					{
+						tempNumber = pokemonNumber - i;
+						m_database.query("UPDATE pn_pokedex SET " + "`" + 
+						MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + 
+						MySqlManager.parseSQL("" + pokedexid) + "'");
+					}
+				else if(//2th stage starter evo's
+						pokemonNumber == 2 || pokemonNumber == 5 || pokemonNumber == 8 || 
+						pokemonNumber == 153 || pokemonNumber == 156 || pokemonNumber == 159 ||
+						pokemonNumber == 253 || pokemonNumber == 256 || pokemonNumber == 259 ||	
+						pokemonNumber == 388 || pokemonNumber == 391 || pokemonNumber == 394 ||
+						pokemonNumber == 496 || pokemonNumber == 499 || pokemonNumber == 502) 
+					for(int i = 0; i < 2; i++)
+					{
+						tempNumber = pokemonNumber - i;
+						m_database.query("UPDATE pn_pokedex SET " + "`" + 
+						MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" +
+						MySqlManager.parseSQL("" + pokedexid) + "'");
+					}
+				else	//Regular pokemon or 1st stage starter
+					m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

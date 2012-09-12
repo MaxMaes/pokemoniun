@@ -29,33 +29,15 @@ public class BattleWindow extends Frame
 {
 	static final long serialVersionUID = -4351471892179339349L;
 
-	public Container endPane;
-	public Container attackPane;
-	public Container pokesContainer;
-	public Button move1;
-	public Button move2;
-	public Button move3;
-	public Button move4;
-	public Label pp1;
-	public Label pp2;
-	public Label pp3;
-	public Label pp4;
-	public Label move1Type;
-	public Label move2Type;
-	public Label move3Type;
-	public Label move4Type;
-	public Button pokeCancelBtn;
-	public Button pokeBtn1;
-	public Button pokeBtn2;
-	public Button pokeBtn3;
-	public Button pokeBtn4;
-	public Button pokeBtn5;
-	public Button pokeBtn6;
-	public Button btnPoke;
-	public Button btnBag;
-	public Button btnRun;
-	public Button cancel;
-	public Button close;
+	private Container endPane;
+	private Container attackPane;
+	private Container pokesContainer;
+	private Button pokeCancelBtn;
+	private Button btnPoke;
+	private Button btnBag;
+	private Button btnRun;
+	private Button cancel;
+	private Button close;
 	public BattleBag m_bag;
 	private boolean isWild;
 	public List<Button> m_moveButtons = new ArrayList<Button>();
@@ -117,14 +99,11 @@ public class BattleWindow extends Frame
 	public void disableMoves()
 	{
 		attackPane.setVisible(false);
-		move1.setEnabled(false);
-		move2.setEnabled(false);
-		move3.setEnabled(false);
-		move4.setEnabled(false);
-		pp1.setEnabled(false);
-		pp2.setEnabled(false);
-		pp3.setEnabled(false);
-		pp4.setEnabled(false);
+		for(int idx = 0; idx < 4; idx++)
+		{
+			m_moveButtons.get(idx).setEnabled(false);
+			m_ppLabels.get(idx).setEnabled(false);
+		}
 		btnPoke.setEnabled(false);
 		btnBag.setEnabled(false);
 		btnRun.setEnabled(false);
@@ -139,35 +118,16 @@ public class BattleWindow extends Frame
 		attackPane.setVisible(true);
 		btnPoke.setEnabled(true);
 		btnBag.setEnabled(true);
-		if(!isWild)
-		{
-			btnRun.setEnabled(false);
-		}
-		else
-		{
-			btnRun.setEnabled(true);
-		}
+		btnRun.setEnabled(isWild);
 
 		pokeCancelBtn.setEnabled(true);
-		if(!move1.getText().equals(""))
+		for(int idx = 0; idx < 4; idx++)
 		{
-			move1.setEnabled(true);
-			pp1.setEnabled(true);
-		}
-		if(!move2.getText().equals(""))
-		{
-			move2.setEnabled(true);
-			pp2.setEnabled(true);
-		}
-		if(!move3.getText().equals(""))
-		{
-			move3.setEnabled(true);
-			pp3.setEnabled(true);
-		}
-		if(!move4.getText().equals(""))
-		{
-			move4.setEnabled(true);
-			pp4.setEnabled(true);
+			if(!m_moveButtons.get(idx).getText().equals(""))
+			{
+				m_moveButtons.get(idx).setEnabled(true);
+				m_ppLabels.get(idx).setEnabled(true);
+			}
 		}
 		cancel.setVisible(false);
 	}
@@ -201,10 +161,10 @@ public class BattleWindow extends Frame
 
 		attackPane = new Container();
 		attackPane.setBackground(new Color(0, 0, 0, 0));
-		move1 = BattleButtonFactory.getButton("");
-		move2 = BattleButtonFactory.getButton("");
-		move3 = BattleButtonFactory.getButton("");
-		move4 = BattleButtonFactory.getButton("");
+		Button move1 = BattleButtonFactory.getButton("");
+		Button move2 = BattleButtonFactory.getButton("");
+		Button move3 = BattleButtonFactory.getButton("");
+		Button move4 = BattleButtonFactory.getButton("");
 		setResizable(false);
 		this.getTitleBar().setVisible(false);
 
@@ -219,10 +179,10 @@ public class BattleWindow extends Frame
 				useMove(0);
 			}
 		});
-		pp1 = new Label();
+		Label pp1 = new Label();
 		pp1.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp1.setBounds(0, move1.getHeight() - 20, move1.getWidth() - 5, 20);
-		move1Type = new Label();
+		Label move1Type = new Label();
 		move1Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move1Type.setBounds(2, move1.getHeight()-20, move1.getWidth()-5, 20);
 		move1.add(move1Type);
@@ -237,10 +197,10 @@ public class BattleWindow extends Frame
 				useMove(1);
 			}
 		});
-		pp2 = new Label();
+		Label pp2 = new Label();
 		pp2.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp2.setBounds(0, move2.getHeight() - 20, move2.getWidth() - 5, 20);
-		move2Type = new Label();
+		Label move2Type = new Label();
 		move2Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move2Type.setBounds(2, move2.getHeight()-20, move2.getWidth()-5, 20);
 		move2.add(move2Type);
@@ -255,10 +215,10 @@ public class BattleWindow extends Frame
 				useMove(2);
 			}
 		});
-		pp3 = new Label();
+		Label pp3 = new Label();
 		pp3.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp3.setBounds(0, move3.getHeight() - 20, move3.getWidth() - 5, 20);
-		move3Type = new Label();
+		Label move3Type = new Label();
 		move3Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move3Type.setBounds(2, move3.getHeight()-20, move3.getWidth()-5, 20);
 		move3.add(move3Type);
@@ -274,10 +234,10 @@ public class BattleWindow extends Frame
 				useMove(3);
 			}
 		});
-		pp4 = new Label();
+		Label pp4 = new Label();
 		pp4.setHorizontalAlignment(Label.RIGHT_ALIGNMENT);
 		pp4.setBounds(0, move4.getHeight() - 20, move4.getWidth() - 5, 20);
-		move4Type = new Label();
+		Label move4Type = new Label();
 		move4Type.setHorizontalAlignment(Label.LEFT_ALIGNMENT);
 		move4Type.setBounds(2, move4.getHeight()-20, move4.getWidth()-5, 20);
 		move4.add(move4Type);
@@ -363,7 +323,7 @@ public class BattleWindow extends Frame
 		pokesContainer = new Container();
 		pokesContainer.setBackground(new Color(0, 0, 0, 0));
 		pokesContainer.setBounds(2, 140, 257, 201);
-		pokeBtn1 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn1 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn1);
 		pokeBtn1.setBounds(8, 8, 116, 51);
 		pokeBtn1.addActionListener(new ActionListener()
@@ -373,7 +333,7 @@ public class BattleWindow extends Frame
 				switchPoke(0);
 			}
 		});
-		pokeBtn2 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn2 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn2);
 		pokeBtn2.setBounds(128, 8, 116, 51);
 		pokeBtn2.addActionListener(new ActionListener()
@@ -383,7 +343,7 @@ public class BattleWindow extends Frame
 				switchPoke(1);
 			}
 		});
-		pokeBtn3 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn3 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn3);
 		pokeBtn3.setBounds(8, 59, 116, 51);
 		pokeBtn3.addActionListener(new ActionListener()
@@ -393,7 +353,7 @@ public class BattleWindow extends Frame
 				switchPoke(2);
 			}
 		});
-		pokeBtn4 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn4 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn4);
 		pokeBtn4.setBounds(128, 59, 116, 51);
 		pokeBtn4.addActionListener(new ActionListener()
@@ -403,7 +363,7 @@ public class BattleWindow extends Frame
 				switchPoke(3);
 			}
 		});
-		pokeBtn5 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn5 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn5);
 		pokeBtn5.setBounds(8, 110, 116, 51);
 		pokeBtn5.addActionListener(new ActionListener()
@@ -413,7 +373,7 @@ public class BattleWindow extends Frame
 				switchPoke(4);
 			}
 		});
-		pokeBtn6 = BattleButtonFactory.getButton(" ");
+		Button pokeBtn6 = BattleButtonFactory.getButton(" ");
 		pokesContainer.add(pokeBtn6);
 		pokeBtn6.setBounds(128, 110, 116, 51);
 		pokeBtn6.addActionListener(new ActionListener()

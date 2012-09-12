@@ -238,10 +238,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));
 			m_pokemon[i].setGender(Integer.parseInt(info[3]));
-			if(info[4].equalsIgnoreCase("0"))
-				m_pokemon[i].setShiny(false);
-			else
-				m_pokemon[i].setShiny(true);
+			m_pokemon[i].setShiny(info[4].equals("1"));
 			m_pokemon[i].setSpriteNumber(Integer.parseInt(info[0]) + 1);
 			m_pokemon[i].setMaxHP(Integer.parseInt(info[5]));
 			/*
@@ -253,7 +250,7 @@ public class OurPlayer extends Player {
 			m_pokemon[i].setSpatk(Integer.parseInt(info[9]));
 			m_pokemon[i].setSpdef(Integer.parseInt(info[10]));
 			m_pokemon[i].setType1(Poketype.valueOf(info[11]));
-			if(info[12] != null && !info[12].equalsIgnoreCase("")) {
+			if(info[12] != null && !info[12].equals("")) {
 				m_pokemon[i].setType2(Poketype.valueOf(info[12]));
 			}
 			m_pokemon[i].setExp(Integer.parseInt(info[13].substring(0, info[13].indexOf('.'))));
@@ -266,7 +263,7 @@ public class OurPlayer extends Player {
 			 */
 			String [] moves = new String[4];
 			String [] movetypes = new String[4];
-			for(int j = 0; j < 4; j++) 
+			for(int j = 0; j < moves.length; j++) 
 			{
 				if(j < info.length - 17 && info[j + 17] != null)
 				{
@@ -284,7 +281,7 @@ public class OurPlayer extends Player {
 			}
 			m_pokemon[i].setMoves(moves);
 			
-			for(int j = 0; j < 4; j++)
+			for(int j = 0; j < movetypes.length; j++)
 			{
 				if(j < info.length - 21 && info[j + 21] != null)
 				{
@@ -338,7 +335,7 @@ public class OurPlayer extends Player {
 	 * @param Poke1
 	 * @param Poke2
 	 */
-	public void swapPokemon(int Poke1, int Poke2){
+	public void swapPokemon(int Poke1, int Poke2) {
 		OurPokemon temp1 = m_pokemon[Poke1];
 		m_pokemon[Poke1] = m_pokemon[Poke2];
 		m_pokemon[Poke2] = temp1;

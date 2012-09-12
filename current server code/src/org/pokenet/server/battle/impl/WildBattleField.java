@@ -11,8 +11,8 @@ import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonEvolution;
-import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
+import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
@@ -21,9 +21,9 @@ import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
 import org.pokenet.server.feature.TimeService;
-import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.network.TcpProtocolHandler;
 import org.pokenet.server.network.message.battle.BattleEndMessage;
+import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
 import org.pokenet.server.network.message.battle.BattleExpMessage;
 import org.pokenet.server.network.message.battle.BattleInitMessage;
 import org.pokenet.server.network.message.battle.BattleLevelChangeMessage;
@@ -31,6 +31,7 @@ import org.pokenet.server.network.message.battle.BattleMessage;
 import org.pokenet.server.network.message.battle.BattleMoveMessage;
 import org.pokenet.server.network.message.battle.BattleMoveRequest;
 import org.pokenet.server.network.message.battle.BattleRewardMessage;
+import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewardType;
 import org.pokenet.server.network.message.battle.EnemyDataMessage;
 import org.pokenet.server.network.message.battle.FaintMessage;
 import org.pokenet.server.network.message.battle.HealthChangeMessage;
@@ -39,8 +40,6 @@ import org.pokenet.server.network.message.battle.RunMessage;
 import org.pokenet.server.network.message.battle.StatusChangeMessage;
 import org.pokenet.server.network.message.battle.SwitchMessage;
 import org.pokenet.server.network.message.battle.SwitchRequest;
-import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
-import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewardType;
 
 /**
  * A battlefield for wild Pokemon battles
@@ -699,6 +698,8 @@ public class WildBattleField extends BattleField {
 			break;
 		case CHERISHBALL:
 			showMessage(m_player.getName() + " threw a Cherish Ball!");
+			break;
+		case SAFARIBALL:
 			break;
 		}
 		

@@ -38,9 +38,9 @@ import org.pokenet.server.battle.mechanics.PokemonType;
 import org.pokenet.server.battle.mechanics.ValidationException;
 import org.pokenet.server.battle.mechanics.clauses.Clause;
 import org.pokenet.server.battle.mechanics.moves.MoveList;
+import org.pokenet.server.battle.mechanics.moves.MoveList.SpeedSwapEffect;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
-import org.pokenet.server.battle.mechanics.moves.MoveList.SpeedSwapEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 
@@ -622,7 +622,6 @@ public abstract class BattleField {
 	 /**
 	  * Tick status effects at the end of a turn.
 	  */
-	 @SuppressWarnings("unchecked")
 	 private void tickStatuses(Pokemon[] active) {
 		 sortBySpeed(active);
 

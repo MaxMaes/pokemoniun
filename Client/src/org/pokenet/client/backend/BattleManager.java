@@ -82,30 +82,16 @@ public class BattleManager
 		try
 		{
 			m_timeLine.getBattleCanvas().drawEnemyPoke();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
 			m_timeLine.getBattleCanvas().drawEnemyInfo();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			if(!m_isWild)
+			if(m_isWild)
 			{
-				m_timeLine.getBattleCanvas().showPokeballs();
-				m_timeLine.addSpeech(m_enemy + " sent out " + m_curEnemyPoke.getName());
+				m_timeLine.getBattleCanvas().hidePokeballs();
+				m_timeLine.addSpeech("A wild " + m_curEnemyPoke.getName() + " appeared!");
 			}
 			else
 			{
-				m_timeLine.getBattleCanvas().hidePokeballs();
-				m_timeLine.addSpeech("A wild " + m_curEnemyPoke.getName() + " attacked!");
+				m_timeLine.getBattleCanvas().showPokeballs();
+				m_timeLine.addSpeech(m_enemy + " sent out " + m_curEnemyPoke.getName());
 			}
 		}
 		catch(Exception e)
@@ -138,9 +124,7 @@ public class BattleManager
 		if(isWild == '0')
 		{
 			setWild(false);
-		}
-		else
-		{
+		} else {
 			setWild(true);
 		}
 		m_battle.showAttack();

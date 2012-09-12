@@ -640,6 +640,8 @@ public class UserInterface extends Frame
 		if(m_stats != null && m_stats.isVisible())
 			m_stats.setVisible(false);
 		m_stats = null;
+		if(m_pokedex != null && m_pokedex.isVisible())
+			m_pokedex.setVisible(false);
 
 	}
 

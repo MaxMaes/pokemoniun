@@ -145,104 +145,103 @@ public class UserInterface extends Frame
 		});
 		m_buttons[0].setToolTipText("Stats");
 
-		m_buttons[1] = HUDButtonFactory.getButton("pokemon");
+		m_buttons[1] = HUDButtonFactory.getButton("pokedex");
 		m_buttons[1].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				togglePokemon();
-			}
-		});
-		m_buttons[1].setToolTipText("Pokemon");
-
-		m_buttons[2] = HUDButtonFactory.getButton("bag");
-		m_buttons[2].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleBag();
-			}
-		});
-		m_buttons[2].setToolTipText("Bag");
-
-		m_buttons[3] = HUDButtonFactory.getButton("map");
-		m_buttons[3].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleMap();
-			}
-		});
-		m_buttons[3].setToolTipText("Map");
-
-		m_buttons[4] = HUDButtonFactory.getButton("friends");
-		m_buttons[4].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleFriends();
-			}
-		});
-		m_buttons[4].setToolTipText("Friends");
-
-		m_buttons[5] = HUDButtonFactory.getButton("requests");
-		m_buttons[5].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleRequests();
-			}
-		});
-		m_buttons[5].setToolTipText("Requests");
-
-		m_buttons[6] = HUDButtonFactory.getButton("options");
-		m_buttons[6].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleOptions();
-			}
-		});
-		m_buttons[6].setToolTipText("Options");
-
-		m_buttons[7] = HUDButtonFactory.getButton("help");
-		m_buttons[7].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				toggleHelp();
-			}
-		});
-		m_buttons[7].setToolTipText("Help");
-
-		m_buttons[8] = HUDButtonFactory.getButton("disconnect");
-		m_buttons[8].addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				disconnect();
-			}
-		});
-		m_buttons[8].setToolTipText("Disconnect");
-		
-		m_buttons[9] = HUDButtonFactory.getButton("pokedex");
-		m_buttons[9].addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				togglePokedex();
 			}
 		});
+		m_buttons[1].setToolTipText("Pokedex");
+		
+		
+		m_buttons[2] = HUDButtonFactory.getButton("pokemon");
+		m_buttons[2].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				togglePokemon();
+			}
+		});
+		m_buttons[2].setToolTipText("Pokemon");
 
+		m_buttons[3] = HUDButtonFactory.getButton("bag");
+		m_buttons[3].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleBag();
+			}
+		});
+		m_buttons[3].setToolTipText("Bag");
 
+		m_buttons[4] = HUDButtonFactory.getButton("map");
+		m_buttons[4].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleMap();
+			}
+		});
+		m_buttons[4].setToolTipText("Map");
+
+		m_buttons[5] = HUDButtonFactory.getButton("friends");
+		m_buttons[5].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleFriends();
+			}
+		});
+		m_buttons[5].setToolTipText("Friends");
+
+		m_buttons[6] = HUDButtonFactory.getButton("requests");
+		m_buttons[6].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleRequests();
+			}
+		});
+		m_buttons[6].setToolTipText("Requests");
+
+		m_buttons[7] = HUDButtonFactory.getButton("options");
+		m_buttons[7].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleOptions();
+			}
+		});
+		m_buttons[7].setToolTipText("Options");
+
+		m_buttons[8] = HUDButtonFactory.getButton("help");
+		m_buttons[8].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				toggleHelp();
+			}
+		});
+		m_buttons[8].setToolTipText("Help");
+
+		m_buttons[9] = HUDButtonFactory.getButton("disconnect");
+		m_buttons[9].addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				disconnect();
+			}
+		});
+		m_buttons[9].setToolTipText("Disconnect");
+		
 		for(int i = 0; i < m_buttons.length; i++)
 		{
 			m_buttons[i].pack();
 			getContentPane().add(m_buttons[i]);
 			m_buttons[i].setLocation(5 + (32 * i) + (5 * i), 7);
 		}
-		
-		m_buttons[9].setToolTipText("Pokedex");
 	}
 
 	public void disconnect()
@@ -609,7 +608,7 @@ public class UserInterface extends Frame
 		{
 			hideHUDElements();
 			m_chat.setVisible(false);
-			m_pokedex.setLocation(0, 20);
+			m_pokedex.setLocation(0, 67 - getTitleBar().getHeight());
 			m_pokedex.setVisible(true);
 		}
 	}
@@ -642,7 +641,6 @@ public class UserInterface extends Frame
 		m_stats = null;
 		if(m_pokedex != null && m_pokedex.isVisible())
 			m_pokedex.setVisible(false);
-
 	}
 
 	/**

@@ -599,7 +599,7 @@ public class PokedexDialog extends Frame
 		pokedexsprite = new Label();
 		pokedexsprite.setImage(pokedexSprite);
 		pokedexsprite.setSize(519,377);
-		pokedexsprite.setLocation(0,20);
+		pokedexsprite.setLocation(0,0);
 		
 		up = new NewImageButton();
 		down = new NewImageButton();

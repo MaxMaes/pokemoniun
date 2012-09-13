@@ -76,7 +76,7 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static final String GAME_TITLE = "Pokemonium 1.3.0";
+	private static final String GAME_TITLE = "Pokemonium 1.4.0";
 	private static final int FPS = 30;
 	
 	private static boolean debug = false;
@@ -710,33 +710,37 @@ public class GameClient extends BasicGame
 				}
 				else if(key == (Input.KEY_2))
 				{
-					m_ui.togglePokemon();
+					m_ui.togglePokedex();
 				}
 				else if(key == (Input.KEY_3))
 				{
-					m_ui.toggleBag();
+					m_ui.togglePokemon();
 				}
 				else if(key == (Input.KEY_4))
 				{
-					m_ui.toggleMap();
+					m_ui.toggleBag();
 				}
 				else if(key == (Input.KEY_5))
 				{
-					m_ui.toggleFriends();
+					m_ui.toggleMap();
 				}
 				else if(key == (Input.KEY_6))
 				{
-					m_ui.toggleRequests();
+					m_ui.toggleFriends();
 				}
 				else if(key == (Input.KEY_7))
 				{
-					m_ui.toggleOptions();
+					m_ui.toggleRequests();
 				}
 				else if(key == (Input.KEY_8))
 				{
-					m_ui.toggleHelp();
+					m_ui.toggleOptions();
 				}
 				else if(key == (Input.KEY_9))
+				{
+					m_ui.toggleHelp();
+				}
+				else if(key == (Input.KEY_0))
 				{
 					m_ui.disconnect();
 				}

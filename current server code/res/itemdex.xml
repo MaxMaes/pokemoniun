@@ -807,7 +807,7 @@
 			<name>Cleanse Tag</name>
 			<description>Keeps wild pokemon away</description>
 			<id>101</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>200</price>
 			<attributes>
@@ -2296,7 +2296,7 @@
 			<name>Adamant Orb</name>
 			<description>Dialga's signature item</description>
 			<id>300</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2311,7 +2311,7 @@
 			<name>Black Belt</name>
 			<description>Enhances fighting moves</description>
 			<id>301</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2326,7 +2326,7 @@
 			<name>BlackGlasses</name>
 			<description>Enhances dark moves</description>
 			<id>302</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2341,7 +2341,7 @@
 			<name>Charcoal</name>
 			<description>Enhances fire moves</description>
 			<id>303</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>4900</price>
 			<attributes>
@@ -2356,7 +2356,7 @@
 			<name>Dragon Fang</name>
 			<description>Enhances dragon moves</description>
 			<id>304</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2371,7 +2371,7 @@
 			<name>Hard Stone</name>
 			<description>Enhances rock moves</description>
 			<id>305</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2386,7 +2386,7 @@
 			<name>Lustrous Orb</name>
 			<description>Palkia's signature item</description>
 			<id>306</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2401,7 +2401,7 @@
 			<name>Magnet</name>
 			<description>Enhances electric moves</description>
 			<id>307</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2416,7 +2416,7 @@
 			<name>Metal Coat</name>
 			<description>Enhances steel moves</description>
 			<id>308</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2431,7 +2431,7 @@
 			<name>Miracle Seed</name>
 			<description>Enhances grass moves</description>
 			<id>309</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2446,7 +2446,7 @@
 			<name>Mystic Water</name>
 			<description>Enhances water moves</description>
 			<id>310</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2461,7 +2461,7 @@
 			<name>NeverMeltIce</name>
 			<description>Enhances ice moves</description>
 			<id>311</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2476,7 +2476,7 @@
 			<name>Pink Bow</name>
 			<description>Enhances normal moves</description>
 			<id>312</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2491,7 +2491,7 @@
 			<name>Poison Barb</name>
 			<description>Enhances poison moves</description>
 			<id>313</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2506,7 +2506,7 @@
 			<name>Polkadot Bow</name>
 			<description>Enhances normal moves</description>
 			<id>314</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2521,7 +2521,7 @@
 			<name>Griseous Orb</name>
 			<description>Giratina's signature item</description>
 			<id>315</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2536,7 +2536,7 @@
 			<name>Sharp Beak</name>
 			<description>Enhances flying moves</description>
 			<id>316</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2551,7 +2551,7 @@
 			<name>Silk Scarf</name>
 			<description>Enhances normal moves</description>
 			<id>317</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2566,7 +2566,7 @@
 			<name>SilverPowder</name>
 			<description>Enhances bug moves</description>
 			<id>318</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2581,7 +2581,7 @@
 			<name>Soft Sand</name>
 			<description>Enhances ground moves</description>
 			<id>319</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2596,7 +2596,7 @@
 			<name>Spell Tag</name>
 			<description>Enhances ghost moves</description>
 			<id>320</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2611,7 +2611,7 @@
 			<name>TwistedSpoon</name>
 			<description>Enhances psychic moves</description>
 			<id>321</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2626,7 +2626,7 @@
 			<name>Draco Plate</name>
 			<description>Enhances dragon moves</description>
 			<id>331</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2641,7 +2641,7 @@
 			<name>Dread Plate</name>
 			<description>Enhances dark moves</description>
 			<id>332</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2656,7 +2656,7 @@
 			<name>Earth Plate</name>
 			<description>Enhances ground moves</description>
 			<id>333</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2671,7 +2671,7 @@
 			<name>Fist Plate</name>
 			<description>Enhances fighting moves</description>
 			<id>334</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2686,7 +2686,7 @@
 			<name>Flame Plate</name>
 			<description>Enhances fire moves</description>
 			<id>335</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2701,7 +2701,7 @@
 			<name>Icicle Plate</name>
 			<description>Enhances ice moves</description>
 			<id>336</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2716,7 +2716,7 @@
 			<name>Insect Plate</name>
 			<description>Enhances bug moves</description>
 			<id>337</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2731,7 +2731,7 @@
 			<name>Iron Plate</name>
 			<description>Enhances steel moves</description>
 			<id>338</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2746,7 +2746,7 @@
 			<name>Meadow Plate</name>
 			<description>Enhances grass moves</description>
 			<id>339</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2761,7 +2761,7 @@
 			<name>Mind Plate</name>
 			<description>Enhances psychic moves</description>
 			<id>340</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2776,7 +2776,7 @@
 			<name>Sky Plate</name>
 			<description>Enhances flying moves</description>
 			<id>341</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2791,7 +2791,7 @@
 			<name>Splash Plate</name>
 			<description>Enhances water moves</description>
 			<id>342</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2806,7 +2806,7 @@
 			<name>Spooky Plate</name>
 			<description>Enhances ghost moves</description>
 			<id>343</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2821,7 +2821,7 @@
 			<name>Stone Plate</name>
 			<description>Enhances rock moves</description>
 			<id>344</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2836,7 +2836,7 @@
 			<name>Toxic Plate</name>
 			<description>Enhances poison moves</description>
 			<id>345</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2851,7 +2851,7 @@
 			<name>Zap Plate</name>
 			<description>Enhances electric moves</description>
 			<id>346</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2866,7 +2866,7 @@
 			<name>Amulet Coin</name>
 			<description>Doubles winnings</description>
 			<id>350</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -2880,7 +2880,7 @@
 			<name>Berserk Gene</name>
 			<description>Confuses and ups attack</description>
 			<id>351</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -2894,7 +2894,7 @@
 			<name>Big Root</name>
 			<description>Increases HP drain</description>
 			<id>352</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>250</price>
 			<attributes>
@@ -2908,7 +2908,7 @@
 			<name>Black Sludge</name>
 			<description>Heals poison types, hurts others</description>
 			<id>353</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -2922,7 +2922,7 @@
 			<name>BrightPowder</name>
 			<description>Raises evasion</description>
 			<id>354</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -2936,7 +2936,7 @@
 			<name>Choice Band</name>
 			<description>Increases only one attack</description>
 			<id>355</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2951,7 +2951,7 @@
 			<description>Increases speed but can only use one move
 			</description>
 			<id>356</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2966,7 +2966,7 @@
 			<description>Increases Sp. attack but can only use one
 				move</description>
 			<id>357</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -2980,7 +2980,7 @@
 			<name>Damp Rock</name>
 			<description>lengthens rain dance</description>
 			<id>358</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -2995,7 +2995,7 @@
 			<description>Both pokemon become infatuated at the same time
 			</description>
 			<id>359</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3009,7 +3009,7 @@
 			<name>Exp. Share</name>
 			<description>Splits exp. among pokemon</description>
 			<id>360</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>10000</price>
 			<attributes>
@@ -3023,7 +3023,7 @@
 			<name>Expert Belt</name>
 			<description>Boosts super effective moves</description>
 			<id>361</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3037,7 +3037,7 @@
 			<name>Flame Orb</name>
 			<description>Burns holder</description>
 			<id>362</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3048,7 +3048,7 @@
 			<name>Focus Band</name>
 			<description>Can survive with one hp left</description>
 			<id>363</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -3060,7 +3060,7 @@
 			<description>Can't be one hit KOed with full health
 			</description>
 			<id>364</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -3071,7 +3071,7 @@
 			<name>Grip Claw</name>
 			<description>Lengthens trapping moves</description>
 			<id>365</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3082,7 +3082,7 @@
 			<name>Heat Rock</name>
 			<description>Lengthens sunny day</description>
 			<id>366</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3093,7 +3093,7 @@
 			<name>Icy Rock</name>
 			<description>Lengthens hail</description>
 			<id>367</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3105,7 +3105,7 @@
 			<description>Cuts speed and cancel's flying type
 			</description>
 			<id>368</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -3116,7 +3116,7 @@
 			<name>Lagging Tail</name>
 			<description>Makes user move last</description>
 			<id>369</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -3127,7 +3127,7 @@
 			<name>Leftovers</name>
 			<description>Heals at the end of each turn</description>
 			<id>370</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -3138,7 +3138,7 @@
 			<name>Life Orb</name>
 			<description>Boosts attack at cost of HP</description>
 			<id>371</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -3150,7 +3150,7 @@
 			<description>Lengthens light screen and reflect
 			</description>
 			<id>372</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3161,7 +3161,7 @@
 			<name>Lucky Egg</name>
 			<description>Boosts experience gained</description>
 			<id>373</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>10000</price>
 			<attributes>
@@ -3172,7 +3172,7 @@
 			<name>Mental Herb</name>
 			<description>Prevents attraction</description>
 			<id>374</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -3184,7 +3184,7 @@
 			<description>Increases consecutive attacks
 			</description>
 			<id>375</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3195,7 +3195,7 @@
 			<name>Muscle Band</name>
 			<description>Increases physical moves</description>
 			<id>376</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3206,7 +3206,7 @@
 			<name>Power Herb</name>
 			<description>No charge move required</description>
 			<id>377</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -3217,7 +3217,7 @@
 			<name>Quick Claw</name>
 			<description>Allows user to move first</description>
 			<id>378</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3228,7 +3228,7 @@
 			<name>Scope Lens</name>
 			<description>Increases critical hits</description>
 			<id>379</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3239,7 +3239,7 @@
 			<name>Shed Shell</name>
 			<description>Can switch even if trapped</description>
 			<id>380</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3250,7 +3250,7 @@
 			<name>Shell Bell</name>
 			<description>Gains HP based on attacks</description>
 			<id>381</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3261,7 +3261,7 @@
 			<name>Smoke Ball</name>
 			<description>Can escape from wild pokemon</description>
 			<id>382</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -3272,7 +3272,7 @@
 			<name>Smooth Rock</name>
 			<description>Lengthens sandstorm</description>
 			<id>383</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3284,7 +3284,7 @@
 			<description>Hurts use every turn but can latch on to other
 				pokemon</description>
 			<id>384</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -3295,7 +3295,7 @@
 			<name>Toxic Orb</name>
 			<description>Poisons user</description>
 			<id>385</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1500</price>
 			<attributes>
@@ -3306,7 +3306,7 @@
 			<name>White Herb</name>
 			<description>Negates negative stat changes</description>
 			<id>386</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>100</price>
 			<attributes>
@@ -3317,7 +3317,7 @@
 			<name>Wide Lens</name>
 			<description>Boosts accuracy</description>
 			<id>387</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3328,7 +3328,7 @@
 			<name>Wise Glasses</name>
 			<description>Boosts special moves</description>
 			<id>388</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3339,7 +3339,7 @@
 			<name>Zoom Lens</name>
 			<description>Bossts accuracy if moves second</description>
 			<id>389</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>2500</price>
 			<attributes>
@@ -3867,7 +3867,7 @@
 			<description>Doubles Sp. attack and attack of pikachu
 			</description>
 			<id>477</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -3880,7 +3880,7 @@
 			<description>Raises critical hit ratio of chansey
 			</description>
 			<id>478</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3893,7 +3893,7 @@
 			<description>Raises defense and Sp. defense of ditto
 			</description>
 			<id>479</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3905,7 +3905,7 @@
 			<name>Quick Powder</name>
 			<description>Increases ditto's speed</description>
 			<id>480</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3918,7 +3918,7 @@
 			<description>Increases Sp. attack and Sp. defense of
 				latios and latias</description>
 			<id>481</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>10000</price>
 			<attributes>
@@ -3931,7 +3931,7 @@
 			<description>Increases the critical hit ratio of farfetch
 			</description>
 			<id>482</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3944,7 +3944,7 @@
 			<description>Doubles attack of cubone and marowak
 			</description>
 			<id>483</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>1000</price>
 			<attributes>
@@ -3956,7 +3956,7 @@
 			<name>Blue Scarf</name>
 			<description>Increases beauty</description>
 			<id>490</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -3968,7 +3968,7 @@
 			<name>Green Scarf</name>
 			<description>Increases smarts</description>
 			<id>491</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -3980,7 +3980,7 @@
 			<name>Pink Scarf</name>
 			<description>Increases cuteness</description>
 			<id>492</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -3992,7 +3992,7 @@
 			<name>Red Scarf</name>
 			<description>Increases coolness</description>
 			<id>493</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -4004,7 +4004,7 @@
 			<name>Yellow Scarf</name>
 			<description>Increases toughness</description>
 			<id>494</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>500</price>
 			<attributes>
@@ -4093,7 +4093,7 @@
 			<name>Soothe Bell</name>
 			<description>Increases friendship</description>
 			<id>525</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>5000</price>
 			<attributes>
@@ -4104,7 +4104,7 @@
 			<name>Air Mail</name>
 			<description>A piece of mail</description>
 			<id>550</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4115,7 +4115,7 @@
 			<name>Bloom Mail</name>
 			<description>A piece of mail</description>
 			<id>551</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4126,7 +4126,7 @@
 			<name>Bubble Mail</name>
 			<description>A piece of mail</description>
 			<id>552</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4137,7 +4137,7 @@
 			<name>Flame Mail</name>
 			<description>A piece of mail</description>
 			<id>553</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4148,7 +4148,7 @@
 			<name>Grass Mail</name>
 			<description>A piece of mail</description>
 			<id>554</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4159,7 +4159,7 @@
 			<name>Hearth Mail</name>
 			<description>A piece of mail</description>
 			<id>555</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4170,7 +4170,7 @@
 			<name>Snom Mail</name>
 			<description>A piece of mail</description>
 			<id>556</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4181,7 +4181,7 @@
 			<name>Space Mail</name>
 			<description>A piece of mail</description>
 			<id>557</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4192,7 +4192,7 @@
 			<name>Steel Mail</name>
 			<description>A piece of mail</description>
 			<id>558</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4203,7 +4203,7 @@
 			<name>Tunnel Mail</name>
 			<description>A piece of mail</description>
 			<id>559</id>
-			<category>Held</category>
+			<category>Field</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>

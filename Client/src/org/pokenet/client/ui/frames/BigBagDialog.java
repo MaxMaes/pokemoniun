@@ -95,13 +95,9 @@ public class BigBagDialog extends Frame
 			{
 				if(item.getNumber() == id)
 				{
-					// Field items
-					if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
-					{
-						m_items.get(0).add(item);
-					}
+					
 					// Potions and medicine
-					else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
 					{
 						m_items.get(1).add(item);
 					}
@@ -119,6 +115,12 @@ public class BigBagDialog extends Frame
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
 					{
 						m_items.get(4).add(item);
+					}
+					// Field items
+					//if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
+					else
+					{
+						m_items.get(0).add(item);
 					}
 				}
 			}
@@ -143,13 +145,9 @@ public class BigBagDialog extends Frame
 			{
 				if(item.getNumber() == id)
 				{
-					// Field items
-					if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
-					{
-						m_items.get(0).remove(item);
-					}
+					
 					// Potions and medicine
-					else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
 					{
 						m_items.get(1).remove(item);
 					}
@@ -167,6 +165,12 @@ public class BigBagDialog extends Frame
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
 					{
 						m_items.get(4).remove(item);
+					}
+					// Field items
+					//if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
+					else
+					{
+						m_items.get(0).remove(item);
 					}
 				}
 			}

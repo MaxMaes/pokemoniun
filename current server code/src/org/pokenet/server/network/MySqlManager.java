@@ -92,7 +92,7 @@ public class MySqlManager {
      * @return
      */
     public ResultSet query(String query){
-    	System.out.println("Let's search for some data;	" + query);
+    	//System.out.println("Let's search for some data;	" + query);
     	//open();
     	
     	ResultSet mysql_result = null;

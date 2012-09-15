@@ -169,8 +169,7 @@ public class LoginManager implements Runnable {
 						session.write("l3");
 						return;
 					}
-				} else if (rs.getString("lastLoginServer")
-						.equals("null")) {
+				} else if (rs.getString("lastLoginServer").equals("null")) {
 					/*
 					 * They are not logged in elsewhere, log them in
 					 */
@@ -459,32 +458,32 @@ public class LoginManager implements Runnable {
 	 */
 	private Player getPlayerObject(ResultSet result) {
 		try {
-			Player p = new Player(result.getString("username"));
+			Player player = new Player(result.getString("username"));
 			Pokemon[] party = new Pokemon[6];
 			PokemonBox[] boxes = new PokemonBox[9];
 
-			p.setName(result.getString("username"));
-			p.setVisible(true);
+			player.setName(result.getString("username"));
+			player.setVisible(true);
 			// Set co-ordinates
-			p.setX(result.getInt("x"));
-			p.setY(result.getInt("y"));
-			p.setMapX(result.getInt("mapX"));
-			p.setMapY(result.getInt("mapY"));
-			p.setId(result.getInt("id"));
-			p.setAdminLevel(result.getInt("adminLevel"));
-			p.setMuted(result.getBoolean("muted"));
-			p.setLastHeal(result.getInt("healX"), result.getInt("healY"),
+			player.setX(result.getInt("x"));
+			player.setY(result.getInt("y"));
+			player.setMapX(result.getInt("mapX"));
+			player.setMapY(result.getInt("mapY"));
+			player.setId(result.getInt("id"));
+			player.setAdminLevel(result.getInt("adminLevel"));
+			player.setMuted(result.getBoolean("muted"));
+			player.setLastHeal(result.getInt("healX"), result.getInt("healY"),
 					result.getInt("healMapX"), result.getInt("healMapY"));
-			p.setSurfing(Boolean.parseBoolean(result.getString("isSurfing")));
+			player.setSurfing(Boolean.parseBoolean(result.getString("isSurfing")));
 			// Set money and skills
-			p.setSprite(result.getInt("sprite"));
-			p.setMoney(result.getInt("money"));
-			p.setHerbalismExp(result.getInt("skHerb"));
-			p.setCraftingExp(result.getInt("skCraft"));
-			p.setFishingExp(result.getInt("skFish"));
-			p.setTrainingExp(result.getInt("skTrain"));
-			p.setCoordinatingExp(result.getInt("skCoord"));
-			p.setBreedingExp(result.getInt("skBreed"));
+			player.setSprite(result.getInt("sprite"));
+			player.setMoney(result.getInt("money"));
+			player.setHerbalismExp(result.getInt("skHerb"));
+			player.setCraftingExp(result.getInt("skCraft"));
+			player.setFishingExp(result.getInt("skFish"));
+			player.setTrainingExp(result.getInt("skTrain"));
+			player.setCoordinatingExp(result.getInt("skCoord"));
+			player.setBreedingExp(result.getInt("skBreed"));
 			// Retrieve refences to all Pokemon
 			int partyId = result.getInt("party");
 			ResultSet partyData = m_database
@@ -493,7 +492,7 @@ public class LoginManager implements Runnable {
 
 			ResultSet pokemons = m_database
 					.query("SELECT * FROM pn_pokemon WHERE currentTrainerName='"
-							+ p.getName() + "'");
+							+ player.getName() + "'");
 			int boxNumber = 0;
 			int boxPosition = 0;
 			/*
@@ -505,7 +504,7 @@ public class LoginManager implements Runnable {
 				boolean isParty = false;
 				int partyIndex = -1;
 				/* Checks if Pokemon is in party */
-				for (int i = 0; i < 6; i++) {
+				for (int i = 0; i < party.length; i++) {
 					if (partyData.getInt("pokemon" + i) == pokemons
 							.getInt("id")) {
 						isParty = true;
@@ -519,7 +518,7 @@ public class LoginManager implements Runnable {
 				} else {
 					/* Else, add it to box if space is available */
 					/* Else, add it to box if space is available */
-					if(boxNumber < 9)
+					if(boxNumber < boxes.length)
 					{
 						/* If there's space in this box, add it to the box */
 						if(boxPosition < 30)
@@ -535,7 +534,7 @@ public class LoginManager implements Runnable {
 							/* Else open up a new box and add it to box */
 							boxPosition = 0;
 							boxNumber++;
-							if(boxNumber < 9)
+							if(boxNumber < boxes.length)
 							{
 								if(boxes[boxNumber] == null)
 								{
@@ -548,36 +547,35 @@ public class LoginManager implements Runnable {
 					}
 				}
 			}
-			p.setParty(party);
-			p.setBoxes(boxes);
+			player.setParty(party);
+			player.setBoxes(boxes);
 
 			// Attach bag
-			p.setBag(getBagObject(
+			player.setBag(getBagObject(
 					m_database.query("SELECT * FROM pn_bag WHERE member='"
-							+ result.getInt("id") + "'"), p.getId()));
+							+ result.getInt("id") + "'"), player.getId()));
 
 			// Attach badges
-			p.generateBadges(result.getString("badges"));
+			player.generateBadges(result.getString("badges"));
 			
 			//Retrieve the players pokedexID, if it doesnt have one.
 			int pokedexid = result.getInt("pokedexId");
 			//If this returns 0, that means the player is a 'pre-1.4BETA player' and we need to assign one
 			if(pokedexid == 0)
 			{
-				pokedexid = generateNewPokedex(pokedexid, result, pokemons, p);
+				pokedexid = generateNewPokedex(pokedexid, result, pokemons, player);
 			}
 			ResultSet pokedexData = m_database.query("SELECT * FROM pn_pokedex WHERE pokedexId = '" + pokedexid + "'");
 			pokedexData.first();
 			int[] pokedex = new int[494];
-			for(int i = 1; i < 494; i++)
+			for(int i = 1; i < pokedex.length; i++)
 			{
-				pokedex[i] = pokedexData.getInt("" + i);
+				pokedex[i] = pokedexData.getInt(Integer.toString(i));
 			}
 			Pokedex px = new Pokedex(pokedexid, pokedex);
-			p.setPokedex(px);
-				
+			player.setPokedex(px);
 			 
-			return p;
+			return player;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -586,10 +584,9 @@ public class LoginManager implements Runnable {
 
 	private int generateNewPokedex(int pokedexid, ResultSet result, ResultSet pokemons, Player p)
 	{
-		int memberID;
 		try
 		{
-			memberID = result.getInt("id");
+			int memberID = result.getInt("id");
 			m_database.query("INSERT INTO `pn_pokedex` VALUES(NULL, " + MySqlManager.parseSQL(""+memberID) + ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
 			ResultSet id = m_database.query("SELECT pokedexId FROM pn_pokedex WHERE memberId = " + MySqlManager.parseSQL(""+memberID));
 			id.first();
@@ -598,35 +595,23 @@ public class LoginManager implements Runnable {
 			//WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
 			pokemons =  m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
 			pokemons.first();
-			String pokemonSpecie;
-			int pokemonNumber;
-			int tempNumber;
+			
 			while(pokemons.next())
 			{
-				pokemonSpecie = pokemons.getString("speciesName");
-				pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getSpecies() + 1;
-				if(		//3th stage starter evo's
-						pokemonNumber == 3 || pokemonNumber == 6 || pokemonNumber == 9 || 
-						pokemonNumber == 154 || pokemonNumber == 157 || pokemonNumber == 160 ||
-						pokemonNumber == 254 || pokemonNumber == 257 || pokemonNumber == 260 ||	
-						pokemonNumber == 389 || pokemonNumber == 392 || pokemonNumber == 395 ||
-						pokemonNumber == 497 || pokemonNumber == 500 || pokemonNumber == 503) 
+				String pokemonSpecie = pokemons.getString("speciesName");
+				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getSpecies() + 1;
+				if(isThirdStageStarter(pokemonNumber)) 
 					for(int i = 0; i < 3; i++)
 					{
-						tempNumber = pokemonNumber - i;
+						int tempNumber = pokemonNumber - i;
 						m_database.query("UPDATE pn_pokedex SET " + "`" + 
 						MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + 
 						MySqlManager.parseSQL("" + pokedexid) + "'");
 					}
-				else if(//2th stage starter evo's
-						pokemonNumber == 2 || pokemonNumber == 5 || pokemonNumber == 8 || 
-						pokemonNumber == 153 || pokemonNumber == 156 || pokemonNumber == 159 ||
-						pokemonNumber == 253 || pokemonNumber == 256 || pokemonNumber == 259 ||	
-						pokemonNumber == 388 || pokemonNumber == 391 || pokemonNumber == 394 ||
-						pokemonNumber == 496 || pokemonNumber == 499 || pokemonNumber == 502) 
+				else if(isSecondStageStarter(pokemonNumber)) 
 					for(int i = 0; i < 2; i++)
 					{
-						tempNumber = pokemonNumber - i;
+						int tempNumber = pokemonNumber - i;
 						m_database.query("UPDATE pn_pokedex SET " + "`" + 
 						MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" +
 						MySqlManager.parseSQL("" + pokedexid) + "'");
@@ -649,6 +634,7 @@ public class LoginManager implements Runnable {
 	 * @return
 	 */
 	private Pokemon getPokemonObject(ResultSet data) {
+		Pokemon pokemon = null;
 		if (data != null) {
 			try {
 				/*
@@ -670,19 +656,15 @@ public class LoginManager implements Runnable {
 				/*
 				 * if the abilty is empty give it an ability
 				 */
-				String abi;
-				if(data.getString("abilityName").equals(""))
+				String abi = data.getString("abilityName");
+				if(abi.equals(""))
 				{
 					abi = PokemonSpecies.getDefaultData().getPokemonByName(data.getString("speciesName")).getAbilities()[0];
-				}
-				else
-				{
-					abi = data.getString("abilityName");
 				}
 				/*
 				 * Create the new Pokemon
 				 */
-				Pokemon p = new Pokemon(
+				pokemon = new Pokemon(
 						DataService.getBattleMechanics(),
 						PokemonSpecies.getDefaultData().getPokemonByName(
 								data.getString("speciesName")),
@@ -700,58 +682,57 @@ public class LoginManager implements Runnable {
 						moves, new int[] { data.getInt("ppUp0"),
 								data.getInt("ppUp1"), data.getInt("ppUp2"),
 								data.getInt("ppUp3") });
-				p.reinitialise();
+				pokemon.reinitialise();
 				/*
 				 * Set exp, nickname, isShiny and exp gain type
 				 */
-				p.setBaseExp(data.getInt("baseExp"));
-				p.setExp(Double.parseDouble(data.getString("exp")));
-				p.setName(data.getString("name"));
-				p.setHappiness(data.getInt("happiness"));
-				p.setShiny(Boolean.parseBoolean(data.getString("isShiny")));
-				p.setExpType(ExpTypes.valueOf(data.getString("expType")));
-				p.setOriginalTrainer(data.getString("originalTrainerName"));
-				p.setDatabaseID(data.getInt("id"));
-				p.setDateCaught(data.getString("date"));
-				p.setIsFainted(Boolean.parseBoolean(data.getString("isFainted")));
-				p.setItem(new HoldItem(data.getString("itemName")));
-				p.setCaughtWithLuxeryBall(data.getInt("caughtWithLuxeryBall"));
+				pokemon.setBaseExp(data.getInt("baseExp"));
+				pokemon.setExp(Double.parseDouble(data.getString("exp")));
+				pokemon.setName(data.getString("name"));
+				pokemon.setHappiness(data.getInt("happiness"));
+				pokemon.setShiny(Boolean.parseBoolean(data.getString("isShiny")));
+				pokemon.setExpType(ExpTypes.valueOf(data.getString("expType")));
+				pokemon.setOriginalTrainer(data.getString("originalTrainerName"));
+				pokemon.setDatabaseID(data.getInt("id"));
+				pokemon.setDateCaught(data.getString("date"));
+				pokemon.setIsFainted(Boolean.parseBoolean(data.getString("isFainted")));
+				pokemon.setItem(new HoldItem(data.getString("itemName")));
+				pokemon.setCaughtWithLuxeryBall(data.getInt("caughtWithLuxeryBall"));
 				/*
 				 * Contest stats (beauty, cute, etc.)
 				 */
 				String[] cstats = data.getString("contestStats").split(",");
-				p.setContestStat(0, Integer.parseInt(cstats[0]));
-				p.setContestStat(1, Integer.parseInt(cstats[1]));
-				p.setContestStat(2, Integer.parseInt(cstats[2]));
-				p.setContestStat(3, Integer.parseInt(cstats[3]));
-				p.setContestStat(4, Integer.parseInt(cstats[4]));
+				pokemon.setContestStat(0, Integer.parseInt(cstats[0]));
+				pokemon.setContestStat(1, Integer.parseInt(cstats[1]));
+				pokemon.setContestStat(2, Integer.parseInt(cstats[2]));
+				pokemon.setContestStat(3, Integer.parseInt(cstats[3]));
+				pokemon.setContestStat(4, Integer.parseInt(cstats[4]));
 				/*
 				 * Sets the stats
 				 */
-				p.calculateStats(true);
-				p.setHealth(data.getInt("hp"));
-				p.setRawStat(1, data.getInt("atk"));
-				p.setRawStat(2, data.getInt("def"));
-				p.setRawStat(3, data.getInt("speed"));
-				p.setRawStat(4, data.getInt("spATK"));
-				p.setRawStat(5, data.getInt("spDEF"));
+				pokemon.calculateStats(true);
+				pokemon.setHealth(data.getInt("hp"));
+				pokemon.setRawStat(1, data.getInt("atk"));
+				pokemon.setRawStat(2, data.getInt("def"));
+				pokemon.setRawStat(3, data.getInt("speed"));
+				pokemon.setRawStat(4, data.getInt("spATK"));
+				pokemon.setRawStat(5, data.getInt("spDEF"));
 				/*
 				 * Sets the pp information
 				 */
-				p.setPp(0, data.getInt("pp0"));
-				p.setPp(1, data.getInt("pp1"));
-				p.setPp(2, data.getInt("pp2"));
-				p.setPp(3, data.getInt("pp3"));
-				p.setPpUp(0, data.getInt("ppUp0"));
-				p.setPpUp(0, data.getInt("ppUp1"));
-				p.setPpUp(0, data.getInt("ppUp2"));
-				p.setPpUp(0, data.getInt("ppUp3"));
-				return p;
+				pokemon.setPp(0, data.getInt("pp0"));
+				pokemon.setPp(1, data.getInt("pp1"));
+				pokemon.setPp(2, data.getInt("pp2"));
+				pokemon.setPp(3, data.getInt("pp3"));
+				pokemon.setPpUp(0, data.getInt("ppUp0"));
+				pokemon.setPpUp(0, data.getInt("ppUp1"));
+				pokemon.setPpUp(0, data.getInt("ppUp2"));
+				pokemon.setPpUp(0, data.getInt("ppUp3"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return pokemon;
 	}
 
 	/**
@@ -761,16 +742,37 @@ public class LoginManager implements Runnable {
 	 * @return
 	 */
 	private Bag getBagObject(ResultSet data, int memberid) {
+		Bag b = null;
 		try {
-			Bag b = new Bag(memberid);
+			b = new Bag(memberid);
 			while (data.next()) {
 				b.addItem(data.getInt("item"), data.getInt("quantity"));
 			}
-			return b;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
-
+		return b;
+	}
+	
+	private boolean isThirdStageStarter(int pokemonIndex)
+	{
+		Integer[] thirdPokemon = { 3, 6, 9, 154, 157, 160, 254, 257, 260, 389, 392, 395, 497, 500, 503 };
+		for(int idx = 0; idx < thirdPokemon.length; idx++)
+		{
+			if(thirdPokemon[idx] == pokemonIndex)
+				return true;
+		}
+		return false;
+	}
+	
+	private boolean isSecondStageStarter(int pokemonIndex)
+	{
+		Integer[] secondPokemon = { 2, 5, 8, 153, 156, 159, 253, 256, 259, 388, 391, 394, 496, 499, 502 };
+		for(int idx = 0; idx < secondPokemon.length; idx++)
+		{
+			if(secondPokemon[idx] == pokemonIndex)
+				return true;
+		}
+		return false;
 	}
 }

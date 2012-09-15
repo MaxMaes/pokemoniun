@@ -352,21 +352,7 @@ public class BattleCanvas extends Container
 		try
 		{
 			bgPic = new Label(new Image(respath + "res/ui/DP_darkgrass.png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
 			playerDataBG = new Label(new Image(respath + "res/battle/singlePlayerBox3.png", false));
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
 			enemyDataBG = new Label(new Image(respath + "res/battle/singleEnemyBox3.png", false));
 		}
 		catch(SlickException e)

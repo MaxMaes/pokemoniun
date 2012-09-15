@@ -385,8 +385,9 @@ public class GameClient extends BasicGame
 			/*
 			 * Check if we need to connect to a selected server
 			 */
-			if(m_host != null && !m_host.equalsIgnoreCase("") && m_packetGen == null)
+			if(m_host != null && !m_host.equals("") && m_packetGen == null)
 			{
+				m_loading.setVisible(true);
 				this.connect();
 			}
 
@@ -1008,15 +1009,21 @@ public class GameClient extends BasicGame
 		{
 			public void operationComplete(IoFuture s)
 			{
+				m_loading.setVisible(false);
 				try
 				{
 					if(s.getSession() != null && s.getSession().isConnected())
 					{
 						m_packetGen.setTcpSession(s.getSession());
+						/*
+						 * Show login screen
+						 */
+						if(!m_host.equals(""))
+							m_login.showLogin();
 					}
 					else
 					{
-						messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
+						messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay());
 						m_host = "";
 						m_packetGen = null;
 					}
@@ -1024,17 +1031,12 @@ public class GameClient extends BasicGame
 				catch(Exception e)
 				{
 					e.printStackTrace();
-					messageDialog("Connection timed out.\n" + "The server may be offline.\n" + "Contact an administrator for assistance.", getDisplay());
+					messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay());
 					m_host = "";
 					m_packetGen = null;
 				}
 			}
 		});
-		/*
-		 * Show login screen
-		 */
-		if(!m_host.equals(""))
-			m_login.showLogin();
 	}
 
 	/**

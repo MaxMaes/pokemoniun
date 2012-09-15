@@ -1,6 +1,7 @@
 package org.pokenet.server.network;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,7 +90,9 @@ public class RegistrationManager implements Runnable {
 				session.write("r2");
 				return;
 			}
-		} catch (Exception e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		/*
 		 * Check if an account is already registered with the email
 		 */
@@ -108,21 +111,26 @@ public class RegistrationManager implements Runnable {
 				session.write("r6");
 				return;
 			}
-		} catch (Exception e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		/*
 		 * Check if user is not trying to register their starter as a non-starter Pokemon
 		 */
-		if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258
-				|| s == 387 || s == 390 || s == 393)) {
-			session.write("r4");
-			return;
+		Integer[] starterPokemon = { 1, 4, 7, 152, 155, 158, 252, 255, 258, 387, 390, 393 /*, 495, 498, 501 */ };
+		for(int idx = 0; idx < starterPokemon.length; idx++)
+		{
+			if(starterPokemon[idx] != s) {
+				session.write("r4");
+				return;
+			}
 		}
 		/*
-		 * Generate badge string
+		 * Generate badge string TODO: Can't we just give it a default value in the database?
 		 */
 		String badges = "";
 		for(int i = 0; i < 50; i++)
-			badges = badges + "0";
+			badges += "0";
 		/*
 		 * Generate starting position
 		 */
@@ -191,8 +199,8 @@ public class RegistrationManager implements Runnable {
 		m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + playerId + "', '35', '5')");
 		
 		//Create a new pokedex record
-		m_database.query("INSERT INTO `pn_pokedex` VALUES(NULL, " + MySqlManager.parseSQL(""+playerId) + ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
-		String playeridsql = MySqlManager.parseSQL(""+playerId);
+		m_database.query("INSERT INTO `pn_pokedex` VALUES(NULL, " + MySqlManager.parseSQL(Integer.toString(playerId)) + ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
+		String playeridsql = MySqlManager.parseSQL(Integer.toString(playerId));
 		data = m_database.query("SELECT pokedexid FROM pn_pokedex WHERE memberid = " + playeridsql);
 		data.first();
 		//Get the pokedex ID
@@ -205,6 +213,7 @@ public class RegistrationManager implements Runnable {
 		session.resumeRead();
 		session.resumeWrite();
 		session.write("rs");
+		//data.close(); // Jesus, we have a leak here D:
 	}
 
 	/**
@@ -325,7 +334,7 @@ public class RegistrationManager implements Runnable {
 					"', ppUp3='" + p.getPpUpCount(3) +
 					"' WHERE id='" + p.getDatabaseID() + "'");
 			return true;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -381,7 +390,7 @@ public class RegistrationManager implements Runnable {
 			species = PokemonSpecies.getDefaultData().getPokemonByName("Piplup");
 			break;
 		default:
-			species = PokemonSpecies.getDefaultData().getPokemonByName("Mudkip");
+			species = PokemonSpecies.getDefaultData().getPokemonByName("Mudkip"); // Juist.
 		}
         
         ArrayList<MoveListEntry> possibleMoves = new ArrayList<MoveListEntry>();
@@ -407,13 +416,13 @@ public class RegistrationManager implements Runnable {
         /*
          * Now the store the final set of moves for the Pokemon
          */
-        if (possibleMoves.size() <= 4) {
+        if (possibleMoves.size() <= moves.length) {
                 for (int i = 0; i < possibleMoves.size(); i++) {
                         moves[i] = possibleMoves.get(i);
                 }
         } else {
         	MoveListEntry m = null;
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < moves.length; i++) {
                         if (possibleMoves.size() == 0) {
                             moves[i] = null;
                         } else {
@@ -437,7 +446,7 @@ public class RegistrationManager implements Runnable {
          * Unfortunately, all Pokemon have two possible ability slots but some only have one.
          * If the null slot was selected, select the other slot
          */
-        while(ab == null || ab.equalsIgnoreCase("")) {
+        while(ab == null || ab.equals("")) {
         	ab = abilities[random.nextInt(abilities.length)];
         }
         /*

@@ -7,6 +7,7 @@ import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.feature.ChatManager;
 import org.pokenet.server.network.codec.PokenetCodecFactory;
 
@@ -18,6 +19,7 @@ public class NetworkService {
 	private final TcpProtocolHandler m_tcpProtocolHandler;
 	private final LoginManager m_loginManager;
 	private final LogoutManager m_logoutManager;
+	private final SaveManager m_saveManager;
 	private final ChatManager[] m_chatManager;
 	private IoAcceptor m_tcpAcceptor;
 	
@@ -25,7 +27,8 @@ public class NetworkService {
 	 * Default constructor
 	 */
 	public NetworkService() {
-		m_logoutManager = new LogoutManager();
+		m_saveManager = new SaveManager();
+		m_logoutManager = new LogoutManager(m_saveManager);
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_tcpProtocolHandler = new TcpProtocolHandler(m_loginManager, m_logoutManager);
 		m_chatManager = new ChatManager[3];

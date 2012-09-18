@@ -1,13 +1,17 @@
 package org.pokenet.server.network;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.Timer;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.ItemProcessor;
+import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.RequestType;
 import org.pokenet.server.backend.entity.Positionable.Direction;
@@ -15,9 +19,11 @@ import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.impl.PvPBattleField;
 import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
+import org.pokenet.server.network.message.ChatMessage;
 import org.pokenet.server.network.message.ItemMessage;
 import org.pokenet.server.network.message.PokenetMessage;
 import org.pokenet.server.network.message.RequestMessage;
+import org.pokenet.server.network.message.ChatMessage.ChatMessageType;
 
 /**
  * Handles packets received from players over TCP
@@ -30,6 +36,16 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	private final LoginManager m_loginManager;
 	private final LogoutManager m_logoutManager;
 	private final RegistrationManager m_regManager;
+	private final SaveManager m_saveManager;
+	
+	private static final int AUTOSAVER_MINUTE_INTERVAL = 5;
+	private Timer autosaver = new Timer(0, new ActionListener()
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			saveAll();
+		}
+	});
 
 	/**
 	 * Constructor
@@ -43,6 +59,10 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		m_logoutManager = logout;
 		m_regManager = new RegistrationManager();
 		m_regManager.start();
+		m_saveManager = new SaveManager();
+		
+		autosaver.setDelay(1000*60*AUTOSAVER_MINUTE_INTERVAL);
+		autosaver.start();
 	}
 
 	@Override
@@ -637,12 +657,13 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	}
 
 	/**
-	 * Logs out all players and stops login/logout/registration managers
+	 * Logs out all players and stops login/logout/registration managers and the autosaver
 	 */
 	public void logoutAll()
 	{
 		m_regManager.stop();
 		m_loginManager.stop();
+		autosaver.stop();
 		/*
 		 * Queue all players to be saved
 		 */
@@ -658,6 +679,33 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		while(m_logoutManager.getPlayerAmount() > 0)
 			;
 		m_logoutManager.stop();
+	}
+	
+	/**
+	 * Saves all players and logs failures
+	 */
+	public void saveAll()
+	{
+		System.out.println("Saving all players");
+		/*
+		 * Queue all players to be saved
+		 */
+		Iterator<Player> it = m_players.values().iterator();
+		Player p;
+		while(it.hasNext())
+		{
+			p = it.next();
+			writeMessage(p.getTcpSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Saving..."));
+			if(m_saveManager.savePlayer(p))
+			{
+				writeMessage(p.getTcpSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save succesfull"));
+			}
+			else
+			{
+				writeMessage(p.getTcpSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save failed"));
+				System.err.println("Error saving player" + p.getName() + " " + p.getId());
+			}
+		}
 	}
 
 	/**

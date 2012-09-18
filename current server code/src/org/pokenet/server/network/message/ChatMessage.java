@@ -6,7 +6,7 @@ package org.pokenet.server.network.message;
  *
  */
 public class ChatMessage extends PokenetMessage {
-        public enum ChatMessageType { LOCAL, PRIVATE, NPC }
+        public enum ChatMessageType { LOCAL, PRIVATE, NPC, ANNOUNCEMENT }
         
         /**
          * Constructor
@@ -24,6 +24,8 @@ public class ChatMessage extends PokenetMessage {
                 case NPC:
                         m_message = "Cn" + message;
                         break;
+                case ANNOUNCEMENT:
+                		m_message = "Cs" + message;
                 }
         }
 }

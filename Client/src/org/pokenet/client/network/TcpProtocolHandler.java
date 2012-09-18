@@ -106,7 +106,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		translated = Translator.translate("_LOGIN");
 		Player p;
 		String message = (String) m;
-		// System.out.println("test0");
 		GameClient.log("INFO: " + message);
 		String[] details;
 		switch(message.charAt(0))
@@ -968,7 +967,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						break;
 				}
 			case 'r':
-				System.out.println("test1");
 				switch(message.charAt(1))
 				{
 					case '!':

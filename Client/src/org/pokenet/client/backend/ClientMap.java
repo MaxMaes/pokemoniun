@@ -698,14 +698,16 @@ public class ClientMap extends TiledMap {
 					// Draw player names
 					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
 					{
-						// User titles for staff (could be developed further)
+						//TODO: User titles for staff (could be developed further)
 						if(p.getUsername().equals("TesterMyth1c")){
+							Color previous = g.getColor();
 							g.drawString(p.getUsername(), m_xOffset
 									+ (p.getX() - (g.getFont()
 											.getWidth(p.getUsername()) / 2)) + 16,
 									m_yOffset + p.getY() - 40);
 							g.setColor(new Color(96, 168, 168));
 							g.drawString("<Dev>", m_xOffset + (p.getX() - (g.getFont().getWidth("<Dev>") / 2)) + 16, m_yOffset + p.getY() - 22);
+							g.setColor(previous);
 						} else {
 							g.drawString(p.getUsername(), m_xOffset
 									+ (p.getX() - (g.getFont()

@@ -1004,7 +1004,13 @@ public class GameClient extends BasicGame
 		connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		m_tcpProtocolHandler = new TcpProtocolHandler(this);
 		connector.setHandler(m_tcpProtocolHandler);
-		ConnectFuture cf = connector.connect(new InetSocketAddress(m_host, 7002));
+		String[] address = m_host.split(":"); // 127.0.0.1:7002
+		int port = 7002; //(default port: 7002)
+		try {
+			if(address.length == 2)
+				port = Integer.parseInt(address[1]);
+		} catch(NumberFormatException ex) { /* Fail safe */ }
+		ConnectFuture cf = connector.connect(new InetSocketAddress(address[0], port));
 		cf.addListener(new IoFutureListener<IoFuture>()
 		{
 			public void operationComplete(IoFuture s)

@@ -19,4 +19,4 @@
 [REQ]battle animations
 [REQ]finish kanto (route 20 and safari zone(being worked on by light adept?))
 [REQ]tm fly and strength
-
+[REQ]Make names clickable on right screen of pokedex.

@@ -161,7 +161,7 @@ public class Pokemon extends PokemonSpecies {
 	private long                              m_originalNo;
 
 	private int                               m_databaseID     = -1;
-	private boolean							  m_caughtWithLuxeryBall = false;
+	private int							  	  m_caughtWith;
 	// Battle mechanics.
 	private BattleMechanics                   m_mech;
 
@@ -2209,7 +2209,7 @@ public class Pokemon extends PokemonSpecies {
 	{
 		int original = m_happiness;
 		int diff = happiness - original;
-		if(m_caughtWithLuxeryBall)
+		if(m_caughtWith == 1)//TODO: change value to luxery ball number
 			diff = diff*2;
 		
 		m_happiness = (happiness+diff) <= 255 ? (happiness+diff) : 255;
@@ -2384,24 +2384,20 @@ public class Pokemon extends PokemonSpecies {
 		return exp;
 	}
 
-	public void setCaughtWithLuxeryBall(int int1)
+	public void setCaughtWith(int ball)
 	{
-		if(int1==0)
-			m_caughtWithLuxeryBall = false;
-		else
-			m_caughtWithLuxeryBall = true;
+		m_caughtWith = ball;
 	}
 	
-	public boolean isCaughtWithLuxeryBall()
+	public boolean isCaughtWith(int ball)
 	{
-		return m_caughtWithLuxeryBall;
+		if(m_caughtWith == ball)
+			return true;
+		return false;
 	}
 	
-	public int isCaughtWithLuxeryBallInt()
+	public int getCaughtWithBall()
 	{
-		if(m_caughtWithLuxeryBall)
-			return 1;
-		else
-			return 0;
+		return m_caughtWith;
 	}
 }

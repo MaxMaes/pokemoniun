@@ -5,6 +5,7 @@
 [ADD]	evs
 [ADD]	Add original trainer name on pokemon info
 [ADD]	Add moves on pokemon info (party-viewer)
+[ADD]	The server now records what ball was used to catch a pokemon (all already caught pokemon have been assigned a regular pokeball). For future purpose.
 
 [FIX] 	Movement has been fixed an is way smoother now!
 [FIX]	No more loading between maps.

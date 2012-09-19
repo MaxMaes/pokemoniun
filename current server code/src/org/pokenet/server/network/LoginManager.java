@@ -697,7 +697,7 @@ public class LoginManager implements Runnable {
 				pokemon.setDateCaught(data.getString("date"));
 				pokemon.setIsFainted(Boolean.parseBoolean(data.getString("isFainted")));
 				pokemon.setItem(new HoldItem(data.getString("itemName")));
-				pokemon.setCaughtWithLuxeryBall(data.getInt("caughtWithLuxeryBall"));
+				pokemon.setCaughtWith(data.getInt("caughtWith"));
 				/*
 				 * Contest stats (beauty, cute, etc.)
 				 */

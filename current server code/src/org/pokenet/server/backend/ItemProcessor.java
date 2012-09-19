@@ -32,7 +32,7 @@ public class ItemProcessor implements Runnable {
 	public enum PokeBall {
 		POKEBALL, GREATBALL, ULTRABALL, MASTERBALL, SAFARIBALL, 								//1st gen
 		LEVELBALL, LUREBALL, MOONBALL, FRIENDBALL, LOVEBALL, HEAVYBALL, FASTBALL, PARKBALL, 	//2nd gen
-		PREMIERBALL, REPEATBALL, TIMERBALL, NESTBALL, NETBALL, DIVEBALL, LUXERYBALL,			//3th gen
+		PREMIERBALL, REPEATBALL, TIMERBALL, NESTBALL, NETBALL, DIVEBALL, LUXURY,				//3th gen
 		HEALBALL, QUICKBALL, DUSKBALL, CHERISHBALL												//4th gen
 	};
 
@@ -723,10 +723,10 @@ public class ItemProcessor implements Runnable {
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}
-				} else if (i.getName().equalsIgnoreCase("LUXERY BALL")) {
+				} else if (i.getName().equalsIgnoreCase("LUXURY BALL")) {
 					if (p.getBattleField() instanceof WildBattleField) {
 						WildBattleField w = (WildBattleField) p.getBattleField();
-						if (!w.throwPokeball(PokeBall.LUXERYBALL))
+						if (!w.throwPokeball(PokeBall.LUXURY))
 							w.queueMove(0, BattleTurn.getMoveTurn(-1));
 						return true;
 					}

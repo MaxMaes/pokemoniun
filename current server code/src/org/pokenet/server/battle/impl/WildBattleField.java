@@ -543,25 +543,30 @@ public class WildBattleField extends BattleField {
 		{
 		case POKEBALL:
 			showMessage(m_player.getName() + " threw a Pokeball!");
+			m_wildPoke.setCaughtWith(35);
 			break;
 			
 		case GREATBALL:
 			showMessage(m_player.getName() + " threw a Great Ball!");
 			catchRate = 1.5;
+			m_wildPoke.setCaughtWith(36);
 			break;
 			
 		case ULTRABALL:
 			showMessage(m_player.getName() + " threw an Ultra Ball!");
 			catchRate = 2.0;
+			m_wildPoke.setCaughtWith(37);
 			break;
 			
 		case MASTERBALL:
 			showMessage(m_player.getName() + " threw a Master Ball!");
 			catchRate = 255.0;
+			m_wildPoke.setCaughtWith(38);
 			break;
 			
 		case LEVELBALL:
 			showMessage(m_player.getName() + " threw a Level Ball!");
+			m_wildPoke.setCaughtWith(41);
 			int m_pokemonLevel = getActivePokemon()[0].getLevel();
 			int w_pokemonLevel = m_wildPoke.getLevel();
 			if(m_pokemonLevel <= w_pokemonLevel )
@@ -576,12 +581,14 @@ public class WildBattleField extends BattleField {
 			
 		case LUREBALL:
 			showMessage(m_player.getName() + " threw a Lure Ball!");
+			m_wildPoke.setCaughtWith(42);
 			if(m_player.isFishing())
 				catchRate = 3.0;
 			break;
 			
 		case MOONBALL:
 			showMessage(m_player.getName() + " threw a Moon Ball!");
+			m_wildPoke.setCaughtWith(43);
 			if(pokeID == 29 || pokeID == 30 || pokeID == 31 || 		//Nidoran male family
 			   pokeID == 32 || pokeID == 33 || pokeID == 34 || 		//Nidoran female family
 			   pokeID == 35 || pokeID == 36 || pokeID == 173 ||  	//Clefairy family	
@@ -594,11 +601,13 @@ public class WildBattleField extends BattleField {
 			
 		case FRIENDBALL:
 			showMessage(m_player.getName() + " threw a Friend Ball!");
+			m_wildPoke.setCaughtWith(44);
 			m_wildPoke.setHappiness(200);
 			break;
 			
 		case LOVEBALL:
 			showMessage(m_player.getName() + " threw a Love Ball!");
+			m_wildPoke.setCaughtWith(47);
 			if(((m_wildPoke.getGender() == Pokemon.GENDER_MALE && getActivePokemon()[0].getGender() == Pokemon.GENDER_FEMALE) && (m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName()))
 					|| 
 			   ((m_wildPoke.getGender() == Pokemon.GENDER_FEMALE && getActivePokemon()[0].getGender() == Pokemon.GENDER_MALE)  && (m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName())))
@@ -609,6 +618,7 @@ public class WildBattleField extends BattleField {
 			
 		case HEAVYBALL:
 			showMessage(m_player.getName() + " threw a Heavy Ball!");
+			m_wildPoke.setCaughtWith(46);
 			if(m_wildPoke.getWeight() < 204.796955)
 				catchRate = -20.0;
 			else if(m_wildPoke.getWeight() >= 204.796955 && m_wildPoke.getWeight() < 307.218112)
@@ -621,6 +631,7 @@ public class WildBattleField extends BattleField {
 			
 		case FASTBALL:
 			showMessage(m_player.getName() + " threw a Fast Ball!");
+			m_wildPoke.setCaughtWith(45);
 			if((m_wildPoke.getBase()[3] >= 100) 				// Speed stat
 			|| pokeID == 63 || pokeID == 58 || pokeID == 81 ||  // Pokemon that run from battle
 			pokeID == 122 || pokeID == 231 || pokeID == 195 ||  //
@@ -634,21 +645,25 @@ public class WildBattleField extends BattleField {
 			break;
 		case PARKBALL:
 			showMessage(m_player.getName() + " threw a Park Ball!");
+			m_wildPoke.setCaughtWith(40);
 			catchRate = 1.5;
 			break;
 			
 		case PREMIERBALL:
 			showMessage(m_player.getName() + " threw a Premier Ball!");
+			m_wildPoke.setCaughtWith(49);
 			break;
 		
 		case REPEATBALL:
 			showMessage(m_player.getName() + " threw a Repeat Ball!");
+			m_wildPoke.setCaughtWith(53);
 			if(m_player.getPokedex().isPokemonCaught(pokeID))
 				catchRate = 4.0;			
 			break;
 			
 		case TIMERBALL:
 			showMessage(m_player.getName() + " threw a Timer Ball!");
+			m_wildPoke.setCaughtWith(54);
 			catchRate = ((m_takenTurns + 10) / 10);
 			if(catchRate > 4.0)
 			{
@@ -658,6 +673,7 @@ public class WildBattleField extends BattleField {
 			
 		case NESTBALL:
 			showMessage(m_player.getName() + " threw a Nest Ball!");
+			m_wildPoke.setCaughtWith(52);
 			catchRate = ((40 - m_wildPoke.getLevel()) / 10);
 			if(catchRate < 1.0)
 			{
@@ -667,6 +683,7 @@ public class WildBattleField extends BattleField {
 			
 		case NETBALL:
 			showMessage(m_player.getName() + " threw a Net Ball!");
+			m_wildPoke.setCaughtWith(50);
 			if(m_wildPoke.getType1().equalsIgnoreCase("BUG") || m_wildPoke.getType2().equalsIgnoreCase("BUG") || 
 			   m_wildPoke.getType1().equalsIgnoreCase("WATER") || m_wildPoke.getType2().equalsIgnoreCase("BUG"))
 				catchRate = 3.5;
@@ -674,32 +691,39 @@ public class WildBattleField extends BattleField {
 			
 		case DIVEBALL:
 			showMessage(m_player.getName() + " threw a Dive Ball!");
+			m_wildPoke.setCaughtWith(51);
 			if(m_player.isSurfing() || m_player.isFishing())
 				
 			break;
 			
-		case LUXERYBALL:
+		case LUXURY:
 			showMessage(m_player.getName() + " threw a Luxery Ball!");
-			m_wildPoke.setCaughtWithLuxeryBall(1);
+			m_wildPoke.setCaughtWith(48);
 			break;
 		case HEALBALL:
 			showMessage(m_player.getName() + " threw a Heal Ball!");
+			m_wildPoke.setCaughtWith(55);
 			resetAfterCaught = true;
 			break;
 		case QUICKBALL: //TODO: VERIFY IF THIS SHOULD BE TURN = 0 or TURN = 1!
 			showMessage(m_player.getName() + " threw a Quick Ball!");
+			m_wildPoke.setCaughtWith(58);
 			if(m_takenTurns == 0)
 				catchRate = 4.0;
 			break;
 		case DUSKBALL:
 			showMessage(m_player.getName() + " threw a Dusk Ball!");
+			m_wildPoke.setCaughtWith(56);
 			if(TimeService.isNight()) //TODO: CAVES :/ FUCK CAVES
 				catchRate = 3.5;
 			break;
 		case CHERISHBALL:
 			showMessage(m_player.getName() + " threw a Cherish Ball!");
+			m_wildPoke.setCaughtWith(57);
 			break;
 		case SAFARIBALL:
+			showMessage(m_player.getName() + " threw a Safari Ball!");
+			m_wildPoke.setCaughtWith(39);
 			break;
 		}
 		

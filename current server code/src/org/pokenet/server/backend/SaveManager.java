@@ -170,7 +170,7 @@ public class SaveManager
 			 * Insert the Pokemon into the database
 			 */
 			db.query("INSERT INTO pn_pokemon" + "(name, speciesName, exp, baseExp, expType, isFainted, level, happiness, "
-					+ "gender, nature, abilityName, itemName, isShiny, currentTrainerName, originalTrainerName, date, contestStats, caughtWithLuxeryBall)" + "VALUES (" + "'"
+					+ "gender, nature, abilityName, itemName, isShiny, currentTrainerName, originalTrainerName, date, contestStats, caughtWith)" + "VALUES (" + "'"
 					+ MySqlManager.parseSQL(p.getName())
 					+ "', "
 					+ "'"
@@ -214,7 +214,7 @@ public class SaveManager
 					+ "', "
 					+ "'"
 					+ MySqlManager.parseSQL(p.getOriginalTrainer())
-					+ "', " + "'" + MySqlManager.parseSQL(p.getDateCaught()) + "', " + "'" + p.getContestStatsAsString() + "', " + "'" + p.isCaughtWithLuxeryBallInt());
+					+ "', " + "'" + MySqlManager.parseSQL(p.getDateCaught()) + "', " + "'" + p.getContestStatsAsString() + "', " + "'" + p.getCaughtWithBall());
 			/*
 			 * Get the pokemon's database id and attach it to the pokemon. This needs to be done so it can be attached to the player in the database later.
 			 */

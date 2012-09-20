@@ -1,19 +1,5 @@
 [npc]
 Pokemon League Officer
-right
-36
-6
-6
-NULL
-0
--1
-0,1,2
-false
-false
-false
-[/npc]
-[npc]
-Pokemon League Officer
 down
 36
 9
@@ -42,5 +28,14 @@ false
 153
 2
 -2
+0
+[/warp]
+[warp]
+5
+6
+52
+27
+1
+1
 0
 [/warp]

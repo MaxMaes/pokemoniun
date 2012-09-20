@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="22" height="45" tilewidth="16" tileheight="16">
+ <properties>
+    <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value="Poliwag,85;Magikarp,15;"/>
+  <property name="fishPokemonLevels" value="20-40;9-20;"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value="Poliwag,65;Magikarp,15;Poliwhirl,20;"/>
+  <property name="waterPokemonLevels" value="20-40;9-20;40-40;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="normal1.tsx"/>
+ <tileset firstgid="1025" source="normal2.tsx"/>
+ <tileset firstgid="2049" source="normal7.tsx"/>
+ <layer name="Walkable" width="22" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7PlYGCwpQJez0wdc9DxeRzmUguMmjs0zUU3e6SaO9TibdTcUXNHzR01d9TcUXNHzR01d9TcUXOHgrmEsDYTA4MOEK9hIk49AGEymjl4DwAA
+  </data>
+ </layer>
+ <layer name="Grass" width="22" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3XwQ2AIAwFUKIXlnIFN3MGVvXUxJCW/gLVgDT5J+FBUpQYwph1xD7h3Gu3Z0aXcm7yOtw41KUg+1vuv13NbnFL633pIvFwvfaLuvTcshbiaiXZz+9aab8153a5NjfvE3fn9HDRcPWWq1WvviF9nMElW6saF+25dJ5bXOt7sVzbXK97fjSXUvsfYE1i3BTLyedL8a4bokPlg3gPAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="22" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC92XAQ6CMAxFiVzQgwh4EEQOIpxRfmRJ07RdN0pI/MmPRpa3zXVtGdqmWQIMpe/PzdPmIZAL5rhz4cfmrsL9zoTutx+TckfyvETTn3E/7AyeyjwDG7eycZzLpa0fY7EuTUe4lqK5aQ8Sl+4vknvWer1cMJIpV4ozLxey7vQRrqbpALcz5vNw6f3TPLfl3JzSGUVzIQ+Xxo4UR7VcT73oGSedAYTPVeB64ir3f9Xm9au40FVc3lNAvObUcHP15ii3lJ3jlvY6Xq5HWh6M5Gp16Kz1evLtwub3cD1nj+c010jxLHEjpOV1ni+lWKrh4rcXcWktqeVa+d/qH3JcKx6tusnjTeqba7g5ncXl7wt8bxH9A5dU37T+QbqH1jjKfRuxk5yUGzfv3C9AykNLeA8AAA==
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="22" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBTgAquYUfEooC4YDd9RMApGwSigDRgtX2kLRsOXODAaPkMToKdvGF49GpcUAQAIKF1DeA8AAA==
+  </data>
+ </layer>
+ <layer name="LedgesRight" width="22" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQQkAAAgEsAPjW9oC/gXZEiwBAADgg67rAZsBdm7lp3gPAAA=
+  </data>
+ </layer>
+</map>

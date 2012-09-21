@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="50" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value=""/>
-  <property name="dayPokemonLevels" value=""/>
+  <property name="dayPokemonChances" value="Ponyta,30;Tangela,30;Donphan,20;Rapidash,10;Doduo,5;Dodrio,5;"/>
+  <property name="dayPokemonLevels" value="40-40;39-39;40-40;42-42;41-41;43-43;"/>
   <property name="fishPokemonChances" value="Poliwag,85;Magikarp,15;"/>
   <property name="fishPokemonLevels" value="20-40;9-20;"/>
-  <property name="nightPokemonChances" value=""/>
-  <property name="nightPokemonLevels" value=""/>
-  <property name="waterPokemonChances" value="Poliwag,65;Magikarp,15;Poliwhirl,20;"/>
-  <property name="waterPokemonLevels" value="20-40;9-20;40-40;"/>
+  <property name="nightPokemonChances" value="Ponyta,30;Tangela,30;Ursaring,20;Rapidash,10;Sneasel,10;"/>
+  <property name="nightPokemonLevels" value="40-40;30-30;40-40;42-42;41-43;"/>
+  <property name="waterPokemonChances" value="Poliwag,80;Poliwhirl,20;"/>
+  <property name="waterPokemonLevels" value="35-40;40-40;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

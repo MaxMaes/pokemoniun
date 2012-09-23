@@ -100,7 +100,7 @@ public class NetworkService {
 		m_tcpAcceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new PokenetCodecFactory()));
 		m_tcpAcceptor.setHandler(m_tcpProtocolHandler);
 		try {
-			m_tcpAcceptor.bind(new InetSocketAddress(7002)); 
+			m_tcpAcceptor.bind(new InetSocketAddress(GameServer.getPort())); 
 			System.out.println("INFO: TCP acceptor started.");
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -407,13 +407,13 @@ public class RegistrationManager implements Runnable {
         /*
          * Now the store the final set of moves for the Pokemon
          */
-        if (possibleMoves.size() <= 4) {
+        if (possibleMoves.size() <= moves.length) {
                 for (int i = 0; i < possibleMoves.size(); i++) {
                         moves[i] = possibleMoves.get(i);
                 }
         } else {
         	MoveListEntry m = null;
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < moves.length; i++) {
                         if (possibleMoves.size() == 0) {
                             moves[i] = null;
                         } else {
@@ -437,7 +437,7 @@ public class RegistrationManager implements Runnable {
          * Unfortunately, all Pokemon have two possible ability slots but some only have one.
          * If the null slot was selected, select the other slot
          */
-        while(ab == null || ab.equalsIgnoreCase("")) {
+        while(ab == null || ab.equals("")) {
         	ab = abilities[random.nextInt(abilities.length)];
         }
         /*

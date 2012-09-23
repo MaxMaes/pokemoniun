@@ -45,6 +45,8 @@ public class GameServer
 	private JButton m_start, m_stop, m_set, m_exit;
 	private JLabel m_pAmount, m_pHighest;
 	private JFrame m_gui;
+	
+	private static int mPort = 7002;
 
 	/* The revision of the game server */
 	public static int REVISION = getSVNRev();
@@ -284,7 +286,6 @@ public class GameServer
 				e.printStackTrace();
 			}
 		}
-
 		m_gui.setVisible(true);
 	}
 
@@ -441,6 +442,7 @@ public class GameServer
 		Options options = new Options();
 		options.addOption("s", "settings", true, "Can be low, medium, or high.");
 		options.addOption("p", "players", true, "Sets the max number of players.");
+		options.addOption("port", "port", true, "Sets the serverport.");
 		options.addOption("ng", "nogui", false, "Starts server in headless mode.");
 		options.addOption("ar", "autorun", false, "Runs without asking a single question.");
 		options.addOption("h", "help", false, "Shows this menu.");
@@ -489,6 +491,10 @@ public class GameServer
 					m_maxPlayers = Integer.parseInt(line.getOptionValue("players"));
 					if(m_maxPlayers < 1)
 						m_maxPlayers = 500;
+				}
+				if(line.hasOption("port"))
+				{
+					mPort = Integer.parseInt(line.getOptionValue("port"));
 				}
 				if(line.hasOption("help"))
 				{
@@ -600,5 +606,10 @@ public class GameServer
 	public static String getDatabaseName()
 	{
 		return m_dbName;
+	}
+	
+	public static int getPort()
+	{
+		return mPort;
 	}
 }

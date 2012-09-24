@@ -112,7 +112,7 @@ public class PokemonInfoDialog extends Frame{
                 if(!poke.getMoves()[1].equalsIgnoreCase(""))
                 {
                 	data[18].setText(poke.getMoves()[1] + "(" +poke.getMoveCurPP()[1] + "/" +  poke.getMoveMaxPP()[1] + ")");
-                	data[19].setText(poke.getMoveType(0));
+                	data[19].setText(poke.getMoveType(1));
                 }
                 else
                 {
@@ -122,7 +122,7 @@ public class PokemonInfoDialog extends Frame{
                 if(!poke.getMoves()[2].equalsIgnoreCase(""))
                 {
                 	data[20].setText(poke.getMoves()[2] + "(" +poke.getMoveCurPP()[2] + "/" +  poke.getMoveMaxPP()[2] + ")");
-                	data[21].setText(poke.getMoveType(0));
+                	data[21].setText(poke.getMoveType(2));
                 }
                 else
                 {
@@ -132,7 +132,7 @@ public class PokemonInfoDialog extends Frame{
                 if(!poke.getMoves()[3].equalsIgnoreCase(""))
                 {
                 	data[22].setText(poke.getMoves()[3] + "(" +poke.getMoveCurPP()[3] + "/" +  poke.getMoveMaxPP()[3] + ")");
-                	data[23].setText(poke.getMoveType(0));
+                	data[23].setText(poke.getMoveType(3));
                 }
                 else
                 {

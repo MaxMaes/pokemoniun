@@ -214,7 +214,7 @@ public class SaveManager
 					+ "', "
 					+ "'"
 					+ MySqlManager.parseSQL(p.getOriginalTrainer())
-					+ "', " + "'" + MySqlManager.parseSQL(p.getDateCaught()) + "', " + "'" + p.getContestStatsAsString() + "', " + "'" + p.getCaughtWithBall() +  "'");
+					+ "', " + "'" + MySqlManager.parseSQL(p.getDateCaught()) + "', " + "'" + p.getContestStatsAsString() + "', " + "'" + p.getCaughtWithBall() +  "')");
 			/*
 			 * Get the pokemon's database id and attach it to the pokemon. This needs to be done so it can be attached to the player in the database later.
 			 */

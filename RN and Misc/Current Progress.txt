@@ -41,4 +41,30 @@
 [BUG] On relog items get incremently multiplied by the quantity that they actually have. 1x10 -> relog -> 2x10 -> relog -> 3x10. This effect is only visually.
 [BUG] Clicking an empty slot after winning/losing a fight disconnects the player from the server.
 
+-------------------------------RN 1.4------------------------------------
+[ADD] 	Ingame pokedex
+[ADD] 	Pokemonium Mall
+[ADD] 	All pokeballs (except for gen 4's Park ball and gen 4's Dream Ball) have been implemented. 
+	You can buy them in the pokemonium mall
+[ADD]	evs
+[ADD]	Add original trainer name on pokemon info
+[ADD]	Add moves on pokemon info (party-viewer)
+[ADD]	The server now records what ball was used to catch a pokemon (all already caught pokemon have been assigned a regular pokeball). For future purpose.
+
+[FIX] 	Movement has been fixed an is way smoother now!
+[FIX]	No more loading between maps.
+[FIX] 	Client doesn't crash anymore when giving an item to a pokemon.
+[FIX] 	One can now press 'Enter' to log out (confirm the dialogue).
+
+
+//REQUESTS/TODO
+[REQ]Hoenn and Sinnoh
+[REQ]trainer cards
+[REQ]quests
+[REQ]battle animations
+[REQ]finish kanto (route 20 and safari zone(being worked on by light adept?))
+[REQ]tm fly and strength
+[REQ]Make names clickable on right screen of pokedex.
+
+
 *These points have to be verified.

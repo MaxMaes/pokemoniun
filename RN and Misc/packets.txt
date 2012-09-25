@@ -140,6 +140,8 @@ Packet from the server:
 0x00 mFi // initialise friends list
 0x00 mFa // friend was added
 0x00 mFr // friend was removed
+0x00 mFo // friend is online
+0x00 mFf // friend is offline
 0x00 mr // remove player from map
 0x00 ms // set map and weather
 0x00 ps // succesful changed password

@@ -1,0 +1,30 @@
+Update Pokemon:
+UPDATE pn_pokemon SET id=17394, name='Clefable', speciesName='Clefable', exp='40816.7', baseExp=68, 
+expType='FAST', isFainted='false', level=37, happiness=59, gender=2,nature='Modest', abilityName='', 
+itemName='', isShiny='false', originalTrainerName='Yondick', currentTrainerName='Yondick', 
+contestStats='0,0,0,0,0', move0='Pound', move1='Cosmic Power', move2='Moonlight', move3='Sing', hp=125, 
+atk=57, def=63, speed=50, spATK=83, spDEF=73, evHP=0, evATK=0, evDEF=0, evSPD=0, evSPATK=0, evSPDEF=0, 
+ivHP=21, ivATK=20, ivDEF=11, ivSPD=4, ivSPATK=24, ivSPDEF=5, pp0=35, pp1=20, pp2=5, pp3=15, maxpp0=35, 
+maxpp1=20, maxpp2=5, maxpp3=15, ppUp0=0, ppUp1=0, ppUp2=0, ppUp3=0 WHERE id=17394;
+
+Insert Pokemon:
+INSERT INTO pn_pokemon VALUES(NULL, 'Slowking', 'Slowking', 64000.0, 99, 'MEDIUM', 'false', 40, 120, 2, 'Bold', '', '', 'false', 'The Doctor', 'The Doctor', '0,0,0,0,0', 'Psychic', 'Calm Mind', 'Rest', 'Surf', 130, 58, 85, 34, 95, 98, 0, 0, 0, 0, 0, 0, 12, 1, 24, 14, 27, 14, 10, 20, 10, 15, 10, 20, 10, 15, 0, 0, 0, 0, '2012-08-12:11-08-24');
+
+Update Bag:
+INSERT INTO pn_bag VALUES (12123, 581, 10)
+UPDATE pn_bag SET item=206, quantity=10 WHERE member=12123 AND item=206;
+
+Delete Old Accounts:
+DELETE FROM pn_members WHERE FROM_UNIXTIME(lastLoginTime / 1000) < '2012-04-13 23:59:59' LIMIT 1000;
+
+SELECT BAG USERNAME:
+SELECT * FROM pn_bag WHERE member = (SELECT id FROM pn_members WHERE username='Remyoman');
+
+Add new Friend:
+INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = 'Remyoman'), (SELECT id FROM `pn_members` WHERE username = 'sadhi'));
+
+Delete a Friend:
+DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = 'Remyoman') AND friendId = (SELECT id FROM `pn_members` WHERE username = 'sadhi');
+
+Select a Friend:
+SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = 'Remyoman'));

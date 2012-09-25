@@ -158,6 +158,19 @@ public class ServerDialog extends Frame
 		catch(IOException ioe)
 		{
 			ioe.printStackTrace();
+			m_host[0] = "157.56.165.7";
+			m_servers[0] = new Button("Pokemonium Server");
+			m_servers[0].setSize(280, 24);
+			m_servers[0].setLocation(16, 32);
+			m_servers[0].setVisible(true);
+			m_servers[0].addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent arg0)
+				{
+					GameClient.setHost(m_host[0]);
+				}
+			});
+			this.add(m_servers[0]);
 		}
 		privateIP = new TextField();
 		privateIP.setLocation(16, 204);

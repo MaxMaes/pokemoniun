@@ -1,10 +1,10 @@
-[ADD] 	Ingame pokedex
-[ADD] 	Pokemonium Mall
+[ADD] 	Ingame pokedex.
+[ADD] 	Pokemonium Mall.
 [ADD] 	All pokeballs (except for gen 4's Park ball and gen 4's Dream Ball) have been implemented. 
 	You can buy them in the pokemonium mall
-[ADD]	evs
-[ADD]	Add original trainer name on pokemon info
-[ADD]	Add moves on pokemon info (party-viewer)
+[ADD]	Effort Values (EV's).
+[ADD]	Add original trainer name on pokemon info.
+[ADD]	Add moves on pokemon info (party-viewer).
 [ADD]	The server now records what ball was used to catch a pokemon (all already caught pokemon have been assigned a regular pokeball). For future purpose.
 
 [FIX] 	Movement has been fixed an is way smoother now!
@@ -14,10 +14,10 @@
 
 
 //REQUESTS/TODO
-[REQ]Hoenn and Sinnoh
-[REQ]trainer cards
-[REQ]quests
-[REQ]battle animations
-[REQ]finish kanto (route 20 and safari zone(being worked on by light adept?))
-[REQ]tm fly and strength
+[REQ]Hoenn and Sinnoh.
+[REQ]Trainer Cards.
+[REQ]Quests.
+[REQ]Battle animations.
+[REQ]finish kanto (route 20 and safari zone(being worked on by light adept?)).
+[REQ]TM's Fly and Strength (Johto Badge?).
 [REQ]Make names clickable on right screen of pokedex.

@@ -1,0 +1,86 @@
+Items:
+Poke ball - 35
+Great Ball - 36
+Ultra Ball - 37
+Light Ball - 477
+
+Old Rod - 97
+Good Rod - 98
+Great Rod - 99
+Ultra Rod - 100
+
+Cheri Berry - 200
+Chesto Berry - 201
+Pecha Berry - 202
+Rawst Berry - 203
+Aspear Berry - 204
+Leppa Berry - 205
+Oran Berry - 206
+Persim Berry - 207
+Lum Berry - 208
+Sitrus Berry - 209
+Figy Berry - 210
+Wiki Berry - 211
+Mago Berry - 212
+Auguav Berry - 213
+
+Grip Claw - 365
+
+King's Rock - 155
+Fire Stone - 164
+Water Stone - 165
+Thunder Stone - 166
+Sun Stone - 167
+Moon Stone - 168
+Shiny Stone - 169
+Dusk Stone - 170
+Dawn Stone - 171
+Everstone - 172
+Leaf Stone - 173
+
+Escape Rope - 91
+Repel - 85
+Super Repel - 86
+Max Repel - 87
+
+TM's:
+TM03 Water Pulse - 578
+TM06 Toxic - 581
+TM09 Bullet Seed - 584
+TM13 Ice Beam - 588
+TM24 Thunderbolt - 599
+TM28 Dig - 603
+TM30 Shadow Ball - 605
+TM34 Shock Wave - 609
+TM47 Steel Wing - 622
+TM61 Will-O-Wisp - 636
+TM67 Stealth Rock - 651
+
+Players:
+Zorro - 5170
+Darkod - 26896
+xLstarBlaze - 26793
+Chaixelm - 25410
+nonamerules - 5892
+Gifoil - 26732
+swimpimp - 25238
+Core - 26983
+Nekohime - 22413
+The Doctor - 21927
+SeleneX - 18308
+Lailune - 28171
+Proudmoore - 20290
+Vinceanator - 27860
+Dr.Troll - 28843
+Val-D - 28737
+Rents - 26781
+Honigschnute - 29287
+Lorkham - 28752
+Rapido - 28967
+Japer - 13935
+Master Red - 29321
+RedMist - 28782
+Chadggg - 26908
+Gman - 28560
+Drunke - 30029
+Teepo - 19457

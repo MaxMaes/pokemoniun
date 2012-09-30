@@ -1,0 +1,14 @@
+[warp]
+11
+40
+23
+34
+6
+0
+0
+[/warp]
+[hmobject]
+CUT_TREE
+19
+24
+[/hmobject]

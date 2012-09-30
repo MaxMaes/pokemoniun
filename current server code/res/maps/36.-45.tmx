@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="66" height="36" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Pidgeotto,30;Girafarig,15;Sentret,15;Flaaffy,10;Farfetch'd,10;Furret,8;Mareep,7;Venonat,2;Raticate,3;"/>
+  <property name="dayPokemonLevels" value="17-17;15-15;15-15;15-15;16-16;15-17;15-15;16-16;17-17;"/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value="Flaaffy,30;Girafarig,15;Venomoth,15;Noctowl,20;Venonat,15;Mareep,2;Raticate,3;"/>
+  <property name="nightPokemonLevels" value="15-15;15-15;17-17;16-16;15-17;15-15;16-17;"/>
+  <property name="pvp" value="enforced"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="1"/>
+  <property name="xOffsetModifier" value="-32"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" name="1" tilewidth="16" tileheight="16">
+  <image source="normal1.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="2" tilewidth="16" tileheight="16">
+  <image source="normal2.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2049" name="5" tilewidth="16" tileheight="16">
+  <image source="normal5.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="Walkable" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Wb07DMAzFzdoP5VjASQAJuAYgDja2izD2dYgj4Mi1sELatMTdnMlPepq0P3Xym19iABtandCW5BxIzoHkHEjOgeQcSM6B5BxIzoHkHEhyXQ04B8lhCR6pZ1pSC+UccqqVw1wWOdXI4Qp9jb6B5TlYYhFn+BZ9h76H9Lr/87/Gv3vvADa9rSg+F2IOjVIN6R3u/7O3FfFe294pDjlPqVELh1Q/fLc6GZYMQiYuLuvicEAOX61OjVQvWOQQ5+IN6N4IfsAvPE7wWI1aOMT9IK3JYYWZaNDrAg5zZrw5lhye0S+RVTkIHmtDHPge33Z/5+rwesicDzk2T81vvoLlfLYzxIFzuu/S/ZG7L6ZwkBmT85klDmO1tDjIjL1CGYelzoYhcVZyHKaI5xA2z9VhjpirY3OQWSkVc5D7t3ZXDInPja3CHS9zUDo7nIrDXolDPE/XwiF8Ftb6ocQh7oWSWfLYHJhF7NT7Y9okeqE2DlOcYzTkc+OgXdsSB8s6Rw4/SDfMviAlAAA=
+  </data>
+ </layer>
+ <layer name="Grass" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SMQqAQAxFQa/i/S9p8RsLF1bYFWJmIG0gjxwHAPA358R0oEN07zBz/5seVbutun+0s4odHe57K9EhdIgdHapa0aFbs5GO//NEg9AhNAgNAAAA+NoFJ7GcuiAlAAA=
+  </data>
+ </layer>
+ <layer name="Water" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VwQmAMBBE0YX0plaiVqJ2YptG5iZkk4MoZP+DuZsfMGYAAAAAgKchmY2FTenvr/vOnM+6FLbSgQ50oEOADt57cO8M0sG779p66tCKDkIH6b2D93+IhA5CB+HdFDoIHYQOsuWz7JVF6NCi1OoI1gHAey7ZqzmyICUAAA==
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAwKcBBzE/CCAlAAA=
+  </data>
+ </layer>
+ <layer name="LedgesRight" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAwKcBBzE/CCAlAAA=
+  </data>
+ </layer>
+ <layer name="LedgesLeft" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAwKcBBzE/CCAlAAA=
+  </data>
+ </layer>
+ <layer name="Bridges" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QQQYAIBCG0Vl1/ytUF01aRKJl1HsMw7/7IgAAAAAAOMkpomyuprn1/3U6DDqc5U2TtdUPdBh0AADgpgbnA2otICUAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Zi00DMQyGIyGYBCiL8FiESbhFKI896LXsARTmwJFqKUTXxHHsxHfil35Z6iO6+++L0ybOyegCfFlRV+CrRK0dP1elhOOdgu8Y9TZTr8E3ilU6By0enk+ce1G0dA5aPGzhWneBH8HrSj8F40nnoMVDnMMbeHPEO4L950bFHFrx8AH+POLBQA5aPOzhWr8zHggZhf6aIQ8UxcyUmHp/2jXHQ2kODwleWuQgzUPJ+h7OnZ+Je5uaW8NMeNDWdiY8aEsrh6XywH2+XB6wH2C9r7/VP8LcUVZ50Fbcd63y0FpWeUhxkRuDI1xLc2rNQ4qLuHfEVVOWeOgpSzz01D8PuvuBPec6V9xnbE21v8n8HD5j1KWplge/p8rZQ34V3CeSUC0PqT3V1P7qu7Ecanmg5hDbWg6teOiRA/X/hZckD6leEZ6vWMxBkgcKG+Ohrhv0y148lOSAvVOTi1Y8nLt8Dn6PPT5fCd9HLjTWWUs8jBOvcc4sqXnFPWljpD9QcqC69BwLvzcXHrS9NB64/gUn5eNlICUAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="66" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UoQ4AIAgFQJr+/xdrsYlOC+VuY4RXCOxFAAAA8KPN6dVHwKPT364s2wDUuvW0/gYAAIC9Ad3fHssgJQAA
+  </data>
+ </layer>
+</map>

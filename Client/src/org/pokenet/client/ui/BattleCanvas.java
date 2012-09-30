@@ -266,6 +266,7 @@ public class BattleCanvas extends Container
 	{
 		boolean healing = false;
 		float currentHP = playerHP.getValue();
+		
 		if(newValue > currentHP) {
 			healing = true;
 		}
@@ -275,9 +276,9 @@ public class BattleCanvas extends Container
 			while(mTimer.getTime() <= 0.05)
 				Timer.tick();
 			if(healing){
-				currentHP += 0.25f;
+				currentHP += 1.00f;
 			} else {
-				currentHP -= 0.25f;
+				currentHP -= 1.00f;
 			}
 			playerHP.setValue(currentHP);
 			//playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
@@ -317,9 +318,9 @@ public class BattleCanvas extends Container
 			while(mTimer.getTime() <= 0.05)
 				Timer.tick();
 			if(healing){
-				currentHP += 0.25f;
+				currentHP += 1.00f;
 			} else {
-				currentHP -= 0.25f;
+				currentHP -= 1.00f;
 			}
 			enemyHP.setValue(currentHP);
 	

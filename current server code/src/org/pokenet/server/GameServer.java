@@ -32,7 +32,7 @@ import org.pokenet.server.network.TcpProtocolHandler;
  */
 public class GameServer
 {
-	static final int SERVER_REVISION = 1883;
+	static final int SERVER_REVISION = 1885;
 	private static GameServer m_instance;
 	private static ServiceManager m_serviceManager;
 	private static int m_maxPlayers = 500; // default 500 players

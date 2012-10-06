@@ -37,6 +37,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	private final RegistrationManager m_regManager;
 	private final SaveManager m_saveManager;
 	private boolean run_autosaver = true;
+	
 	private final Thread autosaver = new Thread()
 	{
 		public void run()
@@ -86,9 +87,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	 */
 	public void exceptionCaught(IoSession session, Throwable t) throws Exception
 	{
-		/*
-		 * Attempt to disconnect and logout the player (save their data)
-		 */
+		/* Attempt to disconnect and logout the player (save their data) */
 		try
 		{
 			Player p = (Player) session.getAttribute("player");
@@ -118,13 +117,39 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	 */
 	public void messageReceived(IoSession session, Object msg) throws Exception
 	{
-		String message = (String) msg;
+		/* TODO:Implement more new packages. Receive String instead of Object? */
+		int packet = 0;
 		String[] details;
+		String message = (String) msg;
+		try
+		{
+			packet = Integer.parseInt(message.substring(0, 2), 16);
+		}
+		catch(Exception e)/*NOTE: NF and OutofBounds Exceptions can be thrown*/
+		{
+			System.out.println("Outdated client package received!");
+		}
 		if(session.getAttribute("player") == null)
 		{
-			/*
-			 * The player hasn't been logged in, only allow login and registration packets
-			 */
+			/* The player hasn't been logged in, only allow login and registration packets */
+			switch(packet)
+			{
+				case 1:
+					details = message.substring(2).split(",");
+					m_loginManager.queuePlayer(session, details[0], details[1]);
+					break;
+				case 2:
+					m_regManager.queueRegistration(session, message.substring(2));
+					break;
+				case 3:
+					details = message.substring(2).split(",");
+					m_loginManager.queuePasswordChange(session, details[0], details[1], details[2]);
+					break;
+				case 4:
+					details = message.substring(2).split(",");
+					m_loginManager.queuePlayer(session, details[0], details[1]);
+					break;
+			}
 			switch(message.charAt(0))
 			{
 				case 'l':
@@ -150,11 +175,61 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		}
 		else
 		{
-			/*
-			 * Player is logged in, allow interaction with their player object
-			 */
+			/* Player is logged in, allow interaction with their player object */
 			Player p = (Player) session.getAttribute("player");
 			p.lastPacket = System.currentTimeMillis();
+			switch(packet)
+			{
+				case 5:
+					p.queueMovement(Direction.Up);
+					break;
+				case 6:
+					p.queueMovement(Direction.Down);
+					break;
+				case 7:
+					p.queueMovement(Direction.Left);
+					break;
+				case 8:
+					p.queueMovement(Direction.Right);
+					break;
+				case 9:
+					int pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
+					int moveIndex = Integer.parseInt(String.valueOf(message.charAt(3)));
+					String move = message.substring(4);
+					if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null)
+					{
+						if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
+						{
+							p.getParty()[pokemonIndex].learnMove(moveIndex, move);
+							p.updateClientPP(pokemonIndex, moveIndex);
+						}
+					}
+					break;
+				case 10:
+					pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
+					move = message.substring(3);
+					if(p.getParty()[pokemonIndex] != null)
+					{
+						if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
+						{
+							p.getParty()[pokemonIndex].getMovesLearning().remove(move);
+						}
+					}
+					break;
+				case 11:
+					pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
+					if(p.getParty()[pokemonIndex] != null)
+						p.getParty()[pokemonIndex].evolutionResponse(false, p);
+					break;
+				case 12:
+					pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
+					if(p.getParty()[pokemonIndex] != null)
+						p.getParty()[pokemonIndex].evolutionResponse(true, p);
+					break;
+				case 13:
+					p.swapPokemon(Integer.parseInt(message.substring(2, message.indexOf(','))), Integer.parseInt(message.substring(message.indexOf(',') + 1)));
+					break;
+			}
 			switch(message.charAt(0))
 			{
 				case 'U':
@@ -633,9 +708,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	@Override
 	public void sessionClosed(IoSession session) throws Exception
 	{
-		/*
-		 * Attempt to save the player's data
-		 */
+		/* Attempt to save the player's data */
 		try
 		{
 			Player p = (Player) session.getAttribute("player");
@@ -676,18 +749,14 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		m_regManager.stop();
 		m_loginManager.stop();
 		run_autosaver = false;
-		/*
-		 * Queue all players to be saved
-		 */
+		/* Queue all players to be saved */
 		Iterator<Player> it = m_players.values().iterator();
 		while(it.hasNext())
 		{
 			Player player = it.next();
 			m_logoutManager.queuePlayer(player);
 		}
-		/*
-		 * Since the method is called during a server shutdown, wait for all players to be logged out
-		 */
+		/* Since the method is called during a server shutdown, wait for all players to be logged out */
 		while(m_logoutManager.getPlayerAmount() > 0)
 			;
 		m_logoutManager.stop();
@@ -699,9 +768,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	public void saveAll()
 	{
 		System.out.println("Saving all players");
-		/*
-		 * Queue all players to be saved
-		 */
+		/* Queue all players to be saved */
 		Iterator<Player> it = m_players.values().iterator();
 		Player p;
 		while(it.hasNext())
@@ -783,7 +850,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		{
 			for(Player p : m_players.values())
 			{
-				if((System.currentTimeMillis() - p.lastPacket) > (15 * 60 * 1000))
+				if((System.currentTimeMillis() - p.lastPacket) > (5 * 60 * 1000))
 				{
 					p.forceLogout();
 				}

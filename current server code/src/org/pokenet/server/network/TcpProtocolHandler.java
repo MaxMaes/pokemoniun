@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.Timer;
-
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
@@ -37,15 +36,27 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	private final LogoutManager m_logoutManager;
 	private final RegistrationManager m_regManager;
 	private final SaveManager m_saveManager;
-	
-	private static final int AUTOSAVER_MINUTE_INTERVAL = 5;
-	private Timer autosaver = new Timer(0, new ActionListener()
+	private boolean run_autosaver = true;
+	private final Thread autosaver = new Thread()
 	{
-		public void actionPerformed(ActionEvent e)
+		public void run()
 		{
-			saveAll();
+			while(run_autosaver)
+			{
+				saveAll();
+				try
+				{
+					Thread.sleep(1000 * 60 * AUTOSAVER_MINUTE_INTERVAL);
+				}
+				catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-	});
+	};
+
+	private static final int AUTOSAVER_MINUTE_INTERVAL = 1;
 
 	/**
 	 * Constructor
@@ -60,8 +71,6 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		m_regManager = new RegistrationManager();
 		m_regManager.start();
 		m_saveManager = new SaveManager();
-		
-		autosaver.setDelay(1000*60*AUTOSAVER_MINUTE_INTERVAL);
 		autosaver.start();
 	}
 
@@ -494,23 +503,24 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 				case 'F':
 					// Friend list TODO: Test offline/online friends.
 					String friend = message.substring(2);
-					switch (message.charAt(1)) {
-					case 'a':
-						// Add a friend
-						if (m_players.containsKey(friend))
-							session.write("MFo" + message.substring(2));
-						p.addFriend(message.substring(2));
-						break;
-					case 'r':
-						// Remove a friend
-						p.removeFriend(message.substring(2));
-						break;
-					case 'o':
-						// Checks if player is online.
-						if (m_players.containsKey(friend))
-							session.write("MFo" + message.substring(2));
-						else
-							session.write("MFf" + message.substring(2));
+					switch(message.charAt(1))
+					{
+						case 'a':
+							// Add a friend
+							if(m_players.containsKey(friend))
+								session.write("MFo" + message.substring(2));
+							p.addFriend(message.substring(2));
+							break;
+						case 'r':
+							// Remove a friend
+							p.removeFriend(message.substring(2));
+							break;
+						case 'o':
+							// Checks if player is online.
+							if(m_players.containsKey(friend))
+								session.write("MFo" + message.substring(2));
+							else
+								session.write("MFf" + message.substring(2));
 					}
 				case 'I':
 					// Use an item, applies inside and outside of battle
@@ -519,14 +529,16 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					new Thread(new ItemProcessor(p, details)).start();
 					break;
 				case 'G':
-					/* Give an items to a pokemon, this can be used for berries and evolving pokemon TODO: Write implementation*/
-					//details = message.substring(1).split(",");
+					/* Give an items to a pokemon, this can be used for berries and evolving pokemon TODO: Write implementation */
+					// details = message.substring(1).split(",");
 					int pIndex = Integer.parseInt(message.split(",")[1]);
-					if (p.getParty()[pIndex] != null) {
+					if(p.getParty()[pIndex] != null)
+					{
 						if(p.getParty()[pIndex].getItemName().equals("") || p.getParty()[pIndex].getItemName() == null)
 						{
 							p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
-							p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0])+ ",1" + "," + (p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold"));
+							p.getTcpSession().write(
+									"Ir" + (message.substring(1).split(",")[0]) + ",1" + "," + (p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold"));
 							p.getBag().removeItem(Integer.parseInt(message.substring(1).split(",")[0]), 1);
 						}
 						else
@@ -535,7 +547,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							p.getTcpSession().write("Iu" + GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId() + ",1");
 							p.getBag().addItem(GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId(), 1);
 							p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(1).split(",")[0])).getName()));
-							p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0])+ ",1" + "," + (pI + " was switched with " + p.getParty()[pIndex].getItemName()));
+							p.getTcpSession().write("Ir" + (message.substring(1).split(",")[0]) + ",1" + "," + (pI + " was switched with " + p.getParty()[pIndex].getItemName()));
 							p.getBag().removeItem(Integer.parseInt(message.substring(1).split(",")[0]), 1);
 						}
 					}
@@ -663,7 +675,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	{
 		m_regManager.stop();
 		m_loginManager.stop();
-		autosaver.stop();
+		run_autosaver = false;
 		/*
 		 * Queue all players to be saved
 		 */
@@ -680,7 +692,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 			;
 		m_logoutManager.stop();
 	}
-	
+
 	/**
 	 * Saves all players and logs failures
 	 */

@@ -37,7 +37,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 	private final RegistrationManager m_regManager;
 	private final SaveManager m_saveManager;
 	private boolean run_autosaver = true;
-	
+
 	private final Thread autosaver = new Thread()
 	{
 		public void run()
@@ -125,7 +125,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 		{
 			packet = Integer.parseInt(message.substring(0, 2), 16);
 		}
-		catch(Exception e)/*NOTE: NF and OutofBounds Exceptions can be thrown*/
+		catch(Exception e)/* NOTE: NumberFormat and OutofBounds Exceptions can be thrown */
 		{
 			System.out.println("Outdated client package received!");
 		}
@@ -178,6 +178,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 			/* Player is logged in, allow interaction with their player object */
 			Player p = (Player) session.getAttribute("player");
 			p.lastPacket = System.currentTimeMillis();
+			String player = message.substring(2);
 			switch(packet)
 			{
 				case 5:
@@ -196,25 +197,17 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					int pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
 					int moveIndex = Integer.parseInt(String.valueOf(message.charAt(3)));
 					String move = message.substring(4);
-					if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null)
+					if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null && p.getParty()[pokemonIndex].getMovesLearning().contains(move))
 					{
-						if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
-						{
-							p.getParty()[pokemonIndex].learnMove(moveIndex, move);
-							p.updateClientPP(pokemonIndex, moveIndex);
-						}
+						p.getParty()[pokemonIndex].learnMove(moveIndex, move);
+						p.updateClientPP(pokemonIndex, moveIndex);
 					}
 					break;
 				case 10:
 					pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
 					move = message.substring(3);
-					if(p.getParty()[pokemonIndex] != null)
-					{
-						if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
-						{
+					if(p.getParty()[pokemonIndex] != null && p.getParty()[pokemonIndex].getMovesLearning().contains(move))
 							p.getParty()[pokemonIndex].getMovesLearning().remove(move);
-						}
-					}
 					break;
 				case 11:
 					pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
@@ -228,6 +221,323 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					break;
 				case 13:
 					p.swapPokemon(Integer.parseInt(message.substring(2, message.indexOf(','))), Integer.parseInt(message.substring(message.indexOf(',') + 1)));
+					break;
+				case 14:
+					if(p.isSpriting())
+					{
+						int sprite = Integer.parseInt(message.substring(2));
+						if(sprite > 0 && !GameServer.getServiceManager().getSpriteList().getUnbuyableSprites().contains(sprite))
+						{
+							if(p.getMoney() >= 500)
+							{
+								p.setMoney(p.getMoney() - 500);
+								p.updateClientMoney();
+								p.setSprite(sprite);
+								p.setSpriting(false);
+							}
+						}
+					}
+					break;
+				case 15:
+					int item = -1;
+					if(p.isShopping())
+					{
+						item = Integer.parseInt(message.substring(2, message.indexOf(',')));
+						p.buyItem(item, 1);
+					}
+					break;
+				case 16:
+					item = -1;
+					if(p.isShopping())
+					{
+						item = Integer.parseInt(message.substring(2, message.indexOf(',')));
+						p.sellItem(item, 1);
+					}
+					break;
+				case 17:
+					if(p.isShopping())
+						p.setShopping(false);
+					break;
+				case 18:
+					if(m_players.containsKey(player))
+					{
+						sessionClosed(m_players.get(player).getTcpSession());
+						TcpProtocolHandler.writeMessage(m_players.get(player).getTcpSession(), new RequestMessage(RequestType.RESPONSE, p.getName()));
+					}
+					break;
+				case 19:
+					if(m_players.containsKey(player))
+					{
+						TcpProtocolHandler.writeMessage(m_players.get(player).getTcpSession(), new RequestMessage(RequestType.BATTLE, p.getName()));
+						p.addRequest(player, RequestType.BATTLE);
+					}
+					break;
+				case 20:
+					if(m_players.containsKey(player))
+					{
+						TcpProtocolHandler.writeMessage(m_players.get(player).getTcpSession(), new RequestMessage(RequestType.TRADE, p.getName()));
+						p.addRequest(player, RequestType.TRADE);
+					}
+					break;
+				case 21:
+					if(m_players.containsKey(player))
+						m_players.get(player).requestAccepted(p.getName());
+					break;
+				case 22:
+					if(m_players.containsKey(player))
+						m_players.get(player).removeRequest(p.getName());
+					break;
+				case 23:
+					int boxNum = Integer.parseInt(String.valueOf(message.charAt(2)));
+					if(p.isBoxing() && boxNum >= 0 && boxNum < 9)
+						p.sendBoxInfo(boxNum);
+					break;
+				case 24:
+					if(p.isBoxing())
+					{
+						details = message.substring(2).split(",");
+						p.releasePokemon(Integer.parseInt(details[0]), Integer.parseInt(details[1]));
+					}
+					break;
+				case 25:
+					if(p.isBoxing())
+					{
+						details = message.substring(2).split(",");
+						p.swapFromBox(Integer.parseInt(details[0]), Integer.parseInt(details[1]), Integer.parseInt(details[2]));
+					}
+					break;
+				case 26:
+					p.setBoxing(false);
+					break;
+				case 27:
+					p.getTcpSession().write("Cl" + m_players.size() + " players online");
+					break;
+				case 28:
+					if(p.getAdminLevel() > 0)
+					{
+						for(String s : m_players.keySet())
+						{
+							m_players.get(s).getTcpSession().write("q" + message.substring(2));
+						}
+					}
+					break;
+				case 29:
+					if(p.getAdminLevel() > 1)
+					{
+						for(String s : m_players.keySet())
+						{
+							m_players.get(s).getTcpSession().write("!" + message.substring(2));
+						}
+					}
+					break;
+				case 30:
+					if(p.getAdminLevel() > 0)
+					{
+						if(m_players.containsKey(player))
+						{
+							Player playerToBeBanned = m_players.get(player);
+							MySqlManager.getInstance().query("INSERT INTO `pn_bans` (ip) VALUE ('" + playerToBeBanned.getIpAddress() + "')");
+						}
+					}
+					break;
+				case 31:
+					if(p.getAdminLevel() > 0)
+						MySqlManager.getInstance().query("DELETE FROM pn_bans WHERE ip='" + player + "'");
+					break;
+				case 32:
+					if(p.getAdminLevel() > 0)
+					{
+						if(m_players.containsKey(player))
+						{
+							Player o = m_players.get(player);
+							p.setX(o.getX());
+							p.setY(o.getY());
+							p.setMap(o.getMap(), null);
+						}
+					}
+					break;
+				case 33:
+					if(p.getAdminLevel() > 0)
+					{
+						if(m_players.containsKey(player))
+						{
+							Player o = m_players.get(player);
+							o.setMuted(true);
+							o.getTcpSession().write("!You have been muted.");
+						}
+					}
+					break;
+				case 34:
+					if(p.getAdminLevel() > 0)
+					{
+						if(m_players.containsKey(player))
+						{
+							Player o = m_players.get(player);
+							o.setMuted(false);
+							o.getTcpSession().write("!You have been unmuted.");
+						}
+					}
+					break;
+				case 35:
+					if(p.getAdminLevel() > 0)
+					{
+						if(m_players.containsKey(player))
+						{
+							Player o = m_players.get(player);
+							o.getTcpSession().write("!You have been kicked from the server.");
+							o.getTcpSession().close(true);
+						}
+					}
+					break;
+				case 36:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(0);
+					break;
+				case 37:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(1);
+					break;
+				case 38:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(2);
+					break;
+				case 39:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(3);
+					break;
+				case 40:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(4);
+					break;
+				case 41:
+					if(p.getAdminLevel() > 0)
+						GameServer.getServiceManager().getTimeService().setForcedWeather(9);
+					break;
+				case 42:
+					if(p.getAdminLevel() == 2)
+						GameServer.getServiceManager().stop();
+					break;
+				case 43:
+					if(p.getAdminLevel() == 2)
+					{
+						String mes = message.substring(3);
+						GameServer.getServiceManager().getNetworkService().getChatManager().queueLocalChatMessage("<SERVER> " + mes, p.getMapX(), p.getMapY(), p.getLanguage());
+					}
+					break;
+				case 44:
+					BattleTurn turn;
+					if(p.isBattling())
+					{
+						turn = BattleTurn.getMoveTurn(Integer.parseInt(message.substring(2)));
+						p.getBattleField().queueMove(p.getBattleId(), turn);
+					}
+					break;
+				case 45:
+					if(p.isBattling())
+					{
+						int pIndex = Integer.parseInt(message.substring(2));
+						if(p.getParty()[pIndex] != null && !p.getParty()[pIndex].isFainted())
+						{
+							turn = BattleTurn.getSwitchTurn(pIndex);
+							p.getBattleField().queueMove(p.getBattleId(), turn);
+						}
+					}
+					break;
+				case 46:
+					if(p.isBattling())
+					{
+						if(p.getBattleField() instanceof WildBattleField)
+							((WildBattleField) p.getBattleField()).run();
+					}
+					break;
+				case 47:
+					if(m_players.containsKey(player))
+						session.write("MFo" + player);
+					p.addFriend(player);
+					break;
+				case 48:
+					p.removeFriend(player);
+					break;
+				case 49:
+					if(m_players.containsKey(player))
+						session.write("MFo" + player);
+					else
+						session.write("MFf" + player);
+					break;
+				case 50:
+					details = message.substring(2).split(",");
+					System.out.println("Item used. " + message);
+					new Thread(new ItemProcessor(p, details)).start();
+					break;
+				case 51:
+					int pIndex = Integer.parseInt(message.split(",")[1]);
+					if(p.getParty()[pIndex] != null)
+					{
+						if(p.getParty()[pIndex].getItemName().equals("") || p.getParty()[pIndex].getItemName() == null)
+						{
+							p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(2).split(",")[0])).getName()));
+							p.getTcpSession().write(
+									"Ir" + (message.substring(2).split(",")[0]) + ",1" + "," + (p.getParty()[pIndex].getName() + " was given " + p.getParty()[pIndex].getItemName() + " to hold"));
+							p.getBag().removeItem(Integer.parseInt(message.substring(2).split(",")[0]), 1);
+						}
+						else
+						{
+							String pI = p.getParty()[pIndex].getItemName();
+							p.getTcpSession().write("Iu" + GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId() + ",1");
+							p.getBag().addItem(GameServer.getServiceManager().getItemDatabase().getItem(p.getParty()[pIndex].getItemName()).getId(), 1);
+							p.getParty()[pIndex].setItem(new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(Integer.parseInt(message.substring(2).split(",")[0])).getName()));
+							p.getTcpSession().write("Ir" + (message.substring(2).split(",")[0]) + ",1" + "," + (pI + " was switched with " + p.getParty()[pIndex].getItemName()));
+							p.getBag().removeItem(Integer.parseInt(message.substring(2).split(",")[0]), 1);
+						}
+					}
+					break;
+				case 52:
+					if(p.getBag().removeItem(Integer.parseInt(message.substring(2)), 1))
+						TcpProtocolHandler.writeMessage(p.getTcpSession(), new ItemMessage(false, Integer.parseInt(message.substring(2)), 1));
+					break;
+				case 53:
+					if(p.isTrading())
+					{
+						details = message.substring(2).split(",");
+						p.getTrade().setOffer(p, Integer.parseInt(String.valueOf(details[0])), Integer.parseInt(String.valueOf(details[1])));
+					}
+					break;
+				case 54:
+					if(p.isTrading())
+						p.setTradeAccepted(true);
+					break;
+				case 55:
+					if(p.isTrading())
+						p.cancelTradeOffer();
+					break;
+				case 56:
+					if(p.isTrading())
+						p.getTrade().endTrade();
+					break;
+				case 57:
+					if(!p.isMuted())
+						for(String s : m_players.keySet())
+						{
+							m_players.get(s).getTcpSession().write("q" + "<" + p.getName() + "> " + message.substring(2));
+						}
+					break;
+				case 58:
+					String mes = message.substring(2);
+					if(!p.isMuted())
+						GameServer.getServiceManager().getNetworkService().getChatManager().queueLocalChatMessage("<" + p.getName() + "> " + mes, p.getMapX(), p.getMapY(), p.getLanguage());
+					break;
+				case 59:
+					details = message.substring(2).split(",");
+					if(m_players.containsKey(details[0]))
+						GameServer.getServiceManager().getNetworkService().getChatManager().queuePrivateMessage(details[1], m_players.get(details[0]).getTcpSession(), p.getName());
+					break;
+				case 60:
+					if(!p.isTalking() && !p.isBattling())
+						p.talkToNpc();
+					break;
+				case 61:
+					if(p.isTalking())
+						p.setTalking(false);
 					break;
 			}
 			switch(message.charAt(0))
@@ -259,26 +569,18 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
 							int moveIndex = Integer.parseInt(String.valueOf(message.charAt(3)));
 							move = message.substring(4);
-							if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null)
+							if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null && p.getParty()[pokemonIndex].getMovesLearning().contains(move))
 							{
-								if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
-								{
-									p.getParty()[pokemonIndex].learnMove(moveIndex, move);
-									p.updateClientPP(pokemonIndex, moveIndex);
-								}
+								p.getParty()[pokemonIndex].learnMove(moveIndex, move);
+								p.updateClientPP(pokemonIndex, moveIndex);
 							}
 							break;
 						case 'M':
 							// Player is not allowing the move to be learned
 							pokemonIndex = Integer.parseInt(String.valueOf(message.charAt(2)));
 							move = message.substring(3);
-							if(p.getParty()[pokemonIndex] != null)
-							{
-								if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
-								{
+							if(p.getParty()[pokemonIndex] != null && p.getParty()[pokemonIndex].getMovesLearning().contains(move))
 									p.getParty()[pokemonIndex].getMovesLearning().remove(move);
-								}
-							}
 							break;
 						case 'e':
 							// Evolution response
@@ -347,7 +649,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					}
 					break;
 				case 'r':
-					String player = message.substring(2);
+					// String player = message.substring(2);
 					// A request was sent
 					switch(message.charAt(1))
 					{
@@ -377,16 +679,12 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 						case 'a':
 							// Request accepted raUSERNAME
 							if(m_players.containsKey(player))
-							{
 								m_players.get(player).requestAccepted(p.getName());
-							}
 							break;
 						case 'c':
 							// Request declined rcUSERNAME
 							if(m_players.containsKey(player))
-							{
 								m_players.get(player).removeRequest(p.getName());
-							}
 							break;
 					}
 					break;
@@ -422,9 +720,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 				case 'M':
 					// Moderation
 					if(message.charAt(1) == 'c')
-					{
 						p.getTcpSession().write("Cl" + m_players.size() + " players online");
-					}
 					else if(p.getAdminLevel() > 0)
 					{
 						switch(message.charAt(1))
@@ -524,16 +820,12 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 								break;
 							case 's':
 								if(p.getAdminLevel() == 2)
-								{
 									GameServer.getServiceManager().stop();
-									return;
-								}
 								break;
 							case 'n':
 								// Announce message to server
 								if(p.getAdminLevel() == 2)
 								{
-									// TODO: add code?
 									String mes = message.substring(3);
 									GameServer.getServiceManager().getNetworkService().getChatManager().queueLocalChatMessage("<SERVER> " + mes, p.getMapX(), p.getMapY(), p.getLanguage());
 								}
@@ -556,27 +848,22 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							case 's':
 								// Pokemon switch (bsPARTYINDEX)
 								int pIndex = Integer.parseInt(message.substring(2));
-								if(p.getParty()[pIndex] != null)
+								if(p.getParty()[pIndex] != null && !p.getParty()[pIndex].isFainted())
 								{
-									if(!p.getParty()[pIndex].isFainted())
-									{
-										turn = BattleTurn.getSwitchTurn(pIndex);
-										p.getBattleField().queueMove(p.getBattleId(), turn);
-									}
+									turn = BattleTurn.getSwitchTurn(pIndex);
+									p.getBattleField().queueMove(p.getBattleId(), turn);
 								}
 								break;
 							case 'r':
 								// Run
 								if(p.getBattleField() instanceof WildBattleField)
-								{
 									((WildBattleField) p.getBattleField()).run();
-								}
 								break;
 						}
 					}
 					break;
 				case 'F':
-					// Friend list TODO: Test offline/online friends.
+					// Friend list TODO: Fix offline/online friends.
 					String friend = message.substring(2);
 					switch(message.charAt(1))
 					{
@@ -604,7 +891,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 					new Thread(new ItemProcessor(p, details)).start();
 					break;
 				case 'G':
-					/* Give an items to a pokemon, this can be used for berries and evolving pokemon TODO: Write implementation */
+					/* Give an items to a pokemon, this can be used for berries and evolving pokemon */
 					// details = message.substring(1).split(",");
 					int pIndex = Integer.parseInt(message.split(",")[1]);
 					if(p.getParty()[pIndex] != null)
@@ -630,9 +917,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 				case 'i':
 					// Drop item
 					if(p.getBag().removeItem(Integer.parseInt(message.substring(1)), 1))
-					{
 						TcpProtocolHandler.writeMessage(p.getTcpSession(), new ItemMessage(false, Integer.parseInt(message.substring(1)), 1));
-					}
 					break;
 				case 'T':
 					// Trade packets
@@ -682,9 +967,7 @@ public class TcpProtocolHandler extends IoHandlerAdapter
 							// Private chat
 							details = message.substring(2).split(",");
 							if(m_players.containsKey(details[0]))
-							{
 								GameServer.getServiceManager().getNetworkService().getChatManager().queuePrivateMessage(details[1], m_players.get(details[0]).getTcpSession(), p.getName());
-							}
 							break;
 						case 't':
 							// Start talking

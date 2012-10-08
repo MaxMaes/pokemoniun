@@ -52,7 +52,7 @@ public class ClientMapMatrix
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		//System.out.println("Map: " + x + ", " + y);
+		System.out.println("Map: " + mapX + ", " + mapY);
 		InputStream f = FileLoader.loadFile(respath + "res/maps/" + (mapX) + "." + (mapY) + ".tmx");
 		if(f != null)
 		{

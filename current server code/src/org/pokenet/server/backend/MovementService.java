@@ -99,13 +99,17 @@ public class MovementService {
 		for(int x = -50; x < 50; x++) {
 			for(int y = -50; y < 50; y++) {
 				nextMap = new File("res/maps/" + String.valueOf(x) + "." + String.valueOf(y) + ".tmx");
+				//System.out.println("trying: " + x + ", " +y);
 				if(nextMap.exists()) {
 					try {
 						s = new ServerMap(loader.readMap(nextMap.getCanonicalPath()), x, y);
 						s.setMapMatrix(m_mapMatrix);
 						s.loadData();
+						
 						m_mapMatrix.setMap(s , x + 50, y + 50);
 						//Thread.sleep(100); // Why sleep?
+						
+						System.out.println("loaded map: " + x + ", " +y);
 					} catch (Exception e) {
 						System.err.println("Error loading " + x + "." + y + ".tmx - Bad map file");
 						m_mapMatrix.setMap(null, x + 50, y + 50);

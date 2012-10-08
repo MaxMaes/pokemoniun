@@ -11,10 +11,10 @@
   <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,5;Gastrodon,1;"/>
   <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
   <property name="wildProbability" value="1"/>
-  <property name="xOffsetModifier" value="0"/>
+  <property name="xOffsetModifier" value="64"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="maps/normal12.tsx"/>
+ <tileset firstgid="1" source="normal12.tsx"/>
  <layer name="Walkable" width="36" height="36">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2VMQ6DMAxFPSF6DNqh9BilA/QYZWl7/wvUGSJZUbCdhiQMHp6EhIkfcaLfAUBnGIZhFOeKjMjtAC6OGVmQ5wFcWvlARR+ul+eU6KNZM4b2LKb6cPWx/p6FMDJw72Nr+GfpP+fg+9JIZ+qNfBjoWlydlq9ybrXuSi7mU89nQC4NfVz/M2FCHhV9Yv1DavkMG/1zfUDhE9Y4XshawCfMmdQsuu/o47KsBzmLaA3NI83MUnykLOsj0H2T9mZKnJWUZVwebe1N7n36B25OLXy4OZmP+ZT2+QEelPS/QBQAAA==
@@ -27,12 +27,12 @@
  </layer>
  <layer name="Collisions" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSQrCQBBFE7fifBBRj6WnEOI9FFwZ5xPo1lmP4awX8AciQkibrjKdhJgPjwJTdBcvo5oWrbR1Tevo6ip1fwO0FFavzNAz1z81an6c871rXPxQo9oPNYkff/x4xUzR97bi5VfkR1VE+/3qx6+o9mMQjzn3baTc4aZLPBbWeRElqOtWNomf74m6n7g/f6jx088QjMAYTMCUMY+snx56TdAHA8FaG7AFO7AHB8Y8sn4W6F2CFVgL1rqCG7iDB3gy5pH1c0TvCZzBxWUd612UQ18eFEARlBjXnayftL12BjXrso/1Lirbv1dQq6DGmCeo+6sp2Zc8f74nbD/c7+e6/V1GrVQfYf//4vrh1sTPf/l5AcId+6pAFAAA
+   H4sIAAAAAAAAC+2XWQqCUBSG09doXkhUy6pVBLaPgp6aawX22lzLaK4N9AtKIN685+RNE3/4OJCnew9f5mBqqVQLmIqqYVdR3P1t0FFY/eLud+ZXVf1ieZlr7xo1P+75nBoXP9So9kNN4icYP37p6/S9rfj5FflRFdF+3/oJKqr9GMRj7n0bujfcdInHwvpdRPnVeSubxM/nRN1P3K8/1ATpZwTGYAKmYMaYR9ZPD719MABDwVobsAU7sAcHxjyyfhboXYIVWAvWuoIbuIMHeDLmkfVzRO8JnMHFYx3rXpRDXx4UQBGUGOedrJ+0vXYGNeuxj3UvKtufV1CroMaY51f/r6ZkX3L9+Zyw/XCfn+v2cxm1Un2E/f7F9cOtiZ//9kP9/gvpnVQfQBQAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VsQrAIAxF0fjpuqrV2h/2LVIQR13ae+CSMVtiBgD/4J1ZcO8EAKzN95K7uU9RVd2qqefgrqiSyuo6uAfAd/EHAAwdZvxtjEAUAAA=
+   H4sIAAAAAAAAC+3VsQ6AIAxF0fLpsoIi+MO8jYQ4lgG9J7lh7NRiBgD/cASzGMYLAHg330vupp+iblVVU8/CWUlldapr4RwA38U/APjZfZ86MQ0GikAUAAA=
   </data>
  </layer>
  <layer name="random" width="36" height="36">

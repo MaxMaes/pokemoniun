@@ -19,7 +19,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -2221,12 +2220,10 @@ public class Pokemon extends PokemonSpecies {
 	 * @param exp
 	 */
 	public void setExp(double exp) {
-		DecimalFormat form = new DecimalFormat("#.##");
 		if (exp > 100000000) {
 			m_exp = 100000000;
 			return;
 		}
-		//m_exp = Double.valueOf(form.format(exp));
 		m_exp = exp;
 	}
 

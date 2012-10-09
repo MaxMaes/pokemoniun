@@ -1091,11 +1091,6 @@ public class GameClient extends BasicGame
 		
 		KeyManager.initialize();
 		PokedexData.loadPokedexData();
-		/*ClientUpdater updater = new ClientUpdater();
-		if(!updater.checkFiles()) {
-			System.out.println("Missing resources, game not starting");
-			System.exit(1);
-		} TODO: Work on the updater. (not included in current release)*/
 		
 		boolean fullscreen = false;
 		try

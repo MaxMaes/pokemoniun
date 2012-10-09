@@ -173,7 +173,7 @@ public class PokedexDialog extends Frame
 		pokemonBiologyLabels[6].setText("Genderrate: " + genderrate);
 		pokemonBiologyLabels[11].setText("Rareness: " + rareness);
 		pokemonBiologyLabels[12].setText("Steps to hatch: " + stepstohatch);
-		pokemonBiologyLabels[12].setText("Compatibility: " + compatibility); // TODO: Myth1c, you're overriding number 12?
+		pokemonBiologyLabels[13].setText("Compatibility: " + compatibility);
 
 		for(int i = 0; i < pokemonBiologyLabels.length; i++)
 		{

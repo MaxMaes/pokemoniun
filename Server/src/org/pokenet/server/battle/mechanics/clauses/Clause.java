@@ -30,7 +30,6 @@ import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
  */
 public abstract class Clause extends FieldEffect {
     
-    @SuppressWarnings("unchecked")
 	public static class ClauseChoice implements Serializable, Comparable {
         private static final long serialVersionUID = 1L;
         private String m_name, m_description;

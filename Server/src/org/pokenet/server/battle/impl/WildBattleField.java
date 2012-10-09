@@ -298,7 +298,8 @@ public class WildBattleField extends BattleField {
 			if (move.getId() == -1) {
 				if (m_dispatch == null && (trainer == 0 && m_turn[1] != null)) {
 					m_dispatch = new Thread(new Runnable() {
-						public void run() {
+						public void run() 
+						{
 							executeTurn(m_turn);
 							m_dispatch = null;
 						}

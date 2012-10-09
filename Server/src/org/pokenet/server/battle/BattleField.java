@@ -365,9 +365,9 @@ public abstract class BattleField {
 	  * Returns the first instance of an effect of a certain class that is
 	  * applied to the BattleField.
 	  */
-	 @SuppressWarnings("unchecked")
-	 public FieldEffect getEffectByType(Class type) {
-		 ArrayList list = getEffectsByType(type);
+	 @SuppressWarnings("rawtypes") //TODO:Supressed this warning because we are passing different kind of effects and can't parameterize the Class type
+	public FieldEffect getEffectByType(Class type) {
+		 ArrayList<FieldEffect> list = getEffectsByType(type);
 		 if (list.size() == 0) {
 			 return null;
 		 }
@@ -378,7 +378,7 @@ public abstract class BattleField {
 	  * Returns a list of the effects of a certain class that are applied to
 	  * this BattleField.
 	  */
-	 @SuppressWarnings("unchecked")
+	 @SuppressWarnings({ "rawtypes", "unchecked" }) //TODO:Supressed this warning because we are passing different kind of effects and can't parameterize the Class type
 	 public ArrayList<FieldEffect> getEffectsByType(Class type) {
 		 ArrayList<FieldEffect> ret = new ArrayList<FieldEffect>();
 		 Iterator<FieldEffect> i = m_effects.iterator();

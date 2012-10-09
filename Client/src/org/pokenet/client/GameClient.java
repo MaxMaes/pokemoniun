@@ -597,7 +597,7 @@ public class GameClient extends BasicGame
 				}
 				if(m_dcConfirm != null)
 				{
-					m_packetGen.writeTcpMessage("rl" + m_ourPlayer.getUsername());
+					m_packetGen.writeTcpMessage("12" + m_ourPlayer.getUsername());
 					disconnect();
 					reset();
 					m_dcConfirm.setVisible(false);
@@ -747,19 +747,19 @@ public class GameClient extends BasicGame
 				}
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 97);
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + 97);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 98);
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + 98);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 99);
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + 99);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + 100);
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + 100);
 				}
 			}
 		}
@@ -788,7 +788,7 @@ public class GameClient extends BasicGame
 		{
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 			{
-				m_packetGen.writeTcpMessage("Ct");
+				m_packetGen.writeTcpMessage("3C");
 			}
 			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -956,7 +956,7 @@ public class GameClient extends BasicGame
 				}
 				if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 				{
-					m_packetGen.writeTcpMessage("Ct");
+					m_packetGen.writeTcpMessage("3C");
 				}
 				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -1142,7 +1142,7 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
-						m_packetGen.writeTcpMessage("rl" + m_ourPlayer.getUsername());
+						m_packetGen.writeTcpMessage("12" + m_ourPlayer.getUsername());
 						disconnect();
 						reset();
 						m_dcConfirm.setVisible(false);
@@ -1165,18 +1165,12 @@ public class GameClient extends BasicGame
 			};
 			m_dcConfirm = new ConfirmationDialog("Are you sure you want to logout?", yes, no);
 			if(getUi() != null)
-			{
 				getUi().getDisplay().add(m_dcConfirm);
-			}
 			else
-			{
 				System.out.println("Attempting close before client loaded, ignoring");
-			}
 		}
 		else
-		{
 			m_dcConfirm.setVisible(true);
-		}
 	}
 
 	/**
@@ -1216,13 +1210,9 @@ public class GameClient extends BasicGame
 			};
 			m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
 			if(getUi() != null)
-			{
 				getUi().getDisplay().add(m_exitConfirm);
-			}
 			else
-			{
 				System.out.println("Attempting close before client loaded, ignoring");
-			}
 		}
 		return m_close;
 	}

@@ -32,7 +32,7 @@ public class NPCSpeechFrame extends SpeechFrame {
                     triangle = null;
                     setVisible(false);
                     GameClient.getInstance().getUi().nullSpeechFrame();
-                    GameClient.getInstance().getPacketGenerator().writeTcpMessage("Cf");
+                    GameClient.getInstance().getPacketGenerator().writeTcpMessage("3D");
             }
     }
 }

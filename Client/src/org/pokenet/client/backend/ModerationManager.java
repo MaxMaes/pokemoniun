@@ -5,75 +5,69 @@ import org.pokenet.client.network.PacketGenerator;
 
 /**
  * Parses chat text for commands
+ * 
  * @author ZombieBear
- *
  */
-public class ModerationManager {
+public class ModerationManager
+{
 	private static PacketGenerator m_ioSession = GameClient.getInstance().getPacketGenerator();
-	
-	public static void parseLine(String x){
+
+	public static void parseLine(String x)
+	{
 		// Announcement
-		if (x.length() >= 9 && x.substring(0, 9).equalsIgnoreCase("announce ")) {
-			m_ioSession.writeTcpMessage("Ma" + x.substring(9));
-		}
+		if(x.length() >= 9 && x.substring(0, 9).equalsIgnoreCase("announce "))
+			m_ioSession.writeTcpMessage("1C" + x.substring(9));
+		// Alert
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("alert "))
+			m_ioSession.writeTcpMessage("1D" + x.substring(6));
 		// Mute
-		else if (x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("mute ")) {
-			m_ioSession.writeTcpMessage("Mm" + x.substring(5));
-		}
+		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("mute "))
+			m_ioSession.writeTcpMessage("21" + x.substring(5));
 		// Unmute
-		else if (x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("unmute ")) {
-			m_ioSession.writeTcpMessage("Mu" + x.substring(7));
-		}
+		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("unmute "))
+			m_ioSession.writeTcpMessage("22" + x.substring(7));
 		// Kick
-		else if (x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("kick ")) {
-			m_ioSession.writeTcpMessage("Mk" + x.substring(5));
-		}
+		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("kick "))
+			m_ioSession.writeTcpMessage("23" + x.substring(5));
 		// Ban
-		else if (x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("ban ")) {
-			m_ioSession.writeTcpMessage("Mb" + x.substring(4));
-		}
+		else if(x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("ban "))
+			m_ioSession.writeTcpMessage("1E" + x.substring(4));
 		// Unban
-		else if (x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("unban ")) {
-			m_ioSession.writeTcpMessage("MB" + x.substring(6));
-		}
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("unban "))
+			m_ioSession.writeTcpMessage("1F" + x.substring(6));
 		// Jump to [player]
-		else if (x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("jumpto ")) {
-			m_ioSession.writeTcpMessage("MW" + x.substring(7));
-		}
+		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("jumpto "))
+			m_ioSession.writeTcpMessage("20" + x.substring(7));
 		// Player count
-		else if (x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount")) {
-			m_ioSession.writeTcpMessage("Mc");
-		}
+		else if(x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount"))
+			m_ioSession.writeTcpMessage("1B");
 		// local chat
-		else if (x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("local ")) {
-			m_ioSession.writeTcpMessage("Cl" + x.substring(6));
-		}
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("local "))
+			m_ioSession.writeTcpMessage("3A" + x.substring(6));
 		// Change Weather
-		else if (x.length() >= 8 && x.substring(0, 8).equalsIgnoreCase("weather ")) {
+		else if(x.length() >= 8 && x.substring(0, 8).equalsIgnoreCase("weather "))
+		{
 			// Normal
-			if (x.substring(8).equalsIgnoreCase("normal") ||
-					x.substring(8).equalsIgnoreCase("sunny"))
-				m_ioSession.writeTcpMessage("Mun");
+			if(x.substring(8).equalsIgnoreCase("normal") || x.substring(8).equalsIgnoreCase("sunny"))
+				m_ioSession.writeTcpMessage("24");
 			// Rain
-			else if (x.substring(8).equalsIgnoreCase("rain"))
-				m_ioSession.writeTcpMessage("Mur");
+			else if(x.substring(8).equalsIgnoreCase("rain"))
+				m_ioSession.writeTcpMessage("25");
 			// Snow
-			else if (x.substring(8).equalsIgnoreCase("snow") ||
-					x.substring(8).equalsIgnoreCase("hail") )
-				m_ioSession.writeTcpMessage("Mus");
+			else if(x.substring(8).equalsIgnoreCase("snow") || x.substring(8).equalsIgnoreCase("hail"))
+				m_ioSession.writeTcpMessage("26");
 			// Fog
-			else if (x.substring(8).equalsIgnoreCase("fog"))
-				m_ioSession.writeTcpMessage("Muf");
+			else if(x.substring(8).equalsIgnoreCase("fog"))
+				m_ioSession.writeTcpMessage("27");
 			// Sandstorm
-			else if (x.substring(8).equalsIgnoreCase("sandstorm"))
-				m_ioSession.writeTcpMessage("MuS");
+			else if(x.substring(8).equalsIgnoreCase("sandstorm"))
+				m_ioSession.writeTcpMessage("28");
 			// Random
-			else if (x.substring(8).equalsIgnoreCase("random"))
-				m_ioSession.writeTcpMessage("MuR");
+			else if(x.substring(8).equalsIgnoreCase("random"))
+				m_ioSession.writeTcpMessage("29");
 		}
 		// Stop server
-		else if (x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("stop")) {
-			m_ioSession.writeTcpMessage("Ms");
-		}
+		else if(x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("stop"))
+			m_ioSession.writeTcpMessage("2A");
 	}
 }

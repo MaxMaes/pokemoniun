@@ -49,23 +49,19 @@ public class ChatDialog extends Frame
 			if(m_possibleChats.getSelected().equalsIgnoreCase("global"))
 			{
 				if(m_inputBox.getText().charAt(0) == '/')
-				{
 					ModerationManager.parseLine(m_inputBox.getText().substring(1));
-				}
 				else
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("Cw" + m_inputBox.getText());
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
 				}
 			}
 			else
 			{
 				if(m_inputBox.getText().charAt(0) == '/')
-				{
 					ModerationManager.parseLine(m_inputBox.getText().substring(1));
-				}
 				else
 				{
-					GameClient.getInstance().getPacketGenerator().writeTcpMessage("Cp" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
+					GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
 					addWhisperLine(m_possibleChats.getSelected(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + m_inputBox.getText());
 				}
 			}

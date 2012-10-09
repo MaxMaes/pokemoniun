@@ -179,7 +179,7 @@ public class PartyInfoDialog extends Frame
 					{
 						public void actionPerformed(ActionEvent e)
 						{
-							GameClient.getInstance().getPacketGenerator().writeTcpMessage("s" + String.valueOf(j) + "," + String.valueOf(j - 1));
+							GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();
@@ -198,7 +198,7 @@ public class PartyInfoDialog extends Frame
 					{
 						public void actionPerformed(ActionEvent e)
 						{
-							GameClient.getInstance().getPacketGenerator().writeTcpMessage("s" + String.valueOf(j) + "," + String.valueOf(j + 1));
+							GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();

@@ -1,13 +1,11 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
-
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
@@ -154,8 +152,7 @@ public class UserInterface extends Frame
 			}
 		});
 		m_buttons[1].setToolTipText("Pokedex");
-		
-		
+
 		m_buttons[2] = HUDButtonFactory.getButton("pokemon");
 		m_buttons[2].addActionListener(new ActionListener()
 		{
@@ -235,7 +232,7 @@ public class UserInterface extends Frame
 			}
 		});
 		m_buttons[9].setToolTipText("Disconnect");
-		
+
 		for(int i = 0; i < m_buttons.length; i++)
 		{
 			m_buttons[i].pack();
@@ -447,7 +444,7 @@ public class UserInterface extends Frame
 			BagDialog pane = new BagDialog(GameClient.getInstance().getOurPlayer().getItems())
 			{
 				public void itemClicked(PlayerItem item)
-				{
+				{/* TODO: Implement 'Hotbar' functionality or remove completely */
 					GameClient.getInstance().getPacketGenerator().writeTcpMessage("u" + item.getItem().getName());
 				}
 
@@ -595,10 +592,10 @@ public class UserInterface extends Frame
 			m_chat.setVisible(true);
 		}
 	}
-	
+
 	public void togglePokedex()
 	{
-		//TODO
+		// TODO
 		if(m_pokedex.isVisible())
 		{
 			m_pokedex.setVisible(false);
@@ -858,7 +855,7 @@ public class UserInterface extends Frame
 		for(int i = 0; i < friends.length; i++)
 			m_friendsList.addFriend(friends[i]);
 	}
-	
+
 	/**
 	 * A pokemon wants to evolve
 	 * 
@@ -871,7 +868,7 @@ public class UserInterface extends Frame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				GameClient.getInstance().getPacketGenerator().writeTcpMessage("Pe1" + index);
+				GameClient.getInstance().getPacketGenerator().writeTcpMessage("0C" + index);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};
@@ -879,7 +876,7 @@ public class UserInterface extends Frame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				GameClient.getInstance().getPacketGenerator().writeTcpMessage("Pe0" + index);
+				GameClient.getInstance().getPacketGenerator().writeTcpMessage("0B" + index);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};

@@ -41,11 +41,11 @@ public class SpriteChooserDialog extends Frame
 		}
 		/* Handle blocked sprites */
 		InputStream in = null;
-		try 
+		try
 		{
 			in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
-		} 
-		catch (Exception e) 
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -90,7 +90,6 @@ public class SpriteChooserDialog extends Frame
 		cancel.pack();
 		cancel.setLocation(130, 280);
 		getContentPane().add(cancel);
-
 		cancel.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -110,7 +109,7 @@ public class SpriteChooserDialog extends Frame
 					{
 						confirm.setVisible(false);
 						GameClient.getInstance().getDisplay().remove(confirm);
-						GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_spriteList.getSelectedName());
+						GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
 					}
 				});
 				confirm.addNoListener(new ActionListener()
@@ -139,10 +138,12 @@ public class SpriteChooserDialog extends Frame
 		{
 			try
 			{
-				try {
+				try
+				{
 					m_stream = FileLoader.loadFile(m_mustLoadSprite);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				}
+				catch(Exception e)
+				{
 					e.printStackTrace();
 				}
 				m_spriteDisplay.setImage(new Image(m_stream, m_mustLoadSprite, false));

@@ -445,7 +445,7 @@ public class BattleWindow extends Frame
 	 */
 	private void run()
 	{
-		GameClient.getInstance().getPacketGenerator().writeTcpMessage("br");
+		GameClient.getInstance().getPacketGenerator().writeTcpMessage("2E");
 	}
 
 	/**
@@ -521,7 +521,7 @@ public class BattleWindow extends Frame
 	{
 		attackPane.setVisible(false);
 		pokesContainer.setVisible(false);
-		GameClient.getInstance().getPacketGenerator().writeTcpMessage("bs" + i);
+		GameClient.getInstance().getPacketGenerator().writeTcpMessage("2D" + i);
 	}
 
 	/**
@@ -537,7 +537,7 @@ public class BattleWindow extends Frame
 			BattleManager.getInstance().getCurPoke().setMoveCurPP(i, BattleManager.getInstance().getCurPoke().getMoveCurPP()[i] - 1);
 			BattleManager.getInstance().updateMoves();
 		}
-		GameClient.getInstance().getPacketGenerator().writeTcpMessage("bm" + i);
+		GameClient.getInstance().getPacketGenerator().writeTcpMessage("2C" + i);
 		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 	}
 	

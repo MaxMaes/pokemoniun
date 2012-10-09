@@ -569,7 +569,7 @@ class ItemPopup extends Frame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				GameClient.getInstance().getPacketGenerator().writeTcpMessage("i" + m_id);
+				GameClient.getInstance().getPacketGenerator().writeTcpMessage("34" + m_id);
 				destroyPopup();
 			}
 		});
@@ -638,7 +638,7 @@ class ItemPopup extends Frame
 		}
 		else
 		{
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + id);
+			GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + id);
 			// System.out.println("no use");
 			destroyPopup();
 		}
@@ -749,11 +749,12 @@ class TeamPopup extends Frame
 	public void processItemUse(boolean use, int id, int pokeIndex, boolean isBattle)
 	{
 		if(use)
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("I" + id + "," + pokeIndex);
+			GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + id + "," + pokeIndex);
 		else
-			// TODO: Write "Give" packet
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("G" + id + "," + pokeIndex);
+		{
+			GameClient.getInstance().getPacketGenerator().writeTcpMessage("33" + id + "," + pokeIndex);
 			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
+		}
 		m_parent.destroyPopup();
 	}
 }

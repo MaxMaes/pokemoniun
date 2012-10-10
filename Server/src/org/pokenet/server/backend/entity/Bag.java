@@ -43,7 +43,7 @@ public class Bag {
 		if(bagIndex > -1) {
 			m_items.get(bagIndex).increaseQuantity(quantity);
 			return true;
-		} else if(m_items.size() < 30){
+		} else if(m_items.size() < m_bagsize){
 			m_items.add(new BagItem(itemNumber, quantity));
 			return true;
 		}
@@ -95,7 +95,7 @@ public class Bag {
 		for(int i = 0; i < m_items.size(); i++) {
 			if(m_items.get(i).getItemNumber() == itemNumber){
 				quantity = m_items.get(i).getQuantity();
-				i = m_items.size();//End for loop. We found what we're looking for. 
+				break;//End for loop. We found what we're looking for. 
 			}
 		}
 		return quantity;

@@ -50,7 +50,6 @@ public class LoginManager implements Runnable {
 		m_database = MySqlManager.getInstance();
 		m_loginQueue = new LinkedList<Object[]>();
 		m_passChangeQueue = new LinkedList<Object[]>();
-		m_thread = null;
 	}
 
 	/**
@@ -60,14 +59,13 @@ public class LoginManager implements Runnable {
 	 * @return
 	 */
 	private String getIp(IoSession s) {
+		String ip = "";
 		if (s != null) {
-			String ip = s.getRemoteAddress().toString();
+			ip = s.getRemoteAddress().toString();
 			ip = ip.substring(1);
 			ip = ip.substring(0, ip.indexOf(":"));
-			return ip;
-		} else {
-			return "";
 		}
+		return ip;
 	}
 
 	/**
@@ -275,7 +273,7 @@ public class LoginManager implements Runnable {
 			}
 			try {
 				Thread.sleep(500);
-			} catch (Exception e) {
+			} catch (InterruptedException e) {
 			}
 
 			synchronized (m_passChangeQueue) {
@@ -295,7 +293,7 @@ public class LoginManager implements Runnable {
 			}
 			try {
 				Thread.sleep(500);
-			} catch (Exception e) {
+			} catch (InterruptedException e) {
 			}
 		}
 		m_thread = null;
@@ -728,7 +726,9 @@ public class LoginManager implements Runnable {
 				pokemon.setPpUp(0, data.getInt("ppUp1"));
 				pokemon.setPpUp(0, data.getInt("ppUp2"));
 				pokemon.setPpUp(0, data.getInt("ppUp3"));
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

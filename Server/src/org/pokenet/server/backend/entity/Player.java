@@ -1204,11 +1204,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getTrainingLevel()
 	{
-		int level = ((int) Math.pow((m_skillTrainingExp / 1.25), (0.3333)));
-		if(level <= 100)
-			return level;
-		else
-			return 100;
+		int level = ((int) Math.pow((m_skillTrainingExp / 1.25), (1/3)));
+		return Math.min(level, 100); // Returns the lowest value
 	}
 
 	/**
@@ -1253,11 +1250,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getCoordinatingLevel()
 	{
-		int level = ((int) Math.pow(m_skillCoordExp, (0.3333)));
-		if(level <= 100)
-			return level;
-		else
-			return 100;
+		int level = ((int) Math.pow(m_skillCoordExp, (1/3)));
+		return Math.min(level, 100);
 
 	}
 
@@ -1303,11 +1297,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getBreedingLevel()
 	{
-		int level = (int) Math.pow((m_skillBreedExp / 1.25), (0.3333));
-		if(level <= 100)
-			return level;
-		else
-			return 100;
+		int level = (int) Math.pow((m_skillBreedExp / 1.25), (1/3));
+		return Math.min(level, 100);
 	}
 
 	/**
@@ -1356,7 +1347,7 @@ public class Player extends Character implements Battleable, Tradeable
 	public void addPokemon(Pokemon p)
 	{
 		/* See if there is space in the player's party */
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < m_pokemon.length; i++)
 		{
 			if(m_pokemon[i] == null)
 			{
@@ -1583,7 +1574,7 @@ public class Player extends Character implements Battleable, Tradeable
 	public void generateBadges(String badges)
 	{
 		m_badges = new byte[42];
-		if(badges == null || badges.equalsIgnoreCase(""))
+		if(badges == null || badges.equals(""))
 		{
 			for(int i = 0; i < 42; i++)
 				m_badges[i] = 0;
@@ -1728,7 +1719,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void sendBoxInfo(int j)
 	{
-		if(j < 0 || j > 8)
+		if(j < 0 || j > m_boxes.length - 1)
 			return;
 		/* If box is non-existant, create it and send small packet */
 		if(m_boxes[j] == null)
@@ -1833,7 +1824,7 @@ public class Player extends Character implements Battleable, Tradeable
 		String data = "";
 		for(int i = 0; i < m_badges.length; i++)
 		{
-			data = data + m_badges[i];
+			data += m_badges[i];
 		}
 		m_tcpSession.write("cBi" + data);
 	}
@@ -1912,15 +1903,18 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getPokemonIndex(Pokemon p)
 	{
+		int pokemonIndex = -1;
 		for(int i = 0; i < m_pokemon.length; i++)
 		{
 			if(m_pokemon[i] != null)
 			{
-				if(p.compareTo(m_pokemon[i]) == 0)
-					return i;
+				if(p.compareTo(m_pokemon[i]) == 0) {
+					pokemonIndex = i;
+					break;
+				}
 			}
 		}
-		return -1;
+		return pokemonIndex;
 	}
 
 	/**
@@ -2003,7 +1997,7 @@ public class Player extends Character implements Battleable, Tradeable
 	public void updateClientPokedex()
 	{
 		String message = "Xi,";
-		for(int i = 1; i < 494; i++)
+		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
 		{
 			message+=(m_pokedex.getPokedex()[i] + ",");
 		}
@@ -2044,8 +2038,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void setPokemonSeen(int i)
 	{
-		this.getPokedex().setPokemonSeen(i);
-		updateClientPokedex(i, 1);
+		m_pokedex.setPokemonSeen(i);
+		updateClientPokedex(i, Pokedex.SEEN);
 	}
 
 	/**
@@ -2055,7 +2049,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public boolean isPokemonSeen(int i)
 	{
-		return this.getPokedex().isPokemonSeen(i);
+		return m_pokedex.isPokemonSeen(i);
 	}
 	
 	/**
@@ -2064,8 +2058,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void setPokemonCaught(int i)
 	{
-		this.getPokedex().setPokemonCaught(i);
-		updateClientPokedex(i, 2);
+		m_pokedex.setPokemonCaught(i);
+		updateClientPokedex(i, Pokedex.CAUGHT);
 	}
 	
 	/**
@@ -2075,6 +2069,6 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public boolean isPokemonCaught(int i)
 	{
-		return this.getPokedex().isPokemonCaught(i);
+		return m_pokedex.isPokemonCaught(i);
 	}
 }

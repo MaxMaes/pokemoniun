@@ -28,11 +28,12 @@ public class Character implements Positionable {
 	 * @return
 	 */
 	public int getPriority() {
+		int priority = m_movementQueue.size();
 		if(m_boostPriority) {
 			m_boostPriority = false;
-			return m_movementQueue.size() + 100;
+			priority += 100;
 		}
-		return m_movementQueue.size();
+		return priority;
 	}
 	
 	/**
@@ -228,7 +229,6 @@ public class Character implements Positionable {
 					//If its a player, resync them
 					Player p = (Player) this;
 					p.getTcpSession().write("U" + getX() + "," + getY());
-					return false;
 				}
 			}
 		}

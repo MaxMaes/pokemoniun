@@ -7,7 +7,7 @@ import java.util.Queue;
 
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
-import org.pokenet.server.backend.entity.HMObject.objectType;
+import org.pokenet.server.backend.entity.HMObject.ObjectType;
 
 /**
  * Loops through all players and moves them if they request to be moved
@@ -48,7 +48,7 @@ public class MovementManager implements Runnable {
 	
 	public void addHMObject(HMObject obj){
 		synchronized(m_waiting) {
-			if (obj.getType() == objectType.STRENGTH_BOULDER){
+			if (obj.getType() == ObjectType.STRENGTH_BOULDER){
 				m_pLoad++;
 				m_waiting.add(obj);
 			}

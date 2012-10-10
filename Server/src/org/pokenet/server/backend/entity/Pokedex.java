@@ -4,6 +4,9 @@ import org.pokenet.server.network.MySqlManager;
 
 public class Pokedex
 {
+	public static final int SEEN = 1;
+	public static final int CAUGHT = 2;
+	
 	private int[] m_pokedex = new int[494];
 	private MySqlManager m_database;
 	private int m_id;
@@ -38,8 +41,8 @@ public class Pokedex
 	 */
 	public void setPokemonSeen(int id)
 	{
-		this.m_pokedex[id] = 1;
-		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = '1' WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
+		this.m_pokedex[id] = Pokedex.SEEN;
+		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = " + Pokedex.SEEN + " WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
 	}
 	
 	/**
@@ -48,8 +51,8 @@ public class Pokedex
 	 */
 	public void setPokemonCaught(int id)
 	{
-		this.m_pokedex[id] = 2;
-		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
+		this.m_pokedex[id] = Pokedex.CAUGHT;
+		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = " + Pokedex.CAUGHT + " WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
 	}
 	
 	/**
@@ -59,10 +62,9 @@ public class Pokedex
 	 */
 	public boolean isPokemonSeen(int id)
 	{
-		if(m_pokedex[id] >= 1)
+		if(m_pokedex[id] >= Pokedex.SEEN)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	/**
@@ -72,10 +74,9 @@ public class Pokedex
 	 */
 	public boolean isPokemonCaught(int id)
 	{
-		if(m_pokedex[id] == 2)
+		if(m_pokedex[id] == Pokedex.CAUGHT)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	

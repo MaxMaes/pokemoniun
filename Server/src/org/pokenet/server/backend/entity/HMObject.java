@@ -12,7 +12,7 @@ import org.pokenet.server.GameServer;
  *
  */
 public class HMObject extends NPC {
-	public enum objectType {
+	public enum ObjectType {
 		ROCKSMASH_ROCK, CUT_TREE, STRENGTH_BOULDER, WHIRLPOOL
 	}
 	
@@ -21,19 +21,19 @@ public class HMObject extends NPC {
 	private int originalX, originalY;
 	private Timer timer = new Timer();
 	
-	public static objectType parseHMObject(String name) throws Exception{
-		for (objectType oT : objectType.values()){
+	public static ObjectType parseHMObject(String name) throws Exception{
+		for (ObjectType oT : ObjectType.values()){
 			if (name.equalsIgnoreCase(oT.name()))
 				return oT;
 		}
 		throw new Exception("The HMObject requested is invalid.");
 	}
 	
-	private objectType m_HMType;
+	private ObjectType m_HMType;
 	private int m_objId;
-	final HMObject hmObj = this;
+	private final HMObject hmObj = this;
 	
-	public objectType getType() {
+	public ObjectType getType() {
 		return m_HMType;
 	}
 	
@@ -49,21 +49,21 @@ public class HMObject extends NPC {
 		return m_objId;
 	}
 
-	public void setType(objectType oT) {
+	public void setType(ObjectType oT) {
 		m_HMType = oT;
-		if (oT == objectType.STRENGTH_BOULDER){
+		if (oT == ObjectType.STRENGTH_BOULDER){
 			HMObjectID++;
 			m_objId = HMObjectID; 
 		}
 		switch (oT){
-		case ROCKSMASH_ROCK:
-			setSprite(-4);
-			break;
 		case CUT_TREE:
 			setSprite(-2);
 			break;
 		case STRENGTH_BOULDER:
 			setSprite(-3);
+			break;
+		case ROCKSMASH_ROCK:
+			setSprite(-4);
 			break;
 		case WHIRLPOOL:
 			setSprite(-5);
@@ -71,24 +71,29 @@ public class HMObject extends NPC {
 		}
 	}
 	
-	public int getNecessaryTrainerLevel(objectType oT) {
+	public int getRequiredTrainerLevel(ObjectType oT) {
+		int level = 0;
 		switch (oT) {
-		case ROCKSMASH_ROCK:
-			return 30;
 		case CUT_TREE:
-			return 15;
+			level = 15;
+			break;
+		case ROCKSMASH_ROCK:
+			level = 30;
+			break;
 		case STRENGTH_BOULDER:
-			return 35;
+			level = 35;
+			break;
 		case WHIRLPOOL:
-			return 40;
+			level = 40;
+			break;
 		}
-		return 0;
+		return level;
 	}
 	
 	@Override
 	public void talkToPlayer(Player p) {
 		// Handle event
-		if (p.getTrainingLevel() >= getNecessaryTrainerLevel(getType())) {
+		if (p.getTrainingLevel() >= getRequiredTrainerLevel(getType())) {
 			switch (m_HMType){
 			case STRENGTH_BOULDER :
 				queueMovement(p.getFacing());
@@ -120,7 +125,7 @@ public class HMObject extends NPC {
 			}
 		} else {
 			// The player isn't strong enough to do this. Alert client
-			p.getTcpSession().write("ch" + getNecessaryTrainerLevel(m_HMType));
+			p.getTcpSession().write("ch" + getRequiredTrainerLevel(m_HMType));
 		}
 	}
 }

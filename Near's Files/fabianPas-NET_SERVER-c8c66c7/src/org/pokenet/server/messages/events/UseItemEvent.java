@@ -1,0 +1,23 @@
+package org.pokenet.server.messages.events;
+
+import org.pokenet.server.backend.ItemProcessor;
+import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.client.Session;
+import org.pokenet.server.messages.MessageEvent;
+import org.pokenet.server.protocol.ClientMessage;
+import org.pokenet.server.protocol.ServerMessage;
+
+
+public class UseItemEvent implements MessageEvent {
+
+	@Override
+	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	{
+		PlayerChar p = Session.getPlayer();		
+		//Use an item, applies inside and outside of battle
+		String[] details = Request.readString().split(",");
+		new Thread(new ItemProcessor(p, details)).start();
+		
+		// the fuq, i should check this out o.o a thread??
+	}
+}

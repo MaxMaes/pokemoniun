@@ -592,13 +592,13 @@ public class LoginManager implements Runnable {
 			m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL(""+pokedexid) + " WHERE id = " + MySqlManager.parseSQL(""+memberID));
 			//WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
 			pokemons =  m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
-			pokemons.first();
+			pokemons.beforeFirst();
 			
 			while(pokemons.next())
 			{
 				String pokemonSpecie = pokemons.getString("speciesName");
-				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getSpecies() + 1;
-				if(isThirdStageStarter(pokemonNumber)) 
+				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getPokemonNumber()+1;
+				if(isThirdStageStarter(pokemonNumber))  
 					for(int i = 0; i < 3; i++)
 					{
 						int tempNumber = pokemonNumber - i;

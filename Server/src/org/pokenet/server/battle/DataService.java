@@ -257,7 +257,7 @@ public class DataService {
 	 */
 	private void initialisePokemon(PokemonSpecies species, Section s, int pokemonNumber) {
 		if(species != null) {
-			//species.setPokemonNumber(pokemonNumber);
+			species.setPokemonNumber(pokemonNumber);
 			species.setInternalName(s.get("InternalName"));
             species.setKind(s.get("Kind"));
             species.setPokedexInfo(s.get("Pokedex"));

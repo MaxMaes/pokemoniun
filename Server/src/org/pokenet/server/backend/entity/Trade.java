@@ -298,8 +298,8 @@ public class Trade implements Runnable{
 					if(player1 instanceof Player) {
 						Player p = (Player) player1;
 						p.addPokemon(temp[1]);
-						if(!p.isPokemonCaught(temp[1].getSpeciesNumber()+1)){
-							p.setPokemonCaught(temp[1].getSpeciesNumber()+1);
+						if(!p.isPokemonCaught(temp[1].getPokemonNumber()+1)){
+							p.setPokemonCaught(temp[1].getPokemonNumber()+1);
 						}
 					}
 				}
@@ -307,8 +307,8 @@ public class Trade implements Runnable{
 					if(player2 instanceof Player) {
 						Player p = (Player) player2;
 						p.addPokemon(temp[0]);
-						if(!p.isPokemonCaught(temp[0].getSpeciesNumber()+1)){
-							p.setPokemonCaught(temp[0].getSpeciesNumber()+1);
+						if(!p.isPokemonCaught(temp[0].getPokemonNumber()+1)){
+							p.setPokemonCaught(temp[0].getPokemonNumber()+1);
 						}
 					}
 				}

@@ -206,7 +206,7 @@ public class RegistrationManager implements Runnable
 		// Bind the pokedex ID to the member
 		m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL("" + pokedexid) + " WHERE id = '" + playeridsql + "'");
 		// Add the players starter to the pokedex
-		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getSpeciesNumber() + 1)) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getPokemonNumber() + 1)) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 		session.resumeRead();
 		session.resumeWrite();
 		session.write("rs");

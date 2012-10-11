@@ -1335,8 +1335,8 @@ public class Player extends Character implements Battleable, Tradeable
 		p.setDatabaseID(-1);
 		addPokemon(p);
 		addTrainingExp(1000 / p.getRareness());
-		if(!isPokemonCaught(p.getSpeciesNumber()+1))
-			setPokemonCaught(p.getSpeciesNumber()+1);
+		if(!isPokemonCaught(p.getPokemonNumber()+1))
+			setPokemonCaught(p.getPokemonNumber()+1);
 	}
 
 	/**

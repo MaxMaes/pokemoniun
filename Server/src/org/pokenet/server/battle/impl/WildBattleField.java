@@ -85,9 +85,9 @@ public class WildBattleField extends BattleField {
 		m_participatingPokemon.add(p.getParty()[0]);
 		
 		//Check if this player has seen this wild pokemon before, if not, update pokedex
-		if(!m_player.isPokemonSeen(wild.getSpeciesNumber()+1))
+		if(!m_player.isPokemonSeen(wild.getPokemonNumber()+1))
 		{
-			m_player.setPokemonSeen(wild.getSpeciesNumber()+1);
+			m_player.setPokemonSeen(wild.getPokemonNumber()+1);
 		}
 
 		/* Call methods */
@@ -538,7 +538,7 @@ public class WildBattleField extends BattleField {
 			}
 		}
 		double catchRate = 1.0;
-		int pokeID = m_wildPoke.getSpeciesNumber()+1;
+		int pokeID = m_wildPoke.getPokemonNumber()+1;
 		boolean resetAfterCaught = false;
 		switch (p) 
 		{

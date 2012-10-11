@@ -234,3 +234,6 @@ INSERT INTO pn_bag VALUES (19457, 603, 2);
 INSERT INTO pn_bag VALUES (19457, 651, 4);
 INSERT INTO pn_bag VALUES (19457, 655, 2);
 INSERT INTO pn_bag VALUES (19457, 206, 5000);
+
+MorganWoop:
+UPDATE pn_bag SET item=35, quantity=235 WHERE member=43518 AND item=35;

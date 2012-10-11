@@ -2,3 +2,4 @@ remote-mysql3.servage.net
 viperpray2
 viperpray2
 jjjkkk111
+Debug

@@ -76,7 +76,7 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static final String GAME_TITLE = "Pokemonium 1.4.0";
+	private static final String GAME_TITLE = "Pokemonium 1.5.0";
 	private static final int FPS = 30;
 	
 	private static boolean debug = false;

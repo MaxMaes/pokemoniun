@@ -132,7 +132,6 @@ public class Situation {
     /**
      * Find the best move to use for the situation.
      */
-    @SuppressWarnings("unchecked")
 	public synchronized String getBestMemory(final Memory target, String[] moves) {
         Comparator comp = new Comparator() {
                 public int compare(Object o1, Object o2) {
@@ -149,7 +148,7 @@ public class Situation {
             };
             
         TreeSet items = new TreeSet(comp);
-        Iterator i = m_memory.iterator();
+        Iterator<Memory> i = m_memory.iterator();
         while (i.hasNext()) {
             Memory mem = (Memory)i.next();
             if (!isInMoveList(mem.m_move, moves)) {

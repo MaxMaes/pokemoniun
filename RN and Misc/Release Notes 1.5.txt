@@ -1,0 +1,4 @@
+[FIX] Gen 4 pokemon not being registrated correctly.
+[FIX] Slow walking when pokedex is open.
+[FIX] Scrolling the pokedex is slow/laggy.
+[FIX] Unable to close the pokedex with the '2' hotkey.

@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -72,9 +73,11 @@ public class AutoUpdater
 		try
 		{
 			URLConnection conn = url.openConnection();
-			conn.setDoOutput(true);
 			conn.setDoInput(true);
 			conn.setRequestProperty("content-type", "binary/data");
+			
+			System.out.println("\f Update size: " + (Math.round(conn.getContentLength()/1000000f*100f)/100f) + "MB");
+			
 			InputStream in = conn.getInputStream();
 			FileOutputStream out = new FileOutputStream("updates/" + versions.get(versionidx + 1) + ".zip");
 
@@ -123,7 +126,7 @@ public class AutoUpdater
 		String link = "";
 		try
 		{
-			URL dllinksURL = new URL("https://dl.dropbox.com/u/50041917/testlinks.ini");
+			URL dllinksURL = new URL("http://pokemonium.com/updater/updatelinks.ini");
 			Ini updateLinks = new Ini(new InputStreamReader(dllinksURL.openStream()));
 			Section s = updateLinks.get(versions.get(i));
 			link = s.get("link");
@@ -240,11 +243,9 @@ public class AutoUpdater
 		try
 		{
 			// URL of the versionlog.txt
-			URL versionURL = new URL("https://dl.dropbox.com/u/50041917/testlog.txt");
+			URL versionURL = new URL("http://pokemonium.com/updater/releaselog.txt");
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(versionURL.openStream()));
-			//BufferedReader in = new BufferedReader(new FileReader(new File("testlog.txt")));
-
 			String str;
 
 			// Get the latest version

@@ -1,0 +1,9 @@
+In this little guide, I'll explain the steps on how to make an auto update available to the world!
+
+1. Upload the update file (with name '<version>.zip')  to http://www.pokemonium.com/updater/patchfiles/
+2. Add the link to updatelinks.ini in http://www.pokemonium.com/updater/updatelinks.ini
+3. Add the new version to releaselog.txt in http://www.pokemonium.com/updater/releaselog.txt
+
+You have to do it in this exact order!!!
+
+Those who have access to edit the site will know how.

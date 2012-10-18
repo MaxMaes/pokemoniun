@@ -22,13 +22,7 @@ public abstract class EffectClause extends Clause
 		m_effect = effect;
 	}
 
-	public boolean equals(Object o2)
-	{
-		if(o2 == null || !(o2 instanceof EffectClause))
-			return false;
-		return ((EffectClause) o2).m_effect.equals(m_effect);
-	}
-
+	@Override
 	public boolean allowsStatus(StatusEffect eff, Pokemon source, Pokemon target)
 	{
 		if(source == target)
@@ -48,11 +42,19 @@ public abstract class EffectClause extends Clause
 			if(effect != null)
 			{
 				Pokemon inducer = effect.getInducer();
-				if((inducer != null) && (inducer.getParty() == source.getParty()))
+				if(inducer != null && inducer.getParty() == source.getParty())
 					return false;
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean equals(Object o2)
+	{
+		if(o2 == null || !(o2 instanceof EffectClause))
+			return false;
+		return ((EffectClause) o2).m_effect.equals(m_effect);
 	}
 
 }

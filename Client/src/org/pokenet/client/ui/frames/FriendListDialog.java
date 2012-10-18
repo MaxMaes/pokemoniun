@@ -12,6 +12,7 @@ import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 
 /**
@@ -23,17 +24,34 @@ import org.pokenet.client.ui.base.ConfirmationDialog;
 public class FriendListDialog extends Frame
 {
 	List<String> m_friends = new ArrayList<String>();
+	int m_index;
 	List<String> m_online = new ArrayList<String>();
+	PopUp m_popup;
 	Label[] m_shownFriends = new Label[10];
 	Button m_up, m_down;
-	int m_index;
-	PopUp m_popup;
 
 	/** Default Constructor */
 	public FriendListDialog()
 	{
 		m_index = 0;
 		initGUI();
+	}
+
+	/**
+	 * Adds a friend from the list.
+	 * 
+	 * @param friend The friend to add to the list.
+	 */
+	public void addFriend(String friend)
+	{
+		boolean knownFriend = false;
+		if(m_friends.contains(friend))
+			knownFriend = true;
+		if(!knownFriend)
+			m_friends.add(friend);
+		else
+			System.out.println("This friend is already present in your Friendlist!");
+		scroll(0);
 	}
 
 	/** Initializes the interface */
@@ -47,6 +65,7 @@ public class FriendListDialog extends Frame
 		m_up = new SimpleArrowButton(SimpleArrowButton.FACE_UP);
 		m_up.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				scroll(-1);
@@ -61,6 +80,7 @@ public class FriendListDialog extends Frame
 			m_down.setEnabled(false);
 		m_down.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				scroll(1);
@@ -71,7 +91,20 @@ public class FriendListDialog extends Frame
 		getContentPane().add(m_down);
 		scroll(0);
 		setResizable(false);
-		this.getTitleBar().getCloseButton().setVisible(false);
+		getTitleBar().getCloseButton().setVisible(false);
+	}
+
+	/**
+	 * Removes a friend from the list.
+	 * 
+	 * @param friend The friend to remove from the list.
+	 */
+	public void removeFriend(String friend)
+	{
+		for(int i = 0; i < m_friends.size(); i++)
+			if(m_friends.get(i).equals(friend))
+				m_friends.remove(friend);
+		scroll(0);
 	}
 
 	/**
@@ -112,7 +145,7 @@ public class FriendListDialog extends Frame
 			if(m_online.contains(m_shownFriends[i]))
 				m_shownFriends[i].setForeground(Color.white);
 			else
-				m_shownFriends[i].setForeground(Color.black);
+				m_shownFriends[i].setForeground(Color.gray);
 			m_shownFriends[i].addMouseListener(new MouseAdapter()
 			{
 				@Override
@@ -129,8 +162,9 @@ public class FriendListDialog extends Frame
 					if(m_online.contains(m_shownFriends[j]))
 						m_shownFriends[j].setForeground(Color.white);
 					else
-						m_shownFriends[j].setForeground(Color.black);
+						m_shownFriends[j].setForeground(Color.gray);
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e)
 				{
@@ -148,40 +182,6 @@ public class FriendListDialog extends Frame
 			y += 15;
 			m_shownFriends[i].setLocation(5, y);
 		}
-	}
-
-	/**
-	 * Removes a friend from the list.
-	 * 
-	 * @param friend The friend to remove from the list.
-	 */
-	public void removeFriend(String friend)
-	{
-		for(int i = 0; i < m_friends.size(); i++)
-		{
-			if(m_friends.get(i).equals(friend))
-			{
-				m_friends.remove(friend);
-			}
-		}
-		scroll(0);
-	}
-
-	/**
-	 * Adds a friend from the list.
-	 * 
-	 * @param friend The friend to add to the list.
-	 */
-	public void addFriend(String friend)
-	{
-		boolean knownFriend = false;
-		if(m_friends.contains(friend))
-			knownFriend = true;
-		if(!knownFriend)
-			m_friends.add(friend);
-		else
-			System.out.println("This friend is already present in your Friendlist!");
-		scroll(0);
 	}
 
 	/**
@@ -210,9 +210,9 @@ public class FriendListDialog extends Frame
  */
 class PopUp extends Frame
 {
-	Button m_remove, m_whisper, m_cancel;
 	ConfirmationDialog m_confirm;
 	Label m_name;
+	Button m_remove, m_whisper, m_cancel;
 
 	/**
 	 * Default Constructor
@@ -226,10 +226,8 @@ class PopUp extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_name = new Label(friend);
 		m_name.setFont(GameClient.getFontSmall());
-		if(online)
-			m_name.setForeground(Color.white);
-		else
-			m_name.setForeground(Color.black);
+		/* if(online) m_name.setForeground(Color.white); else m_name.setForeground(Color.grey); */
+		m_name.setForeground(Color.white);
 		m_name.pack();
 		m_name.setLocation(0, 0);
 		getContentPane().add(m_name);
@@ -254,20 +252,27 @@ class PopUp extends Frame
 		setAlwaysOnTop(true);
 		m_remove.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroy();
 				ActionListener m_yes = new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						GameClient.getInstance().getPacketGenerator().writeTcpMessage("30" + m_name.getText());
+						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("30" + m_name.getText());
+						ClientMessage message = new ClientMessage();
+						message.Init(39);
+						message.addString(m_name.getText());
+						GameClient.m_Session.Send(message);
 						GameClient.getInstance().getDisplay().remove(m_confirm);
 						m_confirm = null;
 					}
 				};
 				ActionListener m_no = new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent evt)
 					{
 						GameClient.getInstance().getDisplay().remove(m_confirm);
@@ -281,6 +286,7 @@ class PopUp extends Frame
 		});
 		m_whisper.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				GameClient.getInstance().getUi().getChat().addChat(m_name.getText(), true);
@@ -289,6 +295,7 @@ class PopUp extends Frame
 		});
 		m_cancel.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroy();

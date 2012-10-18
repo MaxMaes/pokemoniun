@@ -19,6 +19,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
+import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ProgressBar;
 
 /**
@@ -30,16 +31,16 @@ import org.pokenet.client.ui.base.ProgressBar;
 public class PartyInfoDialog extends Frame
 {
 	Container[] m_container;
-	Label[] m_pokeBall;
+	ProgressBar[] m_hp;
 	Label[] m_hpBar;
+	Label[] m_level;
+	Label[] m_pokeBall;
 	Label[] m_pokeIcon;
 	Label[] m_pokeName;
-	Label[] m_level;
-	ProgressBar[] m_hp;
-	Button[] m_switchUp;
+	OurPokemon[] m_pokes;
 	Button[] m_switchDown;
 
-	OurPokemon[] m_pokes;
+	Button[] m_switchUp;
 
 	/**
 	 * Default constructor
@@ -58,34 +59,24 @@ public class PartyInfoDialog extends Frame
 		initGUI();
 	}
 
-	private void allocateVariables()
-	{
-		m_switchDown = new Button[6];
-		m_switchUp = new Button[6];
-		m_hp = new ProgressBar[6];
-		m_level = new Label[6];
-		m_pokeName = new Label[6];
-		m_pokeIcon = new Label[6];
-		m_hpBar = new Label[6];
-		m_pokeBall = new Label[6];
-		m_container = new Container[6];
-	}
-
 	/** Initializes interface */
 	public void initGUI()
 	{
 		InputStream f;
 		int y = -8;
-		this.getTitleBar().getCloseButton().setVisible(false);
-		this.setFont(GameClient.getFontSmall());
-		this.setBackground(new Color(0, 0, 0, 85));
-		this.setForeground(new Color(255, 255, 255));
+		getTitleBar().getCloseButton().setVisible(false);
+		setFont(GameClient.getFontSmall());
+		setBackground(new Color(0, 0, 0, 85));
+		setForeground(new Color(255, 255, 255));
+		int pokemonCount = -1;
+		/* Init damn pokemon count! (FabianPass Code) for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
 		for(int i = 0; i < 6; i++)
 		{
 			final int j = i;
 			m_container[i] = new Container();
 			m_container[i].setSize(170, 42);
 			m_container[i].setVisible(true);
+			m_container[i].setZIndex(0);
 			m_container[i].setLocation(2, y + 10);
 			m_container[i].setBackground(new Color(0, 0, 0, 0));
 			System.out.println("Y: " + y);
@@ -123,6 +114,7 @@ public class PartyInfoDialog extends Frame
 				m_hpBar[i] = new Label(new Image(f, respath + "res/ui/party_info/HPBar.png", false));
 				m_hpBar[i].setSize(98, 11);
 				m_hpBar[i].setVisible(false);
+				m_hpBar[i].setZIndex(1);
 				m_container[i].add(m_hpBar[i]);
 			}
 			catch(Exception e)
@@ -133,19 +125,12 @@ public class PartyInfoDialog extends Frame
 			{
 				m_container[i].add(m_pokeBall[i]);
 				m_pokeBall[i].setLocation(4, 4);
+				m_pokeBall[i].setZIndex(2);
 				m_pokeName[i].setFont(GameClient.getFontSmall());
 				m_pokeName[i].setForeground(new Color(255, 255, 255));
+				m_pokeName[i].setZIndex(3);
 				m_pokeName[i].addMouseListener(new MouseAdapter()
 				{
-					@Override
-					public void mouseReleased(MouseEvent e)
-					{
-						super.mouseReleased(e);
-						PokemonInfoDialog info = new PokemonInfoDialog(m_pokes[j]);
-						info.setAlwaysOnTop(true);
-						info.setLocationRelativeTo(null);
-						getDisplay().add(info);
-					}
 					@Override
 					public void mouseEntered(MouseEvent e)
 					{
@@ -160,26 +145,46 @@ public class PartyInfoDialog extends Frame
 						m_pokeName[j].setForeground(new Color(255, 255, 255));
 					}
 
+					@Override
+					public void mouseReleased(MouseEvent e)
+					{
+						super.mouseReleased(e);
+						PokemonInfoDialog info = new PokemonInfoDialog(m_pokes[j]);
+						info.setAlwaysOnTop(true);
+						info.setLocationRelativeTo(null);
+						getDisplay().add(info);
+					}
+
 				});
 				m_container[i].add(m_pokeIcon[i]);
 				m_pokeIcon[i].setLocation(2, 3);
+				m_pokeIcon[i].setZIndex(4);
 				m_container[i].add(m_pokeName[i]);
 				m_pokeName[i].setLocation(42, 5);
 				m_container[i].add(m_level[i]);
 				m_level[i].setFont(GameClient.getFontSmall());
 				m_level[i].setForeground(new Color(255, 255, 255));
 				m_level[i].setLocation(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
+				m_level[i].setZIndex(4);
 				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
+				m_hp[i].setZIndex(5);
 				m_hp[i].setLocation(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
 				if(i != 0)
 				{
 					m_switchUp[i] = new SimpleArrowButton(SimpleArrowButton.FACE_UP);
+					m_switchUp[i].setZIndex(6);
 					m_switchUp[i].addActionListener(new ActionListener()
 					{
+						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
+							ClientMessage message = new ClientMessage();
+							message.Init(12);
+							message.addInt(j);
+							message.addInt(j - 1);
+							GameClient.m_Session.Send(message);
+							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();
@@ -191,14 +196,20 @@ public class PartyInfoDialog extends Frame
 					m_switchUp[i].setWidth(16);
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != 5)
+				if(i != 5)/* TODO: Change to < pokemonCount? */
 				{
 					m_switchDown[i] = new SimpleArrowButton(SimpleArrowButton.FACE_DOWN);
 					m_switchDown[i].addActionListener(new ActionListener()
 					{
+						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
+							ClientMessage message = new ClientMessage();
+							message.Init(12);
+							message.addInt(j);
+							message.addInt(j + 1);
+							GameClient.m_Session.Send(message);
+							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();
@@ -218,11 +229,11 @@ public class PartyInfoDialog extends Frame
 			}
 		}
 		update(m_pokes);
-		this.getTitleBar().setGlassPane(true);
-		this.setResizable(false);
+		getTitleBar().setGlassPane(true);
+		setResizable(false);
 		this.setSize(170, 270);
 		List<String> translated = Translator.translate("_GUI");
-		this.setTitle(translated.get(0));
+		setTitle(translated.get(0));
 	}
 
 	/**
@@ -256,7 +267,7 @@ public class PartyInfoDialog extends Frame
 				m_pokeBall[i].setImage(new Image(f, respath + "res/ui/Pokeball.gif", false));
 				m_pokeBall[i].setSize(30, 30);
 			}
-			catch(SlickException e)
+			catch(SlickException se)
 			{
 				System.out.println("Couldn't load pokeball");
 			}
@@ -273,17 +284,11 @@ public class PartyInfoDialog extends Frame
 					m_hp[i].setForeground(Color.green);
 					m_hp[i].setValue(pokes[i].getCurHP());
 					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
-					{
 						m_hp[i].setForeground(Color.green);
-					}
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
-					{
 						m_hp[i].setForeground(Color.orange);
-					}
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
-					{
 						m_hp[i].setForeground(Color.red);
-					}
 					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_pokeIcon[i].setSize(32, 32);
 					m_pokeName[i].setText(pokes[i].getName());
@@ -292,9 +297,7 @@ public class PartyInfoDialog extends Frame
 					m_level[i].pack();
 				}
 				else
-				{
 					m_hp[i].setVisible(false);
-				}
 			}
 			catch(NullPointerException e)
 			{
@@ -302,6 +305,28 @@ public class PartyInfoDialog extends Frame
 			}
 		}
 		LoadingList.setDeferredLoading(false);
+	}
+
+	/**
+	 * Sets sprite number
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public int setSpriteNumber(int x)
+	{
+		int i = 0;
+		if(x <= 385)
+			i = x + 1;
+		else if(x <= 388)
+			i = 386;
+		else if(x <= 414)
+			i = x - 2;
+		else if(x <= 416)
+			i = 413;
+		else
+			i = x - 4;
+		return i;
 	}
 
 	/**
@@ -314,8 +339,9 @@ public class PartyInfoDialog extends Frame
 		m_pokes = pokes;
 		List<String> translated = Translator.translate("_GUI");
 		LoadingList.setDeferredLoading(true);
+		int pokemonCount = -1;
+		/* Init damn pokemon count! (Fabian Code) for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
 		for(int i = 0; i < 6; i++)
-		{
 			try
 			{
 				if(pokes[i] != null)
@@ -323,17 +349,11 @@ public class PartyInfoDialog extends Frame
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setValue(pokes[i].getCurHP());
 					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
-					{
 						m_hp[i].setForeground(Color.green);
-					}
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
-					{
 						m_hp[i].setForeground(Color.orange);
-					}
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
-					{
 						m_hp[i].setForeground(Color.red);
-					}
 					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_pokeName[i].setText(pokes[i].getName());
 					m_pokeName[i].pack();
@@ -357,7 +377,7 @@ public class PartyInfoDialog extends Frame
 				{
 					if(i != 0)
 						m_switchUp[i].setVisible(false);
-					if(i != 5)
+					if(i != 5)/* TODO: Change to < pokemonCount? */
 						m_switchDown[i].setVisible(false);
 					m_hpBar[i].setVisible(false);
 					m_hp[i].setVisible(false);
@@ -366,43 +386,23 @@ public class PartyInfoDialog extends Frame
 					m_pokeIcon[i].setImage(null);
 				}
 			}
-			catch(NullPointerException e)
+			catch(NullPointerException npe)
 			{
-				e.printStackTrace();
+				npe.printStackTrace();
 			}
-		}
 		LoadingList.setDeferredLoading(false);
 	}
 
-	/**
-	 * Sets sprite number
-	 * 
-	 * @param x
-	 * @return
-	 */
-	public int setSpriteNumber(int x)
+	private void allocateVariables()
 	{
-		int i = 0;
-		if(x <= 385)
-		{
-			i = x + 1;
-		}
-		else if(x <= 388)
-		{
-			i = 386;
-		}
-		else if(x <= 414)
-		{
-			i = x - 2;
-		}
-		else if(x <= 416)
-		{
-			i = 413;
-		}
-		else
-		{
-			i = x - 4;
-		}
-		return i;
+		m_switchDown = new Button[6];
+		m_switchUp = new Button[6];
+		m_hp = new ProgressBar[6];
+		m_level = new Label[6];
+		m_pokeName = new Label[6];
+		m_pokeIcon = new Label[6];
+		m_hpBar = new Label[6];
+		m_pokeBall = new Label[6];
+		m_container = new Container[6];
 	}
 }

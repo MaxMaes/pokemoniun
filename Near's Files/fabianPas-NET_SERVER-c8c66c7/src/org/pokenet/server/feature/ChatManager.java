@@ -7,9 +7,7 @@ import org.apache.mina.core.session.IoSession;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.PlayerChar.Language;
 import org.pokenet.server.backend.map.ServerMap;
-import org.pokenet.server.network.TcpProtocolHandler;
-import org.pokenet.server.network.message.ChatMessage;
-import org.pokenet.server.network.message.ChatMessage.ChatMessageType;
+import org.pokenet.server.client.Session;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -75,7 +73,7 @@ public class ChatManager implements Runnable {
         public void run() {
                 Object [] o;
                 ServerMap m;
-                IoSession s;
+                Session s;
                 while(true) {
                         //Send next local chat message
                         if(m_localQueue.peek() != null) {
@@ -88,12 +86,9 @@ public class ChatManager implements Runnable {
                         //Send next private chat message
                         if(m_privateQueue.peek() != null) {
                                 o = m_privateQueue.poll();
-                                s = (IoSession) o[0];
-                                if(s.isConnected() && !s.isClosing()) {
-                                        TcpProtocolHandler.writeMessage(s, new ChatMessage(
-                                                        ChatMessageType.PRIVATE, ((String) o[1]) + "," + ((String) o[2])));
-                                
-		                                ServerMessage startBattle = new ServerMessage(p.getSession());
+                                s = (Session) o[0];
+                                if(s.getLoggedIn()) {
+		                                ServerMessage startBattle = new ServerMessage(s);
 		                        		startBattle.Init(50);
 		                        		startBattle.addString("p" + (String) o[2]);
 		                        		startBattle.sendResponse();

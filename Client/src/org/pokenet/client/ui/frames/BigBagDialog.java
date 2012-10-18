@@ -18,6 +18,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.entity.PlayerItem;
+import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ImageButton;
 
 /**
@@ -29,14 +30,14 @@ import org.pokenet.client.ui.base.ImageButton;
 public class BigBagDialog extends Frame
 {
 	protected ImageButton[] m_categoryButtons;
+	protected int m_curCategory = 0;
 	protected ArrayList<Button> m_itemBtns;
-	protected ArrayList<Label> m_stockLabels;
 	protected Button m_leftButton, m_rightButton, m_cancel;
 	protected ItemPopup m_popup;
+	protected ArrayList<Label> m_stockLabels;
+	protected boolean m_update = false;
 	private HashMap<Integer, ArrayList<PlayerItem>> m_items;
 	private HashMap<Integer, Integer> m_scrollIndex;
-	protected int m_curCategory = 0;
-	protected boolean m_update = false;
 
 	public BigBagDialog()
 	{
@@ -45,40 +46,6 @@ public class BigBagDialog extends Frame
 		setCenter();
 		initGUI();
 		loadItems();
-	}
-
-	private void loadItems()
-	{
-		// Load the player's items and sort them by category
-		for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
-		{
-			// Field items
-			if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
-			{
-				m_items.get(0).add(item);
-			}
-			// Potions and medicine
-			else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
-			{
-				m_items.get(1).add(item);
-			}
-			// Berries and food
-			else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
-			{
-				m_items.get(2).add(item);
-			}
-			// Pokeballs
-			else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
-			{
-				m_items.get(3).add(item);
-			}
-			// TMs
-			else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
-			{
-				m_items.get(4).add(item);
-			}
-		}
-		m_update = true;
 	}
 
 	/**
@@ -90,99 +57,41 @@ public class BigBagDialog extends Frame
 	public void addItem(int id, boolean newItem)
 	{
 		if(newItem)
-		{
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
-			{
 				if(item.getNumber() == id)
-				{
-					
 					// Potions and medicine
 					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
-					{
 						m_items.get(1).add(item);
-					}
-					// Berries and food
 					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
-					{
 						m_items.get(2).add(item);
-					}
-					// Pokeballs
 					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
-					{
 						m_items.get(3).add(item);
-					}
-					// TMs
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
-					{
 						m_items.get(4).add(item);
-					}
-					// Field items
-					//if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
 					else
-					{
 						m_items.get(0).add(item);
-					}
-				}
-			}
-		}
 		m_update = true;
 	}
 
 	/**
-	 * Removes an item to the bag
-	 * 
-	 * @param id
-	 * @param amount
+	 * Closes the bag
 	 */
-	public void removeItem(int id, boolean remove)
+	public void closeBag()
 	{
-		/*
-		 * The remove variable indicates that this is the last of the item, and it should be removed from the inventory
-		 */
-		if(remove)
+		setVisible(false);
+		GameClient.getInstance().getDisplay().remove(this);
+	}
+
+	/**
+	 * Destroys the item popup
+	 */
+	public void destroyPopup()
+	{
+		if(getDisplay().containsChild(m_popup))
 		{
-			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
-			{
-				if(item.getNumber() == id)
-				{
-					
-					// Potions and medicine
-					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
-					{
-						m_items.get(1).remove(item);
-					}
-					// Berries and food
-					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
-					{
-						m_items.get(2).remove(item);
-					}
-					// Pokeballs
-					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
-					{
-						m_items.get(3).remove(item);
-					}
-					// TMs
-					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
-					{
-						m_items.get(4).remove(item);
-					}
-					// Field items
-					//if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
-					else
-					{
-						m_items.get(0).remove(item);
-					}
-				}
-			}
-			/*
-			 * There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used.
-			 */
-			int tmpCurCategory = m_curCategory;
-			initGUI();
-			loadItems();
-			m_curCategory = tmpCurCategory;
+			m_popup.destroyPopup();
+			m_popup = null;
 		}
-		m_update = true;
 	}
 
 	/** Initializes the interface */
@@ -253,6 +162,7 @@ public class BigBagDialog extends Frame
 				m_categoryButtons[i].setOpaque(false);
 				m_categoryButtons[i].addActionListener(new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent e)
 					{
 						destroyPopup();
@@ -288,6 +198,7 @@ public class BigBagDialog extends Frame
 		m_leftButton.setLocation(15, 95);
 		m_leftButton.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroyPopup();
@@ -305,9 +216,10 @@ public class BigBagDialog extends Frame
 			// Starts the item buttons
 			Button item = new Button();
 			item.setSize(60, 60);
-			item.setLocation(50 + (80 * i), 85);
+			item.setLocation(50 + 80 * i, 85);
 			item.addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					destroyPopup();
@@ -319,7 +231,7 @@ public class BigBagDialog extends Frame
 			// Starts the item labels
 			Label stock = new Label();
 			stock.setSize(60, 40);
-			stock.setLocation(50 + (80 * i), 135);
+			stock.setLocation(50 + 80 * i, 135);
 			stock.setHorizontalAlignment(Label.CENTER_ALIGNMENT);
 			stock.setFont(GameClient.getFontLarge());
 			stock.setForeground(Color.white);
@@ -333,6 +245,7 @@ public class BigBagDialog extends Frame
 		m_rightButton.setLocation(365, 95);
 		m_rightButton.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroyPopup();
@@ -349,6 +262,7 @@ public class BigBagDialog extends Frame
 		m_cancel.setLocation(0, 195);
 		m_cancel.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroyPopup();
@@ -360,6 +274,7 @@ public class BigBagDialog extends Frame
 		getResizer().setVisible(false);
 		getCloseButton().addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroyPopup();
@@ -385,12 +300,48 @@ public class BigBagDialog extends Frame
 	}
 
 	/**
-	 * Closes the bag
+	 * Removes an item to the bag
+	 * 
+	 * @param id
+	 * @param amount
 	 */
-	public void closeBag()
+	public void removeItem(int id, boolean remove)
 	{
-		setVisible(false);
-		GameClient.getInstance().getDisplay().remove(this);
+		/* The remove variable indicates that this is the last of the item, and it should be removed from the inventory */
+		if(remove)
+		{
+			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+				if(item.getNumber() == id)
+					// Potions and medicine
+					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+						m_items.get(1).remove(item);
+					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+						m_items.get(2).remove(item);
+					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+						m_items.get(3).remove(item);
+					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+						m_items.get(4).remove(item);
+					else
+						m_items.get(0).remove(item);
+			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
+			int tmpCurCategory = m_curCategory;
+			initGUI();
+			loadItems();
+			m_curCategory = tmpCurCategory;
+		}
+		m_update = true;
+	}
+
+	/**
+	 * Centers the frame
+	 */
+	public void setCenter()
+	{
+		int height = (int) GameClient.getInstance().getDisplay().getHeight();
+		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int x = width / 2 - 200;
+		int y = height / 2 - 200;
+		setBounds(x, y, getWidth(), getHeight());
 	}
 
 	@Override
@@ -413,7 +364,6 @@ public class BigBagDialog extends Frame
 			// Update items and stocks
 			System.out.println("Looping through items to display");
 			for(int i = 0; i < 5; i++)
-			{
 				try
 				{
 					m_itemBtns.get(i).setName(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
@@ -432,7 +382,6 @@ public class BigBagDialog extends Frame
 					m_stockLabels.get(i).setText("");
 					m_itemBtns.get(i).setEnabled(false);
 				}
-			}
 		}
 	}
 
@@ -447,17 +396,13 @@ public class BigBagDialog extends Frame
 		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName())).getCategory().equalsIgnoreCase("Field"))
-			{
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), true, false);
-				// System.out.println("win " + i);
-			}
+			// System.out.println("win " + i);
 			else
-			{
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);
-				// System.out.println("fail " + i);
-				// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
-				// .getCategory());
-			}
+			// System.out.println("fail " + i);
+			// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
+			// .getCategory());
 			m_popup.setLocation(m_itemBtns.get(i).getAbsoluteX(), m_itemBtns.get(i).getAbsoluteY() + m_itemBtns.get(i).getHeight() - getTitleBar().getHeight());
 			getDisplay().add(m_popup);
 		}
@@ -470,28 +415,22 @@ public class BigBagDialog extends Frame
 		}
 	}
 
-	/**
-	 * Destroys the item popup
-	 */
-	public void destroyPopup()
+	private void loadItems()
 	{
-		if(getDisplay().containsChild(m_popup))
-		{
-			m_popup.destroyPopup();
-			m_popup = null;
-		}
-	}
-
-	/**
-	 * Centers the frame
-	 */
-	public void setCenter()
-	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
-		int x = (width / 2) - 200;
-		int y = (height / 2) - 200;
-		this.setBounds(x, y, this.getWidth(), this.getHeight());
+		// Load the player's items and sort them by category
+		for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			// Field items
+			if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
+				m_items.get(0).add(item);
+			else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+				m_items.get(1).add(item);
+			else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+				m_items.get(2).add(item);
+			else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+				m_items.get(3).add(item);
+			else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+				m_items.get(4).add(item);
+		m_update = true;
 	}
 }
 
@@ -502,12 +441,12 @@ public class BigBagDialog extends Frame
  */
 class ItemPopup extends Frame
 {
-	private Label m_name;
-	private Button m_use;
-	private Button m_give;
-	private Button m_destroy;
 	private Button m_cancel;
+	private Button m_destroy;
+	private Button m_give;
+	private Label m_name;
 	private TeamPopup m_team;
+	private Button m_use;
 
 	/**
 	 * Default Constructor
@@ -537,6 +476,7 @@ class ItemPopup extends Frame
 		m_use.setLocation(0, m_name.getY() + m_name.getHeight() + 3);
 		m_use.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				useItem(m_id, m_useOnPoke, m_isBattle);
@@ -548,9 +488,10 @@ class ItemPopup extends Frame
 			m_give = new Button("Give");
 			m_give.setSize(100, 25);
 			m_give.setLocation(0, m_use.getY() + 25);
-			//m_give.setEnabled(false);
+			// m_give.setEnabled(false);
 			m_give.addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					giveItem(m_id);
@@ -567,9 +508,13 @@ class ItemPopup extends Frame
 			m_destroy.setLocation(0, m_use.getY() + 25);
 		m_destroy.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				GameClient.getInstance().getPacketGenerator().writeTcpMessage("34" + m_id);
+				ClientMessage message = new ClientMessage();
+				message.Init(41);
+				message.addInt(m_id);
+				GameClient.m_Session.Send(message);
 				destroyPopup();
 			}
 		});
@@ -581,6 +526,7 @@ class ItemPopup extends Frame
 		m_cancel.setLocation(0, m_destroy.getY() + 25);
 		m_cancel.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				destroyPopup();
@@ -618,6 +564,23 @@ class ItemPopup extends Frame
 	}
 
 	/**
+	 * Give the item to a pokemon
+	 * 
+	 * @param id
+	 */
+	public void giveItem(int id)
+	{
+		setAlwaysOnTop(false);
+		if(getDisplay().containsChild(m_team))
+			getDisplay().remove(m_team);
+		m_team = null;
+		m_team = new TeamPopup(this, id, false, false);
+		m_team.setLocation(m_give.getAbsoluteX() + getWidth(), m_give.getAbsoluteY() - 15);
+		getDisplay().add(m_team);
+
+	}
+
+	/**
 	 * Use the item. usedOnPoke determine whether the item should be applied to a pokemon
 	 * 
 	 * @param id
@@ -638,27 +601,12 @@ class ItemPopup extends Frame
 		}
 		else
 		{
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + id);
-			// System.out.println("no use");
+			ClientMessage message = new ClientMessage();
+			message.Init(40);
+			message.addString(String.valueOf(id));
+			GameClient.m_Session.Send(message);
 			destroyPopup();
 		}
-	}
-
-	/**
-	 * Give the item to a pokemon
-	 * 
-	 * @param id
-	 */
-	public void giveItem(int id)
-	{
-		setAlwaysOnTop(false);
-		if(getDisplay().containsChild(m_team))
-			getDisplay().remove(m_team);
-		m_team = null;
-		m_team = new TeamPopup(this, id, false, false);
-		m_team.setLocation(m_give.getAbsoluteX() + getWidth(), m_give.getAbsoluteY() - 15);
-		getDisplay().add(m_team);
-
 	}
 }
 
@@ -669,8 +617,8 @@ class ItemPopup extends Frame
  */
 class TeamPopup extends Frame
 {
-	ItemPopup m_parent;
 	Label m_details;
+	ItemPopup m_parent;
 
 	/**
 	 * Default constructor
@@ -690,7 +638,6 @@ class TeamPopup extends Frame
 		final boolean m_isBattle = isBattle;
 		int y = 0;
 		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++)
-		{
 			try
 			{
 				final Label tempLabel = new Label(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
@@ -701,13 +648,6 @@ class TeamPopup extends Frame
 				tempLabel.setLocation(0, y);
 				tempLabel.addMouseListener(new MouseAdapter()
 				{
-					@Override
-					public void mouseReleased(MouseEvent e)
-					{
-						super.mouseReleased(e);
-						processItemUse(m_use, m_item, j, m_isBattle);
-					}
-
 					@Override
 					public void mouseEntered(MouseEvent e)
 					{
@@ -721,6 +661,13 @@ class TeamPopup extends Frame
 						super.mouseExited(e);
 						tempLabel.setForeground(new Color(255, 255, 255));
 					}
+
+					@Override
+					public void mouseReleased(MouseEvent e)
+					{
+						super.mouseReleased(e);
+						processItemUse(m_use, m_item, j, m_isBattle);
+					}
 				});
 				y += 18;
 				getContentPane().add(tempLabel);
@@ -728,7 +675,6 @@ class TeamPopup extends Frame
 			catch(Exception e)
 			{
 			}
-		}
 		// Frame configuration
 		setBackground(new Color(0, 0, 0, 150));
 		setSize(100, 115);
@@ -749,12 +695,16 @@ class TeamPopup extends Frame
 	public void processItemUse(boolean use, int id, int pokeIndex, boolean isBattle)
 	{
 		if(use)
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("32" + id + "," + pokeIndex);
-		else
 		{
-			GameClient.getInstance().getPacketGenerator().writeTcpMessage("33" + id + "," + pokeIndex);
-			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
+			ClientMessage message = new ClientMessage();
+			message.Init(40);
+			message.addString(id + "," + pokeIndex);
+			GameClient.m_Session.Send(message);
 		}
+		else
+			/* TODO: Write Netty Implementation for Give Pakcets. */
+			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("33" + id + "," + pokeIndex);
+			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
 		m_parent.destroyPopup();
 	}
 }

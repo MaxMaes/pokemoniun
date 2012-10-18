@@ -28,3 +28,10 @@ DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username 
 
 Select a Friend:
 SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = 'Remyoman'));
+
+Delete Player:
+DELETE FROM pn_members WHERE id=44895 LIMIT 10;
+DELETE FROM pn_bag WHERE member=44895 LIMIT 10;
+DELETE FROM pn_party WHERE member=44895 LIMIT 10;
+DELETE FROM pn_friends WHERE id=44895; LIMIT 10;
+DELETE FROM pn_pokemon WHERE currentTrainerName='Ullr' LIMIT 10;

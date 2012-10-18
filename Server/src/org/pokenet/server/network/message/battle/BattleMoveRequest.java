@@ -4,14 +4,16 @@ import org.pokenet.server.network.message.PokenetMessage;
 
 /**
  * A request to select a battle move
+ * 
  * @author shadowkanji
- *
  */
-public class BattleMoveRequest extends PokenetMessage {
+public class BattleMoveRequest extends PokenetMessage
+{
 	/**
 	 * Constructor
 	 */
-	public BattleMoveRequest() {
+	public BattleMoveRequest()
+	{
 		m_message = "bm";
 	}
 }

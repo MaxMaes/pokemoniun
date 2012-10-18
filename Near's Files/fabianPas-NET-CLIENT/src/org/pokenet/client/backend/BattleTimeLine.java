@@ -23,7 +23,6 @@ public class BattleTimeLine {
       m_level, m_expRemaining;
   private boolean                 m_isBattling;
 
-
   /**
    * Default constructor
    */
@@ -308,9 +307,6 @@ public class BattleTimeLine {
    * 
    * @param msg
    */
-  
-  
-  
   public void addSpeech(String msg) {
     String newMsg = parsel10n(msg);
     m_narrator.addSpeech(parsel10n(newMsg));

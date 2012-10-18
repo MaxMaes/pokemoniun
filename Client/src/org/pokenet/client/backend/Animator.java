@@ -6,11 +6,11 @@ import org.pokenet.client.backend.entity.Player.Direction;
 
 public class Animator
 {
+	private static final int ANIMATION_INCREMENT = 4;
+
 	private ClientMapMatrix m_mapMatrix;
 
 	private Timer m_timer;
-
-	private static final int ANIMATION_INCREMENT = 4;
 
 	// Sets up calls
 	public Animator(ClientMapMatrix maps)
@@ -28,12 +28,8 @@ public class Animator
 				Timer.tick();
 			ClientMap map = m_mapMatrix.getCurrentMap();
 			if(map != null)
-			{
 				for(int i = 0; i < m_mapMatrix.getPlayers().size(); i++)
-				{
 					animatePlayer(m_mapMatrix.getPlayers().get(i));
-				}
-			}
 			m_timer.reset();
 		}
 		catch(Exception e)
@@ -49,11 +45,8 @@ public class Animator
 	 */
 	private void animatePlayer(Player player)
 	{
-		/*
-		 * Check if we need to move the player
-		 */
+		/* Check if we need to move the player */
 		if(player.requiresMovement())
-		{
 			switch(player.getNextMovement())
 			{
 				case Down:
@@ -93,32 +86,17 @@ public class Animator
 					}
 					break;
 			}
-		}
-		/*
-		 * Keep the screen following the player, i.e. move the map also
-		 */
+		/* Keep the screen following the player, i.e. move the map also */
 		if(player.isOurPlayer())
-		{
 			if(player.getX() > player.getServerX())
-			{
-				m_mapMatrix.getCurrentMap().setXOffset((m_mapMatrix.getCurrentMap().getXOffset() + ANIMATION_INCREMENT), true);
-			}
+				m_mapMatrix.getCurrentMap().setXOffset(m_mapMatrix.getCurrentMap().getXOffset() + ANIMATION_INCREMENT, true);
 			else if(player.getX() < player.getServerX())
-			{
-				m_mapMatrix.getCurrentMap().setXOffset((m_mapMatrix.getCurrentMap().getXOffset() - ANIMATION_INCREMENT), true);
-			}
+				m_mapMatrix.getCurrentMap().setXOffset(m_mapMatrix.getCurrentMap().getXOffset() - ANIMATION_INCREMENT, true);
 			else if(player.getY() > player.getServerY())
-			{
-				m_mapMatrix.getCurrentMap().setYOffset((m_mapMatrix.getCurrentMap().getYOffset() + ANIMATION_INCREMENT), true);
-			}
+				m_mapMatrix.getCurrentMap().setYOffset(m_mapMatrix.getCurrentMap().getYOffset() + ANIMATION_INCREMENT, true);
 			else if(player.getY() < player.getServerY())
-			{
-				m_mapMatrix.getCurrentMap().setYOffset((m_mapMatrix.getCurrentMap().getYOffset() - ANIMATION_INCREMENT), true);
-			}
-		}
-		/*
-		 * Move the player on screen
-		 */
+				m_mapMatrix.getCurrentMap().setYOffset(m_mapMatrix.getCurrentMap().getYOffset() - ANIMATION_INCREMENT, true);
+		/* Move the player on screen */
 		if(player.getX() > player.getServerX())
 		{
 			// Choose the sprite according to the player's position
@@ -131,10 +109,8 @@ public class Animator
 
 			player.setX(player.getX() - ANIMATION_INCREMENT);
 			if(player.getX() > player.getServerX() && player.getX() % 32 == 0)
-			{
 				/* If the player is still behind the server, make sure the stopped animation is shown */
 				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
-			}
 		}
 		else if(player.getX() < player.getServerX())
 		{
@@ -146,10 +122,8 @@ public class Animator
 			}
 			player.setX(player.getX() + ANIMATION_INCREMENT);
 			if(player.getX() < player.getServerX() && player.getX() % 32 == 0)
-			{
 				/* If the player is still behind the server, make sure the stopped animation is shown */
 				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
-			}
 		}
 		else if(player.getY() > player.getServerY())
 		{
@@ -161,10 +135,8 @@ public class Animator
 			}
 			player.setY(player.getY() - ANIMATION_INCREMENT);
 			if(player.getY() > player.getServerY() && (player.getY() + 8) % 32 == 0)
-			{
 				/* If the player is still behind the server, make sure the stopped animation is shown */
 				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
-			}
 		}
 		else if(player.getY() < player.getServerY())
 		{
@@ -176,14 +148,10 @@ public class Animator
 			}
 			player.setY(player.getY() + ANIMATION_INCREMENT);
 			if(player.getY() < player.getServerY() && (player.getY() + 8) % 32 == 0)
-			{
 				/* If the player is still behind the server, make sure the stopped animation is shown */
 				player.setCurrentImage(Player.getSpriteFactory().getSprite(player.getDirection(), false, player.m_leftOrRight, player.getSprite()));
-			}
 		}
-		/*
-		 * The player is now in sync with the server, stop moving/animating them
-		 */
+		/* The player is now in sync with the server, stop moving/animating them */
 		if(player.getX() == player.getServerX() && player.getY() == player.getServerY())
 		{
 			player.setDirection(player.getDirection());

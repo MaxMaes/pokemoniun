@@ -15,17 +15,18 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
+import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.ListBox;
 
 public class SpriteChooserDialog extends Frame
 {
-	protected ListBox m_spriteList;
-	protected Label m_spriteDisplay;
 	protected String m_mustLoadSprite;
+	protected Label m_spriteDisplay;
+	protected ListBox m_spriteList;
+	private String m_respath;
 	private List<String> m_sprites;
 	private InputStream m_stream;
-	private String m_respath;
 
 	public SpriteChooserDialog()
 	{
@@ -36,24 +37,13 @@ public class SpriteChooserDialog extends Frame
 		if(m_respath == null)
 			m_respath = "";
 		for(int i = 1; i <= 218; i++)
-		{
 			m_sprites.add(String.valueOf(i));
-		}
 		/* Handle blocked sprites */
 		InputStream in = null;
-		try
-		{
-			in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
 		Scanner s = new Scanner(in);
 		while(s.hasNextLine())
-		{
 			m_sprites.remove(s.nextLine());
-		}
 		s.close();
 		m_spriteDisplay = new Label();
 		m_spriteDisplay.setSize(124, 204);
@@ -79,6 +69,11 @@ public class SpriteChooserDialog extends Frame
 		initUse();
 	}
 
+	public int getChoice()
+	{
+		return m_spriteList.getSelectedIndex();
+	}
+
 	public void initUse()
 	{
 		final SpriteChooserDialog thisDialog = this;
@@ -92,6 +87,7 @@ public class SpriteChooserDialog extends Frame
 		getContentPane().add(cancel);
 		cancel.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				GameClient.getInstance().getDisplay().remove(thisDialog);
@@ -99,21 +95,28 @@ public class SpriteChooserDialog extends Frame
 		});
 		use.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				GameClient.getInstance().getDisplay().remove(thisDialog);
 				final ConfirmationDialog confirm = new ConfirmationDialog("Are you sure you want to change sprites?\nIt'll cost you P500!");
 				confirm.addYesListener(new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent e)
 					{
 						confirm.setVisible(false);
 						GameClient.getInstance().getDisplay().remove(confirm);
-						GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
+						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
+						ClientMessage message = new ClientMessage();
+						message.Init(14);
+						message.addInt(Integer.parseInt(m_spriteList.getSelectedName()));
+						GameClient.m_Session.Send(message);
 					}
 				});
 				confirm.addNoListener(new ActionListener()
 				{
+					@Override
 					public void actionPerformed(ActionEvent e)
 					{
 						confirm.setVisible(false);
@@ -125,11 +128,6 @@ public class SpriteChooserDialog extends Frame
 		});
 	}
 
-	public int getChoice()
-	{
-		return m_spriteList.getSelectedIndex();
-	}
-
 	@Override
 	public void render(GUIContext container, Graphics g)
 	{
@@ -138,19 +136,12 @@ public class SpriteChooserDialog extends Frame
 		{
 			try
 			{
-				try
-				{
-					m_stream = FileLoader.loadFile(m_mustLoadSprite);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+				m_stream = FileLoader.loadFile(m_mustLoadSprite);
 				m_spriteDisplay.setImage(new Image(m_stream, m_mustLoadSprite, false));
 			}
-			catch(SlickException e)
+			catch(SlickException se)
 			{
-				e.printStackTrace();
+				se.printStackTrace();
 			}
 			m_mustLoadSprite = null;
 		}

@@ -1,7 +1,7 @@
 package org.pokenet.client.backend;
 
 import org.pokenet.client.GameClient;
-import org.pokenet.client.network.PacketGenerator;
+import org.pokenet.client.protocol.ClientMessage;
 
 /**
  * Parses chat text for commands
@@ -10,64 +10,140 @@ import org.pokenet.client.network.PacketGenerator;
  */
 public class ModerationManager
 {
-	private static PacketGenerator m_ioSession = GameClient.getInstance().getPacketGenerator();
 
 	public static void parseLine(String x)
 	{
 		// Announcement
 		if(x.length() >= 9 && x.substring(0, 9).equalsIgnoreCase("announce "))
-			m_ioSession.writeTcpMessage("1C" + x.substring(9));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(24);
+			message.addString(x.substring(9));
+			GameClient.m_Session.Send(message);
+		}
 		// Alert
 		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("alert "))
-			m_ioSession.writeTcpMessage("1D" + x.substring(6));
+		{
+			ClientMessage message = new ClientMessage();
+			/* message.Init(-); Create ID for Alerts. */
+			message.addString(x.substring(6));
+			GameClient.m_Session.Send(message);
+		}
 		// Mute
 		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("mute "))
-			m_ioSession.writeTcpMessage("21" + x.substring(5));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(29);
+			message.addString(x.substring(5));
+			GameClient.m_Session.Send(message);
+		}
 		// Unmute
 		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("unmute "))
-			m_ioSession.writeTcpMessage("22" + x.substring(7));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(30);
+			message.addString(x.substring(7));
+			GameClient.m_Session.Send(message);
+		}
 		// Kick
 		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("kick "))
-			m_ioSession.writeTcpMessage("23" + x.substring(5));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(31);
+			message.addString(x.substring(5));
+			GameClient.m_Session.Send(message);
+		}
 		// Ban
 		else if(x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("ban "))
-			m_ioSession.writeTcpMessage("1E" + x.substring(4));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(26);
+			message.addString(x.substring(4));
+			GameClient.m_Session.Send(message);
+		}
 		// Unban
 		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("unban "))
-			m_ioSession.writeTcpMessage("1F" + x.substring(6));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(27);
+			message.addString(x.substring(6));
+			GameClient.m_Session.Send(message);
+		}
 		// Jump to [player]
 		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("jumpto "))
-			m_ioSession.writeTcpMessage("20" + x.substring(7));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(28);
+			message.addString(x.substring(7));
+			GameClient.m_Session.Send(message);
+		}
 		// Player count
 		else if(x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount"))
-			m_ioSession.writeTcpMessage("1B");
-		// local chat
-		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("local "))
-			m_ioSession.writeTcpMessage("3A" + x.substring(6));
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(23);
+			message.addString(x.substring(11));
+			GameClient.m_Session.Send(message);
+		}
 		// Change Weather
 		else if(x.length() >= 8 && x.substring(0, 8).equalsIgnoreCase("weather "))
 		{
 			// Normal
 			if(x.substring(8).equalsIgnoreCase("normal") || x.substring(8).equalsIgnoreCase("sunny"))
-				m_ioSession.writeTcpMessage("24");
+			{
+
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(0);
+				GameClient.m_Session.Send(message);
+			}
 			// Rain
 			else if(x.substring(8).equalsIgnoreCase("rain"))
-				m_ioSession.writeTcpMessage("25");
+			{
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(1);
+				GameClient.m_Session.Send(message);
+			}
 			// Snow
 			else if(x.substring(8).equalsIgnoreCase("snow") || x.substring(8).equalsIgnoreCase("hail"))
-				m_ioSession.writeTcpMessage("26");
+			{
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(2);
+				GameClient.m_Session.Send(message);
+			}
 			// Fog
 			else if(x.substring(8).equalsIgnoreCase("fog"))
-				m_ioSession.writeTcpMessage("27");
+			{
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(3);
+				GameClient.m_Session.Send(message);
+			}
 			// Sandstorm
 			else if(x.substring(8).equalsIgnoreCase("sandstorm"))
-				m_ioSession.writeTcpMessage("28");
+			{
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(4);
+				GameClient.m_Session.Send(message);
+			}
 			// Random
 			else if(x.substring(8).equalsIgnoreCase("random"))
-				m_ioSession.writeTcpMessage("29");
+			{
+				ClientMessage message = new ClientMessage();
+				message.Init(32);
+				message.addInt(5);
+				GameClient.m_Session.Send(message);
+			}
 		}
 		// Stop server
 		else if(x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("stop"))
-			m_ioSession.writeTcpMessage("2A");
+		{
+			ClientMessage message = new ClientMessage();
+			message.Init(33);
+			GameClient.m_Session.Send(message);
+		}
 	}
 }

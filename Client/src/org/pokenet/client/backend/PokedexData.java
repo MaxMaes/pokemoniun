@@ -4,21 +4,170 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
 
 /**
  * Contains all information required by the pokedex
+ * 
  * @author Myth1c
- *
  */
 public class PokedexData
 {
 	private static HashMap<Integer, String[]> dexdata;
-	private static HashMap<Integer, ArrayList<Integer>[]> locations;
 	private static HashMap<Integer, Object[]> locationids;
-	
+	private static HashMap<Integer, ArrayList<Integer>[]> locations;
+
+	public static String getAbilities(int id)
+	{
+		return dexdata.get(id)[15];
+	}
+
+	public static String getBaseEXP(int id)
+	{
+		return dexdata.get(id)[8];
+	}
+
+	public static String getBaseStats(int id)
+	{
+		return dexdata.get(id)[6];
+	}
+
+	public static String getBattlerAltitude(int id)
+	{
+		return dexdata.get(id)[25];
+	}
+
+	public static String getBattlerEnemyY(int id)
+	{
+		return dexdata.get(id)[24];
+	}
+
+	public static String getBattlerPlayerY(int id)
+	{
+		return dexdata.get(id)[23];
+	}
+
+	public static String getColor(int id)
+	{
+		return dexdata.get(id)[12];
+	}
+
+	public static String getCompatibility(int id)
+	{
+		return dexdata.get(id)[16];
+	}
+
+	public static String getEffortPoints(int id)
+	{
+		return dexdata.get(id)[14];
+	}
+
+	public static String getEggMoves(int id)
+	{
+		return dexdata.get(id)[21];
+	}
+
+	public static String getEvolutions(int id)
+	{
+		return dexdata.get(id)[22];
+	}
+
+	public static String getGenderRate(int id)
+	{
+		return dexdata.get(id)[19];
+	}
+
+	public static String getGrowthRate(int id)
+	{
+		return dexdata.get(id)[10];
+	}
+
+	public static String getHabitat(int id)
+	{
+		return dexdata.get(id)[13];
+	}
+
+	public static String getHappiness(int id)
+	{
+		return dexdata.get(id)[9];
+	}
+
+	public static String getHeight(int id)
+	{
+		return dexdata.get(id)[17];
+	}
+
+	public static String getInternalName(int id)
+	{
+		return dexdata.get(id)[1];
+	}
+
+	public static String getKind(int id)
+	{
+		return dexdata.get(id)[2];
+	}
+
+	public static Object[] getLocationInfo(int id)
+	{
+		return locationids.get(id);
+	}
+
+	public static ArrayList<Integer>[] getLocations(int id)
+	{
+		return locations.get(id);
+	}
+
+	public static String getMoves(int id)
+	{
+		return dexdata.get(id)[20];
+	}
+
+	public static String getName(int id)
+	{
+		if(dexdata.get(id) == null)
+			return "";
+		return dexdata.get(id)[0];
+	}
+
+	public static String getRareness(int id)
+	{
+		return dexdata.get(id)[7];
+	}
+
+	public static String getStepsToHatch(int id)
+	{
+		return dexdata.get(id)[11];
+	}
+
+	public static String getStory(int id)
+	{
+		return dexdata.get(id)[3];
+	}
+
+	public static String getType1(int id)
+	{
+		return dexdata.get(id)[4];
+	}
+
+	public static String getType2(int id)
+	{
+		return dexdata.get(id)[5];
+	}
+
+	public static String getTypestring(int id)
+	{
+		if(dexdata.get(id)[5] == null)
+			return dexdata.get(id)[4];
+		else
+			return dexdata.get(id)[4] + "/" + dexdata.get(id)[5];
+	}
+
+	public static String getWeight(int id)
+	{
+		return dexdata.get(id)[18];
+	}
+
 	public static void loadPokedexData()
 	{
 		dexdata = new HashMap<Integer, String[]>();
@@ -41,7 +190,7 @@ public class PokedexData
 			e.printStackTrace();
 			return;
 		}
-		
+
 		for(int i = 0; i < 92; i++)
 		{
 			Ini.Section s = locationid.get(String.valueOf(i));
@@ -49,10 +198,10 @@ public class PokedexData
 			data[0] = s.get("Name");
 			data[1] = s.get("MapX");
 			data[2] = s.get("MapY");
-			
+
 			locationids.put(i, data);
 		}
-		
+
 		for(int i = 1; i < 494; i++)
 		{
 			Ini.Section s = pokemon.get(String.valueOf(i));
@@ -71,40 +220,32 @@ public class PokedexData
 		data[2] = new ArrayList<Integer>();
 		data[3] = new ArrayList<Integer>();
 		locations.put(i, data);
-		
+
 		String line = new String();
 		String[] details;
 		line = s.get("Day");
 		details = line.split(",");
 		for(String st : details)
-		{
 			if(!st.equals(""))
 				locations.get(i)[0].add(Integer.parseInt(st));
-		}
-		
+
 		line = s.get("Night");
 		details = line.split(",");
 		for(String st : details)
-		{
 			if(!st.equals(""))
 				locations.get(i)[1].add(Integer.parseInt(st));
-		}
-		
+
 		line = s.get("Fish");
 		details = line.split(",");
 		for(String st : details)
-		{
 			if(!st.equals(""))
 				locations.get(i)[2].add(Integer.parseInt(st));
-		}
-		
+
 		line = s.get("Surf");
 		details = line.split(",");
 		for(String st : details)
-		{
 			if(!st.equals(""))
 				locations.get(i)[3].add(Integer.parseInt(st));
-		}
 	}
 
 	private static void parsePokemonInfo(Section s, int index)
@@ -138,157 +279,5 @@ public class PokedexData
 		data[25] = s.get("BattlerAltitude");
 
 		dexdata.put(index, data);
-	}
-	
-	public static Object[] getLocationInfo(int id)
-	{
-		return locationids.get(id);
-	}
-	
-	public static ArrayList<Integer>[] getLocations(int id)
-	{
-		return locations.get(id);
-	}
-	
-	public static String getName(int id)
-	{
-		if(dexdata.get(id) == null)
-		{
-			return "";
-		}
-		return dexdata.get(id)[0];
-	}
-	
-	public static String getInternalName(int id)
-	{
-		return dexdata.get(id)[1];
-	}
-	
-	public static String getKind(int id)
-	{
-		return dexdata.get(id)[2];
-	}
-	
-	public static String getStory(int id)
-	{
-		return dexdata.get(id)[3];
-	}
-	
-	public static String getType1(int id)
-	{
-		return dexdata.get(id)[4];
-	}
-	
-	public static String getType2(int id)
-	{
-		return dexdata.get(id)[5];
-	}
-	
-	public static String getTypestring(int id)
-	{
-		if(dexdata.get(id)[5] == null)
-			return dexdata.get(id)[4];
-		else
-			return dexdata.get(id)[4] + "/" + dexdata.get(id)[5];
-	}
-	
-	public static String getBaseStats(int id)
-	{
-		return dexdata.get(id)[6];
-	}
-	
-	public static String getRareness(int id)
-	{
-		return dexdata.get(id)[7];
-	}
-	
-	public static String getBaseEXP(int id)
-	{
-		return dexdata.get(id)[8];
-	}
-	
-	public static String getHappiness(int id)
-	{
-		return dexdata.get(id)[9];
-	}
-	
-	public static String getGrowthRate(int id)
-	{
-		return dexdata.get(id)[10];
-	}
-	
-	public static String getStepsToHatch(int id)
-	{
-		return dexdata.get(id)[11];
-	}
-	
-	public static String getColor(int id)
-	{
-		return dexdata.get(id)[12];
-	}
-	
-	public static String getHabitat(int id)
-	{
-		return dexdata.get(id)[13];
-	}
-	
-	public static String getEffortPoints(int id)
-	{
-		return dexdata.get(id)[14];
-	}
-	
-	public static String getAbilities(int id)
-	{
-		return dexdata.get(id)[15];
-	}
-	
-	public static String getCompatibility(int id)
-	{
-		return dexdata.get(id)[16];
-	}
-	
-	public static String getHeight(int id)
-	{
-		return dexdata.get(id)[17];
-	}
-	
-	public static String getWeight(int id)
-	{
-		return dexdata.get(id)[18];
-	}
-	
-	public static String getGenderRate(int id)
-	{
-		return dexdata.get(id)[19];
-	}
-	
-	public static String getMoves(int id)
-	{
-		return dexdata.get(id)[20];
-	}
-	
-	public static String getEggMoves(int id)
-	{
-		return dexdata.get(id)[21];
-	}
-	
-	public static String getEvolutions(int id)
-	{
-		return dexdata.get(id)[22];
-	}
-	
-	public static String getBattlerPlayerY(int id)
-	{
-		return dexdata.get(id)[23];
-	}
-	
-	public static String getBattlerEnemyY(int id)
-	{
-		return dexdata.get(id)[24];
-	}
-	
-	public static String getBattlerAltitude(int id)
-	{
-		return dexdata.get(id)[25];
 	}
 }

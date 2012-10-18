@@ -15,11 +15,28 @@ public class Translator
 {
 	private static Translator m_instance;
 
-	/** Returns a list of translated text
+	/**
+	 * Returns the instance of translator
+	 * 
+	 * @return Instance of the translator.
+	 **/
+	public static Translator getInstance()
+	{
+		if(m_instance == null)
+			m_instance = new Translator();
+		return m_instance;
+	}
+
+	public static List<String> translate(String filename)
+	{
+		return Translator.getInstance().translateText(filename);
+	}
+
+	/**
+	 * Returns a list of translated text
 	 * 
 	 * @param The requested file.
 	 * @return The translated version of the requested file
-	 * 
 	 **/
 	public List<String> translateText(String filename)
 	{
@@ -34,9 +51,7 @@ public class Translator
 			BufferedReader f = new BufferedReader(new InputStreamReader(in));
 			Scanner reader = new Scanner(f);
 			while(reader.hasNextLine())
-			{
 				translated.add(reader.nextLine().replaceAll("/n", "\n"));
-			}
 		}
 		catch(FileNotFoundException fnfe)
 		{
@@ -58,27 +73,8 @@ public class Translator
 			BufferedReader f = new BufferedReader(new InputStreamReader(in));
 			Scanner reader = new Scanner(f);
 			while(reader.hasNextLine())
-			{
 				translated.add(reader.nextLine().replaceAll("/n", "\n"));
-			}
 		}
 		return translated;
-	}
-
-	/** Returns the instance of translator
-	 * 
-	 * @return Instance of the translator.
-	 *  
-	 **/
-	public static Translator getInstance()
-	{
-		if(m_instance == null)
-			m_instance = new Translator();
-		return m_instance;
-	}
-
-	public static List<String> translate(String filename)
-	{
-		return Translator.getInstance().translateText(filename);
 	}
 }

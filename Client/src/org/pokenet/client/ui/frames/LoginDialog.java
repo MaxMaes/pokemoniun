@@ -18,9 +18,9 @@ import org.pokenet.client.backend.Translator;
  */
 public class LoginDialog extends Frame
 {
-	private TextField m_username, m_password;
-	private Label m_userLabel, m_passLabel;
 	private Button m_login, m_register, m_back;
+	private Label m_userLabel, m_passLabel;
+	private TextField m_username, m_password;
 	private Color m_white;
 
 	/**
@@ -31,17 +31,15 @@ public class LoginDialog extends Frame
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		List<String> translated = Translator.translate("_LOGIN");
-		this.setBorderRendered(false);
-		this.getTitleBar().setVisible(false);
+		setBorderRendered(false);
+		getTitleBar().setVisible(false);
 		this.setSize(320, 160);
 		this.setLocation(480, 424);
-		this.setBackground(new Color(0, 0, 0, 140));
-		this.setDraggable(false);
-		this.setResizable(false);
+		setBackground(new Color(0, 0, 0, 140));
+		setDraggable(false);
+		setResizable(false);
 
-		/*
-		 * Set up the components
-		 */
+		/* Set up the components */
 		m_white = new Color(255, 255, 255);
 
 		m_username = new TextField();
@@ -80,6 +78,7 @@ public class LoginDialog extends Frame
 		m_back.setVisible(true);
 		m_back.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				GameClient.getInstance().returnToServerSelect();
@@ -94,12 +93,11 @@ public class LoginDialog extends Frame
 		m_login.setVisible(true);
 		m_login.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
-				{
 					login();
-				}
 			}
 		});
 		this.add(m_login);
@@ -110,6 +108,7 @@ public class LoginDialog extends Frame
 		m_register.setVisible(true);
 		m_register.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				register();
@@ -117,25 +116,7 @@ public class LoginDialog extends Frame
 		});
 		this.add(m_register);
 
-		this.setVisible(false);
-	}
-
-	/**
-	 * Sends login information to packet generator to be sent to server
-	 */
-	private void login()
-	{
-		m_login.setEnabled(false);
-		GameClient.getInstance().getLoadingScreen().setVisible(true);
-		GameClient.getInstance().getPacketGenerator().login(m_username.getText(), m_password.getText());
-	}
-
-	/**
-	 * Opens registration window
-	 */
-	private void register()
-	{
-		GameClient.getInstance().getLoginScreen().showRegistration();
+		setVisible(false);
 	}
 
 	/**
@@ -146,6 +127,17 @@ public class LoginDialog extends Frame
 	public Button getLoginButton()
 	{
 		return m_login;
+	}
+
+	/**
+	 * Enter to login
+	 * 
+	 * @return
+	 */
+	public void goLogin()
+	{
+		if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
+			login();
 	}
 
 	/**
@@ -169,17 +161,6 @@ public class LoginDialog extends Frame
 	}
 
 	/**
-	 * Enter to login
-	 * 
-	 * @return
-	 */
-	public void goLogin()
-	{
-		if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
-			login();
-	}
-
-	/**
 	 * Reloads strings with language selected.
 	 */
 	public void reloadStrings()
@@ -189,5 +170,24 @@ public class LoginDialog extends Frame
 		m_passLabel.setText(translated.get(6));
 		m_login.setText(translated.get(7));
 		m_register.setText(translated.get(8));
+	}
+
+	/**
+	 * Sends login information to packet generator to be sent to server
+	 */
+	private void login()
+	{
+		m_login.setEnabled(false);
+		GameClient.getInstance().getLoadingScreen().setVisible(true);
+		// GameClient.getInstance().getPacketGenerator().login(m_username.getText(), m_password.getText());
+		GameClient.getInstance().getUserManager().login(m_username.getText(), m_password.getText());
+	}
+
+	/**
+	 * Opens registration window
+	 */
+	private void register()
+	{
+		GameClient.getInstance().getLoginScreen().showRegistration();
 	}
 }

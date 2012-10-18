@@ -17,19 +17,19 @@ import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 
-/** Handles server selection
+/**
+ * Handles server selection
  * 
- * @author shadowkanji 
- *
+ * @author shadowkanji
  **/
 public class ServerDialog extends Frame
 {
-	private Button[] m_servers;
+	private Color m_black;
 	private String[] m_host;
 	private Label m_info;
-	private Color m_black;
-	private Button privateServer, m_back;
+	private Button[] m_servers;
 	private TextField privateIP;
+	private Button privateServer, m_back;
 
 	/** Default constructor **/
 	public ServerDialog()
@@ -38,26 +38,22 @@ public class ServerDialog extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_black = new Color(0, 0, 0);
 		List<String> translate = Translator.translate("_LOGIN");
-		this.setSize(316, 300);
+		this.setSize(316, 300);/* TODO: Check difference with 316, 250 */
 		this.setLocation(400 - 160, 280);
-		this.setTitle(translate.get(0));
-		this.setBackground(new Color(0, 0, 0, 140));
-		this.getTitleBar().setForeground(m_black);
-		this.setDraggable(false);
-		this.setResizable(false);
-		this.getTitleBar().getCloseButton().setVisible(false);
-		/*
-		 * Create the info label
-		 */
+		setTitle(translate.get(0));
+		setBackground(new Color(0, 0, 0, 140));
+		getTitleBar().setForeground(m_black);
+		setDraggable(false);
+		setResizable(false);
+		getTitleBar().getCloseButton().setVisible(false);
+		/* Create the info label */
 		m_info = new Label(translate.get(1));
 		m_info.pack();
 		m_info.setLocation(24, 8);
 		m_info.setForeground(new Color(255, 255, 255));
 		this.add(m_info);
 
-		/*
-		 * Create all the server buttons
-		 */
+		/* Create all the server buttons */
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
@@ -75,6 +71,7 @@ public class ServerDialog extends Frame
 			m_servers[0].setVisible(true);
 			m_servers[0].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[0]);
@@ -89,6 +86,7 @@ public class ServerDialog extends Frame
 			m_servers[1].setVisible(true);
 			m_servers[1].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[1]);
@@ -103,6 +101,7 @@ public class ServerDialog extends Frame
 			m_servers[2].setVisible(true);
 			m_servers[2].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[2]);
@@ -117,6 +116,7 @@ public class ServerDialog extends Frame
 			m_servers[3].setVisible(true);
 			m_servers[3].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[3]);
@@ -131,6 +131,7 @@ public class ServerDialog extends Frame
 			m_servers[4].setVisible(true);
 			m_servers[4].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[4]);
@@ -138,9 +139,7 @@ public class ServerDialog extends Frame
 			});
 			this.add(m_servers[4]);
 			m_host[4] = in.readLine();
-			/*
-			 * Finally, check which servers don't exist and disable their buttons
-			 */
+			/* Finally, check which servers don't exist and disable their buttons */
 			for(int i = 0; i < m_host.length; i++)
 			{
 				if(m_host[i] == null || m_host[i].equalsIgnoreCase("-"))
@@ -165,6 +164,7 @@ public class ServerDialog extends Frame
 			m_servers[0].setVisible(true);
 			m_servers[0].addActionListener(new ActionListener()
 			{
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.setHost(m_host[0]);
@@ -176,28 +176,28 @@ public class ServerDialog extends Frame
 		privateIP.setLocation(16, 204);
 		privateIP.setSize(128, 24);
 		this.add(privateIP);
-
 		privateServer = new Button();
 		privateServer.setText(translate.get(2));
 		privateServer.setSize(128, 24);
 		privateServer.setLocation(168, 204);
 		privateServer.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
 				GameClient.setHost(getPrivateServer());
 			}
 		});
 		this.add(privateServer);
-		this.setVisible(false);
-		
+		setVisible(false);
 		m_back = new Button();
 		m_back.setText("Back");
 		m_back.setSize(128, 24);
 		m_back.setLocation(94, 235);
-		this.setVisible(true);
+		setVisible(true);
 		m_back.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
 				GameClient.getInstance().returnToLanguageSelect();
@@ -222,7 +222,7 @@ public class ServerDialog extends Frame
 	public void reloadStrings()
 	{
 		List<String> translate = Translator.translate("_LOGIN");
-		this.setTitle(translate.get(0));
+		setTitle(translate.get(0));
 		m_info.setText(translate.get(1));
 		privateServer.setText(translate.get(2));
 	}

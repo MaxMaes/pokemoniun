@@ -1,11 +1,10 @@
 package org.pokenet.server.messages.events;
 
-import org.pokenet.server.client.Session;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.client.Session;
 import org.pokenet.server.messages.MessageEvent;
-import org.pokenet.server.protocol.*;
-import org.pokenet.server.network.Connection;
-import org.pokenet.server.backend.entity.PlayerChar;
+import org.pokenet.server.protocol.ClientMessage;
+import org.pokenet.server.protocol.ServerMessage;
 
 
 
@@ -20,7 +19,7 @@ public class HandshakeEvent implements MessageEvent {
 
 		Message.Init(2);
 		Message.addBool(true);
-		Message.Send();
+		Message.sendResponse();
 		
 		GameServer.getServiceManager().getNetworkService().getLoginManager();
 		

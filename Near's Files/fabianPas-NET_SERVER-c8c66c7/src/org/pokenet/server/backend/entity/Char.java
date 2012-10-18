@@ -1,5 +1,7 @@
 package org.pokenet.server.backend.entity;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -14,6 +16,50 @@ public class Char implements Positionable {
 	private boolean m_isVisible, m_isSurfing;
 	protected String m_name;
 	protected ServerMap m_map;
+	
+	private boolean m_boostPriority = false;
+	/*
+	 * Stores a queue of movements for processing
+	 */
+	protected Queue<Direction> m_movementQueue = new LinkedList<Direction>();
+	
+	/**
+	 * Returns the priority of this player to be move checked
+	 * @return
+	 */
+	public int getPriority() {
+		int priority = m_movementQueue.size();
+		if(m_boostPriority) {
+			m_boostPriority = false;
+			priority += 100;
+		}
+		return priority;
+	}
+	
+	/**
+	 * Boost the char's movement priority
+	 */
+	public void boostPriority() {
+		m_boostPriority = true;
+	}
+	
+	/**
+	 * Queues a movement to be checked
+	 * @param d
+	 */
+	public void queueMovement(Direction d) {
+		m_movementQueue.offer(d);
+	}
+	
+	/**
+	 * Returns next movement to be checked
+	 * @return
+	 */
+	public Direction getNextMovement() {
+		if(m_movementQueue.size() == 0)
+			return null;
+		return m_movementQueue.poll();
+	}
 	
 	/**
 	 * Returns the direction this char is facing
@@ -131,6 +177,17 @@ public class Char implements Positionable {
 	public void setName(String name) {
 		m_name = name;
 	}
+	
+	/**
+	 * Processes and checks all movements queued
+	 */
+	public void move() {
+		/* 
+		 * Moves player until queue becomes empty, 
+		 * collision encountered or pokemon encountered 
+		 */
+		while(move(getNextMovement())) {}
+	}
 
 	/**
 	 * Returns true if the char was successfully moved in direction d
@@ -176,7 +233,7 @@ public class Char implements Positionable {
 				if(this instanceof PlayerChar) {
 					//If its a player, resync them
 					PlayerChar p = (PlayerChar) this;
-					
+					//p.getTcpSession().write("U" + getX() + "," + getY());
 					ServerMessage message = new ServerMessage();
 					message.Init(64);
 					message.addInt(getX());

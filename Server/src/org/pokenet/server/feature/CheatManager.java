@@ -2,24 +2,23 @@ package org.pokenet.server.feature;
 
 import org.pokenet.server.backend.entity.Player;
 
-public class CheatManager {
+public class CheatManager
+{
 	private static CheatManager mInstance;
-	
+
 	public CheatManager()
 	{
-		
+
 	}
-	
+
 	public static CheatManager getInstance()
 	{
-		if(mInstance == null) 
-		{
+		if(mInstance == null)
 			mInstance = new CheatManager();
-		}
 		return mInstance;
 	}
-	
-	public void log(Player player, String message) 
+
+	public void log(Player player, String message)
 	{
 		System.out.println("[CheatManager] Player " + player.getName() + " (" + player.getIpAddress() + "), " + message);
 	}

@@ -13,22 +13,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
 import org.pokenet.server.feature.TimeService;
-import org.pokenet.server.network.TcpProtocolHandler;
-import org.pokenet.server.network.message.battle.BattleEndMessage;
-import org.pokenet.server.network.message.battle.BattleInitMessage;
-import org.pokenet.server.network.message.battle.BattleMessage;
-import org.pokenet.server.network.message.battle.BattleMoveMessage;
-import org.pokenet.server.network.message.battle.BattleMoveRequest;
-import org.pokenet.server.network.message.battle.BattleRewardMessage;
-import org.pokenet.server.network.message.battle.EnemyDataMessage;
-import org.pokenet.server.network.message.battle.FaintMessage;
-import org.pokenet.server.network.message.battle.HealthChangeMessage;
-import org.pokenet.server.network.message.battle.NoPPMessage;
-import org.pokenet.server.network.message.battle.StatusChangeMessage;
-import org.pokenet.server.network.message.battle.SwitchMessage;
-import org.pokenet.server.network.message.battle.SwitchRequest;
-import org.pokenet.server.network.message.battle.BattleEndMessage.BattleEnd;
-import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewardType;
+import org.pokenet.server.protocol.ServerMessage;
 
 /**
  * A battlefield for NPC battles
@@ -37,10 +22,10 @@ import org.pokenet.server.network.message.battle.BattleRewardMessage.BattleRewar
  */
 public class NpcBattleField extends BattleField
 {
-	private Player m_player;
-	private NPC m_npc;
-	private BattleTurn[] m_turn = new BattleTurn[2];
 	private boolean m_finished = false;
+	private NPC m_npc;
+	private Player m_player;
+	private BattleTurn[] m_turn = new BattleTurn[2];
 
 	/**
 	 * Constructor
@@ -57,68 +42,55 @@ public class NpcBattleField extends BattleField
 		m_npc = n;
 
 		/* Start the battle */
-		TcpProtocolHandler.writeMessage(p.getTcpSession(), new BattleInitMessage(false, getAliveCount(1)));
-		//Check if this player has seen this wild pokemon before, if not, update pokedex
-		if(!m_player.isPokemonSeen(this.getActivePokemon()[1].getPokemonNumber()+1))
-		{
-			m_player.setPokemonSeen(this.getActivePokemon()[1].getPokemonNumber()+1);
-		}
+		// TcpProtocolHandler.writeMessage(p.getTcpSession(), new BattleInitMessage(false, getAliveCount(1)));
+		ServerMessage startBattle = new ServerMessage(m_player.getSession());
+		startBattle.Init(18);
+		startBattle.addBool(false);
+		startBattle.addInt(getAliveCount(1));
+		startBattle.sendResponse();
+		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
+		if(!m_player.isPokemonSeen(getActivePokemon()[1].getPokemonNumber() + 1))
+			m_player.setPokemonSeen(getActivePokemon()[1].getPokemonNumber() + 1);
 		/* Send enemy's Pokemon data */
 		sendPokemonData(p);
 		/* Set the player's battle id */
 		m_player.setBattleId(0);
 		/* Send enemy name */
-		m_player.getTcpSession().write("bn" + m_npc.getName());
+		// m_player.getTcpSession().write("bn" + m_npc.getName());
+		ServerMessage enemyName = new ServerMessage(m_player.getSession());
+		enemyName.Init(22);
+		enemyName.addString(m_npc.getName());
+		enemyName.sendResponse();
 		/* Apply weather and request moves */
 		applyWeather();
 		requestMoves();
-	}
-
-	/**
-	 * Sends pokemon data to the client
-	 * 
-	 * @param receiver
-	 */
-	private void sendPokemonData(Player receiver)
-	{
-		for(int i = 0; i < this.getParty(1).length; i++)
-		{
-			if(this.getParty(1)[i] != null)
-			{
-				TcpProtocolHandler.writeMessage(receiver.getTcpSession(), new EnemyDataMessage(i, getParty(1)[i]));
-			}
-		}
 	}
 
 	@Override
 	public void applyWeather()
 	{
 		if(m_player.getMap().isWeatherForced())
-		{
 			switch(m_player.getMap().getWeather())
 			{
 				case NORMAL:
 					return;
 				case RAIN:
-					this.applyEffect(new RainEffect());
+					applyEffect(new RainEffect());
 					return;
 				case HAIL:
-					this.applyEffect(new HailEffect());
+					applyEffect(new HailEffect());
 					return;
 				case SANDSTORM:
-					this.applyEffect(new SandstormEffect());
+					applyEffect(new SandstormEffect());
 					return;
 				default:
 					return;
 			}
-		}
 		else
 		{
 			FieldEffect f = TimeService.getWeatherEffect();
 			if(f != null)
-			{
-				this.applyEffect(f);
-			}
+				applyEffect(f);
 		}
 	}
 
@@ -127,6 +99,26 @@ public class NpcBattleField extends BattleField
 	{
 		m_turn[0] = null;
 		m_turn[1] = null;
+	}
+
+	@Override
+	public void executeItemTurn(int i)
+	{
+		if(m_turn[0] == null)
+			m_turn[0] = BattleTurn.getItemTurn(i);
+		if(m_turn[1] == null)
+			m_turn[1] = BattleTurn.getItemTurn(i);
+		executeTurn(m_turn);
+	}
+
+	@Override
+	public void forceExecuteTurn()
+	{
+		if(m_turn[0] == null)
+			m_turn[0] = BattleTurn.getMoveTurn(-1);
+		if(m_turn[1] == null)
+			m_turn[1] = BattleTurn.getMoveTurn(-1);
+		executeTurn(m_turn);
 	}
 
 	@Override
@@ -148,33 +140,52 @@ public class NpcBattleField extends BattleField
 	public void informPokemonFainted(int trainer, int idx)
 	{
 		if(m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName()));
+		{
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName()));
+			ServerMessage informFaint = new ServerMessage(m_player.getSession());
+			informFaint.Init(25);
+			informFaint.addString(getParty(trainer)[idx].getSpeciesName());
+			informFaint.sendResponse();
+		}
 	}
 
 	@Override
 	public void informPokemonHealthChanged(Pokemon poke, int change)
 	{
 		if(m_player != null)
-		{
 			if(getActivePokemon()[0] == poke)
 			{
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(0, change));
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(0, change));
+				ServerMessage informHealth = new ServerMessage(m_player.getSession());
+				informHealth.Init(33);
+				informHealth.addInt(0);
+				informHealth.addString("0," + change);
+				informHealth.sendResponse();
 			}
 			else if(getActivePokemon()[1] == poke)
 			{
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(1, change));
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(1, change));
+				ServerMessage informHealth = new ServerMessage(m_player.getSession());
+				informHealth.Init(33);
+				informHealth.addInt(1);
+				informHealth.addString("1," + change);
+				informHealth.sendResponse();
 			}
 			else
 			{
 				int index = getPokemonPartyIndex(0, poke);
 				if(index > -1)
 				{
-					m_player.getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
+					// m_player.getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
+					ServerMessage informHealth = new ServerMessage(m_player.getSession());
+					informHealth.Init(45);
+					informHealth.addInt(index);
+					informHealth.addInt(poke.getHealth());
+					informHealth.sendResponse();
 					return;
 				}
 				// TODO: Add support for NPC pokemon healing for pokemon in pokeballs
 			}
-		}
 	}
 
 	@Override
@@ -183,12 +194,26 @@ public class NpcBattleField extends BattleField
 		if(m_finished)
 			return;
 		if(m_player != null)
-		{
 			if(getActivePokemon()[0].equals(pokemon))
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), false));
+			{
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), false));
+				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+				receiveEffect.Init(29);
+				receiveEffect.addInt(0);
+				receiveEffect.addString(pokemon.getSpeciesName());
+				receiveEffect.addString(eff.getName());
+				receiveEffect.sendResponse();
+			}
 			else if(pokemon.equals(getActivePokemon()[1]))
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), false));
-		}
+			{
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), false));
+				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+				receiveEffect.Init(29);
+				receiveEffect.addInt(1);
+				receiveEffect.addString(pokemon.getSpeciesName());
+				receiveEffect.addString(eff.getName());
+				receiveEffect.sendResponse();
+			}
 	}
 
 	@Override
@@ -197,52 +222,84 @@ public class NpcBattleField extends BattleField
 		if(m_finished)
 			return;
 		if(m_player != null)
-		{
 			if(getActivePokemon()[0].equals(pokemon) && !getActivePokemon()[0].isFainted())
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), true));
+			{
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), true));
+				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
+				removeEffect.Init(30);
+				removeEffect.addInt(0);
+				removeEffect.addString(pokemon.getSpeciesName());
+				removeEffect.addString(eff.getName());
+				removeEffect.sendResponse();
+			}
 			else if(pokemon.equals(getActivePokemon()[1]) && !getActivePokemon()[1].isFainted())
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), true));
-		}
+			{
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), true));
+				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
+				removeEffect.Init(30);
+				removeEffect.addInt(1);
+				removeEffect.addString(pokemon.getSpeciesName());
+				removeEffect.addString(eff.getName());
+				removeEffect.sendResponse();
+			}
 	}
 
 	@Override
 	public void informSwitchInPokemon(int trainer, Pokemon poke)
 	{
 		if(m_player != null)
-		{
 			if(trainer == 0)
 			{
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
+				ServerMessage switchInform = new ServerMessage(m_player.getSession());
+				switchInform.Init(32);
+				switchInform.addString(m_player.getName());
+				switchInform.addString(poke.getSpeciesName());
+				switchInform.addInt(trainer);
+				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
+				switchInform.sendResponse();
 			}
 			else
 			{
-				TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_npc.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
+				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_npc.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
+				ServerMessage switchInform = new ServerMessage(m_player.getSession());
+				switchInform.Init(32);
+				switchInform.addString(m_npc.getName());
+				switchInform.addString(poke.getSpeciesName());
+				switchInform.addInt(trainer);
+				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
+				switchInform.sendResponse();
 			}
-		}
 	}
 
 	@Override
 	public void informUseMove(Pokemon poke, String name)
 	{
 		if(m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name));
+		{
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name));
+			ServerMessage move = new ServerMessage(m_player.getSession());
+			move.Init(26);
+			move.addString(poke.getSpeciesName());
+			move.addString(name);
+			move.sendResponse();
+		}
 	}
 
+	/* Ends the battle and the player gets rewarded with gold and experience.
+	 * If the gym leader was already beaten the player gets triple the experience and 100 extra gold.
+	 * If the enemy trainer was a Gym Leader the player is also rewarded with the badge. */
 	@Override
 	public void informVictory(int winner)
 	{
 		m_finished = true;
 		int money = 30 * (getMechanics().getRandom().nextInt(5) + 1);	// The magic cookie is used as a base to reward gold (replace later).
 		if(winner == 0)
-		{ /*Ends the battle and the player gets rewarded with gold and experience. 
-			If the gym leader was already beaten the player gets triple the experience and 100 extra gold. 
-		 	If the enemy trainer was a Gym Leader the player is also rewarded with the badge.*/
+		{
 			int trainerExp = 0;
 			for(int i = 0; i < getParty(1).length; i++)
-			{
 				if(getParty(1)[i] != null)
 					trainerExp += getParty(1)[i].getLevel() / 2;
-			}
 			if(m_npc.isGymLeader() && !m_player.hasBadge(m_npc.getBadge()))
 			{
 				trainerExp *= 3;
@@ -252,22 +309,30 @@ public class NpcBattleField extends BattleField
 				m_player.addTrainingExp(trainerExp);
 			if(m_npc.isGymLeader())
 				m_player.addBadge(m_npc.getBadge());
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));
+			ServerMessage reward = new ServerMessage(m_player.getSession());
+			reward.Init(35);
+			reward.addInt(money);
+			reward.sendResponse();
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.removeTempStatusEffects();
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.WON));
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.WON));
+			ServerMessage victory = new ServerMessage(m_player.getSession());
+			victory.Init(24);
+			victory.addInt(0);
+			victory.sendResponse();
 		}
 		else
 		{
 			if(m_player.getMoney() - money >= 0)
-			{
 				m_player.setMoney(m_player.getMoney() - money);
-			}
 			else
-			{
 				m_player.setMoney(0);
-			}
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.LOST));
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.LOST));
+			ServerMessage loss = new ServerMessage(m_player.getSession());
+			loss.Init(24);
+			loss.addInt(1);
+			loss.sendResponse();
 			m_player.lostBattle();
 		}
 		m_player.updateClientMoney();
@@ -277,8 +342,8 @@ public class NpcBattleField extends BattleField
 		if(m_dispatch != null)
 		{
 			/* This very bad programming but shoddy does it and forces us to do it */
-			/* Thread t = m_dispatch; 
-			 * m_dispatch = null; 
+			/* Thread t = m_dispatch;
+			 * m_dispatch = null;
 			 * t.stop(); let the thread manually return. */
 		}
 	}
@@ -296,15 +361,13 @@ public class NpcBattleField extends BattleField
 		if(m_isWaiting && m_replace != null && m_replace[trainer])
 		{
 			if(!move.isMoveTurn())
-			{
-				if(!getActivePokemon()[trainer].equals(this.getParty(trainer)[move.getId()]))
+				if(!getActivePokemon()[trainer].equals(getParty(trainer)[move.getId()]))
 				{
-					this.switchInPokemon(trainer, move.getId());
+					switchInPokemon(trainer, move.getId());
 					m_replace[trainer] = false;
 					m_isWaiting = false;
 					return;
 				}
-			}
 			requestPokemonReplacement(trainer);
 			return;
 		}
@@ -313,7 +376,6 @@ public class NpcBattleField extends BattleField
 		{
 			/* Handle Pokemon being unhappy and ignoring you */
 			if(trainer == 0 && !getActivePokemon()[0].isFainted())
-			{
 				if(getActivePokemon()[0].getHappiness() <= 40)
 				{
 					/* Pokemon is unhappy, they'll do what they feel like */
@@ -324,7 +386,6 @@ public class NpcBattleField extends BattleField
 					move = BattleTurn.getMoveTurn(moveID);
 				}
 				else if(getActivePokemon()[0].getHappiness() < 70)
-				{
 					/* Pokemon is partially unhappy, 50% chance they'll listen to you */
 					if(getMechanics().getRandom().nextInt(2) == 1)
 					{
@@ -334,11 +395,9 @@ public class NpcBattleField extends BattleField
 							moveID = getMechanics().getRandom().nextInt(4);
 						move = BattleTurn.getMoveTurn(moveID);
 					}
-				}
-			}
 			if(move.getId() == -1)
 			{
-				if(m_dispatch == null && ((trainer == 0 && m_turn[1] != null) || (trainer == 1 && m_turn[0] != null)))
+				if(m_dispatch == null && (trainer == 0 && m_turn[1] != null || trainer == 1 && m_turn[0] != null))
 				{
 					m_dispatch = new Thread(new Runnable()
 					{
@@ -352,85 +411,66 @@ public class NpcBattleField extends BattleField
 					return;
 				}
 			}
-			else
+			else // Handle a fainted pokemon
+			if(getActivePokemon()[trainer].isFainted())
 			{
-				// Handle a fainted pokemon
-				if(this.getActivePokemon()[trainer].isFainted())
+				if(!move.isMoveTurn() && getParty(trainer)[move.getId()] != null && getParty(trainer)[move.getId()].getHealth() > 0)
 				{
-					if(!move.isMoveTurn() && this.getParty(trainer)[move.getId()] != null && this.getParty(trainer)[move.getId()].getHealth() > 0)
-					{
-						switchInPokemon(trainer, move.getId());
-						requestMoves();
-						return;
-					}
-					else
-					{
-						// The player still has pokemon left
-						if(getAliveCount(trainer) > 0)
-						{
-							requestPokemonReplacement(trainer);
-							return;
-						}
-						else
-						{
-							// the player has no pokemon left. Announce winner
-							if(trainer == 0)
-								this.informVictory(1);
-							else
-								this.informVictory(0);
-							return;
-						}
-					}
+					switchInPokemon(trainer, move.getId());
+					requestMoves();
+					return;
+				}
+				else // The player still has pokemon left
+				if(getAliveCount(trainer) > 0)
+				{
+					requestPokemonReplacement(trainer);
+					return;
 				}
 				else
 				{
-					// The turn was used to attack!
-					if(move.isMoveTurn())
+					// the player has no pokemon left. Announce winner
+					if(trainer == 0)
+						informVictory(1);
+					else
+						informVictory(0);
+					return;
+				}
+			}
+			else // The turn was used to attack!
+			if(move.isMoveTurn())
+			{
+				// Handles Struggle
+				if(getActivePokemon()[trainer].mustStruggle())
+					m_turn[trainer] = BattleTurn.getMoveTurn(-1);
+				else // The move has no more PP
+				if(getActivePokemon()[trainer].getPp(move.getId()) <= 0)
+				{
+					if(trainer == 0)
 					{
-						// Handles Struggle
-						if(getActivePokemon()[trainer].mustStruggle())
-							m_turn[trainer] = BattleTurn.getMoveTurn(-1);
-						else
-						{
-							// The move has no more PP
-							if(this.getActivePokemon()[trainer].getPp(move.getId()) <= 0)
-							{
-								if(trainer == 0)
-								{
-									TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer].getMoveName(move.getId())));
-									requestMove(0);
-								}
-								else
-								{
-									/* Get another move from the npc */
-									requestMove(1);
-								}
-								return;
-							}
-							else
-							{
-								// Assign the move to the turn
-								m_turn[trainer] = move;
-							}
-						}
-					}
-					else if(move.isItemTurn())
-					{
-						return;
+						// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer].getMoveName(move.getId())));
+						ServerMessage noPP = new ServerMessage(m_player.getSession());
+						noPP.Init(20);
+						noPP.addString(getActivePokemon()[trainer].getMoveName(move.getId()));
+						noPP.sendResponse();
+						requestMove(0);
 					}
 					else
-					{
-						if(this.getActivePokemon()[trainer].isActive() && this.getParty(trainer)[move.getId()] != null && this.getParty(trainer)[move.getId()].getHealth() > 0)
-						{
-							m_turn[trainer] = move;
-						}
-						else
-						{
-							requestMove(trainer);
-							return;
-						}
-					}
+						/* Get another move from the npc */
+						requestMove(1);
+					return;
 				}
+				else
+					// Assign the move to the turn
+					m_turn[trainer] = move;
+			}
+			else if(move.isItemTurn())
+				return;
+			else if(getActivePokemon()[trainer].isActive() && getParty(trainer)[move.getId()] != null && getParty(trainer)[move.getId()].getHealth() > 0)
+				m_turn[trainer] = move;
+			else
+			{
+				requestMove(trainer);
+				return;
 			}
 		}
 		/* Ensures the npc selected a move */
@@ -450,9 +490,7 @@ public class NpcBattleField extends BattleField
 				{
 					executeTurn(m_turn);
 					for(int i = 0; i < m_participants; ++i)
-					{
 						m_turn[i] = null;
-					}
 					m_dispatch = null;
 				}
 			});
@@ -463,8 +501,18 @@ public class NpcBattleField extends BattleField
 	@Override
 	public void refreshActivePokemon()
 	{
-		m_player.getTcpSession().write("bh0" + this.getActivePokemon()[0].getHealth());
-		m_player.getTcpSession().write("bh1" + this.getActivePokemon()[1].getHealth());
+		// m_player.getTcpSession().write("bh0" + this.getActivePokemon()[0].getHealth());
+		// m_player.getTcpSession().write("bh1" + this.getActivePokemon()[1].getHealth());
+		ServerMessage informHealthFirst = new ServerMessage(m_player.getSession());
+		informHealthFirst.Init(33);
+		informHealthFirst.addInt(0);
+		informHealthFirst.addString("0," + getActivePokemon()[0].getHealth());
+		informHealthFirst.sendResponse();
+		ServerMessage informHealthSecond = new ServerMessage(m_player.getSession());
+		informHealthSecond.Init(33);
+		informHealthSecond.addInt(1);
+		informHealthSecond.addString("1," + getActivePokemon()[1].getHealth());
+		informHealthSecond.sendResponse();
 	}
 
 	@Override
@@ -475,12 +523,9 @@ public class NpcBattleField extends BattleField
 		{
 			/* Request a switch from the player */
 			if(!m_replace[party])
-			{
 				return;
-			}
 			m_isWaiting = true;
 			do
-			{
 				synchronized(m_dispatch)
 				{
 					try
@@ -492,8 +537,22 @@ public class NpcBattleField extends BattleField
 
 					}
 				}
-			}
-			while((m_replace != null) && m_replace[party]);
+			while(m_replace != null && m_replace[party]);
+		}
+	}
+
+	@Override
+	public void showMessage(String message)
+	{
+		if(m_finished)
+			return;
+		if(m_player != null)
+		{
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMessage(message));
+			ServerMessage Message = new ServerMessage(m_player.getSession());
+			Message.Init(23);
+			Message.addString(message);
+			Message.sendResponse();
 		}
 	}
 
@@ -503,21 +562,22 @@ public class NpcBattleField extends BattleField
 		if(trainer == 0)
 		{
 			/* Request move from player */
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveRequest());
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveRequest());
+			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
+			moveRequest.Init(27);
+			moveRequest.sendResponse();
 		}
 		else
-		{
 			/* Request move from npc */
 			try
 			{
-				if(getActivePokemon()[1].hasTypeWeakness(getActivePokemon()[0]) && this.getAliveCount(1) >= 3)
-				{
+				if(getActivePokemon()[1].hasTypeWeakness(getActivePokemon()[0]) && getAliveCount(1) >= 3)
 					/* The npc should switch out a different Pokemon */
 					/* 50:50 chance they will switch */
-					if(this.getMechanics().getRandom().nextInt(3) == 0)
+					if(getMechanics().getRandom().nextInt(3) == 0)
 					{
 						int index = 0;
-						while(this.getParty(1)[index] == null || this.getParty(1)[index].isFainted() || this.getParty(1)[index].compareTo(getActivePokemon()[1]) == 0)
+						while(getParty(1)[index] == null || getParty(1)[index].isFainted() || getParty(1)[index].compareTo(getActivePokemon()[1]) == 0)
 						{
 							try
 							{
@@ -528,10 +588,9 @@ public class NpcBattleField extends BattleField
 							}
 							index = getMechanics().getRandom().nextInt(6);
 						}
-						this.queueMove(1, BattleTurn.getSwitchTurn(index));
+						queueMove(1, BattleTurn.getSwitchTurn(index));
 						return;
 					}
-				}
 				/* If they did not switch, select a move */
 				int moveID = getMechanics().getRandom().nextInt(4);
 				while(getActivePokemon()[1].getMove(moveID) == null)
@@ -542,7 +601,6 @@ public class NpcBattleField extends BattleField
 			{
 				e.printStackTrace();
 			}
-		}
 	}
 
 	@Override
@@ -559,84 +617,67 @@ public class NpcBattleField extends BattleField
 		if(i == 0)
 		{
 			/* Request Pokemon replacement from player */
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchRequest());
+			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchRequest());
+			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
+			switchOccur.Init(32);
+			switchOccur.sendResponse();
 		}
+		else /* Request Pokemon replacement from npc */
+		if(getAliveCount(1) == 0)
+			informVictory(0);
 		else
-		{
-			/* Request Pokemon replacement from npc */
-			if(getAliveCount(1) == 0)
+			try
 			{
-				informVictory(0);
+				int index = 0;
+
+				while(getParty(1)[index] == null || getParty(1)[index].isFainted())
+				{
+					try
+					{
+						Thread.sleep(100);
+					}
+					catch(Exception e)
+					{
+					}
+					index = getMechanics().getRandom().nextInt(6);
+				}
+				switchInPokemon(1, BattleTurn.getSwitchTurn(index).getId());
+
+				// Check if this player has seen this wild pokemon before, if not, update pokedex
+				if(!m_player.isPokemonSeen(m_pokemon[1][index].getPokemonNumber() + 1))
+					m_player.setPokemonSeen(m_pokemon[1][index].getPokemonNumber() + 1);
+				requestMoves();
 			}
-			else
+			catch(Exception e)
 			{
-				try
-				{
-					int index = 0;
-
-					while(this.getParty(1)[index] == null || this.getParty(1)[index].isFainted())
-					{
-						try
-						{
-							Thread.sleep(100);
-						}
-						catch(Exception e)
-						{
-						}
-						index = getMechanics().getRandom().nextInt(6);
-					}
-					this.switchInPokemon(1, BattleTurn.getSwitchTurn(index).getId());
-					
-					//Check if this player has seen this wild pokemon before, if not, update pokedex
-					if(!m_player.isPokemonSeen(this.m_pokemon[1][index].getPokemonNumber()+1))
-					{
-						m_player.setPokemonSeen(this.m_pokemon[1][index].getPokemonNumber()+1);
-					}
-					requestMoves();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+				e.printStackTrace();
 			}
-		}
 	}
 
-	@Override
-	public void showMessage(String message)
+	/**
+	 * Sends pokemon data to the client
+	 * 
+	 * @param receiver
+	 */
+	private void sendPokemonData(Player receiver)
 	{
-		if(m_finished)
-			return;
-		if(m_player != null)
-			TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMessage(message));
-	}
-
-	@Override
-	public void forceExecuteTurn()
-	{
-		if(m_turn[0] == null)
-		{
-			m_turn[0] = BattleTurn.getMoveTurn(-1);
-		}
-		if(m_turn[1] == null)
-		{
-			m_turn[1] = BattleTurn.getMoveTurn(-1);
-		}
-		executeTurn(m_turn);
-	}
-
-	@Override
-	public void executeItemTurn(int i)
-	{
-		if(m_turn[0] == null)
-		{
-			m_turn[0] = BattleTurn.getItemTurn(i);
-		}
-		if(m_turn[1] == null)
-		{
-			m_turn[1] = BattleTurn.getItemTurn(i);
-		}
-		executeTurn(m_turn);		
+		for(int i = 0; i < getParty(1).length; i++)
+			if(getParty(1)[i] != null)
+			{
+				// TcpProtocolHandler.writeMessage(receiver.getTcpSession(), new EnemyDataMessage(i, getParty(1)[i]));
+				Pokemon p = getParty(1)[i];
+				ServerMessage enemyData = new ServerMessage(m_player.getSession());
+				enemyData.Init(21);
+				enemyData.addInt(i);
+				enemyData.addString(p.getName());
+				enemyData.addInt(p.getLevel());
+				enemyData.addInt(p.getGender());
+				enemyData.addInt(p.getHealth());
+				enemyData.addInt(p.getHealth());
+				enemyData.addInt(p.getSpeciesNumber());
+				enemyData.addBool(p.isShiny());
+				enemyData.sendResponse();
+			}
 	}
 
 }

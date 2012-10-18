@@ -12,17 +12,28 @@ import org.pokenet.client.GameClient;
 
 /**
  * Contains and manages the controls
+ * 
  * @author Myth1c
- *
  */
 public class KeyManager
 {
-	private static HashMap<Action, Integer> keys;
-
 	public enum Action
 	{
-		WALK_UP, WALK_DOWN, WALK_LEFT, WALK_RIGHT, POKEMOVE_1, POKEMOVE_2, POKEMOVE_3, POKEMOVE_4, ROD_OLD, ROD_GOOD, ROD_GREAT, ROD_ULTRA, INTERACTION
-	};
+		INTERACTION, POKEMOVE_1, POKEMOVE_2, POKEMOVE_3, POKEMOVE_4, ROD_GOOD, ROD_GREAT, ROD_OLD, ROD_ULTRA, WALK_DOWN, WALK_LEFT, WALK_RIGHT, WALK_UP
+	}
+
+	private static HashMap<Action, Integer> keys;;
+
+	/**
+	 * Returns the key associated with this action
+	 * 
+	 * @param a The action
+	 * @return The key that is associated with the action
+	 */
+	public static int getKey(Action a)
+	{
+		return keys.get(a);
+	}
 
 	public static void initialize()
 	{
@@ -52,7 +63,7 @@ public class KeyManager
 			}
 			String s;
 
-			//INITIALIZE MOVEMENT KEYS
+			// INITIALIZE MOVEMENT KEYS
 			Ini.Section sec = ini.get("MOVEMENT");
 			s = sec.get("UP");
 			if(checkNotNull(Action.WALK_UP, s, true))
@@ -66,12 +77,12 @@ public class KeyManager
 			s = sec.get("RIGHT");
 			if(checkNotNull(Action.WALK_RIGHT, s, true))
 				keys.put(Action.WALK_RIGHT, stringToInt(s));
-			
-			//INITIALIZE ROD KEYS
+
+			// INITIALIZE ROD KEYS
 			sec = ini.get("RODS");
 			s = sec.get("OLD");
 			if(checkNotNull(Action.ROD_OLD, s, true))
-				keys.put(Action.ROD_OLD, stringToInt(s));	
+				keys.put(Action.ROD_OLD, stringToInt(s));
 			s = sec.get("GOOD");
 			if(checkNotNull(Action.ROD_GOOD, s, true))
 				keys.put(Action.ROD_GOOD, stringToInt(s));
@@ -82,33 +93,98 @@ public class KeyManager
 			if(checkNotNull(Action.ROD_ULTRA, s, true))
 				keys.put(Action.ROD_ULTRA, stringToInt(s));
 
-			//INITIALIZE BATTLE KEYS
+			// INITIALIZE BATTLE KEYS
 			sec = ini.get("BATTLEMOVES");
 			s = sec.get("ATTACK1");
 			if(checkNotNull(Action.POKEMOVE_1, s, true))
-				keys.put(Action.POKEMOVE_1, stringToInt(s));		
+				keys.put(Action.POKEMOVE_1, stringToInt(s));
 			s = sec.get("ATTACK2");
 			if(checkNotNull(Action.POKEMOVE_2, s, true))
-				keys.put(Action.POKEMOVE_2, stringToInt(s));	
+				keys.put(Action.POKEMOVE_2, stringToInt(s));
 			s = sec.get("ATTACK3");
 			if(checkNotNull(Action.POKEMOVE_3, s, true))
-				keys.put(Action.POKEMOVE_3, stringToInt(s));	
+				keys.put(Action.POKEMOVE_3, stringToInt(s));
 			s = sec.get("ATTACK4");
 			if(checkNotNull(Action.POKEMOVE_4, s, true))
-				keys.put(Action.POKEMOVE_4, stringToInt(s));	
-					
-			//INITIALIZE INTERACTION KEYS
+				keys.put(Action.POKEMOVE_4, stringToInt(s));
+
+			// INITIALIZE INTERACTION KEYS
 			sec = ini.get("INTERACTION");
 			s = sec.get("TALK");
 			if(checkNotNull(Action.INTERACTION, s, true))
-				keys.put(Action.INTERACTION, stringToInt(s));	
+				keys.put(Action.INTERACTION, stringToInt(s));
 		}
 		finally
 		{
 			GameClient.log("INFO: Keys Loaded");
 		}
 	}
-	
+
+	private static boolean checkNotNull(Action action, String key, boolean resetOnNull)
+	{
+		if(stringToInt(key) == null)
+		{
+			try
+			{
+				if(resetOnNull)
+					reset();
+				else
+					generateDefaultSettings();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			return false;
+		}
+		else
+			return true;
+	}
+
+	private static void generateDefaultSettings() throws IOException
+	{
+		// Create file
+		FileWriter fstream = new FileWriter("res/keys.ini");
+		BufferedWriter out = new BufferedWriter(fstream);
+		out.write(";see specialkeys.txt for formats of keys like left shift, right control, etc");
+		out.newLine();
+		out.write("[MOVEMENT]");
+		out.newLine();
+		out.write("UP=W");
+		out.newLine();
+		out.write("LEFT=A");
+		out.newLine();
+		out.write("RIGHT=D");
+		out.newLine();
+		out.write("DOWN=S");
+		out.newLine();
+		out.write("[RODS]");
+		out.newLine();
+		out.write("OLD=R");
+		out.newLine();
+		out.write("GOOD=T");
+		out.newLine();
+		out.write("GREAT=Y");
+		out.newLine();
+		out.write("ULTRA=U");
+		out.newLine();
+		out.write("[BATTLEMOVES]");
+		out.newLine();
+		out.write("ATTACK1=1");
+		out.newLine();
+		out.write("ATTACK2=2");
+		out.newLine();
+		out.write("ATTACK3=3");
+		out.newLine();
+		out.write("ATTACK4=4");
+		out.newLine();
+		out.write("[INTERACTION]");
+		out.newLine();
+		out.write("TALK=SPACE");
+		out.newLine();
+		out.close();
+	}
+
 	private static void reset()
 	{
 		try
@@ -122,80 +198,10 @@ public class KeyManager
 		}
 		initialize();
 	}
-	
-	private static boolean checkNotNull(Action action, String key, boolean resetOnNull)
-	{
-		if(stringToInt(key) == null)
-		{
-			try
-			{
-				if(resetOnNull)
-				{
-					reset();
-				}
-				else
-				{
-					generateDefaultSettings();
-				}
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-	
-	private static void generateDefaultSettings() throws IOException
-	{
-		// Create file 
-		  FileWriter fstream = new FileWriter("res/keys.ini");
-		  BufferedWriter out = new BufferedWriter(fstream);
-		  out.write(";see specialkeys.txt for formats of keys like left shift, right control, etc");
-		  out.newLine();
-		  out.write("[MOVEMENT]");
-		  out.newLine();
-		  out.write("UP=W");
-		  out.newLine();
-		  out.write("LEFT=A");
-		  out.newLine();
-		  out.write("RIGHT=D");
-		  out.newLine();
-		  out.write("DOWN=S");
-		  out.newLine();
-		  out.write("[RODS]");
-		  out.newLine();
-		  out.write("OLD=R");
-		  out.newLine();
-		  out.write("GOOD=T");
-		  out.newLine();
-		  out.write("GREAT=Y");
-		  out.newLine();
-		  out.write("ULTRA=U");
-		  out.newLine();
-		  out.write("[BATTLEMOVES]");
-		  out.newLine();
-		  out.write("ATTACK1=1");
-		  out.newLine();
-		  out.write("ATTACK2=2");
-		  out.newLine();
-		  out.write("ATTACK3=3");
-		  out.newLine();
-		  out.write("ATTACK4=4");
-		  out.newLine();
-		  out.write("[INTERACTION]");
-		  out.newLine();
-		  out.write("TALK=SPACE");
-		  out.newLine();
-		  out.close();
-	}
 
 	/**
 	 * Returns the int from the Input class associated with this String.
+	 * 
 	 * @param st The string to convert.
 	 * @return The int from the Input class associated with this String.
 	 */
@@ -330,15 +336,5 @@ public class KeyManager
 		else if(st.equals("SPACE"))
 			return Input.KEY_SPACE;
 		return null;
-	}
-
-	/**
-	 * Returns the key associated with this action
-	 * @param a The action
-	 * @return The key that is associated with the action
-	 */
-	public static int getKey(Action a)
-	{
-		return keys.get(a);
 	}
 }

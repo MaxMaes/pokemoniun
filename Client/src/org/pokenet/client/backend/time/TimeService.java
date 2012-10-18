@@ -4,31 +4,61 @@ import mdes.slick.sui.Label;
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 
-/** 
+/**
  * Handles time and rendering of night. Also acts as a label for usage in GUI.
  * 
- * @author shadowkanji 
- *
+ * @author shadowkanji
  **/
 public class TimeService extends Label implements Runnable
 {
 	private int m_hour, m_minutes, m_daylight, m_targetDaylight;
-	private Thread m_thread;
 	private boolean m_running = true;
+	private Thread m_thread;
 
 	/** Default constructor **/
 	public TimeService()
 	{
 		super("00:00");
-		this.pack();
+		pack();
 		this.setLocation(4, 4);
-		this.setVisible(true);
-		this.setFont(GameClient.getFontLarge());
-		this.setForeground(new Color(255, 255, 255));
+		setVisible(true);
+		setFont(GameClient.getFontLarge());
+		setForeground(new Color(255, 255, 255));
 		m_thread = new Thread(this);
 	}
 
+	/**
+	 * This function return the current daylight.
+	 * 
+	 * @return The current daylight.
+	 **/
+	public int getDaylight()
+	{
+		return m_daylight;
+	}
+
+	/**
+	 * This function returns the daylight target.
+	 * 
+	 * @return The daylight target.
+	 **/
+	public int getTargetDaylight()
+	{
+		return m_targetDaylight;
+	}
+
+	/**
+	 * This function checks if it is night.
+	 * 
+	 * @return Returns true if night, otherwise false.
+	 **/
+	public boolean isNight()
+	{
+		return m_hour >= 18 && m_hour <= 7;
+	}
+
 	/** Called by thread.start() **/
+	@Override
 	public void run()
 	{
 		String min;
@@ -77,31 +107,23 @@ public class TimeService extends Label implements Runnable
 			}
 			hour = m_hour < 10 ? "0" + String.valueOf(m_hour) : String.valueOf(m_hour);
 			min = m_minutes < 10 ? "0" + String.valueOf(m_minutes) : String.valueOf(m_minutes);
-			this.setText(hour + ":" + min);
-			this.pack();
+			setText(hour + ":" + min);
+			pack();
 			try
 			{
 				Thread.sleep(10 * 1000); // Sleep for 10 seconds
 			}
-			catch(InterruptedException ie) { }
+			catch(InterruptedException ie)
+			{
+			}
 		}
 	}
 
-	/** Updates daylight **/
-	public void updateDaylight()
-	{
-		if(m_daylight < m_targetDaylight)
-			m_daylight++;
-		else if(m_daylight > m_targetDaylight)
-			m_daylight--;
-	}
-
-	/** 
+	/**
 	 * Sets the current time and starts the time service.
 	 * 
 	 * @param The number of hours.
 	 * @param The number of minutes.
-	 *
 	 **/
 	public void setTime(int hour, int minutes)
 	{
@@ -157,45 +179,18 @@ public class TimeService extends Label implements Runnable
 			m_daylight = 175;
 			m_targetDaylight = 175;
 		}
-		this.setText(hour + ":" + minutes);
-		/* Stop was causing this next part not to work for some reason...
-		 * hopefully this doesn't cause any problems if setTime gets called
-		 * in the future.
-		 * Seems to generate IllegalStateExceptions*/
+		setText(hour + ":" + minutes);
+		/* Stop was causing this next part not to work for some reason... hopefully this doesn't cause any problems if setTime gets called in the future. Seems to generate IllegalStateExceptions */
 		if(!m_thread.isAlive())
 			m_thread.start();
 	}
 
-	/** 
-	 * This function checks if it is night.
-	 * 
-	 * @return Returns true if night, otherwise false.
-	 *
-	 **/
-	public boolean isNight()
+	/** Updates daylight **/
+	public void updateDaylight()
 	{
-		return m_hour >= 18 && m_hour <= 7;
-	}
-
-	/** 
-	 * This function return the current daylight.
-	 * 
-	 * @return The current daylight.
-	 *
-	 **/
-	public int getDaylight()
-	{
-		return m_daylight;
-	}
-
-	/** 
-	 * This function returns the daylight target.
-	 * 
-	 * @return The daylight target.
-	 *
-	 **/
-	public int getTargetDaylight()
-	{
-		return m_targetDaylight;
+		if(m_daylight < m_targetDaylight)
+			m_daylight++;
+		else if(m_daylight > m_targetDaylight)
+			m_daylight--;
 	}
 }

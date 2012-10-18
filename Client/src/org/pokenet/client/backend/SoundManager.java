@@ -13,14 +13,14 @@ import org.newdawn.slick.openal.AudioLoader;
  */
 public class SoundManager extends Thread
 {
-	private HashMap<String, AudioImpl> m_files;
-	private HashMap<String, String> m_fileList;
-	private HashMap<String, String> m_locations;
+	private static String m_audioPath = "res/music/";
 	protected String m_trackName;
-	private boolean m_tracksLoaded = false, m_trackChanged = true, m_isRunning = false;
+	private HashMap<String, String> m_fileList;
+	private HashMap<String, AudioImpl> m_files;
+	private HashMap<String, String> m_locations;
 	private boolean m_mute = false;
 
-	private static String m_audioPath = "res/music/";
+	private boolean m_tracksLoaded = false, m_trackChanged = true, m_isRunning = false;
 
 	/**
 	 * Default Constructor
@@ -36,95 +36,19 @@ public class SoundManager extends Thread
 		loadLocations();
 	}
 
-	/**
-	 * Loads the file list
-	 */
-	private void loadFileList()
+	public String getTrack()
 	{
-		try
-		{
-			BufferedReader stream = FileLoader.loadTextFile(m_audioPath + "index.txt");
-			m_fileList = new HashMap<String, String>();
-
-			String f;
-			while((f = stream.readLine()) != null)
-			{
-				String[] addFile = f.split(":", 2);
-				try
-				{
-					if(f.charAt(1) != '*')
-					{
-						m_fileList.put(addFile[0], addFile[1]);
-					}
-				}
-				catch(Exception e)
-				{
-					System.err.println("Failed to add file: " + addFile[1]);
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.err.println("Failed to load music");
-		}
+		return m_trackName;
 	}
 
 	/**
-	 * Loads the locations and their respective keys
+	 * Mutes or unmutes the music
+	 * 
+	 * @param mute
 	 */
-	private void loadLocations()
+	public void mute(boolean mute)
 	{
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		try
-		{
-			BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt");
-			m_locations = new HashMap<String, String>();
-
-			String f;
-			while((f = stream.readLine()) != null)
-			{
-				String[] addFile = f.split(":", 2);
-				try
-				{
-					m_locations.put(addFile[0], addFile[1]);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Loads the files
-	 */
-	private void loadFiles()
-	{
-		Audio a;
-		for(String key : m_fileList.keySet())
-		{
-			try
-			{
-				a = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
-				/* For some reason it reads intro and gym wrong so do this to fix it */
-				if(key.endsWith("introandgym"))
-					key = "introandgym";
-				m_files.put(key, (AudioImpl) a);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		m_tracksLoaded = true;
+		m_mute = mute;
 	}
 
 	/**
@@ -136,14 +60,9 @@ public class SoundManager extends Thread
 		while(m_isRunning)
 		{
 			if(!m_mute)
-			{
 				while(!m_tracksLoaded)
-				{
 					loadFiles();
-				}
-			}
 			if(m_trackChanged)
-			{
 				try
 				{
 					m_trackChanged = false;
@@ -155,9 +74,7 @@ public class SoundManager extends Thread
 						// LoadingList.setDeferredLoading(false);
 					}
 					else if(m_mute && m_trackName != null)
-					{
 						m_files.clear();
-					}
 				}
 				catch(Exception e)
 				{
@@ -165,7 +82,6 @@ public class SoundManager extends Thread
 					System.err.println("Failed to load " + m_trackName);
 					m_trackChanged = false;
 				}
-			}
 			try
 			{
 				Thread.sleep(1000);
@@ -215,6 +131,7 @@ public class SoundManager extends Thread
 	/**
 	 * Starts the thread
 	 */
+	@Override
 	public void start()
 	{
 		if(!m_mute)
@@ -225,12 +142,89 @@ public class SoundManager extends Thread
 	}
 
 	/**
-	 * Mutes or unmutes the music
-	 * 
-	 * @param mute
+	 * Loads the file list
 	 */
-	public void mute(boolean mute)
+	private void loadFileList()
 	{
-		m_mute = mute;
+		try
+		{
+			BufferedReader stream = FileLoader.loadTextFile(m_audioPath + "index.txt");
+			m_fileList = new HashMap<String, String>();
+
+			String f;
+			while((f = stream.readLine()) != null)
+			{
+				String[] addFile = f.split(":", 2);
+				try
+				{
+					if(f.charAt(1) != '*')
+						m_fileList.put(addFile[0], addFile[1]);
+				}
+				catch(Exception e)
+				{
+					System.err.println("Failed to add file: " + addFile[1]);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.err.println("Failed to load music");
+		}
+	}
+
+	/**
+	 * Loads the files
+	 */
+	private void loadFiles()
+	{
+		Audio a;
+		for(String key : m_fileList.keySet())
+			try
+			{
+				a = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
+				/* For some reason it reads intro and gym wrong so do this to fix it */
+				if(key.endsWith("introandgym"))
+					key = "introandgym";
+				m_files.put(key, (AudioImpl) a);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		m_tracksLoaded = true;
+	}
+
+	/**
+	 * Loads the locations and their respective keys
+	 */
+	private void loadLocations()
+	{
+		String respath = System.getProperty("res.path");
+		if(respath == null)
+			respath = "";
+		try
+		{
+			BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt");
+			m_locations = new HashMap<String, String>();
+
+			String f;
+			while((f = stream.readLine()) != null)
+			{
+				String[] addFile = f.split(":", 2);
+				try
+				{
+					m_locations.put(addFile[0], addFile[1]);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

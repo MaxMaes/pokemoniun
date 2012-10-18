@@ -2,9 +2,9 @@ package org.pokenet.server.network;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.connections.ActiveConnections;
 
 /**
  * Handles logging players out
@@ -13,11 +13,11 @@ import org.pokenet.server.backend.entity.Player;
  */
 public class LogoutManager implements Runnable
 {
-	private Queue<Player> m_logoutQueue;
-	private Thread m_thread;
-	private boolean m_isRunning = false;
 	private MySqlManager m_database;
+	private boolean m_isRunning = false;
+	private Queue<Player> m_logoutQueue;
 	private SaveManager m_saveManager;
+	private Thread m_thread;
 
 	/**
 	 * Default constructor
@@ -29,6 +29,7 @@ public class LogoutManager implements Runnable
 		m_database = MySqlManager.getInstance();
 		m_logoutQueue = new LinkedList<Player>();
 		m_saveManager = saveManager;
+		m_thread = null;
 	}
 
 	/**
@@ -39,29 +40,6 @@ public class LogoutManager implements Runnable
 	public int getPlayerAmount()
 	{
 		return m_logoutQueue.size();
-	}
-
-	/**
-	 * Attempts to logout a player by saving their data. Returns true on success
-	 * 
-	 * @param player
-	 */
-	private boolean attemptLogout(Player player)
-	{
-		// Remove player from their map if it hasn't been done already
-		if(player.getMap() != null)
-			player.getMap().removeChar(player);
-		TcpProtocolHandler.removePlayer(player);
-		GameServer.getInstance().updatePlayerCount();
-		// Store all player information
-		if(!m_saveManager.savePlayer((player)))
-		{
-			return false;
-		}
-		// Finally, store that the player is logged out and close connection
-		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
-		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
-		return true;
 	}
 
 	/**
@@ -92,17 +70,14 @@ public class LogoutManager implements Runnable
 					synchronized(player)
 					{
 						if(player != null)
-						{
 							if(!attemptLogout(player))
-							{
 								m_logoutQueue.add(player);
-							}
 							else
 							{
 								player.dispose();
 								System.out.println("INFO: " + player.getName() + " logged out.");
+								player = null;
 							}
-						}
 					}
 				}
 			}
@@ -138,5 +113,26 @@ public class LogoutManager implements Runnable
 	{
 		// Stop the thread
 		m_isRunning = false;
+	}
+
+	/**
+	 * Attempts to logout a player by saving their data. Returns true on success
+	 * 
+	 * @param player
+	 */
+	private boolean attemptLogout(Player player)
+	{
+		/* Remove player from their map if it hasn't been done already. */
+		if(player.getMap() != null)
+			player.getMap().removeChar(player);
+		ActiveConnections.removeSession(player.getSession().getChannel());
+		/* GameServer.getInstance().updatePlayerCount(); TODO" See GameServer for details. */
+		/* Store all player information. */
+		if(!m_saveManager.savePlayer(player))
+			return false;
+		/* Finally, store that the player is logged out and close connection. */
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
+		// GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
+		return true;
 	}
 }

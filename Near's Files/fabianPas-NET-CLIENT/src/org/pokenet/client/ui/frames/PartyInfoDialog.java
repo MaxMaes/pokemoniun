@@ -3,7 +3,6 @@ package org.pokenet.client.ui.frames;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
-
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
@@ -13,7 +12,6 @@ import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -27,11 +25,12 @@ import org.pokenet.client.ui.base.ProgressBar;
 
 /**
  * Party information frame
+ * 
  * @author ZombieBear
- *
  */
 @SuppressWarnings("deprecation")
-public class PartyInfoDialog extends Frame {
+public class PartyInfoDialog extends Frame
+{
 	Container[] m_container;
 	Label[] m_pokeBall;
 	Label[] m_hpBar;
@@ -50,18 +49,18 @@ public class PartyInfoDialog extends Frame {
 	 * @param ourPokes
 	 * @param out
 	 */
-	public PartyInfoDialog(OurPokemon[] ourPokes) {
+	public PartyInfoDialog(OurPokemon[] ourPokes)
+	{
 		m_pokes = ourPokes;
 		allocateVariables();
 		loadImages(ourPokes);
-		/* ContentPane location is moved here instead of in initGUI so that
-		 * if/when initGui is recalled the ConentPane doesn't move.
-		 */
+		/*
+		 * ContentPane location is moved here instead of in initGUI so that if/when initGui is recalled the ConentPane doesn't move. */
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		initGUI();
 	}
-	
+
 	private void allocateVariables()
 	{
 		m_switchDown = new Button[6];
@@ -78,7 +77,8 @@ public class PartyInfoDialog extends Frame {
 	/**
 	 * Initializes interface
 	 */
-	public void initGUI() {
+	public void initGUI()
+	{
 		InputStream f;
 		int y = -8;
 		this.getTitleBar().getCloseButton().setVisible(false);
@@ -86,62 +86,81 @@ public class PartyInfoDialog extends Frame {
 		this.setBackground(new Color(0, 0, 0, 85));
 		this.setForeground(new Color(255, 255, 255));
 		int pokemonCount = -1;
-		
+
 		// Init damn pokemon count!
-		for(int i = 0; i < 6; i++) {
-			if (m_pokes[i] != null) {
+		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokes[i] != null)
+			{
 				pokemonCount++;
 			}
 		}
-		
-		for (int i = 0; i < 6; i++) {
+
+		for(int i = 0; i < 6; i++)
+		{
 			final int j = i;
 			m_container[i] = new Container();
 			m_container[i].setSize(170, 42);
 			m_container[i].setVisible(true);
 			m_container[i].setZIndex(0);
-			m_container[i].setLocation(2, y+10);
+			m_container[i].setLocation(2, y + 10);
 			m_container[i].setBackground(new Color(0, 0, 0, 0));
 			getContentPane().add(m_container[i]);
 			y += 41;
-			m_container[i]. setOpaque(true);
+			m_container[i].setOpaque(true);
 			String respath = System.getProperty("res.path");
-			if(respath==null)
-				respath="";
-			try {
-				Label tempLabel = new Label(); 
-				if (i ==0) {
-					f = FileLoader.loadFile(respath+"res/ui/party_info/partyActive.png");
-					tempLabel = new Label(new Image(f, respath+"res/ui/party_info/partyActive.png", false));
-				} else {
-					f = FileLoader.loadFile(respath+"res/ui/party_info/partyInactive.png");
-					tempLabel = new Label(new Image(f, respath+"res/ui/party_info/partyInactive.png", false));
+			if(respath == null)
+				respath = "";
+			try
+			{
+				Label tempLabel = new Label();
+				if(i == 0)
+				{
+					f = FileLoader.loadFile(respath + "res/ui/party_info/partyActive.png");
+					tempLabel = new Label(new Image(f, respath + "res/ui/party_info/partyActive.png", false));
+				}
+				else
+				{
+					f = FileLoader.loadFile(respath + "res/ui/party_info/partyInactive.png");
+					tempLabel = new Label(new Image(f, respath + "res/ui/party_info/partyInactive.png", false));
 				}
 				tempLabel.setSize(170, 42);
 				tempLabel.setY(-4);
 				m_container[i].add(tempLabel);
-			} catch (Exception e) {e.printStackTrace();}
-			
-			try{
-				f = FileLoader.loadFile(respath+"res/ui/party_info/HPBar.png");
-				m_hpBar[i] = new Label(new Image(f, respath+"res/ui/party_info/HPBar.png", false));
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			try
+			{
+				f = FileLoader.loadFile(respath + "res/ui/party_info/HPBar.png");
+				m_hpBar[i] = new Label(new Image(f, respath + "res/ui/party_info/HPBar.png", false));
 				m_hpBar[i].setSize(98, 11);
 				m_hpBar[i].setVisible(false);
 				m_hpBar[i].setZIndex(1);
 				m_container[i].add(m_hpBar[i]);
-			} catch (Exception e) {e.printStackTrace();}
-			
-			try {
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			try
+			{
 				m_container[i].add(m_pokeBall[i]);
 				m_pokeBall[i].setLocation(4, 4);
 				m_pokeBall[i].setZIndex(2);
 				m_pokeName[i].setFont(GameClient.getFontSmall());
 				m_pokeName[i].setForeground(new Color(255, 255, 255));
 				m_pokeName[i].setZIndex(3);
-				m_pokeName[i].addMouseListener(new MouseAdapter() {
+				m_pokeName[i].addMouseListener(new MouseAdapter()
+				{
 
 					@Override
-					public void mouseReleased(MouseEvent e) {
+					public void mouseReleased(MouseEvent e)
+					{
 						super.mouseReleased(e);
 						PokemonInfoDialog info = new PokemonInfoDialog(m_pokes[j]);
 						info.setAlwaysOnTop(true);
@@ -150,13 +169,15 @@ public class PartyInfoDialog extends Frame {
 					}
 
 					@Override
-					public void mouseEntered(MouseEvent e) {
+					public void mouseEntered(MouseEvent e)
+					{
 						super.mouseEntered(e);
 						m_pokeName[j].setForeground(new Color(255, 215, 0));
 					}
 
 					@Override
-					public void mouseExited(MouseEvent e) {
+					public void mouseExited(MouseEvent e)
+					{
 						super.mouseExited(e);
 						m_pokeName[j].setForeground(new Color(255, 255, 255));
 					}
@@ -170,27 +191,28 @@ public class PartyInfoDialog extends Frame {
 				m_container[i].add(m_level[i]);
 				m_level[i].setFont(GameClient.getFontSmall());
 				m_level[i].setForeground(new Color(255, 255, 255));
-				m_level[i].setLocation(m_pokeName[i].getX()
-						+ m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
+				m_level[i].setLocation(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
 				m_level[i].setZIndex(4);
 				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
 				m_hp[i].setZIndex(5);
 				m_hp[i].setLocation(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
-				if (i != 0) {
-					m_switchUp[i] = new SimpleArrowButton(
-							SimpleArrowButton.FACE_UP);
+				if(i != 0)
+				{
+					m_switchUp[i] = new SimpleArrowButton(SimpleArrowButton.FACE_UP);
 					m_switchUp[i].setZIndex(6);
-					m_switchUp[i].addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
+					m_switchUp[i].addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent e)
+						{
 
 							ClientMessage message = new ClientMessage();
 							message.Init(12);
 							message.addInt(j);
 							message.addInt(j - 1);
 							GameClient.session.Send(message);
-							
-							//reinitialize the gui
+
+							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();
 							loadImages(m_pokes);
@@ -201,20 +223,22 @@ public class PartyInfoDialog extends Frame {
 					m_switchUp[i].setWidth(16);
 					m_container[i].add(m_switchUp[i]);
 				}
-				if (i < pokemonCount) {
-					m_switchDown[i] = new SimpleArrowButton(
-							SimpleArrowButton.FACE_DOWN);
+				if(i < pokemonCount)
+				{
+					m_switchDown[i] = new SimpleArrowButton(SimpleArrowButton.FACE_DOWN);
 					m_switchDown[i].setZIndex(7);
-					m_switchDown[i].addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
+					m_switchDown[i].addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent e)
+						{
+
 							ClientMessage message = new ClientMessage();
 							message.Init(12);
 							message.addInt(j);
 							message.addInt(j + 1);
 							GameClient.session.Send(message);
-							
-							//reinitialize the gui
+
+							// reinitialize the gui
 							getContentPane().removeAll();
 							allocateVariables();
 							loadImages(m_pokes);
@@ -227,8 +251,10 @@ public class PartyInfoDialog extends Frame {
 					m_switchDown[i].setX(24);
 					m_container[i].add(m_switchDown[i]);
 				}
-			} catch (NullPointerException e) {
-				//e.printStackTrace();
+			}
+			catch(NullPointerException e)
+			{
+				// e.printStackTrace();
 			}
 		}
 		update(m_pokes);
@@ -241,12 +267,15 @@ public class PartyInfoDialog extends Frame {
 
 	/**
 	 * Loads necessary images
+	 * 
 	 * @param pokes
 	 */
-	public void loadImages(OurPokemon[] pokes) {
+	public void loadImages(OurPokemon[] pokes)
+	{
 		LoadingList.setDeferredLoading(true);
 		InputStream f;
-		for (int i = 0; i < 6; i++) {
+		for(int i = 0; i < 6; i++)
+		{
 			m_pokeIcon[i] = new Label();
 			m_pokeBall[i] = new Label();
 			m_pokeName[i] = new Label();
@@ -259,47 +288,60 @@ public class PartyInfoDialog extends Frame {
 
 			m_pokeName[i].pack();
 			String respath = System.getProperty("res.path");
-			if(respath==null)
-				respath="";
-			try {
-				f = FileLoader.loadFile(respath+"res/ui/Pokeball.gif");
-				m_pokeBall[i].setImage(new Image(f, respath+"res/ui/Pokeball.gif", false));
+			if(respath == null)
+				respath = "";
+			try
+			{
+				f = FileLoader.loadFile(respath + "res/ui/Pokeball.gif");
+				m_pokeBall[i].setImage(new Image(f, respath + "res/ui/Pokeball.gif", false));
 				m_pokeBall[i].setSize(30, 30);
-			} catch (SlickException e) {
-				System.out.println("Couldn't load pokeball");
-			} catch (FileNotFoundException e) {
+			}
+			catch(SlickException e)
+			{
 				System.out.println("Couldn't load pokeball");
 			}
-			try {
+			catch(FileNotFoundException e)
+			{
+				System.out.println("Couldn't load pokeball");
+			}
+			try
+			{
 				List<String> translated = Translator.translate("_GUI");
-				if (pokes[i] != null) {
-					m_level[i].setText(translated.get(32)
-							+ String.valueOf(pokes[i].getLevel()));
+				if(pokes[i] != null)
+				{
+					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_level[i].pack();
 					m_pokeName[i].setText(pokes[i].getName());
 					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setForeground(Color.green);
 					m_hp[i].setValue(pokes[i].getCurHP());
-					if (pokes[i].getCurHP() > pokes[i].getMaxHP() / 2) {
+					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
+					{
 						m_hp[i].setForeground(Color.green);
-					} else if (pokes[i].getCurHP() < pokes[i].getMaxHP() / 2
-							&& pokes[i].getCurHP() > pokes[i].getMaxHP() / 3) {
+					}
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
+					{
 						m_hp[i].setForeground(Color.orange);
-					} else if (pokes[i].getCurHP() < pokes[i].getMaxHP() / 3) {
+					}
+					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
+					{
 						m_hp[i].setForeground(Color.red);
 					}
 					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_pokeIcon[i].setSize(32, 32);
 					m_pokeName[i].setText(pokes[i].getName());
 					m_pokeName[i].pack();
-					m_level[i].setText(translated.get(32)
-							+ String.valueOf(pokes[i].getLevel()));
+					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_level[i].pack();
-				} else {
+				}
+				else
+				{
 					m_hp[i].setVisible(false);
 				}
-			} catch (NullPointerException e) {
+			}
+			catch(NullPointerException e)
+			{
 				e.printStackTrace();
 			}
 		}
@@ -311,67 +353,74 @@ public class PartyInfoDialog extends Frame {
 	 * 
 	 * @param pokes
 	 */
-	public void update(OurPokemon[] pokes) {
+	public void update(OurPokemon[] pokes)
+	{
 		m_pokes = pokes;
 		List<String> translated = Translator.translate("_GUI");
 		LoadingList.setDeferredLoading(true);
 		int pokemonCount = -1;
-		
+
 		// Init damn pokemon count!
-		for(int i = 0; i < 6; i++) {
-			if (m_pokes[i] != null) {
+		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokes[i] != null)
+			{
 				pokemonCount++;
 			}
 		}
-		
-		// hier gaat iets fout, fixen kut @TODO sort out
-		
-		for (int i = 0; i < 6; i++) {
-				if (m_pokes[i] != null) {					
-					m_hp[i].setMaximum(pokes[i].getMaxHP());
-					m_hp[i].setValue(pokes[i].getCurHP());
-					if (pokes[i].getCurHP() > pokes[i].getMaxHP() / 2) {
-						m_hp[i].setForeground(Color.green);
-					} else if (pokes[i].getCurHP() < pokes[i].getMaxHP() / 2
-							&& pokes[i].getCurHP() > pokes[i].getMaxHP() / 3) {
-						m_hp[i].setForeground(Color.orange);
-					} else if (pokes[i].getCurHP() < pokes[i].getMaxHP() / 3) {
-						m_hp[i].setForeground(Color.red);
-					}
-					m_pokeIcon[i].setImage(pokes[i].getIcon());
-					m_pokeName[i].setText(pokes[i].getName());
-					m_pokeName[i].pack();
-					m_level[i].setText(translated.get(32)
-							+ String.valueOf(pokes[i].getLevel()));
-					m_level[i].pack();
-					m_level[i].setLocation(m_pokeName[i].getX()
-							+ m_pokeName[i].getWidth() + 10, 5);
 
-					m_pokeBall[i].setLocation(4, 4);
-					m_pokeIcon[i].setLocation(2, 3);
-					m_pokeName[i].setLocation(45, 5);
-					m_hpBar[i].setLocation(45, m_pokeName[i].getY()
-							+ m_pokeName[i].getHeight() + 3);
-					m_hp[i].setLocation(m_hpBar[i].getX() + 23, 
-							m_hpBar[i].getY() + 3);
-					m_hpBar[i].setVisible(true);
-					m_hp[i].setVisible(true);
-										
-					if (i != 0)
-						m_switchUp[i].setVisible(true);
-					if (i < pokemonCount)
-						m_switchDown[i].setVisible(true);
-				} else {
-					if (i != 0)
-						m_switchUp[i].setVisible(false);
-					if (i < pokemonCount)
-						m_switchDown[i].setVisible(false);
-					m_hpBar[i].setVisible(false);
-					m_hp[i].setVisible(false);
-					m_level[i].setText("");
-					m_level[i].pack();
-					m_pokeIcon[i].setImage(null);
+		// hier gaat iets fout, fixen kut @TODO sort out
+
+		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokes[i] != null)
+			{
+				m_hp[i].setMaximum(pokes[i].getMaxHP());
+				m_hp[i].setValue(pokes[i].getCurHP());
+				if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
+				{
+					m_hp[i].setForeground(Color.green);
 				}
+				else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
+				{
+					m_hp[i].setForeground(Color.orange);
+				}
+				else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
+				{
+					m_hp[i].setForeground(Color.red);
+				}
+				m_pokeIcon[i].setImage(pokes[i].getIcon());
+				m_pokeName[i].setText(pokes[i].getName());
+				m_pokeName[i].pack();
+				m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
+				m_level[i].pack();
+				m_level[i].setLocation(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
+
+				m_pokeBall[i].setLocation(4, 4);
+				m_pokeIcon[i].setLocation(2, 3);
+				m_pokeName[i].setLocation(45, 5);
+				m_hpBar[i].setLocation(45, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 3);
+				m_hp[i].setLocation(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+				m_hpBar[i].setVisible(true);
+				m_hp[i].setVisible(true);
+
+				if(i != 0)
+					m_switchUp[i].setVisible(true);
+				if(i < pokemonCount)
+					m_switchDown[i].setVisible(true);
+			}
+			else
+			{
+				if(i != 0)
+					m_switchUp[i].setVisible(false);
+				if(i < pokemonCount)
+					m_switchDown[i].setVisible(false);
+				m_hpBar[i].setVisible(false);
+				m_hp[i].setVisible(false);
+				m_level[i].setText("");
+				m_level[i].pack();
+				m_pokeIcon[i].setImage(null);
+			}
 		}
 		LoadingList.setDeferredLoading(false);
 	}
@@ -382,17 +431,27 @@ public class PartyInfoDialog extends Frame {
 	 * @param x
 	 * @return
 	 */
-	public int setSpriteNumber(int x) {
+	public int setSpriteNumber(int x)
+	{
 		int i = 0;
-		if (x <= 385) {
+		if(x <= 385)
+		{
 			i = x + 1;
-		} else if (x <= 388) {
+		}
+		else if(x <= 388)
+		{
 			i = 386;
-		} else if (x <= 414) {
+		}
+		else if(x <= 414)
+		{
 			i = x - 2;
-		} else if (x <= 416) {
+		}
+		else if(x <= 416)
+		{
 			i = 413;
-		} else {
+		}
+		else
+		{
 			i = x - 4;
 		}
 		return i;

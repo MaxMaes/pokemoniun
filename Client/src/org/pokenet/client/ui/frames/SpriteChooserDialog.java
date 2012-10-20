@@ -108,10 +108,9 @@ public class SpriteChooserDialog extends Frame
 						confirm.setVisible(false);
 						GameClient.getInstance().getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
-						ClientMessage message = new ClientMessage();
-						message.Init(14);
+						ClientMessage message = new ClientMessage(14);
 						message.addInt(Integer.parseInt(m_spriteList.getSelectedName()));
-						GameClient.m_Session.Send(message);
+						GameClient.getSession().send(message);
 					}
 				});
 				confirm.addNoListener(new ActionListener()

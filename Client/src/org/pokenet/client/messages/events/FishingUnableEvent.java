@@ -10,7 +10,7 @@ public class FishingUnableEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.messageDialog("You can't fish on land!", GameClient.getInstance().getDisplay());
 	}

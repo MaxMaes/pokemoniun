@@ -10,7 +10,7 @@ public class PokemonPPEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		int poke = Request.readInt();
 		int move = Request.readInt();

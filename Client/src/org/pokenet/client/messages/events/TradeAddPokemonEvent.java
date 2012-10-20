@@ -10,7 +10,7 @@ public class TradeAddPokemonEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// CHECK THIS ONE
 		// String[] offerData = Request.readString().split(",");

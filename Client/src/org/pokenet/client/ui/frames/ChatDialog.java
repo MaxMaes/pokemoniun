@@ -209,22 +209,20 @@ public class ChatDialog extends Frame
 				else
 				{
 					// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
-					ClientMessage message = new ClientMessage();
-					message.Init(46);
+					ClientMessage message = new ClientMessage(46);
 					message.addInt(0);
 					message.addString(m_inputBox.getText());
-					GameClient.m_Session.Send(message);
+					GameClient.getSession().send(message);
 				}
 			}
 			else if(m_inputBox.getText().charAt(0) == '/')
 				ModerationManager.parseLine(m_inputBox.getText().substring(1));
 			else
 			{
-				ClientMessage message = new ClientMessage();
-				message.Init(46);
+				ClientMessage message = new ClientMessage(46);
 				message.addInt(1);
 				message.addString(m_possibleChats.getSelected() + "," + m_inputBox.getText());
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
 				addWhisperLine(m_possibleChats.getSelected(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + m_inputBox.getText());
 			}

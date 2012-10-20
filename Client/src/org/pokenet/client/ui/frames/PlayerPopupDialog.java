@@ -72,10 +72,9 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("13" + m_name.getText());
-				ClientMessage message = new ClientMessage();
-				message.Init(15);
+				ClientMessage message = new ClientMessage(15);
 				message.addString(m_name.getText());
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				destroy();
 			}
 		});
@@ -85,10 +84,9 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("14" + m_name.getText());
-				ClientMessage message = new ClientMessage();
-				message.Init(16);
+				ClientMessage message = new ClientMessage(16);
 				message.addString(m_name.getText());
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				destroy();
 			}
 		});
@@ -107,10 +105,9 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2F" + m_name.getText());
-				ClientMessage message = new ClientMessage();
-				message.Init(38);
+				ClientMessage message = new ClientMessage(38);
 				message.addString(m_name.getText());
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());
 				GameClient.getInstance().getUi().getFriendsList().setFriendOnline(m_name.getText(), true);
 				destroy();

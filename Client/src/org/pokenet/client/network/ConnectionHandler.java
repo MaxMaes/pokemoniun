@@ -23,7 +23,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 	{
 
 		System.out.println("Connected to game server.");
-		GameClient.m_Session = new Session(ctnx.getChannel());
+		GameClient.setSession(new Session(ctnx.getChannel()));
 
 		/* if (!ActiveConnections.addSession(ctnx.getChannel())) { ctnx.getChannel().disconnect(); // failed to connect } */
 
@@ -44,10 +44,10 @@ public class ConnectionHandler extends SimpleChannelHandler
 		{
 			ServerMessage msg = (ServerMessage) e.getMessage();
 
-			if(GameClient.m_Session != null)
-				GameClient.m_Session.parseMessage(msg);
+			if(GameClient.getSession() != null)
+				GameClient.getSession().parseMessage(msg);
 			else
-				System.out.print("error ohno");
+				System.out.print("error ohno >: GameClient.getSession() == null");
 		}
 		catch(Exception e1)
 		{

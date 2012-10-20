@@ -10,7 +10,7 @@ public class HealPokemonEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++)
 			if(GameClient.getInstance().getOurPlayer().getPokemon()[i] != null)

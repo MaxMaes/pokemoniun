@@ -10,7 +10,7 @@ public class TradeOfferEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// String[] offerData = Request.readString().split(",");
 		GameClient.getInstance().getUi().getTrade().getOffer(Request.readInt(), Request.readInt());

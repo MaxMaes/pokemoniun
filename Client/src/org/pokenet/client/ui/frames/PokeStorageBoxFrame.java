@@ -200,14 +200,12 @@ public class PokeStorageBoxFrame extends Frame
 						getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("18" + m_boxIndex + "," + m_buttonChosen);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-						ClientMessage message = new ClientMessage();
-						message.Init(20);
+						ClientMessage message = new ClientMessage(20);
 						message.addInt(m_boxIndex);
 						message.addInt(m_buttonChosen);
-						GameClient.m_Session.Send(message);
-						ClientMessage finishBoxing = new ClientMessage();
-						finishBoxing.Init(22);
-						GameClient.m_Session.Send(finishBoxing);
+						GameClient.getSession().send(message);
+						ClientMessage finishBoxing = new ClientMessage(22);
+						GameClient.getSession().send(finishBoxing);
 						GameClient.getInstance().getUi().stopUsingBox();
 					}
 				});
@@ -222,9 +220,8 @@ public class PokeStorageBoxFrame extends Frame
 						confirm.setVisible(false);
 						getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-						ClientMessage finishBoxing = new ClientMessage();
-						finishBoxing.Init(22);
-						GameClient.m_Session.Send(finishBoxing);
+						ClientMessage finishBoxing = new ClientMessage(22);
+						GameClient.getSession().send(finishBoxing);
 						GameClient.getInstance().getUi().stopUsingBox();
 					}
 				});
@@ -246,9 +243,8 @@ public class PokeStorageBoxFrame extends Frame
 			{
 				setVisible(false);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage();
-				finishBoxing.Init(22);
-				GameClient.m_Session.Send(finishBoxing);
+				ClientMessage finishBoxing = new ClientMessage(22);
+				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 			}
 		});
@@ -319,10 +315,9 @@ public class PokeStorageBoxFrame extends Frame
 			m_boxNum = m_boxIndex + 1;
 			disableButtons();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("17" + (m_boxIndex));
-			ClientMessage message = new ClientMessage();
-			message.Init(19);
+			ClientMessage message = new ClientMessage(19);
 			message.addInt(m_boxIndex);
-			GameClient.m_Session.Send(message);
+			GameClient.getSession().send(message);
 			setTitle("Box Number " + String.valueOf(m_boxNum));
 		}
 	}
@@ -403,9 +398,8 @@ class TeamForBox extends Frame
 			{
 				switchPokes(m_boxNumber, m_boxIndex, m_teamIndex);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage();
-				finishBoxing.Init(22);
-				GameClient.m_Session.Send(finishBoxing);
+				ClientMessage finishBoxing = new ClientMessage(22);
+				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 				setVisible(false);
 			}
@@ -420,9 +414,8 @@ class TeamForBox extends Frame
 			public void actionPerformed(ActionEvent evt)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage();
-				finishBoxing.Init(22);
-				GameClient.m_Session.Send(finishBoxing);
+				ClientMessage finishBoxing = new ClientMessage(22);
+				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 				setVisible(false);
 			}
@@ -520,16 +513,14 @@ class TeamForBox extends Frame
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("19" + (boxNum - 1) + "," + boxIndex + "," + teamIndex);
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-		ClientMessage message = new ClientMessage();
-		message.Init(21);
+		ClientMessage message = new ClientMessage(21);
 		message.addInt(boxNum - 1);
 		message.addInt(boxIndex);
 		message.addInt(teamIndex);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 
-		ClientMessage finishBoxing = new ClientMessage();
-		finishBoxing.Init(22);
-		GameClient.m_Session.Send(finishBoxing);
+		ClientMessage finishBoxing = new ClientMessage(22);
+		GameClient.getSession().send(finishBoxing);
 		GameClient.getInstance().getUi().update(false);
 	}
 }

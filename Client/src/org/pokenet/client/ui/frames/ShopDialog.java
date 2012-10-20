@@ -245,10 +245,9 @@ public class ShopDialog extends Frame
 	public void cancelled()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("11");
-		ClientMessage message = new ClientMessage();
-		message.Init(13);
+		ClientMessage message = new ClientMessage(13);
 		message.addInt(2);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 		GameClient.getInstance().getUi().stopShop();
 	}
 
@@ -353,11 +352,10 @@ public class ShopDialog extends Frame
 	public void itemClicked(int itemid)
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0F" + itemid + ",1");
-		ClientMessage message = new ClientMessage();
-		message.Init(13);
+		ClientMessage message = new ClientMessage(13);
 		message.addInt(0);
 		message.addInt(itemid);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 	}
 
 	public void pack()
@@ -396,11 +394,10 @@ public class ShopDialog extends Frame
 						public void actionPerformed(ActionEvent e)
 						{
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("10" + ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId() + ",");
-							ClientMessage message = new ClientMessage();
-							message.Init(13);
+							ClientMessage message = new ClientMessage(13);
 							message.addInt(1);
 							message.addInt(ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId());
-							GameClient.m_Session.Send(message);
+							GameClient.getSession().send(message);
 							GameClient.getInstance().getDisplay().remove(m_confirm);
 						}
 					});

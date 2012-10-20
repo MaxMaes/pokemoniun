@@ -11,7 +11,7 @@ public class SetMapEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		char direction = Request.readString().charAt(0);
 		GameClient.getInstance().getMapMatrix().setNewMapPos(direction);

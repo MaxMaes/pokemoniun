@@ -10,7 +10,7 @@ public class BattleMoveEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		BattleManager.getInstance().getTimeLine().informMoveUsed(Request.readString(), Request.readString());
 	}

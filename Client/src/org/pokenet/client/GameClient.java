@@ -67,8 +67,7 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	public static Session m_Session;
-	public static String UDPCODE = "";
+	private static Session m_Session;
 	private static boolean debug = false;
 	private static final int FPS = 30;
 	private static final String GAME_TITLE = "Pokemonium 1.5.0";
@@ -106,7 +105,7 @@ public class GameClient extends BasicGame
 	private MoveLearningManager m_moveLearningManager;
 	private OurPlayer m_ourPlayer = null;
 	private PlayerPopupDialog m_playerDialog;
-	private boolean m_started;
+	private boolean m_started = false;
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
@@ -531,9 +530,8 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
-						ClientMessage dc = new ClientMessage();
-						dc.Init(49);
-						m_Session.Send(dc);
+						ClientMessage dc = new ClientMessage(49);
+						m_Session.send(dc);
 						disconnect();
 						reset();
 						m_dcConfirm.setVisible(false);
@@ -791,9 +789,8 @@ public class GameClient extends BasicGame
 				if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 				{
 					// m_Session.writeTcpMessage("3C");
-					ClientMessage message = new ClientMessage();
-					message.Init(47);
-					m_Session.Send(message);
+					ClientMessage message = new ClientMessage(47);
+					m_Session.send(message);
 				}
 				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -820,24 +817,20 @@ public class GameClient extends BasicGame
 		switch(d)
 		{
 			case Up:
-				ClientMessage up = new ClientMessage();
-				up.Init(4);
-				m_Session.Send(up);
+				ClientMessage up = new ClientMessage(4);
+				m_Session.send(up);
 				break;
 			case Down:
-				ClientMessage down = new ClientMessage();
-				down.Init(5);
-				m_Session.Send(down);
+				ClientMessage down = new ClientMessage(5);
+				m_Session.send(down);
 				break;
 			case Left:
-				ClientMessage left = new ClientMessage();
-				left.Init(6);
-				m_Session.Send(left);
+				ClientMessage left = new ClientMessage(6);
+				m_Session.send(left);
 				break;
 			case Right:
-				ClientMessage right = new ClientMessage();
-				right.Init(7);
-				m_Session.Send(right);
+				ClientMessage right = new ClientMessage(7);
+				m_Session.send(right);
 				break;
 		}
 	}
@@ -1200,9 +1193,8 @@ public class GameClient extends BasicGame
 					}
 				if(m_dcConfirm != null)
 				{
-					ClientMessage dc = new ClientMessage();
-					dc.Init(49);
-					m_Session.Send(dc);
+					ClientMessage dc = new ClientMessage(49);
+					m_Session.send(dc);
 					disconnect();
 					reset();
 					m_dcConfirm.setVisible(false);
@@ -1328,31 +1320,27 @@ public class GameClient extends BasicGame
 					m_ui.disconnect();
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
-					ClientMessage message = new ClientMessage();
-					message.Init(40);
+					ClientMessage message = new ClientMessage(40);
 					message.addInt(97);
-					m_Session.Send(message);
+					m_Session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
-					ClientMessage message = new ClientMessage();
-					message.Init(40);
+					ClientMessage message = new ClientMessage(40);
 					message.addInt(98);
-					m_Session.Send(message);
+					m_Session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
-					ClientMessage message = new ClientMessage();
-					message.Init(40);
+					ClientMessage message = new ClientMessage(40);
 					message.addInt(99);
-					m_Session.Send(message);
+					m_Session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
-					ClientMessage message = new ClientMessage();
-					message.Init(40);
+					ClientMessage message = new ClientMessage(40);
 					message.addInt(100);
-					m_Session.Send(message);
+					m_Session.send(message);
 				}
 		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(0);
@@ -1368,9 +1356,8 @@ public class GameClient extends BasicGame
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 			{
 				// m_Session.writeTcpMessage("3C");
-				ClientMessage message = new ClientMessage();
-				message.Init(47);
-				m_Session.Send(message);
+				ClientMessage message = new ClientMessage(47);
+				m_Session.send(message);
 			}
 			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -1415,9 +1402,17 @@ public class GameClient extends BasicGame
 
 	}
 
-	void setPlayerSpriteFactory()
+	public void setPlayerSpriteFactory()
 	{
 		Player.setSpriteFactory(new SpriteFactory(m_spriteImageArray));
+	}
+	
+	public static Session getSession() {
+		return m_Session;
+	}
+
+	public static void setSession(Session session) {
+		m_Session = session;
 	}
 
 	/** Slick Native library finder. */

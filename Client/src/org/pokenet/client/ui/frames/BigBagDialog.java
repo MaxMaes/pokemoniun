@@ -511,10 +511,9 @@ class ItemPopup extends Frame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				ClientMessage message = new ClientMessage();
-				message.Init(41);
+				ClientMessage message = new ClientMessage(41);
 				message.addInt(m_id);
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				destroyPopup();
 			}
 		});
@@ -601,10 +600,9 @@ class ItemPopup extends Frame
 		}
 		else
 		{
-			ClientMessage message = new ClientMessage();
-			message.Init(40);
+			ClientMessage message = new ClientMessage(40);
 			message.addString(String.valueOf(id));
-			GameClient.m_Session.Send(message);
+			GameClient.getSession().send(message);
 			destroyPopup();
 		}
 	}
@@ -696,10 +694,9 @@ class TeamPopup extends Frame
 	{
 		if(use)
 		{
-			ClientMessage message = new ClientMessage();
-			message.Init(40);
+			ClientMessage message = new ClientMessage(40);
 			message.addString(id + "," + pokeIndex);
-			GameClient.m_Session.Send(message);
+			GameClient.getSession().send(message);
 		}
 		else
 			/* TODO: Write Netty Implementation for Give Pakcets. */

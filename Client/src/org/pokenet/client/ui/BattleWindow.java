@@ -214,10 +214,9 @@ public class BattleWindow extends Frame
 			BattleManager.getInstance().updateMoves();
 		}
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2C" + i);
-		ClientMessage message = new ClientMessage();
-		message.Init(35);
+		ClientMessage message = new ClientMessage(35);
 		message.addInt(i);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 	}
 
@@ -554,9 +553,8 @@ public class BattleWindow extends Frame
 	private void run()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2E");
-		ClientMessage message = new ClientMessage();
-		message.Init(37);
-		GameClient.m_Session.Send(message);
+		ClientMessage message = new ClientMessage(37);
+		GameClient.getSession().send(message);
 	}
 
 	/**
@@ -569,9 +567,8 @@ public class BattleWindow extends Frame
 		attackPane.setVisible(false);
 		pokesContainer.setVisible(false);
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2D" + i);
-		ClientMessage message = new ClientMessage();
-		message.Init(36);
+		ClientMessage message = new ClientMessage(36);
 		message.addInt(i);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 	}
 }

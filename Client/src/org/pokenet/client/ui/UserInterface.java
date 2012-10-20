@@ -805,10 +805,9 @@ public class UserInterface extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0C" + index);
-				ClientMessage message = new ClientMessage();
-				message.Init(11);
+				ClientMessage message = new ClientMessage(11);
 				message.addInt(index);
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};
@@ -818,10 +817,9 @@ public class UserInterface extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0B" + index);
-				ClientMessage message = new ClientMessage();
-				message.Init(10);
+				ClientMessage message = new ClientMessage(10);
 				message.addInt(index);
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};

@@ -13,7 +13,7 @@ public class LoginErrorEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		List<String> translated = new ArrayList<String>();
 		translated = Translator.translate("_LOGIN");

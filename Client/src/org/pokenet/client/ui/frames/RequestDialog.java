@@ -46,10 +46,9 @@ public class RequestDialog extends Frame
 		if(m_offerUser != null && m_offerUser.size() > 0)
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("15" + m_offerUser.get(userIndex));
-			ClientMessage message = new ClientMessage();
-			message.Init(17);
+			ClientMessage message = new ClientMessage(17);
 			message.addString(m_offerUser.get(userIndex));
-			GameClient.m_Session.Send(message);
+			GameClient.getSession().send(message);
 			m_offers.remove(m_offerUser.get(userIndex));
 			m_offerUser.remove(userIndex);
 			m_update = true;
@@ -95,10 +94,9 @@ public class RequestDialog extends Frame
 		for(String name : m_offerUser)
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + name);
-			ClientMessage message = new ClientMessage();
-			message.Init(17);
+			ClientMessage message = new ClientMessage(17);
 			message.addString(name);
-			GameClient.m_Session.Send(message);
+			GameClient.getSession().send(message);
 			m_offers.remove(name);
 			m_offerUser.remove(name);
 			m_update = true;
@@ -113,10 +111,9 @@ public class RequestDialog extends Frame
 	public void declineOffer(int userIndex)
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + m_offerUser.get(userIndex));
-		ClientMessage message = new ClientMessage();
-		message.Init(17);
+		ClientMessage message = new ClientMessage(17);
 		message.addString(m_offerUser.get(userIndex));
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 		m_offers.remove(m_offerUser.get(userIndex));
 		m_offerUser.remove(userIndex);
 		m_update = true;

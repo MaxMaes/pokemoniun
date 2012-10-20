@@ -14,9 +14,10 @@ public class ClientMessage
 	private ChannelBufferOutputStream bodystream;
 	private String message;
 	private Session Player;
-
-	public ClientMessage()
+	
+	public ClientMessage(int id)
 	{
+		init(id);
 	}
 
 	public ClientMessage(Session Session)
@@ -110,7 +111,7 @@ public class ClientMessage
 		return message;
 	}
 
-	public void Init(int id)
+	private void init(int id)
 	{
 		body = ChannelBuffers.dynamicBuffer();
 		bodystream = new ChannelBufferOutputStream(body);
@@ -130,6 +131,6 @@ public class ClientMessage
 
 	public void Send()
 	{
-		Player.Send(this);
+		Player.send(this);
 	}
 }

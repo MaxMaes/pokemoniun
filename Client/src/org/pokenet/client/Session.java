@@ -1,19 +1,18 @@
 package org.pokenet.client;
 
 import org.jboss.netty.channel.Channel;
+import org.pokenet.client.messages.MessageHandler;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
 
 public class Session
 {
-
-	private Channel channel;
-	private Boolean isLoggedIn;
+	private final Channel channel;
+	private boolean isLoggedIn = false;
 
 	public Session(Channel channel)
 	{
 		this.channel = channel;
-		isLoggedIn = false;
 	}
 
 	public Channel getChannel()
@@ -26,16 +25,18 @@ public class Session
 		return isLoggedIn;
 	}
 
-	public void parseMessage(ServerMessage msg)
+	public void parseMessage(ServerMessage message)
 	{
-		if(GameClient.getConnections().getMessages().contains(msg.getId()))
-			GameClient.getConnections().getMessages().get(msg.getId()).Parse(this, msg, new ClientMessage(this));
+		MessageHandler handler = GameClient.getConnections().getMessages();
+		if(handler.contains(message.getId())) {
+			handler.get(message.getId()).parse(this, message, new ClientMessage(this));
+		}
 	}
 
-	public void Send(ClientMessage msg)
+	public void send(ClientMessage msg)
 	{
 		channel.write(msg);
-		System.out.println(msg.getMessage());
+		System.out.println("Sent: " + msg.getMessage());
 	}
 
 	public void setLoggedIn(boolean state)

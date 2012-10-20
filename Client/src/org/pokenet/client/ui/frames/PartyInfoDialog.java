@@ -179,11 +179,10 @@ public class PartyInfoDialog extends Frame
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							ClientMessage message = new ClientMessage();
-							message.Init(12);
+							ClientMessage message = new ClientMessage(12);
 							message.addInt(j);
 							message.addInt(j - 1);
-							GameClient.m_Session.Send(message);
+							GameClient.getSession().send(message);
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
@@ -204,11 +203,10 @@ public class PartyInfoDialog extends Frame
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							ClientMessage message = new ClientMessage();
-							message.Init(12);
+							ClientMessage message = new ClientMessage(12);
 							message.addInt(j);
 							message.addInt(j + 1);
-							GameClient.m_Session.Send(message);
+							GameClient.getSession().send(message);
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
 							// reinitialize the gui
 							getContentPane().removeAll();

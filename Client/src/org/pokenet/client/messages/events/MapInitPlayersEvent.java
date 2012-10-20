@@ -14,7 +14,7 @@ public class MapInitPlayersEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getMapMatrix().getPlayers().clear();
 		GameClient.getInstance().getMapMatrix().getPlayers().trimToSize();

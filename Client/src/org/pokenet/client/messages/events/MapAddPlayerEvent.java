@@ -13,7 +13,7 @@ public class MapAddPlayerEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// Add player
 		String[] details = Request.readString().split(",");

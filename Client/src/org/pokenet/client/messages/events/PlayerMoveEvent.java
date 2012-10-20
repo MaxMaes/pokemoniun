@@ -12,7 +12,7 @@ public class PlayerMoveEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		int player = Request.readInt();
 		int dir = Request.readInt();

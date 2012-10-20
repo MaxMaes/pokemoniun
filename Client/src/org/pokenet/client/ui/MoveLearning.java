@@ -186,11 +186,10 @@ public class MoveLearning extends Frame
 			{
 				MoveLearningManager.getInstance().removeMoveLearning();
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0A" + m_pokeIndex + m_move);
-				ClientMessage message = new ClientMessage();
-				message.Init(9);
+				ClientMessage message = new ClientMessage(9);
 				message.addInt(m_pokeIndex);
 				message.addString(m_move);
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 			}
 		});
 		m_movePane.add(m_cancel);
@@ -253,12 +252,11 @@ public class MoveLearning extends Frame
 				if(BattleManager.getInstance().getBattleWindow().isVisible())
 					BattleManager.getInstance().updateMoves();
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + i + m_move);
-				ClientMessage message = new ClientMessage();
-				message.Init(8);
+				ClientMessage message = new ClientMessage(8);
 				message.addInt(m_pokeIndex);
 				message.addInt(i);
 				message.addString(m_move);
-				GameClient.m_Session.Send(message);
+				GameClient.getSession().send(message);
 				MoveLearningManager.getInstance().removeMoveLearning();
 			}
 			else
@@ -274,12 +272,11 @@ public class MoveLearning extends Frame
 						GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
 						BattleManager.getInstance().updateMoves();
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + j + m_move);
-						ClientMessage message = new ClientMessage();
-						message.Init(8);
+						ClientMessage message = new ClientMessage(8);
 						message.addInt(m_pokeIndex);
 						message.addInt(j);
 						message.addString(m_move);
-						GameClient.m_Session.Send(message);
+						GameClient.getSession().send(message);
 						GameClient.getInstance().getDisplay().remove(m_replace);
 						m_replace = null;
 						MoveLearningManager.getInstance().removeMoveLearning();

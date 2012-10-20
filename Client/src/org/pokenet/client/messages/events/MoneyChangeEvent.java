@@ -10,7 +10,7 @@ public class MoneyChangeEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getOurPlayer().setMoney(Request.readInt());
 		GameClient.getInstance().getUi().update(true);

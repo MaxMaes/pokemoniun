@@ -10,7 +10,7 @@ public class BoxAccessEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// Box access - receiving a string of pokedex numbers, e.g. B15,23,24,
 		int[] pokes = new int[30];

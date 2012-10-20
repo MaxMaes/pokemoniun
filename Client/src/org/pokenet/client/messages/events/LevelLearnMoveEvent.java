@@ -10,7 +10,7 @@ public class LevelLearnMoveEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		int i = Request.readInt();
 		MoveLearningManager.getInstance().queueMoveLearning(i, Request.readString());

@@ -10,7 +10,7 @@ public class CoordinateLevelEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		int coordinateLevel = Request.readInt();
 

@@ -10,7 +10,7 @@ public class TMLearnMoveEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getOurPlayer().getPokemon()[Request.readInt()].setMoves(Request.readInt(), Request.readString());
 		GameClient.getInstance().getUi().update(false);

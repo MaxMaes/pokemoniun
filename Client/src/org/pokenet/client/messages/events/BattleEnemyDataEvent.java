@@ -10,7 +10,7 @@ public class BattleEnemyDataEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		BattleManager.getInstance().setEnemyPoke(Request.readInt(), Request.readString(), Request.readInt(), Request.readInt(), Request.readInt(), Request.readInt(), Request.readInt(),
 				Request.readBool());

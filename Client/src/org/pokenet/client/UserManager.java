@@ -19,10 +19,9 @@ public class UserManager
 	 */
 	public void changePassword(String username, String newPassword, String oldPassword)
 	{
-		ClientMessage message = new ClientMessage();
-		message.Init(2);
+		ClientMessage message = new ClientMessage(2);
 		message.addString(username + "," + getPasswordHash(username, newPassword) + "," + getPasswordHash(username, oldPassword));
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 	}
 
 	/**
@@ -51,10 +50,9 @@ public class UserManager
 		else if(GameClient.getLanguage().equalsIgnoreCase("german"))
 			language = '7';
 
-		ClientMessage message = new ClientMessage();
-		message.Init(0);
+		ClientMessage message = new ClientMessage(0);
 		message.addString(language + username + "," + getPasswordHash(username, password));
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 	}
 
 	/**
@@ -69,11 +67,10 @@ public class UserManager
 	public void register(String username, String password, String email, String dob, int starter, int sprite, int region)
 	{
 
-		ClientMessage message = new ClientMessage();
-		message.Init(1);
+		ClientMessage message = new ClientMessage(1);
 		message.addInt(region);
 		message.addString(username + "," + getPasswordHash(username, password) + "," + email + "," + dob + "," + starter + "," + sprite);
-		GameClient.m_Session.Send(message);
+		GameClient.getSession().send(message);
 	}
 
 	/**

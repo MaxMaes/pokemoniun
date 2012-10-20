@@ -10,7 +10,7 @@ public class LoginUnknownEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// Unknown problem occurred
 		GameClient.messageDialog("An unknown problem occurred!", GameClient.getInstance().getDisplay());

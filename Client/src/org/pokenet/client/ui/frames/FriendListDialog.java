@@ -262,10 +262,9 @@ class PopUp extends Frame
 					public void actionPerformed(ActionEvent e)
 					{
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("30" + m_name.getText());
-						ClientMessage message = new ClientMessage();
-						message.Init(39);
+						ClientMessage message = new ClientMessage(39);
 						message.addString(m_name.getText());
-						GameClient.m_Session.Send(message);
+						GameClient.getSession().send(message);
 						GameClient.getInstance().getDisplay().remove(m_confirm);
 						m_confirm = null;
 					}

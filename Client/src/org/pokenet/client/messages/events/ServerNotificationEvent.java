@@ -10,7 +10,7 @@ public class ServerNotificationEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.messageDialog(Request.readString(), GameClient.getInstance().getDisplay());
 	}

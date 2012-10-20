@@ -10,7 +10,7 @@ public class BattleLevelupEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		final String[] levelData = Request.readString().split(",");
 		BattleManager.getInstance().getTimeLine().informLevelUp(levelData[0], Integer.parseInt(levelData[1]));

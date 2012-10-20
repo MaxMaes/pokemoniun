@@ -10,7 +10,7 @@ public class ServerRevisionEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getLoginScreen().setServerRevision(Request.readInt());
 	}

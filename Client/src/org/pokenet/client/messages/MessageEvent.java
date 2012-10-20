@@ -6,5 +6,5 @@ import org.pokenet.client.protocol.ServerMessage;
 
 public interface MessageEvent
 {
-	void Parse(Session Session, ServerMessage Request, ClientMessage Message);
+	public void parse(Session session, ServerMessage request, ClientMessage message);
 }

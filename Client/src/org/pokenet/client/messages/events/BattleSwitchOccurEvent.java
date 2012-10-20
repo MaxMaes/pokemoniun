@@ -10,7 +10,7 @@ public class BattleSwitchOccurEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		BattleManager.getInstance().getTimeLine().informSwitch(Request.readString(), Request.readString(), Request.readInt(), Request.readInt());
 	}

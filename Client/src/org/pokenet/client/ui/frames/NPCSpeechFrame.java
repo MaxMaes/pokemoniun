@@ -43,9 +43,8 @@ public class NPCSpeechFrame extends SpeechFrame
 			setVisible(false);
 			GameClient.getInstance().getUi().nullSpeechFrame();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3D");
-			ClientMessage message = new ClientMessage();
-			message.Init(48);
-			GameClient.m_Session.Send(message);
+			ClientMessage message = new ClientMessage(48);
+			GameClient.getSession().send(message);
 		}
 	}
 }

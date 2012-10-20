@@ -10,7 +10,7 @@ public class BattleVictoryEvent implements MessageEvent
 {
 
 	@Override
-	public void Parse(Session Session, ServerMessage Request, ClientMessage Message)
+	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// also, change this in server message ;)
 		int condition = Request.readInt();

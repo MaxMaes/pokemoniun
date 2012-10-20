@@ -13,13 +13,11 @@ import org.simpleframework.xml.Element;
  */
 public class PokemonNature implements Serializable
 {
+	private static final ArrayList<PokemonNature> m_natures = new ArrayList<PokemonNature>();
 
 	public static final PokemonNature N_ADAMANT = new PokemonNature("Adamant", Pokemon.S_ATTACK, Pokemon.S_SPATTACK);
-
 	public static final PokemonNature N_BASHFUL = new PokemonNature("Bashful", -1, -1);
-
 	public static final PokemonNature N_BOLD = new PokemonNature("Bold", Pokemon.S_DEFENCE, Pokemon.S_ATTACK);
-
 	public static final PokemonNature N_BRAVE = new PokemonNature("Brave", Pokemon.S_ATTACK, Pokemon.S_SPEED);
 	public static final PokemonNature N_CALM = new PokemonNature("Calm", Pokemon.S_SPDEFENCE, Pokemon.S_ATTACK);
 	public static final PokemonNature N_CAREFUL = new PokemonNature("Careful", Pokemon.S_SPDEFENCE, Pokemon.S_SPATTACK);
@@ -42,11 +40,10 @@ public class PokemonNature implements Serializable
 	public static final PokemonNature N_SASSY = new PokemonNature("Sassy", Pokemon.S_SPDEFENCE, Pokemon.S_SPEED);
 	public static final PokemonNature N_SERIOUS = new PokemonNature("Serious", -1, -1);
 	public static final PokemonNature N_TIMID = new PokemonNature("Timid", Pokemon.S_SPEED, Pokemon.S_ATTACK);
-	private static final ArrayList<PokemonNature> m_natures = new ArrayList<PokemonNature>();
+
 	private static final long serialVersionUID = -549059028197342801L;
 	@Element
 	transient private int m_benefits;
-
 	@Element
 	transient private int m_harms;
 	@Element

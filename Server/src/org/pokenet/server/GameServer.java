@@ -319,7 +319,10 @@ public class GameServer
 		catch(IOException ioe)
 		{
 			System.err.println("Cannot find .svn/entries to read the SVN revision.");
-			File file = new File("/res/rev.txt");
+			String path = System.getProperty("res.path");
+			if(path == null || path.equalsIgnoreCase("NULL"))
+				path = "./";
+			File file = new File(path + "/res/rev.txt");
 			try
 			{
 				Scanner sc = new Scanner(file);

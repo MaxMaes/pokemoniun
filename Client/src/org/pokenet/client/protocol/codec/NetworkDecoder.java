@@ -19,7 +19,6 @@ public class NetworkDecoder extends FrameDecoder
 		}
 		catch(Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

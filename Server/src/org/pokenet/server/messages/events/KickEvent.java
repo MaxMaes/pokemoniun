@@ -12,7 +12,7 @@ public class KickEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		// TODO maybe do session player rank check?
+		// TODO: maybe do session player rank check?
 		Player o = ActiveConnections.getPlayer(Request.readString());
 		if(o != null)
 		{

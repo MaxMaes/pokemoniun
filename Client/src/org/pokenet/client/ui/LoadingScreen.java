@@ -39,7 +39,7 @@ public class LoadingScreen extends Frame
 			this.add(m_bg);
 
 			setVisible(false);
-			setAlwaysOnTop(true);
+			// setAlwaysOnTop(true);
 		}
 		catch(SlickException e)
 		{

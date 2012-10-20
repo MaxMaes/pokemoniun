@@ -10,7 +10,7 @@ public class LogoutRequestEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		// TODO Auto-generated method stub
+		// TODO: Implement LogoutRequest
 	}
 
 }

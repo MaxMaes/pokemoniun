@@ -23,10 +23,10 @@ public class ModerationManager
 		// Alert
 		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("alert "))
 		{
-			ClientMessage message = new ClientMessage();
-			/* message.Init(-); Create ID for Alerts. */
-			message.addString(x.substring(6));
-			GameClient.getSession().send(message);
+			/* ClientMessage message = new ClientMessage();
+			 * message.Init(-); TODO: Create ID for Alerts.
+			 * message.addString(x.substring(6));
+			 * GameClient.getSession().send(message); */
 		}
 		// Mute
 		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("mute "))

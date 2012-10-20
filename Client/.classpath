@@ -32,6 +32,6 @@
 	<classpathentry kind="lib" path="lib/tinylinepp.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.3.2-jdk14.jar"/>
 	<classpathentry kind="lib" path="lib/slick.jar"/>
-	<classpathentry kind="lib" path="../Near&apos;s Files/fabianPas-NET-CLIENT/lib/netty-3.5.3.Final.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.5.3.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

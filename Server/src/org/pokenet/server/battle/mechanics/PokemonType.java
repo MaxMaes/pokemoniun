@@ -28,29 +28,6 @@ import org.simpleframework.xml.Element;
 public class PokemonType implements Serializable
 {
 
-	public static final PokemonType T_BUG = new PokemonType(11);
-
-	public static final PokemonType T_DARK = new PokemonType(15);
-	public static final PokemonType T_DRAGON = new PokemonType(14);
-
-	public static final PokemonType T_ELECTRIC = new PokemonType(3);
-	public static final PokemonType T_FIGHTING = new PokemonType(6);
-	public static final PokemonType T_FIRE = new PokemonType(1);
-	public static final PokemonType T_FLYING = new PokemonType(9);
-	public static final PokemonType T_GHOST = new PokemonType(13);
-	public static final PokemonType T_GRASS = new PokemonType(4);
-	public static final PokemonType T_GROUND = new PokemonType(8);
-	public static final PokemonType T_ICE = new PokemonType(5);
-	/**
-	 * Constants representing each of the types.
-	 */
-	public static final PokemonType T_NORMAL = new PokemonType(0);
-	public static final PokemonType T_POISON = new PokemonType(7);
-	public static final PokemonType T_PSYCHIC = new PokemonType(10);
-	public static final PokemonType T_ROCK = new PokemonType(12);
-	public static final PokemonType T_STEEL = new PokemonType(16);
-	public static final PokemonType T_TYPELESS = new PokemonType(17);
-	public static final PokemonType T_WATER = new PokemonType(2);
 	private static final double m_multiplier[][] = new double[][] { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1, 1, 0.5, 1 }, { 1, 0.5, 0.5, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0.5, 1, 0.5, 1, 2, 1 },
 			{ 1, 2, 0.5, 1, 0.5, 1, 1, 1, 2, 1, 1, 1, 2, 1, 0.5, 1, 1, 1 }, { 1, 1, 2, 0.5, 0.5, 1, 1, 1, 0, 2, 1, 1, 1, 1, 0.5, 1, 1, 1 },
 			{ 1, 0.5, 2, 1, 0.5, 1, 1, 0.5, 2, 0.5, 1, 0.5, 2, 1, 0.5, 1, 0.5, 1 }, { 1, 0.5, 0.5, 1, 2, 0.5, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 0.5, 1 },
@@ -60,11 +37,31 @@ public class PokemonType implements Serializable
 			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 0.5, 0.5, 1 }, { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0.5, 1 }, { 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 2, 1, 1, 2, 1, 0.5, 0.5, 1 },
 			{ 1, 0.5, 0.5, 0.5, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0.5, 1 }, { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 	private static final boolean m_special[] = new boolean[] { false, true, true, true, true, true, false, false, false, false, true, false, false, false, true, true, false, false };
-	private static ArrayList<PokemonType> m_typeList = new ArrayList<PokemonType>();
-
 	private static final String m_types[] = new String[] { "Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost",
 			"Dragon", "Dark", "Steel", "Typeless" };
+	private static ArrayList<PokemonType> m_typeList = new ArrayList<PokemonType>();
 
+	/**
+	 * Constants representing each of the types.
+	 */
+	public static final PokemonType T_NORMAL = new PokemonType(0);
+	public static final PokemonType T_FIRE = new PokemonType(1);
+	public static final PokemonType T_WATER = new PokemonType(2);
+	public static final PokemonType T_ELECTRIC = new PokemonType(3);
+	public static final PokemonType T_GRASS = new PokemonType(4);
+	public static final PokemonType T_ICE = new PokemonType(5);
+	public static final PokemonType T_FIGHTING = new PokemonType(6);
+	public static final PokemonType T_POISON = new PokemonType(7);
+	public static final PokemonType T_GROUND = new PokemonType(8);
+	public static final PokemonType T_FLYING = new PokemonType(9);
+	public static final PokemonType T_PSYCHIC = new PokemonType(10);
+	public static final PokemonType T_BUG = new PokemonType(11);
+	public static final PokemonType T_ROCK = new PokemonType(12);
+	public static final PokemonType T_GHOST = new PokemonType(13);
+	public static final PokemonType T_DRAGON = new PokemonType(14);
+	public static final PokemonType T_DARK = new PokemonType(15);
+	public static final PokemonType T_STEEL = new PokemonType(16);
+	public static final PokemonType T_TYPELESS = new PokemonType(17);
 	private static final long serialVersionUID = 328662720352042529L;
 
 	@Element

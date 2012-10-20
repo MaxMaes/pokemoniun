@@ -60,7 +60,6 @@ public class Player
 	public static void setSpriteFactory(SpriteFactory spriteFactory)
 	{
 		m_spriteFactory = spriteFactory;
-
 	}
 
 	/**

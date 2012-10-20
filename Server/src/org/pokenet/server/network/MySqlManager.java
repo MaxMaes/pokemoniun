@@ -55,10 +55,9 @@ public class MySqlManager
 	 */
 	public ResultSet query(String query)
 	{
+		ResultSet mysql_result = null;
 		// System.out.println("Let's search for some data;	" + query);
 		// open();
-
-		ResultSet mysql_result = null;
 		try
 		{
 			Statement stmt = mysql_connection.createStatement();
@@ -75,7 +74,6 @@ public class MySqlManager
 		{
 			e.printStackTrace();
 		}
-
 		// close();
 		return mysql_result;
 	}

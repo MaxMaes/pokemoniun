@@ -2,6 +2,7 @@ package org.pokenet.server.network;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.connections.ActiveConnections;
@@ -132,7 +133,7 @@ public class LogoutManager implements Runnable
 			return false;
 		/* Finally, store that the player is logged out and close connection. */
 		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
-		// GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
+		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		return true;
 	}
 }

@@ -338,7 +338,12 @@ public class PartyInfoDialog extends Frame
 		List<String> translated = Translator.translate("_GUI");
 		LoadingList.setDeferredLoading(true);
 		int pokemonCount = -1;
-		/* Init damn pokemon count! (Fabian Code) for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
+		/* Init damn pokemon count! (Fabian Code) */
+		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokes[i] != null)
+				pokemonCount++;
+		}
 		for(int i = 0; i < 6; i++)
 			try
 			{

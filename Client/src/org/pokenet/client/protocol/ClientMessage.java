@@ -118,15 +118,6 @@ public class ClientMessage
 		message = "[Out] -> ID" + id;
 
 		body.writeByte(id);
-
-		try
-		{
-
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	public void Send()

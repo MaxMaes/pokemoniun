@@ -28,7 +28,7 @@ public class RegisterDialog extends Frame
 	private int m_region = 0;
 	private Button[] m_regions;
 	private Button m_register, m_cancel, m_male, m_female, m_terms;
-	private int m_starter = 1;
+	private int m_starter;
 	private ToggleButton[] m_starters;
 	private Label m_u, m_p, m_cp, m_d, m_e, m_ce, m_s, m_g, m_tos, m_reg;
 	private TextField m_username, m_password, m_confirmPass, m_email, m_confirmEmail, m_day, m_month, m_year;
@@ -657,15 +657,20 @@ public class RegisterDialog extends Frame
 					if(m_day.getText() != null && m_day.getText().length() > 0 && m_day.getText().length() < 3 && m_month.getText() != null && m_month.getText().length() > 0
 							&& m_month.getText().length() < 3 && m_year.getText() != null && m_year.getText().length() == 4)
 					{
-						if(!m_terms.isEnabled())
+						if(m_starter != 0)
 						{
-							m_register.setEnabled(false);
-							GameClient.getInstance().getLoadingScreen().setVisible(true);
-							String bday = m_day.getText() + "/" + m_month.getText() + "/" + m_year.getText();
-							GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
+							if(!m_terms.isEnabled())
+							{
+								m_register.setEnabled(false);
+								GameClient.getInstance().getLoadingScreen().setVisible(true);
+								String bday = m_day.getText() + "/" + m_month.getText() + "/" + m_year.getText();
+								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
+							}
+							else
+								GameClient.messageDialog(translated.get(28), display);
 						}
 						else
-							GameClient.messageDialog(translated.get(28), display);
+							GameClient.messageDialog("No starter selected", display); //TODO: Translated
 					}
 					else
 						GameClient.messageDialog(translated.get(29), display);

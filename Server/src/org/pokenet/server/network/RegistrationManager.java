@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -20,7 +21,7 @@ import org.pokenet.server.protocol.ServerMessage;
  */
 public class RegistrationManager implements Runnable
 {
-	private final MySqlManager m_database;
+	private MySqlManager m_database;
 	private boolean m_isRunning = false;
 	// private Queue<Session> m_queue;
 	private Thread m_thread;
@@ -65,6 +66,23 @@ public class RegistrationManager implements Runnable
 		// int region = Integer.parseInt(String.valueOf(((String) session.getAttribute("reg")).charAt(0)));
 		// String[] info = ((String) session.getAttribute("reg")).substring(1).split(",");
 		// Check if the username is invalid or an NPC name.
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+		{
+			ServerMessage message = new ServerMessage();
+			message.Init(87);
+			message.addInt(1);
+			session.Send(message);
+			return;
+		}
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+		{
+			ServerMessage message = new ServerMessage();
+			message.Init(87);
+			message.addInt(1);
+			session.Send(message);
+			return;
+		}
 		if(session.getChannel() != null)
 			return;
 		String[] info = packet.split(",");

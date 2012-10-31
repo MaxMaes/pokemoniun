@@ -1,6 +1,7 @@
 package org.pokenet.server.backend;
 
 import java.sql.ResultSet;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
@@ -15,7 +16,8 @@ public class SaveManager
 
 	public SaveManager()
 	{
-		m_database = MySqlManager.getInstance();
+		/* TODO: Test for breaking if no DB. */
+		m_database = new MySqlManager();
 	}
 
 	/**
@@ -26,6 +28,11 @@ public class SaveManager
 	 */
 	public boolean saveBag(Bag b)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return false;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return false;
 		try
 		{
 			// Destroy item data to prevent dupes.
@@ -51,6 +58,11 @@ public class SaveManager
 	 */
 	public int saveNewPokemon(Pokemon p, String currentTrainer, MySqlManager db)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return -1;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return -1;
 		try
 		{
 			/* Due to issues with Pokemon not receiving abilities, we're going to ensure they have one */
@@ -143,6 +155,11 @@ public class SaveManager
 	 */
 	public boolean savePlayer(Player p)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return false;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return false;
 		try
 		{
 			/* First, check if they have logged in somewhere else. This is useful for when as server loses its internet connection */
@@ -229,6 +246,11 @@ public class SaveManager
 	 */
 	public boolean savePokemon(Pokemon p, String currentTrainer)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return false;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return false;
 		try
 		{
 			/* Update the pokemon in the database */

@@ -2032,7 +2032,7 @@ public class Player extends Character implements Battleable, Tradeable
 		try
 		{
 			m_friends = new ArrayList<String>();
-			while(friends.next())
+			while(friends != null && friends.next())
 				m_friends.add(friends.getString(1));
 		}
 		catch(SQLException sqle)

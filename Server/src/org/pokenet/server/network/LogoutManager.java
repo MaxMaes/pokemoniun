@@ -123,11 +123,16 @@ public class LogoutManager implements Runnable
 	 */
 	private boolean attemptLogout(Player player)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return false;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return false;
 		/* Remove player from their map if it hasn't been done already. */
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);
 		ActiveConnections.removeSession(player.getSession().getChannel());
-		/* GameServer.getInstance().updatePlayerCount(); TODO" See GameServer for details. */
+		/* GameServer.getInstance().updatePlayerCount(); TODO: See GameServer for details. */
 		/* Store all player information. */
 		if(!m_saveManager.savePlayer(player))
 			return false;

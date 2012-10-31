@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.TradeOffer.TradeType;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -222,7 +223,12 @@ public class Trade implements Runnable
 	public void run()
 	{
 		/* Record Trade on History Table */
-		MySqlManager m_database = MySqlManager.getInstance();
+		// MySqlManager m_database = MySqlManager.getInstance();
+		MySqlManager m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return;
 		while(!m_queries.isEmpty())
 		{
 			m_database.query(m_queries.get(0));

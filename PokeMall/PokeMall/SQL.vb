@@ -10062,13 +10062,7 @@ Module SQL
     End Sub
 
     Public Sub XtremeVote()
-        Dim appdata As String = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData
-        If My.Computer.FileSystem.FileExists(appdata + "/MallTime.php") = True Then
-            My.Computer.FileSystem.DeleteFile(appdata + "/MallTime.php")
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
+        Dim datetime1 As Date = New System.Net.WebClient().DownloadString("http://pokemonium.com/functions/MallTime.php")
 
             Try
                 If (datetime1 - My.Settings.xVote).TotalHours > 12 Then
@@ -10082,25 +10076,6 @@ Module SQL
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-        Else
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
-
-            Try
-                If (datetime1 - My.Settings.xVote).TotalHours > 12 Then
-                    ' Vote for points.
-                    frmWindow.Show()
-                    My.Settings.xVote = datetime1
-                    My.Settings.Save()
-                Else
-                    MsgBox("Its only been: " & (datetime1 - My.Settings.xVote).TotalHours & " hrs. Remember, once every 12 hours!")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
     End Sub
 
     Public Sub AddVoteDP()
@@ -10153,13 +10128,7 @@ Module SQL
     End Sub
 
     Public Sub GameSitesVote()
-        Dim appdata As String = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData
-        If My.Computer.FileSystem.FileExists(appdata + "/MallTime.php") = True Then
-            My.Computer.FileSystem.DeleteFile(appdata + "/MallTime.php")
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
+      Dim datetime1 As Date = New System.Net.WebClient().DownloadString("http://pokemonium.com/functions/MallTime.php")
 
             Try
                 If (datetime1 - My.Settings.gVote).TotalHours > 12 Then
@@ -10173,35 +10142,10 @@ Module SQL
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-        Else
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
-
-            Try
-                If (datetime1 - My.Settings.gVote).TotalHours > 12 Then
-                    ' Vote for points.
-                    frmWindow.Show()
-                    My.Settings.gVote = datetime1
-                    My.Settings.Save()
-                Else
-                    MsgBox("Its only been: " & (datetime1 - My.Settings.gVote).TotalHours & " hrs. Remember, once every 12 hours!")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
     End Sub
 
     Public Sub gTop100Vote()
-        Dim appdata As String = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData
-        If My.Computer.FileSystem.FileExists(appdata + "/MallTime.php") = True Then
-            My.Computer.FileSystem.DeleteFile(appdata + "/MallTime.php")
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
+       Dim datetime1 As Date = New System.Net.WebClient().DownloadString("http://pokemonium.com/functions/MallTime.php")
 
             Try
                 If (datetime1 - My.Settings.gTopVote).TotalHours > 12 Then
@@ -10215,35 +10159,10 @@ Module SQL
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-        Else
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
-
-            Try
-                If (datetime1 - My.Settings.gTopVote).TotalHours > 12 Then
-                    ' Vote for points.
-                    frmWindow.Show()
-                    My.Settings.gTopVote = datetime1
-                    My.Settings.Save()
-                Else
-                    MsgBox("Its only been: " & (datetime1 - My.Settings.gTopVote).TotalHours & " hrs. Remember, once every 12 hours!")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
     End Sub
 
     Public Sub mmoVote()
-        Dim appdata As String = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData
-        If My.Computer.FileSystem.FileExists(appdata + "/MallTime.php") = True Then
-            My.Computer.FileSystem.DeleteFile(appdata + "/MallTime.php")
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
+       Dim datetime1 As Date = New System.Net.WebClient().DownloadString("http://pokemonium.com/functions/MallTime.php")
 
             Try
                 If (datetime1 - My.Settings.mmoVote).TotalHours > 12 Then
@@ -10257,35 +10176,10 @@ Module SQL
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-        Else
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
-
-            Try
-                If (datetime1 - My.Settings.mmoVote).TotalHours > 12 Then
-                    ' Vote for points.
-                    frmWindow.Show()
-                    My.Settings.mmoVote = datetime1
-                    My.Settings.Save()
-                Else
-                    MsgBox("Its only been: " & (datetime1 - My.Settings.mmoVote).TotalHours & " hrs. Remember, once every 12 hours!")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
     End Sub
 
     Public Sub top100Vote()
-        Dim appdata As String = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData
-        If My.Computer.FileSystem.FileExists(appdata + "/MallTime.php") = True Then
-            My.Computer.FileSystem.DeleteFile(appdata + "/MallTime.php")
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
+        Dim datetime1 As Date = New System.Net.WebClient().DownloadString("http://pokemonium.com/functions/MallTime.php")
 
             Try
                 If (datetime1 - My.Settings.top100Vote).TotalHours > 12 Then
@@ -10299,25 +10193,6 @@ Module SQL
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-        Else
-            My.Computer.Network.DownloadFile("http://pokemonium.com/functions/MallTime.php", appdata + "/MallTime.php")
-
-            Dim objReader As New System.IO.StreamReader(appdata + "/MallTime.php")
-            Dim datetime1 As Date = objReader.ReadToEnd
-
-            Try
-                If (datetime1 - My.Settings.top100Vote).TotalHours > 12 Then
-                    ' Vote for points.
-                    frmWindow.Show()
-                    My.Settings.top100Vote = datetime1
-                    My.Settings.Save()
-                Else
-                    MsgBox("Its only been: " & (datetime1 - My.Settings.top100Vote).TotalHours & " hrs. Remember, once every 12 hours!")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
     End Sub
 
     Public Sub BuyDP5()

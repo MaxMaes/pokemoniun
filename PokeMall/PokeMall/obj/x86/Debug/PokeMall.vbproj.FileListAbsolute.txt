@@ -1,0 +1,17 @@
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\bin\Debug\PokeMall.exe.config
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\bin\Debug\PokeMall.exe
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\bin\Debug\PokeMall.pdb
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\bin\Debug\PokeMall.xml
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.Resources.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.exe
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.xml
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.pdb
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmLogin.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmAuth.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmLists.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmBuy.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmMall.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmBuyDP.resources
+C:\Users\rac\documents\visual studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.frmWindow.resources
+C:\Users\rac\Documents\Visual Studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.vbprojResolveAssemblyReference.cache
+C:\Users\rac\Documents\Visual Studio 2010\Projects\PokeMall\PokeMall\obj\x86\Debug\PokeMall.vbproj.GenerateResource.Cache

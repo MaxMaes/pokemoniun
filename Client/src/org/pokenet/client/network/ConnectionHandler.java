@@ -39,7 +39,6 @@ public class ConnectionHandler extends SimpleChannelHandler
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
 	{
-
 		try
 		{
 			ServerMessage msg = (ServerMessage) e.getMessage();

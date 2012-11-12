@@ -6,14 +6,14 @@ import org.pokenet.client.messages.MessageEvent;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
 
-public class InitPokedexEvent implements MessageEvent
+public class PokedexInitializeEvent implements MessageEvent
 {
 
 	@Override
-	public void parse(Session session, ServerMessage request, ClientMessage message)
+	public void parse(Session session, ServerMessage Request, ClientMessage Message)
 	{
-		// TODO: Test implementation.
-		String[] details = request.readString().split(",");
+		//TODO
+		String[] details = Request.readString().split(",");
 		GameClient.getInstance().getOurPlayer().initializePokedex(details);
 	}
 

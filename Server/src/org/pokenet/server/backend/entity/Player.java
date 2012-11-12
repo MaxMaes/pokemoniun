@@ -2126,6 +2126,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientPokedex()
 	{
+		/*
 		// String message = "Xi,";
 		String msgString = "";
 		ServerMessage message = new ServerMessage();
@@ -2133,7 +2134,16 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
 			msgString += m_pokedex.getPokedex()[i];
 		message.addString(msgString);
-		getSession().Send(message);
+		getSession().Send(message);*/
+		
+		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
+		{
+			ServerMessage message = new ServerMessage();
+			message.Init(91);
+			message.addInt(i);
+			message.addInt(m_pokedex.getPokedex()[i]);
+			getSession().Send(message);
+		}
 	}
 
 	/**

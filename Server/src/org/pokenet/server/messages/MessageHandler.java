@@ -19,6 +19,7 @@ import org.pokenet.server.messages.events.DropItemEvent;
 import org.pokenet.server.messages.events.FinishBoxingEvent;
 import org.pokenet.server.messages.events.FinishTalkingEvent;
 import org.pokenet.server.messages.events.ForceLoginEvent;
+import org.pokenet.server.messages.events.GiveItemEvent;
 import org.pokenet.server.messages.events.KickEvent;
 import org.pokenet.server.messages.events.LoginEvent;
 import org.pokenet.server.messages.events.LogoutRequestEvent;
@@ -35,6 +36,7 @@ import org.pokenet.server.messages.events.ReleasePokemonEvent;
 import org.pokenet.server.messages.events.RemoveFriendEvent;
 import org.pokenet.server.messages.events.RunEvent;
 import org.pokenet.server.messages.events.SelectedMoveEvent;
+import org.pokenet.server.messages.events.ServerAlertEvent;
 import org.pokenet.server.messages.events.ServerAnnouncementEvent;
 import org.pokenet.server.messages.events.ServerNotificationEvent;
 import org.pokenet.server.messages.events.ShopEvent;
@@ -77,7 +79,7 @@ public class MessageHandler
 
 	public void register()
 	{
-		messages.put(0, new LoginEvent());
+		messages.put(50, new LoginEvent());
 		messages.put(1, new RegisterEvent());
 		messages.put(2, new ChangePasswordEvent());
 		messages.put(3, new ForceLoginEvent());
@@ -127,5 +129,7 @@ public class MessageHandler
 		messages.put(47, new StartTalkingEvent());
 		messages.put(48, new FinishTalkingEvent());
 		messages.put(49, new LogoutRequestEvent());
+		messages.put(51, new GiveItemEvent());
+		messages.put(52, new ServerAlertEvent());
 	}
 }

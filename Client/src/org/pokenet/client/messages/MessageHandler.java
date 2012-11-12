@@ -42,6 +42,7 @@ import org.pokenet.client.messages.events.FishingUnableEvent;
 import org.pokenet.client.messages.events.HMHigherLevelEvent;
 import org.pokenet.client.messages.events.HealPokemonEvent;
 import org.pokenet.client.messages.events.InitFriendListEvent;
+import org.pokenet.client.messages.events.InitPokedexEvent;
 import org.pokenet.client.messages.events.InitPokemonEvent;
 import org.pokenet.client.messages.events.ItemUseEvent;
 import org.pokenet.client.messages.events.LevelLearnMoveEvent;
@@ -92,6 +93,7 @@ import org.pokenet.client.messages.events.TradeRequestEvent;
 import org.pokenet.client.messages.events.TrainerLevelEvent;
 import org.pokenet.client.messages.events.UpdateCoordinatesEvent;
 import org.pokenet.client.messages.events.UpdateItemsEvent;
+import org.pokenet.client.messages.events.UpdatePokedexEvent;
 import org.pokenet.client.messages.events.WeatherChangeEvent;
 
 public class MessageHandler
@@ -209,6 +211,8 @@ public class MessageHandler
 		messages.put(87, new RegisterNotificationEvent());
 		messages.put(88, new MoneyChangeEvent());
 		messages.put(89, new PokemonPPEvent());
+		messages.put(90, new InitPokedexEvent());
+		messages.put(91, new UpdatePokedexEvent());
 
 		// Login
 		// this.messages.put(254, new PingEvent());

@@ -20,6 +20,7 @@ public class NetworkService
 	private final LogoutManager m_logoutManager;
 	private final RegistrationManager m_registrationManager;
 	private final SaveManager m_saveManager;
+	private MySqlManager m_database;
 	private boolean run_autosaver = true;
 
 	/**
@@ -123,7 +124,12 @@ public class NetworkService
 			cnfe.printStackTrace();
 		}
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		MySqlManager.getInstance().query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return;
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
 		/* Start the login/logout managers. */
 		m_logoutManager.start();
 		m_loginManager.start();
@@ -156,23 +162,24 @@ public class NetworkService
 	/* public void saveAll()
 	 * {
 	 * System.out.println("Saving all players");
-	 * /* Queue all players to be saved *//* Iterator<Player> it = m_players.values().iterator();
-										 * Player p;
-										 * while(it.hasNext())
-										 * {
-										 * p = it.next();
-										 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Saving..."));
-										 * if(m_saveManager.savePlayer(p))
-										 * {
-										 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save succesfull"));
-										 * }
-										 * else
-										 * {
-										 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save failed"));
-										 * System.err.println("Error saving player" + p.getName() + " " + p.getId());
-										 * }
-										 * }
-										 * } */
+	 * /* Queue all players to be saved */
+	/* Iterator<Player> it = m_players.values().iterator();
+	 * Player p;
+	 * while(it.hasNext())
+	 * {
+	 * p = it.next();
+	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Saving..."));
+	 * if(m_saveManager.savePlayer(p))
+	 * {
+	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save succesfull"));
+	 * }
+	 * else
+	 * {
+	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save failed"));
+	 * System.err.println("Error saving player" + p.getName() + " " + p.getId());
+	 * }
+	 * }
+	 * } */
 
 	/**
 	 * Stop this network service by stopping all threads.
@@ -186,7 +193,7 @@ public class NetworkService
 		// m_tcpProtocolHandler.logoutAll();
 		logoutAll();
 		System.out.println("Logged out all players.");
-		/* TODO: Experimental, check functionality! */
+		/* TODO: Experimental, check functionality! Doesn't seem to stop the server properly! */
 		_connection.StopSocket();
 	}
 }

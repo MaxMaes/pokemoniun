@@ -90,7 +90,7 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)
 	{
-		m_database = MySqlManager.getInstance();
+		// m_database = MySqlManager.getInstance();
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -167,7 +167,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 * 
 	 * @param exp
 	 */
-	/* TODO: Implement */
+	/* TODO: Implement Skill */
 	public void addCraftingExp(int exp)
 	{
 		m_oldLevel = getCraftingLevel();
@@ -222,7 +222,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 * 
 	 * @param exp
 	 */
-	/* TODO: Implement */
+	/* TODO: Implement Skill */
 	public void addHerbalismExp(int exp)
 	{
 		m_oldLevel = getHerbalismLevel();
@@ -1036,7 +1036,7 @@ public class Player extends Character implements Battleable, Tradeable
 		 * m_tcpSession.write("csb" + getBreedingLevel());
 		 * m_tcpSession.write("csf" + getFishingLevel());
 		 * m_tcpSession.write("csc" + getCoordinatingLevel()); */
-		/* TODO: mag wel ff wat minder he, 1 packet alle levels? :) */
+		/* TODO: mag wel ff wat minder he, 1 packet alle levels? :) (FabianPass) */
 		ServerMessage TrainingLevel = new ServerMessage();
 		TrainingLevel.Init(55);
 		TrainingLevel.addInt(getTrainingLevel());
@@ -1201,7 +1201,12 @@ public class Player extends Character implements Battleable, Tradeable
 						m_repel--;
 					if(m_repel <= 0 && getMap().isWildBattle(m_x, m_y, this))
 					{
-						// m_tcpSession.write("U" + getX() + "," + getY()); TODO: Implement Netty :3
+						/* m_tcpSession.write("U" + getX() + "," + getY()); */
+						ServerMessage message = new ServerMessage();
+						message.Init(64);
+						message.addInt(getX());
+						message.addInt(getY());
+						getSession().Send(message);
 						ensureHealthyPokemon();
 						m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, getMap().getWildPokemon(this));
 						m_movementQueue.clear();
@@ -1613,7 +1618,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 * 
 	 * @param exp
 	 */
-	/* TODO: Implement */
+	/* TODO: Implement Skill */
 	public void setCoordinatingExp(int exp)
 	{
 		m_skillCoordExp = exp;
@@ -2027,6 +2032,11 @@ public class Player extends Character implements Battleable, Tradeable
 
 	public void updateClientFriends()
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return;
 		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '"
 				+ MySqlManager.parseSQL(m_username) + "'))");
 		try
@@ -2110,16 +2120,20 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 	}
 
-	/* TODO: Implement Netty code for all functions below */
+	/* TODO: Test Netty code for both functions below */
 	/**
 	 * Updates the whole pokedex for the player
 	 */
 	public void updateClientPokedex()
 	{
-		String message = "Xi,";
+		// String message = "Xi,";
+		String msgString = "";
+		ServerMessage message = new ServerMessage();
+		message.Init(90);
 		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
-			message += m_pokedex.getPokedex()[i] + ",";
-		// TODO: Implement Netty Message.
+			msgString += m_pokedex.getPokedex()[i];
+		message.addString(msgString);
+		getSession().Send(message);
 	}
 
 	/**
@@ -2130,7 +2144,12 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientPokedex(int id, int value)
 	{
-		/* m_tcpSession.write("Xu," + id + "," + value); TODO: Implement Netty Message. */
+		/* m_tcpSession.write("Xu," + id + "," + value); */
+		ServerMessage message = new ServerMessage();
+		message.Init(91);
+		message.addInt(id);
+		message.addInt(value);
+		getSession().Send(message);
 	}
 
 	/**

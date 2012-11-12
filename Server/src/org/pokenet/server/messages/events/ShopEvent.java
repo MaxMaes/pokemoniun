@@ -27,6 +27,9 @@ public class ShopEvent implements MessageEvent
 			case 2:
 				p.setShopping(false);
 				break;
+			default:
+				p.setShopping(false);
+				break;
 		}
 
 	}

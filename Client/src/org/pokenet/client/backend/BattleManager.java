@@ -78,7 +78,8 @@ public class BattleManager
 	public void endBattle()
 	{
 		BattleManager.getInstance().setFinish(true);
-		/* TODO: New code handles this in Thread in BattleSpeechFrame. Check functionality. GameClient.getInstance().getUi().hideHUD(false); m_timeLine.endBattle(); m_battle.setVisible(false); m_isBattling = false; if(GameClient.getInstance().getDisplay().containsChild(m_battle.m_bag)) GameClient.getInstance().getDisplay().remove(m_battle.m_bag); GameClient.getInstance().getDisplay().remove(m_battle); while(GameClient.getInstance().getDisplay().containsChild(m_battle)) ; GameClient.getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName()); if(GameClient.getSoundPlayer().m_trackName == Music.PVNPC) { GameClient.getSoundPlayer().setTrack(m_curTrack); } */
+		/* TODO: New code handles this in Thread in BattleSpeechFrame. Check functionality.
+		 * GameClient.getInstance().getUi().hideHUD(false); m_timeLine.endBattle(); m_battle.setVisible(false); m_isBattling = false; if(GameClient.getInstance().getDisplay().containsChild(m_battle.m_bag)) GameClient.getInstance().getDisplay().remove(m_battle.m_bag); GameClient.getInstance().getDisplay().remove(m_battle); while(GameClient.getInstance().getDisplay().containsChild(m_battle)) ; GameClient.getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName()); if(GameClient.getSoundPlayer().m_trackName == Music.PVNPC) { GameClient.getSoundPlayer().setTrack(m_curTrack); } */
 	}
 
 	/**

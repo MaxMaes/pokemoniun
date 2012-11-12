@@ -50,7 +50,7 @@ public class UserManager
 		else if(GameClient.getLanguage().equalsIgnoreCase("german"))
 			language = '7';
 
-		ClientMessage message = new ClientMessage(0);
+		ClientMessage message = new ClientMessage(50);
 		message.addString(language + username + "," + getPasswordHash(username, password));
 		GameClient.getSession().send(message);
 	}

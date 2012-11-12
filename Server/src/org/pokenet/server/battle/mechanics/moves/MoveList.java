@@ -4738,8 +4738,7 @@ public class MoveList
 					{
 						StatChangeEffect effectClone = (StatChangeEffect) effect.clone();
 						effectClone.setDescription(null);
-						// TODO: Open question: does Clear Body protect
-						// against lowering stats by using this move?
+						/* TODO: Open question: does Clear Body protect against lowering stats by using this move? */
 						user.addStatus(target, effectClone);
 					}
 				}

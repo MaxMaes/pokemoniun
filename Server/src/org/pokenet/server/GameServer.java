@@ -54,7 +54,7 @@ public class GameServer
 	 * 
 	 * @param amount
 	 */
-	/* TODO: Re-implement Player Count and fix this. public void updatePlayerCount() { if(m_boolGui) { int amount = getPlayerCount(); m_pAmount.setText(amount + " players online"); if(amount > m_highest) { m_highest = amount; m_pHighest.setText("Highest: " + amount); } } else { int amount = getPlayerCount(); System.out.println(amount + " players online"); if(amount > m_highest) { m_highest = amount; System.out.println("Highest: " + amount); } } } */
+	/* TODO: Re-implement Player Count (using ActiveConnections?) and fix this. public void updatePlayerCount() { if(m_boolGui) { int amount = getPlayerCount(); m_pAmount.setText(amount + " players online"); if(amount > m_highest) { m_highest = amount; m_pHighest.setText("Highest: " + amount); } } else { int amount = getPlayerCount(); System.out.println(amount + " players online"); if(amount > m_highest) { m_highest = amount; System.out.println("Highest: " + amount); } } } */
 
 	private JFrame m_gui;
 
@@ -292,7 +292,7 @@ public class GameServer
 	 * 
 	 * @return the value on the third line of .svn/entries
 	 */
-	// TODO: Rewrite this.
+	/* TODO: Rewrite Revision from text file or something else. */
 	private static int getSVNRev()
 	{
 		int rev = SERVER_REVISION;

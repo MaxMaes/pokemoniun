@@ -38,7 +38,7 @@ public class ServerDialog extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_black = new Color(0, 0, 0);
 		List<String> translate = Translator.translate("_LOGIN");
-		this.setSize(316, 300);/* TODO: Check difference with 316, 250 */
+		this.setSize(316, 300);
 		this.setLocation(400 - 160, 280);
 		setTitle(translate.get(0));
 		setBackground(new Color(0, 0, 0, 140));

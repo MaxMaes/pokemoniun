@@ -214,6 +214,7 @@ public class OurPlayer extends Player
 			}
 	}
 
+	/* TODO: Test functionality */
 	public void initializePokedex(String[] details)
 	{
 		int value;
@@ -398,11 +399,8 @@ public class OurPlayer extends Player
 		GameClient.getInstance().getUi().refreshParty();
 	}
 
-	public void updatePokedex(String[] details)
+	public void updatePokedex(int id, int value)
 	{
-		int id = Integer.parseInt(details[0]);
-		int value = Integer.parseInt(details[1]);
-
 		m_pokedex[id] = value;
 	}
 

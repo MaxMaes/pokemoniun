@@ -8,6 +8,7 @@ import org.pokenet.server.client.Session;
 
 public class ActiveConnections
 {
+	/* TODO: Retrieve playercount from here? */
 	private static ConcurrentMap<Integer, Session> Sessions = new ConcurrentHashMap<Integer, Session>();
 
 	public static boolean addSession(Channel channel, String IP)

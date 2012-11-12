@@ -425,7 +425,7 @@ public class GameClient extends BasicGame
 	/** Connects to a selected server */
 	public void connect()
 	{
-		/* TODO: Netty says Connect! */
+		/* TODO: Implement Proper Connections for Netty */
 		Socket socket = null;
 		m_Connection = new Connection(m_host, 7002);
 		try
@@ -1156,7 +1156,6 @@ public class GameClient extends BasicGame
 
 	}
 
-	/* TODO: Move the move function in here, I copied it over from Fabian's Code */
 	private void handleKeyPress(int key)
 	{
 		if(m_started)
@@ -1398,12 +1397,14 @@ public class GameClient extends BasicGame
 	{
 		Player.setSpriteFactory(new SpriteFactory(m_spriteImageArray));
 	}
-	
-	public static Session getSession() {
+
+	public static Session getSession()
+	{
 		return m_Session;
 	}
 
-	public static void setSession(Session session) {
+	public static void setSession(Session session)
+	{
 		m_Session = session;
 	}
 

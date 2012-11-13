@@ -1,11 +1,16 @@
 package org.pokenet.server.network;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
+import javax.swing.Timer;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.feature.ChatManager;
+import org.pokenet.server.protocol.ServerMessage;
 
 /**
  * Handles all networking
@@ -21,7 +26,7 @@ public class NetworkService
 	private final RegistrationManager m_registrationManager;
 	private final SaveManager m_saveManager;
 	private MySqlManager m_database;
-	private boolean run_autosaver = true;
+	private Timer autosaver;
 
 	/**
 	 * Default constructor
@@ -33,6 +38,16 @@ public class NetworkService
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManager = new ChatManager[3];
+		
+		autosaver = new Timer(1000*60*10, new ActionListener() //Change last number to the minutes for the interval
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				saveAll();
+			}
+		});
+		
+		autosaver.start();
 	}
 
 	/**
@@ -95,7 +110,7 @@ public class NetworkService
 	public void logoutAll()
 	{
 		m_loginManager.stop();
-		run_autosaver = false;
+		autosaver.stop();
 		/* Queue all players to be saved */
 		Iterator<Session> it = ActiveConnections.allSessions().values().iterator();
 		while(it.hasNext())
@@ -158,29 +173,45 @@ public class NetworkService
 	/**
 	 * Saves all players and logs failures
 	 */
-	/* TODO: Re-implement autosaver */
-	/* public void saveAll()
-	 * {
-	 * System.out.println("Saving all players");
-	 * /* Queue all players to be saved */
-	/* Iterator<Player> it = m_players.values().iterator();
-	 * Player p;
-	 * while(it.hasNext())
-	 * {
-	 * p = it.next();
-	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Saving..."));
-	 * if(m_saveManager.savePlayer(p))
-	 * {
-	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save succesfull"));
-	 * }
-	 * else
-	 * {
-	 * writeMessage(p.getSession(), new ChatMessage(ChatMessageType.ANNOUNCEMENT, "Save failed"));
-	 * System.err.println("Error saving player" + p.getName() + " " + p.getId());
-	 * }
-	 * }
-	 * } */
-
+	public void saveAll()
+	{
+		System.out.println("Saving all players");
+		/* Queue all players to be saved */
+		Iterator<Session> it = ActiveConnections.allSessions().values().iterator();
+		Session s;
+		while(it.hasNext())
+		{
+			s = it.next();
+			if(s.getPlayer() != null)
+			{
+				ServerMessage message = new ServerMessage();
+				message.Init(2);
+				message.addString("Saving...");
+				s.Send(message);
+				
+				if(m_saveManager.savePlayer(s.getPlayer()))
+				{
+					ServerMessage succesmg = new ServerMessage();
+					succesmg.Init(2);
+					succesmg.addString("Save succesfull.");
+					s.Send(succesmg);
+				}
+				else
+				{
+					ServerMessage failmsg = new ServerMessage();
+					failmsg.Init(2);
+					failmsg.addString("Save Failed.");
+					s.Send(failmsg);
+					System.err.println("Error saving player" + s.getPlayer().getName() + " " + s.getPlayer().getId());
+				}
+			}
+			else
+			{
+				//Attempted save before the client logged in
+			}
+		 }
+	}
+	
 	/**
 	 * Stop this network service by stopping all threads.
 	 */

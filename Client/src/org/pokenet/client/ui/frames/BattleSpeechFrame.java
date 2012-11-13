@@ -71,7 +71,7 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 		while(!getAdvancedLine().equalsIgnoreCase(newMsg))
 			;
 
-		if(BattleManager.getInstance().canFinish())
+		/*if(BattleManager.getInstance().canFinish())
 		{
 			System.out.println("Battle over, no more speech!");
 
@@ -94,7 +94,7 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 				GameClient.getSoundPlayer().setTrack(BattleManager.getInstance().getCurrentTrack());
 
 			m_thread = null;
-		}
+		}*/
 	}
 
 	public void start()

@@ -1,7 +1,6 @@
 package org.pokenet.server.backend.entity;
 
 import org.pokenet.server.battle.Pokemon;
-import org.pokenet.server.network.message.TradeNpcSpeechMessage;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -47,8 +46,8 @@ public class TradeChar extends NPC implements Tradeable
 	{
 		m_trade = null;
 		m_tradeAccepted = false;
-		// TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-		new TradeNpcSpeechMessage("Thanks! It's just what I was looking for!");
+		/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+		 * new TradeNpcSpeechMessage("Thanks! It's just what I was looking for!"); */
 		ServerMessage message = new ServerMessage();
 		message.Init(50);
 		message.addInt(3);
@@ -89,8 +88,8 @@ public class TradeChar extends NPC implements Tradeable
 		else
 		{
 			// This is the wrong Pokemon
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			new TradeNpcSpeechMessage("This is not what I'm looking for!\n" + "Come back when you find the right Pokemon!");
+			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+			 * new TradeNpcSpeechMessage("This is not what I'm looking for!\n" + "Come back when you find the right Pokemon!"); */
 			ServerMessage message = new ServerMessage();
 			message.Init(50);
 			message.addInt(3);
@@ -154,8 +153,8 @@ public class TradeChar extends NPC implements Tradeable
 			m_trade = new Trade(this, p);
 			p.setTrade(m_trade);
 			m_trade.setOffer(this, 0, 0);
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			new TradeNpcSpeechMessage("I'm looking for a " + m_requestedSpecies + ". Want to trade one for my " + m_party[0].getName() + "?");
+			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+			 * new TradeNpcSpeechMessage("I'm looking for a " + m_requestedSpecies + ". Want to trade one for my " + m_party[0].getName() + "?"); */
 			ServerMessage message = new ServerMessage();
 			message.Init(50);
 			message.addInt(3);
@@ -165,8 +164,8 @@ public class TradeChar extends NPC implements Tradeable
 		else
 		{
 			/* Can't trade */
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			new TradeNpcSpeechMessage("I can't trade with you right now");
+			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+			 * new TradeNpcSpeechMessage("I can't trade with you right now"); */
 			ServerMessage message = new ServerMessage();
 			message.Init(50);
 			message.addInt(3);

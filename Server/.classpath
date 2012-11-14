@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.22-bin.jar"/>
-	<classpathentry kind="lib" path="lib/netty-3.5.3.Final.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.5.10.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -2108,7 +2108,15 @@ public class Player extends Character implements Battleable, Tradeable
 					+ (getParty()[i].getTypes().length > 1 && getParty()[i].getTypes()[1] != null ? getParty()[i].getTypes()[1] + "," : ",") + getParty()[i].getExp() + "," + getParty()[i].getLevel()
 					+ "," + getParty()[i].getAbilityName() + "," + getParty()[i].getNature().getName() + "," + (getParty()[i].getMoves()[0] != null ? getParty()[i].getMoveName(0) : "") + ","
 					+ (getParty()[i].getMoves()[1] != null ? getParty()[i].getMoveName(1) : "") + "," + (getParty()[i].getMoves()[2] != null ? getParty()[i].getMoveName(2) : "") + ","
-					+ (getParty()[i].getMoves()[3] != null ? getParty()[i].getMoveName(3) : "");
+					+ (getParty()[i].getMoves()[3] != null ? getParty()[i].getMoveName(3) : "")  + ","
+					+ (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + ","
+					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ","
+					+ this.getParty()[i].getItemName() + ","
+					+ (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()) + ","
+					+ (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1) + ","
+					+ this.getParty()[i].getOriginalTrainer();
 			ServerMessage message = new ServerMessage();
 			message.Init(39);
 			message.addInt(i);
@@ -2126,24 +2134,22 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientPokedex()
 	{
-		/*
-		// String message = "Xi,";
 		String msgString = "";
 		ServerMessage message = new ServerMessage();
 		message.Init(90);
 		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
-			msgString += m_pokedex.getPokedex()[i];
+			msgString += (m_pokedex.getPokedex()[i] + ",");
 		message.addString(msgString);
-		getSession().Send(message);*/
+		getSession().Send(message);
 		
-		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
+		/*for(int i = 1; i < m_pokedex.getPokedex().length; i++)
 		{
 			ServerMessage message = new ServerMessage();
 			message.Init(91);
 			message.addInt(i);
 			message.addInt(m_pokedex.getPokedex()[i]);
 			getSession().Send(message);
-		}
+		}*/
 	}
 
 	/**

@@ -320,8 +320,8 @@ public class OurPlayer extends Player
 		{
 			/* Set sprite, name, gender and hp */
 
-			System.out.println(info);
-			System.out.println(info.length);
+			System.out.println("Poke Info: " + info);
+			System.out.println("String Length: " + info.length);
 			m_pokemon[i] = new OurPokemon();
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));

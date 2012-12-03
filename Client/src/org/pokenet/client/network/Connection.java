@@ -6,6 +6,7 @@ import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.ChannelException;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
+import org.jboss.netty.handler.codec.frame.LengthFieldPrepender;
 import org.pokenet.client.messages.MessageHandler;
 import org.pokenet.client.protocol.codec.NetworkDecoder;
 import org.pokenet.client.protocol.codec.NetworkEncoder;
@@ -58,8 +59,9 @@ public class Connection
 	{
 		ChannelPipeline pipeline = Bootstrap.getPipeline();
 
+		pipeline.addLast("lengthEncoder", new LengthFieldPrepender(4));
 		pipeline.addLast("encoder", new NetworkEncoder());
-		pipeline.addLast("decoder", new NetworkDecoder());
+		pipeline.addLast("decoder", new NetworkDecoder(512, 0, 4, 0, 4));
 		pipeline.addLast("handler", new ConnectionHandler());
 	}
 }

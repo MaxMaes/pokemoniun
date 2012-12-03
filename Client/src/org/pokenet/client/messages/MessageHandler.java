@@ -120,7 +120,7 @@ public class MessageHandler
 
 	public void register()
 	{
-		messages.put(0, new ServerRevisionEvent()); // R
+		messages.put(100, new ServerRevisionEvent()); // R
 		messages.put(1, new ServerNotificationEvent()); // !
 		messages.put(2, new ServerAnnouncementEvent()); // q
 		messages.put(3, new StartTradeEvent()); // Ts

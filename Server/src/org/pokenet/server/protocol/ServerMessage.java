@@ -133,6 +133,7 @@ public class ServerMessage
 
 	public void sendResponse()
 	{
+
 		Player.Send(this);
 	}
 }

@@ -63,12 +63,10 @@ public class ServerMessage
 		try
 		{
 			int len = buffer.readUnsignedShort();
-
 			char[] characters = new char[len];
 			for(int i = 0; i < len; i++)
 				characters[i] = buffer.readChar();
-
-			return new String(characters);
+			return new /* buffer.toString(Charset.forName("UTF-8")) */String(characters);
 		}
 		catch(Exception e)
 		{

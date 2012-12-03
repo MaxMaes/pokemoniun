@@ -21,7 +21,7 @@ public class Session
 		ipAddress = IP;
 
 		ServerMessage Message = new ServerMessage(this);
-		Message.Init(0);
+		Message.Init(100);
 		Message.addInt(GameServer.REVISION);
 		Message.sendResponse();
 	}

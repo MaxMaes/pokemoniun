@@ -14,7 +14,7 @@ public class ClientMessage
 	private ChannelBufferOutputStream bodystream;
 	private String message;
 	private Session Player;
-	
+
 	public ClientMessage(int id)
 	{
 		init(id);

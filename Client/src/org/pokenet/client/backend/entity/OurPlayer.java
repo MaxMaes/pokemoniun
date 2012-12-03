@@ -321,7 +321,6 @@ public class OurPlayer extends Player
 			/* Set sprite, name, gender and hp */
 
 			System.out.println("Poke Info: " + info);
-			System.out.println("String Length: " + info.length);
 			m_pokemon[i] = new OurPokemon();
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));
@@ -370,7 +369,7 @@ public class OurPlayer extends Player
 			m_pokemon[i].setHoldItem(info[25]);
 			m_pokemon[i].setExpLvl(Integer.parseInt(info[26]));
 			m_pokemon[i].setExpLvlUp(Integer.parseInt(info[27]));
-		    m_pokemon[i].setOriginalTrainer(info[28]);
+			m_pokemon[i].setOriginalTrainer(info[28]);
 
 		}
 	}

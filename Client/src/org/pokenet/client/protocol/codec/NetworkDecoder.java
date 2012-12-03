@@ -3,19 +3,31 @@ package org.pokenet.client.protocol.codec;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
-import org.jboss.netty.handler.codec.frame.FrameDecoder;
+import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder;
 import org.pokenet.client.protocol.ServerMessage;
 
-public class NetworkDecoder extends FrameDecoder
+public class NetworkDecoder extends LengthFieldBasedFrameDecoder
 {
+
+	public NetworkDecoder(int maxFrameLength, int lengthFieldOffset, int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip)
+	{
+		super(maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip);
+	}
+
 	@Override
 	protected Object decode(ChannelHandlerContext ctx, Channel channel, ChannelBuffer buffer)
 	{
 		try
 		{
-			int opcode = buffer.readUnsignedByte();
-			System.out.println("[In] <- " + opcode);
-			return new ServerMessage(buffer, opcode);
+			long length = buffer.readUnsignedInt();
+			if(buffer.readableBytes() < length)
+				return null;
+			else
+			{
+				int id = buffer.readUnsignedByte();
+				System.out.println("[Length] <- " + length + " [ID] <- " + id);
+				return new ServerMessage(buffer, id);
+			}
 		}
 		catch(Exception e)
 		{

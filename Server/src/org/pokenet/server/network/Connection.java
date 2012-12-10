@@ -63,7 +63,7 @@ public class Connection
 
 		pipeline.addLast("lengthEncoder", new LengthFieldPrepender(4));
 		pipeline.addLast("encoder", new NetworkEncoder());
-		pipeline.addLast("decoder", new NetworkDecoder(512, 0, 4, 0, 4));
+		pipeline.addLast("decoder", new NetworkDecoder(512, 0, 4, 0, 0));
 		pipeline.addLast("handler", new ConnectionHandler(m_logoutManager));
 	}
 }

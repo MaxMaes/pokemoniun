@@ -19,15 +19,18 @@ public class NetworkDecoder extends LengthFieldBasedFrameDecoder
 	{
 		try
 		{
+			if(buffer.readableBytes() < 4)
+				return null;
+			buffer.markReaderIndex();
 			long length = buffer.readUnsignedInt();
 			if(buffer.readableBytes() < length)
-				return null;
-			else
 			{
-				int id = buffer.readUnsignedByte();
-				System.out.println("[Length] <- " + length + " [ID] <- " + id);
-				return new ClientMessage(buffer, id);
+				buffer.resetReaderIndex();
+				return null;
 			}
+			int id = buffer.readUnsignedByte();
+			System.out.println("[Length] <- " + length + " [ID] <- " + id);
+			return new ClientMessage(buffer, id);
 		}
 		catch(Exception e)
 		{

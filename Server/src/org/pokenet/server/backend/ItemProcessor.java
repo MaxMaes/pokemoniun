@@ -264,7 +264,7 @@ public class ItemProcessor implements Runnable
 						m_player.getSession().Send(hpChange);
 
 						ServerMessage itemUse = new ServerMessage();
-						itemUse.Init(82);
+						itemUse.Init(92);
 						itemUse.addString(message);
 						m_player.getSession().Send(itemUse);
 					}
@@ -367,7 +367,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -383,7 +383,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -399,7 +399,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -415,7 +415,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -431,7 +431,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -447,7 +447,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -490,7 +490,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -506,7 +506,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -522,7 +522,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -538,7 +538,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -554,7 +554,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -574,7 +574,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -595,7 +595,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -613,7 +613,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -629,7 +629,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -650,7 +650,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -673,7 +673,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -696,7 +696,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -719,7 +719,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -742,7 +742,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -765,7 +765,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -798,7 +798,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -836,7 +836,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -867,7 +867,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -893,7 +893,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii"+message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -919,7 +919,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii"+message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -945,7 +945,7 @@ public class ItemProcessor implements Runnable
 						{
 							// p.getTcpSession().write("Ii"+message);
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -979,7 +979,7 @@ public class ItemProcessor implements Runnable
 							p.getSession().Send(hpChange);
 
 							ServerMessage itemUse = new ServerMessage();
-							itemUse.Init(82);
+							itemUse.Init(92);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}

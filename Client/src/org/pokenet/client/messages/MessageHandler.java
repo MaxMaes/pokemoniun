@@ -202,7 +202,6 @@ public class MessageHandler
 		messages.put(79, new LoginBanEvent());
 		messages.put(80, new UpdateItemsEvent());
 		messages.put(81, new BagRemoveItemEvent());
-		messages.put(82, new ItemUseEvent());
 		messages.put(82, new RequestNotificationEvent());
 		messages.put(83, new TradeRequestEvent());
 		messages.put(84, new BattleRequestEvent());
@@ -213,6 +212,7 @@ public class MessageHandler
 		messages.put(89, new PokemonPPEvent());
 		messages.put(90, new PokedexInitializeEvent());
 		messages.put(91, new PokedexUpdateEvent());
+		messages.put(92, new ItemUseEvent());
 
 		// Login
 		// this.messages.put(254, new PingEvent());

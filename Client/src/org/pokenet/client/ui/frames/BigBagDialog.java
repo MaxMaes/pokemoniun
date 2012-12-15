@@ -699,12 +699,13 @@ class TeamPopup extends Frame
 			GameClient.getSession().send(message);
 		}
 		else
+		{
 			/* TODO: Write Netty Implementation for Give. */
-			/* ClientMessage message = new ClientMessage(51);
-			 * message.addString(id + "," + pokeIndex);
-			 * GameClient.getSession().send(message); */
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("33" + id + "," + pokeIndex);
+			ClientMessage message = new ClientMessage(51);
+			message.addString(id + "," + pokeIndex);
+			GameClient.getSession().send(message);
 			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
+		}
 		m_parent.destroyPopup();
 	}
 }

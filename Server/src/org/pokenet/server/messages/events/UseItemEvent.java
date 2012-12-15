@@ -17,6 +17,6 @@ public class UseItemEvent implements MessageEvent
 		String[] details = Request.readString().split(",");
 		new Thread(new ItemProcessor(p, details)).start();
 
-		// the fuq, i should check this out o.o a thread??
+		//TODO: the fuq, i should check this out o.o a thread??
 	}
 }

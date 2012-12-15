@@ -12,6 +12,7 @@ public class ItemUseEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
+		String message = Request.readString();
 		try
 		{
 			GameClient.getInstance().getUi().getNPCSpeech().advance();
@@ -20,6 +21,6 @@ public class ItemUseEvent implements MessageEvent
 		catch(Exception e)
 		{
 		}
-		GameClient.getInstance().getUi().talkToNPC(Request.readString());
+		GameClient.getInstance().getUi().talkToNPC(message);
 	}
 }

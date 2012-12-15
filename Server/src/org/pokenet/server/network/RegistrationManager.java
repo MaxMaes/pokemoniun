@@ -83,7 +83,7 @@ public class RegistrationManager implements Runnable
 			session.Send(message);
 			return;
 		}
-		if(session.getChannel() != null)
+		if(session.getChannel() == null)
 			return;
 		String[] info = packet.split(",");
 		/* Check the username */
@@ -392,6 +392,7 @@ public class RegistrationManager implements Runnable
 		starter.setExp(DataService.getBattleMechanics().getExpForLevel(starter, 5));
 		starter.setHappiness(species.getHappiness());
 		starter.setName(starter.getSpeciesName());
+		starter.setPokemonNumber(species.getPokemonNumber());
 		return starter;
 	}
 

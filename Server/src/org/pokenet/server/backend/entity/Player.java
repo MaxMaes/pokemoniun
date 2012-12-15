@@ -2139,7 +2139,7 @@ public class Player extends Character implements Battleable, Tradeable
 		message.Init(90);
 		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
 			msgString += (m_pokedex.getPokedex()[i] + ",");
-		message.addString(msgString);
+		message.addString(msgString.substring(0, msgString.length()-1));
 		getSession().Send(message);
 		
 		/*for(int i = 1; i < m_pokedex.getPokedex().length; i++)

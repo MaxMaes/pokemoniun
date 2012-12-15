@@ -217,12 +217,14 @@ public class OurPlayer extends Player
 	/* TODO: Test functionality */
 	public void initializePokedex(String[] details)
 	{
-		int value;
-		for(int id = 1; id < 494; id++)
+		int id = 1;
+		
+		for(String s : details)
 		{
-			value = Integer.parseInt(details[id]);
-			m_pokedex[id] = value;
+			m_pokedex[id] = Integer.parseInt(s);
+			id++;
 		}
+
 		GameClient.getInstance().getUi().getPokedex().initGUI();
 	}
 

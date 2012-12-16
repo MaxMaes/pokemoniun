@@ -906,6 +906,9 @@ public class Pokemon extends PokemonSpecies
 				p.getSession().Send(message);
 			}
 			p.updateClientPokemonStats(index);
+			
+			//Enter this pokemon in the pokedex
+			p.setPokemonCaught(pokeData.getPokemonNumber() + 1);
 		}
 	}
 

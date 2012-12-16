@@ -1,9 +1,6 @@
 package org.pokenet.client.ui.frames;
 
 import org.newdawn.slick.gui.GUIContext;
-import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.BattleManager;
-import org.pokenet.client.constants.Music;
 
 public class BattleSpeechFrame extends SpeechFrame implements Runnable
 {

@@ -179,8 +179,8 @@ public class TradeDialog extends Frame
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("38");
 				ClientMessage message = new ClientMessage(45);
-				message.addInt(m_offerNum);
-				message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
+				//message.addInt(m_offerNum);
+				//message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 				GameClient.getSession().send(message);
 				m_confirm.setVisible(false);
 				getDisplay().remove(m_confirm);

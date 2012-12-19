@@ -670,7 +670,7 @@ public class RegisterDialog extends Frame
 								GameClient.messageDialog(translated.get(28), display);
 						}
 						else
-							GameClient.messageDialog("No starter selected", display); //TODO: Translated
+							GameClient.messageDialog("No starter selected", display); // TODO: Use translated.get(*)
 					}
 					else
 						GameClient.messageDialog(translated.get(29), display);

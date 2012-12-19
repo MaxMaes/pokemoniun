@@ -31,7 +31,7 @@ public class RegistrationManager implements Runnable
 	 */
 	public RegistrationManager()
 	{
-		m_database = MySqlManager.getInstance();
+		// m_database = MySqlManager.getInstance();
 		// m_queue = new LinkedList<Session>();
 	}
 

@@ -66,7 +66,6 @@ public class UserManager
 	 */
 	public void register(String username, String password, String email, String dob, int starter, int sprite, int region)
 	{
-
 		ClientMessage message = new ClientMessage(1);
 		message.addInt(region);
 		message.addString(username + "," + getPasswordHash(username, password) + "," + email + "," + dob + "," + starter + "," + sprite);

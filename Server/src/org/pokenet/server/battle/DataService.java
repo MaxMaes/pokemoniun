@@ -30,7 +30,7 @@ public class DataService
 	private static JewelMechanics m_mechanics;
 	private static MoveList m_moveList;
 	private static MoveSetData m_moveSetData;
-	private static ArrayList<String> m_nonTrades;
+	private static final String[] m_nonTrades = new String[] { "Bulbasaur", "Ivysaur", "Venusaur", "Wartortle", "Blastoise", "Charmander", "Charmeleon", "Charizard", "Chikorita", "Bayleef", "Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon" };
 	private PokemonSpeciesData m_speciesData;
 
 	/**
@@ -54,44 +54,6 @@ public class DataService
 			initialiseSpecies();
 			PokemonSpecies.setDefaultData(m_speciesData);
 			System.out.println("INFO: Pokemon Databases loaded.");
-			/* List of non-tradeable Pokemon */
-			m_nonTrades = new ArrayList<String>();
-			m_nonTrades.add("Bulbasaur");
-			m_nonTrades.add("Ivysaur");
-			m_nonTrades.add("Venusaur");
-			m_nonTrades.add("Squirtle");
-			m_nonTrades.add("Wartortle");
-			m_nonTrades.add("Blastoise");
-			m_nonTrades.add("Charmander");
-			m_nonTrades.add("Charmeleon");
-			m_nonTrades.add("Charizard");
-			m_nonTrades.add("Chikorita");
-			m_nonTrades.add("Bayleef");
-			m_nonTrades.add("Meganium");
-			m_nonTrades.add("Cyndaquil");
-			m_nonTrades.add("Quilava");
-			m_nonTrades.add("Typhlosion");
-			m_nonTrades.add("Totodile");
-			m_nonTrades.add("Croconaw");
-			m_nonTrades.add("Feraligatr");
-			m_nonTrades.add("Treecko");
-			m_nonTrades.add("Grovyle");
-			m_nonTrades.add("Sceptile");
-			m_nonTrades.add("Torchic");
-			m_nonTrades.add("Combusken");
-			m_nonTrades.add("Blaziken");
-			m_nonTrades.add("Mudkip");
-			m_nonTrades.add("Marshtomp");
-			m_nonTrades.add("Swampert");
-			m_nonTrades.add("Turtwig");
-			m_nonTrades.add("Grotle");
-			m_nonTrades.add("Torterra");
-			m_nonTrades.add("Chimchar");
-			m_nonTrades.add("Monferno");
-			m_nonTrades.add("Infernape");
-			m_nonTrades.add("Piplup");
-			m_nonTrades.add("Prinplup");
-			m_nonTrades.add("Empoleon");
 			System.out.println("INFO: Trade Block List established.");
 		}
 		catch(Exception e)
@@ -108,8 +70,8 @@ public class DataService
 	 */
 	public static boolean canTrade(String pokemon)
 	{
-		for(int i = 0; i < m_nonTrades.size(); i++)
-			if(m_nonTrades.get(i).equalsIgnoreCase(pokemon))
+		for(int i = 0; i < m_nonTrades.length; i++)
+			if(m_nonTrades[i].equalsIgnoreCase(pokemon))
 				return false;
 		return true;
 	}

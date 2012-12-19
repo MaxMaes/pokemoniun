@@ -3,10 +3,11 @@ package org.pokenet.server.network;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+
 import javax.swing.Timer;
+
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
-import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.feature.ChatManager;

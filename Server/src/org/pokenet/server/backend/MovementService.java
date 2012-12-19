@@ -26,7 +26,7 @@ public class MovementService
 	 */
 	public MovementService()
 	{
-		m_movementManager = new MovementManager[GameServer.getMovementThreadAmount()];
+		m_movementManager = new MovementManager[GameServer.MOVEMENT_THREADS];
 		m_mapMatrix = new ServerMapMatrix();
 		m_sleepTimer = new NpcSleepTimer();
 	}
@@ -148,7 +148,7 @@ public class MovementService
 	 */
 	public void stop()
 	{
-		m_sleepTimer.stop();
+		m_sleepTimer.finish();
 		for(int i = 0; i < m_movementManager.length; i++)
 			m_movementManager[i].stop();
 		System.out.println("INFO: Movement Service stopped");

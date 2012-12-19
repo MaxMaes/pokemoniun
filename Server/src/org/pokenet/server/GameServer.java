@@ -36,10 +36,9 @@ public class GameServer
 	public static int REVISION = getSVNRev();
 	private static boolean m_boolGui = false;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
-	private static int m_highest = -1;
 	private static GameServer m_instance;
 	private static int m_maxPlayers = 500; // default 500 players
-	private static int m_movementThreads = 12; // default to high
+	public static final int MOVEMENT_THREADS = 12; // default to high
 	private static ServiceManager m_serviceManager;
 	private static int mPort = 7002;
 
@@ -151,16 +150,6 @@ public class GameServer
 	}
 
 	/**
-	 * Returns the amount of movement threads running in this server.
-	 * 
-	 * @return
-	 */
-	public static int getMovementThreadAmount()
-	{
-		return m_movementThreads;
-	}
-
-	/**
 	 * Returns connection port for this server.
 	 * 
 	 * @return
@@ -209,7 +198,6 @@ public class GameServer
 		}
 		/* Server settings */
 		Options options = new Options();
-		options.addOption("s", "settings", true, "Can be low, medium, or high.");
 		options.addOption("p", "players", true, "Sets the max number of players.");
 		options.addOption("port", "port", true, "Sets the serverport.");
 		options.addOption("ng", "nogui", false, "Starts server in headless mode.");
@@ -223,31 +211,6 @@ public class GameServer
 			{
 				// parse the command line arguments
 				CommandLine line = parser.parse(options, args);
-				/* The following sets the server's settings based on the computing ability of the server specified by the server owner. */
-				if(line.hasOption("settings"))
-				{
-					String settings = line.getOptionValue("settings");
-					if(settings.equalsIgnoreCase("low"))
-						m_movementThreads = 4;
-					else if(settings.equalsIgnoreCase("medium"))
-						m_movementThreads = 8;
-					else if(settings.equalsIgnoreCase("high"))
-						m_movementThreads = 12;
-					else
-					{
-						System.err.println("Server requires a settings parameter");
-						HelpFormatter formatter = new HelpFormatter();
-						formatter.printHelp("java GameServer [param] <args>", options);
-						System.exit(0);
-					}
-				}
-				else
-				{
-					System.err.println("Server requires a settings parameter");
-					HelpFormatter formatter = new HelpFormatter();
-					formatter.printHelp("java GameServer [param] <args>", options);
-					System.exit(0);
-				}
 				if(line.hasOption("players"))
 				{
 					m_maxPlayers = Integer.parseInt(line.getOptionValue("players"));

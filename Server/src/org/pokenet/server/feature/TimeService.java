@@ -29,7 +29,7 @@ public class TimeService implements Runnable
 	private static int m_minutes = 0;
 	private static Weather m_weather = Weather.NORMAL;
 	private int m_forcedWeather = 0;
-	private boolean m_isRunning = false;
+	private boolean m_isRunning = true;
 	private long m_lastWeatherUpdate = 0;
 
 	private Thread m_thread;
@@ -203,7 +203,6 @@ public class TimeService implements Runnable
 	 */
 	public void start()
 	{
-		m_isRunning = true;
 		m_thread.start();
 		System.out.println("INFO: Time Service started");
 	}

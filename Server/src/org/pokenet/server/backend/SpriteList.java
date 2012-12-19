@@ -1,6 +1,7 @@
 package org.pokenet.server.backend;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,8 +47,10 @@ public class SpriteList
 					m_sprites.add(Integer.parseInt(s.nextLine()));
 				s.close();
 			}
-			catch(Exception e)
+			catch(NumberFormatException e)
 			{
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 	}

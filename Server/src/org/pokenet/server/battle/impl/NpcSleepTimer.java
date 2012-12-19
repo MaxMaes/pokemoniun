@@ -11,16 +11,17 @@ import org.pokenet.server.backend.entity.NPC;
  * 
  * @author XtremeJedi
  */
-public class NpcSleepTimer implements Runnable
+public class NpcSleepTimer extends Thread
 {
 	private static List<NPC> m_npcSleeping = new ArrayList<NPC>();
-	private boolean m_running = false;
+	private boolean m_running = true;
 
 	public static void addNPC(NPC npc)
 	{
 		m_npcSleeping.add(npc);
 	}
 
+	@Override
 	public void run()
 	{
 		System.out.println("INFO: Npc sleep timer started");
@@ -69,21 +70,8 @@ public class NpcSleepTimer implements Runnable
 		}
 		System.out.println("INFO: Npc sleep timer stopped");
 	}
-
-	/**
-	 * Starts the timer
-	 */
-	public void start()
-	{
-		m_running = true;
-		new Thread(this).start();
-	}
-
-	/**
-	 * Stops the timer
-	 */
-	public void stop()
-	{
+	
+	public void finish() {
 		m_running = false;
 	}
 }

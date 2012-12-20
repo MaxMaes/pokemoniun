@@ -29,7 +29,7 @@ import org.pokenet.client.messages.events.CancelRequestEvent;
 import org.pokenet.client.messages.events.ChangeSpriteEvent;
 import org.pokenet.client.messages.events.ChatEvent;
 import org.pokenet.client.messages.events.CoordinateLevelEvent;
-import org.pokenet.client.messages.events.EndTradeEvent;
+import org.pokenet.client.messages.events.TradeEndEvent;
 import org.pokenet.client.messages.events.FaceDownEvent;
 import org.pokenet.client.messages.events.FaceLeftEvent;
 import org.pokenet.client.messages.events.FaceRightEvent;
@@ -88,7 +88,7 @@ import org.pokenet.client.messages.events.StartTradeEvent;
 import org.pokenet.client.messages.events.StatsUpdateEvent;
 import org.pokenet.client.messages.events.TMLearnMoveEvent;
 import org.pokenet.client.messages.events.TradeAddPokemonEvent;
-import org.pokenet.client.messages.events.TradeCancelEvent;
+import org.pokenet.client.messages.events.TradeOfferCancelEvent;
 import org.pokenet.client.messages.events.TradeOfferEvent;
 import org.pokenet.client.messages.events.TradeRequestEvent;
 import org.pokenet.client.messages.events.TrainerLevelEvent;
@@ -125,9 +125,9 @@ public class MessageHandler
 		messages.put(2, new ServerAnnouncementEvent()); // q
 		messages.put(3, new StartTradeEvent()); // Ts
 		messages.put(4, new TradeOfferEvent()); // To
-		messages.put(5, new TradeCancelEvent()); // //Tc
+		messages.put(5, new TradeOfferCancelEvent()); // //Tc
 		messages.put(6, new TradeAddPokemonEvent()); // Ti
-		messages.put(7, new EndTradeEvent()); // Tf
+		messages.put(7, new TradeEndEvent()); // Tf
 		messages.put(8, new PartySwapEvent()); // s
 		messages.put(9, new ShopListEvent()); // s
 		messages.put(10, new ShopNoMoneyEvent()); // s
@@ -213,7 +213,7 @@ public class MessageHandler
 		messages.put(90, new PokedexInitializeEvent());
 		messages.put(91, new PokedexUpdateEvent());
 		messages.put(92, new ItemUseEvent());
-
+		
 		// Login
 		// this.messages.put(254, new PingEvent());
 		// this.messages.put(1, new LoginRequestEvent());

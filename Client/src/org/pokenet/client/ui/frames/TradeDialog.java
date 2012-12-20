@@ -523,4 +523,11 @@ public class TradeDialog extends Frame
 				m_ourPokes[btnIndex].setSelected(true);
 			}
 	}
+	
+	public void forceCancelTrade()
+	{
+		setVisible(false);
+		GameClient.getInstance().getUi().stopTrade();
+		System.out.println("Trade Cancelled");
+	}
 }

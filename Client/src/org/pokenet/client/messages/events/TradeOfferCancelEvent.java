@@ -6,7 +6,7 @@ import org.pokenet.client.messages.MessageEvent;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
 
-public class TradeCancelEvent implements MessageEvent
+public class TradeOfferCancelEvent implements MessageEvent
 {
 
 	@Override

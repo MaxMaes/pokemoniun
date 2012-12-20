@@ -653,6 +653,7 @@ public class LoginManager implements Runnable
 		player.setLastLoginTime(time);
 		// player.setSession(session); Not sure if removable!!
 		session.setPlayer(player);
+		session.setLoggedIn(true);
 		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/* Update the database with login information. */
 

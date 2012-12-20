@@ -3,6 +3,7 @@ package org.pokenet.client.messages;
 import java.util.HashMap;
 import java.util.Map;
 import org.pokenet.client.messages.events.AddFriendListEvent;
+import org.pokenet.client.messages.events.AlertMessageEvent;
 import org.pokenet.client.messages.events.BadgeChangeEvent;
 import org.pokenet.client.messages.events.BagRemoveItemEvent;
 import org.pokenet.client.messages.events.BattleEarningsEvent;
@@ -88,6 +89,7 @@ import org.pokenet.client.messages.events.StartTradeEvent;
 import org.pokenet.client.messages.events.StatsUpdateEvent;
 import org.pokenet.client.messages.events.TMLearnMoveEvent;
 import org.pokenet.client.messages.events.TradeAddPokemonEvent;
+import org.pokenet.client.messages.events.TradeInvalidOfferEvent;
 import org.pokenet.client.messages.events.TradeOfferCancelEvent;
 import org.pokenet.client.messages.events.TradeOfferEvent;
 import org.pokenet.client.messages.events.TradeRequestEvent;
@@ -213,6 +215,8 @@ public class MessageHandler
 		messages.put(90, new PokedexInitializeEvent());
 		messages.put(91, new PokedexUpdateEvent());
 		messages.put(92, new ItemUseEvent());
+		messages.put(93, new AlertMessageEvent());
+		messages.put(94, new TradeInvalidOfferEvent());
 		
 		// Login
 		// this.messages.put(254, new PingEvent());

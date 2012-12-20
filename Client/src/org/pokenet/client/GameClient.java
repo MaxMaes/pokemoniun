@@ -55,6 +55,7 @@ import org.pokenet.client.ui.LoginScreen;
 import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
+import org.pokenet.client.ui.frames.AlertPopupDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
 
 /**
@@ -97,6 +98,7 @@ public class GameClient extends BasicGame
 	private ConfirmationDialog m_dcConfirm;
 	private Display m_display;
 	private ConfirmationDialog m_exitConfirm;
+	private AlertPopupDialog m_activeAlert;
 	private boolean m_isNewMap = false;
 	private LoadingScreen m_loading;
 	private LoginScreen m_login;
@@ -373,6 +375,27 @@ public class GameClient extends BasicGame
 	public boolean chatServerIsActive()
 	{
 		return m_chatServerIsActive;
+	}
+	
+	public void showAlert(String title, String text)
+	{
+		if(m_activeAlert == null)
+		{
+			ActionListener ok = new ActionListener()
+			{
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					m_activeAlert.setVisible(false);
+					getDisplay().remove(m_activeAlert);
+					m_activeAlert = null;
+				}
+			};
+			
+			m_activeAlert = new AlertPopupDialog(title, text, ok);
+			getUi().getDisplay().add(m_activeAlert);
+		}
 	}
 
 	/**
@@ -1407,7 +1430,7 @@ public class GameClient extends BasicGame
 	{
 		m_Session = session;
 	}
-
+	
 	/** Slick Native library finder. */
 	/* static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } } */
 }

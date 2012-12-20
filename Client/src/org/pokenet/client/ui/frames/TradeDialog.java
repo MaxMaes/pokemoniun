@@ -166,6 +166,15 @@ public class TradeDialog extends Frame
 		}
 		m_tradeBtn.setEnabled(false);
 	}
+	
+	public void cancelOurOffer()
+	{
+		m_makeOfferBtn.setText("Make Offer");
+		for(int i = 0; i < 6; i++) {
+			m_ourPokes[i].setGlassPane(false);
+		}
+		m_tradeBtn.setEnabled(false);
+	}
 
 	/**
 	 * Cancels the trade

@@ -214,7 +214,6 @@ public class OurPlayer extends Player
 			}
 	}
 
-	/* TODO: Test functionality */
 	public void initializePokedex(String[] details)
 	{
 		int id = 1;

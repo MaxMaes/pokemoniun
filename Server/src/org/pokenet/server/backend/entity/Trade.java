@@ -66,29 +66,6 @@ public class Trade implements Runnable
 			for(int i = 0; i < player2Party.length; i++)
 				if(player2Party[i] != null)
 				{
-					/* p.getTcpSession().write("Ti" + i + PokemonSpecies.getDefaultData().getPokemonByName(player2Party[i].getSpeciesName()).getSpeciesNumber() + "," +
-					 * player2Party[i].getName() + "," +
-					 * player2Party[i].getHealth() + "," +
-					 * player2Party[i].getGender() + "," +
-					 * (player2Party[i].isShiny() ? 1 : 0) + "," +
-					 * player2Party[i].getStat(0) + "," +
-					 * player2Party[i].getStat(1) + "," +
-					 * player2Party[i].getStat(2) + "," +
-					 * player2Party[i].getStat(3) + "," +
-					 * player2Party[i].getStat(4) + "," +
-					 * player2Party[i].getStat(5) + "," +
-					 * player2Party[i].getTypes()[0] + "," +
-					 * (player2Party[i].getTypes().length > 1 &&
-					 * player2Party[i].getTypes()[1] != null ? player2Party[i].getTypes()[1] + "," : ",") +
-					 * player2Party[i].getExp() + "," +
-					 * player2Party[i].getLevel() + "," +
-					 * player2Party[i].getAbilityName() + "," +
-					 * player2Party[i].getNature().getName() + "," +
-					 * (player2Party[i].getMoves()[0] != null ? player2Party[i].getMoves()[0].getName() : "") + "," +
-					 * (player2Party[i].getMoves()[1] != null ? player2Party[i].getMoves()[1].getName() : "") + "," +
-					 * (player2Party[i].getMoves()[2] != null ? player2Party[i].getMoves()[2].getName() : "") + "," +
-					 * (player2Party[i].getMoves()[3] != null ? player2Party[i].getMoves()[3].getName() : "") + "," +
-					 * player2Party[i].getItemName()); */
 					ServerMessage addPoke = new ServerMessage();
 					addPoke.Init(6);
 					addPoke.addInt(i);
@@ -119,33 +96,10 @@ public class Trade implements Runnable
 			for(int i = 0; i < player1Party.length; i++)
 				if(player1Party[i] != null)
 				{
-					/* p.getTcpSession().write("Ti" + i + PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getSpeciesNumber() + "," +
-					 * player1Party[i].getName() + "," +
-					 * player1Party[i].getHealth() + "," +
-					 * player1Party[i].getGender() + "," +
-					 * (player1Party[i].isShiny() ? 1 : 0) + "," +
-					 * player1Party[i].getStat(0) + "," +
-					 * player1Party[i].getStat(1) + "," +
-					 * player1Party[i].getStat(2) + "," +
-					 * player1Party[i].getStat(3) + "," +
-					 * player1Party[i].getStat(4) + "," +
-					 * player1Party[i].getStat(5) + "," +
-					 * player1Party[i].getTypes()[0] + "," +
-					 * (player1Party[i].getTypes().length > 1 &&
-					 * player1Party[i].getTypes()[1] != null ? player1Party[i].getTypes()[1] + "," : ",") +
-					 * player1Party[i].getExp() + "," +
-					 * player1Party[i].getLevel() + "," +
-					 * player1Party[i].getAbilityName() + "," +
-					 * player1Party[i].getNature().getName() + "," +
-					 * (player1Party[i].getMoves()[0] != null ? player1Party[i].getMoves()[0].getName() : "") + "," +
-					 * (player1Party[i].getMoves()[1] != null ? player1Party[i].getMoves()[1].getName() : "") + "," +
-					 * (player1Party[i].getMoves()[2] != null ? player1Party[i].getMoves()[2].getName() : "") + "," +
-					 * (player1Party[i].getMoves()[3] != null ? player1Party[i].getMoves()[3].getName() : "") + "," +
-					 * player1Party[i].getItemName()); */
 					ServerMessage addPoke = new ServerMessage();
 					addPoke.Init(6);
 					addPoke.addInt(i);
-					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getSpeciesNumber() + "," + player1Party[i].getName() + ","
+					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getPokemonNumber() + "," + player1Party[i].getName() + ","
 							+ player1Party[i].getHealth() + "," + player1Party[i].getGender() + "," + (player1Party[i].isShiny() ? 1 : 0) + "," + player1Party[i].getStat(0) + ","
 							+ player1Party[i].getStat(1) + "," + player1Party[i].getStat(2) + "," + player1Party[i].getStat(3) + "," + player1Party[i].getStat(4) + "," + player1Party[i].getStat(5)
 							+ "," + player1Party[i].getTypes()[0] + "," + (player1Party[i].getTypes().length > 1 && player1Party[i].getTypes()[1] != null ? player1Party[i].getTypes()[1] + "," : ",")
@@ -154,6 +108,7 @@ public class Trade implements Runnable
 							+ (player1Party[i].getMoves()[1] != null ? player1Party[i].getMoves()[1].getName() : "") + ","
 							+ (player1Party[i].getMoves()[2] != null ? player1Party[i].getMoves()[2].getName() : "") + ","
 							+ (player1Party[i].getMoves()[3] != null ? player1Party[i].getMoves()[3].getName() : "") + "," + player1Party[i].getItemName());
+					p.getSession().Send(addPoke);
 				}
 		}
 	}
@@ -258,8 +213,16 @@ public class Trade implements Runnable
 		if(poke > -1 && poke < 6)
 			if(!DataService.canTrade(t.getParty()[poke].getSpeciesName()))
 			{
-				endTrade();
-				return;
+				if(t instanceof Player)
+				{
+					Player p = (Player) t;
+					ServerMessage invalidAlert = new ServerMessage(p.getSession());
+					invalidAlert.Init(94);
+					invalidAlert.sendResponse();
+					//endTrade();
+					return;
+				}
+				
 			}
 
 		o[1] = new TradeOffer();

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="19" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2049" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3073" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="4097" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5121" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6145" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7169" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="8193" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="9217" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
+ </tileset>
+ <tileset firstgid="10027" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="11051" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="12075" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="13099" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="14123" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="15147" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="16171" name="10" tilewidth="16" tileheight="16">
+  <image source="normal18.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <layer name="Walkable" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UQQrAIAxEUfEIns6FRy49UxlEiNCq7aKSST7MwuUjYAh7Kmk+hnKqW/FmMW29cTLc+qvTvTqy5kXuda979XrRyHTEftqtaNXK4kUjr3yzeNHTnc/Yv5li/qfusmRtWXHKLFn/7gKEyvAB0BEAAA==
+  </data>
+ </layer>
+ <layer name="Grass" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAB4MuMzD0LQEQAA
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAB4MuMzD0LQEQAA
+  </data>
+ </layer>
+ <layer name="LedgesRight" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAB4MuMzD0LQEQAA
+  </data>
+ </layer>
+ <layer name="LedgesLeft" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAB4MuMzD0LQEQAA
+  </data>
+ </layer>
+ <layer name="Water" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PsQ0AIAwDQQbIUOw/FRU9BfZD5Jfc+2qOUcBOIn4Rzg72G9EGp/UXtyLa5LTuaFu8Ui5ui1fKxW1uM+2KN97uVoWZtrjNtMNppv/H+753AZ0oHR7QEQAA
+  </data>
+ </layer>
+ <layer name="Water" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UQQrAIAxEUUEKrfe/QL2cPUZ1kV03wRmMdN4BAp8YUxIR+bd2cec/5PleR+HOz+T5XurFUu96lfinROxl7li967F6734nZ8DeAX3DkVsNsjniO/6CaN5htwZxy7bbHZqRvTNe9nBXHdARAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9WW7U3DMBCGLf/loxUZA5R0gw4AmYQCg0DLIP1gkLowSFtYgfeUHFyOCwRUBfuVHrlKncpPLj7Xuf4z99V4nTs3ATfgFtzlzXlL3//aDpm5Wv89/B7AFMzAY+07yb7em5K79vy4Dr8FWIIVeMrteZQhnsHCx+9NrgNVL67fGn4BbMAzeDF8eS75Bl+NsTqzq/blbOG3A3vwCt6Er36npe+w5ff+O+xq1Zc4Kpw7BifgFAwKe+9SUvItwOysutbmI8PPQyYl31C/111cZeT8VHy5tm17+KeQ8xT3j8QYq6907eIrzy3qwVZv5jHWWHvYCrkG4SvPnRR9g3EOc6wzmpw2ifpybdtqvPbVdyVY+WocKV+9h2ONdrWct/Da1VD48943e1TsrpwuzjL6HIq9L1vRrl36dYq1lZF9y6ox15XceA/H/h/ju7CvrrV8f2VfKrNPb+l7PnbuYtz/+n8b9tPOZdZ045pqZ84lXK/+6PsOLlspUtARAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="60" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DQQkAAAgEsMP+UQzpwxTiBksAAH7p2gAAVw0QxK7h0BEAAA==
+  </data>
+ </layer>
+</map>

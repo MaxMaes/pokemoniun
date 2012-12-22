@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="22" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Fire Red Tileset 6.tsx"/>
+ <tileset firstgid="257" source="Fire Red Tileset 7.tsx"/>
+ <tileset firstgid="513" source="Tileset 2.tsx"/>
+ <tileset firstgid="1537" source="Tileset 1.tsx"/>
+ <tileset firstgid="2561" source="Tileset 5.tsx"/>
+ <layer name="Walkable" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC72U0Q3CMAxEzQAsw7yBL8pXyx4wVR2pkazDvjgt8KST/OFLmkvqIiJX1U1VoL6cubA/qu+qSfVwagv21D2Y19azalE9ndqCPXUP5rU1O6MFe36RFWLvpZeVl4OXlbd2E3o9Mlmx94Vej0xWbA/0Rux5VyNZiXyet3ot3rsayUq2M9b+yfgt3j+4Jyvr64F3ks0KfWxNNrsi8LzeOsjrJPLeZNfJMsM+S9DTy4dRgu9s9P7ZLGx2jc63CDa7svOtB8vhH1l9i6M5ZDiaQ2MFysUU/JgIAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGFhgw8vAYAvEdry0syMGaHYsEMfR2Q5lFtrYEQsNM2RMrfBDtqMWDddR2Q56x8eoHaigmRm7HUFUSLc2aOkzlpf6abcGLX0i20GrtFtDZfPIAabAeDMDYnPmgXMDMYAe7hy1Y3jaAQA0g9J4mAgAAA==
+  </data>
+ </layer>
+ <layer name="Water" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgcAADB2841mAgAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwVEAiEwNDEhAnMw20S0bBKKANAABM0D3XmAgAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC83UOU7DQBiG4Qk29GwHAEHhuHIMBwAqQ2VDDsBSULO3IE7Afg72lu0C7C3bPXgjz0ijX8ZygoP4pUexYvv7Mhkn1YpSVcHHBOy5cpS6xg1ucYcxrvEy7pV5WbI63sh8xwc+8aU7AtQsIcYF+3yS01FxleqAAxedbtoh84xYZ06KfC+nY4DMQTc9HuJ1GJHOSESuXI+dH1jnZUfemPX4osesozFext612uH/cJ9ZQ9LGDpPvtbHDrMXsYcOUuLabPe5BL/rQ77bWMcszP4d5LDhirWTWEGIEo1ZHpL+HIh2b5G7p7G3REevMaV5nULc6FrvStRTp+M38RUekf1d5HfJ/JxHXxtbzYNhj3gub+KxyXc08y0UnEJnyWa47KXlc1iyTt4JVrGEdG1gqsWeXrD3s4wCHOMJOiR0nZJ3iDOe4wCWOS+x4IOsRT3jGC15xX/Ke/Lf5BkgFujqYCAAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYOgDRWYGBiUgVgZiFWba2OEINNcJiJ2B2IVGdoyCUTAKRsFIBwALaSGwmAgAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYHiDj8wMDJ+A+DMQfwHir8wD7aJRMAoGPwgbzSejYIAAAJnaI+eYCAAA
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="80" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="xOffsetModifier" value="64"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="normal5.tsx"/>
+ <tileset firstgid="1025" source="normal6.tsx"/>
+ <tileset firstgid="2049" source="normal10.tsx"/>
+ <tileset firstgid="2859" source="normal1.tsx"/>
+ <tileset firstgid="3883" source="normal2.tsx"/>
+ <layer name="Layer 1" width="20" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OIRIAMAjAMCYRfJb/i2k8dxNLXF0jAAAAAIBNlbP7vPkA+NkFQrT/OwAZAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="20" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2RQQ6CMBBFGxtNiBt23kE8iN6FS3kFl2w4B3AFL6BsbAMNn2mLqGyI/yU/YUrntQNKEUIIIYQQQgghhBDy31wTP59S6+G5FP2ynus7Jl0yk8bUp/043/iygA85pF0QeaZ12ZyN59In5sPe+zY8g/Nh0JfvfJe9Y6X974LzxnzY5+aV6+98bcSHmeuTe6p+vRCpA+uOpx7SCt9Dj99PJfTffgl9St3S+P58M12vYd6lXOhb6p4vfoJfnAAZAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="20" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UaUrDUBRGXwIplFJo3IXUFik47EAwnazgDgShdHQJDn/VbsN5HU4LESu6Ak9IgsnLs0jTHwr3g8PjkvdObshNlJJIJBKJRCKRSCQSiUQikUj+bjpWkg0YG9i00ntN6OcPLfN9Rz/cJ860qNSuwelHr3/bn+/bg+V8sp+V/Oz+Lh2lruAabpygt6g/37elnd+mLrhKlXO4oQLV3Pf1BxyP8ATPBt++5jugLuPzcNShAU1oFZRqw6sT7HvzXQbfEeePQ07gFDx83bCnHmsfBriGhfT7ei8GRL5FZR7fxNBfFt+s/Bdfq8QcwA504AM+S/P7BpwdwgjG4DIrS25yb9lmtqECVTtdv8Tm5QzHOVzABFZx1TSfx5k6NKBpp+v4PN/iuIP78BnbuDqar2sHa4+1b6fraYZ51mcw+t5qVsB6xncc+eL/rSzO6PuNfGsL4gtkV4SOABkAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="20" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UWwqCQBiG4R8hwcYZvGkdpdtwKbWTDktxK1HbaBN9UtCRQpoE5X3gRb3QGYdRMwAAAAAAAGD8VpNLMe397dxlZvm1Vsg+37vWXDZqq3aq8d/ndyo0TqoxlFch/W3+75TOrHLxn/usXbv79RuC2fTxOGZz7bWFKlWlDupY/HdMl2hvK69C8nrd9Lxf6sj/i2WH5/X9rl0N5fs9A9yDJPsAGQAA
+  </data>
+ </layer>
+ <layer name="Layer 4" width="20" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQREAMAgAIAvYv4UZ12Bf9YQERAAAAADADZXdg7/pP4BNHtiyqVkAGQAA
+  </data>
+ </layer>
+</map>

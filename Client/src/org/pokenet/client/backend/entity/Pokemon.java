@@ -501,66 +501,85 @@ public class Pokemon
 	/**
 	 * Loads the sprite
 	 */
-	private void setSprite()
-	{
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		LoadingList.setDeferredLoading(true);
-		try
-		{
-			InputStream f;
-			String path = new String();
-			String index, isShiny = new String();
+	private void setSprite() {
+        	String respath = System.getProperty("res.path");
+			if(respath==null)
+				respath="";
+    		LoadingList.setDeferredLoading(true);
+        	try{
+        		InputStream f;
+        		String path = new String();
+        		String index, isShiny = new String();
 
-			if(!isShiny())
-				isShiny = "normal/";
-			else
-				isShiny = "shiny/";
+        		if (!isShiny()){
+        			isShiny = "normal/";
+        		} else {
+        			isShiny = "shiny/";
+        		}
 
-			if(m_spriteNum < 10)
-				index = "00" + String.valueOf(m_spriteNum);
-			else if(m_spriteNum < 100)
-				index = "0" + String.valueOf(m_spriteNum);
-			else if(m_spriteNum > 389)
-			{
-				if(m_spriteNum < 413)
-					index = String.valueOf(m_spriteNum - 3);
-				else if(m_spriteNum > 479 || m_spriteNum < 440)
-					index = String.valueOf(m_spriteNum - 7);
-				else
-					index = String.valueOf(m_spriteNum - 5);
-			}
-			else
-				index = String.valueOf(getSpriteNumber());
+        		if (m_spriteNum < 10) {
+        			index = "00" + String.valueOf(m_spriteNum);
+        		} else if (m_spriteNum < 100) {
+        			index = "0" + String.valueOf(m_spriteNum);
+        		} else {
+        			if(m_spriteNum > 389)
+        			{
+        				if(m_spriteNum < 413)
+        				{
+        					index = String.valueOf(m_spriteNum - 3);
+        				}
+        				else if(m_spriteNum < 416)
+        				{
+        					index = String.valueOf(413);
+        				}
+        				else	
+        				{
+//        					if(m_spriteNum <440 && m_spriteNum< )
+//        					{
+//        						index = String.valueOf(m_spriteNum - 3);
+//        					}
+//        					if(m_spriteNum > 479 )
+//            				{
+//            					index = String.valueOf(m_spriteNum - 5);
+//            				}
+//        					else 
+//        						if(m_spriteNum > 475 && m_spriteNum < 477)
+//        					{
+//        						index = String.valueOf(m_spriteNum - 3);
+//        					}
+//        					else
+//        					{
+        						index = String.valueOf(m_spriteNum - 5);
+//        					}
+        					
+        				}
+        			}
+    				else
+    					index = String.valueOf(getSpriteNumber());
+        		}
+        		
+        		int pathGender;
+        		if (getGender() != 2)
+        			pathGender = 3;
+        		else
+        			pathGender = 2;
 
-			int pathGender;
-			if(getGender() != 2)
-				pathGender = 3;
-			else
-				pathGender = 2;
-
-			try
-			{
-				path = respath + "res/pokemon/front/" + isShiny + index + "-" + pathGender + ".png";
-				f = FileLoader.loadFile(path);
-				m_sprite = new Image(f, path.toString(), false);
-			}
-			catch(Exception e)
-			{
-				if(pathGender == 3)
-					pathGender = 2;
-				else
-					pathGender = 3;
-				path = respath + "res/pokemon/front/" + isShiny + index + "-" + pathGender + ".png";
-				m_sprite = new Image(path.toString(), false);
-				e.printStackTrace();
-			}
-			LoadingList.setDeferredLoading(false);
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-	}
+        		try {
+        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
+        				+ pathGender + ".png";
+        			f = FileLoader.loadFile(path);
+        			m_sprite = new Image(f, path.toString(), false);
+        		} catch (Exception e) {
+        			if(pathGender == 3)
+        				pathGender = 2;
+        			else
+        				pathGender = 3;
+        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
+        				+ pathGender + ".png";
+        			m_sprite = new Image(path.toString(), false);
+        			e.printStackTrace();
+        		}
+        		LoadingList.setDeferredLoading(false);
+        	}catch (SlickException e){e.printStackTrace();}
+        }
 }

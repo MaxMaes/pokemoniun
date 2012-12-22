@@ -24,6 +24,7 @@ import org.pokenet.client.messages.events.BattleTrainerNameEvent;
 import org.pokenet.client.messages.events.BattleUnknownMessageEvent;
 import org.pokenet.client.messages.events.BattleVictoryEvent;
 import org.pokenet.client.messages.events.BattleWonItemEvent;
+import org.pokenet.client.messages.events.BoatEvent;
 import org.pokenet.client.messages.events.BoxAccessEvent;
 import org.pokenet.client.messages.events.BreedLevelEvent;
 import org.pokenet.client.messages.events.CancelRequestEvent;
@@ -94,6 +95,7 @@ import org.pokenet.client.messages.events.TradeOfferCancelEvent;
 import org.pokenet.client.messages.events.TradeOfferEvent;
 import org.pokenet.client.messages.events.TradeRequestEvent;
 import org.pokenet.client.messages.events.TrainerLevelEvent;
+import org.pokenet.client.messages.events.TravelEvent;
 import org.pokenet.client.messages.events.UpdateCoordinatesEvent;
 import org.pokenet.client.messages.events.UpdateItemsEvent;
 import org.pokenet.client.messages.events.WeatherChangeEvent;
@@ -217,7 +219,8 @@ public class MessageHandler
 		messages.put(92, new ItemUseEvent());
 		messages.put(93, new AlertMessageEvent());
 		messages.put(94, new TradeInvalidOfferEvent());
-		
+		messages.put(95, new BoatEvent());
+		messages.put(96, new TravelEvent());
 		// Login
 		// this.messages.put(254, new PingEvent());
 		// this.messages.put(1, new LoginRequestEvent());

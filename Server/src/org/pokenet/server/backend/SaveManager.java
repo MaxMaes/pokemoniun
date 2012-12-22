@@ -239,27 +239,43 @@ public class SaveManager
 		}
 	}
 
-	/**
+		/**
 	 * Updates a pokemon in the database
 	 * 
 	 * @param p
 	 */
 	public boolean savePokemon(Pokemon p, String currentTrainer)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return false;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return false;
 		try
 		{
-			/* Update the pokemon in the database */
+			/*
+			 * Due to issues with Pokemon not receiving abilities, we're going to ensure they have one
+			 */
+			String ab = "";
+			if(p.getAbility() == null || p.getAbility().getName().equalsIgnoreCase(""))
+			{
+				String[] abilities = PokemonSpecies.getDefaultData().getPossibleAbilities(p.getSpeciesName());
+				/* First select an ability randomly */
+				
+				if(abilities.length == 1)
+					ab = abilities[0];
+				else
+					ab = abilities[DataService.getBattleMechanics().getRandom().nextInt(abilities.length)];
+				p.setAbility(IntrinsicAbility.getInstance(ab), true);
+			}
+			else
+			{
+				ab = p.getAbility().getName();
+			}
+			/*
+			 * Update the pokemon in the database
+			 */try
+			{
 			m_database.query("UPDATE pn_pokemon SET " + "name='" + MySqlManager.parseSQL(p.getName()) + "', " + "speciesName='" + MySqlManager.parseSQL(p.getSpeciesName()) + "', " + "exp='"
 					+ String.valueOf(p.getExp()) + "', " + "baseExp='" + p.getBaseExp() + "', " + "expType='" + MySqlManager.parseSQL(p.getExpType().name()) + "', " + "isFainted='"
-					+ String.valueOf(p.isFainted()) + "', " + "level='" + p.getLevel() + "', " + "happiness='" + p.getHappiness() + "', " + "itemName='" + MySqlManager.parseSQL(p.getItemName())
+					+ String.valueOf(p.isFainted()) + "', " + "level='" + p.getLevel() + "', " + "happiness='" + p.getHappiness() + "', " + "abilityName='" + ab + "', " + "itemName='" + MySqlManager.parseSQL(p.getItemName())
 					+ "', " + "currentTrainerName='" + currentTrainer + "', " + "contestStats='" + p.getContestStatsAsString() + "' " + "WHERE id='" + p.getDatabaseID() + "'");
-			try
-			{
+			
 				m_database.query("UPDATE pn_pokemon SET move0='" + (p.getMove(0) == null ? "null" : MySqlManager.parseSQL(p.getMove(0).getName())) + "', move1='"
 						+ (p.getMove(1) == null ? "null" : MySqlManager.parseSQL(p.getMove(1).getName())) + "', move2='"
 						+ (p.getMove(2) == null ? "null" : MySqlManager.parseSQL(p.getMove(2).getName())) + "', move3='"
@@ -270,12 +286,12 @@ public class SaveManager
 			catch(NullPointerException e)
 			{
 				e.printStackTrace();
-				System.out.println("Database is " + m_database);
-				System.out.println("Pokemon object is " + p);
-				System.out.println("Database ID is " + p.getDatabaseID());
-				System.out.println("Pokemon name is " + p.getName());
-				System.out.println("Pokemon moves are " + p.getMove(0).getName() + "|" + p.getMove(1).getName() + "|" + p.getMove(2).getName() + "|" + p.getMove(3).getName());
-				System.out.println("', hp='" + p.getHealth() + "', atk='" + p.getStat(1) + "', def='" + p.getStat(2) + "', speed='" + p.getStat(3) + "', spATK='" + p.getStat(4) + "', spDEF='"
+				System.err.println("Database is " + m_database);
+				System.err.println("Pokemon object is " + p);
+				System.err.println("Database ID is " + p.getDatabaseID());
+				System.err.println("Pokemon name is " + p.getName());
+				System.err.println("Pokemon moves are " + p.getMove(0).getName() + "|" + p.getMove(1).getName() + "|" + p.getMove(2).getName() + "|" + p.getMove(3).getName());
+				System.err.println("', hp='" + p.getHealth() + "', atk='" + p.getStat(1) + "', def='" + p.getStat(2) + "', speed='" + p.getStat(3) + "', spATK='" + p.getStat(4) + "', spDEF='"
 						+ p.getStat(5) + "', evHP='" + p.getEv(0) + "', evATK='" + p.getEv(1) + "', evDEF='" + p.getEv(2) + "', evSPD='" + p.getEv(3) + "', evSPATK='" + p.getEv(4) + "', evSPDEF='"
 						+ p.getEv(5));
 			}

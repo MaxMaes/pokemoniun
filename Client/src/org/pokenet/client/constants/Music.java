@@ -28,4 +28,19 @@ public final class Music
 	public static final String TIN_TOWER = "tintower";
 	public static final String VERMILLION = "vermillion";
 	public static final String VIOLET = "violet";
+	public static final String CANALAVE = "canalave";
+	public static final String JUBILIFE = "jubilife";
+	public static final String TWINLEAF = "twinleaf";
+	public static final String FLOAROMA = "floaroma";
+	public static final String ETERNAC = "eternacity";
+	public static final String ETERNAF = "eternaforest";
+	public static final String OREBURGH = "oreburgh";
+	public static final String HEARTHOME = "hearthome";
+	public static final String MTCORONET = "mtcoronet";
+	public static final String SOLACEON = "solaceon";
+	public static final String VEILSTONE = "veilstone";
+	public static final String MARSH = "pastoria";
+	public static final String SUNNYSHORE = "sunnyshore";
+	public static final String SNOWPOINT = "snowpoint";
+	public static final String UNDERGROUND = "underground";
 }

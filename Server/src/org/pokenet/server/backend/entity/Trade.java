@@ -405,7 +405,38 @@ public class Trade implements Runnable
 								curPokemon.setEvolution(currentEvolution);
 								curPokemon.evolutionResponse(true, p);
 							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("UP-GRADE") && currentEvolution.getAttribute().equalsIgnoreCase("UP_GRADE"))
+							}else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
+							else if(curPokemon.getItem().getName().equalsIgnoreCase("Electirizer")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Electirizer"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
+							else if(curPokemon.getItem().getName().equalsIgnoreCase("Dubious Disc")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Dubious_Disc"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
+							else if(curPokemon.getItem().getName().equalsIgnoreCase("Protector")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Protector"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
+							else if(curPokemon.getItem().getName().equalsIgnoreCase("Razor Claw")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Razor_Claw"))
+							{
+								curPokemon.setEvolution(currentEvolution);
+								curPokemon.evolutionResponse(true, p);
+							}
+							else if(curPokemon.getItem().getName().equalsIgnoreCase("Reaper Cloth")
+									&& currentEvolution.getAttribute().equalsIgnoreCase("Reaper_Cloth"))
 							{
 								curPokemon.setEvolution(currentEvolution);
 								curPokemon.evolutionResponse(true, p);
@@ -435,7 +466,7 @@ public class Trade implements Runnable
 				endTrade();
 			}
 		}
-	}
+	
 
 	/**
 	 * Sends offer information from one player to another

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="22" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="pvp" value="yes"/>
+  <property name="surfLevels" value=""/>
+  <property name="surfProbability" value="0"/>
+  <property name="surfSpecies" value=""/>
+  <property name="wildLevels" value="2-3;2-3;2-3;3-3;2-3"/>
+  <property name="wildProbability" value="28"/>
+  <property name="wildSpecies" value="Pidgey,50;Rattata,45;Sentret,4;Hoppip,5;Hoothoot,55"/>
+  <property name="xOffsetModifier" value="32"/>
+  <property name="yOffsetModifier" value="224"/>
+ </properties>
+ <tileset firstgid="1" source="normal1.tsx"/>
+ <tileset firstgid="1025" source="normal2.tsx"/>
+ <tileset firstgid="2049" source="normal6.tsx"/>
+ <layer name="Walkable" width="24" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NiYGBgGkDMyMjAwMxIO/MVgWYr08h8kNtZaGg+yO1Ko+YTNF+JRmkI2Xxa+AGb+W84KTPzGTsDHCCbD8JMaJicMGNE0q8KxE5IWAXNPiUS7YHlJ2xh/pYF0z9KUDc44zE/ESiXzIhpNsx8kLnY4gPmN3xmg/BCoPxiIHbEEg4w98PsoFZ6gtmFHqcsJLh7sOcDSnEOF2HzQXmFEjsYkcKdFuGDLb1T03x8aZZYDAACUbdhQAgAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="24" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7WVWQrCQBBE2w8N8RZ+uIDLLTSCyzkE0Vu5gMstXMDlDn6IgugZLHEGpJ2xZ0gseHTIUqkw3ZOIiJqgDhqGqpUGGUON1PO2WgQlkAeFj8rFr+vnpKrfY8utxa9LuW35bUoqv01x80vi+V2/Q79Hkq2/ksr/0iwkmoMFWIbvcz75RwHRGEzANPj238FzDw7gqPx98q/guQYbsDX435TnHfWhjqV1+Mx/Vp4X1KvB3yRpPaS+9xXPL/W9r3h+V/Uc7+P5k1ac/v8l1/k9YWMvZ4kqoApqWbMfnxXX+U3hp9GCZxt0QNfiz2fFNX8O/n3lOUAdWvz5rEj5466DlN+3X7n+lV/aP5+w3aMZQAgAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="24" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NggAB2IOZAoocaIOTu4eK/oep+EOjmZGDoAeJeIO7jJF1/K9Dz7VDcwU59942CUUAqoFZ+JNacg6wMDNxcDAw8QMwLxHxc2NWNtLwylMtFSsBA1wsAk+VN4EAIAAA=
+  </data>
+ </layer>
+</map>

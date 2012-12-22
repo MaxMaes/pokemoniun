@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="79" height="20" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="xOffsetModifier" value="32"/>
+  <property name="yOffsetModifier" value="-512"/>
+ </properties>
+ <tileset firstgid="1" source="normal1.tsx"/>
+ <tileset firstgid="1025" source="normal18.tsx"/>
+ <tileset firstgid="2049" source="normal5.tsx"/>
+ <tileset firstgid="3073" source="normal2.tsx"/>
+ <layer name="Layer 0" width="79" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QsQkAIAxE0RTZfyeziU5ikT6tCO/B74+LAAAAmK3sKl8v+c/O7vgOAABGF5uVRrawGAAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="79" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UPQ5AMByG8aYJG5cwuamJc5i4hlthUh9J2xfT/3mSd6lYfmnqnI2mIm9zcf6/Le+zEnZ62Olhp4edHnZ6b+3CsNPtrIWdnmI3+mOWU+wWf2yv386GYFa62jR13C90evpupdx7F7PCDruUsNP7wo73DrvcUiy6CrunuHd6f9itun4WQ7AYAAA=
+  </data>
+ </layer>
+ <layer name="Water" width="79" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3TQQqAIBRFUQfuf0+5E1tJRQh/kGhOIjgH3lwu/pTo2fK9kr9+yf9c3eq5XbvXtFun3bqq3TLt1sWbLWGMxXZxGo61m33q547nxY5tzPHPAACg7wAkHPjMsBgAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="79" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+WYa4rCMBRG73SqSAd1DUp1ZFzHjOI+fGxEXYmPjfgAVzGPOoKCW/ATczGCsVGL0t4PDumfSHpIer0hkpEP98AtWTjH+TpSwu87yBONwFCN43z4XN1dVai7BpjA1QxM1Ti3dNdQ8z2h7vYJ4OofLNW4snTnad7Yo5RE9b3jvecJc2e7V6rqu8bRzyz/lsQzeykDQw1Zw91GsXVkntmwTCxqiO5RSmzcBVfWEClhd99Zoh/wC/5AkH3uuuIQdveSI3LAK3BBKvfcdcUh7K4AV0Xly8dYMrjrPGZZsUgU/ylMdTjpicKdTR1OYkzuSqgVZfAOKmAK5ob6IbUOm3qBT3j6AjVQB0uwCqm9Psnryc65a8JTC7RBB6RROzIWtVdaT3auj+rCVw/01V4rw1vFwp20nsxzr78D8bVn/d7TN85IXu65L+c5b+7p8w4P3pANsBgAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="79" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YUQqCQBRG4ftgGcQwq5bchmnUNrTcl78PwYRIBsqQcz4475eLclGztBTe7BJU+tgTAZhzzmJPsH/jjtnzbwpuCDZSObOrqlWjbi72RP+j1a469VQv1bM7YLe4w1jLQbfiqHJ1Unf14H5M8K0ApOX9j4B3fzn29Sl8hr41ZwDSg08TsBgAAA==
+  </data>
+ </layer>
+</map>

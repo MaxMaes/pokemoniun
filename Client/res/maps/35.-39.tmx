@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="34" height="36" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Pidgeotto,30;Girafarig,15;Sentret,15;Flaaffy,10;Farfetch'd,10;Furret,8;Mareep,7;Venonat,2;Raticate,3;"/>
-  <property name="dayPokemonLevels" value="17-17;15-15;15-15;15-15;16-16;15-17;15-15;16-16;17-17;"/>
-  <property name="fishPokemonChances" value=""/>
-  <property name="fishPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value="Flaaffy,30;Girafarig,15;Venomoth,15;Noctowl,20;Venonat,15;Mareep,2;Raticate,3;"/>
-  <property name="nightPokemonLevels" value="15-15;15-15;17-17;16-16;15-17;15-15;16-17;"/>
+  <property name="dayPokemonChances" value="Floatzel,25;Stunky,20;Skuntank,15;Wingull,10;Roselia,10;Shellos,10;Gastrodon,10;"/>
+  <property name="dayPokemonLevels" value="28-30;28-28;29-30;29-29;29-29;28-28;29-30;"/>
+  <property name="fishPokemonChances" value="Magikarp,50;Finneon,20;Lumineon,5;Gyarados,20;Clamperl,5;"/>
+  <property name="fishPokemonLevels" value="10-25;15-20;25-35;30-40;20-30;"/>
+  <property name="nightPokemonChances" value="Floatzel,25;Stunky,20;Skuntank,15;Wingull,10;Roselia,10;Shellos,10;Gastrodon,10;"/>
+  <property name="nightPokemonLevels" value="28-30;28-28;29-30;29-29;29-29;28-28;29-30;"/>
   <property name="pvp" value="enforced"/>
-  <property name="waterPokemonChances" value=""/>
-  <property name="waterPokemonLevels" value=""/>
-  <property name="wildProbability" value="1"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Wingull,30;Tentacruel,5;Pelipper,5;"/>
+  <property name="waterPokemonLevels" value="20-30;20-30;20-40;20-40;"/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal12.tsx"/>
  <tileset firstgid="1025" source="SinnohCaveset.tsx"/>
- <tileset firstgid="2105" source="SinnohWaterSet.tsx"/>
+ <tileset firstgid="2105" source="SinnohInteriorSet1.tsx"/>
  <layer name="random" width="34" height="36">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3BAQEAAACCIP+vbkhAAQAAAMCvAUajSWUgEwAA
@@ -24,7 +24,7 @@
  </layer>
  <layer name="Walkable" width="34" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2T0Q3CMAxEzWf7BSNQJmlQJOZgWWAWYAdSqZEiY2ynVQ0qPumkfrS554sbASCu2PvkbvThixx9chh9NJ67dABbjh5lYp8X5sg9cAy/1gMozhtmOm1odzN7qOkjMBzUHFIP+D40XcTi2yGXesb/g8QwdS+obGxt/lIc5R3VcGT2bM3+aRgkDhCYNPtXclDZWg6KhTvjEweXN5Wjtg9O0h7UvGvhuSwu1xp1aQCuhG+NLcc95T0IP53DOZyD1LZ9966153C5/lUvyJ8Z5CATAAA=
+   H4sIAAAAAAAAC+2TbQqDMAyGM39Zb6E7iRVh59hJxz6OJayChdJlaaozMs0LD/hDzNPXtAeAfsfUjmbivKFH67ATnfC5QyzIerTRzJjryh6+B8rhH3sYz3Q54TSCPVjCA2b0sMTDu2DP8X1IOfzSI4Y7fy2P8B/leHh3D2f/OA4pD0g4cfYv9MBmcz0wF+ob3zyoeXM9cvugktqDnHclWOqi0ewxtxLgjvAqZT0G4+4ZQlGph3qoB5aH+eRp5D00mqPmDSyhus8gEwAA
   </data>
  </layer>
  <layer name="Grass" width="34" height="36">
@@ -34,7 +34,7 @@
  </layer>
  <layer name="Water" width="34" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RwQmAMBBE0TnuNqTdqLWIHacBDRLiKYcgrugf+Nfw2EiMMcZY3WTSYtEKaT0Mg8dbsiN5rCX/yeinI7cFOcot7nDM1t/1FuVvet9KTvS9WsOBA8c7HS3L0w6iv7YDx0J/dCATAAA=
+   H4sIAAAAAAAAC+3RQQqAIBRF0TdMW1E1CFxZuLBoafmhgTRwYJBS98Gdfg4qMcYYY/1tctKcWlxbR/DSPkjb2M5ibxEvh7U2coTM8NRx+PrizWF/U3srv0P0lUrDgQNHn46S5W0H0V87AenTO7ogEwAA
   </data>
  </layer>
  <layer name="LedgesDown" width="34" height="36">

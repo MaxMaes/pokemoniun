@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="38" height="46" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="dayPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,5;Gastrodon,1;"/>
+  <property name="wildProbability" value="1"/>
+  <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="fishPokemonChances" value="Magikarp,35;Finneon,18;Gyarados,27;Lumineon,10;Staryu,10;"/>
+  <property name="pvp" value="disabled"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="SinnohSet4.tsx"/>
+ <tileset firstgid="1973" source="normal12.tsx"/>
+ <tileset firstgid="2997" source="normal1.tsx"/>
+ <tileset firstgid="4021" source="SinnohCaveset.tsx"/>
+ <layer name="Walkable" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QsQkAIRBE0Q0VK7BU7c3KLhG55AITQXBu/Q8GNvysGQAAgI6WThfM0bXGY9cT5vcOHru+lLr+8K/d6Fqj2jWMNuU+AAAAr3J4p6ZEsxpPV9yjA181ByJQGwAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SwQnCMBTG8Zwqz6WcQy+dQy89qTPk1EFyUNfoIELBg4EqvMSYJmljI3wP/pgGbH+06VdC9AghhNAfFjolmuCKM8FVpitllnAdKyFOunM1zbUh9zr1XV2056q7TXTV2nJfD9WRrpw1zNUU5GqZqy3IhRBCseWcUl2Y302p5xquOO/SDrjyuCQNPchc+4p5riSzWJekT+MctjldLueYa6v3do79Mde3FA1JMte2S1m/9n32eu/gcXWJLvX6L7d1AWfNNvJ925Tq4vEzZhuVx/a+5paQ7/gEkuKCF1AbAAA=
+  </data>
+ </layer>
+ <layer name="Water" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SMQqAMBBE0dxg738cU6nYhFxILASbqGFZMsp/MP1nk5QAAAAAAADwJZPFLJuva7GYVWd/VNfbrY2uYmP21DXK3Xt7/6ZH646b0A3PpsMs1HVFVx/lriraVQS78C87fZiyl1AbAAA=
+  </data>
+ </layer>
+ <layer name="Grass" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SMQoAIAhA0dbuf9nGDhChU0q8By5OH3EMAAAAfrNmfiq7ol1FU3Sn111RY1VXlx+73aK6K6NrFwAApw1KCqLhUBsAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WwQ3DIAxFc0xGSNNF2s3aTdrVOkpyCKiyakWhfGMsOPhJiBwwMk8xeJ6G4RLGDM63MO4Gc4S+11Eej+YvnSP0HfOSxrsv9+W+3JfUF4qVL+LsnAhWvrRY+yrFfcno1RdCC18I7kvG2b/Wgy9OT744rX2lzi3tJ6zutcg2fkdJP1HL42f85XEcmnrU+lpZHpFjXqVetL7WP762hr6WEHud0nm18sXv9pq+tPC3sKYvLTlfKI+w9ilYn4POuyT+MZRXWPuumBfnzBlKbV+18rL0RXcGH9r3Ea1baX1r30e0bqX13cpXLr6Vr1y8+9L5KiW1D9qX5HyVktoH7Ut690Vzb75otuqz0P2sfR1B90v52gE/wKRHUBsAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YNYwUYRgG4AncHXe4a4e7lbi7Q4e7trhLgZe4W4m7FXiLu7S4OwVPQgiwyZG5Y4Zbwr7Jk91JJt//z7uzkg2CnOVjZhB8yoz+8fNPz3OzTlz5/IezU33lLKm+cpZk7St/WhCkkU4GBcgki4IUojBFKEoxiqfF01cTc5vSjOa0oCWtaE0b2tKO9nSgI53oTJe0+PqaaPYkJjOFqUxjOjOYySxmM4e5zGM+C2Lqa6e5u9jNHvayj/0c4CCHOMwRjnKM45zgZIx9PTT7EY95wlOe8ZwXvOQVr3nDW97xng8x9VU5PQiqUJVqVKcGNalFbepQl3rUpwENaUTj9Pj6Gmj2IAYzhKEMYzgjGMkoRjOGsYxjPBPS4+lrhbkrWcVq1rCWdaxnAxvZxGa2sJVtbGdHyH3lpq+LZl/iMle4yjWuc4Ob3OI2d7jLPe7zIKa+Cmb4vKQwRShKMYpTgpKUojRlKEs5ylOBihnx9dXe7A50pBOd6UJXutGdHvSkF73pQ1/6hdxXTjPL3NnMYS7zmM+ChPUWOl7EYpawlGUsD7GvxITt64jZRznGcU5wMmG9U45Pc4aznOM8F3Kxr2RNXv/uSvYk3ve57SuKHu9k/vA2CV+TL7+57rj76p8VBAOywp1bKeR5UWS6tWb8tN7368qXzR5S78df879db5TJ7h5LJfqk7tNvifr/j7Dr/KvJq77+1e+VqPYbtq+41v9bibqvxDlhf8f9b31FtX6y95bX+8yur6+BxEwRUBsAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WOw7AIAgAUEY9U3v/O7VT9yakX+PAe4sLBCUxEAEAAPCPrUXs7Xv++aSWpUesffYtAMbL5l42B+/GXdXhGfsJb2T/lzGq9rfqu2c5AC7eO5lQGwAA
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="38" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BgQAAAADDoPlTn+AGVQEAAAAAAADPAMl5F2BQGwAA
+  </data>
+ </layer>
+</map>

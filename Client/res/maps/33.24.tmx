@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="80" height="50" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Wailmer,15;Sharpedo,5"/>
+  <property name="fishPokemonLevels" value="10-30;10-30;10-30;30-35;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Wingull,35;Pelipper,5;"/>
+  <property name="waterPokemonLevels" value="5-35;10-30;25-30;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" name="PGTileseti" tilewidth="16" tileheight="16">
+  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="PGTilesetii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2049" name="PGtilesetiii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3073" name="PGTilesetiv" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="4097" name="PGTilesetv" tilewidth="16" tileheight="16">
+  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5121" name="PGTilesetvi" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6145" name="PGTilesetvii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7169" name="PGTilesetviii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="8193" name="PGTilesetviiii" tilewidth="16" tileheight="16">
+  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="9217" name="PGTilesetviiiii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviiiii.PNG" trans="050536" width="480" height="432"/>
+ </tileset>
+ <tileset firstgid="10027" name="PGTilesetX" tilewidth="16" tileheight="16">
+  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="11051" name="PGTilesetxi" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="12075" name="PGTilesetxii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="13099" name="PGTilesetzkantoroutes1" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="14123" name="PGTilesetzkantotowns1" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="15147" name="normal5" tilewidth="16" tileheight="16">
+  <image source="normal5.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="16171" name="normal18" tilewidth="16" tileheight="16">
+  <image source="normal18.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Walkable" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QQQ0AQAgEsQ3+pZ0oRPDgSFoFk0kAACB5tV1wm38z/gEAAAAAAAAAAAAAAPyhATFNH7KAPgAA
+  </data>
+ </layer>
+ <layer name="Battles" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
+  </data>
+ </layer>
+ <layer name="RIdges (jumpable)" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
+  </data>
+ </layer>
+ <layer name="Ridges (unjumpable)" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
+  </data>
+ </layer>
+ <layer name="Water" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SQQ3CQAAAwfsXlBQ0tP6tFDxwFuhnM8k9NhkBex1jfGbf2bX8t7dzjMfseS7f8T57zd7Lt1z/r7v+X3f9v+76f931/7rr/3XX/+uu/9dd/6+7/l93/b/u+n/d9f+66/911//rrv/XXf+vu/5fd/2/7vp/3fX/uuv/ddf/667/113/r7v+X3f9v+76f931/7rr/3XX/+uu/9dd/6+7/l93/b/u+n/d9f+66/911//rrv/XXf+vu/5fd/2/7vp/3fX/uuv/ddf/6/4BEr6ljIA+AAA=
+  </data>
+ </layer>
+ <layer name="walkable" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3aQQqAIBAFUOn+R+tQLSIo0bCmRep74MaFMJ8ZF2JKAACwW5frol2e10z55X3zpvYvzujRUees9UeV8jvvc6/Wa/JrV5pd+QGMxd0eIz8AAAAAAOiTN/7n/B+IkRsAAPzPBneu9bqAPgAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2aDW7CMAyFq4rdZDt9t5PATsKAK4xqtfZ4ek7S3xTkT4pWfpa4L44T7DZNEARBEATB89O1TfN5b6fhL7avtrZ1+6YbdOtbR7rZ+0rD7gW07YS/jPEd1u4E7ZuuWa/z/frSPtrxDHqiZspvxvhOr8Ft+F5//QPtMrx/Ha5RL+YIOntj7cVfj+2jn3Tto4amXUpD1MJ0u1G/V9DR4PWN/fF3D4emeTv8j5XSfwts/lg/e433oNYf3xej/I85ij65P7Pz/f7ehxjHG38tcK3ZPKKv8Gtcc3htqPvKrS20gfXl/nJ+5um6BGpulD285nKxq8c0UHE+d8/q8zl+tNZ+Y3PjxZketJt144b3fG4f13Ypnk7sRyV64jnT2hI64h7F/fO9lvq/tya92OZROl7qe2q/5zZHQ/MN3hs4dk3pcwty8VPt92qtlMRhXpf4PyqOlcb2LeH7WGquVD983rX7PRWOPfdzjym6p/bhpWC7eE2qOF7Dh8yOMXvhFjHBxsDzt80Vxk6MbTVj1XFmnF0LtR+t6fel8FzV/l0VBEEQBEEQlFOaM9pD3cGoXWtCzfiMrupIfD5O5Ra3AGtNNebWy79z3pDzapi38HKLa8K5h9o1JVXH9Br6ofr9vWZNh+s3W4G+rfw8lctN+aHKLZpPm44co0rWWaquV8PHOGerbPBqt5zD9vIV3K/pyPXcEg1U7UbF2LVjHs4j+6BnV6qOhLm0KaANqp9cvpNrRLm5mKsv7g/sg+xnpeOgb4wFbWAfw7imctOevUojfl4hhecPOd83DVNrMqfFEuAZBPv26tSc8+Qcc493FkMNvGcb+PzBNRK2ael4PHZ9c3ycCvpzbn/kPVzVlXhNbHVGW/OZihJy+6OaK9YX51Sd0YI/pj5/UdvWvVB7rYzhmWwNgiAIguB1+QWKZwU6gD4AAA==
+  </data>
+ </layer>
+ <layer name="Height" width="80" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
+  </data>
+ </layer>
+</map>

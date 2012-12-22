@@ -597,6 +597,7 @@ public class WildBattleField extends BattleField
 			run.addBool(true);
 			run.sendResponse();
 			m_player.setBattling(false);
+                        m_player.setFishing(false);
 			dispose();
 		}
 		else
@@ -988,15 +989,13 @@ public class WildBattleField extends BattleField
 			double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, m_participatingPokemon.size());
 			if(exp == 0)
 				exp = 1;
-
+			
 			/* Secondly, calculate EVs and exp */
 			// int[] evs = m_wildPoke.getEffortPoints();
 
 			/* Finally, add the EVs and exp to the participating Pokemon */
 			for(Pokemon p : m_participatingPokemon)
 			{
-				int index = m_player.getPokemonIndex(p);
-
 				/* Add the evs */
 				/* Ensure EVs don't go over limit, before or during addition */
 				for(String s : hp)
@@ -1023,7 +1022,26 @@ public class WildBattleField extends BattleField
 						calcEV(p, 3, Integer.parseInt(s.split(",")[1]));
 
 				/* Gain exp/level up and update client */
-				p.setExp(p.getExp() + exp);
+				int index = m_player.getPokemonIndex(p);
+				double ratio = (m_wildPoke.getLevel()/p.getLevel());
+				if(ratio > 5)
+				{
+					ratio = 5;
+				}
+				else if (ratio < 0.1)
+				{
+					ratio = 0.1;
+				}
+				double expX = exp * ratio;
+				if (expX >15000)
+				{
+					expX = 15000;
+				}
+				else if (expX < 5)
+				{
+					expX = 5;
+				}
+				p.setExp(p.getExp() + expX);
 				// Calculate how much exp is left to next level
 				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());
 				// Make sure that value isn't negative.
@@ -1032,9 +1050,9 @@ public class WildBattleField extends BattleField
 				/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleExpMessage(p.getSpeciesName(), exp, expTillLvl)); */
 				ServerMessage expMessage = new ServerMessage(m_player.getSession());
 				expMessage.Init(28);
-				expMessage.addString(p.getSpeciesName() + "," + exp + "," + expTillLvl);
+				expMessage.addString(p.getSpeciesName() + "," + expX + "," + expTillLvl);
 				expMessage.sendResponse();
-				String expGain = exp + "";
+				String expGain = expX + "";
 				expGain = expGain.substring(0, expGain.indexOf('.'));
 				// m_player.getTcpSession().write("Pe" + index + expGain);
 				ServerMessage expGainMessage = new ServerMessage(m_player.getSession());
@@ -1095,6 +1113,7 @@ public class WildBattleField extends BattleField
 							}
 						}
 						else if(evolution.getType() == EvolutionTypes.Happiness)
+						{
 							if(p.getHappiness() > 220)
 							{
 								p.setEvolution(evolution);
@@ -1106,6 +1125,18 @@ public class WildBattleField extends BattleField
 								evolve = true;
 								i = pokeData.getEvolutions().length;
 							}
+						}
+//						else if(p.getSpeciesName().equalsIgnoreCase("Magneton") && m_player.getMapX() == 2)
+//						{
+//								p.setEvolution(evolution);
+//								// m_player.getTcpSession().write("PE" + index);
+//								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
+//								evolveMessage.Init(43);
+//								evolveMessage.addInt(index);
+//								evolveMessage.sendResponse();
+//								evolve = true;
+//								i = pokeData.getEvolutions().length;
+//						}
 					}
 					/* If the Pokemon is evolving, don't move learn just yet */
 					if(evolve)

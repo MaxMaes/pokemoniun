@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="36" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="SinnohCaveset.tsx"/>
+ <tileset firstgid="1081" source="normal12.tsx"/>
+ <layer name="Grass" width="32" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SsQkAMAzEQM+b7N9ngFRp3oacQLX84FVViyRJRn1B/49+9/919/eAfuoG+29S26f2ASDBAdED+R0AEgAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="32" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SoQ2AMABE0RoGAQcOFiiuOHB0QubsORJkm3Lmv+TrMxcCgK9RTcb9WS3G/VVtxn3Ue4Y34G/8Dy2i2o37SR3G/VNdxv1bZeM+AKC/AoAWWZ0AEgAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="32" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VOw7CMAwGYHeBO7DBBjeq2GBC3cqEuDyxhCUrcl6Okyz5JQ9VpH5OkyYrAOyD6u5qc7UOsl9/v3cPZHO/Vw/c9v3WPfi25LfqQbJDPhbmAHaR7JhvZZ+OY31Kif9x9Siop6GvsTdIJ8cvcblt4dfM2x/jwecvK8nX2jnzTn2HGtvCL410TuUkdA708ilWPu6l0BrxhMZr/fMCcFkULzDyr86+NfJj9+8bdOvOg3sxNf9UD7VJ+db3H4X2Tcy3tunfx9C+GTV/SszX3AmaCvk9bLoXZ2ZmZkblBxdj5PcAEgAA
+  </data>
+ </layer>
+</map>

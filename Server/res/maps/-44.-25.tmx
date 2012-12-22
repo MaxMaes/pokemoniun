@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="38" height="24" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Seel,38;Golbat,15;Slowbro,8;Golduck,7;Psyduck,5;Slowpoke,5;Dewgong,10;Jynx,12;"/>
@@ -19,39 +18,40 @@
  <tileset firstgid="2049" source="normal9.tsx"/>
  <tileset firstgid="3073" source="normal14.tsx"/>
  <tileset firstgid="4097" source="normal7.tsx"/>
+ <tileset firstgid="5121" source="Legendaries.tsx"/>
  <layer name="Walkable" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAADvEzcBwaJBjZECOHlL0DXV3kWv+QLsrBYoH2l3kAlLtfTSI3IUr7MlxGz3iYdRdo+4arO4iJi+RC2ht3qi7Rt1Fan4ayPxIC3eR4r6BdhelZo26axRTigGMKrCSQA4AAA==
+   H4sIAAAAAAAAC+3TsQ0AIAgEQHrXdFJGcRJbCgt5gmDyJF+CFwk6RLR5bCE9nr7fXej8atc0qXSh5X13NXKd/h21vdgDXXR1dd3cElrZ8+iiy3tPlfeY4fL4ql3RWXQx0WyspkLtQA4AAA==
   </data>
  </layer>
  <layer name="Grass" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO2WwQ3AIAhFubv/QNpJtIu0h5IQUxXUUg685B+aiH0xSARwdhEDQGrkCP3aVh2GrhntVZPv9eUJ7oHf56JXIvVSrxU4Xuim7VUakZ79TjTPgMtML68Qq35Fh5n7+oUXJ9a8/ujl/PJ/escs9np0LxHuJcOqV/1G0ITOL+oyesdoelma+/SdyI3m3HfscQFse3a7QA4AAA==
+   H4sIAAAAAAAAC+2WMQ7AIAgA2f3/g7Qv0X6kHUpCjVqoljJwCYsRvRgkADiriAEgDWIL/dxRXgr3PaNzWuRzf7mCnolr+4RXIrlSrxk4Xuim7VU6IXn31Wi+AZc3tTxDrOoVHaR/9SsvTljz+qOWc+N++scs1np0LxHuJcOqVz0jaEL7F3V5mmM0vSz1fTonckOz7zv2OAD/q+AhQA4AAA==
   </data>
  </layer>
  <layer name="Water" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGPxgOi8DwwwgnslLuh5S9ZECzIHm7gDinSSYvx2qh1R9o+6ivbvKoenFmghcQUd3IeNoIvBAuItS+3azMDDsIQLvZaGvu24D7btDBL476q5RdxEJkNO6JA3chVwWWCPVg8gYW51IbBhRGl7Yyip8YUkvd+Fz20C7C5fb6OEubGA7hflxsLqLWPcNBndRA4y6axRQAgApa2LBQA4AAA==
+   H4sIAAAAAAAAC2NgGPxgOi8DwwwgnslLmh5y9JECzIHm7gDinSSYv50XgknVN+ou2rurHJperInEFXRyFzKOJgLvGAB3UWrfbhYGhj1E4L0s9HXXbaB9d4jAd0fdNeouIgFyWpekgbuQywJraJmGjrHVicSGEaXhha2swheW9HIXPrcNtLtwuY0e7sIGtlOYHweru4h132BwFzXAqLtGASUAAK5GnmdADgAA
   </data>
  </layer>
  <layer name="RANDOM" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMgoEFCxkZGJ4QgRcx0tddzEzEqWMlUh21wKi7SAODyV3IaZ2Dhu5iJ1EPsWGEDOgRXqPuIg0MVnchg8GUH7EBQu4baHcNlP24wKi7RiYAAN3AFlpADgAA
+   H4sIAAAAAAAAC2NgGAWjYBSMgoEFCxkZGJ4QgRcx0tddzEzEqWMlUh21wKi7SAODyV3IaZ2Dhu5iJ1EPsWGEDOgRXqPuIg0MVnchg8GUH7EBQu4baHcNlP24wKi7RiYAAN3AFlpADgAA
   </data>
  </layer>
  <layer name="Collisions" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAM2W0RGCMBBE/RabELQQsBL0M40wQxXqj23YhxVYhWFgx3MnJDkJ4s7shzoXH7eXkCpbrSrrnfVxYe8HFrixPlhLbe3ns/VlxFfrgmpi6nxrlYIHbMxVOv6TxTWou0fUutYqs89+LcXVZr2xVk1ZdrN1orVqyh6S33GNlquTEVzt0LNG9Moo1vJpSo6GZgysqbnG9jjEvW8pyxguzT57rt890KgVPcNshXKU+wDzGqqZwoVcNVyx0nIZMfvIMJTjr7i6ecln4JKz7jpHfEKvqoGtiODCeQbxew3S9miMK3Y/+lQm5kp1rqbiwmxVlOXSXPzedt1z/oELPWN3PXxseofOeyh0P9NyuSyf/ZvzS8sn39nNjFyQ6y7syicP9Glurti8+E7t4uJ7osZ87vu4fPnht7Few7fBvt+n5KWx73lSrvkCA8rtvkAOAAA=
+   H4sIAAAAAAAAC82WQU7DMBBFs27Z5gC0cJC4Jyksc5FIWbYcoLDhAMCee3ACTsFE9VeHL8f2JA7lS38RRx69zIydceuqcuI78cOVfe9Z4E68E2vdyvNJ/Ox9qKvqKH6qL2sv4m1iX44Rp1E8YGOuhp7fhOdd/FH/Xg/t+6S1HO0UlzNwxeJN5erXZyPOnmo59NYjxdpT7bX0Ou+z5qtVXL3PWady1RpixTSnji31GFhLc42dcYjz3lMtc7gs5+x7dcmBRb3KGXorVUd9DtCvqT1zuFBXC1eurFyt6n3UMFXHv+Ia+mWzAJfudb5DUkKunGfbZnDhPoP4vwZZczTGlXseY2oKc5W6V0txobcc1fLaXPzfDs05/4ELOWMPOfy6OTt130Ox2WwKV8j626fcX1Y+/c/uFuSCQrNwqD6bRJ6W5sqtF8/UIS6eEy0OzY4WDn43lmv41Tv2fk69LI59T8mYP43P/URADgAA
   </data>
  </layer>
  <layer name="random2" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYPiC+YID7QLsYP8gdddIAqNpYxSMglEwCkbBKBgFo4B0AACasLAMQA4AAA==
+   H4sIAAAAAAAAC2NgIA4UiTIwFANxiSiRGkbBKBgEYL7gQLsAO9g/SN01ksBo2hgFo2AUjIJRMApGwSggHQAATP8A6kAOAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="38" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3BgQAAAADDoPlTH+ECVQEAAMA3PcIq6kAOAAA=
+   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+ECVQEAAMA3PcIq6kAOAAA=
   </data>
  </layer>
 </map>

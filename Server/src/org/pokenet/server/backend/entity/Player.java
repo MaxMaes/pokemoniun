@@ -63,6 +63,7 @@ public class Player extends Character implements Battleable, Tradeable
 	private boolean m_isMuted = false;
 	private boolean m_isReadyToTrade = false;
 	private boolean m_isShopping = false;
+	private boolean m_isTaveling = false;
 	private boolean m_isSpriting = false;
 	private boolean m_isTalking = false;
 	private Language m_language = Language.ENGLISH;
@@ -2223,5 +2224,13 @@ public class Player extends Character implements Battleable, Tradeable
 		message.addInt(m_id);
 		message.addInt(m_sprite);
 		getSession().Send(message);
+	}
+        
+	public boolean getIsTaveling() {
+		return m_isTaveling;
+	}
+
+	public void setIsTaveling(boolean m_isTaveling) {
+		this.m_isTaveling = m_isTaveling;
 	}
 }

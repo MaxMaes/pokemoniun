@@ -153,10 +153,10 @@ false
 false
 [/npc]
 [npc]
-Officer
+Ticket_Vendor
 down
 36
-23
+24
 6
 NULL
 0

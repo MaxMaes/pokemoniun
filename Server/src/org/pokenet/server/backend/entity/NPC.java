@@ -8,6 +8,7 @@ import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.protocol.ServerMessage;
+import org.pokenet.server.backend.entity.Positionable.Direction;
 
 /**
  * Represents a Non Playable Character
@@ -376,6 +377,15 @@ public class NPC extends Character
 				if(!p.isShopping())
 				{
 					// Dont send if player is shopping!
+                    //TODO test if this works else remove it
+					if(p.m_facing == Direction.Down)
+						m_facing = Direction.Up;
+					else if (p.m_facing == Direction.Up)
+						m_facing = Direction.Down;
+					else if (p.m_facing == Direction.Left)
+						m_facing = Direction.Right;
+					else if(p.m_facing == Direction.Right)
+						m_facing = Direction.Left;
 					// TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
 					ServerMessage message = new ServerMessage();
 					message.Init(50);
@@ -390,6 +400,26 @@ public class NPC extends Character
 				// TcpProtocolHandler.writeMessage(p.getTcpSession(), new SpriteSelectMessage());
 				ServerMessage message = new ServerMessage();
 				message.Init(16);
+				p.getSession().Send(message);
+				return;
+			}
+                        //@author sadhi
+			/* If this NPC is a sailor show warp options */
+			if(m_name.equalsIgnoreCase("Seasond_Sailor")) {
+				p.setIsTaveling(true);
+				//TcpProtocolHandler.writeMessage(p.getTcpSession(), new BoatMessage());
+				ServerMessage message = new ServerMessage();
+				message.Init(95);
+				p.getSession().Send(message);
+				return;
+			}
+			//@author sadhi
+			/* If this NPC is a train conductor */
+			if(m_name.equalsIgnoreCase("Ticket_Vendor")) {
+				p.setIsTaveling(true);
+				//TcpProtocolHandler.writeMessage(p.getTcpSession(), new TrainMessage());
+				ServerMessage message = new ServerMessage();
+				message.Init(96);
 				p.getSession().Send(message);
 				return;
 			}

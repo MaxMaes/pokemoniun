@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="41" height="20" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Sandshrew,35;Trapinch,35;Cacnea,20;Baltoy,10;"/>
+  <property name="dayPokemonLevels" value="19-21;19-21;19-21;20-22;"/>
+  <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Barboach,20;"/>
+  <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
+  <property name="nightPokemonChances" value="Sandshrew,35;Trapinch,35;Cacnea,20;Baltoy,10;"/>
+  <property name="nightPokemonLevels" value="19-21;19-21;19-21;20-22;"/>
+  <property name="waterPokemonChances" value="Marill,98;Surskit,1;Goldeen,1;"/>
+  <property name="waterPokemonLevels" value="5-35;20-30;20-30;"/>
+  <property name="xOffsetModifier" value="64"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" name="PGTileseti" tilewidth="16" tileheight="16">
+  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="PGTilesetii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2049" name="PGTilesetiii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3073" name="PGTilesetiv" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="4097" name="PGTilesetv" tilewidth="16" tileheight="16">
+  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5121" name="PGTilesetvi" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6145" name="PGTilesetvii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7169" name="PGTilesetviii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="8193" name="PGTilesetviiii" tilewidth="16" tileheight="16">
+  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="9217" name="PGTilesetviiiii" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
+ </tileset>
+ <tileset firstgid="10027" name="PGTilsetzkantotowns1" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="11051" name="PGTilesetx" tilewidth="16" tileheight="16">
+  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="12075" name="PGTilesetzkantoroutes1" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <layer name="Layer 8" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9WUzQ2AMAiFjRto5+jBn0V07g5leyBpDCKlUOtLCD1o+MIDwjgMwTA0pFG3N0bsH2uV9k3ac+/qGbH6+TcYI1eJT4NRMvtTrDs7OrfUGustrjxriOoD6Ijv08nymzgzsPmy2D3PY67XHMaxMhI3vCVet2CEsPT6ySMJp5XX2I1521eK08LrpxtO7WuJ55qM96D2NbHMCOvXNzwXZzZ7Uu98ST2zgf7A2EIXJ/hz+9AMAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC81UwQ3CMAy02AC6Bnm08AR2oPAEhig8gQkRozADrhQkqwrOOWmrWjpdLSXK9S4OEdFrNm1QosZuTU1jaA9SQ2vMPasvrzV/ut8W/8by8Z+eeUG0KOKc46WlKj6rLNJYZvFe2vwN/ffeo/bcluxz+WPUuHJ2rB2ecYwRjVeH4yAQ0p1zBzRYMmoU3UeXln3qfbRwI7Sm3IGcWbdm1mq9Ofs+5K3R3sq+5lhj5E3U/ESyalGJnK1Z52pEsgrl3MdcoxqHynjD2DJ2vo95qelHM/tlja4/Mc6Mi+8RjbKsc1mKrNH1d8aD8fQ9cifHmF+NYxq/CUD2jtAMAAA=
+  </data>
+ </layer>
+ <layer name="Grass" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAD4NWe0DZNAMAAA=
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RwQkAIAxD0dBup3s6inP1KuLRkst/kHvgSwAAAB4rpJHvzXS/Q5e7+w73I3Q7m//uXZwoMpXQDAAA
+  </data>
+ </layer>
+ <layer name="LedgesRight" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBNcEKpoF2AWFwYgi4cRSMglEwCogBADvhTfvQDAAA
+  </data>
+ </layer>
+ <layer name="Water" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAD4NWe0DZNAMAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9WWS07EMAyGo7AEZkF7Cx6nALHgcQrQLHicAjQXYTfMLTqrtnAQoHMF/mqw6nqcxhNVICz9ahOl9hc7TeKcc3Pv3AKKWWjcB/o+Fa0MPq3WxvgS/jQeGtcYOazs5O99y3lp3OSv7ac5hDg0rtA3PE6ZmPtG8ReaQ8hKH/+mnUPlN2s4VLOGcVVMGnssh5b8lIH5U1ytZpxN4yE/p5lzZ9B51rXb98Kvn5TD2FoLjZHzrRQ1jGd+sOnjBhy30DTr2tMfxoLxUR54XMkUy3do/cfW3RN4nqFZ1rVnjLHwfd/EqK2B1H8m1ThjocQu/zmj9Vz5S0b+b7/6vsZkH6vWkq1i7Rem32SU+wrVvfb9NVAL/ym8KYy0T3FGqnvt+2tAMkresRi1fVvmklvN2pMd55YDnKG4GuMu9v09aB+asDOA+GL1JuNnCdliJMZDcB1Bx9CJOKcs9ZZnibzjaFxL3+XYwngBrkvoCro2MFI/z6OFi+stx300H2bk4+/AdQ89QI8JjFYunr8GfKt8/W5h1O4h2zB+AychrCfQDAAA
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYGSAFqaBdgFhAHLjUHAnCIy6c+SAwR6GtHYfLF9Swx56hCU13UtLMFTcCQJDya2jAD+gRlzSIh0M5jQ2WN2FDAD06WlP0AwAAA==
+  </data>
+ </layer>
+</map>

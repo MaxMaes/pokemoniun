@@ -3,7 +3,7 @@
 <map version="1.0" orientation="orthogonal" width="24" height="36" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonLevels" value="16-16;16-16;17-17;16-16;16-16;16-16;15-15;15-15;"/>
-  <property name="dayPokemonChances" value="Rattata,15;Meowth,15;Raticate,30;Magnemite,20;Farfetch'd,5;Pidgeotto,5;Miltank,5;Tauros,5;"/>
+  <property name="dayPokemonChances" value="Rattata,15;Meowth,15;Raticate,30;Magnemite,20;Pidgey,5;Pidgeotto,5;Miltank,5;Tauros,5;"/>
   <property name="nightPokemonLevels" value="16-16;16-16;17-17;16-16;16-16;15-15;15-15;"/>
   <property name="nightPokemonChances" value="Rattata,20;Meowth,20;Raticate,30;Magnemite,20;Noctowl,5;Miltank,3;Tauros,2;"/>
   <property name="waterPokemonLevels" value=""/>

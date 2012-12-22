@@ -13,7 +13,7 @@ false
 false
 [/npc]
 [npc]
-GS line staff
+Ticket_Vendor
 right
 36
 3

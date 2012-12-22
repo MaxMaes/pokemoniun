@@ -48,6 +48,7 @@ import org.pokenet.server.messages.events.TradeCancelOfferEvent;
 import org.pokenet.server.messages.events.TradeOfferEvent;
 import org.pokenet.server.messages.events.TradeReadyEvent;
 import org.pokenet.server.messages.events.TradeRequestEvent;
+import org.pokenet.server.messages.events.TravelEvent;
 import org.pokenet.server.messages.events.UnMuteEvent;
 import org.pokenet.server.messages.events.UnableLearnMoveEvent;
 import org.pokenet.server.messages.events.UnbanEvent;
@@ -131,5 +132,6 @@ public class MessageHandler
 		messages.put(49, new LogoutRequestEvent());
 		messages.put(51, new GiveItemEvent());
 		messages.put(52, new ServerAlertEvent());
+		messages.put(53, new TravelEvent());
 	}
 }

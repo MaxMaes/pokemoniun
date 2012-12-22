@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="26" height="27" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="disabled"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="1"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="SinnohCaveset.tsx"/>
+ <tileset firstgid="1081" source="SinnohCaveset2.tsx"/>
+ <tileset firstgid="1785" source="normal12.tsx"/>
+ <tileset firstgid="2809" source="normal7.tsx"/>
+ <layer name="Grass" width="26" height="27">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DMQ0AAAwDoPqXVHUT0WcHJDRJVdUp8N8BryoPR/gKAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="26" height="27">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9vLAAF7qYzRAS5xXIAYc3HZQ21ArN1DxR5s5pIaP8TaQao95MTpqD30twdfvmzjgGB8biHXHmR9yPagy6Hrp4U96PZRGm749A4me7Cpg+Ht3LjNh8lhiydS7SEGEKsWV7oZBaNgFAxPAABEIMTX+AoAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="26" height="27">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYGeMjIwPAIiB8zDrRLRsEoGAUDAQD8SD/Y+AoAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="26" height="27">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UMQqAMAxFc/+zFCfbKTqpU/FM1qE0LY3EUhE0D/6W8kT43wDA+kCGkIlkDjEPOLDiOdMT/LlnDLFMXEcPMi538abVU95L/rV60j3t8gZ5vyO0owvkvZV6yt2grgjnwJsezkXva44WT80V4RytHsl+IHzb4yHtCcWSG7o5HvjN47ILvktRlPc5AEgxWUP4CgAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="26" height="27">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGJ5gDyfl+v+yMzD8Y6eOe/ABWQ4GBjkO2tszCsgHpKYnYtSPpi9MQGm+HQVDE9Az3h25UWla2gPDo2AUjILBAwCaBlJw+AoAAA==
+  </data>
+ </layer>
+</map>

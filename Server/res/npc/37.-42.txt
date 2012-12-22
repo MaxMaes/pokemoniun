@@ -7,8 +7,3 @@
 -42
 0
 [/warp]
-[hmobject]
-CUT_TREE
-2
-12
-[/hmobject]

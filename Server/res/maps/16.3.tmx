@@ -2,7 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="48" height="36" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonLevels" value="4-6;4-6;3-5;4-5;4-4;"/>
-  <property name="dayPokemonChances" value="Starly,25;Bidoof,25;Budew,25;Shinx,15;Wurmple,10;"/>
+  <property name="dayPokemonChances" value="Zigzagoon,25;Poochyena,25;Wurmple,25;Tailow,15;Shroomish,10;"/>
   <property name="nightPokemonLevels" value="4-6;4-6;4-5;4-5;3-3;4-4;"/>
   <property name="nightPokemonChances" value="Starly,25;Bidoof,25;Budew,15;Shinx,15;Zubat,10;Kricketot,10;"/>
   <property name="pvp" value="enabled"/>

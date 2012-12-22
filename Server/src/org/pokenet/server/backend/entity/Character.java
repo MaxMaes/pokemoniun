@@ -18,7 +18,7 @@ public class Character implements Positionable
 	protected String m_name;
 	protected int m_sprite, m_mapX, m_mapY, m_x, m_y, m_id;
 	private boolean m_boostPriority = false;
-	private Direction m_facing = Direction.Down;
+	protected Direction m_facing = Direction.Down;
 	private boolean m_isVisible, m_isSurfing;
 
 	/**

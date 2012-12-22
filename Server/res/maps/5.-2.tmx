@@ -2,12 +2,12 @@
 <!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="38" height="40" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Mankey,40;Pidgey,30;Oddish,10;Bellsprout,10;Growlithe,5;Vulpix,5;"/>
-  <property name="dayPokemonLevels" value="17-20;19-22;19-22;19-22;18-20;18-20;"/>
+  <property name="dayPokemonChances" value="Stantler,50;Stantler,50;"/>
+  <property name="dayPokemonLevels" value="100-100;50-50;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value="Meowth,40;Murkrow,30;Oddish,10;Bellsprout,10;Houndour,10;"/>
-  <property name="nightPokemonLevels" value="17-20;19-22;19-22;19-22;18-20;"/>
+  <property name="nightPokemonChances" value="Froslass,100;"/>
+  <property name="nightPokemonLevels" value="100-100;"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>

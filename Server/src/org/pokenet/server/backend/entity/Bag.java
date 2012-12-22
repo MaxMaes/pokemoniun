@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Bag
 {
-	private static final int m_bagsize = 30; // 30 is the artificial bag size, right?
+	private static final int m_bagsize = 600; // 30 is the artificial bag size, right? // sadhi set it to 600 because then it should prevent your bag becomming full
 	private final ArrayList<BagItem> m_items;
 	private final int m_memberId;
 

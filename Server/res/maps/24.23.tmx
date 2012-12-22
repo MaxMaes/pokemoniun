@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="23" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Wurmple,30;Poochyena,30;Lotad,14;Zigzagoon,15;Ralts,1;Seedot,10"/>
+  <property name="dayPokemonLevels" value="3-4;3-4;3-4;3-4;4-4;3-3;"/>
+  <property name="fishPokemonChances" value="magikarp,60;Goldeen,20;Corphish,20;"/>
+  <property name="fishPokemonLevels" value="10-30;10-30;10-30"/>
+  <property name="nightPokemonChances" value="Wurmple,30;Poochyena,30;Lotad,10;Zigzagoon,15;Ralts,1;Seedot,14"/>
+  <property name="nightPokemonLevels" value="3-4;3-4;3-4;3-4;4-4;3-3;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Marill,80;Magikarp,17;Goldeen,1;Corphish,1;Surskit,1;"/>
+  <property name="waterPokemonLevels" value="10-20;10-20;10-20;10-20;10-20;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="32"/>
+  <property name="yOffsetModifier" value="224"/>
+ </properties>
+ <tileset firstgid="1" source="normal1.tsx"/>
+ <tileset firstgid="1025" source="normal2.tsx"/>
+ <tileset firstgid="2049" source="normal6.tsx"/>
+ <tileset firstgid="3073" source="normal5.tsx"/>
+ <layer name="Layer 9" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PsQkAMAwEMZP9h04VSOEF/JbgBrgqNjhN03QPEz+elI9fygcAAECKC3mDYTX4EQAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VWw6DIBBFB6TfroE2LsQ+N9LHRvpYbrfQaVISQqfi4KAk1eT8KMK9c4GpAKCa+Qu2NcAO2SOHeno9qRxR+wk5I5dEH+EjrVEpAO1Rqe8xV9R+Q+7Io0Afbw8GWXosCD/6Q2y+p+nvQ8oP5cFnFeSiAzgecvqwqLNB1j/YEPurxDwsUXO/9pL7N8VHmL8O3rtxLVHzrn1TEjGNkvqpesbOGGdu7tpDPeSul0R+HPw+5e70Mf0MzcbpN8SdPsV55K5H6ad6E3deCc+cNS2hvwl6U2oeY9wVLgvToT8lB+ls+vxre+gvoUfFdLQT6+f0q67v0n0vlz+O5hL0z6TzAn4Dtvz4EQAA
+  </data>
+ </layer>
+ <layer name="Grass" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WUQrAIAxDvYr3v+TYn4hC26xNcD7wszFvOrC1y2VPn1ZGbjazw589VhlZ38bTA51nOKy6oPNMj7ELOs/qr4LCWSIo3UmEUx1UsPZRdniJenydj2Lt5nWoPjuvRyS3wiW6j2WO/fb03DGVfz/SQ+mtuevEzmFzikcVD9JcpHz4EQAA
+  </data>
+ </layer>
+ <layer name="LedgesDown" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UsQkAIBADwPD7z+EobuIetmqvhdxBipA+CQC81yrptfdxZN0Bbml+B4CPTQ8nRHL4EQAA
+  </data>
+ </layer>
+ <layer name="LedgesRight" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PAQkAIAwAwaH9ewgWMZYlhpNxl+A/AuCNNaoLchwfX+nysWd1AQAAHV3ucaf0+BEAAA==
+  </data>
+ </layer>
+ <layer name="LedgesLeft" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAACPBrs/BfH4EQAA
+  </data>
+ </layer>
+ <layer name="Water" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SoQ0AAAgDQcL+Q7MAKAwJd6q+HwH/5LC5wy9sdQ3pCgCAbwp9cEL1+BEAAA==
+  </data>
+ </layer>
+ <layer name="Water" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYOQBN2YGBnco9mAeaNeQD9KAbk+H4oxh4o8VQzhekP0xlONluPijDejmdjTcMQT9MQpGwSgYBaNgFIyCUTAKRgElAAABBgjZ+BEAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC91WwRHCMAzLp2xSYJFSRmH/CcgnH1+FZDspBN35/FGqxGpiL6WUS41lsrzWuP5B9p57q/HomLN6UT9UvEReVo/5gc7fG6ze6vps3X8FyIfZMLsPDfbefwu3GvcO38n64d0Hev+zyH7Hu5714yii/SOqz/rxEZSexPqrfcc8+kdgfmTvi+oD6j9RHVTHKJAfKl8F6tuj74nK/8RRkJ2D2LyFoPDsPzgSbP5F8PBHzDxIP+vH2XMB0lfr297Fs+dltc+p9UW80X4wXeZHqz/zwfJsZmDrVb29xnNgZvvspfMG08wZsvgRAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="50" height="23">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WSwqAMAxEs/FzEb2J3v9IBiRQCsXU1DiBPAjdWJzOww9RTCaeuVijsvHsxRqV9IFF+sACxcfCsxr2j/LRm0Out+YXUHwIb89V+6h7euptVJ9WDp6T+n18nd/qJTriJWnj+Qx53AvlnaDBO+vo71BU/jp/9n/T24P2f0C7D63/KDlRuACdgUZP+BEAAA==
+  </data>
+ </layer>
+</map>

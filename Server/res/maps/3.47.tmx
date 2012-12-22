@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="35" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Hoenn Gyms Set 4.tsx"/>
+ <layer name="Walkable" width="35" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QwQkAIAwEQbUD7b9Y/fg7MKIGIbsQ8r5Jaa82rhq+R2VcNnyPcNHhosNFF8nFsvP1n1l2vv644IILLrjgggsuuOASwWXV6e6bne6+GS46XHQ/uXjVAcnH8AHgFQAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="35" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Oxw2DABTAULanLEAZg3qHBAaAZB7MDkhfCD/JdyeJ9C4tddTTQCNNQS8zLfShL620Bb1cdjroR//AD0mSJEmS9HwpZZRTEfxSUkU1NcEvdzsBFaQUCeAVAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="35" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Yt04DQRCG91UwoadxT2OCiY0JJoqMiSJjogg9IvRkJGjokKCho4UG3gHeAAr+0+1Iq9Xo8q0M+Jc++XbndnY0q/tPZyH8KQkGJA2gETSBZmW+0mfOoEqBOUkX6AY9oFeZrzJUSwbsSCbAJJgC08p8i6FarDM6lKyBdbABNpV5U32xzugEnIIzcA4uwCW4AtfCXF+sM7pziN8Lc32xzujJIf4szPXFOqMX8MrE3sC7MPdMZzzcY/KZdlOYM6oBtaAOpOVYh+JDHvL1MevSDP3C9ulBZW0baAcdICvHOhRfAB/gk6mB5meYdVmGWWH79LySYwSMgjGQk2Mdiu+BL/DN1ELzW8y6HMO2sH16V8mxBJbBCsjLsQ7Fjz30ZZ9Zl2c4ELZPHzG5vMqtLybl1heTKqS+FPW/pXt1fcz7VTN7knSv7oy5llZmT5Lu1ePC2SuC+gvFh5k9SbpXrwpnrwjqLxRfZPb8jQrq7XG8E4J6e/Gd8DdVCspAuXZNvxUhcpeAhMyr5k5oY69Khqgl6m+llHJ9A24d7tXjcdbyAB4d7tXjUddSqGfkV8W+8DL1n0PU+gFct9Ms4BUAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="35" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQ6AMBADwUtB4P8/zCMglLigdBqElBPsSO5cbAQAAMio3cuAFo8WjxbvSy27dmhdOye3LCWiaqu2lbktb6LFo8WjxcvWAuB/2mBPfyMXhuR++uAVAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="35" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3V2wnAIBBEUbvKs8Okg6SjpIOkGKcAEVxdCOYemB/3Q1hhDAEAkHIpd8G5p0d5C849sZc09gJ826hMyqwsyup835C4MyfXFdZ+sfZPrius/dJb/1h36/EnWHfb25sArWzKXjFv6VDOijmA/4gQJxfF4BUAAA==
+  </data>
+ </layer>
+</map>

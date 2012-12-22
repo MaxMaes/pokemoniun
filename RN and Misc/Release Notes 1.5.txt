@@ -2,3 +2,6 @@
 [FIX] Slow walking when pokedex is open.
 [FIX] Scrolling the pokedex is slow/laggy.
 [FIX] Unable to close the pokedex with the '2' hotkey.
+[FIX] Trading now works properly
+
+Remade the entire client/server communication infrastructure.

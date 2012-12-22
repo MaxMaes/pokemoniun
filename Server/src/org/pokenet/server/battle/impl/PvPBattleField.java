@@ -44,6 +44,7 @@ public class PvPBattleField extends BattleField
 		p2.setBattling(true);
 		/* Set the battlefield for the players */
 		p2.setBattleField(this);
+		p1.setBattleField(this);
 		/* Set battle ids */
 		p1.setBattleId(0);
 		p2.setBattleId(1);
@@ -56,7 +57,7 @@ public class PvPBattleField extends BattleField
 		startBattleFirst.addInt(p2.getPartyCount());
 		startBattleFirst.sendResponse();
 
-		ServerMessage startBattleSecond = new ServerMessage(p1.getSession());
+		ServerMessage startBattleSecond = new ServerMessage(p2.getSession());
 		startBattleSecond.Init(18);
 		startBattleSecond.addBool(false);
 		startBattleSecond.addInt(p1.getPartyCount());
@@ -76,7 +77,7 @@ public class PvPBattleField extends BattleField
 		enemyNameFirst.addString(p2.getName());
 		enemyNameFirst.sendResponse();
 
-		ServerMessage enemyNameSecond = new ServerMessage(p1.getSession());
+		ServerMessage enemyNameSecond = new ServerMessage(p2.getSession());
 		enemyNameSecond.Init(22);
 		enemyNameSecond.addString(p1.getName());
 		enemyNameSecond.sendResponse();

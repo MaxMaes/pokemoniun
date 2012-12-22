@@ -742,7 +742,7 @@ public class PvPBattleField extends BattleField
 				enemyData.addString(pp.getName());
 				enemyData.addInt(pp.getLevel());
 				enemyData.addInt(pp.getGender());
-				enemyData.addInt(pp.getHealth());
+				enemyData.addInt(pp.getStat(0));
 				enemyData.addInt(pp.getHealth());
 				enemyData.addInt(pp.getSpeciesNumber());
 				enemyData.addBool(pp.isShiny());

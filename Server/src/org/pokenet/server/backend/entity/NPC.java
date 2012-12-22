@@ -3,12 +3,14 @@ package org.pokenet.server.backend.entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.protocol.ServerMessage;
-import org.pokenet.server.backend.entity.Positionable.Direction;
 
 /**
  * Represents a Non Playable Character
@@ -23,6 +25,7 @@ public class NPC extends Character
 	private int m_isShop = 0;
 	private long m_lastBattle = 0;
 	private int m_minPartySize = 1;
+	private Direction originalDirection;
 	/* Trainers can have an more than 6 possible Pokemon.
 	 * When a battle is started with this NPC, it'll check the min party size.
 	 * If you have a party bigger than min party,
@@ -31,6 +34,7 @@ public class NPC extends Character
 	private HashMap<String, Integer> m_possiblePokemon;
 	private Shop m_shop = null;
 	private final ArrayList<Integer> m_speech = new ArrayList<Integer>();
+	private Timer timer = new Timer();
 
 	/**
 	 * Constructor
@@ -49,6 +53,15 @@ public class NPC extends Character
 		m_speech.add(id);
 	}
 
+	
+	/*
+	 * set the original direction of an NPC
+	 */
+	public void setOriginalDirection(Direction d)
+	{
+		originalDirection = d;
+	}
+	
 	/**
 	 * Returns true if this NPC can battle
 	 * 
@@ -379,13 +392,22 @@ public class NPC extends Character
 					// Dont send if player is shopping!
                     //TODO test if this works else remove it
 					if(p.m_facing == Direction.Down)
-						m_facing = Direction.Up;
+						setFacing(Direction.Up);
 					else if (p.m_facing == Direction.Up)
-						m_facing = Direction.Down;
+						setFacing(Direction.Down);
 					else if (p.m_facing == Direction.Left)
-						m_facing = Direction.Right;
+						setFacing(Direction.Right);
 					else if(p.m_facing == Direction.Right)
-						m_facing = Direction.Left;
+						setFacing(Direction.Left);
+//					GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(this);
+					timer.schedule(new TimerTask()
+					{
+						@Override
+						public void run()
+						{
+							setFacing(originalDirection);
+						}
+					}, 30000);
 					// TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
 					ServerMessage message = new ServerMessage();
 					message.Init(50);

@@ -66,6 +66,7 @@ public class DataLoader implements Runnable
 					npc.setSprite(Integer.parseInt(reader.nextLine()));
 					npc.setX(Integer.parseInt(reader.nextLine()) * 32);
 					npc.setY(Integer.parseInt(reader.nextLine()) * 32 - 8);
+					npc.setOriginalDirection(npc.getFacing());
 					// Load possible Pokemons
 					line = reader.nextLine();
 					if(!line.equalsIgnoreCase("NULL"))

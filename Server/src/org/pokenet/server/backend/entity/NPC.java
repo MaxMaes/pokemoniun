@@ -34,7 +34,6 @@ public class NPC extends Character
 	private HashMap<String, Integer> m_possiblePokemon;
 	private Shop m_shop = null;
 	private final ArrayList<Integer> m_speech = new ArrayList<Integer>();
-	private Timer timer = new Timer();
 
 	/**
 	 * Constructor
@@ -400,14 +399,16 @@ public class NPC extends Character
 					else if(p.m_facing == Direction.Right)
 						setFacing(Direction.Left);
 //					GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(this);
+					final Timer timer = new Timer();
 					timer.schedule(new TimerTask()
 					{
 						@Override
 						public void run()
 						{
 							setFacing(originalDirection);
+							timer.cancel();
 						}
-					}, 30000);
+					}, 30 * 1000);
 					// TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
 					ServerMessage message = new ServerMessage();
 					message.Init(50);

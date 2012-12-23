@@ -468,7 +468,7 @@ public class NPC extends Character
 					// TcpProtocolHandler.writeMessage(p.getTcpSession(), new ShopStockMessage(m_shop.getStockData()));
 					ServerMessage message = new ServerMessage();
 					message.Init(9);
-					message.addInt(2);
+					//message.addInt(2); TODO: This was blocking shop access, what is its use :S?
 					message.addString(m_shop.getStockData());
 					p.getSession().Send(message);
 					p.setShopping(true);

@@ -17,7 +17,8 @@ public class PlayersOnlineEvent implements MessageEvent
 		{
 			ServerMessage message = new ServerMessage();
 			message.Init(50);
-			message.addString("l" + ActiveConnections.allSessions().size() + " players online");
+			message.addInt(4);
+			message.addString(ActiveConnections.getActiveConnections() + " players online");
 			p.getSession().Send(message);
 		}
 	}

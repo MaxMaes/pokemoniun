@@ -44,4 +44,9 @@ public class ActiveConnections
 	{
 		Sessions.remove(channel.getId());
 	}
+	
+	public static int getActiveConnections()
+	{
+		return Sessions.size();
+	}
 }

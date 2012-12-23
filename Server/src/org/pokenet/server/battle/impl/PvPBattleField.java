@@ -392,7 +392,7 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.Init(32);
 				switchInformSecond.addString(m_players[1].getName());
 				switchInformSecond.addString(poke.getSpeciesName());
-				switchInformSecond.addInt(1);
+				switchInformSecond.addInt(0);
 				switchInformSecond.addInt(pokeIndex);
 				switchInformSecond.sendResponse();
 			}

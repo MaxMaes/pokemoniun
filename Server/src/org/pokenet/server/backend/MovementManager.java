@@ -17,7 +17,7 @@ public class MovementManager implements Runnable
 {
 	/** Comparator for comparing chars */
 	private Comparator<Character> m_comp;
-	private boolean m_isRunning = false;
+	private boolean m_isRunning = true;
 	private Queue<Character> m_moved;
 	private int m_pLoad = 0;
 	private Thread m_thread;
@@ -134,7 +134,7 @@ public class MovementManager implements Runnable
 		while(m_isRunning)
 		{
 			/* Pull char of highest priority */
-			if(m_waiting != null && m_waiting.size() > 0)
+			if(m_waiting != null && !m_waiting.isEmpty())
 			{
 				synchronized(m_waiting)
 				{
@@ -151,7 +151,7 @@ public class MovementManager implements Runnable
 			/* If waiting array is empty, swap arrays */
 			synchronized(m_waiting)
 			{
-				if(m_waiting.size() == 0)
+				if(m_waiting.isEmpty())
 				{
 					m_waiting = m_moved;
 					m_moved = new PriorityQueue<Character>(1, m_comp);
@@ -173,7 +173,6 @@ public class MovementManager implements Runnable
 	public void start()
 	{
 		m_thread = new Thread(this);
-		m_isRunning = true;
 		m_thread.start();
 	}
 

@@ -138,7 +138,7 @@ public class ServerMap
 		{
 			m_xOffsetModifier = Integer.parseInt(map.getProperties().getProperty("xOffsetModifier"));
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_xOffsetModifier = 0;
 		}
@@ -146,7 +146,7 @@ public class ServerMap
 		{
 			m_yOffsetModifier = Integer.parseInt(map.getProperties().getProperty("yOffsetModifier"));
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_yOffsetModifier = 0;
 		}
@@ -159,7 +159,7 @@ public class ServerMap
 			else
 				m_wildProbability = 28;
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_wildProbability = 28;
 		}
@@ -187,7 +187,7 @@ public class ServerMap
 				}
 			}
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_dayPokemonChances = null;
 			m_dayPokemonLevels = null;
@@ -215,7 +215,7 @@ public class ServerMap
 				}
 			}
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_nightPokemonChances = null;
 			m_nightPokemonLevels = null;
@@ -243,7 +243,7 @@ public class ServerMap
 				}
 			}
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_waterPokemonChances = null;
 			m_waterPokemonLevels = null;
@@ -271,7 +271,7 @@ public class ServerMap
 				}
 			}
 		}
-		catch(Exception e)
+		catch(NumberFormatException e)
 		{
 			m_fishPokemonChances = null;
 			m_fishPokemonLevels = null;
@@ -360,9 +360,7 @@ public class ServerMap
 	 */
 	public boolean caughtFish(Player c, Direction d, int rod)
 	{
-		int failureRate = 75;
-		// Subtract the rod's power from the failure rate.
-		failureRate -= rod;
+		int failureRate = 75 - rod;
 		// If that tile is a water tile, determine if you pulled anything, if not, autofail(You can't fish on dry land)
 		if(facingWater(c, d))
 		{ // If facing water
@@ -478,7 +476,7 @@ public class ServerMap
 	 */
 	public int getWeatherId()
 	{
-		if(m_forcedWeather != null)
+		if(m_forcedWeather != null) {
 			switch(m_forcedWeather)
 			{
 				case NORMAL:
@@ -494,8 +492,8 @@ public class ServerMap
 				default:
 					return 0;
 			}
-		else
-			return 0;
+		}
+		return 0;
 	}
 
 	/**

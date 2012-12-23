@@ -670,7 +670,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getBreedingLevel()
 	{
-		int level = (int) Math.pow(m_skillBreedExp / 1.25, 1 / 3);
+		int level = (int) Math.pow(m_skillBreedExp / 1.25, 0.333333333333333333333333333);
 		return Math.min(level, 100);
 	}
 
@@ -691,7 +691,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getCoordinatingLevel()
 	{
-		int level = (int) Math.pow(m_skillCoordExp, 1 / 3);
+		int level = (int) Math.pow(m_skillCoordExp, 0.333333333333333333333333333);
 		return Math.min(level, 100);
 	}
 
@@ -713,7 +713,7 @@ public class Player extends Character implements Battleable, Tradeable
 	public int getCraftingLevel()
 	{
 		if((int) Math.pow(m_skillCraftExp, 0.3333) <= 100)
-			return (int) Math.pow(m_skillCraftExp, 0.3333);
+			return (int) Math.pow(m_skillCraftExp, 0.333333333333333333333333333);
 		else
 			return 100;
 	}
@@ -735,7 +735,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getFishingLevel()
 	{
-		int level = (int) Math.pow(m_skillFishExp, 0.3333);
+		int level = (int) Math.pow(m_skillFishExp, 0.333333333333333333333333333);
 		if(level <= 100)
 			return level;
 		else
@@ -988,7 +988,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public int getTrainingLevel()
 	{
-		int level = (int) Math.pow(m_skillTrainingExp / 1.25, 1 / 3);
+		int level = (int) Math.pow(m_skillTrainingExp / 1.25, 0.33333);
 		return Math.min(level, 100); // Returns the lowest value
 	}
 

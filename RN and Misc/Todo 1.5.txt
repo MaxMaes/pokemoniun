@@ -1,14 +1,13 @@
 Re-implement/Implement:
-Player Count.
-Unban players.
-Send alerts.
+Unban players properly.
+Ping server and display or don't based on result.
+Connecting, disconnecting, this in conjunction with relogging.
 
 Broken/Unused:
-Trading and battles are completely one sided (MAJOR, issue due to changes in network)
-Opening a shop (Received data == null/probably not splittable or plainly sent wrong).
+Loading screen stays on top in loginscreen while it should dissapear (when alwaysontop == true).
 Giving the same item seems to 'crash' the connection (walk through warps, no updates).
-Use or give only shows 5 pokes.
+Use or give only shows 5 pokes instead of 6.
 
 Misc:
-Unsupported messages seem to block messages from being received on the server.
+Unsupported messages seem to block messages from being processed in the client after receiving the answer from the server.
 Connection refused or connecting to an offline server seems to spawn threads and hang the client.

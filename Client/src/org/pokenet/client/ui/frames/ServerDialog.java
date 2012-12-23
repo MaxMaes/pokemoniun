@@ -62,7 +62,7 @@ public class ServerDialog extends Frame
 			m_servers = new Button[5];
 			m_host = new String[5];
 			InputStream stream;
-			URL url = new URL("http://pokemonium.com/launcher/servers.txt");
+			URL url = new URL("http://s1.pokemonium.com/launcher/servers.txt");
 			stream = url.openStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(stream));
 			m_servers[0] = new Button(in.readLine());
@@ -157,7 +157,7 @@ public class ServerDialog extends Frame
 		catch(IOException ioe)
 		{
 			ioe.printStackTrace();
-			m_host[0] = "188.138.112.131";
+			m_host[0] = "85.25.116.212";
 			m_servers[0] = new Button("Pokemonium Server");
 			m_servers[0].setSize(280, 24);
 			m_servers[0].setLocation(16, 32);

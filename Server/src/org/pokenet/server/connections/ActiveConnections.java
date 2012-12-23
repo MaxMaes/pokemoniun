@@ -44,9 +44,15 @@ public class ActiveConnections
 	{
 		Sessions.remove(channel.getId());
 	}
-	
+
 	public static int getActiveConnections()
 	{
-		return Sessions.size();
+		int online = 0;
+		for(Session s : Sessions.values())
+		{
+			if(s.getPlayer() != null)
+				online++;
+		}
+		return online;
 	}
 }

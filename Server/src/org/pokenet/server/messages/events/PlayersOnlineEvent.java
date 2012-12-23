@@ -13,14 +13,10 @@ public class PlayersOnlineEvent implements MessageEvent
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
 		Player p = Session.getPlayer();
-		if(p.getAdminLevel() > 0)
-		{
-			ServerMessage message = new ServerMessage();
-			message.Init(50);
-			message.addInt(4);
-			message.addString(ActiveConnections.getActiveConnections() + " players online");
-			p.getSession().Send(message);
-		}
+		ServerMessage message = new ServerMessage();
+		message.Init(50);
+		message.addInt(4);
+		message.addString(ActiveConnections.getActiveConnections() + " player(s) online");
+		p.getSession().Send(message);
 	}
-
 }

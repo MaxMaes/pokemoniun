@@ -29,7 +29,7 @@ public class NetworkDecoder extends LengthFieldBasedFrameDecoder
 				return null;
 			}
 			int id = buffer.readUnsignedByte();
-			System.out.println("[Length] <- " + length + " [ID] <- " + id);
+			System.out.println("[ID] <- " + id + " [Length] <- " + length);
 			return new ServerMessage(buffer, id);
 		}
 		catch(Exception e)

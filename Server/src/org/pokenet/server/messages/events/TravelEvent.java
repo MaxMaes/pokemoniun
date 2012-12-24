@@ -93,10 +93,10 @@ public class TravelEvent implements MessageEvent
 				if(p.getAdminLevel() > 0 || (p.getTrainingLevel()>=25 && p.getBadgeCount()>=16))
 				{
 					p.setIsTaveling(false);
-					p.setX(32*32);
-					p.setY(14*28);
+					p.setX(1664);
+					p.setY(888);
 					p.setMap(GameServer.getServiceManager().getMovementService().
-							getMapMatrix().getMapByGamePosition(0, 1), null);
+							getMapMatrix().getMapByGamePosition(1, 1), null);
 //					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
 					message.Init(64);
 					message.addInt(p.getX());

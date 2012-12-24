@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
-<map version="1.0" orientation="orthogonal" width="13" height="9" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="20" height="9" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
@@ -16,24 +15,24 @@
  <tileset firstgid="1" source="normal2.tsx"/>
  <tileset firstgid="1025" source="normal3.tsx"/>
  <tileset firstgid="2049" source="normal15.tsx"/>
- <layer name="Walkable" width="13" height="9">
+ <layer name="Walkable" width="20" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgoB9Yy8zA0AvFWUCci8Q/zwyRh6mBgSxmVOzNjCkGw8h6kNnY9Hij6UF2Cwh3EaHHmwh3YdPjg8MOZHEfJD3owJNAOAMA0in91dQBAAA=
+   H4sIAAAAAAAAC2NgGPxgLTMDQy8UZwFxLhL/PDNEHqaGGJDFjIq9mTHFYJhY85DZ2MzzJsE8ZP+BcBeF5nkT4VdSzfPB4TZkcR8izUMHnuRpAwMAlueLrNACAAA=
   </data>
  </layer>
- <layer name="Collisions" width="13" height="9">
+ <layer name="Collisions" width="20" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAOtiYGDIZ2ZgeAPE56D0WST8BgnnAXEXAwT3A9nPOBkY3kHpt8wIDOLDcB+SnvVA9gYmBjCYwMyAE6xD0vMSSd0GPHoYGBB6TgLVPQfafQpIX0DT0w3k9zAj2DA9+MBqoLo1zAg2sh6QXaewuOs0UOwMM4JNjD24/IOO8cmBMACP0EAn1AEAAA==
+   H4sIAAAAAAAAC+tiYGDIZ2ZgeAPE56D0WST8BgnnAXEXA34Aku8HqnvGycDwDkq/ZUZgEB+G+4g0bz1Q3QYmCH8CM26164g07yWSGRvwmAdTT0j+JNCM50D/nALSF9DM6wbye5gRbGLMwwdWA81Yw4xgE2seyI2nsPj1NFDsDDOCTan7SFXfhQXjEkeWxwUABtmdJtACAAA=
   </data>
  </layer>
- <layer name="random" width="13" height="9">
+ <layer name="random" width="20" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgoBwUMFNuBiMXAwMTEDNzUW7WUAGeTAwMXkDszUS8nkyg2iwgzsajBwD132W+1AEAAA==
+   H4sIAAAAAAAAC2NgoC0oYKat+YxcDAxMQMzMRVt7RgF24MnEwOAFxN5M1DEvE2hOFhBnk2keAKiRAMPQAgAA
   </data>
  </layer>
- <layer name="WalkBehind" width="13" height="9">
+ <layer name="WalkBehind" width="20" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgwA8OcjIwHALiw5yYchOYsOt5CFT7CIgfY9FDKljJzMDwCohXMWPKZQPFcpgRbGrYhc2eoQYAoBUEjdQBAAA=
+   H4sIAAAAAAAAC2NgwA8OcjIwHALiw5wEFKKBCUzYxR8CzXkExI9JNI+aYCUzA8MrIF7FjCmXDRTLYUawBwqsxOG+UYAfAABrgmzu0AIAAA==
   </data>
  </layer>
 </map>

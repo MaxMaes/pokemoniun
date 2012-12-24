@@ -19,7 +19,7 @@ public class TravelEvent implements MessageEvent
 		System.out.println(mapx + ", " + mapy);
 		if (mapx == -49 && mapy == -12)
 		{
-			System.out.println("kanto time");
+//			System.out.println("kanto time");
 			travel = "kanto";
 		}
 		else if (mapx == -30 && mapy == -38)
@@ -30,6 +30,11 @@ public class TravelEvent implements MessageEvent
 		{
 			travel = "Fuchsia";
 		}
-		GameClient.getInstance().getDisplay().add(new TrainChooserDialog(travel,GameClient.getInstance().getOurPlayer()));
+		else if (mapx == -46 && mapy == -33)
+		{
+			travel = "mt.silver";
+		}
+		if (!travel.equals("no_travel"))
+			GameClient.getInstance().getDisplay().add(new TrainChooserDialog(travel,GameClient.getInstance().getOurPlayer()));
 	}
 }

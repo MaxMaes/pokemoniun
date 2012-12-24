@@ -469,6 +469,8 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 			GameClient.messageDialog("The server is offline, please check back later.", GameClient.getInstance().getDisplay());
+			m_host = null;
+			m_loading.setVisible(false);
 		}
 		/* m_Session = new PacketGenerator(); //Connect via TCP to game server NioSocketConnector connector = new NioSocketConnector(); connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII")))); m_tcpProtocolHandler = new TcpProtocolHandler(this); connector.setHandler(m_tcpProtocolHandler); String[] address = m_host.split(":"); // 127.0.0.1:7002 int port = 7002; //(default port: 7002) try { if(address.length == 2) port = Integer.parseInt(address[1]); } catch(NumberFormatException ex) { Fail safe } ConnectFuture cf = connector.connect(new InetSocketAddress(address[0], port)); cf.addListener(new IoFutureListener<IoFuture>() { public void operationComplete(IoFuture s) { m_loading.setVisible(false); try { if(s.getSession() != null && s.getSession().isConnected()) { m_Session.setTcpSession(s.getSession()); // Show login screen if(!m_host.equals("")) m_login.showLogin(); } else { messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } catch(Exception e) { e.printStackTrace(); messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } }); */
 	}

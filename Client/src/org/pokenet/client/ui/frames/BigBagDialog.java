@@ -675,7 +675,7 @@ class TeamPopup extends Frame
 			}
 		// Frame configuration
 		setBackground(new Color(0, 0, 0, 150));
-		setSize(100, 115);
+		setSize(100, 135);
 		getTitleBar().setVisible(false);
 		setVisible(true);
 		setResizable(false);

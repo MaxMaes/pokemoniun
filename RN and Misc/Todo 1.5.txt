@@ -6,7 +6,6 @@ Connecting, disconnecting, this in conjunction with relogging.
 Broken/Unused:
 Loading screen stays on top in loginscreen while it should dissapear (when alwaysontop == true).
 Giving the same item seems to 'crash' the connection (walk through warps, no updates).
-Use or give only shows 5 pokes instead of 6.
 
 Misc:
 Unsupported messages seem to block messages from being processed in the client after receiving the answer from the server.

@@ -422,6 +422,40 @@ public class Pokemon extends PokemonSpecies
 		p.setRareness(ps.getRareness());
 		return p;
 	}
+	
+	/**
+	 * Returns a Pokemon based on a species name, a level, evs and moves
+	 * 
+	 * @param speciesName
+	 * @param level
+	 * @return
+	 */
+	public static Pokemon getGymLeaderPokemon(String species, int level, PokemonNature n, int hp, int att, int def, int spd, int spdef, int spatt, String move0, String move1, String move2, String move3)
+	{
+		Pokemon p;
+		Random random = DataService.getBattleMechanics().getRandom();
+		/* First obtain species data */
+		PokemonSpecies ps = PokemonSpecies.getDefaultData().getPokemonByName(species);
+		MoveListEntry[] moves = new MoveListEntry[4];
+		moves[0] = MoveList.getDefaultData().getMove(move0);
+		moves[1] = MoveList.getDefaultData().getMove(move1);
+		moves[2] = MoveList.getDefaultData().getMove(move2);
+		moves[3] = MoveList.getDefaultData().getMove(move3);
+		/* Get all possible abilities */
+		String[] abilities = PokemonSpecies.getDefaultData().getPokemonByName(species).getAbilities();
+		/* First select an ability randomly */
+		String ab = abilities[random.nextInt(abilities.length)];
+		/* Now lets create the pokemon itself */
+		p = new Pokemon(DataService.getBattleMechanics(), ps, n, ab, null,
+				Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] { 32,32,32,32,32,32 }, new int[] { hp, att, def, spd, spatt, spdef }, // EVs
+				moves, new int[] { 0, 0, 0, 0 });
+		p.setBaseExp(ps.getBaseEXP());
+		p.setExpType(ps.getGrowthRate());
+		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
+		p.setHappiness(ps.getHappiness());
+		p.setRareness(ps.getRareness());
+		return p;
+	}
 
 	/**
 	 * Get the name of a stat.

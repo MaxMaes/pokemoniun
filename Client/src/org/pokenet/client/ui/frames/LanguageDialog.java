@@ -60,6 +60,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.ENGLISH);
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[0]);
@@ -74,6 +75,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.SPANISH);
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[1]);
@@ -88,6 +90,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.FRENCH);
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[2]);
@@ -102,7 +105,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.PORTUGESE);
-
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[3]);
@@ -117,7 +120,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.FINNISH);
-
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[4]);
@@ -131,8 +134,8 @@ public class LanguageDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.getInstance().setLanguage("italian");
-
+					GameClient.getInstance().setLanguage(Language.ITALIAN);
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[5]);
@@ -147,7 +150,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.DUTCH);
-
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[6]);
@@ -162,7 +165,7 @@ public class LanguageDialog extends Frame
 				public void actionPerformed(ActionEvent arg0)
 				{
 					GameClient.getInstance().setLanguage(Language.GERMAN);
-
+					GameClient.getInstance().getLoginScreen().showServerSelect();
 				}
 			});
 			this.add(m_languages[7]);

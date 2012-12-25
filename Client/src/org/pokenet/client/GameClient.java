@@ -76,7 +76,6 @@ public class GameClient extends BasicGame
 	private static Connection m_Connection;
 	private static String m_filepath;
 	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
-	private static String m_host;
 	private static GameClient m_instance;
 	private static String m_language = Language.ENGLISH;
 	private static boolean m_languageChosen = false;
@@ -111,6 +110,8 @@ public class GameClient extends BasicGame
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
+	
+	private static MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
 
 	/**
 	 * Default constructor
@@ -343,7 +344,9 @@ public class GameClient extends BasicGame
 	/** Creates a message Box */
 	public static void messageDialog(String message, Container container)
 	{
-		new MessageDialog(message.replace('~', '\n'), container);
+		if(m_messageDialog == null || !m_messageDialog.isVisible()) {
+			m_messageDialog = new MessageDialog(message.replace('~', '\n'), container);
+		}
 	}
 
 	/** Reloads options */
@@ -360,16 +363,6 @@ public class GameClient extends BasicGame
 			e.printStackTrace();
 			System.exit(32);
 		}
-	}
-
-	/**
-	 * Sets the server host. The server will connect once m_host is not equal to ""
-	 * 
-	 * @param s
-	 */
-	public static void setHost(String s)
-	{
-		m_host = s;
 	}
 
 	public boolean chatServerIsActive()
@@ -446,15 +439,16 @@ public class GameClient extends BasicGame
 	}
 
 	/** Connects to a selected server */
-	public void connect()
+	public void connect(String host)
 	{
+		m_loading.setVisible(true);
 		/* TODO: Implement Proper Connections for Netty */
 		Socket socket = null;
-		m_Connection = new Connection(m_host, 7002);
+		m_Connection = new Connection(host, 7002);
 		try
 		{
 			// dirty hack! :) check if server is alive!!!
-			socket = new Socket(m_host, 7002);
+			socket = new Socket(host, 7002);
 			socket.close();
 
 			if(m_Connection.Connect())
@@ -469,7 +463,6 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 			GameClient.messageDialog("The server is offline, please check back later.", GameClient.getInstance().getDisplay());
-			m_host = null;
 			m_loading.setVisible(false);
 		}
 		/* m_Session = new PacketGenerator(); //Connect via TCP to game server NioSocketConnector connector = new NioSocketConnector(); connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII")))); m_tcpProtocolHandler = new TcpProtocolHandler(this); connector.setHandler(m_tcpProtocolHandler); String[] address = m_host.split(":"); // 127.0.0.1:7002 int port = 7002; //(default port: 7002) try { if(address.length == 2) port = Integer.parseInt(address[1]); } catch(NumberFormatException ex) { Fail safe } ConnectFuture cf = connector.connect(new InetSocketAddress(address[0], port)); cf.addListener(new IoFutureListener<IoFuture>() { public void operationComplete(IoFuture s) { m_loading.setVisible(false); try { if(s.getSession() != null && s.getSession().isConnected()) { m_Session.setTcpSession(s.getSession()); // Show login screen if(!m_host.equals("")) m_login.showLogin(); } else { messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } catch(Exception e) { e.printStackTrace(); messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } }); */
@@ -958,7 +951,6 @@ public class GameClient extends BasicGame
 	public void reset()
 	{
 		m_Session = null;
-		m_host = "";
 		m_ourPlayer = null;
 		try
 		{
@@ -993,9 +985,9 @@ public class GameClient extends BasicGame
 	 */
 	public void returnToServerSelect()
 	{
-		m_host = "";
 		getLoginScreen().setServerRevision(0000);
 		disconnect();
+		m_login.showServerSelect();
 	}
 
 	/**
@@ -1056,6 +1048,7 @@ public class GameClient extends BasicGame
 	}
 
 	/** Updates the game window */
+	/* ! Keep in mind, no calculations in here. Only repaint ! */
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
@@ -1119,16 +1112,7 @@ public class GameClient extends BasicGame
 			{
 				e.printStackTrace();
 			}
-			/* Check if language was chosen. */
-			if(m_language != null && !m_language.equalsIgnoreCase("") && m_languageChosen == true && (m_host != null && m_host.equalsIgnoreCase("") || m_Session == null))
-				m_login.showServerSelect();
-			/* Check if we need to connect to a selected server */
-			if(m_host != null && !m_host.equals("") && m_Session == null)
-			{
-				m_loading.setVisible(true);
-				connect();
-			}
-
+			
 			if(lastPressedKey > -2)
 			{
 				if(gc.getInput().isKeyDown(lastPressedKey))
@@ -1178,7 +1162,6 @@ public class GameClient extends BasicGame
 				m_daylight = new Color(0, 0, 0, a);
 			}
 		}
-
 	}
 
 	private void handleKeyPress(int key)

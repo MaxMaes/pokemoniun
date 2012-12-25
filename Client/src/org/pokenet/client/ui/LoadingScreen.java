@@ -27,7 +27,7 @@ public class LoadingScreen extends Frame
 		try
 		{
 			this.setSize(800, 632);
-			setBackground(new Color(255, 255, 255, 70));
+			setBackground(new Color(0, 0, 0 , 50));
 			this.setLocation(0, -32);
 			setResizable(false);
 			getTitleBar().setVisible(false);

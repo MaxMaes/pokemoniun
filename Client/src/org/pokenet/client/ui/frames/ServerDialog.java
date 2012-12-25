@@ -30,10 +30,13 @@ public class ServerDialog extends Frame
 	private Button[] m_servers;
 	private TextField privateIP;
 	private Button privateServer, m_back;
-
+	
+	private final GameClient mGameClient;
+	
 	/** Default constructor **/
 	public ServerDialog()
 	{
+		mGameClient = GameClient.getInstance(); // hacky, rewrite.
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_black = new Color(0, 0, 0);
@@ -74,7 +77,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[0]);
+					mGameClient.connect(m_host[0]);
 				}
 			});
 			this.add(m_servers[0]);
@@ -89,7 +92,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[1]);
+					mGameClient.connect(m_host[1]);
 				}
 			});
 			this.add(m_servers[1]);
@@ -104,7 +107,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[2]);
+					mGameClient.connect(m_host[2]);
 				}
 			});
 			this.add(m_servers[2]);
@@ -119,7 +122,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[3]);
+					mGameClient.connect(m_host[3]);
 				}
 			});
 			this.add(m_servers[3]);
@@ -134,7 +137,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[4]);
+					mGameClient.connect(m_host[4]);
 				}
 			});
 			this.add(m_servers[4]);
@@ -142,7 +145,7 @@ public class ServerDialog extends Frame
 			/* Finally, check which servers don't exist and disable their buttons */
 			for(int i = 0; i < m_host.length; i++)
 			{
-				if(m_host[i] == null || m_host[i].equalsIgnoreCase("-"))
+				if(m_host[i] == null || m_host[i].equals("-"))
 				{
 					m_host[i] = "";
 					m_servers[i].setEnabled(false);
@@ -157,7 +160,7 @@ public class ServerDialog extends Frame
 		catch(IOException ioe)
 		{
 			ioe.printStackTrace();
-			m_host[0] = "85.25.116.212";
+			m_host[0] = "85.25.116.212"; // Really, hardcoded?
 			m_servers[0] = new Button("Pokemonium Server");
 			m_servers[0].setSize(280, 24);
 			m_servers[0].setLocation(16, 32);
@@ -167,7 +170,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					GameClient.setHost(m_host[0]);
+					mGameClient.connect(m_host[0]);
 				}
 			});
 			this.add(m_servers[0]);
@@ -185,7 +188,7 @@ public class ServerDialog extends Frame
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				GameClient.setHost(getPrivateServer());
+				mGameClient.connect(getPrivateServer());
 			}
 		});
 		this.add(privateServer);
@@ -200,7 +203,7 @@ public class ServerDialog extends Frame
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				GameClient.getInstance().returnToLanguageSelect();
+				mGameClient.getLoginScreen().showLanguageSelect();
 			}
 		});
 		this.add(m_back);
@@ -216,7 +219,7 @@ public class ServerDialog extends Frame
 	public void goServer()
 	{
 		if(privateIP.getText().length() > 0)
-			GameClient.setHost(getPrivateServer());
+			mGameClient.connect(getPrivateServer());
 	}
 
 	public void reloadStrings()

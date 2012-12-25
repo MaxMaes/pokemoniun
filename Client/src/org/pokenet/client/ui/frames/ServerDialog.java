@@ -203,7 +203,7 @@ public class ServerDialog extends Frame
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				mGameClient.getLoginScreen().showLanguageSelect();
+				mGameClient.returnToLanguageSelect();
 			}
 		});
 		this.add(m_back);

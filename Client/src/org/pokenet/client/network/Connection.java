@@ -13,25 +13,21 @@ import org.pokenet.client.protocol.codec.NetworkEncoder;
 
 public class Connection
 {
-	private ClientBootstrap Bootstrap;
-	private NioClientSocketChannelFactory Factory;
+	private NioClientSocketChannelFactory SocketFactory;
+	private ClientBootstrap clientBootstrap;
+	private MessageHandler messages;
+	private String host;
+	private int port;
 
-	private String Host;
-
-	private MessageHandler Messages;
-	private int Port;
-
-	public Connection(String Host, int port)
+	public Connection(String host, int port)
 	{
 
-		Factory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
-
-		Bootstrap = new ClientBootstrap(Factory);
-		Messages = new MessageHandler();
-		Messages.register();
-		Port = port;
-		this.Host = Host;
-
+		SocketFactory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
+		clientBootstrap = new ClientBootstrap(SocketFactory);
+		messages = new MessageHandler();
+		messages.register();
+		this.host = host;
+		this.port = port;
 		SetupSocket();
 	}
 
@@ -39,11 +35,11 @@ public class Connection
 	{
 		try
 		{
-			Bootstrap.connect(new InetSocketAddress(Host, Port));
+			clientBootstrap.connect(new InetSocketAddress(host, port));
 		}
-		catch(ChannelException ex)
+		catch(ChannelException ce)
 		{
-			System.out.println(ex.getStackTrace());
+			System.out.println(ce.getStackTrace());
 			return false;
 		}
 
@@ -52,13 +48,12 @@ public class Connection
 
 	public MessageHandler getMessages()
 	{
-		return Messages;
+		return messages;
 	}
 
 	private void SetupSocket()
 	{
-		ChannelPipeline pipeline = Bootstrap.getPipeline();
-
+		ChannelPipeline pipeline = clientBootstrap.getPipeline();
 		pipeline.addLast("lengthEncoder", new LengthFieldPrepender(4));
 		pipeline.addLast("encoder", new NetworkEncoder());
 		pipeline.addLast("decoder", new NetworkDecoder(512, 0, 4, 0, 0));

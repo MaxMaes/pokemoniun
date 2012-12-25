@@ -1,7 +1,6 @@
 Re-implement/Implement:
+Constants for the messages and magic cookies.
 Unban players properly.
-Ping server and display or don't based on result.
-Connecting, disconnecting, this in conjunction with relogging.
 
 Broken/Unused:
 Loading screen stays on top in loginscreen while it should dissapear (when alwaysontop == true).
@@ -9,4 +8,3 @@ Giving the same item seems to 'crash' the connection (walk through warps, no upd
 
 Misc:
 Unsupported messages seem to block messages from being processed in the client after receiving the answer from the server.
-Connection refused or connecting to an offline server seems to spawn threads and hang the client.

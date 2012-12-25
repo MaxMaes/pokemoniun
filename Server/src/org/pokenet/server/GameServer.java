@@ -2,11 +2,8 @@ package org.pokenet.server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -22,6 +19,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.network.MySqlManager;
 
 /**
@@ -33,33 +31,22 @@ import org.pokenet.server.network.MySqlManager;
 public class GameServer
 {
 	/* The revision of the game server */
-	public static int REVISION = getSVNRev();
+	private static final int SERVER_REVISION = 1890;
 	private static boolean m_boolGui = false;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
 	private static GameServer m_instance;
 	private static int m_maxPlayers = 500; // default 500 players
-	public static final int MOVEMENT_THREADS = 12; // default to high
 	private static ServiceManager m_serviceManager;
-	private static int mPort = 7002;
-
-	static final int SERVER_REVISION = 1887;
-
-	private JPasswordField m_dbP;
-
-	private JTextField m_dbS, m_dbN, m_dbU, m_name;
-
-	/**
-	 * Updates the player count information.
-	 * 
-	 * @param amount
-	 */
-	/* TODO: Re-implement Player Count (using ActiveConnections?) and fix this. public void updatePlayerCount() { if(m_boolGui) { int amount = getPlayerCount(); m_pAmount.setText(amount + " players online"); if(amount > m_highest) { m_highest = amount; m_pHighest.setText("Highest: " + amount); } } else { int amount = getPlayerCount(); System.out.println(amount + " players online"); if(amount > m_highest) { m_highest = amount; System.out.println("Highest: " + amount); } } } */
-
+	private static int m_port = 7002;
 	private JFrame m_gui;
-
 	private JLabel m_pAmount, m_pHighest;
-
 	private JButton m_start, m_stop, m_set, m_exit;
+	private JPasswordField m_dbP;
+	private JTextField m_dbS, m_dbN, m_dbU, m_name;
+	private int m_highest;
+
+	public static final int MOVEMENT_THREADS = 12; // default to high
+	public static int REVISION = getServerRevision();
 
 	/** Default constructor. */
 	public GameServer(boolean autorun)
@@ -79,14 +66,42 @@ public class GameServer
 		else
 		{
 			ConsoleReader r = new ConsoleReader();
-			System.out.println("Load Settings? y/N");
+			System.out.println("Load Settings? Y/N");
 			String answer = r.readToken();
 			if(answer.contains("y") || answer.contains("Y"))
 				loadSettings();
 			else
 				getConsoleSettings();
 		}
-		start(); // Why you removed this?
+		start();
+	}
+
+	/**
+	 * Updates the player count information.
+	 */
+	/* TODO: Re-implement Player Count (using ActiveConnections?) and fix this. */
+	public void updatePlayerCount()
+	{
+		if(m_boolGui)
+		{
+			int amount = ActiveConnections.getActiveConnections();
+			m_pAmount.setText(amount + " players online");
+			if(amount > m_highest)
+			{
+				m_highest = amount;
+				m_pHighest.setText("Highest: " + amount);
+			}
+		}
+		else
+		{
+			int amount = ActiveConnections.getActiveConnections();
+			System.out.println(amount + " players online");
+			if(amount > m_highest)
+			{
+				m_highest = amount;
+				System.out.println("Highest: " + amount);
+			}
+		}
 	}
 
 	/**
@@ -156,7 +171,7 @@ public class GameServer
 	 */
 	public static int getPort()
 	{
-		return mPort;
+		return m_port;
 	}
 
 	/**
@@ -218,7 +233,7 @@ public class GameServer
 						m_maxPlayers = 500;
 				}
 				if(line.hasOption("port"))
-					mPort = Integer.parseInt(line.getOptionValue("port"));
+					m_port = Integer.parseInt(line.getOptionValue("port"));
 				if(line.hasOption("help"))
 				{
 					HelpFormatter formatter = new HelpFormatter();
@@ -256,45 +271,21 @@ public class GameServer
 	 * @return the value on the third line of .svn/entries
 	 */
 	/* TODO: Rewrite Revision from text file or something else. */
-	private static int getSVNRev()
+	private static int getServerRevision()
 	{
 		int rev = SERVER_REVISION;
-		boolean foundRevision = false;
+		String path = System.getProperty("res.path");
+		if(path == null || path.equalsIgnoreCase("NULL"))
+			path = "./";
+		File file = new File(path + "/res/rev.txt");
 		try
 		{
-			BufferedReader input = new BufferedReader(new FileReader(".svn/entries"));
-			try
-			{
-				String line = null;
-
-				while((line = input.readLine()) != null && !foundRevision)
-					if(line.equals("dir"))
-					{
-						rev = Integer.parseInt(input.readLine()); // this hopefully is the revision number
-						foundRevision = true;
-					}
-			}
-			finally
-			{
-				input.close();
-			}
+			Scanner sc = new Scanner(file);
+			rev = Integer.parseInt(sc.nextLine());
 		}
-		catch(IOException ioe)
+		catch(FileNotFoundException fnfe)
 		{
-			System.err.println("Cannot find .svn/entries to read the SVN revision.");
-			String path = System.getProperty("res.path");
-			if(path == null || path.equalsIgnoreCase("NULL"))
-				path = "./";
-			File file = new File(path + "/res/rev.txt");
-			try
-			{
-				Scanner sc = new Scanner(file);
-				rev = Integer.parseInt(sc.nextLine());
-			}
-			catch(FileNotFoundException fnfe)
-			{
-				fnfe.printStackTrace();
-			}
+			fnfe.printStackTrace();
 		}
 		return rev;
 	}

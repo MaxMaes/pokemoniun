@@ -68,12 +68,12 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static Session m_Session;
+	private static Session m_session;
 	private static boolean debug = false;
 	private static final int FPS = 30;
 	private static final String GAME_TITLE = "Pokemonium 1.5.0";
 	private static AppGameContainer gc;
-	private static Connection m_Connection;
+	private static Connection m_connection;
 	private static String m_filepath;
 	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private static GameClient m_instance;
@@ -84,11 +84,12 @@ public class GameClient extends BasicGame
 	private static boolean m_loadSurroundingMaps = false;
 	private static DeferredResource m_nextResource;
 	private static SoundManager m_soundPlayer;
-	private static Image[] m_spriteImageArray = new Image[300]; /* WARNING: Replace with actual number of sprites */
+	private static Image[] m_spriteImageArray = new Image[300]; /* TODO: WARNING: Replace with actual number of sprites */
 	private static UserManager m_userManager;
 	private static HashMap<String, String> options;
 	private static final DecimalFormat percentage = new DecimalFormat("###.##");
 	private static final long startTime = System.currentTimeMillis();
+	private static final int DEFAULT_PORT = 7002;
 	private int lastPressedKey;
 	private Animator m_animator;
 	private boolean m_chatServerIsActive;
@@ -110,7 +111,7 @@ public class GameClient extends BasicGame
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
-	
+
 	private static MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
 
 	/**
@@ -171,7 +172,7 @@ public class GameClient extends BasicGame
 
 	public static Connection getConnections()
 	{
-		return m_Connection;
+		return m_connection;
 	}
 
 	/** Returns the File Path, if any */
@@ -344,7 +345,8 @@ public class GameClient extends BasicGame
 	/** Creates a message Box */
 	public static void messageDialog(String message, Container container)
 	{
-		if(m_messageDialog == null || !m_messageDialog.isVisible()) {
+		if(m_messageDialog == null || !m_messageDialog.isVisible())
+		{
 			m_messageDialog = new MessageDialog(message.replace('~', '\n'), container);
 		}
 	}
@@ -369,14 +371,14 @@ public class GameClient extends BasicGame
 	{
 		return m_chatServerIsActive;
 	}
-	
+
 	public void showAlert(String title, String text)
 	{
 		if(m_activeAlert == null)
 		{
 			ActionListener ok = new ActionListener()
 			{
-				
+
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
@@ -385,16 +387,14 @@ public class GameClient extends BasicGame
 					m_activeAlert = null;
 				}
 			};
-			
+
 			m_activeAlert = new AlertPopupDialog(title, text, ok);
 			getUi().getDisplay().add(m_activeAlert);
 		}
 	}
 
 	/**
-	 * When the close button is pressed...
-	 * 
-	 * @param args
+	 * When the close button is pressed.
 	 */
 	@Override
 	public boolean closeRequested()
@@ -438,34 +438,48 @@ public class GameClient extends BasicGame
 		return m_close;
 	}
 
-	/** Connects to a selected server */
-	public void connect(String host)
+	/**
+	 * Tries to connect to a requested server.
+	 * Will notify the user if connection was succesfully or failed.
+	 * 
+	 * @param hoststring The string that specifies the host including port (e.g. 127.0.0.1:7002).
+	 **/
+	public void connect(String hoststring)
 	{
 		m_loading.setVisible(true);
-		/* TODO: Implement Proper Connections for Netty */
+		String[] address = hoststring.split(":");
+		String host = address[0];
+		int port = DEFAULT_PORT;
+		try
+		{
+			if(address.length == 2)
+				port = Integer.parseInt(address[1]);
+		}
+		catch(NumberFormatException ex)
+		{
+
+		}
 		Socket socket = null;
-		m_Connection = new Connection(host, 7002);
+		m_connection = new Connection(host, port);
 		try
 		{
 			// dirty hack! :) check if server is alive!!!
-			socket = new Socket(host, 7002);
+			socket = new Socket(host, port);
 			socket.close();
-
-			if(m_Connection.Connect())
+			if(m_connection.Connect())
 			{
-				System.out.println("Client connected to port 7002");
+				System.out.println("Client connected to port " + port);
 				m_userManager = new UserManager();
 				m_login.showLogin();
 			}
 			else
-				System.out.println("oops.. something went WRONGUH!");
+				System.out.println("Problem connecting to the server.");
 		}
 		catch(Exception e)
 		{
 			GameClient.messageDialog("The server is offline, please check back later.", GameClient.getInstance().getDisplay());
 			m_loading.setVisible(false);
 		}
-		/* m_Session = new PacketGenerator(); //Connect via TCP to game server NioSocketConnector connector = new NioSocketConnector(); connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("US-ASCII")))); m_tcpProtocolHandler = new TcpProtocolHandler(this); connector.setHandler(m_tcpProtocolHandler); String[] address = m_host.split(":"); // 127.0.0.1:7002 int port = 7002; //(default port: 7002) try { if(address.length == 2) port = Integer.parseInt(address[1]); } catch(NumberFormatException ex) { Fail safe } ConnectFuture cf = connector.connect(new InetSocketAddress(address[0], port)); cf.addListener(new IoFutureListener<IoFuture>() { public void operationComplete(IoFuture s) { m_loading.setVisible(false); try { if(s.getSession() != null && s.getSession().isConnected()) { m_Session.setTcpSession(s.getSession()); // Show login screen if(!m_host.equals("")) m_login.showLogin(); } else { messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } catch(Exception e) { e.printStackTrace(); messageDialog("Can't connect to the server, check your firewall connection or contact an administrator for assistance.", getDisplay()); m_host = ""; m_Session = null; } } }); */
 	}
 
 	@Override
@@ -515,9 +529,9 @@ public class GameClient extends BasicGame
 	/** Disconnects from the current game/chat server */
 	public void disconnect()
 	{
-		if(m_Session != null)
+		if(m_session != null)
 		{
-			ChannelFuture channelFuture = m_Session.getChannel().close();
+			ChannelFuture channelFuture = m_session.getChannel().close();
 			channelFuture.awaitUninterruptibly();
 			assert channelFuture.isSuccess(): "Warning the Session was not closed";
 		}
@@ -528,7 +542,7 @@ public class GameClient extends BasicGame
 	 * 
 	 * @param args
 	 */
-	/* TODO: Check compatibility with Netty and rewrite */
+	/* TODO: Check compatibility with Netty and/or rewrite */
 	public void disconnectRequest()
 	{
 		if(m_dcConfirm == null)
@@ -541,7 +555,7 @@ public class GameClient extends BasicGame
 					try
 					{
 						ClientMessage dc = new ClientMessage(49);
-						m_Session.send(dc);
+						m_session.send(dc);
 						disconnect();
 						reset();
 						m_dcConfirm.setVisible(false);
@@ -800,7 +814,7 @@ public class GameClient extends BasicGame
 				{
 					// m_Session.writeTcpMessage("3C");
 					ClientMessage message = new ClientMessage(47);
-					m_Session.send(message);
+					m_session.send(message);
 				}
 				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -828,19 +842,19 @@ public class GameClient extends BasicGame
 		{
 			case Up:
 				ClientMessage up = new ClientMessage(4);
-				m_Session.send(up);
+				m_session.send(up);
 				break;
 			case Down:
 				ClientMessage down = new ClientMessage(5);
-				m_Session.send(down);
+				m_session.send(down);
 				break;
 			case Left:
 				ClientMessage left = new ClientMessage(6);
-				m_Session.send(left);
+				m_session.send(left);
 				break;
 			case Right:
 				ClientMessage right = new ClientMessage(7);
-				m_Session.send(right);
+				m_session.send(right);
 				break;
 		}
 	}
@@ -950,7 +964,7 @@ public class GameClient extends BasicGame
 	/** Resets the client back to the z */
 	public void reset()
 	{
-		m_Session = null;
+		m_session = null;
 		m_ourPlayer = null;
 		try
 		{
@@ -1112,7 +1126,7 @@ public class GameClient extends BasicGame
 			{
 				e.printStackTrace();
 			}
-			
+
 			if(lastPressedKey > -2)
 			{
 				if(gc.getInput().isKeyDown(lastPressedKey))
@@ -1193,7 +1207,7 @@ public class GameClient extends BasicGame
 				if(m_dcConfirm != null)
 				{
 					ClientMessage dc = new ClientMessage(49);
-					m_Session.send(dc);
+					m_session.send(dc);
 					disconnect();
 					reset();
 					m_dcConfirm.setVisible(false);
@@ -1321,25 +1335,25 @@ public class GameClient extends BasicGame
 				{
 					ClientMessage message = new ClientMessage(40);
 					message.addInt(97);
-					m_Session.send(message);
+					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
 					ClientMessage message = new ClientMessage(40);
 					message.addInt(98);
-					m_Session.send(message);
+					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
 					ClientMessage message = new ClientMessage(40);
 					message.addInt(99);
-					m_Session.send(message);
+					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
 					ClientMessage message = new ClientMessage(40);
 					message.addInt(100);
-					m_Session.send(message);
+					m_session.send(message);
 				}
 		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(0);
@@ -1356,7 +1370,7 @@ public class GameClient extends BasicGame
 			{
 				// m_Session.writeTcpMessage("3C");
 				ClientMessage message = new ClientMessage(47);
-				m_Session.send(message);
+				m_session.send(message);
 			}
 			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
@@ -1408,14 +1422,14 @@ public class GameClient extends BasicGame
 
 	public static Session getSession()
 	{
-		return m_Session;
+		return m_session;
 	}
 
 	public static void setSession(Session session)
 	{
-		m_Session = session;
+		m_session = session;
 	}
-	
+
 	/** Slick Native library finder. */
 	/* static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } } */
 }

@@ -30,13 +30,12 @@ public class ServerDialog extends Frame
 	private Button[] m_servers;
 	private TextField privateIP;
 	private Button privateServer, m_back;
-	
-	private final GameClient mGameClient;
-	
+	private final GameClient m_client;
+
 	/** Default constructor **/
 	public ServerDialog()
 	{
-		mGameClient = GameClient.getInstance(); // hacky, rewrite.
+		m_client = GameClient.getInstance(); // hacky, rewrite.
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_black = new Color(0, 0, 0);
@@ -77,7 +76,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[0]);
+					m_client.connect(m_host[0]);
 				}
 			});
 			this.add(m_servers[0]);
@@ -92,7 +91,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[1]);
+					m_client.connect(m_host[1]);
 				}
 			});
 			this.add(m_servers[1]);
@@ -107,7 +106,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[2]);
+					m_client.connect(m_host[2]);
 				}
 			});
 			this.add(m_servers[2]);
@@ -122,7 +121,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[3]);
+					m_client.connect(m_host[3]);
 				}
 			});
 			this.add(m_servers[3]);
@@ -137,7 +136,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[4]);
+					m_client.connect(m_host[4]);
 				}
 			});
 			this.add(m_servers[4]);
@@ -170,7 +169,7 @@ public class ServerDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					mGameClient.connect(m_host[0]);
+					m_client.connect(m_host[0]);
 				}
 			});
 			this.add(m_servers[0]);
@@ -188,7 +187,7 @@ public class ServerDialog extends Frame
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				mGameClient.connect(getPrivateServer());
+				m_client.connect(getPrivateServer());
 			}
 		});
 		this.add(privateServer);
@@ -203,7 +202,7 @@ public class ServerDialog extends Frame
 			@Override
 			public void actionPerformed(ActionEvent evt)
 			{
-				mGameClient.returnToLanguageSelect();
+				m_client.returnToLanguageSelect();
 			}
 		});
 		this.add(m_back);
@@ -219,7 +218,7 @@ public class ServerDialog extends Frame
 	public void goServer()
 	{
 		if(privateIP.getText().length() > 0)
-			mGameClient.connect(getPrivateServer());
+			m_client.connect(getPrivateServer());
 	}
 
 	public void reloadStrings()

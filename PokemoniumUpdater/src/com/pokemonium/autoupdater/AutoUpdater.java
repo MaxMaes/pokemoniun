@@ -23,9 +23,7 @@ import org.ini4j.Ini.Section;
 import org.ini4j.InvalidIniFormatException;
 
 /**
- * 
  * @author Myth1c
- *
  */
 
 public class AutoUpdater
@@ -41,7 +39,7 @@ public class AutoUpdater
 	{
 		if(checkForUpdate())
 		{
-			System.out.println("A new version is available, do you want to update?");
+			System.out.println("A new version is available, do you want to update? This will update your game to the latest available version.");
 			System.out.println("[Y] / [N]");
 
 			// Y or N
@@ -77,9 +75,9 @@ public class AutoUpdater
 			URLConnection conn = url.openConnection();
 			conn.setDoInput(true);
 			conn.setRequestProperty("content-type", "binary/data");
-			
-			System.out.println("Update size: " + (Math.round(conn.getContentLength()/1000000f*100f)/100f) + "MB");
-			
+
+			System.out.println("Update size: " + (Math.round(conn.getContentLength() / 1000000f * 100f) / 100f) + "MB");
+
 			InputStream in = conn.getInputStream();
 			FileOutputStream out = new FileOutputStream("updates/" + versions.get(versionidx + 1) + ".zip");
 
@@ -105,22 +103,79 @@ public class AutoUpdater
 		// Download next versionidx
 		while(versionidx != latestVersionidx)
 		{
-			downloadUpdate(versionidx + 1);
+			if(isForced(versionidx + 1))
+			{
+				downloadUpdate(versionidx + 1);
+			}
+			else
+			{
+				System.out.println("This update might be unstable (hence the question), do you still want to update?");
+				System.out.println("[Y] / [N]");
+
+				// Y or N
+				Scanner s = new Scanner(System.in);
+				String str = s.nextLine();
+				if(str.equalsIgnoreCase("y"))
+				{
+					downloadUpdate(versionidx + 1);
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 
 		System.out.println("Done updating.");
-		try{
-			  // Create file 
-			  FileWriter fstream = new FileWriter("version.txt");
-			  BufferedWriter out = new BufferedWriter(fstream);
-			  out.write(latestVersion);
-			  //Close the output stream
-			  out.close();
-			  }catch (Exception e){//Catch exception if any
-			  System.err.println("Error: " + e.getMessage());
-			  }
-		
+		try
+		{
+			// Create file
+			FileWriter fstream = new FileWriter("version.txt");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(versions.get(versionidx));
+			// Close the output stream
+			out.close();
+		}
+		catch(Exception e)
+		{// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+
 		// Start game
+	}
+
+	private boolean isForced(int i)
+	{
+		Boolean forced = true;
+		URL dllinksURL;
+		try
+		{
+			dllinksURL = new URL("https://dl.dropbox.com/u/50041917/testlinks.ini");
+			Ini updateLinks = new Ini(new InputStreamReader(dllinksURL.openStream()));
+			Section s = updateLinks.get(versions.get(i));
+			String forc = s.get("forced");
+			if(forc.equalsIgnoreCase("NO"))
+			{
+				forced = false;
+			}
+			else if(forc.equalsIgnoreCase("YES"))
+			{
+				forced = true;
+			}
+		}
+		catch(MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch(InvalidIniFormatException e)
+		{
+			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return forced;
 	}
 
 	private void downloadUpdate(int i)
@@ -203,7 +258,7 @@ public class AutoUpdater
 				fileoutputstream.close();
 				zipinputstream.closeEntry();
 				zipentry = zipinputstream.getNextEntry();
-				
+
 				if(entryName.equalsIgnoreCase("updater.jar"))
 				{
 					updatedUpdater = true;
@@ -221,20 +276,23 @@ public class AutoUpdater
 		System.out.println("Done extracting");
 
 		versionidx += 1;
-		
+
 		if(updatedUpdater)
 		{
-			try{
-				  // Create file 
-				  FileWriter fstream = new FileWriter("version.txt");
-				  BufferedWriter out = new BufferedWriter(fstream);
-				  out.write(versions.get(versionidx));
-				  //Close the output stream
-				  out.close();
-				  }catch (Exception e){//Catch exception if any
-				  System.err.println("Error: " + e.getMessage());
-				  }
-			
+			try
+			{
+				// Create file
+				FileWriter fstream = new FileWriter("version.txt");
+				BufferedWriter out = new BufferedWriter(fstream);
+				out.write(versions.get(versionidx));
+				// Close the output stream
+				out.close();
+			}
+			catch(Exception e)
+			{// Catch exception if any
+				System.err.println("Error: " + e.getMessage());
+			}
+
 			System.out.println("The updater was updated, please restart the game to resume...");
 			System.out.println("Press any key to continue");
 			Scanner s = new Scanner(System.in);
@@ -281,7 +339,7 @@ public class AutoUpdater
 				// When the current line equals the clients current version, save its index for easier version lookup when downloading
 				if(str.equals(currentVersion))
 				{
-					versionidx = latestVersionidx-1;
+					versionidx = latestVersionidx - 1;
 				}
 
 				latestVersion = str;

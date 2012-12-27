@@ -678,7 +678,7 @@ public class GameClient extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
-		gc.getGraphics().setBackground(Color.white);
+		//gc.getGraphics().setBackground(Color.white);
 
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
@@ -704,8 +704,8 @@ public class GameClient extends BasicGame
 		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
 		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
 		m_pokedexfontbetweenminiandsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-betweenminiandsmall.fnt", m_filepath + "res/fonts/dex-betweenminiandsmall.png");
-
-		Player.loadSpriteFactory();
+		
+		//Player.loadSpriteFactory();
 
 		loadSprites();
 
@@ -734,8 +734,8 @@ public class GameClient extends BasicGame
 		m_login.showLanguageSelect();
 		m_display.add(m_login);
 
-		m_ui = new UserInterface(m_display);
-		m_ui.setAllVisible(false);
+		//m_ui = new UserInterface(m_display);
+		//m_ui.setAllVisible(false);
 
 		/* Item DB */
 		ItemDatabase m_itemdb = new ItemDatabase();
@@ -750,7 +750,7 @@ public class GameClient extends BasicGame
 		m_animator = new Animator(m_mapMatrix);
 
 		gc.getInput().enableKeyRepeat();
-		LoadingList.setDeferredLoading(false);
+		//LoadingList.setDeferredLoading(false);
 
 	}
 
@@ -863,7 +863,7 @@ public class GameClient extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		g.setBackground(Color.black);
+		//g.setBackground(Color.black);
 		g.setColor(Color.white);
 
 		int total = LoadingList.get().getTotalResources();

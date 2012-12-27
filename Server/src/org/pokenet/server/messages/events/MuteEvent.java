@@ -12,14 +12,14 @@ public class MuteEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		Player o = ActiveConnections.getPlayer(Request.readString());
-		if(o != null)
+		Player player = ActiveConnections.getPlayer(Request.readString());
+		if(player != null)
 		{
-			o.setMuted(true);
-			ServerMessage msg = new ServerMessage();
-			msg.Init(1);
-			msg.addString("You have been muted.");
-			o.getSession().Send(msg);
+			player.setMuted(true);
+			ServerMessage muteMessage = new ServerMessage();
+			muteMessage.Init(1);
+			muteMessage.addString("You have been muted.");
+			player.getSession().Send(muteMessage);
 		}
 	}
 }

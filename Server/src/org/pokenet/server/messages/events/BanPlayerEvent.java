@@ -1,5 +1,6 @@
 package org.pokenet.server.messages.events;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
@@ -13,11 +14,15 @@ public class BanPlayerEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		Player o = ActiveConnections.getPlayer(Request.readString());
-		if(o != null)
+		Player player = ActiveConnections.getPlayer(Request.readString());
+		if(player != null)
 		{
-			MySqlManager m = MySqlManager.getInstance();
-			m.query("INSERT INTO pn_bans (ip) VALUE ('" + o.getIpAddress() + "')");
+			MySqlManager m = new MySqlManager();
+			if(!m.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+				return;
+			if(!m.selectDatabase(GameServer.getDatabaseName()))
+				return;
+			m.query("INSERT INTO pn_bans VALUE ('" + player.getIpAddress() + "')");
 		}
 	}
 }

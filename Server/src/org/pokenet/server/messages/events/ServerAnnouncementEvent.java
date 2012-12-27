@@ -17,10 +17,10 @@ public class ServerAnnouncementEvent implements MessageEvent
 			for(Session session : ActiveConnections.allSessions().values())
 				if(session.getPlayer() != null)
 				{
-					ServerMessage msg = new ServerMessage();
-					msg.Init(2);
-					msg.addString(Request.readString());
-					session.Send(msg);
+					ServerMessage announceMessage = new ServerMessage();
+					announceMessage.Init(2);
+					announceMessage.addString(Request.readString());
+					session.Send(announceMessage);
 				}
 	}
 

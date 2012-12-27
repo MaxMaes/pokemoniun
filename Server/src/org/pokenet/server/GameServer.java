@@ -79,7 +79,6 @@ public class GameServer
 	/**
 	 * Updates the player count information.
 	 */
-	/* TODO: Re-implement Player Count (using ActiveConnections?) and fix this. */
 	public void updatePlayerCount()
 	{
 		if(m_boolGui)
@@ -268,9 +267,8 @@ public class GameServer
 	/**
 	 * Gets the SVN revision for the server.
 	 * 
-	 * @return the value on the third line of .svn/entries
+	 * @return The number in the rev.txt file.
 	 */
-	/* TODO: Rewrite Revision from text file or something else. */
 	private static int getServerRevision()
 	{
 		int rev = SERVER_REVISION;
@@ -343,7 +341,7 @@ public class GameServer
 		m_gui = new JFrame();
 		m_gui.setTitle("Pokenet Server");
 		m_gui.setSize(148, 340);
-		m_gui.setDefaultCloseOperation(0); // DO_NOTHING_ON_CLOSE
+		m_gui.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		m_gui.getContentPane().setLayout(null);
 		m_gui.setResizable(false);
 		m_gui.setLocation(32, 32);
@@ -464,7 +462,10 @@ public class GameServer
 			System.exit(0);
 	}
 
-	/** Asks for Database User/Pass, then asks to save NOTE: It doesnt save the database password. */
+	/**
+	 * Asks for Database User/Pass, then asks to save
+	 * NOTE: It doesnt save the database password.
+	 **/
 	private void getConsoleSettings()
 	{
 		ConsoleReader r = new ConsoleReader();
@@ -479,7 +480,7 @@ public class GameServer
 		m_dbPassword = r.readToken();
 		System.out.println("This server's IP or hostname:");
 		m_serverName = r.readToken();
-		System.out.println("Save info? (y/N)");
+		System.out.println("Save info? (Y/N)");
 		String answer = r.readToken();
 		if(answer.contains("y") || answer.contains("Y"))
 			saveSettings();
@@ -487,7 +488,10 @@ public class GameServer
 		System.err.println("WARNING: When using -nogui, the server should only be shut down using a master client");
 	}
 
-	/** Load pre-existing settings if any NOTE: It loads the database password if available. */
+	/**
+	 * Load pre-existing settings if any are available.
+	 * NOTE: It loads the database password if available.
+	 **/
 	private void loadSettings()
 	{
 		File settings = new File("res/settings.txt");
@@ -508,7 +512,10 @@ public class GameServer
 			}
 	}
 
-	/** Writes server settings to a file NOTE: It never stores the database password. */
+	/**
+	 * Writes server settings to a file.
+	 * NOTE: It never stores the database password.
+	 **/
 	private void saveSettings()
 	{
 		try
@@ -522,18 +529,18 @@ public class GameServer
 				m_dbPassword = new String(m_dbP.getPassword());
 				m_serverName = m_name.getText();
 			}
-			/* Write to file */
-			File f = new File("res/settings.txt");
-			if(f.exists())
-				f.delete();
-			PrintWriter w = new PrintWriter(f);
-			w.println(m_dbServer);
-			w.println(m_dbName);
-			w.println(m_dbUsername);
-			w.println(m_serverName);
-			w.println(" ");
-			w.flush();
-			w.close();
+			/* Write settings to file */
+			File settings = new File("res/settings.txt");
+			if(settings.exists())
+				settings.delete();
+			PrintWriter settingsWriter = new PrintWriter(settings);
+			settingsWriter.println(m_dbServer);
+			settingsWriter.println(m_dbName);
+			settingsWriter.println(m_dbUsername);
+			settingsWriter.println(m_serverName);
+			settingsWriter.println(" ");
+			settingsWriter.flush();
+			settingsWriter.close();
 		}
 		catch(Exception e)
 		{

@@ -13,14 +13,13 @@ public class AnnounceMessageEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-
 		Player p = Session.getPlayer();
 		if(p.getAdminLevel() == 2)
 		{
 			String msg = Request.readString();
-			ServerMap m = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY());
-			if(m != null)
-				m.sendChatMessage(msg, p.getLanguage());
+			ServerMap map = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY());
+			if(map != null)
+				map.sendChatMessage(msg, p.getLanguage());
 		}
 
 	}

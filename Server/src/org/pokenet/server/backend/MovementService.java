@@ -89,7 +89,8 @@ public class MovementService
 						}
 					}
 		}
-		/* Reload all the maps */
+		/* TODO: Multithreaded implementation to speed up server start!
+		 * Reload all the maps */
 		XMLMapTransformer loader = new XMLMapTransformer();
 		File nextMap;
 		ServerMap s;

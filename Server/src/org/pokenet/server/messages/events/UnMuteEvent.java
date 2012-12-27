@@ -12,14 +12,14 @@ public class UnMuteEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		Player o = ActiveConnections.getPlayer(Request.readString());
-		if(o != null)
+		Player player = ActiveConnections.getPlayer(Request.readString());
+		if(player != null)
 		{
-			o.setMuted(false);
-			ServerMessage msg = new ServerMessage();
-			msg.Init(1);
-			msg.addString("You have been unmuted.");
-			o.getSession().Send(msg);
+			player.setMuted(false);
+			ServerMessage unmuteMessage = new ServerMessage();
+			unmuteMessage.Init(1);
+			unmuteMessage.addString("You have been unmuted.");
+			player.getSession().Send(unmuteMessage);
 		}
 	}
 }

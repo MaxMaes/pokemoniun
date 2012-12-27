@@ -25,7 +25,7 @@ public class ActiveConnections
 	{
 		for(Session session : Sessions.values())
 			if(session.getPlayer() != null)
-				if(session.getPlayer().getName().equals(username))
+				if(session.getPlayer().getName().equalsIgnoreCase(username))
 					return session.getPlayer();
 		return null;
 	}

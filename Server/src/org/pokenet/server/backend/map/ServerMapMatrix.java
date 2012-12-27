@@ -45,42 +45,42 @@ public class ServerMapMatrix
 	}
 
 	/**
-	 * Moves a player between two maps
+	 * Moves a player between two maps.
 	 * 
-	 * @param c
-	 * @param origin
-	 * @param destination
+	 * @param player The player to be moved.
+	 * @param origin The map the player came from.
+	 * @param destination The map the player is moving towards.
 	 */
-	public void moveBetweenMaps(Character c, ServerMap origin, ServerMap dest)
+	public void moveBetweenMaps(Character player, ServerMap origin, ServerMap dest)
 	{
 		Direction dir = null;
 		/* Reposition player so they're on the correct edge */
 		if(origin.getX() > dest.getX())
 		{ // dest. map is to the left
-			c.setX(dest.getWidth() * 32 - 32);
-			c.setY(c.getY() + origin.getYOffsetModifier() - dest.getYOffsetModifier());
+			player.setX(dest.getWidth() * 32 - 32);
+			player.setY(player.getY() + origin.getYOffsetModifier() - dest.getYOffsetModifier());
 			dir = Direction.Left;
 		}
 		else if(origin.getX() < dest.getX())
 		{ // to the right
-			c.setX(0);
-			c.setY(c.getY() + origin.getYOffsetModifier() - dest.getYOffsetModifier());
+			player.setX(0);
+			player.setY(player.getY() + origin.getYOffsetModifier() - dest.getYOffsetModifier());
 			dir = Direction.Right;
 		}
 		else if(origin.getY() > dest.getY())
 		{// up
-			c.setY(dest.getHeight() * 32 - 40);
-			c.setX(c.getX() + origin.getXOffsetModifier() - dest.getXOffsetModifier());
+			player.setY(dest.getHeight() * 32 - 40);
+			player.setX(player.getX() + origin.getXOffsetModifier() - dest.getXOffsetModifier());
 			dir = Direction.Up;
 		}
 		else if(origin.getY() < dest.getY())
 		{// down
-			c.setY(-8);
-			c.setX(c.getX() - dest.getXOffsetModifier() + origin.getXOffsetModifier());
+			player.setY(-8);
+			player.setX(player.getX() - dest.getXOffsetModifier() + origin.getXOffsetModifier());
 			dir = Direction.Down;
 		}
 		/* Set the map */
-		c.setMap(dest, dir);
+		player.setMap(dest, dir);
 	}
 
 	/**

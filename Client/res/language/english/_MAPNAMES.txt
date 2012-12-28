@@ -6,7 +6,7 @@
 12,18,Route 19
 12,17,Fuchsia City
 11,17,Route 18
-12,-2,Celadon City
+12,15,Celadon City
 8,0,Route 12
 8,-2,Lavender Town
 8,-3,Route 10

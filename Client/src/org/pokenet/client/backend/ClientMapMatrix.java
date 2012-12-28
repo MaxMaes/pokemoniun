@@ -388,12 +388,13 @@ public class ClientMapMatrix
 
 			String f;
 			while((f = reader.readLine()) != null)
-				if(f.charAt(0) != '*')
+				if(f.charAt(0) != '*' || f !="")
 				{
 					final String[] details = f.split(",");
 					try
 					{
 						m_mapNames.put(details[0] + ", " + details[1], details[2]);
+						System.out.println(details[0] + ", " + details[1] + ", " + details[2]);
 					}
 					catch(Exception e)
 					{

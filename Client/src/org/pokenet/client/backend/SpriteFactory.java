@@ -91,7 +91,7 @@ public class SpriteFactory {
 					location = respath + "res/characters/" + String.valueOf(i)
 							+ ".png";
 					temp = new Image(location);
-					imgArray[i + 5] = temp;
+					imgArray[i + 7] = temp;
 					ss = new SpriteSheet(temp, 41, 51);
 
 					spriteSheets.put(i, ss);

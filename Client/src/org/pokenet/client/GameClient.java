@@ -78,7 +78,6 @@ public class GameClient extends BasicGame
 	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private static GameClient m_instance;
 	private static String m_language = Language.ENGLISH;
-	private static boolean m_languageChosen = false;
 	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 	private static Image m_loadImage; // Made these static to prevent memory leak.
 	private static boolean m_loadSurroundingMaps = false;
@@ -326,7 +325,6 @@ public class GameClient extends BasicGame
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			fullscreen = false;
 		}
 		try
 		{
@@ -612,6 +610,14 @@ public class GameClient extends BasicGame
 	{
 		return m_login;
 	}
+	
+	public static void enableKeyRepeat() {
+		gc.getInput().enableKeyRepeat();
+	}
+	
+	public static void disableKeyRepeat() {
+		gc.getInput().enableKeyRepeat();
+	}
 
 	/**
 	 * Returns the map matrix
@@ -871,17 +877,21 @@ public class GameClient extends BasicGame
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
 		if(!m_started)
 		{
-			g.drawImage(m_loadImage, 0, 0);
-			g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
+			if(m_nextResource != null) {
+				g.drawImage(m_loadImage, 0, 0);
+				g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
 
-			float bar = loaded / (float) total;
-			g.drawImage(m_loadBarLeft, 13, gc.getHeight() - 120);
-			g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
-					m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
-			g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
-
-			if(m_nextResource != null)
+				float bar = loaded / (float) total;
+				g.drawImage(m_loadBarLeft, 13, gc.getHeight() - 120);
+				g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
+						m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
+				g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
 				g.drawString("Loading,  please wait ... " + percentage.format(bar * 100) + "%", 10, gc.getHeight() - 90);
+				if(LoadingList.get().getRemainingResources() < 1) {
+					m_started = true;
+				}
+			}
+				
 			// g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
 
 			// non-imagy loading bar
@@ -891,7 +901,6 @@ public class GameClient extends BasicGame
 		}
 		else
 		{
-
 			/* Clip the screen, no need to render what we're not seeing */
 			g.setWorldClip(-32, -32, 864, 664);
 			/* If the player is playing, run this rendering algorithm for maps. The uniqueness here is: For the current map it only renders line by line for the layer that the player's are on, other layers are rendered directly to the screen. All other maps are simply rendered directly to the screen. */
@@ -990,7 +999,6 @@ public class GameClient extends BasicGame
 	public void returnToLanguageSelect()
 	{
 		m_language = Language.ENGLISH;
-		m_languageChosen = false;
 		m_login.showLanguageSelect();
 	}
 
@@ -1012,7 +1020,6 @@ public class GameClient extends BasicGame
 	public void setLanguage(String lang)
 	{
 		m_language = lang;
-		m_languageChosen = true;
 	}
 
 	/**
@@ -1079,9 +1086,8 @@ public class GameClient extends BasicGame
 			}
 			return;
 		}
-		else if(!m_started)
+		if(!m_started)
 		{
-			m_started = true;
 			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 			// music.loop();
 			// sound.play();
@@ -1100,14 +1106,7 @@ public class GameClient extends BasicGame
 				m_ui.setAllVisible(false);
 				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start untill you get the language select screen)");
 			}
-		}
-		if(m_started)
-		{
-			// make sure we can't move while changing maps
-			if(m_loading.isVisible())
-				gc.getInput().disableKeyRepeat();
-			else
-				gc.getInput().enableKeyRepeat();
+		} else {
 			/* Update the gui layer */
 			try
 			{

@@ -5,6 +5,7 @@ import mdes.slick.sui.Label;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.pokenet.client.GameClient;
 
 /**
  * The loading screen
@@ -44,6 +45,16 @@ public class LoadingScreen extends Frame
 		catch(SlickException e)
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		if(visible) {
+			GameClient.disableKeyRepeat();
+		} else {
+			GameClient.enableKeyRepeat();
 		}
 	}
 }

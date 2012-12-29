@@ -5,7 +5,7 @@
   <property name="dayPokemoneLevels" value="15-16;15-16;"/>
   <property name="nightPokemonLevels" value="Whismur,50;Zubat,50;"/>
   <property name="nightPokemoneChances" value="15-16;15-16;"/>
-  <property name="pvp" value="yes"/>
+  <property name="pvp" value="enforced"/>
   <property name="wildModifer" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

@@ -7,7 +7,7 @@
   <property name="fishPokemonLevels" value="10-30;10-30;10-30"/>
   <property name="nightPokemonChances" value="Oddish,40;Poochyena,30;Illumise,10;Marill,10;Volbeat,10;"/>
   <property name="nightPokemonLevels" value="13-14;13-14;13-14;13-13;13-13;"/>
-  <property name="pvp" value="yes"/>
+  <property name="pvp" value="enforced"/>
   <property name="surfProbability" value="28"/>
   <property name="waterPokemonChances" value="Marill,98;Surskit,1;Goldeen,1;"/>
   <property name="waterPokemonLevels" value="5-35;20-30;20-30"/>

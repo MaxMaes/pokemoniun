@@ -9,6 +9,7 @@
   <property name="nightPokemonLevels" value="14-20;14-18;14-18;"/>
   <property name="waterPokemonChances" value="Golbat,80;Solrock,10;Lunatone,10;"/>
   <property name="waterPokemonLevels" value="5-35;5-35;5-35;"/>
+  <property name="pvp" value="enforced"/>
   <property name="wildModifier" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

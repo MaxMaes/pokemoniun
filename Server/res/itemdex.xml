@@ -1427,7 +1427,7 @@
 			<description>Cures paralysis</description>
 			<id>200</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1441,7 +1441,7 @@
 			<description>Cures Sleep</description>
 			<id>201</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1455,7 +1455,7 @@
 			<description>Cures poison</description>
 			<id>202</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1469,7 +1469,7 @@
 			<description>Heals burns</description>
 			<id>203</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1483,7 +1483,7 @@
 			<description>Defrosts pokemon</description>
 			<id>204</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1511,7 +1511,7 @@
 			<description>Restores HP</description>
 			<id>206</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -1525,7 +1525,7 @@
 			<description>Cures confusion</description>
 			<id>207</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>11</shop>
 			<price>10</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -3578,8 +3578,8 @@
 			</description>
 			<id>420</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>100</price>
+			<shop>8</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -3590,7 +3590,7 @@
 			</description>
 			<id>421</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>8</shop>
 			<price>100</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -3601,8 +3601,8 @@
 			<description>A bigger version of the big apple?</description>
 			<id>422</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>100</price>
+			<shop>8</shop>
+			<price>500</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -3612,8 +3612,8 @@
 			<description>Not actually made out of gold</description>
 			<id>423</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>100</price>
+			<shop>8</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -3623,8 +3623,8 @@
 			<description>DON'T EAT IT... too precious</description>
 			<id>424</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>100</price>
+			<shop>8</shop>
+			<price>5000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -3635,7 +3635,7 @@
 				happy to see me?</description>
 			<id>425</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>8</shop>
 			<price>100</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -3647,7 +3647,7 @@
 				to eat it?</description>
 			<id>426</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>8</shop>
 			<price>100</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -3658,7 +3658,7 @@
 			<description>A mankey's favorite food</description>
 			<id>427</id>
 			<category>Food</category>
-			<shop>0</shop>
+			<shop>8</shop>
 			<price>100</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
@@ -5342,8 +5342,8 @@
 			<description>Heals 50HP, but might Paralyze your Pokemon</description>
 			<id>800</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5353,8 +5353,8 @@
 			<description>Restores 5PP to all moves, but might Freeze your Pokemon</description>
 			<id>801</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5364,8 +5364,8 @@
 			<description>Heals All Status, but might Burn your Pokemon</description>
 			<id>802</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5375,8 +5375,8 @@
 			<description>Raises Happiness, but might Poison your Pokemon</description>
 			<id>803</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5386,8 +5386,8 @@
 			<description>Raises Happiness, and might Heal 30HP to your Pokemon</description>
 			<id>804</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5397,8 +5397,8 @@
 			<description>Raises Happiness, but might put your Pokemon to Sleep</description>
 			<id>805</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>
@@ -5408,8 +5408,8 @@
 			<description>Heals your Pokemon's HP for an unknown amount. </description>
 			<id>806</id>
 			<category>Food</category>
-			<shop>0</shop>
-			<price>10</price>
+			<shop>10</shop>
+			<price>1000</price>
 			<attributes>
 				<itemAttribute>POKEMON</itemAttribute>
 			</attributes>

@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="5-6;5-6;5-6;5-6;5;5;5-6;5-6"/>
   <property name="nightPokemonChances" value="Zigzagoon,15;Poochyena,15;Wurmple,25;Shroomish,15;Silcoon,10;Cascoon,10;Taillow,5;Slakoth,5;"/>
   <property name="nightPokemonLevels" value="5-6;5-6;5-6;5-6;5;5;5-6;5-6"/>
+  <property name="pvp" value="enforced"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

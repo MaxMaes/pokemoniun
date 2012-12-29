@@ -6,6 +6,7 @@
   <property name="nightPokemonChances" value="Aron,40;Zubat,30;Mawile,10;Sableye,10;Abra,5,Nosepass,5;"/>
   <property name="nightPokemonLevels" value="10-12;10-11;10-12;10-12;10;10-20;"/>
   <property name="wildModifier" value="10"/>
+  <property name="pvp" value="enforced"/>
   <property name="xOffsetModifier" value=""/>
   <property name="yOffsetModifier" value=""/>
  </properties>

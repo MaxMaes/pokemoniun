@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="6-10;7-8;8;-6-9;"/>
   <property name="nightPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Geodude,10;"/>
   <property name="nightPokemonLevels" value="6-10;7-8;8;-6-9;"/>
+  <property name="pvp" value="enforced"/>
   <property name="wildModifier" value="10"/>
   <property name="xOffsetModifier" value=""/>
   <property name="yOffsetModifier" value=""/>

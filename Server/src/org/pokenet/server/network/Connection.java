@@ -54,6 +54,7 @@ public class Connection
 
 	public void StopSocket()
 	{
+		// Bootstrap.shutdown();
 		Bootstrap.bind().close();
 	}
 

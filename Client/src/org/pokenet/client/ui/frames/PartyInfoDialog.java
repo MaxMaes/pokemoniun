@@ -68,8 +68,7 @@ public class PartyInfoDialog extends Frame
 		setFont(GameClient.getFontSmall());
 		setBackground(new Color(0, 0, 0, 85));
 		setForeground(new Color(255, 255, 255));
-		int pokemonCount = -1;
-		/* Init damn pokemon count! (FabianPass Code) for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
+		/* Init damn pokemon count! (FabianPass Code) int pokemonCount = -1; for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
 		for(int i = 0; i < 6; i++)
 		{
 			final int j = i;

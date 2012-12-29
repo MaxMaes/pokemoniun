@@ -131,11 +131,12 @@ public class LogoutManager implements Runnable
 		/* Remove player from their map if it hasn't been done already. */
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);
-		ActiveConnections.removeSession(player.getSession().getChannel());
-		/* GameServer.getInstance().updatePlayerCount(); TODO: See GameServer for details. */
+		/* TODO: Test if people are saved correctly and won't need kicking. */
 		/* Store all player information. */
 		if(!m_saveManager.savePlayer(player))
 			return false;
+		ActiveConnections.removeSession(player.getSession().getChannel());
+		GameServer.getInstance().updatePlayerCount();
 		/* Finally, store that the player is logged out and close connection. */
 		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
 		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());

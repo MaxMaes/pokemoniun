@@ -3,9 +3,7 @@ package org.pokenet.server.network;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
-
 import javax.swing.Timer;
-
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.client.Session;
@@ -39,15 +37,15 @@ public class NetworkService
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManager = new ChatManager[3];
-		
-		autosaver = new Timer(1000*60*10, new ActionListener() //Change last number to the minutes for the interval
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				saveAll();
-			}
-		});
-		
+
+		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
+				{
+					public void actionPerformed(ActionEvent arg0)
+					{
+						saveAll();
+					}
+				});
+
 		autosaver.start();
 	}
 
@@ -189,7 +187,7 @@ public class NetworkService
 				message.Init(2);
 				message.addString("Saving...");
 				s.Send(message);
-				
+
 				if(m_saveManager.savePlayer(s.getPlayer()))
 				{
 					ServerMessage succesmg = new ServerMessage();
@@ -208,11 +206,11 @@ public class NetworkService
 			}
 			else
 			{
-				//Attempted save before the client logged in
+				// Attempted save before the client logged in
 			}
-		 }
+		}
 	}
-	
+
 	/**
 	 * Stop this network service by stopping all threads.
 	 */
@@ -225,7 +223,7 @@ public class NetworkService
 		// m_tcpProtocolHandler.logoutAll();
 		logoutAll();
 		System.out.println("Logged out all players.");
-		/* TODO: Experimental, check functionality! Doesn't seem to stop the server properly! */
+		/* TODO: Doesn't stop the server properly, rewrite! */
 		_connection.StopSocket();
 	}
 }

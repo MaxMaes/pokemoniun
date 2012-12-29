@@ -536,11 +536,9 @@ public class GameClient extends BasicGame
 	}
 
 	/**
-	 * When the disconnect button is pressed...
-	 * 
-	 * @param args
+	 * The user requests a disconnect and the player is logged out.
+	 * The player has to confirm he wants to log out.
 	 */
-	/* TODO: Check compatibility with Netty and/or rewrite */
 	public void disconnectRequest()
 	{
 		if(m_dcConfirm == null)
@@ -610,12 +608,14 @@ public class GameClient extends BasicGame
 	{
 		return m_login;
 	}
-	
-	public static void enableKeyRepeat() {
+
+	public static void enableKeyRepeat()
+	{
 		gc.getInput().enableKeyRepeat();
 	}
-	
-	public static void disableKeyRepeat() {
+
+	public static void disableKeyRepeat()
+	{
 		gc.getInput().enableKeyRepeat();
 	}
 
@@ -684,7 +684,7 @@ public class GameClient extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
-		//gc.getGraphics().setBackground(Color.white);
+		// gc.getGraphics().setBackground(Color.white);
 
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
@@ -710,8 +710,8 @@ public class GameClient extends BasicGame
 		m_pokedexfontlarge = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
 		m_pokedexfontmini = new AngelCodeFont(m_filepath + "res/fonts/dex-mini.fnt", m_filepath + "res/fonts/dex-mini.png");
 		m_pokedexfontbetweenminiandsmall = new AngelCodeFont(m_filepath + "res/fonts/dex-betweenminiandsmall.fnt", m_filepath + "res/fonts/dex-betweenminiandsmall.png");
-		
-		//Player.loadSpriteFactory();
+
+		// Player.loadSpriteFactory();
 
 		loadSprites();
 
@@ -740,8 +740,8 @@ public class GameClient extends BasicGame
 		m_login.showLanguageSelect();
 		m_display.add(m_login);
 
-		//m_ui = new UserInterface(m_display);
-		//m_ui.setAllVisible(false);
+		// m_ui = new UserInterface(m_display);
+		// m_ui.setAllVisible(false);
 
 		/* Item DB */
 		ItemDatabase m_itemdb = new ItemDatabase();
@@ -756,7 +756,7 @@ public class GameClient extends BasicGame
 		m_animator = new Animator(m_mapMatrix);
 
 		gc.getInput().enableKeyRepeat();
-		//LoadingList.setDeferredLoading(false);
+		// LoadingList.setDeferredLoading(false);
 
 	}
 
@@ -869,7 +869,7 @@ public class GameClient extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		//g.setBackground(Color.black);
+		// g.setBackground(Color.black);
 		g.setColor(Color.white);
 
 		int total = LoadingList.get().getTotalResources();
@@ -877,7 +877,8 @@ public class GameClient extends BasicGame
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
 		if(!m_started)
 		{
-			if(m_nextResource != null) {
+			if(m_nextResource != null)
+			{
 				g.drawImage(m_loadImage, 0, 0);
 				g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
 
@@ -887,11 +888,12 @@ public class GameClient extends BasicGame
 						m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
 				g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
 				g.drawString("Loading,  please wait ... " + percentage.format(bar * 100) + "%", 10, gc.getHeight() - 90);
-				if(LoadingList.get().getRemainingResources() < 1) {
+				if(LoadingList.get().getRemainingResources() < 1)
+				{
 					m_started = true;
 				}
 			}
-				
+
 			// g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
 
 			// non-imagy loading bar
@@ -1106,7 +1108,9 @@ public class GameClient extends BasicGame
 				m_ui.setAllVisible(false);
 				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start untill you get the language select screen)");
 			}
-		} else {
+		}
+		else
+		{
 			/* Update the gui layer */
 			try
 			{

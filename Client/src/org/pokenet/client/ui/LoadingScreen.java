@@ -47,13 +47,17 @@ public class LoadingScreen extends Frame
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
-	public void setVisible(boolean visible) {
+	public void setVisible(boolean visible)
+	{
 		super.setVisible(visible);
-		if(visible) {
+		if(visible)
+		{
 			GameClient.disableKeyRepeat();
-		} else {
+		}
+		else
+		{
 			GameClient.enableKeyRepeat();
 		}
 	}

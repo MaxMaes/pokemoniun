@@ -2131,7 +2131,6 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 	}
 
-	/* TODO: Test Netty code for both functions below */
 	/**
 	 * Updates the whole pokedex for the player
 	 */
@@ -2225,12 +2224,14 @@ public class Player extends Character implements Battleable, Tradeable
 		message.addInt(m_sprite);
 		getSession().Send(message);
 	}
-        
-	public boolean getIsTaveling() {
+
+	public boolean getIsTaveling()
+	{
 		return m_isTaveling;
 	}
 
-	public void setIsTaveling(boolean m_isTaveling) {
+	public void setIsTaveling(boolean m_isTaveling)
+	{
 		this.m_isTaveling = m_isTaveling;
 	}
 }

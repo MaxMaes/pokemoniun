@@ -158,8 +158,9 @@ public class ServerDialog extends Frame
 		}
 		catch(IOException ioe)
 		{
+			System.out.println("The serverlist could not be loaded, please connect to a private server or try 'Pokemonium Server'.");
 			ioe.printStackTrace();
-			m_host[0] = "85.25.116.212"; // Really, hardcoded?
+			m_host[0] = "s1.pokemonium.com";
 			m_servers[0] = new Button("Pokemonium Server");
 			m_servers[0].setSize(280, 24);
 			m_servers[0].setLocation(16, 32);

@@ -1,17 +1,12 @@
 Re-implement/Implement:
 [NOT MAJOR FOR RELEASE]
 Constants for the messages and magic cookies.
-
-[REQUIRED FOR RELEASE]
-Unban players properly.
+Improve Database access, old system is currently used due to compatibility issues.
 
 Broken/Unused:
 [NOT MAJOR FOR RELEASE]
-Loading screen stays on top in loginscreen while it should dissapear (when alwaysontop == true).
-
-[REALLY NICE TO HAVE FOR RELEASE]
-Initialisation screen doesnt appear.
+Loading screen stays on top in loginscreen while it shouldn't stay there (when alwaysontop == true).
 
 Misc:
-[CURRENTLY NO KNOWN MESSAGES?]		
-Unsupported messages seem to block messages from being processed in the client after receiving the answer from the server.
+[NO KNOWN MESSAGES]		
+Unsupported or broken messages seem to block messages from being processed in the client after receiving the answer from the server.

@@ -678,8 +678,7 @@ public class LoginManager implements Runnable
 		/* Send success packet to player, set their map and add them to a movement service. */
 		initialiseClient(player, session);
 		/* Add them to the list of players */
-		// TcpProtocolHandler.addPlayer(player);
-		/* GameServer.getInstance().updatePlayerCount(); TODO: See GameServer for details. */
+		GameServer.getInstance().updatePlayerCount();
 		System.out.println("INFO: " + username + " logged in.");
 	}
 }

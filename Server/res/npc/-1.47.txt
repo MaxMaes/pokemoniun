@@ -1,3 +1,17 @@
+[npc]
+Roxanne
+down
+102
+6
+2
+Geodude,50,Graveler,50,Nosepass,50
+3
+16
+0
+false
+false
+false
+[/npc]
 [warp]
 6
 20

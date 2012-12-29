@@ -105,10 +105,10 @@ public class ServerMap
 			String type = map.getProperties().getProperty("pvp");
 			if(type.equalsIgnoreCase("disabled"))
 				m_pvpType = PvPType.DISABLED;
-			else if(type.equalsIgnoreCase("enabled"))
-				m_pvpType = PvPType.ENABLED;
-			else
+			else if(type.equalsIgnoreCase("ENFORCED"))
 				m_pvpType = PvPType.ENFORCED;
+			else
+				m_pvpType = PvPType.ENABLED;
 		}
 		catch(Exception e)
 		{

@@ -1,6 +1,7 @@
 package org.pokenet.client.ui.frames;
 
 import java.io.InputStream;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
@@ -8,6 +9,7 @@ import mdes.slick.sui.Label;
 import mdes.slick.sui.ToggleButton;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -16,6 +18,7 @@ import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.entity.Pokemon;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ComboBox;
 import org.pokenet.client.ui.base.ProgressBar;
@@ -200,11 +203,11 @@ public class PokeStorageBoxFrame extends Frame
 						getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("18" + m_boxIndex + "," + m_buttonChosen);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-						ClientMessage message = new ClientMessage(20);
+						ClientMessage message = new ClientMessage(ServerPacket.RELEASE_POKEMON);
 						message.addInt(m_boxIndex);
 						message.addInt(m_buttonChosen);
 						GameClient.getSession().send(message);
-						ClientMessage finishBoxing = new ClientMessage(22);
+						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getSession().send(finishBoxing);
 						GameClient.getInstance().getUi().stopUsingBox();
 					}
@@ -220,7 +223,7 @@ public class PokeStorageBoxFrame extends Frame
 						confirm.setVisible(false);
 						getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-						ClientMessage finishBoxing = new ClientMessage(22);
+						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getSession().send(finishBoxing);
 						GameClient.getInstance().getUi().stopUsingBox();
 					}
@@ -243,7 +246,7 @@ public class PokeStorageBoxFrame extends Frame
 			{
 				setVisible(false);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage(22);
+				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 			}
@@ -315,7 +318,7 @@ public class PokeStorageBoxFrame extends Frame
 			m_boxNum = m_boxIndex + 1;
 			disableButtons();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("17" + (m_boxIndex));
-			ClientMessage message = new ClientMessage(19);
+			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_INFO_BOX_NUMBER);
 			message.addInt(m_boxIndex);
 			GameClient.getSession().send(message);
 			setTitle("Box Number " + String.valueOf(m_boxNum));
@@ -398,7 +401,7 @@ class TeamForBox extends Frame
 			{
 				switchPokes(m_boxNumber, m_boxIndex, m_teamIndex);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage(22);
+				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 				setVisible(false);
@@ -414,7 +417,7 @@ class TeamForBox extends Frame
 			public void actionPerformed(ActionEvent evt)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage(22);
+				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getSession().send(finishBoxing);
 				GameClient.getInstance().getUi().stopUsingBox();
 				setVisible(false);
@@ -513,13 +516,13 @@ class TeamForBox extends Frame
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("19" + (boxNum - 1) + "," + boxIndex + "," + teamIndex);
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-		ClientMessage message = new ClientMessage(21);
+		ClientMessage message = new ClientMessage(ServerPacket.SWAP_POKEMON_FROM_BOX);
 		message.addInt(boxNum - 1);
 		message.addInt(boxIndex);
 		message.addInt(teamIndex);
 		GameClient.getSession().send(message);
 
-		ClientMessage finishBoxing = new ClientMessage(22);
+		ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 		GameClient.getSession().send(finishBoxing);
 		GameClient.getInstance().getUi().update(false);
 	}

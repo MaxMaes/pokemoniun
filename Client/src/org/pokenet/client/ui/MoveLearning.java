@@ -3,12 +3,14 @@ package org.pokenet.client.ui;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -16,6 +18,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.MoveLearningManager;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.BattleButtonFactory;
 import org.pokenet.client.ui.base.ConfirmationDialog;
@@ -186,7 +189,7 @@ public class MoveLearning extends Frame
 			{
 				MoveLearningManager.getInstance().removeMoveLearning();
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0A" + m_pokeIndex + m_move);
-				ClientMessage message = new ClientMessage(9);
+				ClientMessage message = new ClientMessage(ServerPacket.DONT_LEARN_MOVE);
 				message.addInt(m_pokeIndex);
 				message.addString(m_move);
 				GameClient.getSession().send(message);
@@ -252,7 +255,7 @@ public class MoveLearning extends Frame
 				if(BattleManager.getInstance().getBattleWindow().isVisible())
 					BattleManager.getInstance().updateMoves();
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + i + m_move);
-				ClientMessage message = new ClientMessage(8);
+				ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
 				message.addInt(m_pokeIndex);
 				message.addInt(i);
 				message.addString(m_move);
@@ -272,7 +275,7 @@ public class MoveLearning extends Frame
 						GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
 						BattleManager.getInstance().updateMoves();
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + j + m_move);
-						ClientMessage message = new ClientMessage(8);
+						ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
 						message.addInt(m_pokeIndex);
 						message.addInt(j);
 						message.addString(m_move);

@@ -5,8 +5,10 @@ import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 
 /**
@@ -72,7 +74,7 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("13" + m_name.getText());
-				ClientMessage message = new ClientMessage(15);
+				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_BATTLE);
 				message.addString(m_name.getText());
 				GameClient.getSession().send(message);
 				destroy();
@@ -84,7 +86,7 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("14" + m_name.getText());
-				ClientMessage message = new ClientMessage(16);
+				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_TRADE);
 				message.addString(m_name.getText());
 				GameClient.getSession().send(message);
 				destroy();
@@ -105,7 +107,7 @@ public class PlayerPopupDialog extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2F" + m_name.getText());
-				ClientMessage message = new ClientMessage(38);
+				ClientMessage message = new ClientMessage(ServerPacket.FRIEND_ADD);
 				message.addString(m_name.getText());
 				GameClient.getSession().send(message);
 				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());

@@ -19,6 +19,7 @@ import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.entity.Item;
 import org.pokenet.client.backend.entity.PlayerItem;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.ListBox;
@@ -245,7 +246,7 @@ public class ShopDialog extends Frame
 	public void cancelled()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("11");
-		ClientMessage message = new ClientMessage(13);
+		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 		message.addInt(2);
 		GameClient.getSession().send(message);
 		GameClient.getInstance().getUi().stopShop();
@@ -352,7 +353,7 @@ public class ShopDialog extends Frame
 	public void itemClicked(int itemid)
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0F" + itemid + ",1");
-		ClientMessage message = new ClientMessage(13);
+		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 		message.addInt(0);
 		message.addInt(itemid);
 		GameClient.getSession().send(message);
@@ -394,7 +395,7 @@ public class ShopDialog extends Frame
 						public void actionPerformed(ActionEvent e)
 						{
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("10" + ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId() + ",");
-							ClientMessage message = new ClientMessage(13);
+							ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 							message.addInt(1);
 							message.addInt(ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId());
 							GameClient.getSession().send(message);

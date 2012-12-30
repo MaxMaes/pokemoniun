@@ -2,16 +2,19 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.TextField;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.ModerationManager;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ComboBox;
 
@@ -209,7 +212,7 @@ public class ChatDialog extends Frame
 				else
 				{
 					// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
-					ClientMessage message = new ClientMessage(46);
+					ClientMessage message = new ClientMessage(ServerPacket.CHAT);
 					message.addInt(0);
 					message.addString(m_inputBox.getText());
 					GameClient.getSession().send(message);
@@ -219,7 +222,7 @@ public class ChatDialog extends Frame
 				ModerationManager.parseLine(m_inputBox.getText().substring(1));
 			else
 			{
-				ClientMessage message = new ClientMessage(46);
+				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
 				message.addInt(1);
 				message.addString(m_possibleChats.getSelected() + "," + m_inputBox.getText());
 				GameClient.getSession().send(message);

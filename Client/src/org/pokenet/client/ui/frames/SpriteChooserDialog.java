@@ -4,17 +4,20 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.ListBox;
@@ -108,7 +111,7 @@ public class SpriteChooserDialog extends Frame
 						confirm.setVisible(false);
 						GameClient.getInstance().getDisplay().remove(confirm);
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
-						ClientMessage message = new ClientMessage(14);
+						ClientMessage message = new ClientMessage(ServerPacket.BUY_SPRITE);
 						message.addInt(Integer.parseInt(m_spriteList.getSelectedName()));
 						GameClient.getSession().send(message);
 					}

@@ -1,5 +1,6 @@
 package org.pokenet.client;
 
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Whirlpool;
 import org.pokenet.client.protocol.ClientMessage;
 
@@ -19,7 +20,7 @@ public class UserManager
 	 */
 	public void changePassword(String username, String newPassword, String oldPassword)
 	{
-		ClientMessage message = new ClientMessage(2);
+		ClientMessage message = new ClientMessage(ServerPacket.CHANGE_PASSWORD);
 		message.addString(username + "," + getPasswordHash(username, newPassword) + "," + getPasswordHash(username, oldPassword));
 		GameClient.getSession().send(message);
 	}
@@ -50,7 +51,7 @@ public class UserManager
 		else if(GameClient.getLanguage().equalsIgnoreCase("german"))
 			language = '7';
 
-		ClientMessage message = new ClientMessage(50);
+		ClientMessage message = new ClientMessage(ServerPacket.LOGIN);
 		message.addString(language + username + "," + getPasswordHash(username, password));
 		GameClient.getSession().send(message);
 	}
@@ -66,7 +67,7 @@ public class UserManager
 	 */
 	public void register(String username, String password, String email, String dob, int starter, int sprite, int region)
 	{
-		ClientMessage message = new ClientMessage(1);
+		ClientMessage message = new ClientMessage(ServerPacket.REGISTRATION);
 		message.addInt(region);
 		message.addString(username + "," + getPasswordHash(username, password) + "," + email + "," + dob + "," + starter + "," + sprite);
 		GameClient.getSession().send(message);

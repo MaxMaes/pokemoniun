@@ -48,8 +48,10 @@ import org.pokenet.client.backend.time.WeatherService.Weather;
 import org.pokenet.client.constants.Language;
 import org.pokenet.client.constants.Music;
 import org.pokenet.client.constants.Options;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
+import org.pokenet.client.protocol.ServerMessage;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.LoginScreen;
 import org.pokenet.client.ui.UserInterface;
@@ -550,7 +552,7 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
-						ClientMessage dc = new ClientMessage(49);
+						ClientMessage dc = new ClientMessage(ServerPacket.LOGOUT_REQUEST);
 						m_session.send(dc);
 						disconnect();
 						reset();
@@ -819,7 +821,7 @@ public class GameClient extends BasicGame
 				if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 				{
 					// m_Session.writeTcpMessage("3C");
-					ClientMessage message = new ClientMessage(47);
+					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
 				}
 				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
@@ -847,19 +849,19 @@ public class GameClient extends BasicGame
 		switch(d)
 		{
 			case Up:
-				ClientMessage up = new ClientMessage(4);
+				ClientMessage up = new ClientMessage(ServerPacket.MOVE_UP);
 				m_session.send(up);
 				break;
 			case Down:
-				ClientMessage down = new ClientMessage(5);
+				ClientMessage down = new ClientMessage(ServerPacket.MOVE_DOWN);
 				m_session.send(down);
 				break;
 			case Left:
-				ClientMessage left = new ClientMessage(6);
+				ClientMessage left = new ClientMessage(ServerPacket.MOVE_LEFT);
 				m_session.send(left);
 				break;
 			case Right:
-				ClientMessage right = new ClientMessage(7);
+				ClientMessage right = new ClientMessage(ServerPacket.MOVE_RIGHT);
 				m_session.send(right);
 				break;
 		}
@@ -1209,7 +1211,7 @@ public class GameClient extends BasicGame
 					}
 				if(m_dcConfirm != null)
 				{
-					ClientMessage dc = new ClientMessage(49);
+					ClientMessage dc = new ClientMessage(ServerPacket.LOGOUT_REQUEST);
 					m_session.send(dc);
 					disconnect();
 					reset();
@@ -1336,25 +1338,25 @@ public class GameClient extends BasicGame
 					m_ui.disconnect();
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
-					ClientMessage message = new ClientMessage(40);
+					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 					message.addInt(97);
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
-					ClientMessage message = new ClientMessage(40);
+					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 					message.addInt(98);
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
-					ClientMessage message = new ClientMessage(40);
+					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 					message.addInt(99);
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
-					ClientMessage message = new ClientMessage(40);
+					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 					message.addInt(100);
 					m_session.send(message);
 				}
@@ -1372,7 +1374,7 @@ public class GameClient extends BasicGame
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 			{
 				// m_Session.writeTcpMessage("3C");
-				ClientMessage message = new ClientMessage(47);
+				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
 			}
 			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())

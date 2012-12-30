@@ -15,6 +15,7 @@ import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.backend.entity.Pokemon;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 
@@ -158,7 +159,7 @@ public class TradeDialog extends Frame
 	private void cancelOffer()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("37");
-		ClientMessage message = new ClientMessage(44);
+		ClientMessage message = new ClientMessage(ServerPacket.CANCEL_OFFER);
 		GameClient.getSession().send(message);
 		m_makeOfferBtn.setText("Make Offer");
 		for(int i = 0; i < 6; i++) {
@@ -187,7 +188,7 @@ public class TradeDialog extends Frame
 			public void actionPerformed(ActionEvent evt)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("38");
-				ClientMessage message = new ClientMessage(45);
+				ClientMessage message = new ClientMessage(ServerPacket.TRADE_CANCEL);
 				//message.addInt(m_offerNum);
 				//message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 				GameClient.getSession().send(message);
@@ -480,7 +481,7 @@ public class TradeDialog extends Frame
 		if(!m_ourMoneyOffer.getText().equals(""))
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("35" + m_offerNum + "," + m_ourMoneyOffer.getText());
-			ClientMessage message = new ClientMessage(42);
+			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 			GameClient.getSession().send(message);
@@ -488,7 +489,7 @@ public class TradeDialog extends Frame
 		else
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("35" + m_offerNum + ",0");
-			ClientMessage message = new ClientMessage(42);
+			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(0);
 			GameClient.getSession().send(message);
@@ -507,7 +508,7 @@ public class TradeDialog extends Frame
 	private void performTrade()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("36");
-		ClientMessage message = new ClientMessage(43);
+		ClientMessage message = new ClientMessage(ServerPacket.TRADE_ACCEPTED);
 		GameClient.getSession().send(message);
 		System.out.println("Trade complete");
 		setVisible(false);

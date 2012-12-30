@@ -9,6 +9,7 @@ import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.ListBox;
@@ -126,7 +127,7 @@ public class TrainChooserDialog extends Frame {
 						confirm.setVisible(false);
 						GameClient.getInstance().getDisplay().remove(confirm);
 						//GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_travelList.getSelectedName());
-						ClientMessage message = new ClientMessage(53);
+						ClientMessage message = new ClientMessage(ServerPacket.TRAVEL);
 						message.addString(choice);
 						GameClient.getSession().send(message);
 					}

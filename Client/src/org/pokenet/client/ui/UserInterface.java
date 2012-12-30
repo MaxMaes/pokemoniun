@@ -1,16 +1,19 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
+
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.entity.PlayerItem;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.HUDButtonFactory;
@@ -805,7 +808,7 @@ public class UserInterface extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0C" + index);
-				ClientMessage message = new ClientMessage(11);
+				ClientMessage message = new ClientMessage(ServerPacket.EVOLVE);
 				message.addInt(index);
 				GameClient.getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
@@ -817,7 +820,7 @@ public class UserInterface extends Frame
 			public void actionPerformed(ActionEvent e)
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0B" + index);
-				ClientMessage message = new ClientMessage(10);
+				ClientMessage message = new ClientMessage(ServerPacket.DONT_EVOLVE);
 				message.addInt(index);
 				GameClient.getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);

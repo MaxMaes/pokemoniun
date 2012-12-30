@@ -4,12 +4,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -17,6 +19,7 @@ import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.FileLoader;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.BattleButtonFactory;
 import org.pokenet.client.ui.frames.BattleBag;
@@ -214,7 +217,7 @@ public class BattleWindow extends Frame
 			BattleManager.getInstance().updateMoves();
 		}
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2C" + i);
-		ClientMessage message = new ClientMessage(35);
+		ClientMessage message = new ClientMessage(ServerPacket.MOVE_SELECTED);
 		message.addInt(i);
 		GameClient.getSession().send(message);
 		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
@@ -553,7 +556,7 @@ public class BattleWindow extends Frame
 	private void run()
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2E");
-		ClientMessage message = new ClientMessage(37);
+		ClientMessage message = new ClientMessage(ServerPacket.BATTLE_RUN);
 		GameClient.getSession().send(message);
 	}
 
@@ -567,7 +570,7 @@ public class BattleWindow extends Frame
 		attackPane.setVisible(false);
 		pokesContainer.setVisible(false);
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2D" + i);
-		ClientMessage message = new ClientMessage(36);
+		ClientMessage message = new ClientMessage(ServerPacket.SWITCH_POKEMON);
 		message.addInt(i);
 		GameClient.getSession().send(message);
 	}

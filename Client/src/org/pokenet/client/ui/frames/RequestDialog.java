@@ -3,16 +3,19 @@ package org.pokenet.client.ui.frames;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 
 /**
@@ -46,7 +49,7 @@ public class RequestDialog extends Frame
 		if(m_offerUser != null && m_offerUser.size() > 0)
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("15" + m_offerUser.get(userIndex));
-			ClientMessage message = new ClientMessage(17);
+			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_ACCEPTED);
 			message.addString(m_offerUser.get(userIndex));
 			GameClient.getSession().send(message);
 			m_offers.remove(m_offerUser.get(userIndex));
@@ -94,7 +97,7 @@ public class RequestDialog extends Frame
 		for(String name : m_offerUser)
 		{
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + name);
-			ClientMessage message = new ClientMessage(18);
+			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 			message.addString(name);
 			GameClient.getSession().send(message);
 			m_offers.remove(name);
@@ -111,7 +114,7 @@ public class RequestDialog extends Frame
 	public void declineOffer(int userIndex)
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + m_offerUser.get(userIndex));
-		ClientMessage message = new ClientMessage(18);
+		ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 		message.addString(m_offerUser.get(userIndex));
 		GameClient.getSession().send(message);
 		m_offers.remove(m_offerUser.get(userIndex));

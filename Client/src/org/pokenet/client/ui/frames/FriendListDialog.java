@@ -2,6 +2,7 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
@@ -10,8 +11,10 @@ import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
+
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 
@@ -262,7 +265,7 @@ class PopUp extends Frame
 					public void actionPerformed(ActionEvent e)
 					{
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("30" + m_name.getText());
-						ClientMessage message = new ClientMessage(39);
+						ClientMessage message = new ClientMessage(ServerPacket.FRIEND_REMOVE);
 						message.addString(m_name.getText());
 						GameClient.getSession().send(message);
 						GameClient.getInstance().getDisplay().remove(m_confirm);

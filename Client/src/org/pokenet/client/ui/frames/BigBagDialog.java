@@ -2,6 +2,7 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
@@ -9,6 +10,7 @@ import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -18,6 +20,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.entity.PlayerItem;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ImageButton;
 
@@ -511,7 +514,7 @@ class ItemPopup extends Frame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				ClientMessage message = new ClientMessage(41);
+				ClientMessage message = new ClientMessage(ServerPacket.ITEM_DESTROY);
 				message.addInt(m_id);
 				GameClient.getSession().send(message);
 				destroyPopup();
@@ -600,7 +603,7 @@ class ItemPopup extends Frame
 		}
 		else
 		{
-			ClientMessage message = new ClientMessage(40);
+			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(String.valueOf(id));
 			GameClient.getSession().send(message);
 			destroyPopup();
@@ -694,14 +697,14 @@ class TeamPopup extends Frame
 	{
 		if(use)
 		{
-			ClientMessage message = new ClientMessage(40);
+			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(id + "," + pokeIndex);
 			GameClient.getSession().send(message);
 		}
 		else
 		{
 			/* TODO: Write Netty Implementation for Give. */
-			ClientMessage message = new ClientMessage(51);
+			ClientMessage message = new ClientMessage(ServerPacket.ITEM_GIVE);
 			message.addString(id + "," + pokeIndex);
 			GameClient.getSession().send(message);
 			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());

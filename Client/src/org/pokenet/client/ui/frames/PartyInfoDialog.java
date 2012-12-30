@@ -2,6 +2,7 @@ package org.pokenet.client.ui.frames;
 
 import java.io.InputStream;
 import java.util.List;
+
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
@@ -11,6 +12,7 @@ import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -19,6 +21,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ProgressBar;
 
@@ -178,7 +181,7 @@ public class PartyInfoDialog extends Frame
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							ClientMessage message = new ClientMessage(12);
+							ClientMessage message = new ClientMessage(ServerPacket.SWAP_PARTY);
 							message.addInt(j);
 							message.addInt(j - 1);
 							GameClient.getSession().send(message);
@@ -202,7 +205,7 @@ public class PartyInfoDialog extends Frame
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							ClientMessage message = new ClientMessage(12);
+							ClientMessage message = new ClientMessage(ServerPacket.SWAP_PARTY);
 							message.addInt(j);
 							message.addInt(j + 1);
 							GameClient.getSession().send(message);

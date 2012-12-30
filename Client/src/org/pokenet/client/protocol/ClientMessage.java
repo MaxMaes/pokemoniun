@@ -6,6 +6,7 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferOutputStream;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.pokenet.client.Session;
+import org.pokenet.client.constants.ServerPacket;
 
 public class ClientMessage
 {
@@ -15,9 +16,9 @@ public class ClientMessage
 	private String message;
 	private Session Player;
 
-	public ClientMessage(int id)
+	public ClientMessage(ServerPacket id)
 	{
-		init(id);
+		init(id.getValue());
 	}
 
 	public ClientMessage(Session Session)

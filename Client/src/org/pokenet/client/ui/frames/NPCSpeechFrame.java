@@ -1,6 +1,7 @@
 package org.pokenet.client.ui.frames;
 
 import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 
 /**
@@ -43,7 +44,7 @@ public class NPCSpeechFrame extends SpeechFrame
 			setVisible(false);
 			GameClient.getInstance().getUi().nullSpeechFrame();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3D");
-			ClientMessage message = new ClientMessage(48);
+			ClientMessage message = new ClientMessage(ServerPacket.TALKING_FINISH);
 			GameClient.getSession().send(message);
 		}
 	}

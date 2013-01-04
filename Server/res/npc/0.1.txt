@@ -1,3 +1,17 @@
+[npc]
+NPC
+down
+78
+41
+26
+NULL
+0
+-1
+0
+false
+false
+false
+[/npc]
 [warp]
 32
 14

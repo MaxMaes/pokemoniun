@@ -21,6 +21,8 @@ import org.pokenet.client.backend.entity.Player.Direction;
 public class ClientMap extends TiledMap
 {
 	private static Image m_grassOverlay;
+//	private static Image m_SinnohGrassOverlay;
+	private static Image m_SinnohOverlay;
 	public int m_x;
 	public int m_y;
 	private boolean m_isCurrent = false;
@@ -53,6 +55,10 @@ public class ClientMap extends TiledMap
 		{
 			if(m_grassOverlay == null)
 				m_grassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
+//			if(m_SinnohGrassOverlay == null)
+//				m_SinnohGrassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
+			if(m_SinnohOverlay == null)
+				m_SinnohOverlay = new Image(respath + "res/ui/sinnoh_grass.png", false);
 		}
 		catch(SlickException e)
 		{
@@ -309,22 +315,54 @@ public class ClientMap extends TiledMap
 							m_reflection.draw(m_xOffset + p.getX() - 4, m_yOffset + p.getY() + 8);
 					}
 					if(m_curMap.wasOnGrass(p) && m_curMap.isOnGrass(p))
-						switch(p.getDirection())
+					{
+						//sinnoh  maps use different grass
+						if((m_mapX>32 && m_mapY<-37))
 						{
-							case Up:
-								m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 32 + 8);
-								break;
-							case Left:
-								m_grassOverlay.copy().draw(m_xOffset + p.getServerX() + 32, m_yOffset + p.getServerY() + 8);
-								break;
-							case Right:
-								m_grassOverlay.copy().draw(m_xOffset + p.getServerX() - 32, m_yOffset + p.getServerY() + 8);
-								break;
-							case Down:
-								break;
+							switch(p.getDirection())
+							{
+								case Up:
+									m_SinnohOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 32 + 8);
+									break;
+								case Left:
+									m_SinnohOverlay.copy().draw(m_xOffset + p.getServerX() + 32, m_yOffset + p.getServerY() + 8);
+									break;
+								case Right:
+									m_SinnohOverlay.copy().draw(m_xOffset + p.getServerX() - 32, m_yOffset + p.getServerY() + 8);
+									break;
+								case Down:
+									break;
+							}
 						}
+						else
+						{
+							switch(p.getDirection())
+							{
+								case Up:
+									m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 32 + 8);
+									break;
+								case Left:
+									m_grassOverlay.copy().draw(m_xOffset + p.getServerX() + 32, m_yOffset + p.getServerY() + 8);
+									break;
+								case Right:
+									m_grassOverlay.copy().draw(m_xOffset + p.getServerX() - 32, m_yOffset + p.getServerY() + 8);
+									break;
+								case Down:
+									break;
+							}
+						}
+					}
 					if(m_curMap.isOnGrass(p) && p.getY() <= p.getServerY())
-						m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
+					{
+						if((m_mapX>32 && m_mapY<-37))
+						{
+							m_SinnohOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
+						}
+						else
+						{
+							m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
+						}
+					}
 					// Draw the walk behind layer
 					g.scale(2, 2);
 					try
@@ -535,7 +573,7 @@ public class ClientMap extends TiledMap
 					map.setYOffset(m_mapMatrix.getMap(2, 1).m_yOffset + m_mapMatrix.getMap(2, 1).getHeight() * 32, false);
 				else
 				{ // Try in previous way
-					System.out.println("else");
+//					System.out.println("else");
 					map.setYOffset(offset + getHeight() * 32, false);
 				}
 			// 0, 2 -- Lower Left

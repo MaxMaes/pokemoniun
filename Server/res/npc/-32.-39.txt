@@ -1,5 +1,5 @@
 [npc]
-NULL
+NPC
 down
 115
 3
@@ -13,7 +13,7 @@ false
 false
 [/npc]
 [npc]
-NULL
+NPC
 up
 129
 1
@@ -27,7 +27,7 @@ false
 false
 [/npc]
 [npc]
-NULL
+NPC
 left
 61
 6

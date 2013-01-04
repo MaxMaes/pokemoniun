@@ -3,5 +3,13 @@
 [FIX] Scrolling the pokedex is slow/laggy.
 [FIX] Unable to close the pokedex with the '2' hotkey.
 [FIX] Trading now works properly.
+[FIX] connection between cinnebar island and fushia city
 
 Remade the entire client/server communication infrastructure.
+
+[ADD] Hoenn and Sinnoh (includes caves, hoenn gyms, pokemon centers and pokemarkts)
+[ADD] Kanto cycle route
+[ADD] train and boat transportation
+[reADD] Kanto safari zone
+[ADD] entry control on Mt.Silver
+[ADD] some of slams sprites are now buyable ingame

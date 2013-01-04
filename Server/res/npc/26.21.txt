@@ -1,0 +1,14 @@
+[npc]
+NPC
+down
+50
+47
+5
+NULL
+0
+-1
+0
+false
+false
+false
+[/npc]

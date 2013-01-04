@@ -2,11 +2,25 @@ Re-implement/Implement:
 [NOT MAJOR FOR RELEASE]
 Constants for the messages and magic cookies.
 Improve Database access, old system is currently used due to compatibility issues.
+more NPCs in hoenn and sinnoh, also NPCs outside in towns/cities in kanto and johto
+NPC speech should become server side
 
 Broken/Unused:
+make invisible NPCs visible (http://pokemonium.com/forum/showthread.php?5189-invisible-NPCS-and-missplaced-objects)
+Several moves that used to work are now broken, they make the client freeze (protect, substitute, yawn)
 [NOT MAJOR FOR RELEASE]
 Loading screen stays on top in loginscreen while it shouldn't stay there (when alwaysontop == true).
 
 Misc:
+npc text message may freeze up part of the client
+first pokemon is sent out when your pokemon dies in battle, dead poke in first slot is not swapped at the end of battle with a pokemon that is alive
 [NO KNOWN MESSAGES]		
 Unsupported or broken messages seem to block messages from being processed in the client after receiving the answer from the server.
+[NOT MAJOR FOR RELEASE]
+add hoenn and sinnoh interiors
+line up the sevii isls correctly
+"protein shops" and candy store don't show items
+several items are not shown in the bag even though they are there / sometimes they show when you obtain them ingame but they no longer show after relog
+win or lose message at the end of battle always says you win
+first time the name of the NPC is used in battle name = "NULL"
+when you are the first to enter a map you can skip almost all trainers by the time they are ready to battle

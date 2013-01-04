@@ -36,6 +36,38 @@ public class BoatEvent implements MessageEvent
 		{
 			boat = "canalave";
 		}
+		else if (mapx == -28 && mapy == 3)
+		{
+			boat = "one";
+		}
+		else if (mapx == -43 && mapy == 6)
+		{
+			boat = "two";
+		}
+		else if (mapx == -27 && mapy == 6)
+		{
+			boat = "three";
+		}
+		else if (mapx == -43 && mapy == 11)
+		{
+			boat = "four";
+		}
+		else if (mapx == -28 && mapy == 9)
+		{
+			boat = "five";
+		}
+		else if (mapx == 40 && mapy == -47)
+		{
+			boat = "snowpoint";
+		}
+		else if (mapx == -38 && mapy == 13)
+		{
+			boat = "navel";
+		}
+		else if (mapx == 2 && mapy == -45)
+		{
+			boat = "iron";
+		}
 		GameClient.getInstance().getDisplay().add(new BoatChooserDialog(boat,GameClient.getInstance().getOurPlayer()));
 		
 	}

@@ -246,6 +246,151 @@ public class TravelEvent implements MessageEvent
 					Session.Send(message);
 				}
 			}
+			else if (travel.contains("Snowpoint"))
+			{
+				if(p.getBag().containsItem(557) != -1)
+				{
+					ticket = true;
+				}
+				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount()>=16 && p.getTrainingLevel()>=50))
+				{
+					if(p.getAdminLevel() > 0)
+					{}
+					else if(ticket)
+					{
+						p.setMoney(p.getMoney() - 10000);
+						p.updateClientMoney();
+					}
+					else
+					{
+						p.setMoney(p.getMoney() - 175000);
+						p.updateClientMoney();
+						p.getBag().addItem(557, 1);
+					}
+					p.setIsTaveling(false);
+					p.setX(192);
+					p.setY(1880);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(39, -48), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("One"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(512);
+					p.setY(568);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-29, 2), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Two"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(320);
+					p.setY(1336);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-44, 5), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Three"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(416);
+					p.setY(408);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-28, 5), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Four"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(416);
+					p.setY(1048);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-44, 10), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Five"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(512);
+					p.setY(664);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-29, 8), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Navel"))
+			{
+				if(p.getAdminLevel() > 5)
+				{
+					p.setIsTaveling(false);
+					p.setX(672);
+					p.setY(3192);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(-39, 12), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
+			else if (travel.contains("Iron"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(2752);
+					p.setY(568);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(1, -46), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					message.Init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					Session.Send(message);
+				}
+			}
 		}
 
 	}

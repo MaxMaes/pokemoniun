@@ -17,7 +17,7 @@
  <tileset firstgid="1025" source="normal5.tsx"/>
  <layer name="Walkable" width="41" height="74">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UQQqDMBRF0UR3It1I6/ZdlA5SKGJBTEiinANvfiF+QwAAAAAAAAAAgPLGSrvatgz9N55ZjCEMaWOs23i28711fdLmC425en3j2p0a27flNP7e+r97b934vfXXtilt39m6cd969F/qpbHn7/EpjSVbNd6jsUSrxvzGWn25jSuT1D79aC8AAA==
+   H4sIAAAAAAAAC+3UQQqDMBRF0UR3It2IdvtdVB1EELEgGpJYz4E3vxC/IQAAAAAAAAAAQH59oZ1t+3TtNx5ZjCF0aX0s23i0c5y7prT3icarWn3j0p0a67ddaVzf+q97r9243Ppr3pC27azduG3d+y+10tjy9/gvjTlbNd6jMUerxuc0fgFVGJtGaC8AAA==
   </data>
  </layer>
  <layer name="Grass" width="41" height="74">
@@ -27,7 +27,7 @@
  </layer>
  <layer name="Water" width="41" height="74">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WwQ2CQBBA0U3oTakErQTtRDqxLfdCYrgtI+OSvJfMFX5mCdlSAAAAAAAAAADgvKahlFvD3AeNv2hc6oxJnZf6nmudV2Nj5i5b9/ePXUYas3bZc2PkO9ye91Gi+/sejRqj5vrsR+eNq/cJGnv+P66iZ555/9l75pmNe8/82Xlj9j030vgB3nPJ5GgvAAA=
+   H4sIAAAAAAAAC+3W0QmAIBRA0QftVpvUJjVKo7RW/rhAmfjoHPBXLypiBAAAAAAAAAAA5LVOEdvDoTFH41zWWMo4B258s38aczS2uIdfN7bYP40aW9nL3MfgjdWVoHHk97Fqcea9vDnzXkb+m/2l8QaCr/hVaC8AAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="41" height="74">
@@ -47,7 +47,7 @@
  </layer>
  <layer name="Collisions" width="41" height="74">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WzQ3CMAyG4RAJNuFnEZiFwbghtuDWURBiBVIJC2MSQloXLu8jRUFQWuejxQkBAAAAAAAAAAAAAAAA8DdPY6HmbRq7htl+vzQP0cUQLmks0+tVeM6t7PdL8xB9fbf4nl+rWp7y+TFd6xTbz9/FcevUavn1mVwzNUrt3exR0+x1PZc47n7RSnnKdW1N8r6uXY6z6/HK0Z7Pnldqk+vrukvkGK8chX3uRem3LtF5e+foRefdkuN+yqI+kBzXaWz+VEONRz+Ymkc/mBo5jqef61/kaPucfv/Ta68ca/3a9rlcny71bK8cW/eNtb6jP7frrv1PfrtfzOU5dH/Wuv5v992587X27N4hsw8v5Tk0v7H3+TnVeAcD7aOgaC8AAA==
+   H4sIAAAAAAAAC+3W6w3CMAxG0VAJNuGxCMzCbohJGKViB1IhS5YVN03jwp97pCrQp/NB66YEAAAAAAAAAAAAAAAAxNvn5aDGa15uDaM93ht7HPNyUmPv8d7Yw+bXqpanbH8MKT2HdTVGzFOfx8tvzPW9CzVK7a/d9/s02vlE/F8mXp5yXVuTrNe1y352PlE52vPZ80ptcn1dt0f2icpR2PteeL+1R+cdnWMUnXdLjvcti5ohOZ7zcvlTDTWR/WArkf1gK+TYT9/Xv8ix1Odk/dznqBxr/dr2uVKf9np2VI6t7421vqO323nXnpNL3xdLea59P2ud/9L37tL5Wnu28OZt81ybX8Tz4gMQEzpkaC8AAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="41" height="74">

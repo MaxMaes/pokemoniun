@@ -31,6 +31,10 @@ public class BoatChooserDialog extends Frame {
 		{
 			m_locations.add("Vermillion City - $10k") ;
 		}
+		else
+		{
+			m_locations.add("One Island - canceled") ;
+		}
 		if (!travel.equalsIgnoreCase("johto"))
 		{
 			m_locations.add("Olivine City - $10k") ;
@@ -46,6 +50,75 @@ public class BoatChooserDialog extends Frame {
 		if (!travel.equalsIgnoreCase("canalave"))
 		{
 			m_locations.add("Canalave - $175k") ;
+		}
+		else
+		{
+			m_locations.add("Iron Island - canceled") ;
+		}
+		if (!travel.equalsIgnoreCase("snowpoint"))
+		{
+			m_locations.add("Snowpoint - $175k") ;
+		}
+		else
+		{
+			m_locations.add("Resort Area - canceled") ;
+		}
+		if (travel.equalsIgnoreCase("navel"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("One Island - $10k") ;
+		}
+		if (travel.equalsIgnoreCase("iron"))
+		{
+			m_locations.clear();
+			m_locations.add("Canalave - $10k") ;
+		}
+		if (travel.equalsIgnoreCase("one"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("Two Island - $10k") ;
+			m_locations.add("Three Island - $10k") ;
+			m_locations.add("Four Island - $10k") ;
+			m_locations.add("Five Island - $10k") ;
+			m_locations.add("Navel Rock") ;
+		}
+		if (travel.equalsIgnoreCase("two"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("One Island - $10k") ;
+			m_locations.add("Three Island - $10k") ;
+			m_locations.add("Four Island - $10k") ;
+			m_locations.add("Five Island - $10k") ;
+		}
+		if (travel.equalsIgnoreCase("three"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("One Island - $10k") ;
+			m_locations.add("Two Island - $10k") ;
+			m_locations.add("Four Island - $10k") ;
+			m_locations.add("Five Island - $10k") ;
+		}
+		if (travel.equalsIgnoreCase("four"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("One Island - $10k") ;
+			m_locations.add("Two Island - $10k") ;
+			m_locations.add("Three Island - $10k") ;
+			m_locations.add("Five Island - $10k") ;
+		}
+		if (travel.equalsIgnoreCase("five"))
+		{
+			m_locations.clear();
+			m_locations.add("Vermillion City - $10k") ;
+			m_locations.add("One Island - $10k") ;
+			m_locations.add("Two Island - $10k") ;
+			m_locations.add("Three Island - $10k") ;
+			m_locations.add("Four Island - $10k") ;
 		}
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
@@ -109,11 +182,20 @@ public class BoatChooserDialog extends Frame {
 				{
 					txt = "at least 16 badges";
 				}
-				else if (choice.contains("Canalave"))
+				else if (choice.contains("Canalave") || choice.contains("Snowpoint"))
 				{
 					txt = "at least 20 badges";
 				}
-				final ConfirmationDialog confirm = new ConfirmationDialog("Are you sure you want to travel?\nYou need "+ txt +" otherwise I can't take you with me!");
+				else if (choice.contains("Navel"))
+				{
+					txt = "an admin level > 5";
+				}
+				String note = "Are you sure you want to travel?\nYou need "+ txt +" otherwise I can't take you with me!";
+				if (choice.contains("One") || choice.contains("Two") || choice.contains("Three") || choice.contains("Four") || choice.contains("Five") || choice.contains("Iron") || choice.contains("Resort"))
+				{
+					note = "This trip is canceled.\nWe will resume travel when the wheater calms down.\nPick another one.";
+				}
+				final ConfirmationDialog confirm = new ConfirmationDialog(note);
 				confirm.addYesListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)

@@ -1339,25 +1339,25 @@ public class GameClient extends BasicGame
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
-					message.addInt(97);
+					message.addString("97");
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GOOD))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
-					message.addInt(98);
+					message.addString("98");
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_GREAT))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
-					message.addInt(99);
+					message.addString("99");
 					m_session.send(message);
 				}
 				else if(key == KeyManager.getKey(Action.ROD_ULTRA))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
-					message.addInt(100);
+					message.addString("100");
 					m_session.send(message);
 				}
 		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))

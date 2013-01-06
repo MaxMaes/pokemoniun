@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="23" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Snowpoint Gym Set.tsx"/>
+ <tileset firstgid="1751" source="Oreburgh Gym Set.tsx"/>
+ <tileset firstgid="4091" source="SinnohSet7.tsx"/>
+ <tileset firstgid="5867" source="normal6.tsx"/>
+ <layer name="Walkable" width="23" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3TMQ7AIAgFUFNv0fR6PWuHnsitOyn44WPiAAmT+kK+2lrVTnUferPno1323M4oy2Zn1eync/bbdXv8rHlysGw2HzRvNB85K2LP8mFsKx/0DLJP5mPN6rXHQtvzNjLfScSWObA2++ctG501YqP3F7EzG7GvU++y97NX1QdHOc2hgAsAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="23" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2TSw6CMBRFLxEGrEAKu3PqCtQZ+3AV/lbhwEX4W4MmeieYhpRWeK8JA05yJyXcvpz0ARND2KXAnjkwR+aU6nVf2XVj7syDeSp2zzOgYAxTMlWm192w1K/8sY3YHZOxOjkL7754vn0C/4aczJKew1hovZN//fg8dOHy43Ii8WATY3fafoZ46KLtR8uDTaLUKd0jH6E96ktoVokT7VnHgtY7aXgZ4O3Iwsi7q9J9Xk/dWOXAmtnket0Svtihy52ACwAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="23" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Svw5BMRSHz+31Z2DgCSTEgEEMBk9iwGD2LBg8EAYxeARewSCGyyC0icaPtOfWvTck4kua0/T0nDZfS0QUeEQnL9moqQmiukg2anpy3hfJRs1Yzici2aiZy/lCmCNH1Lpfopz69g3MXOUbZJmh4PK+b+/dkrmOsA8Fl28zvT+FyY/iHQ/IGvaZ/Cg4DxvmnHNMXxemvmH5v+pMdBJY9jWZ/z+AHPo5+89OsDd6GDK9p5Bz9YMeZkzvJeRsfl5BDyum5mi5dylDNLo7UbGSeeTQg+0dFNW0210R9FBj6rsReqOHnmO99oBD8bqGfsYR7ubKnOm9j3nugak3eQhzYvPzbbYFol0hfC0KuSJRvhi+9seNG5Kp+umACwAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="23" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9WVS27CMBRFLUwH2QBToLRrYMBCGLGCrAQB7WIodIBaYBfZBN9sgGvhSMnT8y8fBE86Chj75OViOUI0V2nn9dzK63KPpRDLthA/YAXW4BdMZDX3FOsTXGfyzhwswJce/7b4bW61dqMdf/LOP9iCnR7fy+J8H3c274C1R3DSnMEFXDWp5L2cO8nNU9cucu2BvuYdDMCH5rNdnG9yc/euUrTvt1Y1X5RbT/seOtz02RIyNjK46y5b3r75RIZ5tr5981E5JMy4KxMuX9/fMrdp/2XjNJ+o5d6zpryr7vV832V8Zfr27T/EbVqnPsckb/o9xM1VaGZl3L73sLm55+a8pnwedZ407Xb9/66s4yc4Y0OLvidcZ1WIl1bdmXB9N1GZ25fQNTfptN8ygAsAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="23" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3IMREAMAgEsJeAfwtFJBLYOnDJmAQAgB9eJV37cdsASF1wKIALAAA=
+  </data>
+ </layer>
+</map>

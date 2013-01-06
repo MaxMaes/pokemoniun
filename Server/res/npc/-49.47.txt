@@ -1,7 +1,7 @@
 [npc]
 Roxanne
 down
-102
+182
 6
 2
 Geodude,50,Graveler,50,Nosepass,50

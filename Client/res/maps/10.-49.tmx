@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="24" height="18" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="28" height="18" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
@@ -15,24 +15,24 @@
  <tileset firstgid="1025" source="normal2.tsx"/>
  <tileset firstgid="2049" source="normal5.tsx"/>
  <tileset firstgid="3073" source="normal3.tsx"/>
- <layer name="Walkable" width="24" height="18">
+ <layer name="Walkable" width="28" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMNHjDSxtzedgh+A0bJn4HxTA+SJ0uO0SMl51487GZjQ17IqnVIdP8t0juRsfv0eyjxP0vgfgVEL/G4x9yzPeC8jmBNBcQc2OxH6aGHPNhYawJpLWAWBuL+Z5kmA8Ld/QwxhY370kIH3xAiAg1ADbGgCnABgAA
+   H4sIAAAAAAAAC2NgGAWjYBSMAlTwhpc+9vCwQ/AbNkz8DophfJA6XXaIGC87+fZhswsb9kRSq0Ml+94i+Qsdv0ezn5r+ewnEr4D4NR7/UsM+LyifE0hzATE3FvfA1FDDPlgcaQJpLSDWxmKfJxXsg8Ubehxhi9v3FIQnPiBEhh4Ae1V1Z+AHAAA=
   </data>
  </layer>
- <layer name="random" width="24" height="18">
+ <layer name="random" width="28" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAgYGb9aBdsHAgV9sDAw/2fCrAcn/IqAGlz5aqifVTeT4AR1kcjAwZAFxNgflZmEDnUBzu4C4m4D5AIFpnFjABgAA
+   H4sIAAAAAAAAC2NgGAWjYBSMgsEPvFkH2gVDB/xiY2D4yYZfDUj+FwE1xABC9lCqHh2Q6mZq+BEdZHIwMGQBcTYH9c3GBjqB9nQBcTeJ9gEA2RilaOAHAAA=
   </data>
  </layer>
- <layer name="Collisions" width="24" height="18">
+ <layer name="Collisions" width="28" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGgCIw7KMSHze9kYGD6QgfvYiDN/LVCdADvpeB0R5jPyMDCcZUMVu8XEwFADxLVMCDEDVgaG+0yo6s6xQfQTMh8d/AKa8xuI/wDxXyD+B8X/mYjTT4o8ITCYzOcEhjEXK3716GpIMV8TqE+LgPnoagZD+ODDxKgBAIACAW7ABgAA
+   H4sIAAAAAAAAC2NgGAWjYBQQA4w4KMek2tfLxsDwgQzcx0aefWuB+gTYScfryLCPkYeB4SwbqtgtJgaGGiCuZUKIGbAyMNxnQlV3jg2in1T70MEvoLm/gfgPEP8F4n9Q/J+JOP2k2kdL/QNpHycwjrhY8atHV0OJfZpAc7QI2IeuZiiEJz5MrBpkAACrwCwb4AcAAA==
   </data>
  </layer>
- <layer name="random2" width="24" height="18">
+ <layer name="random2" width="28" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBTgA4w8CIwM3rMyMHxgRfC5WRnIAsjm72JiYOAFmsMHxPxsDAwCIAxk7weKa5Np/igYBcMVAADbrMylwAYAAA==
+   H4sIAAAAAAAAC2NgGAWjYBQMZsDIg8DI4D0rA8MHVgSfm5WBKgDZvl1MDAy8QHP5gJifjYFBAISB7P1AcW0q2TcKRsEooA0AADpxyQzgBwAA
   </data>
  </layer>
 </map>

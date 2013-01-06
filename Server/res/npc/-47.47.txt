@@ -1,7 +1,7 @@
 [npc]
 Wattson
 down
-102
+206
 5
 2
 Voltorb,50,Electrike,50,Magneton,50,Manectric,50

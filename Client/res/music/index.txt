@@ -1,4 +1,4 @@
-﻿introandgym:20-Title&Gym.ogg
+introandgym:20-Title&Gym.ogg
 newbark:1-New_Bark.ogg
 cherrygrove:2-Cherrygrove_Town.ogg
 violet:3-Violet_Town.ogg

@@ -2,14 +2,12 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.TextField;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
@@ -205,25 +203,20 @@ public class ChatDialog extends Frame
 	private void chatTypeActionPerformed(ActionEvent evt)
 	{
 		if(m_inputBox.getText() != null && m_inputBox.getText().length() != 0)
-			if(m_possibleChats.getSelected().equalsIgnoreCase("global"))
-			{
-				if(m_inputBox.getText().charAt(0) == '/')
-					ModerationManager.parseLine(m_inputBox.getText().substring(1));
-				else
-				{
-					// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
-					ClientMessage message = new ClientMessage(ServerPacket.CHAT);
-					message.addInt(0);
-					message.addString(m_inputBox.getText());
-					GameClient.getSession().send(message);
-				}
-			}
-			else if(m_inputBox.getText().charAt(0) == '/')
+			if(m_inputBox.getText().charAt(0) == '/')
 				ModerationManager.parseLine(m_inputBox.getText().substring(1));
+			else if(m_possibleChats.getSelected().equalsIgnoreCase("global"))
+			{
+				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
+				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
+				message.addInt(1);
+				message.addString(m_inputBox.getText());
+				GameClient.getSession().send(message);
+			}
 			else
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
-				message.addInt(1);
+				message.addInt(2);
 				message.addString(m_possibleChats.getSelected() + "," + m_inputBox.getText());
 				GameClient.getSession().send(message);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());

@@ -51,7 +51,6 @@ import org.pokenet.client.constants.Options;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.protocol.ServerMessage;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.LoginScreen;
 import org.pokenet.client.ui.UserInterface;
@@ -142,8 +141,8 @@ public class GameClient extends BasicGame
 				options.put(Options.DISABLE_WEATHER, String.valueOf(false));
 			}
 			m_instance = new GameClient(GAME_TITLE);
-			m_soundPlayer = new SoundManager();
-			m_soundPlayer.mute(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
+			m_soundPlayer = new SoundManager(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
+			// m_soundPlayer.mute();
 			m_soundPlayer.start();
 			// m_soundPlayer.setTrack("introandgym");
 			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
@@ -153,7 +152,7 @@ public class GameClient extends BasicGame
 			e.printStackTrace();
 			m_instance = new GameClient(GAME_TITLE);
 			m_loadSurroundingMaps = false;
-			m_soundPlayer = new SoundManager();
+			m_soundPlayer = new SoundManager(false);
 			m_soundPlayer.mute(false);
 			m_soundPlayer.start();
 			// m_soundPlayer.setTrack("introandgym");

@@ -1,6 +1,7 @@
 package org.pokenet.client.backend;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.HashMap;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
@@ -15,9 +16,9 @@ public class SoundManager extends Thread
 {
 	private static String m_audioPath = "res/music/";
 	protected String m_trackName;
-	private HashMap<String, String> m_fileList;
-	private HashMap<String, AudioImpl> m_files;
-	private HashMap<String, String> m_locations;
+	private HashMap<String, String> m_fileList = new HashMap<String, String>();
+	private HashMap<String, AudioImpl> m_files = new HashMap<String, AudioImpl>();
+	private HashMap<String, String> m_locations = new HashMap<String, String>();
 	private boolean m_mute = false;
 
 	private boolean m_tracksLoaded = false, m_trackChanged = true, m_isRunning = false;
@@ -25,13 +26,12 @@ public class SoundManager extends Thread
 	/**
 	 * Default Constructor
 	 */
-	public SoundManager()
+	public SoundManager(Boolean muted)
 	{
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		m_audioPath = respath + m_audioPath;
-		m_files = new HashMap<String, AudioImpl>();
 		loadFileList();
 		loadLocations();
 	}
@@ -62,7 +62,7 @@ public class SoundManager extends Thread
 			if(!m_mute)
 				while(!m_tracksLoaded)
 					loadFiles();
-			if(m_trackChanged)
+			if(m_trackChanged && m_tracksLoaded)
 				try
 				{
 					m_trackChanged = false;
@@ -149,7 +149,6 @@ public class SoundManager extends Thread
 		try
 		{
 			BufferedReader stream = FileLoader.loadTextFile(m_audioPath + "index.txt");
-			m_fileList = new HashMap<String, String>();
 
 			String f;
 			while((f = stream.readLine()) != null)
@@ -178,19 +177,16 @@ public class SoundManager extends Thread
 	 */
 	private void loadFiles()
 	{
-		Audio a;
+		Audio audio;
 		for(String key : m_fileList.keySet())
 			try
 			{
-				a = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
-				/* For some reason it reads intro and gym wrong so do this to fix it */
-				if(key.endsWith("introandgym"))
-					key = "introandgym";
-				m_files.put(key, (AudioImpl) a);
+				audio = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
+				m_files.put(key, (AudioImpl) audio);
 			}
-			catch(Exception e)
+			catch(IOException ioe)
 			{
-				e.printStackTrace();
+				ioe.printStackTrace();
 			}
 		m_tracksLoaded = true;
 	}
@@ -206,7 +202,6 @@ public class SoundManager extends Thread
 		try
 		{
 			BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt");
-			m_locations = new HashMap<String, String>();
 
 			String f;
 			while((f = stream.readLine()) != null)

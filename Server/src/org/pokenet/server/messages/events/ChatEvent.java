@@ -14,21 +14,34 @@ public class ChatEvent implements MessageEvent
 
 	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
 	{
-		Player p = Session.getPlayer();
+		Player player = Session.getPlayer();
 		int type = Request.readInt();
-		String msg = Request.readString();
+		String message = Request.readString();
 		switch(type)
 		{
 			case 0: // local
-				if(!p.isMuted())
+				if(!player.isMuted())
 				{
-					ServerMap m = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY());
-					if(m != null)
-						m.sendChatMessage("<" + p.getName() + "> " + msg, p.getLanguage());
+					ServerMap map = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getMapX(), player.getMapY());
+					if(map != null)
+						map.sendChatMessage("<" + player.getName() + "> " + message, player.getLanguage());
 				}
 				break;
-			case 1: // private
-				String[] details = msg.split(",");
+			case 1: // global
+				if(!player.isMuted())
+				{
+					for(Session session : ActiveConnections.allSessions().values())
+						if(session.getPlayer() != null)
+						{
+							ServerMessage globalChat = new ServerMessage();
+							globalChat.Init(50);
+							globalChat.addInt(0);
+							globalChat.addString("<" + player.getName() + "> " + message);
+							session.Send(globalChat);
+						}
+				}
+			case 2: // private
+				String[] details = message.split(",");
 				String targetPlayer = details[0];
 				Player target = ActiveConnections.getPlayer(targetPlayer);
 				if(target != null)
@@ -36,7 +49,7 @@ public class ChatEvent implements MessageEvent
 					ServerMessage targetMessage = new ServerMessage();
 					targetMessage.Init(50);
 					targetMessage.addInt(1);
-					targetMessage.addString(p.getName() + "," + "<" + p.getName() + "> " + details[1]);
+					targetMessage.addString(player.getName() + "," + "<" + player.getName() + "> " + details[1]);
 					target.getSession().Send(targetMessage);
 				}
 				break;

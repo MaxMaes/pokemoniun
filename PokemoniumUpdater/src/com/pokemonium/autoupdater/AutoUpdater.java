@@ -28,31 +28,44 @@ import org.ini4j.InvalidIniFormatException;
 
 public class AutoUpdater
 {
+	private String updatelinks = "http://dl.dropbox.com/u/135149666/Pokemonium%20Updater/updatelinks.ini";
+	private String versionlog = "http://dl.dropbox.com/u/135149666/Pokemonium%20Updater/versionlog.txt";
+
+	
 	private String latestVersion = "";
 	private String currentVersion = "";
 	private int versionidx = 0;
 	private int latestVersionidx = 0;
-	private ArrayList<String> versions;
 	private boolean updatedUpdater = false;
-
+	
+	private ArrayList<String> versions;
+	private Ini updatelinksini;
+	
 	public AutoUpdater()
 	{
 		if(checkForUpdate())
 		{
-			System.out.println("A new version is available, do you want to update? This will update your game to the latest available version.");
-			System.out.println("[Y] / [N]");
-
-			// Y or N
-			Scanner s = new Scanner(System.in);
-			String str = s.nextLine();
-			if(str.equalsIgnoreCase("y"))
+			try
 			{
-				update();
+				updatelinksini = new Ini(new InputStreamReader(new URL(updatelinks).openStream()));
 			}
-			else
+			catch(InvalidIniFormatException e)
 			{
-				// start game
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			catch(MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch(IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("A new version is available, please wait while the game is being updated to the latest version.");
+			update();
 		}
 		else
 		{
@@ -147,33 +160,15 @@ public class AutoUpdater
 	private boolean isForced(int i)
 	{
 		Boolean forced = true;
-		URL dllinksURL;
-		try
+		Section s = updatelinksini.get(versions.get(i));
+		String forc = s.get("forced");
+		if(forc.equalsIgnoreCase("NO"))
 		{
-			dllinksURL = new URL("https://dl.dropbox.com/u/50041917/testlinks.ini");
-			Ini updateLinks = new Ini(new InputStreamReader(dllinksURL.openStream()));
-			Section s = updateLinks.get(versions.get(i));
-			String forc = s.get("forced");
-			if(forc.equalsIgnoreCase("NO"))
-			{
-				forced = false;
-			}
-			else if(forc.equalsIgnoreCase("YES"))
-			{
-				forced = true;
-			}
+			forced = false;
 		}
-		catch(MalformedURLException e)
+		else if(forc.equalsIgnoreCase("YES"))
 		{
-			e.printStackTrace();
-		}
-		catch(InvalidIniFormatException e)
-		{
-			e.printStackTrace();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
+			forced = true;
 		}
 		return forced;
 	}
@@ -181,25 +176,8 @@ public class AutoUpdater
 	private void downloadUpdate(int i)
 	{
 		String link = "";
-		try
-		{
-			URL dllinksURL = new URL("https://dl.dropbox.com/u/50041917/testlinks.ini");
-			Ini updateLinks = new Ini(new InputStreamReader(dllinksURL.openStream()));
-			Section s = updateLinks.get(versions.get(i));
-			link = s.get("link");
-		}
-		catch(InvalidIniFormatException e)
-		{
-			e.printStackTrace();
-		}
-		catch(FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		Section s = updatelinksini.get(versions.get(i));
+		link = s.get("link");
 		System.out.println("Downloading update from: " + link);
 
 		try
@@ -296,7 +274,7 @@ public class AutoUpdater
 			System.out.println("The updater was updated, please restart the game to resume...");
 			System.out.println("Press any key to continue");
 			Scanner s = new Scanner(System.in);
-			String str = s.nextLine();
+			s.nextLine();
 			System.exit(0);
 		}
 	}
@@ -324,7 +302,7 @@ public class AutoUpdater
 		try
 		{
 			// URL of the versionlog.txt
-			URL versionURL = new URL("https://dl.dropbox.com/u/50041917/testlog.txt");
+			URL versionURL = new URL(versionlog);
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(versionURL.openStream()));
 			String str;

@@ -43,6 +43,7 @@ public class NpcBattleField extends BattleField
 
 		/* Start the battle */
 		// TcpProtocolHandler.writeMessage(p.getTcpSession(), new BattleInitMessage(false, getAliveCount(1)));
+		m_player.ensureHealthyPokemon();
 		ServerMessage startBattle = new ServerMessage(m_player.getSession());
 		startBattle.Init(18);
 		startBattle.addBool(false);
@@ -618,9 +619,9 @@ public class NpcBattleField extends BattleField
 		{
 			/* Request Pokemon replacement from player */
 			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchRequest());
-			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
-			switchOccur.Init(32);
-			switchOccur.sendResponse();
+//			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
+//			switchOccur.Init(32);
+//			switchOccur.sendResponse();
 		}
 		else /* Request Pokemon replacement from npc */
 		if(getAliveCount(1) == 0)

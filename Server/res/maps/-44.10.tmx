@@ -26,7 +26,7 @@
  </layer>
  <layer name="Walkable" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YwQ2CMBQG4FepSPQgKyCJuoVBNnAlN/DOKM7iEcfgmdLQVA4cbKH1/5KXWIhp/7wGSIkAAOCfCUm04kqkGj/3qkJWcJYDVymHayFnanjtFWe5ctVyyCKMvjUB5WuMPab3mx7r3iXy+z9LNra/9JrN3tn3IG6Xnb+5Hpm/uZbuls69AoBlwrsH5mbuwRLPaoBJ2oTo3ZcLMX834b03j/t6+D11f8XWK1950pxoY1SW+5nXpSNnOBl1dpCpdfhMHeMj04ewztLs8S/5ylRZZ2mFddYbOtGfgdYRZbJ7FqPXVhUAAMStA36D85ZEJQAA
+   H4sIAAAAAAAAC+3YYQqCMBQH8Lc0k/qQVzChukWYN+hK3aDvna2PdozeyNEYEgZu09f/Bw8UhO3PG5uMCAAA/plKiRZcSRp7JuMpOcuOqxKS6b4lqjnLmauxMimrb/qbufg2V9M7dz3OKZ9h5tzXuznmgd+dNuHGuuXhxpq6SxZ7BgDThLMHYrPXYIW9GmCQNiF6duWD5P8mnHtxXJef56HrS1qvQuXJCqKVVXkRZlyf9pzhYNXRQ6bW457aJ0QmTTl3ae77mEJlqp27tFLQXa+mujvQRlAmt2cSPdbvAgAA2V7v83KrRCUAAA==
   </data>
  </layer>
  <layer name="Water" width="53" height="45">
@@ -37,6 +37,11 @@
  <layer name="Walkable" width="53" height="45">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3V7QpAMBTG8VMjbbeBC8Olo1yGFWp8kJdltv6/Ovky9TydiQgAAAAA7PVaZLAz6tBJ/FFmeeYmbA6ftk6FWfblTqy7Uyf7iXV3MXTqb96dGDq5Ga9kSrFTac9Uh7nz/hfcjPXDTNN6Z//SyYeU/1l0+rfy5fcIAEhfk4m0drosdBIAAAD/ZuP+/nNEJQAA
+  </data>
+ </layer>
+ <layer name="Grass" width="53" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PwQkAIBADwevA/ouxNxE5fAo+wwzkn60CgGuOsxRpPVtKU3ck9PT/hJaXtL60HgAAAAAAAP4sIXffUUQlAAA=
   </data>
  </layer>
  <layer name="Collisions" width="53" height="45">

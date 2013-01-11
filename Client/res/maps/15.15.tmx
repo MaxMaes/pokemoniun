@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="26" height="31" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
@@ -18,34 +17,37 @@
  <tileset firstgid="1025" source="normal2.tsx"/>
  <tileset firstgid="2049" source="normal3.tsx"/>
  <tileset firstgid="3073" source="normal5.tsx"/>
- <layer name="walkable" width="26" height="31">
+ <tileset firstgid="4097" source="Buildings11.tsx"/>
+ <tileset firstgid="15521" source="Path0.tsx"/>
+ <tileset firstgid="15817" source="Water02.tsx"/>
+ <tileset firstgid="16009" source="Fences01.tsx"/>
+ <tileset firstgid="16443" source="Buildings7.tsx"/>
+ <tileset firstgid="16795" source="Buildings8.tsx"/>
+ <tileset firstgid="17387" source="Cliffs01.tsx"/>
+ <tileset firstgid="17617" source="Buildings1.tsx"/>
+ <layer name="Walkable" width="26" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMAvIBCxTTww5a2zVqz8DYc5QZFeMDe3ggmNbgDg8EUwoI+Yta9hACQ92e2zwIs3HhoWAPLB3cxmEWrfyDzx5q+G8w2UMNgMseagN89iymYqFNjzKTWgAAJS8JbZgMAAA=
-  </data>
- </layer>
- <layer name="random" width="26" height="31">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO2UUQqDMBBEF/pVifc/jPEk8bO3CIW6mIFhtZC0EfKxDwYxBp4TXEUcx3EcZ0yWIBIpr+eRaNaXWWSdz+uaGlLlvrw73nu2cES9saSXB13g0CS9L+nlsV00+QaPgk7cLTd4HlPdPnTCFb7U2fPN2+pp/VZH79PKHX2uzrRXH56VK/7pw7NhfXgGfuljz4Lh+cczfp9aj51zC58d9vB/SD0fu1YmpZgMAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMgsENWHCwR+2hjj0LbUg3G6QHGeMSx4dh4CgzKsZnj5ctBJNjDyG/IIMgWwimFCD7i5b2IIPhag/MbFx4KNiDnA6wmUUr/+Czh1L/DTZ7KAX47KEmIGSPlyt17aE1oJY9ACnSYfSYDAAA
   </data>
  </layer>
  <layer name="Water" width="26" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMglEwCgYnWMjJwPAECcPAE07iMTGAmYuB4Q4PAsMAshiyOLmAGHuoAQaTPdSyixCgpz3U8l8jGwNDExQ3s9HOHlLMGer2oIcpreyhdvyQ4h5SQSOJYUGuX0DlATHm4DMfAD7Ozo2YDAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCgYn8LRlYPBCwjDgZUs8JgYEAtUFIWEYCLIlHo/aQzt7iAFD0R58eullDyVqB6M9wzF+qJ1P6WkPMf5FxgCxPvVpmAwAAA==
   </data>
  </layer>
- <layer name="random2" width="26" height="31">
+ <layer name="Walkable" width="26" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO2SbQqAIBBEpaKbdJA+LlJZ96rO0r0ySohFcNZMinwwf2TXN4hCHKSWmLDt7MmYO5QM9HC73fUgs9edIuHtUQ/STyrHoDIm/H6mt0NwdbzVQ10cXOZDe9B3W9PjzyHRILMrt3wkQphyIZY8ev7m0feWJPv57NGpPS3JUx7TeWhPpVKfaRy9iKdT6c9Iz57qZn/U45tQni+xAUUCr0WYDAAA
+   H4sIAAAAAAAAC1trw8CwDogX0gizMEDAViB7G5n6iVEHA3uB7H10sIdU81WZSFNPjj3HbBkYjgPxCVvy7CLXb+TYMVTsIQUMBXsGMg2Q41dsbqI1GLWHMnuoGefYgJ4dA8MNW+qaORLsMaOTPXY0sgcWTg/QMEj8ui317ITZ8wENm9HIHnc7VEwr/2ATh9mDHqbUtAc53NDDlJr22CHZgxyeHnbk2TPU8ws6cKMgLOgNABGdW6yYDAAA
   </data>
  </layer>
  <layer name="Collisions" width="26" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO2WWU7DQAyGrTaVohwAeAVa4ABsD6wtCA7A9sDaTRyCteEYUBC0HKQLBymFc/BHZIQ7OMmU5BFLn5JOPf5ijVM1T0QFio5Dh+gIHIMTcOoYbEJ00kRdUMR9ySD/AnUvwRW4BjdDemq4dyNyz8E96j6AOngET87g91Geis9mOvrZsqnv61QqOGc8QzQBJkE28+Np+rwyzxKedRmsgFWw5shrUqyjdh4UwAbzKN6YZ8QmGmWM2fKaFGeoXQQlUI7wzKLGHJgHC2DRltekuEXtGnDBXYRnBzV2wR7YBwe2vMbDO7uchneOQR4pX0KfhTI+VzSqIR4pX6IaMnM8dE/TED6XDcM9XbanlTaDn2PHcE/r3xPbw2eC44IPxifb08d9zxAV+kwpT5vlRMW0RTRjhed0tdp/8WzBsT2Eh/dl6jHpRffwXkw9Jr0k4fFC9WSBTIAzCY/qKQtyAb4kPHooX5jH9d+VOB5pNqRehp1r/X+PNBtJePQwOZ8kPCbnk4Qnzvmovc/gxa/hXRvW77pxzkftbYE2o2MN1g36HQrzSO95D9d3Rt9fVzl6L194zUdcmAwAAA==
+   H4sIAAAAAAAAC+2TyU4CQRCGS88CcYl4VC/DQ4iBZCbxUXwBt2iiF41gjOtFWS4uF4ULgl70qLyV/hOZTNHT3VMgY2JiJV96hu6qj56ubiwRNYEkDh2iEiiDI0eWM+sSZUEbjk6Mp1D4Hj/92jmiMTCei87bPK9wvMV4Vnp11lF7A2yCrVx03uY5Xg6Ji06e6Bm85M1rKkWiKqiBejH0pHqk3f71k/hGU2AazDjm39S4Qe1bcAfumSdgTvHozlzSBw+o/QgaoCnw6M7c1Ac8Wqj9BNqgI/DoztzUB34EZ8fxz9Hk0a3XofbCO94/FLoWj269jq6l53ionpQQ3pcTwpwsy8m6Mvg5qv/Vxr8nGU8GLDAWWc68MmcjCLWnTPfXFGvCPle/zTAeiUt3l9IJ74fvReqRuv6SJ3DZfKPycJ/Ek+ndlWE9JpduL4P0tR+rv+TRhepKwjOK/Wx7RDte+L6L5z0vuu6n+9lHzQNWt4TnsuIZdj9Bnj+eoOYpOAPn4AJcev1rB/XwnGC8Qs1rUAFVUAN1z1z/Cz1+f9+YDAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="26" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMglEwCkbBKBgFo2BogkQWBoYkIE5moZ0dTUCzm5FwCw3tGskAAM0/ooSYDAAA
+   H4sIAAAAAAAAC+3NsRGAIABD0axGwVja6hZohVZKBWxnGkaIWuTdpc0H7EspABu3B20n8//gTnHn4v/NFXGn8r9xXdwxMzMzG6YIzFHfWdhYX+j8zQNhERD2mAwAAA==
   </data>
  </layer>
 </map>

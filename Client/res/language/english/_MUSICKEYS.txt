@@ -23,7 +23,7 @@ Pallet Town:pallet
 Pewter City:pewter
 Viridian City:pewter
 Saffron City:pewter
-Vermillion City:vermillion
+Vermilion City:vermillion
 Cerulean City:vermillion
 Lavender Town:lavender
 Canalave City:canalave

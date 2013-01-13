@@ -86,6 +86,7 @@ public class ServerMessage
 		}
 		catch(IOException e)
 		{
+			e.printStackTrace();
 		}
 	}
 

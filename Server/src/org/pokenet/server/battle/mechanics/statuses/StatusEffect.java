@@ -189,7 +189,7 @@ public abstract class StatusEffect implements Cloneable
 	 */
 	public String getDescription()
 	{
-		return null;
+		return " ";
 	}
 
 	/**

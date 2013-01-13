@@ -52,16 +52,17 @@ public class NpcBattleField extends BattleField
 		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
 		if(!m_player.isPokemonSeen(getActivePokemon()[1].getPokemonNumber() + 1))
 			m_player.setPokemonSeen(getActivePokemon()[1].getPokemonNumber() + 1);
-		/* Send enemy's Pokemon data */
-		sendPokemonData(p);
-		/* Set the player's battle id */
-		m_player.setBattleId(0);
 		/* Send enemy name */
 		// m_player.getTcpSession().write("bn" + m_npc.getName());
 		ServerMessage enemyName = new ServerMessage(m_player.getSession());
 		enemyName.Init(22);
 		enemyName.addString(m_npc.getName());
 		enemyName.sendResponse();
+		/* Send enemy's Pokemon data */
+		sendPokemonData(p);
+		/* Set the player's battle id */
+		m_player.setBattleId(0);
+		
 		/* Apply weather and request moves */
 		applyWeather();
 		requestMoves();
@@ -189,11 +190,15 @@ public class NpcBattleField extends BattleField
 			}
 	}
 
+	@SuppressWarnings("unused")
 	@Override
+	//TODO check this code with checking moves
 	public void informStatusApplied(Pokemon pokemon, StatusEffect eff)
 	{
 		if(m_finished)
 			return;
+		
+			
 		if(m_player != null)
 			if(getActivePokemon()[0].equals(pokemon))
 			{
@@ -202,7 +207,10 @@ public class NpcBattleField extends BattleField
 				receiveEffect.Init(29);
 				receiveEffect.addInt(0);
 				receiveEffect.addString(pokemon.getSpeciesName());
-				receiveEffect.addString(eff.getName());
+				if(eff == null)
+					receiveEffect.addString("");
+				else
+					receiveEffect.addString(eff.getName());
 				receiveEffect.sendResponse();
 			}
 			else if(pokemon.equals(getActivePokemon()[1]))
@@ -212,7 +220,11 @@ public class NpcBattleField extends BattleField
 				receiveEffect.Init(29);
 				receiveEffect.addInt(1);
 				receiveEffect.addString(pokemon.getSpeciesName());
-				receiveEffect.addString(eff.getName());
+//				System.out.println(pokemon.getSpeciesName() + ", " + eff.getName());
+				if(eff.getName() == null)
+					receiveEffect.addString("");
+				else
+					receiveEffect.addString(eff.getName());
 				receiveEffect.sendResponse();
 			}
 	}
@@ -230,7 +242,10 @@ public class NpcBattleField extends BattleField
 				removeEffect.Init(30);
 				removeEffect.addInt(0);
 				removeEffect.addString(pokemon.getSpeciesName());
-				removeEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffect.addString("");
+				else
+					removeEffect.addString(eff.getName());
 				removeEffect.sendResponse();
 			}
 			else if(pokemon.equals(getActivePokemon()[1]) && !getActivePokemon()[1].isFainted())
@@ -240,7 +255,10 @@ public class NpcBattleField extends BattleField
 				removeEffect.Init(30);
 				removeEffect.addInt(1);
 				removeEffect.addString(pokemon.getSpeciesName());
-				removeEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffect.addString("");
+				else
+					removeEffect.addString(eff.getName());
 				removeEffect.sendResponse();
 			}
 	}

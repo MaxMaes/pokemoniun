@@ -419,21 +419,21 @@ public class BattleCanvas extends Container
 		if(trainer == 0)
 		{
 			// The player's pokemon
-			if(status != "normal")
+			if(status.equalsIgnoreCase("poison") || status.equalsIgnoreCase("freeze") || status.equalsIgnoreCase("burn") || status.equalsIgnoreCase("paralysis") || status.equalsIgnoreCase("sleep"))
 			{
 				BattleManager.getInstance().getOurStatuses().put(BattleManager.getInstance().getCurPokeIndex(), status);
 				playerStatus.setImage(m_statusIcons.get(status));
 			}
-			else
+			else if (status.equalsIgnoreCase("normal"))
 			{
 				BattleManager.getInstance().getOurStatuses().remove(BattleManager.getInstance().getCurPokeIndex());
 				playerStatus.setImage(null);
 			}
 		}
 		else // The enemy's pokemon
-		if(status != "normal")
+		if(status.equalsIgnoreCase("poison") || status.equalsIgnoreCase("freeze") || status.equalsIgnoreCase("burn") || status.equalsIgnoreCase("paralysis") || status.equalsIgnoreCase("sleep"))
 			enemyStatus.setImage(m_statusIcons.get(status));
-		else
+		else if(status.equalsIgnoreCase("normal"))
 			enemyStatus.setImage(null);
 	}
 

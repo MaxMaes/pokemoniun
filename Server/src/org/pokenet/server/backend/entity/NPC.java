@@ -252,7 +252,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Electrode", lvl, PokemonNature.N_MODEST, 255, 0, 0, 255, 0, 0, "Rain Dance", "Taunt", "Thunder", "Explosion");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Jolteon", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 0, 255, "Thunderbolt", "Shadow Ball", "Hypnosis", "Extremespeed");
+					poke = Pokemon.getGymLeaderPokemon("Jolteon", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 0, 255, "Thunderbolt", "Shadow Ball", "Hypnosis", "Protect");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Electrode", lvl, PokemonNature.N_NAIVE, 0, 0, 0, 255, 0, 255, "Ancientpower", "Taunt", "Thunderbolt", "Explosion");
 					party[5] = poke;
@@ -268,7 +268,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Electrode", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Rain Dance", "Taunt", "Thunder", "Explosion");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Jolteon", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Thunderbolt", "Shadow Ball", "Crunch", "Hypnosis");
+					poke = Pokemon.getGymLeaderPokemon("Jolteon", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Thunderbolt", "Shadow Ball", "Crunch", "Protect");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Electrode", lvl, PokemonNature.N_NAIVE, 0, 0, 0, 0, 0, 0, "Ancientpower", "Taunt", "Thunderbolt", "Explosion");
 					party[5] = poke;
@@ -322,7 +322,7 @@ public class NPC extends Character
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Weezing", lvl, PokemonNature.N_BOLD, 0, 255, 255, 0, 0, 0, "Thunderbolt", "Flamethrower", "Will-O-Wisp", "Pain Split");
 					party[1] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Ariados", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 255, 0, 255, "Toxic Spikes", "Sucker Punch", "Strength", "Signal Beam");
+					poke = Pokemon.getGymLeaderPokemon("Ariados", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 255, 0, 255, "Toxic Spikes", "Sucker Punch", "Protect", "Signal Beam");
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Forretress", lvl, PokemonNature.N_RELAXED, 0, 255, 255, 0, 0, 0, "Toxic Spikes", "Rapid Spin", "Gyro Ball", "Explosion");
 					party[3] = poke;
@@ -338,7 +338,7 @@ public class NPC extends Character
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Weezing", lvl, PokemonNature.N_BOLD, 0, 0, 0, 0, 0, 0, "Thunderbolt", "Flamethrower", "Will-O-Wisp", "Pain Split");
 					party[1] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Ariados", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 0, 0, 0, "Toxic Spikes", "Sucker Punch", "Strength", "Signal Beam");
+					poke = Pokemon.getGymLeaderPokemon("Ariados", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 0, 0, 0, "Toxic Spikes", "Sucker Punch", "Protect", "Signal Beam");
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Forretress", lvl, PokemonNature.N_RELAXED, 0, 0, 0, 0, 0, 0, "Toxic Spikes", "Rapid Spin", "Gyro Ball", "Explosion");
 					party[3] = poke;
@@ -362,7 +362,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Espeon", lvl, PokemonNature.N_TIMID, 40, 0, 0, 216, 0, 255, "Calm Mind", "Psychic", "Earth Power", "Shadow Ball");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Hypno", lvl, PokemonNature.N_CALM, 255, 0, 200, 0, 56, 0, "Wish", "Seismic Toss", "Psychic", "Shadow Ball");
+					poke = Pokemon.getGymLeaderPokemon("Hypno", lvl, PokemonNature.N_CALM, 255, 0, 200, 0, 56, 0, "Wish", "Seismic Toss", "Psychic", "Protect");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Wobbuffet", lvl, PokemonNature.N_BOLD, 28, 0, 228, 0, 255, 0, "Encore", "Counter", "Mirror Coat", "Safeguard");
 					party[5] = poke;
@@ -378,7 +378,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Espeon", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Calm Mind", "Psychic", "Earth Power", "Shadow Ball");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Hypno", lvl, PokemonNature.N_CALM, 0, 0, 0, 0, 0, 0, "Wish", "Seismic Toss", "Psychic", "Shadow Ball");
+					poke = Pokemon.getGymLeaderPokemon("Hypno", lvl, PokemonNature.N_CALM, 0, 0, 0, 0, 0, 0, "Wish", "Seismic Toss", "Psychic", "Protect");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Jynx", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Ice Beam", "Nasty Plot", "Lovely Kiss", "Psychic");
 					party[5] = poke;
@@ -396,7 +396,7 @@ public class NPC extends Character
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Houndoom", lvl, PokemonNature.N_HASTY, 0, 255, 255, 0, 0, 32, "Pursuit", "Sucker Punch", "Thunder Fang", "Fire Blast");
 					party[2] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 255, 0, 80, 0, 180, 0, "Wish", "Crunch", "Flamethrower", "Toxic");
+					poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 255, 0, 80, 0, 180, 0, "Wish", "Protect", "Flamethrower", "Toxic");
 					party[3] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Rapidash", lvl, PokemonNature.N_CALM, 255, 16, 255, 0, 0, 0, "Flare Blitz", "Hypnosis", "Megahorn", "Will-O-Wisp");
 					party[4] = poke;
@@ -412,7 +412,7 @@ public class NPC extends Character
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Houndoom", lvl, PokemonNature.N_HASTY, 0, 0, 0, 0, 0, 0, "Pursuit", "Sucker Punch", "Thunder Fang", "Fire Blast");
 					party[2] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 0, 0, 0, 0, 0, 0, "Wish", "Crunch", "Flamethrower", "Toxic");
+					poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 0, 0, 0, 0, 0, 0, "Wish", "Protect", "Flamethrower", "Toxic");
 					party[3] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Rapidash", lvl, PokemonNature.N_CALM, 0, 0, 0, 0, 0, 0, "Flare Blitz", "Hypnosis", "Megahorn", "Will-O-Wisp");
 					party[4] = poke;
@@ -507,7 +507,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Beedril", lvl, PokemonNature.N_ADAMANT, 0, 255, 0, 255, 0, 0, "Sword Dance", "X-Scissor", "Poison Jab", "Brick Break");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Yanmega", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 0, 255, "Bug Buzz", "Air Slash", "Thunderfang", "Fire Fang");
+					poke = Pokemon.getGymLeaderPokemon("Yanmega", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 0, 255, "Bug Buzz", "Air Slash", "Protect", "Fire Fang");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Parasect", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 0, 0, 0, "Spore", "Seed Bomb", "Brick Break", "Synthesis");
 					party[5] = poke;
@@ -523,7 +523,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Beedril", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Sword Dance", "X-Scissor", "Poison Jab", "Brick Break");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Yanma", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Bug Buzz", "Air Slash", "Thunderfang", "Hypnosis");
+					poke = Pokemon.getGymLeaderPokemon("Yanma", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Bug Buzz", "Air Slash", "Protect", "Hypnosis");
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Parasect", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Spore", "Seed Bomb", "Brick Break", "Synthesis");
 					party[5] = poke;
@@ -575,7 +575,7 @@ public class NPC extends Character
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Haunter", lvl, PokemonNature.N_BOLD, 255, 0, 255, 0, 0, 0, "Shadow Ball", "Crunch", "Curse", "Thunderbolt");
 					party[1] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_CAREFUL, 184, 0, 184, 0, 184, 0, "Crunch", "Shadow Ball", "Focus Blast", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_CAREFUL, 184, 0, 184, 0, 184, 0, "Substitue", "Shadow Ball", "Focus Blast", "Flamethrower");
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Misdreavus", lvl, PokemonNature.N_TIMID, 0, 255, 0, 255, 0, 0, "Taunt", "Nasty Plot", "Shadow Ball", "Thunderbolt");
 					party[3] = poke;
@@ -591,7 +591,7 @@ public class NPC extends Character
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Haunter", lvl, PokemonNature.N_BOLD, 0, 0, 0, 0, 0, 0, "Shadow Ball", "Crunch", "Curse", "Thunderbolt");
 					party[1] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_CAREFUL, 0, 0, 0, 0, 0, 0, "Crunch", "Shadow Ball", "Focus Blast", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_CAREFUL, 0, 0, 0, 0, 0, 0, "Substitue", "Shadow Ball", "Focus Blast", "Flamethrower");
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Misdreavus", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Taunt", "Nasty Plot", "Shadow Ball", "Thunderbolt");
 					party[3] = poke;
@@ -607,7 +607,7 @@ public class NPC extends Character
 				if(p.getBadgeCount() > 7)
 				{
 					lvl = 53;
-					poke = Pokemon.getGymLeaderPokemon("Poliwrath", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 0, 0, 0, "Ice Beam", "Brick Break", "Waterfall", "Bulk Up");
+					poke = Pokemon.getGymLeaderPokemon("Poliwrath", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 0, 0, 0, "Substitute", "Focus Punch", "Waterfall", "Bulk Up");
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Machamp", lvl, PokemonNature.N_ADAMANT, 255, 0, 255, 0, 0, 0, "DynamicPunch", "Payback", "Bullet Punch", "Stone Edge");
 					party[1] = poke;
@@ -623,7 +623,7 @@ public class NPC extends Character
 				else
 				{
 					lvl = 21;
-					poke = Pokemon.getGymLeaderPokemon("Poliwrath", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Ice Beam", "Brick Break", "Waterfall", "Bulk Up");
+					poke = Pokemon.getGymLeaderPokemon("Poliwrath", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Substitute", "Focus Punch", "Waterfall", "Bulk Up");
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Machamp", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "DynamicPunch", "Payback", "Bullet Punch", "Stone Edge");
 					party[1] = poke;
@@ -645,7 +645,7 @@ public class NPC extends Character
 					lvl = 57;
 					poke = Pokemon.getGymLeaderPokemon("Steelix", lvl, PokemonNature.N_SASSY, 255, 16, 0, 0, 255, 0, "Stealth Rock", "Earthquake", "Gyro Ball", "Iron Tail");
 					party[0] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 108, 0, 0, 160, 0, 255, "Metal Sound", "Thunderbolt", "Magnet Rise", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 108, 0, 0, 160, 0, 255, "Substitute", "Thunderbolt", "Magnet Rise", "Flamethrower");
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Scizor", lvl, PokemonNature.N_ADAMANT, 32, 255, 0, 255, 0, 0, "Sword Dance", "Bullet Punch", "Superpower", "Quick Attack");
 					party[2] = poke;
@@ -661,7 +661,7 @@ public class NPC extends Character
 					lvl = 25;
 					poke = Pokemon.getGymLeaderPokemon("Steelix", lvl, PokemonNature.N_SASSY, 0, 0, 0, 0, 0, 0, "Stealth Rock", "Earthquake", "Gyro Ball", "Iron Tail");
 					party[0] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Metal Sound", "Thunderbolt", "Magnet Rise", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Substitute", "Thunderbolt", "Magnet Rise", "Flamethrower");
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Scizor", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Sword Dance", "Bullet Punch", "Superpower", "Quick Attack");
 					party[2] = poke;
@@ -687,7 +687,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Delibird", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 32, 255, "Ice Beam", "Signal Beam", "Water Pulse", "Grass Knot");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Piloswine", lvl, PokemonNature.N_JOLLY, 32, 255, 0, 255, 0, 0, "Ice Shard", "Earthquake", "Blizzard", "Stone Edge");
+					poke = Pokemon.getGymLeaderPokemon("Piloswine", lvl, PokemonNature.N_JOLLY, 32, 255, 0, 255, 0, 0, "Ice Shard", "Earthquake", "Substitute", "Stone Edge");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Lapras", lvl, PokemonNature.N_MODEST, 255, 0, 0, 0, 80, 200, "Surf", "Ice Beam", "Thunderbolt", "Heal Bell");
 					party[5] = poke;
@@ -703,7 +703,7 @@ public class NPC extends Character
 					party[2] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Delibird", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Ice Beam", "Signal Beam", "Water Pulse", "Grass Knot");
 					party[3] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Piloswine", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 0, 0, 0, "Ice Shard", "Earthquake", "Blizzard", "Stone Edge");
+					poke = Pokemon.getGymLeaderPokemon("Piloswine", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 0, 0, 0, "Ice Shard", "Earthquake", "Substitute", "Stone Edge");
 					party[4] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Lapras", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Surf", "Ice Beam", "Thunderbolt", "Heal Bell");
 					party[5] = poke;
@@ -751,7 +751,7 @@ public class NPC extends Character
 				lvl = 70;
 				poke = Pokemon.getGymLeaderPokemon("Probopass", lvl, PokemonNature.N_CALM, 252, 0, 255, 0, 255, 0, "Stealth Rock", "Thunderbolt", "Power Gem", "Toxic");
 				party[0] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Golem", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 255, 0, 0, "Rock Blast", "Earthquake", "Brick Break", "Sucker Punch");
+				poke = Pokemon.getGymLeaderPokemon("Golem", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 255, 0, 0, "Rock Blast", "Earthquake", "Explosion", "Sucker Punch");
 				party[1] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Onix", lvl, PokemonNature.N_JOLLY, 255, 255, 0, 255, 0, 0, "Stealth Rock", "Earthquake", "Stone Edge", "Taunt");
 				party[2] = poke;
@@ -775,7 +775,7 @@ public class NPC extends Character
 				party[3] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Riolu", lvl, PokemonNature.N_ADAMANT, 0, 255, 140, 255, 140, 0, "Agility", "Hi Jump Kick", "Crunch", "Ice Punch");
 				party[4] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Breloom", lvl, PokemonNature.N_IMPISH, 255, 0, 255, 255, 0, 0, "Thunderpunch", "Leech Seed", "Spore", "Brick Break");
+				poke = Pokemon.getGymLeaderPokemon("Breloom", lvl, PokemonNature.N_IMPISH, 255, 0, 255, 255, 0, 0, "Substitute", "Leech Seed", "Spore", "Focus Punch");
 				party[5] = poke;
 			}
 			//TODO fix moves, natures and evs
@@ -786,7 +786,7 @@ public class NPC extends Character
 				party[0] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Manectric", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 255, 255, "Thunderbolt", "Flamethrower", "Charge Beam", "Leaf Storm");
 				party[1] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 255, 0, 0, 255, 0, 255, "Metal Sound", "Thunderbolt", "Ice Beam", "Thunder");
+				poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 255, 0, 0, 255, 0, 255, "Metal Sound", "Thunderbolt", "Ice Beam", "Substitute");
 				party[2] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Amapharos", lvl, PokemonNature.N_MODEST, 255, 0, 0, 0, 255, 255, "Rain Dance", "Safeguard", "Thunder", "Waterpulse");
 				party[3] = poke;
@@ -806,7 +806,7 @@ public class NPC extends Character
 				party[2] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Magcargo", lvl, PokemonNature.N_BOLD, 255, 0, 255, 0, 255, 0, "Lava Plume", "Rock Slide", "Recover", "Will-O-Wisp");
 				party[3] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 255, 0, 255, 0, 255, 0, "Wish", "Crunch", "Flamethrower", "Toxic");
+				poke = Pokemon.getGymLeaderPokemon("Flareon", lvl, PokemonNature.N_CALM, 255, 0, 255, 0, 255, 0, "Wish", "Protect", "Flamethrower", "Toxic");
 				party[4] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Magmar", lvl, PokemonNature.N_NAIVE, 0, 255, 0, 255, 0, 255, "Fire Blast", "Thunderbolt", "Cross Chop", "Earthquake");
 				party[5] = poke;
@@ -818,11 +818,11 @@ public class NPC extends Character
 				party[0] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Linoone", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 0, 0, "Belly Drum", "ExtremeSpeed", "Seed Bomb", "Shadow Claw");
 				party[1] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Chansey", lvl, PokemonNature.N_BOLD, 255, 255, 255, 0, 255, 0, "Wish", "Ice Beam", "Seismic Toss", "Toxic");
+				poke = Pokemon.getGymLeaderPokemon("Chansey", lvl, PokemonNature.N_BOLD, 255, 255, 255, 0, 255, 0, "Wish", "Protect", "Seismic Toss", "Toxic");
 				party[2] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Delcatty", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 0, 0, "Thunder Wave", "Sing", "Heal Bell", "Double-Edge");
 				party[3] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Vigoroth", lvl, PokemonNature.N_JOLLY, 255, 255, 255, 255, 0, 0, "Encore", "Earthquake", "Return", "Sucker Punch");
+				poke = Pokemon.getGymLeaderPokemon("Vigoroth", lvl, PokemonNature.N_JOLLY, 255, 255, 255, 255, 0, 0, "Encore", "Substitute", "Return", "Sucker Punch");
 				party[4] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Slaking", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 0, 0, "Return", "Earthquake", "Shadow Claw", "Fire Punch");
 				party[5] = poke;
@@ -862,7 +862,7 @@ public class NPC extends Character
 			else if(m_name.equalsIgnoreCase("wallace"))
 			{
 				lvl = 103;
-				poke = Pokemon.getGymLeaderPokemon("Walrein", lvl, PokemonNature.N_BOLD, 255, 255, 255, 255, 0, 0, "Body Slam", "Surf", "Super Fang", "Blizzard");
+				poke = Pokemon.getGymLeaderPokemon("Walrein", lvl, PokemonNature.N_BOLD, 255, 255, 255, 255, 0, 0, "Protect", "Substitute", "Super Fang", "Blizzard");
 				party[0] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Whiscash", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 0, 0, "Dragon Dance", "Aqua Tail", "Earthquake", "Bounce");
 				party[1] = poke;
@@ -922,7 +922,7 @@ public class NPC extends Character
 				party[3] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Lucario", lvl, PokemonNature.N_TIMID, 255, 0, 255, 255, 255, 255, "Aura Sphere", "Shadow Ball", "Dragon Pulse", "Vacuum Wave");
 				party[4] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Hitmonlee", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 0, "Agility", "Hi Jump Kick", "Ice Punch", "Brick Break");
+				poke = Pokemon.getGymLeaderPokemon("Hitmonlee", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 0, "Agility", "Hi Jump Kick", "Ice Punch", "Focus Punch");
 				party[5] = poke;
 			}
 			else if(m_name.equalsIgnoreCase("crasher wake"))
@@ -946,7 +946,7 @@ public class NPC extends Character
 				lvl = 144;
 				poke = Pokemon.getGymLeaderPokemon("Drifblim", lvl, PokemonNature.N_MILD, 255, 255, 255, 255, 255, 255, "Mach Punch", "Shadow Ball", "Explosion", "Hypnosis");
 				party[0] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_TIMID, 255, 255, 255, 255, 255, 255, "Psychic", "Shadow Ball", "Crunch", "Fire Punch");
+				poke = Pokemon.getGymLeaderPokemon("Gengar", lvl, PokemonNature.N_TIMID, 255, 255, 255, 255, 255, 255, "Substitute", "Shadow Ball", "Crunch", "Fire Punch");
 				party[1] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Mismagius", lvl, PokemonNature.N_TIMID, 255, 255, 255, 255, 255, 255, "Taunt", "Nasty Plot", "Shadow Ball", "Thunderbolt");
 				party[2] = poke;
@@ -954,7 +954,7 @@ public class NPC extends Character
 				party[3] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Dusknoir", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 255, "Will-O-Wisp", "Pain Split", "Crunch", "Ice Punch");
 				party[4] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Froslass", lvl, PokemonNature.N_TIMID, 255, 255, 255, 255, 255, 255, "Shadow Ball", "Thunder Wave", "Blizzard", "Water Pulse");
+				poke = Pokemon.getGymLeaderPokemon("Froslass", lvl, PokemonNature.N_TIMID, 255, 255, 255, 255, 255, 255, "Substitute", "Thunder Wave", "Blizzard", "Water Pulse");
 				party[5] = poke;
 			}
 			else if(m_name.equalsIgnoreCase("byron"))
@@ -986,7 +986,7 @@ public class NPC extends Character
 				party[3] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Lapras", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 255, 255, "Reflect", "Thunderbolt", "Hydro Pump", "Ice Beam");
 				party[4] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Weaville", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 255, "Dark Pulse", "Ice Beam", "Iron Tail", "Brick Break");
+				poke = Pokemon.getGymLeaderPokemon("Weaville", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 255, "Dark Pulse", "Ice Beam", "Iron Tail", "Focus Punch");
 				party[5] = poke;
 			}
 			else if(m_name.equalsIgnoreCase("volkner"))

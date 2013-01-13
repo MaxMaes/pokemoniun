@@ -13,7 +13,7 @@
   <property name="waterPokemonLevels" value="5-35;10-30;20-30;25-30;20-30;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
-  <property name="yOffsetModifier" value="224"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal5.tsx"/>
@@ -58,7 +58,7 @@
  </layer>
  <layer name="Collisions" width="46" height="74">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="WalkBehind" width="46" height="74">

@@ -420,7 +420,7 @@ public class NPC extends Character
 					party[5] = poke;
 				}
 			}
-			else if(m_name.equalsIgnoreCase("giovanni"))
+			else if(m_name.equalsIgnoreCase("Giovani"))
 			{
 				
 				if(p.getBadgeCount() > 7)

@@ -535,7 +535,7 @@
 				<m_description>Increases HP EVs</m_description>
 				<m_id>70</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -550,7 +550,7 @@
 				</m_description>
 				<m_id>71</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -564,7 +564,7 @@
 				<m_description>Hardens the Defense EVs</m_description>
 				<m_id>72</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -578,7 +578,7 @@
 				<m_description>Develops the Sp. Attack Evs</m_description>
 				<m_id>73</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -592,7 +592,7 @@
 				<m_description>Hardens the Sp. defense EVs</m_description>
 				<m_id>74</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -606,7 +606,7 @@
 				<m_description>Provides energy for Speed EVs</m_description>
 				<m_id>75</m_id>
 				<m_category>Vitamins</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>7</m_shop>
 				<m_price>9800</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -3762,8 +3762,8 @@
 				</m_description>
 				<m_id>420</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>100</m_price>
+				<m_shop>8</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -3777,7 +3777,7 @@
 				</m_description>
 				<m_id>421</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>8</m_shop>
 				<m_price>100</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -3791,8 +3791,8 @@
 				<m_description>A bigger version of the big apple?</m_description>
 				<m_id>422</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>100</m_price>
+				<m_shop>8</m_shop>
+				<m_price>500</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -3805,8 +3805,8 @@
 				<m_description>Not actually made out of gold</m_description>
 				<m_id>423</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>100</m_price>
+				<m_shop>8</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -3819,8 +3819,8 @@
 				<m_description>DON'T EAT IT... too precious</m_description>
 				<m_id>424</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>100</m_price>
+				<m_shop>8</m_shop>
+				<m_price>5000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -3834,7 +3834,7 @@
 					happy to see me?</m_description>
 				<m_id>425</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>8</m_shop>
 				<m_price>100</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -3849,7 +3849,7 @@
 					to eat it?</m_description>
 				<m_id>426</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>8</m_shop>
 				<m_price>100</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -3863,7 +3863,7 @@
 				<m_description>A mankey's favorite food</m_description>
 				<m_id>427</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
+				<m_shop>8</m_shop>
 				<m_price>100</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
@@ -4524,7 +4524,7 @@
 				<m_name>Space Mail</m_name>
 				<m_description>A piece of mail</m_description>
 				<m_id>557</m_id>
-				<m_category>Held</m_category>
+				<m_category>Key</m_category>
 				<m_shop>0</m_shop>
 				<m_price>50</m_price>
 				<m_attributes>
@@ -4552,7 +4552,7 @@
 				<m_name>Tunnel Mail</m_name>
 				<m_description>A piece of mail</m_description>
 				<m_id>559</m_id>
-				<m_category>Held</m_category>
+				<m_category>Key</m_category>
 				<m_shop>0</m_shop>
 				<m_price>50</m_price>
 				<m_attributes>
@@ -5976,8 +5976,8 @@
 				<m_description>Heals 50HP, but might Paralyze your Pokemon</m_description>
 				<m_id>800</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -5990,8 +5990,8 @@
 				<m_description>Restores 5PP to all moves, but might Freeze your Pokemon</m_description>
 				<m_id>801</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -6004,8 +6004,8 @@
 				<m_description>Heals All Status, but might Burn your Pokemon</m_description>
 				<m_id>802</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -6018,8 +6018,8 @@
 				<m_description>Raises Happiness, but might Poison your Pokemon</m_description>
 				<m_id>803</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -6032,8 +6032,8 @@
 				<m_description>Raises Happiness, and might Heal 30HP to your Pokemon</m_description>
 				<m_id>804</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -6046,8 +6046,8 @@
 				<m_description>Raises Happiness, but might put your Pokemon to Sleep</m_description>
 				<m_id>805</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>
@@ -6060,8 +6060,8 @@
 				<m_description>Heals your Pokemon's HP for an unknown amount. </m_description>
 				<m_id>806</m_id>
 				<m_category>Food</m_category>
-				<m_shop>0</m_shop>
-				<m_price>10</m_price>
+				<m_shop>10</m_shop>
+				<m_price>1000</m_price>
 				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 				</m_attributes>

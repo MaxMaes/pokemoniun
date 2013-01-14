@@ -270,19 +270,19 @@ public class ShopDialog extends Frame
 				break;
 			case 1:
 				for(int i : m_merch)
-					if(PlayerItem.getItem(i).getCategory().equals("Potions"))
+					if(PlayerItem.getItem(i).getCategory().equals("Potions") || PlayerItem.getItem(i).getCategory().equalsIgnoreCase("Food"))
 						m_items.add(PlayerItem.getItem(i));
 				initItems();
 				break;
 			case 2:
 				for(int i : m_merch)
-					if(PlayerItem.getItem(i).getCategory().equals("Medicine"))
+					if(PlayerItem.getItem(i).getCategory().equals("Medicine") || PlayerItem.getItem(i).getCategory().equalsIgnoreCase("Vitamins"))
 						m_items.add(PlayerItem.getItem(i));
 				initItems();
 				break;
 			case 3:
 				for(int i : m_merch)
-					if(PlayerItem.getItem(i).getCategory().equals("Field") || PlayerItem.getItem(i).getCategory().equals("TM"))
+					if(PlayerItem.getItem(i).getCategory().equals("Field") || PlayerItem.getItem(i).getCategory().equals("TM") || PlayerItem.getItem(i).getCategory().equalsIgnoreCase("Held"))
 						m_items.add(PlayerItem.getItem(i));
 				initItems();
 				break;

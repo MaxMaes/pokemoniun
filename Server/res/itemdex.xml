@@ -4181,7 +4181,7 @@
 			<name>Space Mail</name>
 			<description>A piece of mail</description>
 			<id>557</id>
-			<category>Field</category>
+			<category>Key</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>
@@ -4203,7 +4203,7 @@
 			<name>Tunnel Mail</name>
 			<description>A piece of mail</description>
 			<id>559</id>
-			<category>Field</category>
+			<category>Key</category>
 			<shop>0</shop>
 			<price>50</price>
 			<attributes>

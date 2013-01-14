@@ -420,12 +420,14 @@ public class BigBagDialog extends Frame
 
 	private void loadItems()
 	{
+		try
+		{
 		// Load the player's items and sort them by category
 		for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
 			// Field items
-			if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution"))
+			if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution") || item.getItem().getCategory().equalsIgnoreCase("Held"))
 				m_items.get(0).add(item);
-			else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+			else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine")  || item.getItem().getCategory().equalsIgnoreCase("Vitamins"))
 				m_items.get(1).add(item);
 			else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
 				m_items.get(2).add(item);
@@ -434,6 +436,12 @@ public class BigBagDialog extends Frame
 			else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
 				m_items.get(4).add(item);
 		m_update = true;
+		}
+		catch(Exception e)
+		{
+			System.out.println("item trouble");
+			e.printStackTrace();
+		}
 	}
 }
 

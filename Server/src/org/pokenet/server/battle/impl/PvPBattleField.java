@@ -6,6 +6,11 @@ import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
+import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
+import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
+import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
+import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
+import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -278,14 +283,20 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.Init(29);
 				receiveEffectFirst.addInt(0);
 				receiveEffectFirst.addString(poke.getSpeciesName());
-				receiveEffectFirst.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffectFirst.addString("");
+				else
+					receiveEffectFirst.addString(eff.getName());
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
 				receiveEffectSecond.Init(29);
 				receiveEffectSecond.addInt(1);
 				receiveEffectSecond.addString(poke.getSpeciesName());
-				receiveEffectSecond.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffectSecond.addString("");
+				else
+					receiveEffectSecond.addString(eff.getName());
 				receiveEffectSecond.sendResponse();
 			}
 			else if(poke.compareTo(getActivePokemon()[1]) == 0)
@@ -295,14 +306,20 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.Init(29);
 				receiveEffectFirst.addInt(1);
 				receiveEffectFirst.addString(poke.getSpeciesName());
-				receiveEffectFirst.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffectFirst.addString("");
+				else
+					receiveEffectFirst.addString(eff.getName());
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
 				receiveEffectSecond.Init(29);
 				receiveEffectSecond.addInt(0);
 				receiveEffectSecond.addString(poke.getSpeciesName());
-				receiveEffectSecond.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffectSecond.addString("");
+				else
+					receiveEffectSecond.addString(eff.getName());
 				receiveEffectSecond.sendResponse();
 			}
 	}
@@ -320,14 +337,20 @@ public class PvPBattleField extends BattleField
 				removeEffectFirst.Init(30);
 				removeEffectFirst.addInt(0);
 				removeEffectFirst.addString(poke.getSpeciesName());
-				removeEffectFirst.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffectFirst.addString("");
+				else
+					removeEffectFirst.addString(eff.getName());
 				removeEffectFirst.sendResponse();
 
 				ServerMessage removeEffectSecond = new ServerMessage(m_players[1].getSession());
 				removeEffectSecond.Init(30);
 				removeEffectSecond.addInt(1);
 				removeEffectSecond.addString(poke.getSpeciesName());
-				removeEffectSecond.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffectSecond.addString("");
+				else
+					removeEffectSecond.addString(eff.getName());
 				removeEffectSecond.sendResponse();
 			}
 			else if(poke.compareTo(getActivePokemon()[1]) == 0 && !getActivePokemon()[1].isFainted())
@@ -337,14 +360,20 @@ public class PvPBattleField extends BattleField
 				removeEffectFirst.Init(30);
 				removeEffectFirst.addInt(1);
 				removeEffectFirst.addString(poke.getSpeciesName());
-				removeEffectFirst.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffectFirst.addString("");
+				else
+					removeEffectFirst.addString(eff.getName());
 				removeEffectFirst.sendResponse();
 
 				ServerMessage removeEffectSecond = new ServerMessage(m_players[1].getSession());
 				removeEffectSecond.Init(30);
 				removeEffectSecond.addInt(0);
 				removeEffectSecond.addString(poke.getSpeciesName());
-				removeEffectSecond.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffectSecond.addString("");
+				else
+					removeEffectSecond.addString(eff.getName());
 				removeEffectSecond.sendResponse();
 			}
 	}
@@ -368,6 +397,25 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.addInt(0);
 				switchInformFirst.addInt(pokeIndex);
 				switchInformFirst.sendResponse();
+				
+				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
+				receiveEffectFirst.Init(29);
+				receiveEffectFirst.addInt(0);
+				receiveEffectFirst.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffectFirst.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffectFirst.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffectFirst.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffectFirst.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffectFirst.addString("Sleep");
+				else
+					receiveEffectFirst.addString("Normal");
+				receiveEffectFirst.sendResponse();
 
 				ServerMessage switchInformSecond = new ServerMessage(m_players[1].getSession());
 				switchInformSecond.Init(32);
@@ -376,6 +424,27 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.addInt(1);
 				switchInformSecond.addInt(pokeIndex);
 				switchInformSecond.sendResponse();
+				
+				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
+				receiveEffectSecond.Init(29);
+				receiveEffectSecond.addInt(1);
+				receiveEffectSecond.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffectSecond.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffectSecond.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffectSecond.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffectSecond.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffectSecond.addString("Sleep");
+				else
+					receiveEffectSecond.addString("Normal");
+				receiveEffectSecond.sendResponse();
+				
+				poke.removeStatusEffects(false);
 			}
 			else
 			{
@@ -387,6 +456,25 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.addInt(1);
 				switchInformFirst.addInt(pokeIndex);
 				switchInformFirst.sendResponse();
+				
+				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
+				receiveEffectFirst.Init(29);
+				receiveEffectFirst.addInt(1);
+				receiveEffectFirst.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffectFirst.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffectFirst.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffectFirst.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffectFirst.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffectFirst.addString("Sleep");
+				else
+					receiveEffectFirst.addString("Normal");
+				receiveEffectFirst.sendResponse();
 
 				ServerMessage switchInformSecond = new ServerMessage(m_players[1].getSession());
 				switchInformSecond.Init(32);
@@ -395,6 +483,27 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.addInt(0);
 				switchInformSecond.addInt(pokeIndex);
 				switchInformSecond.sendResponse();
+				
+				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
+				receiveEffectSecond.Init(29);
+				receiveEffectSecond.addInt(0);
+				receiveEffectSecond.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffectSecond.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffectSecond.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffectSecond.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffectSecond.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffectSecond.addString("Sleep");
+				else
+					receiveEffectSecond.addString("Normal");
+				receiveEffectSecond.sendResponse();
+				
+				poke.removeStatusEffects(false);
 			}
 	}
 

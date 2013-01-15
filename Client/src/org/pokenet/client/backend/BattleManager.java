@@ -369,7 +369,7 @@ public class BattleManager
 				catch(Exception e2)
 				{
 				}
-				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i)
+				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i || m_ourPokes[i] == null)
 					m_battle.m_pokeButtons.get(i).setEnabled(false);
 				else
 					m_battle.m_pokeButtons.get(i).setEnabled(true);

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
+
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.ModData;
@@ -40,6 +41,7 @@ import org.pokenet.server.battle.mechanics.clauses.Clause.PendanticDamageClause;
 import org.pokenet.server.battle.mechanics.moves.MoveList;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
+import org.pokenet.server.battle.mechanics.moves.MoveList.AttractEffect;
 import org.pokenet.server.battle.mechanics.statuses.AwesomeEffect;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.ChargeEffect;
@@ -340,7 +342,7 @@ public class Pokemon extends PokemonSpecies
 		}
 		Pokemon p = new Pokemon(mech, species, nature, ability, item, gender, 100, ivs, evs, entries, ppUp);
 		// Give it a 5% chance of being shiny.
-		if(random.nextDouble() < 0.05)
+		if(random.nextDouble() < 0.10)
 			p.setShiny(true);
 		return p;
 	}
@@ -2037,10 +2039,17 @@ public class Pokemon extends PokemonSpecies
 			removeStatus(ConfuseEffect.class);
 			removeStatus(StatusEffect.class);
 			removeStatus(StatChangeEffect.class);
+			removeStatus(AttractEffect.class);
+			removeStatus(MoveList.LeechSeedEffect.class);
 		}
 		else
 		{
+			removeStatus(MoveList.LeechSeedEffect.class);
+			removeStatus(AttractEffect.class);
+			removeStatus(ChargeEffect.class);
 			removeStatus(ConfuseEffect.class);
+			removeStatus(FlinchEffect.class);
+			removeStatus(MultipleStatChangeEffect.class);
 			removeStatus(StatChangeEffect.class);
 		}
 	}

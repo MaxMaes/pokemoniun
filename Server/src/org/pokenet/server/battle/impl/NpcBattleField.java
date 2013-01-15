@@ -7,6 +7,11 @@ import org.pokenet.server.battle.BattleTurn;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
+import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
+import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
+import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
+import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
+import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -277,6 +282,27 @@ public class NpcBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
+				
+				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+				receiveEffect.Init(29);
+				receiveEffect.addInt(0);
+				receiveEffect.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffect.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffect.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffect.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffect.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffect.addString("Sleep");
+				else
+					receiveEffect.addString("Normal");
+				receiveEffect.sendResponse();
+				
+				poke.removeStatusEffects(false);
 			}
 			else
 			{
@@ -288,6 +314,27 @@ public class NpcBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
+				
+				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+				receiveEffect.Init(29);
+				receiveEffect.addInt(1);
+				receiveEffect.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffect.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffect.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffect.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffect.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffect.addString("Sleep");
+				else
+					receiveEffect.addString("Normal");
+				receiveEffect.sendResponse();
+				
+				poke.removeStatusEffects(false);
 			}
 	}
 

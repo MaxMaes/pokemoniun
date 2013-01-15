@@ -13,6 +13,11 @@ import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
+import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
+import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
+import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
+import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
+import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -263,7 +268,10 @@ public class WildBattleField extends BattleField
 				receiveEffect.Init(29);
 				receiveEffect.addInt(0);
 				receiveEffect.addString(poke.getSpeciesName());
-				receiveEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffect.addString("");
+				else
+					receiveEffect.addString(eff.getName());
 				receiveEffect.sendResponse();
 			}
 			else if(poke == m_wildPoke)
@@ -273,7 +281,10 @@ public class WildBattleField extends BattleField
 				receiveEffect.Init(29);
 				receiveEffect.addInt(1);
 				receiveEffect.addString(poke.getSpeciesName());
-				receiveEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					receiveEffect.addString("");
+				else
+					receiveEffect.addString(eff.getName());
 				receiveEffect.sendResponse();
 			}
 	}
@@ -293,7 +304,11 @@ public class WildBattleField extends BattleField
 				removeEffect.Init(30);
 				removeEffect.addInt(0);
 				removeEffect.addString(poke.getSpeciesName());
-				removeEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffect.addString("");
+				else
+					removeEffect.addString(eff.getName());
+				removeEffect.sendResponse();
 			}
 			else if(poke == m_wildPoke && !poke.isFainted())
 			{
@@ -304,7 +319,10 @@ public class WildBattleField extends BattleField
 				removeEffect.Init(30);
 				removeEffect.addInt(1);
 				removeEffect.addString(poke.getSpeciesName());
-				removeEffect.addString(eff.getName());
+				if(eff.getName() == null)
+					removeEffect.addString("");
+				else
+					removeEffect.addString(eff.getName());
 				removeEffect.sendResponse();
 			}
 	}
@@ -326,6 +344,27 @@ public class WildBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
+				
+				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+				receiveEffect.Init(29);
+				receiveEffect.addInt(0);
+				receiveEffect.addString(poke.getSpeciesName());
+				
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffect.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffect.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffect.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffect.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffect.addString("Sleep");
+				else
+					receiveEffect.addString("Normal");
+				receiveEffect.sendResponse();
+				
+				poke.removeStatusEffects(false);
 			}
 	}
 

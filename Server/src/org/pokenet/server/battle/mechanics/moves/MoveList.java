@@ -2210,7 +2210,7 @@ public class MoveList
 		}
 	}
 
-	static class LeechSeedEffect extends StatusEffect
+	public static class LeechSeedEffect extends StatusEffect
 	{
 		private boolean m_grassImmune = true;
 

@@ -282,7 +282,9 @@ public class BattleCanvas extends Container
 		{
 			/* playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), (int)BattleManager.getInstance().getCurPoke().getExpLvlUp(), true); */
 			playerXP = new ProgressBar(BattleManager.getInstance().getCurPoke().getExpLvl(), xpMax, true);
+			playerXP.setZIndex(4);
 			playerXPEND = new ProgressBar(xpENDMin, max, true);
+			playerXPEND.setZIndex(4);
 		}
 		else
 		{
@@ -586,6 +588,7 @@ public class BattleCanvas extends Container
 		enemyHP = new ProgressBar(0, 0);
 		enemyHP.setZIndex(7);
 		playerXPEND = new ProgressBar(0, 0, true);
+		playerXPEND.setZIndex(9);
 		bgPic = new Label();
 		bgPic.setZIndex(3);
 		playerPoke = new Label();

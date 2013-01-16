@@ -3732,6 +3732,47 @@ public class MoveList
 				return 0;
 			}
 		}));
+		
+		//TODO make a way to return it to the original pokemon
+		m_moves.add(new MoveListEntry("Transform", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 20)
+		{
+			@Override
+			public int use(BattleMechanics mech, Pokemon user, Pokemon target)
+			{
+				String temp =  user.getName();
+				user.getField().showMessage(user.getName() + " transformed in " + target.getName() + "!");
+				user = target;
+				user.setName(temp);
+				return 0;
+			}
+		}));
+		
+		//TODO test sketch and transform
+		m_moves.add(new MoveListEntry("Sketch", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 1)
+		{
+			@Override
+			public int use(BattleMechanics mech, Pokemon user, Pokemon target)
+			{
+				
+				user.getMoves();
+				for(MoveListEntry m : user.getMoves())
+				{
+					if(m.getName().equalsIgnoreCase("sketch"))
+					{
+						if(target.getLastMove() == null || target.getLastMove().getName() == "")
+						{
+							user.getField().showMessage("But it failed!");
+						}
+						else
+						{
+							m = target.getLastMove();
+							break;
+						}
+					}
+				}
+				return 0;
+			}
+		}));
 
 		m_moves.add(new MoveListEntry("Triple Kick", new PokemonMove(PokemonType.T_FIGHTING, 60, 0.9, 10)
 		{

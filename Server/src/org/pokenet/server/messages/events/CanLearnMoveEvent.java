@@ -18,11 +18,22 @@ public class CanLearnMoveEvent implements MessageEvent
 		String move = Request.readString();
 
 		if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null)
-			if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))
+		{
+			boolean hasMove = false;
+			for (int i = 0; i < 4; i++)
+			{
+				if(p.getParty()[pokemonIndex].getMoveName(i).equalsIgnoreCase(move))
+				{
+					hasMove = true;
+					break;
+				}
+			}
+			if(p.getParty()[pokemonIndex].getMovesLearning().contains(move) && !hasMove)
 			{
 				p.getParty()[pokemonIndex].learnMove(moveIndex, move);
 				p.updateClientPP(pokemonIndex, moveIndex);
 			}
+		}
 	}
 
 }

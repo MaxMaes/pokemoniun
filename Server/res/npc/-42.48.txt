@@ -1,3 +1,17 @@
+[npc]
+volkner
+down
+201
+14
+4
+Lunatone,60,Solrock,60,Xatu,60,Claydol,60
+4
+31
+0
+false
+false
+false
+[/npc]
 [warp]
 25
 104

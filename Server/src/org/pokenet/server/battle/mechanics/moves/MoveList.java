@@ -3754,10 +3754,10 @@ public class MoveList
 			public int use(BattleMechanics mech, Pokemon user, Pokemon target)
 			{
 				
-				user.getMoves();
-				for(MoveListEntry m : user.getMoves())
+				
+				for(int i = 0; i < 4; i++)
 				{
-					if(m.getName().equalsIgnoreCase("sketch"))
+					if(user.getMoves()[i].getName().equalsIgnoreCase("sketch"))
 					{
 						if(target.getLastMove() == null || target.getLastMove().getName() == "")
 						{
@@ -3765,7 +3765,8 @@ public class MoveList
 						}
 						else
 						{
-							m = target.getLastMove();
+							user.setMove(i,target.getLastMove());
+							user.getField().showMessage(user.getName() + " learned " + target.getLastMove().getName());
 							break;
 						}
 					}

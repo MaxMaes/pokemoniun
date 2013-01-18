@@ -135,6 +135,12 @@ public class Pokemon extends PokemonSpecies
 	transient private int m_id;
 	@Element(required = false)
 	transient private HoldItem m_item;
+	
+	/*a variable to store a temp pokemon in for transform*/
+	@Element(required = false) 
+	transient private Pokemon temp;
+	//whether a pokemon is transformed or not
+	private Boolean transformed = false;
 
 	// ability.
 	@Element
@@ -425,6 +431,21 @@ public class Pokemon extends PokemonSpecies
 		return p;
 	}
 	
+	/*
+	 * used for setting a pokemon for transform
+	 */
+	public void setTempPoke(Pokemon t)
+	{
+		temp = t;
+	}
+	
+	/*
+	 * Used for transform
+	 */
+	public Pokemon getTempPoke()
+	{
+		return temp;
+	}
 	/**
 	 * Returns a Pokemon based on a species name, a level, evs and moves
 	 * 
@@ -1029,6 +1050,18 @@ public class Pokemon extends PokemonSpecies
 	{
 		return m_contestStat[i];
 	}
+	
+	/*
+	 * Sets a pokemon move directly used only for sketch
+	 * 
+	 * @author sadhi
+	 * @param i index of move
+	 * @param m moveListEntry
+	 */
+	public void setMove(int i, MoveListEntry m)
+	{
+		m_move[i] = m;
+	}
 
 	/**
 	 * Returns this pokemon's contest stats in string format NOTE: Only used for
@@ -1318,7 +1351,23 @@ public class Pokemon extends PokemonSpecies
 	{
 		return m_mech;
 	}
+	
+	/*
+	 * is this pokemon transformed?
+	 */
+	public Boolean isTransformed()
+	{
+		return transformed;
+	}
 
+	/*
+	 * sets whether this pokemon is transformed
+	*/
+	public void setTransformed(Boolean t)
+	{
+		transformed = t;
+	}
+	
 	/**
 	 * Get one of this pokemon's moves.
 	 */

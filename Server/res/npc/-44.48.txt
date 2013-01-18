@@ -1,3 +1,17 @@
+[npc]
+byron
+down
+201
+28
+11
+Lunatone,60,Solrock,60,Xatu,60,Claydol,60
+4
+29
+0
+false
+false
+false
+[/npc]
 [warp]
 21
 147

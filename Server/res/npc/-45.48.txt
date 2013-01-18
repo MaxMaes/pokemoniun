@@ -1,3 +1,17 @@
+[npc]
+fatina
+down
+201
+12
+9
+Lunatone,60,Solrock,60,Xatu,60,Claydol,60
+4
+28
+0
+false
+false
+false
+[/npc]
 [warp]
 12
 94

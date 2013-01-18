@@ -410,6 +410,7 @@ public class WildBattleField extends BattleField
 			m_player.lostBattle();
 		}
 		m_player.setBattling(false);
+		m_player.setFishing(false);
 		dispose();
 		m_wildPoke = null;
 		if(m_dispatch != null)

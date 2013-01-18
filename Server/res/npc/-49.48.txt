@@ -1,3 +1,17 @@
+[npc]
+roark
+down
+201
+7
+6
+Lunatone,60,Solrock,60,Xatu,60,Claydol,60
+4
+24
+0
+false
+false
+false
+[/npc]
 [warp]
 7
 26

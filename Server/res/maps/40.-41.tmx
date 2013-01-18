@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="35" height="88" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value="16-16;16-16;17-18;17-18;16-17;"/>
   <property name="dayPokemonChances" value="Budew,30;Starly,20;Kricketune,20;Staravia,15;Roselia,15;"/>
-  <property name="nightPokemonLevels" value="16-16;16-16;17-18;17-18;16-17;"/>
-  <property name="nightPokemonChances" value="Budew,30;Starly,20;Kricketune,30;Staravia,5;Roselia,15;"/>
-  <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
-  <property name="waterPokemonChances" value="Psyduck,60;Golduck,40;"/>
-  <property name="wildProbability" value="10"/>
-  <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="dayPokemonLevels" value="16-16;16-16;17-18;17-18;16-17;"/>
   <property name="fishPokemonChances" value="Magikarp,35;Finneon,18;Gyarados,27;Lumineon,10;Staryu,10;"/>
+  <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="nightPokemonChances" value="Budew,30;Starly,20;Kricketune,30;Staravia,5;Roselia,15;"/>
+  <property name="nightPokemonLevels" value="16-16;16-16;17-18;17-18;16-17;"/>
   <property name="pvp" value="enforced"/>
+  <property name="waterPokemonChances" value="Psyduck,60;Golduck,40;"/>
+  <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="896"/>
   <property name="yOffsetModifier" value="224"/>
  </properties>
@@ -33,7 +33,7 @@
  </layer>
  <layer name="Walkable" width="35" height="88">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3aMQrCMBSA4dcL2CJ0d3DRnMS4OHgJq8fwCupZ1MsZcAk1hCCSF9P/gzcV7E/rI0tFgPrde5GHm2evXYJa7Lr4TLUl1gMAwFSFzkGtM/qbawCA31jMtAtEVq3I2hvT6rVs3L2tN1taaCm0Zbw3NjC59urgfnvwJtTiXz9mfE78X2j5l5bxTo9bNHc61MJO00JLHOd0mlzvyM7fU0JLClrKblk2n3uVc298+0bnviHngloAwDcYkZPRrgAAIN2lE7m6uVX8rcQL/K5KWiAwAAA=
+   H4sIAAAAAAAAC+3asQ3CMBBA0csCJE16ChrwJISGgiUIjMEKwCzAcrg8BcuyEPIZ5z/pqkjJF3ByCkSA+j16kaefV29dglrsu/jMtSXWAwDAXIXOQasz+ptrAIDfWC6sC0TWrchGjWvtWrb+2YOaHS20FNoy3ZshMLn26ujvPaoJtejrp4yfE78XWv6lZbrT0xbLnQ61sNO00BLHOZ0m13c0OpGzK6MlBS1lt6yaz73KuTfaobF5bsiloBYA0FLeAwAAKMm1E7n5uVf8X4k3ZMcbjSAwAAA=
   </data>
  </layer>
  <layer name="Grass" width="35" height="88">

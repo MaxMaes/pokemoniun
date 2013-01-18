@@ -5,8 +5,8 @@
   <property name="dayPokemonLevels" value="21-22;22-23;22-24;22-24;"/>
   <property name="nightPokemonChances" value="Pichu,30;Roselia,30;Kricketune,20;Pikachu,10;Staravia,10;"/>
   <property name="nightPokemoneLevels" value="21-22;22-23;22-23;22-24;24-24;"/>
-  <property name="wildModifer" value="10"/>
   <property name="pvp" value="disabled"/>
+  <property name="wildModifer" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
@@ -19,7 +19,7 @@
  <tileset firstgid="10825" source="SinnohWaterSet.tsx"/>
  <layer name="Walkable" width="46" height="103">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZQQqCQBiGYaGu0C5vU0fsri3LheBCM2X8dOR54N8Iji+OC2Ga5n+vW2ZKS3WXbtetW3d93SXXS3bX+r5169atW7du3bp16z5ie63dAAC99to09+veFcs9v82Pirrfl/E5Ot1ZurN0Z+nO0p2lO0t3lu4s3Vm6s3Rn6c6rsRkAOL8jnwNO/ft1058DHvH/8Ff33JQ2tb9j17foXvJ99Wt19wz3tx3s89y+l5ql58xb95QY3brXdq+19/PX0p2lO0t3Vq3dY2poBICz+wAUIHYLCEoAAA==
+   H4sIAAAAAAAAC+3ZQQqCQBiGYSGv0C5vU0fsri2rheDCNGP8msHnhX8jODw4Lgam677vfs5M6VLu0nZubu723CXXS7pb/d7c3Nzc3Nzc3NzcNdpbdUuSJI0Nfddd+n8rtnd7ma+NuB+n5ak17mzc2bizcWfjzsadjTsbdzbubNzZuLNxZ2vVLUmSjlHN94BLZ6jxHrDGM9ba+S95Nvy0v3PP93Bv+b/Gtd7vTPd3mOzz2r6Xmi33zHtbSg0395Hcv1aDgZubm5tbkiTN9QQKiF+RCEoAAA==
   </data>
  </layer>
  <layer name="Walkable" width="46" height="103">
@@ -34,7 +34,7 @@
  </layer>
  <layer name="Collisions" width="46" height="103">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Z0U3DMBCGLdGwQdsXivqMGAMe2QDYAWZp8sYkiA1Ktygz8AiWsGrcO+PY53Mq/k+y0tiN88W5umfZmHbsF8Z0TPlYtHfhHHZzvp9NpK0UyvGccJwxY0p9V8N7qNg3vI9x3vffx4fM8sj4aXiX3IN7Z1reOWNux7q1d8597PWrJR0ztbzf54f5N9c7nL+Hyt77YP7N9bb44zx48dZX8A5jssTb72/46aev7O3G5nIp571V8N4IxeOpeu8871nFfLDEO5aL+b+brfB4h/OfI9Xbdwufwc8PJb2p+c+R4x3LyyS9qfmP+pzaxxS8w7WBDxcLsfVOTW9uHRPzTl3v1PTmeFnHz1OQzE9SvV/X/Hlqvmv/g6WQ8K6ZV3P4uXJszfW2/n2df97Cu79OL7nXcX0AAAAAYDpczI7rVkTdVHBuN4Tj7YS9P8/y2loDb13grQu8dYG3LvDWBd66wFsXeOsCb13grQu8dYG3LtaN8uPqAQAAAACksft9dg+NOjq49pb7gna/z+7vUUcH1z7lfcEYEvlhyvul6kuw3mPjKyTl/VL1pYyNL+rZTxEJ76fOmOdufFsJ/3m8W+DWrTlF836Sz+sYE9+t32/JeLcE3rogvnU5Ze+/5tnaczEw5u7qUAAAAADHF7yvyNAISgAA
+   H4sIAAAAAAAAC+2ZzU3DMBSAI9GyQdsLRT0jxoAjGwA7wCxtbkyC2KB0i3YGjmAJq8Z9z3L8k6To+yQrjd04X50X91lumuHYz5tmqpTDfHgXzWE30/tZB9pykRwvBceJMqbSd/vwbiv2jfcp1vvx5/iUWJ4Vvz68c+6hPbO+vFPG3Iz10N4p9zHXLxdyzNTy/pwd599Ub3/+bit77735N9Xb4I5z68TbpoK3H5M53m5/7W8/m8redmyuF+W8tz14rwvF47l67xzvScV8MMc7lIu578228Hj7858l1tt183+Dmx+W9JbmP0uKdygvK+ktzX/S59g+xuDtrw1ctFgIrXdqemvrmJB37HqnprfG2yp8HkPJ/CTW+32ln8fmu+Y/uBQlvGvm1Rpurhxac32s/l7nng/hvbmNL6nXaX0AAADAeLianNYthbqxYN3uBMf7EXsDwPj4uhjaAAAAAAAAAAAAAAAgH7PfZ/bQpKNFax9yX9Ds95n9Pelo0drPdV+wxN5EzPOV6nMw3l3jyyfm+Ur1uXSNLzjyMm2a12n3NoBzgPiG/wzxDTBuHm6OBQAAwPINs1gx+AhKAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="46" height="103">

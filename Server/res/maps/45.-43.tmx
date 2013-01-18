@@ -18,7 +18,7 @@
  <tileset firstgid="1025" source="SinnohInteriorSet1.tsx"/>
  <layer name="Water" width="45" height="119">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DMQkAAAgAMA+xnbXMbQg/2WBdEa2qqurppKqqqqqqqqqqqqqqqqqqqqqqHy5JXVkorFMAAA==
+   H4sIAAAAAAAAC+3YsQ3AIAwAQQqU7ViLudOmSYVlB3KWroVHUDGu1gYAAGlWRnNOc9UZNO/3Tp5rzZ5jdbI6I5qj9/ty89ueFfelGQCoEj2aNWvWrFmzZgAAAABOs+N/kGbNJzUDAAAAAAAA8C830K+QyKxTAAA=
   </data>
  </layer>
  <layer name="Walkable" width="45" height="119">

@@ -17,6 +17,7 @@
  <tileset firstgid="1" source="normal12.tsx"/>
  <tileset firstgid="1025" source="SinnohCaveset.tsx"/>
  <tileset firstgid="2105" source="SinnohSet10.tsx"/>
+ <tileset firstgid="4569" source="Sinnoh Exit Cave.tsx"/>
  <layer name="Layer 9" width="60" height="28">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3PAREAAAQAMdLp30gL7tgS/EewqXK7YJbf2/ze9u0XAAAAAD5rJuHApkAaAAA=
@@ -59,12 +60,12 @@
  </layer>
  <layer name="Collisions" width="60" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YUQ7CIBBEq9ex98Cv3qLqOUz0NB5SmpQEN8uC22FLq5NMqm1AZh8By3jouov3CL46ZRup3fTsPDv+/I0f3s8KV6dsI7WLM169b5GHwrxorlZ8qUt5b5UvNeWd4k5rqNXafEu50xpqZcE3xTBm2Xuf5u89kxfFl0riJLVxC8YQ6jEp5K/Fl0riZCXH5M3VPnc/9VzDFy0ub672ufup51q+S+Yz15clX+34ULLmqx0fSn++2+crrYEavlpZ5ZXWQA1frbhx5/Yni/n8On466A74Larc/mSRt5a08xk9hvAfc6ictwVx5yEtCnnmYJV3yfqMPHOwzIt+30fwpeszyjXe9xF8UbXkatsiX1QtudquzTfei36BL+1373xpv3tfnzm+b11OZ01AGgAA
+   H4sIAAAAAAAAC+WYYQ6CMAyF0cvNX9wC9RwmehoP6UwkmU3XweO1IL6kwbB0tv1GBxsOXXfONpCvCfSx/N5jp4+Vv+fYPdvD4ZpAH8uvzPGS7VpYPzFfNtcovtKm8v5VvtIk7xp3WUNUa/Odyl3WEFUE3xpD6xmW+bL4SlmcLJ+0IAath3nx1WKvcYpSUvJt1b51vzaO8PXQXL6t+7VxlO+S9VybL4ovEhszX209e/JF42Mp+vlF42Npj3ytHojwRRWVr9UDEb6otLhb+1PEen4ev23UjfBfUq39KSJfL6HrmR3D+I7ZO+e7BWnnIVsU88whKt8l/Zl55hCZL/t7n8FX9meWeXzvM/iyaqnVdot8WbXUars233Iv+ge+ct6985Xz7r0/a3xfbvzNzEAaAAA=
   </data>
  </layer>
  <layer name="Walkable" width="60" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2W3Q2DMAyETdVdoJOUqoNAZ4FN6CZ0EzpELYElHsM54a/3SfcWWXeJFJ8IIeQsXC+jUp3fG0f2vjb21uidNZlIm/l9PCPMCMWTt1Ofb9Brriom3bARMGjeXrN+wLx3VTnpgY1YnUGzfiPkfUX0hGDvnfIvr1S1bJ/13+G+I4R4mHcTr6zbNMAetT4Z6gftUfNd7ZV1mw7Ia30y1A/ao1Lk7YG8nj65hBR5B8C3p08uwbpYDLHPEUIIQfgB4ELhnUAaAAA=
+   H4sIAAAAAAAAC+2W0QnCQBBEN2IDVqFWoqlErSV2EjuJhQgRbMEFbzE/wWT2NlGZB/NzhGPfHeRGhBDyLywXr0R9/2388uxTY3eNnllViJyLvDNF4/Gt1fUC+q41m5QttgUM6tuo6xX03Wn2KWVau62wvaaiVdd7Bt9TWnvM5Gv3HfkvP2iO8nYl88D3jhDiodtNvLFuUwHvqPXJofOgPar7Vntj3aYGfK1PDp2n7NvoAxG+DeDr6ZNjiPBtgbk9fXIM1sVyhH2OEEIIwhOtNxzjQBoAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="60" height="28">

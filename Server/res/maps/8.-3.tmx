@@ -22,7 +22,7 @@
  <tileset firstgid="16135" source="Buildings7.tsx"/>
  <layer name="Walkable" width="24" height="27">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82VQRKCMAxFI3IA7qA7lBvI1gXn5hxeBbPI2Gb6aZNWlJk3LaR9dMoH1jPR+kfch7iPQHOOXJ/AB6o/T0TXmej1iOFpPcVjL3OaZcA1JuWXe5T4c6D1c1vrn97cvuRH7pDavdlze/2SIW5b+3V2vf4w58jdyr+H1T8Z/Jb9Z+9YkDcr4m/t1e9XS/cv/R19anqsx98qJxr97a/NufxPPH60/tApfTkv8dfkvYQ+81wtrqP9qZx68oHyydc74Gd3LtdS3wBNGfkDIAoAAA==
+   H4sIAAAAAAAAC82VQRKCMAxFI3IA7qA7lBvI1gXn5h4eBbPI2Gb6aZNWlJk3LaR9dMoH1jPR+kfch7iPQHOOXJ/AB6o/T0TXmej1iOFpPcVjL3OaZcA1JuWXe5T4c6D1c1vrn97cvuRH7pDavdlze/2SIW5b+3V2vf4w58jdyr+H1T8Z/Jb9Z+9YkDcr4m/t1e9XS/cv/R19anqsx98qJxr97a/NufxPPH60/tApfTkv8dfkvYQ+81wtrqP9qZx68oHyydc74Gd3LtdS3wCivEc3IAoAAA==
   </data>
  </layer>
  <layer name="Grass" width="24" height="27">

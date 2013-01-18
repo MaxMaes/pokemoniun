@@ -47,14 +47,14 @@
    H4sIAAAAAAAAC+2WyW7CMBRFkaxu6I5+ClM3QMuGod1Qhk1L6QYk+BI+m2uhSNGrk+chNrHiK12ZIHzf8XOI02r5VQd+8Zjbhp895Ge5iV+txF+uxF8uFX9XVJdft/6bclD+7JobdUV5smvd0Re/aT9pncSf+EPwc+tw5efWkfj17iNdfrruR/OH6j+9jo0/9v4nfr/8qnfKVxEPf5FC83Ny5ZeSe9WD+/AAHor7XuV/b/v8lxohawxP4Df4HZ6K6vhnyJrDC3gJf8CfDP/16X+2/E7V/xWyvuA1vIG38K5C/m9k/cB7+Bc+wH+W/VfxH5F1yv0fz/h8Eep5Nvw6suWXe1K0V3nXlV9XsfPT+RyHKT+dz9VvKr9ufVt+0zq+cov4Xc93rv+u57tr/135Ofnm5xT7/R/6+WN7DnD1Td/36HyufuIvr980ftv3H11+ysOdD7b9L6pHxxvHJlhaAB4AAA==
   </data>
  </layer>
- <layer name="WalkBehind" width="24" height="80">
+ <layer name="Collisions" width="24" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YS47CMAxAIzHqAlYDbJA4BgMn4CxwKn6L4bOcDRKnw1lEmMixneBqqMiTrPBJ2tfGSdM4xzNFnydCXY7xC21jvonfpsRvpVDXWf0fVH8ea//l1/N3C/+G+e8/7/+s59wPxBxi0Ss7fol/H2KASo7c+4/rDyFGgk+uP1Vf66OpT2HpTxH6YQOJuoXYQewhDo2Nf+iHXzjeEeIEcYa4NLb+MX/G/t7rigbzzcjfM0h4WfvHWM4/bfkHqj9P9eep/jzVn6f683gvzZrScv1PYbl+pvhU/+C1gn5dF74vcGjzvxRt/pdi4c/VLxm/cV9x12s5/1DtLOcf7XtY9X/QJX+qfRvPL9z+U/3j/ZhUKZ0/gP39+cP7p1RS1y3558zf1P3R+Gt5R38JKT9fzX8pP9vc//Gk/KV9R9w+d/9Es+9Itc9dP+Q+B3LXP7h+ag+7K/4puuzfd+3547zH54ufC6X+3LiJyxTcONaufzhyx72UD3elgB8GAB4AAA==
+   H4sIAAAAAAAAC+3YsQrAIAxFUed2qu0i9P+/03QPgpBHoLkHskmMiPCwNQDAnxxWp7B/t7qtHuEen1fcHwAA1HAF9vLyzwjs7+WfavPvrvfmX+XUiPOucmrEfWXODwAANNT/dUAF2e8oe/9dE/7kZU4AHgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YsQrAIAxFUed2qu0i9P+/03QPgpBHoLkHskmMiPCwNQDAnxxWp7B/t7qtHuEen1fcHwAA1HAF9vLyzwjs7+WfavPvrvfmX+XUiPOucmrEfWXODwAANNT/dUAF2e8oe/9dE/7kZU4AHgAA
+   H4sIAAAAAAAAC+2YS47CMAxAIzHqAlYDbJA4BgMn4CxwKn6L4bOcDRKnw1lEmMixneBqqMiTrPBJ2tfGSdM4xzNFnydCXY7xC21jvonfpsRvpVDXWf0fVH8ea//l1/N3C/+G+e8/7/+s59wPxBxi0Ss7fol/H2KASo7c+4/rDyFGgk+uP1Vf66OpT2HpTxH6YQOJuoXYQewhDo2Nf+iHXzjeEeIEcYa4NLb+MX/G/t7rigbzzcjfM0h4WfvHWM4/bfkHqj9P9eep/jzVn6f683gvzZrScv1PYbl+pvhU/+C1gn5dF74vcGjzvxRt/pdi4c/VLxm/cV9x12s5/1DtLOcf7XtY9X/QJX+qfRvPL9z+U/3j/ZhUKZ0/gP39+cP7p1RS1y3558zf1P3R+Gt5R38JKT9fzX8pP9vc//Gk/KV9R9w+d/9Es+9Itc9dP+Q+B3LXP7h+ag+7K/4puuzfd+3547zH54ufC6X+3LiJyxTcONaufzhyx72UD3elgB8GAB4AAA==
   </data>
  </layer>
 </map>

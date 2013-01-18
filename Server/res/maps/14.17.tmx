@@ -57,14 +57,14 @@
    H4sIAAAAAAAAC+3OQQ0AAAgEoMtg/3r28GEINwcJSAAAgE+6rgcAALAGPhXRe4AWAAA=
   </data>
  </layer>
- <layer name="WalkBehind" width="24" height="60">
+ <layer name="Walkable" width="24" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YzQqAIBAEYE8d6tLfRej9n7MughcnXWeDagZESMmvPSzkOoewXWN1msdrTI6zl/vOz0rp3J10Rsl/kN4vP478IQxg7xv86D0M/2LoP0dDb4pgL/LXfpvVj+rM8KM65+ssf8ye5etf8JfC8KMw/Cjyyy//P/yWtPgt9WnxW+ojv/w9/lLY/pr9PX7W/5aiKM/F694wxeveMPUzL3/qZ95+ryT/CVjJgRWAFgAA
+   H4sIAAAAAAAAC+3MIQoAIBAAwXuCgkXw/+80XvIwGAwzdWEjACD1dm6jaLdm8VgP/gAAAMA/NgZTU2qAFgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3MIQoAIBAAwXuCgkXw/+80XvIwGAwzdWEjACD1dm6jaLdm8VgP/gAAAMA/NgZTU2qAFgAA
+   H4sIAAAAAAAAC+3YzQqAIBAEYE8d6tLfRej9n7MughcnXWeDagZESMmvPSzkOoewXWN1msdrTI6zl/vOz0rp3J10Rsl/kN4vP478IQxg7xv86D0M/2LoP0dDb4pgL/LXfpvVj+rM8KM65+ssf8ye5etf8JfC8KMw/Cjyyy//P/yWtPgt9WnxW+ojv/w9/lLY/pr9PX7W/5aiKM/F694wxeveMPUzL3/qZ95+ryT/CVjJgRWAFgAA
   </data>
  </layer>
 </map>

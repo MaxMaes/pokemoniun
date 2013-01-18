@@ -1,5 +1,5 @@
 [npc]
-NULL
+NPC
 down
 47
 36
@@ -76,6 +76,11 @@ CUT_TREE
 [hmobject]
 CUT_TREE
 12
+13
+[/hmobject]
+[hmobject]
+CUT_TREE
+13
 13
 [/hmobject]
 [npc]
@@ -163,5 +168,14 @@ false
 6
 34
 -44
+0
+[/warp]
+[warp]
+16
+48
+14
+31
+-48
+48
 0
 [/warp]

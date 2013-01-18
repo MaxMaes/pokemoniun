@@ -20,17 +20,12 @@
  <tileset firstgid="4097" source="normal1.tsx"/>
  <layer name="Walkable" width="30" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TwQ0CIRBFOXnStRcLWG3Cq1qJhRoTW1FiJpIJIDMMsMb/kh/2xOMzi3Nxdlu7SID397wS92P1ifUZ7uu+nan3Er0t7nek99t8a725OeWw6CvF6v1onJbzlTg9Pbyhz6/Hzfvbrz6xfXL7f3OGHXnfHP4t8HBuQm8JpV6elLuUEm/qHNxL36285K6h1GPt1QIvAAAAAMB/Mk/O7VkOU3vv6eU4R9LyLHPCGcvF0JvqmopFZ0lXy87SruHcNb3p/9U4a/zanpp7D9+olTP23nh/y46l/TX/bU16dw29vbuSt3dX8l4HeUfNd6TXAy+88MK7ZO8TNxfI69AgAAA=
+   H4sIAAAAAAAAC+2TQQ4CIQxFWbnS8S4eYPQSbtWTeNCJiVdRFs0QAiMtpWDyX/IzOx6fTp1LczrqhQO8/+fluN+7Ndp3eO1tO1PvEb0t3ren99d8a71bc9pCoy8Xrf2RODXnW+okLLyx83pYvz6pc7bOL3Vy8bsQJ2ZhdtX0xqmlxJu7h7WX3LVeCRpvDe+4XgAAAACA0Zgn585RLlN77+3ruCfS8i5zxpnKQ9Gb65qLRmdOV83O3K7h3CW96f+VOGv80p6Sdw93VMuZ2re4v2bH0v6S/7Ym1l1Dr3VX8lp3Je+zk7fXfHt6PfDCCy+8I3s/lqBYQdAgAAA=
   </data>
  </layer>
  <layer name="Walkable" width="30" height="70">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2UTQrCMBBGs6qiYhfeQT2Pa724uHAh6DGsaCGGfumknR9a5sFAaUreTDLTEGS51sIC986Wx7rs+9tGJg8N73MXwusXml4Kp5WNN0Xai+6gdKbT8+rjvMUhiYU355xivZ+eifsm7R2puqpmFhZRLDtmI3Zz5bFvPIcojhkv571SvCgPbW/rnqJ3CBqzi7wWWHotz9qqbsdxHMdxHOefS/0Na6dGHq2jyy3tQyHtzOUh5UXvOP3IE7vQOpcb1da3NtRJ2Z/7jimOXG5jvNT9OL3xPqXBBZql9JnTS/1nSNcq1U9UP8pByxuvSXs16kT+OXKvrDNwxvAGmTYImNAgAAA=
-  </data>
- </layer>
- <layer name="Walkable" width="30" height="70">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OsQ0AIAwEsS+zJmH/HaBmAYrY0vWXAADwWpX0bdfvEwAAAAAAmOkAjGxa/NAgAAA=
   </data>
  </layer>
  <layer name="Water" width="30" height="70">
@@ -55,7 +50,7 @@
  </layer>
  <layer name="WalkBehind" width="30" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TUQqAIBBF0QeitbFq/2uo9lH+DaRZChVxD8yXynNGlAAAwFfMXlpOKsWur5k9JS7U3znyFedjr31jbheOMyrNoLXXHDuD1Ntd7XVw0rjX5O7nPoncf+favwUAAAAAAAAAb9kADd2vg9AgAAA=
+   H4sIAAAAAAAAC+3TUQqAIBBF0QeSubFqHdXSq32kf0KWVlAR98B8qTxnRAkAAHzFVEnzQaXE68vOnhxjr985qC6cD726m7m13c4oN4PSXnsnDb5GV7Y/nkHq7Up7bYzU+urM+dwnkfvv3PhvAQAAAAAAAMBbVj01do3QIAAA
   </data>
  </layer>
 </map>

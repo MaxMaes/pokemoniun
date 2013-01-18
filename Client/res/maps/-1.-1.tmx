@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="36" height="36" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Geodude,50;Spearow,30;Rattata,15;Phanpy,2;Jigglypuff,3;"/>
@@ -15,39 +14,47 @@
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal2.tsx"/>
  <tileset firstgid="2049" source="normal3.tsx"/>
+ <tileset firstgid="3073" source="Path0.tsx"/>
+ <tileset firstgid="3369" source="Buildings7.tsx"/>
+ <tileset firstgid="3721" source="Cliffs01.tsx"/>
  <layer name="Walkable" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNiYGBgwoOPMuOXJ1ctuRhkBymY1u4ZxcMTK3APvBtGMQQfGs3Ho3gUDwo8UuvU0TKIOpjU9hut23ODLT2PumfUPcPNPYMpv49UzMgIpKGYmXHg3aMIdIMSFCsPMvewDoJwQnaPKhA7AbHzIHHPYIuvUfcMnHsAIeeDEEAUAAA=
+   H4sIAAAAAAAAC+3WOw6AIBBFUULlL8ZPp/tfgitxQ2JCYWHQBuZGX3Eqm5sZRXznnE/Y+vTzUs6OJ9aNxLmRe+72RtnnDpuXiIg163NZ8u429//3zT2u5B2P9j6rRz1f6yF9739VB03UAnrGYIpmWE8FmNO1ZwiWYIX00PalHrueA1KtIkZAFAAA
   </data>
  </layer>
  <layer name="Grass" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3OsQkAIBAEQVux/yaNTB5eQQOFn4FLLtrWAACAWz3sNT1rv/VMsStb9Z7sr96zowc4NQAPt9VeQBQAAA==
+   H4sIAAAAAAAAC+3SMQ6AIBBE0TkAFxErsALvfy8xYRsVGxPZ4r9k6p3ASAAAAAC+WoIUe9Ywu42UWofcs9HnprQO1VEfY+8UX/LnvqxPvSRP+s80uDdrX+eO9od7nvflqU9x1gfA2AGbE3gHQBQAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3SsQkAIBAEwef7r8NS7MQ+TAzFSBFxBi6/YCMA4LySEW2s5u03vKLohQV9sFvL+XQGwO86hmDDV0AUAAA=
+   H4sIAAAAAAAAC+3SsQ2AMBAEwevgW6Gbx/03QkKIHBlZiBnp8gs2AYD3dSXnvVG73/AVrRcm9MFqRz1PZwD83QVrBbCCQBQAAA==
   </data>
  </layer>
  <layer name="LedgesLeft" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3UMQ0AIAwAwQb/PpBSKdhgZiUkbcidgp8+AgD+N0d1wWk16wHe6/ad1AMAXNrMgx9mQBQAAA==
+   H4sIAAAAAAAAC+3UMQ0AIAwAwTpAAHPxL5GZlZC0IXcKfvoIAPjfHNUFp9WsB3iv23dSDwBwaQOIRL/VQBQAAA==
   </data>
  </layer>
  <layer name="Water" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3BgQAAAADDoPlTX+AIVQEAAAAAfAPkqTuZQBQAAA==
+   H4sIAAAAAAAAC+3BgQAAAADDoPlTX+AIVQEAAAAAfAPkqTuZQBQAAA==
   </data>
  </layer>
  <layer name="Collisions" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAANWX/QnCQAzFi6Kb+LGIH6O4h46iTmKdpHYO759CCPHy0uSuNfAI2Ovx8iNJsV02TZvRS3lO9TacHasu6QOqr+BnjroKLG7G86jQvuCR6yvpPBpI3dL9vK/oXb3Dzy5pT7JUt6dea5ySziRP7Qfh8/ihZwGfnA/vi9wcleDG+WyStiRb5+ie4YmI8zkkHUnO7WdpjizfF0mcjze8fjifqf2gfGhf0LmS+qUGH1o37WMvD40P50Trr+GH8+GctH09zF9uT0XyQb8fw7no/cP5SPsnt3ei52vsHoryo/Gp7edf+XSLaflYOZXmY+2jwYfl/5qkaD5ejeFzEX7zconmo92D5qj+0e5BM+q7NBeUj8YpiouXTzQXL59oLnPls0paA5kH+p41fwEIuWsxQBQAAA==
+   H4sIAAAAAAAAC+2WPQ7CMAyFc4HCUdg4AN3gpvyIpWWEjogRcSA6NKplpfGr4zRCItKTpaRJX77aSduVc21EjTA+pZtynqR7r0dA10J+tNxy+rkE2CB++DxEaC7Q1rDv+BzGX6SvC8xDGpIXfF2eU+9h/MP6O4WfXeVcXY0x9B00+9S2fe/hUI2xtB+Ez2lC5ww+OR+eG7FzJgc3zgfhFfNzjPBExPlIvKT60d4vXpxHakv1w3mU9oPyoXlB6yqUL0vwofumeZzKQ+LDOdH9L+Fnqq5i76N+fP1J/0NWfND7wz+X6/zh+0fPHev60p5DVn4kPkv7+VU+m3VZPnM55eYzN4+8j9j/ACJrPqnS8NkG+lO5WPOR1kGjVf5I66AR9Z2bC8pH4mTFJZWPNZdUPtZc/nyw+AU4867CQBQAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="36" height="36">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RMQqAMAxG4V6gl9FJcBG8/5l0CbRS/kaERuW9JUuG8CUlov+25ugL6vaX3YPPvfCqw0OHjy+cdPjo8NHh4wsn3Vd9pnNvzs9nL4/PMtDQ47MF/LTlNNLlWsspwsUqfSJdrNIn0sXCRzfK5wBwrp8jQBQAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="36" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3WuwoAIAgAwLb6/y+uMVqCoid3IK4lKoYA/4glUpVhhn6CdcwVcJo9xE7tXTmaX9N796v/Wk1duFEGKbTEXEAUAAA=
+   H4sIAAAAAAAAC+3VMQqAMAyF4VygHsVBN73/4K10KYUOqbav5AnvX7JJ+EjRTKn+tmS2pzJ7uxbMPsezw5nKjA7lg4rdJ9qr9on2ivaoi/aok48fy7vKsbyrnHy+JR/u/uKj/7uffPw8n3Xiniif1nfezlatO0Lf2ejeKJfRe531/nr3RrugfFjuh90H5cXmcwONRJmPQBQAAA==
   </data>
  </layer>
 </map>

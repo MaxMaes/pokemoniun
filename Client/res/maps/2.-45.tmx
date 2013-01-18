@@ -30,7 +30,7 @@
  </layer>
  <layer name="Collisions" width="36" height="67">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZTW4CMQyFs0Pc/xojVqUrmFXLajQ3oGdhpq0lY2znJSQZkPIkq1KVmM/5cZzMEEL4TrDDYmfQhgx/I9iP+p4SeGK+NX/jv0md9sr/Mnikb+5X80d9tN+vwRPz5/X5WOzIbAZ5aI4uju81fo9nEO1pbjWmlHVzyRyfh3k22qfOk7cOWvKs40hj+rkxj2Tx1kMLnmf8T8y4jpV4aD2Virf2+LTgmcJ9ziDbgsdi4Uwtebp1a21ofVjbqHa16srQmIX2Pq+BOAupFYvkWe28W/7uQrKQ35S1HZ3/8uzgPNeF5SeDR5NWu0uNER4rhlqK8WjniXdH6Dzb8nyFx73h3Vlq83Ahd9ZVsRqH7m0UK4lidecLZCDl5isudHwQlchXJXm0fJWasywe5E6p+lLmOCU2i4f7lf68s0fTrLS3YkV4EMn8cEjoh/CkSvZ5NR4tv2gm8yvCo8UQ48nVu/DwelUbU4/HykPP7K/YW6jHo701WizoevbinQGeGBOx5PBYeS7G471XoG9BNXnkmizJM4T7d0m+5i0ebZ+U4vHOFI8H2bu5PJZiPCl9O085Hr5+eO1s8VDuoTfuWM3PeSbW18p/nIfXzkj+QQ2tN4hXq2W34CFpbTvPa/P8fv+kbzX7sjzIXuTmtUW+r3rW1dXV1fWnG3rDrzWwJQAA
+   H4sIAAAAAAAAC+2ZS24CMQyGs+X+1xixKl3RWbWsRnOmMgVLxvgZkgyV/EveoMR8zsNxMlMp5Sdgx6t9OW2q8Dc7+0Hfc4DH8s35m+9GdT4wv1XwUN/YL+cP+nD/34PH8qf1+bjaCdnq5IE5uii+t/g1nom0h7nlmCLr5lI5Pk/zLLSPzpO2DkbybOMIY/q5Mw9l0dbDCJ5X/C/IsE6deGA9tYq39/iM4FnKY84A24NHYsFMI3nS0kabtz7sbVC7SnVlGcwCex/XQJgFNIqF8mi1pSXPf9LaDs5/ena04OHE1e5Us8EjxdBLFg93nrQet+Rpx/NdnveGdmfpzYPlubNusmocuLdBrCCIVZ0vJ0NLjco/e/Bw+SqasyQez52S9cXMcSQ2iQf7pf60s4fTyrSXYvXweETzwzHQz8MTFe3zbjxcfuGM5lcPDxeDxVOr/8KD61VuTDUeKQ+9sr+st1CNh3trlFi861mLd3XwWEzAUsMj5TmLR3uv8L4F9eSha7Ilz1Qe3yXxmpd4uH3Sikc7UzQez96t5ZFk8UT6Jk87nuj6gdwDb9xWzY95FtRXyn9Rnhrz1hvAy9Wye/CAuLbJ8948f98/4VvNoS2PZy9i09p6vq9qlkqlUqmbfgFFxvC0sCUAAA==
   </data>
  </layer>
  <layer name="Walkable" width="36" height="67" opacity="0.94">
@@ -40,7 +40,7 @@
  </layer>
  <layer name="Collisions" width="36" height="67">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XQQqDMBBA0SwEaY/hVYur0lXpTbSr6Eq9hZ6lEROMIkirNiP8B4MERD8SAiolUxErVcahK0ataem8Hn0J1yLh/QAAAJi6RcM1jcJ2OHfb8RDS87Qdr4N6pP8/rMnMvA+r+Z42U3rrvi9fmH81z3v0xucl12F+VZlpduzZm7Se/nvV3rq20yzfjhNwZ4KUc8vtMfYUAAAAAAAAzuID2SgybbAlAAA=
+   H4sIAAAAAAAAC+3UwQpAMBjAcYddeAyvKic5yZvgtJzwXCZbjZxYfMv/V19aiX9rLUlwh07//X8AAAAcFWp/lurbDqeyHbWQnsZ2tEJ6pOnMDF9HeLSZ0Vtvff3FvNV87tEPv5dn+9w1mVkC9oQmrWfbr9lbz3aW69cRAXcnSLm33BnjTAEAAAAAACAWKyDqxw6wJQAA
   </data>
  </layer>
  <layer name="LedgesDown" width="36" height="67">

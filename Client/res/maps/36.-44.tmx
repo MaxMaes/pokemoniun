@@ -7,7 +7,7 @@
   <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
   <property name="nightPokemonChances" value="Shellos,65;Buizel,15;Bidoof,10;Pachirisu,10;"/>
   <property name="nightPokemonLevels" value="9-12;10-11;10-10;9-11;"/>
-  <property name="pvp" value="disabled"/>
+  <property name="pvp" value="enforced"/>
   <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,9;Gastrodon,1;"/>
   <property name="waterPokemonLevels" value="20-30;20-30;20-40;20-40;"/>
   <property name="wildProbability" value="7"/>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="38" height="19" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Caterpie,15;Weedle,15;Metapod,5;Kakuna,5;Venonat,5;Paras,5;Butterfree,4;Beedrill,4;Scyther,1;Pinsir,1;Pidgey,10;Sunkern,5;Nidoran-m,10;Nidoran-f,10;Ledyba,5;"/>
@@ -14,34 +13,39 @@
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal2.tsx"/>
+ <tileset firstgid="2049" source="Trees0.tsx"/>
+ <tileset firstgid="2359" source="Buildings7.tsx"/>
+ <tileset firstgid="2711" source="Daycare Johto.tsx"/>
+ <tileset firstgid="3642" source="Path0.tsx"/>
+ <tileset firstgid="3938" source="Fences01.tsx"/>
  <layer name="Walkable" width="38" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3U4Q2CMBCG4esJg+lmuok4CRAHEekefg1tUhsO25grfyB5/5BAnxwtTER8dBTVG6IhajS6691Rhx4/TDOaoqyyrUcDGgtMNWxbrthU2ya5tuZUwya5pDm5q4YtuJ607P1w7nLmlLpscmbT83vG+y+FLoveyOAm87JWw2W21j+71gld8f7bn9+xKbS1fm3t/eXmtpcp3V8dff9fc2waptgVKpmblinHJdk0Ta4Xmnyz4Aq29HxpmdZmJ7n2rJbrAxYZc/BICwAA
+   H4sIAAAAAAAAC7PmY2CwHsWjGAnbYcG0tM8ViN2A2J1EN9Hafb5A7AfE/mS6iVZuw+cuYt1ET3eR4iZauA2bu8hxE7XdBnNXIB8k7VPiJhCG5SN8mBR3RQJxOBXcFQrEYQQwvdMXLeJxKKT7wVxOkOI2arsJhGHpNByPGnq7iRQ8GN00UjAApUwBDUgLAAA=
   </data>
  </layer>
  <layer name="Grass" width="38" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAUjESjioMnVR6o5pNiBLqeIR45WbiPkJnLVUDO8yLWPluFFij3khi0lgJC5A+E2Ys2jVZhQah+93UWMnfSKx6GS7gnZM5jLMHq5Cd0OdLGBqIdw2UGqenqlr5ECAPP9eUpICwAA
+   H4sIAAAAAAAAC2NgGAUjEUTxYafJ1UeqOaTYgS4Hw/R0GyE3kauGmuFFrn20DC9S7CE3bCkBhMwdCLcRax6twoRS++jtLmLspFc8DpV0T6zbyFVLrjuIsY9ebiLktoGoh3DZQap6eqWvkQIA+aqJpEgLAAA=
   </data>
  </layer>
  <layer name="Water" width="38" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3O0Q0AEBAE0U30hk50gk4o021ClOAi+5L5H0BERCgGIFk5vD65+DSsYk1Hb3U/nbqTL+Jbc/YkIn9akI+P3kgLAAA=
-  </data>
- </layer>
- <layer name="Ledges" width="38" height="19">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3BMQEAAADCoPVPbQZ/oAAAgNcATPmh6UgLAAA=
+   H4sIAAAAAAAAC+3OywkAIAwE0VSQ/utTb6IHf2c3IFiCQfbB3EeEiIhMUJGIkr4+ueypoIyqo7eGj3m+FhpOvoy9dWdPRPSnDU/LUuRICwAA
   </data>
  </layer>
  <layer name="Collisions" width="38" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAALWWYQqDMAyFg87dwx/bPYboOfbH83kmb7IWVtC0ti8xCYSHAevXZ5t2IKJnyOGmvkK+C2o9nlTnkEtBteO1uK++xzXG3uWJvp8U9WvsiaZDXkVk+D7Otfgc65JA/fpUWGpMWjbUrxZXjUnDZuEXwiRlu+uXhEnCpvVrUzJxto3V17+i/QVZ9x5hsR89QuqX13/kPFq/vNa9Rf/y6BNW/d66r2r9WikPy3OodT9Jiu5Hq3Nbe//i8/JS9P6YlM/LS3/4Gb6ESAsAAA==
+   H4sIAAAAAAAAC7WWQQqAMAwEPdaTD/LsU/QDgl715doigtbaJttNICwKhumapt1c0+w+t0pdfK4JZdfTKrt+rU+3hji6b1r5Nfra0yP/IjD07v0uPB+Zb1Ih9WsW1E0xoWxSv0pcOSaEjeGXhEnLVuuXhknDVuMXwlRiG9pLWf1lFYz9aBGIXxb/MeZB/bLqe0Z/WcwJ1rxnz1XUr3s/S9m05xDzfPxjQ85t9H4Ur8tKkXvWc11WegJRDdQASAsAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="38" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoByUcjAw5HFgl6vAIU4PUM+B3f5SGroJVziggyYs6upJdFc2CerpGQ+khC+x4UUNMBpepIHR8KIdGMhyER8YTV+DN32NhhdpYDiEFzoYzOUZLdtV5AJQO4vUdhU5AAB0ILSVSAsAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="38" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMAuqC/kFmziggD9A6HtmBmINKdoyCUTDUACz9E0uTq49U80cBaQAA040fckgLAAA=
+   H4sIAAAAAAAAC8vhYGDIBeIcCmlcgNrmDTQYbO4eDS/y3DNYwWh44Qe2nKj8wRZegx0MtvAa7PE0Gl6kAVLDCz0/08o9gxWQ2y6itL1GiHYAxosjJ/E0DJCqj1TaA4g9SaC9gNidDH2k0gACy0+ZSAsAAA==
   </data>
  </layer>
 </map>

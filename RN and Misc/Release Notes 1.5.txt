@@ -9,15 +9,16 @@
 [FIX] invisible NPCs
 [FIX] wild exp gain is now based on the participating pokemon levls
 [FIX] 4th gen pokemon sprites
+[FIX] game crash on ditto, smeargle and some legendaries
 
 Remade the entire client/server communication infrastructure.
 
-[ADD] Hoenn and Sinnoh (includes caves, hoenn gyms, pokemon centers and pokemarkts)
+[ADD] Hoenn and Sinnoh (includes caves, gyms, pokemon centers, pokemarkts and NPCs in some towns)
 [ADD] Kanto cycle route
 [ADD] train and boat transportation
 [reADD] Kanto safari zone
 [ADD] entry control on Mt.Silver and safari zone
 [ADD] some of slams sprites are now buyable ingame
-[ADD] Kanto graphic update
+[ADD] Kanto & Johto graphic update
 
 ([ADD] Sevii islands staff area)

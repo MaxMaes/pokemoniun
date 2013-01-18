@@ -40,7 +40,7 @@
  </layer>
  <layer name="LedgesDown" width="61" height="119">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3IMQ0AIBAEwRdxggD/oigoPjggZCbZZqsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgHzPdynkj9+dtG+ifTu9scQAA
+   H4sIAAAAAAAAC+3IsQ0AIAwEsR8iAxH2H4qWihpFtnTNJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDqqSvdr0/fzq+M2oVbHEAAA==
   </data>
  </layer>
  <layer name="Collisions" width="61" height="119">

@@ -29,7 +29,7 @@ PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=latin1 COLLATE=latin1_swedish_ci
-AUTO_INCREMENT=9224
+AUTO_INCREMENT=1
 
 ;
 
@@ -211,7 +211,7 @@ PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=latin1 COLLATE=latin1_swedish_ci
-AUTO_INCREMENT=15069
+AUTO_INCREMENT=1
 
 ;
 
@@ -269,7 +269,7 @@ PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=latin1 COLLATE=latin1_swedish_ci
-AUTO_INCREMENT=15053
+AUTO_INCREMENT=1
 
 ;
 
@@ -340,7 +340,7 @@ PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=latin1 COLLATE=latin1_swedish_ci
-AUTO_INCREMENT=32164;
+AUTO_INCREMENT=1;
 
 -- ----------------------------
 -- Records of pn_pokemon

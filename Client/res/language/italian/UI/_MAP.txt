@@ -1,0 +1,68 @@
+*Name, width, height, x (multiples of 8), y (multiples of 8)
+*Johto and Kanto RoutesPercorso 1,8,64,42,13Percorso 2,8,24,42,9Percorso 3,40,8,43,8Percorso 4,72,8,47,7
+Route 5,8,48,56,8Percorso 6,8,16,55,16Percorso 7,16,8,53,14
+Percorso 8,40,8,57,14Percorso 9,40,8,57,7Percorso 10,8,56,62,7
+Percorso 11,48,8,56,18
+Percorso 12,8,72,62,15
+Percorso 13,32,8,58,23Percorso 14,8,24,57,23
+Percorso 15,24,8,54,25
+Percorso 16,32,8,47,14
+Percorso 17,8,80,47,15
+Percorso 18,48,8,47,25Percorso 19,8,24,53,26Percorso 20,80,8,43,28
+Percorso 21,8,48,42,22
+Percorso 22,32,8,38,12Percorso 23,8,32,38,8
+Percorso 24,8,24,56,4
+Percorso 25,32,8,57,4Percorso 26,8,72,38,13
+Percorso 27,56,8,31,21Percorso 28,40,8,33,12
+Percorso 29,64,8,23,21
+Percorso 30,8,72,22,12
+Percorso 31,24,8,20,11
+Percorso 32,8,104,19,12
+Percorso 33,16,8,17,25Percorso 34,8,56,13,17
+Percorso 35,8,24,13,12Percorso 36,40,8,14,11
+Percorso 37,8,40,15,6
+Percorso 38,32,8,11,5
+Percorso 39,8,40,10,5
+Percorso 40,8,40,8,11
+Percorso 41,8,32,8,17Percorso 42,56,8,16,5
+Percorso 43,8,24,23,2Percorso 44,24,8,24,5Percorso 45,8,72,27,6
+Percorso 46,8,56,26,14
+*Johto and Kanto Places of Interest
+Isole Vorticose,8,8,8,16
+Lago d'Ira,16,16,23,1Grotta Gelata,8,8,26,5
+Grotta di Mezzo,8,8,19,25
+Rovine d'Alfa,8,8,18,14
+Mt. Scodella,8,8,19,5
+Bosco di Lecci,8,8,13,24
+Grotta Scura,8,8,24,8
+Tana del Drago,8,8,27,4
+Parco Nazionale,8,8,13,11Cascate 
+Tohjo,8,8,35,21
+Mt. Argento,8,8,33,12
+Boscosmeraldo,8,8,42,10Cava 
+Diglett,8,8,43,10
+Mt.Luna,8,8,47,7
+Tunnel Roccioso,8,8,62,7
+Centrale Elettrica,8,8,63,12
+Cava 
+Diglett,8,8,56,18Zona 
+Safari,8,8,53,24
+Isole Spumarine,8,8,48,28
+Via Vittoria,8,8,38,8
+*Johto and Kanto Cities
+Borgo Foglianova,8,8,31,21Fiorpescopoli,8,8,22,21
+Violapoli,8,8,19,11
+Azalina,8,8,16,25
+Fiordoripoli,8,16,13,15
+Amarantopoli,8,8,15,5
+Olivinopoli,8,8,10,10Fiorlisopoli,8,8,5,19
+Mogania,8,8,23,5
+Ebanopoli,8,8,27,5
+Biancavilla,8,8,42,21
+Smeraldopoli,8,8,42,12
+Plumbeopoli,8,8,42,8Celestopoli,8,8,56,7Aranciopoli,8,16,55,18
+Lavandonia,8,8,62,14Azzurropoli,16,8,51,14
+Zafferanopoli,16,16,55,14
+Fucsiapoli,8,8,53,25
+Isola Cannella,8,8,42,28
+Altopiano Blu,8,8,38,7

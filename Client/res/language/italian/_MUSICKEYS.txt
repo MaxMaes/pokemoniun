@@ -1,0 +1,59 @@
+Borgo Foglianova:newbark
+Fiorpescopoli:cherrygrove
+Violapoli:violet
+Parco Nazionale:nationalpark
+Azalina:azalea
+Fiordoropoli:goldenrod
+Amarantopoli:ecruteak
+Grotta Scura:darkcave
+Torre Sprout:sprouttower
+Olivinopoli:violet
+Fiorlisopoli:ecruteak
+Mogania:cherrywood
+Ebanopoli:azalea
+Torre Bruciata:burnedtower
+Torre di Latta:tintower
+Faro di Olivinopoli:lighthouse
+Tana del Drago:dragonsden
+Centro Pokemon:pokecenter
+Palestra:introandgym
+RoA:ruinsofalph
+Percorso:route
+Biancavilla:pallet
+Plumbeopoli:pewter
+Smeraldopoli:pewter
+Zafferanopoli:pewter
+Aranciopoli:vermillion
+Celestopolr:vermillion
+Lavandonia:lavender
+Canalipoli:canalave
+Giubilopoli:jubilife
+Sabbiafine:twinleaf
+Duefoglie:twinleaf
+Giardinfiorito:floaroma
+Bosco di Evopoli:eternaforest
+Evopoli:eternacity
+Mineropoli:oreburgh
+Cuoripoli:hearthome
+Flemminia:solaceon
+Memoride:solaceon
+Nevepoli:snowpoint
+Pratopoli:pastoria
+Gran Palude:pastoria
+Rupepoli:veilstone
+Arenipoli:sunnyshore
+Mt. Corona:mtcoronet
+Albanova:littleroot
+Solarosa:odale
+Petalipoli:petallburghc
+Bosco di Petalipoli:petallburghf
+Ferrugipoli:rustboro
+Bluruvia:dewford
+Porto Selcepoli:slateport
+Ciclamipoli:rustboro
+Mentania:verdanturf
+Cuordilava:odale
+Brunifoglia:fallarbor
+Forestopoli:fortree
+Porto Alghepoli:lilycove
+Verdeazzupoli:rustboro

@@ -1,0 +1,42 @@
+Selezione del Server
+Nota: Il tuo Account funzionerà su tutti i server
+Server Privato
+
+ToS
+Username:
+Password:
+Login
+Registrazione
+Registrazione Pokemonium
+Conferma Password:
+Data di Nascita (gg/mm/aaaa):
+Email:
+Conferma Email:
+Starter Pokemon:
+Genere:
+Maschio
+Femmina
+Termini di Utilizzo
+Accetto i Termini di Utilizzo
+Cancel
+User o password non sono corretti /nVerifica di avere inserito user and password correttamente.
+Il Server degli account è attualmente offline. /nProva più tardi.
+Registrazione effettuata con successo. Puoi loggarti su ogni Server.
+Il Server degli account è attualmente offline./nProva più tardi.
+Username già preso.
+Errore Sconosciuto. Prova più tardi.
+Dati non validi.
+Devi accettare i Termini di Utilizzo (ToS) prima di registrarti.
+Data di nascita non valida.
+Email non valida.
+Le Passwords non corrispondono.
+Username deve avere minimo 4 characters e non più di 12.
+1. Non bestemmiare./n2. No spammare./n3. Un account per persona./n4. Non truffare./n5. Non parlare usando solo lettere maiuscole./n6. Non utilizzare bot./n7. Non effettuare hacking./n/nNon rispettare anche una sola di queste regole può /ndare origine a ban. Ci piacerebbe fae notare che questa è una versione beta, il tuo account/npotrebbe essere cancellato in qualsiasi istante per facilitare miglioramenti. Ogni bug o problema dovrebbe essere segnalato agli sviluppatori(DEV).
+About Pokenet
+Pokenet is a free, non-profit, open-source Pokemon MMORPG. 
+Pokenet is in no way affiliated with or officially supported by Nintendo.
+Pokemon is a registered trademark of Nintendo (1995 - Present)./n/n
+Contributors:
+-chappie112, sadhi, Remyoman, Myth1c, XtremeJedi, DefaulT, Fshy, ZombieBear, Ryan, Pivot,/nIlentcape, Sienide, TMKCodes, Drawig,/nLordAdmiral, Psycho, Dragina,/nOblivion, Lastplacer, Firefly17, Gama,/nJacobe, Latias, Callagan, xkendrickx,/nMewtwo, PheonixClaw, JayJay, May, Nushio, PokeRemixStudio
+Sei stato disconnesso dal Server.
+L'indirizzo e-mail da te inserito è gia in uso.

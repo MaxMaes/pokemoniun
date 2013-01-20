@@ -1,0 +1,24 @@
+pokeName è esausto!
+pokeName usa moveName
+Aspetta una tua mossa...
+pokeName guadagna expNum EXP e ha bisogno di expRemaining EXP per salire di livello...
+pokeName returned to normal.
+trainerName manda pokeName
+Seleziona un nuovo Pokemon!
+pokeName riceve damageNum danni
+Ha hpNum rimanenti
+pokeName recupera damageNum HP
+trainerName ha vinto!
+trainerName è stato sconfitto!
+Scampato pericolo!
+Non si scappa!
+pokeName è  avvelenato!
+pokeName è congelato!
+pokeName è scottato!
+pokeName è paralizzato! Potrebbe non agire
+pokeName si è addormentato!
+Riceci $earningsNum per la vittoria!
+pokeName sale al livello levelNum!
+moveName non ha più PP. Seleziona un altra mossa.
+pokeName lascia cadere rewardItem!
+Ricevi rewardItem per la vittoria!

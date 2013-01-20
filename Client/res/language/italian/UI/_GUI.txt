@@ -1,0 +1,49 @@
+Squadra Pokemon
+Livello:
+Nome:
+PV:
+Attacco:
+Difesa:
+Attacco Sp.:
+Difesa Sp.: 
+Velocità:
+Abilità:
+Esp: 
+Natura:
+Tipo 1:
+Tipo 2:
+Genere:
+Opzioni
+Tutto Schermo
+Muto
+Salva
+I cambiamenti avranno effetto dopo il riavvio.
+Aiuto
+Frecce direzionali o WASD/nMovimento/n/n
+Barra Spaziatrice/nParlare/n/n
+Click Destro/nInteragire con gli altri giocatori/n/n
+Usa l'opzione sussurra per iniziare una convesrazione privata. Usa /local per parlare localmente./n
+inserisci /playercount nella chat per vedere quante persone ci sono online./n
+Per maggiori informazioni visita www.pokemonium.com
+Chat: Globale
+Devi accettare i termini di utilizzo (ToS) prima di registrarti.
+Maschio
+Femmina
+Nessuno
+Lv. 
+PvP Lotta/Scambio
+Annulla
+Accetta
+Rifiuta
+Manda Offerta
+La tua Offerta:
+La sua Offerta:
+test
+Attendere...
+Manda una richiesta
+Richiesta Ricevuta
+Scambio: 
+Solo denaro
+Sfida
+Scambia
+Disabilita le mappe attorno

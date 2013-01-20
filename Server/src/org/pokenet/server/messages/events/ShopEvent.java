@@ -14,14 +14,15 @@ public class ShopEvent implements MessageEvent
 
 		Player p = Session.getPlayer();
 		int i = Request.readInt();
-		int item = Request.readInt();
-
+		int item;
 		switch(i)
 		{
 			case 0:
+				item = Request.readInt();
 				p.buyItem(item, 1);
 				break;
 			case 1:
+				item = Request.readInt();
 				p.sellItem(item, 1);
 				break;
 			case 2:

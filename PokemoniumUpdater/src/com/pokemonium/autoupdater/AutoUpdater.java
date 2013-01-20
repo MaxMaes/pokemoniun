@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -218,9 +217,12 @@ public class AutoUpdater
 				File newFile = new File(entryName);
 				if(zipentry.isDirectory())
 				{
-					if(!newFile.mkdirs())
+					if(!newFile.exists())
 					{
-						break;
+						if(!newFile.mkdirs())
+						{
+							break;
+						}
 					}
 					zipentry = zipinputstream.getNextEntry();
 					continue;

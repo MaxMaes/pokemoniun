@@ -22,7 +22,7 @@
  </layer>
  <layer name="LedgesLeft" width="54" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PIREAAAgAMST90XSlAobDbAn+IwAAAPhU+V1wo30BAAAAwNoAhui0p8AhAAA=
+   H4sIAAAAAAAAC+3UsREAMAgDMcrsn5pdM0WOA6QJ/I0jAAAAqHRP9YI/Uhe04Yd6mdoFAACw3QMG/ooawCEAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="54" height="40">
@@ -32,7 +32,7 @@
  </layer>
  <layer name="Collisions" width="54" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YQQ4CIQxFccec37Vr4/08gLMwRutUfmkLmPyfkG5oC32ZMlC2Uk77KFlWKjvf09Z9bIlWKjvfKy95kRd5kRd5kRd5kddsXla1/LLyGXlZ1fLLygfH+VG/W7Xnt8SH/Dq599YPVTQfL/cveb+P6PhB60irkzH+vX7Od+8vqq8VsS6ntDhXrTeA/VT1O4ihzvPIGAc+/xS/wxjKPI+8cVBe54izAVF2HxO6DNpXWB8D66PuK7q+aDzwu2nVR+tDiL/l/wZdT/j5JDWaV/C5pKm7bsr6eu9Jq2iZe7JXYN7R92SvlnnXmGRHvTOMtrPrSl7kRV7/Z2fXlbzI653XA2rPc6HAIQAA
+   H4sIAAAAAAAAC+2YSw7CMAxEzS69/yEQ9+MA7QIhCHXjbxykGanyJrbDPMUlpY3odjyUFXtl93vFdjxbYuyV3e/dF7zAC7zAC7zAC7zAq5qXVqO8rH5KXlqN8rL6ietc+Pdo+v6a+qI8I3erf1JF8/Fy/5H3fETXD9pHmk/K+s/2vd79+6LmGnX7coqrc+dmg3CesnknNdh1HinriN9/TN5pDWadR946afPIquw5VqQwf73+RPsrrSc8NyN/uDkkydf8v5HuJ/3czOYV/F7iZPaN2Z/1nrSKlrkneyXsO/ue7NUy3zWK4qzvDLNjta/gBV7g9X+x2lfwAq9PXjvq2U0cwCEAAA==
   </data>
  </layer>
  <layer name="Walkable" width="54" height="40">

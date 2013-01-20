@@ -1,3 +1,45 @@
+[npc]
+Rocket Grunt
+right
+179
+18
+12
+Rattata,56,Zubat,58
+2
+-1
+0
+false
+false
+false
+[/npc]
+[npc]
+Rocket Grunt
+left
+180
+25
+18
+Mightyena,56,Golbat,58
+2
+-1
+0
+false
+false
+false
+[/npc]
+[npc]
+Rocket Grunt
+down
+180
+18
+12
+Houndoom,52,Arbok,53
+2
+-1
+0
+false
+false
+false
+[/npc]
 [warp]
 7
 7

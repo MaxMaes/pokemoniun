@@ -1,3 +1,45 @@
+[npc]
+Rocket Grunt
+left
+179
+10
+15
+Golbat,56,Raticate,58,Mightyena,53
+3
+-1
+0
+false
+false
+false
+[/npc]
+[npc]
+Rocket Grunt
+right
+180
+6
+10
+Zangoose,56,Seviper,58
+2
+-1
+0
+false
+false
+false
+[/npc]
+[npc]
+Rocket Grunt
+left
+180
+10
+5
+Purugly,56,Mismagius,58
+2
+-1
+0
+false
+false
+false
+[/npc]
 [warp]
 14
 20

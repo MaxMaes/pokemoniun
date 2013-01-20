@@ -15,7 +15,7 @@
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal5.tsx"/>
- <tileset firstgid="2049" source="../../../Server/res/maps/normal1.tsx"/>
+ <tileset firstgid="2049" source="normal1.tsx"/>
  <layer name="Walkable" width="60" height="81">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3V7w0BQRCH4YmrzKmETvzrhG60oQ+3YZMxWTnudnaI90l+Cb7svgQiAAAAAAAAAAAAAAAAAAAAAAAAAAAA0C4LkU7uS4/18uues2facz167TmlO0zZnM4WvfnMWr1z35Poz3fs8/H4DtRm7156Hjnv3ojfrNa9etcuvtGzV4tua91rRbf+Q+9yWK/WUun81Qd3n9J5GLZRayndY23OP0rd/led52E7/8Qn6T7bx7kncx+9fsZ0Z25M20vs9/ed7ikrNX7T71XurrVSo2dv9P/N2Oill97f7b0BE63ke/BLAAA=

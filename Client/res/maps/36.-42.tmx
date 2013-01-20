@@ -20,7 +20,7 @@
  <tileset firstgid="4569" source="Sinnoh Exit Cave.tsx"/>
  <layer name="Layer 9" width="60" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PAREAAAQAMdLp30gL7tgS/EewqXK7YJbf2/ze9u0XAAAAAD5rJuHApkAaAAA=
+   H4sIAAAAAAAAC+3VsQ0AIAwDQZiO/TdCbIAogjB3faR85da4afTbH9TSm01vrtWqN5febD+1AlDjZFte3l+9ezd6ASDPBPc3pTBAGgAA
   </data>
  </layer>
  <layer name="Walkable" width="60" height="28">

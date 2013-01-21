@@ -41,7 +41,7 @@ public class TimeService implements Runnable
 	{
 		generateWeather();
 		m_lastWeatherUpdate = System.currentTimeMillis();
-		m_thread = new Thread(this);
+		m_thread = new Thread(this, "TimeService-Thread");
 	}
 
 	/**

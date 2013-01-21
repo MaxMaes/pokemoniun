@@ -67,7 +67,7 @@ public class NpcBattleField extends BattleField
 		sendPokemonData(p);
 		/* Set the player's battle id */
 		m_player.setBattleId(0);
-		
+
 		/* Apply weather and request moves */
 		applyWeather();
 		requestMoves();
@@ -197,13 +197,12 @@ public class NpcBattleField extends BattleField
 
 	@SuppressWarnings("unused")
 	@Override
-	//TODO check this code with checking moves
+	// TODO check this code with checking moves
 	public void informStatusApplied(Pokemon pokemon, StatusEffect eff)
 	{
 		if(m_finished)
 			return;
-		
-			
+
 		if(m_player != null)
 			if(getActivePokemon()[0].equals(pokemon))
 			{
@@ -225,7 +224,7 @@ public class NpcBattleField extends BattleField
 				receiveEffect.Init(29);
 				receiveEffect.addInt(1);
 				receiveEffect.addString(pokemon.getSpeciesName());
-//				System.out.println(pokemon.getSpeciesName() + ", " + eff.getName());
+				// System.out.println(pokemon.getSpeciesName() + ", " + eff.getName());
 				if(eff.getName() == null)
 					receiveEffect.addString("");
 				else
@@ -282,12 +281,12 @@ public class NpcBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
-				
+
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
 				receiveEffect.Init(29);
 				receiveEffect.addInt(0);
 				receiveEffect.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffect.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -301,7 +300,7 @@ public class NpcBattleField extends BattleField
 				else
 					receiveEffect.addString("Normal");
 				receiveEffect.sendResponse();
-				
+
 				poke.removeStatusEffects(false);
 			}
 			else
@@ -314,12 +313,12 @@ public class NpcBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
-				
+
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
 				receiveEffect.Init(29);
 				receiveEffect.addInt(1);
 				receiveEffect.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffect.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -333,7 +332,7 @@ public class NpcBattleField extends BattleField
 				else
 					receiveEffect.addString("Normal");
 				receiveEffect.sendResponse();
-				
+
 				poke.removeStatusEffects(false);
 			}
 	}
@@ -472,7 +471,7 @@ public class NpcBattleField extends BattleField
 							executeTurn(m_turn);
 							m_dispatch = null;
 						}
-					});
+					}, "BattleTurn-Thread");
 					m_dispatch.start();
 					return;
 				}
@@ -559,7 +558,7 @@ public class NpcBattleField extends BattleField
 						m_turn[i] = null;
 					m_dispatch = null;
 				}
-			});
+			}, "BattleTurn-Thread");
 			m_dispatch.start();
 		}
 	}
@@ -684,9 +683,9 @@ public class NpcBattleField extends BattleField
 		{
 			/* Request Pokemon replacement from player */
 			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchRequest());
-//			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
-//			switchOccur.Init(32);
-//			switchOccur.sendResponse();
+			// ServerMessage switchOccur = new ServerMessage(m_player.getSession());
+			// switchOccur.Init(32);
+			// switchOccur.sendResponse();
 		}
 		else /* Request Pokemon replacement from npc */
 		if(getAliveCount(1) == 0)

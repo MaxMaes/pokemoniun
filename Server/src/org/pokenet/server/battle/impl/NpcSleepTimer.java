@@ -16,6 +16,11 @@ public class NpcSleepTimer extends Thread
 	private static List<NPC> m_npcSleeping = new ArrayList<NPC>();
 	private boolean m_running = true;
 
+	public NpcSleepTimer()
+	{
+		super("NPCSleepTimer-Thread");
+	}
+
 	public static void addNPC(NPC npc)
 	{
 		m_npcSleeping.add(npc);
@@ -70,8 +75,9 @@ public class NpcSleepTimer extends Thread
 		}
 		System.out.println("INFO: Npc sleep timer stopped");
 	}
-	
-	public void finish() {
+
+	public void finish()
+	{
 		m_running = false;
 	}
 }

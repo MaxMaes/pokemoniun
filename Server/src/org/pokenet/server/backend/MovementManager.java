@@ -172,7 +172,7 @@ public class MovementManager implements Runnable
 	 */
 	public void start()
 	{
-		m_thread = new Thread(this);
+		m_thread = new Thread(this, "MovementManager-Thread");
 		m_thread.start();
 	}
 

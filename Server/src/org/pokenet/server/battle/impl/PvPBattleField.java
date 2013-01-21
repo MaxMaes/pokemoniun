@@ -397,12 +397,12 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.addInt(0);
 				switchInformFirst.addInt(pokeIndex);
 				switchInformFirst.sendResponse();
-				
+
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
 				receiveEffectFirst.Init(29);
 				receiveEffectFirst.addInt(0);
 				receiveEffectFirst.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffectFirst.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -424,12 +424,12 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.addInt(1);
 				switchInformSecond.addInt(pokeIndex);
 				switchInformSecond.sendResponse();
-				
+
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
 				receiveEffectSecond.Init(29);
 				receiveEffectSecond.addInt(1);
 				receiveEffectSecond.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffectSecond.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -443,7 +443,7 @@ public class PvPBattleField extends BattleField
 				else
 					receiveEffectSecond.addString("Normal");
 				receiveEffectSecond.sendResponse();
-				
+
 				poke.removeStatusEffects(false);
 			}
 			else
@@ -456,12 +456,12 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.addInt(1);
 				switchInformFirst.addInt(pokeIndex);
 				switchInformFirst.sendResponse();
-				
+
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
 				receiveEffectFirst.Init(29);
 				receiveEffectFirst.addInt(1);
 				receiveEffectFirst.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffectFirst.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -483,12 +483,12 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.addInt(0);
 				switchInformSecond.addInt(pokeIndex);
 				switchInformSecond.sendResponse();
-				
+
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
 				receiveEffectSecond.Init(29);
 				receiveEffectSecond.addInt(0);
 				receiveEffectSecond.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffectSecond.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -502,7 +502,7 @@ public class PvPBattleField extends BattleField
 				else
 					receiveEffectSecond.addString("Normal");
 				receiveEffectSecond.sendResponse();
-				
+
 				poke.removeStatusEffects(false);
 			}
 	}
@@ -631,7 +631,7 @@ public class PvPBattleField extends BattleField
 							executeTurn(m_turn);
 							m_dispatch = null;
 						}
-					});
+					}, "BattleTurn-Thread");
 					m_dispatch.start();
 					return;
 				}
@@ -716,7 +716,7 @@ public class PvPBattleField extends BattleField
 						m_turn[i] = null;
 					m_dispatch = null;
 				}
-			});
+			}, "BattleTurn-Thread");
 			m_dispatch.start();
 		}
 	}

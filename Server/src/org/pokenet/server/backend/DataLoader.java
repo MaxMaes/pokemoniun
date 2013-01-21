@@ -29,7 +29,7 @@ public class DataLoader implements Runnable
 	{
 		m_file = file;
 		m_map = map;
-		new Thread(this).start();
+		new Thread(this, "MapDataLoader-Thread").start();
 	}
 
 	/**

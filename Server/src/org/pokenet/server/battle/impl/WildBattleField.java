@@ -344,12 +344,12 @@ public class WildBattleField extends BattleField
 				switchInform.addInt(trainer);
 				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
 				switchInform.sendResponse();
-				
+
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
 				receiveEffect.Init(29);
 				receiveEffect.addInt(0);
 				receiveEffect.addString(poke.getSpeciesName());
-				
+
 				if(poke.hasEffect(BurnEffect.class))
 					receiveEffect.addString("Burn");
 				else if(poke.hasEffect(FreezeEffect.class))
@@ -363,7 +363,7 @@ public class WildBattleField extends BattleField
 				else
 					receiveEffect.addString("Normal");
 				receiveEffect.sendResponse();
-				
+
 				poke.removeStatusEffects(false);
 			}
 	}
@@ -485,7 +485,7 @@ public class WildBattleField extends BattleField
 							executeTurn(m_turn);
 							m_dispatch = null;
 						}
-					});
+					}, "BattleTurn-Thread");
 					m_dispatch.start();
 					return;
 				}
@@ -568,7 +568,7 @@ public class WildBattleField extends BattleField
 						m_turn[i] = null;
 					m_dispatch = null;
 				}
-			});
+			}, "BattleTurn-Thread");
 			m_dispatch.start();
 		}
 	}
@@ -637,7 +637,7 @@ public class WildBattleField extends BattleField
 			run.addBool(true);
 			run.sendResponse();
 			m_player.setBattling(false);
-                        m_player.setFishing(false);
+			m_player.setFishing(false);
 			dispose();
 		}
 		else
@@ -1029,7 +1029,7 @@ public class WildBattleField extends BattleField
 			double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, m_participatingPokemon.size());
 			if(exp == 0)
 				exp = 1;
-			
+
 			/* Secondly, calculate EVs and exp */
 			// int[] evs = m_wildPoke.getEffortPoints();
 
@@ -1063,21 +1063,21 @@ public class WildBattleField extends BattleField
 
 				/* Gain exp/level up and update client */
 				int index = m_player.getPokemonIndex(p);
-				double ratio = (m_wildPoke.getLevel()/p.getLevel());
+				double ratio = (m_wildPoke.getLevel() / p.getLevel());
 				if(ratio > 5)
 				{
 					ratio = 5;
 				}
-				else if (ratio < 0.1)
+				else if(ratio < 0.1)
 				{
 					ratio = 0.1;
 				}
 				double expX = exp * ratio;
-				if (expX >15000)
+				if(expX > 15000)
 				{
 					expX = 15000;
 				}
-				else if (expX < 5)
+				else if(expX < 5)
 				{
 					expX = 5;
 				}
@@ -1166,17 +1166,17 @@ public class WildBattleField extends BattleField
 								i = pokeData.getEvolutions().length;
 							}
 						}
-//						else if(p.getSpeciesName().equalsIgnoreCase("Magneton") && m_player.getMapX() == 2)
-//						{
-//								p.setEvolution(evolution);
-//								// m_player.getTcpSession().write("PE" + index);
-//								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-//								evolveMessage.Init(43);
-//								evolveMessage.addInt(index);
-//								evolveMessage.sendResponse();
-//								evolve = true;
-//								i = pokeData.getEvolutions().length;
-//						}
+						// else if(p.getSpeciesName().equalsIgnoreCase("Magneton") && m_player.getMapX() == 2)
+						// {
+						// p.setEvolution(evolution);
+						// // m_player.getTcpSession().write("PE" + index);
+						// ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
+						// evolveMessage.Init(43);
+						// evolveMessage.addInt(index);
+						// evolveMessage.sendResponse();
+						// evolve = true;
+						// i = pokeData.getEvolutions().length;
+						// }
 					}
 					/* If the Pokemon is evolving, don't move learn just yet */
 					if(evolve)

@@ -219,10 +219,10 @@ public class Trade implements Runnable
 					ServerMessage invalidAlert = new ServerMessage(p.getSession());
 					invalidAlert.Init(94);
 					invalidAlert.sendResponse();
-					//endTrade();
+					// endTrade();
 					return;
 				}
-				
+
 			}
 
 		o[1] = new TradeOffer();
@@ -405,68 +405,62 @@ public class Trade implements Runnable
 								curPokemon.setEvolution(currentEvolution);
 								curPokemon.evolutionResponse(true, p);
 							}
-							}else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Electirizer")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Electirizer"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Dubious Disc")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Dubious_Disc"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Protector")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Protector"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Razor Claw")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Razor_Claw"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Reaper Cloth")
-									&& currentEvolution.getAttribute().equalsIgnoreCase("Reaper_Cloth"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							break;
 						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer") && currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Electirizer") && currentEvolution.getAttribute().equalsIgnoreCase("Electirizer"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Dubious Disc") && currentEvolution.getAttribute().equalsIgnoreCase("Dubious_Disc"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Protector") && currentEvolution.getAttribute().equalsIgnoreCase("Protector"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Razor Claw") && currentEvolution.getAttribute().equalsIgnoreCase("Razor_Claw"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						else if(curPokemon.getItem().getName().equalsIgnoreCase("Reaper Cloth") && currentEvolution.getAttribute().equalsIgnoreCase("Reaper_Cloth"))
+						{
+							curPokemon.setEvolution(currentEvolution);
+							curPokemon.evolutionResponse(true, p);
+						}
+						break;
 					}
 				}
-
-				/* Update the money */
-				if(player1 instanceof Player)
-				{
-					Player p = (Player) player1;
-					p.updateClientMoney();
-				}
-				if(player2 instanceof Player)
-				{
-					Player p = (Player) player2;
-					p.updateClientMoney();
-				}
-
-				/* Store transactions on DB */
-				new Thread(this).start();
-
-				/* End the trade */
-				m_isExecuting = false;
-				endTrade();
 			}
+
+			/* Update the money */
+			if(player1 instanceof Player)
+			{
+				Player p = (Player) player1;
+				p.updateClientMoney();
+			}
+			if(player2 instanceof Player)
+			{
+				Player p = (Player) player2;
+				p.updateClientMoney();
+			}
+
+			/* Store transactions on DB */
+			new Thread(this, "Trade-Thread").start();
+
+			/* End the trade */
+			m_isExecuting = false;
+			endTrade();
 		}
-	
+	}
 
 	/**
 	 * Sends offer information from one player to another

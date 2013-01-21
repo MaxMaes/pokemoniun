@@ -30,7 +30,7 @@ public class ChatManager implements Runnable
 	 */
 	public ChatManager()
 	{
-		m_thread = new Thread(this);
+		m_thread = new Thread(this, "ChatManager-Thread");
 		m_localQueue = new ConcurrentLinkedQueue<Object[]>();
 		m_privateQueue = new ConcurrentLinkedQueue<Object[]>();
 	}

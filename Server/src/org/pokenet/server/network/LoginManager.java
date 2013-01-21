@@ -35,7 +35,6 @@ public class LoginManager implements Runnable
 	private boolean m_isRunning = false;
 	private Queue<Object[]> m_loginQueue;
 	private Queue<Object[]> m_passChangeQueue;
-
 	private Thread m_thread;
 
 	/**
@@ -157,7 +156,7 @@ public class LoginManager implements Runnable
 	{
 		if(m_thread == null || !m_thread.isAlive())
 		{
-			m_thread = new Thread(this);
+			m_thread = new Thread(this, "LoginManager-Thread");
 			m_isRunning = true;
 			m_thread.start();
 		}

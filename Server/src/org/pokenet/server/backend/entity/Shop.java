@@ -128,7 +128,7 @@ public class Shop implements Runnable
 	public void start()
 	{
 		m_isRunning = true;
-		new Thread(this).start();
+		new Thread(this, "Shop-Thread").start();
 	}
 
 	/**

@@ -15,8 +15,8 @@ public class UseItemEvent implements MessageEvent
 		Player p = Session.getPlayer();
 		// Use an item, applies inside and outside of battle
 		String[] details = Request.readString().split(",");
-		new Thread(new ItemProcessor(p, details)).start();
+		new Thread(new ItemProcessor(p, details), "Item-Thread").start();
 
-		//TODO: the fuq, i should check this out o.o a thread??
+		// TODO: the fuq, i should check this out o.o a thread??
 	}
 }

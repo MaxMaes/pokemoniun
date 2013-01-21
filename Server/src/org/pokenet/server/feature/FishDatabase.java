@@ -95,7 +95,7 @@ public class FishDatabase
 					e.printStackTrace();
 				}
 			}
-		});
+		}, "FishDatabase_Thread");
 		t.start();
 	}
 }

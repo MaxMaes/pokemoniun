@@ -16,11 +16,11 @@ import tiled.io.xml.XMLMapTransformer;
  */
 public class MovementService
 {
-	public static final int MAX_MAP_THREADS = 10;
+	public static final int MAX_MAP_THREADS = 5;
 	private final ServerMapMatrix m_mapMatrix;
 	private final MovementManager[] m_movementManager;
 	private final NpcSleepTimer m_sleepTimer;
-	protected static int m_mapThreads = 0;
+	private static int m_mapThreads = 0;
 	private ServerMap m_tempMap;
 
 	/**
@@ -130,6 +130,7 @@ public class MovementService
 
 		public MapThread(int mapx, int mapy)
 		{
+			super("Map-Thread " + mapx + "." + mapy);
 			m_mapThreads++;
 			xmlLoader = new XMLMapTransformer();
 			x = mapx;

@@ -101,7 +101,7 @@ public class LogoutManager implements Runnable
 	{
 		if(m_thread == null || !m_thread.isAlive())
 		{
-			m_thread = new Thread(this);
+			m_thread = new Thread(this, "LogoutManager-Thread");
 			m_isRunning = true;
 			m_thread.start();
 		}

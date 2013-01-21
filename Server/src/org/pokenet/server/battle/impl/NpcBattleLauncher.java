@@ -74,6 +74,6 @@ public class NpcBattleLauncher implements Runnable
 	 */
 	public void start()
 	{
-		new Thread(this).start();
+		new Thread(this, "NPCBattle-Thread").start();
 	}
 }

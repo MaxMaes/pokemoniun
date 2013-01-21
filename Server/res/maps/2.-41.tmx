@@ -10,7 +10,7 @@
  </layer>
  <layer name="Collisions" width="20" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC4tkYGAowoGjGUgH2UAcicOsTDLNy8YinkmmebjAYDEPn38LGXDHFa74w2UeOWZlIpknxU68n7CpteHA719yAMhMbOaR4lZksxigZlUCcRKFuJoBEn7UMAvZzFEwCoYTAACZ0GhykAYAAA==
+   H4sIAAAAAAAAC4tkYGAowoGjGUgH2UAcicOsTDLNy8YinkmmebjAYDEPn38LGXDHFa74w2UeOWZlIpknxU68n3CpRTaPGgCXeaS4FQZsOCA0yKxKIE6iEFdDzaWGWehmjoJRMFwAANkYpSGQBgAA
   </data>
  </layer>
  <layer name="Walkable" width="20" height="21">

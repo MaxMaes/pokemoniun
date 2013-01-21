@@ -2,6 +2,8 @@ package org.pokenet.server.backend;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.map.ServerMap;
@@ -16,11 +18,10 @@ import tiled.io.xml.XMLMapTransformer;
  */
 public class MovementService
 {
-	public static final int MAX_MAP_THREADS = 5;
+	public static final int MAX_MAP_THREADS = 10;
 	private final ServerMapMatrix m_mapMatrix;
 	private final MovementManager[] m_movementManager;
 	private final NpcSleepTimer m_sleepTimer;
-	private static int m_mapThreads = 0;
 	private ServerMap m_tempMap;
 
 	/**
@@ -91,37 +92,21 @@ public class MovementService
 						}
 					}
 		}
-		/* TODO: Multithreaded implementation to speed up server start!
-		 * Reload all the maps */
-		XMLMapTransformer xmlLoader = new XMLMapTransformer();
-		File nextMap;
-		ServerMap map;
+		/* Reload all the maps */
+		ExecutorService mapLoader = Executors.newFixedThreadPool(MAX_MAP_THREADS);
 		for(int x = -50; x < 50; x++)
 			for(int y = -50; y < 50; y++)
-			{
-				/* MapThread currentMap = new MapThread(x, y);
-				 * currentMap.start(); */
-				nextMap = new File("res/maps/" + String.valueOf(x) + "." + String.valueOf(y) + ".tmx");
-				// System.out.println("trying: " + x + ", " +y);
-				if(nextMap.exists())
-					try
-					{
-						map = new ServerMap(xmlLoader.readMap(nextMap.getCanonicalPath()), x, y);
-						map.setMapMatrix(m_mapMatrix);
-						map.loadData();
-						m_mapMatrix.setMap(map, x + 50, y + 50);
-						System.out.println("loaded map: " + x + ", " + y);
-					}
-					catch(Exception e)
-					{
-						System.err.println("Error loading " + x + "." + y + ".tmx - Bad map file");
-						m_mapMatrix.setMap(null, x + 50, y + 50);
-					}
-			}
+				mapLoader.submit(new MapThread(x, y));
+		mapLoader.shutdown();
+		while(!mapLoader.isTerminated())
+		{
+			/* Wait for the mapLoader to finish loading the maps.
+			 * TODO: Remove while loop and use a different solution? */
+		}
 		System.out.println("INFO: Maps loaded");
 	}
 
-	private class MapThread extends Thread
+	private class MapThread implements Runnable
 	{
 		private XMLMapTransformer xmlLoader;
 		private File nextMap;
@@ -130,8 +115,6 @@ public class MovementService
 
 		public MapThread(int mapx, int mapy)
 		{
-			super("Map-Thread " + mapx + "." + mapy);
-			m_mapThreads++;
 			xmlLoader = new XMLMapTransformer();
 			x = mapx;
 			y = mapy;
@@ -155,7 +138,6 @@ public class MovementService
 					System.err.println("Error loading " + x + "." + y + ".tmx - Bad map file");
 					m_mapMatrix.setMap(null, x + 50, y + 50);
 				}
-			m_mapThreads--;
 		}
 	}
 

@@ -116,7 +116,6 @@ public class Player extends Character implements Battleable, Tradeable
 		if(num >= 0 && num < m_badges.length)
 		{
 			m_badges[num] = 1;
-			// m_tcpSession.write("cBa" + num);
 			ServerMessage message = new ServerMessage();
 			message.Init(52);
 			message.addInt(1);
@@ -136,11 +135,13 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillBreedExp = m_skillBreedExp + exp;
 		if(getBreedingLevel() > m_oldLevel)
 		{
-			// m_tcpSession.write("csb" + getBreedingLevel());
-			ServerMessage BreedingLevel = new ServerMessage();
-			BreedingLevel.Init(53);
-			BreedingLevel.addInt(getBreedingLevel());
-			getSession().Send(BreedingLevel);
+			ServerMessage skillLevels = new ServerMessage();
+			skillLevels.Init(53);
+			skillLevels.addInt(getTrainingLevel());
+			skillLevels.addInt(getBreedingLevel());
+			skillLevels.addInt(getFishingLevel());
+			skillLevels.addInt(getCoordinatingLevel());
+			getSession().Send(skillLevels);
 		}
 	}
 
@@ -155,11 +156,13 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillCoordExp = m_skillCoordExp + exp;
 		if(getCoordinatingLevel() > m_oldLevel)
 		{
-			// m_tcpSession.write("csc" + getCoordinatingLevel());
-			ServerMessage CoordinatingLevel = new ServerMessage();
-			CoordinatingLevel.Init(56);
-			CoordinatingLevel.addInt(getCoordinatingLevel());
-			getSession().Send(CoordinatingLevel);
+			ServerMessage skillLevels = new ServerMessage();
+			skillLevels.Init(53);
+			skillLevels.addInt(getTrainingLevel());
+			skillLevels.addInt(getBreedingLevel());
+			skillLevels.addInt(getFishingLevel());
+			skillLevels.addInt(getCoordinatingLevel());
+			getSession().Send(skillLevels);
 		}
 	}
 
@@ -175,7 +178,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillCraftExp = m_skillCraftExp + exp;
 		if(getCraftingLevel() > m_oldLevel)
 		{
-			// m_tcpSession.write("csC" + getCraftingLevel());
+
 		}
 	}
 
@@ -190,11 +193,13 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillFishExp = m_skillFishExp + exp;
 		if(getFishingLevel() > m_oldLevel)
 		{
-			// m_tcpSession.write("csf" + getFishingLevel());
-			ServerMessage message = new ServerMessage();
-			message.Init(54);
-			message.addInt(getFishingLevel());
-			getSession().Send(message);
+			ServerMessage skillLevels = new ServerMessage();
+			skillLevels.Init(53);
+			skillLevels.addInt(getTrainingLevel());
+			skillLevels.addInt(getBreedingLevel());
+			skillLevels.addInt(getFishingLevel());
+			skillLevels.addInt(getCoordinatingLevel());
+			getSession().Send(skillLevels);
 		}
 	}
 
@@ -210,7 +215,6 @@ public class Player extends Character implements Battleable, Tradeable
 			m_friends.add(friend);
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
 					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
-			// m_tcpSession.write("Fa" + friend);
 			ServerMessage addFriend = new ServerMessage();
 			addFriend.Init(69);
 			addFriend.addString(friend);
@@ -230,7 +234,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillHerbExp = m_skillHerbExp + exp;
 		if(getHerbalismLevel() > m_oldLevel && getHerbalismLevel() <= 100)
 		{
-			// m_tcpSession.write("csh" + getHerbalismLevel());
+
 		}
 	}
 
@@ -318,11 +322,13 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillTrainingExp = m_skillTrainingExp + exp;
 		if(getTrainingLevel() > m_oldLevel)
 		{
-			// m_tcpSession.write("cst" + getTrainingLevel());
-			ServerMessage TrainingLevel = new ServerMessage();
-			TrainingLevel.Init(55);
-			TrainingLevel.addInt(getTrainingLevel());
-			getSession().Send(TrainingLevel);
+			ServerMessage skillLevels = new ServerMessage();
+			skillLevels.Init(53);
+			skillLevels.addInt(getTrainingLevel());
+			skillLevels.addInt(getBreedingLevel());
+			skillLevels.addInt(getFishingLevel());
+			skillLevels.addInt(getCoordinatingLevel());
+			getSession().Send(skillLevels);
 		}
 	}
 
@@ -876,7 +882,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public Battleable getOpponent()
 	{
-		// DO WE REALLY NEED THIS?
+		// TODO: DO WE REALLY NEED THIS? (It returns null, so probably not...)
 		return null;
 	}
 
@@ -1033,30 +1039,13 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void initializeClientSkills()
 	{
-		/* m_tcpSession.write("cst" + getTrainingLevel());
-		 * m_tcpSession.write("csb" + getBreedingLevel());
-		 * m_tcpSession.write("csf" + getFishingLevel());
-		 * m_tcpSession.write("csc" + getCoordinatingLevel()); */
-		/* TODO: mag wel ff wat minder he, 1 packet alle levels? :) (FabianPass) */
-		ServerMessage TrainingLevel = new ServerMessage();
-		TrainingLevel.Init(55);
-		TrainingLevel.addInt(getTrainingLevel());
-		getSession().Send(TrainingLevel);
-
-		ServerMessage BreedingLevel = new ServerMessage();
-		BreedingLevel.Init(53);
-		BreedingLevel.addInt(getBreedingLevel());
-		getSession().Send(BreedingLevel);
-
-		ServerMessage FishingLevel = new ServerMessage();
-		FishingLevel.Init(54);
-		FishingLevel.addInt(getFishingLevel());
-		getSession().Send(FishingLevel);
-
-		ServerMessage CoordinatingLevel = new ServerMessage();
-		CoordinatingLevel.Init(56);
-		CoordinatingLevel.addInt(getCoordinatingLevel());
-		getSession().Send(CoordinatingLevel);
+		ServerMessage skillLevels = new ServerMessage();
+		skillLevels.Init(53);
+		skillLevels.addInt(getTrainingLevel());
+		skillLevels.addInt(getBreedingLevel());
+		skillLevels.addInt(getFishingLevel());
+		skillLevels.addInt(getCoordinatingLevel());
+		getSession().Send(skillLevels);
 	}
 
 	/**

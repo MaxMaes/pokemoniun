@@ -80,7 +80,6 @@ public class MessageHandler
 
 	public void register()
 	{
-		messages.put(50, new LoginEvent());
 		messages.put(1, new RegisterEvent());
 		messages.put(2, new ChangePasswordEvent());
 		messages.put(3, new ForceLoginEvent());
@@ -130,6 +129,7 @@ public class MessageHandler
 		messages.put(47, new StartTalkingEvent());
 		messages.put(48, new FinishTalkingEvent());
 		messages.put(49, new LogoutRequestEvent());
+		messages.put(50, new LoginEvent());
 		messages.put(51, new GiveItemEvent());
 		messages.put(52, new ServerAlertEvent());
 		messages.put(53, new TravelEvent());

@@ -1399,8 +1399,8 @@ public class GameClient extends BasicGame
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";
-			/* WARNING: Change 242 to the amount of sprites we have in client the load bar only works when we don't make a new SpriteSheet ie. ss = new SpriteSheet(temp, 41, 51); needs to be commented out in order for the load bar to work. */
-			for(int i = -7; i < 242; i++)
+			/* WARNING: Change 256 to the amount of sprites we have in client the load bar only works when we don't make a new SpriteSheet ie. ss = new SpriteSheet(temp, 41, 51); needs to be commented out in order for the load bar to work. */
+			for(int i = -7; i < 256; i++)
 				try
 				{
 					final String location = respath + "res/characters/" + i + ".png";

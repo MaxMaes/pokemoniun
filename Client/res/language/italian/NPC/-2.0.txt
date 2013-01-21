@@ -1,5 +1,5 @@
-Fiorpescopoli - La città dai belli e profumati fiori
+Fiorpescopoli - La citta' dai belli e profumati fiori
 Why hello there strapping young lad
-Il cerchio affianco agli oggetti nel Market ti mostra in che quantità hanno quel oggetto nel loro magazzino
-Se il cerchio è bianco, l'oggetto è finito
-I Market si riforniscono di oggetti dopo un pò di tempo 
+Il cerchio affianco agli oggetti nel Market ti mostra in che quantita' hanno quel oggetto nel loro magazzino
+Se il cerchio è bianco, l'oggetto e' finito
+I Market si riforniscono di oggetti dopo un po' di tempo 

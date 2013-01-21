@@ -51,14 +51,14 @@ public class TownMap extends Frame
 			respath = "";
 		try
 		{
-			m_map = new Label(new Image(respath + "res/ui/KantoandJohto.png", false));
+			m_map = new Label(new Image(respath + "res/ui/worldmap.png", false));
 		}
 		catch(SlickException e)
 		{
 		}
 		LoadingList.setDeferredLoading(false);
 
-		m_map.setSize(534, 264);
+		m_map.setSize(700, 500);
 		m_map.setLocation(0, 0);
 		m_mapName.setFont(GameClient.getFontLarge());
 		m_mapName.setForeground(Color.white);
@@ -67,10 +67,10 @@ public class TownMap extends Frame
 		add(m_map);
 		add(m_mapName);
 
-		setSize(536, 265 + getTitleBar().getHeight());
+		setSize(700, 500 + getTitleBar().getHeight());
 		getTitleBar().getCloseButton().setVisible(false);
 		loadLocations();
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 	}
 
@@ -140,7 +140,7 @@ public class TownMap extends Frame
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.err.println("Failed to load locations");
+			System.err.println("Failed to load map locations");
 		}
 	}
 

@@ -44,8 +44,8 @@ false
 gardenia
 left
 201
-7
 21
+8
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60
 4
 25

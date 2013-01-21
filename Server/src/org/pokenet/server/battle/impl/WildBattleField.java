@@ -420,6 +420,11 @@ public class WildBattleField extends BattleField
 			m_dispatch = null;
 			t.stop();
 		}
+		ServerMessage message = new ServerMessage();
+		message.Init(64);
+		message.addInt(m_player.getX());
+		message.addInt(m_player.getY());
+		m_player.getSession().Send(message);
 	}
 
 	/**
@@ -639,6 +644,11 @@ public class WildBattleField extends BattleField
 			m_player.setBattling(false);
 			m_player.setFishing(false);
 			dispose();
+			ServerMessage message = new ServerMessage();
+			message.Init(64);
+			message.addInt(m_player.getX());
+			message.addInt(m_player.getY());
+			m_player.getSession().Send(message);
 		}
 		else
 		{

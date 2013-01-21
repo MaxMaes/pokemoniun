@@ -64,13 +64,14 @@ public class TrainChooserDialog extends Frame {
 				
 			}
 		};
-		m_travelList.setSize(105, 317);
+		m_travelList.setSize(245, 70);
 		getContentPane().add(m_travelList);
 		setTitle("Please choose your destination..");
 		getCloseButton().setVisible(false);
-		setSize(265, 340);
+		setSize(250, 130);
+		setLocation(300,150);
 		setResizable(false);
-		setDraggable(false);
+		setDraggable(true);
 		setVisible(true);
 		initUse();
 //		System.out.println("end dialog");
@@ -81,11 +82,11 @@ public class TrainChooserDialog extends Frame {
 		final TrainChooserDialog thisDialog = this;
 		Button use = new Button("Let's travel!");
 		use.pack();
-		use.setLocation(130, 245);
+		use.setLocation(25, 75);
 		getContentPane().add(use);
 		Button cancel = new Button("Cancel");
 		cancel.pack();
-		cancel.setLocation(130, 280);
+		cancel.setLocation(150, 75);
 		getContentPane().add(cancel);
 
 		cancel.addActionListener(new ActionListener()

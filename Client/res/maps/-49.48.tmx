@@ -14,7 +14,7 @@
  </layer>
  <layer name="Collisions" width="16" height="27">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW0AD6MCEwOMCJTHzXAbihGZ9PbDcg0rcFeKMbm391YMDpwhWJnJMyAxsYHGqG4HgkzoLFpqR/d/wMd/6QCWPiDALbwRo8XbKARSmMLL/RwxQb2Qmls4YUv7VAbsHIxMLBx4eYTAqZAtWZcuPnUBKqcuDExagAudRHcwAYAAA==
+   H4sIAAAAAAAAC2NgGAW0AD6MCDzUwG4oRmfT2w3INK3BXijG5l9iwsMVip2RMAMaGx9ohOJ6JMyAxqalfnT/D3T8kwpg4Q8C2MIbPV6wgUYojS280MMVG9gLpbGFF3q40hKwcjEwsHHh5hMCpkC1Zly4+dQEqpy4MTFqAJ+aw/rABgAA
   </data>
  </layer>
  <layer name="Walkable" width="16" height="27">
@@ -24,7 +24,7 @@
  </layer>
  <layer name="Collisions" width="16" height="27">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5XTRWxUURQG4EcNp4J7hbLF10DxoMXdtniCJUiRBdbiTmGLL5CEIg0bCi1epMgWXyAJvgE+kkcyDAMdbvLlXDn/vTOL1zQIgmY0pwUtaUVr2tCWTLLIJod25NKeEYxkFKMZw1jGMZ4JTGQSk5nCVKYxnU1sZgtb2cZ2drCTXexmD3vZRzH7OcA1rnODm9ziNpXc4S73uE8VD3jIIx5Ts0YQ1KI2dahLPerTgFTSSCeDhjSiMU3oRW/60Jd+9CdyDLIezBCGMox8hlPAClayitV0jsr/XK9jPRsopIiNnOcCpWHmYlT21ygL96+o5VRwlc984WuM3Dd736P2ExOCIIlkUuhCV7olxH43enTX14Oe5DGHucyLyM83X8BCFrE44myJ+VKWsZyjHON41PsnrE9yitMRZ2fMSzjLOV7wkldR+dfWb3jLu4iz9+Yf+MgnchJ9D+Qmxvf/O+jrSCc6M4WpTIszP0PfTGYxm30Usz/O/EF9hzjMER7wkEc8juOOJ3qe8oznNEzyPdCYJknV59vqySSLbIYyjPw4sj/HBH0TmcRkNlBIERvDOzbHuGtHuLdL3c0e9nKFciq4GvZcj5GvDPfuqve4TxWJyb4HkklJ/jNXN9yrH9ZUNY10MuhOD3qSR6+oO/qF6wFhHagOYjBDWMJSlrGcghi/IXKscb6WdaznDCWc5VxEtvQf91xyVsZl3vOBj9W8+9tICYIaJKT8R+Yv4wfwhNtnwAYAAA==
+   H4sIAAAAAAAAC5XTR0yUQRgG4J+yWBAFC3YFFa/2s4A9EXtXULzaE40mdr2oFLELlqv9YDQRCzcbigULiGfrwWgiWE76kKzJZl3JOsmTmW/me+fPf5ieQRD0ojd96Es/+jOAgWSRzSAGM4QchjKbOcxlHvNZwEIWsZglFFLEUpZRzHL2U8EBDnKIwxzhKMc4TiVVnOAkpzjNQ+p4xGOe8JR6nvGcF7ykgUZe0cRr2iUEQXs60JFUOpFGZ7qQTgZd6UZ3epDJOMYzgYlMYjKRY6q6gGlMZwYzmcV2drCTXexmZFS+td7LPkoopYxybnKLmqhMW+O+3loe8J0f/PxH/leM/eTEIAiRwihGMyYx/u/n6s0jnzWsZV1Efr31hnC90bwp6u4t6q1s4wIXuRTVczlcXzFfjTqrVl/nBu/5wMeonk/h+rP5S8TZV+tmWvjG4CTvgZyk+P59mL7hjGAkS1lGcZz5FfpWsorVnOAkp+LMn9F3lnOcp5FXNPE6zjve6HvLO7olew/0IDM5vnyWvmwGMZ0ZzIwz2zqW6C2kiBJKKaM8fEdFjLuOROwdt66kinvcp5YH4Z66GPn6iL0X1i9pICnkPRAiJfR3LjW8lxZxlm6dQVfGkkse+THyf8aUiLOp1gVMYzNb2NpGNnrs0buXfVyjmutR+Zo27rvt7A53+UozLf/x/SAlCBJITPmPzD/Gb9XOgrfABgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="16" height="27">

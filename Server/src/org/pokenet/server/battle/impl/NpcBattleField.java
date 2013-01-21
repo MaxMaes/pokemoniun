@@ -386,6 +386,11 @@ public class NpcBattleField extends BattleField
 			victory.Init(24);
 			victory.addInt(0);
 			victory.sendResponse();
+			ServerMessage message = new ServerMessage();
+			message.Init(64);
+			message.addInt(m_player.getX());
+			message.addInt(m_player.getY());
+			m_player.getSession().Send(message);
 		}
 		else
 		{

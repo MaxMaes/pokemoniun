@@ -167,8 +167,8 @@ false
 false
 [/npc]
 [warp]
-17
-22
+18
+23
 36
 11
 3

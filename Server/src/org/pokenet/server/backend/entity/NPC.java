@@ -895,7 +895,7 @@ public class NPC extends Character
 			else if(m_name.equalsIgnoreCase("gardenia"))
 			{
 				lvl = 116;
-				poke = Pokemon.getGymLeaderPokemon("Cherim", lvl, PokemonNature.N_MODEST, 255, 0, 255, 255, 255, 255, "Sunny Day", "GrassWhistle", "Energy Ball", "Aqua Tail");
+				poke = Pokemon.getGymLeaderPokemon("Cherrim", lvl, PokemonNature.N_MODEST, 255, 0, 255, 255, 255, 255, "Sunny Day", "GrassWhistle", "Energy Ball", "Aqua Tail");
 				party[0] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Torterra", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 255, 0, "Rock Polish", "Earthquake", "Wood Hammer", "Stone Edge");
 				party[1] = poke;
@@ -985,7 +985,7 @@ public class NPC extends Character
 				party[3] = poke;
 				poke = Pokemon.getGymLeaderPokemon("Lapras", lvl, PokemonNature.N_ADAMANT, 255, 255, 255, 255, 255, 255, "Reflect", "Thunderbolt", "Hydro Pump", "Ice Beam");
 				party[4] = poke;
-				poke = Pokemon.getGymLeaderPokemon("Weaville", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 255, "Dark Pulse", "Ice Beam", "Iron Tail", "Focus Punch");
+				poke = Pokemon.getGymLeaderPokemon("Weavile", lvl, PokemonNature.N_IMPISH, 255, 255, 255, 255, 255, 255, "Dark Pulse", "Ice Beam", "Iron Tail", "Focus Punch");
 				party[5] = poke;
 			}
 			else if(m_name.equalsIgnoreCase("volkner"))

@@ -1,10 +1,10 @@
-Violapoli - Città dai profumi nostalgici
+Violapoli - Citta' dai profumi nostalgici
 Palestra di Violapoli 
 Capopalestra: Valerio
 L'elegante maestro di Pokemon uccello.
 Academia Pokemon di Earl
 Torre Sprout: 
 Testa il tuo cammino con i Pokemon.
-Il cerchio affianco agli oggetti nel Market ti mostra in che quantità hanno quel oggetto nel loro magazzino
-Se il cerchio è bianco, l'oggetto è finito
-I Market si riforniscono di oggetti dopo un pò di tempo 
+Il cerchio affianco agli oggetti nel Market ti mostra in che quantita' hanno quel oggetto nel loro magazzino
+Se il cerchio è bianco, l'oggetto e' finito
+I Market si riforniscono di oggetti dopo un po' di tempo 

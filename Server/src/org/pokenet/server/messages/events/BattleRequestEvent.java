@@ -19,7 +19,7 @@ public class BattleRequestEvent implements MessageEvent
 		if(ActiveConnections.getPlayer(player) != null)
 		{
 			ServerMessage bRequest = new ServerMessage();
-			bRequest.Init(84);
+			bRequest.init(84);
 			bRequest.addString(p.getName());
 			ActiveConnections.getPlayer(player).getSession().Send(bRequest);
 			p.addRequest(player, RequestType.BATTLE);

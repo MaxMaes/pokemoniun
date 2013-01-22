@@ -184,14 +184,14 @@ public class LoginManager implements Runnable
 		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
 		{
 			ServerMessage message = new ServerMessage();
-			message.Init(77);
+			message.init(77);
 			session.Send(message);
 			return;
 		}
 		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
 		{
 			ServerMessage message = new ServerMessage();
-			message.Init(77);
+			message.init(77);
 			session.Send(message);
 			return;
 		}
@@ -209,7 +209,7 @@ public class LoginManager implements Runnable
 				/* This player is banned, inform them. */
 				// session.write("l4");
 				ServerMessage message = new ServerMessage();
-				message.Init(79);
+				message.init(79);
 				session.Send(message);
 				return;
 			}
@@ -231,7 +231,7 @@ public class LoginManager implements Runnable
 				/* Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames. */
 				// session.write("le");
 				ServerMessage message = new ServerMessage();
-				message.Init(76);
+				message.init(76);
 				session.Send(message);
 				return;
 			}
@@ -274,7 +274,7 @@ public class LoginManager implements Runnable
 				/* Password is wrong, let them know. */
 				// session.write("le");
 				ServerMessage message = new ServerMessage();
-				message.Init(76);
+				message.init(76);
 				session.Send(message);
 				return;
 			}
@@ -317,7 +317,7 @@ public class LoginManager implements Runnable
 					// tell them their password was changed successfully
 					// session.write("ps");
 					ServerMessage message = new ServerMessage();
-					message.Init(73);
+					message.init(73);
 					message.addInt(1);
 					session.Send(message);
 					return;
@@ -330,7 +330,7 @@ public class LoginManager implements Runnable
 		/* Tell them we failed to change their password. */
 		// session.write("pe");
 		ServerMessage message = new ServerMessage();
-		message.Init(73);
+		message.init(73);
 		message.addInt(0);
 		session.Send(message);
 	}
@@ -601,7 +601,7 @@ public class LoginManager implements Runnable
 	{
 		// session.write("ls" + p.getId() + "," + TimeService.getTime());
 		ServerMessage message = new ServerMessage();
-		message.Init(74);
+		message.init(74);
 		message.addInt(p.getId());
 		message.addString(TimeService.getTime());
 		session.Send(message);

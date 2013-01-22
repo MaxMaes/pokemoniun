@@ -18,7 +18,7 @@ public class ServerNotificationEvent implements MessageEvent
 				if(session.getPlayer() != null)
 				{
 					ServerMessage msg = new ServerMessage();
-					msg.Init(1);
+					msg.init(1);
 					msg.addString(request.readString());
 					ses.Send(msg);
 				}

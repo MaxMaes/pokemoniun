@@ -17,7 +17,7 @@ public class MuteEvent implements MessageEvent
 		{
 			player.setMuted(true);
 			ServerMessage muteMessage = new ServerMessage();
-			muteMessage.Init(1);
+			muteMessage.init(1);
 			muteMessage.addString("You have been muted.");
 			player.getSession().Send(muteMessage);
 		}

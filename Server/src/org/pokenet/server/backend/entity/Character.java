@@ -239,7 +239,7 @@ public class Character implements Positionable
 				Player p = (Player) this;
 				// p.getTcpSession().write("U" + getX() + "," + getY());
 				ServerMessage message = new ServerMessage();
-				message.Init(64);
+				message.init(64);
 				message.addInt(getX());
 				message.addInt(getY());
 				p.getSession().Send(message);
@@ -339,7 +339,7 @@ public class Character implements Positionable
 		{
 			// m_map.sendToAll(new SpriteChangeMessage(m_id, this.getSprite()));
 			ServerMessage message = new ServerMessage();
-			message.Init(63);
+			message.init(63);
 			message.addInt(m_id);
 			message.addInt(getSprite());
 			m_map.sendToAll(message);
@@ -358,7 +358,7 @@ public class Character implements Positionable
 		{
 			// m_map.sendToAll(new SpriteChangeMessage(m_id, this.getSprite()));
 			ServerMessage message = new ServerMessage();
-			message.Init(63);
+			message.init(63);
 			message.addInt(m_id);
 			message.addInt(getSprite());
 			m_map.sendToAll(message);

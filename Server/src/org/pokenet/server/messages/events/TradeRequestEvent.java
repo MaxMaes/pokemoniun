@@ -19,7 +19,7 @@ public class TradeRequestEvent implements MessageEvent
 		if(ActiveConnections.getPlayer(player) != null)
 		{
 			ServerMessage bRequest = new ServerMessage();
-			bRequest.Init(83);
+			bRequest.init(83);
 			bRequest.addString(p.getName());
 			ActiveConnections.getPlayer(player).getSession().Send(bRequest);
 			p.addRequest(player, RequestType.TRADE);

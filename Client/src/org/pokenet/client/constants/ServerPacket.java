@@ -1,9 +1,10 @@
 package org.pokenet.client.constants;
 
-public enum ServerPacket {
+public enum ServerPacket 
+{
 	REGISTRATION(0x01),
 	CHANGE_PASSWORD(0x02),
-	FORCE_LOGIN(0x03),
+	//FORCE_LOGIN(0x03),
 	MOVE_UP(0x04),
 	MOVE_DOWN(0x05),
 	MOVE_LEFT(0x06),
@@ -34,7 +35,7 @@ public enum ServerPacket {
 	PLAYER_KICK(0x1F),
 	WEATHER(0x20),
 	STOP_SERVER(0x21),
-	ANNOUNCE_MESSAGE_TO_SERVER(0x22),
+	//ANNOUNCE_MESSAGE_TO_SERVER(0x22),
 	MOVE_SELECTED(0x23),
 	SWITCH_POKEMON(0x24),
 	BATTLE_RUN(0x25),
@@ -56,11 +57,13 @@ public enum ServerPacket {
 	
 	private int code = -1;
 
-	private ServerPacket(int code) {
+	private ServerPacket(int code) 
+	{
 		this.code = code;
 	}
 
-	public int getValue() {
+	public int getValue() 
+	{
 		return code;
 	}
 }

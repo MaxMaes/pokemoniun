@@ -34,7 +34,7 @@ public class ChatEvent implements MessageEvent
 						if(ses.getPlayer() != null)
 						{
 							ServerMessage globalChat = new ServerMessage();
-							globalChat.Init(50);
+							globalChat.init(50);
 							globalChat.addInt(0);
 							globalChat.addString("<" + player.getName() + "> " + msg);
 							ses.Send(globalChat);
@@ -47,7 +47,7 @@ public class ChatEvent implements MessageEvent
 				if(target != null)
 				{
 					ServerMessage targetMessage = new ServerMessage();
-					targetMessage.Init(50);
+					targetMessage.init(50);
 					targetMessage.addInt(1);
 					targetMessage.addString(player.getName() + "," + "<" + player.getName() + "> " + details[1]);
 					target.getSession().Send(targetMessage);

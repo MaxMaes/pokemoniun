@@ -15,7 +15,7 @@ public class DropItemEvent implements MessageEvent
 		int item = request.readInt();
 		if(p.getBag().removeItem(item, 1))
 		{
-			message.Init(81);
+			message.init(81);
 			message.addInt(item);
 			message.addInt(1);
 			session.Send(message);

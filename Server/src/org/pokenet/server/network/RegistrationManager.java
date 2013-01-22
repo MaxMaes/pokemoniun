@@ -70,7 +70,7 @@ public class RegistrationManager implements Runnable
 		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
 		{
 			ServerMessage message = new ServerMessage();
-			message.Init(87);
+			message.init(87);
 			message.addInt(1);
 			session.Send(message);
 			return;
@@ -78,7 +78,7 @@ public class RegistrationManager implements Runnable
 		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
 		{
 			ServerMessage message = new ServerMessage();
-			message.Init(87);
+			message.init(87);
 			message.addInt(1);
 			session.Send(message);
 			return;
@@ -91,7 +91,7 @@ public class RegistrationManager implements Runnable
 		{
 			// session.write("r4");
 			ServerMessage message = new ServerMessage();
-			message.Init(87);
+			message.init(87);
 			message.addInt(4);
 			session.Send(message);
 			return;
@@ -102,7 +102,7 @@ public class RegistrationManager implements Runnable
 		{
 			// session.write("r4");
 			ServerMessage message = new ServerMessage();
-			message.Init(87);
+			message.init(87);
 			message.addInt(4);
 			session.Send(message);
 			return;
@@ -119,7 +119,7 @@ public class RegistrationManager implements Runnable
 				// session.resumeWrite();
 				// session.write("r2");
 				ServerMessage message = new ServerMessage();
-				message.Init(87);
+				message.init(87);
 				message.addInt(2);
 				session.Send(message);
 				return;
@@ -139,7 +139,7 @@ public class RegistrationManager implements Runnable
 				// session.resumeWrite();
 				// session.write("r5");
 				ServerMessage message = new ServerMessage();
-				message.Init(87);
+				message.init(87);
 				message.addInt(5);
 				session.Send(message);
 				return;
@@ -150,7 +150,7 @@ public class RegistrationManager implements Runnable
 				// session.resumeWrite();
 				// session.write("r6");
 				ServerMessage message = new ServerMessage();
-				message.Init(87);
+				message.init(87);
 				message.addInt(6);
 				session.Send(message);
 				return;
@@ -164,7 +164,7 @@ public class RegistrationManager implements Runnable
 		{
 			// session.write("r4");
 			ServerMessage message = new ServerMessage();
-			message.Init(87);
+			message.init(87);
 			message.addInt(4);
 			session.Send(message);
 			return;
@@ -256,7 +256,7 @@ public class RegistrationManager implements Runnable
 		// session.resumeWrite();
 		// session.write("rs");
 		ServerMessage message = new ServerMessage();
-		message.Init(86);
+		message.init(86);
 		session.Send(message);
 	}
 

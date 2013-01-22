@@ -305,7 +305,7 @@ public class ServerMap
 						name = "!NPC!";
 					/* p.getTcpSession().write("ma" + name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R")); */
 					ServerMessage message = new ServerMessage();
-					message.Init(67);
+					message.init(67);
 					message.addString(name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
 							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R"));
 					p.getSession().Send(message);
@@ -376,7 +376,7 @@ public class ServerMap
 		{
 			// c.getTcpSession().write("Ff"); // Tell the player he can't fish on land
 			ServerMessage message = new ServerMessage();
-			message.Init(47);
+			message.init(47);
 			c.getSession().Send(message);
 		}
 		return false;
@@ -893,7 +893,7 @@ public class ServerMap
 			{
 				// p.getTcpSession().write("mr" + c.getId());
 				ServerMessage message = new ServerMessage();
-				message.Init(71);
+				message.init(71);
 				message.addInt(c.getId());
 				p.getSession().Send(message);
 			}
@@ -924,7 +924,7 @@ public class ServerMap
 				{
 					/* TcpProtocolHandler.writeMessage( p.getTcpSession(), new ChatMessage(ChatMessageType.LOCAL, message)); */
 					ServerMessage chatMessage = new ServerMessage(p.getSession());
-					chatMessage.Init(50);
+					chatMessage.init(50);
 					chatMessage.addInt(0);
 					chatMessage.addString(message);
 					chatMessage.sendResponse();

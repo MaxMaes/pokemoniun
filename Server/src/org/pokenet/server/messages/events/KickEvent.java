@@ -16,7 +16,7 @@ public class KickEvent implements MessageEvent
 		if(player != null)
 		{
 			ServerMessage kickMessage = new ServerMessage();
-			kickMessage.Init(1);
+			kickMessage.init(1);
 			kickMessage.addString("You have been kicked from the server!");
 			player.getSession().Send(kickMessage);
 			player.getSession().close();

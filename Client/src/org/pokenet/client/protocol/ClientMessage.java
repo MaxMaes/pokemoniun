@@ -10,20 +10,21 @@ import org.pokenet.client.constants.ServerPacket;
 
 public class ClientMessage
 {
-
 	private ChannelBuffer body;
 	private ChannelBufferOutputStream bodystream;
 	private String message;
-	private Session Player;
+	private Session player;
 
 	public ClientMessage(ServerPacket id)
 	{
 		init(id.getValue());
+		message = "";
 	}
 
-	public ClientMessage(Session Session)
+	public ClientMessage(Session session)
 	{
-		Player = Session;
+		player = session;
+		message = "";
 	}
 
 	public void addBool(Boolean obj)
@@ -81,7 +82,6 @@ public class ClientMessage
 			bodystream.writeShort(obj.length());
 			bodystream.writeChars(obj);
 			message = message + ";STRING: " + obj;
-			// bodystream.w(obj);
 		}
 		catch(IOException e)
 		{
@@ -90,20 +90,15 @@ public class ClientMessage
 
 	public ChannelBuffer get()
 	{
-
-		// body.setInt(0, body.writerIndex() - 4);
 		return body;
 	}
 
 	public String getBodyString()
 	{
 		String str = new String(body.toString(Charset.defaultCharset()));
-
 		String consoleText = str;
-
 		for(int i = 0; i < 13; i++)
 			consoleText = consoleText.replace(Character.toString((char) i), "{" + i + "}");
-
 		return consoleText;
 	}
 
@@ -117,12 +112,11 @@ public class ClientMessage
 		body = ChannelBuffers.dynamicBuffer();
 		bodystream = new ChannelBufferOutputStream(body);
 		message = "[Out] -> ID" + id;
-
 		body.writeByte(id);
 	}
 
-	public void Send()
+	public void send()
 	{
-		Player.send(this);
+		player.send(this);
 	}
 }

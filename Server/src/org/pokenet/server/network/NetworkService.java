@@ -184,21 +184,21 @@ public class NetworkService
 			if(s.getPlayer() != null)
 			{
 				ServerMessage message = new ServerMessage();
-				message.Init(2);
+				message.init(2);
 				message.addString("Saving...");
 				s.Send(message);
 
 				if(m_saveManager.savePlayer(s.getPlayer()))
 				{
 					ServerMessage succesmg = new ServerMessage();
-					succesmg.Init(2);
+					succesmg.init(2);
 					succesmg.addString("Save succesfull.");
 					s.Send(succesmg);
 				}
 				else
 				{
 					ServerMessage failmsg = new ServerMessage();
-					failmsg.Init(2);
+					failmsg.init(2);
 					failmsg.addString("Save Failed.");
 					s.Send(failmsg);
 					System.err.println("Error saving player" + s.getPlayer().getName() + " " + s.getPlayer().getId());

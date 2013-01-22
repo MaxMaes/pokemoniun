@@ -9,7 +9,6 @@ import org.pokenet.server.client.Session;
 
 public class ServerMessage
 {
-
 	private ChannelBuffer body;
 	private ChannelBufferOutputStream bodystream;
 	private String message;
@@ -107,7 +106,7 @@ public class ServerMessage
 		return message;
 	}
 
-	public void Init(int id)
+	public void init(int id)
 	{
 		body = ChannelBuffers.dynamicBuffer();
 		bodystream = new ChannelBufferOutputStream(body);

@@ -17,7 +17,7 @@ public class UnMuteEvent implements MessageEvent
 		{
 			player.setMuted(false);
 			ServerMessage unmuteMessage = new ServerMessage();
-			unmuteMessage.Init(1);
+			unmuteMessage.init(1);
 			unmuteMessage.addString("You have been unmuted.");
 			player.getSession().Send(unmuteMessage);
 		}

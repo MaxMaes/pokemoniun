@@ -18,7 +18,7 @@ public class RegisterEvent implements MessageEvent
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			message.Init(87);
+			message.init(87);
 			message.addInt(3);
 			session.Send(message);
 		}

@@ -58,7 +58,7 @@ public class Trade implements Runnable
 			Character c = (Character) player2;
 			// p.getTcpSession().write("Ts" + c.getName());
 			ServerMessage message = new ServerMessage();
-			message.Init(3);
+			message.init(3);
 			message.addString(c.getName());
 			p.getSession().Send(message);
 			/* Send the pokemon data of player 2 to player 1 */
@@ -67,7 +67,7 @@ public class Trade implements Runnable
 				if(player2Party[i] != null)
 				{
 					ServerMessage addPoke = new ServerMessage();
-					addPoke.Init(6);
+					addPoke.init(6);
 					addPoke.addInt(i);
 					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player2Party[i].getSpeciesName()).getSpeciesNumber() + "," + player2Party[i].getName() + ","
 							+ player2Party[i].getHealth() + "," + player2Party[i].getGender() + "," + (player2Party[i].isShiny() ? 1 : 0) + "," + player2Party[i].getStat(0) + ","
@@ -88,7 +88,7 @@ public class Trade implements Runnable
 			Character c = (Character) player1;
 			// p.getTcpSession().write("Ts" + c.getName());
 			ServerMessage message = new ServerMessage();
-			message.Init(3);
+			message.init(3);
 			message.addString(c.getName());
 			p.getSession().Send(message);
 			/* Send the Pokemon data of player 1 to player 2 */
@@ -97,7 +97,7 @@ public class Trade implements Runnable
 				if(player1Party[i] != null)
 				{
 					ServerMessage addPoke = new ServerMessage();
-					addPoke.Init(6);
+					addPoke.init(6);
 					addPoke.addInt(i);
 					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getPokemonNumber() + "," + player1Party[i].getName() + ","
 							+ player1Party[i].getHealth() + "," + player1Party[i].getGender() + "," + (player1Party[i].isShiny() ? 1 : 0) + "," + player1Party[i].getStat(0) + ","
@@ -217,7 +217,7 @@ public class Trade implements Runnable
 				{
 					Player p = (Player) t;
 					ServerMessage invalidAlert = new ServerMessage(p.getSession());
-					invalidAlert.Init(94);
+					invalidAlert.init(94);
 					invalidAlert.sendResponse();
 					// endTrade();
 					return;
@@ -372,7 +372,7 @@ public class Trade implements Runnable
 							curPokemon.setEvolution(currentEvolution);
 							// p.getTcpSession().write("PE" + index);
 							ServerMessage message = new ServerMessage();
-							message.Init(43);
+							message.init(43);
 							message.addInt(index);
 							p.getSession().Send(message);
 							break;

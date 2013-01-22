@@ -18,7 +18,7 @@ public class ServerAnnouncementEvent implements MessageEvent
 				if(ses.getPlayer() != null)
 				{
 					ServerMessage announceMessage = new ServerMessage();
-					announceMessage.Init(2);
+					announceMessage.init(2);
 					announceMessage.addString(request.readString());
 					ses.Send(announceMessage);
 				}

@@ -15,7 +15,7 @@ public class HandshakeEvent implements MessageEvent
 		// String[] Bits = AuthString.split(";");
 		// String Username = Bits[0];
 
-		message.Init(2);
+		message.init(2);
 		message.addBool(true);
 		message.sendResponse();
 		GameServer.getServiceManager().getNetworkService().getLoginManager();

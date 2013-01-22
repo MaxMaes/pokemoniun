@@ -146,7 +146,7 @@ public class HMObject extends NPC
 			// The player isn't strong enough to do this. Alert client
 			// p.getTcpSession().write("ch" + getRequiredTrainerLevel(m_HMType));
 			ServerMessage message = new ServerMessage();
-			message.Init(51);
+			message.init(51);
 			message.addInt(getRequiredTrainerLevel(m_HMType));
 			p.getSession().Send(message);
 		}

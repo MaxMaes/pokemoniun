@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
-
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.ModData;
@@ -39,9 +38,9 @@ import org.pokenet.server.battle.mechanics.StatMultiplier;
 import org.pokenet.server.battle.mechanics.ValidationException;
 import org.pokenet.server.battle.mechanics.clauses.Clause.PendanticDamageClause;
 import org.pokenet.server.battle.mechanics.moves.MoveList;
+import org.pokenet.server.battle.mechanics.moves.MoveList.AttractEffect;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
-import org.pokenet.server.battle.mechanics.moves.MoveList.AttractEffect;
 import org.pokenet.server.battle.mechanics.statuses.AwesomeEffect;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.ChargeEffect;
@@ -135,11 +134,11 @@ public class Pokemon extends PokemonSpecies
 	transient private int m_id;
 	@Element(required = false)
 	transient private HoldItem m_item;
-	
-	/*a variable to store a temp pokemon in for transform*/
-	@Element(required = false) 
+
+	/* a variable to store a temp pokemon in for transform */
+	@Element(required = false)
 	transient private Pokemon temp;
-	//whether a pokemon is transformed or not
+	// whether a pokemon is transformed or not
 	private Boolean transformed = false;
 
 	// ability.
@@ -430,22 +429,19 @@ public class Pokemon extends PokemonSpecies
 		p.setRareness(ps.getRareness());
 		return p;
 	}
-	
-	/*
-	 * used for setting a pokemon for transform
-	 */
+
+	/* used for setting a pokemon for transform */
 	public void setTempPoke(Pokemon t)
 	{
 		temp = t;
 	}
-	
-	/*
-	 * Used for transform
-	 */
+
+	/* Used for transform */
 	public Pokemon getTempPoke()
 	{
 		return temp;
 	}
+
 	/**
 	 * Returns a Pokemon based on a species name, a level, evs and moves
 	 * 
@@ -453,7 +449,8 @@ public class Pokemon extends PokemonSpecies
 	 * @param level
 	 * @return
 	 */
-	public static Pokemon getGymLeaderPokemon(String species, int level, PokemonNature n, int hp, int att, int def, int spd, int spdef, int spatt, String move0, String move1, String move2, String move3)
+	public static Pokemon getGymLeaderPokemon(String species, int level, PokemonNature n, int hp, int att, int def, int spd, int spdef, int spatt, String move0, String move1, String move2,
+			String move3)
 	{
 		Pokemon p;
 		Random random = DataService.getBattleMechanics().getRandom();
@@ -469,8 +466,8 @@ public class Pokemon extends PokemonSpecies
 		/* First select an ability randomly */
 		String ab = abilities[random.nextInt(abilities.length)];
 		/* Now lets create the pokemon itself */
-		p = new Pokemon(DataService.getBattleMechanics(), ps, n, ab, null,
-				Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] { 32,32,32,32,32,32 }, new int[] { hp, att, def, spd, spatt, spdef }, // EVs
+		p = new Pokemon(DataService.getBattleMechanics(), ps, n, ab, null, Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] { 32, 32, 32, 32, 32, 32 }, new int[] { hp, att, def, spd,
+				spatt, spdef }, // EVs
 				moves, new int[] { 0, 0, 0, 0 });
 		p.setBaseExp(ps.getBaseEXP());
 		p.setExpType(ps.getGrowthRate());
@@ -957,14 +954,14 @@ public class Pokemon extends PokemonSpecies
 			{
 				// p.getTcpSession().write("Pm" + index + m_movesLearning.get(i));
 				ServerMessage message = new ServerMessage();
-				message.Init(40);
+				message.init(40);
 				message.addInt(index);
 				message.addString(m_movesLearning.get(i));
 				p.getSession().Send(message);
 			}
 			p.updateClientPokemonStats(index);
-			
-			//Enter this pokemon in the pokedex
+
+			// Enter this pokemon in the pokedex
 			p.setPokemonCaught(pokeData.getPokemonNumber() + 1);
 		}
 	}
@@ -1050,14 +1047,11 @@ public class Pokemon extends PokemonSpecies
 	{
 		return m_contestStat[i];
 	}
-	
-	/*
-	 * Sets a pokemon move directly used only for sketch
-	 * 
+
+	/* Sets a pokemon move directly used only for sketch
 	 * @author sadhi
 	 * @param i index of move
-	 * @param m moveListEntry
-	 */
+	 * @param m moveListEntry */
 	public void setMove(int i, MoveListEntry m)
 	{
 		m_move[i] = m;
@@ -1351,23 +1345,19 @@ public class Pokemon extends PokemonSpecies
 	{
 		return m_mech;
 	}
-	
-	/*
-	 * is this pokemon transformed?
-	 */
+
+	/* is this pokemon transformed? */
 	public Boolean isTransformed()
 	{
 		return transformed;
 	}
 
-	/*
-	 * sets whether this pokemon is transformed
-	*/
+	/* sets whether this pokemon is transformed */
 	public void setTransformed(Boolean t)
 	{
 		transformed = t;
 	}
-	
+
 	/**
 	 * Get one of this pokemon's moves.
 	 */

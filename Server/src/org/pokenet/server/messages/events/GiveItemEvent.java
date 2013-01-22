@@ -25,14 +25,14 @@ public class GiveItemEvent implements MessageEvent
 				HoldItem h = new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(itemId).getName());
 				p.setItem(h);
 				ServerMessage removeItemMessage = new ServerMessage(session);
-				removeItemMessage.Init(81);
+				removeItemMessage.init(81);
 				removeItemMessage.addInt(itemId);
 				removeItemMessage.addInt(1);
 				removeItemMessage.sendResponse();
 				session.getPlayer().getBag().removeItem(itemId, 1);
 
 				ServerMessage speech = new ServerMessage(session);
-				speech.Init(92);
+				speech.init(92);
 				speech.addString(p.getName() + " was given " + p.getItemName() + " to hold");
 				speech.sendResponse();
 			}
@@ -40,7 +40,7 @@ public class GiveItemEvent implements MessageEvent
 			{
 				String pI = p.getItemName();
 				ServerMessage addItemMessage = new ServerMessage(session);
-				addItemMessage.Init(80);
+				addItemMessage.init(80);
 				addItemMessage.addInt(itemId);
 				addItemMessage.addInt(1);
 				addItemMessage.sendResponse();
@@ -49,14 +49,14 @@ public class GiveItemEvent implements MessageEvent
 				HoldItem h = new HoldItem(GameServer.getServiceManager().getItemDatabase().getItem(itemId).getName());
 				p.setItem(h);
 				ServerMessage holdItemMessage = new ServerMessage(session);
-				holdItemMessage.Init(81);
+				holdItemMessage.init(81);
 				holdItemMessage.addInt(itemId);
 				holdItemMessage.addInt(1);
 				holdItemMessage.sendResponse();
 				session.getPlayer().getBag().removeItem(itemId, 1);
 
 				ServerMessage speech = new ServerMessage(session);
-				speech.Init(92);
+				speech.init(92);
 				speech.addString(pI + " was switched with " + p.getItemName());
 				speech.sendResponse();
 			}

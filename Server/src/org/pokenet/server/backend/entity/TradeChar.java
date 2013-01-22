@@ -49,7 +49,7 @@ public class TradeChar extends NPC implements Tradeable
 		/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 		 * new TradeNpcSpeechMessage("Thanks! It's just what I was looking for!"); */
 		ServerMessage message = new ServerMessage();
-		message.Init(50);
+		message.init(50);
 		message.addInt(3);
 		message.addString("Thanks! It's just what I was looking for!");
 		m_player.getSession().Send(message);
@@ -91,7 +91,7 @@ public class TradeChar extends NPC implements Tradeable
 			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 			 * new TradeNpcSpeechMessage("This is not what I'm looking for!\n" + "Come back when you find the right Pokemon!"); */
 			ServerMessage message = new ServerMessage();
-			message.Init(50);
+			message.init(50);
 			message.addInt(3);
 			message.addString("This is not what I'm looking for!\n" + "Come back when you find the right Pokemon!");
 			m_player.getSession().Send(message);
@@ -156,7 +156,7 @@ public class TradeChar extends NPC implements Tradeable
 			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 			 * new TradeNpcSpeechMessage("I'm looking for a " + m_requestedSpecies + ". Want to trade one for my " + m_party[0].getName() + "?"); */
 			ServerMessage message = new ServerMessage();
-			message.Init(50);
+			message.init(50);
 			message.addInt(3);
 			message.addString("I'm looking for a " + m_requestedSpecies + ". Want to trade one for my " + m_party[0].getName() + "?");
 			m_player.getSession().Send(message);
@@ -167,7 +167,7 @@ public class TradeChar extends NPC implements Tradeable
 			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 			 * new TradeNpcSpeechMessage("I can't trade with you right now"); */
 			ServerMessage message = new ServerMessage();
-			message.Init(50);
+			message.init(50);
 			message.addInt(3);
 			message.addString("I can't trade with you right now");
 			m_player.getSession().Send(message);

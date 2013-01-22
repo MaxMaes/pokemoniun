@@ -97,7 +97,7 @@ public class ChatManager implements Runnable
 					/* TcpProtocolHandler.writeMessage(s, new ChatMessage(
 					 * ChatMessageType.PRIVATE, ((String) o[1]) + "," + ((String) o[2]))); */
 					ServerMessage startBattle = new ServerMessage(s);
-					startBattle.Init(50);
+					startBattle.init(50);
 					startBattle.addString("p" + (String) o[2]);
 					startBattle.sendResponse();
 				}

@@ -8,7 +8,7 @@ import org.pokenet.server.protocol.ServerMessage;
 public class ServerAlertEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		// TODO: If not redundant, implement message.
 

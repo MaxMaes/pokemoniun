@@ -9,12 +9,12 @@ import org.pokenet.server.protocol.ServerMessage;
 public class TradeOfferEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		// Make an offer ToPOKENUM,MONEYAMOUNT
 		if(p.isTrading())
-			p.getTrade().setOffer(p, Request.readInt(), Request.readInt());
+			p.getTrade().setOffer(p, request.readInt(), request.readInt());
 	}
 
 }

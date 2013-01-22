@@ -10,13 +10,13 @@ import org.pokenet.server.protocol.ServerMessage;
 public class SelectedMoveEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		BattleTurn turn;
 		if(p.isBattling())
 		{
-			turn = BattleTurn.getMoveTurn(Request.readInt());
+			turn = BattleTurn.getMoveTurn(request.readInt());
 			try
 			{
 				p.getBattleField().queueMove(p.getBattleId(), turn);

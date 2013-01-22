@@ -10,11 +10,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class SpriteEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
-		int sprite = Request.readInt();
+		Player p = session.getPlayer();
+		int sprite = request.readInt();
 		/* Ensure the user buys a visible sprite */
 		if(sprite > 0 && !GameServer.getServiceManager().getSpriteList().getUnbuyableSprites().contains(sprite))
 			if(p.getMoney() >= 500)

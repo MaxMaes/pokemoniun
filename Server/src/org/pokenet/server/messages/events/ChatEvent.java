@@ -12,11 +12,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class ChatEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player player = Session.getPlayer();
-		int type = Request.readInt();
-		String message = Request.readString();
+		Player player = session.getPlayer();
+		int type = request.readInt();
+		String msg = request.readString();
 		switch(type)
 		{
 			case 0: // local
@@ -24,24 +24,24 @@ public class ChatEvent implements MessageEvent
 				{
 					ServerMap map = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getMapX(), player.getMapY());
 					if(map != null)
-						map.sendChatMessage("<" + player.getName() + "> " + message, player.getLanguage());
+						map.sendChatMessage("<" + player.getName() + "> " + msg, player.getLanguage());
 				}
 				break;
 			case 1: // global
 				if(!player.isMuted())
 				{
-					for(Session session : ActiveConnections.allSessions().values())
-						if(session.getPlayer() != null)
+					for(Session ses : ActiveConnections.allSessions().values())
+						if(ses.getPlayer() != null)
 						{
 							ServerMessage globalChat = new ServerMessage();
 							globalChat.Init(50);
 							globalChat.addInt(0);
-							globalChat.addString("<" + player.getName() + "> " + message);
-							session.Send(globalChat);
+							globalChat.addString("<" + player.getName() + "> " + msg);
+							ses.Send(globalChat);
 						}
 				}
 			case 2: // private
-				String[] details = message.split(",");
+				String[] details = msg.split(",");
 				String targetPlayer = details[0];
 				Player target = ActiveConnections.getPlayer(targetPlayer);
 				if(target != null)

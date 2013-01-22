@@ -9,17 +9,16 @@ import org.pokenet.server.protocol.ServerMessage;
 public class DropItemEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
-		int item = Request.readInt();
+		Player p = session.getPlayer();
+		int item = request.readInt();
 		if(p.getBag().removeItem(item, 1))
 		{
-			ServerMessage message = new ServerMessage();
 			message.Init(81);
 			message.addInt(item);
 			message.addInt(1);
-			Session.Send(message);
+			session.Send(message);
 		}
 	}
 }

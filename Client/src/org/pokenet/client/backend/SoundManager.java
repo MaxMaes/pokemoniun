@@ -3,6 +3,8 @@ package org.pokenet.client.backend;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
 import org.newdawn.slick.openal.AudioLoader;
@@ -14,6 +16,7 @@ import org.newdawn.slick.openal.AudioLoader;
  */
 public class SoundManager extends Thread
 {
+	private static final int MAX_SOUND_THREADS = 3;
 	private static String m_audioPath = "res/music/";
 	protected String m_trackName;
 	private HashMap<String, String> m_fileList = new HashMap<String, String>();
@@ -116,8 +119,6 @@ public class SoundManager extends Thread
 		if(track != null)
 		{
 			String key = track;
-			System.out.println(key);
-			// if (key.substring(0, 5).equalsIgnoreCase("Route"))
 			if(key.contains("Route"))
 				key = "Route";
 			if(m_locations.get(key) != m_trackName && m_locations.get(key) != null)
@@ -177,18 +178,40 @@ public class SoundManager extends Thread
 	 */
 	private void loadFiles()
 	{
-		Audio audio;
+		ExecutorService soundLoader = Executors.newFixedThreadPool(MAX_SOUND_THREADS);
 		for(String key : m_fileList.keySet())
+			soundLoader.submit(new SoundThread(key));
+		soundLoader.shutdown();
+		while(!soundLoader.isTerminated())
+		{
+			/* Wait for the soundLoader to finish loading the in-game music. */
+		}
+		System.out.println("Background music loading complete");
+		m_tracksLoaded = true;
+	}
+
+	private class SoundThread implements Runnable
+	{
+		private String key;
+		private Audio music;
+
+		public SoundThread(String audioKey)
+		{
+			key = audioKey;
+		}
+
+		public void run()
+		{
 			try
 			{
-				audio = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
-				m_files.put(key, (AudioImpl) audio);
+				music = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
+				m_files.put(key, (AudioImpl) music);
 			}
 			catch(IOException ioe)
 			{
 				ioe.printStackTrace();
 			}
-		m_tracksLoaded = true;
+		}
 	}
 
 	/**

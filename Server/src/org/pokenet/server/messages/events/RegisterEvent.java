@@ -9,20 +9,18 @@ import org.pokenet.server.protocol.ServerMessage;
 public class RegisterEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		try
 		{
-			GameServer.getServiceManager().getNetworkService().getRegistrationManager().register(Session, Request.readInt(), Request.readString());
+			GameServer.getServiceManager().getNetworkService().getRegistrationManager().register(session, request.readInt(), request.readString());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-
-			ServerMessage message = new ServerMessage();
 			message.Init(87);
 			message.addInt(3);
-			Session.Send(message);
+			session.Send(message);
 		}
 	}
 

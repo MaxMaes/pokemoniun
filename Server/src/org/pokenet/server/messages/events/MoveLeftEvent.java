@@ -9,9 +9,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class MoveLeftEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Session.getPlayer().move(Direction.Left);
+		session.getPlayer().move(Direction.Left);
 	}
 
 }

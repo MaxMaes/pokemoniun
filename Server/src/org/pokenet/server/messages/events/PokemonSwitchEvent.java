@@ -10,10 +10,10 @@ import org.pokenet.server.protocol.ServerMessage;
 public class PokemonSwitchEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
-		int pIndex = Request.readInt();
+		Player p = session.getPlayer();
+		int pIndex = request.readInt();
 		BattleTurn turn;
 		if(p.isBattling())
 			if(p.getParty()[pIndex] != null)

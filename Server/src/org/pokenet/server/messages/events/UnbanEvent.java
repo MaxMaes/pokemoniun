@@ -12,7 +12,7 @@ import org.pokenet.server.protocol.ServerMessage;
 public class UnbanEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		/* TODO: Rewrite once MySqlManager is more efficient. */
 		MySqlManager m = new MySqlManager();
@@ -20,7 +20,7 @@ public class UnbanEvent implements MessageEvent
 			return;
 		if(!m.selectDatabase(GameServer.getDatabaseName()))
 			return;
-		String bannedPlayer = Request.readString();
+		String bannedPlayer = request.readString();
 		ResultSet ip = m.query("SELECT lastLoginIP FROM pn_members WHERE username = '" + bannedPlayer + "'");
 		String bannedIP = "";
 		try

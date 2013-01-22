@@ -10,9 +10,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class StopServerEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		if(p.getAdminLevel() == 2)
 			GameServer.getServiceManager().stop();
 	}

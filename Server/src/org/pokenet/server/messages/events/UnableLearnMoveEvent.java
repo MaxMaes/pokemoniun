@@ -9,12 +9,12 @@ import org.pokenet.server.protocol.ServerMessage;
 public class UnableLearnMoveEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		// Player is allowing move to be learned
-		Player p = Session.getPlayer();
-		int pokemonIndex = Request.readInt();
-		String move = Request.readString();
+		Player p = session.getPlayer();
+		int pokemonIndex = request.readInt();
+		String move = request.readString();
 
 		if(p.getParty()[pokemonIndex] != null)
 			if(p.getParty()[pokemonIndex].getMovesLearning().contains(move))

@@ -11,10 +11,10 @@ import org.pokenet.server.protocol.ServerMessage;
 public class TradeRequestEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
-		String player = Request.readString();
+		Player p = session.getPlayer();
+		String player = request.readString();
 		// Battle Request rbUSERNAME
 		if(ActiveConnections.getPlayer(player) != null)
 		{

@@ -10,11 +10,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class UseItemEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		// Use an item, applies inside and outside of battle
-		String[] details = Request.readString().split(",");
+		String[] details = request.readString().split(",");
 		new Thread(new ItemProcessor(p, details), "Item-Thread").start();
 
 		// TODO: the fuq, i should check this out o.o a thread??

@@ -9,13 +9,13 @@ import org.pokenet.server.protocol.ServerMessage;
 public class BoxInfoEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		if(p.isBoxing())
 		{
-			int boxNum = Request.readInt();
+			int boxNum = request.readInt();
 			if(boxNum >= 0 && boxNum < 9)
 				p.sendBoxInfo(boxNum);
 		}

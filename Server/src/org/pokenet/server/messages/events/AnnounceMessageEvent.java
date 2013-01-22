@@ -11,12 +11,12 @@ import org.pokenet.server.protocol.ServerMessage;
 public class AnnounceMessageEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		if(p.getAdminLevel() == 2)
 		{
-			String msg = Request.readString();
+			String msg = request.readString();
 			ServerMap map = GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY());
 			if(map != null)
 				map.sendChatMessage(msg, p.getLanguage());

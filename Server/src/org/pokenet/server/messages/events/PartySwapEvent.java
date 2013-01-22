@@ -9,11 +9,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class PartySwapEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
-		p.swapPokemon(Request.readInt(), Request.readInt());
+		Player p = session.getPlayer();
+		p.swapPokemon(request.readInt(), request.readInt());
 
 	}
 }

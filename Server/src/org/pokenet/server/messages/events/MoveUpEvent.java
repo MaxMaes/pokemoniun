@@ -9,9 +9,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class MoveUpEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Session.getPlayer().move(Direction.Up);
+		session.getPlayer().move(Direction.Up);
 	}
 
 }

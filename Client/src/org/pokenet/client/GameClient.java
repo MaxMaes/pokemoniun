@@ -144,7 +144,7 @@ public class GameClient extends BasicGame
 			m_soundPlayer = new SoundManager(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
 			// m_soundPlayer.mute();
 			m_soundPlayer.start();
-			// m_soundPlayer.setTrack("introandgym");
+			// m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
 		}
 		catch(IOException e)
@@ -155,7 +155,7 @@ public class GameClient extends BasicGame
 			m_soundPlayer = new SoundManager(false);
 			m_soundPlayer.mute(false);
 			m_soundPlayer.start();
-			// m_soundPlayer.setTrack("introandgym");
+			// m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}
 
 	}
@@ -1083,17 +1083,14 @@ public class GameClient extends BasicGame
 			{
 				m_nextResource.load();
 			}
-			catch(IOException ie)
+			catch(IOException ioe)
 			{
-				ie.printStackTrace();
+				ioe.printStackTrace();
 			}
 			return;
 		}
 		if(!m_started)
 		{
-			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
-			// music.loop();
-			// sound.play();
 			if(m_ui == null)
 			{
 				LoadingList.setDeferredLoading(false);
@@ -1107,8 +1104,9 @@ public class GameClient extends BasicGame
 
 				m_ui = new UserInterface(m_display);
 				m_ui.setAllVisible(false);
-				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start untill you get the language select screen)");
+				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start until you get the language select screen)");
 			}
+			// m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}
 		else
 		{

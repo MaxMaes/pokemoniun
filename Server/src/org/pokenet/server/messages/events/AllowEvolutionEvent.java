@@ -9,11 +9,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class AllowEvolutionEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
-		int pokemonIndex = Request.readInt();
+		Player p = session.getPlayer();
+		int pokemonIndex = request.readInt();
 		if(p.getParty()[pokemonIndex] != null)
 			p.getParty()[pokemonIndex].evolutionResponse(true, p);
 	}

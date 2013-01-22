@@ -9,20 +9,20 @@ import org.pokenet.server.protocol.ServerMessage;
 public class ShopEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
-		int i = Request.readInt();
+		Player p = session.getPlayer();
+		int i = request.readInt();
 		int item;
 		switch(i)
 		{
 			case 0:
-				item = Request.readInt();
+				item = request.readInt();
 				p.buyItem(item, 1);
 				break;
 			case 1:
-				item = Request.readInt();
+				item = request.readInt();
 				p.sellItem(item, 1);
 				break;
 			case 2:

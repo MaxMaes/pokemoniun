@@ -10,10 +10,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class PlayersOnlineEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
-		ServerMessage message = new ServerMessage();
+		Player p = session.getPlayer();
 		message.Init(50);
 		message.addInt(4);
 		message.addString(ActiveConnections.getActiveConnections() + " player(s) online");

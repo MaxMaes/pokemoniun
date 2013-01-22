@@ -12,12 +12,12 @@ import org.pokenet.server.protocol.ServerMessage;
 public class LogoutRequestEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		// TODO: Test proper functioning while in Battle/Trading.
 		try
 		{
-			Player player = ActiveConnections.getPlayer(Request.readString());
+			Player player = ActiveConnections.getPlayer(request.readString());
 			if(player.isBattling())
 			{
 				/* If in PvP battle, the player loses */
@@ -36,7 +36,7 @@ public class LogoutRequestEvent implements MessageEvent
 			}
 			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
 			GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
-			ActiveConnections.removeSession(Session.getChannel());
+			ActiveConnections.removeSession(session.getChannel());
 		}
 		catch(Exception e)
 		{

@@ -100,8 +100,7 @@ public class MovementService
 		mapLoader.shutdown();
 		while(!mapLoader.isTerminated())
 		{
-			/* Wait for the mapLoader to finish loading the maps.
-			 * TODO: Remove while loop and use a different solution? */
+			/* Wait for the mapLoader to finish loading the maps. */
 		}
 		System.out.println("INFO: Maps loaded");
 	}

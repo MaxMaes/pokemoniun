@@ -10,17 +10,17 @@ import org.pokenet.server.protocol.ServerMessage;
 public class ServerAnnouncementEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		if(p.getAdminLevel() > 0)
-			for(Session session : ActiveConnections.allSessions().values())
-				if(session.getPlayer() != null)
+			for(Session ses : ActiveConnections.allSessions().values())
+				if(ses.getPlayer() != null)
 				{
 					ServerMessage announceMessage = new ServerMessage();
 					announceMessage.Init(2);
-					announceMessage.addString(Request.readString());
-					session.Send(announceMessage);
+					announceMessage.addString(request.readString());
+					ses.Send(announceMessage);
 				}
 	}
 

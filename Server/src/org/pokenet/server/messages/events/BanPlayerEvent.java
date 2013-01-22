@@ -12,9 +12,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class BanPlayerEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player player = ActiveConnections.getPlayer(Request.readString());
+		Player player = ActiveConnections.getPlayer(request.readString());
 		if(player != null)
 		{
 			MySqlManager m = new MySqlManager();

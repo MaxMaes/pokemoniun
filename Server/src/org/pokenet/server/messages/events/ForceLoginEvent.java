@@ -9,10 +9,10 @@ import org.pokenet.server.protocol.ServerMessage;
 public class ForceLoginEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		String[] details = Request.readString().split(",");
-		GameServer.getServiceManager().getNetworkService().getLoginManager().queuePlayer(Session, details[0], details[1]);
+		String[] details = request.readString().split(",");
+		GameServer.getServiceManager().getNetworkService().getLoginManager().queuePlayer(session, details[0], details[1]);
 	}
 
 }

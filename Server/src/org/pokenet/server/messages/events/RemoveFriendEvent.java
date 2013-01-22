@@ -9,10 +9,10 @@ import org.pokenet.server.protocol.ServerMessage;
 public class RemoveFriendEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = Session.getPlayer();
-		String friend = Request.readString();
+		Player p = session.getPlayer();
+		String friend = request.readString();
 		p.removeFriend(friend);
 	}
 }

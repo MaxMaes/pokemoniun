@@ -9,11 +9,11 @@ import org.pokenet.server.protocol.ServerMessage;
 public class SwapPokemonBoxPartyEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 
-		Player p = Session.getPlayer();
+		Player p = session.getPlayer();
 		if(p.isBoxing())
-			p.swapFromBox(Request.readInt(), Request.readInt(), Request.readInt());
+			p.swapFromBox(request.readInt(), request.readInt(), request.readInt());
 	}
 }

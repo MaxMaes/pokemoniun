@@ -10,9 +10,9 @@ import org.pokenet.server.protocol.ServerMessage;
 public class KickEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player player = ActiveConnections.getPlayer(Request.readString());
+		Player player = ActiveConnections.getPlayer(request.readString());
 		if(player != null)
 		{
 			ServerMessage kickMessage = new ServerMessage();

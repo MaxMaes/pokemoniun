@@ -9,15 +9,15 @@ import org.pokenet.server.protocol.ServerMessage;
 public class HandshakeEvent implements MessageEvent
 {
 
-	public void Parse(Session Session, ClientMessage Request, ServerMessage Message)
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		// String AuthString = Request.readString();
+		// String AuthString = request.readString();
 		// String[] Bits = AuthString.split(";");
 		// String Username = Bits[0];
 
-		Message.Init(2);
-		Message.addBool(true);
-		Message.sendResponse();
+		message.Init(2);
+		message.addBool(true);
+		message.sendResponse();
 		GameServer.getServiceManager().getNetworkService().getLoginManager();
 	}
 

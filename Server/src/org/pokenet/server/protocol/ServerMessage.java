@@ -13,17 +13,16 @@ public class ServerMessage
 	private ChannelBuffer body;
 	private ChannelBufferOutputStream bodystream;
 	private String message;
-	private Session Player;
+	private Session player;
 
 	public ServerMessage()
 	{
-		// stub??
 		message = "";
 	}
 
-	public ServerMessage(Session Session)
+	public ServerMessage(Session session)
 	{
-		Player = Session;
+		player = session;
 		message = "";
 	}
 
@@ -82,7 +81,6 @@ public class ServerMessage
 			bodystream.writeShort(obj.length());
 			bodystream.writeChars(obj);
 			message = message + ";STRING: " + obj;
-			// bodystream.w(obj);
 		}
 		catch(IOException e)
 		{
@@ -92,20 +90,15 @@ public class ServerMessage
 
 	public ChannelBuffer get()
 	{
-
-		// body.setInt(0, body.writerIndex() - 4);
 		return body;
 	}
 
 	public String getBodyString()
 	{
 		String str = new String(body.toString(Charset.defaultCharset()));
-
 		String consoleText = str;
-
 		for(int i = 0; i < 13; i++)
 			consoleText = consoleText.replace(Character.toString((char) i), "{" + i + "}");
-
 		return consoleText;
 	}
 
@@ -119,12 +112,9 @@ public class ServerMessage
 		body = ChannelBuffers.dynamicBuffer();
 		bodystream = new ChannelBufferOutputStream(body);
 		message = "[Out] -> ID" + id;
-
 		body.writeByte(id);
-
 		try
 		{
-
 		}
 		catch(Exception e)
 		{
@@ -134,7 +124,6 @@ public class ServerMessage
 
 	public void sendResponse()
 	{
-
-		Player.Send(this);
+		player.Send(this);
 	}
 }

@@ -61,9 +61,7 @@ public class ItemProcessor implements Runnable
 		int itemNumber = Integer.parseInt(m_details[0]);
 		if(useItem(m_player, itemNumber, data) && !GameServer.getServiceManager().getItemDatabase().getItem(itemNumber).getName().contains("Rod"))
 		{
-			/* TODO: Write support for giving items */
 			m_player.getBag().removeItem(itemNumber, 1);
-			/* m_player.getTcpSession().write("Ir" + m_details[0] + "," + 1); */
 			ServerMessage message = new ServerMessage(m_player.getSession());
 			message.init(81);
 			message.addInt(itemNumber);

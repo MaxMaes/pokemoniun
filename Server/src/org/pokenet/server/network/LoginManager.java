@@ -178,7 +178,7 @@ public class LoginManager implements Runnable
 	 * @param username
 	 * @param password
 	 */
-	private void attemptLogin(Session session, char l, String username, String password)
+	private void attemptLogin(Session session, char language, String username, String password)
 	{
 		m_database = new MySqlManager();
 		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
@@ -207,7 +207,6 @@ public class LoginManager implements Runnable
 			if(rs != null && rs.first())
 			{
 				/* This player is banned, inform them. */
-				// session.write("l4");
 				ServerMessage message = new ServerMessage();
 				message.init(79);
 				session.Send(message);
@@ -229,7 +228,6 @@ public class LoginManager implements Runnable
 			if(!rs.first())
 			{
 				/* Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames. */
-				// session.write("le");
 				ServerMessage message = new ServerMessage();
 				message.init(76);
 				session.Send(message);
@@ -247,32 +245,37 @@ public class LoginManager implements Runnable
 					/* They are already logged in on this server. Attach the session to the existing player if they exist, if not, log them in */
 					if(ActiveConnections.getPlayer(username) != null)
 					{
-						Player p = ActiveConnections.getPlayer(username);
-						p.setSession(session);
-						p.getSession().setPlayer(p);
-						p.setLastLoginTime(time);
-						// ActiveConnections.removeSession(player.getSession().getChannel());
-						// p.getTcpSession().close(true); hier wordt ie geclosed, weet niet of dat problemen gaat geven, we shall see
-						p.setLanguage(Language.values()[Integer.parseInt(String.valueOf(l))]);
-						m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='"
-								+ MySqlManager.parseSQL(username) + "'");
-						m_database.query("UPDATE pn_members SET lastLoginIP='" + session.getIpAddress() + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-						m_database.query("UPDATE pn_members SET lastLanguageUsed='" + l + "' WHERE username='" + MySqlManager.parseSQL(username) + "'");
-						// session.setAttribute("player", p);
-						initialiseClient(p, session);
+						Player player = ActiveConnections.getPlayer(username);
+						player.setSession(session);
+						player.getSession().setPlayer(player);
+						player.setLastLoginTime(time);
+						player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
+						PreparedStatement updateLogin = DatabaseConnection.getConnection().prepareStatement(
+								"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
+						updateLogin.setString(1, GameServer.getServerName());
+						updateLogin.setLong(2, time);
+						updateLogin.setString(3, session.getIpAddress());
+						updateLogin.setLong(4, language);
+						updateLogin.setString(5, username);
+						updateLogin.executeUpdate();
+						updateLogin.close();
+						initialiseClient(player, session);
 					}
 					else
-						/* session.write("l3"); TODO: Write Logged elsewhere Message. */
+					{
+						ServerMessage message = new ServerMessage();
+						message.init(97);
+						session.Send(message);
 						return;
+					}
 				}
 				else if(rs.getString("lastLoginServer").equals("null"))
 					/* They are not logged in elsewhere, log them in. */
-					login(username, l, session, rs);
+					login(username, language, session, rs);
 			}
 			else
 			{
 				/* Password is wrong, let them know. */
-				// session.write("le");
 				ServerMessage message = new ServerMessage();
 				message.init(76);
 				session.Send(message);
@@ -305,7 +308,7 @@ public class LoginManager implements Runnable
 			return;
 		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
 			return;
-		ResultSet result = m_database.query("SELECT * FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
+		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
 		try
 		{
 			if(result.first())
@@ -351,7 +354,6 @@ public class LoginManager implements Runnable
 			// WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
 			pokemons = m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
 			pokemons.beforeFirst();
-
 			while(pokemons.next())
 			{
 				String pokemonSpecie = pokemons.getString("speciesName");
@@ -373,9 +375,9 @@ public class LoginManager implements Runnable
 					m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 			}
 		}
-		catch(SQLException e)
+		catch(SQLException sqle)
 		{
-			e.printStackTrace();
+			sqle.printStackTrace();
 		}
 		return pokedexid;
 	}
@@ -486,7 +488,6 @@ public class LoginManager implements Runnable
 			}
 			player.setParty(party);
 			player.setBoxes(boxes);
-
 			/* Attach bag. */
 			player.setBag(getBagObject(m_database.query("SELECT * FROM pn_bag WHERE member='" + result.getInt("id") + "'"), player.getId()));
 			/* Attach badges. */
@@ -503,7 +504,6 @@ public class LoginManager implements Runnable
 				pokedex[i] = pokedexData.getInt(Integer.toString(i));
 			Pokedex px = new Pokedex(pokedexid, pokedex);
 			player.setPokedex(px);
-
 			return player;
 		}
 		catch(Exception e)
@@ -580,13 +580,13 @@ public class LoginManager implements Runnable
 				pokemon.setPpUp(0, data.getInt("ppUp2"));
 				pokemon.setPpUp(0, data.getInt("ppUp3"));
 			}
-			catch(NumberFormatException e)
+			catch(NumberFormatException nfe)
 			{
-				e.printStackTrace();
+				nfe.printStackTrace();
 			}
-			catch(SQLException e)
+			catch(SQLException sqle)
 			{
-				e.printStackTrace();
+				sqle.printStackTrace();
 			}
 		return pokemon;
 	}
@@ -597,24 +597,23 @@ public class LoginManager implements Runnable
 	 * @param p
 	 * @param session
 	 */
-	private void initialiseClient(Player p, Session session)
+	private void initialiseClient(Player player, Session session)
 	{
-		// session.write("ls" + p.getId() + "," + TimeService.getTime());
 		ServerMessage message = new ServerMessage();
 		message.init(74);
-		message.addInt(p.getId());
+		message.addInt(player.getId());
 		message.addString(TimeService.getTime());
 		session.Send(message);
 		/* Add the player to the map, add it to a movement service, send the Pokemon information, send the bag, send the pokedex, send the money, send the friends, send the badges and finally initialise the Player's skills. */
-		p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p.getMapX(), p.getMapY()), null);
-		GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(p);
-		p.updateClientParty();
-		p.updateClientBag();
-		p.updateClientPokedex();
-		p.updateClientMoney();
-		p.updateClientFriends();
-		p.updateClientBadges();
-		p.initializeClientSkills();
+		player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getMapX(), player.getMapY()), null);
+		GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(player);
+		player.updateClientParty();
+		player.updateClientBag();
+		player.updateClientPokedex();
+		player.updateClientMoney();
+		player.updateClientFriends();
+		player.updateClientBadges();
+		player.initializeClientSkills();
 	}
 
 	private boolean isSecondStageStarter(int pokemonIndex)
@@ -650,14 +649,11 @@ public class LoginManager implements Runnable
 		/* Attempt to log the player in */
 		Player player = getPlayerObject(result);
 		player.setLastLoginTime(time);
-		// player.setSession(session); Not sure if removable!!
 		session.setPlayer(player);
 		session.setLoggedIn(true);
 		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/* Update the database with login information. */
-
 		/* m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); */
-
 		try
 		{
 			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
@@ -670,9 +666,9 @@ public class LoginManager implements Runnable
 			ps.executeUpdate();
 			ps.close();
 		}
-		catch(SQLException e)
+		catch(SQLException sqle)
 		{
-			e.printStackTrace();
+			sqle.printStackTrace();
 		}
 		/* Send success packet to player, set their map and add them to a movement service. */
 		initialiseClient(player, session);

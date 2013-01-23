@@ -9,7 +9,7 @@ import org.pokenet.client.GameClient;
 public class AlertPopupDialog extends mdes.slick.sui.Frame
 {
 	private Button m_okebutton;
-	
+
 	/**
 	 * Default Constructor
 	 * 
@@ -46,11 +46,9 @@ public class AlertPopupDialog extends mdes.slick.sui.Frame
 		m_label.setSize(maxWidth, maxHeight);
 
 		m_okebutton = new Button();
-
-		m_okebutton.setText("Oke"); //TODO: Translated.get(*)
+		m_okebutton.setText("Ok");
 		m_okebutton.setSize(50, 25);
 		m_okebutton.setY(m_label.getY() + m_label.getHeight() + 20);
-
 
 		getContentPane().add(m_label);
 		getContentPane().add(m_okebutton);
@@ -79,6 +77,7 @@ public class AlertPopupDialog extends mdes.slick.sui.Frame
 		this(title, text);
 		addYesListener(yes);
 	}
+
 	/**
 	 * Sets the Yes action
 	 */

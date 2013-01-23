@@ -1312,10 +1312,8 @@ public class NPC extends Character
 				// Send shop packet to display shop window clientside
 				if(!p.isShopping())
 				{ // Dont display if user's shopping
-					// TcpProtocolHandler.writeMessage(p.getTcpSession(), new ShopStockMessage(m_shop.getStockData()));
 					ServerMessage message = new ServerMessage();
 					message.init(9);
-					//message.addInt(2); TODO: This was blocking shop access, what is its use :S?
 					message.addString(m_shop.getStockData());
 					p.getSession().Send(message);
 					p.setShopping(true);

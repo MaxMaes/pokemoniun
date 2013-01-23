@@ -43,6 +43,7 @@ import org.pokenet.client.messages.events.InitFriendListEvent;
 import org.pokenet.client.messages.events.InitPokemonEvent;
 import org.pokenet.client.messages.events.ItemUseEvent;
 import org.pokenet.client.messages.events.LevelLearnMoveEvent;
+import org.pokenet.client.messages.events.LoggedElsewhereEvent;
 import org.pokenet.client.messages.events.LoginBanEvent;
 import org.pokenet.client.messages.events.LoginErrorEvent;
 import org.pokenet.client.messages.events.LoginFullEvent;
@@ -121,19 +122,19 @@ public class MessageHandler
 
 	public void register()
 	{
-		messages.put(100, new ServerRevisionEvent()); // R
-		messages.put(1, new ServerNotificationEvent()); // !
-		messages.put(2, new ServerAnnouncementEvent()); // q
-		messages.put(3, new StartTradeEvent()); // Ts
-		messages.put(4, new TradeOfferEvent()); // To
-		messages.put(5, new TradeOfferCancelEvent()); // //Tc
-		messages.put(6, new TradeAddPokemonEvent()); // Ti
-		messages.put(7, new TradeEndEvent()); // Tf
-		messages.put(8, new PartySwapEvent()); // s
-		messages.put(9, new ShopListEvent()); // s
-		messages.put(10, new ShopNoMoneyEvent()); // s
-		messages.put(11, new ShopFullPocketEvent()); // s
-		messages.put(12, new ShopTypeFullEvent()); // s
+		messages.put(100, new ServerRevisionEvent());
+		messages.put(1, new ServerNotificationEvent());
+		messages.put(2, new ServerAnnouncementEvent());
+		messages.put(3, new StartTradeEvent());
+		messages.put(4, new TradeOfferEvent());
+		messages.put(5, new TradeOfferCancelEvent());
+		messages.put(6, new TradeAddPokemonEvent());
+		messages.put(7, new TradeEndEvent());
+		messages.put(8, new PartySwapEvent());
+		messages.put(9, new ShopListEvent());
+		messages.put(10, new ShopNoMoneyEvent());
+		messages.put(11, new ShopFullPocketEvent());
+		messages.put(12, new ShopTypeFullEvent());
 		messages.put(13, new ShopNoItemEvent());
 		messages.put(14, new ShopBuyItemEvent());
 		messages.put(15, new ShopSellItemEvent());
@@ -215,6 +216,7 @@ public class MessageHandler
 		messages.put(94, new TradeInvalidOfferEvent());
 		messages.put(95, new BoatEvent());
 		messages.put(96, new TravelEvent());
+		messages.put(97, new LoggedElsewhereEvent());
 		/* TODO: ID's 54, 55 and 56 are now free to use. */
 		// Login
 		// this.messages.put(254, new PingEvent());

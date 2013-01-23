@@ -2,7 +2,6 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
@@ -10,7 +9,6 @@ import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -422,20 +420,21 @@ public class BigBagDialog extends Frame
 	{
 		try
 		{
-		// Load the player's items and sort them by category
-		for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
-			// Field items
-			if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution") || item.getItem().getCategory().equalsIgnoreCase("Held"))
-				m_items.get(0).add(item);
-			else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine")  || item.getItem().getCategory().equalsIgnoreCase("Vitamins"))
-				m_items.get(1).add(item);
-			else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
-				m_items.get(2).add(item);
-			else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
-				m_items.get(3).add(item);
-			else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
-				m_items.get(4).add(item);
-		m_update = true;
+			// Load the player's items and sort them by category
+			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+				// Field items
+				if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution") || item.getItem().getCategory().equalsIgnoreCase("Held"))
+					m_items.get(0).add(item);
+				else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine")
+						|| item.getItem().getCategory().equalsIgnoreCase("Vitamins"))
+					m_items.get(1).add(item);
+				else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+					m_items.get(2).add(item);
+				else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+					m_items.get(3).add(item);
+				else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+					m_items.get(4).add(item);
+			m_update = true;
 		}
 		catch(Exception e)
 		{
@@ -711,7 +710,6 @@ class TeamPopup extends Frame
 		}
 		else
 		{
-			/* TODO: Write Netty Implementation for Give. */
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_GIVE);
 			message.addString(id + "," + pokeIndex);
 			GameClient.getSession().send(message);

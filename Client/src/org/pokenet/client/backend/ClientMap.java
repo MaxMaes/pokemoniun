@@ -21,7 +21,7 @@ import org.pokenet.client.backend.entity.Player.Direction;
 public class ClientMap extends TiledMap
 {
 	private static Image m_grassOverlay;
-//	private static Image m_SinnohGrassOverlay;
+	// private static Image m_SinnohGrassOverlay;
 	private static Image m_SinnohOverlay;
 	public int m_x;
 	public int m_y;
@@ -55,8 +55,8 @@ public class ClientMap extends TiledMap
 		{
 			if(m_grassOverlay == null)
 				m_grassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
-//			if(m_SinnohGrassOverlay == null)
-//				m_SinnohGrassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
+			// if(m_SinnohGrassOverlay == null)
+			// m_SinnohGrassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
 			if(m_SinnohOverlay == null)
 				m_SinnohOverlay = new Image(respath + "res/ui/sinnoh_grass.png", false);
 		}
@@ -316,8 +316,8 @@ public class ClientMap extends TiledMap
 					}
 					if(m_curMap.wasOnGrass(p) && m_curMap.isOnGrass(p))
 					{
-						//sinnoh  maps use different grass
-						if((m_mapX>32 && m_mapY<-37))
+						// sinnoh maps use different grass
+						if((m_mapX > 32 && m_mapY < -37))
 						{
 							switch(p.getDirection())
 							{
@@ -354,7 +354,7 @@ public class ClientMap extends TiledMap
 					}
 					if(m_curMap.isOnGrass(p) && p.getY() <= p.getServerY())
 					{
-						if((m_mapX>32 && m_mapY<-37))
+						if((m_mapX > 32 && m_mapY < -37))
 						{
 							m_SinnohOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
 						}
@@ -377,7 +377,7 @@ public class ClientMap extends TiledMap
 					g.resetTransform();
 					// Draw player names
 					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
-						// TODO: User titles for staff (could be developed further)
+						/* TODO: User titles for staff (could be developed further). Server sided based on AdminLevel? */
 						if(p.getUsername().equals("TesterMyth1c"))
 						{
 							Color previous = g.getColor();
@@ -573,7 +573,7 @@ public class ClientMap extends TiledMap
 					map.setYOffset(m_mapMatrix.getMap(2, 1).m_yOffset + m_mapMatrix.getMap(2, 1).getHeight() * 32, false);
 				else
 				{ // Try in previous way
-//					System.out.println("else");
+					// System.out.println("else");
 					map.setYOffset(offset + getHeight() * 32, false);
 				}
 			// 0, 2 -- Lower Left

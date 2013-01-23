@@ -7,6 +7,11 @@ import org.pokenet.server.GameServer;
 
 public class DatabaseConnection
 {
+	private final static String url = "jdbc:mysql://" + GameServer.getDatabaseHost() + "/" + GameServer.getDatabaseName() + "?autoReconnect=true";
+	private final static String user = GameServer.getDatabaseUsername();
+	private final static String pass = GameServer.getDatabasePassword();
+	private static ThreadLocal<Connection> con = new ThreadLocalConnection();
+
 	private static class ThreadLocalConnection extends ThreadLocal<Connection>
 	{
 		static
@@ -58,12 +63,6 @@ public class DatabaseConnection
 			}
 		}
 	}
-
-	private static ThreadLocal<Connection> con = new ThreadLocalConnection();
-	private final static String pass = GameServer.getDatabasePassword();
-	private final static String url = "jdbc:mysql://" + GameServer.getDatabaseHost() + "/" + GameServer.getDatabaseName() + "?autoReconnect=true";
-
-	private final static String user = GameServer.getDatabaseUsername();
 
 	public static Connection getConnection()
 	{

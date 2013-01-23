@@ -43,9 +43,17 @@ public class BoatChooserDialog extends Frame {
 		{
 			m_locations.add("Slateport - $125k") ;
 		}
+		else
+		{
+			m_locations.add("Battlefrontier - canceled") ;
+		}
 		if (!travel.equalsIgnoreCase("lilycove"))
 		{
 			m_locations.add("Lilycove - $125k") ;
+		}
+		else
+		{
+			m_locations.add("Battlefrontier - canceled") ;
 		}
 		if (!travel.equalsIgnoreCase("canalave"))
 		{
@@ -184,14 +192,14 @@ public class BoatChooserDialog extends Frame {
 				}
 				else if (choice.contains("Canalave") || choice.contains("Snowpoint"))
 				{
-					txt = "at least 20 badges";
+					txt = "at least 20 badges and trainer level 40";
 				}
 				else if (choice.contains("Navel"))
 				{
 					txt = "an admin level > 5";
 				}
 				String note = "Are you sure you want to travel?\nYou need "+ txt +" otherwise I can't take you with me!";
-				if (choice.contains("One") || choice.contains("Two") || choice.contains("Three") || choice.contains("Four") || choice.contains("Five") || choice.contains("Iron") || choice.contains("Resort"))
+				if (choice.split(" - ")[1].contains("canceled"))// || choice.contains("Two") || choice.contains("Three") || choice.contains("Four") || choice.contains("Five") || choice.contains("Iron") || choice.contains("Resort") || choice.contains("Battlefrontier"))
 				{
 					note = "This trip is canceled.\nWe will resume travel when the wheater calms down.\nPick another one.";
 				}

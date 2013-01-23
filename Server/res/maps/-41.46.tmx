@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="17" height="18" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Hoenn Interior Set 25.tsx"/>
+ <tileset firstgid="257" source="Hoenn Interior Set 26.tsx"/>
+ <layer name="Walkable" width="17" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgYGB4SAGGgcFoxmMk/BCJRmfTwh2PcNiBD8PcimwGNdwx2MxABtjU4hInRS0+cWyAFLWwuCU2fpHTIbIZgy1eBtIMSgEA+wKeLcgEAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="17" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGDng6UA7YJgBQUYGBiEgFmYcWWYoAtUoAbEykloNIPsZkH4OxC+w6FlIvtOGLLAEhokVEFtTEC/EAgCBxh/jyAQAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="17" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Q2wrCMAyGG5SiTNxzeOn7v443Os/n6Tz8tYkNZZYieGfgI03a/2OsNMZMwQxUYA42CRZgCVacKxl3twU7sAe16nU0H8ARnDgnDnd3AVfQ8NxEDplv4A4ePIvDkMc5uu7MfeKPr673lkJGHD3yOMcAfUS+69J7SyHz/g6uDufGUV5K9lbdx47iQzauYcLxTbU51oqcfZvjrMjZi4MoYDS61F6/F0efAjkO/f5X//TvSJPz7glU46c+yAQAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="17" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoAzwU6h/FIwCSoAEI375iWh8SaB6KSCWRtKnQMCMmWS5bBTQEwAALHKMgMgEAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="17" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMgqENAANM8fbIBAAA
+  </data>
+ </layer>
+</map>

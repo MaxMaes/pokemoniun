@@ -232,7 +232,7 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16 && p.getTrainingLevel() >= 50))
+				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 22 && p.getTrainingLevel() >= 40))
 				{
 					if(p.getAdminLevel() > 0)
 					{
@@ -350,6 +350,22 @@ public class TravelEvent implements MessageEvent
 					p.setX(2752);
 					p.setY(568);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(1, -46), null);
+					message.init(64);
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+			else if (travel.contains("Battlefrontier"))
+			{
+				if(p.getAdminLevel() > 0)
+				{
+					p.setIsTaveling(false);
+					p.setX(512);
+					p.setY(2552);
+					p.setMap(GameServer.getServiceManager().getMovementService().
+							getMapMatrix().getMapByGamePosition(29, 26), null);
+//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
 					message.init(64);
 					message.addInt(p.getX());
 					message.addInt(p.getY());

@@ -83,6 +83,7 @@ public abstract class StatusEffect implements Cloneable
 	 */
 	public boolean apply(Pokemon p)
 	{
+		p.getField().showMessage(getDescription());
 		return true;
 	}
 

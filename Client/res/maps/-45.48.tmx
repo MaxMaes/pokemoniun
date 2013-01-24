@@ -20,7 +20,7 @@
  </layer>
  <layer name="Collisions" width="27" height="95">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3MoRGAMBBFwe+DuPRfAnQUiiEdnIlhZlc+8RL4h7uSp/p2wtrPt/p2wpjJNfsGAAAAAAAAAADQ+QBd+FOlFCgAAA==
+   H4sIAAAAAAAAC+2YUQ7CIAxA67d+bPc/gt5ID6M/fsx0spZSBN9LSJZm8BrGRodILKed6xbg0vuWWqTLmkuN67qI3JZtXItZ89Tuv7/GfHyMq8UiXOdV5LJu41oswuVFWzujuKzvRK0rim+5WfP2+Dzz4/G1dAAA9OTI/hPVYBwyn9fMrizfzK4sZp3Dty/Lk+2K3G8849W4MvqM4irNe+u6ouYMyOOiNgKA3mT+29V+63DhwvU7Lm/NFlX3ULMBwD+TeRZv7YsLVw9X5ppvdQY1m6tUGx7hCaDR8MEUKAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="27" height="95">

@@ -551,7 +551,7 @@ public class IntrinsicAbility extends StatusEffect implements Comparable<Object>
 				if(p.getField().getRandom().nextDouble() * 3.0 <= 1.0)
 					if(p.hasEffect(StatusEffect.SPECIAL_EFFECT_LOCK))
 					{
-						p.removeStatus(StatusEffect.SPECIAL_EFFECT_LOCK);
+						p.removeStatusEffects(true);
 						p.getField().showMessage(p.getName() + " shed its skin!");
 					}
 				return false;

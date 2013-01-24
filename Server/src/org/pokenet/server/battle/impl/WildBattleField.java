@@ -268,10 +268,18 @@ public class WildBattleField extends BattleField
 				receiveEffect.init(29);
 				receiveEffect.addInt(0);
 				receiveEffect.addString(poke.getSpeciesName());
-				if(eff.getName() == null)
-					receiveEffect.addString("");
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffect.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffect.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffect.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffect.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffect.addString("Sleep");
 				else
-					receiveEffect.addString(eff.getName());
+					receiveEffect.addString("Normal");
 				receiveEffect.sendResponse();
 			}
 			else if(poke == m_wildPoke)
@@ -281,10 +289,18 @@ public class WildBattleField extends BattleField
 				receiveEffect.init(29);
 				receiveEffect.addInt(1);
 				receiveEffect.addString(poke.getSpeciesName());
-				if(eff.getName() == null)
-					receiveEffect.addString("");
+				if(poke.hasEffect(BurnEffect.class))
+					receiveEffect.addString("Burn");
+				else if(poke.hasEffect(FreezeEffect.class))
+					receiveEffect.addString("Freeze");
+				else if(poke.hasEffect(ParalysisEffect.class))
+					receiveEffect.addString("paralysis");
+				else if(poke.hasEffect(PoisonEffect.class))
+					receiveEffect.addString("Poison");
+				else if(poke.hasEffect(SleepEffect.class))
+					receiveEffect.addString("Sleep");
 				else
-					receiveEffect.addString(eff.getName());
+					receiveEffect.addString("Normal");
 				receiveEffect.sendResponse();
 			}
 	}

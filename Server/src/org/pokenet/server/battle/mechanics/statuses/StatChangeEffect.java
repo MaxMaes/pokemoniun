@@ -59,7 +59,10 @@ public class StatChangeEffect extends StatusEffect
 		if(getInducer() != p)
 		{
 			if(!m_raise && (p.hasAbility("Clear Body") || p.hasAbility("White Smoke")))
+			{
+				p.getField().showMessage(p.getAbilityName() + " prevents stats being lowered");
 				return false;
+			}
 			if(!m_raise)
 			{
 				MoveList.MistEffect effect = (MoveList.MistEffect) p.getField().getEffectByType(MoveList.MistEffect.class);
@@ -68,10 +71,15 @@ public class StatChangeEffect extends StatusEffect
 						return false;
 			}
 			if(!m_raise && m_stat == Pokemon.S_ATTACK && p.hasAbility("Hyper Cutter"))
+			{
+				p.getField().showMessage("Hyper Cutter prevents the attack stat being lowered");
 				return false;
-
+			}
 			if(!m_raise && m_stat == Pokemon.S_ACCURACY && p.hasAbility("Keen Eye"))
+			{
+				p.getField().showMessage("Keen Eye prevents the accuracy being lowered");
 				return false;
+			}
 		}
 
 		StatMultiplier mul = getMultiplier(p);
@@ -83,9 +91,15 @@ public class StatChangeEffect extends StatusEffect
 		{
 			boolean changed = false;
 			if(m_raise)
+			{
 				changed = mul.increaseMultiplier();
+				p.getField().showMessage(p.getName() + getDefaultDescription());
+			}
 			else
+			{
 				changed = mul.decreaseMultiplier();
+				p.getField().showMessage(p.getName() + getDefaultDescription());
+			}
 			if(changed)
 				++total;
 		}

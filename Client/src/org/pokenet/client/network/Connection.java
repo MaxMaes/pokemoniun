@@ -13,7 +13,7 @@ import org.pokenet.client.protocol.codec.NetworkEncoder;
 
 public class Connection
 {
-	private NioClientSocketChannelFactory SocketFactory;
+	private NioClientSocketChannelFactory socketFactory;
 	private ClientBootstrap clientBootstrap;
 	private MessageHandler messages;
 	private String host;
@@ -21,9 +21,8 @@ public class Connection
 
 	public Connection(String host, int port)
 	{
-
-		SocketFactory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
-		clientBootstrap = new ClientBootstrap(SocketFactory);
+		socketFactory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
+		clientBootstrap = new ClientBootstrap(socketFactory);
 		messages = new MessageHandler();
 		messages.register();
 		this.host = host;
@@ -42,7 +41,6 @@ public class Connection
 			System.out.println(ce.getStackTrace());
 			return false;
 		}
-
 		return true;
 	}
 
@@ -56,7 +54,7 @@ public class Connection
 		ChannelPipeline pipeline = clientBootstrap.getPipeline();
 		pipeline.addLast("lengthEncoder", new LengthFieldPrepender(4));
 		pipeline.addLast("encoder", new NetworkEncoder());
-		pipeline.addLast("decoder", new NetworkDecoder(512, 0, 4, 0, 0));
+		pipeline.addLast("decoder", new NetworkDecoder());
 		pipeline.addLast("handler", new ConnectionHandler());
 	}
 }

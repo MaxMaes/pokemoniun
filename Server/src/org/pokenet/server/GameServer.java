@@ -20,7 +20,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.pokenet.server.connections.ActiveConnections;
-import org.pokenet.server.network.MySqlManager;
 
 /**
  * Represents a game server. Starting a server requires a parameter to be passed in, i.e. java GameServer -s low -p 500 Here are the different settings: -low < 1.86ghz < 256MB Ram < 1mbps Up/Down Connection 75 Players -medium < 2ghz 512MB - 1GB Ram 1mbps Up/Down Connection 200 Players -high > 1.86ghz > 1GB Ram > 1mbps Up/Down Connection > 500 Players
@@ -304,7 +303,7 @@ public class GameServer
 			m_stop.setEnabled(true);
 		}
 		// Check if we can connect to the database BEFORE we start the server :)
-		MySqlManager.getInstance();
+		// MySqlManager.getInstance();
 
 		m_serviceManager = new ServiceManager();
 		m_serviceManager.start();

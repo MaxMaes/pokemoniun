@@ -74,7 +74,6 @@ public class ModerationManager
 		else if(x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount"))
 		{
 			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COUNT);
-			message.addString(x.substring(11));
 			GameClient.getSession().send(message);
 		}
 		// Change Weather

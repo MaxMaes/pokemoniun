@@ -1,5 +1,6 @@
 package org.pokenet.client;
 
+import org.pokenet.client.constants.Language;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Whirlpool;
 import org.pokenet.client.protocol.ClientMessage;
@@ -34,21 +35,21 @@ public class UserManager
 	public void login(String username, String password)
 	{
 		char language = '0';
-		if(GameClient.getLanguage().equalsIgnoreCase("english"))
+		if(GameClient.getLanguage().equals(Language.ENGLISH))
 			language = '0';
-		else if(GameClient.getLanguage().equalsIgnoreCase("portuguese"))
+		else if(GameClient.getLanguage().equals(Language.PORTUGESE))
 			language = '1';
-		else if(GameClient.getLanguage().equalsIgnoreCase("italian"))
+		else if(GameClient.getLanguage().equals(Language.ITALIAN))
 			language = '2';
-		else if(GameClient.getLanguage().equalsIgnoreCase("french"))
+		else if(GameClient.getLanguage().equals(Language.FRENCH))
 			language = '3';
-		else if(GameClient.getLanguage().equalsIgnoreCase("finnish"))
+		else if(GameClient.getLanguage().equals(Language.FINNISH))
 			language = '4';
-		else if(GameClient.getLanguage().equalsIgnoreCase("spanish"))
+		else if(GameClient.getLanguage().equals(Language.SPANISH))
 			language = '5';
-		else if(GameClient.getLanguage().equalsIgnoreCase("dutch"))
+		else if(GameClient.getLanguage().equals(Language.DUTCH))
 			language = '6';
-		else if(GameClient.getLanguage().equalsIgnoreCase("german"))
+		else if(GameClient.getLanguage().equals(Language.GERMAN))
 			language = '7';
 
 		ClientMessage message = new ClientMessage(ServerPacket.LOGIN);

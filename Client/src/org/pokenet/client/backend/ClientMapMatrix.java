@@ -309,6 +309,9 @@ public class ClientMapMatrix
 		{
 			e.printStackTrace();
 		}
+		try {
+			Thread.sleep(100);
+		} catch(InterruptedException ex) { }
 		recalibrate();
 	}
 

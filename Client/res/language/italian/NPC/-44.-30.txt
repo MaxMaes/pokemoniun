@@ -1,2 +1,2 @@
-Please report this bug!
-Welcome to the PokeMart!
+Benvenuti al Pokemon Market.
+Perfavore Segnala questo bug!

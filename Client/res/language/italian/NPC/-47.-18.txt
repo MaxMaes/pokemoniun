@@ -1,3 +1,3 @@
-Welcome to the Silph Co. office building.
-The upper floors are for staff members only.
-Please report this bug!
+Benvenuto alla Silph Spa.
+I piani superiori sono chiusi al pubblico.
+Perfavore segnala questo bug!

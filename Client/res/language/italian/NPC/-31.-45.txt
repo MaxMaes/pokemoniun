@@ -1,4 +1,4 @@
-Sometimes, a healthy Pokemon may be unable to use it's moves. 
-If that happens, heal it at a Pokemon Center or use an item.
-Once while I was battling, my Pokemon couldn't make any moves. 
-The Power Points, or PP, of it's moves were all gone.
+A volte, un Pokemon puo' non essere in grado di attaccare. 
+Se succede, curalo con uno strumento o al Centro Pokemon.
+Una volta, il mio Pokemon non poteva fare piu' alcuna mossa. 
+I PP di ogni mossa erano 0.

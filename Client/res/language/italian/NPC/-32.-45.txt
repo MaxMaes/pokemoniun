@@ -1,7 +1,7 @@
-5F: Director's office
-5F Studio 1
-Do you listen to our music?
-Hello! 
-You know, I love Pokemon. 
-I built this Radio Tower so I could express my love of Pokemon. 
-It would be nice if people enjoyed our programs.
+5F: Ufficio del Direttore
+5F: Studio 1
+Ascolti la nostra musica?
+Ciao! 
+Lo sai, amo i Pokemon. 
+Ho costruito questa Torre per esprimere il mio amore per loro. 
+Sarebbe bello se la gente ascoltasse i nostri programmmi.

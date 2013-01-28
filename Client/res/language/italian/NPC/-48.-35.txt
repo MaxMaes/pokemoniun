@@ -1,2 +1,2 @@
-I am trying to develop a new technique which lets Pokemon 
-relearn moves they have forgotten.
+Sto cercando di sviluppare una nuova tecnica che mi permetta 
+di insegnare ai Pokemon mosse dimenticate.

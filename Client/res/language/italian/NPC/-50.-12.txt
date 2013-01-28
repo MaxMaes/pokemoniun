@@ -1,2 +1,2 @@
-Hello, I'm Mr. Psychic. Do you know the move Psychic?
-It's an attack that may also lower the target's sepcial stats.
+Ciao, Sono il Signor Psiche. Conosci la mossa Psichico?
+E' un attacco che puo' anche abbassare la Difesa Speciale.

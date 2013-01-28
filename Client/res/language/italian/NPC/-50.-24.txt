@@ -1,9 +1,9 @@
-Hello! Welcome to the Celadon dept. store.
-Let me describe the store layout.
-1F: service counter
-2F: general store
-3F: TM store
-4F: evolutionary stones
-5F: drugstore
-6F: under construction
-Please report this bug!
+Ciao! Benvenuto al Centro Commerciale di Azzurropoli.
+Lascia che ti descriva il luogo.
+1F: Ingresso
+2F: Oggetti Generici
+3F: Negozio MT
+4F: Pietre Evolutive
+5F: Drogheria
+6F: in costruzione
+Perfavore segnala questo bug!

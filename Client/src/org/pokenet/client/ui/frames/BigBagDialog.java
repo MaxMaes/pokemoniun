@@ -47,6 +47,7 @@ public class BigBagDialog extends Frame
 		setCenter();
 		initGUI();
 		loadItems();
+		getTitleBar().getCloseButton().setVisible(false);
 	}
 
 	/**
@@ -397,7 +398,7 @@ public class BigBagDialog extends Frame
 		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName())).getCategory().equalsIgnoreCase("Field"))
-				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), true, false);
+				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);
 			// System.out.println("win " + i);
 			else
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);

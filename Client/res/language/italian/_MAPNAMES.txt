@@ -1,298 +1,299 @@
-15,17,Percorso 13
-15,16,Percorso 12
-15,15,Percorso 12
-14,17,Percorso 14
-13,17,Percorso 15
-12,18,Percorso 19
-12,17,Fucsiapoli
-11,17,Percorso 18
-12,15,Azzuropoli
-8,0,Percorso 12
-8,-2,Lavandonia
-8,-3,Percorso 10
-8,-4,Percorso 10
-7,0,Percorso 11
-7,-2,Percorso 8
-7,-4,Percorso 9
-7,-5,Percorso 25
-6,0,Aranciopoli
-6,-1,Percorso 6
-6,-2,Zafferanopoli
-6,-3,Percorso 5
-6,-4,Celestopoli
-6,-5,Percorso 24
-5,-2,Percorso 7
-5,-4,Percorso 4
-4,-3,Percorso 3
-3,3,Isola Cannella
-3,2,Percorso 21
-3,1,Biancavilla
-3,0,Percorso 1
-3,-1,Smeraldopoli
-3,-2,Percorso 2
-3,-3,Plumbeopoli
-2,0,Percorso 26
-2,-1,Percorso 22
-2,-2,Percorso 23
-2,-3,Altopiano Blu
-1,0,Percorso 27
-0,0,Borgo Foglianova
-0,-1,Percorso 45
-0,-2,Ebanopoli
--1,0,Percorso 29
--1,-1,Percorso 46
--1,-4,Percorso 44
--2,0,Fiorpescopoli
--2,-1,Percorso 30
--2,-2,Percorso 31
--2,-4,Mogania
--2,-5,Percorso 43
--2,-6,Lago d'Ira
--3,2,Percorso 33
+15,17,Route 13
+15,16,Route 12
+15,15,Route 12
+14,17,Route 14
+13,17,Route 15
+12,18,Route 19
+12,17,Fuchsia City
+11,17,Route 18
+12,15,Celadon City
+8,0,Route 12
+8,-2,Lavender Town
+8,-3,Route 10
+8,-4,Route 10
+7,0,Route 11
+7,-2,Route 8
+7,-4,Route 9
+7,-5,Route 25
+6,0,Vermilion City
+6,-1,Route 6
+6,-2,Saffron City
+6,-3,Route 5
+6,-4,Cerulean City
+6,-5,Route 24
+5,-2,Route 7
+5,-4,Route 4
+4,-3,Route 3
+3,3,Cinnabar Island
+3,2,Route 21
+3,1,Pallet Town
+3,0,Route 1
+3,-1,Viridian City
+3,-2,Route 2
+3,-3,Pewter City
+2,0,Route 26
+2,-1,Route 22
+2,-2,Route 23
+2,-3,Indigo Plateau
+1,0,Route 27
+0,0,New Bark Town
+0,-1,Route 45
+0,-2,Blackthorn City
+-1,0,Route 29
+-1,-1,Route 46
+-1,-4,Route 44
+-2,0,Cherrygrove City
+-2,-1,Route 30
+-2,-2,Route 31
+-2,-4,Mahogany Town
+-2,-5,Route 43
+-2,-6,Lake of Rage
+-3,2,Route 33
 -3,-1,Route 32
--3,-2,Violapoli
--3,-4,Percorso 42
--4,2,Azalina
--4,-1,Rovine d'Alfa
--4,-2,Percorso 36
--4,-3,Percorso 37
--4,-4,Amarantopoli
--5,2,Bosco di Lecci
--5,1,Percorso 34
--5,0,Fiordoropoli
--5,-1,Percorso 35
--5,-2,Parco Nazionale
--5,-4,Percorso 38
--6,-3,Olivinopoli
--6,-4,Percorso 39
--7,-2,Percorso 41
--7,-3,Percorso 40
--8,-2,Fiorlisopoli
--50,-42,Grotta Scura
--50,-43,Grotta Scura
--50,-44,Torre Sprout
--50,-45,Torre Sprout
--50,-46,Torre Sprout
--34,-33,Faro di Olivinopoli
--35,-34,Faro di Olivinopoli
--36,-35,Faro di Olivinopoli
--37,-36,Faro di Olivinopoli
--38,-37,Faro di Olivinopoli
--39,-38,Faro di Olivinopoli
--33,-35,Tana del Drago
--33,-39,Torre di Latta
--42,-42,Torre Bruciata
+-3,-2,Violet City
+-3,-4,Route 42
+-4,2,Azalea Town
+-4,-1,Ruins of Alph
+-4,-2,Route 36
+-4,-3,Route 37
+-4,-4,Ecruteak City
+-5,2,Ilex Forest
+-5,1,Route 34
+-5,0,Goldenrod City
+-5,-1,Route 35
+-5,-2,National Park
+-5,-4,Route 38
+-6,-3,Olivine City
+-6,-4,Route 39
+-7,-2,Route 41
+-7,-3,Route 40
+-8,-2,Cianwood City
+-50,-42,Dark Cave
+-50,-43,Dark Cave
+-50,-44,Sprout Tower
+-50,-45,Sprout Tower
+-50,-46,Sprout Tower
+-34,-33,Olivine Lighthouse
+-35,-34,Olivine Lighthouse
+-36,-35,Olivine Lighthouse
+-37,-36,Olivine Lighthouse
+-38,-37,Olivine Lighthouse
+-39,-38,Olivine Lighthouse
+-33,-35,Dragons Den
+-33,-39,Tin Tower
+-42,-42,Burned Tower
 -43,-43,Burned Tower
--32,-33,Centro Pokemon
--32,-34,Centro Pokemon
--32,-40,Centro Pokemon
--33,-34,Centro Pokemon
--33,-38,Centro Pokemon
--44,-31,Centro Pokemon
--44,-39,Centro Pokemon
--45,-31,Centro Pokemon
--46,-30,Centro Pokemon
--46,-31,Centro Pokemon
--47,-30,Centro Pokemon
--47,-31,Centro Pokemon
--48,-30,Centro Pokemon
--48,-31,Centro Pokemon
--49,-29,Centro Pokemon
--49,-35,Centro Pokemon
--49,-38,Centro Pokemon
--49,-41,Centro Pokemon
--49,-44,Centro Pokemon
--49,-46,Centro Pokemon
--50,-29,Centro Pokemon
--31,-30,Palestra
--31,-35,Palestra
--32,-43,Palestra
--35,-35,Palestra
--38,-38,Palestra
--45,-45,Palestra
--46,-46,Palestra
--47,-19,Palestra
--47,-25,Palestra
--48,-22,Palestra
--48,-25,Palestra
--49,-24,Palestra
--49,-28,Palestra
--49,-37,Palestra
--49,-42,Palestra
--50,-50,Palestra
+-32,-33,Pokemon Center
+-32,-34,Pokemon Center
+-32,-40,Pokemon Center
+-33,-34,Pokemon Center
+-33,-38,Pokemon Center
+-44,-31,Pokemon Center
+-44,-39,Pokemon Center
+-45,-31,Pokemon Center
+-46,-30,Pokemon Center
+-46,-31,Pokemon Center
+-47,-30,Pokemon Center
+-47,-31,Pokemon Center
+-48,-30,Pokemon Center
+-48,-31,Pokemon Center
+-49,-29,Pokemon Center
+-49,-35,Pokemon Center
+-49,-38,Pokemon Center
+-49,-41,Pokemon Center
+-49,-44,Pokemon Center
+-49,-46,Pokemon Center
+-50,-29,Pokemon Center
+-31,-30,Gym
+-31,-35,Gym
+-32,-43,Gym
+-35,-35,Gym
+-38,-38,Gym
+-45,-45,Gym
+-46,-46,Gym
+-47,-19,Gym
+-47,-25,Gym
+-48,-22,Gym
+-48,-25,Gym
+-49,-24,Gym
+-49,-28,Gym
+-49,-37,Gym
+-49,-42,Gym
+-50,-50,Gym
 -36,-49,RoA
--44,-14,Boscosmeraldo
--44,-17,Via Vittoria
--44,-16,Via Vittoria
--44,-15,Via Vittoria
--45,-13,Tunnel Roccioso
--45,-14,Tunnel Roccioso
--45,-15,Centrale Elettrica
--45,-16,Monte Luna
--45,-17,Monte Luna
--45,-18,Monte Luna
--45,-24,Cava Diglett
--45,-25,Cava Diglett
--45,-26,Cava Diglett
--48,-17,Torre Pokemon 
--48,-18,Torre Pokemon
--48,-19,Torre Pokemon
--48,-20,Torre Pokemon
--48,-21,Torre Pokemon
--48,-22,Torre Pokemon
--48,-23,Torre Pokemon
--50,-31,Monte Luna
--50,-37,Centrale Elettrica
-33,-42,Canalipoli
-34,-42,Percorso 218
-35,-42,Giubilopoli
-35,-41,Percorso 202
-35,-40,Sabbiafine
-34,-40,Percorso 201
-34,-39,Duefoglie
-35,-39,Percorso 219
-35,-38,Percorso 220
-36,-38,Percorso 221
-36,-42,Percorso 203
-35,-43,Percorso 204
-35,-44,Giardinfiorito
-36,-44,Percorso 205
-36,-45,Percorso 205
-37,-44,Impianto Turbine
-36,-46,Bosco Evopoli
-36,-47,Bosco Evopoli
-37,-45,Evopoli
-38,-45,Percorso 211
-38,-44,Percorso 206
-34,-44,Ponte Ciclabile
-38,-43,Percorso 207
-38,-42,Mineropoli
-39,-42,Percorso 208
-40,-42,Cuoripoli
-41,-42,Percorso 209
-41,-43,Flemminia
-41,-44,Percorso 210
-41,-45,Percorso 210
-40,-45,Memoride
-39,-45,Percorso 211
-38,-47,Percorso 216
-38,-48,Percorso 217
-39,-48,Nevepoli
-37,-50,Lago Arguzia
-38,-50,Lago Verità
-39,-50,Lago Valore
-40,-41,Percorso 212
-40,-40,Percorso 212
+-44,-14,Viridian Forest
+-44,-17,Victory Road
+-44,-16,Victory Road
+-44,-15,Victory Road
+-45,-13,Rock Tunnel
+-45,-14,Rock Tunnel
+-45,-15,Power Plant
+-45,-16,Mt. Moon
+-45,-17,Mt. Moon
+-45,-18,Mt. Moon
+-45,-24,Diglett's Cave
+-45,-25,Diglett's Cave
+-45,-26,Diglett's Cave
+-48,-17,Pokemon Tower
+-48,-18,Pokemon Tower
+-48,-19,Pokemon Tower
+-48,-20,Pokemon Tower
+-48,-21,Pokemon Tower
+-48,-22,Pokemon Tower
+-48,-23,Pokemon Tower
+-50,-31,Mt. Moon
+-50,-37,Power Plant
+33,-42,Canalave City
+34,-42,Route 218
+35,-42,Jubilife City
+35,-41,Route 202
+35,-40,Sandgem Town
+34,-40,Route 201
+34,-39,Twinleaf Town
+35,-39,Route 219
+35,-38,Route 220
+36,-38,Route 221
+36,-42,Route 203
+35,-43,Route 204
+35,-44,Floaroma Town
+36,-44,Route 205
+36,-45,Route 205
+37,-44,Valley Windworks
+36,-46,Eterna Forest
+36,-47,Eterna Forest
+37,-45,Eterna City
+38,-45,Route 211
+38,-44,Route 206
+34,-44,Cylcle Bridge
+38,-43,Route 207
+38,-42,Oreburgh City
+39,-42,Route 208
+40,-42,Hearthome City
+41,-42,Route 209
+41,-43,Solaceon Town
+41,-44,Route 210
+41,-45,Route 210
+40,-45,Celestic Town
+39,-45,Route 211
+38,-47,Route 216
+38,-48,Route 217
+39,-48,Snowpoint
+37,-50,Lake Acuity
+38,-50,Lake Verity
+39,-50,Lake Valor
+40,-41,Route 212
+40,-40,Route 212
 41,-40,Pastoria City
-42,-44,Percorso 215
-43,-44,Rupepoli
-43,-43,Percorso 214
+42,-44,Route 215
+43,-44,Veilstone City
+43,-43,Route 214
 43,-42,Valor Lakefront
-43,-41,Percorso 213
-44,-42,Percorso 222
-45,-42,Arenipoli
-45,-43,Percorso 223
-45,-44,Percorso 223
-2,-47,Mt. Corona
-2,-46,Mt. Corona
-2,-45,Mt. Corona
-2,-44,Mt. Corona
-2,-43,Mt. Corona
-2,-42,Mt. Corona
-2,-41,Mt. Corona
-2,-40,Mt. Corona
-2,-39,Mt. Corona
-2,-38,Vetta Lancia
-2,-37,Mt. Corona
-2,-36,Mt. Corona
-2,-35,Rovine Iceberg
-2,-34,Grotta Labirinto
-2,-33,Grotta Labirinto
-2,-32,Percorso 204
-2,-31,Varco Mineropoli
-2,-30,Varco Mineropoli
-2,-29,Cava Mineropoli
-2,-28,Cava Mineropoli
-28,-49,Gran Palude
-29,-49,Gran Palude
-28,-48,Gran Palude
-29,-48,Gran Palude
-28,-47,Gran Palude
-29,-47,Gran Palude
-0,-47,Villa Pokemon
-0,-46,Tunnel Rovine
-1,-47,Tempio di Nevepoli
-1,-46,Isola Ferrosa
-1,-45,Rovine Flemminia
-1,-44,Rovine Flemminia
-1,-43,Rovine Flemminia
-1,-42,Rovine Flemminia
-0,-49,Centro Pokemon
-1,-49,Centro Pokemon
-2,-49,Centro Pokemon
-3,-49,Centro Pokemon
-4,-49,Centro Pokemon
-5,-49,Centro Pokemon
-6,-49,Centro Pokemon
-7,-49,Centro Pokemon
-8,-49,Centro Pokemon
-9,-49,Centro Pokemon
-10,-49,Centro Pokemon
-11,-49,Centro Pokemon
-12,-49,Centro Pokemon
-0,49,Centro Pokemon
-1,49,Centro Pokemon
-2,49,Centro Pokemon
-3,49,Centro Pokemon
-4,49,Centro Pokemon
-5,49,Centro Pokemon
-6,49,Centro Pokemon
-7,49,Centro Pokemon
-8,49,Centro Pokemon
-25,25,Albanova
-25,23,Solarosa
-23,23,Petalipoli
-41,32,Bosco di Petalipoli
-22,21,Ferrugipoli
-22,26,Bluruvia
-27,24,Porto Selcepoli
-27,21,Ciclamipoli
-25,21,Mentania
-25,20,Cuordilava
-24,19,Brunifoglia
-29,20,Forestopoli
-32,20,Porto Alghepoli
-34,20,Verdeazzupoli
-25,24,Percorso 101
-24,23,Percorso 102
-25,22,Percorso 103
-26,22,Percorso 103
-22,23,Percorso 104
-22,22,Percorso 104
-22,24,Percorso 105
-22,25,Percorso 106
-23,26,Percorso 107
-24,26,Percorso 107
-25,26,Percorso 108
-26,26,Percorso 108
-27,26,Percorso 109
-27,25,Percorso 109
-27,23,Percorso 110
-27,22,Percorso 110
-27,20,Percorso 111
-27,19,Percorso 111
-26,20,Percorso 112
-26,19,Percorso 113
-25,19,Percorso 113
-23,19,Percorso 114
-41,35,Cascate Meteora
-41,36,Cascate Meteora
-41,37,Cascate Meteora
-41,38,Cascate Meteora
-22,20,Percorso 115
-23,21,Percorso 116
-26,21,Percorso 117
-28,21,Percorso 118
-28,20,Percorso 119
-30,20,Percorso 120
-31,20,Percorso 121
+43,-41,Route 213
+44,-42,Route 222
+45,-42,Sunnyshore City
+45,-43,Route 223
+45,-44,Route 223
+2,-47,Mt. Coronet
+2,-46,Mt. Coronet
+2,-45,Mt. Coronet
+2,-44,Mt. Coronet
+2,-43,Mt. Coronet
+2,-42,Mt. Coronet
+2,-41,Mt. Coronet
+2,-40,Mt. Coronet
+2,-39,Mt. Coronet
+2,-38,Spear Pillar
+2,-37,Mt. Coronet
+2,-36,Mt. Coronet
+2,-35,Iceberg Ruins
+2,-34,Wayward Cave
+2,-33,Wayward Cave
+2,-32,Route 204
+2,-31,Oreburgh Gate
+2,-30,Oreburgh Gate
+2,-29,Oreburgh Mine
+2,-28,Oreburgh Mine
+28,-49,Great Marsh
+29,-49,Great Marsh
+28,-48,Great Marsh
+29,-48,Great Marsh
+28,-47,Great Marsh
+29,-47,Great Marsh
+0,-47,Pokemon Mansion
+0,-46,Maniac tunnel
+1,-47,Snowpoint temple
+1,-46,Iron Island
+1,-45,Solaceon Ruins
+1,-44,Solaceon Ruins
+1,-43,Solaceon Ruins
+1,-42,Solaceon Ruins
+0,-49,Pokemon Center
+1,-49,Pokemon Center
+2,-49,Pokemon Center
+3,-49,Pokemon Center
+4,-49,Pokemon Center
+5,-49,Pokemon Center
+6,-49,Pokemon Center
+7,-49,Pokemon Center
+8,-49,Pokemon Center
+9,-49,Pokemon Center
+10,-49,Pokemon Center
+11,-49,Pokemon Center
+12,-49,Pokemon Center
+0,49,Pokemon Center
+1,49,Pokemon Center
+2,49,Pokemon Center
+3,49,Pokemon Center
+4,49,Pokemon Center
+5,49,Pokemon Center
+6,49,Pokemon Center
+7,49,Pokemon Center
+8,49,Pokemon Center
+25,25,Littleroot Town
+25,23,Odale Town
+23,23,Petallburgh City
+41,32,Petallburgh Forrest
+22,21,Rustboro City
+22,26,Dewford Town
+27,24,Slateport City
+27,21,Mauville City
+25,21,Verdanturf Town
+25,20,Lavaridge Town
+24,19,Fallarbor Town
+29,20,Fortree City
+32,20,Lilycove City
+34,20,Mossdeep City
+25,24,Route 101
+24,23,Route 102
+25,22,Route 103
+26,22,Route 103
+22,23,Route 104
+22,22,Route 104
+22,24,Route 105
+22,25,Route 106
+23,26,Route 107
+24,26,Route 107
+25,26,Route 108
+26,26,Route 108
+27,26,Route 109
+27,25,Route 109
+27,23,Route 110
+27,22,Route 110
+27,20,Route 111
+27,19,Route 111
+26,20,Route 112
+26,19,Route 113
+25,19,Route 113
+23,19,Route 114
+41,35,Meteorfalls
+41,36,Meteorfalls
+41,37,Meteorfalls
+41,38,Meteorfalls
+22,20,Route 115
+23,21,Route 116
+26,21,Route 117
+28,21,Route 118
+28,20,Route 119
+30,20,Route 120
+31,20,Route 121
+*

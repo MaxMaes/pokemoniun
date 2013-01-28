@@ -1,27 +1,27 @@
-It's a list of winning trainers.
-From now on you will encounter two paths with a sign in front of them.
-One path leads to a trainer and the other to the next sign.
-The sign will ask you a question and provide two possible answers.
-It will also tell you which path stands for which answer.
-Choose the right path/answer and you can proceed to the next sign.
-Pokemon Quiz! There are two poison-type gyms in total?
-Yes: left, No: right
-Pokemon Quiz! Magnemite evolves two times in total?
-Pokemon Quiz! Rock-type moves are not effective against rock-type Pokemon?
-Pokemon Quiz! Quiet nature decreases defense?
-Pokemon Quiz! Swim is a HM move?
-I was a thief, but I went straight as a trainer.
-Yo! Champ in the making!
-The hotheaded Blaine is a fire Pokemon pro.
-Douse his spirits with water!
-You'd better take some Burn Heals, too.
-Do you know how hot Pokemon fire breath can get?
-I've studied Pokemon thoroughly. You can't win!
-I like using fire-type Pokemon. I just do.
-I know why Blaine became a trainer.
-I've been to many gyms, but this one best suits my style.
-Fire is weak against H2O.
-Hah! I am Blaine, the red-hot leader of Cinnabar gym!
-My fiery Pokemon are all rough and ready with intense heat!
-They incinerate all challengers!
-Hah! You better have Burn Heal!
+E' una lista degli allenatori vincenti.
+Incotrerai due strade con un cartello davanti.
+Una strada porta ad un allenatore , l'altra al cartello successivo.
+Il cartello avra' una domanda e due possibili risposte.
+Ti indichera' quale strada corrisponde alla risposta.
+Scegli la strada/risposta giusta per andare al cartello successivo.
+Pokemon Quiz! Ci sono due palestre veleno in tutto?
+Si: sinistra, No: Destra
+Pokemon Quiz! Magnemite Magnemite si evolve due volte in tutto?
+Pokemon Quiz! Mosse di tipo Roccia sono efficaci contro i Pokemon Roccia?
+Pokemon Quiz! La natura Quieta abbassa la difesa?
+Pokemon Quiz! Nuotare e' una MN?
+Ero un ladro, ma sono diventato allenatore.
+Yo! Campione!
+La testa calda di Blaine ci sa fare con i Pokemon di Fuoco.
+Sbollenta i suoi spiriti con dell'acqua!
+Dovresti anche comprarti alcune Antiscott.
+Hai mai provato la il soffio di un Magmar?
+Ho studiato su una guida Pokemon. Non puoi vincere!
+Mi piace usare i Pokemon Fuoco.
+So perche' Blaine e' diventato allenatore.
+Sono stato in molte palestre ,ma questa e' quella che meglio si adatta al mio stile.
+Il fuoco e' debole contro l'acqua.
+Hah! Sono Blaine il Capopalestra dell'Isola Cannella!
+I miei Pokemon sono tutti ardenti e tosti!
+Polverizzano ogni sfidante!
+Hah! Buon per te se hai un Antiscott.!

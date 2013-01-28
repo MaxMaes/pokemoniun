@@ -1,12 +1,12 @@
-I think these machines have different odds.
-This place was once run by Team Rocket.
-You need coins and a coin case to play.
-These slot games... Win or lose, it's only by luck.
-They offer rare Pokemon that can be exchanged for your coins.
-But, I just can't seem to win!
-Games are scary! It's so easy to get hooked!
-You can't win in the long run. 
-Hey! You're throwing me off! Go away!
-Please report this bug!
-Welcome! You can exchange your coins for fabulous prizes next door.
-Hello, you need a coin case to buy coins.
+Penso che queste slot siano truccate.
+Questo posto una volta fu sede del Team Rocket.
+Hai bisogno di Gettoni e Salvadanaio per giocare.
+Slot... Vinci o Perdi..e' solo fortuna.
+Offrono Pokemon rari in cambio dei tuoi Gettoni.
+Non ci credo...Ho vinto!
+I giochi sono strani! E'facile restarne ammaliati!
+Per vincere ci vuole tempo. 
+Hey! Mi state buttando fuori? Via!
+Perfavore segnala questo bug!
+Welcome! Puoi scambiare i tuoi Gettoni per favolosi premi alla porta accanto.
+Ciao, hai bisogno di un Salvadanaio per comprare i Gettoni.

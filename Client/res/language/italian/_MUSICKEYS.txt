@@ -1,59 +1,59 @@
-Borgo Foglianova:newbark
-Fiorpescopoli:cherrygrove
-Violapoli:violet
-Parco Nazionale:nationalpark
-Azalina:azalea
-Fiordoropoli:goldenrod
-Amarantopoli:ecruteak
-Grotta Scura:darkcave
-Torre Sprout:sprouttower
-Olivinopoli:violet
-Fiorlisopoli:ecruteak
-Mogania:cherrywood
-Ebanopoli:azalea
-Torre Bruciata:burnedtower
-Torre di Latta:tintower
-Faro di Olivinopoli:lighthouse
-Tana del Drago:dragonsden
-Centro Pokemon:pokecenter
-Palestra:introandgym
+New Bark Town:newbark
+Cherrygrove City:cherrygrove
+Violet City:violet
+National Park:nationalpark
+Azalea Town:azalea
+Goldenrod City:goldenrod
+Ecruteak City:ecruteak
+Dark Cave:darkcave
+Sprout Tower:sprouttower
+Olivine City:violet
+Cianwood City:ecruteak
+Mahogany Town:cherrywood
+Blackthorn City:azalea
+Burned Tower:burnedtower
+Tin Tower:tintower
+Olivine Lighthouse:lighthouse
+Dragons Den:dragonsden
+Pokemon Center:pokecenter
+Gym:introandgym
 RoA:ruinsofalph
-Percorso:route
-Biancavilla:pallet
-Plumbeopoli:pewter
-Smeraldopoli:pewter
-Zafferanopoli:pewter
-Aranciopoli:vermillion
-Celestopolr:vermillion
-Lavandonia:lavender
-Canalipoli:canalave
-Giubilopoli:jubilife
-Sabbiafine:twinleaf
-Duefoglie:twinleaf
-Giardinfiorito:floaroma
-Bosco di Evopoli:eternaforest
-Evopoli:eternacity
-Mineropoli:oreburgh
-Cuoripoli:hearthome
-Flemminia:solaceon
-Memoride:solaceon
-Nevepoli:snowpoint
-Pratopoli:pastoria
-Gran Palude:pastoria
-Rupepoli:veilstone
-Arenipoli:sunnyshore
-Mt. Corona:mtcoronet
-Albanova:littleroot
-Solarosa:odale
-Petalipoli:petallburghc
-Bosco di Petalipoli:petallburghf
-Ferrugipoli:rustboro
-Bluruvia:dewford
-Porto Selcepoli:slateport
-Ciclamipoli:rustboro
-Mentania:verdanturf
-Cuordilava:odale
-Brunifoglia:fallarbor
-Forestopoli:fortree
-Porto Alghepoli:lilycove
-Verdeazzupoli:rustboro
+Route:route
+Pallet Town:pallet
+Pewter City:pewter
+Viridian City:pewter
+Saffron City:pewter
+Vermillion City:vermillion
+Cerulean City:vermillion
+Lavender Town:lavender
+Canalave City:canalave
+Jubilife City:jubilife
+Sandgem Town:twinleaf
+Twinleaf Town:twinleaf
+Floaroma Town:floaroma
+Eterna Forest:eternaforest
+Eterna City:eternacity
+Oreburgh City:oreburgh
+Hearthome City:hearthome
+Solaceon Town:solaceon
+Celestic Town:solaceon
+Snowpoint:snowpoint
+Pastoria City:pastoria
+Great Marsh:pastoria
+Veilstone City:veilstone
+Sunnyshore City:sunnyshore
+Mt. Coronet:mtcoronet
+Littleroute Town:littleroot
+Odale Town:odale
+Petallburgh City:petallburghc
+Petalburg Forest:petallburghf
+Rustboro City:rustboro
+Dewford Town:dewford
+Slateport City:slateport
+Mauville City:rustboro
+Verdanturf Town:verdanturf
+Lavaridge Town:odale
+Fallarbor Town:fallarbor
+Fortree City:fortree
+Lilycove City:lilycove
+Mossdeep City:rustboro

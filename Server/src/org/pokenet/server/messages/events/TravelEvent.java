@@ -153,8 +153,8 @@ public class TravelEvent implements MessageEvent
 						p.getBag().addItem(559, 1);
 					}
 					p.setIsTaveling(false);
-					p.setX(960);
-					p.setY(376);
+					p.setX(896);
+					p.setY(408);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(27, 24), null);
 					message.init(64);
 					message.addInt(p.getX());
@@ -362,7 +362,7 @@ public class TravelEvent implements MessageEvent
 				{
 					p.setIsTaveling(false);
 					p.setX(512);
-					p.setY(2552);
+					p.setY(2520);
 					p.setMap(GameServer.getServiceManager().getMovementService().
 							getMapMatrix().getMapByGamePosition(29, 26), null);
 //					p.getTcpSession().write("U" + p.getX() + "," + p.getY());

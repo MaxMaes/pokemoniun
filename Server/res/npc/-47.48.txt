@@ -1,7 +1,7 @@
 [npc]
 maylene
 down
-201
+245
 26
 7
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

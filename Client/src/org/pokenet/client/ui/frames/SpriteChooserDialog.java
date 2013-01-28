@@ -39,7 +39,7 @@ public class SpriteChooserDialog extends Frame
 		m_respath = System.getProperty("res.path");
 		if(m_respath == null)
 			m_respath = "";
-		for(int i = 1; i <= 255; i++)
+		for(int i = 1; i <= 384; i++)
 			m_sprites.add(String.valueOf(i));
 		/* Handle blocked sprites */
 		InputStream in = null;

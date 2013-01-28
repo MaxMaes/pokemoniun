@@ -1,7 +1,7 @@
 [npc]
 crasher wake
 down
-201
+244
 18
 3
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

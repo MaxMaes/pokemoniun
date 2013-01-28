@@ -1,7 +1,7 @@
 [npc]
 volkner
 down
-201
+250
 14
 4
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

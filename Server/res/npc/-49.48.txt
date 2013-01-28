@@ -1,7 +1,7 @@
 [npc]
 roark
 down
-201
+243
 7
 6
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

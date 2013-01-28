@@ -84,7 +84,7 @@ public class GameClient extends BasicGame
 	private static boolean m_loadSurroundingMaps = false;
 	private static DeferredResource m_nextResource;
 	private static SoundManager m_soundPlayer;
-	private static Image[] m_spriteImageArray = new Image[300]; /* TODO: WARNING: Replace with actual number of sprites */
+	private static Image[] m_spriteImageArray = new Image[400]; /* TODO: WARNING: Replace with actual number of sprites */
 	private static UserManager m_userManager;
 	private static HashMap<String, String> options;
 	private static final DecimalFormat percentage = new DecimalFormat("###.##");
@@ -1397,8 +1397,8 @@ public class GameClient extends BasicGame
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";
-			/* WARNING: Change 256 to the amount of sprites we have in client the load bar only works when we don't make a new SpriteSheet ie. ss = new SpriteSheet(temp, 41, 51); needs to be commented out in order for the load bar to work. */
-			for(int i = -7; i < 256; i++)
+			/* WARNING: Change 385 to the amount of sprites we have in client the load bar only works when we don't make a new SpriteSheet ie. ss = new SpriteSheet(temp, 41, 51); needs to be commented out in order for the load bar to work. */
+			for(int i = -7; i < 385; i++)
 				try
 				{
 					final String location = respath + "res/characters/" + i + ".png";

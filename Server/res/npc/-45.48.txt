@@ -1,7 +1,7 @@
 [npc]
 fatina
 down
-201
+247
 12
 9
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

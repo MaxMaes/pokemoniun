@@ -1,7 +1,7 @@
 [npc]
 candice
 down
-201
+249
 11
 4
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

@@ -1,7 +1,7 @@
 [npc]
 NPC
 down
-201
+244
 13
 7
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60
@@ -15,7 +15,7 @@ false
 [npc]
 NPC
 up
-201
+244
 22
 21
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60
@@ -29,7 +29,7 @@ false
 [npc]
 NPC
 down
-201
+244
 7
 21
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60
@@ -43,7 +43,7 @@ false
 [npc]
 gardenia
 left
-201
+244
 21
 8
 Lunatone,60,Solrock,60,Xatu,60,Claydol,60

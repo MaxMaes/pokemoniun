@@ -78,7 +78,7 @@ public class SpriteFactory {
 			if (respath == null)
 				respath = "";
 			Image temp;
-			Image[] imgArray = new Image[300];
+			Image[] imgArray = new Image[400];
 			SpriteSheet ss = null;
 			/*
 			 * WARNING: Change 224 to the amount of sprites we have in client
@@ -86,7 +86,7 @@ public class SpriteFactory {
 			 * ss = new SpriteSheet(temp, 41, 51); needs to be commented out in
 			 * order for the load bar to work.
 			 */
-			for (int i = -7; i < 256; i++) {
+			for (int i = -7; i < 385; i++) {
 				try {
 					location = respath + "res/characters/" + String.valueOf(i)
 							+ ".png";
@@ -107,7 +107,7 @@ public class SpriteFactory {
 	public SpriteFactory(Image[] imgArray) {
 		spriteSheets = new HashMap<Integer, SpriteSheet>();
 
-		for (int i = -7; i < 256; i++) {
+		for (int i = -7; i < 385; i++) {
 			spriteSheets.put(i, new SpriteSheet(imgArray[i + 7], 41, 51));
 			//System.out.println(i);
 		}

@@ -191,15 +191,20 @@ public class PokedexData
 			return;
 		}
 
-		for(int i = 0; i < 92; i++)
+		for(int i = 0; i < 235; i++)
 		{
 			Ini.Section s = locationid.get(String.valueOf(i));
-			Object[] data = new Object[3];
-			data[0] = s.get("Name");
-			data[1] = s.get("MapX");
-			data[2] = s.get("MapY");
 
-			locationids.put(i, data);
+			if(s != null)
+			{
+				Object[] data = new Object[3];
+				System.out.println(i);
+				data[0] = s.get("Name");
+				data[1] = s.get("MapX");
+				data[2] = s.get("MapY");
+
+				locationids.put(i, data);
+			}
 		}
 
 		for(int i = 1; i < 494; i++)

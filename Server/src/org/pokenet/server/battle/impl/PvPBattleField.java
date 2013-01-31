@@ -827,9 +827,9 @@ public class PvPBattleField extends BattleField
 	protected void requestPokemonReplacement(int i)
 	{
 		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
-		ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
-		switchOccur.init(32);
-		switchOccur.sendResponse();
+//		ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
+//		switchOccur.init(32);
+//		switchOccur.sendResponse();
 	}
 
 	/**

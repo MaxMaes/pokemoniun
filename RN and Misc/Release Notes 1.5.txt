@@ -11,10 +11,19 @@
 [FIX] 4th gen pokemon sprites
 [FIX] game crash on ditto, smeargle and some legendaries
 [FIX] fishing bug
+[FIX] faster server boot
+[FIX] shed skin
+[FIX] status ailments display in battle
+[FIX] stat lowering moves now show they do
+[FIX] several abilities now show what they do
+[FIX] recalibrate player position on end of battle
+[FIX] updated pokemon moves
+[FIX] no outer collision in 8th gym of kanto
+[FIX] bigger bag
 
 Remade the entire client/server communication infrastructure.
 
-[ADD] Hoenn and Sinnoh (includes caves, gyms, pokemon centers, pokemarkts and NPCs in some towns)
+[ADD] Hoenn and Sinnoh (includes caves, gyms, pokemon centers, pokemarkts)
 [ADD] Kanto cycle route
 [ADD] train and boat transportation
 [reADD] Kanto safari zone
@@ -22,5 +31,9 @@ Remade the entire client/server communication infrastructure.
 [ADD] some of slams sprites are now buyable ingame
 [ADD] Kanto & Johto graphic update
 [ADD] new sprites
+[ADD] Italian language (if you want your own language to be added provide us with the translated files)
+[ADD] new world map
+[ADD] kanto elite 4
+[ADD] new music
 
-([ADD] Sevii islands staff area)
+([ADD] Sevii islands, iron island, battlefrontier - staff area)

@@ -998,9 +998,9 @@ public class WildBattleField extends BattleField
 			/* 0 = our player in this case */
 			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 			 * new SwitchRequest()); */
-			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
-			switchOccur.init(32);
-			switchOccur.sendResponse();
+//			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
+//			switchOccur.init(32);
+//			switchOccur.sendResponse();
 		}
 	}
 

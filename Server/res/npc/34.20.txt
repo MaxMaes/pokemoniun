@@ -1,4 +1,18 @@
 [npc]
+Pokemon Trainer Brenden
+down
+19
+31
+10
+Aggron,85,Breloom,82,Swellow,83,Wailord,87,Manetric,86,Blaziken,88
+6
+-1
+0
+false
+false
+false
+[/npc]
+[npc]
 NPC
 left
 123

@@ -14,6 +14,8 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.ui.base.NewImageButton;
+import org.pokenet.client.ui.base.PokedexPokemonLocationLabel;
+import org.pokenet.client.ui.base.PokedexPokemonLocationLabel.PokedexMap;
 
 /**
  * Pokedex dialog
@@ -38,8 +40,12 @@ public class PokedexDialog extends Frame
 	private Image incrementerSprite = loadImage("res/ui/pokedex/incrementer.png");
 	private Image locationIcon = loadImage("res/ui/pokedex/pokemonlocationicon.png");
 	private Label[] loreLabels;
-	private Label map;
+	private Label kantoJohtoMap;
+	private Label hoennMap;
+	private Label sinnohMap;
 	private Image mapIcon = loadImage("res/ui/pokedex/kanto_johto_small.png");
+	private Image hoennMapIcon = loadImage("res/ui/pokedex/hoenn.png");
+	private Image sinnohMapIcon = loadImage("res/ui/pokedex/sinnoh.png");
 	// Image labels
 	private Label pokedexsprite;
 	private Image pokedexSprite = loadImage("res/ui/pokedex/pokedex.png");
@@ -47,7 +53,7 @@ public class PokedexDialog extends Frame
 	private Label[] pokemonBiologyLabels;
 	private Label[] pokemonCaughtLabels;
 	private Image[] pokemonIcons = loadPokemonIcons();
-	private Label[] pokemonLocationLabels;
+	private PokedexPokemonLocationLabel[] pokemonLocationLabels;
 	private Label[] pokemonMoveLabels;
 	// Text labels
 	private Label pokemonname;
@@ -142,13 +148,27 @@ public class PokedexDialog extends Frame
 		pokemonsprite.setSize(80, 80);
 		pokemonsprite.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 39);
 
-		map = new Label();
-		map.setImage(mapIcon);
+		kantoJohtoMap = new Label();
+		kantoJohtoMap.setImage(mapIcon);
 
-		map.pack();
-		map.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 132);
-		map.setVisible(false);
+		kantoJohtoMap.pack();
+		kantoJohtoMap.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 132);
+		kantoJohtoMap.setVisible(false);
+		
+		hoennMap = new Label();
+		hoennMap.setImage(hoennMapIcon);
 
+		hoennMap.pack();
+		hoennMap.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 132);
+		hoennMap.setVisible(false);
+
+		sinnohMap = new Label();
+		sinnohMap.setImage(sinnohMapIcon);
+
+		sinnohMap.pack();
+		sinnohMap.setLocation(pokedexsprite.getX() + 33, pokedexsprite.getY() + 132);
+		sinnohMap.setVisible(false);
+		
 		tabname = new Label();
 		tabname.setFont(GameClient.getPokedexFontLarge());
 
@@ -158,7 +178,7 @@ public class PokedexDialog extends Frame
 		loreLabels = new Label[0];
 		pokemonNameList = new Label[13];
 		pokemonCaughtLabels = new Label[13];
-		pokemonLocationLabels = new Label[0];
+		pokemonLocationLabels = new PokedexPokemonLocationLabel[0];
 		pokemonMoveLabels = new Label[0];
 		pokemonBiologyLabels = new Label[14];
 
@@ -193,7 +213,9 @@ public class PokedexDialog extends Frame
 		add(pokemonnumber);
 		add(pokemonsprite);
 		add(tabname);
-		add(map);
+		add(kantoJohtoMap);
+		add(hoennMap);
+		add(sinnohMap);
 		add(pokemonSelectionFrame);
 		for(int i = 0; i < 14; i++)
 			add(pokemonBiologyLabels[i]);
@@ -255,7 +277,9 @@ public class PokedexDialog extends Frame
 
 	public void updateInfoTab()
 	{
-		map.setVisible(false);
+		kantoJohtoMap.setVisible(false);
+		hoennMap.setVisible(false);
+		sinnohMap.setVisible(false);
 		for(Label l : pokemonLocationLabels)
 			l.setVisible(false);
 		for(Label l : loreLabels)
@@ -267,25 +291,56 @@ public class PokedexDialog extends Frame
 
 		if(tabindex == 1)
 		{
-			tabname.setText("Location");
-			for(Label l : pokemonLocationLabels)
-				l.setVisible(true);
-			map.setVisible(true);
+			tabname.setText("Kanto/Johto");
+			for(PokedexPokemonLocationLabel label : pokemonLocationLabels)
+			{
+				if(label.getMap() == PokedexMap.MAP_KANTOJOHTO)
+				{
+					label.setVisible(true);
+				}
+			}
+			
+			kantoJohtoMap.setVisible(true);
 		}
-
-		if(tabindex == 2)
+		else if(tabindex == 2)
+		{
+			tabname.setText("Hoenn");
+			for(PokedexPokemonLocationLabel label : pokemonLocationLabels)
+			{
+				if(label.getMap() == PokedexMap.MAP_HOENN)
+				{
+					label.setVisible(true);
+				}
+			}
+			
+			hoennMap.setVisible(true);
+		}
+		else if(tabindex == 3)
+		{
+			tabname.setText("Sinnoh");
+			for(PokedexPokemonLocationLabel label : pokemonLocationLabels)
+			{
+				if(label.getMap() == PokedexMap.MAP_SINNOH)
+				{
+					label.setVisible(true);
+				}
+			}
+			
+			sinnohMap.setVisible(true);
+		}
+		else if(tabindex == 4)
 		{
 			tabname.setText("Lore");
 			for(Label l : loreLabels)
 				l.setVisible(true);
 		}
-		if(tabindex == 3)
+		else if(tabindex == 5)
 		{
 			tabname.setText("Moves");
 			for(Label l : pokemonMoveLabels)
 				l.setVisible(true);
 		}
-		else if(tabindex == 4)
+		else if(tabindex == 6)
 		{
 			tabname.setText("Biology");
 			for(Label l : pokemonBiologyLabels)
@@ -465,10 +520,10 @@ public class PokedexDialog extends Frame
 
 		for(int i = 0; i < pokemonLocationLabels.length; i++)
 			remove(pokemonLocationLabels[i]);
-		pokemonLocationLabels = new Label[size];
+		pokemonLocationLabels = new PokedexPokemonLocationLabel[size];
 		for(int i = 0; i < pokemonLocationLabels.length; i++)
 		{
-			pokemonLocationLabels[i] = new Label();
+			pokemonLocationLabels[i] = new PokedexPokemonLocationLabel();
 			pokemonLocationLabels[i].setImage(locationIcon);
 			pokemonLocationLabels[i].pack();
 			add(pokemonLocationLabels[i]);
@@ -482,9 +537,16 @@ public class PokedexDialog extends Frame
 		for(Integer i : data)
 		{
 			Object[] locationInfo = PokedexData.getLocationInfo(i);
-			int x = (int) ((int) map.getX() + Integer.parseInt((String) locationInfo[1]) - pokemonLocationLabels[idx].getWidth() / 2);
-			int y = (int) ((int) map.getY() + Integer.parseInt((String) locationInfo[2]) - pokemonLocationLabels[idx].getHeight() / 2);
+			int x = (int) ((int) kantoJohtoMap.getX() + Integer.parseInt((String) locationInfo[1]) - pokemonLocationLabels[idx].getWidth() / 2);
+			int y = (int) ((int) kantoJohtoMap.getY() + Integer.parseInt((String) locationInfo[2]) - pokemonLocationLabels[idx].getHeight() / 2);
 			pokemonLocationLabels[idx].setLocation(x, y);
+			int locationid = (Integer) locationInfo[3];
+			if(locationid < 92)
+				pokemonLocationLabels[idx].setMap(PokedexMap.MAP_KANTOJOHTO);
+			else if(locationid >= 92 && locationid < 161)
+				pokemonLocationLabels[idx].setMap(PokedexMap.MAP_HOENN);
+			else if(locationid > 170)
+				pokemonLocationLabels[idx].setMap(PokedexMap.MAP_SINNOH);
 			idx++;
 		}
 	}
@@ -641,7 +703,7 @@ public class PokedexDialog extends Frame
 				{
 					tabindex--;
 					if(tabindex < 1)
-						tabindex = 4;
+						tabindex = 6;
 
 					updateInfoTab();
 				}
@@ -660,7 +722,7 @@ public class PokedexDialog extends Frame
 				if(arg0.getActionCommand().equals("Up"))
 				{
 					tabindex++;
-					if(tabindex > 4)
+					if(tabindex > 6)
 						tabindex = 1;
 
 					updateInfoTab();

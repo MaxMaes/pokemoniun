@@ -197,11 +197,12 @@ public class PokedexData
 
 			if(s != null)
 			{
-				Object[] data = new Object[3];
+				Object[] data = new Object[4];
 				System.out.println(i);
 				data[0] = s.get("Name");
 				data[1] = s.get("MapX");
 				data[2] = s.get("MapY");
+				data[3] = i;
 
 				locationids.put(i, data);
 			}

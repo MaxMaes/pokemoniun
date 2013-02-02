@@ -1,0 +1,3 @@
+Currently the table pn_mypokes isn't used at all.
+The table pn_bans is used rarely because of it's 'bad' layout.
+One of the more important tables pn_box isn't used (Boxes are currently 100% server sided).

@@ -61,44 +61,17 @@
  <tileset firstgid="16171" name="normal18" tilewidth="16" tileheight="16">
   <image source="normal18.png" width="512" height="512"/>
  </tileset>
- <layer name="Walkable" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3QQQ0AQAgEsQ3+pZ0oRPDgSFoFk0kAACB5tV1wm38z/gEAAAAAAAAAAAAAAPyhATFNH7KAPgAA
-  </data>
- </layer>
- <layer name="Battles" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
-  </data>
- </layer>
- <layer name="RIdges (jumpable)" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
-  </data>
- </layer>
- <layer name="Ridges (unjumpable)" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
-  </data>
- </layer>
+ <tileset firstgid="17195" source="Water02.tsx"/>
+ <tileset firstgid="17387" source="Cliffs02.tsx"/>
+ <tileset firstgid="17499" source="SinnohWaterSet.tsx"/>
  <layer name="Water" width="80" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SQQ3CQAAAwfsXlBQ0tP6tFDxwFuhnM8k9NhkBex1jfGbf2bX8t7dzjMfseS7f8T57zd7Lt1z/r7v+X3f9v+76f931/7rr/3XX/+uu/9dd/6+7/l93/b/u+n/d9f+66/911//rrv/XXf+vu/5fd/2/7vp/3fX/uuv/ddf/667/113/r7v+X3f9v+76f931/7rr/3XX/+uu/9dd/6+7/l93/b/u+n/d9f+66/911//rrv/XXf+vu/5fd/2/7vp/3fX/uuv/ddf/6/4BEr6ljIA+AAA=
-  </data>
- </layer>
- <layer name="walkable" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3aQQqAIBAFUOn+R+tQLSIo0bCmRep74MaFMJ8ZF2JKAACwW5frol2e10z55X3zpvYvzujRUees9UeV8jvvc6/Wa/JrV5pd+QGMxd0eIz8AAAAAAOiTN/7n/B+IkRsAAPzPBneu9bqAPgAA
+   H4sIAAAAAAAAC+3DAQ0AAAwCILs9te0MctjoJVVVVVVVVVVVVVVVVVVVVfX9AQE1JN6APgAA
   </data>
  </layer>
  <layer name="Collisions" width="80" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2aDW7CMAyFq4rdZDt9t5PATsKAK4xqtfZ4ek7S3xTkT4pWfpa4L44T7DZNEARBEATB89O1TfN5b6fhL7avtrZ1+6YbdOtbR7rZ+0rD7gW07YS/jPEd1u4E7ZuuWa/z/frSPtrxDHqiZspvxvhOr8Ft+F5//QPtMrx/Ha5RL+YIOntj7cVfj+2jn3Tto4amXUpD1MJ0u1G/V9DR4PWN/fF3D4emeTv8j5XSfwts/lg/e433oNYf3xej/I85ij65P7Pz/f7ehxjHG38tcK3ZPKKv8Gtcc3htqPvKrS20gfXl/nJ+5um6BGpulD285nKxq8c0UHE+d8/q8zl+tNZ+Y3PjxZketJt144b3fG4f13Ypnk7sRyV64jnT2hI64h7F/fO9lvq/tya92OZROl7qe2q/5zZHQ/MN3hs4dk3pcwty8VPt92qtlMRhXpf4PyqOlcb2LeH7WGquVD983rX7PRWOPfdzjym6p/bhpWC7eE2qOF7Dh8yOMXvhFjHBxsDzt80Vxk6MbTVj1XFmnF0LtR+t6fel8FzV/l0VBEEQBEEQlFOaM9pD3cGoXWtCzfiMrupIfD5O5Ra3AGtNNebWy79z3pDzapi38HKLa8K5h9o1JVXH9Br6ofr9vWZNh+s3W4G+rfw8lctN+aHKLZpPm44co0rWWaquV8PHOGerbPBqt5zD9vIV3K/pyPXcEg1U7UbF2LVjHs4j+6BnV6qOhLm0KaANqp9cvpNrRLm5mKsv7g/sg+xnpeOgb4wFbWAfw7imctOevUojfl4hhecPOd83DVNrMqfFEuAZBPv26tSc8+Qcc493FkMNvGcb+PzBNRK2ael4PHZ9c3ycCvpzbn/kPVzVlXhNbHVGW/OZihJy+6OaK9YX51Sd0YI/pj5/UdvWvVB7rYzhmWwNgiAIguB1+QWKZwU6gD4AAA==
-  </data>
- </layer>
- <layer name="Height" width="80" height="50">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAao3nfFeAPgAA
+   H4sIAAAAAAAAC+2ZR27DMBBFtUu9Seom2SUre51639SbpB4jA9gGZIZTRVIy/B8wgFVIjb5mhjTZddPhadZ1z2QvZK9kb2Tvs7G92hw+SKtPsi+yb7Ifsl/oZ2Zn3nW7ZHtk+2QHZIfzxTXEps4RaXVMdkJ2SnZGdr7UD7Gpc0Na3ZLdkd2TPZA9LvWTYhOsk8tVKTbBOrlclWITrINcHcY25OoF5dRlpfFv03I1p0V6Lj2+ot/XM76951lTIepbTovVOe44d6/ki9RPazTfLG2462kf0nFOd03/tJ+WOlp88353Sx+cH31W7TX9U7TrUSQfpWd7v7vUB4clX7Xz3nu8cO+g1XWtfXrd67v1eZ6aItWBCNJ46M0Prk/L++Ww3h/VjasDHqR+o0R192CNHWvNKBGDXF5o7Sx9D4WbE5b6Np55UXrM+VBiPCv9fjXnINK8PedDrfHc66dHk5o+a/OuFj5IWOe7Y9OifkeYql8AAFCLKa/DTZmpjq+bAnQrA/L3P57/vojDBX3NIv99tz0OPXFk3ftpSYn10trktLLsmbT0qfZ3zMUOdz3Fu5avrUsNWWMcK+612LGu81if0T+OrBVZ90NqxzoXd9Z97tK6evNg6HrwUH25uPPsc/ePo/kj1dDcHMDzHM9+mbX9kPskomvu0ntIOkZ9soxvVo1r1Nwa9bvUHiFXb6UxW6pPY8/RWhOpld45BFhg3Z8DeaAPAAAAAICPP0i2VHGAPgAA
   </data>
  </layer>
 </map>

@@ -28,29 +28,24 @@
  <tileset firstgid="4097" name="5" tilewidth="16" tileheight="16">
   <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
  </tileset>
- <layer name="Layer 6" width="70" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+ECVQEAAAAAAADPAONT2v5YGwAA
-  </data>
- </layer>
+ <tileset firstgid="5121" source="Path0.tsx"/>
+ <tileset firstgid="5417" source="Sinnoh Land Sea 3.tsx"/>
+ <tileset firstgid="7209" source="Buildings7.tsx"/>
+ <tileset firstgid="7561" source="Cliffs01.tsx"/>
+ <tileset firstgid="7791" source="Sinnoh Land Sea 4.tsx"/>
  <layer name="Walkable" width="70" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UUQqAIBBFUcE20P430ZpaSYQEEUGlb2Qar3B/dTioOaWUP2a59v2XuWR91tMctS7rVFLP81eXa0qbSC5Km2guKpuILgqfyC4tPiO41NgoXVrvbQ+btzMqXFT/XK8On3N384zwjryECy644IILLh7CBRdccMEFFw/hgoulywZn1y5OWBsAAA==
+   H4sIAAAAAAAAC+3QsQkAIBAEQbEG+y9JjMRy/BbE5IIJJl+2j9Z6mFlWQEcaX3zxxRdffEngiy++/NvlBHQAAAAAby4srSVnWBsAAA==
   </data>
  </layer>
  <layer name="Grass" width="70" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UsQkAIAxFQVfJ/kvaCCIkChY23sFf4EHSGgCvxRhTJCPvoo0uO9rUdDnT5o5uK7eWq/7z7310yelS06WmCwC80QHczh1GWBsAAA==
+   H4sIAAAAAAAAC+3Wuw2AMAxFUQ+RJQIVUBH23wuZJCiRHgUFn+IeyT26snDMAABvi8FsDF9/xb94k7nMQJ/T1HSpQxuzVXRZ6HJQbdiZzNukMuyM5o02utwWuV2d2oP/c0/ddPZGd2Fv9D2nS8Y78Fr71kncdAAAHrMD8JLIwVgbAAA=
   </data>
  </layer>
  <layer name="LedgesDown" width="70" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3BgQAAAADDoPlTH+ECVQEAAAAAAADPAONT2v5YGwAA
-  </data>
- </layer>
- <layer name="LedgesRight" width="70" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSQrAIAwApf9/Vh/WQy9tCaI2ZtEZ8CSYMGpISgEAD87jveAGLzJfL7iRneCozcvOfmAM3o6M5R/LcgeW9SZTfYueHwAAwCp49QbRexLtvrVn7qzF9J5b/+av7eR5rudsr5FTlGXhRdtN73kj8Wd6aX0ztf0MXMF4UmdYGwAA
   </data>
  </layer>
  <layer name="LedgesLeft" width="70" height="25">
@@ -60,17 +55,17 @@
  </layer>
  <layer name="Water" width="70" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3QwQ3AIAzFUA7sP2Qn6QKu1KSAqsSWOJP/xoh3zX3v5F+RO3TJu+y8u4rL6vt16eGyakdVl697qrtkN3Vwyezq4hLd183lD+nC6cLpwunC6cLp8pwunC6cLpwunC6cLpwunC7cW5cbY8V79VgbAAA=
+   H4sIAAAAAAAAC+3WSwqDMBRG4Swi+99D68ja7s0MDEQ40jwugrn/gTtwkKgfKobQ3iuG8EvzOeab5m0wS+RzWezdOj2tad0Wz8cWNk93ubIatZnRxcJmVpds0/vNmdllxMeDS+lTa+PJJdvUPDtWLuU/RO+/xJ2tf6531CV7bIP73O1ClVZ0P2R5NbS+3KflmfFUi423at8nb8mFkwsnF04unFw4uXBy4eTCyYWTCycXTi5crcsOXpWeg1gbAAA=
   </data>
  </layer>
  <layer name="Collisions" width="70" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+VWS27DIBREURfeVlFvkBukvVMPZq+66CXgTNlWSEZ2nt7/YRW3I80iMoHHMPOgXFIqK2clj8LblNL36/b765rSdTpuPS2yoEdeuR+fO+o0qi7Lbu8YOb16YFRdapYWhhn4BjKKUXWpaL0Go9R3otqMrAuHWeGZiHdG1wXzRoVWE6xHazC6LhXY+Uv31Qy0sWbrDLqUy3NuKjR+gfpYstVTl2iuuXdaBrpwPbkRekrK3Pu08QPR5T49j8HI6RHRZSH+VxzzUlmi8vZ42fiJzNe+SWtqzsGCZT1nCmX3Xbq7K2DWuFrbvDehxlvCtcXeV9S7y6oNp4kGWG+mNIC0oCjnpLLtzZN0Zly90FOUL6KAPtAioktPRHxhmVfq6ZiH/wo4H2syVHGELt589QTst9zbAoPnXh0Z0htRkyE4zrK2pjbPOTVYPYf5A6vjyPsIexdY6N07t//920daV7tHj19gLZo+D2vX1vXbtGgZ8ctZ6PGLxg/UOmdjL79Y9RqVHl3+E7X4AZ5KBq1YGwAA
+   H4sIAAAAAAAAC+2VQQ7CMAwE8wwOcMkj+C4X1BP8ghfwIpQDKkiNm7XXqSlZyVKlNvF2um6mQ0oTWJ665Pn6muvP9RTKxYPTL3PxzNDeuLDYRORStDWbqFwk9eATmUvtPXvkJzKXIhYXlM0/cUH4sLhYcyutYXNpYWXlwppnaZ1mX5TLM891PqZ0/2Bxy9/3a+Uxz2trkLxouJR6nGSP5b5XPqX3tsjCRdunB5e31r5Zi1/JP0OWb8/0oZUHk6V9W/MRhQtTUo635KKdL6aY/6Y9yHr2Le2D9Ea8aYRmTjMf7POIde5p5o3RF+3Tw1trP1YPb59RPQ8ug0u0GlxsXF4UYUPxWBsAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="70" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2W0Q2AMAhEjbM7SkdxMD+0UUloKVQk5F5C/CpHLyBdFj3begY4oX7AGx54w5Pdmzonzxg9m5Gy3rFf31Ey+zODv7zR9rsnnrVVrUJCk8cLy39LmlfrA5d3VP+rO2q0W33hUSPtTWuvztLmmDFPIA+9uY66h76mN9fZ5wZ98IZ7i9Q+iLQfPZC+RXozZKmbnmm9DaiW1afee8SKNU/LB06L+jSi0ZoP6T0ku+jP/xDXRxIPZuhG30fR6wMAgCgcxOKcHFgbAAA=
+   H4sIAAAAAAAAC+2VSw6AMAhEewwXnsHjel6XJsYSPgMllEm60jLTJ9gxXt0Hb33fry4uF4pVRVm4NJt92cy0O5/ZObt/cFyqsUFyWcHH6k3tQXOJYIXyofZp6lq4XKc8v8RTU5PznOPr1TPR/WntZQsXrU+mueXkpfKjvbSzvVJe30jbH1m4RGl3Lsh/UwVZ776/OhJvSbYIaeYDfR+tvPOivKO5cP1QHt45s2ZuLs0l22ouzcWDywP3w1mLWBsAAA==
   </data>
  </layer>
 </map>

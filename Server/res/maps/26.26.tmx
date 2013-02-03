@@ -13,19 +13,21 @@
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal18.tsx"/>
+ <tileset firstgid="2049" source="Water02.tsx"/>
+ <tileset firstgid="2241" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW4wFEWVDxUzEY2fxSMgpEAaJ2PRvPTKKA1AACLyrpIjAcAAA==
-  </data>
- </layer>
- <layer name="Grass" width="23" height="21">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBQAIAehkw8YwHAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMAtqCfg5UTK4Z+MwFgU1kmo/LbGLEyDUbGx4FIxcAAD0ReyOMBwAA
   </data>
  </layer>
  <layer name="Water" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3vEwsDwaIjiJUC8FA0vo5LZR4AYHRwbAmY/wWI2CFArzGll7ige3hg5r5KbR7HpA5mbyoJIj+lkmo8t/xGTT4nx1zMsYqB8+hQNo6sDgaMsEEztvEZLs5H9hs3voxg7BgApNjYqjAcAAA==
+   H4sIAAAAAAAAC+vnYGDoH8XDBj9hGXg3jOJRjI7RAblmEDKXXPOHqtmjePhgAFQ0a/+MBwAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="23" height="21">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAtqClRwMDKugeDUHeWZg0wcydy4Qb4LiOWSavxmLno1I5sIwNnWEwG4senYCxXahYWzqRsHIAQDZ1f8AjAcAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="23" height="21">
@@ -45,7 +47,7 @@
  </layer>
  <layer name="Collisions" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UzQmAMAyFY+kiOpy4m7iFeHEN9SLuYEUDz9jU34OIgUKszeeL5YXo2xFZImOv1eaGqDBzXkfb97HjJgfZUkfvuIPZcjW9qIVzPit1pJBnLu/sWi+yUAvmksnfatxqlzVxtb5wf+8OtP94ZP/MHfzx3fD5821s6Tst2C8leLXyeA3D5ztkMYf9MrG5poIZgvVSrzzDzzg/Qv2gV7WakJ99/eP5O7N+j/PUnAlxRof0MmWMBwAA
+   H4sIAAAAAAAAC2NgGN6Am5OBgYeTNvqFgeIiRJqNbA6MjU0/Lvuw6cdmDjIb3SyYHC5xZDa620g1C5t7cQFc4UiMOClxMApGwUACcsoiYvMRrvyIj48tH+GzD10NLj6yXkL24fIHNj66PYTKKFIAoXKEHuUMAH9VIOqMBwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="23" height="21">

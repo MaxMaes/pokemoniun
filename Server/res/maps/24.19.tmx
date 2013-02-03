@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="34" height="24" tilewidth="16" tileheight="16">
  <properties>
-  <property name="xOffsetModifier" value="64"/>
-  <property name="yOffsetModifier" value="32"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal6.tsx"/>
@@ -12,34 +12,28 @@
  <tileset firstgid="4907" source="normal17.tsx"/>
  <tileset firstgid="5931" source="normal3.tsx"/>
  <tileset firstgid="6955" source="normal7.tsx"/>
- <layer name="Layer 0" width="34" height="24">
+ <tileset firstgid="7979" source="Hoenn Set 1.tsx"/>
+ <tileset firstgid="8294" source="Buildings7.tsx"/>
+ <tileset firstgid="8646" source="Hoenn Set 11.tsx"/>
+ <tileset firstgid="9311" source="Buildings8.tsx"/>
+ <layer name="Walkable" width="34" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwASHOCnDanxYDIUCB0Hs4pTaic0NB8lwHz3dAKLpAfC5AZccDA+k++jtjlEwCkbBKBgFo2AUjIJRMPgBADj2D1zADAAA
+   H4sIAAAAAAAAC7sqz8BwdRQPOvyDSvjnIPALCMsr4HbjQLuNlDCnld05bPTx4x0gvgvE90iUo5a9MGwITA+fgLSBAqo4LjlquYkNaCY7ASwDtV8aixyHAv3S40d5iDs+08m+UXeMuoMSd9Aiv5KCseVteubXUTyKRzF9MQB0rZT6wAwAAA==
   </data>
  </layer>
  <layer name="Walkable" width="34" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWDEewQpB6mBKhwMjCoQrEaEDsIYhcjBlPiPhegPad5IdgNaic2sRMCxLuHWPchY5CdrpyY7kAXw4XviGAXz2HDLo4c1sjhnQKkU6E4DY8YOr4GxNeR8A0scjew6EMOa5BfCfmTkL1fsWBscujuRPYjPn/iwkJCDAzCBDCy/ehyIkL4zadmfvkCdcM3Iu1DNh8WX8hxRUo6JdUdyGYTyqPYxKjlDlzpg9z8Qq47aIHRyzZ0d7xhpa970N2BLb/SE2PL24Ty6ygexaN46GIA7ofJbMAMAAA=
-  </data>
- </layer>
- <layer name="Walkable" width="34" height="24">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OwREAEAADwVSiaVSCStCPdBGP25l7JxIAADm1SM31kv0xvD/dCv/Y3j/uhn8AwK8eVejhxsAMAAA=
-  </data>
- </layer>
- <layer name="Layer 4" width="34" height="24">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYHgCecGBdgFlgFL3D3X/D3cAih9kTIp6QupGwdADAxFvtLRzNB0OPsDFNtAuGAWjgHoAAIVBjinADAAA
+   H4sIAAAAAAAAC2NgGAWjADd4Ic/A8BKIXwHxa/mBc8dfoN3/gPg/yA0KA+cOIaDdwkAsAsSiWNwxjcwwWqmCKeaNxyx1oN0aQKwJxFpY3IFP/xZl7OIbgG7YCMSbsLgFZh4+N40C7PkFVx6ChSex4UqsWpA8tvxCjzyE7j5s+YVQHqIFwJZfiMlD9ATygoTV4CtfKnDkW0rtJBeMlhWjYBSMAloCABzSiqfADAAA
   </data>
  </layer>
  <layer name="Collisions" width="34" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Uy0rDUBRFz6QBJyWW/ER9fYYDH+lYtDoVpQ4FqeIHqJ23VQRnWnUuKg5Frc5FpB9Q9BtcklsIMcm9TRuLjw2Lk+QE9s454daGRWp95lNF6mII63A09JU0Mkxmu8+X1G/OEZmHBSjCkqPPENXr9HXasUV2YQ8qtvdsA98ybMIWbDvJM5jmOMb7BBpwCtmcSBXfOuzDARw63vMRS2QUxmAcJix9BtMct2oGd9R7dX2B7yVcwTXcqL1M4TsNMzALrmXm0a2WxfvuZ3xfII/PK7Wl5rHC/aryLlHXUsrhz/Ovn6G/vKuws82vRoazBs7gPJNejuDZFtQD3k14hKcUc4SdbX61lfcb9R1c3inY0TVMcb1eFJch6GmSs5cMUT5xM+pXFt1OXE3PdI9JvaN2M8iq29t31UHPIen/8dvn8QEmjRAtwAwAAA==
+   H4sIAAAAAAAAC+2VTS8DQRzG5y4+Q8uO134R7wkfQlHUtgfhJNwRL2lxIN0DqRMN/WTufrKzIZuZzIsuB57kl2fTmezz7L/daVISIhkwfRgpCzGqYQiGNRTRoRPQ7yc7mNY+8NEb+8ciIcZhAiZhCqahEoV3sPWosR5DA5pq7wx5szAH87AAi7AUpT1bUog2XME13Eh7B1uPA7V+iB+p6xp5m7AF21CHHYijdP2W3DuZXnfwRPrNXKdLld3C26X0eY/JO4FTlXuGn8OFmsc9uQ8qu4s/DqCHTk/kPUNP9XjBX6EPzXIxmf/6nv7696I7XzJVeU/WYB02CnpnMunOl0x1lR3jjcAey9xzxeHMz58vX7Wrsvfwffl5T5PrtMrnVc//Hpuye5o838enr49s88j3sfUN7eU6D1OeqZ/rc7p66Dxs+309dB62/UXPI/99/NY8XPeHzsP2u86vu74Hrv4OARvMQMAMAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="34" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNpAUoSBQQqIZYFYDojlRWhvZ64AA0MeEOcDcYEA7e2jBuBiY2DgBmIeIOYFYj62gXbRKBgFo2CwAUJlWzcrA0MPEPcCcR8r/d032IEBMMwMBXDT+PTQyy3Y7CTGnZS4AZc9+MKIWm4hFCcGBOSIjUdy7cYVNwNJE4o3etEDHQ7kpo/hHh6DBQAATd6zE8AMAAA=
+   H4sIAAAAAAAAC+2USQrCQBBFC+dbRIzH0LV6AVfOWzdewZXTwukE3sP5Is738IEIGlArJtEIfng0TXf6V/8mJWJP04TIDOawgCWsYJ2weZBDbfDbwg72cIAjnDyuI2OIZCFnXOYBUyQIIQhDBKIQMy/rraRIGzrQhV7SeQ15vAtQhJKh+6aP7wCGMIKxC3X4SU1lDlZNPpjD0Lyf1+Of8/5Lr2++i7W/fEPP+kuZ/6UCVaj9eA9Jcbe0Mudn/aVxk8P1zEejX2Stx6t6tXm88vM6R6d5vLqndnxUj9bPLf1qHtr9dmU3D+3+d/Pwi959P7fyOAOUxbnAwAwAAA==
   </data>
  </layer>
 </map>

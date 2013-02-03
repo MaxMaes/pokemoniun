@@ -14,6 +14,8 @@
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal18.tsx"/>
  <tileset firstgid="2049" source="normal1.tsx"/>
+ <tileset firstgid="3073" source="Water02.tsx"/>
+ <tileset firstgid="3265" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="22" height="21">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAXYwFEWCB4q5o6CUTAKRsEooA8AAAOIlpE4BwAA
@@ -26,7 +28,7 @@
  </layer>
  <layer name="Water" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3vEwsDwaBRjYBgYCHOPQjG17aaVuaN4FI9i+uMlQLwUipdR0dwjLIiy4hgVzQUBmLnULFufAPFTKH5Gp7AHAJyMNDc4BwAA
+   H4sIAAAAAAAAC+vnYWDoH8WjeBSP4lE8ikcxURgAGuTe3TgHAAA=
   </data>
  </layer>
  <layer name="LedgesDown" width="22" height="21">
@@ -46,7 +48,7 @@
  </layer>
  <layer name="Collisions" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1UUQqAIAxd4le3qLNXP9EtopNUP9EdWuBIxyxL66sHQ6fbe0PcAN5BpgGUTs9T4L40foVrbazR/hwJNg/P69HaHKBDG/RxHqIt1UB5O++CnKvhtfkcbYXaytU+q3tEfzI2sztHGzlX5WqT1lP4tEnrx48rpJoVHFKvxIDXSX5sD/E6yace4vwh7xUSQ/zSfPNp3nlTHstnkBSTAl/8pw1ucpDUOAcAAA==
+   H4sIAAAAAAAAC2NgoA3g5mVg4OGlvjnCQLYIAXOJsRubOej6YHwYTYzd2MyC6UM3B9k8Qnbjczc+dxGym9J4wmU3KWE1CkY2oFZZgQ6onQaJzaOkAnR3EsqjxNhLShlITNlAThlITNlAi3KCHukJAPhIBuA4BwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="22" height="21">

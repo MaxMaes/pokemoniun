@@ -84,7 +84,7 @@ public class PokeStorageBoxFrame extends Frame
 //			m_buttons[i].setEnabled(false);
 			m_switchPoke.setEnabled(false);
 //			m_close.setEnabled(false);
-			m_changeBox.setEnabled(false);
+			//m_changeBox.setEnabled(false);
 			m_release.setEnabled(false);
 //		}
 	}

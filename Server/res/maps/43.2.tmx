@@ -18,14 +18,19 @@
  <tileset firstgid="2049" name="15" tilewidth="16" tileheight="16">
   <image source="normal15.png" trans="000000" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="3073" source="Hoenn Set 13.tsx"/>
+ <tileset firstgid="3451" source="various3.tsx"/>
+ <tileset firstgid="3987" source="Trees0.tsx"/>
+ <tileset firstgid="4297" source="Path0.tsx"/>
+ <tileset firstgid="4593" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Y3QrCMAyG4WHv/6Y89j7mZWjBQallpl2zJPP9IAgedH2Wdn/LQgghhJB/yeOmX/f0/R8OHLPmjsPGkQ3eHet7fs8kO+d7TmvHrF5ZO8p+RHb0VGqM79WRp5R7lH9bFcUxWhoOyXVS2pfo+6O1hs7uR32+9o6/Xa8ke8HSob2uvDt6CwcO6f7o2SNeHVfpx5Uc27qSPA97d0TvR+893avDen/MeNb15DjbouGYOT+r+6DFmtJw9L43HKm06L0P1o7tOKO+9TNHC0dZRx3luqkNER3l3OuxozvK0naMfjfw7Bj1SMa0cPxyjYzhwZFr7ztWJMfRwoEDBw4cODw4CCGEEOI3L8HEy+sgNQAA
+   H4sIAAAAAAAAC+3XPQqEMBBAYSGthTfzzpaeSlII4k+UZCaZjO/BNAuGfETd3WEgIiKivzSP+rOE62c4cEjtHUcbRzT05Hjba+o6S46Ss8JR3xFu1u/R4eU8UqPh+PKezLmHOA8cOHDgwIGjP8fX73TrDi/ngaM8id+6lhy1LRoOL/eVB8c61d2/1v/Bs0P7WdF07CPpiHlwpAy9OY5rn0fbITmtHE8juf+WjjdXzhoWHEdL7vVWHKWDAwcOHDhwWHAQERGR3Tbef12vIDUAAA==
   </data>
  </layer>
  <layer name="Grass" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UwQmAMBBE0dzEulK3vXkIXiwgOsN7sAV8WGYMAAAAgH+Z57p0bR0NLWRq+b+GDnsAfO061qV7OtJ7WjoAmry3OXWfWzoAAAAA2OcGnv2G8iA1AAA=
+   H4sIAAAAAAAAC+3UsQkAIBAEQVPrsv+eDEzEWMQ/ZuALOHi2NQAAAIC/jL6uurQdCVuoKeX/EnboAcAde08rNzVlB0CSs81V+5yyAwAAAIB3JmT8GlEgNQAA
   </data>
  </layer>
  <layer name="Water" width="50" height="68">
@@ -35,27 +40,32 @@
  </layer>
  <layer name="LedgesDown" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XQQqDMBAFUElXxZO1vadrj9IjlUDFUE2RFtQM74EgWU3IfMd0HQAAABDN/bL+cIxb5TwezoQf1PLdWt5zLq4N1LnFZ8afaX4fk7zvLUI+ousbnIdrs7yFuidl3dG+vRM55x+1/mk599/07/+VbEjH1lKzZZ5HOY8oyr46q9rdXF/tq7w3ZWNarkVS7i/yPgEAAADO4AU7796fIDUAAA==
+   H4sIAAAAAAAAC+3XQQqAIBAFUOkG3X/fCctatm2hIJEaw3swe3X8jKYEAAAARHOu5WKOvdKPQ094oZZveZ8nN/RD3seRD3qozfJnXe7WMHLOl1rfVlHn+bbMXkGZnNNDyzw30/sqnXMOfval/2LEfQIAAAD8wQ0vOVgUIDUAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VQQ0AQAgDQZJTg3+DeLgPpJlR0L62CgAAAOCmftsLAGBHSgNTfgDAj5QOpvwAAAAAALINKuNdPyA1AAA=
+   H4sIAAAAAAAAC+3VoREAMAwDscDg7j9sdwhJ65MmsNFXAQAAALypz/YCANiR0sCUHwAwEtJBPQcAAAAAfnAB3p/fjiA1AAA=
   </data>
  </layer>
  <layer name="LedgesLeft" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VQQ0AMAgDQJLJwb8/XGzA7hS0j6YRAAAAALPkeZ0AuMXeAfjZlh/c0gMAAAAAAOirAILJUOEgNQAA
+   H4sIAAAAAAAAC+3VQREAMAgDMF4TgH+xuNiAJQraR68RAAAAALOcfJ0AuMXeAfjZlh/c0gMAAAAAAOirALyLOzsgNQAA
   </data>
  </layer>
  <layer name="Collisions" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   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
+   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
+  </data>
+ </layer>
+ <layer name="Walkable" width="50" height="68">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3XywmAMBBAwXRgEWrZgjfBKj1584cQszEzDSh5uktSAgAAqFvfpTR2pd+CnR7xDfqEpMv3WphXviu45h8hhxb2C/AP9iDAM3OGeTkVmMFrhmcugXbJm04lOtw563R1z4jU4cxRn4jnf+eoTw3nDwAA0IoNAekRbiA1AAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="68">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XuxHCMAyAYXWxWSSB/ZeATWAK1KhxEx/4JeX/7nxpfLEsyXmIAACAq3gmkVeaHQVGGVVvW6fXem+954e+bWLLIimfzytrWta29j697Lr2UbG+9U55xW96n3WvsvbibeJ5aOWue3hM3Ee0vvK4nxExz35/eOexr4zn2Hta4UxQmzVRFwAAMNKmI8Knx67jmB1EA//UY4V/DBOlHriGKM/B1Vhez/JbOw9tlfkm/wAAAACi+ALasFqvIDUAAA==
+   H4sIAAAAAAAAC+3XTQ7CIBAF4NlZ3PQY/pxXl2p3Jt5Eb6KnEBeTGBIshZnC2PclppsywDxIIxEAAAAsxb0jenS1VwFzmStvnkdrvqev+cK5FbFyRJ0bfy/MNMw2tY6WjZ97mzA/n53wCXm077pVzp/FdcX7IGXn97CvuI9/O1cW9zPHmmt/P6yzeK6Y5bVrauFOIJs2IRcAAAAbDj3Rsa+9inJnv4eL/w3G98J53IzvoySPFv5jMO08uH74lMZ5aOH64VNarF+lfdOqGxPrV2nftOrGjPUttY9SdXKN9S21j1J1ck3tY9jP0vFSpvbx+3tzyhjXWh6f7801Yxzy+A15tJVHLs4DAAAAYCneGs5ElCA1AAA=
   </data>
  </layer>
 </map>

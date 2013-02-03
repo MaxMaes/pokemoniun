@@ -32,19 +32,16 @@
   <image source="Route_129.png" width="1280" height="640"/>
  </tileset>
  <tileset firstgid="21419" source="normal1.tsx"/>
+ <tileset firstgid="22443" source="Cliffs02.tsx"/>
+ <tileset firstgid="22531" source="Water02.tsx"/>
  <layer name="Water" width="57" height="26">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DAQ0AAAwCIAMY6/0zGeSw0UuqqqqqqqpPD9dAQCUoFwAA
-  </data>
- </layer>
- <layer name="Background" width="57" height="26">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YUQqAIAwGYKE7dhPbCbuXDBmMITko0o3/g7305I9abaX4XOe8ovNk5KLgee+jl/d5RJJlVKtR4LMDXcUeAgB8Ct9GABD6PyvTu4H7x/rQX2YgeSQn916UMLP0lLq/tD3nDlntedNr867J00vLbGRFztnM5s0e7DZHsOeNZZvJaaP7BPCHBod4ogIoFwAA
+   H4sIAAAAAAAAC+3YQQqAIBBGYW9Z1/JOLTtUuAhE9E8FaRze4luUEPOsjcUzhDjgOvT17u5GT7rfWtuNavHW2ft+AQAAAGC197zl6dxV9qleD91f8+frf7fW9ntkJvXfwHLjbG/tuVa+WTWPhflW9HpvhE0Po2I8qCgXAAA=
   </data>
  </layer>
  <layer name="Collisions" width="57" height="26">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC81Y223DMAwUvE67RT7b36iTyJkkcT1DkcmK7lAbMNHz5SQ/JKU+QECcOBRPR5GUnIvj7J3zNPi7D/Fs+G6c+2nmNq/D7/0wLt5lQ9kfEQbb7TRi83wN/7s383fbiV9LA7nxc8zuyLMrwDFlvweOLyfnXk/zd2198N1x8LONz8ln+3wjDjZHbN1zcZ7WFO0H4Pg2zP1+mvuCuE4+98DzRqMjrswN56iBIGInkD+mccoXxU1xRdTmZkDN0F/0p1YM1Qbmv1R+uRM3Fa9HBeZE3icI1u9Z8cWw/bIFa2pECqoO1kBOzg0rNExB1QnkuWfdDbgfcuJG5ZqtYJ5oKydPGa+968S1PrdnwprR+b8YNk23+Mn5bO86ca0vvZc4Prb4WSOflex/0aaq92uRs49jdmr1v3tRqt84Ut+CNWjNnlnSuVQclIBx43NYjKf5bvpwfqp9dtkC1I01xPMla8u+W3561tllCVhPLM+xjsyN7xBi+pbkpuJc3XUon4yXfR/847lTDeZaq180cKwYP8VT3eFgTUF+sXMn909L9yQ5YP34Lkf1rYqv8ivFj/un2D1JCbB+eJej/GG+F7/cF/M6qjjee3YoAebH2nQrOMbyPWt5BMTyyH9qUAtKyyPjF2/Jl+UoFwAA
+   H4sIAAAAAAAAC9VYy27DIBD0X/qD3Z5wTg3tl7S3VCWSVxpNZsEPsOlISMGOYWYXdheGwcc0DsMbNX72LvoevtO7n8z7WghpjnlpNzEf8sD/zqAPn6E27vOYj9R+G2q0eT5S+wKNbFvkgf+dx9e+tc/UIvy+L/2ztE2LTXGeABrxOepFm9xBm/Wxob7o2Kslglg7gfgoezM/pU1pvQLoM+R7hb1rA+OfF1+eUOvzvwBjIu8TRG59nok99i3liNIcKg+2wJHYG1b4MDcH5wkv5+0Bfntk7ahYo+DljidYJ451hJt9u9dOnOtLGks2xZwRBa8tPHP1xhZwri/tJTVPjjf7YAvPFjFtjS+N69Y9spdvrfyE43C+ZxjXs/JGrXl6qlswB63JPyU/91SncJ2l8g+C97cX23rwH2pjH+L5kn3L3I/EthaYgK/FOT5Psza+Q/D8W0Nbbn2ruw7FyXTZ8zC+njtVY62t6kVv/Zs+pVPd4ZimSPq8cyfXT949SQ14e91qQXW/ofQqXjl9XD/xPUlNeHvd8wXrvY3luljVwTxW6ezQEqyPfRNXaPTiBvuyB3hx5EoftILyZc/4A3coSZ8oFwAA
   </data>
  </layer>
 </map>

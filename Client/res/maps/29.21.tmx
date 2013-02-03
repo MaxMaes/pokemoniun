@@ -28,49 +28,29 @@
  <tileset firstgid="4097" name="5" tilewidth="16" tileheight="16">
   <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
  </tileset>
- <layer name="Layer 6" width="26" height="25">
+ <tileset firstgid="5121" source="Sinnoh Land Sea 3.tsx"/>
+ <tileset firstgid="6913" source="Fences01.tsx"/>
+ <tileset firstgid="7347" source="Path0.tsx"/>
+ <tileset firstgid="7643" source="Buildings7.tsx"/>
+ <tileset firstgid="7995" source="Buildings3.tsx"/>
+ <layer name="Walkable" width="26" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW0BkxQjI89as/A2TMKRsFAACYi2PjERsEoGAWjgB4AABqi9JMoCgAA
+   H4sIAAAAAAAAC9siw8CwZRTTFG8D4q14aGrZg8+ObaP+GcVoeDcQ76WDPYeB+OioPRh4OwE2sj3bqWAfNf0DSjt7SMQ7gXgXmhghe04D8RkoRmaTimmdJkbxKB7OGAB8UGzEKAoAAA==
   </data>
  </layer>
  <layer name="Walkable" width="26" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NmYGBgHsU0xS7CDAzuwvjZ1MApQLPShfGzqYFbgGa1C+NnUwPDADIfG3sUk4cZGYE0I+3tUQTaoTxqDwbOYsHPRrYHWX4w+AeUdphIxCxAzIomRsgeR6AaJypgWqeJUTyKhzMGAPUPzsAoCgAA
-  </data>
- </layer>
- <layer name="Grass" width="26" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+AKVQEAwBtBYzsHKAoAAA==
-  </data>
- </layer>
- <layer name="LedgesDown" width="26" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+AKVQEAwBtBYzsHKAoAAA==
-  </data>
- </layer>
- <layer name="LedgesRight" width="26" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+AKVQEAwBtBYzsHKAoAAA==
-  </data>
- </layer>
- <layer name="LedgesLeft" width="26" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+AKVQEAwBtBYzsHKAoAAA==
-  </data>
- </layer>
- <layer name="Water" width="26" height="25">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+AKVQEAwBtBYzsHKAoAAA==
+   H4sIAAAAAAAAC2NgGAWjgHbARnGgXTAKRsEoGAWjYBSMAnIBAC6vj1UoCgAA
   </data>
  </layer>
  <layer name="Collisions" width="26" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UWQ4CIQyGidyAa7jcYTQ+udzB5cHE5VR4E+ZeloxE0pRpO6IPxiZfMhv/B6GDHxnjgfDEE7TZ+1YAlRHQNUVjXxmSojIoB55H9ByAJcPRdh5qfZQX30fP3PLraArf4HmX1qn1jJ0xE2AKzByfn/Zd61lB9hrYAFtH9wTuqzRe4zlD9gW4AjfH5+fj99l+40rPd8CJ8HuUXerb0v5Ky/dk1/ZIKnruiv/0Hc9QRyzp2IXgLOB6JAhdVB9pCv+nn6rSGf0tT21Xn6emi/PkvtRP0t7LkXqGrk2T/+f3eQBIzcl0KAoAAA==
+   H4sIAAAAAAAAC6sVZ2CoHSQ4QhrBJgaQa08y0J5QIA4jgMOlKbcnWZqwP1KharQVGRh0gFgXiPUUaWePsSKENgXSZjS0xxpqjy2QtiPSHhAg1R50QMh8GADZUQjERVBcimReCZJ4MRC/kCXOHmyAGL/gA8TmiWQS8w82e4gB9LaHXECs3kIiyoIwtPQBA67MEAyzi5Cd2NIRKYCYdE0NQGweoqU91LSL2DKOXvaAcAmR6Q45/ZFbF43iUUwJBgBS7A2NKAoAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="26" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWDBXALMTDwADEvEPMJDbRrRgE1QQsTBNMaLGGC4FEAAbBwp3X4w8Idhukd3/SwC2Yfve0aCuFIqjuXMGGmTWIwOfkbPW0Sg0fBKEAGAP2e1xAoCgAA
+   H4sIAAAAAAAAC8sTZ2DII4BBAJlNCBAyD589pAB62aOsyMCgAsSqQKymSDt7yPUfOcBEkTR7qAFoYf4DWeLsoQUgJ0+Qaw8t3ESpPeQCWsUHPrsI2YktHZFqDz3SHa3zKDH2UNOuwVaWUpJ3RvEoHq4YANvd1C8oCgAA
   </data>
  </layer>
 </map>

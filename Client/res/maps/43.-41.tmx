@@ -23,7 +23,7 @@
  <tileset firstgid="10878" source="SinnohCityGroundSet.tsx"/>
  <layer name="Walkable" width="120" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YW2rDMBBAUXcRzhpKu46QdinNfxflXRYhBMbYsSWN5lHugflKosi5KK/7NE13B7NH6rHfbwd3EvI1eP0e1l2l+r66PfXt3csr77c8Hll31ehbe51X1ktKV/ra9m05v/SN07f2Oq+sF4V1V/qOZd1Vqq/kNZ49JhLrrhp9a2k/30jWXaX7jtrLmuffu1vWXbX7/n7KnM9lvnhHY9ZdvZ7f1O9sIrDuGrVvFNZdj/o+Kv6TkL6eInX0+r/FVa2vwc8sO0XqWsZL34/Ajb30XXet3Zu08v2YvrJ9i57zK6V8ztJX7v15e4Z7+vbu50nfIe/PLXvbI9G3TGSe+rbubQ99My99e/a2h74Zfem7nmXOQ98Y6Etfq7496JvRl770jYu+9NXo+6yYMzVrSTyfZxH7ak9kEfsuwV9zTa19tyPV92j97eAaqb6jBn089oUcT30hz7IvxrPoCz1afWGDvv+bRl/YGdkX9iT6AgAAAAAAAAAAAAAAAAAAAAAAAAAAX/4ARaUfeECDAAA=
+   H4sIAAAAAAAAC+3Y0W3CMBCA4XSIMEPVzoFKRynvHSpbIsuyFFlxE9tn3131f9K9UDAOvwyU+7IsdwNzROqx32+FO1V6FNYp3W6Bdlepvn/9PfTt3ct+T7n3WxyLtLvO6Ft7nVfWC1JX+ur2bTm/9PXTt/Y6r6znhXZX+o6l3VWqr+Q1nj3GE+2uM/rWmv18I2l3le47ai97lv/fzWl3nd3391PmfG7rxTsq0+5q9fyGfmfjgXZXr3290O5a6vtV8ZuE9PUkoaPV3y2uan0NflbZSULXNFb6fjhubKXvvmvt3qSl78f0le2b9JxfKelzlr5y78/5Ge7p27ufJ32HvD+37O2IRN80nlnq27q3I/SNrPTt2dsR+kb0pe9+tjUOfX2gL321+vagb0Rf+tLXL/rSd0bfZ8WcqVlL4vks89h39njmse/m/DWfqbVvPlJ9S+vng2uk+o4a9LHYF3Is9YU8zb4YT6Mv5pnVFzro+7/N6As9I/tCn0RfAAAAAAAAAAAAAAAAAAAAAAAAAABgywu+Tb3dQIMAAA==
   </data>
  </layer>
  <layer name="Water" width="120" height="70">

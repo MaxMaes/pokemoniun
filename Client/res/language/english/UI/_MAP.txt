@@ -232,7 +232,7 @@ Granite Cave,6,6,3,47
 Altering Cave,9,5,9,39
 Sky Pillar,10,6,25,43
 Tt Pyre,6,4,18,34
-#Battle Frontier
+*Battle Frontier
 Battle Frontier,15,14,28,46
 *Sevi islands
 Mt. Ember,5,6,43,47

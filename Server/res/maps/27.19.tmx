@@ -51,44 +51,41 @@
  <tileset firstgid="12075" name="PGTilesetzkantoroutes1" tilewidth="16" tileheight="16">
   <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
  </tileset>
- <layer name="Layer 8" width="41" height="20">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WUzQ2AMAiFjRto5+jBn0V07g5leyBpDCKlUOtLCD1o+MIDwjgMwTA0pFG3N0bsH2uV9k3ac+/qGbH6+TcYI1eJT4NRMvtTrDs7OrfUGustrjxriOoD6Ijv08nymzgzsPmy2D3PY67XHMaxMhI3vCVet2CEsPT6ySMJp5XX2I1521eK08LrpxtO7WuJ55qM96D2NbHMCOvXNzwXZzZ7Uu98ST2zgf7A2EIXJ/hz+9AMAAA=
-  </data>
- </layer>
+ <tileset firstgid="13099" source="Path0.tsx"/>
+ <tileset firstgid="13395" source="Cliffs01.tsx"/>
+ <tileset firstgid="13625" source="Sinnoh Land Sea 3.tsx"/>
+ <tileset firstgid="15417" source="Cliffs02.tsx"/>
+ <tileset firstgid="15505" source="Buildings7.tsx"/>
+ <tileset firstgid="15857" source="Trees0.tsx"/>
+ <tileset firstgid="16167" source="Buildings11.tsx"/>
  <layer name="Walkable" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC81UwQ3CMAy02AC6Bnm08AR2oPAEhig8gQkRozADrhQkqwrOOWmrWjpdLSXK9S4OEdFrNm1QosZuTU1jaA9SQ2vMPasvrzV/ut8W/8by8Z+eeUG0KOKc46WlKj6rLNJYZvFe2vwN/ffeo/bcluxz+WPUuHJ2rB2ecYwRjVeH4yAQ0p1zBzRYMmoU3UeXln3qfbRwI7Sm3IGcWbdm1mq9Ofs+5K3R3sq+5lhj5E3U/ESyalGJnK1Z52pEsgrl3MdcoxqHynjD2DJ2vo95qelHM/tlja4/Mc6Mi+8RjbKsc1mKrNH1d8aD8fQ9cifHmF+NYxq/CUD2jtAMAAA=
-  </data>
- </layer>
- <layer name="Grass" width="41" height="20">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAD4NWe0DZNAMAAA=
+   H4sIAAAAAAAAC93VOwqAMAwGYPE8bhV1Uxx83MPjikfxDNqhEEosSfrEwL/ajyStR1tVx08DK7fly+cyf1XpfYtphC7MyKlUM4bVKHrOWu6E33EVx4NFl3FeDa+/vmdLcjONveJnCOilGFdFz/5mfDMHdIee9eJwT4UYXe4tohFG37vU94fyxmmX8dnJZbSdxoM5qed0Sn5nuEbbydnJ0PuIGbFe5txJ6LT7KPn/+cyaavTtg8+sqTuZaqZS4wPgUUSY0AwAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RwQkAIAxD0dBup3s6inP1KuLRkst/kHvgSwAAAB4rpJHvzXS/Q5e7+w73I3Q7m//uXZwoMpXQDAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgYYGfDwGCPA9vaDLTrRgGtAHq8O4zG9bAHdjSMbwCROfAq0AwAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBNcEKpoF2AWFwYgi4cRSMglEwCogBADvhTfvQDAAA
-  </data>
- </layer>
- <layer name="Water" width="41" height="20">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAD4NWe0DZNAMAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBNYGbzUC7gDDwGwJuHAWjYBSMAmIAAC6z08fQDAAA
   </data>
  </layer>
  <layer name="Collisions" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WWS07EMAyGo7AEZkF7Cx6nALHgcQrQLHicAjQXYTfMLTqrtnAQoHMF/mqw6nqcxhNVICz9ahOl9hc7TeKcc3Pv3AKKWWjcB/o+Fa0MPq3WxvgS/jQeGtcYOazs5O99y3lp3OSv7ac5hDg0rtA3PE6ZmPtG8ReaQ8hKH/+mnUPlN2s4VLOGcVVMGnssh5b8lIH5U1ytZpxN4yE/p5lzZ9B51rXb98Kvn5TD2FoLjZHzrRQ1jGd+sOnjBhy30DTr2tMfxoLxUR54XMkUy3do/cfW3RN4nqFZ1rVnjLHwfd/EqK2B1H8m1ThjocQu/zmj9Vz5S0b+b7/6vsZkH6vWkq1i7Rem32SU+wrVvfb9NVAL/ym8KYy0T3FGqnvt+2tAMkresRi1fVvmklvN2pMd55YDnKG4GuMu9v09aB+asDOA+GL1JuNnCdliJMZDcB1Bx9CJOKcs9ZZnibzjaFxL3+XYwngBrkvoCro2MFI/z6OFi+stx300H2bk4+/AdQ89QI8JjFYunr8GfKt8/W5h1O4h2zB+AychrCfQDAAA
+   H4sIAAAAAAAAC+3WQW7CMBAFUKtX6FVYsKiyLNuygbRZIEi6DFagV0DcorfoEXqXit6ggMREiaXRZOyZBCurWvqKDI79GEfBxcSY4s6UkC2TfYS5h6ZSOrR27Xx9fFbh4Fyu0Xss+i6PUDc7cI4cOXztFcYcmXtDNa4EF7ZLNdQYpRpye2YFjxXW/ZoaM3ts1i7JfnPNjfHVMfS8Vsjz+STXAxvruLVdHerGPae+WtLfwe2VVC/J6JxbYuSeAckYu2FjHdryf+OoxjeSLKI7tjFr+wfUD80/ptHlnenTNfp6hxh978i+Rq1TY+Te7b5aHtB+a4waqxvztzDmDLlArotuzbT7Tc8zzhzDWC2N2UH2kI9l1yPtN/1vpmcczvX90ERr/GldJ7j+KoxcLTUunOcEzgpJ2IjHr9LmszVcN2l/o9aF8wK+edLUUmMMnUM0xhs4dTB20AwAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="41" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgFo2AUwICd3UC7ADtwRXKXBwluTIigvlsGEwAAqcGs/NAMAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGSAFqaBdgFhAHLjUHAnCIy6c+SAwR6GtHYfLF9Swx56hCU13UtLMFTcCQJDya2jAD+gRlzSIh0M5jQ2WN2FDAD06WlP0AwAAA==
+   H4sIAAAAAAAAC2NgGAWjYGSAZRYDY+80G+LVgtw4UO4kFsDcOJjdiezGwerOUTdSB9DDjZSaT283kmPXQLqRWPsG2o3E2AtT0xzGwNACxK1A3BZGf3cSo5fWYLC6kZC7bOwYGGzt8NuP7o+X4bR3F7awI9aNpLRDKHUbuXmaUgAAjNt0btAMAAA=
   </data>
  </layer>
 </map>

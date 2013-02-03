@@ -13,9 +13,17 @@
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal18.tsx"/>
+ <tileset firstgid="2049" source="Water02.tsx"/>
+ <tileset firstgid="2241" source="Cliffs02.tsx"/>
+ <tileset firstgid="2329" source="Deep Water.tsx"/>
  <layer name="Walkable" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGPrgKAtpmBZmDrS55NhDLqCVudjMHwWjYLCC0fQ5cgEAoPVg2zgHAAA=
+   H4sIAAAAAAAAC2NgGNqgn4N0TKy5pLphoM3F5c9NWMwgxR247EE2fxOJ4UuM+dQwbxQMf0CrtELL9Deatoc2AABB4UE6OAcAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="22" height="21">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGNpgJQcDwyoS8GoO4szdCFS3iQS8eYDN3QlUtwsJT0Uyo4iTfHNx2TMVzbwpUPHdZJqLyx+UmjcKhj9ALgOoCXYipXNs4CgLZWbvGk3bQxYAAHg1A084BwAA
   </data>
  </layer>
  <layer name="Grass" width="22" height="21">
@@ -25,7 +33,7 @@
  </layer>
  <layer name="Water" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3vEwsDwiA54CRAvJREvI8LMVCAmFRwjYO4RMswcSHNB4CkLAqcRaQ8hc9HxEyLNJtVcmNnY3J6B5C8QIDf9PWFBDaNnNE7vo5h+GLlswSZGTFmCK82A0uNRHGLkpnWYOU9xiI2mz8GPAfA/6Q44BwAA
+   H4sIAAAAAAAAC+vnYGDoH8KYHDBqLvHmkmMPteNzoNPYKB7cmFZphZZpcDRtD20MAIn8oKk4BwAA
   </data>
  </layer>
  <layer name="LedgesDown" width="22" height="21">
@@ -45,12 +53,12 @@
  </layer>
  <layer name="Collisions" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UWQ7CMAxEXWK2Y4BY78F6T8RluEbVczD9sGJNUgjQD4QY6Ul1ktqO40TkN3Sr4vcliFxDHPd2lyoVGWi3j5YadhNiLG/7+N7fDMydX/uH4yjWDMEIjMEETDX16/1ZjFolkcVZYG4JVmANNmBL67k+nHNOO8zvwQEcwQmcKV/e66dqND2nvlSy579Sldytd9R37+TEvfRKb/G9bGW1sF5iuySH3BzXwttc/9y7Y2Ml+XCMR/5sLHdWz2qZy6Ekr2+5p3dHFSgrOAcAAA==
+   H4sIAAAAAAAAC+2USwoCMRBEsxXd6aX8ewD/HkBFvb9v4WAoujszzoAuLHiEpJNOpQmd0lvDXkoj6MPAGDWuc0t5rNqvo97vzXNFsTpSz/pW1Zi1CUxhBnNYwBJWhmetked3zdoGtrCDPRzgCCdjf54nqvuZ9QtcX/Eb4x0exn7N07a2Xef563cV/cE26uLvlLx5PeBTb6U+2dSjdz7qAdYZr4/XeWOUL+ptpVpaZ5r4+raetCUSSTgHAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBsQAAQ3pE4DgHAAA=
+   H4sIAAAAAAAAC+3MuxGAIBRE0ZdSBwhKAfLT/tvy0gIGJHtnTrhrtifvzAIORCScuJDd+u/NtqCioWPgwfvjVymllJp9yAK03jgHAAA=
   </data>
  </layer>
 </map>

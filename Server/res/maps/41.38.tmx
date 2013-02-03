@@ -7,16 +7,16 @@
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;30-45;"/>
   <property name="nightPokemonChances" value="Golbat,39;Solrock,25;Lunatone,35;Bagon,1"/>
   <property name="nightPokemonLevels" value="33-40;33-39;33-39;25-35;"/>
+  <property name="pvp" value="enforced"/>
   <property name="waterPokemonChances" value="Golbat,80;Solrock,10;Lunatone,10;"/>
   <property name="waterPokemonLevels" value="5-35;5-35;5-35;"/>
-  <property name="pvp" value="enforced"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal10.tsx"/>
  <tileset firstgid="811" source="normal3.tsx"/>
- <layer name="grass" width="11" height="28">
+ <layer name="Walkable" width="11" height="28">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYPCDLCbccmrMxOFRMPwBAEIKCsvQBAAA
   </data>
@@ -31,9 +31,9 @@
    H4sIAAAAAAAAC2NgGBnAjBETj6qlntpRMAoGAwAAysoxPtAEAAA=
   </data>
  </layer>
- <layer name="Water" width="11" height="28">
+ <layer name="Walkable" width="11" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGFxAjRkTU0MtNysDAx8SPsOCW60uKypfnxW7uuGu1hco54eE/fGopVW8jYJRQAoAAATW7RrQBAAA
+   H4sIAAAAAAAAC2NgGFxAjRkTU0MtNysDAx8SPsOCW60uKypfnxW7uuGu1hco54eE/fGopVW8wUAWE2E1o2AUAACiVdET0AQAAA==
   </data>
  </layer>
  <layer name="Collisions" width="11" height="28">

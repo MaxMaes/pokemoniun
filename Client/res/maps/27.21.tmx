@@ -23,6 +23,7 @@
  <tileset firstgid="23457" source="Pokemon Mansion and Safari Remake.tsx"/>
  <tileset firstgid="24507" source="Fuchsia Tileset.tsx"/>
  <tileset firstgid="25001" source="Water02.tsx"/>
+ <tileset firstgid="25193" source="Hoenn Set 5.tsx"/>
  <layer name="Walkable" width="46" height="20">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC6tQZGCogOJKNBofe7BgStw0C4hnA/GcQewHbHKLgHgxEC8ZQLeSE+4D6W5K8GB1d4cs/dwdJMnAECxJuTnE5Dl87iY1z1IrjxMKS5A9c6Fq5mGxj9S4IEU9zI/YMLKb8MkvxqGOkH5C9uEL91VAvJqOeCkQLyNS7Ros7h2o+g+UFsjNwwNZZ1PibmrhSiRMTXeDADXcd5GD9uGN7FYYGMg4Icbd6O5EBrRwA74yFF9Zh14u0rstCasniC3XSCnv6OHugS4fRoq7YXUtMfFMzTwGAIlv9CJgDgAA
@@ -35,17 +36,17 @@
  </layer>
  <layer name="Collisions" width="46" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3X228MYRjH8UfKRaPCvZtZp8Qp7ThcVLijpS2J0+5a7U5woXqgIUIvSvAn6Mml+A+cLlCCP8AeKkFC4tRyUQ03gjp8J/M2Wet939mpbJuIJ/nk2XfemXd+2zTzzo45oq22apF2dKATR3EMXdXB/LjhuskaU/MLl5XH5PrF9ZJ8r/Aab/AWIxgtY+7etEgf+jGAwXT03MkakX1IYT+a0YJ0Tem5Y0mRRViMJViK2TG9p5x/lZzXcB03cHMKuR+RL4MscshjGI8j5F5OzhVYiVVYjeeeyAvvz+6vlyFnFjnkMWzJXWH4/nWuSD22ukGOBnojmtxgfk7Mnttf1yXnGqzFOqwPyf2BnOPp4PqP9E+W3KYaIt9d3FO579Mf4KFrz1tYteTckAw+b6RvSprP9f8OVeSf5wXj+fQFXvTc0107Uvrj05nRlOF//Zu10xHZhd3Yg72II+HMYKiCeubojx/meCuOoA3t6ECnOv+J87tyVpS9p4fjZ3BWzZ+jn8cFNS7eezYz3oI61ONLQuQrvmEiob/HNs5rQCOasB23cBt3MORE3zMvcrwXfWp+gD6IS4bcKTVuprdglnpeV/j7u+HZ7alrDtAP4hAyyCKHvCW3ac/03xk+V+rvp8vdpcbH6SdQqbLOpVcZcp9U15yin0Y3RjCKd3jv6K+z7UG6d5DCZ3PYO8pUys8xwbrf8QM/Dfew7aNhucqVu5S93PY+7P+vFD8zCoW9W81Ubl31x+3rmeajZCmlov4+uhyS+0r873+DlVK/AOgc/yVgDgAA
+   H4sIAAAAAAAAC+3Xy04TURzH8T+hLogY3bsZNm6h76CggCbe2lqhE20TlYsSFcGFGvURBFp0ZXwDbwugGPUB7AUTNYGIF9AFEt0YBS/fyRySUs+c6WAKifGffPLPuczMr4T0TBcs0VZXo0g3etCL0ziDvkZ3fdHjupVaUOvbd1THyv3La5Z8b/AW7/Aec5gPkPt8UqQfFzCAwaQ5y1BCZBgjSCOTCJ471iRyBHEcRQc6kWiqPHeanBmM4iZuIdSg95L9d8l5D/fxAA/XkPsZ+XLIo4AipvA8QO4xco5jAllMYtoWmbH/7M79cuTMo4Aipgy5az0+f3NYpAW7w26OVnob2sPu+qYGc27nvtPknEm649f0WZ/cn8i5mHD3f6Z/MeT2qiz5JvFI5X5Mf4KnYXPeVZUSqUmpz0EPpby3On+HevJvsd3xVvo2O3ju9a59cf38emb0yvC//s3ab4kcwEEcwmFEELU2MFRJvbL08yeYP4lT6EI3etCr9r+wVqtmBTl7LjF/GVfU+lX6NVxX4/KzZyfjXWhGC75FRb5jCctR/TP2sK8VbWjHXoxhHBPIWsHPzBvMD2FYrafpGYx65I6rcQe9EzUxd1xLD8X0z7DVNcfox5FEDnkUUDTk9joznXeGr3X65+ly96nxWfo51Kmsm+n1Hrn71TUD9EFcxBzm8QEfLf11pjNI9w5S+t3s946ylnJyLHPfH/iJXx7PMJ2jfrmqlbuSs9z0Puz8r5R/Z5Tye7faqNy6GomY7+e1HiRLJRX099Ftn9x3In//G6yS+g0v1lKmYA4AAA==
   </data>
  </layer>
  <layer name="Walkable" width="46" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYPCC+/HY6cEO6OHuA4aU6beOIE093yAIeyegm52B2IUIt2sB3asNxDpArAvEeoPA/aNgFAw1cFthoF0wfME0hYF2AelgtQIDwxogXqtAWG0hmhouIsrtMiLMHQWDF3xUGGgXjILBAgB9L9v3YA4AAA==
+   H4sIAAAAAAAAC2NgGAWjYPCC+/HY6cEO6OHuA4aU6beOIE093wCHvXIKA4MKEKsCsRoQq6fgV68FdK82EOsAsS4Q6w2RtDMKRsFgArcVBtoFwxdMUxhoF5AOViswMKwB4rUKhNUWoqnhIqLOKSPC3FEweMFHhYF2wSgYLAAAUszvvWAOAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="46" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WSQrCMAAF0I9bT1AHyMqlWuuwcN4InqCiUDyF08rDOFzP6QB+ECnOCTVtpH54dCBNf7tIC+hNMidv4gFTmtGcFt7rsTpjDYAUpSlD2YH6HFH0/kbi2Ltv6+12n53n75v+vnvDy7ZkAY7lnw+z47XDP/FIXQANalKL2tShroiu069F55qSF0CBimTT3gUOdKST+/wah+PKVKEq1WhFa9rQVgRbC5ciyBMFSxhr+EjcHick/knG4uOQh6j21702y/Yw7Tsq2+Hd/3AUMa23SheV+WTpmDOMe5iSM1r84OBgDgAA
+   H4sIAAAAAAAAC2NgoB0ITGZgCALiYCAOAeJQIOZWw43L4hgYyoG4AogrgbgqDrfawQ5G3U1fQIm7PQ0ps/t+MmnqP8Qh2IM9vN2iILSRJAODsSRCnJ5uhLlhFIwMYK3AwGADxLZAbAfE9kDsAMSOCgPnpqEGaFmm6CkwMOgDsQEQGwLxx3AGhk9A/BmIv4Rj12MMVGcCxKZAbAbE5kC8BIiXAvEyIF6uQFlZ2KBAiY8oA/Qow6MVUPlMEYT1JCgQVIIBSHU/rctmYt0x2OpRYt2Arz08EGCwuZsUt5BiHrGYFmbSw47BAgAbApt/YA4AAA==
   </data>
  </layer>
 </map>

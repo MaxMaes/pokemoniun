@@ -1738,7 +1738,7 @@ public class Player extends Character implements Battleable, Tradeable
 		{
 			c = p;
 			packet = packet + c.getName() + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
-					+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",";
+					+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + "," + p.getAdminLevel() + ",";
 		}
 		// Send all npc information to the client
 		for(int i = 0; i < map.getNpcs().size(); i++)

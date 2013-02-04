@@ -73,6 +73,8 @@ public class MapInitPlayersEvent implements MessageEvent
 						p.setDirection(Direction.Down);
 						break;
 				}
+				i++;
+				p.setAdminLevel(Integer.parseInt(details[i]));
 				p.loadSpriteImage();
 			}
 

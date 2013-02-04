@@ -59,6 +59,7 @@ public class MapAddPlayerEvent implements MessageEvent
 					p.setDirection(Direction.Down);
 					break;
 			}
+			p.setAdminLevel(Integer.parseInt(details[6]));
 		}
 
 		GameClient.getInstance().getMapMatrix().addPlayer(p);

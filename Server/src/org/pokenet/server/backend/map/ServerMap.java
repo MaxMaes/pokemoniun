@@ -307,7 +307,7 @@ public class ServerMap
 					ServerMessage message = new ServerMessage();
 					message.init(67);
 					message.addString(name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
-							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R"));
+							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + "," + m_players.get(c.getName()).getAdminLevel());
 					p.getSession().Send(message);
 				}
 		}

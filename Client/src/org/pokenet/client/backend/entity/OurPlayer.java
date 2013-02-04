@@ -265,6 +265,7 @@ public class OurPlayer extends Player
 		m_username = p.getUsername();
 		m_id = p.getId();
 		m_ours = p.isOurPlayer();
+		m_adminLevel = p.getAdminLevel();
 	}
 
 	/**

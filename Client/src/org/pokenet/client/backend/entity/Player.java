@@ -41,6 +41,8 @@ public class Player
 
 	protected int m_x;
 	protected int m_y;
+	
+	protected int m_adminLevel;
 
 	/**
 	 * Returns the sprite factory
@@ -384,5 +386,15 @@ public class Player
 	public void setY(int y)
 	{
 		m_y = y;
+	}
+	
+	public void setAdminLevel(int admin)
+	{
+		m_adminLevel = admin;
+	}
+	
+	public int getAdminLevel()
+	{
+		return m_adminLevel;
 	}
 }

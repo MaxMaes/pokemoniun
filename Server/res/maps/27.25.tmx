@@ -17,8 +17,9 @@
  <tileset firstgid="3073" source="normal2.tsx"/>
  <tileset firstgid="4097" source="Water02.tsx"/>
  <tileset firstgid="4289" source="Cliffs02.tsx"/>
- <tileset firstgid="4377" source="Buildings7.tsx"/>
- <tileset firstgid="4729" source="Hoenn Set 14.tsx"/>
+ <tileset firstgid="4401" source="Buildings7.tsx"/>
+ <tileset firstgid="4753" source="Hoenn Set 14.tsx"/>
+ <tileset firstgid="5418" source="Hoenn Set 6.tsx"/>
  <layer name="Walkable" width="42" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3QwQ0AIAhDUTfQ2RzNiV3AA0SgNPCT3l86xruz8JOENkqdGawVnHvmMqL/bGc721nDqY3ByOREWBmcv7XTzhjhtIzB6Gn1isVpbY0om0eTl+8CJ9cbMmgQAAA=
@@ -36,7 +37,7 @@
  </layer>
  <layer name="Walkable" width="42" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OSwkAIBQAQTvYv5JV/BXwJRA8KTIDe9+U4B8l3z7Yq/HXoh6NaD7+CwAAcGoBvTCqJGgQAAA=
+   H4sIAAAAAAAAC+3TyQkAIAwEwPy8nor235xYhqlABK8YdmC/ZomECECPGl83GDOJyHIcx3NCWnuv5T29Ts8JZU8PKXNuuPW3qzTtHHSTcFMzHSTclIQOAADwtw6xuJtBaBAAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="42" height="25">
@@ -51,12 +52,12 @@
  </layer>
  <layer name="Collisions" width="42" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82VTU4DMQyFs6GLhg0artDhJHARCtyEAjcBwSn464Kq3IHfY/AixVIUnOS5MOo8yZrKo4y/Ptszfs+5XcRY5SNfh9gnOI875+aIE8Qp4qwbnjEo5fOEp+fgWiAuEJeIq4E5NSbG02tw3US2W1zvBuYsMbU8fQHXKrKtcX2Nv/vkzPPUueX099lSnlHOxc5pTV9g+VZ4SnmGL+dq+XmPOg9KLcnveFu+JeGz+vmGZ78rz5f8zNvyrKz7PknqafN2mPG08ow2mc0+qSfzlveU0UGsMyHObrLzR8pz855a1BNnSzzWnQ89re1F7Z72vy08zKymqu2FdWcYDsv3/hG1nwr1S/ckz8xlUOu9xPj5gXqfcY/yXZJ7pTPMXGq8bF5T2CPrLjFzKap5ZpnPsEfM+5Htda6aZ//xnc9l7XUqzTfrrrOy9DqX5tsQXv5FrXfTWNTa9THwMgxj6D/LsA1Ppaal9jY8lZpa7R8HlJdqaBAAAA==
+   H4sIAAAAAAAAC82VXQrCMBCE82x9kQq9jV5JQZ/8u4l/N1H0JooewykkIJLtTtqkZmBpCYX5mO5uipExQ1SuKixfiRoTnKvSmDVqg9qidmV6xlrffAWR6R5cB9QRdUKdE3P6mJhML+C6WrYbnvfEnBKTlukDXE/L9sLzbd8niXv7l4vt0y6aVcbMK+5baX6YHo2lAcHq+LrkqfmE5KYpdN5jerPqozelzKcBPm1nvtYC/stKP4shiaePmQ9RE0/suW+btcQRet+nlraX2Dx9OUk7gdmXGi97LqkLg6amzPq8lzQ1ZRazP2PcDb7ccsrSyZdbLrPupO2mXKTNeg68DEMO/59l+EemzjPE+x+ZOk+f9wegcx8WaBAAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="42" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIAzshRkYHIDYEYidgNgZiF2A2FWYCM10BEk43JMxyNzZisM93YPMnchgNZLb1gHZcoII/nIuBoYVXJh6cImPZLAYGB5LsIQJtcRHMhgJ6U1ekLCakQzw5YvRPEMcWAoMo2U4wgmXHD49o2AUjIJRMApGwSgYmQAAhTBDMmgQAAA=
+   H4sIAAAAAAAAC2NgIAzChRkYIoA4EoijgDgaiGOAOFaYCM10BFU43NMwyNw5F4d7Fg8ydyKDw0huOwZkmwkSp09TnIFBC4i1gVhHnDZuowbwAbrNF4j9gNh/ELiTmHB7LkYfu/HZM5DhNtjijBDQBbpRD4j1gdhAHLcYCOAKc3Mi8x0lIADojkAgDgLiYHHcYkMN4ArrwQYGOqyxhdNgLMexhRO+MoFW5SUpYDC4gRIwGNMBNjDU6oZRMApGwSgYrgAAYa2ziGgQAAA=
   </data>
  </layer>
 </map>

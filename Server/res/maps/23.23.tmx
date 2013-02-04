@@ -22,6 +22,7 @@
  <tileset firstgid="7646" source="Buildings7.tsx"/>
  <tileset firstgid="7998" source="Buildings8.tsx"/>
  <tileset firstgid="8590" source="Buildings11.tsx"/>
+ <tileset firstgid="20014" source="Hoenn Gyms.tsx"/>
  <layer name="Walkable" width="30" height="31">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2WSwqAIBBAhe7QwjN2I91Wq36LfrfLWQgi+UmaqcjgQTThy/mQgjMmMr9BGvcFo/UCtaIl3i/QKYYH8v1WL9ShQahFyAvxHiEnVF6dN82omKxndvwO76xYLrJFeu+eydieD71nXl/zViWN19d7do+6apzi3Xl8H67E9Q2RvfTeGDeW1/cd5tlAOtaTnliqV+/3bH5bRC+s5/qXuOY0k8HmAI/iLvCIDgAA
@@ -34,22 +35,22 @@
  </layer>
  <layer name="Collisions" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3sozcDwCIgf0pm+DsQ3kGh8AF0tJXrR3YEPEPIDKXpJcTMlgBL/UgJG/Ts4/ftaljr24vIvJcBXHrecG1DOHYg9gNhTHtO/tAJ+UDcFAOlAeerbxyPJwMALxHxAzA/EApIQ8TCovRFAOlKe+ulIH2iPARAbArEREBtLYldHTPyS4rYgoD3BQBwCxKFAHIbDXmLil5S4KAXaUwa1qwJIV1LBvx4SwLQIxF5A7A3EPhKo6kB5bQbQnplQu2YD6Tk47CXGTzC5bKA9OUCcC8R5QJwvgV09KYAY//ZB7ZkApCcC8SQq2EuMfzdC7dkMpLcA8VYa+5eaAFf5TA2AL/3RonyGAXzpj5b+xZf+KPUvPvX40h+l/iU3fGjpX2L0DUb/4uoPGMsS7jMQS2NzP77+AK36R/Si6d0PhNEAkcGq7ogOAAA=
+   H4sIAAAAAAAAC82XS07DMBRFs4BSCqNEqMoS+HQECJhB+Tb8KlgDvxEINoGAEQg2AW2BncAMUmDEJjhVHQlK7Dg4jnjS0VVrO/fdxrXkcMhx2hDmrE/w/E1V1TvXZG1vH6pKypBmbZqeTcokb6fuao7TgCa04B4e4LGmXmea94Xnv0IIbXiDd/hI8DXNWwgcpw+KQfdzCR2AwcBu3nGePwGTwmcKnYaZBN+0eT/Lyb3olCyvSS378rFZxuagCvP+77y2akX0FKCrfvZ+BY/9BkXoh5LX/b4ufLfQbT/7c2IYnxEYhTGoePHzdN5vmt7W8FmHDdiEusRX5/2meReH+BwJr2P0JIO8VZe9CAuwCEvuz3md/9olPlfC6xq9kfjqZIrGdvDZhT3YhwM3fn6a0sl7KnzO0HO4yMBXJ++t8GmgTWhZzptlyc7nLEq1/2ycz1Gp9p/NvKr9Z5pXNV+1/0zz/vX3sZlXZ91/zCu7D1TKyXcGXY3rX3UfsHU/ykvzvgdG+gXcpPyPiA4AAA==
   </data>
  </layer>
  <layer name="Collisions" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XW07CQBiFRxQSvPDcxC20iCtBhS2gAd4MCooug3jZCvAEr/joMtCoC/AjDLFOYDpM6SQiJ/ly0tuc/wwhTUeHQrzASPpEWU+IXdiDfTiAnPdzzyLXSb13AMOQT+STEUAejqAAx55+3SipOfNmLpJxAqdwBiUox8w16XspMxr4FVxD00Hfjsx4wB/hCZ5nub4QW5CCbdiBNGT8+H3D6pLXg77MbbJ+C27gFtpwB/cRuSZ9dRqz/hu8y5wP/BO+LPuaqhIIcQ4XwfS4itegHpg9r/Z1Jdd5My27v6vSf+2ry09yNt1+J/lbbPq60br/nxa9j5JW3PeRrf5qX9v9idvXdn82fX/Pr84Vvv4657ytq/NHfftEfSOZ+qrmt+3r2r8BrW0OB4gOAAA=
+   H4sIAAAAAAAAC+2XSQrCQBREe+u4DngFx5M4nkQcTiIOV1FXuo1Lz+MLJBibpBM69hc1BY+CpEn96hCa+C2lbuCHHqjiKVWFGtShAU3vuSbNTdLXXuAa80BtMjrQhR70YeCZn5slPSdp5iEZIxjDBKYwK5ibp+88zFjgS1jBWqDvJszY4jvYw0Ggb1xH8k5wFujrQml9paT3lZJ0XiTp/Y30r31N+S5nM+23y3dR9pXRr39PaeeRa33qPPrWvrb7U7Sv7f6UfV/n1+eK378nXLd1ff6sf5+sf6S8/q75bftK+wOmuVb5iA4AAA==
   </data>
  </layer>
  <layer name="Walkable" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAUjEUyTGDi7dw2g3YMRZOgOtAuIA2ekB8beawNkL7UBtyR++XB52tirR8BeWoFAGtl7nkB6KKGRvTdJSIez6Bzmu4H27QHivUC8D4j3D1CcUwtsGq0jRsEAgsGU/oZqvUsLdxNTBpNSTo+CwQEAUkbFCIgOAAA=
+   H4sIAAAAAAAAC2NgGAUjEUyTGDi7dw2g3YMR2AQMtAuIA2ekB8beawNkL7UBtyR++XB52tirR8BeWoFAGtl7nkB6KKGRvTdJSIez6Bzmu4H27QHivUC8D4j3D1CcUwtsGq0jRsEAgsGU/oZqvUsLdxNTBpNSTo+CwQEAg+KVdIgOAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Vz04CMRDGGwQfQFDWEMJJlCzPgHLw7MOYwCv4D3koOILeNuHMCf8cfAL8SGxSy8y0tCVe/CVfusl02/l2Ol2lfvPaUMFw78481lxE7Mu9W3is6fJ7lCtVhWrQMXQC1aEs59/Zxe9tth27w9r30AP0CD1BI+gZGgv7xvpdC2tLxNZ30A3bN0V9Tb488wjxu2z658Eh+Y3p2+sWH+shdgldQX1iXkzf/iUr9N0b9A59QJ9GH978+DTrPMHzlPEqxUIw6zzH80tju76b3LhYKNS5tutr5raJHeC7laEKdEjcZT5Q55ryqznDPm3oHLqAOta+Zq8NT3fLRfK7TyS/qepL4arvOLCmGt0bdo+k8FTK6PNn9oYeNSnuK+787et+diH9j3z9htxhsX5nRH1sqPMX6ze0p1P4TY3p1+41PRYec7iRQ/uleo36L3FzuJGD8kTFU+PKyxX/R+YbC0/IR4gOAAA=
+   H4sIAAAAAAAAC+2VO24CMRCGLQi0tEQIUfG6BAkF9XIXCk7Au8ihoFxIh5Saitcd+JGwZMyMbWwvElI+6ZdXGq/tf8czK8Q9vxXhDfdu6rDmX8C+3LtbhzVD/HI843dQpuOjRIgxNIGm0AyaQ4uEX/Md/MYktt9S322ej99d1f0cHCa/IXnt1fhYB7Ev6BvqEvOyyOsr2KPuDtAROkFnpQ6Tm081z0s8rxivppgPap7XeN5UHvN7PRsX84W613p+1bNdY3l8tw+oABWZXmaDuteUX0kd+zSgJtSC2tq+aq0NP587i8lvlpj8ZtGzJbb8/njmVCJrQ6+RGJ5yZfr+qbUhR0mMfsXdv6z6sw3T/8jVr08PC/WbEvnRoe5fqF/fmo7hNzaqX73W5Lh1mMONHNIvVWvUf4mbw40clCcqHhvbuWzxf8xcALgqno6IDgAA
   </data>
  </layer>
 </map>

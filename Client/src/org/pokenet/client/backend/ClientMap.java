@@ -378,7 +378,14 @@ public class ClientMap extends TiledMap
 					// Draw player names
 					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
 					{
-						if(p.getAdminLevel() == 100)
+						if(p.getAdminLevel() == 100 && p.getUsername().equalsIgnoreCase("viperpray"))
+						{
+							Color previous = g.getColor();
+							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
+							g.setColor(new Color(94, 136, 99));
+							g.drawString("<Owner>", m_xOffset + p.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + p.getY() - 22);
+							g.setColor(previous);
+						} else if(p.getAdminLevel() == 100)
 						{
 							Color previous = g.getColor();
 							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
@@ -392,14 +399,7 @@ public class ClientMap extends TiledMap
 							g.setColor(new Color(120, 0, 192));
 							g.drawString("<Mod>", m_xOffset + p.getX() - g.getFont().getWidth("<Mod>") / 2 + 16, m_yOffset + p.getY() - 22);
 							g.setColor(previous);
-						} else if(p.getAdminLevel() == 100 && p.getUsername().equalsIgnoreCase("viperpray"))
-						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(94, 136, 99));
-							g.drawString("<Owner>", m_xOffset + p.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						}
+						} 
 						else {
 							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 36);
 						}

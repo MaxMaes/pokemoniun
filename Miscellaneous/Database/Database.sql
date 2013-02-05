@@ -4,23 +4,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 
 -- -----------------------------------------------------
--- Table `logs`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `logs` ;
-
-CREATE  TABLE IF NOT EXISTS `logs` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `date` VARCHAR(25) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `name` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `UID` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `action` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `pn_bag`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `pn_bag` ;

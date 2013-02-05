@@ -378,26 +378,40 @@ public class ClientMap extends TiledMap
 					// Draw player names
 					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
 					{
-						if(p.getAdminLevel() == 100 && p.getUsername().equalsIgnoreCase("viperpray"))
+						if(p.getAdminLevel() == 5)
 						{
 							Color previous = g.getColor();
 							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
 							g.setColor(new Color(94, 136, 99));
 							g.drawString("<Owner>", m_xOffset + p.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + p.getY() - 22);
 							g.setColor(previous);
-						} else if(p.getAdminLevel() == 100)
+						} else if(p.getAdminLevel() == 4)
 						{
 							Color previous = g.getColor();
 							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
 							g.setColor(new Color(96, 168, 168));
 							g.drawString("<Dev>", m_xOffset + p.getX() - g.getFont().getWidth("<Dev>") / 2 + 16, m_yOffset + p.getY() - 22);
 							g.setColor(previous);
-						} else if(p.getAdminLevel() == 5)
+						} else if(p.getAdminLevel() == 3)
+						{
+							Color previous = g.getColor();
+							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
+							g.setColor(new Color(120, 0, 192));
+							g.drawString("<SuperMod>", m_xOffset + p.getX() - g.getFont().getWidth("<SuperMod>") / 2 + 16, m_yOffset + p.getY() - 22);
+							g.setColor(previous);
+						}  else if(p.getAdminLevel() == 2)
 						{
 							Color previous = g.getColor();
 							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
 							g.setColor(new Color(120, 0, 192));
 							g.drawString("<Mod>", m_xOffset + p.getX() - g.getFont().getWidth("<Mod>") / 2 + 16, m_yOffset + p.getY() - 22);
+							g.setColor(previous);
+						}  else if(p.getAdminLevel() == 1)
+						{
+							Color previous = g.getColor();
+							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
+							g.setColor(new Color(255, 223, 0));
+							g.drawString("<Donator>", m_xOffset + p.getX() - g.getFont().getWidth("<Donator>") / 2 + 16, m_yOffset + p.getY() - 22);
 							g.setColor(previous);
 						} 
 						else {

@@ -29,290 +29,6 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `pn_members`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_members` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_members` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `username` VARCHAR(12) CHARACTER SET 'latin1' NULL ,
-  `password` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `dob` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `email` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `lastLoginTime` VARCHAR(42) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `lastLoginServer` VARCHAR(24) CHARACTER SET 'utf8' NULL DEFAULT NULL ,
-  `lastLoginIP` VARCHAR(16) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `lastLanguageUsed` INT(11) NULL DEFAULT NULL ,
-  `sprite` INT(11) NULL DEFAULT NULL ,
-  `party` INT(11) NULL DEFAULT NULL ,
-  `money` INT(11) NULL DEFAULT NULL ,
-  `npcMul` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `skHerb` INT(11) NULL DEFAULT NULL ,
-  `skCraft` INT(11) NULL DEFAULT NULL ,
-  `skFish` INT(11) NULL DEFAULT NULL ,
-  `skTrain` INT(11) NULL DEFAULT NULL ,
-  `skCoord` INT(11) NULL DEFAULT NULL ,
-  `skBreed` INT(11) NULL DEFAULT NULL ,
-  `x` INT(11) NULL DEFAULT NULL ,
-  `y` INT(11) NULL DEFAULT NULL ,
-  `mapX` INT(11) NULL DEFAULT NULL ,
-  `mapY` INT(11) NULL DEFAULT NULL ,
-  `bag` INT(11) NULL DEFAULT NULL ,
-  `badges` VARCHAR(50) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `healX` INT(11) NULL DEFAULT NULL ,
-  `healY` INT(11) NULL DEFAULT NULL ,
-  `healMapX` INT(11) NULL DEFAULT NULL ,
-  `healMapY` INT(11) NULL DEFAULT NULL ,
-  `isSurfing` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `adminLevel` INT(11) NULL DEFAULT NULL ,
-  `muted` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT '' ,
-  PRIMARY KEY (`id`) ,
-  INDEX `index2` (`username` ASC) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_box`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_box` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_box` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `member` INT(11) NOT NULL ,
-  `pokemon0` INT(11) NULL ,
-  `pokemon1` INT(11) NULL DEFAULT NULL ,
-  `pokemon2` INT(11) NULL DEFAULT NULL ,
-  `pokemon3` INT(11) NULL DEFAULT NULL ,
-  `pokemon4` INT(11) NULL DEFAULT NULL ,
-  `pokemon5` INT(11) NULL DEFAULT NULL ,
-  `pokemon6` INT(11) NULL DEFAULT NULL ,
-  `pokemon7` INT(11) NULL DEFAULT NULL ,
-  `pokemon8` INT(11) NULL DEFAULT NULL ,
-  `pokemon9` INT(11) NULL DEFAULT NULL ,
-  `pokemon10` INT(11) NULL DEFAULT NULL ,
-  `pokemon11` INT(11) NULL DEFAULT NULL ,
-  `pokemon12` INT(11) NULL DEFAULT NULL ,
-  `pokemon13` INT(11) NULL DEFAULT NULL ,
-  `pokemon14` INT(11) NULL DEFAULT NULL ,
-  `pokemon15` INT(11) NULL DEFAULT NULL ,
-  `pokemon16` INT(11) NULL DEFAULT NULL ,
-  `pokemon17` INT(11) NULL DEFAULT NULL ,
-  `pokemon18` INT(11) NULL DEFAULT NULL ,
-  `pokemon19` INT(11) NULL DEFAULT NULL ,
-  `pokemon20` INT(11) NULL DEFAULT NULL ,
-  `pokemon21` INT(11) NULL DEFAULT NULL ,
-  `pokemon22` INT(11) NULL DEFAULT NULL ,
-  `pokemon23` INT(11) NULL DEFAULT NULL ,
-  `pokemon24` INT(11) NULL DEFAULT NULL ,
-  `pokemon25` INT(11) NULL DEFAULT NULL ,
-  `pokemon26` INT(11) NULL DEFAULT NULL ,
-  `pokemon27` INT(11) NULL DEFAULT NULL ,
-  `pokemon28` INT(11) NULL DEFAULT NULL ,
-  `pokemon29` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `Player` (`member` ASC) ,
-  INDEX `Pokemon0` (`pokemon0` ASC) ,
-  CONSTRAINT `Player`
-    FOREIGN KEY (`member` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_friends`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_friends` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_friends` (
-  `id` INT(11) NOT NULL ,
-  `friendId` INT(11) NOT NULL ,
-  PRIMARY KEY (`id`, `friendId`) ,
-  INDEX `Player` (`id` ASC) ,
-  INDEX `Friend` (`friendId` ASC) ,
-  CONSTRAINT `Player`
-    FOREIGN KEY (`id` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `Friend`
-    FOREIGN KEY (`friendId` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_history`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_history` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_history` (
-  `member` INT(11) NOT NULL ,
-  `action` INT(11) NOT NULL ,
-  `with` INT(11) NOT NULL ,
-  `timestamp` DATETIME NULL DEFAULT NULL ,
-  `details` VARCHAR(256) CHARACTER SET 'ascii' NULL DEFAULT NULL ,
-  UNIQUE INDEX `memberitem` (`member` ASC, `action` ASC) ,
-  INDEX `Memberid` USING BTREE (`member` ASC) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = ascii;
-
-
--- -----------------------------------------------------
--- Table `pn_party`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_party` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_party` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `member` INT(11) NULL DEFAULT NULL ,
-  `pokemon0` INT(11) NULL ,
-  `pokemon1` INT(11) NULL DEFAULT NULL ,
-  `pokemon2` INT(11) NULL DEFAULT NULL ,
-  `pokemon3` INT(11) NULL DEFAULT NULL ,
-  `pokemon4` INT(11) NULL DEFAULT NULL ,
-  `pokemon5` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `Player` (`member` ASC) ,
-  CONSTRAINT `Player`
-    FOREIGN KEY (`member` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_mypokes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_mypokes` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_mypokes` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `member` INT(11) NOT NULL DEFAULT NULL ,
-  `party` INT(11) NULL DEFAULT NULL ,
-  `box0` INT(11) NULL DEFAULT NULL ,
-  `box1` INT(11) NULL DEFAULT NULL ,
-  `box2` INT(11) NULL DEFAULT NULL ,
-  `box3` INT(11) NULL DEFAULT NULL ,
-  `box4` INT(11) NULL DEFAULT NULL ,
-  `box5` INT(11) NULL DEFAULT NULL ,
-  `box6` INT(11) NULL DEFAULT NULL ,
-  `box7` INT(11) NULL DEFAULT NULL ,
-  `box8` INT(11) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `Player` (`member` ASC) ,
-  INDEX `Party` (`party` ASC) ,
-  CONSTRAINT `Player`
-    FOREIGN KEY (`member` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `Party`
-    FOREIGN KEY (`party` )
-    REFERENCES `pn_party` (`id` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_pokemon`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_pokemon` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_pokemon` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(24) CHARACTER SET 'latin1' NULL ,
-  `speciesName` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `exp` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `baseExp` INT(11) NULL DEFAULT NULL ,
-  `expType` VARCHAR(16) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `isFainted` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `level` INT(11) NULL DEFAULT NULL ,
-  `happiness` INT(11) NULL DEFAULT NULL ,
-  `gender` INT(11) NULL DEFAULT NULL ,
-  `nature` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `abilityName` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `itemName` VARCHAR(28) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `isShiny` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `originalTrainerName` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `currentTrainerName` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `contestStats` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `move0` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `move1` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `move2` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `move3` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  `hp` INT(11) NULL DEFAULT NULL ,
-  `atk` INT(11) NULL DEFAULT NULL ,
-  `def` INT(11) NULL DEFAULT NULL ,
-  `speed` INT(11) NULL DEFAULT NULL ,
-  `spATK` INT(11) NULL DEFAULT NULL ,
-  `spDEF` INT(11) NULL DEFAULT NULL ,
-  `evHP` INT(11) NULL DEFAULT NULL ,
-  `evATK` INT(11) NULL DEFAULT NULL ,
-  `evDEF` INT(11) NULL DEFAULT NULL ,
-  `evSPD` INT(11) NULL DEFAULT NULL ,
-  `evSPATK` INT(11) NULL DEFAULT NULL ,
-  `evSPDEF` INT(11) NULL DEFAULT NULL ,
-  `ivHP` INT(11) NULL DEFAULT NULL ,
-  `ivATK` INT(11) NULL DEFAULT NULL ,
-  `ivDEF` INT(11) NULL DEFAULT NULL ,
-  `ivSPD` INT(11) NULL DEFAULT NULL ,
-  `ivSPATK` INT(11) NULL DEFAULT NULL ,
-  `ivSPDEF` INT(11) NULL DEFAULT NULL ,
-  `pp0` INT(11) NULL DEFAULT NULL ,
-  `pp1` INT(11) NULL DEFAULT NULL ,
-  `pp2` INT(11) NULL DEFAULT NULL ,
-  `pp3` INT(11) NULL DEFAULT NULL ,
-  `maxpp0` INT(11) NULL DEFAULT NULL ,
-  `maxpp1` INT(11) NULL DEFAULT NULL ,
-  `maxpp2` INT(11) NULL DEFAULT NULL ,
-  `maxpp3` INT(11) NULL DEFAULT NULL ,
-  `ppUp0` INT(11) NULL DEFAULT NULL ,
-  `ppUp1` INT(11) NULL DEFAULT NULL ,
-  `ppUp2` INT(11) NULL DEFAULT NULL ,
-  `ppUp3` INT(11) NULL DEFAULT NULL ,
-  `date` VARCHAR(28) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_cheatlog`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_cheatlog` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_cheatlog` (
-  `playerid` INT(11) NOT NULL ,
-  `date` VARCHAR(25) NOT NULL ,
-  `message` VARCHAR(255) NULL DEFAULT NULL ,
-  PRIMARY KEY (`playerid`, `date`) ,
-  INDEX `Player` (`playerid` ASC) ,
-  CONSTRAINT `Player`
-    FOREIGN KEY (`playerid` )
-    REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `pn_pokedex`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `pn_pokedex` ;
@@ -814,14 +530,306 @@ CREATE  TABLE IF NOT EXISTS `pn_pokedex` (
   `492` TINYINT NOT NULL ,
   `493` TINYINT NOT NULL ,
   PRIMARY KEY (`pokedexId`) ,
-  INDEX `Player` (`memberId` ASC) ,
-  CONSTRAINT `Player`
+  INDEX `player_dex_idx` (`memberId` ASC) ,
+  CONSTRAINT `Player_dex_fk`
     FOREIGN KEY (`memberId` )
     REFERENCES `pn_members` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_members`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_members` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_members` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `username` VARCHAR(12) CHARACTER SET 'latin1' NULL ,
+  `password` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `dob` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `email` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `lastLoginTime` VARCHAR(42) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `lastLoginServer` VARCHAR(24) CHARACTER SET 'utf8' NULL DEFAULT NULL ,
+  `lastLoginIP` VARCHAR(16) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `lastLanguageUsed` INT(11) NULL DEFAULT NULL ,
+  `sprite` INT(11) NULL DEFAULT NULL ,
+  `party` INT(11) NULL DEFAULT NULL ,
+  `money` INT(11) NULL DEFAULT NULL ,
+  `npcMul` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `skHerb` INT(11) NULL DEFAULT NULL ,
+  `skCraft` INT(11) NULL DEFAULT NULL ,
+  `skFish` INT(11) NULL DEFAULT NULL ,
+  `skTrain` INT(11) NULL DEFAULT NULL ,
+  `skCoord` INT(11) NULL DEFAULT NULL ,
+  `skBreed` INT(11) NULL DEFAULT NULL ,
+  `x` INT(11) NULL DEFAULT NULL ,
+  `y` INT(11) NULL DEFAULT NULL ,
+  `mapX` INT(11) NULL DEFAULT NULL ,
+  `mapY` INT(11) NULL DEFAULT NULL ,
+  `bag` INT(11) NULL DEFAULT NULL ,
+  `badges` VARCHAR(50) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `healX` INT(11) NULL DEFAULT NULL ,
+  `healY` INT(11) NULL DEFAULT NULL ,
+  `healMapX` INT(11) NULL DEFAULT NULL ,
+  `healMapY` INT(11) NULL DEFAULT NULL ,
+  `isSurfing` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `adminLevel` INT(11) NULL DEFAULT NULL ,
+  `muted` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT '' ,
+  `pokedexId` INT(11) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `username_idx` (`username` ASC) ,
+  INDEX `dex_id_idx` (`pokedexId` ASC) ,
+  CONSTRAINT `dex_id`
+    FOREIGN KEY (`pokedexId` )
+    REFERENCES `pn_pokedex` (`pokedexId` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_box`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_box` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_box` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `member` INT(11) NULL ,
+  `pokemon0` INT(11) NULL ,
+  `pokemon1` INT(11) NULL DEFAULT NULL ,
+  `pokemon2` INT(11) NULL DEFAULT NULL ,
+  `pokemon3` INT(11) NULL DEFAULT NULL ,
+  `pokemon4` INT(11) NULL DEFAULT NULL ,
+  `pokemon5` INT(11) NULL DEFAULT NULL ,
+  `pokemon6` INT(11) NULL DEFAULT NULL ,
+  `pokemon7` INT(11) NULL DEFAULT NULL ,
+  `pokemon8` INT(11) NULL DEFAULT NULL ,
+  `pokemon9` INT(11) NULL DEFAULT NULL ,
+  `pokemon10` INT(11) NULL DEFAULT NULL ,
+  `pokemon11` INT(11) NULL DEFAULT NULL ,
+  `pokemon12` INT(11) NULL DEFAULT NULL ,
+  `pokemon13` INT(11) NULL DEFAULT NULL ,
+  `pokemon14` INT(11) NULL DEFAULT NULL ,
+  `pokemon15` INT(11) NULL DEFAULT NULL ,
+  `pokemon16` INT(11) NULL DEFAULT NULL ,
+  `pokemon17` INT(11) NULL DEFAULT NULL ,
+  `pokemon18` INT(11) NULL DEFAULT NULL ,
+  `pokemon19` INT(11) NULL DEFAULT NULL ,
+  `pokemon20` INT(11) NULL DEFAULT NULL ,
+  `pokemon21` INT(11) NULL DEFAULT NULL ,
+  `pokemon22` INT(11) NULL DEFAULT NULL ,
+  `pokemon23` INT(11) NULL DEFAULT NULL ,
+  `pokemon24` INT(11) NULL DEFAULT NULL ,
+  `pokemon25` INT(11) NULL DEFAULT NULL ,
+  `pokemon26` INT(11) NULL DEFAULT NULL ,
+  `pokemon27` INT(11) NULL DEFAULT NULL ,
+  `pokemon28` INT(11) NULL DEFAULT NULL ,
+  `pokemon29` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `player_box_idx` (`member` ASC) ,
+  INDEX `first_poke_idx` (`pokemon0` ASC) ,
+  CONSTRAINT `player_box_fk`
+    FOREIGN KEY (`member` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_friends`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_friends` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_friends` (
+  `id` INT(11) NOT NULL ,
+  `friendId` INT(11) NOT NULL ,
+  PRIMARY KEY (`id`, `friendId`) ,
+  INDEX `player_friend_idx` (`id` ASC) ,
+  INDEX `friend_idx` (`friendId` ASC) ,
+  CONSTRAINT `player_friend_fk`
+    FOREIGN KEY (`id` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `firend_fk`
+    FOREIGN KEY (`friendId` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_history`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_history` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_history` (
+  `member` INT(11) NOT NULL ,
+  `action` INT(11) NOT NULL ,
+  `with` INT(11) NOT NULL ,
+  `timestamp` DATETIME NULL DEFAULT NULL ,
+  `details` VARCHAR(256) CHARACTER SET 'ascii' NULL DEFAULT NULL ,
+  UNIQUE INDEX `memberitem` (`member` ASC, `action` ASC) ,
+  INDEX `Memberid` USING BTREE (`member` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = ascii;
+
+
+-- -----------------------------------------------------
+-- Table `pn_party`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_party` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_party` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `member` INT(11) NULL DEFAULT NULL ,
+  `pokemon0` INT(11) NULL ,
+  `pokemon1` INT(11) NULL DEFAULT NULL ,
+  `pokemon2` INT(11) NULL DEFAULT NULL ,
+  `pokemon3` INT(11) NULL DEFAULT NULL ,
+  `pokemon4` INT(11) NULL DEFAULT NULL ,
+  `pokemon5` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `player_party_idx` (`member` ASC) ,
+  CONSTRAINT `player_party_fk`
+    FOREIGN KEY (`member` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_mypokes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_mypokes` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_mypokes` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `member` INT(11) NULL ,
+  `party` INT(11) NULL DEFAULT NULL ,
+  `box0` INT(11) NULL DEFAULT NULL ,
+  `box1` INT(11) NULL DEFAULT NULL ,
+  `box2` INT(11) NULL DEFAULT NULL ,
+  `box3` INT(11) NULL DEFAULT NULL ,
+  `box4` INT(11) NULL DEFAULT NULL ,
+  `box5` INT(11) NULL DEFAULT NULL ,
+  `box6` INT(11) NULL DEFAULT NULL ,
+  `box7` INT(11) NULL DEFAULT NULL ,
+  `box8` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `player_pokes_idx` (`member` ASC) ,
+  INDEX `party_idx` (`party` ASC) ,
+  CONSTRAINT `player_pokes_fk`
+    FOREIGN KEY (`member` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `party_pokes_fk`
+    FOREIGN KEY (`party` )
+    REFERENCES `pn_party` (`id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_pokemon`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_pokemon` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_pokemon` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(24) CHARACTER SET 'latin1' NULL ,
+  `speciesName` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `exp` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `baseExp` INT(11) NULL DEFAULT NULL ,
+  `expType` VARCHAR(16) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `isFainted` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `level` INT(11) NULL DEFAULT NULL ,
+  `happiness` INT(11) NULL DEFAULT NULL ,
+  `gender` INT(11) NULL DEFAULT NULL ,
+  `nature` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `abilityName` VARCHAR(24) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `itemName` VARCHAR(28) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `isShiny` VARCHAR(5) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `originalTrainerName` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `currentTrainerName` VARCHAR(12) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `contestStats` VARCHAR(255) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `move0` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `move1` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `move2` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `move3` VARCHAR(32) CHARACTER SET 'latin1' NULL DEFAULT NULL ,
+  `hp` SMALLINT NULL DEFAULT NULL ,
+  `atk` SMALLINT NULL DEFAULT NULL ,
+  `def` SMALLINT NULL DEFAULT NULL ,
+  `speed` SMALLINT NULL DEFAULT NULL ,
+  `spATK` SMALLINT NULL DEFAULT NULL ,
+  `spDEF` SMALLINT NULL DEFAULT NULL ,
+  `evHP` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `evATK` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `evDEF` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `evSPD` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `evSPATK` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `evSPDEF` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `ivHP` TINYINT NULL DEFAULT NULL ,
+  `ivATK` TINYINT NULL DEFAULT NULL ,
+  `ivDEF` TINYINT NULL DEFAULT NULL ,
+  `ivSPD` TINYINT NULL DEFAULT NULL ,
+  `ivSPATK` TINYINT NULL DEFAULT NULL ,
+  `ivSPDEF` TINYINT NULL DEFAULT NULL ,
+  `pp0` TINYINT NULL DEFAULT NULL ,
+  `pp1` TINYINT NULL DEFAULT NULL ,
+  `pp2` TINYINT NULL DEFAULT NULL ,
+  `pp3` TINYINT NULL DEFAULT NULL ,
+  `maxpp0` TINYINT NULL DEFAULT NULL ,
+  `maxpp1` TINYINT NULL DEFAULT NULL ,
+  `maxpp2` TINYINT NULL DEFAULT NULL ,
+  `maxpp3` TINYINT NULL DEFAULT NULL ,
+  `ppUp0` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `ppUp1` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `ppUp2` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `ppUp3` TINYINT UNSIGNED NULL DEFAULT NULL ,
+  `date` VARCHAR(45) NULL ,
+  `caughtWith` TINYINT UNSIGNED NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `pn_cheatlog`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `pn_cheatlog` ;
+
+CREATE  TABLE IF NOT EXISTS `pn_cheatlog` (
+  `playerid` INT(11) NOT NULL ,
+  `date` VARCHAR(25) NOT NULL ,
+  `message` VARCHAR(255) NULL DEFAULT NULL ,
+  PRIMARY KEY (`playerid`, `date`) ,
+  INDEX `player_cheat_idx` (`playerid` ASC) ,
+  CONSTRAINT `player_cheat_fk`
+    FOREIGN KEY (`playerid` )
+    REFERENCES `pn_members` (`id` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 

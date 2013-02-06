@@ -11,6 +11,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.HMObject;
 import org.pokenet.client.backend.entity.Player;
 import org.pokenet.client.backend.entity.Player.Direction;
+import org.pokenet.client.constants.UserClasses;
 
 /**
  * Represents a map to be rendered on screen
@@ -291,44 +292,44 @@ public class ClientMap extends TiledMap
 	{
 		synchronized(m_mapMatrix.getPlayers())
 		{
-			Player p;
+			Player player;
 			Iterator<Player> it = m_mapMatrix.getPlayers().iterator();
 			while(it.hasNext())
 			{
-				p = it.next();
+				player = it.next();
 				ClientMap m_curMap = m_mapMatrix.getCurrentMap();
 				int m_xOffset = m_curMap.getXOffset();
 				int m_yOffset = m_curMap.getYOffset();
-				if(p != null && p.getSprite() != 0 && p.getCurrentImage() != null)
+				if(player != null && player.getSprite() != 0 && player.getCurrentImage() != null)
 				{
 					// Draw the player
-					p.getCurrentImage().draw(m_xOffset + p.getX() - 4, m_yOffset + p.getY());
-					if(m_curMap.shouldReflect(p))
+					player.getCurrentImage().draw(m_xOffset + player.getX() - 4, m_yOffset + player.getY());
+					if(m_curMap.shouldReflect(player))
 					{
 						// If there's a reflection, flip the player's image, set
 						// his alpha so its more translucent, and then draw it.
-						Image m_reflection = p.getCurrentImage().getFlippedCopy(false, true);
+						Image m_reflection = player.getCurrentImage().getFlippedCopy(false, true);
 						m_reflection.setAlpha((float) 0.05);
-						if(p.getSprite() != -1)
-							m_reflection.draw(m_xOffset + p.getX() - 4, m_yOffset + p.getY() + 32);
+						if(player.getSprite() != -1)
+							m_reflection.draw(m_xOffset + player.getX() - 4, m_yOffset + player.getY() + 32);
 						else
-							m_reflection.draw(m_xOffset + p.getX() - 4, m_yOffset + p.getY() + 8);
+							m_reflection.draw(m_xOffset + player.getX() - 4, m_yOffset + player.getY() + 8);
 					}
-					if(m_curMap.wasOnGrass(p) && m_curMap.isOnGrass(p))
+					if(m_curMap.wasOnGrass(player) && m_curMap.isOnGrass(player))
 					{
 						// sinnoh maps use different grass
 						if((m_mapX > 32 && m_mapY < -37))
 						{
-							switch(p.getDirection())
+							switch(player.getDirection())
 							{
 								case Up:
-									m_SinnohOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 32 + 8);
+									m_SinnohOverlay.draw(m_xOffset + player.getServerX(), m_yOffset + player.getServerY() + 32 + 8);
 									break;
 								case Left:
-									m_SinnohOverlay.copy().draw(m_xOffset + p.getServerX() + 32, m_yOffset + p.getServerY() + 8);
+									m_SinnohOverlay.copy().draw(m_xOffset + player.getServerX() + 32, m_yOffset + player.getServerY() + 8);
 									break;
 								case Right:
-									m_SinnohOverlay.copy().draw(m_xOffset + p.getServerX() - 32, m_yOffset + p.getServerY() + 8);
+									m_SinnohOverlay.copy().draw(m_xOffset + player.getServerX() - 32, m_yOffset + player.getServerY() + 8);
 									break;
 								case Down:
 									break;
@@ -336,31 +337,31 @@ public class ClientMap extends TiledMap
 						}
 						else
 						{
-							switch(p.getDirection())
+							switch(player.getDirection())
 							{
 								case Up:
-									m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 32 + 8);
+									m_grassOverlay.draw(m_xOffset + player.getServerX(), m_yOffset + player.getServerY() + 32 + 8);
 									break;
 								case Left:
-									m_grassOverlay.copy().draw(m_xOffset + p.getServerX() + 32, m_yOffset + p.getServerY() + 8);
+									m_grassOverlay.copy().draw(m_xOffset + player.getServerX() + 32, m_yOffset + player.getServerY() + 8);
 									break;
 								case Right:
-									m_grassOverlay.copy().draw(m_xOffset + p.getServerX() - 32, m_yOffset + p.getServerY() + 8);
+									m_grassOverlay.copy().draw(m_xOffset + player.getServerX() - 32, m_yOffset + player.getServerY() + 8);
 									break;
 								case Down:
 									break;
 							}
 						}
 					}
-					if(m_curMap.isOnGrass(p) && p.getY() <= p.getServerY())
+					if(m_curMap.isOnGrass(player) && player.getY() <= player.getServerY())
 					{
 						if((m_mapX > 32 && m_mapY < -37))
 						{
-							m_SinnohOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
+							m_SinnohOverlay.draw(m_xOffset + player.getServerX(), m_yOffset + player.getServerY() + 9);
 						}
 						else
 						{
-							m_grassOverlay.draw(m_xOffset + p.getServerX(), m_yOffset + p.getServerY() + 9);
+							m_grassOverlay.draw(m_xOffset + player.getServerX(), m_yOffset + player.getServerY() + 9);
 						}
 					}
 					// Draw the walk behind layer
@@ -376,46 +377,51 @@ public class ClientMap extends TiledMap
 					}
 					g.resetTransform();
 					// Draw player names
-					if(!p.getUsername().equalsIgnoreCase("!NPC!"))
+					if(!player.getUsername().equalsIgnoreCase("!NPC!"))
 					{
-						if(p.getAdminLevel() == 5)
+						switch(player.getAdminLevel())
 						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(94, 136, 99));
-							g.drawString("<Owner>", m_xOffset + p.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						} else if(p.getAdminLevel() == 4)
-						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(96, 168, 168));
-							g.drawString("<Dev>", m_xOffset + p.getX() - g.getFont().getWidth("<Dev>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						} else if(p.getAdminLevel() == 3)
-						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(120, 0, 192));
-							g.drawString("<SuperMod>", m_xOffset + p.getX() - g.getFont().getWidth("<SuperMod>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						}  else if(p.getAdminLevel() == 2)
-						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(120, 0, 192));
-							g.drawString("<Mod>", m_xOffset + p.getX() - g.getFont().getWidth("<Mod>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						}  else if(p.getAdminLevel() == 1)
-						{
-							Color previous = g.getColor();
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 40);
-							g.setColor(new Color(255, 223, 0));
-							g.drawString("<Donator>", m_xOffset + p.getX() - g.getFont().getWidth("<Donator>") / 2 + 16, m_yOffset + p.getY() - 22);
-							g.setColor(previous);
-						} 
-						else {
-							g.drawString(p.getUsername(), m_xOffset + p.getX() - g.getFont().getWidth(p.getUsername()) / 2 + 16, m_yOffset + p.getY() - 36);
+							case UserClasses.OWNER:
+								Color previous = g.getColor();
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
+								g.setColor(new Color(94, 136, 99));
+								g.drawString("<Owner>", m_xOffset + player.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + player.getY() - 22);
+								g.setColor(previous);
+								break;
+							case UserClasses.DEVELOPER:
+								previous = g.getColor();
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
+								g.setColor(new Color(96, 168, 168));
+								g.drawString("<Dev>", m_xOffset + player.getX() - g.getFont().getWidth("<Dev>") / 2 + 16, m_yOffset + player.getY() - 22);
+								g.setColor(previous);
+								break;
+							case UserClasses.SUPER_MOD:
+								previous = g.getColor();
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
+								g.setColor(new Color(120, 0, 192));
+								g.drawString("<SuperMod>", m_xOffset + player.getX() - g.getFont().getWidth("<SuperMod>") / 2 + 16, m_yOffset + player.getY() - 22);
+								g.setColor(previous);
+								break;
+							case UserClasses.MODERATOR:
+								previous = g.getColor();
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
+								g.setColor(new Color(120, 0, 192));
+								g.drawString("<Mod>", m_xOffset + player.getX() - g.getFont().getWidth("<Mod>") / 2 + 16, m_yOffset + player.getY() - 22);
+								g.setColor(previous);
+								break;
+							case UserClasses.DONATOR:
+								previous = g.getColor();
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
+								g.setColor(new Color(255, 223, 0));
+								g.drawString("<Donator>", m_xOffset + player.getX() - g.getFont().getWidth("<Donator>") / 2 + 16, m_yOffset + player.getY() - 22);
+								g.setColor(previous);
+								break;
+							case UserClasses.DEFAULT:
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 36);
+								break;
+							default:
+								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 36);
+								break;
 						}
 					}
 				}

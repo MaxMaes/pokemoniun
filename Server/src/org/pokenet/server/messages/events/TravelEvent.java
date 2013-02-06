@@ -3,6 +3,7 @@ package org.pokenet.server.messages.events;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
@@ -19,9 +20,9 @@ public class TravelEvent implements MessageEvent
 			boolean ticket = false;
 			if(travel.contains("Vermillion City"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
 				{
-					if(p.getAdminLevel() == 0)
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
 					{
 						p.setMoney(p.getMoney() - 10000);
 						p.updateClientMoney();
@@ -38,9 +39,9 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Saffron City"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
 				{
-					if(p.getAdminLevel() == 0)
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
 					{
 						p.setMoney(p.getMoney() - 10000);
 						p.updateClientMoney();
@@ -58,9 +59,9 @@ public class TravelEvent implements MessageEvent
 			// Fuchsia City kanto
 			else if(travel.contains("Safari Zone"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getMoney() >= 30000 && p.getTrainingLevel() >= 25))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 30000 && p.getTrainingLevel() >= 25))
 				{
-					if(p.getAdminLevel() == 0)
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
 					{
 						p.setMoney(p.getMoney() - 30000);
 						p.updateClientMoney();
@@ -77,7 +78,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Mt.Silver"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getTrainingLevel() >= 25 && p.getBadgeCount() >= 16))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getTrainingLevel() >= 25 && p.getBadgeCount() >= 16))
 				{
 					p.setIsTaveling(false);
 					p.setX(1664);
@@ -91,9 +92,9 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Olivine City"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
 				{
-					if(p.getAdminLevel() > 0)
+					if(p.getAdminLevel() > UserClasses.DEFAULT)
 					{
 					}
 					else if(!ticket)
@@ -113,9 +114,9 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Goldenrod City"))
 			{
-				if(p.getAdminLevel() > 0 || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
 				{
-					if(!(p.getAdminLevel() > 0))
+					if(!(p.getAdminLevel() > UserClasses.DEFAULT))
 					{
 						p.setMoney(p.getMoney() - 10000);
 						p.updateClientMoney();
@@ -136,9 +137,9 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
 				{
-					if(p.getAdminLevel() > 0)
+					if(p.getAdminLevel() >= UserClasses.MODERATOR)
 					{
 					}
 					else if(ticket)
@@ -168,9 +169,9 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
 				{
-					if(p.getAdminLevel() > 0)
+					if(p.getAdminLevel() >= UserClasses.MODERATOR)
 					{
 					}
 					else if(ticket)
@@ -200,9 +201,9 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16 && p.getTrainingLevel() >= 50))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16 && p.getTrainingLevel() >= 50))
 				{
-					if(p.getAdminLevel() > 0)
+					if(p.getAdminLevel() >= UserClasses.MODERATOR)
 					{
 					}
 					else if(ticket)
@@ -232,9 +233,9 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() > 0 || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 22 && p.getTrainingLevel() >= 40))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 22 && p.getTrainingLevel() >= 40))
 				{
-					if(p.getAdminLevel() > 0)
+					if(p.getAdminLevel() >= UserClasses.MODERATOR)
 					{
 					}
 					else if(ticket)
@@ -260,7 +261,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("One"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(512);
@@ -274,7 +275,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Two"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(320);
@@ -288,7 +289,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Three"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(416);
@@ -302,7 +303,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Four"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(416);
@@ -316,7 +317,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Five"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(512);
@@ -330,7 +331,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Navel"))
 			{
-				if(p.getAdminLevel() > 5)
+				if(p.getAdminLevel() >= UserClasses.DEVELOPER)
 				{
 					p.setIsTaveling(false);
 					p.setX(672);
@@ -344,7 +345,7 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Iron"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR)
 				{
 					p.setIsTaveling(false);
 					p.setX(2752);
@@ -356,16 +357,15 @@ public class TravelEvent implements MessageEvent
 					session.Send(message);
 				}
 			}
-			else if (travel.contains("Battlefrontier"))
+			else if(travel.contains("Battlefrontier"))
 			{
-				if(p.getAdminLevel() > 0)
+				if(p.getAdminLevel() >= UserClasses.SUPER_MOD)
 				{
 					p.setIsTaveling(false);
 					p.setX(512);
 					p.setY(2520);
-					p.setMap(GameServer.getServiceManager().getMovementService().
-							getMapMatrix().getMapByGamePosition(29, 26), null);
-//					p.getTcpSession().write("U" + p.getX() + "," + p.getY());
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(29, 26), null);
+					// p.getTcpSession().write("U" + p.getX() + "," + p.getY());
 					message.init(64);
 					message.addInt(p.getX());
 					message.addInt(p.getY());

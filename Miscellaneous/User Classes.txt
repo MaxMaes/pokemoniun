@@ -1,7 +1,7 @@
 User Class	AdminLevel
 Owner		5
-Dev		4
+Developer	4
 SuperMod	3
-Mod		2
+Moderator	2
 Donator		1
-Standard	0
+Default		0

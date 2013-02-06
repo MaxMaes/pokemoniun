@@ -1,7 +1,5 @@
 package org.pokenet.server.messages.events;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
@@ -26,18 +24,7 @@ public class UnbanEvent implements MessageEvent
 			if(!m.selectDatabase(GameServer.getDatabaseName()))
 				return;
 			String bannedPlayer = request.readString();
-			ResultSet ip = m.query("SELECT lastLoginIP FROM pn_members WHERE username = '" + bannedPlayer + "'");
-			String bannedIP = "";
-			try
-			{
-				ip.first();
-				bannedIP = ip.getString(1);
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			}
-			m.query("DELETE FROM pn_bans WHERE ip = '" + bannedIP + "'");
+			m.query("DELETE FROM pn_bans WHERE playername = '" + bannedPlayer + "'");
 		}
 	}
 }

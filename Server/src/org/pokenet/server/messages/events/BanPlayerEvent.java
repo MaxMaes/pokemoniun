@@ -15,7 +15,8 @@ public class BanPlayerEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player player = ActiveConnections.getPlayer(request.readString());
+		String playername = request.readString();
+		Player player = ActiveConnections.getPlayer(playername);
 		Player mod = session.getPlayer();
 		if(player != null && mod.getAdminLevel() > UserClasses.SUPER_MOD)
 		{
@@ -24,7 +25,7 @@ public class BanPlayerEvent implements MessageEvent
 				return;
 			if(!m.selectDatabase(GameServer.getDatabaseName()))
 				return;
-			m.query("INSERT INTO pn_bans VALUE ('" + player.getIpAddress() + "')");
+			m.query("INSERT INTO pn_bans VALUES ('" + playername + "','" + player.getIpAddress() + "')");
 		}
 	}
 }

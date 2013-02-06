@@ -23,7 +23,9 @@ DEFAULT CHARACTER SET = ascii;
 DROP TABLE IF EXISTS `pn_bans` ;
 
 CREATE  TABLE IF NOT EXISTS `pn_bans` (
-  `ip` VARCHAR(48) CHARACTER SET 'latin1' NULL DEFAULT NULL )
+  `playername` VARCHAR(12) NOT NULL ,
+  `ip` VARCHAR(16) CHARACTER SET 'latin1' NOT NULL ,
+  PRIMARY KEY (`playername`, `ip`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -667,23 +669,6 @@ CREATE  TABLE IF NOT EXISTS `pn_friends` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `pn_history`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `pn_history` ;
-
-CREATE  TABLE IF NOT EXISTS `pn_history` (
-  `member` INT(11) NOT NULL ,
-  `action` INT(11) NOT NULL ,
-  `with` INT(11) NOT NULL ,
-  `timestamp` DATETIME NULL DEFAULT NULL ,
-  `details` VARCHAR(256) CHARACTER SET 'ascii' NULL DEFAULT NULL ,
-  UNIQUE INDEX `memberitem` (`member` ASC, `action` ASC) ,
-  INDEX `Memberid` USING BTREE (`member` ASC) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = ascii;
 
 
 -- -----------------------------------------------------

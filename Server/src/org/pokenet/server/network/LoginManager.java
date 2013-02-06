@@ -195,18 +195,16 @@ public class LoginManager implements Runnable
 			session.Send(message);
 			return;
 		}
-		/* Check if we haven't reach the player limit */
-		/* if (TcpProtocolHandler.getPlayerCount() > GameServer.getMaxPlayers()) { session.write("l2"); return; } */
 		/* Now, check that they are not banned. */
 		try
 		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE ip = ?");
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE ip = ? OR playername = ?");
 			ps.setString(1, session.getIpAddress());
+			ps.setString(2, username);
 			ResultSet rs = ps.executeQuery();
 			/* Make sure they are not banned. */
 			if(rs != null && rs.first())
 			{
-				/* This player is banned, inform them. */
 				ServerMessage message = new ServerMessage();
 				message.init(79);
 				session.Send(message);

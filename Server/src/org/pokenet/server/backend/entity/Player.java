@@ -1747,7 +1747,7 @@ public class Player extends Character implements Battleable, Tradeable
 			if(!c.getName().equalsIgnoreCase("NULL"))
 				/* Send no name to indicate NPC */
 				packet = packet + "!NPC!," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
-						+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",";
+						+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ",0,";
 		}
 		/* Only send the packet if there were players on the map */
 		/* TODO: Clean this stuff up? */

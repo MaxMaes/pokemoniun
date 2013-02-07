@@ -962,7 +962,7 @@ public class Pokemon extends PokemonSpecies
 			p.updateClientPokemonStats(index);
 
 			// Enter this pokemon in the pokedex
-			p.setPokemonCaught(pokeData.getPokemonNumber() + 1);
+			p.setPokemonCaught(pokeData.getSpeciesNumber() + 1);
 		}
 	}
 

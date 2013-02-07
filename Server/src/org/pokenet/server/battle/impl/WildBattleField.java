@@ -124,8 +124,8 @@ public class WildBattleField extends BattleField
 		m_wildPoke = wild;
 		m_participatingPokemon.add(p.getParty()[0]);
 		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
-		if(!m_player.isPokemonSeen(wild.getPokemonNumber() + 1))
-			m_player.setPokemonSeen(wild.getPokemonNumber() + 1);
+		if(!m_player.isPokemonSeen(wild.getSpeciesNumber() + 1))
+			m_player.setPokemonSeen(wild.getSpeciesNumber() + 1);
 		/* Call methods */
 		// applyWeather();
 		requestMoves();

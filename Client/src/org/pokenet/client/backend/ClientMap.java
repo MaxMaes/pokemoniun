@@ -318,7 +318,8 @@ public class ClientMap extends TiledMap
 					if(m_curMap.wasOnGrass(player) && m_curMap.isOnGrass(player))
 					{
 						// sinnoh maps use different grass
-						if((m_mapX > 32 && m_mapY < -37))
+//						System.out.println(m_x + ", " + m_y);
+						if((m_x > 32 && m_y < -37))
 						{
 							switch(player.getDirection())
 							{
@@ -355,7 +356,7 @@ public class ClientMap extends TiledMap
 					}
 					if(m_curMap.isOnGrass(player) && player.getY() <= player.getServerY())
 					{
-						if((m_mapX > 32 && m_mapY < -37))
+						if((m_x > 32 && m_y < -37))
 						{
 							m_SinnohOverlay.draw(m_xOffset + player.getServerX(), m_yOffset + player.getServerY() + 9);
 						}

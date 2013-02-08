@@ -102,6 +102,13 @@ public class SoundManager extends Thread
 	 */
 	public void setTrack(String key)
 	{
+//		yield();
+		while(true)
+		{
+			yield();
+			if(m_tracksLoaded)
+				break;
+		}
 		if(key != m_trackName && key != null)
 		{
 			m_trackName = key;
@@ -162,6 +169,7 @@ public class SoundManager extends Thread
 				}
 				catch(Exception e)
 				{
+					e.printStackTrace();
 					System.err.println("Failed to add file: " + addFile[1]);
 				}
 			}
@@ -187,7 +195,7 @@ public class SoundManager extends Thread
 			/* Wait for the soundLoader to finish loading the in-game music. */
 		}
 		System.out.println("Background music loading complete");
-		m_tracksLoaded = true;
+		this.m_tracksLoaded = true;		
 	}
 
 	private class SoundThread implements Runnable

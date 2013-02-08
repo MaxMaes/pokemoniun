@@ -7,7 +7,7 @@
  <tileset firstgid="2561" source="Tileset 5.tsx"/>
  <layer name="Walkable" width="25" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC72U0Q3CMAxEzQAsw7yBL8pXyx4wVR2pkazDvjgt8KST/OFLmkvqIiJX1U1VoL6cubA/qu+qSfVwagv21D2Y19azalE9ndqCPXUP5rU1O6MFe36RFWLvpZeVl4OXlbd2E3o9Mlmx94Vej0xWbA/0Rux5VyNZiXyet3ot3rsayUq2M9b+yfgt3j+4Jyvr64F3ks0KfWxNNrsi8LzeOsjrJPLeZNfJMsM+S9DTy4dRgu9s9P7ZLGx2jc63CDa7svOtB8vhH1l9i6M5ZDiaQ2MFysUU/JgIAAA=
+   H4sIAAAAAAAAC7VUWw7CMAwrv0hchvMOvhhfwD3YGTgMiVgky8pjK5slS9GaxK3TdWitXYRX4UDx+ZST86P4JhyFdydGcI5qZLUYP4RP4cuJEZyjGlktxtkZEZyzh1cMnEvk1ef4Y5vjyiuvtxFrrSdDv1deZfcLazONyqtMg/2JoGtr79Uar0wDvdJahHev1nhlGpo/Qj3C+wd7vMK6CjyTpV5xXdYzersqDaTXh3Peh9ammdin0ojOxeu8rx7wPlnfY69OtH/+Z3t1Mg3vfdtag9+3Pc6x1UzMk955LtUwH/7BF03LEhaYCAAA
   </data>
  </layer>
  <layer name="Walkable" width="25" height="22">
@@ -27,7 +27,7 @@
  </layer>
  <layer name="Collisions" width="25" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83UOU7DQBiG4Qk29GwHAEHhuHIMBwAqQ2VDDsBSULO3IE7Afg72lu0C7C3bPXgjz0ijX8ZygoP4pUexYvv7Mhkn1YpSVcHHBOy5cpS6xg1ucYcxrvEy7pV5WbI63sh8xwc+8aU7AtQsIcYF+3yS01FxleqAAxedbtoh84xYZ06KfC+nY4DMQTc9HuJ1GJHOSESuXI+dH1jnZUfemPX4osesozFext612uH/cJ9ZQ9LGDpPvtbHDrMXsYcOUuLabPe5BL/rQ77bWMcszP4d5LDhirWTWEGIEo1ZHpL+HIh2b5G7p7G3REevMaV5nULc6FrvStRTp+M38RUekf1d5HfJ/JxHXxtbzYNhj3gub+KxyXc08y0UnEJnyWa47KXlc1iyTt4JVrGEdG1gqsWeXrD3s4wCHOMJOiR0nZJ3iDOe4wCWOS+x4IOsRT3jGC15xX/Ke/Lf5BkgFujqYCAAA
+   H4sIAAAAAAAAC73UuVLCUBTG8YuJFnZuD6CjBVAF9AHUCq0AeQCXwtq9xfEJ3J/DvXV7AffCxu09/GdyM3M4hsjE4Jn5TTIEvi+XG8hljMkpeUxCzqVjzBWucYNbjPOebMRndV6UqI43Mt/xgU982Q4PBaGICUVer8R0ZFxjOuDARacbdOi8UNlmTqn8bEzHIJlDbnA+zHEEJZtRUbl6PTLfE9d1R9yE68mrnnAdr93cj/m5d0k7pk2QqfkdntiPdnTUTeN+tKMjXEu4h75p1dHDHveiD/0YcJN1zPLMz2EeC05jh0dmAUWMYkx0lOz33EpHndxNm72lOso2s8pxBjXRsdgVrKWVjr/Mf3SU7O8qrsN/tvT/ipyyeB5CcsLXqjEdv60r6v7ktJqr1yVH3p8/NScgz5P0NLvPZfJWsIo1rGMDSwl6mnXskLWLPezjAIfYTrHjmKwTnOIM57jAUYod92Q94BFPeMYL7lLsSFNaHd9v+Iu9mAgAAA==
   </data>
  </layer>
  <layer name="Collisions" width="25" height="22">

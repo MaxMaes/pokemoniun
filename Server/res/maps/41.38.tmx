@@ -21,17 +21,12 @@
    H4sIAAAAAAAAC2NgGAWjYPCDLCbccmrMxOFRMPwBAEIKCsvQBAAA
   </data>
  </layer>
- <layer name="Grass" width="11" height="28">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMguEBAMaovHHQBAAA
-  </data>
- </layer>
  <layer name="Water" width="11" height="28">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGBnAjBETj6qlntpRMAoGAwAAysoxPtAEAAA=
   </data>
  </layer>
- <layer name="Walkable" width="11" height="28">
+ <layer name="Grass" width="11" height="28">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGFxAjRkTU0MtNysDAx8SPsOCW60uKypfnxW7uuGu1hco54eE/fGopVW8wUAWE2E1o2AUAACiVdET0AQAAA==
   </data>

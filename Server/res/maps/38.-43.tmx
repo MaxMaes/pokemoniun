@@ -19,7 +19,7 @@
  <tileset firstgid="2049" source="Sinnoh Exit Cave.tsx"/>
  <layer name="Walkable" width="68" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XUQ6CMAwG4BEPo17DhIAnEe5/AV10SV02aLuWFmXJ/6ABtn10MPoQQk/I2NGOh+dxz9UObFv16dXCwqNkkerFg5O1hycLCw9MvVj2Z+3Bze1UTs0A647xqPW9NpbzK5dCrszrc0NxlvSAfUeLEWQCmTe0oDppeQzAYha47t49HoVa+GcPj/NfGmv8HZ+5W3lYzRnub1JqHuldpOmhPT/J+kix8ijdu7W0zD+E+li1PDDjkPbAOnn3oOTeWBtLtTxk19b2kAjGlLK2wsch5Rc91ozg/0P3beLdY+re0bo+rA1oDZu0R8uax3qkxvGAjVIf3HefxjMQE+y7iuPRshdYum+S+wquR62+MOuFM2bNOUvXCHW9SI/Pi0cyoa4XbY+WvWntGOq+N19D0rXBtYTn5OOl1hjFJH/Gaq0V6TXAOafW9uzREk47PJY9ooWX7xcPHp6+5w4Pe48nijU67gAiAAA=
+   H4sIAAAAAAAAC+3XUW7CMAwG4BROsr0wjrFJCDgJcO5dZI00S1YUt7Zj1wZR6X8ANU36YbfhVEo5CXKZZOfjcdqx3sHHVnNmtYjw6FlAvWRwivbIZBHhwamXyPmiPbT52fdDGXDdOR7U3GtrOcz56uTYnPfNvL42EmdLDzx3tbig3FEe6Nof85jfna+HxMnL44wsHsR1Iy229rh1aqGNd59k8qDq4RMlsjbatdbP9Zm7lUdUb+D9DYTygHeRpwfUhJUFdW8W9QHx9Fh6RvR+u7WM3P95otfq5dHLnbgPKw+uU3YPSa4G16BquXXy9rBIYaxD0lvl3wHyih5rRvh7bPEMHrXHLPqMCrbA1viw9hjpea6H1g0c4JDUh/bd5/EM5IT7rtJ4jOwFlnrecl+h9cD3LqkPmGN0XZlrRNov1uvL4gEm0n7x9hjZm1LnSPe9bQ9Z14bWEo9p1yutMYlJ+4z16hXrHtCMoY5n9hiJ5nh7LHtUiyz/XzJ4ZPo/9/aI9/gDwMBtDgAiAAA=
   </data>
  </layer>
  <layer name="Grass" width="68" height="32">

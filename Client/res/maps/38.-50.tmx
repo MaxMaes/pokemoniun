@@ -7,7 +7,7 @@
  </tileset>
  <layer name="Walkable" width="54" height="52">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SSwqAMAxF0YrLcRdC978lR52UolXyaeJ9cOc5kFpKqURExknO25LZpTlMMUz9MpqKwL0rmtoymtoymtpw6bjO/blorhnHV9sKrjtjVFdvHHkyuI4th0vrD6VtX1zSHmnTW9eMLapLa7hwrTBc/3at4sMVx6dt8nBZmKxdViZLm7XJwuht0rB5W0Y27xuIiIiIiCh+FzflOF/gKwAA
+   H4sIAAAAAAAAC+3UQQqAMAxFwYjH8RZC738lt1lVBaH4mcLs80joqKoBAAAQ7tzvrZ7xq6b+/tjWO5J21ncz211C17FldKXeYeJ/+KRt9XwAAAAAAABvXMHh1XjgKwAA
   </data>
  </layer>
  <layer name="Walkable" width="54" height="52">

@@ -27,7 +27,7 @@
  </layer>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglFACOQrDLQLRsEoGAWjgHLQxk6a+k6g+skk4Kkkmj8KRsEoGAXkgpNsDAyngPg0G2n6ADKx5v8ADwAA
+   H4sIAAAAAAAAC+3OsQkAIAxE0VRxc8FaHEpdwimstbOOCLH4D667hBMBgGN4D/jU9B4AAA/EYOun3c+GFON/ALhVVaTtdLXdLYuBpfEADwAA
   </data>
  </layer>
  <layer name="Grass" width="24" height="40">
@@ -47,7 +47,7 @@
  </layer>
  <layer name="Collisions" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XTQ6CQAyFG9lzAFxg8H7GvwMg7o038lhGV9YwC2ymnU5hM6Zf8tIJk5YXwuK1AYA1qklUjlRfh9oqKkeqL/X+UvyfKl7nip9/ZHqof4lBmN8zd9S/xF2Yf2PucvxbyPFvwf3/0rcAF9SAurbjsyX9P8PMF9Z3OC/pf7cZ6x7rIZxL+v5Taijv/6G4fxn3L+P+Zdy/zL/51+Zljtz8bPWrzf9Sfo5l5jn+aX6OZWbr/sLN1+49mr0lNn/u3jOF5n8u88d4rHSy9Hz1AXcDmJkADwAA
+   H4sIAAAAAAAAC+2XQQqEMAxFg+7nALrTG44eQDyAeCOvprMbSv9PGnFRyYPQRUl8FBc/nYj0V3XKidD6hqtGw4nQ+rTv1+I/tbjmFs//gp7Un7GS+Qu4S/0ZO5m/gbsSfw8l/h7CX+dJf5G6/Z98/4/U//+EPyf8OeHPCX/O2/yteRlRmp+9vtb8z/JzLjPf8U/zcy4ze/cXNN+691j2ltz8u3vPP2n+R5k/x9HYytPzqxOJtVTWAA8AAA==
   </data>
  </layer>
  <layer name="Collisions" width="24" height="40">
@@ -57,12 +57,12 @@
  </layer>
  <layer name="Collisions" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XwQrAIAiGPe2wnbZ1aez9n3PB8CKmFnMH8YMQouz3R6IAXtY2NiH20NYfbZyG2EPbp+mbBfNq+maJot+b9J8nin4vLudzPP1fIPtHI+8fmewfGe/+Sf9louj3guqnsQzk2pk56j+N90D+KuT5Sr/2/v9bP8LVIflt/fcgXB3VsC+x8QAdJaC0AA8AAA==
+   H4sIAAAAAAAAC+2XuwqAMAxFOzno5GOp+P9/5mMRXURHA7ZLqUlbWsGSA5eLYuNtCGKFeChBFeJvUM83oNbB36DWUflC0XWpfKHkkj813H87f8s/gibQDFoi1tWsyjfQDurVdaz3HMpP0CXS9r8QPD8U/P3B4fnBST0/3H+cXPKnwsxveudRq7bcM/tv+uBRXyJ1YuWn/v+/zq+x7QPrt+u5R2Pbh3RYx7hxAyAHIqMADwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2RywqAIBBF3ZZtemyCwP//w5aNYCQ6jjq2SJoDwwVj4nhVqowDOdsLd0vYkLP5xf+3+mN+XLB7YX5csHuJ/4P4xwxGqRFGw0wm/v51f8vpvHvs30f8acSfRvxpxJ9G/GlS/hpmdFnLvWcT819gVi9rad3vjdw7+H1z3ivX49/6riXsP5Vcwv5TeQGwmZtXAA8AAA==
+   H4sIAAAAAAAAC+2RTQqAIBBGXdeqn03Q/W9V3aAzNIKR2MyoYwuleTB8YEw8P41JY0XOlsTdFGbkbPjw/6X+mJ8U7F6YnxTsXur/oP5vNpgd5iC+1+5vOV222L+P+vOoP4/686g/j/rzUP49TOcyl3vPJuY/wkxe5lK63xqxd/D7lrxXrMe/9Z1L2D+VUsL+qbwA+Po+lAAPAAA=
   </data>
  </layer>
 </map>

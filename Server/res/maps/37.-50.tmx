@@ -9,6 +9,7 @@
  <tileset firstgid="4004" name="1" tilewidth="16" tileheight="16">
   <image source="normal6.png" trans="000000" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="5028" source="Ladder Cave Set.tsx"/>
  <layer name="Walkable" width="46" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3UuwnAMAxAQUPakP2nyhZZwBOYdCniTydkznCVVLxCuB6lVAAAAADYwHPNRTeuNPfm0a1/XSt70a27dt9nnu5vV+/Go1tH7Zn+lFn7+6L7Rt3RDQAAkEUDZQT5zPAjAAA=
@@ -21,7 +22,7 @@
  </layer>
  <layer name="Grass" width="46" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TOwqAMBBF0ezB1bn/jUgKm+A3jW/wHLCK4HWYtAZZ1mXuSW++ei+l++5fzs6/7p6ZeXJ34q6P363SfeTt7iSpOO/uyX1M7a44713V7q5qd1etd1SxGQAAAAAA/mgDnPDVJfAjAAA=
+   H4sIAAAAAAAAC+3TOwqAMBBF0WzCrbp+SWET/KbxDZ4DVhG8DpPWIMu6zD3pzVfvpXTf/cvZ+dfdMzNP7k7c9fG7VbqPvN2dJBXn3T25j6ndFee9q9rdVe3uqvWOKjYDAAAAAMAfbS6IqLTwIwAA
   </data>
  </layer>
  <layer name="Water" width="46" height="50">

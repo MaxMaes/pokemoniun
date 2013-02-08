@@ -33,7 +33,7 @@
  </layer>
  <layer name="LedgesDown" width="63" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OAQkAAAgDsIPt7B/IGCJuCZYAAAAAAF90bQ8AAACAywarzzqebCQAAA==
+   H4sIAAAAAAAAC+3OQQ0AMAgEsEt4zhn+BSGDLLQKmgAAAAAAF7xKurYXAAAAwM8G83KmnGwkAAA=
   </data>
  </layer>
  <layer name="LedgesRight" width="63" height="37">

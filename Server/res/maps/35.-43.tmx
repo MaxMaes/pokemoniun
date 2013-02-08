@@ -10,7 +10,7 @@
   <property name="pvp" value="enabled"/>
   <property name="waterPokemonChances" value="Psyduck,65;Golduck,35;"/>
   <property name="waterPokemonLevels" value="20-30;20-40;"/>
-  <property name="wildProbability" value="1"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="128"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

@@ -4,12 +4,12 @@
  <tileset firstgid="1025" source="SinnohWaterSet.tsx"/>
  <layer name="Walkable" width="50" height="52">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PwQnAIBAFUZtL/y3lHAlEd6OOOAP/qOwr5dm16epW36NDB2k6WDvd8Xc6Yo7R6Wj7Z3Y63t+vTgfj/jodrHSw0sFKBysdrHSw0sFKBysdrKIOmifrWO35uv9Ux2xP6/2nO0Zbeu/POEZadndE7886aNPBmg7WdLCmg7UbIqNfKaAoAAA=
+   H4sIAAAAAAAAC+3RMQqAQBAEwQN/Jvj/LxlrcKntUgOdb7FrPXf9tPe+voeDoxRHK45WHK04WnG04mjF0YqjFUcrjlYc+85jhmPKPzg4ODpxtOJoxdGKoxVHK45WHK04WnG0muK4ARCyXAugKAAA
   </data>
  </layer>
  <layer name="Walkable" width="50" height="52">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TQQqDMABE0QSP01u49di2PZd2IQQpKgjVKe9B9vNJUgq/8KqlvOvVK85bOtJbxnn/M7zh4186AAAA1vpu/9zdkd0JLe3G5Dtp923tT+x41MyO9bsaaua7Sv4XrW+bEzsAAAAAuJcJ4+ocp6AoAAA=
+   H4sIAAAAAAAAC+3UywmAMBRFwQTLsQu3lu2nLnUhSBYqCOoLM5D9PSQkJd4w5ZTm/PWK5/aO6C3Dun8M3rCppQMAAKDUNdfn7+7sjtBy3Bj5To77zvZH7GhzzI7yXfU55ruq4b/a1NAAAAAAwP8sUpBCYKAoAAA=
   </data>
  </layer>
  <layer name="Water" width="50" height="52">

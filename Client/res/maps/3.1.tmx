@@ -21,7 +21,12 @@
  <tileset firstgid="1485" source="Path0.tsx"/>
  <layer name="Walkable " width="24" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACzvHysBwbhSP4iGG0xiIV8NAhNqRhHGBgXYXDDcwMjDUMyJoapuPbHYDAfOXDqJwGcWkYXLTNrHqqZF3AEQKBjGABwAA
+   H4sIAAAAAAAACzvHysBwbhSP4iGG0xiIV8NAhNqRhHGBgXYXDDcwMjDUMyJoapuPbHYDAfOXDqJwGcWkYXLTNbF6qJFvAL56d72ABwAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="24" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCoYuaGOkjjlTqWQOsQAA4mqzioAHAAA=
   </data>
  </layer>
  <layer name="Water" width="24" height="20">
@@ -41,7 +46,7 @@
  </layer>
  <layer name="WalkBehind" width="24" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WRWw5AMBBF2z1hW94bQPjy+JFYrishJtXSIaFOclOReZwiBI9JCjFKZhMYbvSYaDWzJuWdh/hIcDLHVKO739v+T/jSv7LYc1Xj8vcPkQiJkQRJkQzJSY1r/gVzt2v+XK78y4e7vvbnoPv3f/JXoe505uLfIPV6cqhJ76jM3Ojw3Mv9tL1PK4+9lBn0I3+7gAcAAA==
+   H4sIAAAAAAAAC2NgIA3MYGRgmMpIoiYgmECGHlygF4tZM9DETIDYFIjN8JiDSw02/9Hb/ZSAgXR/CxH2EFIzmMM/H4gLgLgQiIuAuBiIS4C4FEnNYHN/E4l2Dzb3kwoIub+ZQrsG2v2kAGxxP5Tcjw6Q3Y5sJsj97UDcBqVJAW049CKHSR+Q3c+IoIn1Ty8jpl5k9wMAa8dszYAHAAA=
   </data>
  </layer>
 </map>

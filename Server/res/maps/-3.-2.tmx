@@ -31,7 +31,7 @@
  </layer>
  <layer name="Walkable" width="44" height="38">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC4o4idNfKBBFQ534RIfBaSBnCEWjiVDzL2j4UtbMJTDd4/gwLmDHHBkiLl3FIyCUYAbzOYbaBeMTHDIkTh1uxSJN/PMaFyOglEwCkbBgILPRJbtgwH8Arr1NxD/GUJuHgWkg9F23igYBaNgFAw/AADtedAJIBoAAA==
+   H4sIAAAAAAAAC2NgoC4o4idNfKBBFQ534RKnFkgapOFBbZAzxPxZMsTcOxq+tAVDOXz3CA6cO8gBR4aYe0fBKBgFuMFsvoF2AfFgOLXHDjkSp26XIvFmnqFSXA6ncB7MYDScBw9IHo2LUUAl8JnIsn0wgF9At/4G4j9DyM3DAdC7vBlM7TxC9R459eJo+T0KRsEoGIkAAAg1aL8gGgAA
   </data>
  </layer>
  <layer name="LedgesDown" width="44" height="38">

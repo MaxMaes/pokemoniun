@@ -10,7 +10,7 @@
   <property name="pvp" value="enforced"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
-  <property name="wildProbability" value="5"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="-2"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

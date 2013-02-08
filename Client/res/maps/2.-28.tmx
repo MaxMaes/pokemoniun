@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="38" height="34" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value=""/>
   <property name="dayPokemonChances" value=""/>
-  <property name="nightPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value=""/>
-  <property name="waterPokemonLevels" value=""/>
-  <property name="waterPokemonChances" value=""/>
-  <property name="wildProbability" value="1"/>
-  <property name="fishPokemonLevels" value=""/>
+  <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="disabled"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="1"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
@@ -24,17 +24,17 @@
  </layer>
  <layer name="Walkable" width="38" height="34">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OQRUAEAAFsH/QvwllCMRdAB5bgiXvqyVp5fRi19dpXPgCAAAA4F8TQcW4cjAUAAA=
+   H4sIAAAAAAAAC+3OsQ3AIAwAsAy5tr/BM/Qg2Ct1YCFC9gWOuF/LiJ6nF19jnd6CLwD2PacDPyrfAACAOia9fY8NMBQAAA==
   </data>
  </layer>
  <layer name="Collisions" width="38" height="34">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VQQ5AMBCF4emiEcfnBG5B2OEmHEQbkXRDO9FOK96X2LCYn6JE780q7JyEyZmLLr8p01wfdPGgiwddPF/q6mr5DteozuNie56aRuFnezfP7UzRZPe4u33u6VoKjSZqtdy8i+/d7E3TkKErRO7vCuKRWMulIlqr9HO4NtO0B3b5/t05ce7jz0pewxKVvAcBH95/iOUAg47VhDAUAAA=
+   H4sIAAAAAAAAC+3VQQ5AMBBA0bGQxlW7dBNO4BaEHW7CQVRiMRvaiXamYl5igcV8aQHw3lyEXeMwobna5TcJzfXRLhrtotEumi91dRV/Bza6JovOz56nJnt/Kzr7MA93pmiq0XF3j0tTArQl48CLb2/2rmkQ6Aoh/V6peDjWcjEAq0k/h2pzTXtgl+/bLYnyHH+W8xrmKOd/kKLT/a9iOQCDlAtMMBQAAA==
   </data>
  </layer>
  <layer name="Collisions" width="38" height="34">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3V929VZRzA4XP1tmWXvQQZJiC42HuJgJoo4gBFHCjwDwAKKAgqICMxkZ9UkL0UFOQXLCRSWpZsUDBxMsre2wGJD6E3valFbk9NuQl8kyd5c0/ecz95e0/PikgQrAhhFVm5xkWDYDyxmWg9KZp3PTPkd4RxdWJtizQsjutaYr00mteUUcxdK3PPbYeGnXFdu6x3R/OabkbXykhw3cm43XW76xbqyk4LgjVpyde1X1NOEnYl69/x/+iKf88VRnYk8a7Vhbx3ZiTvXVKUtv/qCtOUkXvfrOu0xZ6rAptyr2XHrfNP2KZY142eq5klrynoWv51USYjwa7inkS7Poz++7OizGz3m8Nc5jGfBXHfkUzntSVE10/2/Mwv/Mpv/M4e9rKP/eRwgIMc4jBHOMoxjnOCk5ziNGc4y7kEuvaWCIL+ft+R2G88xZo7uJMoKaSSRglKUorSlKEs5UinPBWoSCUqU4WqVKM6NVIKf14N7GnIvTSiMfdxPw/wIA/RhKY0ozktaEkrWtOGtrSjPR3oSCc6F6Ir9v/oCXuepCdP0YuneYZneY7e9OF5XqAvL9KPl3iZV3iV/rzG6wxgIINCnNdge4YwlDd4k2EMZwRv8TYjGcU7jGYM7/Ie7zOWcYznAyYwkUlMDtH1sT2f8ClTmcZnTGcGM5nFbOYwl3nMZwEL+ZwvWMRivuQrlrCUr0N0fWvPKjJZTRbZrGEt61jPBr5jI5vYzBa2so3t7GAn3/MDu9jNjyG6cuw5wEEOcZgjHOUYxznBSU5xmjOc5RznucBFLvEHf/IXf3OZKyG6SqV6/ilDWcqRTnkqUJFKVKYKValGdWpQk7uoRW3upg51qUd97km9cddH2qfE9TexpynNaE4LWtKK1rShLe1oTwc60onOdOFhuvII3ehODx7lMR5PoGu5pm/iuoprYueRTO/HqxM7j4K61rPsJtuQrysZmvK3JVNTfNs/bKtFlDAUAAA=
+   H4sIAAAAAAAAC+3VV4wUdRzA8UH37ui9F0FJQBSR3osURRJEVETxpMvDwRMcFqQpSpOERJ8UkN4EBHzSJwUBO6gImiBVjt6b3cQPIUvmlgX2huTYKP/kk0x28tv57j8zO8ODIBgeQT9GhUyJBZfX9Fj+c9kRrxHFiIS2VaGuNbH8TTmF3BVu2xrq2h7L33QzukYEV185wa2uW13/n64NWUGwMSv9uvZrykvDrvj6L3YlvudSlVuArpEF/O7s4Mr3XJS2a3VFacoJ/eZkbfHnKtl8/Fxu6DhxRW0Kd13ruZpf7JJk5xKPb2SF78dU7t/CWql2zYwl+fAG1kLft4jFLGEpy0LXSKf92hyha4eZn9nJLnazh73s4xf2k8cBDnKIwxzhKMc4zglOcorTnOEs51Lo2lc0CAa5v4vE7/EMx9zG7cTIIJMsilKM4pSgJKUoTRnKUo7yVKAilahMFapSLaPg+1XPTH3upgH3cC8NuY9G3E9jmtCUZjSnBS1pRWva0JZ2tKcDHelUgK74/1FPM4/Qi0fpzWM8zhP04Un68hRP049nyOZZ+jOAgQxiMEMYynMMi7Bfo8zkMprneYEXeYkxvMxYxjGeCUzkFV5lEq/xOpOZwlSmMZ03mBGh620z7zCL2czhXeYyj/ksYCGLWMwSlrKM5bzHClayivdZzRrW8kGEro/NfMI61vMpG9jIJj7jc77gS77ia75hM1v4lu/4nq38wDa28yM/RejKM3OAgxziMEc4yjGOc4KTnOI0ZzjLOc5zgV/5jd/5gz/5i7/5J0JX8UzPPyUpRWnKUJZylKcCFalEZapQlWpUpwY1qcUd1KYOd3IXdTOv3/Wm9rdC/Y3NNKEpzWhOC1rSita0oS3taE8HOtKJB+hMF7rSjQd5iO48TI8Uuj7U9FGoq7BWfD/S6f14ccX3I1nXGIbcZGMTutKhKbEtnZrCbf8C6X9w8jAUAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="38" height="34">

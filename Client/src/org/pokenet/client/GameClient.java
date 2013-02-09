@@ -988,6 +988,7 @@ public class GameClient extends BasicGame
 				getUi().getNPCSpeech().setVisible(false);
 			if(getUi().getChat() != null)
 				getUi().getChat().setVisible(false);
+			getUi().hideHUD(true);
 			getUi().setVisible(false);
 		}
 		catch(Exception e)

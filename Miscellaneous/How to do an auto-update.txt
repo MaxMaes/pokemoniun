@@ -9,20 +9,21 @@ So for instance, betaclient.jar will be in the zip's root and map 2.-49.tmx will
 IMPORTANT!!! Name the update package <version>.zip!!!
 
 2. 
-Upload the update package to the updater's dropbox (if you lost or dont know the login info, you probably shouldnt be there. Ask Myth1c, sadhi or Remyoman for more).
+Upload the update package to the updater's folder C:\xampp\htdocs\updater\patchfiles (if you lost or dont know the login info, you probably shouldnt be there. 
+Ask Myth1c, sadhi or Remyoman for more).
 
 3. 
 Create a new entry in the updatelinks.ini
 
 Example:
-[1.4.1]
-link=https://www.dropbox.com/s/sxlmlm098mi2egn/1.4.1.zip
+[1.5.1]
+link=http://s1.pokemonium.com/updater/patchfiles/1.5.1.zip
 forced=YES
 
 So to put it in a template:
 
 [version]
-link=publiclinkyoujustcopied
+link=http://s1.pokemonium.com/updater/patchfiles/<version>.zip
 forced=<YES if the client doesnt need to be asked for confirmation, NO if this update might be unstable and the user might want to stick to the current version until it is fixed>
 
 4.

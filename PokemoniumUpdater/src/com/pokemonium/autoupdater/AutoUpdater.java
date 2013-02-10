@@ -27,8 +27,8 @@ import org.ini4j.InvalidIniFormatException;
 
 public class AutoUpdater
 {
-	private String updatelinks = "http://dl.dropbox.com/u/135149666/Pokemonium%20Updater/updatelinks.ini";
-	private String versionlog = "http://dl.dropbox.com/u/135149666/Pokemonium%20Updater/versionlog.txt";
+	private String updatelinks = "http://s1.pokemonium.com/updater/updatelinks.ini";
+	private String versionlog = "http://s1.pokemonium.com/updater/releaselog.txt";
 
 	
 	private String latestVersion = "";

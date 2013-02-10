@@ -20,8 +20,10 @@ public class CanLearnMoveEvent implements MessageEvent
 		if(move != null && !move.equalsIgnoreCase("") && p.getParty()[pokemonIndex] != null)
 		{
 			boolean hasMove = false;
-			for (int i = 0; i < 4; i++)
+			for(int i = 0; i < 4; i++)
 			{
+				if(p.getParty()[pokemonIndex].getMoveName(i) == null)
+					break;
 				if(p.getParty()[pokemonIndex].getMoveName(i).equalsIgnoreCase(move))
 				{
 					hasMove = true;

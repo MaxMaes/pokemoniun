@@ -536,8 +536,8 @@ CREATE  TABLE IF NOT EXISTS `pn_pokedex` (
   CONSTRAINT `Player_dex_fk`
     FOREIGN KEY (`memberId` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
@@ -588,8 +588,8 @@ CREATE  TABLE IF NOT EXISTS `pn_members` (
   CONSTRAINT `dex_id`
     FOREIGN KEY (`pokedexId` )
     REFERENCES `pn_pokedex` (`pokedexId` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
@@ -639,8 +639,8 @@ CREATE  TABLE IF NOT EXISTS `pn_box` (
   CONSTRAINT `player_box_fk`
     FOREIGN KEY (`member` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
@@ -660,13 +660,13 @@ CREATE  TABLE IF NOT EXISTS `pn_friends` (
   CONSTRAINT `player_friend_fk`
     FOREIGN KEY (`id` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `firend_fk`
     FOREIGN KEY (`friendId` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -690,8 +690,8 @@ CREATE  TABLE IF NOT EXISTS `pn_party` (
   CONSTRAINT `player_party_fk`
     FOREIGN KEY (`member` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
@@ -721,13 +721,13 @@ CREATE  TABLE IF NOT EXISTS `pn_mypokes` (
   CONSTRAINT `player_pokes_fk`
     FOREIGN KEY (`member` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `party_pokes_fk`
     FOREIGN KEY (`party` )
     REFERENCES `pn_party` (`id` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
@@ -812,8 +812,8 @@ CREATE  TABLE IF NOT EXISTS `pn_cheatlog` (
   CONSTRAINT `player_cheat_fk`
     FOREIGN KEY (`playerid` )
     REFERENCES `pn_members` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 

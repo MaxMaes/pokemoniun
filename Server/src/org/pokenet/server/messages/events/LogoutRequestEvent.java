@@ -17,7 +17,7 @@ public class LogoutRequestEvent implements MessageEvent
 		// TODO: Test proper functioning while in Battle/Trading.
 		try
 		{
-			Player player = ActiveConnections.getPlayer(request.readString());
+			Player player = session.getPlayer();
 			if(player.isBattling())
 			{
 				/* If in PvP battle, the player loses */

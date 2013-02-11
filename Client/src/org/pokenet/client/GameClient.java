@@ -143,7 +143,7 @@ public class GameClient extends BasicGame
 			m_instance = new GameClient(GAME_TITLE);
 			m_soundPlayer = new SoundManager(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
 			// m_soundPlayer.mute();
-			System.out.println("Waiting for music to load");
+			// System.out.println("Waiting for music to load");
 			m_soundPlayer.start();
 			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
@@ -155,7 +155,7 @@ public class GameClient extends BasicGame
 			m_loadSurroundingMaps = false;
 			m_soundPlayer = new SoundManager(false);
 			m_soundPlayer.mute(false);
-			System.out.println("Waiting for music to load");
+			// System.out.println("Waiting for music to load");
 			m_soundPlayer.start();
 			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}

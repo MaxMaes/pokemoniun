@@ -72,7 +72,7 @@ public class GameClient extends BasicGame
 	private static Session m_session;
 	private static boolean debug = false;
 	private static final int FPS = 30;
-	private static final String GAME_TITLE = "Pokemonium 1.5.0";
+	private static final String GAME_TITLE = "Pokemonium 1.5.0.1";
 	private static AppGameContainer gc;
 	private static Connection m_connection;
 	private static String m_filepath;
@@ -157,7 +157,7 @@ public class GameClient extends BasicGame
 			m_soundPlayer.mute(false);
 			System.out.println("Waiting for music to load");
 			m_soundPlayer.start();
-		    m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
+			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}
 
 	}

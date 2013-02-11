@@ -600,10 +600,6 @@ public class WildBattleField extends BattleField
 	@Override
 	public void refreshActivePokemon()
 	{
-		/* m_player.getTcpSession().write(
-		 * "bh0" + this.getActivePokemon()[0].getHealth());
-		 * //m_player.getTcpSession().write(
-		 * "bh1" + this.getActivePokemon()[1].getHealth()); */
 		ServerMessage informHealthFirst = new ServerMessage(m_player.getSession());
 		informHealthFirst.init(33);
 		informHealthFirst.addInt(0);
@@ -652,7 +648,6 @@ public class WildBattleField extends BattleField
 	{
 		if(canRun())
 		{
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new RunMessage( true)); */
 			ServerMessage run = new ServerMessage(m_player.getSession());
 			run.init(34);
 			run.addBool(true);
@@ -668,7 +663,6 @@ public class WildBattleField extends BattleField
 		}
 		else
 		{
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new RunMessage( false)); */
 			ServerMessage run = new ServerMessage(m_player.getSession());
 			run.init(34);
 			run.addBool(false);
@@ -903,7 +897,6 @@ public class WildBattleField extends BattleField
 			m_wildPoke.calculateStats(resetAfterCaught);
 			m_player.catchPokemon(m_wildPoke);
 			showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.POKEBALL)); */
 			ServerMessage victory = new ServerMessage(m_player.getSession());
 			victory.init(24);
 			victory.addInt(2);
@@ -914,7 +907,6 @@ public class WildBattleField extends BattleField
 		}
 		else
 			showMessage("...but it failed!");
-
 		return false;
 	}
 
@@ -998,9 +990,10 @@ public class WildBattleField extends BattleField
 			/* 0 = our player in this case */
 			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 			 * new SwitchRequest()); */
-//			ServerMessage switchOccur = new ServerMessage(m_player.getSession());
-//			switchOccur.init(32);
-//			switchOccur.sendResponse();
+			// ServerMessage switchOccur = new ServerMessage(m_player.getSession());
+			// switchOccur.init(32);
+			// switchOccur.sendResponse();
+			/* TODO: Why is there no implementation here anymore? */
 		}
 	}
 
@@ -1032,7 +1025,6 @@ public class WildBattleField extends BattleField
 		if(item > -1)
 		{
 			m_player.getBag().addItem(item, 1);
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.ITEM, item)); */
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());
 			wonItem.init(19);
 			wonItem.addInt(item);
@@ -1043,7 +1035,6 @@ public class WildBattleField extends BattleField
 			int money = 5;
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.updateClientMoney();
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money)); */
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());
 			wonItem.init(35);
 			wonItem.addInt(money);
@@ -1055,15 +1046,10 @@ public class WildBattleField extends BattleField
 			double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, m_participatingPokemon.size());
 			if(exp == 0)
 				exp = 1;
-
-			/* Secondly, calculate EVs and exp */
-			// int[] evs = m_wildPoke.getEffortPoints();
-
 			/* Finally, add the EVs and exp to the participating Pokemon */
 			for(Pokemon p : m_participatingPokemon)
 			{
-				/* Add the evs */
-				/* Ensure EVs don't go over limit, before or during addition */
+				/* Add the EV's and Ensure EVs don't go over limit, before or during addition */
 				for(String s : hp)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 0, Integer.parseInt(s.split(",")[1]));
@@ -1091,42 +1077,32 @@ public class WildBattleField extends BattleField
 				int index = m_player.getPokemonIndex(p);
 				double ratio = (m_wildPoke.getLevel() / p.getLevel());
 				if(ratio > 5)
-				{
 					ratio = 5;
-				}
 				else if(ratio < 0.1)
-				{
 					ratio = 0.1;
-				}
 				double expX = exp * ratio;
 				if(expX > 15000)
-				{
 					expX = 15000;
-				}
-				else if(expX < 5)
-				{
-					expX = 5;
-				}
+				else if(expX < 8)
+					expX = 8;
 				p.setExp(p.getExp() + expX);
 				// Calculate how much exp is left to next level
 				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());
 				// Make sure that value isn't negative.
 				if(expTillLvl < 0)
 					expTillLvl = 0;
-				/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleExpMessage(p.getSpeciesName(), exp, expTillLvl)); */
 				ServerMessage expMessage = new ServerMessage(m_player.getSession());
 				expMessage.init(28);
 				expMessage.addString(p.getSpeciesName() + "," + expX + "," + expTillLvl);
 				expMessage.sendResponse();
 				String expGain = expX + "";
 				expGain = expGain.substring(0, expGain.indexOf('.'));
-				// m_player.getTcpSession().write("Pe" + index + expGain);
+
 				ServerMessage expGainMessage = new ServerMessage(m_player.getSession());
 				expGainMessage.init(42);
 				expGainMessage.addInt(index);
 				expGainMessage.addInt(Integer.parseInt(expGain));
 				expGainMessage.sendResponse();
-
 				double levelExp = DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp();
 				if(levelExp <= 0)
 				{
@@ -1238,7 +1214,8 @@ public class WildBattleField extends BattleField
 					/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleLevelChangeMessage(p.getSpeciesName(), level); */
 					ServerMessage levelMessage = new ServerMessage(m_player.getSession());
 					levelMessage.init(44);
-					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel()));
+					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) + ","
+							+ (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel()));
 					levelMessage.sendResponse();
 
 					ServerMessage BattlelevelMessage = new ServerMessage(m_player.getSession());

@@ -16,13 +16,13 @@ public class ChangeUserClassEvent implements MessageEvent
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		Player mod = session.getPlayer();
+		String[] playerdata = request.readString().split(",");
+		String playername = playerdata[0];
+		int adminLvl = Integer.parseInt(playerdata[1]);
 		if(mod.getAdminLevel() >= UserClasses.DEVELOPER)
 		{
 			try
 			{
-				String[] playerdata = request.readString().split(",");
-				String playername = playerdata[0];
-				int adminLvl = Integer.parseInt(playerdata[1]);
 				PreparedStatement userClassQuery = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET adminLevel = ? WHERE username = ?");
 				userClassQuery.setInt(1, adminLvl);
 				userClassQuery.setString(2, playername);

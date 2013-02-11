@@ -14,11 +14,11 @@ public class WarpPlayerToPlayerEvent implements MessageEvent
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		Player mod = session.getPlayer();
+		String[] players = request.readString().split(",");
+		Player player1 = ActiveConnections.getPlayer(players[0]);
+		Player player2 = ActiveConnections.getPlayer(players[1]);
 		if(mod.getAdminLevel() >= UserClasses.MODERATOR)
 		{
-			String[] players = request.readString().split(",");
-			Player player1 = ActiveConnections.getPlayer(players[0]);
-			Player player2 = ActiveConnections.getPlayer(players[1]);
 			if(player1 != null && player2 != null)
 			{
 				player1.setX(player2.getX());

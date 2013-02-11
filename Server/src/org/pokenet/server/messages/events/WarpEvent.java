@@ -14,9 +14,9 @@ public class WarpEvent implements MessageEvent
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
 		Player mod = session.getPlayer();
+		Player player = ActiveConnections.getPlayer(request.readString());
 		if(mod.getAdminLevel() >= UserClasses.MODERATOR)
 		{
-			Player player = ActiveConnections.getPlayer(request.readString());
 			if(player != null)
 			{
 				mod.setX(player.getX());

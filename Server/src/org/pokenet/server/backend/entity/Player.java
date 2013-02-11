@@ -564,7 +564,6 @@ public class Player extends Character implements Battleable, Tradeable
 	public void forceLogout()
 	{
 		if(getSession() != null && getSession().getLoggedIn())
-			// m_tcpSession.close(true);
 			getSession().close();
 		else
 			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(this);

@@ -718,6 +718,7 @@ public class UserInterface extends Frame
 		if(m_pokedex.isVisible())
 		{
 			m_pokedex.setVisible(false);
+			m_chat.setVisible(true);
 			hideHUDElements();
 		}
 		else

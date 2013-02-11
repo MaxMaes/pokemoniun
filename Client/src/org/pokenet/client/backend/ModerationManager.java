@@ -21,6 +21,12 @@ public class ModerationManager
 			message.addString(x.substring(9));
 			GameClient.getSession().send(message);
 		}
+		// Player count
+		else if(x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount"))
+		{
+			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COUNT);
+			GameClient.getSession().send(message);
+		}
 		/* Alert TODO: Redundant?
 		 * else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("alert "))
 		 * {
@@ -63,6 +69,13 @@ public class ModerationManager
 			message.addString(x.substring(6));
 			GameClient.getSession().send(message);
 		}
+		// Warp player to you
+		else if(x.length() >= 9 && x.substring(0, 9).equalsIgnoreCase("jumptome "))
+		{
+			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_ME_WARP);
+			message.addString(x.substring(9));
+			GameClient.getSession().send(message);
+		}
 		// Jump to [player]
 		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("jumpto "))
 		{
@@ -70,10 +83,18 @@ public class ModerationManager
 			message.addString(x.substring(7));
 			GameClient.getSession().send(message);
 		}
-		// Player count
-		else if(x.length() >= 11 && x.substring(0, 11).equalsIgnoreCase("playercount"))
+		// Warp player to player
+		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("jump "))
 		{
-			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COUNT);
+			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_PLAYER_WARP);
+			message.addString(x.substring(5));
+			GameClient.getSession().send(message);
+		}
+		// Set user class
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("class "))
+		{
+			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_CLASS);
+			message.addString(x.substring(6));
 			GameClient.getSession().send(message);
 		}
 		// Change Weather

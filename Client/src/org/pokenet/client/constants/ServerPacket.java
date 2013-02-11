@@ -53,7 +53,10 @@ public enum ServerPacket
 	LOGOUT_REQUEST(0x31),
 	LOGIN(0x32),
 	ITEM_GIVE(0x33),
-	TRAVEL(0x35);
+	TRAVEL(0x35),
+	PLAYER_ME_WARP(0x36),
+	PLAYER_PLAYER_WARP(0x37), 
+	PLAYER_CLASS(0x38);
 	
 	private int code = -1;
 

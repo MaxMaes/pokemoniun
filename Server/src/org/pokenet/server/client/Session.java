@@ -60,7 +60,7 @@ public class Session
 	public void Send(ServerMessage msg)
 	{
 		channel.write(msg);
-		System.out.println(msg.getMessage());
+		// TODO: Debug mode. System.out.println(msg.getMessage());
 	}
 
 	public void setLoggedIn(boolean state)

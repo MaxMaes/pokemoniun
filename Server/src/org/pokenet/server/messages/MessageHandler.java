@@ -13,6 +13,7 @@ import org.pokenet.server.messages.events.CanLearnMoveEvent;
 import org.pokenet.server.messages.events.CancelEvolutionEvent;
 import org.pokenet.server.messages.events.CancelTradeEvent;
 import org.pokenet.server.messages.events.ChangePasswordEvent;
+import org.pokenet.server.messages.events.ChangeUserClassEvent;
 import org.pokenet.server.messages.events.ChatEvent;
 import org.pokenet.server.messages.events.DeclineRequestEvent;
 import org.pokenet.server.messages.events.DropItemEvent;
@@ -54,6 +55,8 @@ import org.pokenet.server.messages.events.UnableLearnMoveEvent;
 import org.pokenet.server.messages.events.UnbanEvent;
 import org.pokenet.server.messages.events.UseItemEvent;
 import org.pokenet.server.messages.events.WarpEvent;
+import org.pokenet.server.messages.events.WarpPlayerToMeEvent;
+import org.pokenet.server.messages.events.WarpPlayerToPlayerEvent;
 import org.pokenet.server.messages.events.WeatherEvent;
 
 public class MessageHandler
@@ -133,5 +136,8 @@ public class MessageHandler
 		messages.put(51, new GiveItemEvent());
 		messages.put(52, new ServerAlertEvent());
 		messages.put(53, new TravelEvent());
+		messages.put(54, new WarpPlayerToMeEvent());
+		messages.put(55, new WarpPlayerToPlayerEvent());
+		messages.put(56, new ChangeUserClassEvent());
 	}
 }

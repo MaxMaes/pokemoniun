@@ -18,7 +18,7 @@ public class BanPlayerEvent implements MessageEvent
 		String playername = request.readString();
 		Player player = ActiveConnections.getPlayer(playername);
 		Player mod = session.getPlayer();
-		if(player != null && mod.getAdminLevel() > UserClasses.SUPER_MOD)
+		if(player != null && mod.getAdminLevel() >= UserClasses.SUPER_MOD)
 		{
 			MySqlManager m = new MySqlManager();
 			if(!m.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))

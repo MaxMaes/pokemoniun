@@ -23,7 +23,7 @@ public class NetworkDecoder extends FrameDecoder
 				return null;
 			}
 			int id = buffer.readUnsignedByte();
-			System.out.println("[ID] <- " + id + " [Length] <- " + length);
+			// TODO: Debug mode. System.out.println("[ID] <- " + id + " [Length] <- " + length); ->
 			return new ClientMessage(buffer, id);
 		}
 		catch(Exception e)

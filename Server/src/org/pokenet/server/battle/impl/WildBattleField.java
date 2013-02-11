@@ -1238,7 +1238,7 @@ public class WildBattleField extends BattleField
 					/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleLevelChangeMessage(p.getSpeciesName(), level); */
 					ServerMessage levelMessage = new ServerMessage(m_player.getSession());
 					levelMessage.init(44);
-					levelMessage.addString(index + "," + level);
+					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel()));
 					levelMessage.sendResponse();
 
 					ServerMessage BattlelevelMessage = new ServerMessage(m_player.getSession());

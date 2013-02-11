@@ -41,6 +41,7 @@ import org.pokenet.client.messages.events.HMHigherLevelEvent;
 import org.pokenet.client.messages.events.HealPokemonEvent;
 import org.pokenet.client.messages.events.InitFriendListEvent;
 import org.pokenet.client.messages.events.InitPokemonEvent;
+import org.pokenet.client.messages.events.ItemCantUseEvent;
 import org.pokenet.client.messages.events.ItemUseEvent;
 import org.pokenet.client.messages.events.LevelLearnMoveEvent;
 import org.pokenet.client.messages.events.LoggedElsewhereEvent;
@@ -217,6 +218,7 @@ public class MessageHandler
 		messages.put(95, new BoatEvent());
 		messages.put(96, new TravelEvent());
 		messages.put(97, new LoggedElsewhereEvent());
+		messages.put(98, new ItemCantUseEvent());
 		/* TODO: ID's 54, 55 and 56 are now free to use. */
 		// Login
 		// this.messages.put(254, new PingEvent());

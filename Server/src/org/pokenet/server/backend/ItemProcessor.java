@@ -223,6 +223,15 @@ public class ItemProcessor implements Runnable
 					String message = "";
 					if(poke == null)
 						return false;
+					
+					if(poke.getHealth() <= 0)
+					{
+						ServerMessage cantUse = new ServerMessage();
+						cantUse.init(98);
+						p.getSession().Send(cantUse);
+						return false;
+					}
+					
 					if(i.getId() == 1)
 					{ // Potion
 						hpBoost = 20;
@@ -355,6 +364,16 @@ public class ItemProcessor implements Runnable
 					poke = p.getParty()[Integer.parseInt(data[0])];
 					if(poke == null)
 						return false;
+					
+					//Check if this pokemon is alive to use all items but revive, REVIVE NOT IMPLEMENTED!!! Implement it before this piece of code!
+					if(poke.getHealth() <= 0)
+					{
+						ServerMessage cantUse = new ServerMessage();
+						cantUse.init(98);
+						p.getSession().Send(cantUse);
+						return false;
+					}
+					
 					if(i.getId() == 16)
 					{ // Antidote
 						String message = "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName() + " status to normal";

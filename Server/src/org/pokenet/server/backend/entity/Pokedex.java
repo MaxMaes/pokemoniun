@@ -1,6 +1,5 @@
 package org.pokenet.server.backend.entity;
 
-import org.pokenet.server.GameServer;
 import org.pokenet.server.network.MySqlManager;
 
 public class Pokedex
@@ -14,7 +13,7 @@ public class Pokedex
 
 	public Pokedex(int id, int[] pokedex)
 	{
-		// m_database = MySqlManager.getInstance();
+		m_database = MySqlManager.getInstance();
 		m_pokedex = pokedex;
 		m_id = id;
 	}
@@ -70,11 +69,6 @@ public class Pokedex
 	 */
 	public void setPokemonCaught(int id)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
 		m_pokedex[id] = Pokedex.CAUGHT;
 		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = " + Pokedex.CAUGHT + " WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
 	}
@@ -86,11 +80,6 @@ public class Pokedex
 	 */
 	public void setPokemonSeen(int id)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
 		m_pokedex[id] = Pokedex.SEEN;
 		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + id) + "`" + " = " + Pokedex.SEEN + " WHERE pokedexid = '" + MySqlManager.parseSQL("" + m_id) + "'");
 	}

@@ -129,6 +129,7 @@ public class GameClient extends BasicGame
 	{
 		try
 		{
+			m_instance = new GameClient(GAME_TITLE);
 			m_filepath = System.getProperty("res.path");
 			if(m_filepath == null)
 				m_filepath = "";
@@ -140,24 +141,17 @@ public class GameClient extends BasicGame
 				options.put(Options.DISABLE_MAPS, String.valueOf(false));
 				options.put(Options.DISABLE_WEATHER, String.valueOf(false));
 			}
-			m_instance = new GameClient(GAME_TITLE);
 			m_soundPlayer = new SoundManager(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
-			// m_soundPlayer.mute();
-			// System.out.println("Waiting for music to load");
 			m_soundPlayer.start();
 			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
 		}
-		catch(IOException e)
+		catch(IOException ioe)
 		{
-			e.printStackTrace();
-			m_instance = new GameClient(GAME_TITLE);
+			System.out.println("IOE in mah face");
+			ioe.printStackTrace();
 			m_loadSurroundingMaps = false;
-			m_soundPlayer = new SoundManager(false);
 			m_soundPlayer.mute(false);
-			// System.out.println("Waiting for music to load");
-			m_soundPlayer.start();
-			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}
 
 	}

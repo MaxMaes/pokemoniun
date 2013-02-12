@@ -30,7 +30,7 @@ import org.pokenet.server.connections.ActiveConnections;
 public class GameServer
 {
 	/* The revision of the game server */
-	private static final int SERVER_REVISION = 1890;
+	private static final int SERVER_REVISION = 1910;
 	private static boolean m_boolGui = false;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
 	private static GameServer m_instance;

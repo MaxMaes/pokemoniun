@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.pokenet.server.GameServer;
 
 /**
  * Handles MySql connections
@@ -21,15 +22,15 @@ public class MySqlManager
 	private String mysql_connectionURL;
 	private ResultSet mysql_result;
 
-	/* public MySqlManager()
-	 * {
-	 * mysql_connectionURL = "jdbc:mysql://" + GameServer.getDatabaseHost() + ":3306/" + GameServer.getDatabaseName() + "?autoReconnect=true";
-	 * if(!open())
-	 * {
-	 * System.out.println("Cannot connect to the database, please check your settings.");
-	 * System.exit(-1);
-	 * }
-	 * } */
+	public MySqlManager()
+	{
+		mysql_connectionURL = "jdbc:mysql://" + GameServer.getDatabaseHost() + ":3306/" + GameServer.getDatabaseName() + "?autoReconnect=true";
+		if(!open())
+		{
+			System.out.println("Cannot connect to the database, please check your settings.");
+			System.exit(-1);
+		}
+	}
 
 	public static MySqlManager getInstance()
 	{
@@ -162,11 +163,10 @@ public class MySqlManager
 	 * @param password
 	 * @return
 	 */
-	public boolean connect(String server, String username, String password)
+	private boolean connect(String username, String password)
 	{
 		try
 		{
-			mysql_connectionURL = "jdbc:mysql://" + server + "?autoReconnect=true";
 			mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
 			if(!mysql_connection.isClosed())
 				return true;
@@ -180,25 +180,10 @@ public class MySqlManager
 		}
 	}
 
-	/* private boolean connect(String username, String password)
-	 * {
-	 * try
-	 * {
-	 * mysql_connection = DriverManager.getConnection(mysql_connectionURL, username, password);
-	 * if(!mysql_connection.isClosed())
-	 * return true;
-	 * }
-	 * catch(SQLException e)
-	 * {
-	 * e.printStackTrace();
-	 * }
-	 * return false;
-	 * } */
-
-	/* private boolean open()
-	 * {
-	 * final String username = GameServer.getDatabaseUsername();
-	 * final String password = GameServer.getDatabasePassword();
-	 * return connect(username, password);
-	 * } */
+	private boolean open()
+	{
+		final String username = GameServer.getDatabaseUsername();
+		final String password = GameServer.getDatabasePassword();
+		return connect(username, password);
+	}
 }

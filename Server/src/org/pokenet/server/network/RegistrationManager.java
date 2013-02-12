@@ -1,17 +1,18 @@
 package org.pokenet.server.network;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -31,7 +32,7 @@ public class RegistrationManager implements Runnable
 	 */
 	public RegistrationManager()
 	{
-		// m_database = MySqlManager.getInstance();
+		m_database = MySqlManager.getInstance();
 		// m_queue = new LinkedList<Session>();
 	}
 
@@ -66,23 +67,6 @@ public class RegistrationManager implements Runnable
 		// int region = Integer.parseInt(String.valueOf(((String) session.getAttribute("reg")).charAt(0)));
 		// String[] info = ((String) session.getAttribute("reg")).substring(1).split(",");
 		// Check if the username is invalid or an NPC name.
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(87);
-			message.addInt(1);
-			session.Send(message);
-			return;
-		}
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(87);
-			message.addInt(1);
-			session.Send(message);
-			return;
-		}
 		if(session.getChannel() == null)
 			return;
 		String[] info = packet.split(",");
@@ -109,60 +93,50 @@ public class RegistrationManager implements Runnable
 		}
 		int s = Integer.parseInt(info[4]);
 		// Check if the username is already taken.
-		ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
-		data.first();
-		try
+		PreparedStatement registerStatement = DatabaseConnection.getConnection().prepareStatement("SELECT username FROM pn_members WHERE username = ?");
+		registerStatement.setString(1, info[0]);
+		ResultSet data = registerStatement.executeQuery();
+		String username = "";
+		if(data.first())
+			username = data.getString("username");
+		if(data != null && username != null && username.equalsIgnoreCase(MySqlManager.parseSQL(info[0])))
 		{
-			if(data != null && data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0])))
-			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r2");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(2);
-				session.Send(message);
-				return;
-			}
+			ServerMessage message = new ServerMessage();
+			message.init(87);
+			message.addInt(2);
+			session.Send(message);
+			return;
 		}
-		catch(Exception e)
+		registerStatement.close();
+		data.close();
+		/* Check if an account is already registered with the specified email address. */
+		registerStatement = DatabaseConnection.getConnection().prepareStatement("SELECT email FROM pn_members WHERE email = ?");
+		registerStatement.setString(1, info[2]);
+		data = registerStatement.executeQuery();
+		String email = "";
+		if(data.first())
+			email = data.getString("email");
+		if(data != null && email != null && email.equalsIgnoreCase(MySqlManager.parseSQL(info[2])))
 		{
+			ServerMessage message = new ServerMessage();
+			message.init(87);
+			message.addInt(5);
+			session.Send(message);
+			return;
 		}
-		// Check if an account is already registered with the specified email address.
-		data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
-		data.first();
-		try
+		if(info[2].length() > 52)
 		{
-			if(data != null && data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2])))
-			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r5");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(5);
-				session.Send(message);
-				return;
-			}
-			if(info[2].length() > 52)
-			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r6");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(6);
-				session.Send(message);
-				return;
-			}
+			ServerMessage message = new ServerMessage();
+			message.init(87);
+			message.addInt(6);
+			session.Send(message);
+			return;
 		}
-		catch(Exception e)
-		{
-		}
+		registerStatement.close();
+		data.close();
 		// Check if user is not trying to register their starter as a non-starter Pokemon.
 		if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258 || s == 387 || s == 390 || s == 393))
 		{
-			// session.write("r4");
 			ServerMessage message = new ServerMessage();
 			message.init(87);
 			message.addInt(4);
@@ -196,34 +170,43 @@ public class RegistrationManager implements Runnable
 				y = 440;
 				break;
 		}
-		// Add the player to the Database.
-		m_database.query("INSERT INTO pn_members (username, password, dob, email, lastLoginTime, lastLoginServer, " + "sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, "
-				+ "x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE " + "('"
-				+ MySqlManager.parseSQL(info[0])
-				+ "', '"
-				+ MySqlManager.parseSQL(info[1])
-				+ "', '"
-				+ MySqlManager.parseSQL(info[3])
-				+ "', '"
-				+ MySqlManager.parseSQL(info[2])
-				+ "', "
-				+ "'0', 'null', '"
-				+ MySqlManager.parseSQL(info[5])
-				+ "', '1000', '0', "
-				+ "'0', '0', '0', '0', '0', '"
-				+ x
-				+ "', '"
-				+ y
-				+ "', "
-				+ "'"
-				+ mapX
-				+ "', '"
-				+ mapY
-				+ "', '"
-				+ badges
-				+ "', '" + x + "', '" + y + "', '" + mapX + "', '" + mapY + "', 'false', '0', 'false')");
+		/* Add the player to the Database. */
+		registerStatement = DatabaseConnection
+				.getConnection()
+				.prepareStatement(
+						"INSERT INTO pn_members (username, password, dob, email, lastLoginTime, lastLoginServer, sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		registerStatement.setString(1, info[0]); // username
+		registerStatement.setString(2, info[1]); // password
+		registerStatement.setString(3, info[3]); // dob
+		registerStatement.setString(4, info[2]); // email
+		registerStatement.setInt(5, 0); // lastLoginTime
+		registerStatement.setString(6, "null"); // lastLoginServer
+		registerStatement.setString(7, info[5]); // sprite
+		registerStatement.setInt(8, 1000); // Money
+		registerStatement.setInt(9, 0); // skHerb
+		registerStatement.setInt(10, 0); // skCraft
+		registerStatement.setInt(11, 0); // skFish
+		registerStatement.setInt(12, 0); // skTrain
+		registerStatement.setInt(13, 0); // skCoord
+		registerStatement.setInt(14, 0); // skBreed
+		registerStatement.setInt(15, x); // x
+		registerStatement.setInt(16, y); // y
+		registerStatement.setInt(17, mapX); // mapX
+		registerStatement.setInt(18, mapY); // mapY
+		registerStatement.setString(19, badges); // badges
+		registerStatement.setInt(20, x); // healX
+		registerStatement.setInt(21, y); // healY
+		registerStatement.setInt(22, mapX); // healMapX
+		registerStatement.setInt(23, mapY); // healMapY
+		registerStatement.setBoolean(24, false); // isSurfing
+		registerStatement.setInt(25, 0); // adminLevel
+		registerStatement.setBoolean(26, false); // muted
+		registerStatement.executeUpdate();
+		registerStatement.close();
 		// Retrieve Player ID which is used to create the bag 'on the fly'.
-		data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
+		registerStatement = DatabaseConnection.getConnection().prepareStatement("SELECT id FROM pn_members WHERE username = ?");
+		registerStatement.setString(1, info[0]);
+		data = registerStatement.executeQuery();
 		data.first();
 		int playerId = data.getInt("id");
 		// Create the player's party.

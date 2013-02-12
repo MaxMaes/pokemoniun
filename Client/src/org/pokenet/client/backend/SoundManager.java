@@ -22,9 +22,10 @@ public class SoundManager extends Thread
 	private HashMap<String, String> m_fileList = new HashMap<String, String>();
 	private HashMap<String, AudioImpl> m_files = new HashMap<String, AudioImpl>();
 	private HashMap<String, String> m_locations = new HashMap<String, String>();
+	private boolean m_tracksLoaded = false;
+	private boolean m_trackChanged = true;
+	private boolean m_isRunning = false;
 	private boolean m_mute = false;
-
-	private boolean m_tracksLoaded = false, m_trackChanged = true, m_isRunning = false;
 
 	/**
 	 * Default Constructor
@@ -35,6 +36,7 @@ public class SoundManager extends Thread
 		if(respath == null)
 			respath = "";
 		m_audioPath = respath + m_audioPath;
+		m_mute = muted;
 		loadFileList();
 		loadLocations();
 	}
@@ -102,6 +104,9 @@ public class SoundManager extends Thread
 	 */
 	public void setTrack(String key)
 	{
+		if(m_mute)
+			while(!m_tracksLoaded)
+				yield();
 		if(key != m_trackName && key != null)
 		{
 			m_trackName = key;

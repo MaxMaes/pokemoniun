@@ -180,21 +180,6 @@ public class LoginManager implements Runnable
 	 */
 	private void attemptLogin(Session session, char language, String username, String password)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(77);
-			session.Send(message);
-			return;
-		}
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(77);
-			session.Send(message);
-			return;
-		}
 		/* Now, check that they are not banned. */
 		try
 		{
@@ -301,35 +286,38 @@ public class LoginManager implements Runnable
 	 */
 	private void changePass(String username, String newPassword, String oldPassword, Session session)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
-		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
 		try
 		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_members WHERE username = ?");
+			ps.setString(1, username);
+			ResultSet result = ps.executeQuery();
 			if(result.first())
+			{
 				/* if we got a result, compare their old password to the one we have stored for them. */
 				if(result.getString("password").compareTo(oldPassword) == 0)
 				{
 					/* Old password matches the one on file, therefore they got their old password correct, so it can be changed to their new one. */
-					m_database.query("UPDATE `pn_members` SET `password` = '" + MySqlManager.parseSQL(newPassword) + "' WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
-					// tell them their password was changed successfully
-					// session.write("ps");
+					PreparedStatement ps1 = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET password = ? WHERE username = ?");
+					ps1.setString(1, newPassword);
+					ps1.setString(2, username);
+					ps1.executeUpdate();
+					ps1.close();
+					/* Password sucessfully changed. */
 					ServerMessage message = new ServerMessage();
 					message.init(73);
 					message.addInt(1);
 					session.Send(message);
 					return;
 				}
+			}
+			result.close();
+			ps.close();
 		}
 		catch(SQLException sqle)
 		{
 			sqle.printStackTrace();
 		}
 		/* Tell them we failed to change their password. */
-		// session.write("pe");
 		ServerMessage message = new ServerMessage();
 		message.init(73);
 		message.addInt(0);
@@ -437,10 +425,15 @@ public class LoginManager implements Runnable
 			player.setCoordinatingExp(result.getInt("skCoord"));
 			player.setBreedingExp(result.getInt("skBreed"));
 			/* Retrieve refences to all Pokemon. */
-			int partyId = result.getInt("party");
-			ResultSet partyData = m_database.query("SELECT * FROM pn_party WHERE id='" + partyId + "'");
-			partyData.first(); /* Got a NPE here. */
-			ResultSet pokemons = m_database.query("SELECT * FROM pn_pokemon WHERE currentTrainerName='" + player.getName() + "'");
+			PreparedStatement partyStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_party WHERE id = ?");
+			partyStatement.setInt(1, result.getInt("party"));
+			ResultSet partyResult = partyStatement.executeQuery();
+			partyResult.first();
+
+			PreparedStatement pokeStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_pokemon WHERE currentTrainerName = ?");
+			pokeStatement.setString(1, player.getName());
+			ResultSet pokemons = pokeStatement.executeQuery();
+
 			int boxNumber = 0;
 			int boxPosition = 0;
 			/* Loop through all Pokemon belonging to this player and add them to their party/box */
@@ -450,7 +443,7 @@ public class LoginManager implements Runnable
 				int partyIndex = -1;
 				/* Checks if Pokemon is in party */
 				for(int i = 0; i < party.length; i++)
-					if(partyData.getInt("pokemon" + i) == pokemons.getInt("id"))
+					if(partyResult.getInt("pokemon" + i) == pokemons.getInt("id"))
 					{
 						isParty = true;
 						partyIndex = i;
@@ -484,10 +477,27 @@ public class LoginManager implements Runnable
 					boxPosition++;
 				}
 			}
+			partyStatement.close();
+			partyResult.close();
+			pokeStatement.close();
+			pokemons.close();
+
 			player.setParty(party);
 			player.setBoxes(boxes);
 			/* Attach bag. */
-			player.setBag(getBagObject(m_database.query("SELECT * FROM pn_bag WHERE member='" + result.getInt("id") + "'"), player.getId()));
+			try
+			{
+				PreparedStatement bagStatement = DatabaseConnection.getConnection().prepareStatement("SELECT item, quantity FROM pn_bag WHERE member = ?");
+				bagStatement.setInt(1, result.getInt("id"));
+				ResultSet bagResult = bagStatement.executeQuery();
+				player.setBag(getBagObject(bagResult, player.getId()));
+				bagStatement.close();
+				bagResult.close();
+			}
+			catch(SQLException sqle)
+			{
+				sqle.printStackTrace();
+			}
 			/* Attach badges. */
 			player.generateBadges(result.getString("badges"));
 			// Retrieve the players pokedexID, if it doesnt have one.
@@ -651,7 +661,6 @@ public class LoginManager implements Runnable
 		session.setLoggedIn(true);
 		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/* Update the database with login information. */
-		/* m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); */
 		try
 		{
 			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(

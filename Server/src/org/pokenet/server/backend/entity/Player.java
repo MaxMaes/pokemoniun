@@ -1,5 +1,6 @@
 package org.pokenet.server.backend.entity;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.protocol.ServerMessage;
@@ -91,7 +93,7 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)
 	{
-		// m_database = MySqlManager.getInstance();
+		m_database = MySqlManager.getInstance();
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -213,8 +215,19 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_friends.size() < 10)
 		{
 			m_friends.add(friend);
-			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
-					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+			try
+			{
+				PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+						"INSERT INTO pn_friends VALUES ((SELECT id FROM pn_members WHERE username = ?), (SELECT id FROM pn_members WHERE username = ?))");
+				ps.setString(1, m_username);
+				ps.setString(2, friend);
+				ps.executeUpdate();
+				ps.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
 			ServerMessage addFriend = new ServerMessage();
 			addFriend.init(69);
 			addFriend.addString(friend);
@@ -1293,7 +1306,17 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				/* This box exists and the pokemon exists in the database */
 				int id = m_boxes[box].getPokemon(slot).getDatabaseID();
-				m_database.query("DELETE FROM `pn_pokemon` WHERE `id` = '" + id + "'");
+				try
+				{
+					PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("DELETE FROM pn_pokemon WHERE id = ?");
+					ps.setInt(1, id);
+					ps.executeUpdate();
+					ps.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
 			}
 			m_boxes[box].setPokemon(slot, null);
 		}
@@ -1316,9 +1339,19 @@ public class Player extends Character implements Battleable, Tradeable
 			if(m_friends.get(i).equalsIgnoreCase(friend))
 			{
 				m_friends.remove(i);
-				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
-						+ "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
-				// m_tcpSession.write("Fr" + friend);
+				try
+				{
+					PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+							"DELETE FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?) AND friendId = (SELECT id FROM pn_members WHERE username = ?)");
+					ps.setString(1, m_username);
+					ps.setString(2, friend);
+					ps.executeUpdate();
+					ps.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
 				ServerMessage removeFriend = new ServerMessage();
 				removeFriend.init(70);
 				removeFriend.addString(friend);
@@ -2021,22 +2054,23 @@ public class Player extends Character implements Battleable, Tradeable
 
 	public void updateClientFriends()
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
-		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '"
-				+ MySqlManager.parseSQL(m_username) + "'))");
 		try
 		{
+			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
+					"SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = ?))");
+			ps.setString(1, m_username);
+			ResultSet rs = ps.executeQuery();
 			m_friends = new ArrayList<String>();
-			while(friends != null && friends.next())
-				m_friends.add(friends.getString(1));
+			while(rs.next())
+			{
+				m_friends.add(rs.getString("username"));
+			}
+			ps.close();
+			rs.close();
 		}
-		catch(SQLException sqle)
+		catch(SQLException e)
 		{
-			sqle.printStackTrace();
+			e.printStackTrace();
 		}
 		for(int i = 0; i < m_friends.size(); i++)
 		{

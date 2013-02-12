@@ -1,14 +1,11 @@
 package org.pokenet.server.network;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.connections.ActiveConnections;
-import org.pokenet.server.feature.DatabaseConnection;
 
 /**
  * Handles logging players out
@@ -126,6 +123,11 @@ public class LogoutManager implements Runnable
 	 */
 	private boolean attemptLogout(Player player)
 	{
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return false;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return false;
 		/* Remove player from their map if it hasn't been done already. */
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);
@@ -136,18 +138,7 @@ public class LogoutManager implements Runnable
 		ActiveConnections.removeSession(player.getSession().getChannel());
 		GameServer.getInstance().updatePlayerCount();
 		/* Finally, store that the player is logged out and close connection. */
-		try
-		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET lastLoginServer = ? WHERE id = ?");
-			ps.setString(1, "null");
-			ps.setInt(2, player.getId());
-			ps.executeUpdate();
-			ps.close();
-		}
-		catch(SQLException sqle)
-		{
-			sqle.printStackTrace();
-		}
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
 		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		return true;
 	}

@@ -2,8 +2,6 @@ package org.pokenet.server.network;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Iterator;
 import javax.swing.Timer;
 import org.pokenet.server.GameServer;
@@ -11,7 +9,6 @@ import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.feature.ChatManager;
-import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -40,7 +37,7 @@ public class NetworkService
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManager = new ChatManager[3];
-		m_database = MySqlManager.getInstance();
+
 		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
 				{
 					public void actionPerformed(ActionEvent arg0)
@@ -141,18 +138,12 @@ public class NetworkService
 			cnfe.printStackTrace();
 		}
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		try
-		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("UPDATE pn_members SET lastLoginServer = ? WHERE lastLoginServer = ?");
-			ps.setString(1, "null");
-			ps.setString(2, GameServer.getServerName());
-			ps.executeUpdate();
-			ps.close();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
+		m_database = new MySqlManager();
+		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
+			return;
+		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
+			return;
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
 		/* Start the login/logout managers. */
 		m_logoutManager.start();
 		m_loginManager.start();
@@ -228,6 +219,8 @@ public class NetworkService
 		/* Stop all threads (do not use thread.stop()). */
 		for(int i = 0; i < m_chatManager.length; i++)
 			m_chatManager[i].stop();
+		// m_tcpAcceptor.unbind();
+		// m_tcpProtocolHandler.logoutAll();
 		logoutAll();
 		System.out.println("Logged out all players.");
 		/* TODO: Doesn't stop the server properly, rewrite! */

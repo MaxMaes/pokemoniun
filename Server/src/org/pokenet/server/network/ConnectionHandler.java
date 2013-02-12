@@ -25,25 +25,28 @@ public class ConnectionHandler extends SimpleChannelHandler
 	{
 		try
 		{
-			Player p = ActiveConnections.GetUserByChannel(ctx.getChannel()).getPlayer();
-			if(p != null)
+			if(ctx.getChannel().isOpen())
 			{
-				if(p.isBattling())
+				Player p = ActiveConnections.GetUserByChannel(ctx.getChannel()).getPlayer();
+				if(p != null)
 				{
-					/* If in PvP battle, the player loses */
-					if(p.getBattleField() instanceof PvPBattleField)
-						((PvPBattleField) p.getBattleField()).disconnect(p.getBattleId());
-					p.setBattleField(null);
-					p.setBattling(false);
-					p.lostBattle();
+					if(p.isBattling())
+					{
+						/* If in PvP battle, the player loses */
+						if(p.getBattleField() instanceof PvPBattleField)
+							((PvPBattleField) p.getBattleField()).disconnect(p.getBattleId());
+						p.setBattleField(null);
+						p.setBattling(false);
+						p.lostBattle();
+					}
+					/* If trading, end the trade */
+					if(p.isTrading())
+						p.getTrade().endTrade();
+					m_logoutManager.queuePlayer(p);
+					// GameServer.getServiceManager().getMovementService().removePlayer(p.getName());
+					ActiveConnections.removeSession(ctx.getChannel());
+					ctx.getChannel().close();
 				}
-				/* If trading, end the trade */
-				if(p.isTrading())
-					p.getTrade().endTrade();
-				m_logoutManager.queuePlayer(p);
-				// GameServer.getServiceManager().getMovementService().removePlayer(p.getName());
-				ActiveConnections.removeSession(ctx.getChannel());
-				ctx.getChannel().close();
 			}
 		}
 		catch(Exception er)

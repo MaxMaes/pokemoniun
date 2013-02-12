@@ -369,23 +369,24 @@ public class GameClient extends BasicGame
 
 	public void showAlert(String title, String text)
 	{
-		if(m_activeAlert == null)
+		if(m_activeAlert != null)
 		{
-			ActionListener ok = new ActionListener()
-			{
-
-				@Override
-				public void actionPerformed(ActionEvent arg0)
-				{
-					m_activeAlert.setVisible(false);
-					getDisplay().remove(m_activeAlert);
-					m_activeAlert = null;
-				}
-			};
-
-			m_activeAlert = new AlertPopupDialog(title, text, ok);
-			getUi().getDisplay().add(m_activeAlert);
+			getUi().getDisplay().remove(m_activeAlert);
 		}
+		ActionListener ok = new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				m_activeAlert.setVisible(false);
+				getDisplay().remove(m_activeAlert);
+				m_activeAlert = null;
+			}
+		};
+
+		m_activeAlert = new AlertPopupDialog(title, text, ok);
+		getUi().getDisplay().add(m_activeAlert);
 	}
 
 	/**
@@ -403,6 +404,11 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
+						if(m_ourPlayer != null)
+						{
+							ClientMessage dc = new ClientMessage(ServerPacket.LOGOUT_REQUEST);
+							m_session.send(dc);
+						}
 						System.exit(0);
 						m_close = true;
 					}
@@ -434,8 +440,7 @@ public class GameClient extends BasicGame
 	}
 
 	/**
-	 * Tries to connect to a requested server.
-	 * Will notify the user if connection was succesfully or failed.
+	 * Tries to connect to a requested server. Will notify the user if connection was succesfully or failed.
 	 * 
 	 * @param hoststring The string that specifies the host including port (e.g. 127.0.0.1:7002).
 	 **/
@@ -527,14 +532,14 @@ public class GameClient extends BasicGame
 		if(m_session != null)
 		{
 			ChannelFuture channelFuture = m_session.getChannel().close();
+			m_session = null;
 			channelFuture.awaitUninterruptibly();
 			assert channelFuture.isSuccess(): "Warning the Session was not closed";
 		}
 	}
 
 	/**
-	 * The user requests a disconnect and the player is logged out.
-	 * The player has to confirm he wants to log out.
+	 * The user requests a disconnect and the player is logged out. The player has to confirm he wants to log out.
 	 */
 	public void disconnectRequest()
 	{
@@ -549,10 +554,10 @@ public class GameClient extends BasicGame
 					{
 						ClientMessage dc = new ClientMessage(ServerPacket.LOGOUT_REQUEST);
 						m_session.send(dc);
-						disconnect();
-						reset();
 						m_dcConfirm.setVisible(false);
 						m_dcConfirm = null;
+						reset();
+						disconnect();
 					}
 					catch(Exception e)
 					{

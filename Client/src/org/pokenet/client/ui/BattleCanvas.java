@@ -46,6 +46,11 @@ public class BattleCanvas extends Container
 	private ProgressBar playerXP, playerXPEND;
 
 	private Color xpColor = new Color(0, 150, 200);
+	//For the gender icon
+	private Image genderFemale;
+	private Image genderMale;
+	private Label enemyGender;
+	private Label playerGender;
 
 	/**
 	 * Default constructor
@@ -106,6 +111,18 @@ public class BattleCanvas extends Container
 		enemyNameLabel.setForeground(Color.white);
 		enemyNameLabel.setSize(GameClient.getFontSmall().getWidth(enemyNameLabel.getText()), GameClient.getFontSmall().getHeight(enemyNameLabel.getText()));
 		enemyNameLabel.setLocation(enemyDataBG.getX() + 15, enemyDataBG.getY() + 7);
+		
+		if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 2){
+			enemyGender.setImage(genderFemale);
+			enemyGender.setSize(14,14);
+			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
+			
+		}else if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 1){
+			enemyGender.setImage(genderMale);
+			enemyGender.setSize(14,14);
+			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
+			
+		}
 
 		enemyLv.setText("Lv: " + BattleManager.getInstance().getCurEnemyPoke().getLevel());
 		enemyLv.setFont(GameClient.getFontSmall());
@@ -117,6 +134,7 @@ public class BattleCanvas extends Container
 		enemyStatus.setLocation(105, 40);
 
 		add(enemyNameLabel);
+		add(enemyGender);
 		add(enemyLv);
 		add(enemyStatus);
 		initEnemyHPBar();
@@ -160,7 +178,20 @@ public class BattleCanvas extends Container
 		playerNameLabel.setText(BattleManager.getInstance().getCurPoke().getName());
 		playerNameLabel.setSize(GameClient.getFontSmall().getWidth(playerNameLabel.getText()), GameClient.getFontSmall().getHeight(playerNameLabel.getText()));
 		playerNameLabel.setLocation(playerDataBG.getX() + 30, playerDataBG.getY() + 7);
-
+		
+		if(BattleManager.getInstance().getCurPoke().getGender() == 2){
+			playerGender.setImage(genderFemale);
+			playerGender.setSize(14,14);
+			playerGender.setLocation(playerNameLabel.getX() + GameClient.getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
+			
+		}else if(BattleManager.getInstance().getCurPoke().getGender() == 1){
+			playerGender.setImage(genderMale);
+			playerGender.setSize(14,14);
+			playerGender.setLocation(playerNameLabel.getX() + GameClient.getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
+		}
+		
+		
+		
 		playerLv.setText("Lv:" + BattleManager.getInstance().getCurPoke().getLevel());
 		playerLv.setFont(GameClient.getFontSmall());
 		playerLv.setForeground(Color.white);
@@ -173,6 +204,7 @@ public class BattleCanvas extends Container
 		add(playerNameLabel);
 		add(playerLv);
 		add(playerStatus);
+		add(playerGender);
 		initPlayerXPBar();
 		initPlayerHPBar();
 
@@ -236,7 +268,7 @@ public class BattleCanvas extends Container
 		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
 			enemyHP.setForeground(Color.red);
 
-		enemyHPBar.setLocation(enemyNameLabel.getX(), 40);
+		enemyHPBar.setLocation(enemyNameLabel.getX(), 37);
 		enemyHP.setLocation(enemyHPBar.getX() + 23, enemyHPBar.getY() + 3);
 
 		add(enemyHPBar);
@@ -319,6 +351,10 @@ public class BattleCanvas extends Container
 			enemyHPBar.setZIndex(6);
 			playerHPBar = new Label(new Image(m_path + "HPEXPBar.png", false));
 			playerHPBar.setZIndex(6);
+			// Gender Image Load
+			genderFemale = new Image(m_path + "female.png", false);
+			genderMale = new Image(m_path + "male.png", false);
+			
 		}
 		catch(SlickException e)
 		{
@@ -499,6 +535,8 @@ public class BattleCanvas extends Container
 		enemyLv = null;
 		playerStatus = null;
 		enemyStatus = null;
+		enemyGender = null;
+		playerGender = null;
 		hidePokeballs();
 	}
 
@@ -597,6 +635,12 @@ public class BattleCanvas extends Container
 		playerNameLabel.setZIndex(8);
 		enemyNameLabel = new Label();
 		enemyNameLabel.setZIndex(8);
+		//Gender
+		enemyGender = new Label();
+		enemyGender.setZIndex(6);
+		playerGender = new Label();
+		playerGender.setZIndex(6);
+		//End Gender
 		playerDataBG = new Label();
 		playerDataBG.setZIndex(2);
 		enemyDataBG = new Label();

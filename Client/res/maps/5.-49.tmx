@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="28" height="18" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="24" height="18" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
@@ -15,24 +15,32 @@
  <tileset firstgid="1025" source="normal2.tsx"/>
  <tileset firstgid="2049" source="normal5.tsx"/>
  <tileset firstgid="3073" source="normal3.tsx"/>
- <layer name="Walkable" width="28" height="18">
+ <tileset firstgid="4097" source="Interior - Pokecenter Pokemarkt.tsx"/>
+ <tileset firstgid="4497" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="4827" source="Interior - Furniture.tsx"/>
+ <layer name="Walkable" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAlTwhpc+9vCwQ/AbNkz8DophfJA6XXaIGC87+fZhswsb9kRSq0Ml+94i+Qsdv0ezn5r+ewnEr4D4NR7/UsM+LyifE0hzATE3FvfA1FDDPlgcaQJpLSDWxmKfJxXsg8Ubehxhi9v3FIQnPiBEhh4Ae1V1Z+AHAAA=
+   H4sIAAAAAAAAC2NgGAWjYBQMNHjDSxtzfwkyMPwWJI8mBrAKMTCwCZFHj7p/1P34ADFOBACqe8BCwAYAAA==
   </data>
  </layer>
- <layer name="random" width="28" height="18">
+ <layer name="Walkable" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgsEPvFkH2gVDB/xiY2D4yYZfDUj+FwE1xABC9lCqHh2Q6mZq+BEdZHIwMGQBcTYH9c3GBjqB9nQBcTeJ9gEA2RilaOAHAAA=
+   H4sIAAAAAAAAC+2QOQqAMBAA9wUqSenVeXXxqDz//ypHtBAL8WqEDAwEshmWiFgsFst/8JVIgCFGGKv3zVaLGL2eE3opZphjsfWX+1bfb5vDG0OvxAprbNT5/JXd93T0ehxwxEmdzz/Boemi98Hfv2EGsHo/OcAGAAA=
   </data>
  </layer>
- <layer name="Collisions" width="28" height="18">
+ <layer name="Collisions" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQQA4w4KMek2tfLxsDwgQzcx0aefWuB+gTYScfryLCPkYeB4SwbqtgtJgaGGiCuZUKIGbAyMNxnQlV3jg2in1T70MEvoLm/gfgPEP8F4n9Q/J+JOP2k2kdL/QNpHycwjrhY8atHV0OJfZpAc7QI2IeuZiiEJz5MrBpkAACrwCwb4AcAAA==
+   H4sIAAAAAAAAC2NgGAWjYGgCIw7KMSHz7QUYGBzIwI4CxJkfDFQXQgYOJcJ8Rh4GhnQBVLEsIL+GiYGhlgkhZsDKwJCDpi5TAKKfkPnoYDJQ3xQseKoAcfpJkScEBpP57sIMDB7C+NWjqyHF/ECgviAC5qOrGQzhgw8TowYA2AfnncAGAAA=
   </data>
  </layer>
- <layer name="random2" width="28" height="18">
+ <layer name="Collisions" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMZsDIg8DI4D0rA8MHVgSfm5WBKgDZvl1MDAy8QHP5gJifjYFBAISB7P1AcW0q2TcKRsEooA0AADpxyQzgBwAA
+   H4sIAAAAAAAAC2NgGAWjYBTgA4w8CAwC7AIMDBxAzAnEXAIIddMFsOsnxfwwoBnSQCyDZJYAKwNDBJC/mkzzkYEL0Ax9IDYQwBQfBaNgqAEAhZxvlMAGAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="24" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMgpENbIUZGOyEKVczCugLABlkzyPABgAA
   </data>
  </layer>
 </map>

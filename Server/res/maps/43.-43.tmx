@@ -24,7 +24,7 @@
  <tileset firstgid="10365" source="Sinnoh Exit Cave.tsx"/>
  <layer name="Walkable" width="63" height="87">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UQQrCMBBG4YJ38ECCh/Z2LkqXoWAn/0ud92A2dpF8THDb6nrfbKqjPZSdtrh39+7e3fu/7v3KHaqj7Z/nPh3e/JU7VdbZfnaWdu0rzEz72Xd6qqM9pP1odAbtTdhH0V7t2tPRXu3a09Fe7drT0V7t2tPRXu3a09Fe7drT0V7t2tPRXu3a0/1yx9djn472znvvbO/85jvbO7957dq72Wf8z93F3nnv2rVr165du3bt2rVr165du/ZstFe79nS0V7v2dLRX+1w77dK+zpunrQk7baL3Tru0r2Ef/d7BvuLManQW7XXv2r8Ll/M6pFUAAA==
+   H4sIAAAAAAAAC+3UQQrCMBBG4Yp36IEEwSt7Oxely1Cwyf/SznswG7tIPia4LP16X2x6R3soO21x7+7dvbv3u+79zB16R9u/6zYV3vyZO/Wssv3oLO3aZ5iR9qPv9PSO9pD2vdYZtDdhb0V7tWtPR3u1a09He7VrT0d7tWtPR3u1a09He7VrT0d7tWtPR3u1a0/3zx1fz20q2ivvvbK98puvbK/85rVrr2Yf8T93FXvlvWvXrl27du3atWvXrl27du3as9Fe7drT0V7t2tO17vF51LXfae+0S/s8b562Juy0id477dI+h731ewX7jDOq1lm0171r/wG1UcCapFUAAA==
   </data>
  </layer>
  <layer name="Walkable" width="63" height="87">

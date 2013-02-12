@@ -41,7 +41,7 @@
  </layer>
  <layer name="Water" width="80" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XQQ7CMAwF0V6ENVuOx/ERqioQC5T4244dzUhZJ3mN0vY46vV85A/rOiuGX27Zbt/z7liG3TXPrkWZ/c5B80U9j53LOM8du93P8S77/bNb+Gnhp4XffKNO1z2J36dV/327hJ8Wfj7h5xN+Wv9s8NPCTws/e9x/WvjZ4v2rxXeMLb4DtfDTwk8LP1sWN/zOFDvFr/uzUd0y/Co7evlZ99f9nljtN7uOalXxG1lLxTr5VXSs4tf1DvT0U/aXfda9ivAb3efKu8KraL+MkeER5fcCNGZ1DQAyAAA=
+   H4sIAAAAAAAAC+3XQQrDMAwF0Vyk6257vBy/lBAauiixvixLYgaytv1snGTb8rW/4h/rPDOGX2zRbtdxOxZhd47TtVlmv2PQeLP2o3MR57lij+fxfIp+/3QLPy38tPAb767TeU/i923Vf1+X8NPCzyf8fMJP658Nflr4aeFnj/tPCz9bvH+1+I6xxXegFn5a+GnhZ8viht+RYqf4Vd8f1U1dY/UzXskvo+Fqv9F5ZCuL3925ZKuaXzZDTz9lbVXvQW8/6/rwG1trhvvCowi/Ffvj7THL7w2+PTGJADIAAA==
   </data>
  </layer>
  <layer name="Collisions" width="80" height="40">

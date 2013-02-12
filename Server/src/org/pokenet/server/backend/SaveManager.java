@@ -1,7 +1,6 @@
 package org.pokenet.server.backend;
 
 import java.sql.ResultSet;
-import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Bag;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
@@ -16,7 +15,7 @@ public class SaveManager
 
 	public SaveManager()
 	{
-		m_database = new MySqlManager();
+		m_database = MySqlManager.getInstance();
 	}
 
 	/**
@@ -27,11 +26,6 @@ public class SaveManager
 	 */
 	public boolean saveBag(Bag b)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return false;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return false;
 		try
 		{
 			/* Destroy item data to prevent dupes.
@@ -58,11 +52,6 @@ public class SaveManager
 	 */
 	public int saveNewPokemon(Pokemon poke, String currentTrainer, MySqlManager db)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return -1;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return -1;
 		try
 		{
 			/* Due to issues with Pokemon not receiving abilities, we're going to ensure they have one */
@@ -95,18 +84,9 @@ public class SaveManager
 			ResultSet result = db.query("SELECT id FROM pn_pokemon WHERE originalTrainerName='" + MySqlManager.parseSQL(poke.getOriginalTrainer()) + "' AND date='"
 					+ MySqlManager.parseSQL(poke.getDateCaught()) + "'");
 			result.first();
-			poke.setDatabaseID(result.getInt("id"));
-			/* db.query("UPDATE pn_pokemon SET move0='" + MySqlManager.parseSQL(poke.getMove(0).getName()) + "', move1='"
-			 * + (poke.getMove(1) == null ? "null" : MySqlManager.parseSQL(poke.getMove(1).getName())) + "', move2='"
-			 * + (poke.getMove(2) == null ? "null" : MySqlManager.parseSQL(poke.getMove(2).getName())) + "', move3='"
-			 * + (poke.getMove(3) == null ? "null" : MySqlManager.parseSQL(poke.getMove(3).getName())) + "', hp='" + poke.getHealth() + "', atk='" + poke.getStat(1) + "', def='"
-			 * + poke.getStat(2) + "', speed='" + poke.getStat(3) + "', spATK='" + poke.getStat(4) + "', spDEF='" + poke.getStat(5) + "', evHP='" + poke.getEv(0) + "', evATK='" + poke.getEv(1)
-			 * + "', evDEF='" + poke.getEv(2) + "', evSPD='" + poke.getEv(3) + "', evSPATK='" + poke.getEv(4) + "', evSPDEF='" + poke.getEv(5) + "' WHERE id='" + poke.getDatabaseID() + "'");
-			 * db.query("UPDATE pn_pokemon SET ivHP='" + poke.getIv(0) + "', ivATK='" + poke.getIv(1) + "', ivDEF='" + poke.getIv(2) + "', ivSPD='" + poke.getIv(3) + "', ivSPATK='" + poke.getIv(4)
-			 * + "', ivSPDEF='" + poke.getIv(5) + "', pp0='" + poke.getPp(0) + "', pp1='" + poke.getPp(1) + "', pp2='" + poke.getPp(2) + "', pp3='" + poke.getPp(3) + "', maxpp0='"
-			 * + poke.getMaxPp(0) + "', maxpp1='" + poke.getMaxPp(1) + "', maxpp2='" + poke.getMaxPp(2) + "', maxpp3='" + poke.getMaxPp(3) + "', ppUp0='" + poke.getPpUpCount(0) + "', ppUp1='"
-			 * + poke.getPpUpCount(1) + "', ppUp2='" + poke.getPpUpCount(2) + "', ppUp3='" + poke.getPpUpCount(3) + "' WHERE id='" + poke.getDatabaseID() + "'"); */
-			return result.getInt("id");
+			int pokeId = result.getInt("id");
+			poke.setDatabaseID(pokeId);
+			return pokeId;
 		}
 		catch(Exception e)
 		{
@@ -123,11 +103,6 @@ public class SaveManager
 	 */
 	public boolean savePlayer(Player p)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return false;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return false;
 		try
 		{
 			/* First, check if they have logged in somewhere else. This is useful for when as server loses its internet connection */

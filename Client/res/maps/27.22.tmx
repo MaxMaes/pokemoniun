@@ -33,12 +33,12 @@
  <tileset firstgid="12183" source="Cycling Road Tileset.tsx"/>
  <layer name="Walkable" width="46" height="74">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3av07DMBDH8aj8WQksdSbgASrxHt14bXgKps7ARKHCVolqnS6xg13fnfSL9B2aofn04mSpd67rdsrjDmkT3PqC+9i775Ocuxm6rvfdDjrdwfzj+ybn197r/uozS/3Gmu4v3z7hzm1o5B5nbc09zrqW2yXWSg13POtrf61Lcr17//khoyUzr+Gem/WS6H1p5eZmvSR6Xx4buUtmvbQSd1jXH276PRK3fzo1d+6cburNWdvS7vjdQdO6Tuj77oJU8kye013rvdHavRKYaw23piy4X1Y23LFhQ9LsjnuNZr2JPmt3x1mat9V1Etoy5yy4ueCGG249jT644c71ww13a3erGWDecMOtL7jhhltfcMMNt77ghhtufXFH+O+Ha+573vpj1uatwX3n5pNeI6l5a7an1olV91TS9tLn8nlt02113nCXu8Meu9zoHnVJN7fHbqqDkJ076P46rqtBdm/bf9e3xJ7YlPsX8CE19DA1AAA=
+   H4sIAAAAAAAAC+3avwrCMBDH8VD/zOJi+xAF38PN19ancOqsTlbFhlIawrWNNubu4Ff4DjrIh+OaxVS5MZXwqIfbBLe84G67Nt2Vua351fRU5n401crc3ay1ubtZa3K7s14XxiwLHe7Us47tTjXr2O5Us57rtnt9y8POkXrfN/bdP92+N2S3ud3u2eEndU/8827hleqd/NbNcW7EcGcMc43hlpQG9ynT4XYNpZdkt9vZmXXpfJbudtM0b617YjsQ32lwU8ENN9xy6nxwwx3qhxvu1O5UM8C84YZbXnDDDbe84IYbbnnBDTfc8qIe+98P1djvXDZt2uYtwb3Nx+Pekal5S7ZP7YlW91Dc9rnv5XGn06113nDPd9s7dqGluKMe6qbu2A31ZrJTj3+/jmpV8N5t+3W/Oe7ETrk/ZvQYQTA1AAA=
   </data>
  </layer>
  <layer name="Grass" width="46" height="74">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YwQqDMBAFc+ux9lRz7P//ZBUaWEJqTJHNTnkDSxCDTp5LC5uSEOLfueeUlq0eebbJGM/Nd/3UcrIinNF6n60sb1fvNUCv9LwLETMXYpSX+lYIIYQIx03/zy4oZ19K3sTcyc5Ud5p3caZ57xC9qXmTve1KgZy3vH2x7nW/1/daVe+vn9t63tXOrXcdne3b9dGZWnt+dR/x7Ln0MrnKewb6/fWF7G1XEtS8qd52JUF1JvbJjpz9oPZIgehOdaZ625UE2ZnmTu5veftB96a4H82JIkOd/USbW/W+/8h8bga9GWaUnK1jfd3K2+6Z7e3BG6Pil5QwNQAA
+   H4sIAAAAAAAAC+2YwQqDMBAFc+ux9lQ9tf3/n6xCA0tITSyy2SlvYAli0MlLUNiUhBD/znVJaVrrtow2OcZ99Z0/NXVWhDVa795a5O3qPQc4K4/1/c+Oiph5D+W+ULzLfXlBvKOjHIUQQoh4XPR/dkE5+5LzJuZOdqa607yzM817g+hNzZvsbUcK5Lzl7Yt1L897ea9W5fzyubXnne1ce9fe2r5d762pNudX9yOeLZdWJmd5j0DfX1/I3nYkQc2b6m1HElRn4jnZkLMf1DOSIbpTnanediRBdqa5k8+3vP2ge1Pc9/pEkaH2fqL1rVr7f6Q/N4JWDzNKztaxvK7lbeeM9vbgDXuP7GgwNQAA
   </data>
  </layer>
  <layer name="Water" width="46" height="74">

@@ -180,21 +180,7 @@ public class LoginManager implements Runnable
 	 */
 	private void attemptLogin(Session session, char language, String username, String password)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(77);
-			session.Send(message);
-			return;
-		}
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(77);
-			session.Send(message);
-			return;
-		}
+		m_database = MySqlManager.getInstance();
 		/* Now, check that they are not banned. */
 		try
 		{
@@ -301,11 +287,7 @@ public class LoginManager implements Runnable
 	 */
 	private void changePass(String username, String newPassword, String oldPassword, Session session)
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
+		m_database = MySqlManager.getInstance();
 		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
 		try
 		{

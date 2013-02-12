@@ -138,11 +138,7 @@ public class NetworkService
 			cnfe.printStackTrace();
 		}
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
+		m_database = MySqlManager.getInstance();
 		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
 		/* Start the login/logout managers. */
 		m_logoutManager.start();

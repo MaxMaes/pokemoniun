@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="57" height="40" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value="30-30;30-30;25-27;26-26;23-23;32-32;28-28;"/>
-  <property name="dayPokemonChances" value="Nidorino,20;Nidorina,15;Exeggcute,20;Rhyhorn,20;Paras,15;Venomoth,5;Tauros,5;"/>
-  <property name="dayPokemonLevels" value="30-30;30-30;25-27;26-26;23-23;32-32;28-28;"/>
   <property name="dayPokemonChances" value="Nidorino,15;Nidorina,20;Exeggcute,20;Rhyhorn,20;Paras,15;Venomoth,5;Tauros,5;"/>
+  <property name="dayPokemonLevels" value="30-30;30-30;25-27;26-26;23-23;32-32;28-28;"/>
+  <property name="fishPokemonChances" value="Seaking,45;Goldeen,50;Slowpoke,5;"/>
+  <property name="fishPokemonLevels" value="20-30;15-25;15-35;"/>
   <property name="pvp" value="enabled"/>
   <property name="waterPokemonChances" value="Psyduck,65;Golduck,35;"/>
   <property name="waterPokemonLevels" value="20-30;20-40;"/>
   <property name="wildProbability" value="1"/>
-  <property name="fishPokemonLevels" value="20-30;15-25;15-35;"/>
-  <property name="fishPokemonChances" value="Seaking,45;Goldeen,50;Slowpoke,5;"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
@@ -26,14 +24,15 @@
  <tileset firstgid="3073" name="kantoroutes" tilewidth="16" tileheight="16">
   <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="4097" source="Tileset 4.tsx"/>
  <layer name="Walkable" width="57" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82Y4W0CMQyFU2Ax2h+do2WSQtmkzNaO0UM6q+7DcV6c3F0iPQmBY/uLEydil1LaBaXH0jatSukxHn4/GiPmXGNTE2cUMTlvxdviv3Zuiav36Om3tY5b7j2LpaXGrA+MF4kf4csNzN/6rdaGibcEW6m2THy0GYmR2b8RxmgeqOOkZ9BLB9/iV3ytyYjffUz6mvQ+6zbpAnZHyJVhfJv9nToz1gw97855nnVJj7X9nHSdOUv+jmoOw8hwRRlzvLoGKIYT57J1zOXC1LyGUT7ruqIuBb+a8Qb2PRjFBveat/asb3b/4L6P7slSLN1HrB5SGtYaRc8IMray6n4t61naWzom9gvRtcD6+pSXxYhxa/h0L/PWM8eZ6zUi6R8tjMxZy32v87MYvSG+coz3/Y7nC3P43qf0s//zGWEssUcZtS+LUffG3NnQkv62JGOux+zgsyXrzvD48Nzq9V2SUd+5yOj58IZVN4tvZEavZ+hcvZ6kz2xvRhEyWn5z3Cwj8/6ROEsxYn9IyWZDTuSRoXslu69lLMH4kR77AzMsxtxctubR+zF6Vkdj1L7WZMT722OU33CO57+2jtb8nA5kfHZdxMa6+y2V3vI99vDByTtSf332z+n/fySWcvdYbT5rMlqsFie+bw+EWhmjYjnPyX//MXt7LUa0ZxgZeW8HUa3PXowWazSPkrwYSfmR/0E9Nm1Xyo3xt4Y04/09dyIYxa7km7UbmbFUH89ORk2erD3absnYWpfRGbdQb8aateihXyucvGugIwAA
+   H4sIAAAAAAAAC+WYa07DMAyAzbaLFX5wDraTjLGbsLPBMWilWnhuHrZnpylY+rSH3DRfnLrddgCwM0IjOudRAJbn49/35sjnrMnRnKcXJHP+S77WuntHT3XcKimHrXsBeQXyWZvTM5L58pz/4OjFMPLMeHEcF8da0/E88jlynLmNXOA+BoP32zzeqQNH9HyfucCyth8jV6HnQI6ROEZ6SWrAkXjyY6V1BEGOB3gOWlfOReF4I/lejpjD95pHD5HC9z2fm0cdAO77CF1LKRFrBOzVCu3XuJ4aP94vkGvF9fUpT8oRyGetH+9lWnK95lgZV+MoqXXuezo/b8dpv5f2xBRfe4Dv/W+NLI419yjH0vWce0aKdrT0GCR1zyj58esW1zfa0VLDWqTqlvLr2bHUM+hcSz2JXrPejkgLR+nzT6Sj9VrM9XvslZp9jRHheDb6lRytNbfeHyNp6QjkfUtSe7IEwPKenwtLHVPH5zgErUnq3p9C8iyvcW/piP2V/keSgv4+rkVvjtQ15cmfbw8CenWkNaXw/i7Z260co/d2Cdi4o2Sv0uDHAxkH/wctzZXm1eYmGa8F1HF6njsJHDGvNrY0r2fHWn1KeRiaeUrzee6ajo/WpXfHNfB21KyFBz+V3aeioCMAAA==
   </data>
  </layer>
  <layer name="Grass" width="57" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSwrAIAxEvUrvf8nShZviBzWJyWQedFFQM09JsaUQQkhunsZjXbv3LlnjhmOvtlQGzbUlMmg6WqOZI4Njb31LLPrl9lmuOJ7ku+1ZM/zztMacZPPgOUMyWwZHryD7ReijXTzcw7RB96ugehE8kHsR/Zu6+98caT9md/LZPDr6YOQ4Gh/J8WM1X2bHCK6rZPDM4FhBdiOEEFRePWFGO6AjAAA=
+   H4sIAAAAAAAAC+2XQQ6AIAwE/YP/f4p/Mx64qECAtrTbncSDCdAdSA0eByGE5OY6v4917dq7ZI0djrXaUhk015bIoOlojWaODI619S2x6JfdZzniuJJvt2fJ8M7zN2YlmwfPHpLZMjh6BdkvQh/N4uEepg26XwHVi+CB3Ivo39TZ/+ZI+9G7k/fm0dEHLcfW+EiOD6P5MjtGcB0lg2cGxwKyGyGEoHIDhhH/5KAjAAA=
   </data>
  </layer>
  <layer name="Water" width="57" height="40">

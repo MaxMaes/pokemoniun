@@ -2021,11 +2021,7 @@ public class Player extends Character implements Battleable, Tradeable
 
 	public void updateClientFriends()
 	{
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-			return;
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-			return;
+		m_database = MySqlManager.getInstance();
 		ResultSet friends = m_database.query("SELECT username FROM pn_members WHERE id = ANY (SELECT friendId FROM pn_friends WHERE id = (SELECT id FROM pn_members WHERE username = '"
 				+ MySqlManager.parseSQL(m_username) + "'))");
 		try

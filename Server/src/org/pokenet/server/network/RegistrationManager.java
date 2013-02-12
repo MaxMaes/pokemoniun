@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonSpecies;
@@ -66,23 +65,7 @@ public class RegistrationManager implements Runnable
 		// int region = Integer.parseInt(String.valueOf(((String) session.getAttribute("reg")).charAt(0)));
 		// String[] info = ((String) session.getAttribute("reg")).substring(1).split(",");
 		// Check if the username is invalid or an NPC name.
-		m_database = new MySqlManager();
-		if(!m_database.connect(GameServer.getDatabaseHost(), GameServer.getDatabaseUsername(), GameServer.getDatabasePassword()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(87);
-			message.addInt(1);
-			session.Send(message);
-			return;
-		}
-		if(!m_database.selectDatabase(GameServer.getDatabaseName()))
-		{
-			ServerMessage message = new ServerMessage();
-			message.init(87);
-			message.addInt(1);
-			session.Send(message);
-			return;
-		}
+		m_database = MySqlManager.getInstance();
 		if(session.getChannel() == null)
 			return;
 		String[] info = packet.split(",");

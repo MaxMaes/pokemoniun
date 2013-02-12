@@ -29,7 +29,7 @@
  </layer>
  <layer name="Walkable" width="72" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WTQ5AMBBGewii8bPCCvcQN3EEtzcWTRqhVW3HYL7kxaoy8zKmkkyI5IeMUogJsOXpOtkPTdgP+3nCT2p5HlEApUblWKvp3dT83KEDeo2BuJvYftS8uM4JJWL6qYEGaAn0ieFHn/Er866+p8HxHCUw98/b3GD7saHfbyF21iz9oeRH7auNPICnRfpDyc/+/nf9BzgDIxh+YsF+zHV+xc+bo+r/an+++Xv/trAfc1YIdrhvgBYAAA==
+   H4sIAAAAAAAAC+2WTQ5AMBBGewii8bPCCvcQN3EEtzcWTRpBVdsxdL7kxaoy8zKmkkyIJEJGKcQEmPJ2neyHJuyH/bzhJzU8jyiAUqOyrPXq3dT8PKEDeo2BuJvQftS82M4JJUL6qYEGaAn0ieFHn/E7866+p8HyHCUw98/X3GD7MaHfbz521izdoeRH7auN3IOnRbpDyc/+/rf9BzgDIxh+QsF+4vDz5aj6/9qfa2Lv3xT2c50Vsmxvv4AWAAA=
   </data>
  </layer>
  <layer name="Grass" width="72" height="20">
@@ -54,7 +54,7 @@
  </layer>
  <layer name="Walkable" width="72" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3QMREAAAjEMEzgXwwjppDBD4mCXqsAgGTT3wXZ1h8AAIBYBzQp/QGAFgAA
+   H4sIAAAAAAAAC+3QsQkAIBAEwW/C/osRTARrsoX/RFBn4k3uIgCA00bLt73QvmIVNs8P/wEAALjFBhlq5LOAFgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="72" height="20">

@@ -34,6 +34,13 @@ public class ModerationManager
 		 * message.addString(x.substring(6));
 		 * GameClient.getSession().send(message);
 		 * } */
+		// Reset player to Heal Location
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("reset "))
+		{
+			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_UNSTICK);
+			message.addString(x.substring(6));
+			GameClient.getSession().send(message);
+		}
 		// Mute
 		else if(x.length() >= 5 && x.substring(0, 5).equalsIgnoreCase("mute "))
 		{

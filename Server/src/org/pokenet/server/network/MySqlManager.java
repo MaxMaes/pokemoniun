@@ -89,37 +89,12 @@ public class MySqlManager
 		}
 	}
 
-	/* public ResultSet query(String query)
-	 * {
-	 * ResultSet mysql_result = null;
-	 * // System.out.println("Let's search for some data;	" + query);
-	 * // open();
-	 * try
-	 * {
-	 * Statement stmt = mysql_connection.createStatement();
-	 * if(query.startsWith("SELECT"))
-	 * // Use the "executeQuery" function because we have to retrieve data
-	 * // Return the data as a resultset
-	 * mysql_result = stmt.executeQuery(query);
-	 * else
-	 * // It's an UPDATE, INSERT, or DELETE statement
-	 * // Use the"executeUpdaye" function and return a null result
-	 * stmt.executeUpdate(query);
-	 * }
-	 * catch(SQLException e)
-	 * {
-	 * e.printStackTrace();
-	 * }
-	 * // close();
-	 * return mysql_result;
-	 * } */
-
 	/**
 	 * Closes the connection to the mysql server. Returns true on success.
 	 * 
 	 * @return
 	 */
-	private boolean close()
+	public boolean close()
 	{
 		try
 		{

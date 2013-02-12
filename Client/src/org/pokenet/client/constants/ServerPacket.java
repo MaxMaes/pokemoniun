@@ -56,7 +56,8 @@ public enum ServerPacket
 	TRAVEL(0x35),
 	PLAYER_ME_WARP(0x36),
 	PLAYER_PLAYER_WARP(0x37), 
-	PLAYER_CLASS(0x38);
+	PLAYER_CLASS(0x38), 
+	PLAYER_UNSTICK(0x39);
 	
 	private int code = -1;
 

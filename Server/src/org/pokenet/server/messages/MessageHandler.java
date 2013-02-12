@@ -54,6 +54,7 @@ import org.pokenet.server.messages.events.UnMuteEvent;
 import org.pokenet.server.messages.events.UnableLearnMoveEvent;
 import org.pokenet.server.messages.events.UnbanEvent;
 import org.pokenet.server.messages.events.UseItemEvent;
+import org.pokenet.server.messages.events.UserUnstickEvent;
 import org.pokenet.server.messages.events.WarpEvent;
 import org.pokenet.server.messages.events.WarpPlayerToMeEvent;
 import org.pokenet.server.messages.events.WarpPlayerToPlayerEvent;
@@ -139,5 +140,6 @@ public class MessageHandler
 		messages.put(54, new WarpPlayerToMeEvent());
 		messages.put(55, new WarpPlayerToPlayerEvent());
 		messages.put(56, new ChangeUserClassEvent());
+		messages.put(57, new UserUnstickEvent());
 	}
 }

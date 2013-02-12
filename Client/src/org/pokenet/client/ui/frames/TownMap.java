@@ -69,8 +69,9 @@ public class TownMap extends Frame
 
 		setSize(700, 500 + getTitleBar().getHeight());
 		getTitleBar().getCloseButton().setVisible(false);
+		getTitleBar().setVisible(false);
 		loadLocations();
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 	}
 

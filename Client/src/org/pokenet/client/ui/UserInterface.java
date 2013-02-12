@@ -85,12 +85,13 @@ public class UserInterface extends Frame
 		m_battleManager = new BattleManager();
 		m_display = display;
 		m_chat = new ChatDialog();
+		m_chat.setLocation(0, GameClient.getInstance().getDisplay().getHeight() - m_chat.getHeight());
+		m_display.add(m_chat);
 		m_requestsForm = new RequestDialog();
 		m_friendsList = new FriendListDialog();
 		m_friendsList.setVisible(false);
 		m_display.add(m_friendsList);
 		m_map = new TownMap();
-		m_map.setAlwaysOnTop(true);
 		m_map.setVisible(false);
 		m_display.add(m_map);
 		m_pokedex = new PokedexDialog();
@@ -107,8 +108,6 @@ public class UserInterface extends Frame
 		this.add(GameClient.getInstance().getTimeService());
 		GameClient.getInstance().getTimeService().setX(745);
 		getTitleBar().setVisible(false);
-		m_chat.setLocation(0, GameClient.getInstance().getDisplay().getHeight() - m_chat.getHeight());
-		m_display.add(m_chat);
 		m_display.add(this);
 	}
 
@@ -685,7 +684,8 @@ public class UserInterface extends Frame
 		else
 		{
 			hideHUDElements();
-			m_map.setLocation(m_buttons[3].getX(), 67 - getTitleBar().getHeight());
+			m_chat.releaseFocus();
+			m_map.setLocation(m_buttons[1].getX(), 67 - getTitleBar().getHeight());
 			m_map.setVisible(true);
 		}
 	}
@@ -718,14 +718,12 @@ public class UserInterface extends Frame
 		if(m_pokedex.isVisible())
 		{
 			m_pokedex.setVisible(false);
-			m_chat.setVisible(true);
 			hideHUDElements();
 		}
 		else
 		{
 			hideHUDElements();
-			m_chat.setVisible(false);
-			m_pokedex.setLocation(0, 67 - getTitleBar().getHeight());
+			m_pokedex.setLocation(150, 50);
 			m_pokedex.setVisible(true);
 		}
 	}

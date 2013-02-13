@@ -72,7 +72,7 @@ public class GameClient extends BasicGame
 	private static Session m_session;
 	private static boolean debug = false;
 	private static final int FPS = 30;
-	private static final String GAME_TITLE = "Pokemonium 1.5.0.1";
+	private static final String GAME_TITLE = "Pokemonium 1.5.0.2";
 	private static AppGameContainer gc;
 	private static Connection m_connection;
 	private static String m_filepath;

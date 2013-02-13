@@ -151,6 +151,8 @@ public class ServerDialog extends Frame
 				}
 				m_servers[i].setForeground(m_black);
 			}
+			in.close();
+			stream.close();
 		}
 		catch(MalformedURLException mue)
 		{

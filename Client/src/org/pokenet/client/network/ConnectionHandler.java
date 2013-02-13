@@ -5,6 +5,7 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelHandler;
+import org.lwjgl.examples.Game;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.Session;
 import org.pokenet.client.protocol.ServerMessage;
@@ -16,6 +17,8 @@ public class ConnectionHandler extends SimpleChannelHandler
 	public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e)
 	{
 		// nun
+		GameClient.getInstance().reset();
+		GameClient.getInstance().showAlert("Session closed", "You have been disconnected from the server");
 	}
 
 	@Override

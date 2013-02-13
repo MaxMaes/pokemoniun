@@ -39,6 +39,7 @@ public class AutoUpdater
 	
 	private ArrayList<String> versions;
 	private Ini updatelinksini;
+	private InputStreamReader updatelinksreader;
 	
 	public AutoUpdater()
 	{
@@ -46,7 +47,8 @@ public class AutoUpdater
 		{
 			try
 			{
-				updatelinksini = new Ini(new InputStreamReader(new URL(updatelinks).openStream()));
+				updatelinksreader = new InputStreamReader(new URL(updatelinks).openStream());
+				updatelinksini = new Ini(updatelinksreader);
 			}
 			catch(InvalidIniFormatException e)
 			{
@@ -65,6 +67,14 @@ public class AutoUpdater
 			}
 			System.out.println("A new version is available, please wait while the game is being updated to the latest version.");
 			update();
+			try
+			{
+				updatelinksreader.close();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		else
 		{

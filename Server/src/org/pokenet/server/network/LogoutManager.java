@@ -6,7 +6,6 @@ import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.connections.ActiveConnections;
-import org.pokenet.server.protocol.ServerMessage;
 
 /**
  * Handles logging players out
@@ -132,10 +131,8 @@ public class LogoutManager implements Runnable
 		/* Store all player information. */
 		if(!m_saveManager.savePlayer(player))
 			return false;
-		
 		/* Finally, store that the player is logged out and close connection. */
 		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");
-		
 		GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		ActiveConnections.removeSession(player.getSession().getChannel());
 		GameServer.getInstance().updatePlayerCount();

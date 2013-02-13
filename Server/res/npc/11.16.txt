@@ -163,6 +163,7 @@ false
 [npc]
 NULL
 down
+0
 5
 17
 NULL
@@ -176,6 +177,7 @@ false
 [npc]
 NULL
 down
+0
 13
 77
 NULL
@@ -189,10 +191,11 @@ false
 [npc]
 NULL
 down
+0
 13
 87
 NULL
-6
+0
 -1
 6
 false
@@ -202,10 +205,11 @@ false
 [npc]
 NULL
 down
+0
 11
 136
 NULL
-6
+0
 -1
 7
 false

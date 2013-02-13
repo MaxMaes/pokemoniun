@@ -72,6 +72,5 @@ public class Session
 	{
 		player.setSession(this);
 		this.player = player;
-
 	}
 }

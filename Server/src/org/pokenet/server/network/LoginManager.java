@@ -1,6 +1,5 @@
 package org.pokenet.server.network;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -20,7 +19,6 @@ import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
-import org.pokenet.server.feature.DatabaseConnection;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -184,10 +182,7 @@ public class LoginManager implements Runnable
 		/* Now, check that they are not banned. */
 		try
 		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_bans WHERE ip = ? OR playername = ?");
-			ps.setString(1, session.getIpAddress());
-			ps.setString(2, username);
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = m_database.query("SELECT * FROM `pn_bans` WHERE ip = '" + session.getIpAddress() + "' OR playername = '" + username + "';");
 			/* Make sure they are not banned. */
 			if(rs != null && rs.first())
 			{
@@ -197,7 +192,6 @@ public class LoginManager implements Runnable
 				return;
 			}
 			rs.close();
-			ps.close();
 		}
 		catch(SQLException sqle)
 		{
@@ -206,9 +200,7 @@ public class LoginManager implements Runnable
 		/* Find the member's information. */
 		try
 		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM pn_members WHERE username = ?");
-			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = m_database.query("SELECT * FROM `pn_members` WHERE username = '" + username + "';");
 			if(!rs.first())
 			{
 				/* Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames. */
@@ -234,15 +226,8 @@ public class LoginManager implements Runnable
 						player.getSession().setPlayer(player);
 						player.setLastLoginTime(time);
 						player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
-						PreparedStatement updateLogin = DatabaseConnection.getConnection().prepareStatement(
-								"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
-						updateLogin.setString(1, GameServer.getServerName());
-						updateLogin.setLong(2, time);
-						updateLogin.setString(3, session.getIpAddress());
-						updateLogin.setLong(4, language);
-						updateLogin.setString(5, username);
-						updateLogin.executeUpdate();
-						updateLogin.close();
+						m_database.query("UPDATE `pn_members` SET lastLoginServer = '" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime = '" + time + "', lastLoginIP = '"
+								+ MySqlManager.parseSQL(session.getIpAddress()) + "', lastLanguageUsed = " + language + " WHERE username = '" + MySqlManager.parseSQL(username) + "';");
 						initialiseClient(player, session);
 					}
 					else
@@ -265,15 +250,13 @@ public class LoginManager implements Runnable
 				session.Send(message);
 				return;
 			}
-
 			rs.close();
-			ps.close();
 			/* Something went wrong, make sure the player is registered as logged out. */
 		}
 		catch(SQLException sqle)
 		{
 			sqle.printStackTrace();
-			m_database.query("UPDATE pn_members SET lastLoginServer='null' WHERE username='" + MySqlManager.parseSQL(username) + "'");
+			m_database.query("UPDATE `pn_members` SET lastLoginServer = 'null' WHERE username = '" + MySqlManager.parseSQL(username) + "';");
 		}
 	}
 
@@ -288,7 +271,7 @@ public class LoginManager implements Runnable
 	private void changePass(String username, String newPassword, String oldPassword, Session session)
 	{
 		m_database = MySqlManager.getInstance();
-		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
+		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "';");
 		try
 		{
 			if(result.first())
@@ -296,9 +279,8 @@ public class LoginManager implements Runnable
 				if(result.getString("password").compareTo(oldPassword) == 0)
 				{
 					/* Old password matches the one on file, therefore they got their old password correct, so it can be changed to their new one. */
-					m_database.query("UPDATE `pn_members` SET `password` = '" + MySqlManager.parseSQL(newPassword) + "' WHERE `username` = '" + MySqlManager.parseSQL(username) + "'");
+					m_database.query("UPDATE `pn_members` SET `password` = '" + MySqlManager.parseSQL(newPassword) + "' WHERE `username` = '" + MySqlManager.parseSQL(username) + "';");
 					// tell them their password was changed successfully
-					// session.write("ps");
 					ServerMessage message = new ServerMessage();
 					message.init(73);
 					message.addInt(1);
@@ -311,7 +293,6 @@ public class LoginManager implements Runnable
 			sqle.printStackTrace();
 		}
 		/* Tell them we failed to change their password. */
-		// session.write("pe");
 		ServerMessage message = new ServerMessage();
 		message.init(73);
 		message.addInt(0);
@@ -327,12 +308,12 @@ public class LoginManager implements Runnable
 					.query("INSERT INTO `pn_pokedex` VALUES(NULL, "
 							+ MySqlManager.parseSQL("" + memberID)
 							+ ", '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
-			ResultSet id = m_database.query("SELECT pokedexId FROM pn_pokedex WHERE memberId = " + MySqlManager.parseSQL("" + memberID));
+			ResultSet id = m_database.query("SELECT pokedexId FROM `pn_pokedex` WHERE memberId = " + MySqlManager.parseSQL("" + memberID));
 			id.first();
 			pokedexid = id.getInt("pokedexId");
 			m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL("" + pokedexid) + " WHERE id = " + MySqlManager.parseSQL("" + memberID));
-			// WE NEED TO CHECK ALL THE PLAYERS POKEMON (PREVIOUSLY) OWNED AND CHANGE THEIR VALUES ON THE POKEDEX TO CAUGHT
-			pokemons = m_database.query("SELECT * FROM pn_pokemon WHERE originalTrainerName='" + p.getName() + "'");
+			/* We need to check all the previously and currently owned pokemn and change the values on the Pokedex to caught. */
+			pokemons = m_database.query("SELECT * FROM `pn_pokemon` WHERE originalTrainerName='" + p.getName() + "'");
 			pokemons.beforeFirst();
 			while(pokemons.next())
 			{
@@ -342,17 +323,17 @@ public class LoginManager implements Runnable
 					for(int i = 0; i < 3; i++)
 					{
 						int tempNumber = pokemonNumber - i;
-						m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 					}
 				else if(isSecondStageStarter(pokemonNumber))
 					for(int i = 0; i < 2; i++)
 					{
 						int tempNumber = pokemonNumber - i;
-						m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 					}
 				else
 					// Regular pokemon or 1st stage starter
-					m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+					m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 			}
 		}
 		catch(SQLException sqle)
@@ -420,9 +401,9 @@ public class LoginManager implements Runnable
 			player.setBreedingExp(result.getInt("skBreed"));
 			/* Retrieve refences to all Pokemon. */
 			int partyId = result.getInt("party");
-			ResultSet partyData = m_database.query("SELECT * FROM pn_party WHERE id='" + partyId + "'");
+			ResultSet partyData = m_database.query("SELECT * FROM pn_party WHERE id = '" + partyId + "'");
 			partyData.first(); /* Got a NPE here. */
-			ResultSet pokemons = m_database.query("SELECT * FROM pn_pokemon WHERE currentTrainerName='" + player.getName() + "'");
+			ResultSet pokemons = m_database.query("SELECT * FROM pn_pokemon WHERE currentTrainerName = '" + player.getName() + "'");
 			int boxNumber = 0;
 			int boxPosition = 0;
 			/* Loop through all Pokemon belonging to this player and add them to their party/box */
@@ -633,23 +614,8 @@ public class LoginManager implements Runnable
 		session.setLoggedIn(true);
 		player.setLanguage(Language.values()[Integer.parseInt(String.valueOf(language))]);
 		/* Update the database with login information. */
-		/* m_database.query("UPDATE pn_members SET lastLoginServer='" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime='" + time + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLoginIP='" + getIp(session) + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); m_database.query("UPDATE pn_members SET lastLanguageUsed='" + language + "' WHERE username='" + MySqlManager.parseSQL(username) + "'"); */
-		try
-		{
-			PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(
-					"UPDATE pn_members SET lastLoginServer = ?, lastLoginTime = ?, lastLoginIP = ?, lastLanguageUsed = ? WHERE username = ?");
-			ps.setString(1, GameServer.getServerName());
-			ps.setLong(2, time);
-			ps.setString(3, session.getIpAddress());
-			ps.setLong(4, language);
-			ps.setString(5, username);
-			ps.executeUpdate();
-			ps.close();
-		}
-		catch(SQLException sqle)
-		{
-			sqle.printStackTrace();
-		}
+		m_database.query("UPDATE `pn_members` SET lastLoginServer = '" + MySqlManager.parseSQL(GameServer.getServerName()) + "', lastLoginTime = '" + time + "', lastLoginIP = '"
+				+ MySqlManager.parseSQL(session.getIpAddress()) + "', lastLanguageUsed = " + language + " WHERE username = '" + MySqlManager.parseSQL(username) + "';");
 		/* Send success packet to player, set their map and add them to a movement service. */
 		initialiseClient(player, session);
 		/* Add them to the list of players */

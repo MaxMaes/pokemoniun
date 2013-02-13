@@ -32,12 +32,12 @@ public class NetworkService
 	 */
 	public NetworkService()
 	{
+		m_database = MySqlManager.getInstance();
 		m_saveManager = new SaveManager();
 		m_logoutManager = new LogoutManager(m_saveManager);
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManager = new ChatManager[3];
-
 		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
 				{
 					public void actionPerformed(ActionEvent arg0)
@@ -128,39 +128,23 @@ public class NetworkService
 	 */
 	public void start()
 	{
-		// Load MySQL JDBC Driver
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch(ClassNotFoundException cnfe)
-		{
-			cnfe.printStackTrace();
-		}
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		m_database = MySqlManager.getInstance();
-		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'"); /* <-- Evil Exception = evil. */
 		/* Start the login/logout managers. */
 		m_logoutManager.start();
 		m_loginManager.start();
-
-		GameServer.getInstance();
 		_connection = new Connection(GameServer.getPort(), m_logoutManager);
 		if(!_connection.StartSocket())
 			System.out.println("ERROR: Something is using the port or the IP address is invalid.");
 		else
 		{
-			GameServer.getInstance();
 			System.out.println("INFO: Server started on port " + GameServer.getPort());
-
 			/* Start the chat managers */
 			for(int i = 0; i < m_chatManager.length; i++)
 			{
 				m_chatManager[i] = new ChatManager();
 				m_chatManager[i].start();
 			}
-
-			/* Bind the TCP port *//* m_tcpAcceptor = new NioSocketAcceptor(); m_tcpAcceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new PokenetCodecFactory())); m_tcpAcceptor.setHandler(m_tcpProtocolHandler); try { m_tcpAcceptor.bind(new InetSocketAddress(GameServer.getPort())); System.out.println("INFO: TCP acceptor started."); } catch (IOException e) { e.printStackTrace(); return; } */
 			System.out.println("INFO: Network Service started.");
 		}
 	}
@@ -202,7 +186,7 @@ public class NetworkService
 			}
 			else
 			{
-				// Attempted save before the client logged in
+				/* Attempted save before the client logged in. */
 			}
 		}
 	}

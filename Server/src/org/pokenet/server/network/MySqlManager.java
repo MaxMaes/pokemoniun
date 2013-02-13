@@ -1,7 +1,5 @@
 package org.pokenet.server.network;
 
-/* Simple MySQL Java Class
- * Makes it similair to PHP */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +8,8 @@ import java.sql.Statement;
 import org.pokenet.server.GameServer;
 
 /**
- * Handles MySql connections
+ * Handles MySQL connections.
+ * Makes the process similair to PHP.
  * 
  * @author Daniel Morante
  * @author XtremeJedi
@@ -59,31 +58,31 @@ public class MySqlManager
 		Statement stmt;
 		if(query.startsWith("SELECT"))
 		{
-			// Use the "executeQuery" function because we have to retrieve data
-			// Return the data as a resultset
+			/* Use the "executeQuery" function because we have to retrieve data.
+			 * Return the data as a ResultSet. */
 			try
 			{
 				stmt = mysql_connection.createStatement();
 				mysql_result = stmt.executeQuery(query);
 			}
-			catch(Exception x)
+			catch(Exception e)
 			{
-				x.printStackTrace();
+				e.printStackTrace();
 			}
 			return mysql_result;
 		}
 		else
 		{
-			// It's an UPDATE, INSERT, or DELETE statement
-			// Use the"executeUpdaye" function and return a null result
+			/* It's an UPDATE, INSERT, or DELETE statement.
+			 * Use the"executeUpdaye" function and return a null result. */
 			try
 			{
 				stmt = mysql_connection.createStatement();
 				stmt.executeUpdate(query);
 			}
-			catch(Exception x)
+			catch(Exception e)
 			{
-				x.printStackTrace();
+				e.printStackTrace();
 			}
 			return null;
 		}

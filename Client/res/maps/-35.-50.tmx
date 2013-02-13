@@ -26,7 +26,7 @@
  <tileset firstgid="8817" source="Path0.tsx"/>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4nZqYWqVq5S6HV0/MXqHstuphQfC7djsHAx+H3X7qNsJYXdG/Hxqux1kPgzTy4/Dxe0DkR6GEh7Kbh/F9MOXRIlXe5SZMkyKXeRiABp9WrMoEAAA
+   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4nZqYWqVq6NuHxg82Nw+VMJt1O2DBw9nt7szIvBAu3U4uZ1aeCj7bSi7fRTTD18SJV7tUWbKMCl2kYsBEpdrkCgQAAA=
   </data>
  </layer>
  <layer name="Grass" width="47" height="22">
@@ -41,7 +41,7 @@
  </layer>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NggAAeGYYhC0bdPgpGwShABlfkGBiuAvE1AniwAW55BgZeIOYjgqYFICbccAFnoJtcgdiNCJrawEGGcHjhC7PqAXY7ITvtZCAYl34VBcJYHYg1FAaX26OB7okhAscDccIAuZ0aYCi7ndpAWYFwOh2sbieUXmmRTkfBKBgF9AcOg7QMGggAAJI5FDcoEAAA
+   H4sIAAAAAAAAC+2TzQmAMAxGc/dngqI9CG4hBdEpBB1anccUQUWoqVZphTz4yCnkERKAlVjAb2F3hmGOjBnAhJmJuFK9/L9RDpBgUovqytldCbu9majRqcG0FvULd2pfVzvT/T7dqZm6x3Rrur+QdEoZpnsn6fQe3U2oG78/yEfKGz7dv4C605DdqTsN2Z1hGDv4V3cWL3Dr+igQAAA=
   </data>
  </layer>
  <layer name="Collisions" width="47" height="22">

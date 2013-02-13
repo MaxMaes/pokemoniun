@@ -111,7 +111,6 @@ public class GameClient extends BasicGame
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
-
 	private static MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
 
 	/**
@@ -341,9 +340,7 @@ public class GameClient extends BasicGame
 	public static void messageDialog(String message, Container container)
 	{
 		if(m_messageDialog == null || !m_messageDialog.isVisible())
-		{
 			m_messageDialog = new MessageDialog(message.replace('~', '\n'), container);
-		}
 	}
 
 	/** Reloads options */
@@ -455,15 +452,15 @@ public class GameClient extends BasicGame
 			if(address.length == 2)
 				port = Integer.parseInt(address[1]);
 		}
-		catch(NumberFormatException ex)
+		catch(NumberFormatException nfe)
 		{
-
+			nfe.printStackTrace();
 		}
 		Socket socket = null;
 		m_connection = new Connection(host, port);
 		try
 		{
-			// dirty hack! :) check if server is alive!!!
+			/* Dirty check if the server is alive. */
 			socket = new Socket(host, port);
 			socket.close();
 			if(m_connection.Connect())

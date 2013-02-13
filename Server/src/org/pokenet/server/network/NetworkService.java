@@ -129,7 +129,7 @@ public class NetworkService
 	public void start()
 	{
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'"); /* <-- Evil Exception = evil. */
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
 		/* Start the login/logout managers. */
 		m_logoutManager.start();
 		m_loginManager.start();

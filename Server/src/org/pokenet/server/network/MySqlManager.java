@@ -16,7 +16,7 @@ import org.pokenet.server.GameServer;
  */
 public class MySqlManager
 {
-	private static MySqlManager mInstance;
+	private static MySqlManager m_instance;
 	private Connection mysql_connection;
 	private String mysql_connectionURL;
 	private ResultSet mysql_result;
@@ -31,11 +31,18 @@ public class MySqlManager
 		}
 	}
 
+	private boolean open()
+	{
+		final String username = GameServer.getDatabaseUsername();
+		final String password = GameServer.getDatabasePassword();
+		return connect(username, password);
+	}
+
 	public static MySqlManager getInstance()
 	{
-		if(mInstance == null)
-			mInstance = new MySqlManager();
-		return mInstance;
+		if(m_instance == null)
+			m_instance = new MySqlManager();
+		return m_instance;
 	}
 
 	public static String parseSQL(String text)
@@ -93,7 +100,7 @@ public class MySqlManager
 	 * 
 	 * @return
 	 */
-	public boolean close()
+	private boolean close()
 	{
 		try
 		{
@@ -106,27 +113,6 @@ public class MySqlManager
 			sqle.printStackTrace();
 		}
 		return false;
-	}
-
-	/**
-	 * Selects the current database. Returns true on success
-	 * 
-	 * @param database
-	 * @return
-	 */
-	public boolean selectDatabase(String database)
-	{
-		try
-		{
-			Statement stm = mysql_connection.createStatement();
-			stm.executeQuery("USE " + database);
-			return true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	/**
@@ -152,12 +138,5 @@ public class MySqlManager
 			sqle.printStackTrace();
 			return false;
 		}
-	}
-
-	private boolean open()
-	{
-		final String username = GameServer.getDatabaseUsername();
-		final String password = GameServer.getDatabasePassword();
-		return connect(username, password);
 	}
 }

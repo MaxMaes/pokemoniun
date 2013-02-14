@@ -20,22 +20,22 @@
  <tileset firstgid="4827" source="Interior - Furniture.tsx"/>
  <layer name="Walkable" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMNHjDSxtzfwkyMPwWJI8mBrAKMTCwCZFHj7p/1P34ADFOBACqe8BCwAYAAA==
+   H4sIAAAAAAAAC2NgGAWjYBQQAg4CtDX/DS9tzP0lyMDwW5A8mhjAKsTAwCZEHj3q/lH34wPEOBEAXzXQzsAGAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="24" height="18">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYGgCIw7KMSHz7QUYGBwEIHwHAeKxowBx5gcD1YVAzQ8RIB6HEmE+Iw8DQ7oAqlgWkF/DxMBQy4QQM2BlYMhBU5cpANFPyHx0MBmobwoWPFWAOP2kyBMCg8l8d2EGBg9h/OrR1ZBifiBQXxAB89HVDIbwwYeJUQMAhUaPR8AGAAA=
   </data>
  </layer>
  <layer name="Walkable" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMNHjDO9AuGDpAWoiBQQaIZYFYDojlhSg301qYgcFQGMJWA5qnDsQaQKwJxFpQ80Hy1sKkm22IpscQaJ4REBsDsQkQmwrhV0+M25GBDdA8WyC2A2J7IHYQwq+eHMAHNJMfiAWoEPaUAABWDYOswAYAAA==
+   H4sIAAAAAAAAC+2QvQ6CMBRGP3ZB046KbCpsVZnwh/dXn8T4DhyjA2FoVGQhPclJmvT25KZSIBDwcYmlK97iYfp3utFEegzUHxtzIy0wxSVmpn+zspKzr/OK3ho3mGPx7j/vK/t923XeOHpb3OEeS+Of/2T3Ngd6RzzhGWvjn/+FhOYUZ3/4+z4012ME/MAGAAA=
   </data>
  </layer>
  <layer name="Collisions" width="24" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGgCIw7KMSHz7QUYGBzIwI4CxJkfDFQXIgDhhwgQj0OJMJ+Rh4EhXQBVLAvIr2FiYKhlQogZsDIw5KCpyxSA6CdkPjqYDNQ3BQueKkCcflLkCYHBZL67MAODhzB+9ehqSDE/EKgviID56GoGQ/jgw8SoAQBwCJ/LwAYAAA==
-  </data>
- </layer>
- <layer name="Collisions" width="24" height="18">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBTgA6d5GRjOAPFZXgifXYCBgQOIOYGYSwChbroAdv2EwGuguYw8DAxvgXQY0AxpIJZBMkuAlYEhAshfTab5yMAFaIY+EBsIYIqPglEw1AAALfxLgMAGAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSQAtgFGBg4gJgTiLkEEOLTBXDrIRaEAc2QBmIZJLMEWBkYIoD81VQw3wVohj4QGwhgio+CUTDUAABK5XBFwAYAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="18">

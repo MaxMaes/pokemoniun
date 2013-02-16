@@ -1,7 +1,7 @@
 [npc]
 Agatha
 down
-215
+3
 6
 4
 Gengar,64,Spiritomb,63,Dusknoir,63,Mismagius,66,Crobat,66,Arbok,70

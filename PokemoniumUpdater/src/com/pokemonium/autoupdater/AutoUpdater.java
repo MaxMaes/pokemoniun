@@ -67,6 +67,7 @@ public class AutoUpdater
 			}
 			System.out.println("A new version is available, please wait while the game is being updated to the latest version.");
 			update();
+			
 			try
 			{
 				updatelinksreader.close();
@@ -282,12 +283,21 @@ public class AutoUpdater
 			{// Catch exception if any
 				System.err.println("Error: " + e.getMessage());
 			}
+			
+			try
+			{
+				updatelinksreader.close();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
 
 			System.out.println("The updater was updated, please restart the game to resume...");
 			System.out.println("Press any key to continue");
 			Scanner s = new Scanner(System.in);
 			s.nextLine();
-			System.exit(0);
+			System.exit(1);
 		}
 	}
 

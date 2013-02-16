@@ -106,6 +106,7 @@ public class SaveManager
 		try
 		{
 			/* First, check if they have logged in somewhere else. This is useful for when as server loses its internet connection */
+			m_database = MySqlManager.getInstance();
 			ResultSet data = m_database.query("SELECT lastLoginTime FROM `pn_members` WHERE id='" + p.getId() + "'");
 			data.first();
 			if(data.getLong("lastLoginTime") == p.getLastLoginTime())

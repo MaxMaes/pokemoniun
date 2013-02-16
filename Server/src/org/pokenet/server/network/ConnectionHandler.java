@@ -21,13 +21,13 @@ public class ConnectionHandler extends SimpleChannelHandler
 	}
 
 	@Override
-	public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e)
+	public void channelClosed(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
 		try
 		{
-			if(ctx.getChannel().isOpen())
+			if(channelContext.getChannel().isOpen())
 			{
-				Player p = ActiveConnections.GetUserByChannel(ctx.getChannel()).getPlayer();
+				Player p = ActiveConnections.GetUserByChannel(channelContext.getChannel()).getPlayer();
 				if(p != null)
 				{
 					if(p.isBattling())
@@ -43,32 +43,30 @@ public class ConnectionHandler extends SimpleChannelHandler
 					if(p.isTrading())
 						p.getTrade().endTrade();
 					m_logoutManager.queuePlayer(p);
-					// GameServer.getServiceManager().getMovementService().removePlayer(p.getName());
-					ActiveConnections.removeSession(ctx.getChannel());
-					ctx.getChannel().close();
+					ActiveConnections.removeSession(channelContext.getChannel());
+					channelContext.getChannel().close();
 				}
 			}
 		}
-		catch(Exception er)
+		catch(Exception e)
 		{
-			er.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void channelOpen(ChannelHandlerContext ctnx, ChannelStateEvent e)
+	public void channelOpen(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
-
-		if(!ActiveConnections.addSession(ctnx.getChannel(), ctnx.getChannel().getRemoteAddress().toString()))
-			ctnx.getChannel().disconnect(); // failed to connect
+		if(!ActiveConnections.addSession(channelContext.getChannel(), channelContext.getChannel().getRemoteAddress().toString()))
+			channelContext.getChannel().disconnect(); // failed to connect
 	}
 
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e)
+	public void exceptionCaught(ChannelHandlerContext channelContext, ExceptionEvent channelState)
 	{
 		try
 		{
-			Player p = ActiveConnections.GetUserByChannel(ctx.getChannel()).getPlayer();
+			Player p = ActiveConnections.GetUserByChannel(channelContext.getChannel()).getPlayer();
 			if(p != null)
 			{
 				if(p.isBattling())
@@ -84,33 +82,32 @@ public class ConnectionHandler extends SimpleChannelHandler
 				if(p.isTrading())
 					p.getTrade().endTrade();
 				m_logoutManager.queuePlayer(p);
-				// GameServer.getServiceManager().getMovementService().removePlayer(p.getName());
-				ActiveConnections.removeSession(ctx.getChannel());
+				ActiveConnections.removeSession(channelContext.getChannel());
 			}
 		}
-		catch(Exception er)
+		catch(Exception e)
 		{
-			ctx.getChannel().close();
-			System.out.println(e);
+			channelContext.getChannel().close();
+			e.printStackTrace();
+			System.out.println(channelState);
 		}
 
 	}
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
+	public void messageReceived(ChannelHandlerContext channelContext, MessageEvent messageEvent)
 	{
 		try
 		{
-			ClientMessage msg = (ClientMessage) e.getMessage();
-
-			if(ActiveConnections.hasSession(ctx.getChannel()))
-				ActiveConnections.GetUserByChannel(ctx.getChannel()).parseMessage(msg);
+			ClientMessage msg = (ClientMessage) messageEvent.getMessage();
+			if(ActiveConnections.hasSession(channelContext.getChannel()))
+				ActiveConnections.GetUserByChannel(channelContext.getChannel()).parseMessage(msg);
 			else
-				System.out.print("error ohno");
+				System.out.println("This session has been closed.");
 		}
-		catch(Exception e1)
+		catch(Exception e)
 		{
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }

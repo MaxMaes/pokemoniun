@@ -5,7 +5,6 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelHandler;
-import org.lwjgl.examples.Game;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.Session;
 import org.pokenet.client.protocol.ServerMessage;
@@ -14,46 +13,40 @@ public class ConnectionHandler extends SimpleChannelHandler
 {
 
 	@Override
-	public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e)
+	public void channelClosed(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
-		// nun
 		GameClient.getInstance().reset();
 		GameClient.getInstance().showAlert("Session closed", "You have been disconnected from the server");
 	}
 
 	@Override
-	public void channelOpen(ChannelHandlerContext ctnx, ChannelStateEvent e)
+	public void channelOpen(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
-
 		System.out.println("Connected to game server.");
-		GameClient.setSession(new Session(ctnx.getChannel()));
-
-		/* if (!ActiveConnections.addSession(ctnx.getChannel())) { ctnx.getChannel().disconnect(); // failed to connect } */
-
+		GameClient.setSession(new Session(channelContext.getChannel()));
 	}
 
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e)
+	public void exceptionCaught(ChannelHandlerContext channelContext, ExceptionEvent channelState)
 	{
-		ctx.getChannel().close();
-		System.out.println(e);
+		channelContext.getChannel().close();
+		System.out.println(channelState);
 	}
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
+	public void messageReceived(ChannelHandlerContext channelContext, MessageEvent messageEvent)
 	{
 		try
 		{
-			ServerMessage msg = (ServerMessage) e.getMessage();
-
+			ServerMessage msg = (ServerMessage) messageEvent.getMessage();
 			if(GameClient.getSession() != null)
 				GameClient.getSession().parseMessage(msg);
 			else
-				System.out.print("error ohno >: GameClient.getSession() == null");
+				System.out.print("The session has been closed. GameClient.getSession() == null");
 		}
-		catch(Exception e1)
+		catch(Exception e)
 		{
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }

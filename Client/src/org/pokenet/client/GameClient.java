@@ -1369,7 +1369,6 @@ public class GameClient extends BasicGame
 		{
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 			{
-				// m_Session.writeTcpMessage("3C");
 				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
 			}
@@ -1384,7 +1383,6 @@ public class GameClient extends BasicGame
 				catch(Exception e)
 				{
 					m_ui.nullSpeechFrame();
-					// m_Session.write("F");
 				}
 		}
 	}

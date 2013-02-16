@@ -325,12 +325,10 @@ public abstract class BattleField
 			if(turn != null)
 				executeTurn(turn, order[i], other);
 		}
-
 		// Refresh the active array in case a trainer switched.
+		/* TODO: somehow this sometimes gets called without active Pokemon (e.g. victory). */
 		active = getActivePokemon();
-
 		tickStatuses(active);
-
 		boolean request = true;
 		for(int i = 0; i < active.length; ++i)
 		{

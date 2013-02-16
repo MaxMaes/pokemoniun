@@ -26,6 +26,7 @@
  <tileset firstgid="16003" source="Cinnabar Island Lab Remake.tsx"/>
  <tileset firstgid="16038" source="Buildings8.tsx"/>
  <tileset firstgid="16630" source="various3.tsx"/>
+ <tileset firstgid="17166" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="24" height="60">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2STQqAIBBGJcQbtO6ynax1tapoUdFRMiSywZ8xJFp8Dz4wwTdOjhBPGpk3lD/4S2Vycq3pdw5/KDn9tI8Uv2vv6/un+ludPlKjUiZ2Te78DDpT4hyWnlo5/dz/85W/I7HfhM4Cx++qZxPrib55qn929ORL7/EP1l5d3OtRmuw6KyObx78wz3FD/W/OAQAAAAAAAAAAAIQ4AGwLWhmAFgAA
@@ -48,7 +49,7 @@
  </layer>
  <layer name="Collisions" width="24" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XPQqAMAyG4ewdRfcW/Dm06C3UST2aAZ0KUtQqUt4HQghtv84RAdJXWpFKq9ZqbPz89sjstPcv5Gdu77n2wsXPB/5mMCKj1mTivPfnWfuitZ6ch/jv/Tl0HwAAAABS9uVOd+evKzsd+9xzG7VlSi2AFgAA
+   H4sIAAAAAAAAC+3XvQmAMBCG4fQpRXsFf/ZwCUsHE91CrdTRPFCbgEpi0sj7QDgCl+/SnlKAm6YOm996zM9TpQo5pZwq9Zd76c7MXuoQID/KjhpLTTL/+cCsw+Zv2m7OKH2Ttv/XNcd8b94Xqau+739jvjfvb/0AAAAA8GeuO93d+6edzmWWzU7HPvfdDiex1eiAFgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="60">

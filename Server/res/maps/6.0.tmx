@@ -54,12 +54,12 @@
  </layer>
  <layer name="Collisions" width="48" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZyU7DMBRF/RVILMqSj4AVsOqCWWEUUxGzmL+OYQGCDYLfYNjBDpaciFSkIbVjx45dlCMdWVHdvpf7kqpqhHBPs0+IIRwusfpkhPqjOOZgzWOgv3MtSzOnTtl55M2l3e9gZtXlrdF5/MzxS+Jr4+d1F/mb9pvmnd4+Gup9uqjyt3WtfNL7l+X+ZfdPGxvZu0L2/RVjK3tXqPIPOfsYWf6hZx8jyz/07GPq698v9fXvl7zfT2mqmsEFdS7xCq8t1qxqBrdJnTvWe8s1q5jBQ1LjkfXJcr1euA9k9ML3kIw6f7/U+ftFlf9N4Of33/MPmTp7/4Q+A1V/oc4g+59mkb0hoZNr6DOwvbcqXM1A9zmByT6TPIu+J+85wXgkxARO4hRO4wzORr/7VOed/jyTazpbJ4vs/CL6nMN5XMBFXMLl6O/nl6lThG55yTJZoc9VXMN13MAWbkbd32NSRwed50lb9LmNO7iLe7iPB5L+Teq44pA+j/AYT/AUz/C8QP8mfAOCPJsxAB4AAA==
+   H4sIAAAAAAAAC+2ZuU7EMBRF/RVIFKHkI6ACqinYFVaxi13sX8dSgKBB8BssHXRQciJlRCZk7NixYw/KkY6sSE7ey32ZGWkihHtafUIM4XCF1Scj1B/FMQdrEQP9nWtVWgV1qs6jaC7tfgdzqy7vUefxC8evqW+R3XlkMe03ywf9fUbyPUXzUKHK39az8kXv34r+dZHNq42N7F0h+/5KsJW9K1T5h5x9giz/0LNPkOUfevYJzfPvl+b594vq97quGVxS5wqv8cZizbpmcJfWuWd9sFyzjhk8pjWeWJ8t1+uFz4GMXvgektHk75cmf7+o8r8N/P7+e/4h02Tvn9BnoOov1Bnk/9MsszckdHINfQa299aFqxnovicw2WeSZ9lzit4TjMdCTOAkTuE0zuBs/LtPdd/Z65k80/k6eWT3F9PnHM7jAi7iEi7Hf69fpU4ZuuUly2SFPldxDddxAzdxK+5+jkkdHXTeJ23T5w7u4h7u4wEeSvo3qeOKI/o8xhM8xTM8x4sS/ZvwAzBFQlgAHgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="48" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XyQnCQBSG30XQBkQPgVxtQEtQC0gBHm3B/ebWhFsD7l5UENQ63L26X/0PERWUJKLOiO+Dj8BkkvnzILMQMcznmChEU+W+rWgjKsEyrNjE5GLeh9cpZtydW8y4DMMwzHdJq0QZmIU5mFev9xbYYyzhCq6Vh49TFetFDdZh48fXjibyt2D7S99xWeML6vM+2yd1v2Wg5+3i2oP9F/L7BO03bhki9wiO9fyi9kDM64Rc1vpHPERRGINxmIBJmPJ8Jp8RYYv5N8i5hTu4hwd4hCeT+S9nuRmcm/jXjbBaf9mwUv/Om+ZpoznW5zD/rn+qv4xw/cXC9RcL15+RjbodZ0O7cZvs+DWiAAxqopMwDCMrZ5h1GtYAHgAA
+   H4sIAAAAAAAAC+2XSQ4BQRSG30bCBYRFJ711AY6AAziApSuYd6ZLmC5gtkEiwTnMtuatf0GwkO4Sukq8L/nSSXWl6++3qHpFxDDfY6oRzbTnsZKNqAwrsGoT/+ZGM57DWIfXKWfdvVvOugzDMIy1ZHSiLMzBPCzo93dL9AQruNZe9wc1nBd12IDNHz87Wsjfhh2L/uN2xhf113N2Jvqy4TVvD88+HLyR3yep33hkhNxjOLnml9UDMe8TdonNj3qIYjAOEzAJUzDt+U4+IyKC+bfIuYN7eIBHeIJnk/lvd7k5XHzgDiZaf9UQqX/3Q/u00R7rc5j/1j/VX0W4/nLh+suF68+oRsOOu6HdeEx1/CGiAAyGZCdhGEZVLuJrOywAHgAA
   </data>
  </layer>
 </map>

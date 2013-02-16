@@ -31,9 +31,4 @@
    H4sIAAAAAAAAC2NgQIBeZuphfGC42ZMPlF9LBVxAwJ4+AvLEgp5Re2hiTy4z6RiXXnxgOOQfAC+6Mbx4BAAA
   </data>
  </layer>
- <layer name="WalkBehind" width="26" height="11" opacity="0.67">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9PnYGDQH8WjeBSPYjpiAGJlFWl4BAAA
-  </data>
- </layer>
 </map>

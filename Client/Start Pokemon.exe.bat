@@ -10,25 +10,25 @@ IF EXIST "%ProgramFiles(x86)%\Java\jre7" goto Java1.7x32
 
 :Java1.7	
 "%ProgramFiles%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-if errorlevel 1 Goto End
+IF errorlevel 1 Goto End
 "%ProgramFiles%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
 Goto End
 
 :Java1.6
 "%ProgramFiles%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-if errorlevel 1 Goto End
+IF errorlevel 1 Goto End
 "%ProgramFiles%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
 Goto End
 
 :Java1.7x32
 "%ProgramFiles(x86)%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-if errorlevel 1 Goto End
+IF errorlevel 1 Goto End
 "%ProgramFiles(x86)%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
 Goto End
 
 :Java1.6x32
 "%ProgramFiles(x86)%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-if errorlevel 1 Goto End
+IF errorlevel 1 Goto End
 "%ProgramFiles(x86)%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
 Goto End
 

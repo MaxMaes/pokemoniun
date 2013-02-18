@@ -223,9 +223,33 @@ public class AutoUpdater
 				entryName = entryName.replace('/', File.separatorChar);
 				entryName = entryName.replace('\\', File.separatorChar);
 				System.out.println("Extracting: " + entryName);
+				
 				int n;
 				FileOutputStream fileoutputstream;
 				File newFile = new File(entryName);
+				
+				String extension = "";
+				int i = entryName.lastIndexOf('.');
+				if (i > 0) {
+				    extension = entryName.substring(i+1);
+				}
+				
+				if(extension.equalsIgnoreCase("jar"))
+				{
+					if(newFile.exists())
+					{
+						System.out.println("Deleting old jar file");
+						if(newFile.delete())
+						{
+							System.out.println("Delete succes, extracting new file");
+						}
+						else
+						{
+							System.out.println("Delete failed...");
+						}
+					}
+				}
+				
 				if(zipentry.isDirectory())
 				{
 					if(!newFile.exists())

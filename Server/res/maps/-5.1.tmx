@@ -27,8 +27,8 @@
  <tileset firstgid="9879" source="Path0.tsx"/>
  <tileset firstgid="10175" source="Daycare Johto.tsx"/>
  <tileset firstgid="11106" source="Cliffs02.tsx"/>
- <tileset firstgid="11194" source="Cliffs01.tsx"/>
- <tileset firstgid="11424" source="Fences01.tsx"/>
+ <tileset firstgid="11218" source="Cliffs01.tsx"/>
+ <tileset firstgid="11448" source="Fences01.tsx"/>
  <layer name="Walkable" width="25" height="48">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3UOw6AIBAAUU7DlaXyUxi1Um8IJJtIaGhghWSKV0+WBZw1xgFAZioYvaFxVi0af98LAChZglVsjRp38Ii3g5l7prGPIzjFRYPGoI3Zfm+l5ntJG7lac2k00n832pX3Q4NG5AF1Skw+wBIAAA==
@@ -46,12 +46,12 @@
  </layer>
  <layer name="Water" width="25" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC/NQZ2DwwII9gZhaAJv5o3aM2jFqx6gd1LLDG4gdgNiRBLvscajHZQc5/nHHoZ4SO+yhfoVhLxrY4Q+UC0DDgTQOK1xg1I6hYUcwnnRCLTuGS3k1aseoHaN2jNoxEu1Ab1fga1+MglEwCkYBLgAAntTjM8ASAAA=
+   H4sIAAAAAAAAC+3WMQ6AIAyFYW7DMcBJ0QGN97+LzA1lgDKo/0s60eQLhDSN3rlYqaWUVTZfr4SBgYFhYBwdcyso/ZrRc59V6R8xgpjV+wQjl7NT1DX5rbRgvMO4G//EyvjKvMLAwMD4oyH3itZ+QQghWh77SWXVwBIAAA==
   </data>
  </layer>
  <layer name="Collisions" width="25" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+WXsU7DQAyGPcEOI0Lt0EhJm7dou6Gq3eD9YIOpdGgLSLwKI9DyAlSqI5Il+M7+nTCU/pLlSkltf+fz6UL0W/cDooeB8CCgaUI0S8Je0iPHXwA5rjnOTRL2TRkQjio2yoBwaLHPe3q9Vo5YDq1eK0coV5FjmRKt2NZsT2zPbC8pvq9Ca1bkeOd4H2yfbBu2LdtXiu2r2HoVOS6yn9+Xpe+w72YYR6zvI373qow9Kf2U/SyzcyBzcdaPPw9xIHOh5ZA40Nn2cKCz7eGoZOXx9qOQlWfIOd4y2cZ9/dxFeDwcKE9Ix8DRtP5KbewrTW2cV5raOK80/WcOjSG2z2PvI+eutM9HkZzIfFjm1cpRqc5jOXcQDqkn1vuS9V4i9cR6D29yLzlEDomnbQ6J5y846j25zYnucj/HN8fa1dZf6sk893Oc8H9PhRrrtc4NHBqXtoYWDo1L43jN9ZhNOTzSODz1ohyeelEO77c3wuH99j4Gjj2JQteIwBIAAA==
+   H4sIAAAAAAAAC+WXS07DQAyG5ww8Voi2CyIl7dyCsqtQu4M7wg4WQMsFegK2LHleAUdkNsEe+3eGBfSXLEdKYvubGY9mQvipq1kI1zPmhaBlFcKqkj2nG4p/C+S4oDiXleyHMiAcKTbKgHBosfdP9HqtHLkcWr1WDilXm+OuDuGe7IFsTbYhe6zxdSWNWZvjheK9kr2RvZN9kH3W2LrKjVeb46j5fj7u/Jj8pME4cvM+p28XXezzzi/Jrxo7B9IXe9P8e4kD6QstB8eB9raHA+1tD0eSlcc7H62sPKeU47nh7Wyq77sIj4cD5ZG0CxxD608qsa40ldivNJXYrzT9Zw6NIbfOc98j+y63zueZnEh/WPrVypHU57HsOwgHNyfW85L1XMLNifUcPuRc8hc5OJ7SHBzPb3D052Qd6Wwe/RwH9O9hlBmSttHPMaJ/x0yN/Vq3Bg6NSxtDC4fGpXE8RTlWKQ6PNA5PvSiHp16Uw3v3Rji8d+9d4PgCMxCzUsASAAA=
   </data>
  </layer>
  <layer name="Walkable" width="25" height="48">

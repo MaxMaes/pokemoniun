@@ -6,7 +6,7 @@ SET UPDATER=updater.jar
 IF EXIST "%ProgramFiles%\Java\jre6" goto Java1.6
 IF EXIST "%ProgramFiles(x86)%\Java\jre6" goto Java1.6x32
 IF EXIST "%ProgramFiles%\Java\jre7" goto Java1.7
-IF EXIST "%ProgramFiles(x86)%\Java\jre7" goto Java1.76x32
+IF EXIST "%ProgramFiles(x86)%\Java\jre7" goto Java1.7x32
 
 :Java1.7	
 "%ProgramFiles%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%

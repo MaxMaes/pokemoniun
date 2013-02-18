@@ -129,7 +129,13 @@ public class TimeService implements Runnable
 	{
 		try
 		{
-			/* Parses time from a common server. The webpage should just have text (no html tags) in the form: DAY HOUR MINUTES where day is a number from 0 - 6 <?php // set the default timezone to use. Available since PHP 5.1 date_default_timezone_set('America/Los_Angeles'); // Format for PokeNet // DAY HOUR MINUTES // where day is a number from 0 - 6 // Prints something like: 2 5 30 echo date('w h i'); // Coded by -DefaulT for PokeNet servers ?> */
+			/* Parses time from a common server. The webpage should just have text (no html tags) in the form: DAY HOUR MINUTES where day is a number from 0 - 6
+			 * <?php // set the default timezone to use. Available since PHP 5.1 date_default_timezone_set('America/Los_Angeles');
+			 * Format for PokeNet
+			 * DAY HOUR MINUTES
+			 * where day is a number from 0 - 6
+			 * Prints something like: 2 5 30 echo date('w h i');
+			 * Coded by -DefaulT for PokeNet servers ?> */
 			URL url = new URL("http://pokemonium.com/time.php");
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			in.readLine();
@@ -141,9 +147,9 @@ public class TimeService implements Runnable
 		}
 		catch(Exception e)
 		{
-			/* Can throw a number of exceptions including IO and NumberFormat due to an empty line. */
+			/* Can throw a number of exceptions including IO and NumberFormat due to an empty line.
+			 * Can't reach website, base time on local */
 			System.out.println("ERROR: Cannot reach time server, reverting to local time");
-			/* Can't reach website, base time on local */
 			Calendar cal = Calendar.getInstance();
 			m_hour = cal.get(Calendar.HOUR_OF_DAY);
 			m_minutes = cal.get(Calendar.MINUTE);
@@ -174,11 +180,11 @@ public class TimeService implements Runnable
 				generateWeather();
 				m_lastWeatherUpdate = System.currentTimeMillis();
 			}
-			/* Loop through all players and check for idling If they've idled, disconnect them */
-			// TcpProtocolHandler.kickIdlePlayers();
+			/* Loop through all players and check for idling If they've idled, disconnect them
+			 * TODO: Write kicker function and kick idle players again. */
 			try
 			{
-				Thread.sleep(10 * 1000); // Sleep for 10 seconds since it goes 6 times faster.
+				Thread.sleep(10 * 1000);
 			}
 			catch(InterruptedException e)
 			{
@@ -216,11 +222,11 @@ public class TimeService implements Runnable
 	}
 
 	/**
-	 * Generates a new weather status
+	 * Generates a new weather status.
+	 * NOTE: Weather is generated randomly.
 	 */
 	private void generateWeather()
 	{
-		/* Generate random weather */
 		int weather = m_forcedWeather;
 		if(weather == 9)
 			weather = new Random().nextInt(4);

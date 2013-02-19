@@ -52,17 +52,17 @@ public class Options
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("[INTERFACE]");
 			out.newLine();
-			out.write("FULLSCREEN=0");
+			out.write("FULLSCREEN=" + convertBoolean(fullscreenEnabled));
 			out.newLine();
-			out.write("SHOW_SURROUNDING_MAPS=1");
+			out.write("SHOW_SURROUNDING_MAPS=" + convertBoolean(surroundingMapsEnabled));
 			out.newLine();
-			out.write("SHOW_WEATHER=1D");
+			out.write("SHOW_WEATHER=" + convertBoolean(weatherEnabled));
 			out.newLine();
 			out.write("[SOUND]");
 			out.newLine();
 			out.write("DOLOAD=1");
 			out.newLine();
-			out.write("VOLUME=100");
+			out.write("VOLUME=" + volume);
 			out.newLine();
 			out.close();
 		}
@@ -133,5 +133,10 @@ public class Options
 	public boolean convertIntToBoolean(int intValue)
 	{
 		return (intValue != 0);
+	}
+	
+	public int convertBoolean(boolean boolValue)
+	{
+		return boolValue ? 1 : 0;
 	}
 }

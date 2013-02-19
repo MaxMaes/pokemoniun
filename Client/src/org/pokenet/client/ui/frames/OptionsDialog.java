@@ -95,7 +95,7 @@ public class OptionsDialog extends Frame
 					GameClient.getSoundPlayer().mute(m_options.isSoundMuted());
 					
 					m_options.setSurroundingMapsEnabled(!m_disableMaps.isSelected());
-					GameClient.getInstance().setLoadSurroundingMaps(m_disableMaps.isSelected());
+					GameClient.getInstance().setLoadSurroundingMaps(m_options.isSurroundingMapsEnabled());
 					
 					m_options.setWeatherEnabled(!m_disableWeather.isSelected());
 					GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());

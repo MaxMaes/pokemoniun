@@ -12,6 +12,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.muffin.Muffin;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.Translator;
 
 public class OptionsDialog extends Frame
@@ -23,7 +24,7 @@ public class OptionsDialog extends Frame
 
 	private Muffin m_muffin = new FileMuffin();
 	private CheckBox m_muteSound;
-	private HashMap<String, String> m_options;
+	private Options m_options;
 	private Button m_save;
 
 	// private SimpleColorPicker learnColor;
@@ -47,7 +48,7 @@ public class OptionsDialog extends Frame
 			m_fullScreen.pack();
 			m_fullScreen.setLocation(10, 10);
 
-			m_fullScreen.setSelected(Boolean.parseBoolean(m_options.get("fullScreen")));
+			m_fullScreen.setSelected(m_options.isFullscreenEnabled());
 			getContentPane().add(m_fullScreen);
 		}
 		{
@@ -55,21 +56,21 @@ public class OptionsDialog extends Frame
 			m_muteSound.pack();
 			m_muteSound.setLocation(150, 10);
 
-			m_muteSound.setSelected(Boolean.parseBoolean(m_options.get("soundMuted")));
+			m_muteSound.setSelected(m_options.isSoundMuted());
 			getContentPane().add(m_muteSound);
 		}
 		{
 			m_disableMaps = new CheckBox(translated.get(48));
 			m_disableMaps.pack();
 			m_disableMaps.setLocation(10, 45);
-			m_disableMaps.setSelected(Boolean.parseBoolean(m_options.get("disableMaps")));
+			m_disableMaps.setSelected(!m_options.isSurroundingMapsEnabled());
 			getContentPane().add(m_disableMaps);
 		}
 		{
 			m_disableWeather = new CheckBox("Disable Weather");
 			m_disableWeather.pack();
 			m_disableWeather.setLocation(10, 78);
-			m_disableWeather.setSelected(Boolean.parseBoolean(m_options.get("disableWeather")));
+			m_disableWeather.setSelected(!m_options.isWeatherEnabled());
 			getContentPane().add(m_disableWeather);
 		}
 		{
@@ -83,39 +84,25 @@ public class OptionsDialog extends Frame
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					try
-					{
-						List<String> translated = Translator.translate("_GUI");
-						/* options.remove("learnColor"); options.put("learnColor", learnColor.getColorHexLabel(). getText()); */
+					List<String> translated = Translator.translate("_GUI");
+					/* options.remove("learnColor"); options.put("learnColor", learnColor.getColorHexLabel(). getText()); */
+					
+					m_options.setFullscreenEnabled(m_fullScreen.isSelected());
+					if(m_muteSound.isSelected())
+						m_options.setVolume(0);
+					else
+						m_options.setVolume(100);
+					GameClient.getSoundPlayer().mute(m_options.isSoundMuted());
+					
+					m_options.setSurroundingMapsEnabled(!m_disableMaps.isSelected());
+					GameClient.getInstance().setLoadSurroundingMaps(m_disableMaps.isSelected());
+					
+					m_options.setWeatherEnabled(!m_disableWeather.isSelected());
+					GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());
 
-						m_options.remove("fullScreen");
-						m_options.put("fullScreen", Boolean.toString(m_fullScreen.isSelected()));
-
-						m_options.remove("soundMuted");
-						m_options.put("soundMuted", Boolean.toString(m_muteSound.isSelected()));
-
-						m_options.remove("disableMaps");
-						m_options.put("disableMaps", Boolean.toString(m_disableMaps.isSelected()));
-						GameClient.getInstance().setLoadSurroundingMaps(m_disableMaps.isSelected());
-
-						m_options.remove("disableWeather");
-						m_options.put("disableWeather", Boolean.toString(m_disableWeather.isSelected()));
-
-						if(m_muteSound.isSelected())
-							GameClient.getSoundPlayer().mute(true);
-						else
-							GameClient.getSoundPlayer().mute(false);
-
-						GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());
-
-						m_muffin.saveFile(m_options, "options.dat");
-						GameClient.messageDialog(translated.get(19), getDisplay());
-						GameClient.reloadOptions();
-					}
-					catch(IOException e1)
-					{
-						e1.printStackTrace();
-					}
+					m_options.saveSettings();
+					GameClient.messageDialog(translated.get(19), getDisplay());
+					GameClient.reloadOptions();
 				}
 			});
 		}

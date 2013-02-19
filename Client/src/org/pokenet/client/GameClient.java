@@ -36,6 +36,7 @@ import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
+import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
@@ -47,7 +48,6 @@ import org.pokenet.client.backend.time.WeatherService;
 import org.pokenet.client.backend.time.WeatherService.Weather;
 import org.pokenet.client.constants.Language;
 import org.pokenet.client.constants.Music;
-import org.pokenet.client.constants.Options;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
@@ -86,7 +86,7 @@ public class GameClient extends BasicGame
 	private static SoundManager m_soundPlayer;
 	private static Image[] m_spriteImageArray = new Image[400]; /* TODO: WARNING: Replace with actual number of sprites */
 	private static UserManager m_userManager;
-	private static HashMap<String, String> options;
+	private static Options options;
 	private static final DecimalFormat percentage = new DecimalFormat("###.##");
 	private static final long startTime = System.currentTimeMillis();
 	private static final int DEFAULT_PORT = 7002;
@@ -126,33 +126,17 @@ public class GameClient extends BasicGame
 	/** Load options */
 	static
 	{
-		try
-		{
-			m_instance = new GameClient(GAME_TITLE);
-			m_filepath = System.getProperty("res.path");
-			if(m_filepath == null)
-				m_filepath = "";
-			options = new FileMuffin().loadFile("options.dat");
-			if(options == null)
-			{
-				options = new HashMap<String, String>();
-				options.put(Options.SOUND_MUTED, String.valueOf(true));
-				options.put(Options.DISABLE_MAPS, String.valueOf(false));
-				options.put(Options.DISABLE_WEATHER, String.valueOf(false));
-			}
-			m_soundPlayer = new SoundManager(Boolean.parseBoolean(options.get(Options.SOUND_MUTED)));
-			m_soundPlayer.start();
-			m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
-			m_loadSurroundingMaps = Boolean.parseBoolean(options.get(Options.DISABLE_MAPS));
-		}
-		catch(IOException ioe)
-		{
-			System.out.println("IOE in mah face");
-			ioe.printStackTrace();
-			m_loadSurroundingMaps = false;
-			m_soundPlayer.mute(false);
-		}
+		m_instance = new GameClient(GAME_TITLE);
+		m_filepath = System.getProperty("res.path");
+		if(m_filepath == null)
+			m_filepath = "";
+		options = new Options();
 
+		m_soundPlayer = new SoundManager(options.isSoundMuted());
+		
+		m_soundPlayer.start();
+		m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
+		m_loadSurroundingMaps = options.isSurroundingMapsEnabled();
 	}
 
 	/**
@@ -217,7 +201,7 @@ public class GameClient extends BasicGame
 	}
 
 	/** Returns the options */
-	public static HashMap<String, String> getOptions()
+	public static Options getOptions()
 	{
 		return options;
 	}
@@ -316,7 +300,7 @@ public class GameClient extends BasicGame
 		boolean fullscreen = false;
 		try
 		{
-			fullscreen = Boolean.parseBoolean(options.get(Options.FULLSCREEN));
+			fullscreen = options.isFullscreenEnabled();
 		}
 		catch(Exception e)
 		{
@@ -348,9 +332,7 @@ public class GameClient extends BasicGame
 	{
 		try
 		{
-			options = new FileMuffin().loadFile("options.dat");
-			if(options == null)
-				options = new HashMap<String, String>();
+			options = new Options();
 		}
 		catch(Exception e)
 		{
@@ -729,7 +711,7 @@ public class GameClient extends BasicGame
 		m_time = new TimeService();
 		m_weather = new WeatherService();
 		if(options != null)
-			m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
+			m_weather.setEnabled(options.isWeatherEnabled());
 
 		/* Add the ui components */
 		m_loading = new LoadingScreen();
@@ -1099,7 +1081,7 @@ public class GameClient extends BasicGame
 				m_weather = new WeatherService();
 				m_time = new TimeService();
 				if(options != null)
-					m_weather.setEnabled(!Boolean.parseBoolean(options.get(Options.DISABLE_WEATHER)));
+					m_weather.setEnabled(options.isWeatherEnabled());
 
 				m_ui = new UserInterface(m_display);
 				m_ui.setAllVisible(false);

@@ -31,7 +31,7 @@
  </layer>
  <layer name="Grass" width="76" height="76">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZwQ6DIAzGcfY4bqe509z7v9cksUklYKkejPb/SzhNkvmlCsWUAAAAzjHM43X2n7iQ9zw+Z/+JC8l5jYka6yV5UWN9yMuHvHzIy4e8fPbmlfdtz2VEWlv35iXzotWmvu+eOin7AZkfpc68dVL2A9HqrPd+5X1VXkde29dNy/DOvwtPXrXfI+f1M67bymsy5t+F3K91r1ZeUXzT+n3UknMpM81rgNQm6vS+fkzkZSnXyXK9xBrn1z75fRdhHfTiu5EPz51PtHOHo2RfFmXfDtwB66gP62ib7h11D0ledfqsTA/yqiMvn1Ze7M/qdF6wkZeP9Eg8fwAA4AjOb2zlN236xW21vhFt5OWj86Ifsulva17Do38AAAAAAAAAAIDY/uk8oDRAWgAA
+   H4sIAAAAAAAAC+3ZwQ6DIAzGcfY4bqe509z7v9cksUklYKkejPb/SzhNkvmlCsWUAAAAzjHM43X2n7iQ9zw+Z/+JC8l5jYka6yV5UWN9yMuHvHzIy4e8fPbmlfdtz2VEWlv35iXzotWmvu+eOin7AZkfpc68dVL2A9HqrPd+5X1VXkde29dNy/DOvwtPXrXfI+f1M67bymsy5t+F3K91r1ZeUXzT+n3UknMpM81rgNQm6vS+fkzkZSnXyXK9xBrn1z75fRdhHfTiu5EPz51PtHOHo2RfFmXfDtwB66gP62ib7h11D0ledfqsTA/yqiMvn1Ze7M/qdF6wkZeP9Eg8fwAA4AjOb2zlN236xW21vhFt5OWT+yDJiX7Ipr+teQ2P/gEAAAAAAAAAAGL7A3nmU5xAWgAA
   </data>
  </layer>
  <layer name="LedgesDown" width="76" height="76">
@@ -51,7 +51,7 @@
  </layer>
  <layer name="Walkable" width="50" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Yz2oCMRCH97rg0+jJuhdBsK1CbRW8CFLw/Z+hUzAYpvkzm8TNL3Q+GFxkDjPzbbLZ7boyDP3jetn789DZWLWvG+7jv/nYzrruleKN4p1iR7GfPb8+KT4fA+vpg2o+UHxSfFEcKU5Affh8bFgfZ0fNl4p98DlLud5r/rZqv1Xsg885h5r7W8iHvT7mghpr7m8hH2a+C/p9uV+H+kb3seofPkJ9q498SvhAeO6X8IFwDlMff/NqIvUxWD585y70/YrnSf6fGunzXHIOVh/5jPHhmneLPlzzbt0HigdDqg8UDxyXl9D7uS+vNi4vofdzX15tpPc72rrgSO931HVhiK0PVz66D0PMSys+DLG5I3nJ2Y+QvKR+V/ylFR8x1Ed51If6eAbGh/RsZYPoQ3q2skH0kQKijxTUR3nUh/qYgjF+kHxwxvhp1Qfy/DmtfK+KoT6wSPUh2eem9JnqQ7LPTekz9Tturo8fT9fcxfgqAAA=
+   H4sIAAAAAAAAC+2Yy2rDMBBFvTX4a5JVW28Khj5SyKOBbAKl0P//hk7BwmKix1hWrCs6B4YYR4sZHUseq2ny0LfT9UPrH4fOYOX+XHEd/83HS9c0rxRvFO8UO4qP7v75SfH56FlNe8r5QHGkOFF8UpyB6vD5GFgdF0fO14J18HmW8jXm/G3l/lOwDj7PSyi5v4V82OtjI8ix5P4W8mHmd0u/j+N1qG50H0/t5CNUt/pYTg4fCO/9HD4Q+jD1cTuuJFIfveXD13eh71d8nOT+2kjf55I+WH0sZ44P13zX6MM137X7QPFgSPWB4oHj8hL6PveNK43LS+j73DeuNNLnHW1dcKTPO+q6MMTWh2s8ug9DzEstPgyxfQvJS0qf5fq/NKnnin/U4iOG+siP+lAf98D4kPZWNog+pL2VDaKPFBB9pKA+8qM+1McazPGD5IMzx0+tPpDnn1PLeVUM9YFFqg/JPremz1Qfkn1uTZ+p57hLffwC4ZyXefgqAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="76" height="76">

@@ -26,7 +26,7 @@
  <tileset firstgid="8817" source="Path0.tsx"/>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4nZqYWqVq6NuHxg82Nw+VMJt1O2DBw9nt7szIvBAu3U4uZ1aeCj7bSi7fRTTD18SJV7tUWbKMCl2kYsBEpdrkCgQAAA=
+   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4vbBhkfdPup2ELYfBGEyikfxYMHujAg80G4ZSW4nxY8D7YaR6PZRTD98SZR4tUeZKcOk2EUuBgBQ0nX9KBAAAA==
   </data>
  </layer>
  <layer name="Grass" width="47" height="22">

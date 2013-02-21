@@ -255,7 +255,8 @@ Module SQL
     End Sub
 
 
-    Public Sub LoadUser()
+    Public Sub 
+()
         ' MySQL Addapters
         Dim userCommand As New MySqlCommand
         Dim spriteCommand As New MySqlCommand

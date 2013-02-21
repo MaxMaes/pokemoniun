@@ -547,12 +547,13 @@ public class Player extends Character implements Battleable, Tradeable
 			else
 			{
 				if(getMap().facingWater(this, getFacing()))
-					;
-				// m_tcpSession.write("Fu"); // "Not even a nibble!" message
-				ServerMessage message = new ServerMessage();
-				message.init(49);
-				getSession().Send(message);
-				addFishingExp(1);			// Complementary exp for trying to fish.
+				{
+					// m_tcpSession.write("Fu"); // "Not even a nibble!" message
+					ServerMessage message = new ServerMessage();
+					message.init(49);
+					getSession().Send(message);
+					addFishingExp(1);			// Complementary exp for trying to fish.
+				}
 			}
 			setFishing(false);
 		}

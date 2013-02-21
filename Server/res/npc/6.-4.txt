@@ -167,3 +167,26 @@ CUT_TREE
 26
 33
 [/hmobject]
+[warp]
+1
+12
+45
+32
+45
+5
+24
+[/warp]
+[npc]
+Police Man
+down
+36
+2
+13
+NULL
+0
+-1
+9,10
+false
+false
+false
+[/npc]

@@ -189,9 +189,11 @@ public class LoginManager implements Runnable
 				ServerMessage message = new ServerMessage();
 				message.init(79);
 				session.Send(message);
+				rs.close();
 				return;
 			}
-			rs.close();
+			if(rs != null)
+				rs.close();
 		}
 		catch(SQLException sqle)
 		{
@@ -504,7 +506,7 @@ public class LoginManager implements Runnable
 						data.getInt("ppUp3") });
 				pokemon.reinitialise();
 				/* Set exp, nickname, isShiny and exp gain type. */
-				pokemon.setBaseExp(data.getInt("baseExp"));
+				pokemon.setPokemonBaseExp(data.getInt("baseExp"));
 				pokemon.setExp(Double.parseDouble(data.getString("exp")));
 				pokemon.setName(data.getString("name"));
 				pokemon.setHappiness(data.getInt("happiness"));

@@ -371,7 +371,7 @@ public class RegistrationManager implements Runnable
 				moves, new int[] { 0, 0, 0, 0 });
 		// Attach the growth rate, experience, current experience, happiness and their speciesname to the starter.
 		starter.setExpType(species.getGrowthRate());
-		starter.setBaseExp(species.getBaseEXP());
+		starter.setPokemonBaseExp(species.getBaseEXP());
 		starter.setExp(DataService.getBattleMechanics().getExpForLevel(starter, 5));
 		starter.setHappiness(species.getHappiness());
 		starter.setName(starter.getSpeciesName());
@@ -400,7 +400,7 @@ public class RegistrationManager implements Runnable
 					+ String.valueOf(p.getExp())
 					+ "', "
 					+ "'"
-					+ p.getBaseExp()
+					+ p.getPokemonBaseExp()
 					+ "', "
 					+ "'"
 					+ MySqlManager.parseSQL(p.getExpType().name())

@@ -297,7 +297,7 @@ public class AutoUpdater
 			try
 			{
 				// Create file
-				FileWriter fstream = new FileWriter("version.txt");
+				FileWriter fstream = new FileWriter("Version.txt");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(versions.get(versionidx));
 				// Close the output stream

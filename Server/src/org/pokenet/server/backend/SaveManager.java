@@ -68,7 +68,7 @@ public class SaveManager
 			}
 			/* Insert the Pokemon into the database */
 			db.query("INSERT INTO pn_pokemon " + "VALUES (NULL, '" + MySqlManager.parseSQL(poke.getName()) + "', '" + MySqlManager.parseSQL(poke.getSpeciesName()) + "', '"
-					+ String.valueOf(poke.getExp()) + "', '" + poke.getBaseExp() + "', '" + MySqlManager.parseSQL(poke.getExpType().name()) + "', '" + String.valueOf(poke.isFainted()) + "', '"
+					+ String.valueOf(poke.getExp()) + "', '" + poke.getPokemonBaseExp() + "', '" + MySqlManager.parseSQL(poke.getExpType().name()) + "', '" + String.valueOf(poke.isFainted()) + "', '"
 					+ poke.getLevel() + "', '" + poke.getHappiness() + "', '" + poke.getGender() + "', '" + MySqlManager.parseSQL(poke.getNature().getName()) + "', '"
 					+ MySqlManager.parseSQL(poke.getAbilityName()) + "', '" + MySqlManager.parseSQL(poke.getItemName()) + "', '" + String.valueOf(poke.isShiny()) + "', '"
 					+ MySqlManager.parseSQL(poke.getOriginalTrainer()) + "', '" + MySqlManager.parseSQL(currentTrainer) + "', '" + poke.getContestStatsAsString() + "', '"
@@ -213,7 +213,7 @@ public class SaveManager
 			try
 			{
 				m_database.query("UPDATE pn_pokemon SET " + "name='" + MySqlManager.parseSQL(p.getName()) + "', " + "speciesName='" + MySqlManager.parseSQL(p.getSpeciesName()) + "', " + "exp='"
-						+ String.valueOf(p.getExp()) + "', " + "baseExp='" + p.getBaseExp() + "', " + "expType='" + MySqlManager.parseSQL(p.getExpType().name()) + "', " + "isFainted='"
+						+ String.valueOf(p.getExp()) + "', " + "baseExp='" + p.getPokemonBaseExp() + "', " + "expType='" + MySqlManager.parseSQL(p.getExpType().name()) + "', " + "isFainted='"
 						+ String.valueOf(p.isFainted()) + "', " + "level='" + p.getLevel() + "', " + "happiness='" + p.getHappiness() + "', " + "abilityName='" + ab + "', " + "itemName='"
 						+ MySqlManager.parseSQL(p.getItemName()) + "', " + "currentTrainerName='" + currentTrainer + "', " + "contestStats='" + p.getContestStatsAsString() + "' " + "WHERE id='"
 						+ p.getDatabaseID() + "'");

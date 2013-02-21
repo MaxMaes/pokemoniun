@@ -163,11 +163,9 @@ public class BreedingLogic
 	 * @return
 	 * @throws Exception
 	 */
-	private Pokemon generateHatchling(int species) throws Exception
+	private Pokemon generateHatchling(int species)
 	{
 		Pokemon hatchling;
-		try
-		{
 			PokemonSpecies speciesData = PokemonSpecies.getDefaultData().getSpecies(species);
 			Random random = DataService.getBattleMechanics().getRandom();
 
@@ -184,7 +182,7 @@ public class BreedingLogic
 			int natureIndex = 0;
 			for(String name : PokemonNature.getNatureNames())
 			{
-				if(name == nature)
+				if(name.equalsIgnoreCase(nature))
 					break;
 				natureIndex++;
 			}
@@ -214,11 +212,7 @@ public class BreedingLogic
 			hatchling = new Pokemon(DataService.getBattleMechanics(), PokemonSpecies.getDefaultData().getSpecies(species), PokemonNature.getNature(natureIndex),
 					speciesData.getPossibleAbilities(PokemonSpecies.getDefaultData())[random.nextInt(speciesData.getPossibleAbilities(PokemonSpecies.getDefaultData()).length)], "",
 					Pokemon.generateGender(speciesData.getPossibleGenders()), 5, ivs, new int[6], getBabyMoves(species), new int[4]);
-		}
-		catch(Exception e)
-		{
-			throw new Exception("BreedingException: Hatchling generation issue");
-		}
+
 		return hatchling;
 	}
 }

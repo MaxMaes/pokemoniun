@@ -45,7 +45,7 @@ public class Character implements Positionable
 	 */
 	public boolean equals(Character c)
 	{
-		return m_id == c.getId();
+		return (m_id == c.getId()) ? true : false;
 	}
 
 	/**

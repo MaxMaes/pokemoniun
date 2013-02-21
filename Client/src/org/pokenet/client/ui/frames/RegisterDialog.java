@@ -692,7 +692,6 @@ public class RegisterDialog extends Frame
 	 */
 	private void selectStarter(int m_starter)
 	{
-		System.out.println(m_starter);
 		for(int i = 0; i < m_starters.length; i++)
 			m_starters[i].setEnabled(true);
 		switch(m_starter)
@@ -734,5 +733,32 @@ public class RegisterDialog extends Frame
 				m_starters[11].setEnabled(false);
 				break;
 		}
+	}
+	
+	/*
+	 * Resets the registration dialog. Called when registration is successfull.
+	 */
+	public void clear()
+	{
+		//Enable all starters
+		for(int i = 0; i < m_starters.length; i++)
+			m_starters[i].setEnabled(true);
+		
+		m_confirmEmail.setText("");
+		m_email.setText("");
+		m_username.setText("");
+		m_confirmPass.setText("");
+		m_password.setText("");
+		m_day.setText("");
+		m_month.setText("");
+		m_year.setText("");
+		m_register.setEnabled(true);
+		m_regions[0].setEnabled(true);
+		m_regions[1].setEnabled(true);
+		m_regions[2].setEnabled(false);
+		m_regions[3].setEnabled(false);
+		m_terms.setEnabled(true);
+		m_male.setEnabled(true);
+		m_female.setEnabled(true);
 	}
 }

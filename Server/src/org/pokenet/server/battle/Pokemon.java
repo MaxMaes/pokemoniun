@@ -308,7 +308,7 @@ public class Pokemon extends PokemonSpecies
 		if(moveset == null || moveset.length == 0)
 			return null;
 		int moveCount = moveset.length;
-		String[] moves = (String[]) species.getLevelMoves().values().toArray();
+		String[] moves = species.getLevelMoves().values().toArray(new String[species.getLevelMoves().size()]);
 		MoveListEntry[] entries = new MoveListEntry[moveCount >= 4 ? 4 : moveCount];
 		Set<String> moveSet = new HashSet<String>();
 		int[] ppUp = new int[entries.length];
@@ -422,7 +422,7 @@ public class Pokemon extends PokemonSpecies
 				Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] { random.nextInt(32), // IVs
 						random.nextInt(32), random.nextInt(32), random.nextInt(32), random.nextInt(32), random.nextInt(32) }, new int[] { 0, 0, 0, 0, 0, 0 }, // EVs
 				moves, new int[] { 0, 0, 0, 0 });
-		p.setBaseExp(ps.getBaseEXP());
+		p.setPokemonBaseExp(ps.getBaseEXP());
 		p.setExpType(ps.getGrowthRate());
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
@@ -469,7 +469,7 @@ public class Pokemon extends PokemonSpecies
 		p = new Pokemon(DataService.getBattleMechanics(), ps, n, ab, null, Pokemon.generateGender(ps.getPossibleGenders()), level, new int[] { 32, 32, 32, 32, 32, 32 }, new int[] { hp, att, def, spd,
 				spatt, spdef }, // EVs
 				moves, new int[] { 0, 0, 0, 0 });
-		p.setBaseExp(ps.getBaseEXP());
+		p.setPokemonBaseExp(ps.getBaseEXP());
 		p.setExpType(ps.getGrowthRate());
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
@@ -862,7 +862,7 @@ public class Pokemon extends PokemonSpecies
 			return 0;
 		if(getDatabaseID() != -1 && p.getDatabaseID() != -1 && p.getDatabaseID() == getDatabaseID())
 			return 0;
-		if(p.getSpeciesName() == getSpeciesName() && p.getStat(0) == this.getStat(0) && p.getStat(1) == this.getStat(1))
+		if(p.getSpeciesName().equalsIgnoreCase(getSpeciesName()) && p.getStat(0) == this.getStat(0) && p.getStat(1) == this.getStat(1))
 			return 0;
 		return -1;
 	}
@@ -1028,7 +1028,7 @@ public class Pokemon extends PokemonSpecies
 	 * 
 	 * @return
 	 */
-	public int getBaseExp()
+	public int getPokemonBaseExp()
 	{
 		return m_baseExp;
 	}
@@ -2118,7 +2118,7 @@ public class Pokemon extends PokemonSpecies
 	 * 
 	 * @param baseEXP
 	 */
-	public void setBaseExp(int baseEXP)
+	public void setPokemonBaseExp(int baseEXP)
 	{
 		m_baseExp = baseEXP;
 	}

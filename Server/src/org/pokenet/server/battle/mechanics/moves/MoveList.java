@@ -3759,7 +3759,7 @@ public class MoveList
 				{
 					if(user.getMoves()[i].getName().equalsIgnoreCase("sketch"))
 					{
-						if(target.getLastMove() == null || target.getLastMove().getName() == "")
+						if(target.getLastMove() == null || target.getLastMove().getName().equalsIgnoreCase(""))
 						{
 							user.getField().showMessage("But it failed!");
 						}

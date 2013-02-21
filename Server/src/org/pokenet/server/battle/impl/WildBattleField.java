@@ -784,8 +784,8 @@ public class WildBattleField extends BattleField
 				showMessage(m_player.getName() + " threw a Love Ball!");
 				m_wildPoke.setCaughtWith(47);
 				if(m_wildPoke.getGender() == PokemonSpecies.GENDER_MALE && getActivePokemon()[0].getGender() == PokemonSpecies.GENDER_FEMALE
-						&& m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName() || m_wildPoke.getGender() == PokemonSpecies.GENDER_FEMALE
-						&& getActivePokemon()[0].getGender() == PokemonSpecies.GENDER_MALE && m_wildPoke.getSpeciesName() == getActivePokemon()[0].getSpeciesName())
+						&& m_wildPoke.getSpeciesName().equalsIgnoreCase(getActivePokemon()[0].getSpeciesName()) || m_wildPoke.getGender() == PokemonSpecies.GENDER_FEMALE
+						&& getActivePokemon()[0].getGender() == PokemonSpecies.GENDER_MALE && m_wildPoke.getSpeciesName().equalsIgnoreCase(getActivePokemon()[0].getSpeciesName()))
 					catchRate = 8.0;
 				break;
 

@@ -1,5 +1,0 @@
-localhost
-db_name	
-db_username
-password
-servername

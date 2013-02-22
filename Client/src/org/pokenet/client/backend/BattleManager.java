@@ -17,9 +17,7 @@ import org.pokenet.client.ui.BattleWindow;
 public class BattleManager
 {
 	private static BattleManager m_instance;
-
-	private static boolean m_isBattling = false;
-
+	private boolean m_isBattling = false;
 	private BattleWindow m_battle;
 	private boolean m_canFinish = false;
 	private int m_curEnemyIndex;
@@ -38,9 +36,8 @@ public class BattleManager
 	/**
 	 * Default Constructor
 	 */
-	public BattleManager()
+	private BattleManager()
 	{
-		m_instance = this;
 		m_battle = new BattleWindow("Battle!");
 		m_timeLine = new BattleTimeLine();
 		m_battle.setVisible(false);
@@ -54,6 +51,8 @@ public class BattleManager
 	 */
 	public static BattleManager getInstance()
 	{
+		if(m_instance == null)
+			m_instance = new BattleManager();
 		return m_instance;
 	}
 
@@ -62,7 +61,7 @@ public class BattleManager
 	 * 
 	 * @return true if a battle is in progress
 	 */
-	public static boolean isBattling()
+	public boolean isBattling()
 	{
 		return m_isBattling;
 	}
@@ -87,9 +86,9 @@ public class BattleManager
 		GameClient.getInstance().getDisplay().remove(m_battle);
 		while(GameClient.getInstance().getDisplay().containsChild(m_battle))
 			;
-		GameClient.getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
-		if(GameClient.getSoundPlayer().m_trackName == Music.PVNPC)
-			GameClient.getSoundPlayer().setTrack(m_curTrack);
+		GameClient.getInstance().getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
+		if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
+			GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
 	}
 
 	/**
@@ -274,10 +273,10 @@ public class BattleManager
 		updateMoves();
 		updatePokePane();
 		m_timeLine.startBattle();
-		m_curTrack = GameClient.getSoundPlayer().m_trackName;
+		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
 		GameClient.getInstance().getDisplay().add(m_battle);
-		GameClient.changeTrack(Music.PVNPC);
+		GameClient.getInstance().changeTrack(Music.PVNPC);
 	}
 
 	/**
@@ -310,7 +309,7 @@ public class BattleManager
 	public void updateMoves()
 	{
 		for(int i = 0; i < 4; i++)
-			if(m_curPoke != null && m_curPoke.getMoves()[i] != null && m_curPoke.getMoves()[i] != "")
+			if(m_curPoke != null && m_curPoke.getMoves()[i] != null && !m_curPoke.getMoves()[i].equals(""))
 			{
 				m_battle.m_moveButtons.get(i).setText(m_curPoke.getMoves()[i]);
 				m_battle.m_ppLabels.get(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);

@@ -12,6 +12,6 @@ public class FishingGotAwayEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog("The fish was too strong for you! \n" + "It got away!", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("The fish was too strong for you! \n" + "It got away!", GameClient.getInstance().getDisplay());
 	}
 }

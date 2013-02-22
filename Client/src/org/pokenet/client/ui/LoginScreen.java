@@ -141,7 +141,7 @@ public class LoginScreen extends Window
 			setClientRevision();
 
 			m_serverRev = new Label("Server Version: ?");
-			m_serverRev.setFont(GameClient.getFontSmall());
+			m_serverRev.setFont(GameClient.getInstance().getFontSmall());
 			m_serverRev.setForeground(new Color(255, 255, 255));
 			m_serverRev.pack();
 			m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth() + 16, m_clientRev.getY());
@@ -330,7 +330,7 @@ public class LoginScreen extends Window
 			m_clientRev = new Label("Client Version: ?");
 		}
 
-		m_clientRev.setFont(GameClient.getFontSmall());
+		m_clientRev.setFont(GameClient.getInstance().getFontSmall());
 		m_clientRev.setForeground(new Color(255, 255, 255));
 		m_clientRev.pack();
 		m_clientRev.setLocation(4, 600 - m_clientRev.getHeight() - 8);

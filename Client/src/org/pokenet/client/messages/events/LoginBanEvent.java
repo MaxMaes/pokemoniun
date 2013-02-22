@@ -12,7 +12,7 @@ public class LoginBanEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog("You've been banned from the game.", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("You've been banned from the game.", GameClient.getInstance().getDisplay());
 		GameClient.getInstance().getLoadingScreen().setVisible(false);
 		GameClient.getInstance().getLoginScreen().showLogin();
 

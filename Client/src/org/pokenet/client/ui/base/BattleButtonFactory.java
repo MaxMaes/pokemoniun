@@ -28,7 +28,7 @@ public class BattleButtonFactory
 			small = new Image(path + "button_small.png", false);
 			smallDown = new Image(path + "button_small_pressed.png", false);
 
-			font = GameClient.getFontSmall();
+			font = GameClient.getInstance().getFontSmall();
 		}
 		catch(SlickException e)
 		{

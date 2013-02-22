@@ -93,7 +93,7 @@ public class ShopDialog extends Frame
 		LoadingList.setDeferredLoading(false);
 		m_categoryButtons[0].setSize(150, 160);
 		m_categoryButtons[0].setLocation(0, 0);
-		m_categoryButtons[0].setFont(GameClient.getFontLarge());
+		m_categoryButtons[0].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryButtons[0].addActionListener(new ActionListener()
 		{
 			@Override
@@ -108,7 +108,7 @@ public class ShopDialog extends Frame
 		m_categoryLabels[0].setGlassPane(true);
 		m_categoryLabels[0].setZIndex(1000);
 		m_categoryLabels[0].setSize(150, 10);
-		m_categoryLabels[0].setFont(GameClient.getFontLarge());
+		m_categoryLabels[0].setFont(GameClient.getInstance().getFontLarge());
 		getContentPane().add(m_categoryLabels[0]);
 		m_categoryButtons[1] = new Button(" ");
 		LoadingList.setDeferredLoading(true);
@@ -123,7 +123,7 @@ public class ShopDialog extends Frame
 		LoadingList.setDeferredLoading(false);
 		m_categoryButtons[1].setSize(150, 160);
 		m_categoryButtons[1].setLocation(151, 0);
-		m_categoryButtons[1].setFont(GameClient.getFontLarge());
+		m_categoryButtons[1].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryButtons[1].addActionListener(new ActionListener()
 		{
 			@Override
@@ -137,7 +137,7 @@ public class ShopDialog extends Frame
 		m_categoryLabels[1] = new Label("Potions");
 		m_categoryLabels[1].setLocation(151, 0);
 		m_categoryLabels[1].setGlassPane(true);
-		m_categoryLabels[1].setFont(GameClient.getFontLarge());
+		m_categoryLabels[1].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryLabels[1].setZIndex(1000);
 		m_categoryLabels[1].setSize(150, 10);
 		getContentPane().add(m_categoryLabels[1]);
@@ -155,7 +155,7 @@ public class ShopDialog extends Frame
 		LoadingList.setDeferredLoading(false);
 		m_categoryButtons[2].setSize(150, 160);
 		m_categoryButtons[2].setLocation(0, 161);
-		m_categoryButtons[2].setFont(GameClient.getFontLarge());
+		m_categoryButtons[2].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryButtons[2].setEnabled(true);
 		m_categoryButtons[2].addActionListener(new ActionListener()
 		{
@@ -170,7 +170,7 @@ public class ShopDialog extends Frame
 		m_categoryLabels[2] = new Label("Status Heals");
 		m_categoryLabels[2].setLocation(0, 161);
 		m_categoryLabels[2].setGlassPane(true);
-		m_categoryLabels[2].setFont(GameClient.getFontLarge());
+		m_categoryLabels[2].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryLabels[2].setZIndex(1000);
 		m_categoryLabels[2].setSize(150, 10);
 		getContentPane().add(m_categoryLabels[2]);
@@ -188,7 +188,7 @@ public class ShopDialog extends Frame
 		LoadingList.setDeferredLoading(false);
 		m_categoryButtons[3].setSize(150, 160);
 		m_categoryButtons[3].setLocation(151, 161);
-		m_categoryButtons[3].setFont(GameClient.getFontLarge());
+		m_categoryButtons[3].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryButtons[3].addActionListener(new ActionListener()
 		{
 			@Override
@@ -202,7 +202,7 @@ public class ShopDialog extends Frame
 		m_categoryLabels[3] = new Label("Field Tools");
 		m_categoryLabels[3].setLocation(151, 161);
 		m_categoryLabels[3].setGlassPane(true);
-		m_categoryLabels[3].setFont(GameClient.getFontLarge());
+		m_categoryLabels[3].setFont(GameClient.getInstance().getFontLarge());
 		m_categoryLabels[3].setZIndex(1000);
 		m_categoryLabels[3].setSize(150, 10);
 		getContentPane().add(m_categoryLabels[3]);
@@ -210,7 +210,7 @@ public class ShopDialog extends Frame
 		m_cancel = new Button("Cancel");
 		m_cancel.setSize(300, 56);
 		m_cancel.setLocation(0, 321);
-		m_cancel.setFont(GameClient.getFontLarge());
+		m_cancel.setFont(GameClient.getInstance().getFontLarge());
 		m_cancel.addActionListener(new ActionListener()
 		{
 			@Override
@@ -248,7 +248,7 @@ public class ShopDialog extends Frame
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("11");
 		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 		message.addInt(2);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 		GameClient.getInstance().getUi().stopShop();
 	}
 
@@ -297,7 +297,7 @@ public class ShopDialog extends Frame
 		m_buy = new Button("Buy");
 		m_buy.setLocation(0, 0);
 		m_buy.setSize(150, 320);
-		m_buy.setFont(GameClient.getFontLarge());
+		m_buy.setFont(GameClient.getInstance().getFontLarge());
 		m_buy.addActionListener(new ActionListener()
 		{
 			@Override
@@ -310,7 +310,7 @@ public class ShopDialog extends Frame
 		m_sell = new Button("Sell");
 		m_sell.setLocation(151, 0);
 		m_sell.setSize(150, 320);
-		m_sell.setFont(GameClient.getFontLarge());
+		m_sell.setFont(GameClient.getInstance().getFontLarge());
 		m_sell.addActionListener(new ActionListener()
 		{
 			@Override
@@ -323,7 +323,7 @@ public class ShopDialog extends Frame
 		m_cancel = new Button("Cancel");
 		m_cancel.setSize(300, 56);
 		m_cancel.setLocation(0, 321);
-		m_cancel.setFont(GameClient.getFontLarge());
+		m_cancel.setFont(GameClient.getInstance().getFontLarge());
 		m_cancel.addActionListener(new ActionListener()
 		{
 			@Override
@@ -356,7 +356,7 @@ public class ShopDialog extends Frame
 		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 		message.addInt(0);
 		message.addInt(itemid);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 
 	public void pack()
@@ -377,7 +377,7 @@ public class ShopDialog extends Frame
 		m_sellList = new ListBox(m_items);
 		m_sellButton = new Button[1];
 		m_sellButton[0] = new Button("Sell");
-		m_sellButton[0].setFont(GameClient.getFontLarge());
+		m_sellButton[0].setFont(GameClient.getInstance().getFontLarge());
 		m_sellButton[0].setSize(getWidth(), 35);
 		m_sellButton[0].setLocation(0, m_cancel.getY() - 35);
 		m_sellButton[0].addActionListener(new ActionListener()
@@ -398,7 +398,7 @@ public class ShopDialog extends Frame
 							ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 							message.addInt(1);
 							message.addInt(ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId());
-							GameClient.getSession().send(message);
+							GameClient.getInstance().getSession().send(message);
 							GameClient.getInstance().getDisplay().remove(m_confirm);
 						}
 					});
@@ -486,7 +486,7 @@ public class ShopDialog extends Frame
 			else
 				m_itemButtons[i].setLocation(0, 0);
 			m_itemButtons[i].setZIndex(0);
-			m_itemButtons[i].setFont(GameClient.getFontLarge());
+			m_itemButtons[i].setFont(GameClient.getInstance().getFontLarge());
 			m_itemButtons[i].addActionListener(new ActionListener()
 			{
 				@Override
@@ -523,7 +523,7 @@ public class ShopDialog extends Frame
 			{
 				LoadingList.setDeferredLoading(true);
 				String stock = "empty";
-				if(m_stock.get(m_items.get(i).getId()) >= 100 || m_items.size() == -1)
+				if(m_stock.get(m_items.get(i).getId()) >= 100)
 					stock = "full";
 				else if(m_stock.get(m_items.get(i).getId()) < 100 && m_stock.get(m_items.get(i).getId()) >= 60)
 					stock = "half";
@@ -546,7 +546,7 @@ public class ShopDialog extends Frame
 			}
 			m_itemLabels[i] = new Label(m_items.get(i).getName() + " - $" + m_items.get(i).getPrice());
 			m_itemLabels[i].setSize(200, 50);
-			m_itemLabels[i].setFont(GameClient.getFontLarge());
+			m_itemLabels[i].setFont(GameClient.getInstance().getFontLarge());
 			m_itemLabels[i].setZIndex(1200);
 			m_itemLabels[i].setHorizontalAlignment(0);
 			m_itemLabels[i].addMouseListener(new MouseListener()
@@ -600,7 +600,7 @@ public class ShopDialog extends Frame
 		m_cancel = new Button("Cancel");
 		m_cancel.setSize(300, 40);
 		m_cancel.setLocation(0, 336);
-		m_cancel.setFont(GameClient.getFontLarge());
+		m_cancel.setFont(GameClient.getInstance().getFontLarge());
 		m_cancel.addActionListener(new ActionListener()
 		{
 			@Override

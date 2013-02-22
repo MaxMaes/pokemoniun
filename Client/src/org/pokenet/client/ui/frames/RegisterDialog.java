@@ -54,7 +54,7 @@ public class RegisterDialog extends Frame
 		m_u = new Label(translated.get(5));
 		m_u.pack();
 		m_u.setLocation(4, 4);
-		m_u.setFont(GameClient.getFontSmall());
+		m_u.setFont(GameClient.getInstance().getFontSmall());
 		m_u.setForeground(m_white);
 		this.add(m_u);
 
@@ -68,7 +68,7 @@ public class RegisterDialog extends Frame
 		m_p = new Label(translated.get(6));
 		m_p.pack();
 		m_p.setLocation(4, 52);
-		m_p.setFont(GameClient.getFontSmall());
+		m_p.setFont(GameClient.getInstance().getFontSmall());
 		m_p.setForeground(m_white);
 		this.add(m_p);
 
@@ -83,7 +83,7 @@ public class RegisterDialog extends Frame
 		m_cp = new Label(translated.get(10));
 		m_cp.pack();
 		m_cp.setLocation(4, 100);
-		m_cp.setFont(GameClient.getFontSmall());
+		m_cp.setFont(GameClient.getInstance().getFontSmall());
 		m_cp.setForeground(m_white);
 		this.add(m_cp);
 
@@ -98,7 +98,7 @@ public class RegisterDialog extends Frame
 		m_d = new Label(translated.get(11));
 		m_d.pack();
 		m_d.setLocation(4, 152);
-		m_d.setFont(GameClient.getFontSmall());
+		m_d.setFont(GameClient.getInstance().getFontSmall());
 		m_d.setForeground(m_white);
 		this.add(m_d);
 
@@ -126,7 +126,7 @@ public class RegisterDialog extends Frame
 		m_e = new Label(translated.get(12));
 		m_e.pack();
 		m_e.setLocation(4, 202);
-		m_e.setFont(GameClient.getFontSmall());
+		m_e.setFont(GameClient.getInstance().getFontSmall());
 		m_e.setForeground(m_white);
 		this.add(m_e);
 
@@ -139,7 +139,7 @@ public class RegisterDialog extends Frame
 		m_ce = new Label(translated.get(13));
 		m_ce.pack();
 		m_ce.setLocation(4, 248);
-		m_ce.setFont(GameClient.getFontSmall());
+		m_ce.setFont(GameClient.getInstance().getFontSmall());
 		m_ce.setForeground(m_white);
 		this.add(m_ce);
 
@@ -152,7 +152,7 @@ public class RegisterDialog extends Frame
 		m_s = new Label(translated.get(14));
 		m_s.pack();
 		m_s.setLocation(170, 4);
-		m_s.setFont(GameClient.getFontSmall());
+		m_s.setFont(GameClient.getInstance().getFontSmall());
 		m_s.setForeground(m_white);
 		this.add(m_s);
 
@@ -161,7 +161,7 @@ public class RegisterDialog extends Frame
 		m_g = new Label(translated.get(15));
 		m_g.pack();
 		m_g.setLocation(170, 128);
-		m_g.setFont(GameClient.getFontSmall());
+		m_g.setFont(GameClient.getInstance().getFontSmall());
 		m_g.setForeground(m_white);
 		this.add(m_g);
 
@@ -196,7 +196,7 @@ public class RegisterDialog extends Frame
 		this.add(m_female);
 
 		m_reg = new Label("Starting Region:");
-		m_reg.setFont(GameClient.getFontSmall());
+		m_reg.setFont(GameClient.getInstance().getFontSmall());
 		m_reg.setForeground(m_white);
 		m_reg.pack();
 		m_reg.setLocation(170, 182);
@@ -286,7 +286,7 @@ public class RegisterDialog extends Frame
 		m_tos = new Label(translated.get(18));
 		m_tos.pack();
 		m_tos.setLocation(172, 256);
-		m_tos.setFont(GameClient.getFontSmall());
+		m_tos.setFont(GameClient.getInstance().getFontSmall());
 		m_tos.setForeground(m_white);
 		this.add(m_tos);
 
@@ -667,22 +667,22 @@ public class RegisterDialog extends Frame
 								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
 							}
 							else
-								GameClient.messageDialog(translated.get(28), display);
+								GameClient.getInstance().messageDialog(translated.get(28), display);
 						}
 						else
-							GameClient.messageDialog("No starter selected", display);
+							GameClient.getInstance().messageDialog("No starter selected", display);
 					}
 					else
-						GameClient.messageDialog(translated.get(29), display);
+						GameClient.getInstance().messageDialog(translated.get(29), display);
 				}
 				else
-					GameClient.messageDialog(translated.get(30), display);
+					GameClient.getInstance().messageDialog(translated.get(30), display);
 			}
 			else
-				GameClient.messageDialog(translated.get(31), display);
+				GameClient.getInstance().messageDialog(translated.get(31), display);
 		}
 		else
-			GameClient.messageDialog(translated.get(32), display);
+			GameClient.getInstance().messageDialog(translated.get(32), display);
 	}
 
 	/**

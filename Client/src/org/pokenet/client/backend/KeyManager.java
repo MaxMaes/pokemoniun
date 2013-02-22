@@ -51,13 +51,13 @@ public class KeyManager
 			}
 			catch(InvalidIniFormatException e)
 			{
-				GameClient.log("ERROR: Malformed keys.ini, a new file will be generated");
+				GameClient.getInstance().log("ERROR: Malformed keys.ini, a new file will be generated");
 				reset();
 				return;
 			}
 			catch(IOException e)
 			{
-				GameClient.log("ERROR: Error during the loading of keys.ini, could be missing. A new file will be generated");
+				GameClient.getInstance().log("ERROR: Error during the loading of keys.ini, could be missing. A new file will be generated");
 				reset();
 				return;
 			}
@@ -116,7 +116,7 @@ public class KeyManager
 		}
 		finally
 		{
-			GameClient.log("INFO: Keys Loaded");
+			GameClient.getInstance().log("INFO: Keys Loaded");
 		}
 	}
 

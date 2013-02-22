@@ -40,7 +40,7 @@ public class LoadingScreen extends Frame
 			this.add(m_bg);
 
 			setVisible(false);
-			//setAlwaysOnTop(true);
+			// setAlwaysOnTop(true);
 		}
 		catch(SlickException e)
 		{
@@ -54,11 +54,11 @@ public class LoadingScreen extends Frame
 		super.setVisible(visible);
 		if(visible)
 		{
-			GameClient.disableKeyRepeat();
+			GameClient.getInstance().disableKeyRepeat();
 		}
 		else
 		{
-			GameClient.enableKeyRepeat();
+			GameClient.getInstance().enableKeyRepeat();
 		}
 	}
 }

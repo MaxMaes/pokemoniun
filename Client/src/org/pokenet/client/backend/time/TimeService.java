@@ -22,7 +22,7 @@ public class TimeService extends Label implements Runnable
 		pack();
 		this.setLocation(4, 4);
 		setVisible(true);
-		setFont(GameClient.getFontLarge());
+		setFont(GameClient.getInstance().getFontLarge());
 		setForeground(new Color(255, 255, 255));
 		m_thread = new Thread(this);
 	}
@@ -61,10 +61,10 @@ public class TimeService extends Label implements Runnable
 	@Override
 	public void run()
 	{
-		String min;
-		String hour;
 		while(m_running)
 		{
+			String min;
+			String hour;
 			m_minutes = m_minutes == 59 ? 0 : m_minutes + 1;
 			if(m_minutes == 0)
 			{

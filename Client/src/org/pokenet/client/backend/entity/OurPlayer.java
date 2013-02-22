@@ -217,7 +217,7 @@ public class OurPlayer extends Player
 	public void initializePokedex(String[] details)
 	{
 		int id = 1;
-		
+
 		for(String s : details)
 		{
 			m_pokedex[id] = Integer.parseInt(s);
@@ -321,8 +321,6 @@ public class OurPlayer extends Player
 		else
 		{
 			/* Set sprite, name, gender and hp */
-
-			System.out.println("Poke Info: " + info);
 			m_pokemon[i] = new OurPokemon();
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));

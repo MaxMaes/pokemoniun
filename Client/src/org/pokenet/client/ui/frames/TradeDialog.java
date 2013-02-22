@@ -160,7 +160,7 @@ public class TradeDialog extends Frame
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("37");
 		ClientMessage message = new ClientMessage(ServerPacket.CANCEL_OFFER);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 		m_makeOfferBtn.setText("Make Offer");
 		for(int i = 0; i < 6; i++) {
 			m_ourPokes[i].setGlassPane(false);
@@ -191,7 +191,7 @@ public class TradeDialog extends Frame
 				ClientMessage message = new ClientMessage(ServerPacket.TRADE_CANCEL);
 				//message.addInt(m_offerNum);
 				//message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				m_confirm.setVisible(false);
 				getDisplay().remove(m_confirm);
 				m_confirm = null;
@@ -484,7 +484,7 @@ public class TradeDialog extends Frame
 			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 		}
 		else
 		{
@@ -492,7 +492,7 @@ public class TradeDialog extends Frame
 			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(0);
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 		}
 		m_makeOfferBtn.setText("Cancel Offer");
 		for(int i = 0; i < 6; i++)
@@ -509,7 +509,7 @@ public class TradeDialog extends Frame
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("36");
 		ClientMessage message = new ClientMessage(ServerPacket.TRADE_ACCEPTED);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 		System.out.println("Trade complete");
 		setVisible(false);
 	}

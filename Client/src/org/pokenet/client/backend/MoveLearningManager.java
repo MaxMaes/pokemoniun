@@ -13,9 +13,7 @@ import org.pokenet.client.ui.MoveLearning;
 public class MoveLearningManager extends Thread
 {
 	private static MoveLearningManager m_instance;
-
 	private boolean m_canLearn = false;
-
 	private boolean m_isRunning = true;
 	private MoveLearning m_moveLearning;
 	private Queue<MoveLearnQueueObject> m_moveLearningQueue;
@@ -23,9 +21,8 @@ public class MoveLearningManager extends Thread
 	/**
 	 * Default constructor
 	 */
-	public MoveLearningManager()
+	private MoveLearningManager()
 	{
-		m_instance = this;
 		m_moveLearningQueue = new LinkedList<MoveLearnQueueObject>();
 		m_moveLearning = new MoveLearning();
 		System.out.println("Move Learning Manager started.");
@@ -38,6 +35,8 @@ public class MoveLearningManager extends Thread
 	 */
 	public static MoveLearningManager getInstance()
 	{
+		if(m_instance == null)
+			m_instance = new MoveLearningManager();
 		return m_instance;
 	}
 
@@ -96,30 +95,21 @@ public class MoveLearningManager extends Thread
 	@Override
 	public void run()
 	{
-		while(true)
+		while(m_isRunning)
 		{
+			if(m_canLearn && !m_moveLearningQueue.isEmpty())
+			{
+				MoveLearnQueueObject temp = m_moveLearningQueue.poll();
+				learnMove(temp.getPokeIndex(), temp.getMoveName());
+				m_canLearn = false;
+			}
 			try
 			{
-				Thread.sleep(250);
+				Thread.sleep(500);
 			}
-			catch(Exception e)
+			catch(InterruptedException ie)
 			{
-			}
-			while(m_isRunning)
-			{
-				if(m_canLearn && !m_moveLearningQueue.isEmpty())
-				{
-					MoveLearnQueueObject temp = m_moveLearningQueue.poll();
-					learnMove(temp.getPokeIndex(), temp.getMoveName());
-					m_canLearn = false;
-				}
-				try
-				{
-					Thread.sleep(500);
-				}
-				catch(Exception e)
-				{
-				}
+				ie.printStackTrace();
 			}
 		}
 	}

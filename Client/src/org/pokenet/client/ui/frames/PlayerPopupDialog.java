@@ -31,7 +31,7 @@ public class PlayerPopupDialog extends Frame
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_name = new Label(player);
-		m_name.setFont(GameClient.getFontSmall());
+		m_name.setFont(GameClient.getInstance().getFontSmall());
 		m_name.setForeground(Color.white);
 		m_name.pack();
 		m_name.setLocation(0, 0);
@@ -76,7 +76,7 @@ public class PlayerPopupDialog extends Frame
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("13" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_BATTLE);
 				message.addString(m_name.getText());
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				destroy();
 			}
 		});
@@ -88,7 +88,7 @@ public class PlayerPopupDialog extends Frame
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("14" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_TRADE);
 				message.addString(m_name.getText());
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				destroy();
 			}
 		});
@@ -109,7 +109,7 @@ public class PlayerPopupDialog extends Frame
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2F" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.FRIEND_ADD);
 				message.addString(m_name.getText());
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());
 				GameClient.getInstance().getUi().getFriendsList().setFriendOnline(m_name.getText(), true);
 				destroy();

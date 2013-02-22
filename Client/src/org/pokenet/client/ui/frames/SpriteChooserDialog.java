@@ -113,7 +113,7 @@ public class SpriteChooserDialog extends Frame
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
 						ClientMessage message = new ClientMessage(ServerPacket.BUY_SPRITE);
 						message.addInt(Integer.parseInt(m_spriteList.getSelectedName()));
-						GameClient.getSession().send(message);
+						GameClient.getInstance().getSession().send(message);
 					}
 				});
 				confirm.addNoListener(new ActionListener()

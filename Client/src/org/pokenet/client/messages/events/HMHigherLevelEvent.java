@@ -15,6 +15,6 @@ public class HMHigherLevelEvent implements MessageEvent
 
 		int level = Request.readInt();
 
-		GameClient.messageDialog("You are not strong enough to do this.\n" + "Your trainer level must be " + level + " to do this.", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("You are not strong enough to do this.\n" + "Your trainer level must be " + level + " to do this.", GameClient.getInstance().getDisplay());
 	}
 }

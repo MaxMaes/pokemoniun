@@ -160,7 +160,7 @@ public class BigBagDialog extends Frame
 					m_categoryButtons[i].setLocation(80, 10);
 				else
 					m_categoryButtons[i].setLocation(m_categoryButtons[i - 1].getX() + 65, 10);
-				m_categoryButtons[i].setFont(GameClient.getFontLarge());
+				m_categoryButtons[i].setFont(GameClient.getInstance().getFontLarge());
 				m_categoryButtons[i].setOpaque(false);
 				m_categoryButtons[i].addActionListener(new ActionListener()
 				{
@@ -192,7 +192,7 @@ public class BigBagDialog extends Frame
 		}
 		LoadingList.setDeferredLoading(false);
 		bagicon.setLocation(18, 0);
-		bagicon.setFont(GameClient.getFontLarge());
+		bagicon.setFont(GameClient.getInstance().getFontLarge());
 		getContentPane().add(bagicon);
 		// Scrolling Button LEFT
 		m_leftButton = new Button("<");
@@ -235,7 +235,7 @@ public class BigBagDialog extends Frame
 			stock.setSize(60, 40);
 			stock.setLocation(50 + 80 * i, 135);
 			stock.setHorizontalAlignment(Label.CENTER_ALIGNMENT);
-			stock.setFont(GameClient.getFontLarge());
+			stock.setFont(GameClient.getInstance().getFontLarge());
 			stock.setForeground(Color.white);
 			m_stockLabels.add(stock);
 			getContentPane().add(stock);
@@ -476,7 +476,7 @@ class ItemPopup extends Frame
 		getContentPane().setY(getContentPane().getY() + 1);
 		// Item name label
 		m_name = new Label(item.split("\n")[0]);
-		m_name.setFont(GameClient.getFontSmall());
+		m_name.setFont(GameClient.getInstance().getFontSmall());
 		m_name.setForeground(Color.white);
 		m_name.pack();
 		m_name.setLocation(0, 0);
@@ -524,7 +524,7 @@ class ItemPopup extends Frame
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.ITEM_DESTROY);
 				message.addInt(m_id);
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				destroyPopup();
 			}
 		});
@@ -613,7 +613,7 @@ class ItemPopup extends Frame
 		{
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(String.valueOf(id));
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 			destroyPopup();
 		}
 	}
@@ -652,7 +652,7 @@ class TeamPopup extends Frame
 				final Label tempLabel = new Label(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
 				final int j = i;
 				tempLabel.setSize(100, 15);
-				tempLabel.setFont(GameClient.getFontSmall());
+				tempLabel.setFont(GameClient.getInstance().getFontSmall());
 				tempLabel.setForeground(Color.white);
 				tempLabel.setLocation(0, y);
 				tempLabel.addMouseListener(new MouseAdapter()
@@ -707,13 +707,13 @@ class TeamPopup extends Frame
 		{
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(id + "," + pokeIndex);
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 		}
 		else
 		{
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_GIVE);
 			message.addString(id + "," + pokeIndex);
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
 		}
 		m_parent.destroyPopup();

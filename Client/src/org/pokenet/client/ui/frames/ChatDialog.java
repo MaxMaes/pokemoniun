@@ -211,14 +211,14 @@ public class ChatDialog extends Frame
 				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
 				message.addInt(1);
 				message.addString(m_inputBox.getText());
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 			}
 			else
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
 				message.addInt(2);
 				message.addString(m_possibleChats.getSelected() + "," + m_inputBox.getText());
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
 				addWhisperLine(m_possibleChats.getSelected(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + m_inputBox.getText());
 			}

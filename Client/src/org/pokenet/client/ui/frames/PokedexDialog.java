@@ -136,13 +136,13 @@ public class PokedexDialog extends Frame
 		initPokedexSprite();
 
 		pokemonname = new Label();
-		pokemonname.setFont(GameClient.getPokedexFontMedium());
+		pokemonname.setFont(GameClient.getInstance().getPokedexFontMedium());
 
 		pokemontypes = new Label();
-		pokemontypes.setFont(GameClient.getPokedexFontSmall());
+		pokemontypes.setFont(GameClient.getInstance().getPokedexFontSmall());
 
 		pokemonnumber = new Label();
-		pokemonnumber.setFont(GameClient.getPokedexFontLarge());
+		pokemonnumber.setFont(GameClient.getInstance().getPokedexFontLarge());
 
 		pokemonsprite = new Label();
 		pokemonsprite.setSize(80, 80);
@@ -170,7 +170,7 @@ public class PokedexDialog extends Frame
 		sinnohMap.setVisible(false);
 		
 		tabname = new Label();
-		tabname.setFont(GameClient.getPokedexFontLarge());
+		tabname.setFont(GameClient.getInstance().getPokedexFontLarge());
 
 		pokemonSelectionFrame = new Label();
 		pokemonSelectionFrame.setImage(selectionFrame);
@@ -185,13 +185,13 @@ public class PokedexDialog extends Frame
 		for(int i = 0; i < 14; i++)
 		{
 			pokemonBiologyLabels[i] = new Label();
-			pokemonBiologyLabels[i].setFont(GameClient.getPokedexFontBetweenSmallAndMini());
+			pokemonBiologyLabels[i].setFont(GameClient.getInstance().getPokedexFontBetweenSmallAndMini());
 		}
 
 		for(int i = 0; i < 13; i++)
 		{
 			pokemonNameList[i] = new Label();
-			pokemonNameList[i].setFont(GameClient.getPokedexFontSmall());
+			pokemonNameList[i].setFont(GameClient.getInstance().getPokedexFontSmall());
 			pokemonNameList[i].setLocation(pokedexsprite.getX() + 322, pokedexsprite.getY() + 63 + 22 * i);
 			pokemonCaughtLabels[i] = new Label();
 			pokemonCaughtLabels[i].setImage(caughtIcon);
@@ -568,7 +568,7 @@ public class PokedexDialog extends Frame
 			int end = (i + 1) * charsPerLine;
 			if(end > loreString.length())
 				end = loreString.length();
-			loreLabels[i].setFont(GameClient.getPokedexFontBetweenSmallAndMini());
+			loreLabels[i].setFont(GameClient.getInstance().getPokedexFontBetweenSmallAndMini());
 			loreLabels[i].setText(loreString.substring(begin, end));
 			loreLabels[i].pack();
 			loreLabels[i].setLocation(pokedexsprite.getX() + 34, pokedexsprite.getY() + 132 + 10 * i);
@@ -587,7 +587,7 @@ public class PokedexDialog extends Frame
 		for(int i = 0; i < pokemonMoveLabels.length; i++)
 		{
 			pokemonMoveLabels[i] = new Label();
-			pokemonMoveLabels[i].setFont(GameClient.getPokedexFontBetweenSmallAndMini());
+			pokemonMoveLabels[i].setFont(GameClient.getInstance().getPokedexFontBetweenSmallAndMini());
 			if(i < 9)
 				pokemonMoveLabels[i].setLocation(pokedexsprite.getX() + 34 + 15 * (i / 9), pokedexsprite.getY() + 132 + 10 * i);
 			else
@@ -731,7 +731,7 @@ public class PokedexDialog extends Frame
 		});
 
 		inc1.setImages(incrementerPressedSprite, incrementerSprite, incrementerPressedSprite);
-		inc1.setFont(GameClient.getPokedexFontMini());
+		inc1.setFont(GameClient.getInstance().getPokedexFontMini());
 		inc1.setText("1");
 		inc1.setSize(36, 14);
 		inc1.setLocation(down.getX() - 3, pokedexsprite.getY() + 70);
@@ -754,7 +754,7 @@ public class PokedexDialog extends Frame
 		});
 
 		inc5.setImages(incrementerPressedSprite, incrementerSprite, incrementerPressedSprite);
-		inc5.setFont(GameClient.getPokedexFontMini());
+		inc5.setFont(GameClient.getInstance().getPokedexFontMini());
 		inc5.setText("5");
 		inc5.setSize(36, 14);
 		inc5.setLocation(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
@@ -775,7 +775,7 @@ public class PokedexDialog extends Frame
 		});
 
 		inc10.setImages(incrementerPressedSprite, incrementerSprite, incrementerPressedSprite);
-		inc10.setFont(GameClient.getPokedexFontMini());
+		inc10.setFont(GameClient.getInstance().getPokedexFontMini());
 		inc10.setText("10");
 		inc10.setSize(36, 14);
 		inc10.setLocation(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
@@ -796,7 +796,7 @@ public class PokedexDialog extends Frame
 		});
 
 		inc50.setImages(incrementerPressedSprite, incrementerSprite, incrementerPressedSprite);
-		inc50.setFont(GameClient.getPokedexFontMini());
+		inc50.setFont(GameClient.getInstance().getPokedexFontMini());
 		inc50.setText("50");
 		inc50.setSize(36, 14);
 		inc50.setLocation(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);

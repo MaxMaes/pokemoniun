@@ -213,7 +213,7 @@ public class BoatChooserDialog extends Frame {
 //						GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_travelList.getSelectedName());
 						ClientMessage message = new ClientMessage(ServerPacket.TRAVEL);
 						message.addString(choice);
-						GameClient.getSession().send(message);
+						GameClient.getInstance().getSession().send(message);
 					}
 				});
 				confirm.addNoListener(new ActionListener()

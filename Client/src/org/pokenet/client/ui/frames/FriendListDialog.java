@@ -2,7 +2,6 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
@@ -11,7 +10,6 @@ import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
-
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
@@ -144,8 +142,8 @@ public class FriendListDialog extends Frame
 				m_shownFriends[i] = new Label();
 			}
 			m_shownFriends[i].pack();
-			m_shownFriends[i].setFont(GameClient.getFontSmall());
-			if(m_online.contains(m_shownFriends[i]))
+			m_shownFriends[i].setFont(GameClient.getInstance().getFontSmall());
+			if(m_online.contains(m_shownFriends[i].getText()))
 				m_shownFriends[i].setForeground(Color.white);
 			else
 				m_shownFriends[i].setForeground(Color.gray);
@@ -162,7 +160,7 @@ public class FriendListDialog extends Frame
 				public void mouseExited(MouseEvent e)
 				{
 					super.mouseExited(e);
-					if(m_online.contains(m_shownFriends[j]))
+					if(m_online.contains(m_shownFriends[j].getText()))
 						m_shownFriends[j].setForeground(Color.white);
 					else
 						m_shownFriends[j].setForeground(Color.gray);
@@ -228,7 +226,7 @@ class PopUp extends Frame
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		m_name = new Label(friend);
-		m_name.setFont(GameClient.getFontSmall());
+		m_name.setFont(GameClient.getInstance().getFontSmall());
 		/* if(online) m_name.setForeground(Color.white); else m_name.setForeground(Color.grey); */
 		m_name.setForeground(Color.white);
 		m_name.pack();
@@ -267,7 +265,7 @@ class PopUp extends Frame
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("30" + m_name.getText());
 						ClientMessage message = new ClientMessage(ServerPacket.FRIEND_REMOVE);
 						message.addString(m_name.getText());
-						GameClient.getSession().send(message);
+						GameClient.getInstance().getSession().send(message);
 						GameClient.getInstance().getDisplay().remove(m_confirm);
 						m_confirm = null;
 					}

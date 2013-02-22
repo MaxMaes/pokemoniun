@@ -54,12 +54,8 @@ public class ClientMap extends TiledMap
 			respath = "";
 		try
 		{
-			if(m_grassOverlay == null)
-				m_grassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
-			// if(m_SinnohGrassOverlay == null)
-			// m_SinnohGrassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
-			if(m_SinnohOverlay == null)
-				m_SinnohOverlay = new Image(respath + "res/ui/sinnoh_grass.png", false);
+			m_grassOverlay = new Image(respath + "res/ui/grass_overlay.png", false);
+			m_SinnohOverlay = new Image(respath + "res/ui/sinnoh_grass.png", false);
 		}
 		catch(SlickException e)
 		{
@@ -318,7 +314,7 @@ public class ClientMap extends TiledMap
 					if(m_curMap.wasOnGrass(player) && m_curMap.isOnGrass(player))
 					{
 						// sinnoh maps use different grass
-//						System.out.println(m_x + ", " + m_y);
+						// System.out.println(m_x + ", " + m_y);
 						if((m_x > 32 && m_y < -37))
 						{
 							switch(player.getDirection())

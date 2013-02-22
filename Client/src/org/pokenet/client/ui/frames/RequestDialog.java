@@ -51,7 +51,7 @@ public class RequestDialog extends Frame
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("15" + m_offerUser.get(userIndex));
 			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_ACCEPTED);
 			message.addString(m_offerUser.get(userIndex));
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 			m_offers.remove(m_offerUser.get(userIndex));
 			m_offerUser.remove(userIndex);
 			m_update = true;
@@ -99,7 +99,7 @@ public class RequestDialog extends Frame
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + name);
 			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 			message.addString(name);
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 			m_offers.remove(name);
 			m_offerUser.remove(name);
 			m_update = true;
@@ -116,7 +116,7 @@ public class RequestDialog extends Frame
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + m_offerUser.get(userIndex));
 		ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 		message.addString(m_offerUser.get(userIndex));
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 		m_offers.remove(m_offerUser.get(userIndex));
 		m_offerUser.remove(userIndex);
 		m_update = true;
@@ -135,7 +135,7 @@ public class RequestDialog extends Frame
 		setBackground(new Color(0, 0, 0, 85));
 		setForeground(new Color(255, 255, 255));
 		setHeight(getTitleBar().getHeight() + 25);
-		m_noOffers.setFont(GameClient.getFontSmall());
+		m_noOffers.setFont(GameClient.getInstance().getFontSmall());
 		m_noOffers.setForeground(Color.white);
 		m_noOffers.pack();
 		m_noOffers.setY(10 - m_noOffers.getTextHeight() / 2);
@@ -207,7 +207,7 @@ public class RequestDialog extends Frame
 								declineOffer(j);
 							}
 						});
-						m_label.setFont(GameClient.getFontSmall());
+						m_label.setFont(GameClient.getInstance().getFontSmall());
 						m_label.setForeground(Color.white);
 						m_label.pack();
 						m_label.setY(10 - m_label.getTextHeight() / 2);

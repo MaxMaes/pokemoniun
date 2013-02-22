@@ -1,13 +1,11 @@
 package org.pokenet.client.ui;
 
 import java.util.HashMap;
-
 import mdes.slick.sui.Display;
 import mdes.slick.sui.Frame;
 import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
@@ -74,7 +72,7 @@ public class UserInterface extends Frame
 	 */
 	public UserInterface(Display display)
 	{
-		m_instance = this;
+		UserInterface.setInstance(this);
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		this.setSize(800, 66);
@@ -82,7 +80,7 @@ public class UserInterface extends Frame
 		setBackground(new Color(0, 0, 0, 75));
 		setResizable(false);
 		setDraggable(false);
-		m_battleManager = new BattleManager();
+		m_battleManager = BattleManager.getInstance();
 		m_display = display;
 		m_chat = new ChatDialog();
 		m_chat.setLocation(0, GameClient.getInstance().getDisplay().getHeight() - m_chat.getHeight());
@@ -102,7 +100,7 @@ public class UserInterface extends Frame
 		m_moneyLabel.pack();
 		m_moneyLabel.setLocation(m_buttons[m_buttons.length - 1].getX() + 37, 6);
 		m_moneyLabel.setVisible(true);
-		m_moneyLabel.setFont(GameClient.getFontLarge());
+		m_moneyLabel.setFont(GameClient.getInstance().getFontLarge());
 		m_moneyLabel.setForeground(new Color(255, 255, 255));
 		this.add(m_moneyLabel);
 		this.add(GameClient.getInstance().getTimeService());
@@ -625,8 +623,6 @@ public class UserInterface extends Frame
 			m_chat.setVisible(false);
 		else
 		{
-			if(m_chat == null)
-				m_chat = new ChatDialog();
 			m_chat.setLocation(0, GameClient.getInstance().getDisplay().getHeight() - m_chat.getHeight());
 			m_chat.setVisible(true);
 		}
@@ -809,7 +805,7 @@ public class UserInterface extends Frame
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0C" + index);
 				ClientMessage message = new ClientMessage(ServerPacket.EVOLVE);
 				message.addInt(index);
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};
@@ -821,7 +817,7 @@ public class UserInterface extends Frame
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0B" + index);
 				ClientMessage message = new ClientMessage(ServerPacket.DONT_EVOLVE);
 				message.addInt(index);
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				GameClient.getInstance().getDisplay().remove(m_evolveDialog);
 			}
 		};
@@ -894,5 +890,10 @@ public class UserInterface extends Frame
 		m_stats = null;
 		if(m_pokedex != null && m_pokedex.isVisible())
 			m_pokedex.setVisible(false);
+	}
+
+	private static void setInstance(UserInterface ui)
+	{
+		m_instance = ui;
 	}
 }

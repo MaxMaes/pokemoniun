@@ -60,7 +60,7 @@ public class TownMap extends Frame
 
 		m_map.setSize(700, 500);
 		m_map.setLocation(0, 0);
-		m_mapName.setFont(GameClient.getFontLarge());
+		m_mapName.setFont(GameClient.getInstance().getFontLarge());
 		m_mapName.setForeground(Color.white);
 		m_mapName.setX(10);
 
@@ -89,7 +89,7 @@ public class TownMap extends Frame
 
 			try
 			{
-				reader = new BufferedReader(new InputStreamReader(FileLoader.loadFile(respath + "res/language/" + GameClient.getLanguage() + "/UI/_MAP.txt")));
+				reader = new BufferedReader(new InputStreamReader(FileLoader.loadFile(respath + "res/language/" + GameClient.getInstance().getLanguage() + "/UI/_MAP.txt")));
 			}
 			catch(Exception e)
 			{

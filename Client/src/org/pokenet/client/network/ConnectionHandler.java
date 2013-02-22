@@ -23,7 +23,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 	public void channelOpen(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
 		System.out.println("Connected to game server.");
-		GameClient.setSession(new Session(channelContext.getChannel()));
+		GameClient.getInstance().setSession(new Session(channelContext.getChannel()));
 	}
 
 	@Override
@@ -39,10 +39,10 @@ public class ConnectionHandler extends SimpleChannelHandler
 		try
 		{
 			ServerMessage msg = (ServerMessage) messageEvent.getMessage();
-			if(GameClient.getSession() != null)
-				GameClient.getSession().parseMessage(msg);
+			if(GameClient.getInstance().getSession() != null)
+				GameClient.getInstance().getSession().parseMessage(msg);
 			else
-				System.out.print("The session has been closed. GameClient.getSession() == null");
+				System.out.print("The session has been closed. GameClient.getInstance().getSession() == null");
 		}
 		catch(Exception e)
 		{

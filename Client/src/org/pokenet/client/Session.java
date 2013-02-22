@@ -27,8 +27,9 @@ public class Session
 
 	public void parseMessage(ServerMessage message)
 	{
-		MessageHandler handler = GameClient.getConnections().getMessages();
-		if(handler.contains(message.getId())) {
+		MessageHandler handler = GameClient.getInstance().getConnections().getMessages();
+		if(handler.contains(message.getId()))
+		{
 			handler.get(message.getId()).parse(this, message, new ClientMessage(this));
 		}
 	}

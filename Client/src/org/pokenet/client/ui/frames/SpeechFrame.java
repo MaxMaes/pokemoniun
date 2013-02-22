@@ -229,7 +229,7 @@ public class SpeechFrame extends Frame
 		speechDisplay.setLocation(16, 5);
 		speechDisplay.setZIndex(1);
 		speechDisplay.setBorderRendered(false);
-		speechDisplay.setFont(GameClient.getFontLarge());
+		speechDisplay.setFont(GameClient.getInstance().getFontLarge());
 		speechDisplay.setOpaque(false);
 		getContentPane().add(bg);
 		getContentPane().add(speechDisplay);

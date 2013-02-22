@@ -8,7 +8,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
-import java.util.HashMap;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
 import mdes.slick.sui.event.ActionEvent;
@@ -27,7 +26,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
-import org.newdawn.slick.muffin.FileMuffin;
 import org.pokenet.client.backend.Animator;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.ClientMap;
@@ -69,27 +67,27 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
-	private static Session m_session;
+	private Session m_session;
 	private static boolean debug = false;
-	private static final int FPS = 30;
-	private static final String GAME_TITLE = "Pokemonium 1.5.0.3";
-	private static AppGameContainer gc;
-	private static Connection m_connection;
-	private static String m_filepath;
-	private static Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
+	private final static int FPS = 30;
+	private final static String GAME_TITLE = "Pokemonium 1.5.0.3";
+	private static AppGameContainer gameContainer;
+	private Connection m_connection;
+	private String m_filepath;
+	private Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private static GameClient m_instance;
-	private static String m_language = Language.ENGLISH;
-	private static Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
-	private static Image m_loadImage; // Made these static to prevent memory leak.
-	private static boolean m_loadSurroundingMaps = false;
-	private static DeferredResource m_nextResource;
-	private static SoundManager m_soundPlayer;
-	private static Image[] m_spriteImageArray = new Image[400]; /* TODO: WARNING: Replace with actual number of sprites */
-	private static UserManager m_userManager;
+	private String m_language = Language.ENGLISH;
+	private Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
+	private Image m_loadImage; // Made these static to prevent memory leak.
+	private boolean m_loadSurroundingMaps = false;
+	private DeferredResource m_nextResource;
+	private SoundManager m_soundPlayer;
+	private Image[] m_spriteImageArray = new Image[400]; /* TODO: WARNING: Replace with actual number of sprites */
+	private UserManager m_userManager;
 	private static Options options;
-	private static final DecimalFormat percentage = new DecimalFormat("###.##");
-	private static final long startTime = System.currentTimeMillis();
-	private static final int DEFAULT_PORT = 7002;
+	private final DecimalFormat percentage = new DecimalFormat("###.##");
+	private final long startTime = System.currentTimeMillis();
+	private final int DEFAULT_PORT = 7002;
 	private int lastPressedKey;
 	private Animator m_animator;
 	private boolean m_chatServerIsActive;
@@ -111,29 +109,26 @@ public class GameClient extends BasicGame
 	private TimeService m_time;// = new TimeService();
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
-	private static MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
+	private MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
 
 	/**
 	 * Default constructor
 	 * 
 	 * @param title
 	 */
-	public GameClient(String title)
+	private GameClient(String title)
 	{
 		super(title);
 	}
 
 	/** Load options */
-	static
+	private void initClient()
 	{
-		m_instance = new GameClient(GAME_TITLE);
 		m_filepath = System.getProperty("res.path");
 		if(m_filepath == null)
 			m_filepath = "";
 		options = new Options();
-
 		m_soundPlayer = new SoundManager(options.isSoundMuted());
-		
 		m_soundPlayer.start();
 		m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		m_loadSurroundingMaps = options.isSurroundingMapsEnabled();
@@ -144,18 +139,18 @@ public class GameClient extends BasicGame
 	 * 
 	 * @param fileKey
 	 */
-	public static void changeTrack(String fileKey)
+	public void changeTrack(String fileKey)
 	{
 		m_soundPlayer.setTrack(fileKey);
 	}
 
-	public static Connection getConnections()
+	public Connection getConnections()
 	{
 		return m_connection;
 	}
 
 	/** Returns the File Path, if any */
-	public static String getFilePath()
+	public String getFilePath()
 	{
 		return m_filepath;
 	}
@@ -165,7 +160,7 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static Font getFontLarge()
+	public Font getFontLarge()
 	{
 		return m_fontLarge;
 	}
@@ -175,7 +170,7 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static Font getFontSmall()
+	public Font getFontSmall()
 	{
 		return m_fontSmall;
 	}
@@ -187,6 +182,8 @@ public class GameClient extends BasicGame
 	 */
 	public static GameClient getInstance()
 	{
+		if(m_instance == null)
+			m_instance = new GameClient(GAME_TITLE);
 		return m_instance;
 	}
 
@@ -195,13 +192,13 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static String getLanguage()
+	public String getLanguage()
 	{
 		return m_language;
 	}
 
 	/** Returns the options */
-	public static Options getOptions()
+	public Options getOptions()
 	{
 		return options;
 	}
@@ -209,7 +206,7 @@ public class GameClient extends BasicGame
 	/**
 	 * Returns the pokedex font between small and mini;
 	 */
-	public static Font getPokedexFontBetweenSmallAndMini()
+	public Font getPokedexFontBetweenSmallAndMini()
 	{
 		return m_pokedexfontbetweenminiandsmall;
 	}
@@ -217,7 +214,7 @@ public class GameClient extends BasicGame
 	/**
 	 * Returns the pokedex font in large
 	 */
-	public static Font getPokedexFontLarge()
+	public Font getPokedexFontLarge()
 	{
 		return m_pokedexfontlarge;
 	}
@@ -225,7 +222,7 @@ public class GameClient extends BasicGame
 	/**
 	 * Returns the pokedex font in medium
 	 */
-	public static Font getPokedexFontMedium()
+	public Font getPokedexFontMedium()
 	{
 		return m_pokedexfontmedium;
 	}
@@ -233,7 +230,7 @@ public class GameClient extends BasicGame
 	/**
 	 * Returns the pokedex font in mini
 	 */
-	public static Font getPokedexFontMini()
+	public Font getPokedexFontMini()
 	{
 		return m_pokedexfontmini;
 	}
@@ -241,7 +238,7 @@ public class GameClient extends BasicGame
 	/**
 	 * Returns the pokedex font in small
 	 */
-	public static Font getPokedexFontSmall()
+	public Font getPokedexFontSmall()
 	{
 		return m_pokedexfontsmall;
 	}
@@ -251,17 +248,17 @@ public class GameClient extends BasicGame
 	 * 
 	 * @return
 	 */
-	public static SoundManager getSoundPlayer()
+	public SoundManager getSoundPlayer()
 	{
 		return m_soundPlayer;
 	}
 
-	public static Font getTrueTypeFont()
+	public Font getTrueTypeFont()
 	{
 		return m_trueTypeFont;
 	}
 
-	public static void log(String message)
+	public void log(String message)
 	{
 		if(debug)
 			System.out.println(message);
@@ -274,22 +271,26 @@ public class GameClient extends BasicGame
 	 */
 	public static void main(String[] args)
 	{
+		GameClient.getInstance().initClient();
 		/* Pipe errors to a file */
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		Date now = new Date(System.currentTimeMillis());
 		try
 		{
-			File log = new File("log" + sdf.format(now) + ".txt");
+			File logFolder = new File("logs");
+			if(!logFolder.exists())
+				logFolder.mkdir();
+			File log = new File("logs\\" + sdf.format(now) + "-log.txt");
 			if(!log.exists())
 				log.createNewFile();
 			PrintStream p = new PrintStream(log);
 			System.setErr(p);
 		}
-		catch(IOException e)
+		catch(IOException ioe)
 		{
-			e.printStackTrace();
+			ioe.printStackTrace();
 		}
-		// See if we need to debug
+		/* See if we need to debug. */
 		if(args.length > 0)
 			if(args[0].equalsIgnoreCase("-debug") || args[0].equalsIgnoreCase("-d"))
 				debug = true;
@@ -308,11 +309,11 @@ public class GameClient extends BasicGame
 		}
 		try
 		{
-			gc = new AppGameContainer(new GameClient(GAME_TITLE), 800, 600, fullscreen);
-			gc.setTargetFrameRate(FPS);
+			gameContainer = new AppGameContainer(GameClient.getInstance(), 800, 600, fullscreen);
+			gameContainer.setTargetFrameRate(FPS);
 			if(!fullscreen)
-				gc.setAlwaysRender(true);
-			gc.start();
+				gameContainer.setAlwaysRender(true);
+			gameContainer.start();
 		}
 		catch(Exception e)
 		{
@@ -321,18 +322,18 @@ public class GameClient extends BasicGame
 	}
 
 	/** Creates a message Box */
-	public static void messageDialog(String message, Container container)
+	public void messageDialog(String message, Container container)
 	{
 		if(m_messageDialog == null || !m_messageDialog.isVisible())
 			m_messageDialog = new MessageDialog(message.replace('~', '\n'), container);
 	}
 
 	/** Reloads options */
-	public static void reloadOptions()
+	public void reloadOptions()
 	{
 		try
 		{
-			options = new Options();
+			GameClient.setOptions(new Options());
 		}
 		catch(Exception e)
 		{
@@ -456,7 +457,7 @@ public class GameClient extends BasicGame
 		}
 		catch(Exception e)
 		{
-			GameClient.messageDialog("The server is offline, please check back later.", GameClient.getInstance().getDisplay());
+			GameClient.getInstance().messageDialog("The server is offline, please check back later.", GameClient.getInstance().getDisplay());
 			m_loading.setVisible(false);
 		}
 	}
@@ -590,14 +591,14 @@ public class GameClient extends BasicGame
 		return m_login;
 	}
 
-	public static void enableKeyRepeat()
+	public void enableKeyRepeat()
 	{
-		gc.getInput().enableKeyRepeat();
+		gameContainer.getInput().enableKeyRepeat();
 	}
 
-	public static void disableKeyRepeat()
+	public void disableKeyRepeat()
 	{
-		gc.getInput().enableKeyRepeat();
+		gameContainer.getInput().enableKeyRepeat();
 	}
 
 	/**
@@ -678,7 +679,6 @@ public class GameClient extends BasicGame
 
 		LoadingList.setDeferredLoading(true);
 
-		m_instance = this;
 		gc.getGraphics().setWorldClip(-32, -32, 832, 832);
 		gc.setShowFPS(false); /* Toggle this to show FPS */
 		m_display = new Display(gc);
@@ -729,7 +729,7 @@ public class GameClient extends BasicGame
 		m_itemdb.reinitialise();
 
 		/* Move Learning Manager */
-		m_moveLearningManager = new MoveLearningManager();
+		m_moveLearningManager = MoveLearningManager.getInstance();
 		m_moveLearningManager.start();
 
 		/* The animator and map matrix */
@@ -803,7 +803,7 @@ public class GameClient extends BasicGame
 					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
 				}
-				if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
+				if(BattleManager.getInstance().isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 					BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 				else
@@ -1087,7 +1087,6 @@ public class GameClient extends BasicGame
 				m_ui.setAllVisible(false);
 				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start until you get the language select screen)");
 			}
-			// m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		}
 		else
 		{
@@ -1096,20 +1095,13 @@ public class GameClient extends BasicGame
 			{
 				synchronized(m_display)
 				{
-					try
-					{
-						m_display.update(gc, delta);
-					}
-					catch(Exception e)
-					{
-					}
+					m_display.update(gc, delta);
 				}
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
-
 			if(lastPressedKey > -2)
 			{
 				if(gc.getInput().isKeyDown(lastPressedKey))
@@ -1118,13 +1110,10 @@ public class GameClient extends BasicGame
 						&& lastPressedKey != KeyManager.getKey(Action.WALK_RIGHT))
 					lastPressedKey = -2;
 			}
-
 			/* Check if we need to loads maps */
-			if(m_isNewMap && m_loading.isVisible())
+			if(m_isNewMap && m_loading.isVisible() && m_ourPlayer != null)
 			{
 				m_mapMatrix.loadMaps(m_mapX, m_mapY, gc.getGraphics());
-				while(m_ourPlayer == null)
-					;
 				m_mapMatrix.getCurrentMap().setName(m_mapMatrix.getMapName(m_mapX, m_mapY));
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
 				m_mapMatrix.getCurrentMap().setYOffset(300 - m_ourPlayer.getY(), false);
@@ -1236,10 +1225,10 @@ public class GameClient extends BasicGame
 				getDisplay().remove(m_exitConfirm);
 				m_exitConfirm = null;
 			}
-		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.isBattling() && !m_isNewMap)
+		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !m_login.isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.getInstance().isBattling() && !m_isNewMap)
 			if(m_ourPlayer != null && !m_isNewMap
 			/* && m_loading != null && !m_loading.isVisible() */
-			&& !BattleManager.isBattling() && m_ourPlayer.canMove())
+			&& !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
@@ -1338,13 +1327,13 @@ public class GameClient extends BasicGame
 					message.addString("100");
 					m_session.send(message);
 				}
-		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(0);
-		if(key == KeyManager.getKey(Action.POKEMOVE_2) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_2) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(1);
-		if(key == KeyManager.getKey(Action.POKEMOVE_3) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_3) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(2);
-		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(3);
 		if(key == KeyManager.getKey(Action.INTERACTION) && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
 				&& !getDisplay().containsChild(getUi().getShop()))
@@ -1354,7 +1343,7 @@ public class GameClient extends BasicGame
 				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
 			}
-			if(BattleManager.isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
+			if(BattleManager.getInstance().isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
 					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 				BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 			else
@@ -1401,16 +1390,18 @@ public class GameClient extends BasicGame
 		Player.setSpriteFactory(new SpriteFactory(m_spriteImageArray));
 	}
 
-	public static Session getSession()
+	public Session getSession()
 	{
 		return m_session;
 	}
 
-	public static void setSession(Session session)
+	public void setSession(Session session)
 	{
 		m_session = session;
 	}
 
-	/** Slick Native library finder. */
-	/* static { String s = File.separator; // Modify this to point to the location of the native libraries. String newLibPath = System.getProperty("user.dir") + s + "lib" + s + "native"; System.setProperty("java.library.path", newLibPath); Field fieldSysPath = null; try { fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths"); } catch (SecurityException e) { e.printStackTrace(); } catch (NoSuchFieldException e) { e.printStackTrace(); } if (fieldSysPath != null) { try { fieldSysPath.setAccessible(true); fieldSysPath.set(System.class.getClassLoader(), null); } catch (IllegalArgumentException e) { e.printStackTrace(); } catch (IllegalAccessException e) { e.printStackTrace(); } } } */
+	private static void setOptions(Options opt)
+	{
+		options = opt;
+	}
 }

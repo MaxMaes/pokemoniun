@@ -219,7 +219,7 @@ public class BattleWindow extends Frame
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2C" + i);
 		ClientMessage message = new ClientMessage(ServerPacket.MOVE_SELECTED);
 		message.addInt(i);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
 	}
 
@@ -339,18 +339,18 @@ public class BattleWindow extends Frame
 		move4.add(move4Type);
 		move4.add(pp4);
 
-		pp1.setFont(GameClient.getFontSmall());
-		pp2.setFont(GameClient.getFontSmall());
-		pp3.setFont(GameClient.getFontSmall());
-		pp4.setFont(GameClient.getFontSmall());
+		pp1.setFont(GameClient.getInstance().getFontSmall());
+		pp2.setFont(GameClient.getInstance().getFontSmall());
+		pp3.setFont(GameClient.getInstance().getFontSmall());
+		pp4.setFont(GameClient.getInstance().getFontSmall());
 		pp1.setForeground(Color.white);
 		pp2.setForeground(Color.white);
 		pp3.setForeground(Color.white);
 		pp4.setForeground(Color.white);
-		move1Type.setFont(GameClient.getFontSmall());
-		move2Type.setFont(GameClient.getFontSmall());
-		move3Type.setFont(GameClient.getFontSmall());
-		move4Type.setFont(GameClient.getFontSmall());
+		move1Type.setFont(GameClient.getInstance().getFontSmall());
+		move2Type.setFont(GameClient.getInstance().getFontSmall());
+		move3Type.setFont(GameClient.getInstance().getFontSmall());
+		move4Type.setFont(GameClient.getInstance().getFontSmall());
 		move1Type.setForeground(Color.white);
 		move2Type.setForeground(Color.white);
 		move3Type.setForeground(Color.white);
@@ -510,7 +510,7 @@ public class BattleWindow extends Frame
 			info.setSize(107, 14);
 			info.setForeground(Color.white);
 			info.setGlassPane(true);
-			info.setFont(GameClient.getFontSmall());
+			info.setFont(GameClient.getInstance().getFontSmall());
 			m_pokeInfo.add(info);
 		}
 		pokeCancelBtn = BattleButtonFactory.getSmallButton("Cancel");
@@ -557,7 +557,7 @@ public class BattleWindow extends Frame
 	{
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2E");
 		ClientMessage message = new ClientMessage(ServerPacket.BATTLE_RUN);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 
 	/**
@@ -572,6 +572,6 @@ public class BattleWindow extends Frame
 		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2D" + i);
 		ClientMessage message = new ClientMessage(ServerPacket.SWITCH_POKEMON);
 		message.addInt(i);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 }

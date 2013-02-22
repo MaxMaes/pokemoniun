@@ -46,7 +46,7 @@ public class BattleCanvas extends Container
 	private ProgressBar playerXP, playerXPEND;
 
 	private Color xpColor = new Color(0, 150, 200);
-	//For the gender icon
+	// For the gender icon
 	private Image genderFemale;
 	private Image genderMale;
 	private Label enemyGender;
@@ -107,27 +107,30 @@ public class BattleCanvas extends Container
 	{
 		// display enemy's data
 		enemyNameLabel.setText(BattleManager.getInstance().getCurEnemyPoke().getName());
-		enemyNameLabel.setFont(GameClient.getFontSmall());
+		enemyNameLabel.setFont(GameClient.getInstance().getFontSmall());
 		enemyNameLabel.setForeground(Color.white);
-		enemyNameLabel.setSize(GameClient.getFontSmall().getWidth(enemyNameLabel.getText()), GameClient.getFontSmall().getHeight(enemyNameLabel.getText()));
+		enemyNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyNameLabel.getText()));
 		enemyNameLabel.setLocation(enemyDataBG.getX() + 15, enemyDataBG.getY() + 7);
-		
-		if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 2){
+
+		if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 2)
+		{
 			enemyGender.setImage(genderFemale);
-			enemyGender.setSize(14,14);
-			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
-			
-		}else if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 1){
+			enemyGender.setSize(14, 14);
+			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
+
+		}
+		else if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 1)
+		{
 			enemyGender.setImage(genderMale);
-			enemyGender.setSize(14,14);
-			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
-			
+			enemyGender.setSize(14, 14);
+			enemyGender.setLocation(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()) + 3, enemyNameLabel.getY());
+
 		}
 
 		enemyLv.setText("Lv: " + BattleManager.getInstance().getCurEnemyPoke().getLevel());
-		enemyLv.setFont(GameClient.getFontSmall());
+		enemyLv.setFont(GameClient.getInstance().getFontSmall());
 		enemyLv.setForeground(Color.white);
-		enemyLv.setSize(GameClient.getFontSmall().getWidth(enemyLv.getText()), GameClient.getFontSmall().getHeight(enemyLv.getText()));
+		enemyLv.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyLv.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyLv.getText()));
 		enemyLv.setLocation(enemyDataBG.getX() + enemyDataBG.getWidth() - enemyLv.getWidth() - 25, enemyDataBG.getY() + 7);
 
 		enemyStatus.setSize(30, 12);
@@ -173,29 +176,30 @@ public class BattleCanvas extends Container
 	public void drawOurInfo()
 	{
 		// display player's data
-		playerNameLabel.setFont(GameClient.getFontSmall());
+		playerNameLabel.setFont(GameClient.getInstance().getFontSmall());
 		playerNameLabel.setForeground(Color.white);
 		playerNameLabel.setText(BattleManager.getInstance().getCurPoke().getName());
-		playerNameLabel.setSize(GameClient.getFontSmall().getWidth(playerNameLabel.getText()), GameClient.getFontSmall().getHeight(playerNameLabel.getText()));
+		playerNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(playerNameLabel.getText()));
 		playerNameLabel.setLocation(playerDataBG.getX() + 30, playerDataBG.getY() + 7);
-		
-		if(BattleManager.getInstance().getCurPoke().getGender() == 2){
+
+		if(BattleManager.getInstance().getCurPoke().getGender() == 2)
+		{
 			playerGender.setImage(genderFemale);
-			playerGender.setSize(14,14);
-			playerGender.setLocation(playerNameLabel.getX() + GameClient.getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
-			
-		}else if(BattleManager.getInstance().getCurPoke().getGender() == 1){
-			playerGender.setImage(genderMale);
-			playerGender.setSize(14,14);
-			playerGender.setLocation(playerNameLabel.getX() + GameClient.getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
+			playerGender.setSize(14, 14);
+			playerGender.setLocation(playerNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
+
 		}
-		
-		
-		
+		else if(BattleManager.getInstance().getCurPoke().getGender() == 1)
+		{
+			playerGender.setImage(genderMale);
+			playerGender.setSize(14, 14);
+			playerGender.setLocation(playerNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()) + 3, playerNameLabel.getY());
+		}
+
 		playerLv.setText("Lv:" + BattleManager.getInstance().getCurPoke().getLevel());
-		playerLv.setFont(GameClient.getFontSmall());
+		playerLv.setFont(GameClient.getInstance().getFontSmall());
 		playerLv.setForeground(Color.white);
-		playerLv.setSize(GameClient.getFontSmall().getWidth(playerLv.getText()), GameClient.getFontSmall().getHeight(playerLv.getText()));
+		playerLv.setSize(GameClient.getInstance().getFontSmall().getWidth(playerLv.getText()), GameClient.getInstance().getFontSmall().getHeight(playerLv.getText()));
 		playerLv.setLocation(playerDataBG.getX() + playerDataBG.getWidth() - playerLv.getWidth() - 5, playerDataBG.getY() + 7);
 
 		playerStatus.setSize(30, 12);
@@ -354,7 +358,7 @@ public class BattleCanvas extends Container
 			// Gender Image Load
 			genderFemale = new Image(m_path + "female.png", false);
 			genderMale = new Image(m_path + "male.png", false);
-			
+
 		}
 		catch(SlickException e)
 		{
@@ -462,7 +466,7 @@ public class BattleCanvas extends Container
 				BattleManager.getInstance().getOurStatuses().put(BattleManager.getInstance().getCurPokeIndex(), status);
 				playerStatus.setImage(m_statusIcons.get(status));
 			}
-			else if (status.equalsIgnoreCase("normal"))
+			else if(status.equalsIgnoreCase("normal"))
 			{
 				BattleManager.getInstance().getOurStatuses().remove(BattleManager.getInstance().getCurPokeIndex());
 				playerStatus.setImage(null);
@@ -548,10 +552,9 @@ public class BattleCanvas extends Container
 	public void updateEnemyHP(int newValue)
 	{
 		boolean healing = false;
-		float currentHP = enemyHP.getValue();
+		int currentHP = (int) enemyHP.getValue();
 		if(newValue > currentHP)
 			healing = true;
-
 		while(currentHP != newValue)
 		{
 			while(mTimer.getTime() <= 0.05)
@@ -581,7 +584,7 @@ public class BattleCanvas extends Container
 	public void updatePlayerHP(int newValue)
 	{
 		boolean healing = false;
-		float currentHP = playerHP.getValue();
+		int currentHP = (int) playerHP.getValue();
 
 		if(newValue > currentHP)
 			healing = true;
@@ -635,12 +638,12 @@ public class BattleCanvas extends Container
 		playerNameLabel.setZIndex(8);
 		enemyNameLabel = new Label();
 		enemyNameLabel.setZIndex(8);
-		//Gender
+		// Gender
 		enemyGender = new Label();
 		enemyGender.setZIndex(6);
 		playerGender = new Label();
 		playerGender.setZIndex(6);
-		//End Gender
+		// End Gender
 		playerDataBG = new Label();
 		playerDataBG.setZIndex(2);
 		enemyDataBG = new Label();

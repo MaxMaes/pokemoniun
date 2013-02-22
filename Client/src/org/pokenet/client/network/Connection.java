@@ -38,7 +38,7 @@ public class Connection
 		}
 		catch(ChannelException ce)
 		{
-			System.out.println(ce.getStackTrace());
+			ce.printStackTrace();
 			return false;
 		}
 		return true;

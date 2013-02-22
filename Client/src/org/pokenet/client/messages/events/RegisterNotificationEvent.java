@@ -22,22 +22,22 @@ public class RegisterNotificationEvent implements MessageEvent
 		{
 			case 1:
 				// Account server offline
-				GameClient.messageDialog(translated.get(24), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(24), GameClient.getInstance().getDisplay());
 				break;
 			case 2:
-				GameClient.messageDialog(translated.get(25), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(25), GameClient.getInstance().getDisplay());
 				break;
 			case 3:
-				GameClient.messageDialog(translated.get(26), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(26), GameClient.getInstance().getDisplay());
 				break;
 			case 4:
-				GameClient.messageDialog(translated.get(27), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(27), GameClient.getInstance().getDisplay());
 				break;
 			case 5:
-				GameClient.messageDialog(translated.get(41), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(41), GameClient.getInstance().getDisplay());
 				break;
 			case 6:
-				GameClient.messageDialog("Email too long!", GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog("Email too long!", GameClient.getInstance().getDisplay());
 				break;
 		}
 		GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration();

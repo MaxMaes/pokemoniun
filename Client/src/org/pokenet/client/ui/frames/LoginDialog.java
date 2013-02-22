@@ -60,7 +60,7 @@ public class LoginDialog extends Frame
 		m_userLabel.pack();
 		m_userLabel.setLocation(m_username.getX() - m_userLabel.getWidth() - 24, 12);
 		m_userLabel.setVisible(true);
-		m_userLabel.setFont(GameClient.getFontSmall());
+		m_userLabel.setFont(GameClient.getInstance().getFontSmall());
 		m_userLabel.setForeground(m_white);
 		this.add(m_userLabel);
 
@@ -68,7 +68,7 @@ public class LoginDialog extends Frame
 		m_passLabel.pack();
 		m_passLabel.setLocation(m_userLabel.getX(), 40);
 		m_passLabel.setVisible(true);
-		m_passLabel.setFont(GameClient.getFontSmall());
+		m_passLabel.setFont(GameClient.getInstance().getFontSmall());
 		m_passLabel.setForeground(m_white);
 		this.add(m_passLabel);
 

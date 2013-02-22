@@ -12,6 +12,6 @@ public class ServerNotificationEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog(Request.readString(), GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog(Request.readString(), GameClient.getInstance().getDisplay());
 	}
 }

@@ -1,7 +1,5 @@
 package org.pokenet.client.ui.frames;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import mdes.slick.sui.Button;
 import mdes.slick.sui.CheckBox;
@@ -31,7 +29,7 @@ public class OptionsDialog extends Frame
 
 	public OptionsDialog()
 	{
-		m_options = GameClient.getOptions();
+		m_options = GameClient.getInstance().getOptions();
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
 		initGUI();
@@ -86,23 +84,23 @@ public class OptionsDialog extends Frame
 				{
 					List<String> translated = Translator.translate("_GUI");
 					/* options.remove("learnColor"); options.put("learnColor", learnColor.getColorHexLabel(). getText()); */
-					
+
 					m_options.setFullscreenEnabled(m_fullScreen.isSelected());
 					if(m_muteSound.isSelected())
 						m_options.setVolume(0);
 					else
 						m_options.setVolume(100);
-					GameClient.getSoundPlayer().mute(m_options.isSoundMuted());
-					
+					GameClient.getInstance().getSoundPlayer().mute(m_options.isSoundMuted());
+
 					m_options.setSurroundingMapsEnabled(!m_disableMaps.isSelected());
 					GameClient.getInstance().setLoadSurroundingMaps(m_options.isSurroundingMapsEnabled());
-					
+
 					m_options.setWeatherEnabled(!m_disableWeather.isSelected());
 					GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());
 
 					m_options.saveSettings();
-					GameClient.messageDialog(translated.get(19), getDisplay());
-					GameClient.reloadOptions();
+					GameClient.getInstance().messageDialog(translated.get(19), getDisplay());
+					GameClient.getInstance().reloadOptions();
 				}
 			});
 		}
@@ -115,7 +113,7 @@ public class OptionsDialog extends Frame
 	@Override
 	public void setVisible(boolean state)
 	{
-		m_options = GameClient.getOptions();
+		m_options = GameClient.getInstance().getOptions();
 		super.setVisible(state);
 	}
 }

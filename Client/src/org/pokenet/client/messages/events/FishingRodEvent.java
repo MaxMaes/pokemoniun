@@ -12,6 +12,6 @@ public class FishingRodEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog("You need to have a fishing level of " + Request.readInt() + " to use that rod!", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("You need to have a fishing level of " + Request.readInt() + " to use that rod!", GameClient.getInstance().getDisplay());
 	}
 }

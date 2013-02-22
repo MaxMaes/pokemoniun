@@ -79,7 +79,7 @@ public class HUDButtonFactory
 			rollovers.put("disconnect", getRolloverImage("disconnect"));
 			downs.put("disconnect", getDownImage("disconnect"));
 
-			font = GameClient.getFontSmall();
+			font = GameClient.getInstance().getFontSmall();
 			// LoadingList.setDeferredLoading(false);
 		}
 		catch(SlickException e)

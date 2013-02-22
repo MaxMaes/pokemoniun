@@ -45,7 +45,7 @@ public class NPCSpeechFrame extends SpeechFrame
 			GameClient.getInstance().getUi().nullSpeechFrame();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3D");
 			ClientMessage message = new ClientMessage(ServerPacket.TALKING_FINISH);
-			GameClient.getSession().send(message);
+			GameClient.getInstance().getSession().send(message);
 		}
 	}
 }

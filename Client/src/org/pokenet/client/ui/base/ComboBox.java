@@ -69,7 +69,7 @@ public class ComboBox extends Container
 	public void addElement(String element)
 	{
 		m_elements.add(element);
-		if(m_item.getText() == "")
+		if(m_item.getText().equals(""))
 			setSelected(element);
 	}
 

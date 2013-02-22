@@ -12,7 +12,7 @@ import org.pokenet.client.ui.base.Notification;
  */
 public class NotificationManager implements Runnable
 {
-	private static Queue<Notification> m_notifications;
+	private static Queue<Notification> m_notifications = new ConcurrentLinkedQueue<Notification>();;
 	@SuppressWarnings("unused")
 	private Display m_display;
 	private boolean m_isRunning;
@@ -61,7 +61,6 @@ public class NotificationManager implements Runnable
 	 */
 	public void start()
 	{
-		m_notifications = new ConcurrentLinkedQueue<Notification>();
 		m_isRunning = true;
 		m_thread = new Thread(this);
 		m_thread.start();

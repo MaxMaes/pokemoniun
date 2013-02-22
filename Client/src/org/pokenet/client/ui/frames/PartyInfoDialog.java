@@ -68,7 +68,7 @@ public class PartyInfoDialog extends Frame
 		InputStream f;
 		int y = -8;
 		getTitleBar().getCloseButton().setVisible(false);
-		setFont(GameClient.getFontSmall());
+		setFont(GameClient.getInstance().getFontSmall());
 		setBackground(new Color(0, 0, 0, 85));
 		setForeground(new Color(255, 255, 255));
 		/* Init damn pokemon count! (FabianPass Code) int pokemonCount = -1; for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
@@ -128,7 +128,7 @@ public class PartyInfoDialog extends Frame
 				m_container[i].add(m_pokeBall[i]);
 				m_pokeBall[i].setLocation(4, 4);
 				m_pokeBall[i].setZIndex(2);
-				m_pokeName[i].setFont(GameClient.getFontSmall());
+				m_pokeName[i].setFont(GameClient.getInstance().getFontSmall());
 				m_pokeName[i].setForeground(new Color(255, 255, 255));
 				m_pokeName[i].setZIndex(3);
 				m_pokeName[i].addMouseListener(new MouseAdapter()
@@ -164,7 +164,7 @@ public class PartyInfoDialog extends Frame
 				m_container[i].add(m_pokeName[i]);
 				m_pokeName[i].setLocation(42, 5);
 				m_container[i].add(m_level[i]);
-				m_level[i].setFont(GameClient.getFontSmall());
+				m_level[i].setFont(GameClient.getInstance().getFontSmall());
 				m_level[i].setForeground(new Color(255, 255, 255));
 				m_level[i].setLocation(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
 				m_level[i].setZIndex(4);
@@ -184,7 +184,7 @@ public class PartyInfoDialog extends Frame
 							ClientMessage message = new ClientMessage(ServerPacket.SWAP_PARTY);
 							message.addInt(j);
 							message.addInt(j - 1);
-							GameClient.getSession().send(message);
+							GameClient.getInstance().getSession().send(message);
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
 							// reinitialize the gui
 							getContentPane().removeAll();
@@ -208,7 +208,7 @@ public class PartyInfoDialog extends Frame
 							ClientMessage message = new ClientMessage(ServerPacket.SWAP_PARTY);
 							message.addInt(j);
 							message.addInt(j + 1);
-							GameClient.getSession().send(message);
+							GameClient.getInstance().getSession().send(message);
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
 							// reinitialize the gui
 							getContentPane().removeAll();

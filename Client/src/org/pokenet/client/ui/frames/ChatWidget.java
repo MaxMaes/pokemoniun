@@ -155,7 +155,7 @@ class ChatWidget extends Container
 		for(int i = 0; i < m_maxLines; i++)
 		{
 			m_shownChat.add(new Label());
-			m_shownChat.get(i).setFont(GameClient.getFontSmall());
+			m_shownChat.get(i).setFont(GameClient.getInstance().getFontSmall());
 			m_shownChat.get(i).setForeground(m_foreColor);
 			m_shownChat.get(i).setLocation(0, y);
 			try
@@ -185,7 +185,7 @@ class ChatWidget extends Container
 			}
 			m_shownChat.get(i).pack();
 			add(m_shownChat.get(i));
-			y += GameClient.getFontSmall().getHeight("X");
+			y += GameClient.getInstance().getFontSmall().getHeight("X");
 		}
 	}
 
@@ -220,7 +220,7 @@ class ChatWidget extends Container
 	public void setSize(float width, float height)
 	{
 		super.setSize(width, height);
-		m_maxLines = (int) (getHeight() / GameClient.getFontSmall().getHeight("X"));
+		m_maxLines = (int) (getHeight() / GameClient.getInstance().getFontSmall().getHeight("X"));
 		wrap();
 		layoutScrollButtons();
 		scroll(0);
@@ -238,7 +238,7 @@ class ChatWidget extends Container
 			for(int i = 0; i < m_contents.size(); i++)
 				try
 				{
-					if(GameClient.getFontSmall().getWidth(m_contents.get(i)) <= getWidth())
+					if(GameClient.getInstance().getFontSmall().getWidth(m_contents.get(i)) <= getWidth())
 						m_wrappedText.add(m_contents.get(i));
 					else
 					{
@@ -254,10 +254,10 @@ class ChatWidget extends Container
 						else if(loopLine.charAt(0) == '!' || !loopLine.contains('<' + GameClient.getInstance().getOurPlayer().getUsername() + '>')
 								&& loopLine.contains(GameClient.getInstance().getOurPlayer().getUsername()))
 							messageType = '!';
-						while(GameClient.getFontSmall().getWidth(loopLine) > getWidth())
+						while(GameClient.getInstance().getFontSmall().getWidth(loopLine) > getWidth())
 						{
 							int linesToDrop = 1;
-							while(GameClient.getFontSmall().getWidth(loopList.get(loopList.size() - 1)) > getWidth())
+							while(GameClient.getInstance().getFontSmall().getWidth(loopList.get(loopList.size() - 1)) > getWidth())
 							{
 								loopList.add(loopLine.substring(0, loopLine.length() - linesToDrop));
 								linesToDrop++;

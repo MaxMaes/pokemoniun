@@ -12,6 +12,6 @@ public class ShopNoMoneyEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog("You can't afford this item", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("You can't afford this item", GameClient.getInstance().getDisplay());
 	}
 }

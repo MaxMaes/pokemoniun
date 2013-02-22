@@ -107,7 +107,7 @@ public class SoundManager extends Thread
 		if(m_mute)
 			while(!m_tracksLoaded)
 				yield();
-		if(key != m_trackName && key != null)
+		if(key != null && !key.equalsIgnoreCase(m_trackName))
 		{
 			m_trackName = key;
 			m_trackChanged = true;
@@ -126,7 +126,7 @@ public class SoundManager extends Thread
 			String key = track;
 			if(key.contains("Route"))
 				key = "Route";
-			if(m_locations.get(key) != m_trackName && m_locations.get(key) != null)
+			if(!m_locations.get(key).equalsIgnoreCase(m_trackName) && m_locations.get(key) != null)
 			{
 				m_trackName = m_locations.get(key);
 				m_trackChanged = true;

@@ -37,7 +37,7 @@ public class ToSDialog extends Frame
 		m_info.setLocation(4, 4);
 		m_info.setWrapEnabled(true);
 		m_info.setText(translated.get(33));
-		m_info.setFont(GameClient.getFontSmall());
+		m_info.setFont(GameClient.getInstance().getFontSmall());
 		m_info.setBackground(m_bg);
 		m_info.setForeground(m_white);
 		this.add(m_info);

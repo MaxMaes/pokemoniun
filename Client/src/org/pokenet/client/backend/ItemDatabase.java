@@ -54,6 +54,8 @@ public class ItemDatabase
 	 */
 	public static ItemDatabase getInstance()
 	{
+		if(m_instance == null)
+			m_instance = new ItemDatabase();
 		return m_instance;
 	}
 
@@ -113,21 +115,11 @@ public class ItemDatabase
 				respath = "";
 			InputStream source = FileLoader.loadFile(respath + "res/items/items.xml");
 			m_instance = serializer.read(ItemDatabase.class, source);
-			GameClient.log("INFO: Items database loaded.");
+			GameClient.getInstance().log("INFO: Items database loaded.");
 		}
 		catch(Exception e)
 		{
-			GameClient.log("ERROR: Item database could not be loaded.");
+			GameClient.getInstance().log("ERROR: Item database could not be loaded.");
 		}
-	}
-
-	/**
-	 * Sets the instance
-	 * 
-	 * @param i
-	 */
-	public void setInstance(ItemDatabase instance)
-	{
-		m_instance = instance;
 	}
 }

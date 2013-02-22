@@ -12,6 +12,6 @@ public class FishingNoNibbleEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.messageDialog("Not even a nibble!", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("Not even a nibble!", GameClient.getInstance().getDisplay());
 	}
 }

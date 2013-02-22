@@ -192,7 +192,7 @@ public class MoveLearning extends Frame
 				ClientMessage message = new ClientMessage(ServerPacket.DONT_LEARN_MOVE);
 				message.addInt(m_pokeIndex);
 				message.addString(m_move);
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 			}
 		});
 		m_movePane.add(m_cancel);
@@ -259,7 +259,7 @@ public class MoveLearning extends Frame
 				message.addInt(m_pokeIndex);
 				message.addInt(i);
 				message.addString(m_move);
-				GameClient.getSession().send(message);
+				GameClient.getInstance().getSession().send(message);
 				MoveLearningManager.getInstance().removeMoveLearning();
 			}
 			else
@@ -279,7 +279,7 @@ public class MoveLearning extends Frame
 						message.addInt(m_pokeIndex);
 						message.addInt(j);
 						message.addString(m_move);
-						GameClient.getSession().send(message);
+						GameClient.getInstance().getSession().send(message);
 						GameClient.getInstance().getDisplay().remove(m_replace);
 						m_replace = null;
 						MoveLearningManager.getInstance().removeMoveLearning();

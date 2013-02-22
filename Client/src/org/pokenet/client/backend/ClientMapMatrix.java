@@ -283,7 +283,7 @@ public class ClientMapMatrix
 		{
 			try
 			{
-				BufferedReader reader = FileLoader.loadTextFile(respath + "res/language/" + GameClient.getLanguage() + "/NPC/" + mapX + "." + mapY + ".txt");
+				BufferedReader reader = FileLoader.loadTextFile(respath + "res/language/" + GameClient.getInstance().getLanguage() + "/NPC/" + mapX + "." + mapY + ".txt");
 				String line;
 				while((line = reader.readLine()) != null)
 					m_speech.add(line);
@@ -309,9 +309,13 @@ public class ClientMapMatrix
 		{
 			e.printStackTrace();
 		}
-		try {
+		try
+		{
 			Thread.sleep(100);
-		} catch(InterruptedException ex) { }
+		}
+		catch(InterruptedException ex)
+		{
+		}
 		recalibrate();
 	}
 
@@ -382,7 +386,7 @@ public class ClientMapMatrix
 			BufferedReader reader;
 			try
 			{
-				reader = FileLoader.loadTextFile(respath + "res/language/" + GameClient.getLanguage() + "/_MAPNAMES.txt");
+				reader = FileLoader.loadTextFile(respath + "res/language/" + GameClient.getInstance().getLanguage() + "/_MAPNAMES.txt");
 			}
 			catch(Exception e)
 			{
@@ -391,7 +395,7 @@ public class ClientMapMatrix
 
 			String f;
 			while((f = reader.readLine()) != null)
-				if(f.charAt(0) != '*' || f !="")
+				if(f.charAt(0) != '*' || !f.equals(""))
 				{
 					final String[] details = f.split(",");
 					try

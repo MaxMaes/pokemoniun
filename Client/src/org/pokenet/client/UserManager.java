@@ -23,7 +23,7 @@ public class UserManager
 	{
 		ClientMessage message = new ClientMessage(ServerPacket.CHANGE_PASSWORD);
 		message.addString(username + "," + getPasswordHash(username, newPassword) + "," + getPasswordHash(username, oldPassword));
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 
 	/**
@@ -35,26 +35,26 @@ public class UserManager
 	public void login(String username, String password)
 	{
 		char language = '0';
-		if(GameClient.getLanguage().equals(Language.ENGLISH))
+		if(GameClient.getInstance().getLanguage().equals(Language.ENGLISH))
 			language = '0';
-		else if(GameClient.getLanguage().equals(Language.PORTUGESE))
+		else if(GameClient.getInstance().getLanguage().equals(Language.PORTUGESE))
 			language = '1';
-		else if(GameClient.getLanguage().equals(Language.ITALIAN))
+		else if(GameClient.getInstance().getLanguage().equals(Language.ITALIAN))
 			language = '2';
-		else if(GameClient.getLanguage().equals(Language.FRENCH))
+		else if(GameClient.getInstance().getLanguage().equals(Language.FRENCH))
 			language = '3';
-		else if(GameClient.getLanguage().equals(Language.FINNISH))
+		else if(GameClient.getInstance().getLanguage().equals(Language.FINNISH))
 			language = '4';
-		else if(GameClient.getLanguage().equals(Language.SPANISH))
+		else if(GameClient.getInstance().getLanguage().equals(Language.SPANISH))
 			language = '5';
-		else if(GameClient.getLanguage().equals(Language.DUTCH))
+		else if(GameClient.getInstance().getLanguage().equals(Language.DUTCH))
 			language = '6';
-		else if(GameClient.getLanguage().equals(Language.GERMAN))
+		else if(GameClient.getInstance().getLanguage().equals(Language.GERMAN))
 			language = '7';
 
 		ClientMessage message = new ClientMessage(ServerPacket.LOGIN);
 		message.addString(language + username + "," + getPasswordHash(username, password));
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class UserManager
 		ClientMessage message = new ClientMessage(ServerPacket.REGISTRATION);
 		message.addInt(region);
 		message.addString(username + "," + getPasswordHash(username, password) + "," + email + "," + dob + "," + starter + "," + sprite);
-		GameClient.getSession().send(message);
+		GameClient.getInstance().getSession().send(message);
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class Translator
 			respath = "";
 		try
 		{
-			String path = respath + "res/language/" + GameClient.getLanguage() + "/UI/" + filename + ".txt";
+			String path = respath + "res/language/" + GameClient.getInstance().getLanguage() + "/UI/" + filename + ".txt";
 			InputStream in = new FileInputStream(path);
 			BufferedReader f = new BufferedReader(new InputStreamReader(in));
 			Scanner reader = new Scanner(f);
@@ -56,24 +56,23 @@ public class Translator
 		catch(FileNotFoundException fnfe)
 		{
 			// This should not happen anymore, but to be 9000% safe we keep it.
-			GameClient.log("INFO: This language is not available yet, reverting to English!");
+			GameClient.getInstance().log("INFO: This language is not available yet, reverting to English!");
 			GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
 		finally
 		{
-			InputStream in = null;
 			try
 			{
-				in = new FileInputStream(respath + "res/language/" + GameClient.getLanguage() + "/UI/" + filename + ".txt");
+				InputStream in = new FileInputStream(respath + "res/language/" + GameClient.getInstance().getLanguage() + "/UI/" + filename + ".txt");
+				BufferedReader f = new BufferedReader(new InputStreamReader(in));
+				Scanner reader = new Scanner(f);
+				while(reader.hasNextLine())
+					translated.add(reader.nextLine().replaceAll("/n", "\n"));
 			}
 			catch(FileNotFoundException fnfe)
 			{
 				fnfe.printStackTrace();
 			}
-			BufferedReader f = new BufferedReader(new InputStreamReader(in));
-			Scanner reader = new Scanner(f);
-			while(reader.hasNextLine())
-				translated.add(reader.nextLine().replaceAll("/n", "\n"));
 		}
 		return translated;
 	}

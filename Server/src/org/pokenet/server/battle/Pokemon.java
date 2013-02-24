@@ -1400,10 +1400,10 @@ public class Pokemon extends PokemonSpecies
 	 */
 	public StatMultiplier getMultiplier(int i) throws StatException
 	{
+		if(m_multiplier == null)
+			m_multiplier = new StatMultiplier[m_stat.length];
 		if(i < m_multiplier.length)
 		{
-			if(m_multiplier == null)
-				m_multiplier = new StatMultiplier[m_stat.length];
 			if(m_multiplier[i] == null)
 				m_multiplier[i] = new StatMultiplier(false);
 			if(i < 0)

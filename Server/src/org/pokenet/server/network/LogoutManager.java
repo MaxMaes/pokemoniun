@@ -68,9 +68,10 @@ public class LogoutManager implements Runnable
 				if(m_logoutQueue.peek() != null)
 				{
 					Player player = m_logoutQueue.poll();
-					synchronized(player)
+					if(player != null)
 					{
-						if(player != null)
+						synchronized(player)
+						{
 							if(!attemptLogout(player))
 								m_logoutQueue.add(player);
 							else
@@ -79,6 +80,7 @@ public class LogoutManager implements Runnable
 								System.out.println("INFO: " + player.getName() + " logged out.");
 								player = null;
 							}
+						}
 					}
 				}
 			}

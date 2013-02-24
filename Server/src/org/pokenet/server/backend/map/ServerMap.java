@@ -43,7 +43,7 @@ public class ServerMap
 	private Weather m_forcedWeather = null;
 	private ServerTileLayer m_grass = null;
 	private int m_heigth;
-	private ArrayList<MapItem> m_items;
+	private ArrayList<MapItem> m_items = new ArrayList<MapItem>();
 	private ServerTileLayer m_ledgesDown = null;
 	private ServerTileLayer m_ledgesLeft = null;
 	private ServerTileLayer m_ledgesRight = null;

@@ -14,9 +14,9 @@ import java.io.InputStreamReader;
 public class ConsoleReader
 {
 
-	static String buffer = "";
+	private  String buffer = "";
 
-	static int p = 1; // buffer[p..] contains next input
+	private int p = 1; // buffer[p..] contains next input
 	private BufferedReader br; // the input stream
 
 	/**

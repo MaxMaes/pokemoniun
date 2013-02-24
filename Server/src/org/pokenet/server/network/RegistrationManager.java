@@ -40,18 +40,9 @@ public class RegistrationManager implements Runnable
 	 * @param session
 	 * @param packet
 	 */
-	/* public void queueRegistration(IoSession session, String packet)
-	 * {
-	 * if(m_thread == null || !m_thread.isAlive())
-	 * start();
-	 * if(!m_queue.contains(session))
-	 * {
-	 * session.setAttribute("reg", packet);
-	 * m_queue.offer(session);
-	 * }
-	 * session.suspendRead();
-	 * session.suspendWrite();
-	 * } */
+	/*
+	 * public void queueRegistration(IoSession session, String packet) { if(m_thread == null || !m_thread.isAlive()) start(); if(!m_queue.contains(session)) { session.setAttribute("reg", packet); m_queue.offer(session); } session.suspendRead(); session.suspendWrite(); }
+	 */
 
 	/**
 	 * Registers a new player
@@ -93,54 +84,61 @@ public class RegistrationManager implements Runnable
 		int s = Integer.parseInt(info[4]);
 		// Check if the username is already taken.
 		ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
-		data.first();
-		try
+		if(data != null)
 		{
-			if(data != null && data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0])))
+			data.first();
+			try
 			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r2");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(2);
-				session.Send(message);
-				return;
+				if(data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0])))
+				{
+					// session.resumeRead();
+					// session.resumeWrite();
+					// session.write("r2");
+					ServerMessage message = new ServerMessage();
+					message.init(87);
+					message.addInt(2);
+					session.Send(message);
+					return;
+				}
 			}
-		}
-		catch(Exception e)
-		{
+			catch(Exception e)
+			{
+			}
 		}
 		// Check if an account is already registered with the specified email address.
 		data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
-		data.first();
-		try
+		if(data != null)
 		{
-			if(data != null && data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2])))
+			data.first();
+			try
 			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r5");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(5);
-				session.Send(message);
-				return;
+				if(data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2])))
+				{
+					// session.resumeRead();
+					// session.resumeWrite();
+					// session.write("r5");
+					ServerMessage message = new ServerMessage();
+					message.init(87);
+					message.addInt(5);
+					session.Send(message);
+					return;
+				}
+				if(info[2].length() > 52)
+				{
+					// session.resumeRead();
+					// session.resumeWrite();
+					// session.write("r6");
+					ServerMessage message = new ServerMessage();
+					message.init(87);
+					message.addInt(6);
+					session.Send(message);
+					return;
+				}
 			}
-			if(info[2].length() > 52)
+
+			catch(Exception e)
 			{
-				// session.resumeRead();
-				// session.resumeWrite();
-				// session.write("r6");
-				ServerMessage message = new ServerMessage();
-				message.init(87);
-				message.addInt(6);
-				session.Send(message);
-				return;
 			}
-		}
-		catch(Exception e)
-		{
 		}
 		// Check if user is not trying to register their starter as a non-starter Pokemon.
 		if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258 || s == 387 || s == 390 || s == 393))

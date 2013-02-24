@@ -43,9 +43,14 @@ public class Character implements Positionable
 	 * @param c
 	 * @return
 	 */
-	public boolean equals(Character c)
+	public boolean equals(Object o)
 	{
-		return (m_id == c.getId()) ? true : false;
+		if(o instanceof Character)
+		{
+			Character c = (Character) o;
+			return (m_id == c.getId()) ? true : false;
+		}
+		return false;
 	}
 
 	/**

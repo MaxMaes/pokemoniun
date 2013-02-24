@@ -76,13 +76,10 @@ public class PokemonNature implements Serializable
 		while(i.hasNext())
 		{
 			PokemonNature nature = i.next();
-			if(name.equals(name))
-			{
-				m_name = name;
-				m_benefits = nature.m_benefits;
-				m_harms = nature.m_harms;
-				break;
-			}
+			m_name = name;
+			m_benefits = nature.m_benefits;
+			m_harms = nature.m_harms;
+			break;
 		}
 	}
 

@@ -383,10 +383,11 @@ public class PvPBattleField extends BattleField
 	{
 		int pokeIndex = getPokemonPartyIndex(trainer, poke);
 		// Check if the enemy of the player switching has seen this pokemon before, if not, update the pokedex
-		if(!m_players[trainer].isPokemonSeen(poke.getSpeciesNumber() + 1))
-			m_players[trainer].setPokemonSeen(poke.getSpeciesNumber() + 1);
-
 		if(m_players != null)
+		{
+			if(!m_players[trainer].isPokemonSeen(poke.getSpeciesNumber() + 1))
+				m_players[trainer].setPokemonSeen(poke.getSpeciesNumber() + 1);
+
 			if(trainer == 0)
 			{
 				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new SwitchMessage(m_players[0].getName(), poke.getSpeciesName(), 0, pokeIndex)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new SwitchMessage(m_players[0].getName(), poke.getSpeciesName(), 1, pokeIndex)); */
@@ -505,6 +506,7 @@ public class PvPBattleField extends BattleField
 
 				poke.removeStatusEffects(false);
 			}
+		}
 	}
 
 	@Override
@@ -827,9 +829,9 @@ public class PvPBattleField extends BattleField
 	protected void requestPokemonReplacement(int i)
 	{
 		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
-//		ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
-//		switchOccur.init(32);
-//		switchOccur.sendResponse();
+		// ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
+		// switchOccur.init(32);
+		// switchOccur.sendResponse();
 	}
 
 	/**

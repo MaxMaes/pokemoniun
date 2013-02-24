@@ -21,6 +21,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.network.MySqlManager;
+import com.sun.corba.se.impl.oa.poa.AOMEntry;
 
 /**
  * Represents a game server. Starting a server requires a parameter to be passed in, i.e. java GameServer -s low -p 500 Here are the different settings: -low < 1.86ghz < 256MB Ram < 1mbps Up/Down Connection 75 Players -medium < 2ghz 512MB - 1GB Ram 1mbps Up/Down Connection 200 Players -high > 1.86ghz > 1GB Ram > 1mbps Up/Down Connection > 500 Players
@@ -51,7 +52,6 @@ public class GameServer
 	/** Default constructor. */
 	public GameServer(boolean autorun)
 	{
-		m_instance = this;
 		if(autorun)
 		{
 			if(m_boolGui)
@@ -152,6 +152,15 @@ public class GameServer
 	{
 		return m_instance;
 	}
+	
+	/**
+	 * Initializes the gameserver object
+	 */
+	public static void initGameServer(boolean autorun)
+	{
+		m_instance = new GameServer(autorun);
+	}
+	
 
 	/**
 	 * Returns the amount of players this server will allow.
@@ -244,7 +253,7 @@ public class GameServer
 					m_boolGui = true;
 				// No else since it's set to default 'false'
 				boolean autorun = line.hasOption("autorun");
-				new GameServer(autorun);
+				GameServer.initGameServer(autorun);
 			}
 			catch(ParseException exp)
 			{

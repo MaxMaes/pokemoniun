@@ -88,7 +88,7 @@ public class MovementService
 						for(Player p : players.values())
 						{
 							p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
-							p.setMap(m_tempMap, null);
+							p.setMap(m_mapMatrix.getMapByRealPosition(x, y), null);
 						}
 					}
 		}

@@ -1,18 +1,6 @@
-/* StatusEffect.java
- * Created on December 16, 2006, 9:43 AM
- * This file is a part of Shoddy Battle.
- * Copyright (C) 2006 Colin Fitzpatrick
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, visit the Free Software Foundation, Inc.
- * online at http://gnu.org. */
+/*
+ * StatusEffect.java Created on December 16, 2006, 9:43 AM This file is a part of Shoddy Battle. Copyright (C) 2006 Colin Fitzpatrick This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, visit the Free Software Foundation, Inc. online at http://gnu.org.
+ */
 
 package org.pokenet.server.battle.mechanics.statuses;
 
@@ -30,9 +18,7 @@ public abstract class StatusEffect implements Cloneable
 {
 
 	/**
-	 * A pokemon can have only one of freeze, burn, sleep, paralysis, and
-	 * poison, so we protect against this by giving this class of effects
-	 * a designated lock called SPECIAL_EFFECT_LOCK.
+	 * A pokemon can have only one of freeze, burn, sleep, paralysis, and poison, so we protect against this by giving this class of effects a designated lock called SPECIAL_EFFECT_LOCK.
 	 */
 	public static final int SPECIAL_EFFECT_LOCK = 1;
 
@@ -51,8 +37,7 @@ public abstract class StatusEffect implements Cloneable
 	private int m_state = STATE_ACTIVE;
 
 	/**
-	 * Return the total number of tiers. There will be six tiers eventually.
-	 * This could also differ based on the mechanics used.
+	 * Return the total number of tiers. There will be six tiers eventually. This could also differ based on the mechanics used.
 	 */
 	public static final int getTierCount()
 	{
@@ -69,8 +54,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Does this effect allow the application of the given status effect to
-	 * a particular pokemon? This is called on the target pokemon.
+	 * Does this effect allow the application of the given status effect to a particular pokemon? This is called on the target pokemon.
 	 */
 	public boolean allowsStatus(StatusEffect eff, Pokemon source, Pokemon target)
 	{
@@ -78,8 +62,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Applies the initial effects of the status to a pokemon but does not add
-	 * the status to the list of statuses the pokemon has.
+	 * Applies the initial effects of the status to a pokemon but does not add the status to the list of statuses the pokemon has.
 	 */
 	public boolean apply(Pokemon p)
 	{
@@ -153,8 +136,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Disable this status effect (i.e. mark it as removable). This cannot
-	 * be undone.
+	 * Disable this status effect (i.e. mark it as removable). This cannot be undone.
 	 */
 	public final void disable()
 	{
@@ -167,17 +149,19 @@ public abstract class StatusEffect implements Cloneable
 	@Override
 	public boolean equals(Object eff)
 	{
-		if(!getClass().equals(eff.getClass()))
-			// If they are different types of status effects then they are
-			// not equal.
-			return false;
-		// Otherwise they might be.
+		if(eff != null)
+		{
+			if(!getClass().equals(eff.getClass()))
+				// If they are different types of status effects then they are
+				// not equal.
+				return false;
+			// Otherwise they might be.
+		}
 		return isSingleton();
 	}
 
 	/**
-	 * This method is called when the pokemon to whom the status effect is
-	 * applied is just about to execute his turn.
+	 * This method is called when the pokemon to whom the status effect is applied is just about to execute his turn.
 	 */
 	public void executeTurn(Pokemon p, BattleTurn turn)
 	{
@@ -225,8 +209,7 @@ public abstract class StatusEffect implements Cloneable
 	/**
 	 * Transform a move based on this status effect.
 	 * 
-	 * @param move the move to transform; the method is free to modify it
-	 *        although it may also return a new MoveListEntry
+	 * @param move the move to transform; the method is free to modify it although it may also return a new MoveListEntry
 	 * @param enemy whether the Pokemon p is an enemy
 	 * @return the transformed move
 	 */
@@ -254,8 +237,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Return whether this status effect can apply statuses through a
-	 * substitute.
+	 * Return whether this status effect can apply statuses through a substitute.
 	 */
 	public boolean hitsThroughSubstitute()
 	{
@@ -349,8 +331,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Determine whether this effect is a singleton -- i.e., whether only
-	 * a single copy of it can be present on a pokemon.
+	 * Determine whether this effect is a singleton -- i.e., whether only a single copy of it can be present on a pokemon.
 	 */
 	public boolean isSingleton()
 	{
@@ -374,8 +355,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Called when a pokemon with this status effect switches out.
-	 * Returns true if the status effect should be removed.
+	 * Called when a pokemon with this status effect switches out. Returns true if the status effect should be removed.
 	 */
 	public boolean switchOut(Pokemon p)
 	{
@@ -383,8 +363,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Called each turn that this status effect is applied to a pokemon.
-	 * Returns whether the status was removed.
+	 * Called each turn that this status effect is applied to a pokemon. Returns whether the status was removed.
 	 */
 	public boolean tick(Pokemon p)
 	{
@@ -400,8 +379,7 @@ public abstract class StatusEffect implements Cloneable
 	}
 
 	/**
-	 * Returns whether this status effect vetoes the choice of a particular
-	 * move.
+	 * Returns whether this status effect vetoes the choice of a particular move.
 	 */
 	public boolean vetoesMove(Pokemon p, MoveListEntry entry)
 	{

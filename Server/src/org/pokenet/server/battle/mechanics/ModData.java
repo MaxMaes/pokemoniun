@@ -166,8 +166,8 @@ public class ModData
 	public static void setStorageLocation(String value)
 	{
 		Preferences prefs = Preferences.userRoot();
-		value.replace('/', File.separatorChar);
-		value.replace('\\', File.separatorChar);
+		//value.replace('/', File.separatorChar);
+		//value.replace('\\', File.separatorChar);
 		if(!value.endsWith(File.separator))
 			value += File.separator;
 		prefs.put(REGISTRY_KEY, value);

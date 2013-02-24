@@ -84,8 +84,7 @@ public class MovementManager implements Runnable
 	}
 
 	/**
-	 * Removes a player from this movement service, returns true if the player was in the thread and was removed.
-	 * Otherwise, returns false.
+	 * Removes a player from this movement service, returns true if the player was in the thread and was removed. Otherwise, returns false.
 	 * 
 	 * @param player
 	 */
@@ -148,13 +147,16 @@ public class MovementManager implements Runnable
 					m_moved.offer(tmp);
 				}
 			}
-			/* If waiting array is empty, swap arrays */
-			synchronized(m_waiting)
+			if(m_waiting != null)
 			{
-				if(m_waiting.isEmpty())
+				/* If waiting array is empty, swap arrays */
+				synchronized(m_waiting)
 				{
-					m_waiting = m_moved;
-					m_moved = new PriorityQueue<Character>(1, m_comp);
+					if(m_waiting.isEmpty())
+					{
+						m_waiting = m_moved;
+						m_moved = new PriorityQueue<Character>(1, m_comp);
+					}
 				}
 			}
 			try

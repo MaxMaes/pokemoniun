@@ -42,11 +42,11 @@ public class DataService
 		{
 			Persister stream = new Persister();
 			/* Load all of shoddy's databases */
-			m_moveList = new MoveList(true);
-			m_moveSetData = new MoveSetData();
+			m_moveList = DataService.getMovesList();
+			m_moveSetData =  DataService.getMoveSetData();
 			m_speciesData = new PokemonSpeciesData();
-			m_mechanics = new JewelMechanics(5);
-			m_fishingData = new FishDatabase();
+			m_mechanics = DataService.getBattleMechanics();
+			m_fishingData = DataService.getFishDatabase();
 			m_fishingData.reinitialise();
 			JewelMechanics.loadMoveTypes("res/movetypes.txt");
 			File f = new File(".");
@@ -83,6 +83,8 @@ public class DataService
 	 */
 	public static JewelMechanics getBattleMechanics()
 	{
+		if(m_mechanics == null)
+			m_mechanics = new JewelMechanics(5);
 		return m_mechanics;
 	}
 
@@ -93,6 +95,8 @@ public class DataService
 	 */
 	public static FishDatabase getFishDatabase()
 	{
+		if(m_fishingData == null)
+			m_fishingData = new FishDatabase();
 		return m_fishingData;
 	}
 
@@ -103,6 +107,8 @@ public class DataService
 	 */
 	public static MoveSetData getMoveSetData()
 	{
+		if(m_moveSetData == null)
+			m_moveSetData = new MoveSetData();
 		return m_moveSetData;
 	}
 
@@ -113,6 +119,8 @@ public class DataService
 	 */
 	public static MoveList getMovesList()
 	{
+		if(m_moveList == null)
+			m_moveList = new MoveList(true);
 		return m_moveList;
 	}
 

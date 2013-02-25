@@ -109,6 +109,7 @@ public class GameClient extends BasicGame
 	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
 	private MessageDialog m_messageDialog; // We only want 1 messagedialog, don't we?
+	private static boolean started = false;
 
 	/**
 	 * Default constructor
@@ -272,7 +273,7 @@ public class GameClient extends BasicGame
 	{
 		GameClient.getInstance().initClient();
 		/* Pipe errors to a file */
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 		Date now = new Date(System.currentTimeMillis());
 		try
 		{
@@ -313,6 +314,7 @@ public class GameClient extends BasicGame
 			if(!fullscreen)
 				gameContainer.setAlwaysRender(true);
 			gameContainer.start();
+			started = true;
 		}
 		catch(Exception e)
 		{
@@ -460,49 +462,52 @@ public class GameClient extends BasicGame
 			m_loading.setVisible(false);
 		}
 	}
-
 	@Override
 	public void controllerDownPressed(int controller)
 	{
-		if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
-			if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
-				if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
-					move(Direction.Down);
-				else if(m_ourPlayer.getDirection() != Direction.Down)
-					move(Direction.Down);
+		if(started)
+			if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
+				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
+						move(Direction.Down);
+					else if(m_ourPlayer.getDirection() != Direction.Down)
+						move(Direction.Down);
 	}
 
 	@Override
 	public void controllerLeftPressed(int controller)
 	{
-		if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
-			if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
-				if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
-					move(Direction.Left);
-				else if(m_ourPlayer.getDirection() != Direction.Left)
-					move(Direction.Left);
+		if(started)
+			if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
+				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
+						move(Direction.Left);
+					else if(m_ourPlayer.getDirection() != Direction.Left)
+						move(Direction.Left);
 	}
 
 	@Override
 	public void controllerRightPressed(int controller)
 	{
-		if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
-			if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
-				if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
-					move(Direction.Right);
-				else if(m_ourPlayer.getDirection() != Direction.Right)
-					move(Direction.Right);
+		if(started)
+			if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
+				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
+						move(Direction.Right);
+					else if(m_ourPlayer.getDirection() != Direction.Right)
+						move(Direction.Right);
 	}
 
 	@Override
 	public void controllerUpPressed(int controller)
 	{
-		if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
-			if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
-				if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
-					move(Direction.Up);
-				else if(m_ourPlayer.getDirection() != Direction.Up)
-					move(Direction.Up);
+		if(started)
+			if(m_ui.getNPCSpeech() == null && !m_login.isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(m_playerDialog))
+				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
+					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
+						move(Direction.Up);
+					else if(m_ourPlayer.getDirection() != Direction.Up)
+						move(Direction.Up);
 	}
 
 	/** Disconnects from the current game/chat server */
@@ -867,7 +872,7 @@ public class GameClient extends BasicGame
 				g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
 						m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
 				g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
-				g.drawString("Loading,  please wait ... " + percentage.format(bar * 100) + "%", 10, gc.getHeight() - 90);
+				g.drawString("Loading,  please wait ... ", 10, gc.getHeight() - 90);
 				if(LoadingList.get().getRemainingResources() < 1)
 				{
 					m_started = true;

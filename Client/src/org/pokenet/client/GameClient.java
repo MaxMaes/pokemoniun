@@ -64,7 +64,6 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
  * @author ZombieBear
  * @author Nushio
  */
-@SuppressWarnings("unchecked")
 public class GameClient extends BasicGame
 {
 	private Session m_session;

@@ -273,7 +273,7 @@ public class GameClient extends BasicGame
 	{
 		GameClient.getInstance().initClient();
 		/* Pipe errors to a file */
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		Date now = new Date(System.currentTimeMillis());
 		try
 		{

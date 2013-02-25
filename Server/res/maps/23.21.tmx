@@ -35,7 +35,7 @@
  </layer>
  <layer name="LedgesDown" width="83" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VsQkAIAwAwZD953IT90gnmCqFYHMHP8NHAADwws47APih/2jS8i0AADgKpU02HzwbAAA=
+   H4sIAAAAAAAAC+3PQQ0AIAwEwfNQ3RTLiOABTWaSFbAJAAAAMNmqpC/b9foCAAD+cACu14rSPBsAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="83" height="21">
@@ -45,17 +45,17 @@
  </layer>
  <layer name="LedgesLeft" width="83" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VUQnAMBAFwVD/PiqlQlIhNZCfwkIgzCg4lgc3BpznvnZfcI5Hy4yWHS07WnbeRcupb8ZWO1p2tOxo2Vn9IwAA4J8P7ZPHSzwbAAA=
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdP7ewBFAAAAAAAAHADosd1cDwbAAA=
   </data>
  </layer>
  <layer name="Collisions" width="83" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82YTU7DMBSEKyQkygKpaXsC2MEOiZ6Anw2CDYLTwRYOwj2KUDdulqFLhK3WynT6HP+lJCM9OXXcJP4yz479OhoM3nS89rQ0UsU6llDycR/iXT/vx6i/JbOsdCyE47bjW8cPhe9eOX7xqS1vKuK2b28ajiuhvvJwzfGLT215k/NbRfQvlSP7kq9dCfU5vrM6PJHrbGAbLGN8iQxduS31LzanrR/LYrs/+M7wHnjPHN8xN2bFjPl3qC8tO3zuptzmfjfxZYb4u0mcD6pI86GLp8TL15bbX08GgxsdtzruJnU9j5ESL1csGtrzuMh+9OlyWj+Pz4dtsEZeEj+sv9/we9DlI7Dk+fvX9nm8zcz0jcUeluZoZIvnjUKv75JlmJLzRp8H9bE0BrBsm6cNv2ddvky226C3jsbruuPxrveM2JOY4yXwkt4J5/ep5nc23c1rKx9LyzBnTrI82Zco35hwNQw7rxx9sRwVsbQ8pXfCOtccL6bueS7Wlyn+dLGcDevjmHG2SZWDgxF/n5YQ0nUw542axmEVwNLly1SfusbIpvOxqqDvUg6qAJYxUoEsrXzfKzNPDnYlJbC0nlt1xNKltr6l9iWJJa9t2maZyiR1fk9V7FjjYolr7bKIv+5c/+cLAln+N5NUxe4P4DyL8wl+P64K/3WZnQmJp7Qe75ty96+ktWaIH3kvYEkM8Xrsy776M3f/Slo7hviR96jmAkNmu499yyZ1vU+fsneK3uP8ztm/zFXX+/SxJa6bJG9idP3e+14a8bePK/4AOSAp8zwbAAA=
+   H4sIAAAAAAAAC82YTU7DMBCFIyQkygKpaXsC2MEOiZ6Anw2CDYLTwRYOwj2KUDdulqFLhK3W6vR1xh7HKcmTRm4Tx4m/vIl/XodF8WbjtaelkylXsSAl/u5DvNvn/Rj2t0SWtY0587vt+LbxAxG7V45fUIcnq/Bqy5sGuO3bm47jkjleR7jm+IXjSFm25U3Mb5PQv6Yc0ZfYds0cT/GdJMpPYsuVKb6kDKXc5vqXmtPej1W53R/6zug96D21voux5FghY/yv9aVnR587lNvY7xBfZEj/h4T5YMpmPpR4crxidbH+9bgobmzc2rgbb47jN5LjJcU8UB+/i+jHmC4nm+eJ+VDDOsSGno/VcXG/5vdgy0fCEsfvX9/n0TYz1zcUepgboylbet5J274kz1Cb88jo84A/J/nW13la83u25ct4uw711tFodex4tOs9J/QkzfGK8OLeCeb3qeV3NtnNa68YS89QOyZxfvM80Zd4XUhXA915I/TFczTA0vPk3gnq3HK8mMjjXKovNf6UvIksp4Pd+prvbEi1wMEJ56cVCa4dmvNOoe+wUbCUfBnyaYiH5juaq5r0nctBo2CZIqNk6RWbr0wjOdiVDMPSe27ZEUtJbc2l9iWOJa5t2mbZlEmTOX2OUvcHJJZ0rV2V6e3O7DVfJCjL/2bSVKn7A3ScpeMJnT8uy3i7yM4Fx5Nbj/dNuftX3FpT40fcC1gAQ9oe+rKv/szdv+LWjho/4h7VjGGIbNvYt0xR1/v0TfZOqfcwv3P2L3PV9T59aknXTZw3aXT93vteOuHcR4o/9C6F6TwbAAA=
   </data>
  </layer>
  <layer name="Walkable" width="83" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UMQqAMAxFXR1FvZajFxPcCh5VOoihVAhtrN/2v7GUkCbvt+uwOYavO6iLnfM0g27aQS/toJdEsgkfmLM83HDPsNWcLbNNHe9lOMMSfq6T7l4/xs+t3m+J9PKiRj+fdmJJzMuQ2v9RK8edYk5oniLmm6SDnNVN0RtS/2hZlfzxr/Eg7VfjY4im/5S6KSDtV+NjiKb/lLpvkONtKR/+Qo63KD4Q0hInI8RwgjwbAAA=
+   H4sIAAAAAAAAC+2UMQqAMAxFXR1FvZajFyu4CR5VOhRDqRDar6b1v7FIGn9e2nW2OYavO2iLjXnCoJs46CUOekkkTvjAPStjH64M/7pny4yp472MM3zDz3XSfdeP6XPU/yORXgZa9PNuJkhSXsa0/o6iHN8VOVnz9Mv9bt2rNwleWc7UKXqz1L+1XZXU+NZ4LM1X42OMpv+cujl3W5qvxscYTf85dVF3S0q8fcqHWinx9ikfCCH3nKCZ95U8GwAA
   </data>
  </layer>
  <layer name="Collisions" width="83" height="21">
@@ -65,7 +65,7 @@
  </layer>
  <layer name="WalkBehind" width="83" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZTQrCMBCFu+3CheI57E08mC6j7gQv6VrrYjCETJjfBJJ+UFrakgyvr28aOk0brXnsW1fQD69NSzIc3713+XOwxfek+xHg+A7TLNVrFP0wH17W81eCrhy/lfTugdSHoOFt3e7KbIz1wvTrVdeQ0ZDqTwDTD9Mrvud8pM3xOdDracUzo5nEnzn9uBl6mnXXKXg+k1DQDPxJ8Smm5TL/j3vv6zlfAuBPrk+xjCxdH43F4B3rBW5P+RFnQK21ZJotnKypNa6kp8QZUGstmWaLNGtiQmE82Eu8on2+XlDrktRf6guAxCsW3+QeUOvyql+TYV65RB1fO591vZoM88glzvja+azr9eytXF9Z+6Q2nr2V6ytrn9Rm+39gB8eXX+HFMpw8GwAA
+   H4sIAAAAAAAAC+2WwQrCMAyGd93Bg+JzuDfxwfQ49Sb4kp51IoWSJWnSNBu0+2CMdaULf//9TddtrM1jPx977/7Xho4X0DLouGk5B/MdBaYf1Ja6twD0HQelGdSrFf0oH16m8atAV43fOL1rAPowaHibrntCy5Q28Rg3p0ZdR0TDlD+hFpR+lF7xnPNRVufnIJu3Jk9Es5Q/uXykNMaeIafe9l6C556MjGbBn5hPKW/CsaGfz6/x//6B+TIQ/In5lNNDkqOtMxT4x2pB2vPExBmg6ektwGzhsmatdSU9DyTOAE1PbwFmC5c1UkZmvXDP8Yp1f72Q1pVTP3cuBHK8YtlfT6R1edVvyTCvXJKub/1e6XotGeaRS5r1rd8rXa/n2ar1VWmfLI3n2ar1VWmfLM1SPV8LaHz5BcSsB+48GwAA
   </data>
  </layer>
 </map>

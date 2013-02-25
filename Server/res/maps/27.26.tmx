@@ -19,7 +19,7 @@
  <tileset firstgid="3377" source="Hoenn Set 6.tsx"/>
  <layer name="Walkable" width="42" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Uyw3AIAwDUAbo9J2YO1JLvo4RscSR5IkAY2DyPrJVGamxyqnxVTgtvnbe7URa28llZ3My1owO6zzWnOCMvOOZbyaqbvZfVOnU9GBx7nqxOb/6Sffs6kU6NVapAen0zNNzpn97mJzI88yyZjsjrNZY6yKNHmdFTnF2OqhMnutXTgAVAAA=
+   H4sIAAAAAAAAC+3USQrAMAwDwDygr++Ley+UyJusUAtyjD04y1qc3Be2OoMau5wWX4fT4xvnv51M6zi17GpOxZrZUT2Pd05wZt7xyjeTVbf6L+p0WnqoOHe91Jxf/dA9u3qZTqsVMTCdkfOMzBSZkYKTOc8qa7Uzw+qNty7TGHF25BTnZMLKAwuUFBUAFQAA
   </data>
  </layer>
  <layer name="Water" width="42" height="32">

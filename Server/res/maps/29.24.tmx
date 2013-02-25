@@ -23,7 +23,7 @@
  <tileset firstgid="3051" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="76" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZSw6DMAxFUebd/2K6lyym6gAJEPnimNi+R2Ic+8VEImwbAACxfD/1Z/Z6ltTqJa+zWt0t/bTMqNb8asnVf9fP03w85LXTyiu9lJf0mrX9t5rTsfZU6G/Wmj25rPL+XWtIk7Pzci7l9je3x5LrlGZrZRr73rMnq+f1p52XlVwAAAAkWf4uAeDLyB1cVCP9W7g7kSQxK17zyvX1tF/PefWcQy13pNHex92159J/FM77c+9RZ6ZX9JkBALzrBy6rwdWALwAA
+   H4sIAAAAAAAAC+3ZSw6DMAxFUebd/2K6lyym6gAJEPnimNi+R+o49osTiXTbAACI5fup/2avZ0mtXvI6q9Xd0k/LjGrNr5Zc/Xf9PM3HQ147rbzSS3lJr1nbf6s5HWtPhf5mrdmTyyrn71pDmpydl3spt7+5PZZcpzRbK9PY9549WT2vP+28rOQCAAAgyfJ3CeBN9PM28gYX1Uj/Ft5OJEnMite8cn097ddzXj33UMsbabTzuLv2XPofhfv+3HvUmekVfWYAAO/6AfH4B12ALwAA
   </data>
  </layer>
  <layer name="Walkable" width="76" height="40">

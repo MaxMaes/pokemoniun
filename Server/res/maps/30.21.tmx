@@ -9,7 +9,7 @@
   <property name="nightPokemonLevels" value="26-28;26-28;26;26-28;26;26-28;26-28;26-28;26-28;-25;"/>
   <property name="waterPokemonChances" value="Tentacool,60;Wingull,35;Pelipper,5;"/>
   <property name="waterPokemonLevels" value="5-35;10-30;25-30;"/>
-  <property name="wildModifier" value="10"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
@@ -31,8 +31,8 @@
  <tileset firstgid="5121" source="Path0.tsx"/>
  <tileset firstgid="5417" source="Sinnoh Land Sea 3.tsx"/>
  <tileset firstgid="7209" source="Cliffs02.tsx"/>
- <tileset firstgid="7297" source="Cliffs01.tsx"/>
- <tileset firstgid="7527" source="Fences01.tsx"/>
+ <tileset firstgid="7321" source="Cliffs01.tsx"/>
+ <tileset firstgid="7551" source="Fences01.tsx"/>
  <layer name="Walkable" width="46" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3FoQ0AAAgAIKcv+P+tdovVQGBkRyQAABxqDQD8N+29t734EQAA
@@ -65,7 +65,7 @@
  </layer>
  <layer name="Collisions" width="46" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WQQ6CMBBFewwX5QbeU1mqS3ThhlMQL6A38DJizCQVGZg/nVKb8JIfFoXpo20G2o1zbYG5VfkdNLkbeRM779weTO1ltYlY7zEOvcMRzInxngL15uj859r01zOTK+A9x5y3JQ3jPvSWwHmnYmw/LhHeBO33UqBrRuNv79wgzmEfzI30fKTyHp4xxEdKyvWWnlnNO1G9R+C99b/jaG9BvnnIedbOr3HlntfURbDy5u7X1LTGep6lvuHcfP9WLzdd9Z1n0F9KfFe0P3BM/e9I12OsBj0n6WWcv2RPYupb1VqzppS8ABg/lr/4EQAA
+   H4sIAAAAAAAAC+2WQQ6CMBBFewwX5QbeWd2QqEt0wT2IF9AbeAExZpKKDMyfTqlNeMkPi8L00TYD9ca5usDcqvwOmtyNvImdd24P5uBltYlY7zGOvcMJzJnxngL15uj859r01wuTFvCeY87bkoZxH3pL4LxTMbYf1whvgvZ7KdA1o/G3d24Q57AP5kZ6PlJ5D88Y4iMl5XpLz6zmnajeI/De+t9xtLcg3zzkPGvn17hyz2vqIlh5c/dralpjPc9S33Buvn+rl5uu+s4z6C8lvivaHzim/nek6zFWg56T9DLOX7InMfWtaq1ZU0peTGcX2/gRAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="46" height="25">

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="108" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Linoone,15;Mightyena,15;Oddish,25;Zigzagoon,10;Poochyena,10;Marill,15;Absol,8;Surskit,1,Kecleon,1;"/>
+  <property name="dayPokemonChances" value="Linoone,15;Mightyena,15;Oddish,25;Zigzagoon,10;Poochyena,10;Marill,15;Absol,8;Surskit,1;Kecleon,1;"/>
   <property name="dayPokemonLevels" value="25-27;25-27;25-27;25-25;25-25;25-27;25-27;25-25;25-25;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Barboach,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
-  <property name="nightPokemonChances" value="Linoone,15;Mightyena,15;Oddish,25;Zigzagoon,10;Poochyena,10;Marill,15;Absol,8;Surskit,1,Kecleon,1;"/>
+  <property name="nightPokemonChances" value="Linoone,15;Mightyena,15;Oddish,25;Zigzagoon,10;Poochyena,10;Marill,15;Absol,8;Surskit,1;Kecleon,1;"/>
   <property name="nightPokemonLevels" value="25-27;25-27;25-27;25-25;25-25;25-27;25-27;25-25;25-25;"/>
   <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Marill,98;Surskit,1;Goldeen,1;"/>

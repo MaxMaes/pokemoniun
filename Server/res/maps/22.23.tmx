@@ -8,7 +8,6 @@
   <property name="nightPokemonChances" value="Poochyena,40;Wurmple,25;Taillow,25;Wingull,10;"/>
   <property name="nightPokemonLevels" value="4-5;4-5;4-5;3-5;"/>
   <property name="pvp" value="yes"/>
-  <property name="surfProbability" value="10"/>
   <property name="waterPokemonChances" value="Wingull,50;Tentacool,45;Pelipper,5;"/>
   <property name="waterPokemonLevels" value="10-30;5-10;25-30;"/>
   <property name="wildProbability" value="10"/>

@@ -8,4 +8,4 @@ Trainer Tips
 You can catch rare Pokemon through fishing.
 You need a high fishing skill for them.
 This Cave has strong Pokemon.
-That's why you can't enter without at least 24 badges.
+That's why you can't enter without at least 16 badges.

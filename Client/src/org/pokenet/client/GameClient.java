@@ -281,8 +281,7 @@ public class GameClient extends BasicGame
 			if(!logFolder.exists())
 				logFolder.mkdir();
 			File log = new File("logs\\" + sdf.format(now) + "-log.txt");
-			if(!log.exists())
-				log.createNewFile();
+			log.createNewFile();
 			PrintStream p = new PrintStream(log);
 			System.setErr(p);
 		}
@@ -462,6 +461,7 @@ public class GameClient extends BasicGame
 			m_loading.setVisible(false);
 		}
 	}
+
 	@Override
 	public void controllerDownPressed(int controller)
 	{

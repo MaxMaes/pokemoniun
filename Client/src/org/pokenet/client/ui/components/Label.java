@@ -49,19 +49,29 @@ public class Label extends Component
 		this.setTextColor(textColor);
 	}
 	
-	public Label(String text, Font font, Color textColor, Color backColor)
-	{
-		this.setText(text);
-		this.setFont(font);
-		this.setTextColor(textColor);
-		this.setBackgroundColor(backColor);
-	}
-	
 	public Label(String text, Color backColor, Font font)
 	{
 		this.setText(text);
 		this.setFont(font);
 		this.setBackgroundColor(backColor);
+	}
+	
+	public Label(String text, float x, float y, Font font, Color textColor, Color backColor)
+	{
+		this.setText(text);
+		this.setFont(font);
+		this.setTextColor(textColor);
+		this.setBackgroundColor(backColor);
+		this.setPosition(x, y);
+	}
+	
+	public Label(String text, float x, float y, float width, float height, Font font, Color textColor, Color backColor)
+	{
+		this.setText(text);
+		this.setFont(font);
+		this.setTextColor(textColor);
+		this.setBackgroundColor(backColor);
+		this.setBounds(x, y, width, height);
 	}
 
 	public String getText()
@@ -102,36 +112,6 @@ public class Label extends Component
 	public void setBackgroundColor(Color backgroundColor)
 	{
 		this.backgroundColor = backgroundColor;
-	}
-	
-	public void setPosition(float newX, float newY)
-	{
-		this.setXLocation(newX);
-		this.setYLocation(newY);
-	}
-	
-	/**
-	 * Sets the size of this label
-	 * @param newWidth The width to set
-	 * @param newHeight The height to set
-	 */
-	public void setSize(float newWidth, float newHeight)
-	{
-		this.setWidth(newWidth);
-		this.setHeight(newHeight);
-	}
-	
-	/**
-	 * Sets this labels bounds
-	 * @param newX This labels X-location in its parent.
-	 * @param newY This labels Y-location in its parent.
-	 * @param newWidth This labels width.
-	 * @param newHeight This labels height.
-	 */
-	public void setBounds(float newX, float newY, float newWidth, float newHeight)
-	{
-		this.setPosition(newX, newY);
-		this.setSize(newWidth, newHeight);
 	}
 	
 	/**
@@ -182,20 +162,16 @@ public class Label extends Component
      * Renders this label
      */
 	@Override
-	public void render(GUIContext ctx, Graphics g)
+	public void render(GUIContext gc, Graphics g)
 	{
 		//Save the old situation
 		Color oldColor = g.getColor();
-		Rectangle oldClip = g.getWorldClip();
 		Font oldFont = g.getFont();
 		
 		//Set the font
 		if(getFont() == null)
-			setFont(ctx.getDefaultFont());
-		
-		//Set the clipping
-		g.setWorldClip(getXLocation(), getYLocation(), getWidth(), getHeight());
-		
+			setFont(gc.getDefaultFont());
+
 		//Render the background
 		if(getBackgroundColor() != null)
 		{
@@ -210,7 +186,6 @@ public class Label extends Component
 		
 		//Restore start situation
 		g.setColor(oldColor);
-		g.setWorldClip(oldClip);
 		g.setFont(oldFont);
 	}
 }

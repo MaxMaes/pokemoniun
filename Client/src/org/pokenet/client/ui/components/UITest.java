@@ -39,24 +39,24 @@ public class UITest extends BasicGame
 	{
 		g.setBackground(Color.black);
 		
-		Label maxLabel = new Label("Hello");
-		maxLabel.setBounds(50, 50, 10, 10);
-		maxLabel.setFont(gc.getDefaultFont());
-		//maxLabel.fitToText();
-		maxLabel.setTextColor(Color.white);
-		maxLabel.setBackgroundColor(Color.blue);
+		Frame fr1 = new Frame(100, 100, 100, 100);
 		
-		Component test = maxLabel;
-		test.render(gc, g);
 		
-		Label maxLabel2 = new Label("Hello");
-		maxLabel2.setBounds(200, 50, 0, 0);
+		Label maxLabel = new Label("Label in frame", 0, 20, gc.getDefaultFont(), Color.white, Color.blue);
+		maxLabel.fitToText();
+
+		fr1.addComponent(maxLabel);
+		
+		Label maxLabel2 = new Label("Label not in frame");
+		maxLabel2.setBounds(100, 100, 0, 0);
 		maxLabel2.setFont(gc.getDefaultFont());
 		maxLabel2.fitToText();
 		maxLabel2.setTextColor(Color.blue);
 		maxLabel2.setBackgroundColor(Color.white);
 
 		maxLabel2.render(gc, g);
+		
+		fr1.render(gc, g);
 	}
 
 	@Override

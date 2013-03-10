@@ -7,7 +7,7 @@
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
   <property name="nightPokemonChances" value="Sandshrew,45;Trapinch,1;Cacnea,40;Baltoy,14;"/>
   <property name="nightPokemonLevels" value="19-21;19-21;19-21;20-22;"/>
-  <property name="waterPokemonChances" value="Marill,98;Surskit,1;Goldeen,1;"/>
+  <property name="waterPokemonChances" value="Goldeen,98;Surskit,1;Marill,1;"/>
   <property name="waterPokemonLevels" value="5-35;20-30;20-30;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="64"/>

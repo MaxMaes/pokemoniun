@@ -217,7 +217,7 @@ Teddiursa 206 100
 Ursaring 206 100
 Slugma 203 50 202 50
 Magcargo 203 50 202 50
-Swinub 204 100
+Swinub 204 90 647 10 
 Piloswine 204 100
 Corsola 202 50 204 50
 Remoraid 200 25 206 25 202 25 204 25
@@ -294,7 +294,7 @@ Whismur 200 100
 Loudred 200 75 205 25
 Exploud 209 50 205 50
 Makuhita 206 100
-Hariyama 206 99 301 1
+Hariyama 206 90 583 10
 Azurill 206 100
 Nosepass 305 5 200 95
 Skitty 206 95 168 5
@@ -304,7 +304,7 @@ Mawile 203 97 157 3
 Aron 206 100
 Lairon 206 30 209 40 305 3
 Aggron 206 15 157 5 209 80
-Meditite 201 75 205 25
+Meditite 201 90 585 10
 Medicham 201 75 205 25
 Electrike 206 100
 Manectric 209 75 236 25
@@ -353,7 +353,7 @@ Kecleon 206 95 651 5
 Shuppet 201 99 320 1
 Banette 209 95 320 5
 Duskull 206 90 162 10
-Dusclops 209 80 208 10 162 10
+Dusclops 209 85 667 5 162 10
 Tropius 204 50 203 50
 Chimecho 201 40 206 40 321 3
 Absol 206 40 209 30 302 5 239 25

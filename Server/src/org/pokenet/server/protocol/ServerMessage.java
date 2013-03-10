@@ -77,12 +77,19 @@ public class ServerMessage
 	{
 		try
 		{
-			bodystream.writeShort(obj.length());
-			bodystream.writeChars(obj);
-			message = message + ";STRING: " + obj;
+			if(obj == null){
+				//sometimes this string is null which is causing some issues (battle freezing for example)
+				bodystream.writeShort(0);
+				bodystream.writeChars("");
+				message = message + ";STRING: " + "";
+			}else{
+				bodystream.writeShort(obj.length());
+				bodystream.writeChars(obj);
+				message = message + ";STRING: " + obj;}
 		}
 		catch(IOException e)
 		{
+			System.out.println("There was an error adding a String");
 			e.printStackTrace();
 		}
 	}

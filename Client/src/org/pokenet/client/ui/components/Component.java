@@ -1,6 +1,8 @@
 package org.pokenet.client.ui.components;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.GUIContext;
 
@@ -8,6 +10,8 @@ public abstract class Component
 {
 	protected Rectangle bounds;
 	protected boolean isVisible = true;
+	protected Color backgroundColor = Color.transparent;
+	protected Image backgroundImage;
 	
 	public Component() {}
 	
@@ -105,5 +109,35 @@ public abstract class Component
 	/**
      * Renders this component
      */
-	public abstract void render(GUIContext gc, Graphics g);
+	public void render(GUIContext gc, Graphics g)
+	{
+		Color oldColor = g.getColor();
+		if(this.getBackgroundImage() != null)
+		{
+			g.drawImage(this.getBackgroundImage(), this.getX(), this.getY());
+		}
+		//Render the background
+		if(this.getBackgroundColor() != null)
+		{
+			g.setColor(this.getBackgroundColor());
+			g.fillRect(getX(), getY(), getWidth(), getHeight());
+		}
+		g.setColor(oldColor);
+	}
+
+	public Color getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	public void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	
+	public void setBackgroundImage(Image newImage) {
+		this.backgroundImage = newImage;
+	}
+	
+	public Image getBackgroundImage() {
+		return this.backgroundImage;
+	}
 }

@@ -42,7 +42,9 @@ public class UITest extends BasicGame
 		
 		Frame fr1 = new Frame(100, 100, 100, 100);
 		Frame fr2 = new Frame(10, 10, 100, 100);
-		Frame fr3 = new Frame(-10, -10, 50, 50);
+		Frame fr3 = new Frame(0, 0, 50, 50);
+		
+		fr3.setBackgroundColor(Color.lightGray);
 		
 		Label maxLabel = new Label("Label in frame", 0, 0, gc.getDefaultFont(), Color.white, Color.transparent);
 		maxLabel.fitToText();

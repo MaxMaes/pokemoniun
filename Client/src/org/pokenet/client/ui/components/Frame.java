@@ -34,7 +34,7 @@ public class Frame extends Component {
 	}
 
 	@Override
-	public void render(GUIContext gc, Graphics g) {
+	public void render(GUIContext gc, Graphics g) {		
 		Color original = g.getColor();
 		Rectangle oldClip = g.getWorldClip();
 		Rectangle oldInOwn = new Rectangle(0, 0, oldClip.getWidth(), oldClip.getHeight());
@@ -43,6 +43,8 @@ public class Frame extends Component {
 		g.translate(oldClip.getX(), oldClip.getY());
 		g.setWorldClip(newClip);
 
+		super.render(gc, g);
+		
 		g.setColor(Color.red);
 		g.draw(newClip);
 		

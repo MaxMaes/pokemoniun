@@ -17,7 +17,6 @@ public class Label extends Component
 	private String text;
 	private Font font;
 	private Color textColor = Color.white;
-	private Color backgroundColor = Color.transparent;
 	
 	public Label()
 	{
@@ -103,16 +102,6 @@ public class Label extends Component
 		this.textColor = color;
 	}
 	
-	public Color getBackgroundColor()
-	{
-		return backgroundColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor)
-	{
-		this.backgroundColor = backgroundColor;
-	}
-	
 	/**
 	 * Makes the bounds of this label fit to its text. Only works if the label's font has been set first!
 	 */
@@ -163,6 +152,7 @@ public class Label extends Component
 	@Override
 	public void render(GUIContext gc, Graphics g)
 	{
+		super.render(gc, g);
 		//Save the old situation
 		Color oldColor = g.getColor();
 		Font oldFont = g.getFont();
@@ -170,13 +160,6 @@ public class Label extends Component
 		//Set the font
 		if(getFont() == null)
 			setFont(gc.getDefaultFont());
-
-		//Render the background
-		if(getBackgroundColor() != null)
-		{
-			g.setColor(getBackgroundColor());
-			g.fillRect(getX(), getY(), getWidth(), getHeight());
-		}
 		
 		//Render the text
 		g.setFont(getFont());

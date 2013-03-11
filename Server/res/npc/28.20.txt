@@ -152,3 +152,12 @@ false
 false
 false
 [/npc]
+[warp]
+37
+37
+24
+50
+-44
+-34
+0
+[/warp]

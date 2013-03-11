@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="25" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Hoenn Interior Set 1.tsx"/>
+ <tileset firstgid="257" source="Hoenn Interior Set 13.tsx"/>
+ <tileset firstgid="513" source="Hoenn Interior Set 6.tsx"/>
+ <layer name="Walkable" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMdBCIBw8lEEQAU8sOWofXqB2jYBSMAmIAAJw5dpvECQAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMguEBMhhxy93BI0cOcEcyz4PKZtPTDnqB70wMDD+YBtoVo2AUDC8AAEKPJNHECQAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMdJAExSk42NQAWVCcg4NNKWigkhpS9CsyMjAoMdLWDk2g+Vo0toNcNYPBDmRMSHwUjILhBgDYCT1yxAkAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAtzgDCN1zEnAY84VKtkxCkbBKBgFIwkAAKMDF83ECQAA
+  </data>
+ </layer>
+</map>

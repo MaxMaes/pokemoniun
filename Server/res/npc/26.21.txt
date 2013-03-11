@@ -82,3 +82,13 @@ false
 false
 false
 [/npc]
+[warp]
+51
+5
+12
+29
+-46
+-42
+0
+[/warp]
+

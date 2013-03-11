@@ -1,56 +1,58 @@
 package org.pokenet.client.ui.components;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.GUIContext;
 
 public abstract class Component
 {
-	protected float xLocation = 0;
-	protected float yLocation = 0;
-	protected float height = 0;
-	protected float width = 0;
+	protected Rectangle bounds;
 	protected boolean isVisible = true;
 	
 	public Component() {}
 	
-	public void setXLocation(float newlocation)
+	public void setX(float newlocation)
 	{
-		this.xLocation = newlocation;
+		this.getBounds().setX(newlocation);
 	}
 	
-	public float getXLocation()
+	public float getX()
 	{
-		return this.xLocation;
+		return this.getBounds().getX();
 	}
 	
-	public void setYLocation(float newlocation)
+	public Rectangle getBounds() {
+		return this.bounds;
+	}
+
+	public void setY(float newlocation)
 	{
-		this.yLocation = newlocation;
+		this.getBounds().setY(newlocation);
 	}
 	
-	public float getYLocation()
+	public float getY()
 	{
-		return this.yLocation;
+		return this.getBounds().getY();
 	}
 	
 	public void setHeight(float newHeight)
 	{
-		this.height = newHeight;
+		this.getBounds().setHeight(newHeight);
 	}
 	
 	public float getHeight()
 	{
-		return this.height;
+		return this.getBounds().getHeight();
 	}
 	
 	public void setWidth(float newWidth)
 	{
-		this.width = newWidth;
+		this.getBounds().setWidth(newWidth);
 	}
 	
 	public float getWidth()
 	{
-		return this.width;
+		return this.getBounds().getWidth();
 	}
 	
 	public boolean isVisible()
@@ -80,8 +82,7 @@ public abstract class Component
 	 */
 	public void setSize(float newWidth, float newHeight)
 	{
-		this.setWidth(newWidth);
-		this.setHeight(newHeight);
+		this.getBounds().setSize(newWidth, newHeight);
 	}
 	
 	/**
@@ -93,14 +94,12 @@ public abstract class Component
 	 */
 	public void setBounds(float newX, float newY, float newWidth, float newHeight)
 	{
-		this.setPosition(newX, newY);
-		this.setSize(newWidth, newHeight);
+		this.bounds = new Rectangle(newX, newY, newWidth, newHeight);
 	}
 	
 	public void setPosition(float newX, float newY)
 	{
-		this.setXLocation(newX);
-		this.setYLocation(newY);
+		this.getBounds().setLocation(newX, newY);
 	}
 	
 	/**

@@ -6,7 +6,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.pokenet.client.ui.components.Component;
+import org.newdawn.slick.geom.Rectangle;
 import org.pokenet.client.ui.components.Label;
 
 public class UITest extends BasicGame
@@ -38,23 +38,27 @@ public class UITest extends BasicGame
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 		g.setBackground(Color.black);
+		g.setWorldClip(new Rectangle(0,  0, 800,  600));
 		
 		Frame fr1 = new Frame(100, 100, 100, 100);
+		Frame fr2 = new Frame(10, 10, 100, 100);
+		Frame fr3 = new Frame(-10, -10, 50, 50);
 		
-		
-		Label maxLabel = new Label("Label in frame", 0, 20, gc.getDefaultFont(), Color.white, Color.blue);
+		Label maxLabel = new Label("Label in frame", 0, 0, gc.getDefaultFont(), Color.white, Color.transparent);
 		maxLabel.fitToText();
 
-		fr1.addComponent(maxLabel);
+		fr2.addComponent(maxLabel);
+		fr1.addComponent(fr2);
+		fr2.addComponent(fr3);
 		
 		Label maxLabel2 = new Label("Label not in frame");
-		maxLabel2.setBounds(100, 100, 0, 0);
+		maxLabel2.setBounds(20, 20, 0, 0);
 		maxLabel2.setFont(gc.getDefaultFont());
 		maxLabel2.fitToText();
 		maxLabel2.setTextColor(Color.blue);
 		maxLabel2.setBackgroundColor(Color.white);
 
-		maxLabel2.render(gc, g);
+		fr3.addComponent(maxLabel2);
 		
 		fr1.render(gc, g);
 	}

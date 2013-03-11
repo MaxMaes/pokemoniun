@@ -3,7 +3,6 @@ package org.pokenet.client.ui.components;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.GUIContext;
 
 /**
@@ -62,7 +61,7 @@ public class Label extends Component
 		this.setFont(font);
 		this.setTextColor(textColor);
 		this.setBackgroundColor(backColor);
-		this.setPosition(x, y);
+		this.setBounds(x, y, 0, 0);
 	}
 	
 	public Label(String text, float x, float y, float width, float height, Font font, Color textColor, Color backColor)
@@ -176,13 +175,13 @@ public class Label extends Component
 		if(getBackgroundColor() != null)
 		{
 			g.setColor(getBackgroundColor());
-			g.fillRect(getXLocation(), getYLocation(), getWidth(), getHeight());
+			g.fillRect(getX(), getY(), getWidth(), getHeight());
 		}
 		
 		//Render the text
 		g.setFont(getFont());
 		g.setColor(getTextColor());
-		g.drawString(getText(), getXLocation(), getYLocation());
+		g.drawString(getText(), getX(), getY());
 		
 		//Restore start situation
 		g.setColor(oldColor);

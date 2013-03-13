@@ -8,17 +8,20 @@ import org.newdawn.slick.gui.GUIContext;
 
 public class Frame extends Component {
 	private ArrayList<Component> components = new ArrayList<Component>();
+	private TitleBar titleBar;
 
 	public Frame() {
-
+		this.titleBar = new TitleBar(this, "test");
 	}
 
 	public Frame(float x, float y) {
 		this.setPosition(x, y);
+		this.titleBar = new TitleBar(this, "test");
 	}
 
 	public Frame(float x, float y, float width, float height) {
 		this.setBounds(x, y, width, height);
+		this.titleBar = new TitleBar(this, "test");
 	}
 
 	public void addComponent(Component c) {
@@ -31,6 +34,14 @@ public class Frame extends Component {
 
 	public void removeComponent(int index) {
 		this.components.remove(index);
+	}
+	
+	public TitleBar getTitleBar() {
+		return this.titleBar;
+	}
+	
+	public void setTitleBar(TitleBar bar) {
+		this.titleBar = bar;
 	}
 
 	@Override
@@ -46,14 +57,17 @@ public class Frame extends Component {
 		super.render(gc, g);
 		
 		g.setColor(Color.red);
-		g.draw(newClip);
+		//g.draw(newClip);
 		
 		g.setColor(Color.green);
-		g.draw(getBounds());
+		//g.draw(getBounds());
 		g.setColor(original);
 
 		for (Component c : components)
 			c.render(gc, g);
+		
+		if(titleBar.isVisible())
+			titleBar.render(gc, g);
 
 		g.setWorldClip(oldClip);
 		g.translate(-oldClip.getX(), -oldClip.getY());
@@ -68,4 +82,59 @@ public class Frame extends Component {
 		return intersecting;
 	}
 
+	public class TitleBar extends Component
+	{
+		private Label titleLabel;
+	    //private Button closeButton;
+		private Frame owner;
+		
+		public TitleBar(Frame owner, String title)
+		{
+			this.titleLabel = new Label(title);
+			this.owner = owner;
+			this.setBounds(0, -20, owner.getWidth(), 20);
+		}
+		
+		public Frame getOwner() {
+			return owner;
+		}
+		public void setOwner(Frame owner) {
+			this.owner = owner;
+		}
+		public Label getTitleLabel() {
+			return titleLabel;
+		}
+		public void setTitleLabel(Label titleLabel) {
+			this.titleLabel = titleLabel;
+		}
+		
+		/**
+	     * Renders this titlebar
+	     */
+		@Override
+		public void render(GUIContext gc, Graphics g)
+		{
+			Color original = g.getColor();
+			Rectangle bounds = new Rectangle(0, 0, getOwner().getWidth(), 20);
+			Rectangle oldClip = g.getWorldClip();
+			
+			g.translate(oldClip.getX(), oldClip.getY()-20);
+			
+			g.setWorldClip(bounds);
+
+			super.render(gc, g);
+			
+			g.setColor(Color.blue);
+			g.draw(bounds);
+			g.setColor(original);
+			
+			titleLabel.setFont(gc.getDefaultFont());
+			titleLabel.fitToText();
+			titleLabel.render(gc, g);
+			
+			g.translate(-oldClip.getX(), -oldClip.getY()+20);
+			
+			g.setWorldClip(oldClip);
+		}
+	}
 }

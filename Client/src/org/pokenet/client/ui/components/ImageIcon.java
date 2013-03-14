@@ -24,6 +24,8 @@ public class ImageIcon extends Component {
 	@Override
 	public void render(GUIContext gc, Graphics g)
 	{
+		g.translate(g.getWorldClip().getX(), g.getWorldClip().getY());
 		g.drawImage(this.getImage(), this.getX(), this.getY());
+		g.translate(-g.getWorldClip().getX(), -g.getWorldClip().getY());
 	}
 }

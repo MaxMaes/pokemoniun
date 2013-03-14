@@ -66,7 +66,7 @@ public class UITest extends BasicGame
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		ImageIcon test = new ImageIcon(new Image(respath + "res/ui/pokedex/pokedex.png"), 0, 0);
+		ImageIcon test = new ImageIcon(new Image(respath + "res/pokemon/front/normal/006-2.png"), 0, 0);
 		fr1.addComponent(test);
 		
 		//fr3.addComponent(maxLabel2);

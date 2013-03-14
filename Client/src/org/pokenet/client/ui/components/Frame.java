@@ -1,8 +1,12 @@
 package org.pokenet.client.ui.components;
 
 import java.util.ArrayList;
+
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.GUIContext;
 
@@ -69,8 +73,9 @@ public class Frame extends Component {
 		if(titleBar.isVisible())
 			titleBar.render(gc, g);
 
-		g.setWorldClip(oldClip);
 		g.translate(-oldClip.getX(), -oldClip.getY());
+		g.setWorldClip(oldClip);
+		
 	}
 
 	public static Rectangle intersect(Rectangle src1, Rectangle src2) {
@@ -92,7 +97,23 @@ public class Frame extends Component {
 		{
 			this.titleLabel = new Label(title);
 			this.owner = owner;
-			this.setBounds(0, -20, owner.getWidth(), 20);
+			this.setBounds(0, 0, owner.getWidth(), 20);
+			
+			try {
+				String m_filepath = System.getProperty("res.path");
+				if(m_filepath == null)
+					m_filepath = "";
+				Font font = new AngelCodeFont(m_filepath + "res/fonts/dex-large.fnt", m_filepath + "res/fonts/dex-large.png");
+				this.titleLabel.setFont(font);
+				this.titleLabel.fitToText();
+				this.titleLabel.setY(-9);
+				this.titleLabel.setTextColor(Color.white);
+				this.titleLabel.setBackgroundColor(Color.transparent);
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		public Frame getOwner() {
@@ -128,8 +149,6 @@ public class Frame extends Component {
 			g.draw(bounds);
 			g.setColor(original);
 			
-			titleLabel.setFont(gc.getDefaultFont());
-			titleLabel.fitToText();
 			titleLabel.render(gc, g);
 			
 			g.translate(-oldClip.getX(), -oldClip.getY()+20);

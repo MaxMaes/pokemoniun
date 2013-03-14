@@ -21,27 +21,23 @@ public class Label extends Component
 	public Label()
 	{
 		this.setText("");
-		this.fitToText();
 	}
 	
 	public Label(String text)
 	{
 		this.setText(text);
-		this.fitToText();
 	}
 	
 	public Label(String text, Font font)
 	{
 		this.setText(text);
 		this.setFont(font);
-		this.fitToText();
 	}
 	
 	public Label(String text, Color textColor)
 	{
 		this.setText(text);
 		this.setTextColor(textColor);
-		this.fitToText();
 	}
 	
 	public Label(String text, Font font, Color textColor)

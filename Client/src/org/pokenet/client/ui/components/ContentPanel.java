@@ -49,14 +49,14 @@ public class ContentPanel extends Component {
 		//g.draw(newClip);
 		
 		g.setColor(Color.green);
-		//g.draw(getBounds());
+		g.draw(getBounds());
 		g.setColor(original);
 
 		for (Component c : components)
 			c.render(gc, g);
 
-		g.setWorldClip(oldClip);
 		g.translate(-oldClip.getX(), -oldClip.getY());
+		g.setWorldClip(oldClip);
 	}
 
 	public static Rectangle intersect(Rectangle src1, Rectangle src2) {

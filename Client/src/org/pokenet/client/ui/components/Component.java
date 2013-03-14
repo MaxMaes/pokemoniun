@@ -103,7 +103,10 @@ public abstract class Component
 	
 	public void setPosition(float newX, float newY)
 	{
-		this.getBounds().setLocation(newX, newY);
+		if(this.getBounds() == null)
+			this.setBounds(newX, newY, 0, 0);
+		else
+			this.getBounds().setLocation(newX, newY);
 	}
 	
 	/**

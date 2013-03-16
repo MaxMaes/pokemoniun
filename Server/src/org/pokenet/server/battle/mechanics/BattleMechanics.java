@@ -97,9 +97,10 @@ public abstract class BattleMechanics implements Serializable
 	 * @param u - How many Pokemon defeated it
 	 * @return
 	 */
-	public double calculateExpGain(Pokemon wildPoke, int noPokesUsed)
+	public double calculateExpGain(Pokemon wildPoke, Pokemon playerPoke, int noPokesUsed, double user)
 	{
-		double result = wildPoke.getLevel() * wildPoke.getPokemonBaseExp() / 7 / noPokesUsed;
+		 double result = (((1*wildPoke.getBaseExp()*wildPoke.getLevel())/(5*noPokesUsed))*(Math.pow(2*wildPoke.getLevel(),2.5)/Math.pow(wildPoke.getLevel()+playerPoke.getLevel()+10,2.5))+1)*user;
+//		double result = wildPoke.getLevel() * wildPoke.getBaseExp() / 7 / noPokesUsed;
 		return result;
 	}
 

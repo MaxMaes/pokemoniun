@@ -1043,9 +1043,7 @@ public class WildBattleField extends BattleField
 
 		if(m_participatingPokemon.size() > 0)
 		{
-			double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, m_participatingPokemon.size());
-			if(exp == 0)
-				exp = 1;
+			
 			/* Finally, add the EVs and exp to the participating Pokemon */
 			for(Pokemon p : m_participatingPokemon)
 			{
@@ -1075,17 +1073,11 @@ public class WildBattleField extends BattleField
 
 				/* Gain exp/level up and update client */
 				int index = m_player.getPokemonIndex(p);
-				double ratio = (m_wildPoke.getLevel() / p.getLevel());
-				if(ratio > 5)
-					ratio = 5;
-				else if(ratio < 0.1)
-					ratio = 0.1;
-				double expX = exp * ratio;
-				if(expX > 15000)
-					expX = 15000;
-				else if(expX < 8)
-					expX = 8;
-				p.setExp(p.getExp() + expX);
+				double user = 1;
+				if(!p.getOriginalTrainer().equals(m_player.getName()))
+					user = 1.5;
+				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, p, m_participatingPokemon.size(),user);
+				p.setExp(p.getExp() + exp);
 				// Calculate how much exp is left to next level
 				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());
 				// Make sure that value isn't negative.
@@ -1093,9 +1085,9 @@ public class WildBattleField extends BattleField
 					expTillLvl = 0;
 				ServerMessage expMessage = new ServerMessage(m_player.getSession());
 				expMessage.init(28);
-				expMessage.addString(p.getSpeciesName() + "," + expX + "," + expTillLvl);
+				expMessage.addString(p.getSpeciesName() + "," + exp + "," + expTillLvl);
 				expMessage.sendResponse();
-				String expGain = expX + "";
+				String expGain = exp + "";
 				expGain = expGain.substring(0, expGain.indexOf('.'));
 
 				ServerMessage expGainMessage = new ServerMessage(m_player.getSession());

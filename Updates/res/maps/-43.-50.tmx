@@ -44,7 +44,7 @@
  </layer>
  <layer name="Collisions" width="40" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UMQqDQBCF4bWy9QSmGS8h5BC2mhzSkEYxVUgVvJMDa9hCjaIuEvJ/8EDXcXyVxgAAAADjgp3yz/1KsXlqHnr/Enc2lZvY9+/iv18lNu/+m624s6nU/WzjuV8Wzc+kobs+h8PnS3astWR3rp0KzUVzPaBfnBhzSrbt8IV+2/xCv2/5/H/n5gAAAAD40QF7SGLXIBwAAA==
+   H4sIAAAAAAAAC+3OPQqDQBCG4U1lmxMkzXiJgIewjXpIxSZBK0kVcicHVtgi8d9FJO8DH+g6O37GAAAAAL+dNso/98vFptHU+v4Sd9aXQuz9Uvz3e4jNu/vnR9xZX57dbOW5X3wen7kF7jkKvr9P2bHUlN137ZRoUk22Q79LaMw1XLfDF/qtc4R+Q5k7BwAAAGBbLXAfh1YgHAAA
   </data>
  </layer>
  <layer name="Collisions" width="40" height="45">

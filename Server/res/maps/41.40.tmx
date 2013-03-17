@@ -2,13 +2,13 @@
 <map version="1.0" orientation="orthogonal" width="63" height="37" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Geodude,10;"/>
-  <property name="dayPokemonLevels" value="6-10;7-8;8;-6-9;"/>
+  <property name="dayPokemonLevels" value="6-10;7-8;8-8;6-9;"/>
   <property name="nightPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Geodude,10;"/>
-  <property name="nightPokemonLevels" value="6-10;7-8;8;-6-9;"/>
-  <property name="pvp" value="enforced"/>
-  <property name="wildModifier" value="10"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="nightPokemonLevels" value="6-10;7-8;8-8;6-9;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal5.tsx"/>
@@ -18,7 +18,7 @@
  <tileset firstgid="4907" source="normal10.tsx"/>
  <layer name="Walkable" width="63" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UMQ6AIBAF0W1NDJ2l3pLzWXgx4wEQCGgW/rxkewY2mAEAAEDJtYwztNNOO+2ztJ+rbvvI7x6395mtPddbOsrtubvw1l56dpX2XjsyW3tN/9/tezA7Ql37o+UP99Lecu7eO+S9/YtJ7Z1Ce2oAAACg5QaK2levbCQAAA==
+   H4sIAAAAAAAAC+3VQQqAIBBG4dkG4a5l3cRjdcIuFh3AVLQY/d8Hs/fJoGYAAABQci3jDO200z5Xe1xpV2wfeefP7X1ma8/1lo5ye+4uvLWXnl2lvdeOzNZe0/93+x7MjlDX/vzJLW+4l/aWc/feIe/tX0xq7xTaUwMAAAAtN9gXhMpsJAAA
   </data>
  </layer>
  <layer name="Grass" width="63" height="37">
@@ -28,7 +28,7 @@
  </layer>
  <layer name="Water" width="63" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTH+ECVQEAAAAAAAAAAHwD5zgvSmwkAAA=
+   H4sIAAAAAAAAC+3OMREAAAgEoA9g/zpWs4SeCyQgAQAAAC51fQ8AAAAAAHYMLckoEGwkAAA=
   </data>
  </layer>
  <layer name="LedgesDown" width="63" height="37">

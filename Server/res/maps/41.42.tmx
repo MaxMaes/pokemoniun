@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="54" height="47" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Aron,40;Zubat,30;Mawile,10;Sableye,10;Abra,5,Nosepass,5;"/>
-  <property name="dayPokemonLevels" value="10-12;10-11;10-12;10-12;10;10-20;"/>
-  <property name="nightPokemonChances" value="Aron,40;Zubat,30;Mawile,10;Sableye,10;Abra,5,Nosepass,5;"/>
-  <property name="nightPokemonLevels" value="10-12;10-11;10-12;10-12;10;10-20;"/>
-  <property name="wildModifier" value="10"/>
-  <property name="pvp" value="enforced"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="dayPokemonChances" value="Aron,40;Zubat,30;Mawile,10;Sableye,10;Abra,5;Nosepass,5;"/>
+  <property name="dayPokemonLevels" value="10-12;10-11;10-12;10-12;10-10;10-20;"/>
+  <property name="nightPokemonChances" value="Aron,40;Zubat,30;Mawile,10;Sableye,10;Abra,5;Nosepass,5;"/>
+  <property name="nightPokemonLevels" value="10-12;10-11;10-12;10-12;10-10;10-20;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal16.tsx"/>
  <tileset firstgid="1025" source="normal1.tsx"/>
@@ -16,7 +16,7 @@
  <tileset firstgid="2859" source="normal7.tsx"/>
  <layer name="Grass" width="54" height="47">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XUQqAIBAF7aefukrXqG7STcqDdbAMWigIrVBcYwYeK6Kyg/ihMQAAAAA6WCsdwQsvDcELLw3BCy8NwQuvUKbmmn2ud3U4xnsdm/u1sl6T112P0ufs6nKK9Xj5zknpZdv3XpKufrYndFZKr7c9xUjJXqG3WqpXzvvK5STjFF457wqvcrzOiU1uH7zw+rNXrH+GNi8AAACAr2zoxu2UqCcAAA==
+   H4sIAAAAAAAAC+2XUQqAIBAF66efukrXqG7STaqDdbAUEgpEK7TdYgYeK2KygyhUFAAAAAA6WEsdwQsvDcELLw3BCy8NwQuvWMb6HDvXmdrvY1uH2r/Wrdfk5evR9TmZOh+yBLxC++T0Wpr7Xi5tde2b2F45ve72lCJf9ord1a96SZ6XlJMb5/CSPKs3vewb90cviaRG2gcvvP7sleo/Q5sXAAAAwFM2uH1p9KgnAAA=
   </data>
  </layer>
  <layer name="Walkable" width="54" height="47">

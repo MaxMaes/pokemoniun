@@ -55,7 +55,7 @@
  </layer>
  <layer name="Collisions" width="40" height="39">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XTQ7CIBCF2fmz0bKQaDf1HHbp/Td6EfUCkpRGQ/rKwDBg1JdMZkFlHl9xCt1WqaONLpClherubBhClhaqG+Lmr0NKXH5S75lal8ovN8fYun59tI5cSuXnry+V37mZH8+170v3m9h9X7rvcPlJ/2+o/GL3by6F+FH7Ty1+1P5dml9s/5YS4hfbv6XE5SctKr8pzyWE+C20UksbKxtrjT1LC/HbOE+NzVqX8TIlxM84T3ubDxX9SZ87uaJ8f0NnI0l9A7+a+vOLU+l7Y6xq3btDkrp3X1qlrsx4tOn335MZ4u7mGXV3c9/aYbw3r2d7kOfG/Geo5yd/jlGobi5/iN843oM5SvnzOfq8kL/QnLn9ofeYwx/VO6r1zo/rD9Xn+svBb64+x1/qbz7BX0r+ZX9PbITkCWAYAAA=
+   H4sIAAAAAAAAC+2XTQ7CIBCF2fmzsWUh0W70CF3bpfff6EWsF5CkbTTY1w4wA0Z9yWQW4MzjExHqQqmaENI62B7H4j1vbRhClhbqi3yjdUgplt8wn1vUvlR+3Bx9+7r90Tq4FMrPXV8ov3M5Pc6176X4Ifnu+9TnTiw/6d8NlZ/v/uXSHD/q+ZOLH/X8Ts3P9/yWEuLne35LKZaftKj8xjynEOK30EotbaxsrDX2LC3Eb9N7Km3WOo2XMSF+pve0s3mf0Z/0vTNWlP/fubuRpL6BX079+fkp9bvRV7ne3XOSendfKqWukXGvwt+/J9NF29cZ1Pa1b1U33pjn3AbkqTF3DvX+5NYYhPpy+UP8hvEG1Ejlz+Xo8kL+5mpy+0PfI4c/qnfU65VfrD/UP9YfB7+p/jH+Qj/zCf5C8i/7ewCVDNK+YBgAAA==
   </data>
  </layer>
  <layer name="Walkable" width="40" height="39">

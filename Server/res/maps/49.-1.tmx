@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="22" height="45" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Quagsire,40;Steelix,20;Donphan,20;Golduck,10;Golbat,5;Larvitar,5;"/>
+  <property name="dayPokemonChances" value="Quagsire,40;Steelix,20;Donphan,5;Golduck,10;Golbat,20;Larvitar,5;"/>
   <property name="dayPokemonLevels" value="45-45;48-48;47-48;48-48;48-48;15-20;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>

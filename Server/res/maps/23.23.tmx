@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="30" height="31" tilewidth="16" tileheight="16">
  <properties>
+  <property name="WildProbability" value="10"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Corphish,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30"/>
   <property name="pvp" value="yes"/>
-  <property name="waterPokemonChances" value="Marill,100;"/>
+  <property name="waterPokemonChances" value="Goldeen,100;"/>
   <property name="waterPokemonLevels" value="5-35;"/>
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="-32"/>
@@ -45,12 +46,12 @@
  </layer>
  <layer name="Walkable" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAUjEUyTGDi7dw2g3YMR2AQMtAuIA2ekB8beawNkL7UBtyR++XB52tirR8BeWoFAGtl7nkB6KKGRvTdJSIez6Bzmu4H27QHivUC8D4j3D1CcUwtsGq0jRsEAgsGU/oZqvUsLdxNTBpNSTo+CwQEAg+KVdIgOAAA=
+   H4sIAAAAAAAAC2NgGAUjEUyTGDi7dw2g3YMR2AQMtAuIA2ekB8beawNkL7UBtyR++XB52tirR8BeWoFAGtl7nkB6KKGRvTdJSIez6Bzmu4H27QHivUC8D4j3D1CcUwtsGq0jRsEAgsGU/qhZ7x4mwSxK611atBeIKYNJKadHweAAAJZ2shKIDgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VO24CMRCGLQi0tEQIUfG6BAkF9XIXCk7Au8ihoFxIh5Saitcd+JGwZMyMbWwvElI+6ZdXGq/tf8czK8Q9vxXhDfdu6rDmX8C+3LtbhzVD/HI843dQpuOjRIgxNIGm0AyaQ4uEX/Md/MYktt9S322ej99d1f0cHCa/IXnt1fhYB7Ev6BvqEvOyyOsr2KPuDtAROkFnpQ6Tm081z0s8rxivppgPap7XeN5UHvN7PRsX84W613p+1bNdY3l8tw+oABWZXmaDuteUX0kd+zSgJtSC2tq+aq0NP587i8lvlpj8ZtGzJbb8/njmVCJrQ6+RGJ5yZfr+qbUhR0mMfsXdv6z6sw3T/8jVr08PC/WbEvnRoe5fqF/fmo7hNzaqX73W5Lh1mMONHNIvVWvUf4mbw40clCcqHhvbuWzxf8xcALgqno6IDgAA
+   H4sIAAAAAAAAC+2VO24CMRCGLV4tLWiFqMLjEiEpUi93oeAESXgUORQpE+iQUqeCwB34V8KSMTO21w8kpHzSL680Xu/8jGcQ4pJNJrzh3v1yOPMn4Lvcu1uHM0P8cpTxO2nR8ddciDfoHZpBc2gBLXP+zHvwG5PYfptjt30+fn877nlwmPyG1PWly8ceERtBT9AzsS9FXW/BDn23h/6gA3RU+jA/+1TrvMLzJ+PVFPNBrfM3ntfZdX2L3LiYL9S91uur5lbEqvjdalAdajCzzAZ1rym/kgd8pwf1oQE01L6r9tq0XS4Xk9+UmPymmNkSW30/PGsqkb2h90gMT5UWff/U3pCrJMa84u5fqvlsw/R/5OrXZ4aF+nWZYdT9C/Wr33FXYvgts98FNX+91+Sq+6X2cCuHzJ/qNaqm3B5u5aA8UfHY2PKyxf8xcwKzl0RdiA4AAA==
   </data>
  </layer>
 </map>

@@ -9,7 +9,7 @@
  </layer>
  <layer name="Walkable" width="60" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SsQmAQAwF0HMdR1IcQh1KOx3JUbxCW0G4I4jvwS8CgZ8iKQEAAACltJV2v+xooi8ob8yZcrqcPme45jnyKB4tAZ1rQOdtC+jcAzr/yj/X558BAAB44wTXkdKxgCUAAA==
+   H4sIAAAAAAAAC+3SsQ2DQBAEQOjDNEBJWBQBLspkdkmUwgWQEDj61xkxI23w0ku7wTUNAAAAUEpf6e+VrW32gvKmyBwZIs/IuL9fmaP46Z3QuSR0Hj4Jnd+Ezrtyz/W55//1iHTZIwAAAE42xVXq3YAlAAA=
   </data>
  </layer>
  <layer name="Collisions" width="60" height="40">
@@ -19,7 +19,7 @@
  </layer>
  <layer name="Collisions" width="60" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OsQmAQBBE0bMPbUqxADFSG7YcJzASzOQO5D34wW40pQAAAABfW17+azq7mkvq2NKexjSl+b6PlqMAgN/p09B6BAAAwMMFbkcj1oAlAAA=
+   H4sIAAAAAAAAC+3OsQ2AMBAEQdMiiAIQkXHDLocLSMnQk8xIG/xH1xoAAADwtePlf6a5VC6p0dOV1rSl/bnHn6MAAAAAAArcfIMbuoAlAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="60" height="40">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="50" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Ponyta,30;Tangela,30;Donphan,20;Rapidash,10;Doduo,5;Dodrio,5;"/>
+  <property name="dayPokemonChances" value="Ponyta,30;Tangela,30;Donphan,5;Rapidash,10;Doduo,20;Dodrio,5;"/>
   <property name="dayPokemonLevels" value="40-40;39-39;40-40;42-42;41-41;43-43;"/>
   <property name="fishPokemonChances" value="Poliwag,85;Magikarp,15;"/>
   <property name="fishPokemonLevels" value="20-40;9-20;"/>
@@ -43,6 +43,11 @@
  <layer name="Collisions" width="60" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2YSU7FMAyGK7GCrDgAN+EE8J7Y8LrkcQbEfZgWTBIgWIDgcriikaIQp44zWW0s/arUIe6XP3GTbna7buNQj5yPvTdWp5nabbyNt/E2Xgm8a9B21BJ4zffbIjpPyLv25MF0grR1xngmtR9T7XHycXzEnmm88njtcYuN1bnwcvzG5rZZi0LrCKe2leKVIs3rqtNDUOptLK/OnZNT59D+9xbPxch7ifCajLG8JdYIdo5+5HPF4f5/LZkXq0WUui2B92AvjBcT1ffavKH+SuS166/9ncrBSx3nOXgp647UvFTfS/Ganr/slOO1fQ/Z78XwDudMhhDeK9V116Ab0C3oTtHrcQml5r0HvgfQI+gJ9Kxwz6l7bMm8r8D3pv6uv8Pxw8Nr58FylebF3sd1/RP4vkbebzj+KP8eaKpPJfGmiMY7zcv5t+ar+TV4dduunBSPYj1vvGXG89x4Mb5UvJy5PczpXIGN31S8vvV+jSjBm3sOhoTvPbA5JIUX84jKS1mvSRrPnH5svPg1abycWBrvVCyN1xWN178+PK6gVWQ/HxlthfLWkPnd54TvP+fSeEuP2ZUA3tLeUe6L6dPajBzeuajx5tUvAdtC9uAuAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="60" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PQQ0AMAzEsFIYj/HHVwz7dNLVRpBUAQAAAAAAwE73/C6Y5Teb32x+s/nN5hcAAN40xuZKP+AuAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="60" height="50">

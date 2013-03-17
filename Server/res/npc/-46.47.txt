@@ -4,7 +4,7 @@ down
 48
 16
 29
-slugma,50,Numel,50,Camerupt,50,Torkoal,50
+Slugma,50,Numel,50,Camerupt,50,Torkoal,50
 4
 19
 0

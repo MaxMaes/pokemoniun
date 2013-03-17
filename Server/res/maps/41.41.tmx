@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="54" height="47" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Aron,40;Zubat,30;Abra,10;Makuhita,10;Mahile,5;Sableye,5;"/>
-  <property name="dayPokemonLevels" value="9-11;9-10;9;10-11;9-11;9-11;"/>
-  <property name="nightPokemonChances" value="Aron,40;Zubat,30;Abra,10;Makuhita,10;Mahile,5;Sableye,5;"/>
-  <property name="nightPokemonLevels" value="9-11;9-10;9;10-11;9-11;9-11;"/>
-  <property name="wildModifier" value="10"/>
-  <property name="pvp" value="enforced"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="dayPokemonChances" value="Aron,5;Zubat,50;Abra,10;Makuhita,20;Mahile,5;Sableye,10;"/>
+  <property name="dayPokemonLevels" value="9-11;9-10;9-9;10-11;9-11;9-11;"/>
+  <property name="nightPokemonChances" value="Aron,5;Zubat,50;Abra,10;Makuhita,20;Mahile,5;Sableye,10;"/>
+  <property name="nightPokemonLevels" value="9-11;9-10;9-9;10-11;9-11;9-11;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal16.tsx"/>
  <tileset firstgid="1025" source="normal1.tsx"/>
@@ -24,7 +24,7 @@
  </layer>
  <layer name="Walkable" width="54" height="47">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VsQkAIAwEQHvdfydHcQtLQQsbJYJ3A4R/UnxKAABAtJajE6xezMTgPwDs1BKd4I429bKJAJw2b83x+7YLAAC+1AEYn2C6qCcAAA==
+   H4sIAAAAAAAAC+3VwQnAIBAEQP+xb2tLKXbhM3ASApJwQmYKOHa5x5YCAABk60d2gtmOmbj4DwBPzpqd4Bs99LKJALwtbs2qdnPHdgEAwD8NN7G6kagnAAA=
   </data>
  </layer>
  <layer name="Water" width="54" height="47">

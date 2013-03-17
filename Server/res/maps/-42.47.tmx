@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="50" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Hoenn Gyms Set.tsx"/>
  <layer name="Walkable" width="70" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Y3QqCMBiA4TU7q1vp/q8jUutED6tbCDrIYaLsp4za9lXvAx9UkNgLzqVSAAAAAAAAgGw7Pb7eancGlXa/+8tKq4HdxNfoX51o4EUXpVrtTuP5rM3calO8Pu9o9PzJiS5+dPFL3cV21f26exG29ubusiz6LosPHzeW2PfOR/cjyWJ3kbqu2FJfP3R5TvJ+ly7zpDpXqddPCF1cRz1ObHQJO39BE4MuYbHXF/Oct/KMEv5/IHaX6XPe0LNvKVLuXcr776+tHjVd1L6bw6TL8F6aHHtdY9Udfy14XcnVBQAAILUbF+m8VLA2AAA=
+   H4sIAAAAAAAAC+3YXQqCQBRA4enadtr/OiK1Xuyx2kLQQ4mJMj9l1Mxc83xwoYKiDjhOYwwAAAAAAACg206Gx1txp1eJ+95/VloN7Ca+Rkt1poEXXYw5ijuN57Vj5lab4vP5RiPTJye6+NHFL3UX2026dfeqbO3N3WVddF1WP/7cWGLfO1/djzSL3UXrumJLff3Q5T3N+126TJPqu2q9fkLo4jrJMLHRJewygyYtuoTFXl/ac97KM0b5/4HYXcbnvKGzby1S7l3K5++vrR41Xcz+MYdRl/65Njn2unNAFwAAsBR3Rkc7pbA2AAA=
   </data>
  </layer>
  <layer name="Walkable" width="70" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YLQqAAAyA0eGK0d+i3v8+3siB1SoqvgdfWBuLiwAAAACA7+gzYqjGaqrmfHqjd9ibiKVusVZbnjMAAAAAANyt9ae/1LkLAAA/dgATXg80sDYAAA==
+   H4sIAAAAAAAAC+3YOwqAQAwFwOA2ghZ+G/X+9/FGBmxtFxVm4BVpQnhlIgAAAADgP8YSMWXmzJJZy9sXfcPZRGzZxZ45yj0DAAAAAEBtrT/9o6FyL13u73UPAMBHXbUp6bywNgAA
   </data>
  </layer>
  <layer name="Grass" width="70" height="50">
@@ -16,7 +28,7 @@
    H4sIAAAAAAAAC+3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAADgN2YIZcmwNgAA
   </data>
  </layer>
- <layer name="water" width="70" height="50">
+ <layer name="Water" width="70" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAADgN2YIZcmwNgAA
   </data>
@@ -28,7 +40,7 @@
  </layer>
  <layer name="Collisions" width="70" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAADgN2YIZcmwNgAA
+   H4sIAAAAAAAAC+3IsQkAAAgEMcdy/8lsxcb6IYFrrgoAAAAAAAAAAAAAIE+v7iNDPwEAeQYHon0usDYAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="70" height="50">

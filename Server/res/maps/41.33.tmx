@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="36" height="34" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Whismur,80;Zubat,20;"/>
-  <property name="dayPokemoneLevels" value="15-16;15-16;"/>
-  <property name="nightPokemonLevels" value="Whismur,50;Zubat,50;"/>
-  <property name="nightPokemoneChances" value="15-16;15-16;"/>
-  <property name="pvp" value="enforced"/>
-  <property name="wildModifer" value="10"/>
+  <property name="dayPokemonChances" value="Whismur,75;Zubat,20;Aron,5;"/>
+  <property name="dayPokemonLevels" value="15-16;15-16;15-16;"/>
+  <property name="nightPokemonChances" value="Whismur,50;Zubat,50;"/>
+  <property name="nightPokemonLevels" value="15-16;15-16;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

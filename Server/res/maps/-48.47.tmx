@@ -34,7 +34,7 @@
  </layer>
  <layer name="WalkBehind" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WPQ6AIAyGYQYnq/dw0/ufTgZNGkT8WWzr+yQshKHRr4WUAAAAAOBbY3fck7w3FKt2zpqy5ity85xl4rD+PUviJFeRPMmLxb63Vg/+x9vMnXO907YWZ7VL4z73cHdHmldvv7e3ftFa+QO0s17XGdJvX8u5ijS3oujVP6nNVKtZAgAAAFYvADyzECcAAA==
+   H4sIAAAAAAAAC+3WMQ6AIAyFYQYnq/dw0/ufTgZNGkBEF1v8v4SFMLzERyUEAAAAAPjWPOR7EvemZJXOWZNmviON5ywTh/nPLomTXvXkSV8s3ntrefA/3mbuGvMux9qcZZfK/9zDLPCQsdXbt5K3+6LV+gdoV3ddd0i/fS33qqe51YtRfZPSTLXaJQAAAGAHsILOHRAnAAA=
   </data>
  </layer>
  <layer name="LedgesLeft" width="50" height="50">

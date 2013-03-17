@@ -2,11 +2,12 @@
 <map version="1.0" orientation="orthogonal" width="50" height="20" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Spinda,65;Sandshrew,15;Slugma,15;Skarmory,5;"/>
-  <property name="dayPokemonLevels" value="14-16;14-16;14-16;16;"/>
+  <property name="dayPokemonLevels" value="14-16;14-16;14-16;14-16;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
   <property name="nightPokemonChances" value="Spinda,65;Sandshrew,15;Slugma,15;Skarmory,5;"/>
-  <property name="nightPokemonLevels" value="14-16;14-16;14-16;16;"/>
+  <property name="nightPokemonLevels" value="14-16;14-16;14-16;14-16;"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>

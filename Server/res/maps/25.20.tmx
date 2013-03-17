@@ -20,7 +20,7 @@
  <tileset firstgid="20716" source="Hoenn Gyms.tsx"/>
  <layer name="Walkable" width="20" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2SQQ6CMBBFZ+/GhDmGx/IC6koPoJ5E17gCcaHGgzkTbDJAi1Qa4uK/5CVNoY9OAhEAAAAAAAAATMs2G+bY8zG6rlJy83snbhozo7bUlazX4ka8sr/5rW97e1kfxGOrZzlzbWgW27OGem6v8Lw3pBc6l6rn5o3pvSa4303MjVVgX3sP7vr89O6eZ31qr/2fjRE9osv8f+63y2pT9ZTFjGiZqOl6qe4JAAAA/MIbh2GI2gAZAAA=
+   H4sIAAAAAAAAC+2SPQ7CIBhA2V1MyjE8lhdQJz2AepI618m/QRsP5kcKCW0hFksah/eSlxBaHpBWKQAAAAAAgGnZFsMcuz5F1zVcdXu/UrdNuaNpGVcyXosb8abDzW99v7eX8UE8dno+J90Yu4vf84313Nwl8N6QXmxdrp67b0rvPcH5HmLleQ/Mn23vpfvWtvcMPItZ2173PxsjPflO8/85365ozNUzLGZKLTM1XS/XOQEAAH7hAz/5IgIAGQAA
   </data>
  </layer>
  <layer name="Walkable" width="20" height="80">

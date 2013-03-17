@@ -76,7 +76,7 @@
  </layer>
  <layer name="WalkBehind" width="40" height="47">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WSwoCQQxEc4zRceFFXM1FBMHL6NLPbsDDeCb/YLKa0NgKnQYLrQeBpmGG4oUmESGEpKxakXX77RQDPs8GKJfh8+z13IPl83kOYNkMtH6moPUzpba/UyNy1rpoXbVuWnetR1P2v9r+xqPX99PM/Sdq+5tlcnSF+Wr7m7scC3degvjLcZyUfYf8ftHmrMf6utXageZD7qvBufYfsM8EDeS5YqDOFXp7T24Ho7cykL1x/4vBvSAG/cWgvxj0F4P+YvyCvyfhyus1YB0AAA==
+   H4sIAAAAAAAAC+2WTQrCQAyFc4xqXXiRrryIIHgZXardCR7GM/kPZhZiGIzCZMAnvg9Ch4GWxxdKIkIIyVm0Isv22yme2DwroFwJm6fX8xYsn82zA8uWQOtnDlo/c2r7OzQiR62T1lnronXVujVl36vtbzh4fT927j9R21/n5JgU5qvtb2pyzMx5DuLPYz8qew/5/0Wbs5bU17XWBjQfcl8TnGv/AftM0ECeKwnUuUJv7/F2MHorA9kb978Y3Ati0F8M+otBfzHoL8Yv+HvsL97zDl96jphgHQAA
   </data>
  </layer>
 </map>

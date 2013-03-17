@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="35" height="35" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Aron,10;"/>
-  <property name="dayPokemonLevels" value="6-10;7-8;8;-7-8;"/>
+  <property name="dayPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Aron,9;Beldum,1;"/>
+  <property name="dayPokemonLevels" value="6-10;7-8;8-8;7-8;10-15;"/>
   <property name="nightPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Aron,10;"/>
-  <property name="nightPokemonLevels" value="6-10;7-8;8;-7-8;"/>
-  <property name="wildModifier" value="10"/>
-  <property name="pvp" value="enforced"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="nightPokemonLevels" value="6-10;7-8;8-8;7-8;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal16.tsx"/>
  <tileset firstgid="1025" source="normal10.tsx"/>

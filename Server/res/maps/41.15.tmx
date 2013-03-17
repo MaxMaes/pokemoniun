@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="60" tilewidth="16" tileheight="16">
  <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value="Magikarp,50;Tentacool,30;Gyarados,20;"/>
-  <property name="fishPokemonLevels" value="10-30;10-30;5-45;"/>
+  <property name="fishPokemonLevels" value="10-30;10-30;40-40;"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Magikarp,100;"/>
   <property name="waterPokemonLevels" value="5-35;"/>
-  <property name="wildModifier" value="10"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" name="1" tilewidth="16" tileheight="16">
   <image source="PGTileseti.png" trans="000000" width="512" height="512"/>

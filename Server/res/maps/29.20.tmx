@@ -41,12 +41,12 @@
  </layer>
  <layer name="Collisions" width="40" height="108">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WSU4CQRiFO17AIVFXFCKiiUuHRN067dSoGziA0000mngF9ho9hInzDRwWGt0gJIjjytehOzRlVXXRjYbF+5Ivf6CmVw1VUE44ziuswHzGcfYD5i31MbWp2k1tvt3CcXpgr9D3KSD7CyzCUsK+zaVdVGsnapeoZTG1BZ3A+5Oi+rz6UFOwH6bhgIi3hsuI994Y6rg0Vtem0s03jT4zcBbOwXkRb40omL5Ha5h/HW7ATbgloq1hkyFKvm3k2fEy7aLuGfLZrGGb03Rugu0HyHPoZTpCPRb1Y9xals6772nWcc7gObyAl/AKXmfr15DHx0XOpzvvFeR4g+/wA37CL/gt5ZPHq56f6Vn65IbVWf3zLs+TyuHcw3Su2jeDOgiHcurxUzHzqZ6h6a5bQI5FuOTlWUZdgave64ekfn2/6ua3yefi3nUdQn+f2u5Tl0+e3/ZZBu+6UWG+TxvJJueT55f73uAzuIV38D75O18j69pqml/u++hlekJ9bsF8BS9TEbWUVPdrRibTfGHzh+3jL/IF5wz7XGxw++l+R0yetNUMW8t2X7qxNv8bZVV7ipovTPl3wEbTnpqZ7T/3RAghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhLQiP+EIObuAQwAA
+   H4sIAAAAAAAAC+2WSUoDQRiFGy/gAOoqFWOMgktRULdOOxV1kz6A000UBa+QvaKHEJxv4LBQdBMTiHFc+Zp0k05ZVV3pjuLiffDxk9T0qpLqpJJynBdYhYWc4+yFLFgaYGpTtZvaAruF4/TAXqHvU0T2Z1iC5ZR9m0e7qNVO1C5Rz2JqCzuO9ydE7bz6UDOwH2bhgEi2hseI/94o6pg0Vtem0ss3hT7TcAbOwjmRbI04mL5Hq5h/Da7DDbgp4q1hkyFOvi3k2fYz7aDuGvLZrGGb03Rvwu37yHPgZzpEPRKNY7xake574EnecU7hGTyHF/ASXuUb15DHJ0XOp7vvVeR4hW/wHX7AT/gl5ZPHq87PdJYB7rA6a3Df5XkyLu49zLq1vjnUQTjkqsdPJsynOkPTs24eORbgop9nCXUZrviv79P69YOqm98mn4f3rOsQ+uep7T51+eT5bc+ymedpM9nkfPL8ct9rfAY38BbepX/ma2ZdW03zy30f/EyPqE//MF/Rz1RCLafV/VqRyTRf1PxR+/iNfOE5oz4XG7x+ut8Rk8dtdaPWst2XbqzN/0ZZ1Z7i5otS/h2w0bSnVmb7yz0RQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQggh/5FvgpJqzYBDAAA=
   </data>
  </layer>
  <layer name="Walkable" width="40" height="108">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3QwQmAIBQG4Cbp1gQt2gbt0qFWaYy8CB3CirQkvg8E4anvfzYNV43tN337RN99bXqQ72qPM0s4u4Y1F/yrVI9YK52B/IbueJ/z/bhyvJVTiXlLqz2zfM/8OV+8W/uMd/xxJgAAAAAAAAAAAAAAAACAt23vfcMxgEMAAA==
+   H4sIAAAAAAAAC+3UwQ1AMBQGYJO4mcCiNrCLA6sYg0sTB6GlReT7kiaS1nv/66FVRay+fqdve9B3uzfcyBfb48y0np3XNRa8q6MeYa90BvLrmv3vnPXDylErpxLzlvb1zFfypbx1V2zr//H+nnQnX/j36zOm+ONMAAAAAAAAAAAAAAAAAABPWwCM55BHgEMAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="40" height="108">

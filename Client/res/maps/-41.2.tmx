@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="80" height="80" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Spheal,10;Zubat,45;Golbat,20;Sealeo,5;Snorunt,20;"/>
+  <property name="dayPokemonLevels" value="26-32;26-32;32-32;32-32;25-25;"/>
+  <property name="nightPokemonChances" value="Spheal,10;Zubat,45;Golbat,20;Sealeo,5;Snorunt,20;"/>
+  <property name="nightPokemonLevels" value="26-32;26-32;32-32;32-32;25-25;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="normal1.tsx"/>
+ <tileset firstgid="1025" source="normal18.tsx"/>
+ <tileset firstgid="2049" source="normal3.tsx"/>
+ <tileset firstgid="3073" source="normal7.tsx"/>
+ <tileset firstgid="4097" source="normal2.tsx"/>
+ <tileset firstgid="5121" source="Hoenn Victory Road.tsx"/>
+ <layer name="Grass" width="80" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VQQ7BYBSFUWFmbBuWYaP2Yl9iShNNte79OSe5Y+mX19rtAAAAAAAAgDaXU/9uh9e1SLfRT78R1yLdQT/9Rth5r5/761mLdIc5e3539XN/6bVId5ja1Ps6Yr85z7FFs1/pl7o5/bZfi3QH/b77nRy9X6LVL/Wbeg79xluLdAf99NtqU/81a/3/tEjf0dKeLZLvn37Z/g22er/0616LT54heZst0nf02FE/91e060E/9/d+S75ba/1Gi/Qd/fP96ZfvMHo/AAAAAACAFnc0mZ56AGQAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="80" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YwQmAMAwF0A7gset4E4dwWVfz2IIHLTSK9T3IvQRCmp8SAAAAAAAAAAAt9untF7Rbc6loSy41Cv0DAODKF+8EAJ63uffprM6t7mZXdf709wxK/2Acc8A82tsAwEgi/ksAAAAAAAAAwNkBG/eGZwBkAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="80" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2ay1IDIRBFs7Xc5nM0q5iVZmE5u/j/v2G6DFbbXpoeTAaY3FNFFXlBOKFpmMlmQwghhBBCCCGEEEIIIYQQQgjpjZft3/JxLm+dlAl8Pym9gL7boROH4m7fuT/k6djQ4aTc7Afwl/PUwmGabwmpvxYct+Zw8eS9toTD5M76Q+Seb4HnrzX09z907AooxlsTid8l/O5B/Hrv6wXkJ613R/orgvzox0v7Q/lWyOWY1tT6ezo/93zlEp17a/B3izHcm7+5c3BXGHeKXcHbH47gz+YQix1HyaW4OxmPel8uoDpyN4I/69ASPSvoNm1d9yEgf8jdKP68vHstf6Xcjtyt0Z/ed6Dzfc5fNC+v0V/u2ggaH/I3d28zoj977UWYlLv3zDqP+kH1KKP6Q2P1zvU1/qL7oLX4Q5Tmh+cv6mMUf7fqB9UF+ov1g+rCGvzpPKGvW9XELzqHHbf5/Xj0HkfP/nIOo2fZyNh0HylvC9E9UO/+PFf2cZqXOndG/CWHQumsa+ndn/ce9BnBXoeJ+Iuca0b3p8/1dr2y/qxDtJ/bbe/LX2k+on2t9ob+E0J/33hnA/RfC/org+ZgLnb1aw+Xfh7Bb5HrYwR/tfd/0ByM5PjIvaSR/NXg+Zt7n+ST/n5KxJf17bXfo7+5sYrWrRR3uRzi5Rbke87a2Iqa2PJc1Pg7BdrV7ffkb66viOO5/qLtRs44S3PNcS1ZCCGEEEIIIYQQQgghhBBCyG++AMA06t4AZAAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="80" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YsQ3AMAgEQIZggaRz9h8waWgsyxWVcye9noKGlggAAAAAAAAAAE53ZcSdPV3zKvP+KcZ3y5M9XfMq8z4AAAAA7HT8+/6s498HAAAAAAAAAAAAAFBeu3uHUgBkAAA=
+  </data>
+ </layer>
+</map>

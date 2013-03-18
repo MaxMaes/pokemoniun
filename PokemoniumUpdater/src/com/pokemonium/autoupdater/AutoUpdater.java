@@ -19,7 +19,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
-import org.ini4j.InvalidIniFormatException;
 
 /**
  * @author Myth1c
@@ -30,17 +29,16 @@ public class AutoUpdater
 	private String updatelinks = "http://s1.pokemonium.com/updater/updatelinks.ini";
 	private String versionlog = "http://s1.pokemonium.com/updater/releaselog.txt";
 
-	
 	private String latestVersion = "";
 	private String currentVersion = "";
 	private int versionidx = 0;
 	private int latestVersionidx = 0;
 	private boolean updatedUpdater = false;
-	
+
 	private ArrayList<String> versions;
 	private Ini updatelinksini;
 	private InputStreamReader updatelinksreader;
-	
+
 	public AutoUpdater()
 	{
 		if(checkForUpdate())
@@ -50,24 +48,13 @@ public class AutoUpdater
 				updatelinksreader = new InputStreamReader(new URL(updatelinks).openStream());
 				updatelinksini = new Ini(updatelinksreader);
 			}
-			catch(InvalidIniFormatException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch(MalformedURLException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			catch(IOException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("A new version is available, please wait while the game is being updated to the latest version.");
 			update();
-			
+
 			try
 			{
 				updatelinksreader.close();
@@ -144,8 +131,10 @@ public class AutoUpdater
 				}
 				else
 				{
+					s.close();
 					break;
 				}
+				s.close();
 			}
 		}
 
@@ -223,17 +212,18 @@ public class AutoUpdater
 				entryName = entryName.replace('/', File.separatorChar);
 				entryName = entryName.replace('\\', File.separatorChar);
 				System.out.println("Extracting: " + entryName);
-				
+
 				int n;
 				FileOutputStream fileoutputstream;
 				File newFile = new File(entryName);
-				
+
 				String extension = "";
 				int i = entryName.lastIndexOf('.');
-				if (i > 0) {
-				    extension = entryName.substring(i+1);
+				if(i > 0)
+				{
+					extension = entryName.substring(i + 1);
 				}
-				
+
 				if(extension.equalsIgnoreCase("jar"))
 				{
 					if(newFile.exists())
@@ -249,7 +239,7 @@ public class AutoUpdater
 						}
 					}
 				}
-				
+
 				if(zipentry.isDirectory())
 				{
 					if(!newFile.exists())
@@ -307,7 +297,7 @@ public class AutoUpdater
 			{// Catch exception if any
 				System.err.println("Error: " + e.getMessage());
 			}
-			
+
 			try
 			{
 				updatelinksreader.close();
@@ -321,13 +311,12 @@ public class AutoUpdater
 			System.out.println("Press any key to continue");
 			Scanner s = new Scanner(System.in);
 			s.nextLine();
+			s.close();
 			System.exit(1);
 		}
 	}
 
-	/*
-	 * Returns true when an update is available
-	 */
+	/* Returns true when an update is available */
 	public boolean checkForUpdate()
 	{
 		System.out.println("Checking for new version");
@@ -370,9 +359,6 @@ public class AutoUpdater
 			}
 			latestVersionidx--;
 			in.close();
-		}
-		catch(MalformedURLException e)
-		{
 		}
 		catch(IOException e)
 		{

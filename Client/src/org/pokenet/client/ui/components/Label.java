@@ -111,7 +111,7 @@ public class Label extends Component
 	{
 		if(getFont() == null)
 		{
-			System.out.println("WARNING: Attempting to fit the label to text but font is not set. Please set the font before fitting.");
+			//System.out.println("WARNING: Attempting to fit the label to text but font is not set. Please set the font before fitting.");
 			return;
 		}
 		if(this.getBounds() == null)

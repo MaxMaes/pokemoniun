@@ -395,13 +395,14 @@ public class BigBagDialog extends Frame
 	public void useItem(int i)
 	{
 		destroyPopup();
-		if(m_curCategory == 0 || m_curCategory == 3)
+		if(m_curCategory == 3)
+//		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName())).getCategory().equalsIgnoreCase("Field"))
 				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);
 			// System.out.println("win " + i);
 			else
-				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);
+				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), true, false);
 			// System.out.println("fail " + i);
 			// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
 			// .getCategory());

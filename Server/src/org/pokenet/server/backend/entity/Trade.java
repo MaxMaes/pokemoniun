@@ -400,7 +400,7 @@ public class Trade implements Runnable
 								curPokemon.setEvolution(currentEvolution);
 								curPokemon.evolutionResponse(true, p);
 							}
-						}
+						
 						else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer") && currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
 						{
 							curPokemon.setEvolution(currentEvolution);
@@ -430,6 +430,7 @@ public class Trade implements Runnable
 						{
 							curPokemon.setEvolution(currentEvolution);
 							curPokemon.evolutionResponse(true, p);
+						}
 						}
 						break;
 					}

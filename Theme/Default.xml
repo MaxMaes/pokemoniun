@@ -47,13 +47,11 @@
         <param name="maxHeight"><int>14</int></param>
         <param name="background"><image>closebutton_background</image></param>
     </theme>
-    <theme name="editField" ref="-defaults">
+    <theme name="editfield" ref="-defaults">
         <param name="background"><image>editField</image></param>
         <param name="border"><border>5,0</border></param>
         <theme name="renderer" ref="-defaults"/>
         <param name="mouseCursor"><cursor>cursor_text</cursor></param>
-        <param name="minWidth"><int>4</int></param>
-        <param name="minHeight"><int>4</int></param>
     </theme>
     <theme name="resizableframe_titled" ref="-defaults">
         <param name="background"><image>resizableframe_titled</image></param>
@@ -82,5 +80,11 @@
         <theme name="scrollbar_horizontal" ref="scrollbar_horizontal"/>
         <param name="autoScrollArea"><int>5</int></param>
         <param name="autoScrollSpeed"><int>10</int></param>
+        <param name="scrollbarsAlwaysVisible"><bool>false</bool></param>
+        <param name="hasDragButton"><bool>false</bool></param>
+    </theme>
+    <theme name="tooltipwindow" ref="-defaults">
+        <param name="background"><image>resizableframe</image></param>
+        <param name="fadeInTime"><int>250</int></param>
     </theme>
 </themes>

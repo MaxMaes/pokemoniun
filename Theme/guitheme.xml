@@ -4,9 +4,9 @@
     <images file="guitheme.png">
         <area name="close" xywh="3,3,14,14"/>
         <area name="close_pressed" xywh="3,20,14,14"/>
-        <area name="button" xywh="20,2,23,17" splitx="L11,R11" splity="T8,B8"/>
-        <area name="button_pressed" xywh="20,22,23,17" splitx="L11,R11" splity="T8,B8"/>
-        <area name="button_disabled" xywh="20,42,23,17" splitx="L11,R11" splity="T8,B8"/>
+        <area name="button" xywh="20,2,23,17" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button_pressed" xywh="20,22,23,17" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button_disabled" xywh="20,42,23,17" splitx="L6,R6" splity="T6,B6"/>
         <select name="button_background">
             <alias ref="button_pressed" if="pressed"/>
             <alias ref="button_disabled" if="disabled"/>
@@ -16,7 +16,28 @@
             <alias ref="close_pressed" if="pressed"/>
             <alias ref="close"/>
         </select>
-        <area name="editField" xywh="55,4,23,15" splitx="L11,R11" splity="T7,B7"/>
+        <area name="editField" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
         <cursor name="cursor_text" hotSpotX="0" hotSpotY="0" xywh="93,3,7,16"/>
+        <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
+        <area name="resizableframe" xywh="55,63,24,7" splitx="L2,R2" splity="T2,B2"/>
+        <area name="scrollbar_horizontal_button_left" xywh="60,78,14,14"/>
+        <area name="scrollbar_horizontal_button_left_pressed" xywh="60,96,14,14"/>
+        <area name="scrollbar_horizontal_button_right" xywh="83,78,14,14"/>
+        <area name="scrollbar_horizontal_button_right_pressed" xywh="83,96,14,14"/>
+        <area name="scrollbar_horizontal_bar" xywh="75,78,7,14"/>
+        <area name="scrollbar_horizontal_thumb" xywh="111,78,7,14" splitx="L3,R3" splity="T3,B3"/>
+        <area name="scrollbar_horizontal_thumb_pressed" xywh="101,78,7,14" splitx="L3,R3" splity="T3,B3"/>
+        <select name="scrollbar_horizontal_button_left_background">
+            <alias ref="scrollbar_horizontal_button_left_pressed" if="pressed"/>
+            <alias ref="scrollbar_horizontal_button_left"/>
+        </select>
+        <select name="scrollbar_horizontal_button_right_background">
+            <alias ref="scrollbar_horizontal_button_right_pressed" if="pressed"/>
+            <alias ref="scrollbar_horizontal_button_right"/>
+        </select>
+        <select name="scrollbar_horizontal_thumb_background">
+            <alias ref="scrollbar_horizontal_thumb_pressed" if="pressed"/>
+            <alias ref="scrollbar_horizontal_thumb"/>
+        </select>
     </images>
 </themes>

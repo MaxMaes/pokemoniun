@@ -16,7 +16,8 @@
             <alias ref="close_pressed" if="pressed"/>
             <alias ref="close"/>
         </select>
-        <area name="editField" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
+        <area name="editfield" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
+        <cursor name="cursor" hotSpotX="0" hotSpotY="0" xywh="112,2,12,19"/>
         <cursor name="cursor_text" hotSpotX="0" hotSpotY="0" xywh="93,3,7,16"/>
         <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
         <area name="resizableframe" xywh="55,63,24,7" splitx="L2,R2" splity="T2,B2"/>
@@ -36,8 +37,53 @@
             <alias ref="scrollbar_horizontal_button_right"/>
         </select>
         <select name="scrollbar_horizontal_thumb_background">
-            <alias ref="scrollbar_horizontal_thumb_pressed" if="pressed"/>
-            <alias ref="scrollbar_horizontal_thumb"/>
+            <grid weightsX="1,0,1,0,1" weightsY="1" if="pressed">
+                <area xywh="101,78,2,14"/>
+                <area xywh="103,78,1,14"/>
+                <area xywh="104,78,1,14"/>
+                <area xywh="105,78,1,14"/>
+                <area xywh="106,78,2,14"/>
+            </grid>
+            <grid weightsX="1,0,1,0,1" weightsY="1">
+                <area xywh="111,78,2,14"/>
+                <area xywh="113,78,1,14"/>
+                <area xywh="114,78,1,14"/>
+                <area xywh="115,78,1,14"/>
+                <area xywh="116,78,2,14"/>
+            </grid>
+        </select>
+        <area name="scrollbar_vertical_button_up" xywh="20,76,14,14"/>
+        <area name="scrollbar_vertical_button_down" xywh="20,99,14,14"/>
+        <area name="scrollbar_vertical_button_up_pressed" xywh="38,76,14,14"/>
+        <area name="scrollbar_vertical_button_down_pressed" xywh="38,99,14,14"/>
+        <area name="scrollbar_vertical_bar" xywh="20,91,14,7"/>
+        <area name="scrollbar_vertical_thumb" xywh="101,95,14,7" splitx="L3,R3" splity="T3,B3"/>
+        <area name="scrollbar_vertical_thumb_pressed" xywh="101,105,14,7" splitx="L3,R3" splity="T4,B4"/>
+        <area name="editfield_cursor" xywh="97,23,1,12"/>
+        <area name="editfield_selection" xywh="93,23,1,12"/>
+        <select name="scrollbar_vertical_button_up_background">
+            <alias ref="scrollbar_vertical_button_up_pressed" if="pressed"/>
+            <alias ref="scrollbar_vertical_button_up"/>
+        </select>
+        <select name="scrollbar_vertical_button_down_background">
+            <alias ref="scrollbar_vertical_button_down_pressed" if="pressed"/>
+            <alias ref="scrollbar_vertical_button_down"/>
+        </select>
+        <select name="scrollbar_vertical_thumb_background">
+            <grid weightsX="1" weightsY="0,1,0,1,0" if="pressed">
+                <area xywh="101,105,14,2"/>
+                <area xywh="101,107,14,1"/>
+                <area xywh="101,108,14,1"/>
+                <area xywh="101,109,14,1"/>
+                <area xywh="101,110,14,2"/>
+            </grid>
+            <grid weightsX="1" weightsY="0,1,0,1,0">
+                <area xywh="101,95,14,2"/>
+                <area xywh="101,97,14,1"/>
+                <area xywh="101,98,14,1"/>
+                <area xywh="101,99,14,1"/>
+                <area xywh="101,100,14,2"/>
+            </grid>
         </select>
     </images>
 </themes>

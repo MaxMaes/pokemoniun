@@ -81,7 +81,7 @@
         <param name="minWidth"><int>4</int></param>
         <param name="minHeight"><int>4</int></param>
     </theme>
-    <theme name="scrollbar_horizontal" ref="-defaults">
+    <theme name="hscrollbar" ref="-defaults">
         <theme name="leftbutton" ref="-defaults">
             <param name="background"><image>scrollbar_horizontal_button_left_background</image></param>
         </theme>
@@ -94,7 +94,7 @@
         <param name="background"><image>scrollbar_horizontal_bar</image></param>
         <param name="scaleThumb"><bool>true</bool></param>
     </theme>
-    <theme name="scrollbar_vertical" ref="-defaults">
+    <theme name="vscrollbar" ref="-defaults">
         <theme name="upbutton" ref="-defaults">
             <param name="background"><image>scrollbar_vertical_button_up_background</image></param>
         </theme>
@@ -108,8 +108,8 @@
         <param name="scaleThumb"><bool>true</bool></param>
     </theme>
     <theme name="scrollpane" ref="-defaults">
-        <theme name="hscrollbar" ref="scrollbar_horizontal"/>
-        <theme name="vscrollbar" ref="scrollbar_vertical"/>
+        <theme name="hscrollbar" ref="hscrollbar"/>
+        <theme name="vscrollbar" ref="vscrollbar"/>
         <param name="autoScrollArea"><int>5</int></param>
         <param name="autoScrollSpeed"><int>10</int></param>
         <param name="scrollbarsAlwaysVisible"><bool>false</bool></param>

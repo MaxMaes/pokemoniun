@@ -37,14 +37,14 @@
             <alias ref="scrollbar_horizontal_button_right"/>
         </select>
         <select name="scrollbar_horizontal_thumb_background">
-            <grid weightsX="1,0,1,0,1" weightsY="1" if="pressed">
+            <grid weightsX="0,1,0,1,0" weightsY="1" if="pressed">
                 <area xywh="101,78,2,14"/>
                 <area xywh="103,78,1,14"/>
                 <area xywh="104,78,1,14"/>
                 <area xywh="105,78,1,14"/>
                 <area xywh="106,78,2,14"/>
             </grid>
-            <grid weightsX="1,0,1,0,1" weightsY="1">
+            <grid weightsX="0,1,0,1,0" weightsY="1">
                 <area xywh="111,78,2,14"/>
                 <area xywh="113,78,1,14"/>
                 <area xywh="114,78,1,14"/>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="35" height="35" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2049" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="3073" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="4097" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5121" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="6145" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="7169" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="8193" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="9217" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
+ </tileset>
+ <tileset firstgid="10027" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="11051" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="12075" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="13099" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetxiii.png" trans="000000" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="14123" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="15147" name="Untitled" tilewidth="16" tileheight="16">
+  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <layer name="Grass" width="35" height="35">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEw2MF0PdxyU/DIUQv81CEP0wJI6pKHR5pbcIFfOqh4pLiFkB30iCNi/TtS3UJseqG1W5D9i24nujg989FgcQuyXQNR1o2CUTAKRsEoGAW0BADc2ylcJBMAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="35" height="35">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UwQ2DMAxFYQ1mKJkNOLSwRQuXsgV0vV5wlEZEVgKUYqjQf9K/OLLzEgWiCAAAgKVSJlfKjVKqsTa1tjUxpVUmzWf+U421qbVYwGWO92V97zeE5tn9k9TkSBfr4cLvZw+XjN5CzlJ43qqEiz6ve+Y77ftgqXdy4XAPGxft/i8uod4zu3S0b+9Ee7wOcAn913x1SZeQx5LeLVg7T+o7+iWSLgAAAM7BAOWtGVwkEwAA
+  </data>
+ </layer>
+</map>

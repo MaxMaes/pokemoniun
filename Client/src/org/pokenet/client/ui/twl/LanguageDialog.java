@@ -8,7 +8,7 @@ import de.matthiasmann.twl.Widget;
 /**
  * Handles language selection
  * 
- * @author Nushio
+ * @author Myth1c
  */
 public class LanguageDialog extends ResizableFrame
 {
@@ -25,15 +25,12 @@ public class LanguageDialog extends ResizableFrame
 		setPosition(400 - 170, 250);
 		setTheme("languagedialog");
 		setTitle("Pokemonium Language Selection");
+		setResizableAxis(ResizableAxis.NONE);
+		setDraggable(false);
 		pane = new Widget();
 		pane.setSize(350, 320);
 		pane.setTheme("content");
-		//setBackground(new Color(0, 0, 0, 140));
-		/*getTitleBar().setForeground(m_black);
-		setDraggable(false);
-		setResizable(false);
-		getTitleBar().getCloseButton().setVisible(false);*/
-
+		
 		/* Create the info label */
 		m_info = new Label("  Welcome | Bienvenido | Bienvenue \n         Bem-vindo | Tervetuloa");
 		m_info.setPosition(60, 40);
@@ -127,7 +124,6 @@ public class LanguageDialog extends ResizableFrame
 			}
 
 			setVisible(true);
-			pane.setVisible(true);
 			add(pane);
 		}
 		catch(Exception e)

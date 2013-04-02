@@ -36,7 +36,17 @@ public class AboutDialog extends Frame
 		m_info.setSize(280, 320);
 		m_info.setLocation(4, 4);
 		m_info.setWrapEnabled(true);
-		m_info.setText(translated.get(35) + "\n" + translated.get(36) + "\n" + translated.get(37) + "\n" + translated.get(38) + "\n" + translated.get(39) + "\n");
+		m_info.setText("This is a small test message. It's not too long.\n" +
+                "\tThis is a small test message. It's not too long.\n" +
+                "This\tis a small test message. It's not too long.\n" +
+                "This is\ta small test message. It's not too long.\n" +
+                "This is a\tsmall test message. It's not too long.\n" +
+                "This is a small\ttest message. It's not too long.\n" +
+                "This is a small test\tmessage. It's not too long.\n" +
+                "This is a small test message.\tIt's not too long.\n" +
+                "This is a small test message. It's\tnot too long.\n" +
+                "This is a small test message. It's not\ttoo long.\n" +
+                "This is a small test message. It's not too\tlong.");
 		m_info.setFont(GameClient.getInstance().getFontSmall());
 		m_info.setBackground(m_bg);
 		m_info.setForeground(m_white);

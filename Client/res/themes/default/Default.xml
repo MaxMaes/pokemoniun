@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
-    <fontDef name="pokefont" filename="dp-small.fnt" color="white">
+    <include filename="guitheme.xml"/>
+    <fontDef name="pokefont" filename="dp-small.fnt" color="white" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
     <fontDef name="pokefont_large" filename="dp.fnt" color="#FFFFFF">
@@ -25,7 +26,6 @@
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
-    <include filename="guitheme.xml"/>
 
     <inputMapDef name="-defaultInputMap">
         <action name="selectAll">ctrl A</action>
@@ -41,7 +41,7 @@
     <theme name="-defaults">
         <param name="background"><image>none</image></param>
         <param name="overlay"><image>none</image></param>
-        <param name="font"><font>normal_black</font></param>
+        <param name="font"><font>normal</font></param>
         <param name="textAlignment"><enum type="alignment">left</enum></param>
         <param name="minWidth"><int>0</int></param>
         <param name="minHeight"><int>0</int></param>
@@ -81,8 +81,14 @@
         <param name="background"><image>resizableframe</image></param>
         <param name="minWidth"><int>4</int></param>
         <param name="minHeight"><int>4</int></param>
+        <param name="fadeDurationActive"><int>0</int></param>
+        <param name="fadeDurationDeactivate"><int>0</int></param>
+        <param name="fadeDurationActivate"><int>0</int></param>
+        <param name="fadeDurationHide"><int>0</int></param>
+        <param name="fadeDurationShow"><int>0</int></param>
+        <param name="fadeColorInactive"><color>WHITE</color></param>
     </theme>
-    <theme name="resizableframe_titled" ref="-defaults">
+    <theme name="resizableframe_titled" ref="resizableframe">
         <param name="background"><image>resizableframe_titled</image></param>
         <param name="minWidth"><int>3</int></param>
         <param name="minHeight"><int>27</int></param>
@@ -91,6 +97,10 @@
         <param name="titleAreaRight"><int>-8</int></param>
         <param name="titleAreaBottom"><int>20</int></param>
         <theme name="closeButton" ref="closeButton"/>
+        <param name="closeButtonX"><int>0</int></param>
+        <param name="closeButtonY"><int>0</int></param>
+        <param name="resizeHandleX"><int>0</int></param>
+        <param name="resizeHandleY"><int>0</int></param>
     </theme>
     <theme name="hscrollbar" ref="-defaults">
         <theme name="leftbutton" ref="-defaults">
@@ -147,37 +157,46 @@
     </theme>
     <theme name="guipane" ref="-defaults">
         <theme name="label" ref="label"/>
-        <theme name="languagedialog" ref="resizableframe_titled">
-            <theme name="content" ref="-defaults">
+        <theme name="loginscreen" ref="-defaults">
+            <theme name="label" ref="label">
+                <param name="font"><font>pokefont</font></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+            <theme name="languagedialog" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button_language" ref="button">
+                        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                    <param name="defaultGap"><dimension>0,5</dimension></param>
+                    <theme name="label_welcome" ref="label">
+                        <param name="font"><font>normal_white</font></param>
+                    </theme>
+                </theme>
+                <theme name="label_title" ref="-defaults">
+                    <param name="font"><font>normal_black</font></param>
+                </theme>
                 <theme name="button_language" ref="button">
                     <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
                     <param name="font"><font>normal</font></param>
                 </theme>
-                <param name="defaultGap"><dimension>0,5</dimension></param>
-                <theme name="label_welcome" ref="label">
-                    <param name="font"><font>normal_white</font></param>
+                <theme name="title" ref="title"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+            </theme>
+            <theme name="aboutdialog" ref="resizableframe_titled">
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="content" ref="-defaults">
+                    <theme name="textarea" ref="textarea">
+                    </theme>
                 </theme>
+                <param name="closeButtonX"><int>270</int></param>
+                <param name="closeButtonY"><int>5</int></param>
             </theme>
-            <theme name="label_title" ref="-defaults">
-                <param name="font"><font>normal_black</font></param>
-            </theme>
-            <theme name="button_language" ref="button">
-                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
-                <param name="font"><font>normal</font></param>
-            </theme>
-            <theme name="title" ref="title"/>
-            <param name="hasCloseButton"><bool>false</bool></param>
-            <param name="hasResizeHandle"><bool>false</bool></param>
-            <param name="closeButtonX"><int>0</int></param>
-            <param name="closeButtonY"><int>0</int></param>
-            <param name="resizeHandleX"><int>0</int></param>
-            <param name="resizeHandleY"><int>0</int></param>
-            <param name="fadeDurationActive"><int>250</int></param>
-            <param name="fadeDurationDeactivate"><int>250</int></param>
-            <param name="fadeDurationActivate"><int>250</int></param>
-            <param name="fadeDurationShow"><int>250</int></param>
-            <param name="fadeDurationHide"><int>250</int></param>
-            <param name="fadeColorInactive"><color>#FFFFFF</color></param>
         </theme>
     </theme>
 </themes>

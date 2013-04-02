@@ -16,12 +16,19 @@ import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
+/**
+ * Test class for the new UI
+ * @author Myth1c
+ *
+ */
 public class TWLTest extends BasicGame {
 
 	public TWLTest(String title) {
 		super(title);
 	}
 
+	private static TWLTest m_instance;
+	
 	private LWJGLRenderer lwjglRenderer;
 	private ThemeManager theme;
 	private GUI gui;
@@ -32,7 +39,8 @@ public class TWLTest extends BasicGame {
 	{
 		try
 		{
-			AppGameContainer gameContainer = new AppGameContainer(new TWLTest("TWL"), 800, 600, false);
+			TWLTest test = TWLTest.getInstance();
+			AppGameContainer gameContainer = new AppGameContainer(test, 800, 600, false);
 			gameContainer.setTargetFrameRate(60);
 			gameContainer.setAlwaysRender(true);
 			gameContainer.setShowFPS(false);
@@ -52,7 +60,6 @@ public class TWLTest extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		// construct & configure root widget
-        root = new GUIPane();
         String m_filepath = System.getProperty("res.path");
 		if(m_filepath == null)
 			m_filepath = "";
@@ -63,6 +70,7 @@ public class TWLTest extends BasicGame {
             lwjglRenderer = new LWJGLRenderer();
             File f = new File(m_filepath + "res/themes/default/Default.xml");
             theme = ThemeManager.createThemeManager(f.getAbsoluteFile().toURI().toURL() , lwjglRenderer);
+            root = new GUIPane();
             gui = new GUI(root, lwjglRenderer);
             gui.applyTheme(theme);
         } catch (LWJGLException e) {
@@ -77,11 +85,26 @@ public class TWLTest extends BasicGame {
         // connect input
         twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
         gc.getInput().addPrimaryListener(twlInputAdapter); 	
+        root.getLoginScreen().setServerRevision(2000);
 	}
 
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
 		twlInputAdapter.update();	
+	}
+	
+	public static TWLTest getInstance() {
+		if(m_instance == null)
+			m_instance = new TWLTest("TWL");
+		return m_instance;
+	}
+	
+	public LWJGLRenderer getRenderer() {
+		return lwjglRenderer;
+	}
+	
+	public ThemeManager getTheme() {
+		return theme;
 	}
 
 }

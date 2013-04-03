@@ -26,6 +26,9 @@ import de.matthiasmann.twl.renderer.Renderer;
 public class LoginScreen extends DesktopArea {
 	private LanguageDialog m_languageDialog;
 	private AboutDialog m_about;
+	private ToSDialog m_terms;
+	private LoginDialog m_login;
+	private ServerDialog m_select;
 	
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
@@ -46,11 +49,22 @@ public class LoginScreen extends DesktopArea {
 		m_languageDialog = new LanguageDialog();
 		add(m_languageDialog);
 		
+		m_terms = new ToSDialog();
+		add(m_terms);
+		
 		m_about = new AboutDialog();
 		add(m_about);
 		
+		m_login = new LoginDialog();
+		add(m_login);
+		
+		m_select = new ServerDialog();
+		add(m_select);
+		
+		m_languageDialog.setVisible(false);
+		
 		m_openAbout = new Button(translated.get(3));
-		m_openAbout.setVisible(false);
+		m_openAbout.setVisible(true);
 		m_openAbout.addCallback(new Runnable()
 		{
 			@Override
@@ -62,7 +76,7 @@ public class LoginScreen extends DesktopArea {
 		add(m_openAbout);
 
 		m_openToS = new Button(translated.get(4));
-		m_openToS.setVisible(false);
+		m_openToS.setVisible(true);
 		m_openToS.addCallback(new Runnable()
 		{
 			@Override
@@ -84,9 +98,9 @@ public class LoginScreen extends DesktopArea {
 		m_clientRev.setPosition(4, 600 - m_clientRev.getHeight() - 10);
 		m_serverRev.setPosition(m_clientRev.getWidth() + m_clientRev.computeTextWidth() + 16, m_clientRev.getY());
 		m_openAbout.setSize(64, 32);
-		m_openAbout.setPosition(800 - 64 - 8, 8);
+		m_openAbout.setPosition(728, 8);
 		m_openToS.setSize(64, 32);
-		m_openToS.setPosition(800 - 64 - 8, 40);
+		m_openToS.setPosition(728, 45);
 	}
 	
 	private void loadBackground(String respath) 
@@ -199,8 +213,8 @@ public class LoginScreen extends DesktopArea {
 	 */
 	public void showToS()
 	{
-		//m_terms.reloadStrings();
-		//m_terms.setVisible(true);
+		m_terms.reloadStrings();
+		m_terms.setVisible(true);
 	}
 	
 	/**
@@ -209,9 +223,9 @@ public class LoginScreen extends DesktopArea {
 	public void showServerSelect()
 	{
 		//m_register.setVisible(false);
-		//m_login.setVisible(false);
-		//m_select.reloadStrings();
-		//m_select.setVisible(true);
+		m_login.setVisible(false);
+		m_select.reloadStrings();
+		m_select.setVisible(true);
 		m_openAbout.setVisible(false);
 		m_openToS.setVisible(false);
 		m_languageDialog.setVisible(false);
@@ -222,8 +236,8 @@ public class LoginScreen extends DesktopArea {
 	 */
 	public void showRegistration()
 	{
-		//m_select.setVisible(false);
-		//m_login.setVisible(false);
+		m_select.setVisible(false);
+		m_login.setVisible(false);
 		m_openAbout.setVisible(true);
 		m_openToS.setVisible(true);
 		m_languageDialog.setVisible(false);
@@ -237,13 +251,13 @@ public class LoginScreen extends DesktopArea {
 	 */
 	public void showLogin()
 	{
-		//m_login.reloadStrings();
-		//m_select.setVisible(false);
+		m_login.reloadStrings();
+		m_select.setVisible(false);
 		//m_register.setVisible(false);
-		//m_login.setVisible(true);
+		m_login.setVisible(true);
 		m_openAbout.setVisible(true);
 		m_openToS.setVisible(true);
-		//m_login.getLoginButton().setEnabled(true);
+		m_login.getLoginButton().setEnabled(true);
 		m_languageDialog.setVisible(false);
 	}
 	
@@ -253,10 +267,24 @@ public class LoginScreen extends DesktopArea {
 	public void showLanguageSelect()
 	{
 		//m_register.setVisible(false);
-		//m_login.setVisible(false);
-		//m_select.setVisible(false);
+		m_login.setVisible(false);
+		m_select.setVisible(false);
 		m_languageDialog.setVisible(true);
 		m_openAbout.setVisible(false);
 		m_openToS.setVisible(false);
+	}
+	
+	/**
+	 * Logs the user with current user and pass, this way they don't have to click "Login".
+	 * 
+	 * @return
+	 */
+	public void enterKeyDefault()
+	{
+		if(!m_languageDialog.isVisible())
+			if(m_select.isVisible())
+				m_select.goServer();
+			else
+				m_login.goLogin();
 	}
 }

@@ -57,6 +57,7 @@
         <param name="border"><border>5,0</border></param>
         <param name="minWidth"><int>12</int></param>
         <param name="minHeight"><int>12</int></param>
+        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
     </theme>
     <theme name="closeButton" ref="-defaults">
         <param name="minWidth"><int>14</int></param>
@@ -87,6 +88,9 @@
         <param name="fadeDurationHide"><int>0</int></param>
         <param name="fadeDurationShow"><int>0</int></param>
         <param name="fadeColorInactive"><color>WHITE</color></param>
+    </theme>
+    <theme name="resizableframe_borderless" ref="resizableframe">
+        <param name="background"><image>resizableframe_borderless</image></param>
     </theme>
     <theme name="resizableframe_titled" ref="resizableframe">
         <param name="background"><image>resizableframe_titled</image></param>
@@ -179,7 +183,27 @@
                     <param name="font"><font>normal_black</font></param>
                 </theme>
                 <theme name="button_language" ref="button">
-                    <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+                    <param name="font"><font>normal</font></param>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+            </theme>
+            <theme name="serverdialog" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button" ref="button">
+                        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+                        <param name="font"><font>normal_black</font></param>
+                    </theme>
+                    <theme name="label_info" ref="label">
+                        <param name="font"><font>normal_white</font></param>
+                    </theme>
+                    <theme name="editfield" ref="editfield"/>
+                </theme>
+                <theme name="label_title" ref="-defaults">
+                    <param name="font"><font>normal_black</font></param>
+                </theme>
+                <theme name="button_language" ref="button">
                     <param name="font"><font>normal</font></param>
                 </theme>
                 <theme name="title" ref="title"/>
@@ -196,6 +220,26 @@
                 </theme>
                 <param name="closeButtonX"><int>270</int></param>
                 <param name="closeButtonY"><int>5</int></param>
+            </theme>
+            <theme name="tosdialog" ref="resizableframe_titled">
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="content" ref="-defaults">
+                    <theme name="textarea" ref="textarea">
+                    </theme>
+                </theme>
+                <param name="closeButtonX"><int>270</int></param>
+                <param name="closeButtonY"><int>5</int></param>
+            </theme>
+            <theme name="logindialog" ref="resizableframe_borderless">
+                <theme name="button" ref="button">
+                    <param name="font"><font>normal</font></param>
+                </theme>
+                <theme name="editfield" ref="editfield"/>
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
             </theme>
         </theme>
     </theme>

@@ -19,8 +19,9 @@
         <area name="editfield" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
         <cursor name="cursor" hotSpotX="0" hotSpotY="0" xywh="112,2,12,19"/>
         <cursor name="cursor_text" hotSpotX="0" hotSpotY="0" xywh="93,3,7,16"/>
-        <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
         <area name="resizableframe" xywh="55,63,24,7" splitx="L2,R2" splity="T2,B2"/>
+        <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
+        <area name="resizableframe_borderless" xywh="57,65,20,3"/>
         <area name="scrollbar_horizontal_button_left" xywh="60,78,14,14"/>
         <area name="scrollbar_horizontal_button_left_pressed" xywh="60,96,14,14"/>
         <area name="scrollbar_horizontal_button_right" xywh="83,78,14,14"/>

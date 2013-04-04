@@ -17,6 +17,16 @@ public class GUIPane extends DesktopArea {
 		setTheme("guipane");
 	}
 	
+	public void showLoginScreen() {
+		loginScreen.loadBackground(getGUI());
+		loginScreen.setVisible(true);
+	}
+	
+	public void hideLoginScreen() {
+		loginScreen.setVisible(false); //Hide the GUI elements
+		getGUI().setBackground(null);  //Empty the background since the main game doesnt use TWL GUI background.
+	}
+	
 	public LoginScreen getLoginScreen() {
 		return loginScreen;
 	}

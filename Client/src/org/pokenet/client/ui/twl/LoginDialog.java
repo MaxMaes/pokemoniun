@@ -1,7 +1,6 @@
 package org.pokenet.client.ui.twl;
 
 import java.util.List;
-import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 
 import de.matthiasmann.twl.Button;

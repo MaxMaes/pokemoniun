@@ -190,12 +190,10 @@ public class ServerDialog extends ResizableFrame
 			}
 		});
 		panel.add(privateServer);
-		setVisible(false);
 		m_back = new Button();
 		m_back.setText("Back");
 		m_back.setSize(128, 24);
 		m_back.setPosition(94, 267);
-		setVisible(true);
 		m_back.addCallback(new Runnable()
 		{
 			@Override
@@ -206,6 +204,7 @@ public class ServerDialog extends ResizableFrame
 		});
 		panel.add(m_back);
 		add(panel);
+		setVisible(false);
 	}
 
 	public String getPrivateServer()

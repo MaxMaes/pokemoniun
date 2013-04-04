@@ -199,7 +199,6 @@ public class ServerDialog extends Frame
 		m_back.setText("Back");
 		m_back.setSize(128, 24);
 		m_back.setLocation(94, 235);
-		setVisible(true);
 		m_back.addActionListener(new ActionListener()
 		{
 			@Override
@@ -209,6 +208,7 @@ public class ServerDialog extends Frame
 			}
 		});
 		this.add(m_back);
+		setVisible(false);
 	}
 
 	public String getPrivateServer()

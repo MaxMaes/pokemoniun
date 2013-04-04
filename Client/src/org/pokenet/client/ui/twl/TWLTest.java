@@ -1,17 +1,7 @@
 package org.pokenet.client.ui.twl;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Calendar;
-
-import javax.imageio.ImageIO;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
@@ -23,9 +13,6 @@ import org.newdawn.slick.SlickException;
 import org.pokenet.client.backend.TWLInputAdapter;
 
 import de.matthiasmann.twl.GUI;
-import de.matthiasmann.twl.renderer.DynamicImage;
-import de.matthiasmann.twl.renderer.Renderer;
-import de.matthiasmann.twl.renderer.DynamicImage.Format;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
@@ -85,7 +72,6 @@ public class TWLTest extends BasicGame {
             theme = ThemeManager.createThemeManager(f.getAbsoluteFile().toURI().toURL() , lwjglRenderer);
             root = new GUIPane();
             gui = new GUI(root, lwjglRenderer);
-            loadBackground(m_filepath,gui);
             gui.applyTheme(theme);
         } catch (LWJGLException e) {
             e.printStackTrace();
@@ -100,8 +86,10 @@ public class TWLTest extends BasicGame {
         twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
         gc.getInput().addPrimaryListener(twlInputAdapter); 	
         root.getLoginScreen().setServerRevision(2000);
+        root.showLoginScreen();
 	}
 	
+	/* Nice, but will probably not be used because we dont use java ImageIO.
 	private DynamicImage getDynamicImageFromBufferedImage(BufferedImage bufferedImage)
     {
 		 ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferedImage.getWidth() * bufferedImage.getHeight() * 4);
@@ -126,56 +114,7 @@ public class TWLTest extends BasicGame {
 	      DynamicImage dynImage= renderer.createDynamicImage(bufferedImage.getWidth(), bufferedImage.getHeight());
 	      dynImage.update(byteBuffer, Format.RGBA);
 	      return dynImage;
-    }
-	
-	private void loadBackground(String respath, GUI gui) 
-	{
-		
-		String backgroundPath = "";
-		/* Load the background image, NOTE: Months start at 0, not 1 */
-		Calendar cal = Calendar.getInstance();
-		if(cal.get(Calendar.MONTH) == 1)
-		{
-			if(cal.get(Calendar.DAY_OF_MONTH) >= 7 && cal.get(Calendar.DAY_OF_MONTH) <= 14)
-				backgroundPath = respath + "res/pokenet_valentines.png";
-			else
-				backgroundPath = respath + "res/pokenet_venonat.png";
-		}
-		else if(cal.get(Calendar.MONTH) == 2 && cal.get(Calendar.DAY_OF_MONTH) > 14)
-			/* If second half of March, show Easter login */
-			backgroundPath = respath + "res/pokenet_easter.png";
-		else if(cal.get(Calendar.MONTH) == 3 && cal.get(Calendar.DAY_OF_MONTH) < 26)
-			/* If before April 26, show Easter login */
-			backgroundPath = respath + "res/pokenet_easter.png";
-		else if(cal.get(Calendar.MONTH) == 9)
-			/* Halloween */
-			backgroundPath = respath + "res/pokenet_halloween.png";
-		else if(cal.get(Calendar.MONTH) == 11)
-			/* Christmas! */
-			backgroundPath = respath + "res/pokenet_xmas.png";
-		else if(cal.get(Calendar.MONTH) == 0)
-			/* January - Venonat Time! */
-			backgroundPath = respath + "res/pokenet_venonat.png";
-		else if(cal.get(Calendar.MONTH) >= 5 && cal.get(Calendar.MONTH) <= 7)
-			/* Summer login */
-			backgroundPath = respath + "res/pokenet_summer.png";
-		else
-			/* Show normal login screen */
-			backgroundPath = respath + "res/pokenet_normal.png";
-		
-		BufferedImage bufferedimg = null;
-        try 
-        {
-			bufferedimg = ImageIO.read(new File(backgroundPath));
-		} 
-        catch (IOException e) 
-        {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-		gui.setBackground(getDynamicImageFromBufferedImage(bufferedimg));
-	}
+    }*/
 
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {

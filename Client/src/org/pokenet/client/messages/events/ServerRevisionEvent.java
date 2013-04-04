@@ -8,10 +8,10 @@ import org.pokenet.client.protocol.ServerMessage;
 
 public class ServerRevisionEvent implements MessageEvent
 {
-
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getLoginScreen().setServerRevision(Request.readInt());
+		GameClient.getInstance().getGUI().getLoginScreen().setServerRevision(Request.readInt());
+		GameClient.getInstance().getGUI().getLoginScreen().showServerRevision();
 	}
 }

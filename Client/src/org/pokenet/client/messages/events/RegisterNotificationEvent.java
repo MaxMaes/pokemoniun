@@ -40,7 +40,7 @@ public class RegisterNotificationEvent implements MessageEvent
 				GameClient.getInstance().messageDialog("Email too long!", GameClient.getInstance().getDisplay());
 				break;
 		}
-		GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration();
+		//GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration(); TODO uncomment when registration is done
 		GameClient.getInstance().getLoadingScreen().setVisible(false);
 	}
 }

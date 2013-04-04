@@ -1,6 +1,8 @@
 package org.pokenet.client.ui.twl;
 
 import java.util.List;
+
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 
 import de.matthiasmann.twl.Button;
@@ -59,7 +61,7 @@ public class LoginDialog extends Widget
 			@Override
 			public void run()
 			{
-				//GameClient.getInstance().returnToServerSelect();
+				GameClient.getInstance().returnToServerSelect();
 			}
 		});
 
@@ -145,7 +147,7 @@ public class LoginDialog extends Widget
 	{
 		m_login.setEnabled(false);
 		//GameClient.getInstance().getLoadingScreen().setVisible(true);
-		//GameClient.getInstance().getUserManager().login(m_username.getText(), m_password.getText());
+		GameClient.getInstance().getUserManager().login(m_username.getText(), m_password.getText());
 	}
 
 	/**
@@ -153,6 +155,6 @@ public class LoginDialog extends Widget
 	 */
 	private void register()
 	{
-		//GameClient.getInstance().getLoginScreen().showRegistration();
+		GameClient.getInstance().getGUI().getLoginScreen().showRegistration();
 	}
 }

@@ -73,7 +73,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[0]);
+					m_client.connect(m_host[0]);
 				}
 			});
 			panel.add(m_servers[0]);
@@ -87,7 +87,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[1]);
+					m_client.connect(m_host[1]);
 				}
 			});
 			panel.add(m_servers[1]);
@@ -101,7 +101,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[2]);
+					m_client.connect(m_host[2]);
 				}
 			});
 			panel.add(m_servers[2]);
@@ -115,7 +115,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[3]);
+					m_client.connect(m_host[3]);
 				}
 			});
 			panel.add(m_servers[3]);
@@ -129,7 +129,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[4]);
+					m_client.connect(m_host[4]);
 				}
 			});
 			panel.add(m_servers[4]);
@@ -168,7 +168,7 @@ public class ServerDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					//m_client.connect(m_host[0]);
+					m_client.connect(m_host[0]);
 				}
 			});
 			panel.add(m_servers[0]);
@@ -186,7 +186,7 @@ public class ServerDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				//m_client.connect(getPrivateServer());
+				m_client.connect(getPrivateServer());
 			}
 		});
 		panel.add(privateServer);
@@ -199,7 +199,7 @@ public class ServerDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				//m_client.returnToLanguageSelect();
+				m_client.returnToLanguageSelect();
 			}
 		});
 		panel.add(m_back);

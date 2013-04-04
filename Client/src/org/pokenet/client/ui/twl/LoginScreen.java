@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 
@@ -85,8 +86,8 @@ public class LoginScreen extends DesktopArea {
 		add(m_openToS);
 		
 		setClientRevision();
-		m_serverRev = new Label("Server Version: ?");
-		m_serverRev.setVisible(true);
+		m_serverRev = new Label("");
+		m_serverRev.setVisible(false);
 		add(m_serverRev);
 	}
 	
@@ -108,7 +109,7 @@ public class LoginScreen extends DesktopArea {
 	public void setServerRevision(int rev)
 	{
 		m_serverRev.setText("Server Version: r" + rev);
-		m_serverRev.setPosition(m_clientRev.getX() + m_clientRev.getWidth() + 16, m_clientRev.getY());
+		invalidateLayout();
 	}
 	
 	/**
@@ -282,9 +283,32 @@ public class LoginScreen extends DesktopArea {
 			/* Show normal login screen */
 			backgroundPath = respath + "res/pokenet_normal.png";
 		
-		DynamicImage i = TWLTest.getInstance().getRenderer().createDynamicImage(800, 600);
+		DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
 		i.update(FileLoader.loadPNG(backgroundPath), Format.RGBA);
         
 		gui.setBackground(i);
+	}
+
+	public Object getRegistration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Enables the login button
+	 */
+	public void enableLogin()
+	{
+		m_login.getLoginButton().setEnabled(true);
+	}
+	
+	public void hideServerRevision()
+	{
+		m_serverRev.setVisible(false);
+	}
+	
+	public void showServerRevision()
+	{
+		m_serverRev.setVisible(true);
 	}
 }

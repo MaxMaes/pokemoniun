@@ -1,5 +1,8 @@
 package org.pokenet.client.ui.twl;
 
+import org.pokenet.client.GameClient;
+import org.pokenet.client.constants.Language;
+
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
@@ -46,8 +49,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[0].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.ENGLISH);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.ENGLISH);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 			
@@ -56,8 +59,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[1].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.SPANISH);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.SPANISH);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -65,8 +68,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[2].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.FRENCH);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.FRENCH);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -74,8 +77,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[3].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.PORTUGESE);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.PORTUGESE);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -83,8 +86,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[4].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.FINNISH);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.FINNISH);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -92,8 +95,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[5].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.ITALIAN);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.ITALIAN);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -101,8 +104,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[6].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.DUTCH);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.DUTCH);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -110,8 +113,8 @@ public class LanguageDialog extends ResizableFrame
 			m_languages[7].addCallback(new Runnable(){
 				@Override
 				public void run() {
-					//GameClient.getInstance().setLanguage(Language.GERMAN);
-					//GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().setLanguage(Language.GERMAN);
+					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -131,13 +134,5 @@ public class LanguageDialog extends ResizableFrame
 			e.printStackTrace();
 		}
 		setVisible(true);
-		
-		/*DialogLayout layout = new DialogLayout();
-		Group vbuttonGroup = layout.createSequentialGroup(m_languages[0], m_languages[1], m_languages[2], m_languages[3], m_languages[4], m_languages[5], m_languages[6], m_languages[7]);
-		Group hbuttonGroup = layout.createParallelGroup(m_languages[0], m_languages[1], m_languages[2], m_languages[3], m_languages[4], m_languages[5], m_languages[6], m_languages[7]);
-		layout.setHorizontalGroup(hbuttonGroup);
-		layout.setVerticalGroup(vbuttonGroup);
-		layout.setTheme("content");
-		add(layout);*/
 	}
 }

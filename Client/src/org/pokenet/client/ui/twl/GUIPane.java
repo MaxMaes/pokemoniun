@@ -34,4 +34,8 @@ public class GUIPane extends DesktopArea {
 	public void showLanguageSelect() {
 		loginScreen.showLanguageSelect();
 	}
+
+	public void showServerSelect() {
+		
+	}
 }

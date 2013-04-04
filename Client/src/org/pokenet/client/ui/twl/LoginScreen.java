@@ -1,13 +1,23 @@
 package org.pokenet.client.ui.twl;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
+
+import com.sun.xml.internal.ws.util.StreamUtils;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;
@@ -45,23 +55,22 @@ public class LoginScreen extends DesktopArea {
 		List<String> translated = new ArrayList<String>();
 		translated = Translator.translate("_LOGIN");
 		
-		loadBackground(respath);
 		m_languageDialog = new LanguageDialog();
 		add(m_languageDialog);
 		
-		m_terms = new ToSDialog();
-		add(m_terms);
+		//m_terms = new ToSDialog();
+		//add(m_terms);
 		
-		m_about = new AboutDialog();
-		add(m_about);
+		//m_about = new AboutDialog();
+		//add(m_about);
 		
-		m_login = new LoginDialog();
-		add(m_login);
+		//m_login = new LoginDialog();
+		//add(m_login);
 		
-		m_select = new ServerDialog();
-		add(m_select);
+		//m_select = new ServerDialog();
+		//add(m_select);
 		
-		m_languageDialog.setVisible(false);
+		//m_languageDialog.setVisible(false);
 		
 		m_openAbout = new Button(translated.get(3));
 		m_openAbout.setVisible(true);
@@ -101,46 +110,6 @@ public class LoginScreen extends DesktopArea {
 		m_openAbout.setPosition(728, 8);
 		m_openToS.setSize(64, 32);
 		m_openToS.setPosition(728, 45);
-	}
-	
-	private void loadBackground(String respath) 
-	{
-		Renderer renderer = TWLTest.getInstance().getRenderer();
-		DynamicImage img = renderer.createDynamicImage(800, 600);
-		String backgroundPath = "";
-		/* Load the background image, NOTE: Months start at 0, not 1 */
-		Calendar cal = Calendar.getInstance();
-		if(cal.get(Calendar.MONTH) == 1)
-		{
-			if(cal.get(Calendar.DAY_OF_MONTH) >= 7 && cal.get(Calendar.DAY_OF_MONTH) <= 14)
-				backgroundPath = respath + "res/pokenet_valentines.png";
-			else
-				backgroundPath = respath + "res/pokenet_venonat.png";
-		}
-		else if(cal.get(Calendar.MONTH) == 2 && cal.get(Calendar.DAY_OF_MONTH) > 14)
-			/* If second half of March, show Easter login */
-			backgroundPath = respath + "res/pokenet_easter.png";
-		else if(cal.get(Calendar.MONTH) == 3 && cal.get(Calendar.DAY_OF_MONTH) < 26)
-			/* If before April 26, show Easter login */
-			backgroundPath = respath + "res/pokenet_easter.png";
-		else if(cal.get(Calendar.MONTH) == 9)
-			/* Halloween */
-			backgroundPath = respath + "res/pokenet_halloween.png";
-		else if(cal.get(Calendar.MONTH) == 11)
-			/* Christmas! */
-			backgroundPath = respath + "res/pokenet_xmas.png";
-		else if(cal.get(Calendar.MONTH) == 0)
-			/* January - Venonat Time! */
-			backgroundPath = respath + "res/pokenet_venonat.png";
-		else if(cal.get(Calendar.MONTH) >= 5 && cal.get(Calendar.MONTH) <= 7)
-			/* Summer login */
-			backgroundPath = respath + "res/pokenet_summer.png";
-		else
-			/* Show normal login screen */
-			backgroundPath = respath + "res/pokenet_normal.png";
-		
-		img.update(FileLoader.loadPNG(backgroundPath), Format.RGBA);
-		setBackground(img);
 	}
 
 	/**

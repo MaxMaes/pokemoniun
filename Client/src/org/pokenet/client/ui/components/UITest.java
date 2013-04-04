@@ -61,59 +61,7 @@ public class UITest extends BasicGame
 		fr1.addComponent(fr2);
 		//fr2.addComponent(fr3);
 		
-		Button maxLabel2 = new Button("Label not in frame");
-		maxLabel2.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-				System.out.println("clicked");
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) 
-			{
-				System.out.println("Entered");
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) 
-			{
-				System.out.println("exited");
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) 
-			{
-				System.out.println("pressed");
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) 
-			{
-				System.out.println("Released");
-			}
-		});
-		maxLabel2.setBounds(20, 20, 100, 100);
-		maxLabel2.setFont(gc.getDefaultFont());
-		//maxLabel2.fitToText();
-		maxLabel2.setTextColor(Color.red);
-		maxLabel2.setBackgroundColor(Color.white);
 		
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		Button b = new Button((new Image(respath + "res/pokemon/front/normal/004-2.png")));
-		b.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("KOEKJES");
-				
-			}
-		});
-		b.setHoverImage(new Image(respath + "res/pokemon/front/normal/005-2.png"));
-		fr1.addComponent(b);
 		
 		//fr3.addComponent(maxLabel2);
 		

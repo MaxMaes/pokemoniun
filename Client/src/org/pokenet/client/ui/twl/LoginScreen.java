@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
+import org.simpleframework.xml.Root;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;
@@ -20,7 +21,7 @@ import de.matthiasmann.twl.renderer.DynamicImage.Format;
 
 /**
  * The complete login screen
- * @author Myth1c
+ * @author Myth1c, Chappie112
  *
  */
 
@@ -30,10 +31,13 @@ public class LoginScreen extends DesktopArea {
 	private ToSDialog m_terms;
 	private LoginDialog m_login;
 	private ServerDialog m_select;
+	private AlertPopupDialog alertdialog;
+	private ConfirmationDialog m_onExit;
 
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
 	private Button m_openToS;
+	private Button test;
 	
 	
 	public LoginScreen() {
@@ -61,6 +65,10 @@ public class LoginScreen extends DesktopArea {
 		m_select = new ServerDialog();
 		add(m_select);
 		
+		m_onExit = new ConfirmationDialog("Are you sure you want to exit?","Exit");
+		m_onExit.setVisible(false);
+		add(m_onExit);
+		
 		m_openAbout = new Button(translated.get(3));
 		m_openAbout.setVisible(true);
 		m_openAbout.addCallback(new Runnable()
@@ -72,7 +80,7 @@ public class LoginScreen extends DesktopArea {
 			}
 		});
 		add(m_openAbout);
-
+		
 		m_openToS = new Button(translated.get(4));
 		m_openToS.setVisible(true);
 		m_openToS.addCallback(new Runnable()
@@ -85,12 +93,31 @@ public class LoginScreen extends DesktopArea {
 		});
 		add(m_openToS);
 		
+		test = new Button("test");
+		test.setVisible(true);
+		test.addCallback(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if(!getOnExit().isVisible())
+					showOnExit();
+				else
+					hideOnExit();
+			}
+		});
+		add(test);
+		
 		setClientRevision();
 		m_serverRev = new Label("");
 		m_serverRev.setVisible(false);
 		add(m_serverRev);
 	}
 	
+	protected void showAlertDialog() {
+		alertdialog.setVisible(true);
+	}
+
 	@Override
 	public void layout() {
 		m_clientRev.setPosition(4, 600 - m_clientRev.getHeight() - 10);
@@ -99,6 +126,8 @@ public class LoginScreen extends DesktopArea {
 		m_openAbout.setPosition(728, 8);
 		m_openToS.setSize(64, 32);
 		m_openToS.setPosition(728, 45);
+		test.setPosition(728, 82);
+		test.setSize(64, 32);
 	}
 
 	/**
@@ -164,6 +193,24 @@ public class LoginScreen extends DesktopArea {
 	{
 		m_about.reloadStrings();
 		m_about.setVisible(true);
+	}
+	
+	/**
+	 * Shows the onExit confirmation dialog
+	 */
+	public void showOnExit()
+	{
+		m_onExit.setVisible(true);
+	}
+	
+	public void hideOnExit()
+	{
+		m_onExit.setVisible(true);
+	}
+	
+	public ConfirmationDialog getOnExit()
+	{
+		return m_onExit;
 	}
 	
 	/**
@@ -283,7 +330,8 @@ public class LoginScreen extends DesktopArea {
 			/* Show normal login screen */
 			backgroundPath = respath + "res/pokenet_normal.png";
 		
-		DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
+		//DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
+		DynamicImage i = gui.getRenderer().createDynamicImage(800, 600);
 		i.update(FileLoader.loadPNG(backgroundPath), Format.RGBA);
         
 		gui.setBackground(i);

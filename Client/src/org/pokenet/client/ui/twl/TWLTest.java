@@ -43,7 +43,7 @@ public class TWLTest extends BasicGame {
 			AppGameContainer gameContainer = new AppGameContainer(test, 800, 600, false);
 			gameContainer.setTargetFrameRate(60);
 			gameContainer.setAlwaysRender(true);
-			gameContainer.setShowFPS(false);
+			gameContainer.setShowFPS(true);
 			gameContainer.start();
 		}
 		catch(Exception e)

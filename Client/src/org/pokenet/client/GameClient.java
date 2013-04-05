@@ -54,10 +54,10 @@ import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.UserInterface;
-import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.AlertPopupDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
+import org.pokenet.client.ui.twl.ConfirmationDialog;
 import org.pokenet.client.ui.twl.GUIPane;
 import org.pokenet.client.ui.twl.LoginScreen;
 
@@ -105,7 +105,6 @@ public class GameClient extends BasicGame
 	private Color m_daylight;
 	private ConfirmationDialog m_dcConfirm;
 	private Display m_display;
-	private ConfirmationDialog m_exitConfirm;
 	private AlertPopupDialog m_activeAlert;
 	private boolean m_isNewMap = false;
 	private LoadingScreen m_loading;
@@ -385,12 +384,12 @@ public class GameClient extends BasicGame
 	@Override
 	public boolean closeRequested()
 	{
-		if(m_exitConfirm == null)
+		if(!root.getLoginScreen().getOnExit().isVisible())
 		{
-			ActionListener yes = new ActionListener()
+			Runnable yes = new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					try
 					{
@@ -409,20 +408,21 @@ public class GameClient extends BasicGame
 					}
 				}
 			};
-			ActionListener no = new ActionListener()
+			Runnable no = new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
-					m_exitConfirm.setVisible(false);
-					getDisplay().remove(m_exitConfirm);
-					m_exitConfirm = null;
+					root.getLoginScreen().hideOnExit();
 					m_close = false;
 				}
 			};
-			m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
-			if(getUi() != null)
-				getUi().getDisplay().add(m_exitConfirm);
+			if(root.getLoginScreen() != null)
+			{
+				root.getLoginScreen().getOnExit().addYesListener(yes);
+				root.getLoginScreen().getOnExit().addNoListener(no);
+				root.getLoginScreen().showOnExit();
+			}
 			else
 				System.out.println("Attempting to close before is client loaded, ignoring");
 		}
@@ -538,10 +538,10 @@ public class GameClient extends BasicGame
 	{
 		if(m_dcConfirm == null)
 		{
-			ActionListener yes = new ActionListener()
+			Runnable yes = new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					try
 					{
@@ -558,21 +558,21 @@ public class GameClient extends BasicGame
 					}
 				}
 			};
-			ActionListener no = new ActionListener()
+			Runnable no = new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_dcConfirm.setVisible(false);
-					getDisplay().remove(m_dcConfirm);
+					root.removeChild(m_dcConfirm);
 					m_dcConfirm = null;
 				}
 			};
 			m_dcConfirm = new ConfirmationDialog("Are you sure you want to logout?", yes, no);
-			if(getUi() != null)
-				getUi().getDisplay().add(m_dcConfirm);
+			if(root != null)
+				root.add(m_dcConfirm);
 			else
-				System.out.println("Attempting close before client loaded, ignoring");
+				System.out.println("Attempting logout before client loaded/connected, ignoring");
 		}
 		else
 			m_dcConfirm.setVisible(true);
@@ -1204,7 +1204,7 @@ public class GameClient extends BasicGame
 
 			if(key == Input.KEY_ENTER)
 			{
-				if(m_exitConfirm != null)
+				if(m_dcConfirm != null)
 					try
 					{
 						System.exit(0);
@@ -1226,12 +1226,12 @@ public class GameClient extends BasicGame
 		}
 
 		if(key == Input.KEY_ESCAPE)
-			if(m_exitConfirm == null)
+			if(root.getLoginScreen().getOnExit().isVisible())
 			{
-				ActionListener yes = new ActionListener()
+				Runnable yes = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent arg0)
+					public void run()
 					{
 						try
 						{
@@ -1243,24 +1243,21 @@ public class GameClient extends BasicGame
 						}
 					}
 				};
-				ActionListener no = new ActionListener()
+				Runnable no = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent arg0)
+					public void run()
 					{
-						m_exitConfirm.setVisible(false);
-						getDisplay().remove(m_exitConfirm);
-						m_exitConfirm = null;
+						root.getLoginScreen().hideOnExit();
 					}
 				};
-				m_exitConfirm = new ConfirmationDialog("Are you sure you want to exit?", yes, no);
-				getUi().getDisplay().add(m_exitConfirm);
+				root.getLoginScreen().getOnExit().addYesListener(yes);
+				root.getLoginScreen().getOnExit().addNoListener(no);
+				root.getLoginScreen().showOnExit();
 			}
 			else
 			{
-				m_exitConfirm.setVisible(false);
-				getDisplay().remove(m_exitConfirm);
-				m_exitConfirm = null;
+				root.getLoginScreen().hideOnExit();
 			}
 		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !root.getLoginScreen().isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.getInstance().isBattling() && !m_isNewMap)
 			if(m_ourPlayer != null && !m_isNewMap

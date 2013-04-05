@@ -1226,7 +1226,7 @@ public class GameClient extends BasicGame
 		}
 
 		if(key == Input.KEY_ESCAPE)
-			if(root.getLoginScreen().getOnExit().isVisible())
+			if(!root.getLoginScreen().getOnExit().isVisible())
 			{
 				Runnable yes = new Runnable()
 				{

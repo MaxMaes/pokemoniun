@@ -1,7 +1,5 @@
 package org.pokenet.client.ui.twl;
 
-import mdes.slick.sui.event.ActionListener;
-
 import org.pokenet.client.GameClient;
 
 import de.matthiasmann.twl.*;
@@ -16,6 +14,8 @@ import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 public class ConfirmationDialog extends ResizableFrame
 {
 	private Button yesButton,noButton;
+	private Widget pane;
+	private TextArea dialogText;
 	
 	/*
 	 * 
@@ -30,41 +30,41 @@ public class ConfirmationDialog extends ResizableFrame
 	 */
 	public ConfirmationDialog(String text, String title)
 	{
-		setTitle(title);
 		setTheme("confirmationdialog");
+		setTitle(title);
 		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(false);
 		setSize(300,80);
 		setVisible(false);
 		
-		Widget pane = new Widget();
+		pane = new Widget();
 		pane.setTheme("content");
 		pane.setSize(getWidth(), 190);
 		pane.setPosition(0, 0);
-		
+
 		SimpleTextAreaModel tam = new SimpleTextAreaModel();
 		tam.setText(text);
-		TextArea textarea = new TextArea(tam);
-		pane.add(textarea);
-		textarea.setSize(pane.getWidth(), 120);
-		textarea.setPosition(0, 30);
+		dialogText = new TextArea(tam);
+		dialogText.setPosition(10, 30);
+		dialogText.setSize(pane.getWidth()-(dialogText.getX()*2), 120);
+		pane.add(dialogText);
 
 		yesButton = new Button();
 		noButton = new Button();
 		
 		yesButton.setText("Yes");
 		yesButton.setSize(50, 25);
-		yesButton.setPosition(pane.getWidth() / 2 -55,50);
+		yesButton.setPosition(pane.getWidth() / 2 -60, yesButton.getWidth());
 		
 		noButton.setText("No");
 		noButton.setSize(50, 25);
-		noButton.setPosition(pane.getWidth() /2 + 5, 50);
-		add(pane);
+		noButton.setPosition(pane.getWidth() /2 + 10, noButton.getWidth());
 		pane.add(yesButton);
 		pane.add(noButton);
 		
+		add(pane);
+	
 		setCenter();
-
 	}
 	
 	public ConfirmationDialog(String text, Runnable callbackYes, Runnable callbackNo) 

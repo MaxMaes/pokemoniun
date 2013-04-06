@@ -6,10 +6,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
-import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
-import org.simpleframework.xml.Root;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;
@@ -31,7 +29,7 @@ public class LoginScreen extends DesktopArea {
 	private ToSDialog m_terms;
 	private LoginDialog m_login;
 	private ServerDialog m_select;
-	private AlertPopupDialog alertdialog;
+	//private AlertPopupDialog alertdialog;
 	private ConfirmationDialog m_onExit;
 
 	private Label m_serverRev, m_clientRev;
@@ -115,7 +113,7 @@ public class LoginScreen extends DesktopArea {
 	}
 	
 	protected void showAlertDialog() {
-		alertdialog.setVisible(true);
+		//alertdialog.setVisible(true);
 	}
 
 	@Override

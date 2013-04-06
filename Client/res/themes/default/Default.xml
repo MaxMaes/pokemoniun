@@ -106,6 +106,12 @@
         <param name="resizeHandleX"><int>0</int></param>
         <param name="resizeHandleY"><int>0</int></param>
     </theme>
+    <theme name="popup_titled" ref="resizableframe_titled">
+        <param name="background"><image>popup_titled</image></param>
+    </theme>
+    <theme name="popup_untitled" ref="resizableframe">
+        <param name="background"><image>popup_untitled</image></param>
+    </theme>
     <theme name="hscrollbar" ref="-defaults">
         <theme name="leftbutton" ref="-defaults">
             <param name="background"><image>scrollbar_horizontal_button_left_background</image></param>
@@ -179,9 +185,6 @@
                         <param name="font"><font>normal_white</font></param>
                     </theme>
                 </theme>
-                <theme name="label_title" ref="-defaults">
-                    <param name="font"><font>normal_black</font></param>
-                </theme>
                 <theme name="button_language" ref="button">
                     <param name="font"><font>normal</font></param>
                 </theme>
@@ -232,20 +235,14 @@
                 <param name="closeButtonX"><int>270</int></param>
                 <param name="closeButtonY"><int>5</int></param>
             </theme>
-            <theme name="alertpopupdialog" ref="resizableframe_titled">
-                <theme name="label" ref="label">
-                    <param name="font"><font>pokefont</font></param>
-                </theme>
-                <theme name="button" ref="button">
-                    <param name="font"><font>normal</font></param>
-                </theme>
+            <theme name="alertpopupdialog" ref="popup_titled">
+                <param name="defaultGap"><dimension>0,5</dimension></param>
                 <theme name="title" ref="title">
                     <param name="font"><font>pokefont</font></param>
                 </theme>
-                <param name="defaultGap"><dimension>0,5</dimension></param>
                 <theme name="content" ref="scrollpane">
                     <theme name="label" ref="label">
-                        <param name="font"><font>pokefont</font></param>
+                        <param name="font"><font>normal_black</font></param>
                     </theme>
                 </theme>
                 <param name="hasCloseButton"><bool>false</bool></param>
@@ -261,22 +258,21 @@
                     <param name="font"><font>pokefont</font></param>
                 </theme>
             </theme>
-            <theme name="confirmationdialog" ref="resizableframe_titled">
-                <theme name="label" ref="label">
-                    <param name="font"><font>pokefont</font></param>
-                </theme>
-                <theme name="button" ref="button">
-                    <param name="font"><font>normal</font></param>
-                </theme>
+            <theme name="confirmationdialog" ref="popup_titled">
                 <theme name="content" ref="-defaults">
                     <theme name="textarea" ref="textarea">
-                        <param name="font"><font>pokefont</font></param>
-                    </theme>
-                    <theme name="label" ref="label">
-                        <param name="font"><font>pokefont</font></param>
+                        <param name="fonts">
+                            <map>
+                                <param name="default"><font>normal_black</font></param>
+                            </map>
+                        </param>
+                        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
                     </theme>
                     <theme name="button" ref="button">
                         <param name="font"><font>normal</font></param>
+                    </theme>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>normal_black</font></param>
                     </theme>
                 </theme>
                 <theme name="title" ref="title"/>

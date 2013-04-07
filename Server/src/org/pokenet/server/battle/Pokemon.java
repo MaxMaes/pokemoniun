@@ -348,6 +348,7 @@ public class Pokemon extends PokemonSpecies
 		Pokemon p = new Pokemon(mech, species, nature, ability, item, gender, 100, ivs, evs, entries, ppUp);
 		// Give it a 5% chance of being shiny.
 		if(random.nextDouble() < 0.10)
+			
 			p.setShiny(true);
 		return p;
 	}
@@ -427,6 +428,8 @@ public class Pokemon extends PokemonSpecies
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
 		p.setRareness(ps.getRareness());
+		if(random.nextDouble() < 0.02)
+			p.setShiny(true);
 		return p;
 	}
 

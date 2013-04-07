@@ -261,8 +261,13 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("One"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(512);
 					p.setY(568);
@@ -345,8 +350,13 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Iron"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 15000 && p.getBadgeCount() >= 24))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 15000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(2752);
 					p.setY(568);

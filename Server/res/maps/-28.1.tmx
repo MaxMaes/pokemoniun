@@ -2,11 +2,11 @@
 <map version="1.0" orientation="orthogonal" width="80" height="108" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Ponyta,35;Spearow,10;Fearow,25;Machop,10;Geodude,10;Magmar,5;Rapidash,5;"/>
-  <property name="dayPokemonLevels" value="30-36;30-32;38-42;35-35;33-33;39-43;38-42;"/>
+  <property name="dayPokemonLevels" value="40-46;40-42;58-62;45-45;43-43;59-63;58-62;"/>
   <property name="fishPokemonChances" value="Horsea,40;Krabby,40;Magikarp,20;"/>
   <property name="fishPokemonLevels" value="5-15;5-15;5-15;"/>
   <property name="nightPokemonChances" value="Ponyta,35;Spearow,11;Fearow,25;Machop,12;Geodude,12;Rapidash,5;"/>
-  <property name="nightPokemonLevels" value="30-36;30-32;38-42;35-35;33-33;38-42;"/>
+  <property name="nightPokemonLevels" value="40-46;40-42;58-62;45-45;43-43;58-62;"/>
   <property name="waterPokemonChances" value="Tentacool,95;Tentacruel,5;"/>
   <property name="waterPokemonLevels" value="5-40;35-40;"/>
   <property name="wildProbability" value="10"/>

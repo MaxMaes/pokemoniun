@@ -61,7 +61,7 @@ public class BoatChooserDialog extends Frame {
 		}
 		else
 		{
-			m_locations.add("Iron Island - canceled") ;
+			m_locations.add("Iron Island - $15k") ;
 		}
 		if (!travel.equalsIgnoreCase("snowpoint"))
 		{
@@ -75,58 +75,59 @@ public class BoatChooserDialog extends Frame {
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("One Island - $10k") ;
+			m_locations.add("One Island - $5k") ;
 		}
 		if (travel.equalsIgnoreCase("iron"))
 		{
 			m_locations.clear();
-			m_locations.add("Canalave - $10k") ;
+			m_locations.add("Canalave - $0") ;
 		}
 		if (travel.equalsIgnoreCase("one"))
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("Two Island - $10k") ;
-			m_locations.add("Three Island - $10k") ;
-			m_locations.add("Four Island - $10k") ;
-			m_locations.add("Five Island - $10k") ;
-			m_locations.add("Navel Rock") ;
+			m_locations.add("Two Island - canceled") ;
+			m_locations.add("Three Island - canceled") ;
+			m_locations.add("Four Island - canceled") ;
+			m_locations.add("Five Island - canceled") ;
 		}
 		if (travel.equalsIgnoreCase("two"))
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("One Island - $10k") ;
-			m_locations.add("Three Island - $10k") ;
-			m_locations.add("Four Island - $10k") ;
-			m_locations.add("Five Island - $10k") ;
+			m_locations.add("One Island - $5k") ;
+			m_locations.add("Three Island - $5k") ;
+			m_locations.add("Four Island - $5k") ;
+			m_locations.add("Five Island - $5k") ;
 		}
 		if (travel.equalsIgnoreCase("three"))
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("One Island - $10k") ;
-			m_locations.add("Two Island - $10k") ;
-			m_locations.add("Four Island - $10k") ;
-			m_locations.add("Five Island - $10k") ;
+			m_locations.add("One Island - $5k") ;
+			m_locations.add("Two Island - $5k") ;
+			m_locations.add("Four Island - $5k") ;
+			m_locations.add("Five Island - $5k") ;
 		}
 		if (travel.equalsIgnoreCase("four"))
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("One Island - $10k") ;
-			m_locations.add("Two Island - $10k") ;
-			m_locations.add("Three Island - $10k") ;
-			m_locations.add("Five Island - $10k") ;
+			m_locations.add("One Island - $5k") ;
+			m_locations.add("Two Island - $5k") ;
+			m_locations.add("Three Island - $5k") ;
+			m_locations.add("Five Island - $5k") ;
+			m_locations.add("Navel Rock") ;
 		}
 		if (travel.equalsIgnoreCase("five"))
 		{
 			m_locations.clear();
-			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("One Island - $10k") ;
-			m_locations.add("Two Island - $10k") ;
-			m_locations.add("Three Island - $10k") ;
-			m_locations.add("Four Island - $10k") ;
+			m_locations.add("Vermillion City - $5k") ;
+			m_locations.add("One Island - $5k") ;
+			m_locations.add("Two Island - $5k") ;
+			m_locations.add("Three Island - $5k") ;
+			m_locations.add("Four Island - $5k") ;
+			m_locations.add("Navel Rock") ;
 		}
 		getContentPane().setX(getContentPane().getX() - 1);
 		getContentPane().setY(getContentPane().getY() + 1);
@@ -182,11 +183,7 @@ public class BoatChooserDialog extends Frame {
 				choice =  m_travelList.getSelectedName();
 				GameClient.getInstance().getDisplay().remove(thisDialog);
 				String txt = "a trainer level > 24";
-				if (choice.contains("Slateport"))
-				{
-					txt = "at least 16 badges";
-				}
-				else if (choice.contains("Lilycove"))
+				if (choice.contains("Slateport") || choice.contains("Lilycove") || choice.contains("One"))
 				{
 					txt = "at least 16 badges";
 				}
@@ -196,7 +193,7 @@ public class BoatChooserDialog extends Frame {
 				}
 				else if (choice.contains("Navel"))
 				{
-					txt = "an admin level > 5";
+					txt = "dev status";
 				}
 				String note = "Are you sure you want to travel?\nYou need "+ txt +" otherwise I can't take you with me!";
 				if (choice.split(" - ")[1].contains("canceled"))// || choice.contains("Two") || choice.contains("Three") || choice.contains("Four") || choice.contains("Five") || choice.contains("Iron") || choice.contains("Resort") || choice.contains("Battlefrontier"))

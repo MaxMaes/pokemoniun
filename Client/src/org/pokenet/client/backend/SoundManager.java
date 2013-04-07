@@ -123,6 +123,7 @@ public class SoundManager extends Thread
 	{
 		if(track != null)
 		{
+			try{
 			String key = track;
 			if(key.contains("Route"))
 				key = "Route";
@@ -130,6 +131,11 @@ public class SoundManager extends Thread
 			{
 				m_trackName = m_locations.get(key);
 				m_trackChanged = true;
+			}
+			}
+			catch (Exception e)
+			{
+				System.err.println(e.getStackTrace());
 			}
 		}
 	}

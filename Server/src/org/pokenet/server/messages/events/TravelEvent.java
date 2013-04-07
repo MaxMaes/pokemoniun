@@ -201,9 +201,10 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16 && p.getTrainingLevel() >= 50))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46) || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
 				{
-					if(p.getAdminLevel() >= UserClasses.MODERATOR)
+					
+					if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46))
 					{
 					}
 					else if(ticket)
@@ -233,7 +234,7 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 22 && p.getTrainingLevel() >= 40))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
 				{
 					if(p.getAdminLevel() >= UserClasses.MODERATOR)
 					{

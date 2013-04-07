@@ -22,12 +22,12 @@
  </layer>
  <layer name="Collisions" width="22" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UbQqDMAwG4P5PTzJ3n+F9nAfQ3Wd4H7czzCKhMSbRav0xaODFUupjv7DzzvWZcwfn3tPzBrGvgmW2DD42mIOfXW6nODQvP5vUDekMZ8/ag1fD2tXmLbnS2iX3AbGdWmhe4dbKPuRy6blR89/c0D7i8qCFdk6XzvkKF+3U4nvL9/eMq93fM/dBcvkdG6d8jDwhBvtaxUW7Afk9y8ZxX+X/0BjOXr+F5bmNylhrflrQtua55UnfRrtUqVLr+gHTHoWjUAoAAA==
+   H4sIAAAAAAAAC+3UUQ6DIAwGYN7LSbbdZ/E+6gHc7rN4H7czaGMaam1RJj6Y0OQPRPETkNh5516Z8wDnPlN7g3DtDstsGXIsmr2fXWmnODxvP5vcxXQRZ8/a0atg7Vrz1lxt7Zr7hNBPLTLPcCtjH3K5/Ltx82ou9v9xZcgiO6fL53yGS3Zqyb2V+3vEtc7vkfOgufKMDVO+SrCwbSCE7rWGS3YN+nMyjTLuZ/wf6oiz129h+d0GY2xsflbIjs1zy9PeTXapUqXWNQKzW8AQUAoAAA==
   </data>
  </layer>
  <layer name="Walkable" width="22" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYPAADh4IHmkA5mdsfscnNxgAsrsGqxvpCdx4B9oFo2AUjIJRQH8AAFmOzHpQCgAA
+   H4sIAAAAAAAAC2NgGAWjYPAADh4IHmkA5mdsfscnNxgAsrsGqxuHOnDjHWgXjIJRMApGAX4AAD0E/5NQCgAA
   </data>
  </layer>
  <layer name="Collisions" width="22" height="30">

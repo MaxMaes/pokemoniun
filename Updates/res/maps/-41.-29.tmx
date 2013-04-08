@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="57" height="46" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="enforced"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Path0.tsx"/>
+ <tileset firstgid="297" source="Cliffs01.tsx"/>
+ <tileset firstgid="527" source="Trees3.tsx"/>
+ <tileset firstgid="815" source="Vulcano Tileset.tsx"/>
+ <layer name="Walkable" width="57" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3V0QqEIBSEYcEnWqi7vdne/6EqKCjBsNJz3OH/QLwSPA6DIQAAAABQMsYQhvhu79W03O0X6+69qJFbz7nWzu1q99I6v+PuwSo/z35a5efVS+v8PHppnZ9HL3Pv/NnW05xKzlvJvfN+x6c5lZy30rJvveeo1McV/+P//487xX8xpdrDlGIPc1T6V0Ipt7u+8bwUMaMGZtTAjBqYUQMzamDGtmbfcNXZ+CgAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="57" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WwQmAMAwF0EK2cwF1CBfo9Ao9eunFBtv34B8DyeWTUgAAAOa3RfYG39sXuBEYY5XOPJ6ck9x6RUvW/Ag1WrLmGau3h/7cV7095McDAAAAeLsBhtlxofgoAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="57" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WQQoCMQxFB3qiucAcQN0pqEdQ9+rxDYhQajo04DhpeA/+ZmiZ/KakfxgAAAAAAOCQvgWx2EhPt6JdB729SI1X0c1Y61HWn0TnDjzepcaH6NlBrb9gSjb1xJjesnr87PPOlPmz1Jt79N7TWj9aZqanXs693db+lbR4/Ed2WDuf4HH5f2h31ZILWu762meszcZaLijn0FiZOd4yXl6nZfbM7fOY8cp6tUxQW+Ph3bAQOcsBgG/2ykzRvvUMHmOAxxjgMQZ4jAEeY4DH5XkB0iUguPgoAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="57" height="46">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WQQ0AIBAEsU3OJuBfBi80HIRWwTwnAQAAeMeoZFZ3BQBwg/MFyxsAAAAAwFc2/PCdg/goAAA=
+  </data>
+ </layer>
+</map>

@@ -350,6 +350,7 @@ public class WildBattleField extends BattleField
 			if(!m_participatingPokemon.contains(poke))
 			{
 				m_participatingPokemon.add(poke);
+			}
 				/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
 				 * new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer,
 				 * getPokemonPartyIndex(trainer, poke))); */
@@ -381,7 +382,7 @@ public class WildBattleField extends BattleField
 				receiveEffect.sendResponse();
 
 				poke.removeStatusEffects(false);
-			}
+			
 	}
 
 	@Override

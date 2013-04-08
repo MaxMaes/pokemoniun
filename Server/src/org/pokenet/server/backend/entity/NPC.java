@@ -1293,6 +1293,16 @@ public class NPC extends Character
 				p.getSession().Send(message);
 				return;
 			}
+			//@author sadhi
+			/*this npc tps a player a battle room in a specific battle frontier*/
+			if(m_name.contains("Battlefrontier")) {
+				p.setIsTaveling(true);
+				//TcpProtocolHandler.writeMessage(p.getTcpSession(), new TrainMessage());
+				ServerMessage message = new ServerMessage();
+				message.init(99);
+				p.getSession().Send(message);
+				return;
+			}
 			/* Box access */
 			if(m_isBox)
 			{

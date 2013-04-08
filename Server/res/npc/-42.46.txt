@@ -1,5 +1,5 @@
 [npc]
-Nurse Joy
+Battlefrontier lady - lvl 50
 down
 335
 19
@@ -13,7 +13,7 @@ false
 false
 [/npc]
 [npc]
-Nurse Joy
+Battlefrontier lady - lvl 50
 down
 363
 15
@@ -27,7 +27,7 @@ false
 false
 [/npc]
 [npc]
-Nurse Joy
+Battlefrontier lady - any lvl
 down
 363
 11
@@ -41,7 +41,7 @@ false
 false
 [/npc]
 [npc]
-Nurse Joy
+Battlefrontier lady - any lvl
 down
 335
 7

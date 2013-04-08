@@ -24,6 +24,7 @@ import org.pokenet.client.messages.events.BattleTrainerNameEvent;
 import org.pokenet.client.messages.events.BattleUnknownMessageEvent;
 import org.pokenet.client.messages.events.BattleVictoryEvent;
 import org.pokenet.client.messages.events.BattleWonItemEvent;
+import org.pokenet.client.messages.events.BattlefrontierEvent;
 import org.pokenet.client.messages.events.BoatEvent;
 import org.pokenet.client.messages.events.BoxAccessEvent;
 import org.pokenet.client.messages.events.CancelRequestEvent;
@@ -219,6 +220,7 @@ public class MessageHandler
 		messages.put(96, new TravelEvent());
 		messages.put(97, new LoggedElsewhereEvent());
 		messages.put(98, new ItemCantUseEvent());
+		messages.put(99, new BattlefrontierEvent());
 		/* TODO: ID's 54, 55 and 56 are now free to use. */
 		// Login
 		// this.messages.put(254, new PingEvent());

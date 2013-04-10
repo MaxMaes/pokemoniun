@@ -50,7 +50,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.ENGLISH);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 			
@@ -60,7 +60,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.SPANISH);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -69,7 +69,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.FRENCH);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -78,7 +78,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.PORTUGESE);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -87,7 +87,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.FINNISH);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -96,7 +96,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.ITALIAN);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -105,7 +105,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.DUTCH);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 
@@ -114,7 +114,7 @@ public class LanguageDialog extends ResizableFrame
 				@Override
 				public void run() {
 					GameClient.getInstance().setLanguage(Language.GERMAN);
-					GameClient.getInstance().getGUI().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
 

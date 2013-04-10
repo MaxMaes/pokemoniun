@@ -2,6 +2,7 @@ package org.pokenet.client.ui.twl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
@@ -10,9 +11,16 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.pokenet.client.GameClient;
+import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.TWLInputAdapter;
+import org.pokenet.client.ui.base.TWLImageButton;
 
 import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.DynamicImage;
+import de.matthiasmann.twl.renderer.DynamicImage.Format;
+import de.matthiasmann.twl.renderer.Image;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
@@ -32,7 +40,7 @@ public class TWLTest extends BasicGame {
 	private LWJGLRenderer lwjglRenderer;
 	private ThemeManager theme;
 	private GUI gui;
-	private GUIPane root;
+	private Widget root;
 	private TWLInputAdapter twlInputAdapter;
 	
 	public static void main(String[] args)
@@ -43,7 +51,7 @@ public class TWLTest extends BasicGame {
 			AppGameContainer gameContainer = new AppGameContainer(test, 800, 600, false);
 			gameContainer.setTargetFrameRate(60);
 			gameContainer.setAlwaysRender(true);
-			gameContainer.setShowFPS(true);
+			gameContainer.setShowFPS(false);
 			gameContainer.start();
 		}
 		catch(Exception e)
@@ -70,7 +78,7 @@ public class TWLTest extends BasicGame {
             lwjglRenderer = new LWJGLRenderer();
             File f = new File(m_filepath + "res/themes/default/Default.xml");
             theme = ThemeManager.createThemeManager(f.getAbsoluteFile().toURI().toURL() , lwjglRenderer);
-            root = new GUIPane();
+            root = new Widget();
             gui = new GUI(root, lwjglRenderer);
             gui.applyTheme(theme);
         } catch (LWJGLException e) {
@@ -85,8 +93,35 @@ public class TWLTest extends BasicGame {
         // connect input
         twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
         gc.getInput().addPrimaryListener(twlInputAdapter); 	
-        root.getLoginScreen().setServerRevision(2000);
-        root.showLoginScreen();
+        
+        ByteBuffer f;
+    	String starterPath = "res/pokemon/icons/001.png";
+    	String respath = System.getProperty("res.path");
+		if(respath == null)
+			respath = "";
+
+		Image img = FileLoader.loadPNG(respath + starterPath);
+        
+        Widget w = new Widget();
+        w.setBackground(img);
+        w.setSize(img.getWidth(), img.getHeight());
+        root.add(w);
+        
+        	
+			/*TWLImageButton m_starter = new TWLImageButton(img);
+			m_starter.setSize(22, 32);
+			m_starter.setVisible(true);
+		
+			m_starter.setPosition(0, 0);
+			m_starter.getButton().addCallback(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					System.out.println("Test");
+				}
+			});
+			root.add(m_starter);*/
 	}
 	
 	/* Nice, but will probably not be used because we dont use java ImageIO.

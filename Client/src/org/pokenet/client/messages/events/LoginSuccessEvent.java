@@ -14,7 +14,7 @@ public class LoginSuccessEvent implements MessageEvent
 	{
 		int id = Request.readInt();
 		String time = Request.readString();
-		GameClient.getInstance().getGUI().hideLoginScreen();
+		GameClient.getInstance().getGUIPane().hideLoginScreen();
 		GameClient.getInstance().getLoadingScreen().setVisible(false);
 		GameClient.getInstance().setPlayerId(id);
 		GameClient.getInstance().getUi().setVisible(true);

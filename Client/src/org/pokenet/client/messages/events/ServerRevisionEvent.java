@@ -11,7 +11,7 @@ public class ServerRevisionEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getGUI().getLoginScreen().setServerRevision(Request.readInt());
-		GameClient.getInstance().getGUI().getLoginScreen().showServerRevision();
+		GameClient.getInstance().getGUIPane().getLoginScreen().setServerRevision(Request.readInt());
+		GameClient.getInstance().getGUIPane().getLoginScreen().showServerRevision();
 	}
 }

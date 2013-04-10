@@ -66,6 +66,8 @@
         <param name="maxHeight"><int>14</int></param>
         <param name="background"><image>closebutton_background</image></param>
     </theme>
+    <theme name="twlimagebutton" ref="button">
+    </theme>
     <theme name="editfield" ref="-defaults">
         <param name="background"><image>editfield</image></param>
         <param name="border"><border>5,0</border></param>
@@ -278,6 +280,19 @@
                 <theme name="title" ref="title"/>
                 <param name="hasCloseButton"><bool>false</bool></param>
                 <param name="hasResizeHandle"><bool>false</bool></param>
+            </theme>
+            <theme name="registerdialog" ref="resizableframe_titled">
+                <theme name="title" ref="title"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="content" ref="-defaults">
+                    <theme name="editfield" ref="editfield"/>
+                    <theme name="button" ref="button"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="twlimagebutton" ref="twlimagebutton"/>
+                </theme>
             </theme>
         </theme>
     </theme>

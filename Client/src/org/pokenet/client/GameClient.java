@@ -604,7 +604,7 @@ public class GameClient extends BasicGame
 		return root.getLoginScreen();
 	}
 	
-	public GUIPane getGUI()
+	public GUIPane getGUIPane()
 	{
 		return root;
 	}
@@ -1441,5 +1441,9 @@ public class GameClient extends BasicGame
 
 	public LWJGLRenderer getRenderer() {
 		return lwjglRenderer;
+	}
+	
+	public GUI getGUI() {
+		return gui;
 	}
 }

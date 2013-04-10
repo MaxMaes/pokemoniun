@@ -15,6 +15,7 @@ import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.renderer.DynamicImage;
 import de.matthiasmann.twl.renderer.DynamicImage.Format;
+import de.matthiasmann.twl.renderer.Image;
 
 
 /**
@@ -31,6 +32,7 @@ public class LoginScreen extends DesktopArea {
 	private ServerDialog m_select;
 	//private AlertPopupDialog alertdialog;
 	private ConfirmationDialog m_onExit;
+	private RegisterDialog m_register;
 
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
@@ -62,6 +64,9 @@ public class LoginScreen extends DesktopArea {
 		
 		m_select = new ServerDialog();
 		add(m_select);
+		
+		m_register = new RegisterDialog();
+		add(m_register);
 		
 		m_onExit = new ConfirmationDialog("Are you sure you want to exit?","Exit");
 		m_onExit.setVisible(false);
@@ -225,7 +230,7 @@ public class LoginScreen extends DesktopArea {
 	 */
 	public void showServerSelect()
 	{
-		//m_register.setVisible(false);
+		m_register.setVisible(false);
 		m_login.setVisible(false);
 		m_select.reloadStrings();
 		m_select.setVisible(true);
@@ -244,9 +249,8 @@ public class LoginScreen extends DesktopArea {
 		m_openAbout.setVisible(true);
 		m_openToS.setVisible(true);
 		m_languageDialog.setVisible(false);
-		//m_register.reloadStrings();
-		//m_register.setVisible(true);
-		//m_register.grabFocus();
+		m_register.reloadStrings();
+		m_register.setVisible(true);
 	}
 	
 	/**
@@ -256,7 +260,7 @@ public class LoginScreen extends DesktopArea {
 	{
 		m_login.reloadStrings();
 		m_select.setVisible(false);
-		//m_register.setVisible(false);
+		m_register.setVisible(false);
 		m_login.setVisible(true);
 		m_openAbout.setVisible(true);
 		m_openToS.setVisible(true);
@@ -269,7 +273,7 @@ public class LoginScreen extends DesktopArea {
 	 */
 	public void showLanguageSelect()
 	{
-		//m_register.setVisible(false);
+		m_register.setVisible(false);
 		m_login.setVisible(false);
 		m_select.setVisible(false);
 		m_languageDialog.setVisible(true);
@@ -329,8 +333,7 @@ public class LoginScreen extends DesktopArea {
 			backgroundPath = respath + "res/pokenet_normal.png";
 		
 		//DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
-		DynamicImage i = gui.getRenderer().createDynamicImage(800, 600);
-		i.update(FileLoader.loadPNG(backgroundPath), Format.RGBA);
+		Image i = FileLoader.loadPNG(backgroundPath);
         
 		gui.setBackground(i);
 	}

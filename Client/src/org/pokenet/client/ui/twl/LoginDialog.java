@@ -155,6 +155,6 @@ public class LoginDialog extends Widget
 	 */
 	private void register()
 	{
-		GameClient.getInstance().getGUI().getLoginScreen().showRegistration();
+		GameClient.getInstance().getGUIPane().getLoginScreen().showRegistration();
 	}
 }

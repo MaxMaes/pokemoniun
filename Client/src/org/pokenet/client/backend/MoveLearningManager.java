@@ -14,7 +14,7 @@ public class MoveLearningManager extends Thread
 {
 	private static MoveLearningManager m_instance;
 	private boolean m_canLearn = false;
-	private boolean m_isRunning = true;
+	private boolean m_running = true;
 	private MoveLearning m_moveLearning;
 	private Queue<MoveLearnQueueObject> m_moveLearningQueue;
 
@@ -71,7 +71,7 @@ public class MoveLearningManager extends Thread
 	 */
 	public void queueMoveLearning(int index, String move)
 	{
-		m_isRunning = true;
+		m_running = true;
 		if(m_moveLearningQueue.isEmpty())
 			m_canLearn = true;
 		m_moveLearningQueue.add(new MoveLearnQueueObject(index, move));
@@ -95,7 +95,7 @@ public class MoveLearningManager extends Thread
 	@Override
 	public void run()
 	{
-		while(m_isRunning)
+		while(m_running)
 		{
 			if(m_canLearn && !m_moveLearningQueue.isEmpty())
 			{
@@ -112,6 +112,11 @@ public class MoveLearningManager extends Thread
 				ie.printStackTrace();
 			}
 		}
+	}
+
+	public void stopMoveLearning()
+	{
+		m_running = false;
 	}
 }
 

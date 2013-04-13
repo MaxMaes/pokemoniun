@@ -123,19 +123,20 @@ public class SoundManager extends Thread
 	{
 		if(track != null)
 		{
-			try{
-			String key = track;
-			if(key.contains("Route"))
-				key = "Route";
-			if(!m_locations.get(key).equalsIgnoreCase(m_trackName) && m_locations.get(key) != null)
+			try
 			{
-				m_trackName = m_locations.get(key);
-				m_trackChanged = true;
+				String key = track;
+				if(key.contains("Route"))
+					key = "Route";
+				if(!m_locations.get(key).equalsIgnoreCase(m_trackName) && m_locations.get(key) != null)
+				{
+					m_trackName = m_locations.get(key);
+					m_trackChanged = true;
+				}
 			}
-			}
-			catch (Exception e)
+			catch(Exception e)
 			{
-				System.err.println(e.getStackTrace());
+				e.printStackTrace();
 			}
 		}
 	}

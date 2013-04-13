@@ -180,7 +180,7 @@ public class TimeService extends Label implements Runnable
 			m_targetDaylight = 175;
 		}
 		setText(hour + ":" + minutes);
-		/* Stop was causing this next part not to work for some reason... hopefully this doesn't cause any problems if setTime gets called in the future. Seems to generate IllegalStateExceptions */
+		/* TODO: (IllegalStateExceptions may be generated here.) Stop was causing this next part not to work for some reason... hopefully this doesn't cause any problems if setTime gets called in the future. Seems to generate IllegalStateExceptions */
 		if(!m_thread.isAlive())
 			m_thread.start();
 	}
@@ -192,5 +192,10 @@ public class TimeService extends Label implements Runnable
 			m_daylight++;
 		else if(m_daylight > m_targetDaylight)
 			m_daylight--;
+	}
+
+	public void stopTimeService()
+	{
+		m_running = false;
 	}
 }

@@ -34,13 +34,13 @@ import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.KeyManager;
-import org.pokenet.client.backend.TWLInputAdapter;
 import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
+import org.pokenet.client.backend.TWLInputAdapter;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.Player;
 import org.pokenet.client.backend.entity.Player.Direction;
@@ -60,14 +60,12 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.ui.twl.ConfirmationDialog;
 import org.pokenet.client.ui.twl.GUIPane;
 import org.pokenet.client.ui.twl.LoginScreen;
-
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
 /**
  * The game client
- * 
  */
 public class GameClient extends BasicGame
 {
@@ -76,7 +74,7 @@ public class GameClient extends BasicGame
 	private GUI gui;
 	private GUIPane root;
 	private TWLInputAdapter twlInputAdapter;
-	
+
 	private Session m_session;
 	private static boolean debug = false;
 	private final static int FPS = 30;
@@ -85,7 +83,7 @@ public class GameClient extends BasicGame
 	private Connection m_connection;
 	private String m_filepath;
 	private Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
-	private static GameClient m_instance;
+	private volatile static GameClient m_instance;
 	private String m_language = Language.ENGLISH;
 	private Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 	private Image m_loadImage; // Made these static to prevent memory leak.
@@ -603,7 +601,7 @@ public class GameClient extends BasicGame
 	{
 		return root.getLoginScreen();
 	}
-	
+
 	public GUIPane getGUIPane()
 	{
 		return root;
@@ -732,35 +730,42 @@ public class GameClient extends BasicGame
 			m_weather.setEnabled(options.isWeatherEnabled());
 
 		/* Add the ui components */
-		 // save Slick's GL state while loading the theme
-        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-        try {
-            lwjglRenderer = new LWJGLRenderer();
-            File f = new File(m_filepath + "res/themes/default/Default.xml");
-            theme = ThemeManager.createThemeManager(f.getAbsoluteFile().toURI().toURL() , lwjglRenderer);
-            root = new GUIPane();
-            gui = new GUI(root, lwjglRenderer);
-            gui.applyTheme(theme);
-        } catch (LWJGLException e) {
-            e.printStackTrace();
-        } catch(IOException e){
-            e.printStackTrace();
-        } finally {
-            // restore Slick's GL state
-            GL11.glPopAttrib();
-        }
+		// save Slick's GL state while loading the theme
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+		try
+		{
+			lwjglRenderer = new LWJGLRenderer();
+			File f = new File(m_filepath + "res/themes/default/Default.xml");
+			theme = ThemeManager.createThemeManager(f.getAbsoluteFile().toURI().toURL(), lwjglRenderer);
+			root = new GUIPane();
+			gui = new GUI(root, lwjglRenderer);
+			gui.applyTheme(theme);
+		}
+		catch(LWJGLException e)
+		{
+			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			// restore Slick's GL state
+			GL11.glPopAttrib();
+		}
 
-        // connect input
-        twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
-        gc.getInput().addPrimaryListener(twlInputAdapter); 	
-        root.getLoginScreen().setServerRevision(2000);
-        root.showLoginScreen();
-		
+		// connect input
+		twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
+		gc.getInput().addPrimaryListener(twlInputAdapter);
+		root.getLoginScreen().setServerRevision(2000);
+		root.showLoginScreen();
+
 		m_loading = new LoadingScreen();
 		m_display.add(m_loading);
 
-		//m_ui = new UserInterface(m_display);
-		//m_ui.setAllVisible(false);
+		// m_ui = new UserInterface(m_display);
+		// m_ui.setAllVisible(false);
 
 		/* Item DB */
 		ItemDatabase m_itemdb = new ItemDatabase();
@@ -1095,7 +1100,7 @@ public class GameClient extends BasicGame
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
-		twlInputAdapter.update();	
+		twlInputAdapter.update();
 		if(LoadingList.get().getRemainingResources() > 0)
 		{
 			m_nextResource = LoadingList.get().getNext();
@@ -1259,7 +1264,8 @@ public class GameClient extends BasicGame
 			{
 				root.getLoginScreen().hideOnExit();
 			}
-		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !root.getLoginScreen().isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.getInstance().isBattling() && !m_isNewMap)
+		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !root.getLoginScreen().isVisible() && !getDisplay().containsChild(m_playerDialog) && !BattleManager.getInstance().isBattling()
+				&& !m_isNewMap)
 			if(m_ourPlayer != null && !m_isNewMap
 			/* && m_loading != null && !m_loading.isVisible() */
 			&& !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
@@ -1369,8 +1375,8 @@ public class GameClient extends BasicGame
 			BattleManager.getInstance().getBattleWindow().useMove(2);
 		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
 			BattleManager.getInstance().getBattleWindow().useMove(3);
-		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning())
-				&& !getDisplay().containsChild(getUi().getShop()))
+		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive()
+				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()) && !getDisplay().containsChild(getUi().getShop()))
 		{
 			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
 			{
@@ -1401,22 +1407,15 @@ public class GameClient extends BasicGame
 				respath = "";
 			/* WARNING: Change 385 to the amount of sprites we have in client the load bar only works when we don't make a new SpriteSheet ie. ss = new SpriteSheet(temp, 41, 51); needs to be commented out in order for the load bar to work. */
 			for(int i = -7; i < 385; i++)
-				try
-				{
-					final String location = respath + "res/characters/" + i + ".png";
-					m_spriteImageArray[i + 7] = new Image(location);
-				}
-				catch(Exception e)
-				{
-					// location = respath + "res/characters/" + String.valueOf(i) + ".png";
-					// m_spriteImageArray[i + 5] = new Image(location);
-				}
+			{
+				final String location = respath + "res/characters/" + i + ".png";
+				m_spriteImageArray[i + 7] = new Image(location);
+			}
 		}
-		catch(Exception e)
+		catch(SlickException se)
 		{
-			e.printStackTrace();
+			se.printStackTrace();
 		}
-
 	}
 
 	public void setPlayerSpriteFactory()
@@ -1439,11 +1438,13 @@ public class GameClient extends BasicGame
 		options = opt;
 	}
 
-	public LWJGLRenderer getRenderer() {
+	public LWJGLRenderer getRenderer()
+	{
 		return lwjglRenderer;
 	}
-	
-	public GUI getGUI() {
+
+	public GUI getGUI()
+	{
 		return gui;
 	}
 }

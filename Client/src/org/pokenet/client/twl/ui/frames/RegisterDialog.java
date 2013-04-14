@@ -1,8 +1,5 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui.frames;
 
-import java.io.File;
-import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -18,12 +15,7 @@ import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.DynamicImage;
-import de.matthiasmann.twl.renderer.DynamicImage.Format;
 import de.matthiasmann.twl.renderer.Image;
-import de.matthiasmann.twl.renderer.Texture;
-import de.matthiasmann.twl.theme.ThemeManager;
-
 /**
  * Handles registration dialog
  * 
@@ -400,7 +392,6 @@ public class RegisterDialog extends ResizableFrame
 			respath = "";
 		try
 		{
-			ByteBuffer f;
 			m_starters = new TWLImageButton[12];
 			for(int i = 0; i < m_starters.length; i++)
 			{

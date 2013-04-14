@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui;
 
 import de.matthiasmann.twl.DesktopArea;
 

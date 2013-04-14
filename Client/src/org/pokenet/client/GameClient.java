@@ -52,14 +52,14 @@ import org.pokenet.client.constants.Music;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
+import org.pokenet.client.twl.ui.GUIPane;
+import org.pokenet.client.twl.ui.LoginScreen;
+import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.UserInterface;
 import org.pokenet.client.ui.base.MessageDialog;
 import org.pokenet.client.ui.frames.AlertPopupDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
-import org.pokenet.client.ui.twl.ConfirmationDialog;
-import org.pokenet.client.ui.twl.GUIPane;
-import org.pokenet.client.ui.twl.LoginScreen;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
@@ -1446,5 +1446,9 @@ public class GameClient extends BasicGame
 	public GUI getGUI()
 	{
 		return gui;
+	}
+	
+	public ThemeManager getTheme() {
+		return theme;
 	}
 }

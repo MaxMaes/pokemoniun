@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui;
 
 import java.io.File;
 import java.io.IOException;

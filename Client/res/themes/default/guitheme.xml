@@ -89,4 +89,23 @@
             </grid>
         </select>
     </images>
+    <images file="pokedex.png">
+        <area name="incrementer" xywh="11,34,36,14"/>
+        <area name="incrementer_pressed" xywh="11,13,36,14"/>
+        <area name="button_up" xywh="68,8,29,26"/>
+        <area name="button_down" xywh="68,38,29,26"/>
+        <area name="button_right" xywh="141,16,20,35"/>
+        <area name="button_left" xywh="111,16,20,35"/>
+        <area name="pokemoncaught" xywh="11,58,19,19"/>
+        <area name="pokemonlocation" xywh="39,63,11,9"/>
+        <area name="map_hoenn" xywh="226,9,199,98"/>
+        <area name="map_kantojohto" xywh="226,115,199,98"/>
+        <area name="map_sinnoh" xywh="11,115,199,98"/>
+        <area name="pokemonselection" xywh="11,82,173,21"/>
+        <area name="pokedex" xywh="3,232,500,363"/>
+        <select name="incrementer_background">
+            <alias ref="incrementer_pressed" if="pressed"/>
+            <alias ref="incrementer"/>
+        </select>
+    </images>
 </themes>

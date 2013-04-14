@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui.frames;
 
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.Language;

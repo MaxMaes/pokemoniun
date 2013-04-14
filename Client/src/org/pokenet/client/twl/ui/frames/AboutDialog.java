@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui.frames;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
  * 
  * @author Myth1c
  */
-public class ToSDialog extends ResizableFrame
+public class AboutDialog extends ResizableFrame
 {
 	private TextArea m_info;
 	private Widget panel;
@@ -22,24 +22,23 @@ public class ToSDialog extends ResizableFrame
 	/**
 	 * Default constructor
 	 */
-	public ToSDialog()
+	public AboutDialog()
 	{
 		List<String> translated = Translator.translate("_LOGIN");
-		setTitle(translated.get(18));
-		setPosition(128, 256);
-		setResizableAxis(ResizableAxis.NONE);
+		setTitle(translated.get(34));
+		setPosition(0, 0);
 		setSize(288, 320);
-		setVisible(false);
 		
-		panel = new Widget();
+		Widget panel = new Widget();
 		panel.setTheme("content");
-		m_info = new TextArea();
-		m_info.setSize(280, 320);
-		m_info.setPosition(0, 25);
-		
+		panel.setSize(288, 320);
+		panel.setPosition(0, 0);
+
 		SimpleTextAreaModel tam = new SimpleTextAreaModel();
-		tam.setText(translated.get(33));
-		m_info.setModel(tam);
+        tam.setText(translated.get(35) + "\n" + translated.get(36) + "\n" + translated.get(37) + "\n" + translated.get(38) + "\n" + translated.get(39) + "\n");
+		m_info = new TextArea(tam);
+		m_info.setPosition(0, 25);
+		m_info.setSize(280, 500);
 		panel.add(m_info);
 		add(panel);
 		
@@ -49,13 +48,16 @@ public class ToSDialog extends ResizableFrame
 				setVisible(false);
 			}
 		});
+		
+		setVisible(false);
 	}
-	
+
 	public void reloadStrings()
 	{
 		List<String> translated = Translator.translate("_LOGIN");
-		setTitle(translated.get(18));
+		setTitle(translated.get(34));
 		SimpleTextAreaModel tam = new SimpleTextAreaModel();
-		tam.setText(translated.get(33));
+		tam.setText(translated.get(35) + "\n" + translated.get(36) + "\n" + translated.get(37) + "\n" + translated.get(38) + "\n" + translated.get(39) + "\n");
+		m_info.setModel(tam);
 	}
 }

@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.twl;
+package org.pokenet.client.twl.ui;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,6 +8,13 @@ import java.util.Scanner;
 
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
+import org.pokenet.client.twl.ui.frames.AboutDialog;
+import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
+import org.pokenet.client.twl.ui.frames.LanguageDialog;
+import org.pokenet.client.twl.ui.frames.LoginDialog;
+import org.pokenet.client.twl.ui.frames.RegisterDialog;
+import org.pokenet.client.twl.ui.frames.ServerDialog;
+import org.pokenet.client.twl.ui.frames.ToSDialog;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;

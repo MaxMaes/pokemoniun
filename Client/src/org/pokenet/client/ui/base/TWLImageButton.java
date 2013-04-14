@@ -2,9 +2,7 @@ package org.pokenet.client.ui.base;
 
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.GUI;
-import de.matthiasmann.twl.renderer.AnimationState;
 import de.matthiasmann.twl.renderer.Image;
-import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 
 /**
  * An ImageButton class based on the TWL Library.

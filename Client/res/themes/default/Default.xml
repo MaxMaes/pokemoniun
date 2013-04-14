@@ -2,7 +2,7 @@
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
     <include filename="guitheme.xml"/>
-    <fontDef name="pokefont" filename="dp-small.fnt" color="white" offsetY="-4">
+    <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
     <fontDef name="pokefont_large" filename="dp.fnt" color="#FFFFFF">
@@ -26,6 +26,11 @@
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
+    <fontDef name="pokedex_mini" filename="pokedex_mini.fnt" color="#000000"/>
+    <fontDef name="pokedex_betweenminiandsmall" filename="pokedex_betweenminiandsmall.fnt" color="#000000"/>
+    <fontDef name="pokedex_small" filename="pokedex_small.fnt" color="#000000"/>
+    <fontDef name="pokedex_medium" filename="pokedex_medium.fnt" color="#000000"/>
+    <fontDef name="pokedex_large" filename="pokedex_large.fnt" color="#000000"/>
 
     <inputMapDef name="-defaultInputMap">
         <action name="selectAll">ctrl A</action>
@@ -292,6 +297,42 @@
                         <param name="font"><font>pokefont</font></param>
                     </theme>
                     <theme name="twlimagebutton" ref="twlimagebutton"/>
+                </theme>
+            </theme>
+        </theme>
+        <theme name="userinterface" ref="-defaults">
+            <theme name="pokedexdialog" ref="-defaults">
+                <param name="background"><image>none</image></param>
+                <theme name="label_small" ref="label">
+                    <param name="font"><font>pokedex_small</font></param>
+                </theme>
+                <theme name="label_mini" ref="label">
+                    <param name="font"><font>pokedex_mini</font></param>
+                </theme>
+                <theme name="label_minismall" ref="label">
+                    <param name="font"><font>pokedex_betweenminiandsmall</font></param>
+                </theme>
+                <theme name="label_medium" ref="label">
+                    <param name="font"><font>pokedex_medium</font></param>
+                </theme>
+                <theme name="label_large" ref="label">
+                    <param name="font"><font>pokedex_large</font></param>
+                </theme>
+                <theme name="button_left" ref="button">
+                    <param name="background"><image>button_left</image></param>
+                </theme>
+                <theme name="button_right" ref="button">
+                    <param name="background"><image>button_right</image></param>
+                </theme>
+                <theme name="button_up" ref="button">
+                    <param name="background"><image>button_up</image></param>
+                </theme>
+                <theme name="button_down" ref="button">
+                    <param name="background"><image>button_down</image></param>
+                </theme>
+                <theme name="button_incrementer" ref="button">
+                    <param name="background"><image>incrementer_background</image></param>
+                    <param name="font"><font>pokedex_mini</font></param>
                 </theme>
             </theme>
         </theme>

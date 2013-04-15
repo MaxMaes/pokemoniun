@@ -87,6 +87,10 @@ public class Player extends Character implements Battleable, Tradeable
 	/* Trade stuff */
 	private Trade m_trade = null;
 	private String m_username;
+	private int battletowerCurrentStreakLvl50;
+	private int battletowerHighscoreLvl50;
+	private int battletowerCurrentStreakAnyLvl;
+	private int battletowerHighscoreAnyLvl;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)
@@ -2218,5 +2222,69 @@ public class Player extends Character implements Battleable, Tradeable
 	public void setIsTaveling(boolean m_isTaveling)
 	{
 		this.m_isTaveling = m_isTaveling;
+	}
+	
+	/**
+	 * get the Battletower current streak for lvl 50
+	 */
+	public int getBTStreak50()
+	{
+		return battletowerCurrentStreakLvl50;
+	}
+	
+	/**
+	 * get the Battletower current streak for any lvl
+	 */
+	public int getBTStreakAny()
+	{
+		return battletowerCurrentStreakAnyLvl;
+	}
+	
+	/**
+	 * get the Battletower highscore for lvl 50
+	 */
+	public int getBTHighScore50()
+	{
+		return battletowerHighscoreLvl50;
+	}
+	
+	/**
+	 * get the Battletower highscore for any lvl
+	 */
+	public int getBTHighScoreAny()
+	{
+		return battletowerHighscoreAnyLvl;
+	}
+	
+	/**
+	 * set the Battletower current streak for lvl 50
+	 */
+	public void setBTStreak50(int s)
+	{
+		battletowerCurrentStreakLvl50 = s;
+	}
+	
+	/**
+	 * set the Battletower current streak for any lvl
+	 */
+	public void setBTStreakAny(int s)
+	{
+		battletowerCurrentStreakAnyLvl = s;
+	}
+	
+	/**
+	 * set the Battletower highscore for lvl 50
+	 */
+	public void setBTHighScore50(int s)
+	{
+		battletowerHighscoreLvl50 = s;
+	}
+	
+	/**
+	 * set the Battletower highscore for any lvl
+	 */
+	public void setBTHighScoreAny(int s)
+	{
+		battletowerHighscoreAnyLvl = s;
 	}
 }

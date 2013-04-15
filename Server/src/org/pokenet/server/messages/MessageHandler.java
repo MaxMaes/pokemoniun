@@ -42,6 +42,7 @@ import org.pokenet.server.messages.events.ServerAnnouncementEvent;
 import org.pokenet.server.messages.events.ServerNotificationEvent;
 import org.pokenet.server.messages.events.ShopEvent;
 import org.pokenet.server.messages.events.SpriteEvent;
+import org.pokenet.server.messages.events.StartBattlefrontierEvent;
 import org.pokenet.server.messages.events.StartTalkingEvent;
 import org.pokenet.server.messages.events.StopServerEvent;
 import org.pokenet.server.messages.events.SwapPokemonBoxPartyEvent;
@@ -141,5 +142,6 @@ public class MessageHandler
 		messages.put(55, new WarpPlayerToPlayerEvent());
 		messages.put(56, new ChangeUserClassEvent());
 		messages.put(57, new UserUnstickEvent());
+		messages.put(58, new StartBattlefrontierEvent());
 	}
 }

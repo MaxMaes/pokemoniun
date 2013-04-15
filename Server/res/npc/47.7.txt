@@ -792,7 +792,7 @@ right
 336
 58
 24
-Aggron,50 
+Aggron,50
 1
 -1
 27
@@ -806,7 +806,7 @@ left
 336
 63
 21
-Tyranitar,50 
+Tyranitar,50
 1
 -1
 27
@@ -820,7 +820,7 @@ right
 339
 67
 24
-Magnezone,50 
+Magnezone,50
 1
 -1
 28
@@ -834,7 +834,7 @@ right
 336
 58
 24
-Aggron,50 
+Aggron,50
 1
 -1
 27
@@ -848,7 +848,7 @@ down
 351
 85
 23
-Golem,50 
+Golem,50
 1
 -1
 29

@@ -102,6 +102,7 @@ public class PokemonSpecies
 	@Element
 	protected float m_weight;
 	private int m_number;
+	protected int tier;
 
 	// private int m_number;
 
@@ -123,6 +124,12 @@ public class PokemonSpecies
 
 	/**
 	 * Allows for construction from another PokemonSpecies.
+	 * 
+	 * @param int m_species = id number of the pokemon
+	 * @param String m_name = name of the species
+	 * @param int[] m_base = base stats
+	 * @param pokemon[] m_type which type(s) is this pokemon
+	 * @param int m_genders
 	 */
 	public PokemonSpecies(PokemonSpecies i)
 	{
@@ -626,5 +633,15 @@ public class PokemonSpecies
 	private void writeObject(ObjectOutputStream out) throws IOException
 	{
 		out.defaultWriteObject();
+	}
+	
+	public int getTier()
+	{
+		return tier;
+	}
+	
+	public void setTier(int t)
+	{
+		tier = t;
 	}
 }

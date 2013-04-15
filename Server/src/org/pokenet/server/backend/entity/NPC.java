@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
+import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.battle.mechanics.PokemonNature;
@@ -643,7 +644,7 @@ public class NPC extends Character
 					lvl = 57;
 					poke = Pokemon.getGymLeaderPokemon("Steelix", lvl, PokemonNature.N_SASSY, 255, 16, 0, 0, 255, 0, "Stealth Rock", "Earthquake", "Gyro Ball", "Iron Tail");
 					party[0] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 108, 0, 0, 160, 0, 255, "Substitute", "Thunderbolt", "Magnet Rise", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 108, 0, 0, 160, 0, 255, "Rain Dance", "Thunderbolt", "Magnet Rise", "Flamethrower");
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Scizor", lvl, PokemonNature.N_ADAMANT, 32, 255, 0, 255, 0, 0, "Swords Dance", "Bullet Punch", "Superpower", "Quick Attack");
 					party[2] = poke;
@@ -659,7 +660,7 @@ public class NPC extends Character
 					lvl = 25;
 					poke = Pokemon.getGymLeaderPokemon("Steelix", lvl, PokemonNature.N_SASSY, 0, 0, 0, 0, 0, 0, "Stealth Rock", "Earthquake", "Gyro Ball", "Iron Tail");
 					party[0] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Substitute", "Thunderbolt", "Magnet Rise", "Flamethrower");
+					poke = Pokemon.getGymLeaderPokemon("Magneton", lvl, PokemonNature.N_MODEST, 0, 0, 0, 0, 0, 0, "Rain Dance", "Thunderbolt", "Magnet Rise", "Flamethrower");
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Scizor", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Swords Dance", "Bullet Punch", "Superpower", "Quick Attack");
 					party[2] = poke;
@@ -1026,6 +1027,24 @@ public class NPC extends Character
 					}
 			}
 		}
+		//TODO random trainers pokemon
+		else if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer"))
+		{
+			int lvl;
+			if(p.getHighestLevel()==50)
+				lvl = 50;
+			else
+				lvl = p.getHighestLevel();
+			
+			r.nextInt(472);
+			
+			poke = Pokemon.getRandomPokemon(PokemonSpecies.getDefaultData(),DataService.getBattleMechanics(),lvl);
+			party[0] = poke;
+			poke = Pokemon.getRandomPokemon(PokemonSpecies.getDefaultData(),DataService.getBattleMechanics(),lvl);
+			party[1] = poke;
+			poke = Pokemon.getRandomPokemon(PokemonSpecies.getDefaultData(),DataService.getBattleMechanics(),lvl);
+			party[2] = poke;
+		}
 		else
 		{
 			int playerPartySize = p.getPartyCount();
@@ -1291,6 +1310,14 @@ public class NPC extends Character
 				ServerMessage message = new ServerMessage();
 				message.init(96);
 				p.getSession().Send(message);
+				return;
+			}
+			//@author sadhi
+			//TODO finish the random trainer
+			/* random trainer different from normal trainer */
+			if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer")) {
+				p.setBattling(true);
+				p.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), p, this));
 				return;
 			}
 			//@author sadhi

@@ -57,7 +57,8 @@ public enum ServerPacket
 	PLAYER_ME_WARP(0x36),
 	PLAYER_PLAYER_WARP(0x37), 
 	PLAYER_CLASS(0x38), 
-	PLAYER_UNSTICK(0x39);
+	PLAYER_UNSTICK(0x39),
+	BATTLEFRONTIER_FACILITY(0x3A);
 	
 	private int code = -1;
 

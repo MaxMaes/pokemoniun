@@ -187,42 +187,42 @@ public abstract class Clause extends FieldEffect
 			}
 		};
 
-		new Clause("Random Battle")
-		{
-			@Override
-			public boolean disablesTeamSelection()
-			{
-				return true;
-			}
-
-			@Override
-			public String getClauseDescription()
-			{
-				return "Instead of loading teams, both players use randomly " + "generated parties.";
-			}
-
-			@Override
-			public int getTier()
-			{
-				return -2;
-			}
-
-			@Override
-			public boolean isTeamValid(BattleField field, Pokemon[] team, int idx)
-			{
-				for(int i = 0; i < team.length; ++i)
-				{
-					if(team[i] != null)
-					{
-						team[i].setItem(null);
-						team[i].setAbility(null, true);
-					}
-					team[i] = Pokemon.getRandomPokemon(ModData.getDefaultData(), field.getMechanics());
-				}
-				field.attachField(idx);
-				return true;
-			}
-		};
+//		new Clause("Random Battle")
+//		{
+//			@Override
+//			public boolean disablesTeamSelection()
+//			{
+//				return true;
+//			}
+//
+//			@Override
+//			public String getClauseDescription()
+//			{
+//				return "Instead of loading teams, both players use randomly " + "generated parties.";
+//			}
+//
+//			@Override
+//			public int getTier()
+//			{
+//				return -2;
+//			}
+//
+//			@Override
+//			public boolean isTeamValid(BattleField field, Pokemon[] team, int idx)
+//			{
+//				for(int i = 0; i < team.length; ++i)
+//				{
+//					if(team[i] != null)
+//					{
+//						team[i].setItem(null);
+//						team[i].setAbility(null, true);
+//					}
+//					team[i] = Pokemon.getRandomPokemon(ModData.getDefaultData(), field.getMechanics());
+//				}
+//				field.attachField(idx);
+//				return true;
+//			}
+//		};
 
 		new Clause("OHKO Clause")
 		{

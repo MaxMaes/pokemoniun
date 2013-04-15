@@ -1,5 +1,5 @@
 [npc]
-Nurse Joy
+Battlefrontier - battledome lady - lvl 50
 down
 327
 6
@@ -13,7 +13,7 @@ false
 false
 [/npc]
 [npc]
-Nurse Joy
+Battlefrontier - battledome lady - any lvl
 down
 327
 18

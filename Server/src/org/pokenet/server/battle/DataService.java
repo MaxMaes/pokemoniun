@@ -448,7 +448,10 @@ public class DataService
 			}
 			species.setEvolutions(evos);
 			species.setTMMoves(new String[92]);
-
+			if(s.get("Tier") == null)
+				species.setTier(0);
+			else
+				species.setTier(Integer.parseInt(s.get("Tier")));
 		}
 	}
 }

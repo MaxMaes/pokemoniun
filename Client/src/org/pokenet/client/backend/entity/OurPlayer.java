@@ -422,4 +422,18 @@ public class OurPlayer extends Player
 			m_pokemon[i].setSpdef(Integer.parseInt(info[6]));
 		}
 	}
+	
+	/**
+	 * Returns the amount of Pokemon in this player's party
+	 * 
+	 * @return
+	 */
+	public int getPartyCount()
+	{
+		int r = 0;
+		for(int i = 0; i < m_pokemon.length; i++)
+			if(m_pokemon[i] != null)
+				r++;
+		return r;
+	}
 }

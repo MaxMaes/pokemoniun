@@ -287,7 +287,7 @@ public class Pokemon extends PokemonSpecies
 	/**
 	 * Get a random Pokemon object.
 	 */
-	public static Pokemon getRandomPokemon(ModData data, BattleMechanics mech)
+	public static Pokemon getRandomPokemon(PokemonSpeciesData d, BattleMechanics mech, int lvl)
 	{
 		Random random = mech.getRandom();
 		int[] ivs = new int[6];
@@ -302,13 +302,21 @@ public class Pokemon extends PokemonSpecies
 			evTotal += inc;
 		}
 		PokemonNature nature = PokemonNature.getNature(random.nextInt(25));
-		PokemonSpeciesData speciesData = data.getSpeciesData();
-		PokemonSpecies species = new PokemonSpecies(speciesData, random.nextInt(speciesData.getSpeciesCount()));
+		PokemonSpeciesData speciesData = d;
+		int chosenPoke = random.nextInt(speciesData.getSpeciesCount());
+		PokemonSpecies species = speciesData.getSpecies(chosenPoke);
 		String[] moveset = species.getStarterMoves();
-		if(moveset == null || moveset.length == 0)
-			return null;
-		int moveCount = moveset.length;
+//		if(moveset == null || moveset.length == 0)
+//			return null;
+		int moveCount = 4;
 		String[] moves = species.getLevelMoves().values().toArray(new String[species.getLevelMoves().size()]);
+//		int j =0;
+//		for(int i = moves.length; i < moves.length + species.getTMMoves().length; i++)		
+//		{
+//			moves[i] = species.getTMMoves()[j];
+//			j++;
+//		}
+		
 		MoveListEntry[] entries = new MoveListEntry[moveCount >= 4 ? 4 : moveCount];
 		Set<String> moveSet = new HashSet<String>();
 		int[] ppUp = new int[entries.length];
@@ -319,20 +327,15 @@ public class Pokemon extends PokemonSpecies
 				move = moves[random.nextInt(moves.length)];
 			while(moveSet.contains(move));
 			moveSet.add(move);
-			entries[i] = data.getMoveData().getMove(move);
+			entries[i] = MoveList.getDefaultData().getMove(move);//d.getMoveData().getMove(move);
 			ppUp[i] = random.nextInt(4);
 		}
 
 		String ability = null;
-		SortedSet<Object> set;
 		String[] itemes = species.getPossibleAbilities(speciesData);
 		if(itemes != null)
 			ability = itemes[random.nextInt(itemes.length)];
-
-		set = data.getHoldItemData().getItemSet(species.getName());
-		String[] items = set.toArray(new String[set.size()]);
-		String item = items[random.nextInt(items.length)];
-
+		
 		int genders = species.getPossibleGenders();
 		int gender = GENDER_NONE;
 		if(genders != GENDER_NONE)
@@ -345,9 +348,9 @@ public class Pokemon extends PokemonSpecies
 					break;
 			}
 		}
-		Pokemon p = new Pokemon(mech, species, nature, ability, item, gender, 100, ivs, evs, entries, ppUp);
+		Pokemon p = new Pokemon(mech, species, nature, ability, "", gender, lvl, ivs, evs, entries, ppUp);
 		// Give it a 5% chance of being shiny.
-		if(random.nextDouble() < 0.10)
+		if(random.nextDouble() < (1/8192))
 			
 			p.setShiny(true);
 		return p;

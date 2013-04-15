@@ -29,7 +29,7 @@ public class AboutDialog extends ResizableFrame
 		setPosition(0, 0);
 		setSize(288, 320);
 		
-		Widget panel = new Widget();
+		panel = new Widget();
 		panel.setTheme("content");
 		panel.setSize(288, 320);
 		panel.setPosition(0, 0);

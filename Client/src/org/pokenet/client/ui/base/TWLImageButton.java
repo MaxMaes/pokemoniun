@@ -12,14 +12,54 @@ import de.matthiasmann.twl.renderer.Image;
 
 public class TWLImageButton extends Button {
 	private Image image;
+	private Image pressedImage;
+	private Image hoverImage;
+	
+	private Image currImage;
+	
+	private int x;
+	private int y;
+	private ImageAlignment alignment = ImageAlignment.CENTER;
+	
+	public static enum ImageAlignment {
+		CENTER,
+		CUSTOM
+	};
 	
 	/**
 	 * Creates the imagebutton with given image
 	 * @param img The image
 	 */
 	public TWLImageButton(Image img) {
-		
+		super();
 		image = img;
+		currImage = image;
+	}
+	
+	/**
+	 * Creates the imagebutton with given images
+	 * @param img The image
+	 */
+	public TWLImageButton(Image img, Image hover, Image pressed) {
+		super();
+		image = img;
+		hoverImage = hover;
+		pressedImage = pressed;
+		currImage = image;
+		getModel().addStateCallback(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if(getModel().isHover()) {
+					currImage = hoverImage;
+				} else if(getModel().isPressed()) {
+					currImage = pressedImage;
+				} else {
+					currImage = image;
+				}
+			}
+		});
 	}
 	
 	/**
@@ -31,11 +71,24 @@ public class TWLImageButton extends Button {
 	}
 	
 	/**
+	 * Sets the position of the image based on the position of the button
+	 * @param xPos
+	 * @param yPos
+	 */
+	public void setImagePosition(int xPos, int yPos) {
+		x = xPos + getInnerX();
+		y = yPos + getInnerY();
+	}
+	
+	/**
 	 * Paints the button first and then the image on top of it.
 	 */
 	@Override
 	public void paintWidget(GUI gui) {
 		super.paintWidget(gui);
-		image.draw(getAnimationState(), getInnerX()-4, getInnerY()-4, image.getWidth(), image.getHeight());
+		if(alignment == ImageAlignment.CENTER)
+			currImage.draw(getAnimationState(), getInnerX()-4, getInnerY()-4, currImage.getWidth(), currImage.getHeight());
+		else
+			currImage.draw(getAnimationState(), x, y, currImage.getWidth(), currImage.getHeight());
 	}
 }

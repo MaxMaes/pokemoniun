@@ -16,9 +16,27 @@
             <alias ref="close_pressed" if="pressed"/>
             <alias ref="close"/>
         </select>
-        <area name="editfield" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
+        <area name="checkmark" xywh="35,142,14,14"/>
+        <area name="checkbox" xywh="20,142,14,14"/>
+        <area name="checkbox_pressed" xywh="20,125,14,14"/>
+        <composed name="checkbox_active">
+            <alias ref="checkbox"/>
+            <alias ref="checkmark"/>
+        </composed>
+        <composed name="checkbox_active_pressed">
+            <alias ref="checkbox_pressed"/>
+            <alias ref="checkmark"/>
+        </composed>
+        <select name="checkbox_background">
+            <alias ref="checkbox_active_pressed" if="pressed"/>
+            <alias ref="checkbox_active" if="selected"/>
+            <alias ref="checkbox"/>
+        </select>
+    
+    
         <cursor name="cursor" hotSpotX="0" hotSpotY="0" xywh="112,2,12,19"/>
         <cursor name="cursor_text" hotSpotX="0" hotSpotY="0" xywh="93,3,7,16"/>
+        <area name="editfield" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
         <area name="resizableframe" xywh="55,63,24,7" splitx="L2,R2" splity="T2,B2"/>
         <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
         <area name="resizableframe_borderless" xywh="57,65,20,3"/>

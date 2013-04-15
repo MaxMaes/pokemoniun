@@ -341,8 +341,6 @@ public class OurPokemon extends Pokemon
     				{
     					index = String.valueOf(getSpriteNumber() - 5);
     				}
-    					
-    				
     			}
 				else
 					index = String.valueOf(getSpriteNumber());

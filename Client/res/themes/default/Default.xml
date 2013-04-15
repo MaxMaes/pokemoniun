@@ -172,6 +172,9 @@
         <param name="font"><font>normal_black</font></param>
         <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
     </theme>
+    <theme name="checkbox" ref="-defaults">
+        <param name="background"><image>checkbox_background</image></param>
+    </theme>
     <theme name="guipane" ref="-defaults">
         <theme name="label" ref="label"/>
         <theme name="loginscreen" ref="-defaults">

@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.ini4j.Ini;
 import org.ini4j.Ini.Section;
 import org.ini4j.InvalidIniFormatException;
-import org.newdawn.slick.Image;
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class Options
 {

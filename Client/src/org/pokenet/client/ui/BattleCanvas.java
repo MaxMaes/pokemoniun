@@ -23,7 +23,7 @@ public class BattleCanvas extends Container
 {
 	private Label bgPic;
 	private Label enemyDataBG;
-	private ProgressBar enemyHP;
+	public ProgressBar enemyHP;
 	// private Label playerXPBar;
 	private Label enemyHPBar;
 	private Label enemyLv;
@@ -37,7 +37,7 @@ public class BattleCanvas extends Container
 	private HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 	private Timer mTimer = new Timer();
 	private Label playerDataBG;
-	private ProgressBar playerHP;
+	public ProgressBar playerHP;
 	private Label playerHPBar;
 	private Label playerLv;
 	private Label playerNameLabel;
@@ -140,7 +140,7 @@ public class BattleCanvas extends Container
 		add(enemyGender);
 		add(enemyLv);
 		add(enemyStatus);
-		initEnemyHPBar();
+//		initEnemyHPBar();
 	}
 
 	/**
@@ -209,9 +209,9 @@ public class BattleCanvas extends Container
 		add(playerLv);
 		add(playerStatus);
 		add(playerGender);
-		initPlayerXPBar();
-		initPlayerHPBar();
-
+		
+//		initPlayerHPBar();
+//		initPlayerXPBar();
 	}
 
 	/**
@@ -499,6 +499,8 @@ public class BattleCanvas extends Container
 		drawBackground();
 		drawOurPoke();
 		drawOurInfo();
+		initPlayerHPBar();
+		initPlayerXPBar();
 	}
 
 	/**

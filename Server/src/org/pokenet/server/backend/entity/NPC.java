@@ -1030,6 +1030,7 @@ public class NPC extends Character
 		//TODO random trainers pokemon
 		else if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer"))
 		{
+			
 			int lvl;
 			if(p.getHighestLevel()==50)
 				lvl = 50;
@@ -1224,6 +1225,11 @@ public class NPC extends Character
 	{
 		if(isTrainer())
 		{
+			if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer"))
+				if(p.canBattle)
+				{
+					m_lastBattle = 0;
+				}
 			if(canBattle())
 			{
 				String speech = getSpeech();
@@ -1238,6 +1244,7 @@ public class NPC extends Character
 				}
 				updateLastBattleTime();
 				p.setBattling(true);
+				p.canBattle = false;
 				p.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), p, this));
 				return;
 			}
@@ -1342,6 +1349,7 @@ public class NPC extends Character
 			if(m_isHeal)
 			{
 				p.healPokemon();
+				p.canBattle = true;
 				p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
 			}
 			/* Shop access */

@@ -91,6 +91,7 @@ public class Player extends Character implements Battleable, Tradeable
 	private int battletowerHighscoreLvl50;
 	private int battletowerCurrentStreakAnyLvl;
 	private int battletowerHighscoreAnyLvl;
+	public boolean canBattle = false;
 
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)

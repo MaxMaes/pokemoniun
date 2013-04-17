@@ -332,8 +332,8 @@ public class BattleTimeLine
 		m_pokeName = pokeName;
 		BattleManager.getInstance().switchPoke(Trainer, pIndex);
 		m_canvas.drawOurPoke();
-		m_canvas.drawOurInfo();
 		m_canvas.drawEnemyPoke();
+		m_canvas.drawOurInfo();
 		m_canvas.drawEnemyInfo();
 		addSpeech(m_translator.get(5));
 	}

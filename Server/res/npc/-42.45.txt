@@ -12,6 +12,20 @@ false
 false
 false
 [/npc]
+[npc]
+Nurse Joy
+down
+157
+1
+6
+NULL
+0
+-1
+1
+true
+false
+false
+[/npc]
 [warp]
 5
 9

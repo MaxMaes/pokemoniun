@@ -293,13 +293,18 @@ public class BattleManager
 			m_curPokeIndex = pokeIndex;
 			updateMoves();
 			updatePokePane();
-			m_timeLine.getBattleCanvas().drawOurPoke();
-			m_timeLine.getBattleCanvas().drawOurInfo();
+			m_timeLine.getBattleCanvas().playerHP.setMaximum(m_curPoke.getMaxHP());
+			m_timeLine.getBattleCanvas().playerHP.setValue(m_curPoke.getCurHP());
+			m_timeLine.getBattleCanvas().initPlayerXPBar();
+//			m_timeLine.getBattleCanvas().drawOurPoke();
+//			m_timeLine.getBattleCanvas().drawOurInfo();
 		}
 		else
 		{
 			m_curEnemyPoke = m_enemyPokes[pokeIndex];
 			m_curEnemyIndex = pokeIndex;
+			m_timeLine.getBattleCanvas().enemyHP.setMaximum(m_curEnemyPoke.getMaxHP());
+			m_timeLine.getBattleCanvas().enemyHP.setValue(m_curEnemyPoke.getCurHP());
 		}
 	}
 
@@ -400,6 +405,7 @@ public class BattleManager
 		{
 			m_timeLine.getBattleCanvas().drawEnemyPoke();
 			m_timeLine.getBattleCanvas().drawEnemyInfo();
+			m_timeLine.getBattleCanvas().initEnemyHPBar();
 			if(m_isWild)
 			{
 				m_timeLine.getBattleCanvas().hidePokeballs();

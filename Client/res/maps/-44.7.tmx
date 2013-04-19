@@ -2,11 +2,12 @@
 <map version="1.0" orientation="orthogonal" width="38" height="48" tilewidth="16" tileheight="16">
  <properties> 
   <property name="dayPokemonChances" value="Pidgeotto,20;Weepinbell,20;Pidgey,10;Bellsprout,10;Venonat,10;Drowzee,10;Venomoth,5;Slowpoke,5;Hypno,5;Exeggcute,5;"/>
-  <property name="dayPokemonLevels" value="37-50;35-45;32-38;30-35;34-40;34-42;37-45;31-37;37-45;35-40;"/>
+  <property name="dayPokemonLevels" value="57-60;55-65;52-58;50-55;54-60;54-62;57-65;51-57;57-65;55-60;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
   <property name="nightPokemonChances" value="Pidgeotto,20;Weepinbell,20;Pidgey,10;Bellsprout,10;Venonat,10;Drowzee,10;Venomoth,5;Slowpoke,5;Hypno,5;Exeggcute,5;"/>
-  <property name="nightPokemonLevels" value="37-50;35-45;32-38;30-35;34-40;34-42;37-45;31-37;37-45;35-40;"/>
+  <property name="nightPokemonLevels" value="57-60;55-65;52-58;50-55;54-60;54-62;57-65;51-57;57-65;55-60
+  <property name="pvp" value="enforced"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>

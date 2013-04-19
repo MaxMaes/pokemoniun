@@ -281,8 +281,13 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Two"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(320);
 					p.setY(1336);
@@ -295,8 +300,13 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Three"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(416);
 					p.setY(408);

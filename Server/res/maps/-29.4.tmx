@@ -2,13 +2,14 @@
 <map version="1.0" orientation="orthogonal" width="102" height="39" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Pidgey,30;Oddish,20;Pidgeotto,15;Gloom,10;Meowth,10;Venonat,5;Persian,5;Psyduck,5;"/>
-  <property name="dayPokemonLevels" value="29-32;31-31;34-40;36-36;31-31;34-34;37-40;31-31;"/>
+  <property name="dayPokemonLevels" value="52-55;54-54;54-60;56-56;54-54;57-57;57-60;54-54;"/>
   <property name="fishPokemonChances" value="Krabby,80;Gyarados,15;Kingler,5;"/>
-  <property name="fishPokemonLevels" value="15-25;30-50;30-50;"/>
+  <property name="fishPokemonLevels" value="15-55;30-60;30-60;"/>
+  <property name="pvp" value="enforced"/>
   <property name="nightPokemonChances" value="Pidgey,30;Bellsprout,20;Pidgeotto,15;Weepinbell,10;Meowth,10;Venonat,5;Persian,5;Slowpoke,5;"/>
-  <property name="nightPokemonLevels" value="39-32;31-31;34-40;36-36;31-31;34-34;37-40;31-31;"/>
+  <property name="nightPokemonLevels" value="52-55;54-54;54-60;56-56;54-54;57-57;57-60;54-54;"/>
   <property name="waterPokemonChances" value="Tentacool,95;Tentacruel,5;"/>
-  <property name="waterPokemonLevels" value="5-40;35-40;"/>
+  <property name="waterPokemonLevels" value="5-55;35-65;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

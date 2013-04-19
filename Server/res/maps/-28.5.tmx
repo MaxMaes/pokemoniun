@@ -7,6 +7,7 @@
   <property name="fishPokemonLevels" value=""/>
   <property name="nightPokemonChances" value="Dunsparce,100;"/>
   <property name="nightPokemonLevels" value="5-35;"/>
+  <property name="pvp" value="enforced"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>

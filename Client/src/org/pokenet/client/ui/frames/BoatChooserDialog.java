@@ -33,7 +33,7 @@ public class BoatChooserDialog extends Frame {
 		}
 		else
 		{
-			m_locations.add("One Island - canceled") ;
+			m_locations.add("One Island - $5k") ;
 		}
 		if (!travel.equalsIgnoreCase("johto"))
 		{
@@ -86,8 +86,8 @@ public class BoatChooserDialog extends Frame {
 		{
 			m_locations.clear();
 			m_locations.add("Vermillion City - $10k") ;
-			m_locations.add("Two Island - canceled") ;
-			m_locations.add("Three Island - canceled") ;
+			m_locations.add("Two Island - $5k") ;
+			m_locations.add("Three Island - $5k") ;
 			m_locations.add("Four Island - canceled") ;
 			m_locations.add("Five Island - canceled") ;
 		}
@@ -97,8 +97,8 @@ public class BoatChooserDialog extends Frame {
 			m_locations.add("Vermillion City - $10k") ;
 			m_locations.add("One Island - $5k") ;
 			m_locations.add("Three Island - $5k") ;
-			m_locations.add("Four Island - $5k") ;
-			m_locations.add("Five Island - $5k") ;
+			m_locations.add("Four Island - canceled") ;
+			m_locations.add("Five Island - canceled") ;
 		}
 		if (travel.equalsIgnoreCase("three"))
 		{
@@ -106,8 +106,8 @@ public class BoatChooserDialog extends Frame {
 			m_locations.add("Vermillion City - $10k") ;
 			m_locations.add("One Island - $5k") ;
 			m_locations.add("Two Island - $5k") ;
-			m_locations.add("Four Island - $5k") ;
-			m_locations.add("Five Island - $5k") ;
+			m_locations.add("Four Island - canceled") ;
+			m_locations.add("Five Island - canceled") ;
 		}
 		if (travel.equalsIgnoreCase("four"))
 		{

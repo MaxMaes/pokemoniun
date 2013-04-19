@@ -90,6 +90,19 @@ public class SaveManager
 		}
 		catch(Exception e)
 		{
+			System.err.println("INSERT INTO pn_pokemon " + "VALUES (NULL, '" + MySqlManager.parseSQL(poke.getName()) + "', '" + MySqlManager.parseSQL(poke.getSpeciesName()) + "', '"
+					+ String.valueOf(poke.getExp()) + "', '" + poke.getPokemonBaseExp() + "', '" + MySqlManager.parseSQL(poke.getExpType().name()) + "', '" + String.valueOf(poke.isFainted()) + "', '"
+					+ poke.getLevel() + "', '" + poke.getHappiness() + "', '" + poke.getGender() + "', '" + MySqlManager.parseSQL(poke.getNature().getName()) + "', '"
+					+ MySqlManager.parseSQL(poke.getAbilityName()) + "', '" + MySqlManager.parseSQL(poke.getItemName()) + "', '" + String.valueOf(poke.isShiny()) + "', '"
+					+ MySqlManager.parseSQL(poke.getOriginalTrainer()) + "', '" + MySqlManager.parseSQL(currentTrainer) + "', '" + poke.getContestStatsAsString() + "', '"
+					+ MySqlManager.parseSQL(poke.getMove(0).getName()) + "', '" + (poke.getMove(1) == null ? "null" : MySqlManager.parseSQL(poke.getMove(1).getName())) + "', '"
+					+ (poke.getMove(2) == null ? "null" : MySqlManager.parseSQL(poke.getMove(2).getName())) + "', '"
+					+ (poke.getMove(3) == null ? "null" : MySqlManager.parseSQL(poke.getMove(3).getName())) + "', '" + poke.getHealth() + "', '" + poke.getStat(1) + "', '" + poke.getStat(2) + "', '"
+					+ poke.getStat(3) + "', '" + poke.getStat(4) + "', '" + poke.getStat(5) + "', '" + poke.getEv(0) + "', '" + poke.getEv(1) + "', '" + poke.getEv(2) + "', '" + poke.getEv(3)
+					+ "', '" + poke.getEv(4) + "', '" + poke.getEv(5) + "', '" + poke.getIv(0) + "', '" + poke.getIv(1) + "', '" + poke.getIv(2) + "', '" + poke.getIv(3) + "', '" + poke.getIv(4)
+					+ "', '" + poke.getIv(5) + "', '" + poke.getPp(0) + "', '" + poke.getPp(1) + "', '" + poke.getPp(2) + "', '" + poke.getPp(3) + "', '" + poke.getMaxPp(0) + "', '"
+					+ poke.getMaxPp(1) + "', '" + poke.getMaxPp(2) + "', '" + poke.getMaxPp(3) + "', '" + poke.getPpUpCount(0) + "', '" + poke.getPpUpCount(1) + "', '" + poke.getPpUpCount(2) + "', '"
+					+ poke.getPpUpCount(3) + "', '" + MySqlManager.parseSQL(poke.getDateCaught()) + "', '" + poke.getCaughtWithBall() + "')");
 			e.printStackTrace();
 			return -1;
 		}
@@ -178,6 +191,11 @@ public class SaveManager
 		}
 		catch(Exception e)
 		{
+			System.err.println("UPDATE pn_members SET " + "muted='" + p.isMuted() + "', " + "sprite='" + p.getRawSprite() + "', " + "money='" + p.getMoney() + "', " + "skHerb='"
+					+ p.getHerbalismExp() + "', " + "skCraft='" + p.getCraftingExp() + "', " + "skFish='" + p.getFishingExp() + "', " + "skTrain='" + p.getTrainingExp() + "', " + "skCoord='"
+					+ p.getCoordinatingExp() + "', " + "skBreed='" + p.getBreedingExp() + "', " + "x='" + p.getX() + "', " + "y='" + p.getY() + "', " + "mapX='" + p.getMapX() + "', " + "mapY='"
+					+ p.getMapY() + "', " + "healX='" + p.getHealX() + "', " + "healY='" + p.getHealY() + "', " + "healMapX='" + p.getHealMapX() + "', " + "healMapY='" + p.getHealMapY() + "', "
+					+ "isSurfing='" + String.valueOf(p.isSurfing()) + "', " + "badges='"  + "' " + "WHERE id='" + p.getId() + "'");
 			e.printStackTrace();
 			return false;
 		}

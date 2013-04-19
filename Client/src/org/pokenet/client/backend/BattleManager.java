@@ -2,6 +2,8 @@ package org.pokenet.client.backend;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.OurPokemon;
@@ -293,8 +295,15 @@ public class BattleManager
 			m_curPokeIndex = pokeIndex;
 			updateMoves();
 			updatePokePane();
-			m_timeLine.getBattleCanvas().playerHP.setMaximum(m_curPoke.getMaxHP());
-			m_timeLine.getBattleCanvas().playerHP.setValue(m_curPoke.getCurHP());
+			m_timeLine.getBattleCanvas().setPlayerHP(m_curPoke.getMaxHP());
+			m_timeLine.getBattleCanvas().setPlayerMaxHP(m_curPoke.getCurHP());
+			if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
+				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.green);
+			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
+					&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.orange);
+			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.red);
 			m_timeLine.getBattleCanvas().initPlayerXPBar();
 //			m_timeLine.getBattleCanvas().drawOurPoke();
 //			m_timeLine.getBattleCanvas().drawOurInfo();
@@ -303,8 +312,15 @@ public class BattleManager
 		{
 			m_curEnemyPoke = m_enemyPokes[pokeIndex];
 			m_curEnemyIndex = pokeIndex;
-			m_timeLine.getBattleCanvas().enemyHP.setMaximum(m_curEnemyPoke.getMaxHP());
-			m_timeLine.getBattleCanvas().enemyHP.setValue(m_curEnemyPoke.getCurHP());
+			m_timeLine.getBattleCanvas().setEnemyHP(m_curEnemyPoke.getMaxHP());
+			m_timeLine.getBattleCanvas().setEnemyMaxHP(m_curEnemyPoke.getCurHP());
+			if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
+				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.green);
+			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
+					&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.orange);
+			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.red);
 		}
 	}
 

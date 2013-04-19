@@ -23,7 +23,7 @@ public class BattleCanvas extends Container
 {
 	private Label bgPic;
 	private Label enemyDataBG;
-	public ProgressBar enemyHP;
+	private ProgressBar enemyHP;
 	// private Label playerXPBar;
 	private Label enemyHPBar;
 	private Label enemyLv;
@@ -37,7 +37,7 @@ public class BattleCanvas extends Container
 	private HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 	private Timer mTimer = new Timer();
 	private Label playerDataBG;
-	public ProgressBar playerHP;
+	private ProgressBar playerHP;
 	private Label playerHPBar;
 	private Label playerLv;
 	private Label playerNameLabel;
@@ -658,5 +658,35 @@ public class BattleCanvas extends Container
 		playerStatus.setZIndex(8);
 		enemyStatus = new Label();
 		enemyStatus.setZIndex(8);
+	}
+	
+	public void setPlayerHP(float hp)
+	{
+		playerHP.setValue(hp);
+	}
+	
+	public void setPlayerMaxHP(int maxHP)
+	{
+		playerHP.setMaximum(maxHP);
+	}
+	
+	public void setPlayerHPColor(Color c)
+	{
+		playerHP.setForeground(c);
+	}
+	
+	public void setEnemyHP(float hp)
+	{
+		enemyHP.setValue(hp);
+	}
+	
+	public void setEnemyMaxHP(int maxHP)
+	{
+		enemyHP.setMaximum(maxHP);
+	}
+	
+	public void setEnemyHPColor(Color c)
+	{
+		enemyHP.setForeground(c);
 	}
 }

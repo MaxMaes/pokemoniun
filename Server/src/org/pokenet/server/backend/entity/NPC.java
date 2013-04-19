@@ -1032,12 +1032,12 @@ public class NPC extends Character
 		{
 			
 			int lvl;
-			if(p.getHighestLevel()==50)
+			if(p.getHighestLevel()<=50)
 				lvl = 50;
 			else
 				lvl = p.getHighestLevel();
 			
-			r.nextInt(472);
+			//r.nextInt(472);
 			
 			poke = Pokemon.getRandomPokemon(PokemonSpecies.getDefaultData(),DataService.getBattleMechanics(),lvl);
 			party[0] = poke;

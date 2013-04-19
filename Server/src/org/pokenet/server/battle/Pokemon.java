@@ -303,9 +303,93 @@ public class Pokemon extends PokemonSpecies
 		}
 		PokemonNature nature = PokemonNature.getNature(random.nextInt(25));
 		PokemonSpeciesData speciesData = d;
-		int chosenPoke = random.nextInt(speciesData.getSpeciesCount());
+		int chosenPoke = random.nextInt(478);	//speciesData.getSpeciesCount());	//cut off the top so 4th gen legends are not included
+		switch(chosenPoke)
+		{
+			case 132:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 137:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 144:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 145:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 146:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 150:
+				chosenPoke = random.nextInt(131);
+				break;
+			case 151:
+				chosenPoke = random.nextInt(131);
+				break;
+			//johto
+			case 233:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 235:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 243:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 244:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 245:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 249:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 250:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			case 251:
+				chosenPoke = random.nextInt(81)+151;
+				break;
+			//hoenn
+			case 377:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 378:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 379:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 380:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 381:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 382:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 383:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 384:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 385:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			case 386:
+				chosenPoke = random.nextInt(124)+252;
+				break;
+			//sinnoh
+			case 474:
+				chosenPoke = random.nextInt(87)+252;
+				break;
+		}
 		PokemonSpecies species = speciesData.getSpecies(chosenPoke);
-		String[] moveset = species.getStarterMoves();
+//		String[] moveset = species.getStarterMoves();
 //		if(moveset == null || moveset.length == 0)
 //			return null;
 		int moveCount = 4;

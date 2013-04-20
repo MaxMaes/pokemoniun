@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="25" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Battle Hall Lobby.tsx"/>
+ <tileset firstgid="193" source="SinnohInteriorSet0.tsx"/>
+ <layer name="Walkable" width="30" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3NyTPXcRzH8d+f4NiMFhJJSGStiCxFyU2R5RTK0qCs2YfKUtGULWUZ+TN7HH4HDk6fXMz3OfOY+cz78HnFYlFRUVEnSzijfy8ceydykUtc5gpJAX8nc5UUrpFKGtdJ5wYZ3CSTLLK5RU7A7m1yyeMO+RRQSBHFlHCXe9ynlDIeBOyWU8FDKqmimhoe8Zha6njCU+p5RkPA7mk18pwXNNHMS1popY32/7z5ig466eI1b+imh176eBuwMU0/AwzyjvcMMcwIo4wxzgcmmGQqYPcbM8wyF7/Ns8BHPvGZRZZYZoUvfA3cXWWN7/HbD36yzgabbLHNL3b4zZ+A3V322OcgfjvkL0cB/0ZFnbf+AazLIpu4CwAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="30" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UOQ7CMBCF4YGwr0rYBPfgICxJH0KOkiOkTMk9+ZGgQQYJW+BIzJM+TePxc2URjUZTx1RtkW3Tfr+B23qAFrhOOuiihz4GGGKEMSaYOr45ZEaYYY4Flljdz6yxceh41esj/9i7Y+5xwBExkh/0pswTMpyRf7nz0esjpt7ig13bv8PUW77peGYb0+7F0KPRaESuK9GLw7gLAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="30" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMNDCZdWDsnT1A9tIDlLCh0vS2dxSMglEwCkbB8AcAFuNHebgLAAA=
+  </data>
+ </layer>
+</map>

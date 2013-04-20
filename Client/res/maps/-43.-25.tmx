@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="35" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Battle Tower Lobby.tsx"/>
+ <tileset firstgid="1639" source="SinnohInteriorSet0.tsx"/>
+ <tileset firstgid="6639" source="SinnohSet7.tsx"/>
+ <tileset firstgid="8415" source="InteriorFloor 1.tsx"/>
+ <layer name="Walkable" width="35" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OwQkAMAzEsKyd7TtEezQBGfxXlSTpZx2chYWFhYWFhSVhSXlumuJ46dnaAXSD9KBoEAAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="35" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAvqALUC8lQBNjBpsNKngNhDfIUATowYbrSpFvDtgatUYGRjieVHlkpD45MhlcJPnFhBIB5rhCzXHG0hn8VIuR65b8oFmhELNCQbSRbyUy5HrFlqAUbdQbj4+tZqyxJmBTx213BJJpFvwqRuOcUQNMOoWys0fdQvpakd6+UKreCLXbGq7h1LzqOUeapqDDxOjhhS3AACj0wFbaBAAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="35" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UTU7CQBjG8ekIuNArdNGVBZU7eAFAxeBCuYUKQriAytcduICA6B28ACAfR+EfEhc0maZxOmmI8yS/dDPt+6SZGSFsbGxsbPY1F0dJN7D573GPd5+6qcTzmW18V29dS2N28L/cRuyiWjfQ6KLKiyPEK97QRgdd9NB31O99G+jyzrwhRhjjAxN84iuki4lMmTfDHD9YYIkV1oa6KPe9FMKBxAFSSCODQ/mH70WIat+fMM9HFjmc4gznyId00TlHqn1fYF4RJVziCtco4yaki845Cu7733vjgXmPeEINdTyjgaZU3y9xniPd+8Ummdx5Qtyj6iXdxEw2E/T142gQAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="35" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAvoDOyC2B2IHKsqRCv4DcQwvA0MqkE4D4nQgjuVFyOOSs+TGr28UjAwwQ4aBYSYQz5KhjjpKwAmg2SeB+BQBO4hVRwn4ATT7JxD/ImAHsepGwSgYiWC0fMEORsuXUTAKhg4AAPRxrkJoEAAA
+  </data>
+ </layer>
+</map>

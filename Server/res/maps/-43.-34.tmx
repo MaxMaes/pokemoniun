@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="25" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Battle Arcade Lobby.tsx"/>
+ <tileset firstgid="109" source="normal1.tsx"/>
+ <tileset firstgid="1133" source="SinnohInteriorSet0.tsx"/>
+ <layer name="Walkable" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3NuVICURRF0f4BNVahEEFFQCZxQANnSB0IAUtlxv+PXQGBgVFjJ9TbVSu5wT1RFAqtVxtsspXgxjY77JIivbxn2CPLPjnyMTcOOOSIAscUKVHmhApVajE36jQ4pckZ51xwSYsrrmP+/90Nt9xxzwOPPNGm8w8bf/XMC6+80U1go0efAe8r/Pngky+GjBgzYcqMOQu+V9gJhULr0Q9N1fuMxAkAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBQMReDOOdAuGAWjYBSMglEwkAAAJpT8PsQJAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3ROw6CQBRG4evbUQsEX5UrQW0VFSoFtXEDuv/SU1hQTNDchITinuRLKIb8k4yIZYm8vureaKGNDrrooY8BhnAYYYyJcqNcgClCRJhhjgWWWHn+0bYufe9c9b1+pblT3RuxcmOD7Z/n98qNAxIcccIZKTLP+bfTbVxwRY4CN9zx8Jx/SnPfXMOyrGb2AQjqrCTECQAA
+  </data>
+ </layer>
+</map>

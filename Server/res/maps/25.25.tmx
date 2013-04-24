@@ -32,12 +32,12 @@
  </layer>
  <layer name="Walkable" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGF5AX5a25lvS2PxRMPBgk8RAu2AUjGRwSZq25pthKcNwlZsfJIk3VwdP2UiNchObu9EBOeU/PnejA3L8QYy7R8EoGAWjYBSMAmoCAA/6PQ/gDQAA
+   H4sIAAAAAAAAC2NgGF5AX5a25lvS2PxRMPBgkwTpenaRoWcUjAJs4JI0bc03w1KG4So3P0gSb64OnrKRGuUmNnejA3LKf3zuRgfk+IMYd4+CUTAKRsEoGAXUBABAcTf94A0AAA==
   </data>
  </layer>
  <layer name="Collisions" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VN04DQRTG8SlJB1jL8glIJbR2RRLpBGQKkkgnIFMgQKQTkF1YgEgnIAj7IAQBF+Bf7EgW9ozemkFQzCf99IoZPX2W7d1kQqkUksKpI73fgMYIU0d6X9rDVf8oKQuUKkcFKlEVFH4+Uz9JqtlXg1rUoT5v//f+Ok3caUYLWtEWFO7VaeesA53oQrelv84Id0YxhnFMWPZPcjaFacxgVtB/LbyzztzApmX/Fmfb2MEu9gT9M+GdM+Y5LpCNF99/ydkVrnGDW0F/VzH1d5W/6t8TU6oXfejHAAYxhOHYz/vPsWMeC1jEEpaxglXD/mLfv6n/PjsOcIgjHOMEp0g76H/Hjns84DHc98TMIhdhv6n/Mzte8Iq3cN878wOfDvrnx/S/kvT+rd+/y+e/rbeL57+td6nv31Lf1z4+Pj4+/ytft+H1nuANAAA=
+   H4sIAAAAAAAAC+3VR0qDQRjG8VnaDvAF8QS2ZdzGlQ3bCdRYFjZsJ7C7EBVLTmB3ISoqnsCC8SAW1Av4X8xAMJnh/eKILuaBH7OYNy9PSPIlVaVUI1LC00Q6n0RDjNNEOi/t4at/nJRESpWiDOWoiPLfn62fJNXsq0Et6lCfs/97f5MmZprRgla0Rfl7Tdq560AnutDt6G8yzMwIRjGGccf+Ce4mMYVpzAj6r+qZNc51bDj2b3K3hW3sICPof6pnzjjPcYFsZeH9l9xd4Vq/5kbQ31ds/X3lr/r3JJTqRR/S6McABjGU+Hn/WXbMYR4LWMQSlrFi2V/o87f132XHHvZxgEMc4RgnHvrfsuMO93jQ+x45s3iKsd/W/5kdL3jFm973zvmBTw/9c2P7XUl6/9b33+fz39Xbx/Pf1bvY/99i/69DQkJCQv5XvgD4av9s4A0AAA==
   </data>
  </layer>
  <layer name="Collisions" width="24" height="37">

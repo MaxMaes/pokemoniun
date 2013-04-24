@@ -131,7 +131,7 @@ public class LogoutManager implements Runnable
 			player.getMap().removeChar(player);
 		/* TODO: Test if people are saved correctly and won't need kicking. */
 		/* Store all player information. */
-		if(!m_saveManager.savePlayer(player))
+		if(m_saveManager.savePlayer(player) > 0)
 			return false;
 		/* Finally, store that the player is logged out and close connection. */
 		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `id` = '" + player.getId() + "'");

@@ -13,7 +13,7 @@ false
 false
 [/npc]
 [npc]
-Nurse Joy
+Battlefrontier Nurse Joy
 down
 157
 1

@@ -1349,7 +1349,8 @@ public class NPC extends Character
 			if(m_isHeal)
 			{
 				p.healPokemon();
-				p.canBattle = true;
+				if(m_name.equalsIgnoreCase("Battlefrontier Nurse Joy"))
+					p.canBattle = true;
 				p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
 			}
 			/* Shop access */

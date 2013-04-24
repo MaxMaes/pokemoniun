@@ -12,7 +12,8 @@ import org.pokenet.server.network.MySqlManager;
 public class SaveManager
 {
 	private MySqlManager m_database;
-
+	private int fail = 0;
+	
 	public SaveManager()
 	{
 		m_database = MySqlManager.getInstance();
@@ -114,10 +115,11 @@ public class SaveManager
 	 * @param p
 	 * @return
 	 */
-	public boolean savePlayer(Player p)
+	public int savePlayer(Player p)
 	{
 		try
 		{
+			fail = 0;
 			/* First, check if they have logged in somewhere else. This is useful for when as server loses its internet connection */
 			m_database = MySqlManager.getInstance();
 			ResultSet data = m_database.query("SELECT lastLoginTime FROM `pn_members` WHERE id='" + p.getId() + "'");
@@ -128,7 +130,8 @@ public class SaveManager
 				if(p.isTrading())
 					/* If the trade is still executing, don't save them yet */
 					if(!p.getTrade().endTrade())
-						return false;
+						fail +=1;
+						//return false;
 				/* Update the player row */
 				String badges = "";
 				for(int i = 0; i < 42; i++)
@@ -149,11 +152,18 @@ public class SaveManager
 						{
 							// This is a new Pokemon, add it to the database
 							if(saveNewPokemon(p.getParty()[i], p.getName(), m_database) < 1)
-								return false;
+							{
+								System.out.println("failed to save pokemon: " + p.getParty()[i].getName() + " of " + p.getName());
+								fail +=1;
+								//return false;
+							}
 						}
 						else // Old Pokemon, just update
 						if(!savePokemon(p.getParty()[i], p.getName()))
-							return false;
+						{
+							fail +=1;
+//							return false;
+						}
 				// Save all the Pokemon id's in the player's party
 				if(p.getParty() != null)
 					m_database.query("UPDATE pn_party SET " + "pokemon0='" + (p.getParty()[0] != null ? p.getParty()[0].getDatabaseID() : -1) + "', " + "pokemon1='"
@@ -161,10 +171,13 @@ public class SaveManager
 							+ "pokemon3='" + (p.getParty()[3] != null ? p.getParty()[3].getDatabaseID() : -1) + "', " + "pokemon4='" + (p.getParty()[4] != null ? p.getParty()[4].getDatabaseID() : -1)
 							+ "', " + "pokemon5='" + (p.getParty()[5] != null ? p.getParty()[5].getDatabaseID() : -1) + "' " + "WHERE member='" + p.getId() + "'");
 				else
-					return true;
+					return fail;
 				/* Save the player's bag */
 				if(p.getBag() == null || !saveBag(p.getBag()))
-					return false;
+				{
+					fail +=1;
+//					return false;
+				}
 				/* Finally, update all the boxes */
 				if(p.getBoxes() != null)
 					for(int i = 0; i < 9; i++)
@@ -176,18 +189,25 @@ public class SaveManager
 									{
 										/* This is a new Pokemon, create it in the database */
 										if(saveNewPokemon(p.getBoxes()[i].getPokemon(j), p.getName(), m_database) < 1)
-											return false;
+										{
+											System.out.println("failed to save pokemon: " + p.getBoxes()[i].getPokemon(j).getName() + " of " + p.getName());
+											fail +=1;
+											//return false;
+										}
 									}
 									else /* Update an existing pokemon */
 									if(!savePokemon(p.getBoxes()[i].getPokemon()[j], p.getName()))
-										return false;
+									{
+										fail +=1;
+//										return false;
+									}
 				// Dispose of the player object
 				if(p.getMap() != null)
 					p.getMap().removeChar(p);
-				return true;
+				return fail;
 			}
 			else
-				return true;
+				return fail;
 		}
 		catch(Exception e)
 		{
@@ -196,8 +216,9 @@ public class SaveManager
 					+ p.getCoordinatingExp() + "', " + "skBreed='" + p.getBreedingExp() + "', " + "x='" + p.getX() + "', " + "y='" + p.getY() + "', " + "mapX='" + p.getMapX() + "', " + "mapY='"
 					+ p.getMapY() + "', " + "healX='" + p.getHealX() + "', " + "healY='" + p.getHealY() + "', " + "healMapX='" + p.getHealMapX() + "', " + "healMapY='" + p.getHealMapY() + "', "
 					+ "isSurfing='" + String.valueOf(p.isSurfing()) + "', " + "badges='"  + "' " + "WHERE id='" + p.getId() + "'");
+			System.err.println(p.getName() + " has " + fail + " fails.");
 			e.printStackTrace();
-			return false;
+			return fail;
 		}
 	}
 

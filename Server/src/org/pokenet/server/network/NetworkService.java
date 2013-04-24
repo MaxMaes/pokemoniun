@@ -168,7 +168,7 @@ public class NetworkService
 				message.addString("Saving...");
 				s.Send(message);
 
-				if(m_saveManager.savePlayer(s.getPlayer()))
+				if(m_saveManager.savePlayer(s.getPlayer()) == 0)
 				{
 					ServerMessage succesmg = new ServerMessage();
 					succesmg.init(2);

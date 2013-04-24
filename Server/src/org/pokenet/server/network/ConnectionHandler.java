@@ -12,7 +12,8 @@ import org.pokenet.server.protocol.ClientMessage;
 
 public class ConnectionHandler extends SimpleChannelHandler
 {
-
+	
+	private String name = "";
 	private LogoutManager m_logoutManager;
 
 	public ConnectionHandler(LogoutManager logoutManager)
@@ -69,6 +70,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 			Player p = ActiveConnections.GetUserByChannel(channelContext.getChannel()).getPlayer();
 			if(p != null)
 			{
+				name = p.getName();
 				if(p.isBattling())
 				{
 					/* If in PvP battle, the player loses */
@@ -84,11 +86,13 @@ public class ConnectionHandler extends SimpleChannelHandler
 				m_logoutManager.queuePlayer(p);
 				ActiveConnections.removeSession(channelContext.getChannel());
 			}
+			name = "";
 		}
 		catch(Exception e)
 		{
 			channelContext.getChannel().close();
-			e.printStackTrace();
+			System.err.println(name + "'s connection terminated");
+//			e.printStackTrace();
 			System.out.println(channelState);
 		}
 

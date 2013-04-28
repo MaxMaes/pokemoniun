@@ -4,7 +4,7 @@
   <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Wailmer,15;Sharpedo,5"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;30-35;"/>
   <property name="pvp" value="yes"/>
-  <property name="waterPokemonChances" value="Tentacool,60;Wingull,35;Pelipper,5;"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Wingull,35;Clamperl,5;"/>
   <property name="waterPokemonLevels" value="5-35;10-30;25-30;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>

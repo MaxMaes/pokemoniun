@@ -1,6 +1,5 @@
 package org.pokenet.client.twl.ui;
 
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.twl.ui.frames.BagDialog;

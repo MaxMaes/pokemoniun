@@ -9,88 +9,67 @@ import de.matthiasmann.twl.Widget;
 
 
 /**
- * The confirmation dialog
+ * The Alert dialog
  * @author Chappie112
  *
  */
 
-public class ConfirmationDialog extends ResizableFrame
+public class AlertDialog extends ResizableFrame
 {
-	private Runnable yesCallback, noCallback;
-	private Button yesButton,noButton;
+	private Runnable okCallback;
+	private Button okButton;
 	private Widget pane;
 	private Label dialogText;
-	
+
 	/*
 	 * 
 	 */
-	public ConfirmationDialog(String text)
+	public AlertDialog(String Title,String text)
 	{
+		setTitle(Title);
 		setTheme("confirmationdialog");
 		setDraggable(true);
 		setSize(300,80);
 		setVisible(false);
-		
+
 		pane = new Widget();
 		pane.setTheme("content");
 		pane.setSize(getWidth(), 190);
 		pane.setPosition(0, 0);
-		
+
 		dialogText = new Label(text);
 		pane.add(dialogText);
 
-		yesButton = new Button();
-		noButton = new Button();
-		yesButton.setText("Yes");
-		noButton.setText("No");
-		pane.add(yesButton);
-		pane.add(noButton);
+		okButton = new Button("Ok");
+		pane.add(okButton);
 		add(pane);
-	
+
 		setCenter();
 	}
-	
+
 	@Override
 	public void layout()
 	{
 		dialogText.adjustSize();
 		dialogText.setPosition(getInnerX() +( pane.getWidth()/2 - dialogText.getWidth()/2), getInnerY() + 30);
-		yesButton.setSize(50, 25);
-		yesButton.setPosition(getInnerX() + (pane.getWidth() / 2 -60), getInnerY() + yesButton.getWidth());
-		noButton.setSize(50, 25);
-		noButton.setPosition(getInnerX() + (pane.getWidth() /2 + 10), getInnerY() + noButton.getWidth());
+		okButton.setSize(50, 25);
+		okButton.setPosition(getInnerX() + (pane.getWidth() / 2 - okButton.getWidth()/2), getInnerY() + dialogText.getY() + 10);
 	} 
 
 	/*
-	 * adds the callback method for the "yes" button
+	 * adds the callback method for the "Ok" button
 	 */
-	public void addYesListener(Runnable callback)
+	public void addOkListener(Runnable callback)
 	{
-		if(yesCallback != null)
-			removeYesCallback();
-		yesButton.addCallback(callback);
-		yesCallback = callback;
-	}
-	
-	private void removeYesCallback() 
-	{
-		yesButton.removeCallback(yesCallback);
+		if(okCallback != null)
+			removeOkCallback();
+		okButton.addCallback(callback);
+		okCallback = callback;
 	}
 
-	/*
-	 * adds the callbackmethod for the "no" button
-	 */
-	public void addNoListener(Runnable callback)
+	private void removeOkCallback() 
 	{
-		if(noCallback != null)
-			removeNoCallback();
-		noButton.addCallback(callback);
-		noCallback = callback;
-	}
-	
-	private void removeNoCallback() 
-	{
-		noButton.removeCallback(noCallback);
+		okButton.removeCallback(okCallback);
 	}
 
 	/*
@@ -110,7 +89,7 @@ public class ConfirmationDialog extends ResizableFrame
 		dialogText.setText(text);
 		dialogText.adjustSize();
 	}
-	
+
 	public String getText()
 	{
 		return dialogText.getText();

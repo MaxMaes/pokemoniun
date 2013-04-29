@@ -12,7 +12,7 @@ public class LoginFullEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().messageDialog("This server is full, please try another", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("This server is full, please try another");
 		GameClient.getInstance().getLoadingScreen().setVisible(false);
 		GameClient.getInstance().getLoginScreen().showLogin();
 

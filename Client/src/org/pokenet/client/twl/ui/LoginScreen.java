@@ -9,7 +9,6 @@ import java.util.Scanner;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.twl.ui.frames.AboutDialog;
-import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
 import org.pokenet.client.twl.ui.frames.LanguageDialog;
 import org.pokenet.client.twl.ui.frames.LoginDialog;
 import org.pokenet.client.twl.ui.frames.RegisterDialog;
@@ -20,8 +19,6 @@ import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
-import de.matthiasmann.twl.renderer.DynamicImage;
-import de.matthiasmann.twl.renderer.DynamicImage.Format;
 import de.matthiasmann.twl.renderer.Image;
 
 
@@ -38,13 +35,13 @@ public class LoginScreen extends DesktopArea {
 	private LoginDialog m_login;
 	private ServerDialog m_select;
 	//private AlertPopupDialog alertdialog;
-	private ConfirmationDialog m_onExit;
+	
 	private RegisterDialog m_register;
 
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
 	private Button m_openToS;
-	private Button test;
+	private Label test;
 	
 	
 	public LoginScreen() {
@@ -75,10 +72,6 @@ public class LoginScreen extends DesktopArea {
 		m_register = new RegisterDialog();
 		add(m_register);
 		
-		m_onExit = new ConfirmationDialog("Are you sure you want to exit?","Exit");
-		m_onExit.setVisible(false);
-		add(m_onExit);
-		
 		m_openAbout = new Button(translated.get(3));
 		m_openAbout.setVisible(true);
 		m_openAbout.addCallback(new Runnable()
@@ -103,21 +96,6 @@ public class LoginScreen extends DesktopArea {
 		});
 		add(m_openToS);
 		
-		test = new Button("test");
-		test.setVisible(true);
-		test.addCallback(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				if(!getOnExit().isVisible())
-					showOnExit();
-				else
-					hideOnExit();
-			}
-		});
-		add(test);
-		
 		setClientRevision();
 		m_serverRev = new Label("");
 		m_serverRev.setVisible(false);
@@ -136,8 +114,6 @@ public class LoginScreen extends DesktopArea {
 		m_openAbout.setPosition(728, 8);
 		m_openToS.setSize(64, 32);
 		m_openToS.setPosition(728, 45);
-		test.setPosition(728, 82);
-		test.setSize(64, 32);
 	}
 
 	/**
@@ -203,24 +179,6 @@ public class LoginScreen extends DesktopArea {
 	{
 		m_about.reloadStrings();
 		m_about.setVisible(true);
-	}
-	
-	/**
-	 * Shows the onExit confirmation dialog
-	 */
-	public void showOnExit()
-	{
-		m_onExit.setVisible(true);
-	}
-	
-	public void hideOnExit()
-	{
-		m_onExit.setVisible(true);
-	}
-	
-	public ConfirmationDialog getOnExit()
-	{
-		return m_onExit;
 	}
 	
 	/**

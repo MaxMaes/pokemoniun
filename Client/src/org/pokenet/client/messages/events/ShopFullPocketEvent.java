@@ -12,6 +12,6 @@ public class ShopFullPocketEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().messageDialog("You can't carry any new items", GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog("You can't carry any new items");
 	}
 }

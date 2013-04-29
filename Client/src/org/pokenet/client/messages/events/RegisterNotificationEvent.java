@@ -22,22 +22,22 @@ public class RegisterNotificationEvent implements MessageEvent
 		{
 			case 1:
 				// Account server offline
-				GameClient.getInstance().messageDialog(translated.get(24), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(24));
 				break;
 			case 2:
-				GameClient.getInstance().messageDialog(translated.get(25), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(25));
 				break;
 			case 3:
-				GameClient.getInstance().messageDialog(translated.get(26), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(26));
 				break;
 			case 4:
-				GameClient.getInstance().messageDialog(translated.get(27), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(27));
 				break;
 			case 5:
-				GameClient.getInstance().messageDialog(translated.get(41), GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog(translated.get(41));
 				break;
 			case 6:
-				GameClient.getInstance().messageDialog("Email too long!", GameClient.getInstance().getDisplay());
+				GameClient.getInstance().messageDialog("Email too long!");
 				break;
 		}
 		//GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration(); TODO uncomment when registration is done

@@ -18,7 +18,7 @@ public class RegistrationSuccessEvent implements MessageEvent
 		List<String> translated = new ArrayList<String>();
 		translated = Translator.translate("_LOGIN");
 
-		GameClient.getInstance().messageDialog(translated.get(23), GameClient.getInstance().getDisplay());
+		GameClient.getInstance().messageDialog(translated.get(23));
 		GameClient.getInstance().getLoadingScreen().setVisible(false);
 		GameClient.getInstance().getLoginScreen().showLogin();
 		//GameClient.getInstance().getLoginScreen().getRegistration().clear();

@@ -609,30 +609,29 @@ public class RegisterDialog extends ResizableFrame
 								String bday = m_day.getText() + "/" + m_month.getText() + "/" + m_year.getText();
 								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
 							} 
-							//TODO: Change the messagedialog lines to chappie's new TWL version when it is done.
 							else
 								System.out.println(translated.get(28));
-								GameClient.getInstance().messageDialog(translated.get(28), display);
+								GameClient.getInstance().messageDialog(translated.get(28));
 						}
 						else
 							System.out.println(translated.get(28));
-							GameClient.getInstance().messageDialog("No starter selected", display);
+							GameClient.getInstance().messageDialog("No starter selected");
 					}
 					else
 						System.out.println(translated.get(28));
-						GameClient.getInstance().messageDialog(translated.get(29), display);
+						GameClient.getInstance().messageDialog(translated.get(29));
 				}
 				else
 					System.out.println(translated.get(28));
-					GameClient.getInstance().messageDialog(translated.get(30), display);
+					GameClient.getInstance().messageDialog(translated.get(30));
 			}
 			else
 				System.out.println(translated.get(28));
-				GameClient.getInstance().messageDialog(translated.get(31), display);
+				GameClient.getInstance().messageDialog(translated.get(31));
 		}
 		else
 			System.out.println(translated.get(28));
-			GameClient.getInstance().messageDialog(translated.get(32), display);
+			GameClient.getInstance().messageDialog(translated.get(32));
 	}
 
 	/**

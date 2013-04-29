@@ -99,7 +99,7 @@ public class OptionsDialog extends Frame
 					GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());
 
 					m_options.saveSettings();
-					GameClient.getInstance().messageDialog(translated.get(19), getDisplay());
+					GameClient.getInstance().messageDialog(translated.get(19));
 					GameClient.getInstance().reloadOptions();
 				}
 			});

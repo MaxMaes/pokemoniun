@@ -11,15 +11,10 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.TWLInputAdapter;
-import org.pokenet.client.ui.base.TWLImageButton;
-
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.DynamicImage;
-import de.matthiasmann.twl.renderer.DynamicImage.Format;
 import de.matthiasmann.twl.renderer.Image;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;

@@ -667,22 +667,22 @@ public class RegisterDialog extends Frame
 								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
 							}
 							else
-								GameClient.getInstance().messageDialog(translated.get(28), display);
+								GameClient.getInstance().messageDialog(translated.get(28));
 						}
 						else
-							GameClient.getInstance().messageDialog("No starter selected", display);
+							GameClient.getInstance().messageDialog("No starter selected");
 					}
 					else
-						GameClient.getInstance().messageDialog(translated.get(29), display);
+						GameClient.getInstance().messageDialog(translated.get(29));
 				}
 				else
-					GameClient.getInstance().messageDialog(translated.get(30), display);
+					GameClient.getInstance().messageDialog(translated.get(30));
 			}
 			else
-				GameClient.getInstance().messageDialog(translated.get(31), display);
+				GameClient.getInstance().messageDialog(translated.get(31));
 		}
 		else
-			GameClient.getInstance().messageDialog(translated.get(32), display);
+			GameClient.getInstance().messageDialog(translated.get(32));
 	}
 
 	/**

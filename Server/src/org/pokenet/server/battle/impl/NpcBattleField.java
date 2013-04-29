@@ -195,7 +195,6 @@ public class NpcBattleField extends BattleField
 			}
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	// TODO check this code with checking moves
 	public void informStatusApplied(Pokemon pokemon, StatusEffect eff)

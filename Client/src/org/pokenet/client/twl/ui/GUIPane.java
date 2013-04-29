@@ -1,5 +1,6 @@
 package org.pokenet.client.twl.ui;
 
+
 import de.matthiasmann.twl.DesktopArea;
 
 /**
@@ -10,10 +11,14 @@ import de.matthiasmann.twl.DesktopArea;
  */
 public class GUIPane extends DesktopArea {
 	private LoginScreen loginScreen;
+	private HUD hud;
 	
 	public GUIPane() {
 		loginScreen = new LoginScreen();
 		add(loginScreen);
+		HUD hud = new HUD();
+		add(hud);
+		hud.setVisible(false);
 		setTheme("guipane");
 	}
 	
@@ -36,6 +41,10 @@ public class GUIPane extends DesktopArea {
 	}
 
 	public void showServerSelect() {
-		
+		loginScreen.showServerSelect();
+	}
+	
+	public void showHUD() {
+		hud.setVisible(true);
 	}
 }

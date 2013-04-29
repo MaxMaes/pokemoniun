@@ -198,7 +198,7 @@ public class BoatChooserDialog extends Frame {
 				String note = "Are you sure you want to travel?\nYou need "+ txt +" otherwise I can't take you with me!";
 				if (choice.split(" - ")[1].contains("canceled"))// || choice.contains("Two") || choice.contains("Three") || choice.contains("Four") || choice.contains("Five") || choice.contains("Iron") || choice.contains("Resort") || choice.contains("Battlefrontier"))
 				{
-					note = "This trip is canceled.\nWe will resume travel when the wheater calms down.\nPick another one.";
+					note = "This trip is canceled.\nWe will resume travel when the weather calms down.\nPick another one.";
 				}
 				final ConfirmationDialog confirm = new ConfirmationDialog(note);
 				confirm.addYesListener(new ActionListener()

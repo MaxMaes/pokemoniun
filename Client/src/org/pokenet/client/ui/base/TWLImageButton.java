@@ -27,6 +27,14 @@ public class TWLImageButton extends Button {
 	};
 	
 	/**
+	 * Creates the imagebutton without an image
+	 * @param img The image
+	 */
+	public TWLImageButton() {
+		super();
+	}
+	
+	/**
 	 * Creates the imagebutton with given image
 	 * @param img The image
 	 */

@@ -40,8 +40,8 @@ public class HelpWindow extends ResizableFrame
 	@Override
 	public boolean setSize(int width, int height)
 	{
-		if(helptext != null)
-			helptext.setSize(width - 5, height - 5);
+		if(helptext != null && width >= 10 && height >= 10)
+			helptext.setSize(width - 10, height - 10);
 		return super.setSize(width, height);
 	}
 
@@ -62,16 +62,21 @@ public class HelpWindow extends ResizableFrame
 		List<String> translated = Translator.translate("_GUI");
 		setTitle(translated.get(20));
 
-		setPosition(200, 0);
 		setResizableAxis(ResizableAxis.NONE);
-
 		helptext = new TextArea();
 		helptext.setSize(355, 455);
 		// setText Mover stuff to help panel.
 		TextAreaModel model = new SimpleTextAreaModel(translated.get(21) + translated.get(22) + translated.get(23) + translated.get(24) + translated.get(25) + translated.get(26));
 		helptext.setModel(model);
-		this.setSize(360, 460);
-		this.add(helptext);
+		setSize(360, 460);
+		add(helptext);
 		setDraggable(false);
+	}
+	
+	@Override
+	public void layout()
+	{
+		setPosition(200, 0);
+		helptext.setPosition(getInnerX() + 5, getInnerY() + 40);
 	}
 }

@@ -10,10 +10,12 @@ public class Checkbox extends Widget {
 	
 	public Checkbox(String txt) {
 		checkbox = new ToggleButton();
-		checkbox.setTheme("checkbox");
+		//checkbox.setTheme("checkbox");
 		checkbox.setSize(14, 14);
 		checkbox.setPosition(0,0);
 		text = new Label(txt);
+		add(checkbox);
+		add(text);
 	}
 	
 	public void setText(String txt) {
@@ -23,7 +25,7 @@ public class Checkbox extends Widget {
 	
 	@Override
 	public void layout() {
-		text.setPosition(checkbox.getX() + 5, checkbox.getY() + (checkbox.getHeight()/2) - (text.computeTextHeight()/2));
+		text.setPosition(checkbox.getX() + 20, checkbox.getY() + 7);
 	}
 	
 	public void setActive(boolean toSet) {

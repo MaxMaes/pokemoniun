@@ -24,11 +24,11 @@ public class PokedexDialog extends ResizableFrame
 {
 	// Images
 	private Image icon_caught = GameClient.getInstance().getTheme().getImage("pokemoncaught");
-	private Image icon_location =GameClient.getInstance().getTheme().getImage("pokemonlocationicon");
+	private Image icon_location =GameClient.getInstance().getTheme().getImage("pokemonlocation");
 	private Image map_kantojohto = GameClient.getInstance().getTheme().getImage("map_kantojohto");
 	private Image map_hoenn = GameClient.getInstance().getTheme().getImage("map_hoenn");
 	private Image map_sinnoh = GameClient.getInstance().getTheme().getImage("map_sinnoh");
-	private Image selectionFrame = GameClient.getInstance().getTheme().getImage("pokemonselected");
+	private Image selectionFrame = GameClient.getInstance().getTheme().getImage("pokemonselection");
 	private Image[] pokemonIcons = loadPokemonIcons();
 	
 	//Buttons
@@ -43,7 +43,6 @@ public class PokedexDialog extends ResizableFrame
 	private Label[] pokemonNameList;
 	private Label pokemonnumber;
 	private Label pokemontypes;
-	private Label pokedexsprite;
 	private Label[] pokemonMoveLabels;
 	private Label pokemonname;
 	private Label tabname;
@@ -59,6 +58,10 @@ public class PokedexDialog extends ResizableFrame
 	public PokedexDialog()
 	{
 		trainerPokedex = new int[MAX + 1];
+		trainerPokedex[1] = 2;
+		trainerPokedex[2] = 1;
+		trainerPokedex[3] = 0;
+		trainerPokedex[4] = 2;
 		initGUI();
 	}
 
@@ -136,13 +139,14 @@ public class PokedexDialog extends ResizableFrame
 		{
 			pokemonBiologyLabels[i] = new Label();
 			pokemonBiologyLabels[i].setTheme("label_minismall");
+			add(pokemonBiologyLabels[i]);
 		}
 
 		for(int i = 0; i < 13; i++)
 		{
 			pokemonNameList[i] = new Label();
 			pokemonNameList[i].setTheme("label_small");
-			pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 63 + 22 * i);
+			pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 67 + (22 * i));
 			pokemonCaughtLabels[i] = new Label();
 			pokemonCaughtLabels[i].setPosition(getInnerX() + 299, getInnerY() + 60 + 22 * i);
 		}
@@ -151,14 +155,10 @@ public class PokedexDialog extends ResizableFrame
 
 		updatePokemonInfo();
 
-		setSize(500, 363);
-
 		add(pokemonname);
 		add(pokemontypes);
 		add(pokemonnumber);
 		add(tabname);
-		for(int i = 0; i < 14; i++)
-			add(pokemonBiologyLabels[i]);
 
 		for(int i = 0; i < 13; i++)
 		{
@@ -247,7 +247,6 @@ public class PokedexDialog extends ResizableFrame
 			for(Label l : pokemonBiologyLabels)
 				l.setVisible(true);
 		}
-		tabname.setPosition(getInnerX() + 133 - tabname.getWidth() / 2, left.getY() + 7);
 	}
 
 	public void updatePokemonInfo()
@@ -261,7 +260,7 @@ public class PokedexDialog extends ResizableFrame
 			number = "#" + selection;
 
 		pokemonnumber.setText(number);
-		pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.getWidth() / 2, pokemonname.getY() - 25);
+		
 
 		if(getPokemon(selection) < 1)
 		{
@@ -273,19 +272,14 @@ public class PokedexDialog extends ResizableFrame
 				removeChild(pokemonMoveLabels[i]);
 			for(int i = 0; i < loreLabels.length; i++)
 				removeChild(loreLabels[i]);
-			/*for(int i = 0; i < pokemonLocationLabels.length; i++)
-				removeChild(pokemonLocationLabels[i]);*/
 			for(int i = 0; i < pokemonBiologyLabels.length; i++)
-				removeChild(pokemonBiologyLabels[i]);
+				pokemonBiologyLabels[i].setVisible(false);;
 		}
 		else if(getPokemon(selection) >= 1)
 		{
 			pokemonname.setText(PokedexData.getName(selection));
-			pokemonname.setPosition(getInnerX() + 178 - pokemonname.getWidth() / 2, getInnerY() + 75);
-
 			pokemontypes.setText(PokedexData.getTypestring(selection));
-			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.getWidth() / 2, pokemonname.getY() + 17);
-
+			
 			initLocationLabels();
 			initMoveLabels();
 		}
@@ -386,7 +380,7 @@ public class PokedexDialog extends ResizableFrame
 		}
 
 		for(int i = 0; i < pokemonBiologyLabels.length; i++)
-			add(pokemonBiologyLabels[i]);
+			pokemonBiologyLabels[i].setVisible(true);
 	}
 
 	private void initLocationLabels()
@@ -440,7 +434,7 @@ public class PokedexDialog extends ResizableFrame
 			int end = (i + 1) * charsPerLine;
 			if(end > loreString.length())
 				end = loreString.length();
-			loreLabels[i].setTheme("label_smallmini");
+			loreLabels[i].setTheme("label_minismall");
 			loreLabels[i].setText(loreString.substring(begin, end));
 			loreLabels[i].setPosition(getInnerX() + 34, getInnerY() + 132 + 10 * i);
 			add(loreLabels[i]);
@@ -458,7 +452,7 @@ public class PokedexDialog extends ResizableFrame
 		for(int i = 0; i < pokemonMoveLabels.length; i++)
 		{
 			pokemonMoveLabels[i] = new Label();
-			pokemonMoveLabels[i].setTheme("smallmini");
+			pokemonMoveLabels[i].setTheme("label_minismall");
 			if(i < 9)
 				pokemonMoveLabels[i].setPosition(getInnerX() + 34 + 15 * (i / 9), getInnerY() + 132 + 10 * i);
 			else
@@ -475,24 +469,21 @@ public class PokedexDialog extends ResizableFrame
 
 	private void initPokedexSprite()
 	{
-		pokedexsprite = new Label();
-		//pokedexsprite.setImage(pokedexSprite);
-		pokedexsprite.setSize(519, 377);
-		pokedexsprite.setPosition(0, 0);
-
 		up = new Button();
 		down = new Button();
 		left = new Button();
 		right = new Button();
 
 		inc1 = new Button();
+		inc1.setTheme("button_incrementer");
 		inc5 = new Button();
+		inc5.setTheme("button_incrementer");
 		inc10 = new Button();
+		inc10.setTheme("button_incrementer");
 		inc50 = new Button();
+		inc50.setTheme("button_incrementer");
 
-		down.setSize(30, 30);
 		down.setTheme("button_down");
-		down.setPosition(getInnerX() + pokedexsprite.getWidth() - down.getWidth() - 8, getInnerY() + pokedexsprite.getHeight() - down.getHeight() - 47);
 		down.addCallback(new Runnable()
 		{
 			@Override
@@ -522,8 +513,6 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		up.setTheme("button_up");
-		up.setSize(30, 30);
-		up.setPosition(down.getX(), down.getY() - down.getHeight() - 5);
 		up.addCallback(new Runnable()
 		{
 			@Override
@@ -553,8 +542,6 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		left.setTheme("button_left");
-		left.setSize(20, 38);
-		left.setPosition(getInnerX() + 32, getInnerY() + pokedexsprite.getHeight() - left.getHeight() - 76);
 		left.addCallback(new Runnable()
 		{
 			@Override
@@ -569,8 +556,6 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		right.setTheme("button_right");
-		right.setSize(20, 38);
-		right.setPosition(left.getX() + 177, left.getY());
 		right.addCallback(new Runnable()
 		{
 			@Override
@@ -586,8 +571,6 @@ public class PokedexDialog extends ResizableFrame
 
 		inc1.setTheme("button_incrementer");
 		inc1.setText("1");
-		inc1.setSize(36, 14);
-		inc1.setPosition(down.getX() - 3, getInnerY() + 70);
 		currIncButton = inc1;
 		currIncButton.setEnabled(false);
 		inc1.addCallback(new Runnable()
@@ -606,9 +589,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc5.setTheme("button_incrementer");
-		inc5.setText("5");
-		inc5.setSize(36, 14);
-		inc5.setPosition(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
+		inc5.setText("5");		
 		inc5.addCallback(new Runnable()
 		{
 			@Override
@@ -625,9 +606,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc10.setTheme("button_incrementer");
-		inc10.setText("10");
-		inc10.setSize(36, 14);
-		inc10.setPosition(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
+		inc10.setText("10");	
 		inc10.addCallback(new Runnable()
 		{
 			@Override
@@ -644,9 +623,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc50.setTheme("button_incrementer");
-		inc50.setText("50");
-		inc50.setSize(36, 14);
-		inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
+		inc50.setText("50");	
 		inc50.addCallback(new Runnable()
 		{
 			@Override
@@ -662,7 +639,6 @@ public class PokedexDialog extends ResizableFrame
 			}
 		});
 
-		add(pokedexsprite);
 		add(down);
 		add(up);
 		add(left);
@@ -715,6 +691,34 @@ public class PokedexDialog extends ResizableFrame
 		for(int i = 0; i < 13; i++)
 			if(getPokemon(first + i) == 2)
 				icon_caught.draw(getAnimationState(), getInnerX() + 299, getInnerY() + 60 + 22 * i);
+	}
+	
+	@Override
+	public void layout() {
+		down.setSize(29, 26);
+		down.setPosition(getInnerX() + getWidth() - down.getWidth() - 8, getInnerY() + getHeight() - down.getHeight() - 47);
+		up.setSize(29, 26);
+		up.setPosition(down.getX(), down.getY() - down.getHeight() - 5);
+		left.setSize(20, 35);
+		left.setPosition(getInnerX() + 32, getInnerY() + getHeight() - left.getHeight() - 76);
+		right.setSize(20, 35);
+		right.setPosition(left.getX() + 177, left.getY());		
 		
+		inc1.setSize(36, 14);
+		inc1.setPosition(down.getX() - 3, getInnerY() + 70);
+		inc5.setSize(36, 14);
+		inc5.setPosition(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
+		inc10.setSize(36, 14);
+		inc10.setPosition(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
+		inc50.setSize(36, 14);
+		inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
+		
+		tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);	
+		
+		pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.computeTextWidth() / 2, pokemonname.getY() - 25);
+		pokemonname.setPosition(getInnerX() + 178 - pokemonname.computeTextWidth() / 2, getInnerY() + 75);
+		pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.computeTextWidth() / 2, pokemonname.getY() + 17);
+		
+		setSize(519, 377);	
 	}
 }

@@ -36,11 +36,10 @@ public class GUIPane extends DesktopArea {
 		messageDialog = new AlertDialog("Message!", "");
 		messageDialog.setVisible(false);
 		add(messageDialog);
-		
-		
-		HUD hud = new HUD();
+			
+		/*HUD hud = new HUD();
 		add(hud);
-		hud.setVisible(false);
+		hud.setVisible(false);*/
 		setTheme("guipane");
 	}
 	

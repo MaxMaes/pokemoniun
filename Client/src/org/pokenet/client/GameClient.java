@@ -887,8 +887,8 @@ public class GameClient extends BasicGame {
 		m_loading = new LoadingScreen();
 		m_display.add(m_loading);
 
-		m_ui = new UserInterface(m_display);
-		m_ui.setAllVisible(false);
+		//m_ui = new UserInterface(m_display);
+		//m_ui.setAllVisible(false);
 
 		/* Item DB */
 		ItemDatabase m_itemdb = new ItemDatabase();

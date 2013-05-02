@@ -1,5 +1,6 @@
 package org.pokenet.server.battle.impl;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.NPC;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
@@ -357,7 +358,7 @@ public class NpcBattleField extends BattleField
 	public void informVictory(int winner)
 	{
 		m_finished = true;
-		int money = 30 * (getMechanics().getRandom().nextInt(5) + 1);	// The magic cookie is used as a base to reward gold (replace later).
+		int money = (int)((30 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);	// The magic cookie is used as a base to reward gold (replace later).
 		if(winner == 0)
 		{
 			int trainerExp = 0;
@@ -370,7 +371,7 @@ public class NpcBattleField extends BattleField
 				money += 100;
 			}
 			if(trainerExp > 0)
-				m_player.addTrainingExp(trainerExp);
+				m_player.addTrainingExp((int)(trainerExp * GameServer.RATE_EXP_TRAINER));
 			if(m_npc.isGymLeader())
 				m_player.addBadge(m_npc.getBadge());
 			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));

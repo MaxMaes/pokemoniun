@@ -3,6 +3,8 @@ package org.pokenet.server.battle.mechanics;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import org.pokenet.server.GameServer;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 
@@ -99,7 +101,7 @@ public abstract class BattleMechanics implements Serializable
 	 */
 	public double calculateExpGain(Pokemon wildPoke, Pokemon playerPoke, int noPokesUsed, double user)
 	{
-		double result = (((1 * (wildPoke.getPokemonBaseExp()/2) * wildPoke.getLevel()) / (5 * noPokesUsed)) * (Math.pow(2 * wildPoke.getLevel(), 2.5) / Math.pow(wildPoke.getLevel() + playerPoke.getLevel() + 10, 2.5)) + 1) * user;
+		double result = ((((1 * (wildPoke.getPokemonBaseExp()/2) * wildPoke.getLevel()) / (5 * noPokesUsed)) * (Math.pow(2 * wildPoke.getLevel(), 2.5) / Math.pow(wildPoke.getLevel() + playerPoke.getLevel() + 10, 2.5)) + 1) * user) * GameServer.RATE_EXP_POKE;
 		/* double result = wildPoke.getLevel() * wildPoke.getBaseExp() / 7 / noPokesUsed; Old implementation of exp. */
 		return result;
 	}

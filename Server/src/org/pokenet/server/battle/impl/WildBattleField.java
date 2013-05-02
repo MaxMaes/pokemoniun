@@ -2,6 +2,8 @@ package org.pokenet.server.battle.impl;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.ItemProcessor.PokeBall;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.BattleField;
@@ -1033,7 +1035,7 @@ public class WildBattleField extends BattleField
 		}
 		else
 		{
-			int money = 5;
+			int money = (int)((2 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.updateClientMoney();
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());

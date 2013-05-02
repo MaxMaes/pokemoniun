@@ -3,7 +3,9 @@ package org.pokenet.server;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -19,6 +21,9 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.ini4j.Ini;
+import org.ini4j.Ini.Section;
+import org.ini4j.InvalidIniFormatException;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.network.MySqlManager;
 import com.sun.corba.se.impl.oa.poa.AOMEntry;
@@ -45,6 +50,9 @@ public class GameServer
 	private JPasswordField m_dbP;
 	private JTextField m_dbS, m_dbN, m_dbU, m_name;
 	private int m_highest;
+	public static double RATE_GOLD = 1.0;
+	public static double RATE_EXP_POKE = 1.0;
+	public static double RATE_EXP_TRAINER = 1.0;
 
 	public static final int MOVEMENT_THREADS = 12; // default to high
 	public static int REVISION = getServerRevision();
@@ -226,6 +234,7 @@ public class GameServer
 		options.addOption("ng", "nogui", false, "Starts server in headless mode.");
 		options.addOption("ar", "autorun", false, "Runs without asking a single question.");
 		options.addOption("h", "help", false, "Shows this menu.");
+		options.addOption("rates", "serverrates", true, "Gives the file to be used for server rates config");
 		if(args.length > 0)
 		{
 
@@ -251,6 +260,18 @@ public class GameServer
 				/* Create the server gui */
 				if(!line.hasOption("nogui"))
 					m_boolGui = true;
+				
+				/* Load the server rates file*/
+				if(line.hasOption("rates"))
+				{
+					String rates = line.getOptionValue("rates");
+					Ini ratesIni = new Ini(new FileInputStream(rates));
+					Section s = ratesIni.get("RATES");
+					RATE_GOLD = Double.parseDouble(s.get("GOLD"));
+					RATE_EXP_POKE = Double.parseDouble(s.get("EXP_POKE"));
+					RATE_EXP_TRAINER = Double.parseDouble(s.get("EXP_TRAINER"));
+				}
+				
 				// No else since it's set to default 'false'
 				boolean autorun = line.hasOption("autorun");
 				GameServer.initGameServer(autorun);
@@ -262,6 +283,15 @@ public class GameServer
 				// automatically generate the help statement
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp("java GameServer [param] <args>", options);
+			} catch (InvalidIniFormatException e) {
+				e.printStackTrace();
+				System.err.println("Error in server rates format, using default 1.0");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		else

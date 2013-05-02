@@ -64,7 +64,7 @@ public class ConfirmationDialog extends ResizableFrame
 	/*
 	 * adds the callback method for the "yes" button
 	 */
-	public void addYesListener(Runnable callback)
+	public void setYesListener(Runnable callback)
 	{
 		if(yesCallback != null)
 			removeYesCallback();
@@ -80,7 +80,7 @@ public class ConfirmationDialog extends ResizableFrame
 	/*
 	 * adds the callbackmethod for the "no" button
 	 */
-	public void addNoListener(Runnable callback)
+	public void setNoListener(Runnable callback)
 	{
 		if(noCallback != null)
 			removeNoCallback();
@@ -114,5 +114,10 @@ public class ConfirmationDialog extends ResizableFrame
 	public String getText()
 	{
 		return dialogText.getText();
+	}
+	
+	public void runYes()
+	{
+		yesCallback.run();
 	}
 }

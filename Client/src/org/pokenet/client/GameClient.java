@@ -379,6 +379,7 @@ public class GameClient extends BasicGame {
 						ClientMessage dc = new ClientMessage(
 								ServerPacket.LOGOUT_REQUEST);
 						m_session.send(dc);
+						root.hideConfirmationDialog();
 						reset();
 						disconnect();
 					} catch (Exception e) {
@@ -599,26 +600,16 @@ public class GameClient extends BasicGame {
 					System.out.println("ENTER");
 					root.getLoginScreen().enterKeyDefault();
 				}
-
-//			if (key == Input.KEY_ENTER) {
-//				if (m_dcConfirm != null)
-//					try {
-//						System.exit(0);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				if (m_dcConfirm != null) {
-//					ClientMessage dc = new ClientMessage(
-//							ServerPacket.LOGOUT_REQUEST);
-//					m_session.send(dc);
-//					disconnect();
-//					reset();
-//					m_dcConfirm.setVisible(false);
-//					m_dcConfirm = null;
-//				}
-//			}
 		}
 
+		if(key == Input.KEY_ENTER) {
+			if(root.getConfirmationDialog().isVisible() 
+					&& root.getConfirmationDialog().isVisible()) 
+			{
+				root.getConfirmationDialog().runYes();
+			}
+		}
+			
 		if (key == Input.KEY_ESCAPE)
 
 			if (!root.getConfirmationDialog().isVisible())
@@ -657,7 +648,6 @@ public class GameClient extends BasicGame {
 
 		if (m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive()
 				&& !root.getLoginScreen().isVisible()
-				&& !root.getPlayerPopupDialog().isVisible()
 				&& !BattleManager.getInstance().isBattling() && !m_isNewMap)
 			if (m_ourPlayer != null && !m_isNewMap
 			/* && m_loading != null && !m_loading.isVisible() */

@@ -75,8 +75,8 @@ public class GUIPane extends DesktopArea {
 	public void showConfirmationDialog(String text, Runnable yes, Runnable no)
 	{
 		confirmationDialog.setText(text);
-		confirmationDialog.addYesListener(yes);
-		confirmationDialog.addNoListener(no);
+		confirmationDialog.setYesListener(yes);
+		confirmationDialog.setNoListener(no);
 		confirmationDialog.setVisible(true);
 	}
 	

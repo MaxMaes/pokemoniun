@@ -126,14 +126,14 @@ public class TWLInputAdapter extends InputAdapter {
     @Override
     public void keyPressed(int key, char c) {
         if(gui.handleKey(key, c, true)) {
-            consume();
+            //consume(); //Disabled, causes the event not to pass to slick's keyPressed
         }
     }
 
     @Override
     public void keyReleased(int key, char c) {
         if(gui.handleKey(key, c, false)) {
-            consume();
+            //consume(); //Disabled, causes the event not to pass to slick's keyPressed
         }
     }
 

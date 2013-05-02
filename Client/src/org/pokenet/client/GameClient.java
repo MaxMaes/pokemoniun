@@ -1005,15 +1005,18 @@ public class GameClient extends BasicGame {
 		// Left click
 		if (button == 0) {
 			// Get rid of the popup if you click outside of it
-			if (root.getPlayerPopupDialog().isVisible())
-				if (x > root.getPlayerPopupDialog().getInnerX()
-						|| x < root.getPlayerPopupDialog().getInnerX()
-						+ root.getPlayerPopupDialog().getWidth())
-					root.getPlayerPopupDialog().destroy();
-				else if (y > root.getPlayerPopupDialog().getInnerY()
-						|| y < root.getPlayerPopupDialog().getInnerY()
-						+ root.getPlayerPopupDialog().getHeight())
-					root.destroyPlayerPopupDialog();
+			if(root.getPlayerPopupDialog() != null)
+			{
+				if (root.getPlayerPopupDialog().isVisible())
+					if (x > root.getPlayerPopupDialog().getInnerX()
+							|| x < root.getPlayerPopupDialog().getInnerX()
+							+ root.getPlayerPopupDialog().getWidth())
+						root.getPlayerPopupDialog().destroy();
+					else if (y > root.getPlayerPopupDialog().getInnerY()
+							|| y < root.getPlayerPopupDialog().getInnerY()
+							+ root.getPlayerPopupDialog().getHeight())
+						root.destroyPlayerPopupDialog();
+			}
 			// repeats space bar items (space bar emulation for mouse. In case
 			// you do not have a space bar!)
 			try {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="35" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="Battle Tower Lobby.tsx"/>
- <tileset firstgid="1639" source="SinnohInteriorSet0.tsx"/>
- <tileset firstgid="6639" source="SinnohSet7.tsx"/>
- <tileset firstgid="8415" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="1639" source="SinnohSet7.tsx"/>
+ <tileset firstgid="3415" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="3745" source="SinnohInteriorSet4.tsx"/>
+ <tileset firstgid="4433" source="SinnohInteriorSet3.tsx"/>
  <layer name="Walkable" width="35" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3OwQkAMAzEsKyd7TtEezQBGfxXlSTpZx2chYWFhYWFhSVhSXlumuJ46dnaAXSD9KBoEAAA
@@ -11,17 +12,17 @@
  </layer>
  <layer name="Collisions" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAvqALUC8lQBNjBpsNKngNhDfIUATowYbrSpFvDtgatUYGRjieVHlkpD45MhlcJPnFhBIB5rhCzXHG0hn8VIuR65b8oFmhELNCQbSRbyUy5HrFlqAUbdQbj4+tZqyxJmBTx213BJJpFvwqRuOcUQNMOoWys0fdQvpakd6+UKreCLXbGq7h1LzqOUeapqDDxOjhhS3AACj0wFbaBAAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMAvqALUC8lQBNjBpsNKngNhDfIUATowYbPZeNeHfA1KoxMjDECaDKxSPxyZUjxy0gkIlmZo4A5XLkuqUQaEYJ1JxQJDYlcuS6hRZg1C2Um49P7UJO4szAp45abrlIpFvwqRuOcUQNMOoWys0fdQvpaodT+fJIiHS30CqeyDWb2u6h1DxquYea5uDDxKghxS0AT9tMpGgQAAA=
   </data>
  </layer>
  <layer name="Walkable" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UTU7CQBjG8ekIuNArdNGVBZU7eAFAxeBCuYUKQriAytcduICA6B28ACAfR+EfEhc0maZxOmmI8yS/dDPt+6SZGSFsbGxsbPY1F0dJN7D573GPd5+6qcTzmW18V29dS2N28L/cRuyiWjfQ6KLKiyPEK97QRgdd9NB31O99G+jyzrwhRhjjAxN84iuki4lMmTfDHD9YYIkV1oa6KPe9FMKBxAFSSCODQ/mH70WIat+fMM9HFjmc4gznyId00TlHqn1fYF4RJVziCtco4yaki845Cu7733vjgXmPeEINdTyjgaZU3y9xniPd+8Ummdx5Qtyj6iXdxEw2E/T142gQAAA=
+   H4sIAAAAAAAAC+3US2rCQBzH8Um0igspeIEufVQ9itW24kl8Fy/g2xO48QI+2noHF12ooK2Po/jduDAwIXYMAZkffBaBSf4/wswIoaOjo6Nzj5lHvG6go3N9CgrvPj1ePg9Dzt6TrWsodLHmx2EX2bqRwmzrfzmnaQjRQhsddNFDHwND/r2FQhdZxsybYIoZPvGFb8xturiRDfO2+MUfdtjjgKNLXaT73hTCgAkf/HhAAEHzH99zENm+jzIvhjgSeEYSKaRtuqicI9m+zzDvBVnk8Io3vCNv00XlHFn3/fneKDKvhDIqqKKGOj5M+f1yy3Oker/oeJNlWIgV1mGvm7iTEyO1vgFoEAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAvoDOyC2B2IHKsqRCv4DcQwvA0MqkE4D4nQgjuVFyOOSs+TGr28UjAwwQ4aBYSYQz5KhjjpKwAmg2SeB+BQBO4hVRwn4ATT7JxD/ImAHsepGwSgYiWC0fMEORsuXUTAKhg4AAPRxrkJoEAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMAvoDOyC2B2IHKsqRCv5D6VQgTgPidCxqSJXbKEQFhw0S4C8AoX0FqCc3nIAAJwODIBALcVJHHSXAAWi2IxA7EbCDWHWUgAKg2YVAXETADmLVjYJRMBLBaPmCHYyWL6NgFAwdAAB4hQvzaBAAAA==
   </data>
  </layer>
 </map>

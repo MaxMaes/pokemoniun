@@ -28,7 +28,7 @@
  </layer>
  <layer name="Collisions" width="27" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC+w52FgcEDCIIDMd+Shnl3BQLNCkDAIIPNDqWhXOtSs9WjiMH4mlexi5KCuOkrN2MBGXbvs+Sh3EzXsore/qJHuQXbZAO2xI+CvULQ8SAqGuZPYsMlEy4OkYJA7QfbA7PrLy8Dwjxe/fVlYwvEB0M85BMI3E80udmAYchCIs8lAPVOgOBuJPZWIuES2i9aA2nYhxwN6nJAaX4QAcjygxwmp8UUJGIj4ohcGAIriVUQECAAA
+   H4sIAAAAAAAAC2NgoC+w52FgcEDCIIDMd+Shnl3BQLNCkDAIIPNDqWhXOtSs9WjiMH4mlexi5KCuOkrN2MBGXbvs+Sh3EzXsore/qJHuQXbZAO2xI+CvULQ8SAqGuZPYsMlEy4OkYJA7QfbA7PrLy8Dwjxe/fVlYwvEB0M85BMI3E80udmAYchCIs8lAPVOgOBuJPZWIuES2i9aA2nYhxwN6nJAaX4QAcjygxwmp8UUJGIj4IgWTqw+EAQ9PBHIECAAA
   </data>
  </layer>
  <layer name="Walkable" width="27" height="19">

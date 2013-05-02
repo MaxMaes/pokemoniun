@@ -6,9 +6,9 @@
   <property name="nightPokemonChances" value="Duskull,20;Shuppet,20;Meditite,30;Vulpix,20;Wingull,10;"/>
   <property name="nightPokemonLevels" value="27-29;27-29;27-29;25-29;26-28;"/>
   <property name="pvp" value="yes"/>
-  <property name="wildModifier" value="10"/>
-  <property name="xOffsetModifier" value=""/>
-  <property name="yOffsetModifier" value=""/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal1.tsx"/>
  <tileset firstgid="1025" source="normal5.tsx"/>

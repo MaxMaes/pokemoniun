@@ -2,7 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="25" height="25" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="Battle Factory Lobby.tsx"/>
  <tileset firstgid="109" source="normal1.tsx"/>
- <tileset firstgid="1133" source="SinnohInteriorSet0.tsx"/>
+ <tileset firstgid="1133" source="SinnohInteriorSet3.tsx"/>
  <layer name="Walkable" width="25" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3Nt06CYQCGUW5AHe1oomJNwIYkFDvF3guooNj1/mfP5r+ZfJPD9yZne5MnlYqLi/tP66GXvj9+/QwENgYZYpgRRkkzxnjiN8FkYGOKDNPMMMsc8ywkfllygY1FllhmhVXyrFFI/IqUAhtlKqyzwSZbbLPDLlVq1AMbDfbY54BDjjjmhFPOOOcisHHJFdfccEuTFnfc80CbTmDjkSe6PPPCK2+888EnX3wHNuLi4n73Azc7CSzECQAA
@@ -15,7 +15,7 @@
  </layer>
  <layer name="Walkable" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMFWDPSXs73OlgxygYBaNgFIwCygEAxsxXO8QJAAA=
+   H4sIAAAAAAAAC2NgGAWjYBQMFXCWlfZ2XKWDHaNgFIyCUTAKKAcAOe1UqcQJAAA=
   </data>
  </layer>
 </map>

@@ -19,7 +19,7 @@
  <tileset firstgid="1521" source="SinnohSet6.tsx"/>
  <layer name="Walkable" width="40" height="46">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UUQoAEBCEYXEm5f4n8+RFm0ibWf1b3yPGKCkxDMP4TM0AftfK+wxWJsVcyp39YtVtxN49M897757l3aO1/+mZEd9aXYR/VTkfAH/q/8BtvrFe/Z6qRmd0BwBALB1wBNoQwBwAAA==
+   H4sIAAAAAAAAC+2UQQrAIBADpb5J6P9f1pMXsWCpwQQmMEd3xwiWQgghmrQLFNz1vANue71c3VZ6O+n+tju9U9B0m9i70nmcvbpL3eNs/tediW/tTsK/6uwHAHrc/4G/fv28+z1d6Z3RHQAAQBYPNIENlMAcAAA=
   </data>
  </layer>
  <layer name="Walkable" width="40" height="46">
@@ -29,7 +29,7 @@
  </layer>
  <layer name="Collisions" width="40" height="46">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1WO04DMRC1SCKFFdQQwQX4NFRJCtLz6UNaqBBUHAUuQfj0BLgAv4OQhIIb8KLdQZORvV57N0sk/KSnSby79vMbe2ylAgICAmaDViUwD48CA8FOJd5P39Xp/TWoK/UIPoHP9eln8l0fZNHVArsGvZ/QNARH4LiePlbR+joaXdTeTPQ1FuO4hrie/N4tKZ9p2kifDu3E8yJ0Eq7BPovNir4eNR30tdl3vloJD+CARZs+nbfEnkZf21OjyT9bbnXaJbmmXvJfjmOLJv8IK+hzFWxk9E76KD2U49iiBOkmXTusbxdtMtfUh69/0kfKIc+Pqzad1rz+EbqsT+mtyfM+zosb8Ba8A+8158ckL8eRUidRvGZc/UsDzUmeadT+Aj2v4Bv4Dn6AG+AmuAVuV+O8XELbVZRtPbropXfkmfbbjvGH4Agcg1/gHrgPHoCH1ek1wnNj88SWb/6uPNOofbGmVFSLny0hLoOnSY7PEM897gtF5D0PLhbSn7vum7JR5P6ZBXzrT1kw+SXrlGt/eXVQNPkl65RtPgTqZzI/fnZTtH1nq3+6+wuvU6b5yJrN7zl0j+Hnm69/Wded7EfWbH6XoHuM7jtf/2yQ/ciaLe8SlAOTD0X7VzRc/ZuX6HofKzv+tT/Bv+DfPPgU/Puf/v0A5iKzHsAcAAA=
+   H4sIAAAAAAAAC+1WO04DMRC1IJGSFdQQwQX4NFQhBfR8+rBtqBBUHAUuQfj0BLgAv4OQhIIb8Fa7gyYjex07m2Ql/KSnSdZe7/Mbe2ylAgICAqaDk0U998HdEtCkrVkCbTp9pK1t0D5PBm3T05b0SfBTGd1fvZpST+Az+FIbbZN9fWDTRvtYtpPeL2jqgwNwWMv/lg9s2nRtNKcEjXoa1xDXs997BebWVxvp06GVeV6ETsIN2GXRVP+aDvpa7D1frYRHsMeiTV/eXoo1+lqeGk3+2XKr0y7JNcXZf/kdWzT5R1jBmKtgY0zvpI/SQ/kdW5Qg3aRrh43tU79joc/XP+kj5ZDnZ9KzJS7AP0KbjSm9NXnexXlxC96B9+CD5vxI8tKJlDqN0jXj6l8eaE7yTKPnr9DzBr6DH+AnuAFuglvgdiXNyxW0XUfjrUcXvdRHnml/z/H9PjgAh+A3eAAegkfgcWV0jfDc2Dyx5Zv3lWcaPa9XlYqqadsS4jJ4luX4HPHC475QRN4nweVCfrvrvpk1itw/04Bv/ZkVTH7JOuU63qQ6KJr8knXKNh8CjZPMj5/dFG3v2eqf7v7C65RpPrJm83sO3WP4+ebr37jrTo4jaza/S9A9Rveer382yHFkzZZ3CcqByYei/Ssarv6VJbrex2Yd5+1P8C/4Vwafgn//079f0lCmc8AcAAA=
   </data>
  </layer>
  <layer name="LedgesDown" width="40" height="46">

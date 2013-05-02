@@ -515,7 +515,7 @@ public class Pokemon extends PokemonSpecies
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
 		p.setRareness(ps.getRareness());
-		if(random.nextDouble() < 0.02)
+		if(random.nextDouble() < (1/8192))
 			p.setShiny(true);
 		return p;
 	}

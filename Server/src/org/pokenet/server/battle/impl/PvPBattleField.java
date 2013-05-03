@@ -755,7 +755,29 @@ public class PvPBattleField extends BattleField
 	@Override
 	public void requestAndWaitForSwitch(int party)
 	{
-		requestPokemonReplacement(party);
+		int index = m_players[party].getPokemonIndex(getActivePokemon()[party]);
+		int switchin = 0;
+		for (int i = index+1; i !=index; i++)
+		{
+			if(i==6)
+			{
+				i=0;
+			}
+			if(m_players[party].getParty()[i] != null || !m_players[party].getParty()[i].isFainted())
+			{
+				switchin = i;
+				break;
+			}
+		}
+		if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
+		{
+//			getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
+//			getActivePokemon()[party].hasEffect(StatChangeEffect.class);
+			System.out.println("last move was baton pass");
+		}
+		getActivePokemon()[party].switchOut();
+		m_active[party] = switchin;
+		replacementPokemonRequest(party,m_players[party].getParty()[switchin]);
 		if(!m_replace[party])
 			return;
 		m_isWaiting = true;
@@ -832,6 +854,13 @@ public class PvPBattleField extends BattleField
 		// ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
 		// switchOccur.init(32);
 		// switchOccur.sendResponse();
+	}
+	
+	protected void replacementPokemonRequest(int i, Pokemon poke)
+	{
+		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
+		informSwitchInPokemon(i, poke);
+		poke.switchIn();
 	}
 
 	/**

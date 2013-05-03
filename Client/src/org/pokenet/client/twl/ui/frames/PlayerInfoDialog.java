@@ -82,7 +82,7 @@ public class PlayerInfoDialog extends ResizableFrame {
 				+ GameClient.getInstance().getOurPlayer().getBreedingLevel());
 		m_fishingEXP = new Label("Fishing Lv:          "
 				+ GameClient.getInstance().getOurPlayer().getFishingLevel());
-		m_coordinatingEXP = new Label("Corrdinating Lv:  "
+		m_coordinatingEXP = new Label("Coordinating Lv:  "
 				+ GameClient.getInstance().getOurPlayer()
 						.getCoordinatingLevel());
 

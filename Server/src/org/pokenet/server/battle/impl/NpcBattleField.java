@@ -10,9 +10,11 @@ import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
+import org.pokenet.server.battle.mechanics.statuses.MultipleStatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
+import org.pokenet.server.battle.mechanics.statuses.StatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -588,9 +590,26 @@ public class NpcBattleField extends BattleField
 	@Override
 	public void requestAndWaitForSwitch(int party)
 	{
-		requestPokemonReplacement(party);
+		
 		if(party == 0)
 		{
+			int index = m_player.getPokemonIndex(getActivePokemon()[party]);
+			int switchin = 0;
+			for (int i = index+1; i !=index; i++)
+			{
+				if(i==6)
+				{
+					i=0;
+				}
+				if(m_player.getParty()[i] != null || !m_player.getParty()[i].isFainted())
+				{
+					switchin = i;
+					break;
+				}
+			}
+			getActivePokemon()[party].switchOut();
+			m_active[party] = switchin;
+			replacementPokemonRequest(party,m_player.getParty()[switchin]);
 			/* Request a switch from the player */
 			if(!m_replace[party])
 				return;
@@ -608,6 +627,41 @@ public class NpcBattleField extends BattleField
 					}
 				}
 			while(m_replace != null && m_replace[party]);
+		}
+		else
+		{
+			int index = 0;
+			for(int i = 0; i <  m_npc.getParty(m_player).length; i++)
+			{
+				if(m_npc.getParty(m_player)[i].isActive())
+				{
+					index = i;
+					break;
+				}
+			}
+			//int index = m_npc.getParty(m_player).getPokemonIndex(getActivePokemon()[party]);
+			int switchin = 0;
+			for (int i = index+1; i !=index; i++)
+			{
+				if(i==6)
+				{
+					i=0;
+				}
+				if(m_npc.getParty(m_player)[i] != null || !m_npc.getParty(m_player)[i].isFainted())
+				{
+					switchin = i;
+					break;
+				}
+			}
+			if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
+			{
+//				getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
+//				getActivePokemon()[party].hasEffect(StatChangeEffect.class);
+				System.out.println("last move was baton pass");
+			}
+			getActivePokemon()[party].switchOut();
+			m_active[party] = switchin;
+			replacementPokemonRequest(party,m_npc.getParty(m_player)[switchin]);
 		}
 	}
 
@@ -722,6 +776,13 @@ public class NpcBattleField extends BattleField
 			{
 				e.printStackTrace();
 			}
+	}
+	
+	protected void replacementPokemonRequest(int i, Pokemon poke)
+	{
+		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
+		informSwitchInPokemon(i, poke);
+		poke.switchIn();
 	}
 
 	/**

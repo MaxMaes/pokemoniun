@@ -2459,6 +2459,14 @@ public class Pokemon extends PokemonSpecies
 		for(int i = 0; i < size; ++i)
 			m_statuses.get(i).switchIn(this);
 	}
+	
+	/**
+	 * return a list of all status effects that effect this pokemon
+	 */
+	public ArrayList<StatusEffect> getStatusEffects()
+	{
+		return m_statuses;
+	}
 
 	/**
 	 * Switch out this pokemon.

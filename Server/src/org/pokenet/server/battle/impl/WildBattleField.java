@@ -1,5 +1,6 @@
 package org.pokenet.server.battle.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
+import org.pokenet.server.battle.mechanics.statuses.StatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -624,7 +626,30 @@ public class WildBattleField extends BattleField
 	{
 		if(party == 0)
 		{
-			requestPokemonReplacement(party);
+			int index = m_player.getPokemonIndex(getActivePokemon()[party]);
+			int switchin = 0;
+			for (int i = index+1; i !=index; i++)
+			{
+				if(i==6)
+				{
+					i=0;
+				}
+				if(m_player.getParty()[i] != null || !m_player.getParty()[i].isFainted())
+				{
+					switchin = i;
+					break;
+				}
+			}
+//			if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
+//			{
+////				getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
+////				getActivePokemon()[party].hasEffect(StatChangeEffect.class);
+//				System.out.println("last move was baton pass");
+//			}
+			ArrayList<StatusEffect> temp = getActivePokemon()[party].getStatusEffects();
+			getActivePokemon()[party].switchOut();
+			m_active[party] = switchin;
+			replacementPokemonRequest(party,m_player.getParty()[switchin]);
 			if(!m_replace[party])
 				return;
 			m_isWaiting = true;
@@ -998,6 +1023,13 @@ public class WildBattleField extends BattleField
 			// switchOccur.sendResponse();
 			/* TODO: Why is there no implementation here anymore? */
 		}
+	}
+	
+	protected void replacementPokemonRequest(int i, Pokemon poke)
+	{
+		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
+		informSwitchInPokemon(i, poke);
+		poke.switchIn();
 	}
 
 	private void calcEV(Pokemon p, int position, int ammount)

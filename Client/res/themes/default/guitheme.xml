@@ -106,6 +106,116 @@
                 <area xywh="101,100,14,2"/>
             </grid>
         </select>
+        <area name="listbox_background" xywh="64,137,9,4"/>
+        <area name="listbox_display_background" xywh="77,136,24,6" splitx="L2,R2" splity="T5,B2"/>
+    
+        <select name="combobox_button_background">
+            <grid weightsX="0,0,1,0,1,0,0" weightsY="0,0,1,0,1,0,0" if="pressed">
+                <area xywh="81,115,1,1"/>
+                <area xywh="82,115,1,1"/>
+                <area xywh="83,115,1,1"/>
+                <area xywh="84,115,5,1"/>
+                <area xywh="89,115,1,1"/>
+                <area xywh="90,115,1,1"/>
+                <area xywh="91,115,1,1"/>
+                <area xywh="81,116,1,1"/>
+                <area xywh="82,116,1,1"/>
+                <area xywh="83,116,1,1"/>
+                <area xywh="84,116,5,1"/>
+                <area xywh="89,116,1,1"/>
+                <area xywh="90,116,1,1"/>
+                <area xywh="91,116,1,1"/>
+                <area xywh="81,117,1,1"/>
+                <area xywh="82,117,1,1"/>
+                <area xywh="83,117,1,1"/>
+                <area xywh="84,117,5,1"/>
+                <area xywh="89,117,1,1"/>
+                <area xywh="90,117,1,1"/>
+                <area xywh="91,117,1,1"/>
+                <area xywh="81,118,1,4"/>
+                <area xywh="82,118,1,4"/>
+                <area xywh="83,118,1,4"/>
+                <area xywh="84,118,5,4"/>
+                <area xywh="89,118,1,4"/>
+                <area xywh="90,118,1,4"/>
+                <area xywh="91,118,1,4"/>
+                <area xywh="81,122,1,1"/>
+                <area xywh="82,122,1,1"/>
+                <area xywh="83,122,1,1"/>
+                <area xywh="84,122,5,1"/>
+                <area xywh="89,122,1,1"/>
+                <area xywh="90,122,1,1"/>
+                <area xywh="91,122,1,1"/>
+                <area xywh="81,123,1,1"/>
+                <area xywh="82,123,1,1"/>
+                <area xywh="83,123,1,1"/>
+                <area xywh="84,123,5,1"/>
+                <area xywh="89,123,1,1"/>
+                <area xywh="90,123,1,1"/>
+                <area xywh="91,123,1,1"/>
+                <area xywh="81,124,1,1"/>
+                <area xywh="82,124,1,1"/>
+                <area xywh="83,124,1,1"/>
+                <area xywh="84,124,5,1"/>
+                <area xywh="89,124,1,1"/>
+                <area xywh="90,124,1,1"/>
+                <area xywh="91,124,1,1"/>
+            </grid>
+            <grid weightsX="0,0,1,0,1,0,0" weightsY="0,0,1,0,1,0,0">
+                <area xywh="63,115,1,1"/>
+                <area xywh="64,115,1,1"/>
+                <area xywh="65,115,1,1"/>
+                <area xywh="66,115,5,1"/>
+                <area xywh="71,115,1,1"/>
+                <area xywh="72,115,1,1"/>
+                <area xywh="73,115,1,1"/>
+                <area xywh="63,116,1,1"/>
+                <area xywh="64,116,1,1"/>
+                <area xywh="65,116,1,1"/>
+                <area xywh="66,116,5,1"/>
+                <area xywh="71,116,1,1"/>
+                <area xywh="72,116,1,1"/>
+                <area xywh="73,116,1,1"/>
+                <area xywh="63,117,1,1"/>
+                <area xywh="64,117,1,1"/>
+                <area xywh="65,117,1,1"/>
+                <area xywh="66,117,5,1"/>
+                <area xywh="71,117,1,1"/>
+                <area xywh="72,117,1,1"/>
+                <area xywh="73,117,1,1"/>
+                <area xywh="63,118,1,4"/>
+                <area xywh="64,118,1,4"/>
+                <area xywh="65,118,1,4"/>
+                <area xywh="66,118,5,4"/>
+                <area xywh="71,118,1,4"/>
+                <area xywh="72,118,1,4"/>
+                <area xywh="73,118,1,4"/>
+                <area xywh="63,122,1,1"/>
+                <area xywh="64,122,1,1"/>
+                <area xywh="65,122,1,1"/>
+                <area xywh="66,122,5,1"/>
+                <area xywh="71,122,1,1"/>
+                <area xywh="72,122,1,1"/>
+                <area xywh="73,122,1,1"/>
+                <area xywh="63,123,1,1"/>
+                <area xywh="64,123,1,1"/>
+                <area xywh="65,123,1,1"/>
+                <area xywh="66,123,5,1"/>
+                <area xywh="71,123,1,1"/>
+                <area xywh="72,123,1,1"/>
+                <area xywh="73,123,1,1"/>
+                <area xywh="63,124,1,1"/>
+                <area xywh="64,124,1,1"/>
+                <area xywh="65,124,1,1"/>
+                <area xywh="66,124,5,1"/>
+                <area xywh="71,124,1,1"/>
+                <area xywh="72,124,1,1"/>
+                <area xywh="73,124,1,1"/>
+            </grid>
+        </select>
+        <area name="combobox_background" xywh="64,128,9,4"/>
+    
+    
     </images>
     <images file="pokedex.png">
         <area name="incrementer" xywh="11,34,36,14"/>

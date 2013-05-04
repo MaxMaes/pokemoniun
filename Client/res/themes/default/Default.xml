@@ -58,7 +58,7 @@
     <theme name="label" ref="-defaults" allowWildcard="true">
     </theme>
     <theme name="button" ref="-defaults">
-        <param name="background"><image>button_background</image></param>
+        <param name="background"><image>combobox_button_background</image></param>
         <param name="border"><border>5,0</border></param>
         <param name="minWidth"><int>12</int></param>
         <param name="minHeight"><int>12</int></param>
@@ -188,6 +188,39 @@
             <param name="font"><font>normal_black</font></param>
         </theme>
     </theme>
+    <theme name="listbox" ref="-defaults">
+        <param name="background"><image>listbox_background</image></param>
+        <param name="cellHeight"><int>21</int></param>
+        <param name="cellWidth"><constant>SINGLE_COLUMN</constant></param>
+        <param name="rowMajor"><bool>true</bool></param>
+        <param name="fixedCellWidth"><bool>false</bool></param>
+        <param name="fixedCellHeight"><bool>false</bool></param>
+        <theme name="vscrollbar" ref="vscrollbar"/>
+        <theme name="display" ref="label">
+            <param name="background"><image>listbox_display_background</image></param>
+            <param name="border"><border>5,0</border></param>
+        </theme>
+        <param name="minDisplayedRows"><int>0</int></param>
+    </theme>
+
+    <theme name="combobox" ref="-defaults">
+        <param name="background"><image>combobox_background</image></param>
+        <param name="popupHeight"><int>150</int></param>
+        <theme name="display" ref="label">
+            <param name="border"><border>4,8,4,8</border></param>
+            <param name="minWidth"><int>100</int></param>
+            <param name="textAlignment"><enum type="alignment">left</enum></param>
+        </theme>
+        <theme name="button" ref="-defaults">
+            <param name="background"><image>combobox_button_background</image></param>
+            <param name="minWidth"><int>14</int></param>
+        </theme>
+    </theme>
+    <theme name="comboboxPopup" ref="-defaults">
+        <theme name="listbox" ref="listbox"/>
+    </theme>
+
+
     <theme name="guipane" ref="-defaults">
         <theme name="label" ref="label"/>
         <theme name="loginscreen" ref="-defaults">

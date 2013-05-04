@@ -3,6 +3,7 @@ package org.pokenet.client.twl.ui;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.twl.ui.frames.BagDialog;
+import org.pokenet.client.twl.ui.frames.ChatDialog;
 import org.pokenet.client.twl.ui.frames.HelpWindow;
 import org.pokenet.client.twl.ui.frames.OptionsDialog;
 import org.pokenet.client.twl.ui.frames.PlayerInfoDialog;
@@ -26,6 +27,7 @@ public class HUD extends DesktopArea {
 	private BagDialog bag;
 	private OptionsDialog options;
 	private PlayerInfoDialog playerinfo;
+	private ChatDialog chat;
 	
 	public HUD() {
 		setSize(800,600);
@@ -38,10 +40,13 @@ public class HUD extends DesktopArea {
 		add(help);
 		options = new OptionsDialog();
 		add(options);
+		chat = new ChatDialog();
+		add(chat);
 		
 		pokedex.setVisible(false);
 		options.setVisible(false);
 		help.setVisible(false);
+		chat.setVisible(false);
 	}
 
 	public PokedexDialog getPokedex() {
@@ -127,5 +132,9 @@ public class HUD extends DesktopArea {
 		help.setVisible(false);
 		options.setVisible(false);
 		bag.setVisible(false);
+	}
+
+	public ChatDialog getChat() {
+		return null;
 	}
 }

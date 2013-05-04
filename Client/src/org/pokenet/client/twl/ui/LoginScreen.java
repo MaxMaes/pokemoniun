@@ -34,15 +34,13 @@ public class LoginScreen extends DesktopArea {
 	private ToSDialog m_terms;
 	private LoginDialog m_login;
 	private ServerDialog m_select;
-	//private AlertPopupDialog alertdialog;
 	
 	private RegisterDialog m_register;
 
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
 	private Button m_openToS;
-	private Label test;
-	
+
 	
 	public LoginScreen() {
 		setSize(800,600);
@@ -100,10 +98,6 @@ public class LoginScreen extends DesktopArea {
 		m_serverRev = new Label("");
 		m_serverRev.setVisible(false);
 		add(m_serverRev);
-	}
-	
-	protected void showAlertDialog() {
-		//alertdialog.setVisible(true);
 	}
 
 	@Override

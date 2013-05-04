@@ -1,6 +1,7 @@
 package org.pokenet.client.twl.ui;
 
 import org.pokenet.client.twl.ui.frames.AlertDialog;
+import org.pokenet.client.twl.ui.frames.ChatDialog;
 import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
 import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
 
@@ -158,6 +159,66 @@ public class GUIPane extends DesktopArea {
 	
 	public void showPlayerPopupDialogAt(int x, int y)
 	{
+		
+	}
+	
+	public Object getNPCSpeech()
+	{
+		return null;
+	}
+	
+	public ChatDialog getChat()
+	{
+		return hud.getChat();
+	}
+
+	public void toggleChat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleStats() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void togglePokedex() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void togglePokemon() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleBag() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleMap() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleFriends() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleRequests() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleOptions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void toggleHelp() {
+		// TODO Auto-generated method stub
 		
 	}
 }

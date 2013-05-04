@@ -1,0 +1,13 @@
+To import the formatter and cleaner follow these intsructions:
+Window -> Preferences
+Java -> Code Style -> Formatter/Clean Up -> Import
+
+To keep maintaining the code style easy you can setup auto clean on save:
+Window -> Preferences
+Java -> Editor -> Save Actions
+
+Check the following boxes.
+Perform the selected actions on save is
+Format source code
+Format all lines
+Organize import

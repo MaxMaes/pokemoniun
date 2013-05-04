@@ -154,8 +154,8 @@ public class MovementManager implements Runnable
 				{
 					if(m_waiting.isEmpty())
 					{
-						m_waiting = m_moved;
-						m_moved = new PriorityQueue<Character>(1, m_comp);
+						m_waiting.addAll(m_moved);
+						m_moved.clear();
 					}
 				}
 			}

@@ -3734,29 +3734,28 @@ public class MoveList
 				return 0;
 			}
 		}));
-		
-		//TODO make a way to return it to the original pokemon
+
+		// TODO make a way to return it to the original pokemon
 		m_moves.add(new MoveListEntry("Transform", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 20)
 		{
 			@Override
 			public int use(BattleMechanics mech, Pokemon user, Pokemon target)
 			{
-				String temp =  user.getName();
+				String temp = user.getName();
 				user.getField().showMessage(user.getName() + " transformed in " + target.getName() + "!");
 				user = target;
 				user.setName(temp);
 				return 0;
 			}
 		}));
-		
-		//TODO test sketch and transform
+
+		// TODO test sketch and transform
 		m_moves.add(new MoveListEntry("Sketch", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 1)
 		{
 			@Override
 			public int use(BattleMechanics mech, Pokemon user, Pokemon target)
 			{
-				
-				
+
 				for(int i = 0; i < 4; i++)
 				{
 					if(user.getMoves()[i].getName().equalsIgnoreCase("sketch"))
@@ -3767,7 +3766,7 @@ public class MoveList
 						}
 						else
 						{
-							user.setMove(i,target.getLastMove());
+							user.setMove(i, target.getLastMove());
 							user.getField().showMessage(user.getName() + " learned " + target.getLastMove().getName());
 							break;
 						}
@@ -7597,7 +7596,6 @@ public class MoveList
 				return true;
 			}
 
-			@SuppressWarnings("unused")
 			public void beginTurn(BattleTurn[] turn, Pokemon p, int index)
 			{
 				if(p.hasEffect(SleepEffect.class) || p.hasEffect(FreezeEffect.class))

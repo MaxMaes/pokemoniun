@@ -900,9 +900,9 @@ public class MoveList
 		@Override
 		public boolean apply(Pokemon p)
 		{
-			//rawstat(0) = hp
-			//so you get the maxhp and devide it by 4 because it does 25% damage to the user
-			p.setHealth(p.getHealth()-(p.getRawStat(0)/4));//refreshActivePokemon();
+			// rawstat(0) = hp
+			// so you get the maxhp and devide it by 4 because it does 25% damage to the user
+			p.setHealth(p.getHealth() - (p.getRawStat(0) / 4));// refreshActivePokemon();
 			return true;
 		}
 
@@ -940,7 +940,7 @@ public class MoveList
 		@Override
 		public void unapply(Pokemon p)
 		{
-			p.removeStatus(SubstituteEffect.class);//p.getField().refreshActivePokemon();
+			p.setSubstitute(0);// p.getField().refreshActivePokemon();
 		}
 	}
 
@@ -6620,7 +6620,7 @@ public class MoveList
 				for(int i = 0; i < 4; ++i)
 					if(move.getName().equals(target.getMove(i).getName()))
 					{
-						//int number = mech instanceof JewelMechanics ? 4 : mech.getRandom().nextInt(3) + 2;
+						// int number = mech instanceof JewelMechanics ? 4 : mech.getRandom().nextInt(3) + 2;
 						target.setPp(i, target.getPp(i) - 5);
 						return 0;
 					}
@@ -6952,7 +6952,7 @@ public class MoveList
 					return false;
 				}
 				m_entry = entry;
-				m_turns = p.getField().getRandom().nextInt(3) + 2;
+				m_turns = 5;
 				return true;
 			}
 

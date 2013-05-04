@@ -3,7 +3,6 @@ package org.pokenet.server.battle.impl;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.ItemProcessor.PokeBall;
 import org.pokenet.server.backend.entity.Player;
@@ -21,7 +20,6 @@ import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
-import org.pokenet.server.battle.mechanics.statuses.StatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -355,38 +353,38 @@ public class WildBattleField extends BattleField
 			{
 				m_participatingPokemon.add(poke);
 			}
-				/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-				 * new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer,
-				 * getPokemonPartyIndex(trainer, poke))); */
-				ServerMessage switchInform = new ServerMessage(m_player.getSession());
-				switchInform.init(32);
-				switchInform.addString(m_player.getName());
-				switchInform.addString(poke.getSpeciesName());
-				switchInform.addInt(trainer);
-				switchInform.addInt(getPokemonPartyIndex(trainer, poke));
-				switchInform.sendResponse();
+		/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
+		 * new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer,
+		 * getPokemonPartyIndex(trainer, poke))); */
+		ServerMessage switchInform = new ServerMessage(m_player.getSession());
+		switchInform.init(32);
+		switchInform.addString(m_player.getName());
+		switchInform.addString(poke.getSpeciesName());
+		switchInform.addInt(trainer);
+		switchInform.addInt(getPokemonPartyIndex(trainer, poke));
+		switchInform.sendResponse();
 
-				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
-				receiveEffect.init(29);
-				receiveEffect.addInt(0);
-				receiveEffect.addString(poke.getSpeciesName());
+		ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
+		receiveEffect.init(29);
+		receiveEffect.addInt(0);
+		receiveEffect.addString(poke.getSpeciesName());
 
-				if(poke.hasEffect(BurnEffect.class))
-					receiveEffect.addString("Burn");
-				else if(poke.hasEffect(FreezeEffect.class))
-					receiveEffect.addString("Freeze");
-				else if(poke.hasEffect(ParalysisEffect.class))
-					receiveEffect.addString("paralysis");
-				else if(poke.hasEffect(PoisonEffect.class))
-					receiveEffect.addString("Poison");
-				else if(poke.hasEffect(SleepEffect.class))
-					receiveEffect.addString("Sleep");
-				else
-					receiveEffect.addString("Normal");
-				receiveEffect.sendResponse();
+		if(poke.hasEffect(BurnEffect.class))
+			receiveEffect.addString("Burn");
+		else if(poke.hasEffect(FreezeEffect.class))
+			receiveEffect.addString("Freeze");
+		else if(poke.hasEffect(ParalysisEffect.class))
+			receiveEffect.addString("paralysis");
+		else if(poke.hasEffect(PoisonEffect.class))
+			receiveEffect.addString("Poison");
+		else if(poke.hasEffect(SleepEffect.class))
+			receiveEffect.addString("Sleep");
+		else
+			receiveEffect.addString("Normal");
+		receiveEffect.sendResponse();
 
-				poke.removeStatusEffects(false);
-			
+		poke.removeStatusEffects(false);
+
 	}
 
 	@Override
@@ -628,11 +626,11 @@ public class WildBattleField extends BattleField
 		{
 			int index = m_player.getPokemonIndex(getActivePokemon()[party]);
 			int switchin = 0;
-			for (int i = index+1; i !=index; i++)
+			for(int i = index + 1; i != index; i++)
 			{
-				if(i==6)
+				if(i == 6)
 				{
-					i=0;
+					i = 0;
 				}
 				if(m_player.getParty()[i] != null || !m_player.getParty()[i].isFainted())
 				{
@@ -640,16 +638,10 @@ public class WildBattleField extends BattleField
 					break;
 				}
 			}
-//			if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
-//			{
-////				getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
-////				getActivePokemon()[party].hasEffect(StatChangeEffect.class);
-//				System.out.println("last move was baton pass");
-//			}
 			ArrayList<StatusEffect> temp = getActivePokemon()[party].getStatusEffects();
 			getActivePokemon()[party].switchOut();
 			m_active[party] = switchin;
-			replacementPokemonRequest(party,m_player.getParty()[switchin]);
+			replacementPokemonRequest(party, m_player.getParty()[switchin]);
 			if(!m_replace[party])
 				return;
 			m_isWaiting = true;
@@ -1024,7 +1016,7 @@ public class WildBattleField extends BattleField
 			/* TODO: Why is there no implementation here anymore? */
 		}
 	}
-	
+
 	protected void replacementPokemonRequest(int i, Pokemon poke)
 	{
 		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
@@ -1067,7 +1059,7 @@ public class WildBattleField extends BattleField
 		}
 		else
 		{
-			int money = (int)((2 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);
+			int money = (int) ((2 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.updateClientMoney();
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());
@@ -1078,7 +1070,7 @@ public class WildBattleField extends BattleField
 
 		if(m_participatingPokemon.size() > 0)
 		{
-			
+
 			/* Finally, add the EVs and exp to the participating Pokemon */
 			for(Pokemon p : m_participatingPokemon)
 			{
@@ -1111,7 +1103,7 @@ public class WildBattleField extends BattleField
 				double user = 1;
 				if(!p.getOriginalTrainer().equals(m_player.getName()))
 					user = 1.5;
-				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, p, m_participatingPokemon.size(),user);
+				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, p, m_participatingPokemon.size(), user);
 				p.setExp(p.getExp() + exp);
 				// Calculate how much exp is left to next level
 				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());

@@ -1433,6 +1433,12 @@ public class IntrinsicAbility extends StatusEffect implements Comparable<Object>
 		return m_name.compareTo(ability.m_name);
 	}
 
+	/**
+	 * Returns if two abilities are the same based on name.
+	 * 
+	 * @param obj
+	 * @return True when both objects are equal, otherwise false.
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -1440,6 +1446,15 @@ public class IntrinsicAbility extends StatusEffect implements Comparable<Object>
 			return false;
 		IntrinsicAbility ability = (IntrinsicAbility) obj;
 		return ability.m_name.equals(m_name);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((m_name == null) ? 0 : m_name.hashCode());
+		return result;
 	}
 
 	/**

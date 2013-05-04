@@ -110,22 +110,27 @@ public class PokemonType implements Serializable
 	}
 
 	/**
-	 * Return whether this type is equal to the test type.
+	 * Returns if two types are the same.
+	 * 
+	 * @param type
+	 * @return True when both objects are equal, otherwise false.
 	 */
 	@Override
 	public boolean equals(Object type)
 	{
 		if(type == null)
 			return false;
-		try
-		{
-			PokemonType poketype = (PokemonType) type;
-			return poketype.m_type == m_type;
-		}
-		catch(ClassCastException e)
-		{
-			return false;
-		}
+		PokemonType pokeType = (PokemonType) type;
+		return pokeType.m_type == m_type;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + m_type;
+		return result;
 	}
 
 	/**

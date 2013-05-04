@@ -30,7 +30,6 @@ public class MoveListEntry implements Serializable, Cloneable
 {
 
 	private static final long serialVersionUID = 873410794589044553L;
-
 	transient private PokemonMove m_move;
 	private String m_name;
 
@@ -60,17 +59,31 @@ public class MoveListEntry implements Serializable, Cloneable
 		}
 		catch(CloneNotSupportedException e)
 		{
-			/* unreachable */
 			return null;
 		}
 	}
 
+	/**
+	 * Returns if two moves are the same based on name.
+	 * 
+	 * @param obj
+	 * @return True when both objects are equal, otherwise false.
+	 */
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object move)
 	{
-		if(!(o instanceof MoveListEntry))
+		if(!(move instanceof MoveListEntry))
 			return false;
-		return m_name.equals(((MoveListEntry) o).m_name);
+		return m_name.equals(((MoveListEntry) move).m_name);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((m_name == null) ? 0 : m_name.hashCode());
+		return result;
 	}
 
 	public PokemonMove getMove()

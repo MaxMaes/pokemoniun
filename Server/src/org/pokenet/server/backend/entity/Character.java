@@ -38,19 +38,30 @@ public class Character implements Positionable
 	}
 
 	/**
-	 * Returns if two chars are the same based on id
+	 * Returns if two chars are the same based on id.
 	 * 
-	 * @param c
-	 * @return
+	 * @param obj
+	 * @return True when both objects are equal, otherwise false.
 	 */
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if(o instanceof Character)
+		if(obj instanceof Character)
 		{
-			Character c = (Character) o;
+			Character c = (Character) obj;
 			return (m_id == c.getId()) ? true : false;
 		}
 		return false;
+	}
+
+	/**
+	 * Returns the hashcode for this object.
+	 */
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + m_id;
+		return result;
 	}
 
 	/**

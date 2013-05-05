@@ -6,6 +6,10 @@ import org.pokenet.server.battle.mechanics.moves.MoveList;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.battle.mechanics.statuses.StatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
+import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
+import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
+import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.battle.mechanics.statuses.field.SunEffect;
 
 /**
  * This class represents the mechanics in the advanced generation of pokemon.
@@ -32,13 +36,55 @@ public class AdvanceMechanics extends BattleMechanics
 	public boolean attemptHit(PokemonMove move, Pokemon user, Pokemon target)
 	{
 		BattleField field = user.getField();
-		double accuracy = move.getAccuracy();
+		double accuracy = 0;
+		switch(move.getMoveListEntry().getName())
+		{
+			case "Thunder":
+				if(field.getEffectByType(RainEffect.class) != null)
+					accuracy = 1;
+				else if(field.getEffectByType(SunEffect.class) != null)
+					accuracy = 0.5;
+				else
+					accuracy = move.getAccuracy();
+				break;
+			case "Hurricane":
+				if(field.getEffectByType(RainEffect.class) != null)
+					accuracy = 1;
+				else if(field.getEffectByType(SunEffect.class) != null)
+					accuracy = 0.5;
+				else
+					accuracy = move.getAccuracy();
+				break;
+			case "Blizzard":
+				if(field.getEffectByType(HailEffect.class) != null)
+					accuracy = 1;
+				else
+					accuracy = move.getAccuracy();
+				break;
+			default:
+				accuracy = move.getAccuracy();
+				break;
+		}
+
 		boolean hit;
 		if(accuracy != 0.0 && (user.hasAbility("No Guard") || target.hasAbility("No Guard") || user.hasEffect(MoveList.LockOnEffect.class)))
 			hit = true;
 		else
 		{
-			double effective = accuracy * user.getAccuracy().getMultiplier() / target.getEvasion().getMultiplier();
+			double evasion = 1;
+			if(target.hasAbility("Snow Cloak") && field.getEffectByType(HailEffect.class) != null)
+			{
+				evasion = target.getEvasion().getMultiplier() * 1.2;
+			}
+			else if(target.hasAbility("Sand Veil") && field.getEffectByType(SandstormEffect.class) != null)
+			{
+				evasion = target.getEvasion().getMultiplier() * 1.2;
+			}
+			else
+			{
+				evasion = target.getEvasion().getMultiplier();
+			}
+			double effective = accuracy * user.getAccuracy().getMultiplier() / evasion;
 			if(effective > 1.0)
 				effective = 1.0;
 
@@ -119,11 +165,17 @@ public class AdvanceMechanics extends BattleMechanics
 			throw new StatException();
 		int common = (int) ((int) (2.0 * p.getBase(i) + p.getIv(i) + p.getEv(i) / 4.0) * (p.getLevel() / 100.0));
 		if(i == Pokemon.S_HP)
+		{
 			if(p.getSpeciesName().equals("Shedinja"))
+			{
 				// Shedinja always has 1 hp.
 				return 1;
+			}
 			else
+			{
 				return common + 10 + p.getLevel();
+			}
+		}
 		return (int) ((common + 5) * p.getNature().getEffect(i));
 	}
 

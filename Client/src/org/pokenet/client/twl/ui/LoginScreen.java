@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
-
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.twl.ui.frames.AboutDialog;
@@ -14,62 +13,61 @@ import org.pokenet.client.twl.ui.frames.LoginDialog;
 import org.pokenet.client.twl.ui.frames.RegisterDialog;
 import org.pokenet.client.twl.ui.frames.ServerDialog;
 import org.pokenet.client.twl.ui.frames.ToSDialog;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.DesktopArea;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.renderer.Image;
 
-
 /**
  * The complete login screen
+ * 
  * @author Myth1c, Chappie112
- *
  */
 
-public class LoginScreen extends DesktopArea {
+public class LoginScreen extends DesktopArea
+{
 	private LanguageDialog m_languageDialog;
 	private AboutDialog m_about;
 	private ToSDialog m_terms;
 	private LoginDialog m_login;
 	private ServerDialog m_select;
-	
+
 	private RegisterDialog m_register;
 
 	private Label m_serverRev, m_clientRev;
 	private Button m_openAbout;
 	private Button m_openToS;
 
-	
-	public LoginScreen() {
-		setSize(800,600);
+	public LoginScreen()
+	{
+		setSize(800, 600);
 		setPosition(0, 0);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		
+
 		List<String> translated = new ArrayList<String>();
 		translated = Translator.translate("_LOGIN");
-		
+
 		m_languageDialog = new LanguageDialog();
 		add(m_languageDialog);
-		
+
 		m_terms = new ToSDialog();
 		add(m_terms);
-		
+
 		m_about = new AboutDialog();
 		add(m_about);
-		
+
 		m_login = new LoginDialog();
 		add(m_login);
-		
+
 		m_select = new ServerDialog();
 		add(m_select);
-		
+
 		m_register = new RegisterDialog();
 		add(m_register);
-		
+
 		m_openAbout = new Button(translated.get(3));
 		m_openAbout.setVisible(true);
 		m_openAbout.addCallback(new Runnable()
@@ -81,7 +79,7 @@ public class LoginScreen extends DesktopArea {
 			}
 		});
 		add(m_openAbout);
-		
+
 		m_openToS = new Button(translated.get(4));
 		m_openToS.setVisible(true);
 		m_openToS.addCallback(new Runnable()
@@ -93,7 +91,7 @@ public class LoginScreen extends DesktopArea {
 			}
 		});
 		add(m_openToS);
-		
+
 		setClientRevision();
 		m_serverRev = new Label("");
 		m_serverRev.setVisible(false);
@@ -101,7 +99,8 @@ public class LoginScreen extends DesktopArea {
 	}
 
 	@Override
-	public void layout() {
+	public void layout()
+	{
 		m_clientRev.setPosition(4, 600 - m_clientRev.getHeight() - 10);
 		m_serverRev.setPosition(m_clientRev.getWidth() + m_clientRev.computeTextWidth() + 16, m_clientRev.getY());
 		m_openAbout.setSize(64, 32);
@@ -120,7 +119,7 @@ public class LoginScreen extends DesktopArea {
 		m_serverRev.setText("Server Version: r" + rev);
 		invalidateLayout();
 	}
-	
+
 	/**
 	 * Displays client version (ThinClient Version) based on rev.txt If rev.txt is not found, ? is displayed
 	 */
@@ -165,7 +164,7 @@ public class LoginScreen extends DesktopArea {
 		}
 		this.add(m_clientRev);
 	}
-	
+
 	/**
 	 * Shows about dialog
 	 */
@@ -174,7 +173,7 @@ public class LoginScreen extends DesktopArea {
 		m_about.reloadStrings();
 		m_about.setVisible(true);
 	}
-	
+
 	/**
 	 * Shows the terms of service dialog
 	 */
@@ -183,7 +182,7 @@ public class LoginScreen extends DesktopArea {
 		m_terms.reloadStrings();
 		m_terms.setVisible(true);
 	}
-	
+
 	/**
 	 * Shows the server selection dialog
 	 */
@@ -197,7 +196,7 @@ public class LoginScreen extends DesktopArea {
 		m_openToS.setVisible(false);
 		m_languageDialog.setVisible(false);
 	}
-	
+
 	/**
 	 * Shows the registration dialog
 	 */
@@ -211,7 +210,7 @@ public class LoginScreen extends DesktopArea {
 		m_register.reloadStrings();
 		m_register.setVisible(true);
 	}
-	
+
 	/**
 	 * Shows the login dialog
 	 */
@@ -226,7 +225,7 @@ public class LoginScreen extends DesktopArea {
 		m_login.getLoginButton().setEnabled(true);
 		m_languageDialog.setVisible(false);
 	}
-	
+
 	/**
 	 * Shows the server selection dialogs
 	 */
@@ -239,7 +238,7 @@ public class LoginScreen extends DesktopArea {
 		m_openAbout.setVisible(false);
 		m_openToS.setVisible(false);
 	}
-	
+
 	/**
 	 * Logs the user with current user and pass, this way they don't have to click "Login".
 	 * 
@@ -253,8 +252,8 @@ public class LoginScreen extends DesktopArea {
 			else
 				m_login.goLogin();
 	}
-	
-	public void loadBackground(GUI gui) 
+
+	public void loadBackground(GUI gui)
 	{
 		String respath = System.getProperty("res.path");
 		if(respath == null)
@@ -290,14 +289,15 @@ public class LoginScreen extends DesktopArea {
 		else
 			/* Show normal login screen */
 			backgroundPath = respath + "res/pokenet_normal.png";
-		
-		//DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
+
+		// DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
 		Image i = FileLoader.loadPNG(backgroundPath);
-        
+
 		gui.setBackground(i);
 	}
 
-	public Object getRegistration() {
+	public Object getRegistration()
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -309,12 +309,12 @@ public class LoginScreen extends DesktopArea {
 	{
 		m_login.getLoginButton().setEnabled(true);
 	}
-	
+
 	public void hideServerRevision()
 	{
 		m_serverRev.setVisible(false);
 	}
-	
+
 	public void showServerRevision()
 	{
 		m_serverRev.setVisible(true);

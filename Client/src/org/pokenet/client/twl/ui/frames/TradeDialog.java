@@ -8,7 +8,6 @@ import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.base.ConfirmationDialog;
 import org.pokenet.client.ui.base.TWLImageButton;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Label;
@@ -17,7 +16,7 @@ import de.matthiasmann.twl.ResizableFrame;
 /**
  * The trade interface
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
 public class TradeDialog extends ResizableFrame
 {
@@ -71,7 +70,7 @@ public class TradeDialog extends ResizableFrame
 		m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke);
 		m_theirPokeInfo[index].setVisible(false);
 		m_theirPokeInfo[index].setPosition(m_theirPokes[index].getX(), m_theirPokes[index].getY() + 32);
-		//GameClient.getInstance().getDisplay().add(m_theirPokeInfo[index]);
+		// GameClient.getInstance().getDisplay().add(m_theirPokeInfo[index]);
 		m_theirPokes[index].getModel().addStateCallback(new Runnable()
 		{
 			@Override
@@ -80,7 +79,9 @@ public class TradeDialog extends ResizableFrame
 				if(m_theirPokes[index].getModel().isHover())
 				{
 					m_theirPokeInfo[j].setVisible(true);
-				} else {
+				}
+				else
+				{
 					m_theirPokeInfo[j].setVisible(false);
 				}
 			}
@@ -145,7 +146,7 @@ public class TradeDialog extends ResizableFrame
 
 		m_tradeBtn.setEnabled(false);
 	}
-	
+
 	public void cancelOurOffer()
 	{
 		m_makeOfferBtn.setText("Make Offer");
@@ -164,11 +165,11 @@ public class TradeDialog extends ResizableFrame
 			{
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("38");
 				ClientMessage message = new ClientMessage(ServerPacket.TRADE_CANCEL);
-				//message.addInt(m_offerNum);
-				//message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
+				// message.addInt(m_offerNum);
+				// message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 				GameClient.getInstance().getSession().send(message);
 				m_confirm.setVisible(false);
-				//removeChild(m_confirm); TODO:
+				// removeChild(m_confirm); TODO:
 				m_confirm = null;
 				setVisible(false);
 				GameClient.getInstance().getUi().stopTrade();
@@ -181,11 +182,11 @@ public class TradeDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				//removeChild(m_confirm); TODO:
+				// removeChild(m_confirm); TODO:
 				m_confirm = null;
 			}
 		};
-		//m_confirm = new ConfirmationDialog("Are you sure you want to cancel the trade?", yes, no); TODO: Waiting for Chappie
+		// m_confirm = new ConfirmationDialog("Are you sure you want to cancel the trade?", yes, no); TODO: Waiting for Chappie
 	}
 
 	/**
@@ -381,7 +382,7 @@ public class TradeDialog extends ResizableFrame
 					public void run()
 					{
 						performTrade();
-						//removeChild(m_confirm); TODO:
+						// removeChild(m_confirm); TODO:
 						m_confirm = null;
 						setVisible(false);
 					}
@@ -393,13 +394,13 @@ public class TradeDialog extends ResizableFrame
 					public void run()
 					{
 						m_confirm.setVisible(false);
-						//remove(m_confirm); TODO: 
+						// remove(m_confirm); TODO:
 						m_confirm = null;
 						setVisible(true);
 					}
 
 				};
-				//m_confirm = new ConfirmationDialog("Are you sure you want to trade?", yes, no); TODO: Chappie
+				// m_confirm = new ConfirmationDialog("Are you sure you want to trade?", yes, no); TODO: Chappie
 				setVisible(false);
 			}
 		});
@@ -492,7 +493,7 @@ public class TradeDialog extends ResizableFrame
 				m_ourPokes[btnIndex].setEnabled(false);
 			}
 	}
-	
+
 	public void forceCancelTrade()
 	{
 		setVisible(false);

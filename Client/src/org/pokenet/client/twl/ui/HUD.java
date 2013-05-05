@@ -3,36 +3,39 @@ package org.pokenet.client.twl.ui;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.twl.ui.frames.BagDialog;
+import org.pokenet.client.twl.ui.frames.BoatChooserDialog;
 import org.pokenet.client.twl.ui.frames.ChatDialog;
 import org.pokenet.client.twl.ui.frames.HelpWindow;
 import org.pokenet.client.twl.ui.frames.OptionsDialog;
 import org.pokenet.client.twl.ui.frames.PlayerInfoDialog;
 import org.pokenet.client.twl.ui.frames.PokedexDialog;
 import org.pokenet.client.ui.base.TWLImageButton;
-
 import de.matthiasmann.twl.DesktopArea;
 import de.matthiasmann.twl.Widget;
 
 /**
  * Class which controls and contains everything which is rendered over the map and player.
+ * 
  * @author Myth1c
- *
  */
-public class HUD extends DesktopArea {
+public class HUD extends DesktopArea
+{
 	private Widget topBar;
-	private TWLImageButton[] barbuttons; //The buttons in the top bar
-	
+	private TWLImageButton[] barbuttons; // The buttons in the top bar
+
 	private PokedexDialog pokedex;
 	private HelpWindow help;
 	private BagDialog bag;
 	private OptionsDialog options;
 	private PlayerInfoDialog playerinfo;
 	private ChatDialog chat;
-	
-	public HUD() {
-		setSize(800,600);
+	private BoatChooserDialog boatChooser;
+
+	public HUD()
+	{
+		setSize(800, 600);
 		setPosition(0, 0);
-		
+
 		pokedex = new PokedexDialog();
 		add(pokedex);
 		help = new HelpWindow();
@@ -42,27 +45,33 @@ public class HUD extends DesktopArea {
 		add(options);
 		chat = new ChatDialog();
 		add(chat);
-		
+
 		pokedex.setVisible(false);
 		options.setVisible(false);
 		help.setVisible(false);
 		chat.setVisible(false);
+		boatChooser.setVisible(false);
 	}
 
-	public PokedexDialog getPokedex() {
+	public PokedexDialog getPokedex()
+	{
 		return pokedex;
 	}
-	
-	public HelpWindow getHelp() {
+
+	public HelpWindow getHelp()
+	{
 		return help;
 	}
-	
-	public OptionsDialog getOptions() {
+
+	public OptionsDialog getOptions()
+	{
 		return options;
 	}
-	
-	public void toggleBag() {
-		if(bag == null) {
+
+	public void toggleBag()
+	{
+		if(bag == null)
+		{
 			bag = new BagDialog(GameClient.getInstance().getOurPlayer().getItems())
 			{
 				@Override
@@ -84,24 +93,27 @@ public class HUD extends DesktopArea {
 				{
 					bag.setVisible(false);
 					bag = null;
-					/*m_bag = new BigBagDialog();
-					getDisplay().add(m_bag);*/
+					/* m_bag = new BigBagDialog();
+					 * getDisplay().add(m_bag); */
 				}
 			};
-		} else {
+		}
+		else
+		{
 			bag.setVisible(false);
 			bag = null;
 		}
 	}
-	
+
 	/**
 	 * Toggles the Player Stats pane
 	 */
-	public void toggleStats() {
+	public void togglePlayerStats()
+	{
+		hideHUDElements();
 		if(playerinfo != null)
 		{
 			removeChild(playerinfo);
-			hideHUDElements();
 		}
 		else
 		{
@@ -111,13 +123,27 @@ public class HUD extends DesktopArea {
 			add(playerinfo);
 		}
 	}
-	
+
+	/**
+	 * Shows the boat chooser dialog
+	 */
+	public void showBoatDialog(String currentLocation)
+	{
+		if(boatChooser != null)
+		{
+			removeChild(boatChooser);
+		}
+		hideHUDElements();
+		boatChooser = new BoatChooserDialog(currentLocation);
+		add(boatChooser);
+		boatChooser.setVisible(true);
+	}
+
 	public void togglePokedex()
 	{
 		if(pokedex.isVisible())
 		{
 			pokedex.setVisible(false);
-			hideHUDElements();
 		}
 		else
 		{
@@ -126,15 +152,19 @@ public class HUD extends DesktopArea {
 			pokedex.setVisible(true);
 		}
 	}
-	
-	public void hideHUDElements() {
+
+	public void hideHUDElements()
+	{
 		pokedex.setVisible(false);
 		help.setVisible(false);
 		options.setVisible(false);
 		bag.setVisible(false);
+		if(boatChooser != null)
+			boatChooser.setVisible(false);
 	}
 
-	public ChatDialog getChat() {
+	public ChatDialog getChat()
+	{
 		return null;
 	}
 }

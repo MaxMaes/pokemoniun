@@ -361,7 +361,7 @@ public class Trade implements Runnable
 					for(PokemonEvolution currentEvolution : pokeData.getEvolutions())
 					{
 						System.out.println(curPokemon.getName() + " can evolve via " + currentEvolution.getType());
-
+						/* TODO: Switch case 1.7 support. */
 						if(currentEvolution.getType().equals(EvolutionTypes.Trade))
 						{
 							curPokemon.setEvolution(currentEvolution);
@@ -374,7 +374,6 @@ public class Trade implements Runnable
 						}
 						else if(currentEvolution.getType() == EvolutionTypes.TradeItem)
 						{
-							/* TODO: TEST THIS CODE! Coded same way as evo stones, so if that is fixed, same fix will work here if this doesn't work already */
 							if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE") && currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
 							{
 								curPokemon.setEvolution(currentEvolution);

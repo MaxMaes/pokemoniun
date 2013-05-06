@@ -2,7 +2,6 @@ package org.pokenet.client.ui.frames;
 
 import java.io.InputStream;
 import java.util.List;
-
 import mdes.slick.sui.Button;
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Frame;
@@ -12,7 +11,6 @@ import mdes.slick.sui.event.ActionListener;
 import mdes.slick.sui.event.MouseAdapter;
 import mdes.slick.sui.event.MouseEvent;
 import mdes.slick.sui.skin.simple.SimpleArrowButton;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -72,6 +70,7 @@ public class PartyInfoDialog extends Frame
 		setBackground(new Color(0, 0, 0, 85));
 		setForeground(new Color(255, 255, 255));
 		/* Init damn pokemon count! (FabianPass Code) int pokemonCount = -1; for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
+		/* TODO: Change magic cookies to pokemonCount or keep it this way. */
 		for(int i = 0; i < 6; i++)
 		{
 			final int j = i;
@@ -197,7 +196,7 @@ public class PartyInfoDialog extends Frame
 					m_switchUp[i].setWidth(16);
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != 5)/* TODO: Change to < pokemonCount? */
+				if(i != 5)
 				{
 					m_switchDown[i] = new SimpleArrowButton(SimpleArrowButton.FACE_DOWN);
 					m_switchDown[i].addActionListener(new ActionListener()
@@ -341,6 +340,7 @@ public class PartyInfoDialog extends Frame
 		LoadingList.setDeferredLoading(true);
 		int pokemonCount = -1;
 		/* Init damn pokemon count! (Fabian Code) */
+		/* TODO: Change magic cookies to pokemonCount or keep it this way. */
 		for(int i = 0; i < 6; i++)
 		{
 			if(m_pokes[i] != null)
@@ -382,7 +382,7 @@ public class PartyInfoDialog extends Frame
 				{
 					if(i != 0)
 						m_switchUp[i].setVisible(false);
-					if(i != 5)/* TODO: Change to < pokemonCount? */
+					if(i != 5)
 						m_switchDown[i].setVisible(false);
 					m_hpBar[i].setVisible(false);
 					m_hp[i].setVisible(false);

@@ -100,7 +100,7 @@ public class GameClient extends BasicGame
 	private boolean m_loadSurroundingMaps = false;
 	private DeferredResource m_nextResource;
 	private SoundManager m_soundPlayer;
-	private Image[] m_spriteImageArray = new Image[400]; /* TODO: WARNING: Replace with actual number of sprites. */
+	private Image[] m_spriteImageArray = new Image[400];
 	private UserManager m_userManager;
 	private static Options options;
 	private final long startTime = System.currentTimeMillis();
@@ -369,7 +369,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess() : "Warning the Session was not closed";
+			assert channelFuture.isSuccess(): "Warning the Session was not closed";
 		}
 	}
 

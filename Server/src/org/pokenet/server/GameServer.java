@@ -26,7 +26,6 @@ import org.ini4j.Ini.Section;
 import org.ini4j.InvalidIniFormatException;
 import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.network.MySqlManager;
-import com.sun.corba.se.impl.oa.poa.AOMEntry;
 
 /**
  * Represents a game server. Starting a server requires a parameter to be passed in, i.e. java GameServer -s low -p 500 Here are the different settings: -low < 1.86ghz < 256MB Ram < 1mbps Up/Down Connection 75 Players -medium < 2ghz 512MB - 1GB Ram 1mbps Up/Down Connection 200 Players -high > 1.86ghz > 1GB Ram > 1mbps Up/Down Connection > 500 Players
@@ -160,7 +159,7 @@ public class GameServer
 	{
 		return m_instance;
 	}
-	
+
 	/**
 	 * Initializes the gameserver object
 	 */
@@ -168,7 +167,6 @@ public class GameServer
 	{
 		m_instance = new GameServer(autorun);
 	}
-	
 
 	/**
 	 * Returns the amount of players this server will allow.
@@ -260,8 +258,8 @@ public class GameServer
 				/* Create the server gui */
 				if(!line.hasOption("nogui"))
 					m_boolGui = true;
-				
-				/* Load the server rates file*/
+
+				/* Load the server rates file */
 				if(line.hasOption("rates"))
 				{
 					String rates = line.getOptionValue("rates");
@@ -271,7 +269,7 @@ public class GameServer
 					RATE_EXP_POKE = Double.parseDouble(s.get("EXP_POKE"));
 					RATE_EXP_TRAINER = Double.parseDouble(s.get("EXP_TRAINER"));
 				}
-				
+
 				// No else since it's set to default 'false'
 				boolean autorun = line.hasOption("autorun");
 				GameServer.initGameServer(autorun);
@@ -283,14 +281,18 @@ public class GameServer
 				// automatically generate the help statement
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp("java GameServer [param] <args>", options);
-			} catch (InvalidIniFormatException e) {
+			}
+			catch(InvalidIniFormatException e)
+			{
 				e.printStackTrace();
 				System.err.println("Error in server rates format, using default 1.0");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
+			}
+			catch(FileNotFoundException e)
+			{
 				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			}
+			catch(IOException e)
+			{
 				e.printStackTrace();
 			}
 		}

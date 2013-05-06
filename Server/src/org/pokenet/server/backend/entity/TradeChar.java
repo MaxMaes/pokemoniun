@@ -127,8 +127,10 @@ public class TradeChar extends NPC implements Tradeable
 	 */
 	public void setRequestedPokemon(String species, int level, String nature)
 	{
+		/* TODO: Add support for trading NPC's. */
 		m_requestedSpecies = species;
-		// TODO: Add support for levels and natures
+		/* m_requestedLevel = level;
+		 * m_requestedNature = nature; */
 	}
 
 	public void setTrade(Trade t)

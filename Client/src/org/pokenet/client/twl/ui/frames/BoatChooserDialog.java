@@ -24,10 +24,6 @@ public class BoatChooserDialog extends ResizableFrame
 
 	public BoatChooserDialog(String currentLocation)
 	{
-		// m_travelDisplay = new Label();
-		// m_travelDisplay.setSize(124,204);
-		// m_travelDisplay.setPosition(105, 20);
-		// add(m_travelDisplay); TODO: What is the function of this sadhi?
 		initUse(currentLocation);
 		m_travelList = new ListBox<String>();
 		m_travelList.setSize(245, 70);

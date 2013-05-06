@@ -246,8 +246,7 @@ public class PvPBattleField extends BattleField
 				int index = getPokemonPartyIndex(0, poke);
 				if(index > -1)
 				{
-					// m_players[0].getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
-					/* TODO: Add support for enemy pokemon, healing for pokemon in pokeballs */
+					/* TODO: Add support for NPC pokemon healing whilst not in the battlefield. */
 					ServerMessage informHealth = new ServerMessage(m_players[0].getSession());
 					informHealth.init(45);
 					informHealth.addInt(index);
@@ -258,8 +257,7 @@ public class PvPBattleField extends BattleField
 				index = getPokemonPartyIndex(1, poke);
 				if(index > -1)
 				{
-					// m_players[1].getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
-					/* TODO: Add support for enemy pokemon, healing for pokemon in pokeballs */
+					/* TODO: Add support for NPC pokemon healing whilst not in the battlefield. */
 					ServerMessage informHealth = new ServerMessage(m_players[1].getSession());
 					informHealth.init(45);
 					informHealth.addInt(index);
@@ -757,11 +755,11 @@ public class PvPBattleField extends BattleField
 	{
 		int index = m_players[party].getPokemonIndex(getActivePokemon()[party]);
 		int switchin = 0;
-		for (int i = index+1; i !=index; i++)
+		for(int i = index + 1; i != index; i++)
 		{
-			if(i==6)
+			if(i == 6)
 			{
-				i=0;
+				i = 0;
 			}
 			if(m_players[party].getParty()[i] != null || !m_players[party].getParty()[i].isFainted())
 			{
@@ -771,13 +769,13 @@ public class PvPBattleField extends BattleField
 		}
 		if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
 		{
-//			getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
-//			getActivePokemon()[party].hasEffect(StatChangeEffect.class);
+			// getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
+			// getActivePokemon()[party].hasEffect(StatChangeEffect.class);
 			System.out.println("last move was baton pass");
 		}
 		getActivePokemon()[party].switchOut();
 		m_active[party] = switchin;
-		replacementPokemonRequest(party,m_players[party].getParty()[switchin]);
+		replacementPokemonRequest(party, m_players[party].getParty()[switchin]);
 		if(!m_replace[party])
 			return;
 		m_isWaiting = true;
@@ -855,7 +853,7 @@ public class PvPBattleField extends BattleField
 		// switchOccur.init(32);
 		// switchOccur.sendResponse();
 	}
-	
+
 	protected void replacementPokemonRequest(int i, Pokemon poke)
 	{
 		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */

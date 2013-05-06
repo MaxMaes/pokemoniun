@@ -326,7 +326,7 @@ public abstract class BattleField
 				executeTurn(turn, order[i], other);
 		}
 		// Refresh the active array in case a trainer switched.
-		/* TODO: somehow this sometimes gets called without active Pokemon (e.g. victory). */
+		/* TODO: Somehow this sometimes gets called without active Pokemon (e.g. victory). */
 		active = getActivePokemon();
 		tickStatuses(active);
 		boolean request = true;

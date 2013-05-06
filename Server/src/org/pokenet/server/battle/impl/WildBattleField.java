@@ -52,7 +52,6 @@ public class WildBattleField extends BattleField
 			"TORKOAL,2", "DUSCLOPS,1", "CLAMPERL,1", "HUNTAIL,1", "RELICANTH,1", "SHELGON,2", "BELDUM,1", "METANG,2", "METAGROSS,3", "REGIROCK,3", "REGISTEEL,2", "GROTLE,1", "TORTERRA,1",
 			"KRICKETOT", "SHIELDON,1", "BASTIODON,2", "VESPIQUEN,1", "BRONZOR,1", "BRONZONG,1", "BONSLY,1", "SPIRITOMB,1", "HIPPOPOTAS,1", "HIPPOWDON,2", "SKORUPI,1", "DRAPION,2", "TANGROWTH,2",
 			"LEAFEON,2", "GLISCOR,2", "PROBOPASS,1", "DUSKNOIR,1", "UXIE,2" };
-	/* TODO: fill lists (Done?) */
 	private String[] hp = { "CATERPIE,1", "NIDORAN,1", "NIDORINA,2", "NIDOQUEEN,3", "CLEFAIRY,2", "CLEFABLE,3", "JIGGLYPUFF,2", "WIGGLYTUFF,3", "SLOWPOKE,1", "GRIMER,1", "MUK,1", "LICKITUNG,2",
 			"CHANSEY,2", "KANGASKHAN,2", "LAPRAS,2", "DITTO,1", "VAPOREON,2", "SNORLAX,2", "MEW,3", "HOOTHOOT,1", "NOCTOWL,2", "CHINCHOU,1", "LANTURN,2", "IGGLYBUFF,1", "MARILL,2", "AZUMARILL,3",
 			"WOOPER,1", "QUAGSIRE,2", "WOBBUFFET,2", "DUNSPARCE,1", "PILOSWINE,1", "PHANPY,1", "BLISSEY,3", "ENTEI,1", "CELEBI,3", "WURMPLE,1", "SHROOMISH,1", "SLAKOTH,1", "SLAKING,3", "SHEDINJA,2",
@@ -890,16 +889,16 @@ public class WildBattleField extends BattleField
 				m_wildPoke.setCaughtWith(55);
 				resetAfterCaught = true;
 				break;
-			case QUICKBALL: // TODO: VERIFY IF THIS SHOULD BE TURN = 0 or TURN = 1!
+			case QUICKBALL:
 				showMessage(m_player.getName() + " threw a Quick Ball!");
 				m_wildPoke.setCaughtWith(58);
-				if(m_takenTurns == 0)
+				if(m_takenTurns <= 1)
 					catchRate = 4.0;
 				break;
 			case DUSKBALL:
 				showMessage(m_player.getName() + " threw a Dusk Ball!");
 				m_wildPoke.setCaughtWith(56);
-				if(TimeService.isNight()) // TODO: CAVES :/ FUCK CAVES
+				if(TimeService.isNight()) // TODO: Check if the player is in a cave. FUCK CAVES. */
 					catchRate = 3.5;
 				break;
 			case CHERISHBALL:

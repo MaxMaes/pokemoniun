@@ -27,13 +27,13 @@ public class ModerationManager
 			ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COUNT);
 			GameClient.getInstance().getSession().send(message);
 		}
-		/* Alert TODO: Redundant?
-		 * else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("alert "))
-		 * {
-		 * ClientMessage message = new ClientMessage(52);
-		 * message.addString(x.substring(6));
-		 * GameClient.getInstance().getSession().send(message);
-		 * } */
+		// Notify all players
+		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("notify "))
+		{
+			ClientMessage message = new ClientMessage(ServerPacket.SERVER_NOTIFICATION);
+			message.addString(x.substring(6));
+			GameClient.getInstance().getSession().send(message);
+		}
 		// Reset player to Heal Location
 		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("reset "))
 		{

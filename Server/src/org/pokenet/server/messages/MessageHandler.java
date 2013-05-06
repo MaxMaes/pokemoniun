@@ -5,7 +5,6 @@ import java.util.Map;
 import org.pokenet.server.messages.events.AcceptRequestEvent;
 import org.pokenet.server.messages.events.AddFriendEvent;
 import org.pokenet.server.messages.events.AllowEvolutionEvent;
-import org.pokenet.server.messages.events.AnnounceMessageEvent;
 import org.pokenet.server.messages.events.BanPlayerEvent;
 import org.pokenet.server.messages.events.BattleRequestEvent;
 import org.pokenet.server.messages.events.BoxInfoEvent;
@@ -37,7 +36,6 @@ import org.pokenet.server.messages.events.ReleasePokemonEvent;
 import org.pokenet.server.messages.events.RemoveFriendEvent;
 import org.pokenet.server.messages.events.RunEvent;
 import org.pokenet.server.messages.events.SelectedMoveEvent;
-import org.pokenet.server.messages.events.ServerAlertEvent;
 import org.pokenet.server.messages.events.ServerAnnouncementEvent;
 import org.pokenet.server.messages.events.ServerNotificationEvent;
 import org.pokenet.server.messages.events.ShopEvent;
@@ -118,7 +116,6 @@ public class MessageHandler
 		messages.put(31, new KickEvent());
 		messages.put(32, new WeatherEvent());
 		messages.put(33, new StopServerEvent());
-		messages.put(34, new AnnounceMessageEvent());
 		messages.put(35, new SelectedMoveEvent());
 		messages.put(36, new PokemonSwitchEvent());
 		messages.put(37, new RunEvent());
@@ -136,12 +133,12 @@ public class MessageHandler
 		messages.put(49, new LogoutRequestEvent());
 		messages.put(50, new LoginEvent());
 		messages.put(51, new GiveItemEvent());
-		messages.put(52, new ServerAlertEvent());
 		messages.put(53, new TravelEvent());
 		messages.put(54, new WarpPlayerToMeEvent());
 		messages.put(55, new WarpPlayerToPlayerEvent());
 		messages.put(56, new ChangeUserClassEvent());
 		messages.put(57, new UserUnstickEvent());
 		messages.put(58, new StartBattlefrontierEvent());
+		/* TODO: Server id's 34 and 52 are now free to use. */
 	}
 }

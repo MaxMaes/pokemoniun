@@ -13,15 +13,19 @@ public class ServerNotificationEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
+		String notification = request.readString();
 		Player p = session.getPlayer();
-		if(p.getAdminLevel() >= UserClasses.MODERATOR)
-			for(Session ses : ActiveConnections.allSessions().values())
-				if(session.getPlayer() != null)
+		if(p.getAdminLevel() >= UserClasses.SUPER_MOD)
+		{
+			for(Session s : ActiveConnections.allSessions().values())
+			{
+				if(s.getPlayer() != null)
 				{
-					ServerMessage msg = new ServerMessage();
-					msg.init(1);
-					msg.addString(request.readString());
-					ses.Send(msg);
+					message.init(1);
+					message.addString(notification);
+					s.Send(message);
 				}
+			}
+		}
 	}
 }

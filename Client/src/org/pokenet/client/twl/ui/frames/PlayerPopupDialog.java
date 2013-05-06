@@ -3,7 +3,6 @@ package org.pokenet.client.twl.ui.frames;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
@@ -49,7 +48,7 @@ public class PlayerPopupDialog extends Widget
 		m_cancel.setSize(100, 25);
 		add(m_cancel);
 		setVisible(true);
-		//setAlwaysOnTop(true); TODO: CHAPPIE
+		// setAlwaysOnTop(true); TODO: CHAPPIE MAGIC :D
 
 		m_battle.addCallback(new Runnable()
 		{
@@ -110,9 +109,9 @@ public class PlayerPopupDialog extends Widget
 	 */
 	public void destroy()
 	{
-		//GameClient.getInstance().getDisplay().remove(this); TODO: Requires new way
+		// GameClient.getInstance().getDisplay().remove(this); TODO: Requires new way
 	}
-	
+
 	@Override
 	public void layout()
 	{

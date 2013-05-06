@@ -887,7 +887,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public Battleable getOpponent()
 	{
-		// TODO: DO WE REALLY NEED THIS? (It returns null, so probably not...)
+		/* TODO: Inherited function from Character Interface, requires implementation! */
 		return null;
 	}
 
@@ -1490,27 +1490,25 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void sendBoxInfo(int j)
 	{
+		/* TODO: Save boxes in the Database and not in the server! */
 		if(j < 0 || j > m_boxes.length - 1)
 			return;
 		/* If box is non-existant, create it and send small packet */
 		if(m_boxes[j] == null)
 		{
 			m_boxes[j] = new PokemonBox();
-			// m_tcpSession.write("B");
 			ServerMessage message = new ServerMessage();
 			message.init(17);
 			message.addInt(0);
 			getSession().Send(message);
 		}
 		/* Else send all pokes in box */
-		/* TODO: Change to getPokemonNumber()? */
 		String packet = "";
 		for(int i = 0; i < m_boxes[j].getPokemon().length; i++)
 			if(m_boxes[j].getPokemon(i) != null)
 				packet += m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";
 			else
 				packet += ",";
-		// m_tcpSession.write("B" + packet);
 		ServerMessage message = new ServerMessage();
 		message.init(17);
 		message.addInt(1);
@@ -1758,7 +1756,6 @@ public class Player extends Character implements Battleable, Tradeable
 		/* TODO: Clean this stuff up? */
 		if(packet.length() > 2)
 		{
-			// m_tcpSession.write(packet);
 			ServerMessage initPlayers = new ServerMessage();
 			initPlayers.init(66);
 			initPlayers.addString(packet);
@@ -2224,7 +2221,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		this.m_isTaveling = m_isTaveling;
 	}
-	
+
 	/**
 	 * get the Battletower current streak for lvl 50
 	 */
@@ -2232,7 +2229,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		return battletowerCurrentStreakLvl50;
 	}
-	
+
 	/**
 	 * get the Battletower current streak for any lvl
 	 */
@@ -2240,7 +2237,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		return battletowerCurrentStreakAnyLvl;
 	}
-	
+
 	/**
 	 * get the Battletower highscore for lvl 50
 	 */
@@ -2248,7 +2245,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		return battletowerHighscoreLvl50;
 	}
-	
+
 	/**
 	 * get the Battletower highscore for any lvl
 	 */
@@ -2256,7 +2253,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		return battletowerHighscoreAnyLvl;
 	}
-	
+
 	/**
 	 * set the Battletower current streak for lvl 50
 	 */
@@ -2264,7 +2261,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		battletowerCurrentStreakLvl50 = s;
 	}
-	
+
 	/**
 	 * set the Battletower current streak for any lvl
 	 */
@@ -2272,7 +2269,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		battletowerCurrentStreakAnyLvl = s;
 	}
-	
+
 	/**
 	 * set the Battletower highscore for lvl 50
 	 */
@@ -2280,7 +2277,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		battletowerHighscoreLvl50 = s;
 	}
-	
+
 	/**
 	 * set the Battletower highscore for any lvl
 	 */

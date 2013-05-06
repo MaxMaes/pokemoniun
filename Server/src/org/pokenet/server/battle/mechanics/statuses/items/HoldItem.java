@@ -218,9 +218,7 @@ public class HoldItem extends IntrinsicAbility
 		};
 
 		/** Diamond/Pearl-exclusive items begin here. */
-
 		new ChoiceBandItem("Choice Specs", Pokemon.S_SPATTACK);
-
 		// Arceus plates.
 		new ArceusPlate("Draco Plate", PokemonType.T_DRAGON);
 		new ArceusPlate("Dread Plate", PokemonType.T_DARK);
@@ -237,9 +235,7 @@ public class HoldItem extends IntrinsicAbility
 		new ArceusPlate("Stone Plate", PokemonType.T_ROCK);
 		new ArceusPlate("Toxic Plate", PokemonType.T_POISON);
 		new ArceusPlate("Zap Plate", PokemonType.T_ELECTRIC);
-
-		// TODO (tbd) : Full Incense
-
+		/* TODO: Full Incense. What is meant and what is the actual Todo? */
 		new SwitchInBoostItem("Lax Incense", Pokemon.S_EVASION, 1.05);
 		new HoldItem("Luck Incense"); // Does nothing.
 		new HoldItem("Pure Incense"); // Does nothing.
@@ -248,10 +244,8 @@ public class HoldItem extends IntrinsicAbility
 		new TypeBoostItem("Rose Incense", PokemonType.T_GRASS);
 		new TypeBoostItem("Sea Incense", PokemonType.T_WATER, 1.05);
 		new TypeBoostItem("Wave Incense", PokemonType.T_WATER);
-
 		new StabOrbItem("Adamant Orb", "Dialga");
 		new StabOrbItem("Lustrous Orb", "Palkia");
-
 		new HoldItem("Black Sludge")
 		{
 			@Override

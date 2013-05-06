@@ -201,9 +201,6 @@ public class NetworkService
 		/* Stop all threads (do not use thread.stop()). */
 		for(int i = 0; i < m_chatManager.length; i++)
 			m_chatManager[i].stop();
-		// m_tcpAcceptor.unbind();
-		// m_tcpProtocolHandler.logoutAll();
-		
 		/* TODO: Doesn't stop the server properly, rewrite! */
 		_connection.StopSocket();
 	}

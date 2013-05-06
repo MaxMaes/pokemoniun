@@ -224,9 +224,5 @@ public class MessageHandler
 		messages.put(98, new ItemCantUseEvent());
 		messages.put(99, new BattlefrontierEvent());
 		/* TODO: ID's 55 and 56 are now free to use. */
-		// Login
-		// this.messages.put(254, new PingEvent());
-		// this.messages.put(1, new LoginRequestEvent());
-		// this.messages.put(2, new HandshakeEvent());
 	}
 }

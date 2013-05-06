@@ -10,11 +10,9 @@ import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.MoveQueueException;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
-import org.pokenet.server.battle.mechanics.statuses.MultipleStatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
-import org.pokenet.server.battle.mechanics.statuses.StatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
@@ -50,7 +48,6 @@ public class NpcBattleField extends BattleField
 		m_npc = n;
 
 		/* Start the battle */
-		// TcpProtocolHandler.writeMessage(p.getTcpSession(), new BattleInitMessage(false, getAliveCount(1)));
 		m_player.ensureHealthyPokemon();
 		ServerMessage startBattle = new ServerMessage(m_player.getSession());
 		startBattle.init(18);
@@ -61,7 +58,6 @@ public class NpcBattleField extends BattleField
 		if(!m_player.isPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1))
 			m_player.setPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1);
 		/* Send enemy name */
-		// m_player.getTcpSession().write("bn" + m_npc.getName());
 		ServerMessage enemyName = new ServerMessage(m_player.getSession());
 		enemyName.init(22);
 		enemyName.addString(m_npc.getName());
@@ -70,7 +66,6 @@ public class NpcBattleField extends BattleField
 		sendPokemonData(p);
 		/* Set the player's battle id */
 		m_player.setBattleId(0);
-
 		/* Apply weather and request moves */
 		applyWeather();
 		requestMoves();
@@ -151,7 +146,6 @@ public class NpcBattleField extends BattleField
 	{
 		if(m_player != null)
 		{
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName()));
 			ServerMessage informFaint = new ServerMessage(m_player.getSession());
 			informFaint.init(25);
 			informFaint.addString(getParty(trainer)[idx].getSpeciesName());
@@ -165,7 +159,6 @@ public class NpcBattleField extends BattleField
 		if(m_player != null)
 			if(getActivePokemon()[0] == poke)
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(0, change));
 				ServerMessage informHealth = new ServerMessage(m_player.getSession());
 				informHealth.init(33);
 				informHealth.addInt(0);
@@ -174,7 +167,6 @@ public class NpcBattleField extends BattleField
 			}
 			else if(getActivePokemon()[1] == poke)
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new HealthChangeMessage(1, change));
 				ServerMessage informHealth = new ServerMessage(m_player.getSession());
 				informHealth.init(33);
 				informHealth.addInt(1);
@@ -186,7 +178,6 @@ public class NpcBattleField extends BattleField
 				int index = getPokemonPartyIndex(0, poke);
 				if(index > -1)
 				{
-					// m_player.getTcpSession().write("Ph" + String.valueOf(index) + poke.getHealth());
 					ServerMessage informHealth = new ServerMessage(m_player.getSession());
 					informHealth.init(45);
 					informHealth.addInt(index);
@@ -194,12 +185,12 @@ public class NpcBattleField extends BattleField
 					informHealth.sendResponse();
 					return;
 				}
-				// TODO: Add support for NPC pokemon healing for pokemon in pokeballs
+				/* TODO: Add support for NPC pokemon healing whilst not in the battlefield. */
 			}
 	}
 
 	@Override
-	// TODO check this code with checking moves
+	/* TODO: check this code with checking moves. */
 	public void informStatusApplied(Pokemon pokemon, StatusEffect eff)
 	{
 		if(m_finished)
@@ -360,7 +351,7 @@ public class NpcBattleField extends BattleField
 	public void informVictory(int winner)
 	{
 		m_finished = true;
-		int money = (int)((30 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);	// The magic cookie is used as a base to reward gold (replace later).
+		int money = (int) ((30 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);	// The magic cookie is used as a base to reward gold (replace later).
 		if(winner == 0)
 		{
 			int trainerExp = 0;
@@ -373,7 +364,7 @@ public class NpcBattleField extends BattleField
 				money += 100;
 			}
 			if(trainerExp > 0)
-				m_player.addTrainingExp((int)(trainerExp * GameServer.RATE_EXP_TRAINER));
+				m_player.addTrainingExp((int) (trainerExp * GameServer.RATE_EXP_TRAINER));
 			if(m_npc.isGymLeader())
 				m_player.addBadge(m_npc.getBadge());
 			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));
@@ -590,16 +581,16 @@ public class NpcBattleField extends BattleField
 	@Override
 	public void requestAndWaitForSwitch(int party)
 	{
-		
+
 		if(party == 0)
 		{
 			int index = m_player.getPokemonIndex(getActivePokemon()[party]);
 			int switchin = 0;
-			for (int i = index+1; i !=index; i++)
+			for(int i = index + 1; i != index; i++)
 			{
-				if(i==6)
+				if(i == 6)
 				{
-					i=0;
+					i = 0;
 				}
 				if(m_player.getParty()[i] != null || !m_player.getParty()[i].isFainted())
 				{
@@ -609,7 +600,7 @@ public class NpcBattleField extends BattleField
 			}
 			getActivePokemon()[party].switchOut();
 			m_active[party] = switchin;
-			replacementPokemonRequest(party,m_player.getParty()[switchin]);
+			replacementPokemonRequest(party, m_player.getParty()[switchin]);
 			/* Request a switch from the player */
 			if(!m_replace[party])
 				return;
@@ -631,7 +622,7 @@ public class NpcBattleField extends BattleField
 		else
 		{
 			int index = 0;
-			for(int i = 0; i <  m_npc.getParty(m_player).length; i++)
+			for(int i = 0; i < m_npc.getParty(m_player).length; i++)
 			{
 				if(m_npc.getParty(m_player)[i].isActive())
 				{
@@ -639,13 +630,13 @@ public class NpcBattleField extends BattleField
 					break;
 				}
 			}
-			//int index = m_npc.getParty(m_player).getPokemonIndex(getActivePokemon()[party]);
+			// int index = m_npc.getParty(m_player).getPokemonIndex(getActivePokemon()[party]);
 			int switchin = 0;
-			for (int i = index+1; i !=index; i++)
+			for(int i = index + 1; i != index; i++)
 			{
-				if(i==6)
+				if(i == 6)
 				{
-					i=0;
+					i = 0;
 				}
 				if(m_npc.getParty(m_player)[i] != null || !m_npc.getParty(m_player)[i].isFainted())
 				{
@@ -655,13 +646,13 @@ public class NpcBattleField extends BattleField
 			}
 			if(getActivePokemon()[party].getLastMove().getName().equalsIgnoreCase("Baton Pass"))
 			{
-//				getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
-//				getActivePokemon()[party].hasEffect(StatChangeEffect.class);
+				// getActivePokemon()[party].hasEffect(MultipleStatChangeEffect.class);
+				// getActivePokemon()[party].hasEffect(StatChangeEffect.class);
 				System.out.println("last move was baton pass");
 			}
 			getActivePokemon()[party].switchOut();
 			m_active[party] = switchin;
-			replacementPokemonRequest(party,m_npc.getParty(m_player)[switchin]);
+			replacementPokemonRequest(party, m_npc.getParty(m_player)[switchin]);
 		}
 	}
 
@@ -777,7 +768,7 @@ public class NpcBattleField extends BattleField
 				e.printStackTrace();
 			}
 	}
-	
+
 	protected void replacementPokemonRequest(int i, Pokemon poke)
 	{
 		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */

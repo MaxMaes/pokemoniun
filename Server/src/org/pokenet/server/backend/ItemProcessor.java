@@ -81,6 +81,7 @@ public class ItemProcessor implements Runnable
 	 */
 	public boolean useItem(Player p, int itemId, String[] data)
 	{
+		/* TODO: ERMAGERD I don't even XD. */
 		/* Check that the bag contains the item */
 		if(p.getBag().containsItem(itemId) < 0)
 			return false;
@@ -223,7 +224,7 @@ public class ItemProcessor implements Runnable
 					String message = "";
 					if(poke == null)
 						return false;
-					
+
 					if(poke.getHealth() <= 0)
 					{
 						ServerMessage cantUse = new ServerMessage();
@@ -231,7 +232,7 @@ public class ItemProcessor implements Runnable
 						p.getSession().Send(cantUse);
 						return false;
 					}
-					
+
 					if(i.getId() == 1)
 					{ // Potion
 						hpBoost = 20;
@@ -364,8 +365,8 @@ public class ItemProcessor implements Runnable
 					poke = p.getParty()[Integer.parseInt(data[0])];
 					if(poke == null)
 						return false;
-					
-					//Check if this pokemon is alive to use all items but revive, REVIVE NOT IMPLEMENTED!!! Implement it before this piece of code!
+
+					// Check if this pokemon is alive to use all items but revive, REVIVE NOT IMPLEMENTED!!! Implement it before this piece of code!
 					if(poke.getHealth() <= 0)
 					{
 						ServerMessage cantUse = new ServerMessage();
@@ -373,7 +374,7 @@ public class ItemProcessor implements Runnable
 						p.getSession().Send(cantUse);
 						return false;
 					}
-					
+
 					if(i.getId() == 16)
 					{ // Antidote
 						String message = "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName() + " status to normal";
@@ -589,7 +590,6 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
 							ServerMessage itemUse = new ServerMessage();
 							itemUse.init(92);
 							itemUse.addString(message);

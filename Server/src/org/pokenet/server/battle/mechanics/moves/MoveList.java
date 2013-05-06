@@ -3242,7 +3242,6 @@ public class MoveList
 
 		m_moves.add(new MoveListEntry("Thundershock", new StatusMove(PokemonType.T_ELECTRIC, 40, 1.0, 30, new StatusEffect[] { new ParalysisEffect() }, new boolean[] { false }, new double[] { 0.1 })));
 
-		// TODO: Hits through substitutes in Advance, but not in D/P.
 		m_moves.add(new MoveListEntry("Tickle", new StatusMove(PokemonType.T_NORMAL, 0, 1.0, 20, new StatusEffect[] { new StatChangeEffect(Pokemon.S_ATTACK, false),
 				new StatChangeEffect(Pokemon.S_DEFENCE, false) }, new boolean[] { false, false }, new double[] { 1.0, 1.0 })));
 
@@ -3438,7 +3437,7 @@ public class MoveList
 
 		m_moves.add(new MoveListEntry("Absorb", new AbsorbMove(PokemonType.T_GRASS, 20, 1.0, 20, 0.5)));
 
-		/** TBD (TODO): Has only 5 PP in Advance, but 10 in D/P. */
+		/* TODO: Has only 5 PP in Advance, but 10 in D/P. */
 		m_moves.add(new MoveListEntry("Giga Drain", new AbsorbMove(PokemonType.T_GRASS, 60, 1.0, 10, 0.5)));
 
 		m_moves.add(new MoveListEntry("Leech Life", new AbsorbMove(PokemonType.T_BUG, 20, 1.0, 15, 0.5)));
@@ -3735,7 +3734,7 @@ public class MoveList
 			}
 		}));
 
-		// TODO make a way to return it to the original pokemon
+		/* TODO: Create the option to return to the untransformed Pokemon. */
 		m_moves.add(new MoveListEntry("Transform", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 20)
 		{
 			@Override
@@ -3749,7 +3748,7 @@ public class MoveList
 			}
 		}));
 
-		// TODO test sketch and transform
+		/* TODO: test sketch and transform. */
 		m_moves.add(new MoveListEntry("Sketch", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 1)
 		{
 			@Override
@@ -4781,7 +4780,6 @@ public class MoveList
 					{
 						StatChangeEffect effectClone = (StatChangeEffect) effect.clone();
 						effectClone.setDescription(null);
-						/* TODO: Open question: does Clear Body protect against lowering stats by using this move? */
 						user.addStatus(target, effectClone);
 					}
 				}
@@ -6125,7 +6123,6 @@ public class MoveList
 			@Override
 			public boolean hitsThroughSubstitute()
 			{
-				// TODO: NOTE: Does not hit through in advance!
 				return true;
 			}
 

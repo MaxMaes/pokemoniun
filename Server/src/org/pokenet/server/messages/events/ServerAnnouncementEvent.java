@@ -13,17 +13,20 @@ public class ServerAnnouncementEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		/* TODO: Check current usage and adjust. */
+		String announcement = request.readString();
 		Player p = session.getPlayer();
 		if(p.getAdminLevel() >= UserClasses.MODERATOR)
-			for(Session ses : ActiveConnections.allSessions().values())
-				if(ses.getPlayer() != null)
+		{
+			for(Session s : ActiveConnections.allSessions().values())
+			{
+				if(s.getPlayer() != null)
 				{
-					ServerMessage announceMessage = new ServerMessage();
-					announceMessage.init(2);
-					announceMessage.addString(request.readString());
-					ses.Send(announceMessage);
+					message.init(2);
+					message.addString(announcement);
+					s.Send(message);
 				}
+			}
+		}
 	}
 
 }

@@ -710,7 +710,7 @@ public class UserInterface extends Frame
 
 	public void togglePokedex()
 	{
-		// TODO
+		/* TODO: Is this still Todo, if yes. What? */
 		if(m_pokedex.isVisible())
 		{
 			m_pokedex.setVisible(false);

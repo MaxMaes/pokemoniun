@@ -24,7 +24,7 @@ public class HUDButtonFactory
 			rollovers = new HashMap<String, Image>();
 			downs = new HashMap<String, Image>();
 
-			// -- Pokedex Button -- TODO
+			// -- Pokedex Button -- TODO: Still todo?
 			normals.put("pokedex", getNormalImage("pokedex/pokedex"));
 			rollovers.put("pokedex", getRolloverImage("pokedex/pokedex"));
 			downs.put("pokedex", getDownImage("pokedex/pokedex"));
@@ -106,6 +106,7 @@ public class HUDButtonFactory
 		return new Image(respath + "res/ui/" + text + "Pressed_32x32.png", false);
 	}
 
+	/* TODO: If these function execute the same code, why have them both? */
 	private static Image getNormalImage(String text) throws SlickException
 	{
 		String respath = System.getProperty("res.path");

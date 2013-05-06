@@ -40,9 +40,7 @@ public class RegistrationManager implements Runnable
 	 * @param session
 	 * @param packet
 	 */
-	/*
-	 * public void queueRegistration(IoSession session, String packet) { if(m_thread == null || !m_thread.isAlive()) start(); if(!m_queue.contains(session)) { session.setAttribute("reg", packet); m_queue.offer(session); } session.suspendRead(); session.suspendWrite(); }
-	 */
+	/* public void queueRegistration(IoSession session, String packet) { if(m_thread == null || !m_thread.isAlive()) start(); if(!m_queue.contains(session)) { session.setAttribute("reg", packet); m_queue.offer(session); } session.suspendRead(); session.suspendWrite(); } */
 
 	/**
 	 * Registers a new player
@@ -233,9 +231,6 @@ public class RegistrationManager implements Runnable
 		m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL("" + pokedexid) + " WHERE id = '" + playeridsql + "'");
 		// Add the players starter to the pokedex
 		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getPokemonNumber() + 1)) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
-		// session.resumeRead();
-		// session.resumeWrite();
-		// session.write("rs");
 		ServerMessage message = new ServerMessage();
 		message.init(86);
 		session.Send(message);

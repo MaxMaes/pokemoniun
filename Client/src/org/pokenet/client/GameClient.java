@@ -50,6 +50,7 @@ import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.GUIPane;
 import org.pokenet.client.twl.ui.LoginScreen;
+import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.ui.LoadingScreen;
 import org.pokenet.client.ui.UserInterface;
 import de.matthiasmann.twl.GUI;
@@ -311,7 +312,7 @@ public class GameClient extends BasicGame
 	public void controllerDownPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getPlayerPopupDialog().isVisible())
+			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
 						move(Direction.Down);
@@ -323,7 +324,7 @@ public class GameClient extends BasicGame
 	public void controllerLeftPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getPlayerPopupDialog().isVisible())
+			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
 						move(Direction.Left);
@@ -335,7 +336,7 @@ public class GameClient extends BasicGame
 	public void controllerRightPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getPlayerPopupDialog().isVisible())
+			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
 						move(Direction.Right);
@@ -347,7 +348,7 @@ public class GameClient extends BasicGame
 	public void controllerUpPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getPlayerPopupDialog().isVisible())
+			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
 						move(Direction.Up);
@@ -368,7 +369,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess(): "Warning the Session was not closed";
+			assert channelFuture.isSuccess() : "Warning the Session was not closed";
 		}
 	}
 
@@ -1031,22 +1032,23 @@ public class GameClient extends BasicGame
 					// Brings up a popup menu with player options
 					if(!p.isOurPlayer())
 					{
-						if(root.getPlayerPopupDialog() != null)
-							root.destroyPlayerPopupDialog();
-						root.createPlayerPopupDialog(p.getUsername());
-						root.showPlayerPopupDialogAt(x, y);
+						if(root.getHUD().getPlayerPopupDialog() != null)
+							root.getHUD().destroyPlayerPopupDialog();
+						root.getHUD().createPlayerPopupDialog(p.getUsername());
+						root.getHUD().showPlayerPopupDialogAt(x, y);
 					}
 		// Left click
 		if(button == 0)
 		{
 			// Get rid of the popup if you click outside of it
-			if(root.getPlayerPopupDialog() != null)
+			if(root.getHUD().getPlayerPopupDialog() != null)
 			{
-				if(root.getPlayerPopupDialog().isVisible())
-					if(x > root.getPlayerPopupDialog().getInnerX() || x < root.getPlayerPopupDialog().getInnerX() + root.getPlayerPopupDialog().getWidth())
-						root.getPlayerPopupDialog().destroy();
-					else if(y > root.getPlayerPopupDialog().getInnerY() || y < root.getPlayerPopupDialog().getInnerY() + root.getPlayerPopupDialog().getHeight())
-						root.destroyPlayerPopupDialog();
+				PlayerPopupDialog dialog = root.getHUD().getPlayerPopupDialog();
+				if(dialog.isVisible())
+					if(x > dialog.getInnerX() || x < dialog.getInnerX() + dialog.getWidth())
+						dialog.destroy();
+					else if(y > dialog.getInnerY() || y < dialog.getInnerY() + dialog.getHeight())
+						root.getHUD().destroyPlayerPopupDialog();
 			}
 			// repeats space bar items (space bar emulation for mouse. In case
 			// you do not have a space bar!)

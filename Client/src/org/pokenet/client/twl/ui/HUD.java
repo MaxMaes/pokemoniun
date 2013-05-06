@@ -1,13 +1,16 @@
 package org.pokenet.client.twl.ui;
 
 import org.pokenet.client.GameClient;
+import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.twl.ui.frames.BagDialog;
+import org.pokenet.client.twl.ui.frames.BattleFrontierDialog;
 import org.pokenet.client.twl.ui.frames.BoatChooserDialog;
 import org.pokenet.client.twl.ui.frames.ChatDialog;
 import org.pokenet.client.twl.ui.frames.HelpWindow;
 import org.pokenet.client.twl.ui.frames.OptionsDialog;
 import org.pokenet.client.twl.ui.frames.PlayerInfoDialog;
+import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.twl.ui.frames.PokedexDialog;
 import org.pokenet.client.ui.base.TWLImageButton;
 import de.matthiasmann.twl.DesktopArea;
@@ -30,6 +33,8 @@ public class HUD extends DesktopArea
 	private PlayerInfoDialog playerinfo;
 	private ChatDialog chat;
 	private BoatChooserDialog boatChooser;
+	private BattleFrontierDialog battlefrontierDialog;
+	private PlayerPopupDialog playerPopupDialog;
 
 	public HUD()
 	{
@@ -161,10 +166,55 @@ public class HUD extends DesktopArea
 		bag.setVisible(false);
 		if(boatChooser != null)
 			boatChooser.setVisible(false);
+
+		hideBattleFrontierDialog();
 	}
 
 	public ChatDialog getChat()
 	{
 		return null;
+	}
+
+	public void hideBattleFrontierDialog()
+	{
+		if(battlefrontierDialog != null)
+		{
+			battlefrontierDialog.setVisible(false);
+			removeChild(battlefrontierDialog);
+			battlefrontierDialog = null;
+		}
+	}
+
+	public void showBattleFrontierDialog(String battle, OurPlayer p)
+	{
+		hideHUDElements();
+		battlefrontierDialog = new BattleFrontierDialog(battle, p);
+		battlefrontierDialog.setVisible(true);
+		add(battlefrontierDialog);
+	}
+
+	/**
+	 * functions for player popup
+	 */
+	public void createPlayerPopupDialog(String player)
+	{
+		playerPopupDialog = new PlayerPopupDialog(player);
+		playerPopupDialog.setVisible(false);
+		add(playerPopupDialog);
+	}
+
+	public PlayerPopupDialog getPlayerPopupDialog()
+	{
+		return playerPopupDialog;
+	}
+
+	public void destroyPlayerPopupDialog()
+	{
+
+	}
+
+	public void showPlayerPopupDialogAt(int x, int y)
+	{
+
 	}
 }

@@ -55,7 +55,6 @@ public class HUD extends DesktopArea
 		options.setVisible(false);
 		help.setVisible(false);
 		chat.setVisible(false);
-		boatChooser.setVisible(false);
 	}
 
 	public PokedexDialog getPokedex()

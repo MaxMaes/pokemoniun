@@ -36,7 +36,7 @@ public class GUIPane extends DesktopArea
 		messageDialog.setVisible(false);
 		add(messageDialog);
 
-		/* HUD hud = new HUD();
+		/* hud = new HUD();
 		 * add(hud);
 		 * hud.setVisible(false); */
 		setTheme("guipane");
@@ -76,6 +76,8 @@ public class GUIPane extends DesktopArea
 
 	public HUD getHUD()
 	{
+		if(hud == null) // TODO: Dirty hack, remove when UserInterface.java class is removed.
+			hud = new HUD();
 		return hud;
 	}
 

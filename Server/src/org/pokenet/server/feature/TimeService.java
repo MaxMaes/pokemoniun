@@ -6,10 +6,15 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.StringTokenizer;
+import org.pokenet.server.GameServer;
+import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.client.Session;
+import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.protocol.ServerMessage;
 
 /**
  * Handles game time and weather
@@ -31,6 +36,8 @@ public class TimeService implements Runnable
 	private int m_forcedWeather = 0;
 	private boolean m_isRunning = true;
 	private long m_lastWeatherUpdate = 0;
+	private int m_idleKickTime = 10 * 60 * 1000;
+	private int m_weatherUpdateTime = 15 * 60 * 1000;
 
 	private Thread m_thread;
 
@@ -175,13 +182,31 @@ public class TimeService implements Runnable
 			else
 				m_minutes++;
 			/* Check if weather should be updated every 15 minutes (in real time) */
-			if(System.currentTimeMillis() - m_lastWeatherUpdate > 15 * 60 * 1000)
+			if(System.currentTimeMillis() - m_lastWeatherUpdate > m_weatherUpdateTime)
 			{
 				generateWeather();
 				m_lastWeatherUpdate = System.currentTimeMillis();
 			}
-			/* Loop through all players and check for idling If they've idled, disconnect them
-			 * TODO: Write kicker function and kick idle players again. */
+			/* Loop through all players and check for idling If they've idled, disconnect them. */
+			for(Session session : ActiveConnections.allSessions().values())
+			{
+				if(session.getPlayer() == null)
+					continue;
+				Player player = session.getPlayer();
+				if(System.currentTimeMillis() - m_idleKickTime > player.lastPacket)
+				{
+					ServerMessage idleMessage = new ServerMessage();
+					idleMessage.init(1);
+					idleMessage.addString("You have been kicked for idling too long!");
+					session.Send(idleMessage);
+					ServerMessage login = new ServerMessage();
+					login.init(54);
+					session.Send(login);
+					GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
+					GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
+					ActiveConnections.removeSession(session.getChannel());
+				}
+			}
 			try
 			{
 				Thread.sleep(10 * 1000);

@@ -289,10 +289,7 @@ public class LoginScreen extends DesktopArea
 		else
 			/* Show normal login screen */
 			backgroundPath = respath + "res/pokenet_normal.png";
-
-		// DynamicImage i = GameClient.getInstance().getRenderer().createDynamicImage(800, 600);
-		Image i = FileLoader.loadPNG(backgroundPath);
-
+		Image i = FileLoader.loadImage(backgroundPath);
 		gui.setBackground(i);
 	}
 

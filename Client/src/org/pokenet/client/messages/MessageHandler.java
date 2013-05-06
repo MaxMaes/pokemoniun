@@ -73,6 +73,7 @@ import org.pokenet.client.messages.events.RegisterNotificationEvent;
 import org.pokenet.client.messages.events.RegistrationSuccessEvent;
 import org.pokenet.client.messages.events.RemoveFriendListEvent;
 import org.pokenet.client.messages.events.RequestNotificationEvent;
+import org.pokenet.client.messages.events.ReturnToLoginEvent;
 import org.pokenet.client.messages.events.ServerAnnouncementEvent;
 import org.pokenet.client.messages.events.ServerNotificationEvent;
 import org.pokenet.client.messages.events.ServerRevisionEvent;
@@ -178,6 +179,7 @@ public class MessageHandler
 		messages.put(51, new HMHigherLevelEvent());
 		messages.put(52, new BadgeChangeEvent());
 		messages.put(53, new SkillLevelEvent());
+		messages.put(54, new ReturnToLoginEvent());
 		messages.put(57, new WeatherChangeEvent());
 		messages.put(58, new HealPokemonEvent());
 		messages.put(59, new FaceDownEvent());
@@ -221,7 +223,7 @@ public class MessageHandler
 		messages.put(97, new LoggedElsewhereEvent());
 		messages.put(98, new ItemCantUseEvent());
 		messages.put(99, new BattlefrontierEvent());
-		/* TODO: ID's 54, 55 and 56 are now free to use. */
+		/* TODO: ID's 55 and 56 are now free to use. */
 		// Login
 		// this.messages.put(254, new PingEvent());
 		// this.messages.put(1, new LoginRequestEvent());

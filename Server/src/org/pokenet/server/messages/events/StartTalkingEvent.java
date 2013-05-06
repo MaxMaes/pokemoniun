@@ -11,8 +11,12 @@ public class StartTalkingEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = session.getPlayer();
-		if(!p.isTalking() && !p.isBattling())
-			p.talkToNpc();
+		Player player = session.getPlayer();
+		/* The session has no player, not logged in yet or already logged out. */
+		if(player != null)
+		{
+			if(!player.isTalking() && !player.isBattling())
+				player.talkToNpc();
+		}
 	}
 }

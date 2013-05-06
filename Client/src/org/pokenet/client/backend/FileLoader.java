@@ -14,27 +14,31 @@ import org.pokenet.client.constants.Language;
 import de.matthiasmann.twl.renderer.DynamicImage;
 import de.matthiasmann.twl.renderer.Image;
 import de.matthiasmann.twl.renderer.Texture;
-import de.matthiasmann.twl.utils.PNGDecoder;
 
 /**
  * A simple file loader to make our lives easier
  * 
  * @author ZombieBear
  */
-public class FileLoader {
+public class FileLoader
+{
 	/**
 	 * Loads a file as an InputStream.
 	 * 
 	 * @param path
-	 *            The path to the wanted file.
+	 *        The path to the wanted file.
 	 * @return Returns an InputStream of a file.
 	 */
-	public static InputStream loadFile(String path) {
+	public static InputStream loadFile(String path)
+	{
 		FileInputStream inputStream = null;
-		try {
+		try
+		{
 			inputStream = new FileInputStream(path);
-		} catch (FileNotFoundException fnfe) {
-			if (path.contains("language") && !path.contains(Language.ENGLISH))
+		}
+		catch(FileNotFoundException fnfe)
+		{
+			if(path.contains("language") && !path.contains(Language.ENGLISH))
 				GameClient.getInstance().setLanguage(Language.ENGLISH);
 		}
 		return inputStream;
@@ -44,79 +48,63 @@ public class FileLoader {
 	 * Loads a text file and gets it ready for parsing.
 	 * 
 	 * @param path
-	 *            The path to the wanted file.
+	 *        The path to the wanted file.
 	 * @return Returns a BufferedReader for a text file
 	 */
-	public static BufferedReader loadTextFile(String path) {
+	public static BufferedReader loadTextFile(String path)
+	{
 		return new BufferedReader(new InputStreamReader(loadFile(path)));
-	}
-
-	/**
-	 * Decodes a PNG file using TWL's PNG decoder
-	 */
-	public static Image loadPNG(String path) {
-		ByteBuffer buffer = null;
-		try (InputStream input = new FileInputStream(path)) {
-			PNGDecoder decoder = new PNGDecoder(input);
-			buffer = ByteBuffer.allocateDirect(4 * decoder.getWidth()
-					* decoder.getHeight());
-			decoder.decode(buffer, decoder.getWidth() * 4,
-					de.matthiasmann.twl.utils.PNGDecoder.Format.RGBA);
-			buffer.flip();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-		DynamicImage dynImage = GameClient.getInstance().getRenderer()
-				.createDynamicImage(800, 600);
-		dynImage.update(buffer,
-				de.matthiasmann.twl.renderer.DynamicImage.Format.RGBA);
-		return dynImage;
 	}
 
 	/**
 	 * Returns an Image object
 	 */
-	public static Image loadImage(String path) {
+	public static Image loadImage(String path)
+	{
 		File fl = new File(path);
 		Image img = null;
-		try {
+		try
+		{
 			URL flURL = fl.getAbsoluteFile().toURI().toURL();
-			Texture text = GameClient.getInstance().getRenderer()
-					.loadTexture(flURL, "RGBA", "linear");
-			img = text.getImage(0, 0, text.getWidth(), text.getHeight(), null,
-					false, Texture.Rotation.NONE);
-		} catch (IOException ioe) {
+			Texture text = GameClient.getInstance().getRenderer().loadTexture(flURL, "RGBA", "linear");
+			img = text.getImage(0, 0, text.getWidth(), text.getHeight(), null, false, Texture.Rotation.NONE);
+		}
+		catch(IOException ioe)
+		{
 			ioe.printStackTrace();
 		}
 		return img;
 	}
 
-	public static de.matthiasmann.twl.renderer.Image toTWLImage(org.newdawn.slick.Image image, boolean hasAlpha) {
+	public static de.matthiasmann.twl.renderer.Image toTWLImage(org.newdawn.slick.Image image, boolean hasAlpha)
+	{
 		// conver the image into a byte buffer by reading each pixel in turn
 		int len = 4 * image.getWidth() * image.getHeight();
-		if (!hasAlpha) {
+		if(!hasAlpha)
+		{
 			len = 3 * image.getWidth() * image.getHeight();
 		}
 
 		ByteBuffer out = ByteBuffer.allocate(len);
 		org.newdawn.slick.Color c;
 
-		for (int y = image.getHeight() - 1; y >= 0; y--) {
-			for (int x = 0; x < image.getWidth(); x++) {
+		for(int y = image.getHeight() - 1; y >= 0; y--)
+		{
+			for(int x = 0; x < image.getWidth(); x++)
+			{
 				c = image.getColor(x, y);
 
 				out.put((byte) (c.r * 255.0f));
 				out.put((byte) (c.g * 255.0f));
 				out.put((byte) (c.b * 255.0f));
-				if (hasAlpha) {
+				if(hasAlpha)
+				{
 					out.put((byte) (c.a * 255.0f));
 				}
 			}
 		}
-		DynamicImage dynImage = GameClient.getInstance().getRenderer()
-				.createDynamicImage(image.getWidth(), image.getHeight());
-		dynImage.update(out,
-				de.matthiasmann.twl.renderer.DynamicImage.Format.RGBA);
+		DynamicImage dynImage = GameClient.getInstance().getRenderer().createDynamicImage(image.getWidth(), image.getHeight());
+		dynImage.update(out, de.matthiasmann.twl.renderer.DynamicImage.Format.RGBA);
 		return dynImage;
 	}
 }

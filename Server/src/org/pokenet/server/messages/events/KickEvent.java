@@ -1,5 +1,6 @@
 package org.pokenet.server.messages.events;
 
+import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
@@ -21,8 +22,10 @@ public class KickEvent implements MessageEvent
 			kickMessage.init(1);
 			kickMessage.addString("You have been kicked from the server!");
 			player.getSession().Send(kickMessage);
-			player.getSession().close();
-			player.forceLogout();
+			message.init(54);
+			player.getSession().Send(message);
+			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
+			GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
 		}
 	}
 }

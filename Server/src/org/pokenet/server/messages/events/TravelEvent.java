@@ -151,8 +151,9 @@ public class TravelEvent implements MessageEvent
 					{
 						p.setMoney(p.getMoney() - 125000);
 						p.updateClientMoney();
-						p.getBag().addItem(559, 1);
+
 					}
+					p.getBag().addItem(559, 1);
 					p.setIsTaveling(false);
 					p.setX(896);
 					p.setY(408);
@@ -183,8 +184,9 @@ public class TravelEvent implements MessageEvent
 					{
 						p.setMoney(p.getMoney() - 125000);
 						p.updateClientMoney();
-						p.getBag().addItem(559, 1);
+
 					}
+					p.getBag().addItem(559, 1);
 					p.setIsTaveling(false);
 					p.setX(384);
 					p.setY(1112);
@@ -201,9 +203,10 @@ public class TravelEvent implements MessageEvent
 				{
 					ticket = true;
 				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46) || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46)
+						|| ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
 				{
-					
+
 					if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46))
 					{
 					}
@@ -248,8 +251,9 @@ public class TravelEvent implements MessageEvent
 					{
 						p.setMoney(p.getMoney() - 175000);
 						p.updateClientMoney();
-						p.getBag().addItem(557, 1);
+
 					}
+					p.getBag().addItem(557, 1);
 					p.setIsTaveling(false);
 					p.setX(192);
 					p.setY(1880);

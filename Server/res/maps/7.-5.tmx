@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="72" height="20" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Weedle,12;Caterpie,12;Bellsprout,15;Pidgey,15;Kakuna,15;Metapod,15;Abra,14;Weepinbell,1;Pidgeotto,1;"/>
-  <property name="dayPokemonLevels" value="7-7;7-7;12-14;12-13;8-8;8-8;8-12;12-12;10-10;"/>
+  <property name="dayPokemonChances" value="Weedle,12;Caterpie,12;Bellsprout,14;Pidgey,15;Kakuna,15;Metapod,15;Abra,14;Weepinbell,1;Pidgeotto,1;Eevee,1;"/>
+  <property name="dayPokemonLevels" value="7-7;7-7;12-14;12-13;8-8;8-8;8-12;12-12;10-10;10-12;"/>
   <property name="fishPokemonChances" value="Magikarp,43;Krabby,20;Horsea,20;Gyarados,15;Psyduck,1;Slowpoke,1;"/>
   <property name="fishPokemonLevels" value="5-15;5-35;5-35;15-25;25-35;25-35;"/>
-  <property name="nightPokemonChances" value="Oddish,33;Venonat,33;Abra,16;Venomoth,1;Gloom,1;Hoothoot,15;Noctowl,1;"/>
-  <property name="nightPokemonLevels" value="12-14;13-16;8-12;10-10;12-12;12-13;10-10;"/>
+  <property name="nightPokemonChances" value="Oddish,33;Venonat,32;Abra,16;Venomoth,1;Gloom,1;Hoothoot,15;Noctowl,1;Eevee,1;"/>
+  <property name="nightPokemonLevels" value="12-14;13-16;8-12;10-10;12-12;12-13;10-10;10-12;"/>
   <property name="waterPokemonChances" value="Tentacool,50;Goldeen,49;Seaking,1;"/>
   <property name="waterPokemonLevels" value="5-40;5-14;10-14;"/>
   <property name="wildProbability" value="10"/>

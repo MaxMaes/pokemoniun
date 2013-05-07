@@ -407,6 +407,19 @@
                 <theme name="button" ref="button"/>
                 <theme name="title" ref="title"/>
             </theme>
+            <theme name="battledialog" ref="-defaults">
+                <theme name="battlecanvas" ref="-defaults"/>
+                <theme name="battlecontrolframe" ref="-defaults">
+                    <theme name="battlebutton" ref="button">
+                        <param name="background"><image>battlebutton_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="battlebutton_small" ref="button">
+                        <param name="background"><image>battlebutton_small_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                </theme>
+            </theme>
         </theme>
         <theme name="confirmationdialog" ref="popup_titled">
             <theme name="content" ref="-defaults">

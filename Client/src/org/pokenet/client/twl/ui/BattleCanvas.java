@@ -15,9 +15,9 @@ import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
 
 /**
- * Canvas for drawing the battle and it's animations
+ * Canvas for drawing the battle and it's animations. This is the topside of the battleFrame
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
 public class BattleCanvas extends Widget
 {

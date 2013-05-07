@@ -140,7 +140,7 @@ public class BattleCanvas extends Container
 		add(enemyGender);
 		add(enemyLv);
 		add(enemyStatus);
-//		initEnemyHPBar();
+		// initEnemyHPBar();
 	}
 
 	/**
@@ -209,9 +209,9 @@ public class BattleCanvas extends Container
 		add(playerLv);
 		add(playerStatus);
 		add(playerGender);
-		
-//		initPlayerHPBar();
-//		initPlayerXPBar();
+
+		// initPlayerHPBar();
+		// initPlayerXPBar();
 	}
 
 	/**
@@ -659,32 +659,32 @@ public class BattleCanvas extends Container
 		enemyStatus = new Label();
 		enemyStatus.setZIndex(8);
 	}
-	
+
 	public void setPlayerHP(float hp)
 	{
 		playerHP.setValue(hp);
 	}
-	
+
 	public void setPlayerMaxHP(int maxHP)
 	{
 		playerHP.setMaximum(maxHP);
 	}
-	
+
 	public void setPlayerHPColor(Color c)
 	{
 		playerHP.setForeground(c);
 	}
-	
+
 	public void setEnemyHP(float hp)
 	{
 		enemyHP.setValue(hp);
 	}
-	
+
 	public void setEnemyMaxHP(int maxHP)
 	{
 		enemyHP.setMaximum(maxHP);
 	}
-	
+
 	public void setEnemyHPColor(Color c)
 	{
 		enemyHP.setForeground(c);

@@ -240,4 +240,43 @@
             <alias ref="incrementer"/>
         </select>
     </images>
+    <images file="battle.png">
+        <area name="battleground" xywh="125,1,256,144"/>
+        <area name="interfacebackground" xywh="126,146,255,203"/>
+        <area name="battlebutton" xywh="8,298,116,51"/>
+        <area name="battlebutton_pressed" xywh="8,246,116,51"/>
+        <select name="battlebutton_background">
+            <alias ref="battlebutton_pressed" if="pressed"/>
+            <alias ref="battlebutton"/>
+        </select>
+    
+        <area name="battlebutton_small_pressed" xywh="42,197,82,48"/>
+        <area name="battlebutton_small" xywh="42,148,82,48"/>
+        <select name="battlebutton_small_background">
+            <alias ref="battlebutton_small_pressed" if="pressed"/>
+            <alias ref="battlebutton_small"/>
+        </select>
+    
+        <area name="enemyhp" xywh="25,134,98,11"/>
+    
+        <area name="playerhp" xywh="12,112,111,17"/>
+        <area name="battle_enemydata_background" xywh="2,350,164,48"/>
+        <area name="battle_playerdata_background" xywh="2,399,164,48"/>
+        <area name="pokeball_empty" xywh="1,1,14,14"/>
+        <area name="pokeball_faint" xywh="16,1,14,14"/>
+        <area name="pokeball_normal" xywh="31,1,14,14"/>
+        <area name="pokeball_status" xywh="46,1,14,14"/>
+        <area name="gender_female" xywh="67,2,10,14"/>
+        <area name="gender_male" xywh="78,2,14,14"/>
+        <area name="status_brn" xywh="1,22,30,12"/>
+        <area name="status_frz" xywh="1,35,30,12"/>
+        <area name="status_par" xywh="1,48,30,12"/>
+        <area name="status_psn" xywh="1,61,30,12"/>
+        <area name="status_slp" xywh="1,74,30,12"/>
+        <area name="hpbar_high" xywh="13,139,1,5"/>
+        <area name="hpbar_middle" xywh="15,139,1,5"/>
+        <area name="hpbar_low" xywh="17,139,1,5"/>
+        <area name="expbar" xywh="19,139,1,5"/>
+    
+    </images>
 </themes>

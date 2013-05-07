@@ -14,7 +14,6 @@ public class LogoutRequestEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		// TODO: Test proper functioning while in Battle/Trading.
 		try
 		{
 			Player player = session.getPlayer();

@@ -248,18 +248,19 @@ public class Character implements Positionable
 				}
 				return true;
 			}
-			else // Invalid movement
-			if(this instanceof Player)
+			else
 			{
-				// If its a player, resync them
-				Player p = (Player) this;
-				// p.getTcpSession().write("U" + getX() + "," + getY());
-				ServerMessage message = new ServerMessage();
-				message.init(64);
-				message.addInt(getX());
-				message.addInt(getY());
-				p.getSession().Send(message);
-				return false;
+				if(this instanceof Player)
+				{
+					// If its a player, resync them
+					Player p = (Player) this;
+					ServerMessage message = new ServerMessage();
+					message.init(64);
+					message.addInt(getX());
+					message.addInt(getY());
+					p.getSession().Send(message);
+					return false;
+				}
 			}
 		}
 		return false;
@@ -276,15 +277,27 @@ public class Character implements Positionable
 	}
 
 	/**
-	 * Changes the direction of the npc
+	 * Changes the direction of the NPC.
 	 * 
-	 * @param d
+	 * @param direction The direction to change to.
 	 */
-	public void setFacing(Direction d)
+	public void setFacing(Direction direction)
 	{
-		m_facing = d;
+		m_facing = direction;
 		if(m_map != null)
-			m_map.sendMovementToAll(d, this);
+			m_map.sendMovementToAll(direction, this);
+	}
+
+	/**
+	 * Changes the direction of the NPC.
+	 * 
+	 * @param direction The direction to change to.
+	 * @param map The map the Character is located in.
+	 */
+	public void setFacing(Direction direction, ServerMap map)
+	{
+		m_facing = direction;
+		map.sendMovementToAll(direction, this);
 	}
 
 	/**

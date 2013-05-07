@@ -33,11 +33,11 @@
 	<classpathentry kind="lib" path="lib/sui.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.3.2-jdk14.jar"/>
 	<classpathentry kind="lib" path="lib/slick.jar"/>
-	<classpathentry kind="lib" path="lib/netty-3.5.10.final.jar"/>
 	<classpathentry kind="lib" path="lib/simple-xml-2.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/TWL.jar"/>
 	<classpathentry kind="lib" path="lib/TWLEffects.jar"/>
 	<classpathentry kind="lib" path="lib/xpp3-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="lib/PNGDecoder.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.6.5.final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

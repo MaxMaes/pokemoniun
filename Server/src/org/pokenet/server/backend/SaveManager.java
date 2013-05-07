@@ -27,8 +27,6 @@ public class SaveManager
 	 */
 	public boolean saveBag(Bag b)
 	{
-		try
-		{
 			/* Destroy item data to prevent dupes.
 			 * TODO: UPDATE when exists, otherwise INSERT. More efficient and FK safer. */
 			m_database.query("DELETE FROM pn_bag WHERE member='" + b.getMemberId() + "'");
@@ -42,12 +40,6 @@ public class SaveManager
 				}
 			}
 			return true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 	/**

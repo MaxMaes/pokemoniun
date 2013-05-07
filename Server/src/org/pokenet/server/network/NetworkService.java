@@ -45,7 +45,6 @@ public class NetworkService
 						saveAll();
 					}
 				});
-
 		autosaver.start();
 	}
 
@@ -129,7 +128,8 @@ public class NetworkService
 	public void start()
 	{
 		/* Ensure anyone still marked as logged in on this server is unmarked */
-		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "'");
+		m_database.query("SELECT `username` FROM `pn_members` LIMIT 1;");
+		m_database.query("UPDATE `pn_members` SET `lastLoginServer` = 'null' WHERE `lastLoginServer` = '" + GameServer.getServerName() + "';");
 		/* Start the login/logout managers. */
 		m_logoutManager.start();
 		m_loginManager.start();
@@ -196,12 +196,11 @@ public class NetworkService
 	 */
 	public void stop()
 	{
+		_connection.StopSocket();
 		logoutAll();
 		System.out.println("Logged out all players.");
-		/* Stop all threads (do not use thread.stop()). */
 		for(int i = 0; i < m_chatManager.length; i++)
 			m_chatManager[i].stop();
-		/* TODO: Doesn't stop the server properly, rewrite! */
-		_connection.StopSocket();
+		System.out.println("INFO: Network Service stopped.");
 	}
 }

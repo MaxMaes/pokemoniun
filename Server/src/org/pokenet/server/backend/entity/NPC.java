@@ -1218,14 +1218,14 @@ public class NPC extends Character
 	/**
 	 * Talks to a player
 	 * 
-	 * @param p
+	 * @param player
 	 */
-	public void talkToPlayer(Player p)
+	public void talkToPlayer(Player player)
 	{
 		if(isTrainer())
 		{
 			if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer"))
-				if(p.canBattle)
+				if(player.canBattle)
 					m_lastBattle = 0;
 			if(canBattle())
 			{
@@ -1236,17 +1236,17 @@ public class NPC extends Character
 					message.init(50);
 					message.addInt(2);
 					message.addString(speech);
-					p.getSession().Send(message);
+					player.getSession().Send(message);
 				}
 				updateLastBattleTime();
-				p.setBattling(true);
-				p.canBattle = false;
-				p.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), p, this));
+				player.setBattling(true);
+				player.canBattle = false;
+				player.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), player, this));
 				return;
 			}
 			else
 			{
-				p.setTalking(false);
+				player.setTalking(false);
 				return;
 			}
 		}
@@ -1255,19 +1255,17 @@ public class NPC extends Character
 			/* If this NPC wasn't a trainer, handle other possibilities */
 			String speech = getSpeech();
 			if(!speech.equalsIgnoreCase(""))
-				if(!p.isShopping())
+				if(!player.isShopping())
 				{
-					// Dont send if player is shopping!
-					// TODO: test if this works else remove it
-					if(p.m_facing == Direction.Down)
-						setFacing(Direction.Up);
-					else if(p.m_facing == Direction.Up)
-						setFacing(Direction.Down);
-					else if(p.m_facing == Direction.Left)
-						setFacing(Direction.Right);
-					else if(p.m_facing == Direction.Right)
-						setFacing(Direction.Left);
-					// GameServer.getServiceManager().getMovementService().getMovementManager().addPlayer(this);
+					/* Dont send if player is shopping! */
+					if(player.m_facing == Direction.Down)
+						setFacing(Direction.Up, player.m_map);
+					else if(player.m_facing == Direction.Up)
+						setFacing(Direction.Down, player.m_map);
+					else if(player.m_facing == Direction.Left)
+						setFacing(Direction.Right, player.m_map);
+					else if(player.m_facing == Direction.Right)
+						setFacing(Direction.Left, player.m_map);
 					final Timer timer = new Timer();
 					timer.schedule(new TimerTask()
 					{
@@ -1277,42 +1275,40 @@ public class NPC extends Character
 							setFacing(originalDirection);
 							timer.cancel();
 						}
-					}, 30 * 1000);
+					}, 20 * 1000);
 					ServerMessage message = new ServerMessage();
 					message.init(50);
 					message.addInt(2);
 					message.addString(speech);
-					p.getSession().Send(message);
+					player.getSession().Send(message);
 				}
 			/* If this NPC is a sprite selection npc */
 			if(m_name.equalsIgnoreCase("Spriter"))
 			{
-				p.setSpriting(true);
+				player.setSpriting(true);
 				ServerMessage message = new ServerMessage();
 				message.init(16);
-				p.getSession().Send(message);
+				player.getSession().Send(message);
 				return;
 			}
 			// @author sadhi
 			/* If this NPC is a sailor, show warp options. */
 			if(m_name.equalsIgnoreCase("Seasond_Sailor"))
 			{
-				p.setIsTaveling(true);
-				// TcpProtocolHandler.writeMessage(p.getTcpSession(), new BoatMessage());
+				player.setIsTaveling(true);
 				ServerMessage message = new ServerMessage();
 				message.init(95);
-				p.getSession().Send(message);
+				player.getSession().Send(message);
 				return;
 			}
 			// @author sadhi
 			/* If this NPC is a train conductor. */
 			if(m_name.equalsIgnoreCase("Ticket_Vendor"))
 			{
-				p.setIsTaveling(true);
-				// TcpProtocolHandler.writeMessage(p.getTcpSession(), new TrainMessage());
+				player.setIsTaveling(true);
 				ServerMessage message = new ServerMessage();
 				message.init(96);
-				p.getSession().Send(message);
+				player.getSession().Send(message);
 				return;
 			}
 			// @author sadhi
@@ -1320,57 +1316,54 @@ public class NPC extends Character
 			/* Random trainer different from normal a trainer. */
 			if(m_name.equalsIgnoreCase("Random_Battlefrontier_Trainer"))
 			{
-				p.setBattling(true);
-				p.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), p, this));
+				player.setBattling(true);
+				player.setBattleField(new NpcBattleField(DataService.getBattleMechanics(), player, this));
 				return;
 			}
 			// @author sadhi
 			/* This npc teleportss a player a battle room in a specific battle frontier. */
 			if(m_name.contains("Battlefrontier"))
 			{
-				p.setIsTaveling(true);
-				// TcpProtocolHandler.writeMessage(p.getTcpSession(), new TrainMessage());
+				player.setIsTaveling(true);
 				ServerMessage message = new ServerMessage();
 				message.init(99);
-				p.getSession().Send(message);
+				player.getSession().Send(message);
 				return;
 			}
 			/* Box access */
 			if(m_isBox)
 			{
-				// Send the data for the player's first box, they may change this later
-				p.setTalking(false);
-				p.setBoxing(true);
-				p.sendBoxInfo(0);
+				/* Send the data for the player's first box, they may change this later. */
+				player.setTalking(false);
+				player.setBoxing(true);
+				player.sendBoxInfo(0);
 			}
 			/* Healer */
 			if(m_isHeal)
 			{
-				p.healPokemon();
+				player.healPokemon();
 				if(m_name.equalsIgnoreCase("Battlefrontier Nurse Joy"))
-					p.canBattle = true;
-				p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
+					player.canBattle = true;
+				player.setLastHeal(player.getX(), player.getY(), player.getMapX(), player.getMapY());
 			}
 			/* Shop access */
 			if(m_isShop > 0)
 			{
-				if(!p.isShopping())
+				if(!player.isShopping())
 				{
 					ServerMessage message = new ServerMessage();
 					message.init(9);
 					message.addString(m_shop.getStockData());
-					p.getSession().Send(message);
-					p.setShopping(true);
-					p.setShop(m_shop);
+					player.getSession().Send(message);
+					player.setShopping(true);
+					player.setShop(m_shop);
 				}
 			}
 		}
 	}
 
 	/**
-	 * Sets the time this NPC last battled
-	 * 
-	 * @param l
+	 * Updates the time this NPC last battled.
 	 */
 	public void updateLastBattleTime()
 	{
@@ -1383,9 +1376,7 @@ public class NPC extends Character
 	}
 
 	/**
-	 * Returns a string of this npcs speech ids
-	 * 
-	 * @param p
+	 * Returns a string of this npcs speech id's.
 	 */
 	private String getSpeech()
 	{

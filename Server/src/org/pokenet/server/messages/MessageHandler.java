@@ -42,7 +42,6 @@ import org.pokenet.server.messages.events.ShopEvent;
 import org.pokenet.server.messages.events.SpriteEvent;
 import org.pokenet.server.messages.events.StartBattlefrontierEvent;
 import org.pokenet.server.messages.events.StartTalkingEvent;
-import org.pokenet.server.messages.events.StopServerEvent;
 import org.pokenet.server.messages.events.SwapPokemonBoxPartyEvent;
 import org.pokenet.server.messages.events.TradeCancelOfferEvent;
 import org.pokenet.server.messages.events.TradeOfferEvent;
@@ -115,7 +114,6 @@ public class MessageHandler
 		messages.put(30, new UnMuteEvent());
 		messages.put(31, new KickEvent());
 		messages.put(32, new WeatherEvent());
-		messages.put(33, new StopServerEvent());
 		messages.put(35, new SelectedMoveEvent());
 		messages.put(36, new PokemonSwitchEvent());
 		messages.put(37, new RunEvent());
@@ -139,6 +137,6 @@ public class MessageHandler
 		messages.put(56, new ChangeUserClassEvent());
 		messages.put(57, new UserUnstickEvent());
 		messages.put(58, new StartBattlefrontierEvent());
-		/* TODO: Server id's 34 and 52 are now free to use. */
+		/* TODO: Server id's 33, 34 and 52 are now free to use. */
 	}
 }

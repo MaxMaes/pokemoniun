@@ -100,7 +100,7 @@ public class MySqlManager
 	 * 
 	 * @return
 	 */
-	private boolean close()
+	public boolean close()
 	{
 		try
 		{

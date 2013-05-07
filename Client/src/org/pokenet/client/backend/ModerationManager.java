@@ -151,11 +151,5 @@ public class ModerationManager
 				GameClient.getInstance().getSession().send(message);
 			}
 		}
-		// Stop server
-		else if(x.length() >= 4 && x.substring(0, 4).equalsIgnoreCase("stop"))
-		{
-			ClientMessage message = new ClientMessage(ServerPacket.STOP_SERVER);
-			GameClient.getInstance().getSession().send(message);
-		}
 	}
 }

@@ -65,7 +65,7 @@ public class LogoutManager implements Runnable
 		{
 			synchronized(m_logoutQueue)
 			{
-				if(m_logoutQueue.peek() != null)
+				if(!m_logoutQueue.isEmpty())
 				{
 					Player player = m_logoutQueue.poll();
 					if(player != null)

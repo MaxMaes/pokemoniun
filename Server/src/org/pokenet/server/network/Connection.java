@@ -1,7 +1,6 @@
 package org.pokenet.server.network;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.Executors;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.ChannelException;
 import org.jboss.netty.channel.ChannelPipeline;
@@ -22,7 +21,7 @@ public class Connection
 	public Connection(int port, LogoutManager logoutManager)
 	{
 		m_logoutManager = logoutManager;
-		socketFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
+		socketFactory = new NioServerSocketChannelFactory();
 		serverBootstrap = new ServerBootstrap(socketFactory);
 		messages = new MessageHandler();
 		messages.register();
@@ -45,7 +44,8 @@ public class Connection
 
 	public void StopSocket()
 	{
-		serverBootstrap.bind().close();
+		socketFactory.shutdown();
+		serverBootstrap.shutdown();
 	}
 
 	public MessageHandler getMessages()

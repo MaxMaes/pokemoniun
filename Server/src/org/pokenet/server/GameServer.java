@@ -317,9 +317,8 @@ public class GameServer
 		if(path == null || path.equalsIgnoreCase("NULL"))
 			path = "./";
 		File file = new File(path + "/res/rev.txt");
-		try
+		try(Scanner sc = new Scanner(file))
 		{
-			Scanner sc = new Scanner(file);
 			rev = Integer.parseInt(sc.nextLine());
 		}
 		catch(FileNotFoundException fnfe)
@@ -360,17 +359,18 @@ public class GameServer
 			m_stop.setEnabled(false);
 		}
 		else
+		{
 			try
 			{
-				/* Let threads finish up */
 				Thread.sleep(10 * 1000);
-				/* Exit */
 				System.out.println("Exiting server...");
+				MySqlManager.getInstance().close();
 				System.exit(0);
 			}
 			catch(InterruptedException e)
 			{
 			}
+		}
 	}
 
 	/**
@@ -499,7 +499,10 @@ public class GameServer
 		if(m_boolGui && m_stop.isEnabled())
 			JOptionPane.showMessageDialog(null, "You must stop the server before exiting.");
 		else
+		{
+			MySqlManager.getInstance().close();
 			System.exit(0);
+		}
 	}
 
 	/**

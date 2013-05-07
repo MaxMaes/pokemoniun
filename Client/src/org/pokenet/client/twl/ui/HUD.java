@@ -12,6 +12,7 @@ import org.pokenet.client.twl.ui.frames.OptionsDialog;
 import org.pokenet.client.twl.ui.frames.PlayerInfoDialog;
 import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.twl.ui.frames.PokedexDialog;
+import org.pokenet.client.twl.ui.frames.TrainChooserDialog;
 import org.pokenet.client.ui.base.TWLImageButton;
 import de.matthiasmann.twl.DesktopArea;
 import de.matthiasmann.twl.Widget;
@@ -35,6 +36,7 @@ public class HUD extends DesktopArea
 	private BoatChooserDialog boatChooser;
 	private BattleFrontierDialog battlefrontierDialog;
 	private PlayerPopupDialog playerPopupDialog;
+	private TrainChooserDialog trainChooserDialog;
 
 	public HUD()
 	{
@@ -133,14 +135,29 @@ public class HUD extends DesktopArea
 	 */
 	public void showBoatDialog(String currentLocation)
 	{
+		hideHUDElements();
 		if(boatChooser != null)
 		{
 			removeChild(boatChooser);
 		}
-		hideHUDElements();
 		boatChooser = new BoatChooserDialog(currentLocation);
 		add(boatChooser);
 		boatChooser.setVisible(true);
+	}
+
+	/**
+	 * Shows the train chooser dialog
+	 */
+	public void showTrainDialog(String currentLocation)
+	{
+		hideHUDElements();
+		if(trainChooserDialog != null)
+		{
+			removeChild(trainChooserDialog);
+		}
+		trainChooserDialog = new TrainChooserDialog(currentLocation, GameClient.getInstance().getOurPlayer());
+		add(trainChooserDialog);
+		trainChooserDialog.setVisible(true);
 	}
 
 	public void togglePokedex()
@@ -165,6 +182,8 @@ public class HUD extends DesktopArea
 		bag.setVisible(false);
 		if(boatChooser != null)
 			boatChooser.setVisible(false);
+		if(trainChooserDialog != null)
+			trainChooserDialog.setVisible(false);
 
 		hideBattleFrontierDialog();
 	}

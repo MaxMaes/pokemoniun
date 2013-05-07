@@ -6,49 +6,78 @@ import de.matthiasmann.twl.renderer.Image;
 
 /**
  * An ImageButton class based on the TWL Library.
+ * 
  * @author Myth1c
- *
  */
 
-public class TWLImageButton extends Button {
+public class TWLImageButton extends Button
+{
 	private Image image;
 	private Image pressedImage;
 	private Image hoverImage;
-	
+
 	private Image currImage;
-	
+
 	private int x;
 	private int y;
 	private ImageAlignment alignment = ImageAlignment.CENTER;
-	
-	public static enum ImageAlignment {
-		CENTER,
-		CUSTOM
+
+	public static enum ImageAlignment
+	{
+		CENTER, CUSTOM
 	};
-	
+
 	/**
 	 * Creates the imagebutton without an image
+	 * 
 	 * @param img The image
 	 */
-	public TWLImageButton() {
+	public TWLImageButton()
+	{
 		super();
 	}
-	
+
 	/**
-	 * Creates the imagebutton with given image
+	 * Creates the imagebutton without an image and with text
+	 * 
 	 * @param img The image
 	 */
-	public TWLImageButton(Image img) {
+	public TWLImageButton(String text)
+	{
+		super(text);
+	}
+
+	/**
+	 * Creates the imagebutton with an image and with text
+	 * 
+	 * @param img The image
+	 */
+	public TWLImageButton(Image img, String text)
+	{
+		super(text);
+		image = img;
+		currImage = image;
+	}
+
+	/**
+	 * Creates the imagebutton with given image
+	 * 
+	 * @param img The image
+	 */
+	public TWLImageButton(Image img)
+	{
 		super();
 		image = img;
 		currImage = image;
 	}
-	
+
 	/**
 	 * Creates the imagebutton with given images
+	 * 
 	 * @param img The image
 	 */
-	public TWLImageButton(Image img, Image hover, Image pressed) {
+	public TWLImageButton(Image img, Image hover, Image pressed)
+	{
 		super();
 		image = img;
 		hoverImage = hover;
@@ -59,43 +88,53 @@ public class TWLImageButton extends Button {
 			@Override
 			public void run()
 			{
-				if(getModel().isHover()) {
+				if(getModel().isHover())
+				{
 					currImage = hoverImage;
-				} else if(getModel().isPressed()) {
+				}
+				else if(getModel().isPressed())
+				{
 					currImage = pressedImage;
-				} else {
+				}
+				else
+				{
 					currImage = image;
 				}
 			}
 		});
 	}
-	
+
 	/**
 	 * Sets the image to be displayed on the button
+	 * 
 	 * @param img The image to be set
 	 */
-	public void setImage(Image img)	{
+	public void setImage(Image img)
+	{
 		image = img;
 	}
-	
+
 	/**
 	 * Sets the position of the image based on the position of the button
+	 * 
 	 * @param xPos
 	 * @param yPos
 	 */
-	public void setImagePosition(int xPos, int yPos) {
+	public void setImagePosition(int xPos, int yPos)
+	{
 		x = xPos + getInnerX();
 		y = yPos + getInnerY();
 	}
-	
+
 	/**
 	 * Paints the button first and then the image on top of it.
 	 */
 	@Override
-	public void paintWidget(GUI gui) {
+	public void paintWidget(GUI gui)
+	{
 		super.paintWidget(gui);
 		if(alignment == ImageAlignment.CENTER)
-			currImage.draw(getAnimationState(), getInnerX()-4, getInnerY()-4, currImage.getWidth(), currImage.getHeight());
+			currImage.draw(getAnimationState(), getInnerX() - 4, getInnerY() - 4, currImage.getWidth(), currImage.getHeight());
 		else
 			currImage.draw(getAnimationState(), x, y, currImage.getWidth(), currImage.getHeight());
 	}

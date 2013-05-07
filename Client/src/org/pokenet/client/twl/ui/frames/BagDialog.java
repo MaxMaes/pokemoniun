@@ -2,14 +2,12 @@ package org.pokenet.client.twl.ui.frames;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.ui.base.TWLImageButton;
-
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
 
 /**
@@ -17,7 +15,7 @@ import de.matthiasmann.twl.renderer.Image;
  * 
  * @author Myth1c
  */
-public abstract class BagDialog extends ResizableFrame
+public abstract class BagDialog extends Widget
 {
 	private Button m_bag;
 	private Button m_cancel;
@@ -92,9 +90,9 @@ public abstract class BagDialog extends ResizableFrame
 		{
 			final int j = i;
 			Image img = FileLoader.loadImage(respath + "res/items/24/" + m_items.get(i).getNumber() + ".png");
-			m_itemButtons[i] = new TWLImageButton(img);
-			m_itemButtons[i].setText("       x" + m_items.get(i).getQuantity());
+			m_itemButtons[i] = new TWLImageButton(img, "       x" + m_items.get(i).getQuantity());
 			m_itemButtons[i].setTooltipContent(m_items.get(i).getItem().getName() + "\n" + m_items.get(i).getItem().getDescription());
+			m_itemButtons[i].setImagePosition(5, 5);
 
 			m_itemButtons[i].addCallback(new Runnable()
 			{
@@ -154,6 +152,7 @@ public abstract class BagDialog extends ResizableFrame
 		m_cancel.setPosition(getHeight() - 20, 0);
 		m_bag.setSize(getWidth(), 40);
 		m_bag.setPosition(0, m_cancel.getY() - 40);
+
 		for(int i = 0; i < m_itemButtons.length; i++)
 		{
 			if(i > 0)

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Sealed: true
 Class-Path: lib/ini4j-0.3.2-jdk14.jar lib/simple-xml-2.0.2.jar lib/slf4j-api-1.5.6.jar 
- lib/netty-3.5.10.final.jar lib/slick.jar lib/sui.jar lib/lwjgl.jar lib/lwjgl_util.jar 
+ lib/netty-3.6.5.final.jar lib/slick.jar lib/sui.jar lib/lwjgl.jar lib/lwjgl_util.jar 
  lib/jinput.jar lib/jogg-0.0.7.jar lib/jorbis-0.0.15.jar 
  lib/native/jinput-dx8.dll lib/native/jinput-raw.dll lib/native/libjinput-linux.so 
  lib/native/libjinput-linux64.so lib/native/libjinput-osx.so lib/native/liblwjgl.jnilib 

@@ -11,6 +11,7 @@ import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonEvolution;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
 import org.pokenet.server.battle.PokemonSpecies;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -55,9 +56,7 @@ public class Trade implements Runnable
 			/* Tell the client to open the trade window */
 			Player p = (Player) player1;
 			Character c = (Character) player2;
-			// p.getTcpSession().write("Ts" + c.getName());
-			ServerMessage message = new ServerMessage();
-			message.init(3);
+			ServerMessage message = new ServerMessage(ClientPacket.START_TRADE);
 			message.addString(c.getName());
 			p.getSession().Send(message);
 			/* Send the pokemon data of player 2 to player 1 */
@@ -65,8 +64,7 @@ public class Trade implements Runnable
 			for(int i = 0; i < player2Party.length; i++)
 				if(player2Party[i] != null)
 				{
-					ServerMessage addPoke = new ServerMessage();
-					addPoke.init(6);
+					ServerMessage addPoke = new ServerMessage(ClientPacket.TRADE_ADD_POKE);
 					addPoke.addInt(i);
 					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player2Party[i].getSpeciesName()).getSpeciesNumber() + "," + player2Party[i].getName() + ","
 							+ player2Party[i].getHealth() + "," + player2Party[i].getGender() + "," + (player2Party[i].isShiny() ? 1 : 0) + "," + player2Party[i].getStat(0) + ","
@@ -85,9 +83,7 @@ public class Trade implements Runnable
 			/* If player 2 is a Player, tell client to open trade window */
 			Player p = (Player) player2;
 			Character c = (Character) player1;
-			// p.getTcpSession().write("Ts" + c.getName());
-			ServerMessage message = new ServerMessage();
-			message.init(3);
+			ServerMessage message = new ServerMessage(ClientPacket.START_TRADE);
 			message.addString(c.getName());
 			p.getSession().Send(message);
 			/* Send the Pokemon data of player 1 to player 2 */
@@ -95,8 +91,7 @@ public class Trade implements Runnable
 			for(int i = 0; i < player1Party.length; i++)
 				if(player1Party[i] != null)
 				{
-					ServerMessage addPoke = new ServerMessage();
-					addPoke.init(6);
+					ServerMessage addPoke = new ServerMessage(ClientPacket.TRADE_ADD_POKE);
 					addPoke.addInt(i);
 					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getPokemonNumber() + "," + player1Party[i].getName() + ","
 							+ player1Party[i].getHealth() + "," + player1Party[i].getGender() + "," + (player1Party[i].isShiny() ? 1 : 0) + "," + player1Party[i].getStat(0) + ","
@@ -177,7 +172,6 @@ public class Trade implements Runnable
 	public void run()
 	{
 		/* Record Trade on History Table */
-		// MySqlManager m_database = MySqlManager.getInstance();
 		MySqlManager m_database = MySqlManager.getInstance();
 		while(!m_queries.isEmpty())
 		{
@@ -214,16 +208,13 @@ public class Trade implements Runnable
 					ServerMessage invalidAlert = new ServerMessage(p.getSession());
 					invalidAlert.init(94);
 					invalidAlert.sendResponse();
-					// endTrade();
 					return;
 				}
 
 			}
-
 		o[1] = new TradeOffer();
 		o[1].setQuantity(money);
 		o[1].setType(TradeType.MONEY);
-
 		m_offers.put(t, o);
 		/* Send the offer to the other player */
 		sendOfferInformation(t, o);
@@ -245,19 +236,15 @@ public class Trade implements Runnable
 			Tradeable player2 = it.next();
 			TradeOffer[] o1 = m_offers.get(player1);
 			TradeOffer[] o2 = m_offers.get(player2);
-
 			/* Ensure each player has made an offer */
 			if(o1 == null || o2 == null)
 				return;
-
 			/* Keep checking no player has left the trade */
 			if(player1 != null && player2 != null)
 			{
-
 				/* Store a timestamp of the transaction */
 				Date date = new Date();
 				String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-
 				/* Handle player 1's offers */
 				for(int j = 0; j < o1.length; j++)
 					switch(o1[j].getType())
@@ -355,9 +342,7 @@ public class Trade implements Runnable
 						p = (Player) player1;
 
 					int index = p.getPokemonIndex(curPokemon);
-
 					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(curPokemon.getSpeciesName());
-
 					for(PokemonEvolution currentEvolution : pokeData.getEvolutions())
 					{
 						System.out.println(curPokemon.getName() + " can evolve via " + currentEvolution.getType());
@@ -366,8 +351,7 @@ public class Trade implements Runnable
 						{
 							curPokemon.setEvolution(currentEvolution);
 							// p.getTcpSession().write("PE" + index);
-							ServerMessage message = new ServerMessage();
-							message.init(43);
+							ServerMessage message = new ServerMessage(ClientPacket.POKE_REQUEST_EVOLVE);
 							message.addInt(index);
 							p.getSession().Send(message);
 							break;
@@ -434,7 +418,6 @@ public class Trade implements Runnable
 					}
 				}
 			}
-
 			/* Update the money */
 			if(player1 instanceof Player)
 			{
@@ -446,10 +429,8 @@ public class Trade implements Runnable
 				Player p = (Player) player2;
 				p.updateClientMoney();
 			}
-
 			/* Store transactions on DB */
 			new Thread(this, "Trade-Thread").start();
-
 			/* End the trade */
 			m_isExecuting = false;
 			endTrade();

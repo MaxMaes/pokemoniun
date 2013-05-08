@@ -19,6 +19,7 @@ import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -186,8 +187,7 @@ public class LoginManager implements Runnable
 			/* Make sure they are not banned. */
 			if(rs != null && rs.first())
 			{
-				ServerMessage message = new ServerMessage();
-				message.init(79);
+				ServerMessage message = new ServerMessage(ClientPacket.PLAYER_BANNED);
 				session.Send(message);
 				rs.close();
 				return;
@@ -206,8 +206,7 @@ public class LoginManager implements Runnable
 			if(!rs.first())
 			{
 				/* Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames. */
-				ServerMessage message = new ServerMessage();
-				message.init(76);
+				ServerMessage message = new ServerMessage(ClientPacket.USER_OR_PASS_WRONG);
 				session.Send(message);
 				return;
 			}
@@ -234,8 +233,7 @@ public class LoginManager implements Runnable
 					}
 					else
 					{
-						ServerMessage message = new ServerMessage();
-						message.init(97);
+						ServerMessage message = new ServerMessage(ClientPacket.LOGGED_ELSEWHERE);
 						session.Send(message);
 						return;
 					}
@@ -247,8 +245,7 @@ public class LoginManager implements Runnable
 			else
 			{
 				/* Password is wrong, let them know. */
-				ServerMessage message = new ServerMessage();
-				message.init(76);
+				ServerMessage message = new ServerMessage(ClientPacket.USER_OR_PASS_WRONG);
 				session.Send(message);
 				return;
 			}
@@ -283,8 +280,7 @@ public class LoginManager implements Runnable
 					/* Old password matches the one on file, therefore they got their old password correct, so it can be changed to their new one. */
 					m_database.query("UPDATE `pn_members` SET `password` = '" + MySqlManager.parseSQL(newPassword) + "' WHERE `username` = '" + MySqlManager.parseSQL(username) + "';");
 					// tell them their password was changed successfully
-					ServerMessage message = new ServerMessage();
-					message.init(73);
+					ServerMessage message = new ServerMessage(ClientPacket.PASS_CHANGE_RESULT);
 					message.addInt(1);
 					session.Send(message);
 					return;
@@ -295,8 +291,7 @@ public class LoginManager implements Runnable
 			sqle.printStackTrace();
 		}
 		/* Tell them we failed to change their password. */
-		ServerMessage message = new ServerMessage();
-		message.init(73);
+		ServerMessage message = new ServerMessage(ClientPacket.PASS_CHANGE_RESULT);
 		message.addInt(0);
 		session.Send(message);
 	}
@@ -562,8 +557,7 @@ public class LoginManager implements Runnable
 	 */
 	private void initialiseClient(Player player, Session session)
 	{
-		ServerMessage message = new ServerMessage();
-		message.init(74);
+		ServerMessage message = new ServerMessage(ClientPacket.LOGIN_SUCCESS);
 		message.addInt(player.getId());
 		message.addString(TimeService.getTime());
 		session.Send(message);

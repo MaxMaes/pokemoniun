@@ -18,6 +18,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -50,7 +51,7 @@ public class NpcBattleField extends BattleField
 		/* Start the battle */
 		m_player.ensureHealthyPokemon();
 		ServerMessage startBattle = new ServerMessage(m_player.getSession());
-		startBattle.init(18);
+		startBattle.init(ClientPacket.BATTLE_STARTED.getValue());
 		startBattle.addBool(false);
 		startBattle.addInt(getAliveCount(1));
 		startBattle.sendResponse();
@@ -59,7 +60,7 @@ public class NpcBattleField extends BattleField
 			m_player.setPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1);
 		/* Send enemy name */
 		ServerMessage enemyName = new ServerMessage(m_player.getSession());
-		enemyName.init(22);
+		enemyName.init(ClientPacket.ENEMY_TRAINER_NAME.getValue());
 		enemyName.addString(m_npc.getName());
 		enemyName.sendResponse();
 		/* Send enemy's Pokemon data */
@@ -147,7 +148,7 @@ public class NpcBattleField extends BattleField
 		if(m_player != null)
 		{
 			ServerMessage informFaint = new ServerMessage(m_player.getSession());
-			informFaint.init(25);
+			informFaint.init(ClientPacket.POKEMON_FAINTED.getValue());
 			informFaint.addString(getParty(trainer)[idx].getSpeciesName());
 			informFaint.sendResponse();
 		}
@@ -160,7 +161,7 @@ public class NpcBattleField extends BattleField
 			if(getActivePokemon()[0] == poke)
 			{
 				ServerMessage informHealth = new ServerMessage(m_player.getSession());
-				informHealth.init(33);
+				informHealth.init(ClientPacket.POKEMON_HP.getValue());
 				informHealth.addInt(0);
 				informHealth.addString("0," + change);
 				informHealth.sendResponse();
@@ -168,7 +169,7 @@ public class NpcBattleField extends BattleField
 			else if(getActivePokemon()[1] == poke)
 			{
 				ServerMessage informHealth = new ServerMessage(m_player.getSession());
-				informHealth.init(33);
+				informHealth.init(ClientPacket.POKEMON_HP.getValue());
 				informHealth.addInt(1);
 				informHealth.addString("1," + change);
 				informHealth.sendResponse();
@@ -179,7 +180,7 @@ public class NpcBattleField extends BattleField
 				if(index > -1)
 				{
 					ServerMessage informHealth = new ServerMessage(m_player.getSession());
-					informHealth.init(45);
+					informHealth.init(ClientPacket.POKE_HP_CHANGE.getValue());
 					informHealth.addInt(index);
 					informHealth.addInt(poke.getHealth());
 					informHealth.sendResponse();
@@ -201,7 +202,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), false));
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
-				receiveEffect.init(29);
+				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(0);
 				receiveEffect.addString(pokemon.getSpeciesName());
 				if(eff == null)
@@ -214,7 +215,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), false));
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
-				receiveEffect.init(29);
+				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(1);
 				receiveEffect.addString(pokemon.getSpeciesName());
 				// System.out.println(pokemon.getSpeciesName() + ", " + eff.getName());
@@ -236,7 +237,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), true));
 				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
-				removeEffect.init(30);
+				removeEffect.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffect.addInt(0);
 				removeEffect.addString(pokemon.getSpeciesName());
 				if(eff.getName() == null)
@@ -249,7 +250,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), true));
 				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
-				removeEffect.init(30);
+				removeEffect.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffect.addInt(1);
 				removeEffect.addString(pokemon.getSpeciesName());
 				if(eff.getName() == null)
@@ -268,7 +269,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
 				ServerMessage switchInform = new ServerMessage(m_player.getSession());
-				switchInform.init(32);
+				switchInform.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInform.addString(m_player.getName());
 				switchInform.addString(poke.getSpeciesName());
 				switchInform.addInt(trainer);
@@ -276,7 +277,7 @@ public class NpcBattleField extends BattleField
 				switchInform.sendResponse();
 
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
-				receiveEffect.init(29);
+				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(0);
 				receiveEffect.addString(poke.getSpeciesName());
 
@@ -300,7 +301,7 @@ public class NpcBattleField extends BattleField
 			{
 				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_npc.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
 				ServerMessage switchInform = new ServerMessage(m_player.getSession());
-				switchInform.init(32);
+				switchInform.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInform.addString(m_npc.getName());
 				switchInform.addString(poke.getSpeciesName());
 				switchInform.addInt(trainer);
@@ -308,7 +309,7 @@ public class NpcBattleField extends BattleField
 				switchInform.sendResponse();
 
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
-				receiveEffect.init(29);
+				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(1);
 				receiveEffect.addString(poke.getSpeciesName());
 
@@ -335,9 +336,8 @@ public class NpcBattleField extends BattleField
 	{
 		if(m_player != null)
 		{
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name));
 			ServerMessage move = new ServerMessage(m_player.getSession());
-			move.init(26);
+			move.init(ClientPacket.MOVE_USED.getValue());
 			move.addString(poke.getSpeciesName());
 			move.addString(name);
 			move.sendResponse();
@@ -367,20 +367,16 @@ public class NpcBattleField extends BattleField
 				m_player.addTrainingExp((int) (trainerExp * GameServer.RATE_EXP_TRAINER));
 			if(m_npc.isGymLeader())
 				m_player.addBadge(m_npc.getBadge());
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleRewardMessage(BattleRewardType.MONEY, money));
 			ServerMessage reward = new ServerMessage(m_player.getSession());
-			reward.init(35);
+			reward.init(ClientPacket.MONEY_CHANGED.getValue());
 			reward.addInt(money);
 			reward.sendResponse();
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.removeTempStatusEffects();
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.WON));
 			ServerMessage victory = new ServerMessage(m_player.getSession());
-			victory.init(24);
-			victory.addInt(0);
+			victory.init(ClientPacket.BATTLE_RESULT.getValue());
 			victory.sendResponse();
-			ServerMessage message = new ServerMessage();
-			message.init(64);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 			message.addInt(m_player.getX());
 			message.addInt(m_player.getY());
 			m_player.getSession().Send(message);
@@ -391,9 +387,8 @@ public class NpcBattleField extends BattleField
 				m_player.setMoney(m_player.getMoney() - money);
 			else
 				m_player.setMoney(0);
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleEndMessage(BattleEnd.LOST));
 			ServerMessage loss = new ServerMessage(m_player.getSession());
-			loss.init(24);
+			loss.init(ClientPacket.BATTLE_RESULT.getValue());
 			loss.addInt(1);
 			loss.sendResponse();
 			m_player.lostBattle();
@@ -404,7 +399,8 @@ public class NpcBattleField extends BattleField
 		dispose();
 		if(m_dispatch != null)
 		{
-			/* This very bad programming but shoddy does it and forces us to do it */
+			/* TODO: This programming so bad it's in comments. Rewrite or remove?
+			 * This very bad programming but shoddy does it and forces us to do it */
 			/* Thread t = m_dispatch;
 			 * m_dispatch = null;
 			 * t.stop(); let the thread manually return. */
@@ -512,7 +508,7 @@ public class NpcBattleField extends BattleField
 					{
 						// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer].getMoveName(move.getId())));
 						ServerMessage noPP = new ServerMessage(m_player.getSession());
-						noPP.init(20);
+						noPP.init(ClientPacket.NO_PP_LEFT.getValue());
 						noPP.addString(getActivePokemon()[trainer].getMoveName(move.getId()));
 						noPP.sendResponse();
 						requestMove(0);
@@ -564,15 +560,13 @@ public class NpcBattleField extends BattleField
 	@Override
 	public void refreshActivePokemon()
 	{
-		// m_player.getTcpSession().write("bh0" + this.getActivePokemon()[0].getHealth());
-		// m_player.getTcpSession().write("bh1" + this.getActivePokemon()[1].getHealth());
 		ServerMessage informHealthFirst = new ServerMessage(m_player.getSession());
-		informHealthFirst.init(33);
+		informHealthFirst.init(ClientPacket.POKEMON_HP.getValue());
 		informHealthFirst.addInt(0);
 		informHealthFirst.addString("0," + getActivePokemon()[0].getHealth());
 		informHealthFirst.sendResponse();
 		ServerMessage informHealthSecond = new ServerMessage(m_player.getSession());
-		informHealthSecond.init(33);
+		informHealthSecond.init(ClientPacket.POKEMON_HP.getValue());
 		informHealthSecond.addInt(1);
 		informHealthSecond.addString("1," + getActivePokemon()[1].getHealth());
 		informHealthSecond.sendResponse();
@@ -663,9 +657,8 @@ public class NpcBattleField extends BattleField
 			return;
 		if(m_player != null)
 		{
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMessage(message));
 			ServerMessage Message = new ServerMessage(m_player.getSession());
-			Message.init(23);
+			Message.init(ClientPacket.MISC_BATTLE_MESSAGE.getValue());
 			Message.addString(message);
 			Message.sendResponse();
 		}
@@ -677,9 +670,8 @@ public class NpcBattleField extends BattleField
 		if(trainer == 0)
 		{
 			/* Request move from player */
-			// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveRequest());
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
-			moveRequest.init(27);
+			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequest.sendResponse();
 		}
 		else
@@ -786,10 +778,9 @@ public class NpcBattleField extends BattleField
 		for(int i = 0; i < getParty(1).length; i++)
 			if(getParty(1)[i] != null)
 			{
-				// TcpProtocolHandler.writeMessage(receiver.getTcpSession(), new EnemyDataMessage(i, getParty(1)[i]));
 				Pokemon p = getParty(1)[i];
 				ServerMessage enemyData = new ServerMessage(m_player.getSession());
-				enemyData.init(21);
+				enemyData.init(ClientPacket.RECEIVE_POKE_DATA.getValue());
 				enemyData.addInt(i);
 				enemyData.addString(p.getName());
 				enemyData.addInt(p.getLevel());

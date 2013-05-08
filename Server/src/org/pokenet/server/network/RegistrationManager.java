@@ -11,6 +11,7 @@ import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -30,7 +31,7 @@ public class RegistrationManager implements Runnable
 	 */
 	public RegistrationManager()
 	{
-		// m_database = MySqlManager.getInstance();
+		m_database = MySqlManager.getInstance();
 		// m_queue = new LinkedList<Session>();
 	}
 
@@ -49,11 +50,6 @@ public class RegistrationManager implements Runnable
 	 */
 	public void register(Session session, int region, String packet /* IoSession session */) throws Exception
 	{
-		// if(!session.isConnected() || session.isClosing())
-		// return;
-		// int region = Integer.parseInt(String.valueOf(((String) session.getAttribute("reg")).charAt(0)));
-		// String[] info = ((String) session.getAttribute("reg")).substring(1).split(",");
-		// Check if the username is invalid or an NPC name.
 		m_database = MySqlManager.getInstance();
 		if(session.getChannel() == null)
 			return;
@@ -61,9 +57,8 @@ public class RegistrationManager implements Runnable
 		/* Check the username */
 		if(info[0].equalsIgnoreCase("NULL") || info[0].equalsIgnoreCase("!NPC!"))
 		{
-			// session.write("r4");
-			ServerMessage message = new ServerMessage();
-			message.init(87);
+
+			ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 			message.addInt(4);
 			session.Send(message);
 			return;
@@ -72,15 +67,13 @@ public class RegistrationManager implements Runnable
 				|| info[0].contains("[") || info[0].contains("]") || info[0].contains("~") || info[0].contains("#") || info[0].contains("|") || info[0].contains("?") || info[0].contains("/")
 				|| info[0].contains("\""))
 		{
-			// session.write("r4");
-			ServerMessage message = new ServerMessage();
-			message.init(87);
+			ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 			message.addInt(4);
 			session.Send(message);
 			return;
 		}
 		int s = Integer.parseInt(info[4]);
-		// Check if the username is already taken.
+		/* Check if the username is already taken. */
 		ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
 		if(data != null)
 		{
@@ -89,11 +82,7 @@ public class RegistrationManager implements Runnable
 			{
 				if(data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0])))
 				{
-					// session.resumeRead();
-					// session.resumeWrite();
-					// session.write("r2");
-					ServerMessage message = new ServerMessage();
-					message.init(87);
+					ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 					message.addInt(2);
 					session.Send(message);
 					return;
@@ -103,7 +92,7 @@ public class RegistrationManager implements Runnable
 			{
 			}
 		}
-		// Check if an account is already registered with the specified email address.
+		/* Check if an account is already registered with the specified email address. */
 		data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
 		if(data != null)
 		{
@@ -112,22 +101,14 @@ public class RegistrationManager implements Runnable
 			{
 				if(data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2])))
 				{
-					// session.resumeRead();
-					// session.resumeWrite();
-					// session.write("r5");
-					ServerMessage message = new ServerMessage();
-					message.init(87);
+					ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 					message.addInt(5);
 					session.Send(message);
 					return;
 				}
 				if(info[2].length() > 52)
 				{
-					// session.resumeRead();
-					// session.resumeWrite();
-					// session.write("r6");
-					ServerMessage message = new ServerMessage();
-					message.init(87);
+					ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 					message.addInt(6);
 					session.Send(message);
 					return;
@@ -138,21 +119,19 @@ public class RegistrationManager implements Runnable
 			{
 			}
 		}
-		// Check if user is not trying to register their starter as a non-starter Pokemon.
+		/* Check if user is not trying to register their starter as a non-starter Pokemon. */
 		if(!(s == 1 || s == 4 || s == 7 || s == 152 || s == 155 || s == 158 || s == 252 || s == 255 || s == 258 || s == 387 || s == 390 || s == 393))
 		{
-			// session.write("r4");
-			ServerMessage message = new ServerMessage();
-			message.init(87);
+			ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
 			message.addInt(4);
 			session.Send(message);
 			return;
 		}
-		// Generate badge string.
+		/* Generate badge string. */
 		String badges = "";
 		for(int i = 0; i < 50; i++)
 			badges = badges + "0";
-		// Generate starting position.
+		/* Generate starting position. */
 		int mapX, mapY, x, y;
 		switch(region)
 		{
@@ -175,7 +154,7 @@ public class RegistrationManager implements Runnable
 				y = 440;
 				break;
 		}
-		// Add the player to the Database.
+		/* Add the player to the Database. */
 		m_database.query("INSERT INTO pn_members (username, password, dob, email, lastLoginTime, lastLoginServer, " + "sprite, money, skHerb, skCraft, skFish, skTrain, skCoord, skBreed, "
 				+ "x, y, mapX, mapY, badges, healX, healY, healMapX, healMapY, isSurfing, adminLevel, muted) VALUE " + "('"
 				+ MySqlManager.parseSQL(info[0])
@@ -201,11 +180,11 @@ public class RegistrationManager implements Runnable
 				+ "', '"
 				+ badges
 				+ "', '" + x + "', '" + y + "', '" + mapX + "', '" + mapY + "', 'false', '0', 'false')");
-		// Retrieve Player ID which is used to create the bag 'on the fly'.
+		/* Retrieve Player ID which is used to create the bag 'on the fly'. */
 		data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
 		data.first();
 		int playerId = data.getInt("id");
-		// Create the player's party.
+		/* Create the player's party. */
 		Pokemon p = createStarter(s);
 		p.setOriginalTrainer(info[0]);
 		p.setDateCaught(new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()));
@@ -213,11 +192,11 @@ public class RegistrationManager implements Runnable
 		m_database.query("INSERT INTO pn_party (member, pokemon0, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5) VALUES ('" + +playerId + "','" + p.getDatabaseID() + "','-1','-1','-1','-1','-1')");
 		data = m_database.query("SELECT * FROM pn_party WHERE member='" + playerId + "'");
 		data.first();
-		// Attach pokemon to the player (his party).
+		/* Attach pokemon to the player (his party). */
 		m_database.query("UPDATE pn_members SET party='" + data.getInt("id") + "' WHERE id='" + playerId + "'");
-		// Give the player 5 Pokéballs to start his journey.
+		/* Give the player 5 Pokéballs to start his journey. */
 		m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + playerId + "', '35', '5')");
-		// Create a new pokedex record
+		/* Create a new pokedex record. */
 		m_database
 				.query("INSERT INTO `pn_pokedex` VALUES(NULL, "
 						+ MySqlManager.parseSQL("" + playerId)
@@ -225,14 +204,11 @@ public class RegistrationManager implements Runnable
 		String playeridsql = MySqlManager.parseSQL("" + playerId);
 		data = m_database.query("SELECT pokedexid FROM pn_pokedex WHERE memberid = " + playeridsql);
 		data.first();
-		// Get the pokedex ID
 		int pokedexid = data.getInt("pokedexid");
-		// Bind the pokedex ID to the member
+		/* Bind the pokedex ID to the member and add the starter to the Pokedex. */
 		m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL("" + pokedexid) + " WHERE id = '" + playeridsql + "'");
-		// Add the players starter to the pokedex
 		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getPokemonNumber() + 1)) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
-		ServerMessage message = new ServerMessage();
-		message.init(86);
+		ServerMessage message = new ServerMessage(ClientPacket.REGISTER_SUCCESS);
 		session.Send(message);
 	}
 

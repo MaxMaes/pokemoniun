@@ -25,6 +25,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -433,13 +434,12 @@ public class WildBattleField extends BattleField
 		m_wildPoke = null;
 		if(m_dispatch != null)
 		{
-			/* This very bad programming but shoddy does it and forces us to do it */
+			/* TODO: This very bad programming but shoddy does it and forces us to do it */
 			Thread t = m_dispatch;
 			m_dispatch = null;
 			t.stop();
 		}
-		ServerMessage message = new ServerMessage();
-		message.init(64);
+		ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 		message.addInt(m_player.getX());
 		message.addInt(m_player.getY());
 		m_player.getSession().Send(message);
@@ -546,11 +546,8 @@ public class WildBattleField extends BattleField
 				{
 					if(trainer == 0)
 					{
-						/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-						 * new NoPPMessage(this.getActivePokemon()[trainer]
-						 * .getMoveName(move.getId()))); */
 						ServerMessage noPP = new ServerMessage(m_player.getSession());
-						noPP.init(20);
+						noPP.init(ClientPacket.NO_PP_LEFT.getValue());
 						noPP.addString(getActivePokemon()[trainer].getMoveName(move.getId()));
 						noPP.sendResponse();
 						requestMove(0);
@@ -674,8 +671,7 @@ public class WildBattleField extends BattleField
 			m_player.setBattling(false);
 			m_player.setFishing(false);
 			dispose();
-			ServerMessage message = new ServerMessage();
-			message.init(64);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 			message.addInt(m_player.getX());
 			message.addInt(m_player.getY());
 			m_player.getSession().Send(message);
@@ -683,7 +679,7 @@ public class WildBattleField extends BattleField
 		else
 		{
 			ServerMessage run = new ServerMessage(m_player.getSession());
-			run.init(34);
+			run.init(ClientPacket.BATTLE_RUN_EVENT.getValue());
 			run.addBool(false);
 			run.sendResponse();
 			if(m_turn[1] == null)
@@ -706,10 +702,8 @@ public class WildBattleField extends BattleField
 			return;
 		if(m_player != null)
 		{
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			 * new BattleMessage(message)); */
 			ServerMessage Message = new ServerMessage(m_player.getSession());
-			Message.init(23);
+			Message.init(ClientPacket.MISC_BATTLE_MESSAGE.getValue());
 			Message.addString(message);
 			Message.sendResponse();
 		}
@@ -917,7 +911,7 @@ public class WildBattleField extends BattleField
 			m_player.catchPokemon(m_wildPoke);
 			showMessage("You successfuly caught " + m_wildPoke.getSpeciesName());
 			ServerMessage victory = new ServerMessage(m_player.getSession());
-			victory.init(24);
+			victory.init(ClientPacket.BATTLE_RESULT.getValue());
 			victory.addInt(2);
 			victory.sendResponse();
 			m_player.setBattling(false);
@@ -970,9 +964,8 @@ public class WildBattleField extends BattleField
 		if(trainer == 0)
 		{
 			/* If its the player, send a move request packet */
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleMoveRequest()); */
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
-			moveRequest.init(27);
+			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequest.sendResponse();
 		}
 		else
@@ -990,10 +983,8 @@ public class WildBattleField extends BattleField
 		if(getActivePokemon()[0].isActive() && getActivePokemon()[1].isActive())
 		{
 			getWildPokemonMove();
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			 * new BattleMoveRequest()); */
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
-			moveRequest.init(27);
+			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequest.sendResponse();
 		}
 	}
@@ -1018,7 +1009,6 @@ public class WildBattleField extends BattleField
 
 	protected void replacementPokemonRequest(int i, Pokemon poke)
 	{
-		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
 		informSwitchInPokemon(i, poke);
 		poke.switchIn();
 	}
@@ -1052,7 +1042,7 @@ public class WildBattleField extends BattleField
 		{
 			m_player.getBag().addItem(item, 1);
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());
-			wonItem.init(19);
+			wonItem.init(ClientPacket.ITEM_WON_BATTLE.getValue());
 			wonItem.addInt(item);
 			wonItem.sendResponse();
 		}
@@ -1062,7 +1052,7 @@ public class WildBattleField extends BattleField
 			m_player.setMoney(m_player.getMoney() + money);
 			m_player.updateClientMoney();
 			ServerMessage wonItem = new ServerMessage(m_player.getSession());
-			wonItem.init(35);
+			wonItem.init(ClientPacket.BATTLE_EARNINGS.getValue());
 			wonItem.addInt(money);
 			wonItem.sendResponse();
 		}
@@ -1104,20 +1094,19 @@ public class WildBattleField extends BattleField
 					user = 1.5;
 				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, p, m_participatingPokemon.size(), user);
 				p.setExp(p.getExp() + exp);
-				// Calculate how much exp is left to next level
+				/* Calculate how much exp is left to next level. */
 				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());
-				// Make sure that value isn't negative.
+				/* Make sure that value isn't negative. */
 				if(expTillLvl < 0)
 					expTillLvl = 0;
 				ServerMessage expMessage = new ServerMessage(m_player.getSession());
-				expMessage.init(28);
+				expMessage.init(ClientPacket.EXP_GAINED.getValue());
 				expMessage.addString(p.getSpeciesName() + "," + exp + "," + expTillLvl);
 				expMessage.sendResponse();
 				String expGain = exp + "";
 				expGain = expGain.substring(0, expGain.indexOf('.'));
-
 				ServerMessage expGainMessage = new ServerMessage(m_player.getSession());
-				expGainMessage.init(42);
+				expGainMessage.init(ClientPacket.POKE_EXP_GAINED.getValue());
 				expGainMessage.addInt(index);
 				expGainMessage.addInt(Integer.parseInt(expGain));
 				expGainMessage.sendResponse();
@@ -1135,9 +1124,8 @@ public class WildBattleField extends BattleField
 							if(evolution.getLevel() <= p.getLevel() + 1)
 							{
 								p.setEvolution(evolution);
-								// m_player.getTcpSession().write("PE" + index);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-								evolveMessage.init(43);
+								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
 								evolveMessage.sendResponse();
 								evolve = true;
@@ -1149,9 +1137,8 @@ public class WildBattleField extends BattleField
 							if(p.getHappiness() > 220 && !TimeService.isNight())
 							{
 								p.setEvolution(evolution);
-								// m_player.getTcpSession().write("PE" + index);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-								evolveMessage.init(43);
+								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
 								evolveMessage.sendResponse();
 								evolve = true;
@@ -1163,9 +1150,8 @@ public class WildBattleField extends BattleField
 							if(p.getHappiness() > 220 && TimeService.isNight())
 							{
 								p.setEvolution(evolution);
-								// m_player.getTcpSession().write("PE" + index);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-								evolveMessage.init(43);
+								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
 								evolveMessage.sendResponse();
 								evolve = true;
@@ -1177,40 +1163,25 @@ public class WildBattleField extends BattleField
 							if(p.getHappiness() > 220)
 							{
 								p.setEvolution(evolution);
-								// m_player.getTcpSession().write("PE" + index);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-								evolveMessage.init(43);
+								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
 								evolveMessage.sendResponse();
 								evolve = true;
 								i = pokeData.getEvolutions().length;
 							}
 						}
-						// else if(p.getSpeciesName().equalsIgnoreCase("Magneton") && m_player.getMapX() == 2)
-						// {
-						// p.setEvolution(evolution);
-						// // m_player.getTcpSession().write("PE" + index);
-						// ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
-						// evolveMessage.Init(43);
-						// evolveMessage.addInt(index);
-						// evolveMessage.sendResponse();
-						// evolve = true;
-						// i = pokeData.getEvolutions().length;
-						// }
 					}
 					/* If the Pokemon is evolving, don't move learn just yet */
 					if(evolve)
 						continue;
-
 					/* This Pokemon just levelled up! */
 					p.setHappiness(p.getHappiness() + 5);
 					p.calculateStats(false);
-
 					int level = DataService.getBattleMechanics().calculateLevel(p);
 					m_player.addTrainingExp(level * 5);
 					int oldLevel = p.getLevel();
 					String move = "";
-
 					/* Move learning */
 					p.getMovesLearning().clear();
 					for(int i = oldLevel + 1; i <= level; i++)
@@ -1218,9 +1189,8 @@ public class WildBattleField extends BattleField
 						{
 							move = pokeData.getLevelMoves().get(i);
 							p.getMovesLearning().add(move);
-							// m_player.getTcpSession().write("Pm" + index + move);
 							ServerMessage moveLearn = new ServerMessage(m_player.getSession());
-							moveLearn.init(40);
+							moveLearn.init(ClientPacket.MOVE_LEARN_LVL.getValue());
 							moveLearn.addInt(index);
 							moveLearn.addString(move);
 							moveLearn.sendResponse();
@@ -1228,16 +1198,13 @@ public class WildBattleField extends BattleField
 
 					/* Save the level and update the client */
 					p.setLevel(level);
-					// m_player.getTcpSession().write("Pl" + index + "," + level + "," + (int)p.getExpForLevel(level+1));
-					/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new BattleLevelChangeMessage(p.getSpeciesName(), level); */
 					ServerMessage levelMessage = new ServerMessage(m_player.getSession());
-					levelMessage.init(44);
+					levelMessage.init(ClientPacket.POKE_LVL_CHANGE.getValue());
 					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) + ","
 							+ (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel()));
 					levelMessage.sendResponse();
-
 					ServerMessage BattlelevelMessage = new ServerMessage(m_player.getSession());
-					BattlelevelMessage.init(36);
+					BattlelevelMessage.init(ClientPacket.POKE_LVL_UP.getValue());
 					BattlelevelMessage.addString(p.getSpeciesName() + "," + level);
 					BattlelevelMessage.sendResponse();
 					m_player.updateClientPokemonStats(index);
@@ -1253,19 +1220,15 @@ public class WildBattleField extends BattleField
 	 */
 	private boolean canRun()
 	{
-		// Formula from http://bulbapedia.bulbagarden.net/wiki/Escape
+		/* Formula from http://bulbapedia.bulbagarden.net/wiki/Escape */
 		float A = getActivePokemon()[0].getStat(Pokemon.S_SPEED);
 		float B = getActivePokemon()[1].getStat(Pokemon.S_SPEED);
 		int C = ++m_runCount;
-
 		float F = (A * 32 / (B / 4) + 30) * C;
-
 		if(F > 255)
 			return true;
-
 		if(getMechanics().getRandom().nextInt(255) <= F)
 			return true;
-
 		return false;
 	}
 }

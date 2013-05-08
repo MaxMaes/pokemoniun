@@ -1,6 +1,6 @@
 package org.pokenet.client.constants;
 
-public class UserClasses
+public class UserClass
 {
 	public static final int DEFAULT = 0;
 	public static final int DONATOR = 1;

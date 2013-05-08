@@ -6,6 +6,7 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferOutputStream;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 
 public class ServerMessage
 {
@@ -14,8 +15,9 @@ public class ServerMessage
 	private String message;
 	private Session player;
 
-	public ServerMessage()
+	public ServerMessage(ClientPacket id)
 	{
+		init(id.getValue());
 		message = "";
 	}
 
@@ -77,15 +79,19 @@ public class ServerMessage
 	{
 		try
 		{
-			if(obj == null){
-				//sometimes this string is null which is causing some issues (battle freezing for example)
+			if(obj == null)
+			{
+				// sometimes this string is null which is causing some issues (battle freezing for example)
 				bodystream.writeShort(0);
 				bodystream.writeChars("");
 				message = message + ";STRING: " + "";
-			}else{
+			}
+			else
+			{
 				bodystream.writeShort(obj.length());
 				bodystream.writeChars(obj);
-				message = message + ";STRING: " + obj;}
+				message = message + ";STRING: " + obj;
+			}
 		}
 		catch(IOException e)
 		{

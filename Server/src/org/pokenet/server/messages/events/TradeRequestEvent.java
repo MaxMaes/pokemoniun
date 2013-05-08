@@ -4,6 +4,7 @@ import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.entity.Player.RequestType;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
@@ -15,11 +16,9 @@ public class TradeRequestEvent implements MessageEvent
 	{
 		Player p = session.getPlayer();
 		String player = request.readString();
-		// Battle Request rbUSERNAME
 		if(ActiveConnections.getPlayer(player) != null)
 		{
-			ServerMessage bRequest = new ServerMessage();
-			bRequest.init(83);
+			ServerMessage bRequest = new ServerMessage(ClientPacket.TRADE_REQUEST);
 			bRequest.addString(p.getName());
 			ActiveConnections.getPlayer(player).getSession().Send(bRequest);
 			p.addRequest(player, RequestType.TRADE);

@@ -19,6 +19,7 @@ import org.pokenet.server.battle.impl.WildBattleField;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.network.MySqlManager;
 import org.pokenet.server.protocol.ServerMessage;
@@ -121,8 +122,7 @@ public class Player extends Character implements Battleable, Tradeable
 		if(num >= 0 && num < m_badges.length)
 		{
 			m_badges[num] = 1;
-			ServerMessage message = new ServerMessage();
-			message.init(52);
+			ServerMessage message = new ServerMessage(ClientPacket.BADGES_PACKET);
 			message.addInt(1);
 			message.addInt(num);
 			getSession().Send(message);
@@ -140,8 +140,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillBreedExp = m_skillBreedExp + exp;
 		if(getBreedingLevel() > m_oldLevel)
 		{
-			ServerMessage skillLevels = new ServerMessage();
-			skillLevels.init(53);
+			ServerMessage skillLevels = new ServerMessage(ClientPacket.SKILL_LVL_UP);
 			skillLevels.addInt(getTrainingLevel());
 			skillLevels.addInt(getBreedingLevel());
 			skillLevels.addInt(getFishingLevel());
@@ -161,8 +160,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillCoordExp = m_skillCoordExp + exp;
 		if(getCoordinatingLevel() > m_oldLevel)
 		{
-			ServerMessage skillLevels = new ServerMessage();
-			skillLevels.init(53);
+			ServerMessage skillLevels = new ServerMessage(ClientPacket.SKILL_LVL_UP);
 			skillLevels.addInt(getTrainingLevel());
 			skillLevels.addInt(getBreedingLevel());
 			skillLevels.addInt(getFishingLevel());
@@ -198,8 +196,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillFishExp = m_skillFishExp + exp;
 		if(getFishingLevel() > m_oldLevel)
 		{
-			ServerMessage skillLevels = new ServerMessage();
-			skillLevels.init(53);
+			ServerMessage skillLevels = new ServerMessage(ClientPacket.SKILL_LVL_UP);
 			skillLevels.addInt(getTrainingLevel());
 			skillLevels.addInt(getBreedingLevel());
 			skillLevels.addInt(getFishingLevel());
@@ -220,8 +217,7 @@ public class Player extends Character implements Battleable, Tradeable
 			m_friends.add(friend);
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
 					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
-			ServerMessage addFriend = new ServerMessage();
-			addFriend.init(69);
+			ServerMessage addFriend = new ServerMessage(ClientPacket.FRIEND_ADDED);
 			addFriend.addString(friend);
 			getSession().Send(addFriend);
 		}
@@ -292,7 +288,6 @@ public class Player extends Character implements Battleable, Tradeable
 			/* If the player is on the same map and within 3 squares of the player, start the battle */
 			if(getMap().getPvPType() == PvPType.ENFORCED)
 			{
-				// Player otherPlayer = TcpProtocolHandler.getPlayer(username);
 				Player otherPlayer = ActiveConnections.getPlayer(username);
 				if(otherPlayer != null && getMap() == otherPlayer.getMap())
 					if(otherPlayer.getX() >= getX() - 96 || otherPlayer.getX() <= getX() + 96 || otherPlayer.getY() >= getY() - 96 || otherPlayer.getY() <= getY() + 96)
@@ -305,9 +300,7 @@ public class Player extends Character implements Battleable, Tradeable
 					}
 					else
 					{
-						// m_tcpSession.write("r!3");
-						ServerMessage sendNot = new ServerMessage();
-						sendNot.init(82);
+						ServerMessage sendNot = new ServerMessage(ClientPacket.PVP_PACKETS);
 						sendNot.addInt(3);
 						getSession().Send(sendNot);
 					}
@@ -327,8 +320,7 @@ public class Player extends Character implements Battleable, Tradeable
 		m_skillTrainingExp = m_skillTrainingExp + exp;
 		if(getTrainingLevel() > m_oldLevel)
 		{
-			ServerMessage skillLevels = new ServerMessage();
-			skillLevels.init(53);
+			ServerMessage skillLevels = new ServerMessage(ClientPacket.SKILL_LVL_UP);
 			skillLevels.addInt(getTrainingLevel());
 			skillLevels.addInt(getBreedingLevel());
 			skillLevels.addInt(getFishingLevel());
@@ -359,16 +351,12 @@ public class Player extends Character implements Battleable, Tradeable
 					m_money = m_money - q * m_currentShop.getPriceForItem(id);
 					m_bag.addItem(id, q);
 					updateClientMoney();
-					// Let player know he bought the item
-					// TcpProtocolHandler.writeMessage(m_tcpSession, new ShopBuyMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getId()));
-					ServerMessage message = new ServerMessage();
-					message.init(14);
+					/* Let player know he bought the item. */
+					ServerMessage message = new ServerMessage(ClientPacket.BOUGHT_ITEM);
 					message.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
 					getSession().Send(message);
-					// Update player inventory
-					// TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, GameServer.getServiceManager().getItemDatabase().getItem(id).getId(), 1));
-					ServerMessage update = new ServerMessage();
-					update.init(80);
+					/* Update player inventory. */
+					ServerMessage update = new ServerMessage(ClientPacket.UPDATE_ITEM_TOT);
 					update.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
 					update.addInt(1);
 					getSession().Send(update);
@@ -376,19 +364,15 @@ public class Player extends Character implements Battleable, Tradeable
 			}
 			else
 			{
-				// Return You have no money, fool!
-				// TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoMoneyMessage());
-				ServerMessage message = new ServerMessage();
-				message.init(10);
+				/* Return You have no money, fool! */
+				ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
 				getSession().Send(message);
 			}
 		}
 		else
 		{
-			// Send You cant carry any more items!
-			// TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoSpaceMessage());
-			ServerMessage message = new ServerMessage();
-			message.init(11);
+			/* Send You cant carry any more items! */
+			ServerMessage message = new ServerMessage(ClientPacket.POCKET_FULL);
 			getSession().Send(message);
 		}
 	}
@@ -452,12 +436,9 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_requests.size() > 0)
 		{
 			for(String username : m_requests.keySet())
-				/* if(TcpProtocolHandler.containsPlayer(username))
-				 * TcpProtocolHandler.getPlayer(username).getTcpSession().write("rc" + this.getName()); */
 				if(ActiveConnections.getPlayer(username) != null)
 				{
-					ServerMessage sendNot = new ServerMessage();
-					sendNot.init(85);
+					ServerMessage sendNot = new ServerMessage(ClientPacket.REQUEST_CANCELLED);
 					sendNot.addString(getName());
 					ActiveConnections.getPlayer(username).getSession().Send(sendNot);
 				}
@@ -511,11 +492,9 @@ public class Player extends Character implements Battleable, Tradeable
 		m_isTalking = false;
 		m_isReadyToTrade = false;
 		m_trade = null;
-		if(getSession() != null && getSession().getLoggedIn()) /* if(m_tcpSession != null && m_tcpSession.isConnected()) */
+		if(getSession() != null && getSession().getLoggedIn())
 		{
-			// m_tcpSession.write("Tf");
-			ServerMessage tradeFinish = new ServerMessage();
-			tradeFinish.init(7);
+			ServerMessage tradeFinish = new ServerMessage(ClientPacket.TRADE_FINISHED);
 			getSession().Send(tradeFinish);
 		}
 		ensureHealthyPokemon();
@@ -532,19 +511,17 @@ public class Player extends Character implements Battleable, Tradeable
 			if(getMap().caughtFish(this, getFacing(), rod))
 			{
 				Pokemon p = getMap().getWildPokemon(this);
-				// If we have both the required level to fish this thing up and the rod to do it
+				/* If we have both the required level to fish this thing up and the rod to do it. */
 				if(getFishingLevel() >= DataService.getFishDatabase().getFish(p.getSpeciesName()).getReqLevel() && rod >= DataService.getFishDatabase().getFish(p.getSpeciesName()).getReqRod())
 				{
 					addFishingExp(DataService.getFishDatabase().getFish(p.getSpeciesName()).getExperience());
 					ensureHealthyPokemon();
 					m_battleField = new WildBattleField(DataService.getBattleMechanics(), this, p);
 				}
-				// If you either have too low a fishing level or too weak a rod
+				/* If you either have too low a fishing level or too weak a rod. */
 				else
 				{
-					// m_tcpSession.write("FU"); // Notify client you pulled up a fish too strong for you
-					ServerMessage message = new ServerMessage();
-					message.init(48);
+					ServerMessage message = new ServerMessage(ClientPacket.FISH_GOT_AWAY);
 					getSession().Send(message);
 					addFishingExp(10); 	// Conciliatory exp for "hooking" something even if it got away
 				}
@@ -553,9 +530,7 @@ public class Player extends Character implements Battleable, Tradeable
 			{
 				if(getMap().facingWater(this, getFacing()))
 				{
-					// m_tcpSession.write("Fu"); // "Not even a nibble!" message
-					ServerMessage message = new ServerMessage();
-					message.init(49);
+					ServerMessage message = new ServerMessage(ClientPacket.CAUGHT_NOTHING);
 					getSession().Send(message);
 					addFishingExp(1);			// Complementary exp for trying to fish.
 				}
@@ -838,17 +813,8 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public String getIpAddress()
 	{
-		/* if(m_tcpSession != null)
-		 * {
-		 * String ip = m_tcpSession.getRemoteAddress().toString();
-		 * ip = ip.substring(1);
-		 * ip = ip.substring(0, ip.indexOf(":"));
-		 * return ip;
-		 * }
-		 * else
-		 * {
-		 * return "";
-		 * } Fabian Pass Code, Check Plz */
+		/* TODO: The IP address returned is in this format: /127.0.0.1:9845
+		 * Rewrite to remove the unnessecary data. */
 		return getSession().getIpAddress();
 	}
 
@@ -1033,9 +999,7 @@ public class Player extends Character implements Battleable, Tradeable
 						pokemon.setMaxPP(i, move.getPp() * (5 + pokemon.getPpUpCount(i)) / 5);
 					}
 			}
-		// m_tcpSession.write("cH");
-		ServerMessage sendHeal = new ServerMessage();
-		sendHeal.init(58);
+		ServerMessage sendHeal = new ServerMessage(ClientPacket.POKES_HEALED);
 		getSession().Send(sendHeal);
 	}
 
@@ -1044,8 +1008,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void initializeClientSkills()
 	{
-		ServerMessage skillLevels = new ServerMessage();
-		skillLevels.init(53);
+		ServerMessage skillLevels = new ServerMessage(ClientPacket.SKILL_LVL_UP);
 		skillLevels.addInt(getTrainingLevel());
 		skillLevels.addInt(getBreedingLevel());
 		skillLevels.addInt(getFishingLevel());
@@ -1196,9 +1159,7 @@ public class Player extends Character implements Battleable, Tradeable
 						m_repel--;
 					if(m_repel <= 0 && getMap().isWildBattle(m_x, m_y, this))
 					{
-						/* m_tcpSession.write("U" + getX() + "," + getY()); */
-						ServerMessage message = new ServerMessage();
-						message.init(64);
+						ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 						message.addInt(getX());
 						message.addInt(getY());
 						getSession().Send(message);
@@ -1222,9 +1183,7 @@ public class Player extends Character implements Battleable, Tradeable
 		{
 			/* Someone has been trying to move in-battle! RE-SYNC */
 			m_movementQueue.clear();
-			// m_tcpSession.write("U" + getX() + "," + getY());
-			ServerMessage message = new ServerMessage();
-			message.init(64);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 			message.addInt(getX());
 			message.addInt(getY());
 			getSession().Send(message);
@@ -1240,10 +1199,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void queueOtherPlayerMovement(Direction d, int player)
 	{
-		/* String message = "M" + d.name().toUpperCase().charAt(0) + String.valueOf(player);
-		 * m_tcpSession.write(message); */
-		ServerMessage move = new ServerMessage();
-		move.init(65);
+		ServerMessage move = new ServerMessage(ClientPacket.PLAYER_MOVEMENT);
 		move.addInt(player);
 		switch(d.name().toUpperCase().charAt(0))
 		{
@@ -1265,9 +1221,7 @@ public class Player extends Character implements Battleable, Tradeable
 
 	public void receiveTradeOffer(TradeOffer[] o)
 	{
-		// m_tcpSession.write("To" + o[0].getId() + "," + o[1].getId());
-		ServerMessage tradeOffer = new ServerMessage();
-		tradeOffer.init(4);
+		ServerMessage tradeOffer = new ServerMessage(ClientPacket.TRADE_OFFER);
 		tradeOffer.addInt(o[0].getId());
 		tradeOffer.addInt(o[1].getId());
 		getSession().Send(tradeOffer);
@@ -1275,9 +1229,7 @@ public class Player extends Character implements Battleable, Tradeable
 
 	public void receiveTradeOfferCancelation()
 	{
-		// m_tcpSession.write("Tc");
-		ServerMessage tradeCancel = new ServerMessage();
-		tradeCancel.init(5);
+		ServerMessage tradeCancel = new ServerMessage(ClientPacket.TRADE_OFFER_CANCEL);
 		getSession().Send(tradeCancel);
 	}
 
@@ -1324,9 +1276,7 @@ public class Player extends Character implements Battleable, Tradeable
 				m_friends.remove(i);
 				m_database.query("DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
 						+ "') AND friendId = (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "');");
-				// m_tcpSession.write("Fr" + friend);
-				ServerMessage removeFriend = new ServerMessage();
-				removeFriend.init(70);
+				ServerMessage removeFriend = new ServerMessage(ClientPacket.FRIEND_REMOVED);
 				removeFriend.addString(friend);
 				getSession().Send(removeFriend);
 				return;
@@ -1377,15 +1327,10 @@ public class Player extends Character implements Battleable, Tradeable
 							{
 								case DISABLED:
 									/* Some maps have pvp disabled */
-									// otherPlayer.getTcpSession().write("r!2");
-									// m_tcpSession.write("r!2");
-									ServerMessage sendNotOther = new ServerMessage();
-									sendNotOther.init(82);
+									ServerMessage sendNotOther = new ServerMessage(ClientPacket.PVP_PACKETS);
 									sendNotOther.addInt(2);
 									otherPlayer.getSession().Send(sendNotOther);
-
-									ServerMessage sendNot = new ServerMessage();
-									sendNot.init(82);
+									ServerMessage sendNot = new ServerMessage(ClientPacket.PVP_PACKETS);
 									sendNot.addInt(2);
 									getSession().Send(sendNot);
 									return;
@@ -1414,15 +1359,10 @@ public class Player extends Character implements Battleable, Tradeable
 						}
 						else
 						{
-							// m_tcpSession.write("r!4");
-							// otherPlayer.getTcpSession().write("r!4");
-							ServerMessage sendNotOther = new ServerMessage();
-							sendNotOther.init(82);
+							ServerMessage sendNotOther = new ServerMessage(ClientPacket.PVP_PACKETS);
 							sendNotOther.addInt(4);
 							otherPlayer.getSession().Send(sendNotOther);
-
-							ServerMessage sendNot = new ServerMessage();
-							sendNot.init(82);
+							ServerMessage sendNot = new ServerMessage(ClientPacket.PVP_PACKETS);
 							sendNot.addInt(4);
 							getSession().Send(sendNot);
 						}
@@ -1433,9 +1373,7 @@ public class Player extends Character implements Battleable, Tradeable
 		}
 		else
 		{
-			// m_tcpSession.write("r!0");
-			ServerMessage sendNot = new ServerMessage();
-			sendNot.init(82);
+			ServerMessage sendNot = new ServerMessage(ClientPacket.PVP_PACKETS);
 			sendNot.addInt(0);
 			getSession().Send(sendNot);
 		}
@@ -1453,31 +1391,24 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_currentShop == null)
 			return;
 		if(m_bag.containsItem(id) > -1)
-		{ // Guy does have the item he's selling.
+		{
 			m_money = m_money + m_currentShop.sellItem(id, q);
 			m_bag.removeItem(id, q);
-			// Tell the client to remove the item from the player's inventory
-			// TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(false, GameServer.getServiceManager().getItemDatabase().getItem(id).getId(), q));
-			ServerMessage message = new ServerMessage();
-			message.init(81);
+			/* Tell the client to remove the item from the player's inventory. */
+			ServerMessage message = new ServerMessage(ClientPacket.REMOVE_ITEM_BAG);
 			message.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
 			message.addInt(q);
 			getSession().Send(message);
-			// Update the client's money
 			updateClientMoney();
-			// Let player know he sold the item.
-			// TcpProtocolHandler.writeMessage(m_tcpSession, new ShopSellMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getId()));
-			ServerMessage sell = new ServerMessage();
-			sell.init(15);
+			/* Let player know he sold the item. */
+			ServerMessage sell = new ServerMessage(ClientPacket.SOLD_ITEM);
 			sell.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
 			getSession().Send(sell);
 		}
 		else
 		{
-			// Return You don't have that item, fool!
-			// TcpProtocolHandler.writeMessage(m_tcpSession, new ShopNoItemMessage(GameServer.getServiceManager().getItemDatabase().getItem(id).getName()));
-			ServerMessage message = new ServerMessage();
-			message.init(13);
+			/* Return You don't have that item, fool! */
+			ServerMessage message = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
 			message.addString(GameServer.getServiceManager().getItemDatabase().getItem(id).getName());
 			getSession().Send(message);
 		}
@@ -1497,8 +1428,7 @@ public class Player extends Character implements Battleable, Tradeable
 		if(m_boxes[j] == null)
 		{
 			m_boxes[j] = new PokemonBox();
-			ServerMessage message = new ServerMessage();
-			message.init(17);
+			ServerMessage message = new ServerMessage(ClientPacket.ACCESS_BOX);
 			message.addInt(0);
 			getSession().Send(message);
 		}
@@ -1509,8 +1439,7 @@ public class Player extends Character implements Battleable, Tradeable
 				packet += m_boxes[j].getPokemon(i).getSpeciesNumber() + ",";
 			else
 				packet += ",";
-		ServerMessage message = new ServerMessage();
-		message.init(17);
+		ServerMessage message = new ServerMessage(ClientPacket.ACCESS_BOX);
 		message.addInt(1);
 		message.addString(packet);
 		getSession().Send(message);
@@ -1639,7 +1568,7 @@ public class Player extends Character implements Battleable, Tradeable
 			lastFishingTime = System.currentTimeMillis();
 		if(m_map != null)
 		{
-			// Tell clients to update this char to reflect whether player is fishing or not.
+			/* TODO: Tell clients to update this char to reflect whether player is fishing or not. */
 		}
 	}
 
@@ -1723,12 +1652,9 @@ public class Player extends Character implements Battleable, Tradeable
 					break;
 			}
 		super.setMap(map, dir);
-		// Clear the requests list
 		clearRequests();
-		// Send the map switch packet to the client
-		// m_tcpSession.write("ms" + direction + map.getX() + "," + map.getY() + "," + (map.isWeatherForced() ? map.getWeatherId() : TimeService.getWeatherId()));
-		ServerMessage message = new ServerMessage();
-		message.init(72);
+		/* Send the map switch packet to the client. */
+		ServerMessage message = new ServerMessage(ClientPacket.SET_MAP_AND_WEATHER);
 		message.addString(java.lang.Character.toString(direction));
 		message.addInt(map.getX());
 		message.addInt(map.getY());
@@ -1736,14 +1662,14 @@ public class Player extends Character implements Battleable, Tradeable
 		getSession().Send(message);
 		Character c;
 		String packet = "";
-		// Send all player information to the client
+		/* Send all player information to the client. */
 		for(Player p : map.getPlayers().values())
 		{
 			c = p;
 			packet = packet + c.getName() + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
 					+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + "," + p.getAdminLevel() + ",";
 		}
-		// Send all npc information to the client
+		/* Send all npc information to the client. */
 		for(int i = 0; i < map.getNpcs().size(); i++)
 		{
 			c = map.getNpcs().get(i);
@@ -1756,8 +1682,7 @@ public class Player extends Character implements Battleable, Tradeable
 		/* TODO: Clean this stuff up? */
 		if(packet.length() > 2)
 		{
-			ServerMessage initPlayers = new ServerMessage();
-			initPlayers.init(66);
+			ServerMessage initPlayers = new ServerMessage(ClientPacket.INIT_PLAYERS);
 			initPlayers.addString(packet);
 			getSession().Send(initPlayers);
 		}
@@ -1939,9 +1864,7 @@ public class Player extends Character implements Battleable, Tradeable
 			updateClientParty(partySlot);
 		else
 		{
-			// m_tcpSession.write("PN" + partySlot);
-			ServerMessage partyLeave = new ServerMessage();
-			partyLeave.init(38);
+			ServerMessage partyLeave = new ServerMessage(ClientPacket.POKE_LEAVE_PARTY);
 			partyLeave.addInt(partySlot);
 			getSession().Send(partyLeave);
 		}
@@ -1960,9 +1883,7 @@ public class Player extends Character implements Battleable, Tradeable
 			Pokemon temp = m_pokemon[a];
 			m_pokemon[a] = m_pokemon[b];
 			m_pokemon[b] = temp;
-			// m_tcpSession.write("s" + a + "," + b);
-			ServerMessage sendSwap = new ServerMessage();
-			sendSwap.init(8);
+			ServerMessage sendSwap = new ServerMessage(ClientPacket.SWAP_PARTY);
 			sendSwap.addInt(a);
 			sendSwap.addInt(b);
 			getSession().Send(sendSwap);
@@ -1987,9 +1908,7 @@ public class Player extends Character implements Battleable, Tradeable
 		String data = "";
 		for(int i = 0; i < m_badges.length; i++)
 			data += m_badges[i];
-		// m_tcpSession.write("cBi" + data);
-		ServerMessage message = new ServerMessage();
-		message.init(52);
+		ServerMessage message = new ServerMessage(ClientPacket.BADGES_PACKET);
 		message.addInt(0);
 		message.addString(data);
 		getSession().Send(message);
@@ -2013,9 +1932,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(getBag().getItems().get(i) != null)
 		{
-			// TcpProtocolHandler.writeMessage(m_tcpSession, new ItemMessage(true, getBag().getItems().get(i).getItemNumber(), getBag().getItems().get(i).getQuantity()));
-			ServerMessage message = new ServerMessage();
-			message.init(80);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_ITEM_TOT);
 			message.addInt(getBag().getItems().get(i).getItemNumber());
 			message.addInt(getBag().getItems().get(i).getQuantity());
 			getSession().Send(message);
@@ -2040,8 +1957,7 @@ public class Player extends Character implements Battleable, Tradeable
 		for(int i = 0; i < m_friends.size(); i++)
 		{
 			String friend = m_friends.get(i);
-			ServerMessage friendMessage = new ServerMessage();
-			friendMessage.init(69);
+			ServerMessage friendMessage = new ServerMessage(ClientPacket.FRIEND_ADDED);
 			friendMessage.addString(friend);
 			getSession().Send(friendMessage);
 		}
@@ -2052,9 +1968,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientMoney()
 	{
-		// m_tcpSession.write("cM" + m_money);
-		ServerMessage message = new ServerMessage();
-		message.init(88);
+		ServerMessage message = new ServerMessage(ClientPacket.MONEY_CHANGED);
 		message.addInt(m_money);
 		getSession().Send(message);
 	}
@@ -2077,23 +1991,6 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(getParty()[i] != null)
 		{
-			/* m_tcpSession.write("Pi" + i + PokemonSpecies.getDefaultData().getPokemonByName(this.getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + this.getParty()[i].getName() + ","
-			 * + this.getParty()[i].getHealth() + "," + this.getParty()[i].getGender() + "," + (this.getParty()[i].isShiny() ? 1 : 0) + "," + this.getParty()[i].getStat(0) + ","
-			 * + this.getParty()[i].getStat(1) + "," + this.getParty()[i].getStat(2) + "," + this.getParty()[i].getStat(3) + "," + this.getParty()[i].getStat(4) + ","
-			 * + this.getParty()[i].getStat(5) + "," + this.getParty()[i].getTypes()[0] + ","
-			 * + (this.getParty()[i].getTypes().length > 1 && this.getParty()[i].getTypes()[1] != null ? this.getParty()[i].getTypes()[1] + "," : ",") + this.getParty()[i].getExp() + ","
-			 * + this.getParty()[i].getLevel() + "," + this.getParty()[i].getAbilityName() + "," + this.getParty()[i].getNature().getName() + ","
-			 * + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMoveName(0) : "") + "," + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMoveName(1) : "")
-			 * + "," + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMoveName(2) : "") + ","
-			 * + (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMoveName(3) : "") + ","
-			 * + (this.getParty()[i].getMoves()[0] != null ? this.getParty()[i].getMove(0).getMove().getType().toString() : "") + ","
-			 * + (this.getParty()[i].getMoves()[1] != null ? this.getParty()[i].getMove(1).getMove().getType().toString() : "") + ","
-			 * + (this.getParty()[i].getMoves()[2] != null ? this.getParty()[i].getMove(2).getMove().getType().toString() : "") + ","
-			 * + (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + ","
-			 * + this.getParty()[i].getItemName() + ","
-			 * + (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()) + ","
-			 * + (int)this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()+1) + ","
-			 * + this.getParty()[i].getOriginalTrainer()); */
 			String data = PokemonSpecies.getDefaultData().getPokemonByName(getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + getParty()[i].getName() + "," + getParty()[i].getHealth() + ","
 					+ getParty()[i].getGender() + "," + (getParty()[i].isShiny() ? 1 : 0) + "," + getParty()[i].getStat(0) + "," + getParty()[i].getStat(1) + "," + getParty()[i].getStat(2) + ","
 					+ getParty()[i].getStat(3) + "," + getParty()[i].getStat(4) + "," + getParty()[i].getStat(5) + "," + getParty()[i].getTypes()[0] + ","
@@ -2107,8 +2004,7 @@ public class Player extends Character implements Battleable, Tradeable
 					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + "," + this.getParty()[i].getItemName() + ","
 					+ (int) this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()) + "," + (int) this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel() + 1) + ","
 					+ this.getParty()[i].getOriginalTrainer();
-			ServerMessage message = new ServerMessage();
-			message.init(39);
+			ServerMessage message = new ServerMessage(ClientPacket.INIT_POKEDEX);
 			message.addInt(i);
 			message.addString(data);
 			getSession().Send(message);
@@ -2124,21 +2020,11 @@ public class Player extends Character implements Battleable, Tradeable
 	public void updateClientPokedex()
 	{
 		String msgString = "";
-		ServerMessage message = new ServerMessage();
-		message.init(90);
+		ServerMessage message = new ServerMessage(ClientPacket.INIT_POKEDEX);
 		for(int i = 1; i < m_pokedex.getPokedex().length; i++)
 			msgString += (m_pokedex.getPokedex()[i] + ",");
 		message.addString(msgString.substring(0, msgString.length() - 1));
 		getSession().Send(message);
-
-		/* for(int i = 1; i < m_pokedex.getPokedex().length; i++)
-		 * {
-		 * ServerMessage message = new ServerMessage();
-		 * message.Init(91);
-		 * message.addInt(i);
-		 * message.addInt(m_pokedex.getPokedex()[i]);
-		 * getSession().Send(message);
-		 * } */
 	}
 
 	/**
@@ -2149,9 +2035,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientPokedex(int id, int value)
 	{
-		/* m_tcpSession.write("Xu," + id + "," + value); */
-		ServerMessage message = new ServerMessage();
-		message.init(91);
+		ServerMessage message = new ServerMessage(ClientPacket.UPDATE_POKEDEX);
 		message.addInt(id);
 		message.addInt(value);
 		getSession().Send(message);
@@ -2166,12 +2050,9 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(m_pokemon[i] != null)
 		{
-			/* m_tcpSession.write("PS" + i + m_pokemon[i].getHealth() + "," + m_pokemon[i].getStat(0) + "," + m_pokemon[i].getStat(1) + "," + m_pokemon[i].getStat(2) + "," + m_pokemon[i].getStat(3)
-			 * + "," + m_pokemon[i].getStat(4) + "," + m_pokemon[i].getStat(5)); */
 			String data = m_pokemon[i].getHealth() + "," + m_pokemon[i].getStat(0) + "," + m_pokemon[i].getStat(1) + "," + m_pokemon[i].getStat(2) + "," + m_pokemon[i].getStat(3) + ","
 					+ m_pokemon[i].getStat(4) + "," + m_pokemon[i].getStat(5);
-			ServerMessage message = new ServerMessage();
-			message.init(37);
+			ServerMessage message = new ServerMessage(ClientPacket.POKE_STATUS_UPDATE);
 			message.addInt(i);
 			message.addString(data);
 			getSession().Send(message);
@@ -2188,9 +2069,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(getParty()[poke] != null && getParty()[poke].getMove(move) != null)
 		{
-			// m_tcpSession.write("Pp" + String.valueOf(poke) + String.valueOf(move) + this.getParty()[poke].getPp(move) + "," + this.getParty()[poke].getMaxPp(move));
-			ServerMessage message = new ServerMessage();
-			message.init(89);
+			ServerMessage message = new ServerMessage(ClientPacket.POKE_CUR_PP);
 			message.addInt(poke);
 			message.addInt(move);
 			message.addInt(getParty()[poke].getPp(move));
@@ -2204,9 +2083,7 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void updateClientSprite()
 	{
-		// TcpProtocolHandler.writeMessage(m_tcpSession, new SpriteChangeMessage(m_id, m_sprite));
-		ServerMessage message = new ServerMessage();
-		message.init(63);
+		ServerMessage message = new ServerMessage(ClientPacket.SPRITE_CHANGE);
 		message.addInt(m_id);
 		message.addInt(m_sprite);
 		getSession().Send(message);

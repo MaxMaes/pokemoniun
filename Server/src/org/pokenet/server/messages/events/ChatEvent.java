@@ -5,6 +5,7 @@ import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
@@ -33,8 +34,7 @@ public class ChatEvent implements MessageEvent
 					for(Session ses : ActiveConnections.allSessions().values())
 						if(ses.getPlayer() != null)
 						{
-							ServerMessage globalChat = new ServerMessage();
-							globalChat.init(50);
+							ServerMessage globalChat = new ServerMessage(ClientPacket.CHAT_PACKET);
 							globalChat.addInt(0);
 							globalChat.addString("<" + player.getName() + "> " + msg);
 							ses.Send(globalChat);
@@ -46,8 +46,7 @@ public class ChatEvent implements MessageEvent
 				Player target = ActiveConnections.getPlayer(targetPlayer);
 				if(target != null)
 				{
-					ServerMessage targetMessage = new ServerMessage();
-					targetMessage.init(50);
+					ServerMessage targetMessage = new ServerMessage(ClientPacket.CHAT_PACKET);
 					targetMessage.addInt(1);
 					targetMessage.addString(player.getName() + "," + "<" + player.getName() + "> " + details[1]);
 					target.getSession().Send(targetMessage);

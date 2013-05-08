@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.SortedSet;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.mechanics.BattleMechanics;
 import org.pokenet.server.battle.mechanics.ModData;
@@ -56,6 +55,7 @@ import org.pokenet.server.battle.mechanics.statuses.StatusListener;
 import org.pokenet.server.battle.mechanics.statuses.ToxicEffect;
 import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
 import org.pokenet.server.battle.mechanics.statuses.items.HoldItem;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
@@ -303,7 +303,7 @@ public class Pokemon extends PokemonSpecies
 		}
 		PokemonNature nature = PokemonNature.getNature(random.nextInt(25));
 		PokemonSpeciesData speciesData = d;
-		int chosenPoke = random.nextInt(478);	//speciesData.getSpeciesCount());	//cut off the top so 4th gen legends are not included
+		int chosenPoke = random.nextInt(478);	// speciesData.getSpeciesCount()); //cut off the top so 4th gen legends are not included
 		switch(chosenPoke)
 		{
 			case 132:
@@ -327,80 +327,80 @@ public class Pokemon extends PokemonSpecies
 			case 151:
 				chosenPoke = random.nextInt(131);
 				break;
-			//johto
+			// johto
 			case 233:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 235:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 243:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 244:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 245:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 249:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 250:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
 			case 251:
-				chosenPoke = random.nextInt(81)+151;
+				chosenPoke = random.nextInt(81) + 151;
 				break;
-			//hoenn
+			// hoenn
 			case 377:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 378:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 379:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 380:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 381:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 382:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 383:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 384:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 385:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
 			case 386:
-				chosenPoke = random.nextInt(124)+252;
+				chosenPoke = random.nextInt(124) + 252;
 				break;
-			//sinnoh
+			// sinnoh
 			case 474:
-				chosenPoke = random.nextInt(87)+252;
+				chosenPoke = random.nextInt(87) + 252;
 				break;
 		}
 		PokemonSpecies species = speciesData.getSpecies(chosenPoke);
-//		String[] moveset = species.getStarterMoves();
-//		if(moveset == null || moveset.length == 0)
-//			return null;
+		// String[] moveset = species.getStarterMoves();
+		// if(moveset == null || moveset.length == 0)
+		// return null;
 		int moveCount = 4;
 		String[] moves = species.getLevelMoves().values().toArray(new String[species.getLevelMoves().size()]);
-//		int j =0;
-//		for(int i = moves.length; i < moves.length + species.getTMMoves().length; i++)		
-//		{
-//			moves[i] = species.getTMMoves()[j];
-//			j++;
-//		}
-		
+		// int j =0;
+		// for(int i = moves.length; i < moves.length + species.getTMMoves().length; i++)
+		// {
+		// moves[i] = species.getTMMoves()[j];
+		// j++;
+		// }
+
 		MoveListEntry[] entries = new MoveListEntry[moveCount >= 4 ? 4 : moveCount];
 		Set<String> moveSet = new HashSet<String>();
 		int[] ppUp = new int[entries.length];
@@ -411,7 +411,7 @@ public class Pokemon extends PokemonSpecies
 				move = moves[random.nextInt(moves.length)];
 			while(moveSet.contains(move));
 			moveSet.add(move);
-			entries[i] = MoveList.getDefaultData().getMove(move);//d.getMoveData().getMove(move);
+			entries[i] = MoveList.getDefaultData().getMove(move);// d.getMoveData().getMove(move);
 			ppUp[i] = random.nextInt(4);
 		}
 
@@ -419,7 +419,7 @@ public class Pokemon extends PokemonSpecies
 		String[] itemes = species.getPossibleAbilities(speciesData);
 		if(itemes != null)
 			ability = itemes[random.nextInt(itemes.length)];
-		
+
 		int genders = species.getPossibleGenders();
 		int gender = GENDER_NONE;
 		if(genders != GENDER_NONE)
@@ -434,8 +434,8 @@ public class Pokemon extends PokemonSpecies
 		}
 		Pokemon p = new Pokemon(mech, species, nature, ability, "", gender, lvl, ivs, evs, entries, ppUp);
 		// Give it a 5% chance of being shiny.
-		if(random.nextDouble() < (1/8192))
-			
+		if(random.nextDouble() < (1 / 8192))
+
 			p.setShiny(true);
 		return p;
 	}
@@ -515,7 +515,7 @@ public class Pokemon extends PokemonSpecies
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
 		p.setRareness(ps.getRareness());
-		if(random.nextDouble() < (1/8192))
+		if(random.nextDouble() < (1 / 8192))
 			p.setShiny(true);
 		return p;
 	}
@@ -1012,16 +1012,13 @@ public class Pokemon extends PokemonSpecies
 		{
 			/* Get the index of the Pokemon in the player's party */
 			int index = p.getPokemonIndex(this);
-
 			if(allow)
 				/* The player is allowing evolution, evolve the Pokemon */
 				evolve(PokemonSpecies.getDefaultData().getPokemonByName(m_evolution.getEvolveTo()));
 			/* Retrieve the Pokemon data */
 			PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(getSpeciesName());
-
 			setHappiness(m_happiness + 2);
 			calculateStats(false);
-
 			/* Now learn any moves that need learning */
 			int level = DataService.getBattleMechanics().calculateLevel(this);
 			int oldLevel = getLevel();
@@ -1035,23 +1032,19 @@ public class Pokemon extends PokemonSpecies
 					if(move != null && !move.equalsIgnoreCase("") && !hasMove(move))
 						m_movesLearning.add(move);
 				}
-			/* Save the Pokemon's level */
 			setLevel(level);
 			/* Update the client with new Pokemon information */
 			p.updateClientParty(index);
 			/* Inform the client this Pokemon wants to learn new moves */
 			for(int i = 0; i < m_movesLearning.size(); i++)
 			{
-				// p.getTcpSession().write("Pm" + index + m_movesLearning.get(i));
-				ServerMessage message = new ServerMessage();
-				message.init(40);
+				ServerMessage message = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
 				message.addInt(index);
 				message.addString(m_movesLearning.get(i));
 				p.getSession().Send(message);
 			}
 			p.updateClientPokemonStats(index);
-
-			// Enter this pokemon in the pokedex
+			/* Enter this pokemon in the pokedex. */
 			p.setPokemonCaught(pokeData.getSpeciesNumber() + 1);
 		}
 	}
@@ -2459,7 +2452,7 @@ public class Pokemon extends PokemonSpecies
 		for(int i = 0; i < size; ++i)
 			m_statuses.get(i).switchIn(this);
 	}
-	
+
 	/**
 	 * return a list of all status effects that effect this pokemon
 	 */

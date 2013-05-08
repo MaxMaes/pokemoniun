@@ -3,6 +3,7 @@ package org.pokenet.server.messages.events;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
@@ -18,8 +19,7 @@ public class UnMuteEvent implements MessageEvent
 		if(player != null && mod.getAdminLevel() >= UserClasses.MODERATOR)
 		{
 			player.setMuted(false);
-			ServerMessage unmuteMessage = new ServerMessage();
-			unmuteMessage.init(1);
+			ServerMessage unmuteMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
 			unmuteMessage.addString("You have been unmuted.");
 			player.getSession().Send(unmuteMessage);
 		}

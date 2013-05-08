@@ -14,6 +14,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -195,12 +196,10 @@ public class TimeService implements Runnable
 				Player player = session.getPlayer();
 				if(System.currentTimeMillis() - m_idleKickTime > player.lastPacket)
 				{
-					ServerMessage idleMessage = new ServerMessage();
-					idleMessage.init(1);
+					ServerMessage idleMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
 					idleMessage.addString("You have been kicked for idling too long!");
 					session.Send(idleMessage);
-					ServerMessage login = new ServerMessage();
-					login.init(54);
+					ServerMessage login = new ServerMessage(ClientPacket.RETURN_TO_LOGIN);
 					session.Send(login);
 					GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
 					GameServer.getServiceManager().getMovementService().removePlayer(player.getName());

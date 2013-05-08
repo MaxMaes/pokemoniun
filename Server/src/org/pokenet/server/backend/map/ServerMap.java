@@ -15,6 +15,7 @@ import org.pokenet.server.backend.entity.Positionable.Direction;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.impl.NpcBattleLauncher;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.feature.TimeService.Weather;
 import org.pokenet.server.protocol.ServerMessage;
@@ -304,10 +305,10 @@ public class ServerMap
 					if(c instanceof NPC)
 						name = "!NPC!";
 					/* p.getTcpSession().write("ma" + name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R")); */
-					ServerMessage message = new ServerMessage();
-					message.init(67);
+					ServerMessage message = new ServerMessage(ClientPacket.ADD_PLAYER_MAP);
 					message.addString(name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
-							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + "," + m_players.get(c.getName()).getAdminLevel());
+							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ","
+							+ m_players.get(c.getName()).getAdminLevel());
 					p.getSession().Send(message);
 				}
 		}
@@ -374,9 +375,8 @@ public class ServerMap
 		}
 		else
 		{
-			// c.getTcpSession().write("Ff"); // Tell the player he can't fish on land
-			ServerMessage message = new ServerMessage();
-			message.init(47);
+			/* Tell the player he can't fish on land. */
+			ServerMessage message = new ServerMessage(ClientPacket.CANT_FISH_LAND);
 			c.getSession().Send(message);
 		}
 		return false;
@@ -891,9 +891,7 @@ public class ServerMap
 		{
 			for(Player p : m_players.values())
 			{
-				// p.getTcpSession().write("mr" + c.getId());
-				ServerMessage message = new ServerMessage();
-				message.init(71);
+				ServerMessage message = new ServerMessage(ClientPacket.REMOVE_PLAYER_MAP);
 				message.addInt(c.getId());
 				p.getSession().Send(message);
 			}

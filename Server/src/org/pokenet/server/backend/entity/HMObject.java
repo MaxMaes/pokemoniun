@@ -3,6 +3,7 @@ package org.pokenet.server.backend.entity;
 import java.util.Timer;
 import java.util.TimerTask;
 import org.pokenet.server.GameServer;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -145,8 +146,7 @@ public class HMObject extends NPC
 		{
 			// The player isn't strong enough to do this. Alert client
 			// p.getTcpSession().write("ch" + getRequiredTrainerLevel(m_HMType));
-			ServerMessage message = new ServerMessage();
-			message.init(51);
+			ServerMessage message = new ServerMessage(ClientPacket.TRAIN_LVL_LOW);
 			message.addInt(getRequiredTrainerLevel(m_HMType));
 			p.getSession().Send(message);
 		}

@@ -11,6 +11,7 @@ import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.battle.mechanics.PokemonNature;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -113,9 +114,7 @@ public class NPC extends Character
 		String speech = getSpeech();
 		if(!speech.equalsIgnoreCase(""))
 		{
-			// TcpProtocolHandler.writeMessage(p.getTcpSession(), new NpcSpeechMessage(speech));
-			ServerMessage message = new ServerMessage();
-			message.init(50);
+			ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 			message.addInt(2);
 			message.addString(speech);
 			p.getSession().Send(message);
@@ -1232,8 +1231,7 @@ public class NPC extends Character
 				String speech = getSpeech();
 				if(!speech.equalsIgnoreCase(""))
 				{
-					ServerMessage message = new ServerMessage();
-					message.init(50);
+					ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 					message.addInt(2);
 					message.addString(speech);
 					player.getSession().Send(message);
@@ -1276,8 +1274,7 @@ public class NPC extends Character
 							timer.cancel();
 						}
 					}, 20 * 1000);
-					ServerMessage message = new ServerMessage();
-					message.init(50);
+					ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 					message.addInt(2);
 					message.addString(speech);
 					player.getSession().Send(message);
@@ -1286,8 +1283,7 @@ public class NPC extends Character
 			if(m_name.equalsIgnoreCase("Spriter"))
 			{
 				player.setSpriting(true);
-				ServerMessage message = new ServerMessage();
-				message.init(16);
+				ServerMessage message = new ServerMessage(ClientPacket.SPRITE_SELECT);
 				player.getSession().Send(message);
 				return;
 			}
@@ -1296,8 +1292,7 @@ public class NPC extends Character
 			if(m_name.equalsIgnoreCase("Seasond_Sailor"))
 			{
 				player.setIsTaveling(true);
-				ServerMessage message = new ServerMessage();
-				message.init(95);
+				ServerMessage message = new ServerMessage(ClientPacket.TRAVEL_BOAT);
 				player.getSession().Send(message);
 				return;
 			}
@@ -1306,8 +1301,7 @@ public class NPC extends Character
 			if(m_name.equalsIgnoreCase("Ticket_Vendor"))
 			{
 				player.setIsTaveling(true);
-				ServerMessage message = new ServerMessage();
-				message.init(96);
+				ServerMessage message = new ServerMessage(ClientPacket.TRAVEL_EVENT);
 				player.getSession().Send(message);
 				return;
 			}
@@ -1325,8 +1319,7 @@ public class NPC extends Character
 			if(m_name.contains("Battlefrontier"))
 			{
 				player.setIsTaveling(true);
-				ServerMessage message = new ServerMessage();
-				message.init(99);
+				ServerMessage message = new ServerMessage(ClientPacket.BATTLEFRONTIER_EVENT);
 				player.getSession().Send(message);
 				return;
 			}
@@ -1351,8 +1344,7 @@ public class NPC extends Character
 			{
 				if(!player.isShopping())
 				{
-					ServerMessage message = new ServerMessage();
-					message.init(9);
+					ServerMessage message = new ServerMessage(ClientPacket.SHOP_LIST);
 					message.addString(m_shop.getStockData());
 					player.getSession().Send(message);
 					player.setShopping(true);

@@ -3,6 +3,7 @@ package org.pokenet.server.backend.entity;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.pokenet.server.backend.map.ServerMap;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -254,8 +255,7 @@ public class Character implements Positionable
 				{
 					// If its a player, resync them
 					Player p = (Player) this;
-					ServerMessage message = new ServerMessage();
-					message.init(64);
+					ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 					message.addInt(getX());
 					message.addInt(getY());
 					p.getSession().Send(message);
@@ -367,8 +367,7 @@ public class Character implements Positionable
 		if(m_map != null)
 		{
 			// m_map.sendToAll(new SpriteChangeMessage(m_id, this.getSprite()));
-			ServerMessage message = new ServerMessage();
-			message.init(63);
+			ServerMessage message = new ServerMessage(ClientPacket.SPRITE_CHANGE);
 			message.addInt(m_id);
 			message.addInt(getSprite());
 			m_map.sendToAll(message);
@@ -386,8 +385,7 @@ public class Character implements Positionable
 		if(m_map != null)
 		{
 			// m_map.sendToAll(new SpriteChangeMessage(m_id, this.getSprite()));
-			ServerMessage message = new ServerMessage();
-			message.init(63);
+			ServerMessage message = new ServerMessage(ClientPacket.SPRITE_CHANGE);
 			message.addInt(m_id);
 			message.addInt(getSprite());
 			m_map.sendToAll(message);

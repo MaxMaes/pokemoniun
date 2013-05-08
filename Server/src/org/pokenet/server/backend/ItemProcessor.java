@@ -18,6 +18,7 @@ import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -63,7 +64,7 @@ public class ItemProcessor implements Runnable
 		{
 			m_player.getBag().removeItem(itemNumber, 1);
 			ServerMessage message = new ServerMessage(m_player.getSession());
-			message.init(81);
+			message.init(ClientPacket.REMOVE_ITEM_BAG.getValue());
 			message.addInt(itemNumber);
 			message.addInt(1);
 			message.sendResponse();
@@ -109,9 +110,8 @@ public class ItemProcessor implements Runnable
 					else
 					{
 						// Notify client that you need a fishing level of 15 or higher for this rod
-						// p.getTcpSession().write("FF15");
 						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(46);
+						message.init(ClientPacket.CANT_USE_ROD.getValue());
 						message.addInt(15);
 						message.sendResponse();
 					}
@@ -127,9 +127,8 @@ public class ItemProcessor implements Runnable
 					else
 					{
 						// Notify client that you need a fishing level of 50 or higher for this rod
-						// p.getTcpSession().write("FF50");
 						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(46);
+						message.init(ClientPacket.CANT_USE_ROD.getValue());
 						message.addInt(50);
 						message.sendResponse();
 					}
@@ -145,9 +144,8 @@ public class ItemProcessor implements Runnable
 					else
 					{
 						// Notify client that you need a fishing level of 70 or higher for this rod
-						// p.getTcpSession().write("FF70");
 						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(46);
+						message.init(ClientPacket.CANT_USE_ROD.getValue());
 						message.addInt(70);
 						message.sendResponse();
 					}
@@ -198,9 +196,7 @@ public class ItemProcessor implements Runnable
 					if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
 					{
 						poke.getMovesLearning().add(moveName);
-						// m_player.getTcpSession().write("Pm" + data[0] + moveName);
-						ServerMessage message = new ServerMessage();
-						message.init(40);
+						ServerMessage message = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
 						message.addInt(Integer.parseInt(data[0]));
 						message.addString(moveName);
 						m_player.getSession().Send(message);
@@ -227,8 +223,7 @@ public class ItemProcessor implements Runnable
 
 					if(poke.getHealth() <= 0)
 					{
-						ServerMessage cantUse = new ServerMessage();
-						cantUse.init(98);
+						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
 						p.getSession().Send(cantUse);
 						return false;
 					}
@@ -263,16 +258,11 @@ public class ItemProcessor implements Runnable
 					if(!p.isBattling())
 					{
 						/* Update the client */
-						// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-						// p.getTcpSession().write("Ii" + message);
-						ServerMessage hpChange = new ServerMessage();
-						hpChange.init(45);
+						ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 						hpChange.addInt(Integer.parseInt(data[0]));
 						hpChange.addInt(poke.getHealth());
 						m_player.getSession().Send(hpChange);
-
-						ServerMessage itemUse = new ServerMessage();
-						itemUse.init(92);
+						ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 						itemUse.addString(message);
 						m_player.getSession().Send(itemUse);
 					}
@@ -369,8 +359,7 @@ public class ItemProcessor implements Runnable
 					// Check if this pokemon is alive to use all items but revive, REVIVE NOT IMPLEMENTED!!! Implement it before this piece of code!
 					if(poke.getHealth() <= 0)
 					{
-						ServerMessage cantUse = new ServerMessage();
-						cantUse.init(98);
+						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
 						p.getSession().Send(cantUse);
 						return false;
 					}
@@ -383,9 +372,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -399,9 +386,8 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().forceExecuteTurn();
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -416,8 +402,8 @@ public class ItemProcessor implements Runnable
 						else
 						{
 							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -432,8 +418,8 @@ public class ItemProcessor implements Runnable
 						else
 						{
 							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -447,9 +433,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().forceExecuteTurn();
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -463,9 +447,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().forceExecuteTurn();
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -506,9 +488,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -522,9 +502,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -538,9 +516,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -554,9 +530,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -570,9 +544,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -580,7 +552,8 @@ public class ItemProcessor implements Runnable
 					}
 					else if(i.getId() == 205)
 					{ // Leppa Berry
-						String message = "Leppa Berry had no effect"; /* Move selection not completed, temp message TODO: Add support for this */
+						String message = "Leppa Berry had no effect";
+						/* Move selection not completed, temp message TODO: Add support for this */
 						int ppSlot = Integer.parseInt(data[1]);
 						if(poke.getPp(ppSlot) + 10 <= poke.getMaxPp(ppSlot))
 							poke.setPp(ppSlot, poke.getPp(ppSlot) + 10);
@@ -590,8 +563,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -603,16 +575,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(10);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -628,9 +595,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -644,9 +609,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -658,16 +621,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(30);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -681,16 +639,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(poke.getRawStat(0) / 8);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -704,16 +657,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(poke.getRawStat(0) / 8);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -727,16 +675,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(poke.getRawStat(0) / 8);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -750,16 +693,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(poke.getRawStat(0) / 8);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -773,16 +711,11 @@ public class ItemProcessor implements Runnable
 						poke.changeHealth(poke.getRawStat(0) / 8);
 						if(!p.isBattling())
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -806,16 +739,11 @@ public class ItemProcessor implements Runnable
 						}
 						else
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -827,13 +755,9 @@ public class ItemProcessor implements Runnable
 						for(int ppSlot = 0; ppSlot < 4; ppSlot++)
 						{
 							if(poke.getPp(ppSlot) + 5 <= poke.getMaxPp(ppSlot))
-							{
 								poke.setPp(ppSlot, poke.getPp(ppSlot) + 5);
-							}
 							else
-							{
 								poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
-							}
 						}
 						int random = rand.nextInt(10);
 						if(random < 3)
@@ -851,9 +775,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -875,16 +797,11 @@ public class ItemProcessor implements Runnable
 						}
 						else
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii"+message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}
@@ -908,9 +825,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii"+message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -934,9 +849,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii"+message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -960,9 +873,7 @@ public class ItemProcessor implements Runnable
 							p.getBattleField().executeItemTurn(i.getId());
 						else
 						{
-							// p.getTcpSession().write("Ii"+message);
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 							return true;
@@ -987,16 +898,11 @@ public class ItemProcessor implements Runnable
 						}
 						else
 						{
-							// p.getTcpSession().write("Ph" + data[0] + poke.getHealth());
-							// p.getTcpSession().write("Ii"+message);
-							ServerMessage hpChange = new ServerMessage();
-							hpChange.init(45);
+							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 							hpChange.addInt(Integer.parseInt(data[0]));
 							hpChange.addInt(poke.getHealth());
 							p.getSession().Send(hpChange);
-
-							ServerMessage itemUse = new ServerMessage();
-							itemUse.init(92);
+							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 							itemUse.addString(message);
 							p.getSession().Send(itemUse);
 						}

@@ -8,6 +8,7 @@ import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.ChatManager;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -163,22 +164,19 @@ public class NetworkService
 			s = it.next();
 			if(s.getPlayer() != null)
 			{
-				ServerMessage message = new ServerMessage();
-				message.init(2);
+				ServerMessage message = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 				message.addString("Saving...");
 				s.Send(message);
 
 				if(m_saveManager.savePlayer(s.getPlayer()) == 0)
 				{
-					ServerMessage succesmg = new ServerMessage();
-					succesmg.init(2);
+					ServerMessage succesmg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 					succesmg.addString("Save succesfull.");
 					s.Send(succesmg);
 				}
 				else
 				{
-					ServerMessage failmsg = new ServerMessage();
-					failmsg.init(2);
+					ServerMessage failmsg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 					failmsg.addString("Save Failed.");
 					s.Send(failmsg);
 					System.err.println("Error saving player" + s.getPlayer().getName() + " " + s.getPlayer().getId());

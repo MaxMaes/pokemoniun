@@ -11,7 +11,7 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.HMObject;
 import org.pokenet.client.backend.entity.Player;
 import org.pokenet.client.backend.entity.Player.Direction;
-import org.pokenet.client.constants.UserClasses;
+import org.pokenet.client.constants.UserClass;
 
 /**
  * Represents a map to be rendered on screen
@@ -378,42 +378,42 @@ public class ClientMap extends TiledMap
 					{
 						switch(player.getAdminLevel())
 						{
-							case UserClasses.OWNER:
+							case UserClass.OWNER:
 								Color previous = g.getColor();
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
 								g.setColor(new Color(94, 136, 99));
 								g.drawString("<Owner>", m_xOffset + player.getX() - g.getFont().getWidth("<Owner>") / 2 + 16, m_yOffset + player.getY() - 22);
 								g.setColor(previous);
 								break;
-							case UserClasses.DEVELOPER:
+							case UserClass.DEVELOPER:
 								previous = g.getColor();
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
 								g.setColor(new Color(96, 168, 168));
 								g.drawString("<Dev>", m_xOffset + player.getX() - g.getFont().getWidth("<Dev>") / 2 + 16, m_yOffset + player.getY() - 22);
 								g.setColor(previous);
 								break;
-							case UserClasses.SUPER_MOD:
+							case UserClass.SUPER_MOD:
 								previous = g.getColor();
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
 								g.setColor(new Color(120, 0, 192));
 								g.drawString("<SuperMod>", m_xOffset + player.getX() - g.getFont().getWidth("<SuperMod>") / 2 + 16, m_yOffset + player.getY() - 22);
 								g.setColor(previous);
 								break;
-							case UserClasses.MODERATOR:
+							case UserClass.MODERATOR:
 								previous = g.getColor();
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
 								g.setColor(new Color(120, 0, 192));
 								g.drawString("<Mod>", m_xOffset + player.getX() - g.getFont().getWidth("<Mod>") / 2 + 16, m_yOffset + player.getY() - 22);
 								g.setColor(previous);
 								break;
-							case UserClasses.DONATOR:
+							case UserClass.DONATOR:
 								previous = g.getColor();
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 40);
 								g.setColor(new Color(255, 223, 0));
 								g.drawString("<Donator>", m_xOffset + player.getX() - g.getFont().getWidth("<Donator>") / 2 + 16, m_yOffset + player.getY() - 22);
 								g.setColor(previous);
 								break;
-							case UserClasses.DEFAULT:
+							case UserClass.DEFAULT:
 								g.drawString(player.getUsername(), m_xOffset + player.getX() - g.getFont().getWidth(player.getUsername()) / 2 + 16, m_yOffset + player.getY() - 36);
 								break;
 							default:

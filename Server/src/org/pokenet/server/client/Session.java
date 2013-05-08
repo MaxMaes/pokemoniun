@@ -3,6 +3,7 @@ package org.pokenet.server.client;
 import org.jboss.netty.channel.Channel;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -20,10 +21,10 @@ public class Session
 		authenticated = false;
 		ipAddress = IP;
 
-		ServerMessage Message = new ServerMessage(this);
-		Message.init(100);
-		Message.addInt(GameServer.REVISION);
-		Message.sendResponse();
+		ServerMessage message = new ServerMessage(this);
+		message.init(ClientPacket.SERVER_REVISION.getValue());
+		message.addInt(GameServer.REVISION);
+		message.sendResponse();
 	}
 
 	public void close()
@@ -53,6 +54,9 @@ public class Session
 
 	public void parseMessage(ClientMessage msg)
 	{
+		/* If the player is logged in reset his lastPacket time for the idlekicker. */
+		if(player != null)
+			player.lastPacket = System.currentTimeMillis();
 		if(GameServer.getServiceManager().getNetworkService().getConnections().getMessages().contains(msg.getId()))
 			GameServer.getServiceManager().getNetworkService().getConnections().getMessages().get(msg.getId()).Parse(this, msg, new ServerMessage(this));
 	}

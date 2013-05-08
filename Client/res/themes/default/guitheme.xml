@@ -279,4 +279,26 @@
         <area name="expbar" xywh="19,139,1,5"/>
     
     </images>
+    <images file="bag.png">
+        <area name="bag_topright" xywh="1,1,56,57"/>
+        <area name="bag_topleft" xywh="58,1,56,59"/>
+        <area name="bag_middle" xywh="115,1,56,58"/>
+        <area name="bag_front" xywh="172,1,56,58"/>
+        <area name="bag_bottom" xywh="229,1,56,58"/>
+        <area name="tm_pressed" xywh="1,60,32,31"/>
+        <area name="potion_pressed" xywh="34,60,32,31"/>
+        <area name="pokeball_pressed" xywh="67,60,32,31"/>
+        <area name="berrie_pressed" xywh="100,60,32,30"/>
+        <area name="item_pressed" xywh="133,60,32,30"/>
+        <area name="tm_hover" xywh="1,125,32,31"/>
+        <area name="potion_hover" xywh="34,125,32,31"/>
+        <area name="pokeball_hover" xywh="67,125,32,31"/>
+        <area name="berrie_hover" xywh="100,124,32,31"/>
+        <area name="item_hover" xywh="133,124,32,31"/>
+        <area name="tm" xywh="1,92,32,32"/>
+        <area name="potion" xywh="34,92,32,32"/>
+        <area name="pokeball" xywh="66,92,32,32"/>
+        <area name="berrie" xywh="100,91,32,32"/>
+        <area name="item" xywh="133,91,32,32"/>
+    </images>
 </themes>

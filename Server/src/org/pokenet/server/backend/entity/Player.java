@@ -2004,7 +2004,7 @@ public class Player extends Character implements Battleable, Tradeable
 					+ (this.getParty()[i].getMoves()[3] != null ? this.getParty()[i].getMove(3).getMove().getType().toString() : "") + "," + this.getParty()[i].getItemName() + ","
 					+ (int) this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel()) + "," + (int) this.getParty()[i].getExpForLevel(this.getParty()[i].getLevel() + 1) + ","
 					+ this.getParty()[i].getOriginalTrainer();
-			ServerMessage message = new ServerMessage(ClientPacket.INIT_POKEDEX);
+			ServerMessage message = new ServerMessage(ClientPacket.INIT_POKEMON);
 			message.addInt(i);
 			message.addString(data);
 			getSession().Send(message);

@@ -296,8 +296,11 @@ public class Character implements Positionable
 	 */
 	public void setFacing(Direction direction, ServerMap map)
 	{
-		m_facing = direction;
-		map.sendMovementToAll(direction, this);
+		if(m_facing != direction)
+		{
+			m_facing = direction;
+			map.sendMovementToAll(direction, this);
+		}
 	}
 
 	/**

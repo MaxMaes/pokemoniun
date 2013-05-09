@@ -765,6 +765,7 @@ public abstract class BattleField
 	 */
 	private void executeTurn(BattleTurn turn, int source, int target)
 	{
+		/* TODO: Check this code, it is known to cause Battle Crashes. (NPE) */
 		Pokemon psource = m_pokemon[source][m_active[source]];
 		if(psource.isFainted())
 			return;
@@ -807,6 +808,7 @@ public abstract class BattleField
 	private void sortBySpeed(Pokemon[] active)
 	{
 		// Sort pokemon by speed.
+		/* TODO: Check this code, it is known to cause Battle Crashes. (NPE) */
 		ArrayList<Pokemon> list = new ArrayList<Pokemon>(Arrays.asList(active));
 		Collections.sort(list, new Comparator()
 		{

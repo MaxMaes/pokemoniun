@@ -1253,6 +1253,7 @@ public class NPC extends Character
 			/* If this NPC wasn't a trainer, handle other possibilities */
 			String speech = getSpeech();
 			if(!speech.equalsIgnoreCase(""))
+			{
 				if(!player.isShopping())
 				{
 					/* Dont send if player is shopping! */
@@ -1279,6 +1280,7 @@ public class NPC extends Character
 					message.addString(speech);
 					player.getSession().Send(message);
 				}
+			}
 			/* If this NPC is a sprite selection npc */
 			if(m_name.equalsIgnoreCase("Spriter"))
 			{

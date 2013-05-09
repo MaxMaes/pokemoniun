@@ -3,6 +3,7 @@ package org.pokenet.server.messages.events;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
@@ -21,7 +22,7 @@ public class ServerNotificationEvent implements MessageEvent
 			{
 				if(s.getPlayer() != null)
 				{
-					message.init(1);
+					message.init(ClientPacket.SERVER_NOTIFICATION.getValue());
 					message.addString(notification);
 					s.Send(message);
 				}

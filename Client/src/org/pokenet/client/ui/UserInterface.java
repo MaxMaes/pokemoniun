@@ -277,13 +277,14 @@ public class UserInterface extends Frame
 	}
 
 	/**
-	 * Adds a message to its appropriate chat window
+	 * Adds a message to its appropriate chat window.
 	 * 
-	 * @param m
+	 * @param type The type of chat message.
+	 * @param msg The message itself.
 	 */
-	public void messageReceived(int Type, String msg)
+	public void messageReceived(int type, String msg)
 	{
-		switch(Type)
+		switch(type)
 		{
 			case 0:
 				m_chat.addChatLine(0, msg);
@@ -306,10 +307,13 @@ public class UserInterface extends Frame
 				// Trade npc speech
 				talkToNPC(msg);
 				break;
-			// The following is for in case the chat server is down...
 			case 4:
 				// Server Announcement
 				m_chat.addSystemMessage(msg);
+				break;
+			default:
+				m_chat.addChatLine(0, msg);
+				break;
 		}
 	}
 

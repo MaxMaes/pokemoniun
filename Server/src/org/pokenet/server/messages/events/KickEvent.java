@@ -15,8 +15,16 @@ public class KickEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player player = ActiveConnections.getPlayer(request.readString());
+		String playername = request.readString();
+		Player player = ActiveConnections.getPlayer(playername);
 		Player mod = session.getPlayer();
+		if(player == null)
+		{
+			message = new ServerMessage(ClientPacket.CHAT_PACKET);
+			message.addInt(4);
+			message.addString("Player " + playername + " is not online or does not exist.");
+			mod.getSession().Send(message);
+		}
 		if(player != null && mod.getAdminLevel() >= UserClasses.MODERATOR)
 		{
 			ServerMessage kickMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
@@ -26,6 +34,10 @@ public class KickEvent implements MessageEvent
 			player.getSession().Send(message);
 			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
 			GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
+			message = new ServerMessage(ClientPacket.CHAT_PACKET);
+			message.addInt(4);
+			message.addString("Player " + playername + " has been kicked from the server.");
+			mod.getSession().Send(message);
 		}
 	}
 }

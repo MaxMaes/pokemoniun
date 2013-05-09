@@ -12,6 +12,7 @@ import org.pokenet.client.protocol.ClientMessage;
 public class ModerationManager
 {
 
+	/* TODO: Look at making commands server sided for better feedback and centralized handling. */
 	public static void parseLine(String x)
 	{
 		// Announcement
@@ -28,7 +29,7 @@ public class ModerationManager
 			GameClient.getInstance().getSession().send(message);
 		}
 		// Notify all players
-		else if(x.length() >= 6 && x.substring(0, 6).equalsIgnoreCase("notify "))
+		else if(x.length() >= 7 && x.substring(0, 7).equalsIgnoreCase("notify "))
 		{
 			ClientMessage message = new ClientMessage(ServerPacket.SERVER_NOTIFICATION);
 			message.addString(x.substring(6));

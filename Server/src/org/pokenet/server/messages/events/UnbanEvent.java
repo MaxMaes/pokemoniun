@@ -2,6 +2,7 @@ package org.pokenet.server.messages.events;
 
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.network.MySqlManager;
@@ -19,6 +20,10 @@ public class UnbanEvent implements MessageEvent
 		{
 			MySqlManager m_database = MySqlManager.getInstance();
 			m_database.query("DELETE FROM pn_bans WHERE playername = '" + bannedPlayer + "';");
+			message = new ServerMessage(ClientPacket.CHAT_PACKET);
+			message.addInt(4);
+			message.addString("Player " + bannedPlayer + " has been unbanned.");
+			mod.getSession().Send(message);
 		}
 	}
 }

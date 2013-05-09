@@ -2,6 +2,7 @@ package org.pokenet.client.backend;
 
 import java.util.Iterator;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Game;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -190,6 +191,19 @@ public class ClientMap extends TiledMap
 				if(p.getDirection() != Direction.Down && getLayer("LedgesDown") != null && ledgeLayer == 0)
 					ledgeLayer = getLayer("LedgesDown").getTileID(newX / 32, (newY + 8) / 32);
 			}
+		// Maybe not the right place, but it works :)
+		if(p.getDirection() == Direction.Down && getLayer("LedgesDown") != null && getLayer("LedgesDown").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+			GameClient.getInstance().move(Direction.Down);
+			p.moveDown();
+		}
+		if(p.getDirection() == Direction.Right && getLayer("LedgesRight") != null && getLayer("LedgesRight").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+			GameClient.getInstance().move(Direction.Right);
+			p.moveRight();
+		}
+		if(p.getDirection() == Direction.Left && getLayer("LedgesLeft") != null && getLayer("LedgesLeft").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+			GameClient.getInstance().move(Direction.Left);
+			p.moveLeft();
+		}
 		if(ledgeLayer + collisionLayer + waterLayer != 0)
 			return true;
 		/* Check NPCs */

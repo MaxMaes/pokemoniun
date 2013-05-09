@@ -5327,6 +5327,78 @@
 			</attributes>
 		</item>
 		<item>
+			<name>TM94 Cut</name>
+			<description>Teaches Cut</description>
+			<id>669</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
+			<name>TM95 Fly</name>
+			<description>Teaches Fly</description>
+			<id>670</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
+			<name>TM96 Strength</name>
+			<description>Teaches Strength</description>
+			<id>671</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
+			<name>TM97 Rocksmash</name>
+			<description>Teaches Rocksmash</description>
+			<id>672</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
+			<name>TM98 Waterfall</name>
+			<description>Teaches Waterfall</description>
+			<id>673</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
+			<name>TM99 Dive</name>
+			<description>Teaches Dive</description>
+			<id>674</id>
+			<category>TM</category>
+			<shop>0</shop>
+			<price>7500</price>
+			<attributes>
+				<itemAttribute>POKEMON</itemAttribute>
+				<itemAttribute>MOVESLOT</itemAttribute>
+			</attributes>
+		</item>
+		<item>
 			<name>Secret Potion</name>
 			<description>Known to cure psyduck headaches</description>
 			<id>750</id>

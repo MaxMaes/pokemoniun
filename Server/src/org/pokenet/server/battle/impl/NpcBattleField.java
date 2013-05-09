@@ -375,6 +375,7 @@ public class NpcBattleField extends BattleField
 			m_player.removeTempStatusEffects();
 			ServerMessage victory = new ServerMessage(m_player.getSession());
 			victory.init(ClientPacket.BATTLE_RESULT.getValue());
+			victory.addInt(0);
 			victory.sendResponse();
 			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 			message.addInt(m_player.getX());

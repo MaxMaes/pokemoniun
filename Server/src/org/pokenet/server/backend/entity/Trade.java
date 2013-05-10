@@ -206,7 +206,7 @@ public class Trade implements Runnable
 				{
 					Player p = (Player) tradeable;
 					ServerMessage invalidAlert = new ServerMessage(p.getSession());
-					invalidAlert.init(94);
+					invalidAlert.init(ClientPacket.TRADE_OFF_INVALID.getValue());
 					invalidAlert.sendResponse();
 					return;
 				}

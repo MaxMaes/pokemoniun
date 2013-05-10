@@ -16,6 +16,7 @@ import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.HailEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.SandstormEffect;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.feature.TimeService;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -53,17 +54,14 @@ public class PvPBattleField extends BattleField
 		/* Set battle ids */
 		p1.setBattleId(0);
 		p2.setBattleId(1);
-
 		/* Send battle initialisation packets */
-		/* TcpProtocolHandler.writeMessage(p1.getTcpSession(), new BattleInitMessage(false, p2.getPartyCount())); //TcpProtocolHandler.writeMessage(p2.getTcpSession(), new BattleInitMessage(false, p1.getPartyCount())); */
 		ServerMessage startBattleFirst = new ServerMessage(p1.getSession());
-		startBattleFirst.init(18);
+		startBattleFirst.init(ClientPacket.BATTLE_STARTED.getValue());
 		startBattleFirst.addBool(false);
 		startBattleFirst.addInt(p2.getPartyCount());
 		startBattleFirst.sendResponse();
-
 		ServerMessage startBattleSecond = new ServerMessage(p2.getSession());
-		startBattleSecond.init(18);
+		startBattleSecond.init(ClientPacket.BATTLE_STARTED.getValue());
 		startBattleSecond.addBool(false);
 		startBattleSecond.addInt(p1.getPartyCount());
 		startBattleSecond.sendResponse();
@@ -73,17 +71,13 @@ public class PvPBattleField extends BattleField
 		/* Check if p2 player has seen this enemy pokemon before, if not, update pokedex */
 		if(!p2.isPokemonSeen(getActivePokemon()[0].getSpeciesNumber() + 1))
 			p2.setPokemonSeen(getActivePokemon()[0].getSpeciesNumber() + 1);
-
 		/* Send the enemy's name to both players */
-		// p1.getTcpSession().write("bn" + p2.getName());
-		// p2.getTcpSession().write("bn" + p1.getName());
 		ServerMessage enemyNameFirst = new ServerMessage(p1.getSession());
-		enemyNameFirst.init(22);
+		enemyNameFirst.init(ClientPacket.ENEMY_TRAINER_NAME.getValue());
 		enemyNameFirst.addString(p2.getName());
 		enemyNameFirst.sendResponse();
-
 		ServerMessage enemyNameSecond = new ServerMessage(p2.getSession());
-		enemyNameSecond.init(22);
+		enemyNameSecond.init(ClientPacket.ENEMY_TRAINER_NAME.getValue());
 		enemyNameSecond.addString(p1.getName());
 		enemyNameSecond.sendResponse();
 		/* Send pokemon data to both players */
@@ -139,18 +133,16 @@ public class PvPBattleField extends BattleField
 		if(m_players != null)
 			if(trainer == 0)
 			{
-				/* if(m_players[0].getMoney() >= 100) { m_players[0].setMoney(m_players[0].getMoney() - 100); m_players[1].setMoney(m_players[1].getMoney() + 100); } else { m_players[1].setMoney(m_players[1].getMoney() + m_players[0].getMoney()); m_players[0].setMoney(0); } m_players[1].updateClientMoney(); *//* TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleEndMessage(BattleEnd.WON)); */
 				ServerMessage victory = new ServerMessage(m_players[1].getSession());
-				victory.init(24);
+				victory.init(ClientPacket.BATTLE_RESULT.getValue());
 				victory.addInt(0);
 				victory.sendResponse();
 				m_players[1].setBattling(false);
 			}
 			else
 			{
-				/* if(m_players[1].getMoney() >= 100) { m_players[1].setMoney(m_players[0].getMoney() - 100); m_players[0].setMoney(m_players[1].getMoney() + 100); } else { m_players[0].setMoney(m_players[1].getMoney() + m_players[0].getMoney()); m_players[1].setMoney(0); } m_players[0].updateClientMoney(); *//* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new BattleEndMessage(BattleEnd.WON)); */
 				ServerMessage victory = new ServerMessage(m_players[0].getSession());
-				victory.init(24);
+				victory.init(ClientPacket.BATTLE_RESULT.getValue());
 				victory.addInt(0);
 				victory.sendResponse();
 				m_players[0].setBattling(false);
@@ -194,14 +186,13 @@ public class PvPBattleField extends BattleField
 	{
 		if(m_players != null)
 		{
-			/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName())); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new FaintMessage(getParty(trainer)[idx].getSpeciesName())); */
 			ServerMessage informFaintFirst = new ServerMessage(m_players[0].getSession());
-			informFaintFirst.init(25);
+			informFaintFirst.init(ClientPacket.POKEMON_FAINTED.getValue());
 			informFaintFirst.addString(getParty(trainer)[idx].getSpeciesName());
 			informFaintFirst.sendResponse();
 
 			ServerMessage informFaintSecond = new ServerMessage(m_players[1].getSession());
-			informFaintSecond.init(25);
+			informFaintSecond.init(ClientPacket.POKEMON_FAINTED.getValue());
 			informFaintSecond.addString(getParty(trainer)[idx].getSpeciesName());
 			informFaintSecond.sendResponse();
 		}
@@ -213,30 +204,28 @@ public class PvPBattleField extends BattleField
 		if(m_players != null && poke != null)
 			if(poke.compareTo(getActivePokemon()[0]) == 0)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new HealthChangeMessage(0 , change)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new HealthChangeMessage(1 , change)); */
 				ServerMessage informHealthFirst = new ServerMessage(m_players[0].getSession());
-				informHealthFirst.init(33);
+				informHealthFirst.init(ClientPacket.POKEMON_HP.getValue());
 				informHealthFirst.addInt(0);
 				informHealthFirst.addString("0," + change);
 				informHealthFirst.sendResponse();
 
 				ServerMessage informHealthSecond = new ServerMessage(m_players[1].getSession());
-				informHealthSecond.init(33);
+				informHealthSecond.init(ClientPacket.POKEMON_HP.getValue());
 				informHealthSecond.addInt(1);
 				informHealthSecond.addString("1," + change);
 				informHealthSecond.sendResponse();
 			}
 			else if(poke.compareTo(getActivePokemon()[1]) == 0)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new HealthChangeMessage(0 , change)); //TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new HealthChangeMessage(1 , change)); */
 				ServerMessage informHealthFirst = new ServerMessage(m_players[1].getSession());
-				informHealthFirst.init(33);
+				informHealthFirst.init(ClientPacket.POKEMON_HP.getValue());
 				informHealthFirst.addInt(0);
 				informHealthFirst.addString("0," + change);
 				informHealthFirst.sendResponse();
 
 				ServerMessage informHealthSecond = new ServerMessage(m_players[0].getSession());
-				informHealthSecond.init(33);
+				informHealthSecond.init(ClientPacket.POKEMON_HP.getValue());
 				informHealthSecond.addInt(1);
 				informHealthSecond.addString("1," + change);
 				informHealthSecond.sendResponse();
@@ -248,7 +237,7 @@ public class PvPBattleField extends BattleField
 				{
 					/* TODO: Add support for NPC pokemon healing whilst not in the battlefield. */
 					ServerMessage informHealth = new ServerMessage(m_players[0].getSession());
-					informHealth.init(45);
+					informHealth.init(ClientPacket.POKE_HP_CHANGE.getValue());
 					informHealth.addInt(index);
 					informHealth.addInt(poke.getHealth());
 					informHealth.sendResponse();
@@ -259,7 +248,7 @@ public class PvPBattleField extends BattleField
 				{
 					/* TODO: Add support for NPC pokemon healing whilst not in the battlefield. */
 					ServerMessage informHealth = new ServerMessage(m_players[1].getSession());
-					informHealth.init(45);
+					informHealth.init(ClientPacket.POKE_HP_CHANGE.getValue());
 					informHealth.addInt(index);
 					informHealth.addInt(poke.getHealth());
 					informHealth.sendResponse();
@@ -276,9 +265,8 @@ public class PvPBattleField extends BattleField
 		if(m_players != null && poke != null)
 			if(poke.compareTo(getActivePokemon()[0]) == 0)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new StatusChangeMessage(0, poke.getSpeciesName(), eff.getName(), false)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new StatusChangeMessage(1, poke.getSpeciesName(), eff.getName(), false)); */
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
-				receiveEffectFirst.init(29);
+				receiveEffectFirst.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectFirst.addInt(0);
 				receiveEffectFirst.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -288,7 +276,7 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
-				receiveEffectSecond.init(29);
+				receiveEffectSecond.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectSecond.addInt(1);
 				receiveEffectSecond.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -299,9 +287,8 @@ public class PvPBattleField extends BattleField
 			}
 			else if(poke.compareTo(getActivePokemon()[1]) == 0)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new StatusChangeMessage(1, poke.getSpeciesName(), eff.getName(), false)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new StatusChangeMessage(0, poke.getSpeciesName(), eff.getName(), false)); */
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
-				receiveEffectFirst.init(29);
+				receiveEffectFirst.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectFirst.addInt(1);
 				receiveEffectFirst.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -311,7 +298,7 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
-				receiveEffectSecond.init(29);
+				receiveEffectSecond.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectSecond.addInt(0);
 				receiveEffectSecond.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -330,9 +317,8 @@ public class PvPBattleField extends BattleField
 		if(poke != null && m_players != null)
 			if(poke.compareTo(getActivePokemon()[0]) == 0 && !getActivePokemon()[0].isFainted())
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new StatusChangeMessage(0, poke.getSpeciesName(), eff.getName(), true)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new StatusChangeMessage(1, poke.getSpeciesName(), eff.getName(), true)); */
 				ServerMessage removeEffectFirst = new ServerMessage(m_players[0].getSession());
-				removeEffectFirst.init(30);
+				removeEffectFirst.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffectFirst.addInt(0);
 				removeEffectFirst.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -342,7 +328,7 @@ public class PvPBattleField extends BattleField
 				removeEffectFirst.sendResponse();
 
 				ServerMessage removeEffectSecond = new ServerMessage(m_players[1].getSession());
-				removeEffectSecond.init(30);
+				removeEffectSecond.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffectSecond.addInt(1);
 				removeEffectSecond.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -353,9 +339,8 @@ public class PvPBattleField extends BattleField
 			}
 			else if(poke.compareTo(getActivePokemon()[1]) == 0 && !getActivePokemon()[1].isFainted())
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new StatusChangeMessage(1, poke.getSpeciesName(), eff.getName(), true)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new StatusChangeMessage(0, poke.getSpeciesName(), eff.getName(), true)); */
 				ServerMessage removeEffectFirst = new ServerMessage(m_players[0].getSession());
-				removeEffectFirst.init(30);
+				removeEffectFirst.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffectFirst.addInt(1);
 				removeEffectFirst.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -365,7 +350,7 @@ public class PvPBattleField extends BattleField
 				removeEffectFirst.sendResponse();
 
 				ServerMessage removeEffectSecond = new ServerMessage(m_players[1].getSession());
-				removeEffectSecond.init(30);
+				removeEffectSecond.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffectSecond.addInt(0);
 				removeEffectSecond.addString(poke.getSpeciesName());
 				if(eff.getName() == null)
@@ -388,9 +373,8 @@ public class PvPBattleField extends BattleField
 
 			if(trainer == 0)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new SwitchMessage(m_players[0].getName(), poke.getSpeciesName(), 0, pokeIndex)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new SwitchMessage(m_players[0].getName(), poke.getSpeciesName(), 1, pokeIndex)); */
 				ServerMessage switchInformFirst = new ServerMessage(m_players[0].getSession());
-				switchInformFirst.init(32);
+				switchInformFirst.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInformFirst.addString(m_players[0].getName());
 				switchInformFirst.addString(poke.getSpeciesName());
 				switchInformFirst.addInt(0);
@@ -398,7 +382,7 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.sendResponse();
 
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
-				receiveEffectFirst.init(29);
+				receiveEffectFirst.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectFirst.addInt(0);
 				receiveEffectFirst.addString(poke.getSpeciesName());
 
@@ -417,7 +401,7 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage switchInformSecond = new ServerMessage(m_players[1].getSession());
-				switchInformSecond.init(32);
+				switchInformSecond.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInformSecond.addString(m_players[0].getName());
 				switchInformSecond.addString(poke.getSpeciesName());
 				switchInformSecond.addInt(1);
@@ -425,7 +409,7 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
-				receiveEffectSecond.init(29);
+				receiveEffectSecond.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectSecond.addInt(1);
 				receiveEffectSecond.addString(poke.getSpeciesName());
 
@@ -447,9 +431,8 @@ public class PvPBattleField extends BattleField
 			}
 			else
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new SwitchMessage(m_players[1].getName(), poke.getSpeciesName(), 1, pokeIndex)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new SwitchMessage(m_players[1].getName(), poke.getSpeciesName(), 0, pokeIndex)); */
 				ServerMessage switchInformFirst = new ServerMessage(m_players[0].getSession());
-				switchInformFirst.init(32);
+				switchInformFirst.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInformFirst.addString(m_players[1].getName());
 				switchInformFirst.addString(poke.getSpeciesName());
 				switchInformFirst.addInt(1);
@@ -457,7 +440,7 @@ public class PvPBattleField extends BattleField
 				switchInformFirst.sendResponse();
 
 				ServerMessage receiveEffectFirst = new ServerMessage(m_players[0].getSession());
-				receiveEffectFirst.init(29);
+				receiveEffectFirst.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectFirst.addInt(1);
 				receiveEffectFirst.addString(poke.getSpeciesName());
 
@@ -476,7 +459,7 @@ public class PvPBattleField extends BattleField
 				receiveEffectFirst.sendResponse();
 
 				ServerMessage switchInformSecond = new ServerMessage(m_players[1].getSession());
-				switchInformSecond.init(32);
+				switchInformSecond.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInformSecond.addString(m_players[1].getName());
 				switchInformSecond.addString(poke.getSpeciesName());
 				switchInformSecond.addInt(0);
@@ -484,7 +467,7 @@ public class PvPBattleField extends BattleField
 				switchInformSecond.sendResponse();
 
 				ServerMessage receiveEffectSecond = new ServerMessage(m_players[1].getSession());
-				receiveEffectSecond.init(29);
+				receiveEffectSecond.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffectSecond.addInt(0);
 				receiveEffectSecond.addString(poke.getSpeciesName());
 
@@ -512,15 +495,14 @@ public class PvPBattleField extends BattleField
 	{
 		if(m_players != null)
 		{
-			/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleMoveMessage(poke.getSpeciesName(), name)); */
 			ServerMessage moveFirst = new ServerMessage(m_players[0].getSession());
-			moveFirst.init(26);
+			moveFirst.init(ClientPacket.MOVE_USED.getValue());
 			moveFirst.addString(poke.getSpeciesName());
 			moveFirst.addString(name);
 			moveFirst.sendResponse();
 
 			ServerMessage moveSecond = new ServerMessage(m_players[1].getSession());
-			moveSecond.init(26);
+			moveSecond.init(ClientPacket.MOVE_USED.getValue());
 			moveSecond.addString(poke.getSpeciesName());
 			moveSecond.addString(name);
 			moveSecond.sendResponse();
@@ -535,28 +517,26 @@ public class PvPBattleField extends BattleField
 		m_players[1].removeTempStatusEffects();
 		if(winner == 0)
 		{
-			/* .writeMessage(m_players[0].getTcpSession(), new BattleEndMessage(BattleEnd.WON)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleEndMessage(BattleEnd.LOST)); */
 			ServerMessage victory = new ServerMessage(m_players[0].getSession());
-			victory.init(24);
+			victory.init(ClientPacket.BATTLE_RESULT.getValue());
 			victory.addInt(0);
 			victory.sendResponse();
 
 			ServerMessage loss = new ServerMessage(m_players[1].getSession());
-			loss.init(24);
+			loss.init(ClientPacket.BATTLE_RESULT.getValue());
 			loss.addInt(1);
 			loss.sendResponse();
 			m_players[1].lostBattle();
 		}
 		else
 		{
-			/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new BattleEndMessage(BattleEnd.LOST)); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleEndMessage(BattleEnd.WON)); */
 			ServerMessage loss = new ServerMessage(m_players[0].getSession());
-			loss.init(24);
+			loss.init(ClientPacket.BATTLE_RESULT.getValue());
 			loss.addInt(0);
 			loss.sendResponse();
 
 			ServerMessage victory = new ServerMessage(m_players[1].getSession());
-			victory.init(24);
+			victory.init(ClientPacket.BATTLE_RESULT.getValue());
 			victory.addInt(1);
 			victory.sendResponse();
 			m_players[0].lostBattle();
@@ -568,7 +548,7 @@ public class PvPBattleField extends BattleField
 		{
 			/* This very bad programming but shoddy does it and forces us to do it */
 			// Thread t = m_dispatch;
-			// m_dispatch = null;
+			m_dispatch = null;
 			// t.stop(); let the thread manually return.
 		}
 	}
@@ -672,17 +652,15 @@ public class PvPBattleField extends BattleField
 				{
 					if(trainer == 0)
 					{
-						/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer] .getMoveName(move.getId()))); */
 						ServerMessage noPP = new ServerMessage(m_players[0].getSession());
-						noPP.init(20);
+						noPP.init(ClientPacket.NO_PP_LEFT.getValue());
 						noPP.addString(getActivePokemon()[trainer].getMoveName(move.getId()));
 						noPP.sendResponse();
 					}
 					else
 					{
-						/* TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new NoPPMessage(this.getActivePokemon()[trainer] .getMoveName(move.getId()))); */
 						ServerMessage noPP = new ServerMessage(m_players[1].getSession());
-						noPP.init(20);
+						noPP.init(ClientPacket.NO_PP_LEFT.getValue());
 						noPP.addString(getActivePokemon()[trainer].getMoveName(move.getId()));
 						noPP.sendResponse();
 					}
@@ -726,24 +704,23 @@ public class PvPBattleField extends BattleField
 	{
 		if(m_players != null)
 		{
-			/* m_players[0].getTcpSession().write( "bh0" + this.getActivePokemon()[0].getHealth()); //m_players[0].getTcpSession().write( "bh1" + this.getActivePokemon()[1].getHealth()); //m_players[1].getTcpSession().write( "bh0" + this.getActivePokemon()[1].getHealth()); //m_players[1].getTcpSession().write( "bh1" + this.getActivePokemon()[0].getHealth()); */
 			ServerMessage informHealthFirst = new ServerMessage(m_players[0].getSession());
-			informHealthFirst.init(33);
+			informHealthFirst.init(ClientPacket.POKEMON_HP.getValue());
 			informHealthFirst.addInt(0);
 			informHealthFirst.addString("0," + getActivePokemon()[0].getHealth());
 			informHealthFirst.sendResponse();
 			ServerMessage informHealthFirstSecond = new ServerMessage(m_players[0].getSession());
-			informHealthFirstSecond.init(33);
+			informHealthFirstSecond.init(ClientPacket.POKEMON_HP.getValue());
 			informHealthFirstSecond.addInt(1);
 			informHealthFirstSecond.addString("1," + getActivePokemon()[1].getHealth());
 			informHealthFirstSecond.sendResponse();
 			ServerMessage informHealthSecond = new ServerMessage(m_players[1].getSession());
-			informHealthSecond.init(33);
+			informHealthSecond.init(ClientPacket.POKEMON_HP.getValue());
 			informHealthSecond.addInt(0);
 			informHealthSecond.addString("0," + getActivePokemon()[1].getHealth());
 			informHealthSecond.sendResponse();
 			ServerMessage informHealthSecondS = new ServerMessage(m_players[1].getSession());
-			informHealthSecondS.init(33);
+			informHealthSecondS.init(ClientPacket.POKEMON_HP.getValue());
 			informHealthSecondS.addInt(1);
 			informHealthSecondS.addString("1," + getActivePokemon()[0].getHealth());
 			informHealthSecondS.sendResponse();
@@ -802,17 +779,15 @@ public class PvPBattleField extends BattleField
 		{
 			if(m_players[0] != null)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new BattleMessage(message)); */
 				ServerMessage MessageFirst = new ServerMessage(m_players[0].getSession());
-				MessageFirst.init(23);
+				MessageFirst.init(ClientPacket.MISC_BATTLE_MESSAGE.getValue());
 				MessageFirst.addString(message);
 				MessageFirst.sendResponse();
 			}
 			if(m_players[1] != null)
 			{
-				/* TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleMessage(message)); */
 				ServerMessage MessageSecond = new ServerMessage(m_players[1].getSession());
-				MessageSecond.init(23);
+				MessageSecond.init(ClientPacket.MISC_BATTLE_MESSAGE.getValue());
 				MessageSecond.addString(message);
 				MessageSecond.sendResponse();
 			}
@@ -822,9 +797,8 @@ public class PvPBattleField extends BattleField
 	@Override
 	protected void requestMove(int trainer)
 	{
-		/* TcpProtocolHandler.writeMessage(m_players[trainer].getTcpSession(), new BattleMoveRequest()); */
 		ServerMessage moveRequest = new ServerMessage(m_players[trainer].getSession());
-		moveRequest.init(27);
+		moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
 		moveRequest.sendResponse();
 	}
 
@@ -834,13 +808,12 @@ public class PvPBattleField extends BattleField
 		clearQueue();
 		if(getActivePokemon()[0].isActive() && getActivePokemon()[1].isActive())
 		{
-			/* TcpProtocolHandler.writeMessage(m_players[0].getTcpSession(), new BattleMoveRequest()); //TcpProtocolHandler.writeMessage(m_players[1].getTcpSession(), new BattleMoveRequest()); */
 			ServerMessage moveRequestFirst = new ServerMessage(m_players[0].getSession());
-			moveRequestFirst.init(27);
+			moveRequestFirst.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequestFirst.sendResponse();
 
 			ServerMessage moveRequestSecond = new ServerMessage(m_players[1].getSession());
-			moveRequestSecond.init(27);
+			moveRequestSecond.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequestSecond.sendResponse();
 		}
 	}
@@ -848,15 +821,13 @@ public class PvPBattleField extends BattleField
 	@Override
 	protected void requestPokemonReplacement(int i)
 	{
-		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
 		// ServerMessage switchOccur = new ServerMessage(m_players[i].getSession());
-		// switchOccur.init(32);
+		// switchOccur.init(ClientPacket.SWITCHED_POKE.getValue());
 		// switchOccur.sendResponse();
 	}
 
 	protected void replacementPokemonRequest(int i, Pokemon poke)
 	{
-		/* TcpProtocolHandler.writeMessage(m_players[i].getTcpSession(), new SwitchRequest()); */
 		informSwitchInPokemon(i, poke);
 		poke.switchIn();
 	}
@@ -870,12 +841,12 @@ public class PvPBattleField extends BattleField
 	private void sendPokemonData(Player p, Player receiver)
 	{
 		for(int i = 0; i < p.getParty().length; i++)
+		{
 			if(p.getParty()[i] != null)
 			{
-				/* TcpProtocolHandler.writeMessage(receiver.getTcpSession(), new EnemyDataMessage(i, p.getParty()[i])); */
 				Pokemon pp = p.getParty()[i];
 				ServerMessage enemyData = new ServerMessage(receiver.getSession());
-				enemyData.init(21);
+				enemyData.init(ClientPacket.RECEIVE_POKE_DATA.getValue());
 				enemyData.addInt(i);
 				enemyData.addString(pp.getName());
 				enemyData.addInt(pp.getLevel());
@@ -886,5 +857,6 @@ public class PvPBattleField extends BattleField
 				enemyData.addBool(pp.isShiny());
 				enemyData.sendResponse();
 			}
+		}
 	}
 }

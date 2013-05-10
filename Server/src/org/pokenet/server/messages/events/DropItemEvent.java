@@ -2,6 +2,7 @@ package org.pokenet.server.messages.events;
 
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
@@ -15,7 +16,7 @@ public class DropItemEvent implements MessageEvent
 		int item = request.readInt();
 		if(p.getBag().removeItem(item, 1))
 		{
-			message.init(81);
+			message.init(ClientPacket.REMOVE_ITEM_BAG.getValue());
 			message.addInt(item);
 			message.addInt(1);
 			session.Send(message);

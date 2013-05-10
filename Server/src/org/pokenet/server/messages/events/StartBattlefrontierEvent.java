@@ -3,6 +3,7 @@ package org.pokenet.server.messages.events;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
@@ -27,7 +28,7 @@ public class StartBattlefrontierEvent implements MessageEvent
 					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-42, 45), null);
 				else
 					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-41, 45), null);
-				message.init(64);
+				message.init(ClientPacket.UPDATE_COORDS.getValue());
 				message.addInt(player.getX());
 				message.addInt(player.getY());
 				session.Send(message);
@@ -39,7 +40,7 @@ public class StartBattlefrontierEvent implements MessageEvent
 					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-44, 45), null);
 				else
 					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-43, 45), null);
-				message.init(64);
+				message.init(ClientPacket.UPDATE_COORDS.getValue());
 				message.addInt(player.getX());
 				message.addInt(player.getY());
 				session.Send(message);
@@ -53,7 +54,7 @@ public class StartBattlefrontierEvent implements MessageEvent
 				 * player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-45, 45), null);
 				 * else
 				 * ;
-				 * message.init(64);
+				 * message.init(ClientPacket.UPDATE_COORDS.getValue());
 				 * message.addInt(player.getX());
 				 * message.addInt(player.getY());
 				 * session.Send(message); */

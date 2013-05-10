@@ -7,6 +7,7 @@ import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player.Language;
 import org.pokenet.server.backend.map.ServerMap;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -79,7 +80,7 @@ public class ChatManager implements Runnable
 		Session s;
 		while(m_isRunning)
 		{
-			// Send next local chat message
+			/* Send next local chat message. */
 			if(m_localQueue.peek() != null)
 			{
 				o = m_localQueue.poll();
@@ -87,17 +88,15 @@ public class ChatManager implements Runnable
 				if(m != null)
 					m.sendChatMessage((String) o[0], Language.valueOf((String) o[3]));
 			}
-			// Send next private chat message
+			/* Send next private chat message. */
 			if(m_privateQueue.peek() != null)
 			{
 				o = m_privateQueue.poll();
 				s = (Session) o[0];
 				if(s.getLoggedIn())
 				{
-					/* TcpProtocolHandler.writeMessage(s, new ChatMessage(
-					 * ChatMessageType.PRIVATE, ((String) o[1]) + "," + ((String) o[2]))); */
 					ServerMessage startBattle = new ServerMessage(s);
-					startBattle.init(50);
+					startBattle.init(ClientPacket.CHAT_PACKET.getValue());
 					startBattle.addString("p" + (String) o[2]);
 					startBattle.sendResponse();
 				}

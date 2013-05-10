@@ -3,11 +3,13 @@ package org.pokenet.server.messages.events;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
+import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
 
+/* TODO: Rewrite to Switch case for Java 1.7 Readability. */
 public class TravelEvent implements MessageEvent
 {
 
@@ -31,7 +33,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(736);
 					p.setY(1048);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(6, 0), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -50,7 +52,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(128);
 					p.setY(56);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-50, -13), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -70,7 +72,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(800);
 					p.setY(952);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(16, 0), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -84,7 +86,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(1664);
 					p.setY(888);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(1, 1), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -106,7 +108,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(640);
 					p.setY(664);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-6, -3), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -125,7 +127,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(352);
 					p.setY(152);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-31, -39), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -158,7 +160,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(896);
 					p.setY(408);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(27, 24), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -191,7 +193,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(384);
 					p.setY(1112);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(32, 20), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -225,7 +227,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(384);
 					p.setY(1336);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(33, -42), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -258,7 +260,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(192);
 					p.setY(1880);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(39, -48), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -277,7 +279,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(512);
 					p.setY(568);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 2), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -296,7 +298,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(320);
 					p.setY(1336);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-44, 5), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -315,7 +317,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(416);
 					p.setY(408);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-28, 5), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -329,7 +331,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(416);
 					p.setY(1048);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-44, 10), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -343,7 +345,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(512);
 					p.setY(664);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 8), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -357,7 +359,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(672);
 					p.setY(3192);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-39, 12), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -376,7 +378,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(2752);
 					p.setY(568);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(1, -46), null);
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);
@@ -390,8 +392,7 @@ public class TravelEvent implements MessageEvent
 					p.setX(512);
 					p.setY(2520);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(29, 26), null);
-					// p.getTcpSession().write("U" + p.getX() + "," + p.getY());
-					message.init(64);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());
 					session.Send(message);

@@ -922,7 +922,7 @@ public class ServerMap
 				{
 					/* TcpProtocolHandler.writeMessage( p.getTcpSession(), new ChatMessage(ChatMessageType.LOCAL, message)); */
 					ServerMessage chatMessage = new ServerMessage(p.getSession());
-					chatMessage.init(50);
+					chatMessage.init(ClientPacket.CHAT_PACKET.getValue());
 					chatMessage.addInt(0);
 					chatMessage.addString(message);
 					chatMessage.sendResponse();

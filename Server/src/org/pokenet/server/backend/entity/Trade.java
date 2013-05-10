@@ -9,7 +9,6 @@ import org.pokenet.server.backend.entity.TradeOffer.TradeType;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
 import org.pokenet.server.battle.PokemonEvolution;
-import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.network.MySqlManager;
@@ -186,25 +185,26 @@ public class Trade implements Runnable
 	 * @param p
 	 * @param o
 	 */
-	public void setOffer(Tradeable t, int poke, int money)
+	public void setOffer(Tradeable tradeable, int poke, int money)
 	{
-		if(t instanceof Player)
+		if(tradeable instanceof Player)
 		{
-			Player p = (Player) t;
-			if(p.getMoney() < money)
+			Player player = (Player) tradeable;
+			if(player.getMoney() < money)
 				return;
 		}
-		TradeOffer[] o = new TradeOffer[2];
-		o[0] = new TradeOffer();
-		o[0].setId(poke);
-		o[0].setType(TradeType.POKEMON);
-		o[0].setInformation(t.getParty()[poke].getSpeciesName());
+		TradeOffer[] tradeOffers = new TradeOffer[2];
+		tradeOffers[0] = new TradeOffer();
+		tradeOffers[0].setId(poke);
+		tradeOffers[0].setType(TradeType.POKEMON);
+		tradeOffers[0].setInformation(tradeable.getParty()[poke].getSpeciesName());
 		if(poke > -1 && poke < 6)
-			if(!DataService.canTrade(t.getParty()[poke].getSpeciesName()))
+		{
+			if(!DataService.canTrade(tradeable.getParty()[poke].getSpeciesName()))
 			{
-				if(t instanceof Player)
+				if(tradeable instanceof Player)
 				{
-					Player p = (Player) t;
+					Player p = (Player) tradeable;
 					ServerMessage invalidAlert = new ServerMessage(p.getSession());
 					invalidAlert.init(94);
 					invalidAlert.sendResponse();
@@ -212,12 +212,13 @@ public class Trade implements Runnable
 				}
 
 			}
-		o[1] = new TradeOffer();
-		o[1].setQuantity(money);
-		o[1].setType(TradeType.MONEY);
-		m_offers.put(t, o);
+		}
+		tradeOffers[1] = new TradeOffer();
+		tradeOffers[1].setQuantity(money);
+		tradeOffers[1].setType(TradeType.MONEY);
+		m_offers.put(tradeable, tradeOffers);
 		/* Send the offer to the other player */
-		sendOfferInformation(t, o);
+		sendOfferInformation(tradeable, tradeOffers);
 	}
 
 	/**
@@ -230,14 +231,13 @@ public class Trade implements Runnable
 		{
 			m_isExecuting = true;
 			Pokemon[] temp = new Pokemon[2];
-
 			Iterator<Tradeable> it = m_offers.keySet().iterator();
 			Tradeable player1 = it.next();
 			Tradeable player2 = it.next();
-			TradeOffer[] o1 = m_offers.get(player1);
-			TradeOffer[] o2 = m_offers.get(player2);
+			TradeOffer[] offer1 = m_offers.get(player1);
+			TradeOffer[] offer2 = m_offers.get(player2);
 			/* Ensure each player has made an offer */
-			if(o1 == null || o2 == null)
+			if(offer1 == null || offer2 == null)
 				return;
 			/* Keep checking no player has left the trade */
 			if(player1 != null && player2 != null)
@@ -246,20 +246,20 @@ public class Trade implements Runnable
 				Date date = new Date();
 				String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 				/* Handle player 1's offers */
-				for(int j = 0; j < o1.length; j++)
-					switch(o1[j].getType())
+				for(int j = 0; j < offer1.length; j++)
+					switch(offer1[j].getType())
 					{
 						case POKEMON:
 							/* An id greater than 5 or less an 0 is sent
 							 * if no pokemon is being traded */
-							if(o1[j].getId() >= 0 && o1[j].getId() <= 5)
+							if(offer1[j].getId() >= 0 && offer1[j].getId() <= 5)
 							{
 								/* Store the Pokemon temporarily */
-								temp[0] = player1.getParty()[o1[j].getId()];
+								temp[0] = player1.getParty()[offer1[j].getId()];
 								if(player1 instanceof Player && player2 instanceof Player)
 								{
-									player1.getParty()[o1[j].getId()] = null;
-									m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('" + ((Player) player1).getId() + "','1','" + ((Player) player2).getId()
+									player1.getParty()[offer1[j].getId()] = null;
+									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player1).getId() + "','1','" + ((Player) player2).getId()
 											+ "','" + timestamp + "','" + temp[0].getDatabaseID() + "')");
 								}
 
@@ -267,13 +267,13 @@ public class Trade implements Runnable
 							break;
 						case MONEY:
 							/* Ensure there was money offered */
-							if(o1[j].getQuantity() > 0)
+							if(offer1[j].getQuantity() > 0)
 							{
-								player1.setMoney(player1.getMoney() - o1[j].getQuantity());
-								player2.setMoney(player2.getMoney() + o1[j].getQuantity());
+								player1.setMoney(player1.getMoney() - offer1[j].getQuantity());
+								player2.setMoney(player2.getMoney() + offer1[j].getQuantity());
 								if(player1 instanceof Player && player2 instanceof Player)
-									m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('" + ((Player) player1).getId() + "','0','" + ((Player) player2).getId()
-											+ "','" + timestamp + "','" + o1[j].getQuantity() + "')");
+									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player1).getId() + "','0','" + ((Player) player2).getId()
+											+ "','" + timestamp + "','" + offer1[j].getQuantity() + "')");
 							}
 							break;
 						case ITEM:
@@ -281,39 +281,38 @@ public class Trade implements Runnable
 					}
 
 				/* Handle player 2's offers */
-				for(int j = 0; j < o2.length; j++)
-					switch(o2[j].getType())
+				for(int j = 0; j < offer2.length; j++)
+					switch(offer2[j].getType())
 					{
 						case POKEMON:
 							/* An id greater than 5 or less an 0 is sent
 							 * if no pokemon is being traded */
-							if(o2[j].getId() >= 0 && o2[j].getId() <= 5)
+							if(offer2[j].getId() >= 0 && offer2[j].getId() <= 5)
 							{
 								/* Store the Pokemon temporarily */
-								temp[1] = player2.getParty()[o2[j].getId()];
+								temp[1] = player2.getParty()[offer2[j].getId()];
 								if(player1 instanceof Player && player2 instanceof Player)
 								{
-									player2.getParty()[o1[j].getId()] = null;
-									m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('" + ((Player) player2).getId() + "','1','" + ((Player) player1).getId()
+									player2.getParty()[offer1[j].getId()] = null;
+									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player2).getId() + "','1','" + ((Player) player1).getId()
 											+ "','" + timestamp + "','" + temp[1].getDatabaseID() + "')");
 								}
 							}
 							break;
 						case MONEY:
 							/* Ensure there was money offered */
-							if(o2[j].getQuantity() > 0)
+							if(offer2[j].getQuantity() > 0)
 							{
-								player2.setMoney(player2.getMoney() - o2[j].getQuantity());
-								player1.setMoney(player1.getMoney() + o2[j].getQuantity());
+								player2.setMoney(player2.getMoney() - offer2[j].getQuantity());
+								player1.setMoney(player1.getMoney() + offer2[j].getQuantity());
 								if(player1 instanceof Player && player2 instanceof Player)
-									m_queries.add("INSERT into pn_history (member,action,with,timestamp,details) VALUES ('" + ((Player) player2).getId() + "','0','" + ((Player) player1).getId()
-											+ "','" + timestamp + "','" + o2[j].getQuantity() + "')");
+									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player2).getId() + "','0','" + ((Player) player1).getId()
+											+ "','" + timestamp + "','" + offer2[j].getQuantity() + "')");
 							}
 							break;
 						case ITEM:
 							break;
 					}
-
 				/* Execute the Pokemon swap */
 				if(temp[1] != null)
 					if(player1 instanceof Player)
@@ -331,88 +330,33 @@ public class Trade implements Runnable
 						if(!p.isPokemonCaught(temp[0].getSpeciesNumber() + 1))
 							p.setPokemonCaught(temp[0].getSpeciesNumber() + 1);
 					}
-
 				/* Evolution checks */
 				for(Pokemon curPokemon : temp)
 				{ // do both pokemon
-					Player p;
+					Player player;
 					if(curPokemon == temp[0])
-						p = (Player) player2;
+						player = (Player) player2;
 					else
-						p = (Player) player1;
+						player = (Player) player1;
 
-					int index = p.getPokemonIndex(curPokemon);
+					int index = player.getPokemonIndex(curPokemon);
 					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(curPokemon.getSpeciesName());
 					for(PokemonEvolution currentEvolution : pokeData.getEvolutions())
 					{
 						System.out.println(curPokemon.getName() + " can evolve via " + currentEvolution.getType());
-						/* TODO: Switch case 1.7 support. */
-						if(currentEvolution.getType().equals(EvolutionTypes.Trade))
+						switch(currentEvolution.getType())
 						{
-							curPokemon.setEvolution(currentEvolution);
-							// p.getTcpSession().write("PE" + index);
-							ServerMessage message = new ServerMessage(ClientPacket.POKE_REQUEST_EVOLVE);
-							message.addInt(index);
-							p.getSession().Send(message);
-							break;
-						}
-						else if(currentEvolution.getType() == EvolutionTypes.TradeItem)
-						{
-							if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE") && currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
-							{
+							case Trade:
 								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("DRAGON SCALE") && currentEvolution.getAttribute().equalsIgnoreCase("DRAGONSCALE"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEATOOTH") && currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEATOOTH"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("METAL COAT") && currentEvolution.getAttribute().equalsIgnoreCase("METALCOAT"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("KING'S ROCK") && currentEvolution.getAttribute().equalsIgnoreCase("KINGSROCK"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer") && currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Electirizer") && currentEvolution.getAttribute().equalsIgnoreCase("Electirizer"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Dubious Disc") && currentEvolution.getAttribute().equalsIgnoreCase("Dubious_Disc"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Protector") && currentEvolution.getAttribute().equalsIgnoreCase("Protector"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Razor Claw") && currentEvolution.getAttribute().equalsIgnoreCase("Razor_Claw"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
-							else if(curPokemon.getItem().getName().equalsIgnoreCase("Reaper Cloth") && currentEvolution.getAttribute().equalsIgnoreCase("Reaper_Cloth"))
-							{
-								curPokemon.setEvolution(currentEvolution);
-								curPokemon.evolutionResponse(true, p);
-							}
+								ServerMessage message = new ServerMessage(ClientPacket.POKE_REQUEST_EVOLVE);
+								message.addInt(index);
+								player.getSession().Send(message);
+								break;
+							case TradeItem:
+								checkItemTradeEvolution(curPokemon, currentEvolution, player);
+								break;
+							default:
+								break;
 						}
 						break;
 					}
@@ -431,27 +375,58 @@ public class Trade implements Runnable
 			}
 			/* Store transactions on DB */
 			new Thread(this, "Trade-Thread").start();
-			/* End the trade */
 			m_isExecuting = false;
 			endTrade();
 		}
 	}
 
+	/* TODO: Helper function to simplify the Trading Evolution Check, improvements welcome. */
+	private void checkItemTradeEvolution(Pokemon curPokemon, PokemonEvolution currentEvolution, Player player)
+	{
+		if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEASCALE") && currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEASCALE"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("DRAGON SCALE") && currentEvolution.getAttribute().equalsIgnoreCase("DRAGONSCALE"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("DEEPSEATOOTH") && currentEvolution.getAttribute().equalsIgnoreCase("DEEPSEATOOTH"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("METAL COAT") && currentEvolution.getAttribute().equalsIgnoreCase("METALCOAT"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("KING'S ROCK") && currentEvolution.getAttribute().equalsIgnoreCase("KINGSROCK"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Magmarizer") && currentEvolution.getAttribute().equalsIgnoreCase("Magmarizer"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Electirizer") && currentEvolution.getAttribute().equalsIgnoreCase("Electirizer"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Dubious Disc") && currentEvolution.getAttribute().equalsIgnoreCase("Dubious_Disc"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Protector") && currentEvolution.getAttribute().equalsIgnoreCase("Protector"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Razor Claw") && currentEvolution.getAttribute().equalsIgnoreCase("Razor_Claw"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+		else if(curPokemon.getItem().getName().equalsIgnoreCase("Reaper Cloth") && currentEvolution.getAttribute().equalsIgnoreCase("Reaper_Cloth"))
+			evolveWithItem(curPokemon, currentEvolution, player);
+	}
+
+	private void evolveWithItem(Pokemon curPokemon, PokemonEvolution currentEvolution, Player player)
+	{
+		curPokemon.setEvolution(currentEvolution);
+		curPokemon.evolutionResponse(true, player);
+	}
+
 	/**
 	 * Sends offer information from one player to another
 	 * 
-	 * @param p
+	 * @param
 	 * @param poke
-	 * @param money
 	 */
-	private void sendOfferInformation(Tradeable t, TradeOffer[] o)
+	private void sendOfferInformation(Tradeable tradeable, TradeOffer[] tradeOffers)
 	{
 		Iterator<Tradeable> i = m_offers.keySet().iterator();
 		while(i.hasNext())
 		{
 			Tradeable temp = i.next();
-			if(temp.getName().compareTo(t.getName()) != 0)
-				temp.receiveTradeOffer(o);
+			if(temp.getName().compareTo(tradeable.getName()) != 0)
+				temp.receiveTradeOffer(tradeOffers);
 		}
 	}
 }

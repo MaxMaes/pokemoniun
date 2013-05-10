@@ -304,7 +304,6 @@ public abstract class BattleField
 	{
 		Pokemon[] active = getActivePokemon();
 		int[] order = PokemonWrapper.sortMoves(active, move);
-
 		for(int i = 0; i < active.length; ++i)
 		{
 			BattleTurn turn = move[i];
@@ -317,7 +316,6 @@ public abstract class BattleField
 					pokemonMove.beginTurn(move, i, active[i]);
 			}
 		}
-
 		for(int i = 0; i < active.length; ++i)
 		{
 			int other = order[i] == 0 ? 1 : 0;
@@ -325,28 +323,26 @@ public abstract class BattleField
 			if(turn != null)
 				executeTurn(turn, order[i], other);
 		}
-		// Refresh the active array in case a trainer switched.
-		/* TODO: Somehow this sometimes gets called without active Pokemon (e.g. victory). */
+
+		/* TODO: On Victory the active Pokemon returned are null. We have 2 choices:
+		 * Throw NPE in getActivePokemon() and catch it, or do a null check here and return. */
+		if(getActivePokemon() == null)
+			return;
+		/* Refresh the active array in case a trainer switched. */
 		active = getActivePokemon();
 		tickStatuses(active);
 		boolean request = true;
 		for(int i = 0; i < active.length; ++i)
 		{
-			// Synchronise statuses.
+			/* Synchronise statuses. */
 			active[i].synchroniseStatuses();
-
 			if(!active[i].isFainted())
 				continue;
-
 			requestPokemonReplacement(i);
 			request = false;
 		}
-
-		// Synchronise FieldEffects.
+		/* Synchronise FieldEffects. */
 		synchroniseFieldEffects();
-
-		// showMessage("---");
-
 		if(request)
 			requestMoves();
 	}
@@ -765,32 +761,28 @@ public abstract class BattleField
 	 */
 	private void executeTurn(BattleTurn turn, int source, int target)
 	{
-		/* TODO: Check this code, it is known to cause Battle Crashes. (NPE) */
+		/* TODO: Check this code, it is known to cause Battle Crashes. (NPE)
+		 * m_pokemon and m_active are null (Battle is over.) */
+		if(m_pokemon == null || m_active == null)
+			return;
 		Pokemon psource = m_pokemon[source][m_active[source]];
 		if(psource.isFainted())
 			return;
-
 		if(turn.isSwitchTurn())
 		{
 			switchInPokemon(source, turn.getId());
 			return;
 		}
-
 		psource.executeTurn(turn);
-
 		int move = turn.getId();
-
 		if(turn.isItemTurn())
 			return;
-
 		MoveListEntry entry = psource.getMove(move);
 		if(entry == null)
 			return;
 		PokemonMove theMove = entry.getMove();
-
 		if(psource.isImmobilised(theMove.getStatusException()))
 			return;
-
 		Pokemon ptarget = m_pokemon[target][m_active[target]];
 		if(theMove.isAttack() && ptarget.isFainted())
 		{
@@ -807,8 +799,7 @@ public abstract class BattleField
 	@SuppressWarnings("unchecked")
 	private void sortBySpeed(Pokemon[] active)
 	{
-		// Sort pokemon by speed.
-		/* TODO: Check this code, it is known to cause Battle Crashes. (NPE) */
+		/* Sort pokemon by speed. */
 		ArrayList<Pokemon> list = new ArrayList<Pokemon>(Arrays.asList(active));
 		Collections.sort(list, new Comparator()
 		{

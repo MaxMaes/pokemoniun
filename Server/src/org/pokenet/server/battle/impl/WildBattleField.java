@@ -36,29 +36,51 @@ import org.pokenet.server.protocol.ServerMessage;
  */
 public class WildBattleField extends BattleField
 {
-	private String[] att = { "Beedrill,2", "Ekans,1", "Arbok,2", "Nidoran-m,1", "Nidorino,2", "Nidoking,3", "Paras,1", "Parasect,2", "Mankey,1", "Primeape,2", "Growlithe,1", "Arcanine,2", "Machop,1",
-			"Machoke,2", "Machamp,3", "Bellsprout,1", "Weepingbell,2", "Victreebel,3", "Farfetchd,1", "Doduo,1", "Dodrio,2", "Muk,1", "Krabby,1", "Kingler,2", "Hitmonlee,2", "Rhydon,2", "Goldeen,1",
-			"Seaking,2", "Scyther,1", "Pinser,2", "Tauros,1", "Gyarados,2", "Flareon,2", "Kabutops,2", "Dratini,1", "Dragonair,2", "Dragonite,3", "Totodile,1", "Croconaw,1", "Feraligatr,2",
-			"Sentret,1", "Spinarak,1", "Ariados,2", "Unown,1", "Snubbull,1", "GranBull,2", "Qwilfish,1", "Scizor,2", "Heracross,2", "Teddiursa,1", "Ursaring,2", "Swinub,1", "Piloswine,1",
-			"Octillery,1", "Kingdra,1", "Donphan,1", "Stantler,1", "Tyrogue,1", "Entei,2", "Larvitar,1", "Pupitar,2", "Tyranitar,3", "Combusken,1", "Blaziken,3", "Mudkip,1", "Marshtomp,2",
-			"Swampert,3", "Poochyena,1", "Mightyena,2", "Nuzleaf,2", "Shiftry,3", "Breloom,2", "Sableye,1", "Mawile,1", "Caravanha,1", "Sharpedo,2", "Camerupt,1", "Trapinch,1", "Vibrava,1",
-			"Flygon,1", "Cacturne,1", "Zangoose,2", "seviper,1", "solrock,2", "Corphish,1", "Crawdaunt,2", "Anorith,1", "Armaldo,2", "Shuppet,1", "Banette,2", "Absol,2", "Huntail,1", "Bagon,1",
-			"Salamence,3", "Groudon,3", "Rayquaza,2", "Deoxys,1", "Turtwig,1", "Grotle,1", "Torterra,2", "Infernape,1", "Staraptor,3", "Bibarel,2", "Kricketune,2", "Shinx,1", "Luxio,2", "Luxray,3",
-			"Cranidos,1", "Rampardos,2", "Mothim,1", "Honchkrow,2", "Chatot,1", "Gible,1", "Gabite.2", "Garchomp,3", "Riolu,1", "Lucario,1", "Croagunk,1", "Toxicroak,2", "Carnivine,2", "Snover,1",
-			"Abomasnow,1", "Weavile,1", "Rhyperior,3", "electivire,3", "Yanmega,2", "Mamoswine,3", "Gallade,3", "Mesprit,1", "Azelf,2", "Regigigas,3" };
-	private String[] def = { "Squitle,1", "WARTORTLE,1", "METAPOD,2", "KAKUNA,2", "SANDSHREW,1", "SANDSLASH,3", "PARASECT,1", "POLIWRATH,3", "GEODUDE,1", "GRAVELER,2", "GOLEM,3", "SLOWBRO,2",
-			"SHELLDER,2", "CLOYSTER,2", "ONIX,1", "EXEGGCUTE,1", "CUBONE,1", "MAROWAK,2", "KOFFING,1", "WEEZING,2", "RHYHORN,1", "TANGELA,1", "SEADRA,1", "OMANYTE,1", "OMASTAR,2", "KABUTO,1",
-			"BAYLEEF,1", "MEGANIUM,1", "CROCONAW,1", "FERALIGATR,1", "SUDOWOODO,2", "PINECO,1", "FORRETRESS,2", "GLIGAR,1", "STEELIX,2", "SHUCKLE,1", "MAGCARGO,2", "CORSOLA,1", "SKARMORY,2",
-			"DONPHAN,1", "MILTANK,2", "SUICUNE,1", "SILCOON,2", "CASCOON,2", "SEEDOT,1", "PELIPPER,2", "NINCADA,1", "NOSEPASS,1", "SABLEYE,1", "MAWILE,1", "ARON,1", "LAIRON,1", "AGGRON,3",
-			"TORKOAL,2", "DUSCLOPS,1", "CLAMPERL,1", "HUNTAIL,1", "RELICANTH,1", "SHELGON,2", "BELDUM,1", "METANG,2", "METAGROSS,3", "REGIROCK,3", "REGISTEEL,2", "GROTLE,1", "TORTERRA,1",
+	private static final String[] ATK_EV = { "Beedrill,2", "Ekans,1", "Arbok,2", "Nidoran-m,1", "Nidorino,2", "Nidoking,3", "Paras,1", "Parasect,2", "Mankey,1", "Primeape,2", "Growlithe,1",
+			"Arcanine,2", "Machop,1", "Machoke,2", "Machamp,3", "Bellsprout,1", "Weepingbell,2", "Victreebel,3", "Farfetchd,1", "Doduo,1", "Dodrio,2", "Muk,1", "Krabby,1", "Kingler,2", "Hitmonlee,2",
+			"Rhydon,2", "Goldeen,1", "Seaking,2", "Scyther,1", "Pinser,2", "Tauros,1", "Gyarados,2", "Flareon,2", "Kabutops,2", "Dratini,1", "Dragonair,2", "Dragonite,3", "Totodile,1", "Croconaw,1",
+			"Feraligatr,2", "Sentret,1", "Spinarak,1", "Ariados,2", "Unown,1", "Snubbull,1", "GranBull,2", "Qwilfish,1", "Scizor,2", "Heracross,2", "Teddiursa,1", "Ursaring,2", "Swinub,1",
+			"Piloswine,1", "Octillery,1", "Kingdra,1", "Donphan,1", "Stantler,1", "Tyrogue,1", "Entei,2", "Larvitar,1", "Pupitar,2", "Tyranitar,3", "Combusken,1", "Blaziken,3", "Mudkip,1",
+			"Marshtomp,2", "Swampert,3", "Poochyena,1", "Mightyena,2", "Nuzleaf,2", "Shiftry,3", "Breloom,2", "Sableye,1", "Mawile,1", "Caravanha,1", "Sharpedo,2", "Camerupt,1", "Trapinch,1",
+			"Vibrava,1", "Flygon,1", "Cacturne,1", "Zangoose,2", "seviper,1", "solrock,2", "Corphish,1", "Crawdaunt,2", "Anorith,1", "Armaldo,2", "Shuppet,1", "Banette,2", "Absol,2", "Huntail,1",
+			"Bagon,1", "Salamence,3", "Groudon,3", "Rayquaza,2", "Deoxys,1", "Turtwig,1", "Grotle,1", "Torterra,2", "Infernape,1", "Staraptor,3", "Bibarel,2", "Kricketune,2", "Shinx,1", "Luxio,2",
+			"Luxray,3", "Cranidos,1", "Rampardos,2", "Mothim,1", "Honchkrow,2", "Chatot,1", "Gible,1", "Gabite.2", "Garchomp,3", "Riolu,1", "Lucario,1", "Croagunk,1", "Toxicroak,2", "Carnivine,2",
+			"Snover,1", "Abomasnow,1", "Weavile,1", "Rhyperior,3", "electivire,3", "Yanmega,2", "Mamoswine,3", "Gallade,3", "Mesprit,1", "Azelf,2", "Regigigas,3" };
+	private static final String[] DEF_EV = { "Squitle,1", "WARTORTLE,1", "METAPOD,2", "KAKUNA,2", "SANDSHREW,1", "SANDSLASH,3", "PARASECT,1", "POLIWRATH,3", "GEODUDE,1", "GRAVELER,2", "GOLEM,3",
+			"SLOWBRO,2", "SHELLDER,2", "CLOYSTER,2", "ONIX,1", "EXEGGCUTE,1", "CUBONE,1", "MAROWAK,2", "KOFFING,1", "WEEZING,2", "RHYHORN,1", "TANGELA,1", "SEADRA,1", "OMANYTE,1", "OMASTAR,2",
+			"KABUTO,1", "BAYLEEF,1", "MEGANIUM,1", "CROCONAW,1", "FERALIGATR,1", "SUDOWOODO,2", "PINECO,1", "FORRETRESS,2", "GLIGAR,1", "STEELIX,2", "SHUCKLE,1", "MAGCARGO,2", "CORSOLA,1",
+			"SKARMORY,2", "DONPHAN,1", "MILTANK,2", "SUICUNE,1", "SILCOON,2", "CASCOON,2", "SEEDOT,1", "PELIPPER,2", "NINCADA,1", "NOSEPASS,1", "SABLEYE,1", "MAWILE,1", "ARON,1", "LAIRON,1",
+			"AGGRON,3", "TORKOAL,2", "DUSCLOPS,1", "CLAMPERL,1", "HUNTAIL,1", "RELICANTH,1", "SHELGON,2", "BELDUM,1", "METANG,2", "METAGROSS,3", "REGIROCK,3", "REGISTEEL,2", "GROTLE,1", "TORTERRA,1",
 			"KRICKETOT", "SHIELDON,1", "BASTIODON,2", "VESPIQUEN,1", "BRONZOR,1", "BRONZONG,1", "BONSLY,1", "SPIRITOMB,1", "HIPPOPOTAS,1", "HIPPOWDON,2", "SKORUPI,1", "DRAPION,2", "TANGROWTH,2",
 			"LEAFEON,2", "GLISCOR,2", "PROBOPASS,1", "DUSKNOIR,1", "UXIE,2" };
-	private String[] hp = { "CATERPIE,1", "NIDORAN,1", "NIDORINA,2", "NIDOQUEEN,3", "CLEFAIRY,2", "CLEFABLE,3", "JIGGLYPUFF,2", "WIGGLYTUFF,3", "SLOWPOKE,1", "GRIMER,1", "MUK,1", "LICKITUNG,2",
-			"CHANSEY,2", "KANGASKHAN,2", "LAPRAS,2", "DITTO,1", "VAPOREON,2", "SNORLAX,2", "MEW,3", "HOOTHOOT,1", "NOCTOWL,2", "CHINCHOU,1", "LANTURN,2", "IGGLYBUFF,1", "MARILL,2", "AZUMARILL,3",
-			"WOOPER,1", "QUAGSIRE,2", "WOBBUFFET,2", "DUNSPARCE,1", "PILOSWINE,1", "PHANPY,1", "BLISSEY,3", "ENTEI,1", "CELEBI,3", "WURMPLE,1", "SHROOMISH,1", "SLAKOTH,1", "SLAKING,3", "SHEDINJA,2",
-			"WHISMUR,1", "LOUDRED,2", "EXPLOUD,3", "MUKUHITA,1", "HARIYAMA,2", "AZURILL,1", "DELCATTY,2", "GULPIN,1", "SWALOT,2", "WAILMER,1", "WAILORD,2", "BARBOACH,1", "WHISCASH,2", "CASTFORM,1",
-			"TROPIUS,2", "WYNAUT,1", "SNORUNT,1", "GLALIE,2", "SPHEAL,1", "SEALEO,2", "WALREIN,3", "RELICANTH,1", "JIRACHI,3", "BIDOOF,1", "SHELLOS,1", "GASTRODON,2", "DRIFLOON,1", "DRIFBLIM,2",
-			"SKUNTANK,2", "HAPPINY,1", "MUNCHLAX,1", "LICKILICKY,3", "GIRATINA,3", "PHIONE,1", "MANAPHY,3", "SHAYMIN,3", "ARCEUS,3" };
+	private static final String[] HP_EV = { "CATERPIE,1", "NIDORAN,1", "NIDORINA,2", "NIDOQUEEN,3", "CLEFAIRY,2", "CLEFABLE,3", "JIGGLYPUFF,2", "WIGGLYTUFF,3", "SLOWPOKE,1", "GRIMER,1", "MUK,1",
+			"LICKITUNG,2", "CHANSEY,2", "KANGASKHAN,2", "LAPRAS,2", "DITTO,1", "VAPOREON,2", "SNORLAX,2", "MEW,3", "HOOTHOOT,1", "NOCTOWL,2", "CHINCHOU,1", "LANTURN,2", "IGGLYBUFF,1", "MARILL,2",
+			"AZUMARILL,3", "WOOPER,1", "QUAGSIRE,2", "WOBBUFFET,2", "DUNSPARCE,1", "PILOSWINE,1", "PHANPY,1", "BLISSEY,3", "ENTEI,1", "CELEBI,3", "WURMPLE,1", "SHROOMISH,1", "SLAKOTH,1", "SLAKING,3",
+			"SHEDINJA,2", "WHISMUR,1", "LOUDRED,2", "EXPLOUD,3", "MUKUHITA,1", "HARIYAMA,2", "AZURILL,1", "DELCATTY,2", "GULPIN,1", "SWALOT,2", "WAILMER,1", "WAILORD,2", "BARBOACH,1", "WHISCASH,2",
+			"CASTFORM,1", "TROPIUS,2", "WYNAUT,1", "SNORUNT,1", "GLALIE,2", "SPHEAL,1", "SEALEO,2", "WALREIN,3", "RELICANTH,1", "JIRACHI,3", "BIDOOF,1", "SHELLOS,1", "GASTRODON,2", "DRIFLOON,1",
+			"DRIFBLIM,2", "SKUNTANK,2", "HAPPINY,1", "MUNCHLAX,1", "LICKILICKY,3", "GIRATINA,3", "PHIONE,1", "MANAPHY,3", "SHAYMIN,3", "ARCEUS,3" };
+	private static final String[] SP_ATK_EV = { "bulbasaur,1", "ivysaur,1", "venusaur,2", "charmeleon,1", "charizard,3", "butterfree,2", "oddish,1", "gloom,2", "vileplume,3", "venomoth,1",
+			"psyduck,1", "golduck,2", "abra,1", "kadabra,2", "alakazam,3", "megnemite,1", "magneton,2", "gastly,1", "haunter,2", "gengar,3", "exeggutor,2", "horsea,1", "seadra,2", "jynx,2",
+			"magmar,2", "porygon,1", "zapdos,3", "moltres,3", "mewtwo,3", "quilava,1", "typhlosion,3", "natu,1", "xatu,1", "mareep,1", "flaaffy,2", "ampharos,3", "sunkern1", "sunflora,2", "espeon,2",
+			"unown,1", "girafarig,2", "slugma,1", "remoraid,1", "octillery,1", "houndour,1", "houndoom,2", "kingdra,1", "porygon2,2", "smoochum,1", "raikou,1", "torchic,1", "combusken,1",
+			"beautifly,3", "ralts,1", "kirlia,2", "gardevoir,3", "masquerain,1", "roselia,2", "numel,1", "camerupt,1", "spinda,1", "cacnea,1", "cacturne,1", "seviper,1", "lunatone,2", "chimecho,1",
+			"gorebyss,2", "latios,3", "kyogre,3", "rayquaza,1", "deoxys,1", "monferno,1", "infernape,1", "piplup,1", "prinplup,2", "empoleon,3", "budew,1", "roserade,3", "mothim,1", "cherubi,1",
+			"cherrim,2", "mismagius,1", "chingling,1", "lucario,1", "abomasnow,1", "magnezone,3", "magmortar,3", "togekiss,2", "glaceon,2", "porygon-z,3", "rotom,1", "mesprit,1", "azelf,1",
+			"dialga,3", "palkia,3", "heatran,3", "darkrai,2" };
+	private static final String[] SP_DEF_EV = { "ivysaur,1", "venusaur,1", "wartortle,1", "blastoise,3", "butterfree,1", "beedrill,1", "ninetales,1", "venonat,1", "tentacool,1", "tentacruel,2",
+			"seel,1", "dewgong,2", "drowzee,1", "hypno,2", "hitmonchan,2", "mr.mime,2", "eevee,1", "articuno,3", "chikorita,1", "bayleef,1", "meganium,2", "ledyba,1", "ledian,2", "cleffa,1",
+			"togepi,1", "togetic,2", "bellossom,3", "politoed,3", "hoppip,1", "umbreon,2", "slowking,3", "midreavus,1", "shuckle,1", "corsola,1", "mantine,2", "kingdra,1", "hitmontop,2", "suicune,2",
+			"lugia,3", "ho-oh,3", "dustox,3", "lotad,1", "lombre,2", "ludicolo,3", "masquerain,1", "spoink,1", "grumpig,2", "swablu,1", "altaria,2", "baltoy,1", "claydol,2", "lileep,1", "cradily,2",
+			"milotic,2", "kecleon,1", "duskull,1", "duclops,1", "chimecho,1", "regice,3", "registeel,1", "latias,3", "burmy,1", "wormadam,2", "vespiquen,1", "mismagius,1", "bronzong,1", "mime jr.,1",
+			"spiritomb,1", "mantyke,1", "togekiss,1", "probopass,2", "dusknoir,2", "uxie,1", "mesprit,1", "cresselia,3" };
+	private static final String[] SPD_EV = { "charmander,1", "charmeleon,1", "WEEDLE,1", "PIDGEY,1", "PIDGEOTTO,2", "PIDGEOT,3", "RATTATA,1", "RATICATE,2", "SPEAROW,1", "FEAROW,2", "PIKACHU,2",
+			"RAICHU,3", "VULPIX,1", "NINETALES,1", "ZUBAT,1", "GOLBAT,2", "VENOMOTH,1", "DIGLETT,1", "DUGTRIO,2", "MEOWTH,1", "PERSIAN,2", "POLIWAG,1", "POLIWHIRL,2", "PONYTA,1", "RAPIDASH,2",
+			"VOLTORB,1", "ELECTRODE,2", "STARYU,1", "STARMIE,2", "ELECTABUZZ,2", "TAUROS,1", "MAGIKARP,1", "JOLTEON,2", "AERODACTYL,2", "CYNDAQUIL,1", "QUILAVA,1", "FURRET,2", "CROBAT,3", "PICHU,1",
+			"XATU,1", "SKIPLOOM,2", "JUMPLUFF,3", "AIPOM,1", "YANMA,1", "MURKROW,1", "SNEASEL,1", "DELIBIRD,1", "SMEARGLE,1", "ELEKID,1", "MAGBY,1", "RAIKOU,2", "TREECKO,1", "GROVYLE,2",
+			"SCEPTILE,3", "ZIGZAGOON,1", "LINOONE,2", "TAILOW,1", "SWELLOW,2", "WINGULL,1", "SURSKIT,1", "VIGOROTH,2", "NINJASK,2", "SKITTY,1", "DELCATTY,1", "MEDITITE,1", "MEDICHAM,2",
+			"ELECTRIKE,1", "MANECTRIC,2", "PLUSLE,1", "MINUN,1", "VOLBEAT,1", "ILLUMISE,1", "VIBRAVA,1", "FLYGON,2", "FEEBAS,1", "LUVDISC,1", "DEOXYS,1", "CHIMCHAR,1", "MONFERNO,1", "INFERNAPE,1",
+			"STARLY,1", "STARAVIA,2", "COMBEE,1", "PACHIRISU,1", "BUIZEL,1", "FLOATZEL,2", "AMBIPOM,2", "BUNEARY,1", "LOPUNNY,2", "GLAMEOW,1", "PURUGLY,2", "STUNKY,1", "FINNEON,1", "LUMINEON,2",
+			"WEAVILE,1", "FROSLASS,2", "ROTOM,1", "DARKRAI,1" };
 	private boolean m_finished = false;
 	private final Player m_player;
 	private int m_runCount;
@@ -66,28 +88,6 @@ public class WildBattleField extends BattleField
 
 	private final BattleTurn[] m_turn = new BattleTurn[2];
 	private Pokemon m_wildPoke;
-	private String[] spatt = { "bulbasaur,1", "ivysaur,1", "venusaur,2", "charmeleon,1", "charizard,3", "butterfree,2", "oddish,1", "gloom,2", "vileplume,3", "venomoth,1", "psyduck,1", "golduck,2",
-			"abra,1", "kadabra,2", "alakazam,3", "megnemite,1", "magneton,2", "gastly,1", "haunter,2", "gengar,3", "exeggutor,2", "horsea,1", "seadra,2", "jynx,2", "magmar,2", "porygon,1",
-			"zapdos,3", "moltres,3", "mewtwo,3", "quilava,1", "typhlosion,3", "natu,1", "xatu,1", "mareep,1", "flaaffy,2", "ampharos,3", "sunkern1", "sunflora,2", "espeon,2", "unown,1",
-			"girafarig,2", "slugma,1", "remoraid,1", "octillery,1", "houndour,1", "houndoom,2", "kingdra,1", "porygon2,2", "smoochum,1", "raikou,1", "torchic,1", "combusken,1", "beautifly,3",
-			"ralts,1", "kirlia,2", "gardevoir,3", "masquerain,1", "roselia,2", "numel,1", "camerupt,1", "spinda,1", "cacnea,1", "cacturne,1", "seviper,1", "lunatone,2", "chimecho,1", "gorebyss,2",
-			"latios,3", "kyogre,3", "rayquaza,1", "deoxys,1", "monferno,1", "infernape,1", "piplup,1", "prinplup,2", "empoleon,3", "budew,1", "roserade,3", "mothim,1", "cherubi,1", "cherrim,2",
-			"mismagius,1", "chingling,1", "lucario,1", "abomasnow,1", "magnezone,3", "magmortar,3", "togekiss,2", "glaceon,2", "porygon-z,3", "rotom,1", "mesprit,1", "azelf,1", "dialga,3",
-			"palkia,3", "heatran,3", "darkrai,2" };
-	private String[] spdef = { "ivysaur,1", "venusaur,1", "wartortle,1", "blastoise,3", "butterfree,1", "beedrill,1", "ninetales,1", "venonat,1", "tentacool,1", "tentacruel,2", "seel,1", "dewgong,2",
-			"drowzee,1", "hypno,2", "hitmonchan,2", "mr.mime,2", "eevee,1", "articuno,3", "chikorita,1", "bayleef,1", "meganium,2", "ledyba,1", "ledian,2", "cleffa,1", "togepi,1", "togetic,2",
-			"bellossom,3", "politoed,3", "hoppip,1", "umbreon,2", "slowking,3", "midreavus,1", "shuckle,1", "corsola,1", "mantine,2", "kingdra,1", "hitmontop,2", "suicune,2", "lugia,3", "ho-oh,3",
-			"dustox,3", "lotad,1", "lombre,2", "ludicolo,3", "masquerain,1", "spoink,1", "grumpig,2", "swablu,1", "altaria,2", "baltoy,1", "claydol,2", "lileep,1", "cradily,2", "milotic,2",
-			"kecleon,1", "duskull,1", "duclops,1", "chimecho,1", "regice,3", "registeel,1", "latias,3", "burmy,1", "wormadam,2", "vespiquen,1", "mismagius,1", "bronzong,1", "mime jr.,1",
-			"spiritomb,1", "mantyke,1", "togekiss,1", "probopass,2", "dusknoir,2", "uxie,1", "mesprit,1", "cresselia,3" };
-	private String[] speed = { "charmander,1", "charmeleon,1", "WEEDLE,1", "PIDGEY,1", "PIDGEOTTO,2", "PIDGEOT,3", "RATTATA,1", "RATICATE,2", "SPEAROW,1", "FEAROW,2", "PIKACHU,2", "RAICHU,3",
-			"VULPIX,1", "NINETALES,1", "ZUBAT,1", "GOLBAT,2", "VENOMOTH,1", "DIGLETT,1", "DUGTRIO,2", "MEOWTH,1", "PERSIAN,2", "POLIWAG,1", "POLIWHIRL,2", "PONYTA,1", "RAPIDASH,2", "VOLTORB,1",
-			"ELECTRODE,2", "STARYU,1", "STARMIE,2", "ELECTABUZZ,2", "TAUROS,1", "MAGIKARP,1", "JOLTEON,2", "AERODACTYL,2", "CYNDAQUIL,1", "QUILAVA,1", "FURRET,2", "CROBAT,3", "PICHU,1", "XATU,1",
-			"SKIPLOOM,2", "JUMPLUFF,3", "AIPOM,1", "YANMA,1", "MURKROW,1", "SNEASEL,1", "DELIBIRD,1", "SMEARGLE,1", "ELEKID,1", "MAGBY,1", "RAIKOU,2", "TREECKO,1", "GROVYLE,2", "SCEPTILE,3",
-			"ZIGZAGOON,1", "LINOONE,2", "TAILOW,1", "SWELLOW,2", "WINGULL,1", "SURSKIT,1", "VIGOROTH,2", "NINJASK,2", "SKITTY,1", "DELCATTY,1", "MEDITITE,1", "MEDICHAM,2", "ELECTRIKE,1",
-			"MANECTRIC,2", "PLUSLE,1", "MINUN,1", "VOLBEAT,1", "ILLUMISE,1", "VIBRAVA,1", "FLYGON,2", "FEEBAS,1", "LUVDISC,1", "DEOXYS,1", "CHIMCHAR,1", "MONFERNO,1", "INFERNAPE,1", "STARLY,1",
-			"STARAVIA,2", "COMBEE,1", "PACHIRISU,1", "BUIZEL,1", "FLOATZEL,2", "AMBIPOM,2", "BUNEARY,1", "LOPUNNY,2", "GLAMEOW,1", "PURUGLY,2", "STUNKY,1", "FINNEON,1", "LUMINEON,2", "WEAVILE,1",
-			"FROSLASS,2", "ROTOM,1", "DARKRAI,1" };
 	Set<Pokemon> m_participatingPokemon = new LinkedHashSet<Pokemon>();
 
 	/**
@@ -402,7 +402,7 @@ public class WildBattleField extends BattleField
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	@Override
 	public void informVictory(int winner)
 	{
@@ -411,8 +411,6 @@ public class WildBattleField extends BattleField
 		{
 			calculateExp();
 			m_player.removeTempStatusEffects();
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			 * new BattleEndMessage(BattleEnd.WON)); */
 			ServerMessage victory = new ServerMessage(m_player.getSession());
 			victory.init(24);
 			victory.addInt(0);
@@ -420,8 +418,6 @@ public class WildBattleField extends BattleField
 		}
 		else
 		{
-			/* TcpProtocolHandler.writeMessage(m_player.getTcpSession(),
-			 * new BattleEndMessage(BattleEnd.LOST)); */
 			ServerMessage loss = new ServerMessage(m_player.getSession());
 			loss.init(24);
 			loss.addInt(1);
@@ -435,9 +431,9 @@ public class WildBattleField extends BattleField
 		if(m_dispatch != null)
 		{
 			/* TODO: This very bad programming but shoddy does it and forces us to do it */
-			Thread t = m_dispatch;
+			// Thread t = m_dispatch;
 			m_dispatch = null;
-			t.stop();
+			// t.stop();
 		}
 		ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
 		message.addInt(m_player.getX());
@@ -735,25 +731,21 @@ public class WildBattleField extends BattleField
 				showMessage(m_player.getName() + " threw a Pokeball!");
 				m_wildPoke.setCaughtWith(35);
 				break;
-
 			case GREATBALL:
 				showMessage(m_player.getName() + " threw a Great Ball!");
 				catchRate = 1.5;
 				m_wildPoke.setCaughtWith(36);
 				break;
-
 			case ULTRABALL:
 				showMessage(m_player.getName() + " threw an Ultra Ball!");
 				catchRate = 2.0;
 				m_wildPoke.setCaughtWith(37);
 				break;
-
 			case MASTERBALL:
 				showMessage(m_player.getName() + " threw a Master Ball!");
 				catchRate = 255.0;
 				m_wildPoke.setCaughtWith(38);
 				break;
-
 			case LEVELBALL:
 				showMessage(m_player.getName() + " threw a Level Ball!");
 				m_wildPoke.setCaughtWith(41);
@@ -768,14 +760,12 @@ public class WildBattleField extends BattleField
 				else if(m_pokemonLevel > w_pokemonLevel * 4)
 					catchRate = 8.0;
 				break;
-
 			case LUREBALL:
 				showMessage(m_player.getName() + " threw a Lure Ball!");
 				m_wildPoke.setCaughtWith(42);
 				if(m_player.isFishing())
 					catchRate = 3.0;
 				break;
-
 			case MOONBALL:
 				showMessage(m_player.getName() + " threw a Moon Ball!");
 				m_wildPoke.setCaughtWith(43);
@@ -786,13 +776,11 @@ public class WildBattleField extends BattleField
 						pokeID == 300 || pokeID == 301)
 					catchRate = 4.0;
 				break;
-
 			case FRIENDBALL:
 				showMessage(m_player.getName() + " threw a Friend Ball!");
 				m_wildPoke.setCaughtWith(44);
 				m_wildPoke.setHappiness(200);
 				break;
-
 			case LOVEBALL:
 				showMessage(m_player.getName() + " threw a Love Ball!");
 				m_wildPoke.setCaughtWith(47);
@@ -801,7 +789,6 @@ public class WildBattleField extends BattleField
 						&& getActivePokemon()[0].getGender() == PokemonSpecies.GENDER_MALE && m_wildPoke.getSpeciesName().equalsIgnoreCase(getActivePokemon()[0].getSpeciesName()))
 					catchRate = 8.0;
 				break;
-
 			case HEAVYBALL:
 				showMessage(m_player.getName() + " threw a Heavy Ball!");
 				m_wildPoke.setCaughtWith(46);
@@ -814,7 +801,6 @@ public class WildBattleField extends BattleField
 				else if(m_wildPoke.getWeight() >= 409.59391)
 					catchRate = 40.0;
 				break;
-
 			case FASTBALL:
 				showMessage(m_player.getName() + " threw a Fast Ball!");
 				m_wildPoke.setCaughtWith(45);
@@ -830,19 +816,16 @@ public class WildBattleField extends BattleField
 				m_wildPoke.setCaughtWith(40);
 				catchRate = 1.5;
 				break;
-
 			case PREMIERBALL:
 				showMessage(m_player.getName() + " threw a Premier Ball!");
 				m_wildPoke.setCaughtWith(49);
 				break;
-
 			case REPEATBALL:
 				showMessage(m_player.getName() + " threw a Repeat Ball!");
 				m_wildPoke.setCaughtWith(53);
 				if(m_player.getPokedex().isPokemonCaught(pokeID))
 					catchRate = 4.0;
 				break;
-
 			case TIMERBALL:
 				showMessage(m_player.getName() + " threw a Timer Ball!");
 				m_wildPoke.setCaughtWith(54);
@@ -850,7 +833,6 @@ public class WildBattleField extends BattleField
 				if(catchRate > 4.0)
 					catchRate = 4.0;
 				break;
-
 			case NESTBALL:
 				showMessage(m_player.getName() + " threw a Nest Ball!");
 				m_wildPoke.setCaughtWith(52);
@@ -858,7 +840,6 @@ public class WildBattleField extends BattleField
 				if(catchRate < 1.0)
 					catchRate = 1.0;
 				break;
-
 			case NETBALL:
 				showMessage(m_player.getName() + " threw a Net Ball!");
 				m_wildPoke.setCaughtWith(50);
@@ -866,14 +847,12 @@ public class WildBattleField extends BattleField
 						|| m_wildPoke.getType2().equalsIgnoreCase("BUG"))
 					catchRate = 3.5;
 				break;
-
 			case DIVEBALL:
 				showMessage(m_player.getName() + " threw a Dive Ball!");
 				m_wildPoke.setCaughtWith(51);
 				if(m_player.isSurfing() || m_player.isFishing())
-
-					break;
-
+					catchRate = 3.5;
+				break;
 			case LUXURY:
 				showMessage(m_player.getName() + " threw a Luxery Ball!");
 				m_wildPoke.setCaughtWith(48);
@@ -904,7 +883,6 @@ public class WildBattleField extends BattleField
 				m_wildPoke.setCaughtWith(39);
 				break;
 		}
-
 		if(getMechanics().isCaught(m_wildPoke, m_wildPoke.getRareness(), catchRate, 1))
 		{
 			m_wildPoke.calculateStats(resetAfterCaught);
@@ -949,9 +927,9 @@ public class WildBattleField extends BattleField
 			}
 			queueMove(1, BattleTurn.getMoveTurn(moveID));
 		}
-		catch(MoveQueueException x)
+		catch(MoveQueueException mqe)
 		{
-			x.printStackTrace();
+			mqe.printStackTrace();
 		}
 	}
 
@@ -970,6 +948,7 @@ public class WildBattleField extends BattleField
 		}
 		else
 			/* If its the wild Pokemon, just get the moves */
+			/* TODO: This sometimes spawns a NPE, haven't reproduced it yet. */
 			getWildPokemonMove();
 	}
 
@@ -1064,26 +1043,26 @@ public class WildBattleField extends BattleField
 			for(Pokemon p : m_participatingPokemon)
 			{
 				/* Add the EV's and Ensure EVs don't go over limit, before or during addition */
-				for(String s : hp)
+				for(String s : HP_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 0, Integer.parseInt(s.split(",")[1]));
-				for(String s : att)
+				for(String s : ATK_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 1, Integer.parseInt(s.split(",")[1]));
 
-				for(String s : def)
+				for(String s : DEF_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 2, Integer.parseInt(s.split(",")[1]));
 
-				for(String s : spatt)
+				for(String s : SP_ATK_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 4, Integer.parseInt(s.split(",")[1]));
 
-				for(String s : spdef)
+				for(String s : SP_DEF_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 5, Integer.parseInt(s.split(",")[1]));
 
-				for(String s : speed)
+				for(String s : SPD_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
 						calcEV(p, 3, Integer.parseInt(s.split(",")[1]));
 

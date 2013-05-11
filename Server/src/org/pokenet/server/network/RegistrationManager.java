@@ -25,6 +25,7 @@ public class RegistrationManager implements Runnable
 	private boolean m_isRunning = false;
 	// private Queue<Session> m_queue;
 	private Thread m_thread;
+	private static String[] forbiddenWords = new String[] { "fuck", "sex", "troll", "penis", "vagina", "ass" };
 
 	/**
 	 * Constructor
@@ -55,6 +56,17 @@ public class RegistrationManager implements Runnable
 			return;
 		String[] info = packet.split(",");
 		/* Check the username */
+		for(String s : forbiddenWords)
+		{
+			if(info[0].toLowerCase().contains(s))
+			{
+				ServerMessage message = new ServerMessage(ClientPacket.REGISTER_ISSUES);
+				message.addInt(7);
+				message.addString(s);
+				session.Send(message);
+				return;
+			}
+		}
 		if(info[0].equalsIgnoreCase("NULL") || info[0].equalsIgnoreCase("!NPC!"))
 		{
 

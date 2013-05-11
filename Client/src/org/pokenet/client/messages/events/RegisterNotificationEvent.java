@@ -39,6 +39,9 @@ public class RegisterNotificationEvent implements MessageEvent
 			case 6:
 				GameClient.getInstance().messageDialog("Email too long!");
 				break;
+			case 7:
+				GameClient.getInstance().messageDialog("Username cannot contain: " + Request.readString());
+
 		}
 		// GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration(); TODO: uncomment when registration is done
 		GameClient.getInstance().getLoadingScreen().setVisible(false);

@@ -59,7 +59,7 @@ public class FishPokemon
 
 	/**
 	 * Returns the rod required to fish up this pogey
-	 * 0 is old rod, 15 is good rod, 35 is great rod, 50 is ultra rod.
+	 * 0 is old rod, 15 is good rod, 50 is great rod, 75 is ultra rod.
 	 * 
 	 * @return
 	 */

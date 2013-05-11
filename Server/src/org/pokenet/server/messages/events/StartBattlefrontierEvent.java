@@ -21,7 +21,7 @@ public class StartBattlefrontierEvent implements MessageEvent
 		String level = battle.split("_")[1].toLowerCase();
 		switch(location)
 		{
-			case "BattleTower":
+			case "battletower":
 				player.setX(128);
 				player.setY(152);
 				if(level.equals(lvl50Str))
@@ -33,7 +33,7 @@ public class StartBattlefrontierEvent implements MessageEvent
 				message.addInt(player.getY());
 				session.Send(message);
 				break;
-			case "BattlePalace":
+			case "battlepalace":
 				player.setX(320);
 				player.setY(152);
 				if(level.equals(lvl50Str))
@@ -45,9 +45,9 @@ public class StartBattlefrontierEvent implements MessageEvent
 				message.addInt(player.getY());
 				session.Send(message);
 				break;
-			case "BattleArena":
+			case "battlearena":
 				break;
-			case "BattleFactory":
+			case "battlefactory":
 				/* player.setX(160);
 				 * player.setY(184);
 				 * if(level.equals(lvl50Str))
@@ -59,11 +59,11 @@ public class StartBattlefrontierEvent implements MessageEvent
 				 * message.addInt(player.getY());
 				 * session.Send(message); */
 				break;
-			case "BattlePike":
+			case "battlepike":
 				break;
-			case "BattlePyramide": /* TODO: Shouldn't this be BattlePyramid? */
+			case "battlepyramide": /* TODO: Shouldn't this be BattlePyramid? */
 				break;
-			case "BattleDome":
+			case "battledome":
 				break;
 			default:
 				System.out.println("Location name unkown or not implemented!");

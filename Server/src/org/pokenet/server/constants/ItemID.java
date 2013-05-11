@@ -1,443 +1,431 @@
 package org.pokenet.server.constants;
 
-public enum ItemID
+public class ItemID
 {
-	POTION(1),
-	SUPER_POTION(2),
-	HYPER_POTION(3),
-	MAX_POTION(4),
-	FULL_RESTORE(5),
-	ANTIDOTE(16),
-	PARALYZ_HEAL(17),
-	AWAKENING(18),
-	BURN_HEAL(19),
-	ICE_HEAL(20),
-	FULL_HEAL(21),
-	LAVA_COOKIES(22),
-	OLD_GATEAU(23),
-	POKE_BALL(35),
-	GREAT_BALL(36),
-	ULTRA_BALL(37),
-	MASTER_BALL(38),
-	SAFARI_BALL(39),
-	PARK_BALL(40),
-	LEVEL_BALL(41),
-	LURE_BALL(42),
-	MOON_BALL(43),
-	FRIEND_BALL(44),
-	FAST_BALL(45),
-	HEAVY_BALL(46),
-	LOVE_BALL(47),
-	LUXURY_BALL(48),
-	PREMIER_BALL(49),
-	NET_BALL(50),
-	DIVE_BALL(51),
-	NEST_BALL(52),
-	REPEAT_BALL(53),
-	TIMER_BALL(54),
-	HEAL_BALL(55),
-	DUSK_BALL(56),
-	CHERISH_BALL(57),
-	QUICK_BALL(58),
-	HP_UP(70),
-	PROTEIN(71),
-	IRON(72),
-	CALCIUM(73),
-	ZINC(74),
-	CARBOS(75),
-	PP_UP(76),
-	PP_MAX(77),
-	RARE_CANDY(78),
-	REPER(85),
-	SUPER_REPEL(86),
-	MAX_REPEL(87),
-	ESCAPE_ROPE(91),
-	MACH_BIKE(92),
-	ACRO_BIKE(93),
-	VIAL(94),
-	POFFIN_CASE(95),
-	BERRY_BLENDER(96),
-	OLD_ROD(97),
-	GOOD_ROD(98),
-	GREAT_ROD(99),
-	ULTRA_ROD(100),
-	CLEANSE_TAG(101),
-	GLASS(126),
-	COAL(127),
-	IRON_CRAFT(128),
-	STEEL(129),
-	RUBBER(130),
-	CLOTH(131),
-	STRING(132),
-	FLAX(133),
-	NUGGET(134),
-	WOOD(135),
-	DEEP_SEA_SCALE(150),
-	DEEP_SEA_TOOTH(151),
-	DRAGON_SCALE(152),
-	DUBIOUS_DISC(153),
-	ELECTIRIZER(154),
-	KINGS_ROCK(155),
-	MAGMARIZER(156),
-	METAL_COAT(157),
-	OVAL_STONE(158),
-	PROTECTOR(159),
-	RAZOR_CLAW(160),
-	RAZOR_FANG(161),
-	REAPER_CLOTH(162),
-	UP_GRADE(163),
-	FIRE_STONE(164),
-	WATER_STONE(165),
-	THUNDER_STONE(166),
-	SUN_STONE(167),
-	MOON_STONE(168),
-	SHINY_STONE(169),
-	DUSK_STONE(170),
-	DAWN_STONE(171),
-	EVERSTONE(172),
-	LEAF_STONE(173),
-	FULL_INCENSE(181),
-	LAX_INCENSE(182),
-	LUCK_INCENSE(183),
-	ODD_INCENSE(184),
-	ROCK_INCENSE(185),
-	ROSE_INCENSE(186),
-	SEA_INCENSE(187),
-	WAVE_INCENSE(188),
-	PURE_INCENSE(189),
-	CHERI_BERRY(200),
-	CHESTO_BERRY(201),
-	PECHA_BERRY(202),
-	RAWST_BERRY(203),
-	ASPEAR_BERRY(204),
-	LEPPA_BERRY(205),
-	ORAN_BERRY(206),
-	PERSIM_BERRY(207),
-	LUM_BERRY(208),
-	SITRUS_BERRY(209),
-	FIGY_BERRY(210),
-	WIKI_BERRY(211),
-	MAGO_BERRY(212),
-	AUGUAV_BERRY(213),
-	IAPAPA_BERRY(214),
-	RAZZ_BERRY(215),
-	BLUK_BERRY(216),
-	NANAB_BERRY(217),
-	WEAPER_BERRY(218),
-	POMEG_BERRY(219),
-	KELSPY_BERRY(220),
-	QUALOT_BERRY(221),
-	HONDOW_BERRY(222),
-	GREPA_BERRY(223),
-	TAMATO_BERRY(224),
-	CORNN_BERRY(225),
-	MAGOST_BERRY(226),
-	RABUTA_BERRY(227),
-	NOMEL_BERRY(228),
-	SPELON_BERRY(229),
-	PAMTRE_BERRY(230),
-	WATMEL_BERRY(231),
-	DURIN_BERRY(232),
-	BELUE_BERRY(233),
-	OCCA_BERRY(234),
-	PASSHO_BERRY(235),
-	WACAN_BERRY(236),
-	RINDO_BERRY(237),
-	YACHE_BERRY(238),
-	CHOPLE_BERRY(239),
-	KEBIA_BERRY(240),
-	SHUCA_BERRY(241),
-	COBA_BERRY(242),
-	PAYAPA_BERRY(243),
-	TANGA_BERRY(244),
-	CHARTI_BERRY(245),
-	KASIB_BERRY(246),
-	HABAN_BERRY(247),
-	COLBUR_BERRY(248),
-	BABIRI_BERRY(249),
-	CHILAN_BERRY(250),
-	LIECHI_BERRY(251),
-	GANLON_BERRY(252),
-	SALAC_BERRY(253),
-	PETAYA_BERRY(254),
-	APICOT_BERRY(255),
-	STARF_BERRY(256),
-	ENIGMA_BERRY(257),
-	MICLE_BERRY(258),
-	CUSTAP_BERRY(259),
-	JABOCA_BERRY(260),
-	ROWAP_BERRY(261),
-	ADAMANT_ORB(300),
-	BLACK_BELT(301),
-	BLACK_GLASSES(302),
-	CHARCOAL(303),
-	DRAGON_FANG(304),
-	HARD_STONE(305),
-	LUSTROUS_ORB(306),
-	MAGNET(307),
-	METAL_COAT_FIELD(308),
-	MIRACLE_SEED(309),
-	MYSTIC_WATER(310),
-	NEVER_MELT_ICE(311),
-	PINK_BOW(312),
-	POISON_BARB(313),
-	POLKADOT_BOW(314),
-	GRISEOUS_ORB(315),
-	SHARP_BEAK(316),
-	SILK_SCARF(317),
-	SILVER_POWDER(318),
-	SOFT_SAND(319),
-	SPELL_TAG(320),
-	TWISTED_SPOONS(321),
-	DRACO_PLATE(331),
-	DREAD_PLATE(332),
-	EARTH_PLATE(333),
-	FIST_PLATE(334),
-	FLAME_PLATE(335),
-	ICICLE_PLATE(336),
-	INSECT_PLATE(337),
-	IRON_PLATE(338),
-	MEADOW_PLATE(339),
-	MIND_PLATE(340),
-	SKY_PLATE(341),
-	SPLASH_PLATE(342),
-	SPOOKY_PLATE(343),
-	STONE_PLATE(344),
-	TOXIC_PLATE(345),
-	ZAP_PLATE(346),
-	AMULET_COIN(350),
-	BERSERK_GENE(351),
-	BIG_ROOT(352),
-	BLACK_SLUDGE(353),
-	BRIGHT_POWDER(354),
-	CHOICE_BAND(355),
-	CHOICE_SCARF(356),
-	CHOICE_SPECS(357),
-	DAMP_ROCK(358),
-	DESTINY_KNOT(359),
-	EXP_SHARE(360),
-	EXPERT_BELT(361),
-	FLAME_ORB(362),
-	FOCUS_BAND(363),
-	FOCUS_SLASH(364),
-	GRIP_CLAW(365),
-	HEAT_ROCK(366),
-	ICY_ROCK(367),
-	IRON_BALL(368),
-	LAGGING_TAIL(369),
-	LEFTOVERS(370),
-	LIFE_ORB(371),
-	LIGHT_CLAY(372),
-	LUCKY_EGG(373),
-	MENTAL_HERB(374),
-	METRONOME(375),
-	MUSCLE_BAND(376),
-	POWER_HERB(377),
-	QUICK_CLAW(378),
-	SCOPE_LENS(379),
-	SHED_SHELL(380),
-	SHELL_BELL(381),
-	SMOKE_BALL(382),
-	SMOOTH_ROCK(383),
-	STICKY_BARB(384),
-	TOXIC_ORB(385),
-	WHITE_HERB(386),
-	WIDE_LENS(387),
-	WISE_GLASSES(388),
-	ZOOM_LENS(389),
-	RED_POKEBLOCK(400),
-	BLUE_POKEBLOCK(401),
-	PNIK_POKEBLOCK(402),
-	GREEN_POKEBLOCK(403),
-	YELLOW_POKEBLOCK(404),
-	PURPLE_POKEBLOCK(405),
-	INDIGO_POKEBLOCK(406),
-	BROWN_POKEBLOCK(407),
-	LITE_BLUE_POKEBLOCK(408),
-	OLIVE_POKEBLOCK(409),
-	BLACK_POKEBLOCK(410),
-	GOLD_POKEBLOCK(411),
-	GRAY_POKEBLOCK(412),
-	WHITE_POKEBLOCK(413),
-	BITTER_POFFIN(414),
-	SPICY_POFFIN(415),
-	SWEET_POFFIN(416),
-	DRY_POFFIN(417),
-	SOUR_POFFIN(418),
-	MILD_POFFIN(419),
-	HONEY(420),
-	BIG_APPLE(421),
-	HUGE_APPLE(422),
-	GOLDEN_APPLE(423),
-	PERFECT_APPLE(424),
-	BANANA(425),
-	GRIMY_FOOD(426),
-	CHESTNUT(427),
-	BLACK_GUMMI(428),
-	BLUE_GUMMI(429),
-	BROWN_GUMMI(430),
-	CLEAR_GUMMI(431),
-	GOLD_GUMMI(432),
-	GRASS_GUMMI(433),
-	GREEN_GUMMI(434),
-	GREY_GUMMI(435),
-	ORANGE_GUMMI(436),
-	PINK_GUMMI(437),
-	PURPLE_GUMMI(438),
-	RED_GUMMI(439),
-	ROYAL_GUMMI(440),
-	SILVER_GUMMI(441),
-	SKY_GUMMI(442),
-	WHITE_GUMMI(443),
-	YELLOW_GUMMI(444),
-	WONDER_GUMMI(445),
-	LIGHT_BALL(477),
-	LUCKY_PUNCH(478),
-	METAL_POWDER(479),
-	QUICK_POWDER(480),
-	SOUL_DEW(481),
-	STICK(482),
-	THICK_CLUB(483),
-	BLUE_SCARF(490),
-	GREEN_SCARF(491),
-	PINK_SCARF(492),
-	RED_SCARF(493),
-	YELLOW_SCARF(494),
-	WHITE_APRICORN(500),
-	RED_APRICORN(501),
-	BLUE_APRICORN(502),
-	BLACK_APRICORN(503),
-	PINK_APRICORN(504),
-	GREEN_APRICORN(505),
-	YELLOW_APRICORN(506),
-	SCOOTHE_BELL(525),
-	AIR_MAIL(550),
-	BLOOM_MAIL(551),
-	BUBBLE_MAIL(552),
-	FLAME_MAIL(553),
-	GRASS_MAIL(554),
-	HEARTH_MAIL(555),
-	SNOM_MAIL(556),
-	SAPCE_MAIL(557),
-	STEEL_MAIL(558),
-	TUNNEL_MAIL(559),
-	TM01(576),
-	TM02(577),
-	TM03(578),
-	TM04(579),
-	TM05(580),
-	TM06(581),
-	TM07(582),
-	TM08(583),
-	TM09(584),
-	TM10(585),
-	TM11(586),
-	TM12(587),
-	TM13(588),
-	TM14(589),
-	TM15(590),
-	TM16(591),
-	TM17(592),
-	TM18(593),
-	TM19(594),
-	TM20(595),
-	TM21(596),
-	TM22(597),
-	TM23(598),
-	TM24(599),
-	TM25(600),
-	TM26(601),
-	TM27(602),
-	TM28(603),
-	TM29(604),
-	TM30(605),
-	TM31(606),
-	TM32(607),
-	TM33(608),
-	TM34(609),
-	TM35(610),
-	TM36(611),
-	TM37(612),
-	TM38(613),
-	TM39(614),
-	TM40(615),
-	TM41(616),
-	TM42(617),
-	TM43(618),
-	TM44(619),
-	TM45(620),
-	TM46(621),
-	TM47(622),
-	TM48(623),
-	TM49(624),
-	TM50(625),
-	TM51(626),
-	TM52(627),
-	TM53(628),
-	TM54(629),
-	TM55(630),
-	TM56(631),
-	TM57(632),
-	TM58(633),
-	TM59(634),
-	TM60(635),
-	TM61(636),
-	TM62(637),
-	TM63(638),
-	TM64(639),
-	TM65(640),
-	TM66(641),
-	TM67(642),
-	TM68(643),
-	TM69(654),
-	TM70(645),
-	TM71(646),
-	TM72(647),
-	TM73(648),
-	TM74(649),
-	TM75(650),
-	TM76(651),
-	TM77(652),
-	TM78(653),
-	TM79(654),
-	TM80(655),
-	TM81(656),
-	TM82(657),
-	TM83(658),
-	TM84(659),
-	TM85(660),
-	TM86(661),
-	TM87(662),
-	TM88(663),
-	TM89(664),
-	TM90(665),
-	TM91(666),
-	TM92(667),
-	TM93(668),
-	TM94(669),
-	TM95(670),
-	TM96(671),
-	TM97(672),
-	TM98(673),
-	TM99(674),
-	SECRET_POTION(750),
-	VOLTORB_LOLLIPOP(800),
-	SWEET_CHILLS(801),
-	CINNAMON_CANDY(802),
-	CANDY_CORN(803),
-	POKE_CHOC(804),
-	GUMMILAX(805),
-	GENGUM(806);
-	
-	private int value = -1;
-
-	private ItemID(int value)
-	{
-		this.value = value;
-	}
-
-	public int getValue()
-	{
-		return value;
-	}
+	public static final int POTION = 1;
+	public static final int SUPER_POTION = 2;
+	public static final int HYPER_POTION = 3;
+	public static final int MAX_POTION = 4;
+	public static final int FULL_RESTORE = 5;
+	public static final int ANTIDOTE = 16;
+	public static final int PARALYZ_HEAL = 17;
+	public static final int AWAKENING = 18;
+	public static final int BURN_HEAL = 19;
+	public static final int ICE_HEAL = 20;
+	public static final int FULL_HEAL = 21;
+	public static final int LAVA_COOKIES = 22;
+	public static final int OLD_GATEAU = 23;
+	public static final int POKE_BALL = 35;
+	public static final int GREAT_BALL = 36;
+	public static final int ULTRA_BALL = 37;
+	public static final int MASTER_BALL = 38;
+	public static final int SAFARI_BALL = 39;
+	public static final int PARK_BALL = 40;
+	public static final int LEVEL_BALL = 41;
+	public static final int LURE_BALL = 42;
+	public static final int MOON_BALL = 43;
+	public static final int FRIEND_BALL = 44;
+	public static final int FAST_BALL = 45;
+	public static final int HEAVY_BALL = 46;
+	public static final int LOVE_BALL = 47;
+	public static final int LUXURY_BALL = 48;
+	public static final int PREMIER_BALL = 49;
+	public static final int NET_BALL = 50;
+	public static final int DIVE_BALL = 51;
+	public static final int NEST_BALL = 52;
+	public static final int REPEAT_BALL = 53;
+	public static final int TIMER_BALL = 54;
+	public static final int HEAL_BALL = 55;
+	public static final int DUSK_BALL = 56;
+	public static final int CHERISH_BALL = 57;
+	public static final int QUICK_BALL = 58;
+	public static final int HP_UP = 70;
+	public static final int PROTEIN = 71;
+	public static final int IRON = 72;
+	public static final int CALCIUM = 73;
+	public static final int ZINC = 74;
+	public static final int CARBOS = 75;
+	public static final int PP_UP = 76;
+	public static final int PP_MAX = 77;
+	public static final int RARE_CANDY = 78;
+	public static final int REPEL = 85;
+	public static final int SUPER_REPEL = 86;
+	public static final int MAX_REPEL = 87;
+	public static final int ESCAPE_ROPE = 91;
+	public static final int MACH_BIKE = 92;
+	public static final int ACRO_BIKE = 93;
+	public static final int VIAL = 94;
+	public static final int POFFIN_CASE = 95;
+	public static final int BERRY_BLENDER = 96;
+	public static final int OLD_ROD = 97;
+	public static final int GOOD_ROD = 98;
+	public static final int GREAT_ROD = 99;
+	public static final int ULTRA_ROD = 100;
+	public static final int CLEANSE_TAG = 101;
+	public static final int GLASS = 126;
+	public static final int COAL = 127;
+	public static final int IRON_CRAFT = 128;
+	public static final int STEEL = 129;
+	public static final int RUBBER = 130;
+	public static final int CLOTH = 131;
+	public static final int STRING = 132;
+	public static final int FLAX = 133;
+	public static final int NUGGET = 134;
+	public static final int WOOD = 135;
+	public static final int DEEP_SEA_SCALE = 150;
+	public static final int DEEP_SEA_TOOTH = 151;
+	public static final int DRAGON_SCALE = 152;
+	public static final int DUBIOUS_DISC = 153;
+	public static final int ELECTIRIZER = 154;
+	public static final int KINGS_ROCK = 155;
+	public static final int MAGMARIZER = 156;
+	public static final int METAL_COAT = 157;
+	public static final int OVAL_STONE = 158;
+	public static final int PROTECTOR = 159;
+	public static final int RAZOR_CLAW = 160;
+	public static final int RAZOR_FANG = 161;
+	public static final int REAPER_CLOTH = 162;
+	public static final int UP_GRADE = 163;
+	public static final int FIRE_STONE = 164;
+	public static final int WATER_STONE = 165;
+	public static final int THUNDER_STONE = 166;
+	public static final int SUN_STONE = 167;
+	public static final int MOON_STONE = 168;
+	public static final int SHINY_STONE = 169;
+	public static final int DUSK_STONE = 170;
+	public static final int DAWN_STONE = 171;
+	public static final int EVERSTONE = 172;
+	public static final int LEAF_STONE = 173;
+	public static final int FULL_INCENSE = 181;
+	public static final int LAX_INCENSE = 182;
+	public static final int LUCK_INCENSE = 183;
+	public static final int ODD_INCENSE = 184;
+	public static final int ROCK_INCENSE = 185;
+	public static final int ROSE_INCENSE = 186;
+	public static final int SEA_INCENSE = 187;
+	public static final int WAVE_INCENSE = 188;
+	public static final int PURE_INCENSE = 189;
+	public static final int CHERI_BERRY = 200;
+	public static final int CHESTO_BERRY = 201;
+	public static final int PECHA_BERRY = 202;
+	public static final int RAWST_BERRY = 203;
+	public static final int ASPEAR_BERRY = 204;
+	public static final int LEPPA_BERRY = 205;
+	public static final int ORAN_BERRY = 206;
+	public static final int PERSIM_BERRY = 207;
+	public static final int LUM_BERRY = 208;
+	public static final int SITRUS_BERRY = 209;
+	public static final int FIGY_BERRY = 210;
+	public static final int WIKI_BERRY = 211;
+	public static final int MAGO_BERRY = 212;
+	public static final int AUGUAV_BERRY = 213;
+	public static final int IAPAPA_BERRY = 214;
+	public static final int RAZZ_BERRY = 215;
+	public static final int BLUK_BERRY = 216;
+	public static final int NANAB_BERRY = 217;
+	public static final int WEAPER_BERRY = 218;
+	public static final int POMEG_BERRY = 219;
+	public static final int KELSPY_BERRY = 220;
+	public static final int QUALOT_BERRY = 221;
+	public static final int HONDOW_BERRY = 222;
+	public static final int GREPA_BERRY = 223;
+	public static final int TAMATO_BERRY = 224;
+	public static final int CORNN_BERRY = 225;
+	public static final int MAGOST_BERRY = 226;
+	public static final int RABUTA_BERRY = 227;
+	public static final int NOMEL_BERRY = 228;
+	public static final int SPELON_BERRY = 229;
+	public static final int PAMTRE_BERRY = 230;
+	public static final int WATMEL_BERRY = 231;
+	public static final int DURIN_BERRY = 232;
+	public static final int BELUE_BERRY = 233;
+	public static final int OCCA_BERRY = 234;
+	public static final int PASSHO_BERRY = 235;
+	public static final int WACAN_BERRY = 236;
+	public static final int RINDO_BERRY = 237;
+	public static final int YACHE_BERRY = 238;
+	public static final int CHOPLE_BERRY = 239;
+	public static final int KEBIA_BERRY = 240;
+	public static final int SHUCA_BERRY = 241;
+	public static final int COBA_BERRY = 242;
+	public static final int PAYAPA_BERRY = 243;
+	public static final int TANGA_BERRY = 244;
+	public static final int CHARTI_BERRY = 245;
+	public static final int KASIB_BERRY = 246;
+	public static final int HABAN_BERRY = 247;
+	public static final int COLBUR_BERRY = 248;
+	public static final int BABIRI_BERRY = 249;
+	public static final int CHILAN_BERRY = 250;
+	public static final int LIECHI_BERRY = 251;
+	public static final int GANLON_BERRY = 252;
+	public static final int SALAC_BERRY = 253;
+	public static final int PETAYA_BERRY = 254;
+	public static final int APICOT_BERRY = 255;
+	public static final int STARF_BERRY = 256;
+	public static final int ENIGMA_BERRY = 257;
+	public static final int MICLE_BERRY = 258;
+	public static final int CUSTAP_BERRY = 259;
+	public static final int JABOCA_BERRY = 260;
+	public static final int ROWAP_BERRY = 261;
+	public static final int ADAMANT_ORB = 300;
+	public static final int BLACK_BELT = 301;
+	public static final int BLACK_GLASSES = 302;
+	public static final int CHARCOAL = 303;
+	public static final int DRAGON_FANG = 304;
+	public static final int HARD_STONE = 305;
+	public static final int LUSTROUS_ORB = 306;
+	public static final int MAGNET = 307;
+	public static final int METAL_COAT_FIELD = 308;
+	public static final int MIRACLE_SEED = 309;
+	public static final int MYSTIC_WATER = 310;
+	public static final int NEVER_MELT_ICE = 311;
+	public static final int PINK_BOW = 312;
+	public static final int POISON_BARB = 313;
+	public static final int POLKADOT_BOW = 314;
+	public static final int GRISEOUS_ORB = 315;
+	public static final int SHARP_BEAK = 316;
+	public static final int SILK_SCARF = 317;
+	public static final int SILVER_POWDER = 318;
+	public static final int SOFT_SAND = 319;
+	public static final int SPELL_TAG = 320;
+	public static final int TWISTED_SPOONS = 321;
+	public static final int DRACO_PLATE = 331;
+	public static final int DREAD_PLATE = 332;
+	public static final int EARTH_PLATE = 333;
+	public static final int FIST_PLATE = 334;
+	public static final int FLAME_PLATE = 335;
+	public static final int ICICLE_PLATE = 336;
+	public static final int INSECT_PLATE = 337;
+	public static final int IRON_PLATE = 338;
+	public static final int MEADOW_PLATE = 339;
+	public static final int MIND_PLATE = 340;
+	public static final int SKY_PLATE = 341;
+	public static final int SPLASH_PLATE = 342;
+	public static final int SPOOKY_PLATE = 343;
+	public static final int STONE_PLATE = 344;
+	public static final int TOXIC_PLATE = 345;
+	public static final int ZAP_PLATE = 346;
+	public static final int AMULET_COIN = 350;
+	public static final int BERSERK_GENE = 351;
+	public static final int BIG_ROOT = 352;
+	public static final int BLACK_SLUDGE = 353;
+	public static final int BRIGHT_POWDER = 354;
+	public static final int CHOICE_BAND = 355;
+	public static final int CHOICE_SCARF = 356;
+	public static final int CHOICE_SPECS = 357;
+	public static final int DAMP_ROCK = 358;
+	public static final int DESTINY_KNOT = 359;
+	public static final int EXP_SHARE = 360;
+	public static final int EXPERT_BELT = 361;
+	public static final int FLAME_ORB = 362;
+	public static final int FOCUS_BAND = 363;
+	public static final int FOCUS_SLASH = 364;
+	public static final int GRIP_CLAW = 365;
+	public static final int HEAT_ROCK = 366;
+	public static final int ICY_ROCK = 367;
+	public static final int IRON_BALL = 368;
+	public static final int LAGGING_TAIL = 369;
+	public static final int LEFTOVERS = 370;
+	public static final int LIFE_ORB = 371;
+	public static final int LIGHT_CLAY = 372;
+	public static final int LUCKY_EGG = 373;
+	public static final int MENTAL_HERB = 374;
+	public static final int METRONOME = 375;
+	public static final int MUSCLE_BAND = 376;
+	public static final int POWER_HERB = 377;
+	public static final int QUICK_CLAW = 378;
+	public static final int SCOPE_LENS = 379;
+	public static final int SHED_SHELL = 380;
+	public static final int SHELL_BELL = 381;
+	public static final int SMOKE_BALL = 382;
+	public static final int SMOOTH_ROCK = 383;
+	public static final int STICKY_BARB = 384;
+	public static final int TOXIC_ORB = 385;
+	public static final int WHITE_HERB = 386;
+	public static final int WIDE_LENS = 387;
+	public static final int WISE_GLASSES = 388;
+	public static final int ZOOM_LENS = 389;
+	public static final int RED_POKEBLOCK = 400;
+	public static final int BLUE_POKEBLOCK = 401;
+	public static final int PNIK_POKEBLOCK = 402;
+	public static final int GREEN_POKEBLOCK = 403;
+	public static final int YELLOW_POKEBLOCK = 404;
+	public static final int PURPLE_POKEBLOCK = 405;
+	public static final int INDIGO_POKEBLOCK = 406;
+	public static final int BROWN_POKEBLOCK = 407;
+	public static final int LITE_BLUE_POKEBLOCK = 408;
+	public static final int OLIVE_POKEBLOCK = 409;
+	public static final int BLACK_POKEBLOCK = 410;
+	public static final int GOLD_POKEBLOCK = 411;
+	public static final int GRAY_POKEBLOCK = 412;
+	public static final int WHITE_POKEBLOCK = 413;
+	public static final int BITTER_POFFIN = 414;
+	public static final int SPICY_POFFIN = 415;
+	public static final int SWEET_POFFIN = 416;
+	public static final int DRY_POFFIN = 417;
+	public static final int SOUR_POFFIN = 418;
+	public static final int MILD_POFFIN = 419;
+	public static final int HONEY = 420;
+	public static final int BIG_APPLE = 421;
+	public static final int HUGE_APPLE = 422;
+	public static final int GOLDEN_APPLE = 423;
+	public static final int PERFECT_APPLE = 424;
+	public static final int BANANA = 425;
+	public static final int GRIMY_FOOD = 426;
+	public static final int CHESTNUT = 427;
+	public static final int BLACK_GUMMI = 428;
+	public static final int BLUE_GUMMI = 429;
+	public static final int BROWN_GUMMI = 430;
+	public static final int CLEAR_GUMMI = 431;
+	public static final int GOLD_GUMMI = 432;
+	public static final int GRASS_GUMMI = 433;
+	public static final int GREEN_GUMMI = 434;
+	public static final int GREY_GUMMI = 435;
+	public static final int ORANGE_GUMMI = 436;
+	public static final int PINK_GUMMI = 437;
+	public static final int PURPLE_GUMMI = 438;
+	public static final int RED_GUMMI = 439;
+	public static final int ROYAL_GUMMI = 440;
+	public static final int SILVER_GUMMI = 441;
+	public static final int SKY_GUMMI = 442;
+	public static final int WHITE_GUMMI = 443;
+	public static final int YELLOW_GUMMI = 444;
+	public static final int WONDER_GUMMI = 445;
+	public static final int LIGHT_BALL = 477;
+	public static final int LUCKY_PUNCH = 478;
+	public static final int METAL_POWDER = 479;
+	public static final int QUICK_POWDER = 480;
+	public static final int SOUL_DEW = 481;
+	public static final int STICK = 482;
+	public static final int THICK_CLUB = 483;
+	public static final int BLUE_SCARF = 490;
+	public static final int GREEN_SCARF = 491;
+	public static final int PINK_SCARF = 492;
+	public static final int RED_SCARF = 493;
+	public static final int YELLOW_SCARF = 494;
+	public static final int WHITE_APRICORN = 500;
+	public static final int RED_APRICORN = 501;
+	public static final int BLUE_APRICORN = 502;
+	public static final int BLACK_APRICORN = 503;
+	public static final int PINK_APRICORN = 504;
+	public static final int GREEN_APRICORN = 505;
+	public static final int YELLOW_APRICORN = 506;
+	public static final int SCOOTHE_BELL = 525;
+	public static final int AIR_MAIL = 550;
+	public static final int BLOOM_MAIL = 551;
+	public static final int BUBBLE_MAIL = 552;
+	public static final int FLAME_MAIL = 553;
+	public static final int GRASS_MAIL = 554;
+	public static final int HEARTH_MAIL = 555;
+	public static final int SNOM_MAIL = 556;
+	public static final int SAPCE_MAIL = 557;
+	public static final int STEEL_MAIL = 558;
+	public static final int TUNNEL_MAIL = 559;
+	public static final int TM01 = 576;
+	public static final int TM02 = 577;
+	public static final int TM03 = 578;
+	public static final int TM04 = 579;
+	public static final int TM05 = 580;
+	public static final int TM06 = 581;
+	public static final int TM07 = 582;
+	public static final int TM08 = 583;
+	public static final int TM09 = 584;
+	public static final int TM10 = 585;
+	public static final int TM11 = 586;
+	public static final int TM12 = 587;
+	public static final int TM13 = 588;
+	public static final int TM14 = 589;
+	public static final int TM15 = 590;
+	public static final int TM16 = 591;
+	public static final int TM17 = 592;
+	public static final int TM18 = 593;
+	public static final int TM19 = 594;
+	public static final int TM20 = 595;
+	public static final int TM21 = 596;
+	public static final int TM22 = 597;
+	public static final int TM23 = 598;
+	public static final int TM24 = 599;
+	public static final int TM25 = 600;
+	public static final int TM26 = 601;
+	public static final int TM27 = 602;
+	public static final int TM28 = 603;
+	public static final int TM29 = 604;
+	public static final int TM30 = 605;
+	public static final int TM31 = 606;
+	public static final int TM32 = 607;
+	public static final int TM33 = 608;
+	public static final int TM34 = 609;
+	public static final int TM35 = 610;
+	public static final int TM36 = 611;
+	public static final int TM37 = 612;
+	public static final int TM38 = 613;
+	public static final int TM39 = 614;
+	public static final int TM40 = 615;
+	public static final int TM41 = 616;
+	public static final int TM42 = 617;
+	public static final int TM43 = 618;
+	public static final int TM44 = 619;
+	public static final int TM45 = 620;
+	public static final int TM46 = 621;
+	public static final int TM47 = 622;
+	public static final int TM48 = 623;
+	public static final int TM49 = 624;
+	public static final int TM50 = 625;
+	public static final int TM51 = 626;
+	public static final int TM52 = 627;
+	public static final int TM53 = 628;
+	public static final int TM54 = 629;
+	public static final int TM55 = 630;
+	public static final int TM56 = 631;
+	public static final int TM57 = 632;
+	public static final int TM58 = 633;
+	public static final int TM59 = 634;
+	public static final int TM60 = 635;
+	public static final int TM61 = 636;
+	public static final int TM62 = 637;
+	public static final int TM63 = 638;
+	public static final int TM64 = 639;
+	public static final int TM65 = 640;
+	public static final int TM66 = 641;
+	public static final int TM67 = 642;
+	public static final int TM68 = 643;
+	public static final int TM69 = 654;
+	public static final int TM70 = 645;
+	public static final int TM71 = 646;
+	public static final int TM72 = 647;
+	public static final int TM73 = 648;
+	public static final int TM74 = 649;
+	public static final int TM75 = 650;
+	public static final int TM76 = 651;
+	public static final int TM77 = 652;
+	public static final int TM78 = 653;
+	public static final int TM79 = 654;
+	public static final int TM80 = 655;
+	public static final int TM81 = 656;
+	public static final int TM82 = 657;
+	public static final int TM83 = 658;
+	public static final int TM84 = 659;
+	public static final int TM85 = 660;
+	public static final int TM86 = 661;
+	public static final int TM87 = 662;
+	public static final int TM88 = 663;
+	public static final int TM89 = 664;
+	public static final int TM90 = 665;
+	public static final int TM91 = 666;
+	public static final int TM92 = 667;
+	public static final int TM93 = 668;
+	public static final int TM94 = 669;
+	public static final int TM95 = 670;
+	public static final int TM96 = 671;
+	public static final int TM97 = 672;
+	public static final int TM98 = 673;
+	public static final int TM99 = 674;
+	public static final int SECRET_POTION = 750;
+	public static final int VOLTORB_LOLLIPOP = 800;
+	public static final int SWEET_CHILLS = 801;
+	public static final int CINNAMON_CANDY = 802;
+	public static final int CANDY_CORN = 803;
+	public static final int POKE_CHOC = 804;
+	public static final int GUMMILAX = 805;
+	public static final int GENGUM = 806;
 }

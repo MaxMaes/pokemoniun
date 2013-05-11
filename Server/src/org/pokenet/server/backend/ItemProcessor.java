@@ -19,6 +19,8 @@ import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 import org.pokenet.server.constants.ClientPacket;
+import org.pokenet.server.constants.ItemID;
+import org.pokenet.server.constants.Rod;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -84,129 +86,70 @@ public class ItemProcessor implements Runnable
 	{
 		/* TODO: Rewrite this thread/function/monster in iterations. */
 		/* Check that the bag contains the item */
+		boolean returnValue = false;
 		if(player.getBag().containsItem(itemId) < 0)
 			return false;
 		/* We have the item, so let us use it */
 		Item item = GameServer.getServiceManager().getItemDatabase().getItem(itemId);
-		/* Pokemon object we might need */
+		String itemName = item.getName().toUpperCase();
 		Pokemon poke = null;
 		try
 		{
-			/* Check if the item is a rod */
-			if(item.getName().equalsIgnoreCase("OLD ROD"))
+			switch(itemId)
 			{
-				if(!player.isBattling() && !player.isFishing())
-				{
-					player.fish(0);
+				case ItemID.OLD_ROD:
+					returnValue = processRod(player, Rod.OLD_ROD_LVL);
+					return returnValue;
+				case ItemID.GOOD_ROD:
+					returnValue = processRod(player, Rod.GOOD_ROD_LVL);
+					return returnValue;
+				case ItemID.GREAT_ROD:
+					returnValue = processRod(player, Rod.GREAT_ROD_LVL);
+					return returnValue;
+				case ItemID.ULTRA_ROD:
+					returnValue = processRod(player, Rod.ULTRA_ROD_LVL);
+					return returnValue;
+				case ItemID.REPEL:
+					player.setRepel(100);
 					return true;
-				}
-			}
-			else if(item.getName().equalsIgnoreCase("GOOD ROD"))
-			{
-				if(!player.isBattling() && !player.isFishing())
-				{
-					if(player.getFishingLevel() >= 15)
-						player.fish(15);
-					else
-					{
-						// Notify client that you need a fishing level of 15 or higher for this rod
-						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(ClientPacket.CANT_USE_ROD.getValue());
-						message.addInt(15);
-						message.sendResponse();
-					}
+				case ItemID.SUPER_REPEL:
+					player.setRepel(200);
 					return true;
-				}
-			}
-			else if(item.getName().equalsIgnoreCase("GREAT ROD"))
-			{
-				if(!player.isBattling() && !player.isFishing())
-				{
-					if(player.getFishingLevel() >= 50)
-						player.fish(35);
-					else
-					{
-						// Notify client that you need a fishing level of 50 or higher for this rod
-						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(ClientPacket.CANT_USE_ROD.getValue());
-						message.addInt(50);
-						message.sendResponse();
-					}
+				case ItemID.MAX_REPEL:
+					player.setRepel(250);
 					return true;
-				}
-			}
-			else if(item.getName().equalsIgnoreCase("ULTRA ROD"))
-			{
-				if(!player.isBattling() && !player.isFishing())
-				{
-					if(player.getFishingLevel() >= 70)
-						player.fish(50);
-					else
-					{
-						// Notify client that you need a fishing level of 70 or higher for this rod
-						ServerMessage message = new ServerMessage(m_player.getSession());
-						message.init(ClientPacket.CANT_USE_ROD.getValue());
-						message.addInt(70);
-						message.sendResponse();
-					}
+				case ItemID.ESCAPE_ROPE:
+					if(player.isBattling())
+						return false;
+					/* Warp the player to their last heal point */
+					player.setX(player.getHealX());
+					player.setY(player.getHealY());
+					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getHealMapX(), player.getHealMapY()), null);
 					return true;
-				}
-			}
-			/* Check if the item is a repel or escape rope */
-			else if(item.getName().equalsIgnoreCase("REPEL"))
-			{
-				player.setRepel(100);
-				return true;
-			}
-			else if(item.getName().equalsIgnoreCase("SUPER REPEL"))
-			{
-				player.setRepel(200);
-				return true;
-			}
-			else if(item.getName().equalsIgnoreCase("MAX REPEL"))
-			{
-				player.setRepel(250);
-				return true;
-			}
-			else if(item.getName().equalsIgnoreCase("ESCAPE ROPE"))
-			{
-				if(player.isBattling())
-					return false;
-				/* Warp the player to their last heal point */
-				player.setX(player.getHealX());
-				player.setY(player.getHealY());
-				player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getHealMapX(), player.getHealMapY()), null);
-				return true;
+					/* default:
+					 * return false; */
 			}
 			/* Else, determine what do to with the item */
 			if(item.getAttributes().contains(ItemAttribute.MOVESLOT))
 			{
 				/* TMs & HMs */
-				try
-				{
-					/* Can't use a TM/HM during battle */
-					if(player.isBattling())
-						return false;
-					/* Player is not in battle, learn the move */
-					poke = player.getParty()[Integer.parseInt(data[0])];
-					if(poke == null)
-						return false;
-					String moveName = item.getName().substring(5);
-					/* Ensure the Pokemon can learn this move */
-					if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
-					{
-						poke.getMovesLearning().add(moveName);
-						ServerMessage message = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
-						message.addInt(Integer.parseInt(data[0]));
-						message.addString(moveName);
-						m_player.getSession().Send(message);
-						return true;
-					}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
+				/* Can't use a TM/HM during battle */
+				if(player.isBattling())
 					return false;
+				/* Player is not in battle, learn the move */
+				poke = player.getParty()[Integer.parseInt(data[0])];
+				if(poke == null)
+					return false;
+				String moveName = itemName.substring(5);
+				/* Ensure the Pokemon can learn this move */
+				if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
+				{
+					poke.getMovesLearning().add(moveName);
+					ServerMessage message = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
+					message.addInt(Integer.parseInt(data[0]));
+					message.addString(moveName);
+					m_player.getSession().Send(message);
+					return true;
 				}
 			}
 			else if(item.getAttributes().contains(ItemAttribute.POKEMON))
@@ -228,25 +171,25 @@ public class ItemProcessor implements Runnable
 						return false;
 					}
 
-					if(item.getId() == 1)
+					if(itemId == 1)
 					{ // Potion
 						hpBoost = 20;
 						poke.changeHealth(hpBoost);
 						message = "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP";
 					}
-					else if(item.getId() == 2)
+					else if(itemId == 2)
 					{// Super Potion
 						hpBoost = 50;
 						poke.changeHealth(hpBoost);
 						message = "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP";
 					}
-					else if(item.getId() == 3)
+					else if(itemId == 3)
 					{ // Hyper Potion
 						hpBoost = 200;
 						poke.changeHealth(hpBoost);
 						message = "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP";
 					}
-					else if(item.getId() == 4)
+					else if(itemId == 4)
 					{// Max Potion
 						poke.changeHealth(poke.getRawStat(0));
 						message = "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP";
@@ -269,7 +212,7 @@ public class ItemProcessor implements Runnable
 					else
 					{
 						/* Player is in battle, take a hit from enemy */
-						player.getBattleField().executeItemTurn(item.getId());
+						player.getBattleField().executeItemTurn(itemId);
 					}
 					return true;
 				}
@@ -292,55 +235,55 @@ public class ItemProcessor implements Runnable
 						{
 							/* Check if the item is an evolution stone If so, evolve the
 							 * Pokemon */
-							if(item.getId() == 164 && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
+							if(itemId == 164 && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 165 && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
+							else if(itemId == 165 && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 166 && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
+							else if(itemId == 166 && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 173 && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
+							else if(itemId == 173 && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 168 && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
+							else if(itemId == 168 && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 167 && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
+							else if(itemId == 167 && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 169 && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
+							else if(itemId == 169 && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 170 && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
+							else if(itemId == 170 && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
 								return true;
 							}
-							else if(item.getId() == 171 && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
+							else if(itemId == 171 && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
 							{
 								poke.setEvolution(evolution);
 								poke.evolutionResponse(true, player);
@@ -364,12 +307,12 @@ public class ItemProcessor implements Runnable
 						return false;
 					}
 
-					if(item.getId() == 16)
+					if(itemId == 16)
 					{ // Antidote
 						String message = "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName() + " status to normal";
 						poke.removeStatus(PoisonEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -378,7 +321,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 17)
+					else if(itemId == 17)
 					{ // Parlyz Heal
 						String message = "You used Parlyz Heal on " + poke.getName() + "/nThe Parlyz Heal restored " + poke.getName() + " status to normal";
 						poke.removeStatus(ParalysisEffect.class);
@@ -393,7 +336,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 18)
+					else if(itemId == 18)
 					{ // Awakening
 						String message = "You used Awakening on " + poke.getName() + "/nThe Awakening restored " + poke.getName() + " status to normal";
 						poke.removeStatus(SleepEffect.class);
@@ -409,7 +352,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 19)
+					else if(itemId == 19)
 					{ // Burn Heal
 						String message = "You used Burn Heal on " + poke.getName() + "/nThe Burn Heal restored " + poke.getName() + " status to normal";
 						poke.removeStatus(BurnEffect.class);
@@ -425,7 +368,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 20)
+					else if(itemId == 20)
 					{ // Ice Heal
 						String message = "You used Ice Heal on " + poke.getName() + "/nThe Ice Heal restored " + poke.getName() + " status to normal";
 						poke.removeStatus(FreezeEffect.class);
@@ -439,7 +382,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 21)
+					else if(itemId == 21)
 					{ // Full Heal
 						String message = "You used Full Heal on " + poke.getName() + "/nThe Full Heal restored " + poke.getName() + " status to normal";
 						poke.removeStatusEffects(true);
@@ -453,23 +396,23 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getName().equalsIgnoreCase("LAVA COOKIE"))
+					else if(itemName.equalsIgnoreCase("LAVA COOKIE"))
 					{
 						// just like a FULL HEAL
 						poke.removeStatusEffects(true);
 						if(player.isBattling())
 						{
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						}
 						return true;
 					}
-					else if(item.getName().equalsIgnoreCase("OLD GATEAU"))
+					else if(itemName.equalsIgnoreCase("OLD GATEAU"))
 					{
 						// just like a FULL HEAL
 						poke.removeStatusEffects(true);
 						if(player.isBattling())
 						{
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						}
 						return true;
 					}
@@ -480,12 +423,12 @@ public class ItemProcessor implements Runnable
 					Random rand = new Random();
 					if(poke == null)
 						return false;
-					if(item.getId() == 200)
+					if(itemId == 200)
 					{ // Cheri Berry
 						String message = poke.getName() + " ate the Cheri Berry/nThe Cheri Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(ParalysisEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -494,12 +437,12 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 201)
+					else if(itemId == 201)
 					{ // Chesto Berry
 						String message = poke.getName() + " ate the Chesto Berry/nThe Chesto Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(SleepEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -508,12 +451,12 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 202)
+					else if(itemId == 202)
 					{ // Pecha Berry
 						String message = poke.getName() + " ate the Pecha Berry/nThe Pecha Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(PoisonEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -522,12 +465,12 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 203)
+					else if(itemId == 203)
 					{ // Rawst Berry
 						String message = poke.getName() + " ate the Rawst Berry/nThe Rawst Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(BurnEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -536,12 +479,12 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 204)
+					else if(itemId == 204)
 					{ // Aspear Berry
 						String message = poke.getName() + " ate the Aspear Berry/nThe Aspear Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(FreezeEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -550,7 +493,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 205)
+					else if(itemId == 205)
 					{ // Leppa Berry
 						String message = "Leppa Berry had no effect";
 						/* Move selection not completed, temp message TODO: Add support for this */
@@ -560,7 +503,7 @@ public class ItemProcessor implements Runnable
 						else
 							poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -569,7 +512,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 206)
+					else if(itemId == 206)
 					{ // Oran Berry
 						String message = poke.getName() + " ate the Oran Berry/nThe Oran Berry restored 10HP";
 						poke.changeHealth(10);
@@ -584,15 +527,15 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 207)
+					else if(itemId == 207)
 					{ // Persim Berry
 						String message = poke.getName() + " ate the Persim Berry/nThe Persim Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatus(ConfuseEffect.class);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -601,12 +544,12 @@ public class ItemProcessor implements Runnable
 							return true;
 						}
 					}
-					else if(item.getId() == 208)
+					else if(itemId == 208)
 					{ // Lum Berry
 						String message = poke.getName() + " ate the Lum Berry/nThe Lum Berry restored " + poke.getName() + " status to normal";
 						poke.removeStatusEffects(true);
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -615,7 +558,7 @@ public class ItemProcessor implements Runnable
 							return true;
 						}
 					}
-					else if(item.getId() == 209)
+					else if(itemId == 209)
 					{ // Sitrus Berry
 						String message = poke.getName() + " ate the Sitrus Berry/nThe Sitrus Berry restored 30HP";
 						poke.changeHealth(30);
@@ -630,10 +573,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 210)
+					else if(itemId == 210)
 					{ // Figy Berry
 						String message = poke.getName() + " ate the Figy Berry/nThe Figy Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						poke.changeHealth(poke.getRawStat(0) / 8);
@@ -648,10 +591,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 214)
+					else if(itemId == 214)
 					{ // Wiki Berry
 						String message = poke.getName() + " ate the Wiki Berry/nThe Wiki Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						poke.changeHealth(poke.getRawStat(0) / 8);
@@ -666,10 +609,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 212)
+					else if(itemId == 212)
 					{ // Mago Berry
 						String message = poke.getName() + " ate the Mago Berry/nThe Mago Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						poke.changeHealth(poke.getRawStat(0) / 8);
@@ -684,10 +627,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 213)
+					else if(itemId == 213)
 					{ // Aguav Berry
 						String message = poke.getName() + " ate the Aguav Berry/nThe Aguav Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						poke.changeHealth(poke.getRawStat(0) / 8);
@@ -702,10 +645,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 214)
+					else if(itemId == 214)
 					{ // Iapapa Berry
 						String message = poke.getName() + " ate the Iapapa Berry/nThe Iapapa Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						poke.changeHealth(poke.getRawStat(0) / 8);
@@ -720,10 +663,10 @@ public class ItemProcessor implements Runnable
 							player.getSession().Send(itemUse);
 						}
 						else
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						return true;
 					}
-					else if(item.getId() == 800)
+					else if(itemId == 800)
 					{ // Voltorb Lollipop
 						String message = poke.getName() + " ate the Voltorb Lollipop/nThe Lollipop restored 50 HP to " + poke.getName() + "!";
 						poke.changeHealth(50);
@@ -735,7 +678,7 @@ public class ItemProcessor implements Runnable
 						}
 						if(player.isBattling())
 						{
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						}
 						else
 						{
@@ -749,7 +692,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 801)
+					else if(itemId == 801)
 					{ // Sweet Chills
 						String message = poke.getName() + " ate the Sweet Chill/nThe Sweet Chill restored " + poke.getName() + "'s moves!";
 						for(int ppSlot = 0; ppSlot < 4; ppSlot++)
@@ -772,7 +715,7 @@ public class ItemProcessor implements Runnable
 							}// Already under a status effect.
 						}
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -781,7 +724,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 802)
+					else if(itemId == 802)
 					{ // Cinnamon Candy
 						String message = poke.getName() + " ate the Cinnamon Candy./nThe Cinnamon Candy restored " + poke.getName() + "'s status to normal!";
 						poke.removeStatusEffects(true);
@@ -793,7 +736,7 @@ public class ItemProcessor implements Runnable
 						}
 						if(player.isBattling())
 						{
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						}
 						else
 						{
@@ -807,7 +750,7 @@ public class ItemProcessor implements Runnable
 						}
 						return true;
 					}
-					else if(item.getId() == 803)
+					else if(itemId == 803)
 					{ // Candy Corn
 						String message = poke.getName() + " ate the Candy Corn./n" + poke.getName() + " is happier!";
 						int happiness = poke.getHappiness() + 15;
@@ -822,7 +765,7 @@ public class ItemProcessor implements Runnable
 							message += "/n" + poke.getName() + " got Poisoned from the rotten candy!";
 						}
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -831,7 +774,7 @@ public class ItemProcessor implements Runnable
 							return true;
 						}
 					}
-					else if(item.getId() == 804)
+					else if(itemId == 804)
 					{ // Poke'Choc
 						String message = poke.getName() + " ate the Poke'Choc Bar!/n" + poke.getName() + " is happier!";
 						int happiness = poke.getHappiness() + 10;
@@ -846,7 +789,7 @@ public class ItemProcessor implements Runnable
 							message += "/n" + poke.getName() + " recovered 30HP.";
 						}
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -855,7 +798,7 @@ public class ItemProcessor implements Runnable
 							return true;
 						}
 					}
-					else if(item.getId() == 805)
+					else if(itemId == 805)
 					{ // Gummilax
 						String message = poke.getName() + " ate the Gummilax./n" + poke.getName() + " is happier!";
 						int happiness = poke.getHappiness() + rand.nextInt(30);
@@ -870,7 +813,7 @@ public class ItemProcessor implements Runnable
 							message += "/nThe gummi was too sweet for " + poke.getName() + "./n" + poke.getName() + " fell asleep!";
 						}
 						if(player.isBattling())
-							player.getBattleField().executeItemTurn(item.getId());
+							player.getBattleField().executeItemTurn(itemId);
 						else
 						{
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -879,7 +822,7 @@ public class ItemProcessor implements Runnable
 							return true;
 						}
 					}
-					else if(item.getId() == 806)
+					else if(itemId == 806)
 					{ // Gengum
 						String message = poke.getName() + " ate the Gengum.";
 						int randHealth = rand.nextInt(100);
@@ -913,7 +856,7 @@ public class ItemProcessor implements Runnable
 			else if(item.getAttributes().contains(ItemAttribute.BATTLE))
 			{
 				/* Pokeballs */
-				if(item.getName().equalsIgnoreCase("POKE BALL"))
+				if(itemName.equalsIgnoreCase("POKE BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -923,7 +866,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("GREAT BALL"))
+				else if(itemName.equalsIgnoreCase("GREAT BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -933,7 +876,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("ULTRA BALL"))
+				else if(itemName.equalsIgnoreCase("ULTRA BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -943,7 +886,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("MASTER BALL"))
+				else if(itemName.equalsIgnoreCase("MASTER BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -953,7 +896,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("LEVEL BALL"))
+				else if(itemName.equalsIgnoreCase("LEVEL BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -963,7 +906,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("LURE BALL"))
+				else if(itemName.equalsIgnoreCase("LURE BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -973,7 +916,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("MOON BALL"))
+				else if(itemName.equalsIgnoreCase("MOON BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -983,7 +926,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("FRIEND BALL"))
+				else if(itemName.equalsIgnoreCase("FRIEND BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -993,7 +936,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("LOVE BALL"))
+				else if(itemName.equalsIgnoreCase("LOVE BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1003,7 +946,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("HEAVY BALL"))
+				else if(itemName.equalsIgnoreCase("HEAVY BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1013,7 +956,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("FAST BALL"))
+				else if(itemName.equalsIgnoreCase("FAST BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1023,7 +966,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("PARK BALL"))
+				else if(itemName.equalsIgnoreCase("PARK BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1033,7 +976,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("PREMIER BALL"))
+				else if(itemName.equalsIgnoreCase("PREMIER BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1043,7 +986,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("REPEAT BALL"))
+				else if(itemName.equalsIgnoreCase("REPEAT BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1053,7 +996,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("TIMER BALL"))
+				else if(itemName.equalsIgnoreCase("TIMER BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1063,7 +1006,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("NEST BALL"))
+				else if(itemName.equalsIgnoreCase("NEST BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1073,7 +1016,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("NET BALL"))
+				else if(itemName.equalsIgnoreCase("NET BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1083,7 +1026,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("DIVE BALL"))
+				else if(itemName.equalsIgnoreCase("DIVE BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1093,7 +1036,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("LUXURY BALL"))
+				else if(itemName.equalsIgnoreCase("LUXURY BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1103,7 +1046,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("HEAL BALL"))
+				else if(itemName.equalsIgnoreCase("HEAL BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1113,7 +1056,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("QUICK BALL"))
+				else if(itemName.equalsIgnoreCase("QUICK BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1123,7 +1066,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("DUSK BALL"))
+				else if(itemName.equalsIgnoreCase("DUSK BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1133,7 +1076,7 @@ public class ItemProcessor implements Runnable
 						return true;
 					}
 				}
-				else if(item.getName().equalsIgnoreCase("CHERISH BALL"))
+				else if(itemName.equalsIgnoreCase("CHERISH BALL"))
 				{
 					if(player.getBattleField() instanceof WildBattleField)
 					{
@@ -1150,5 +1093,23 @@ public class ItemProcessor implements Runnable
 		{
 			return false;
 		}
+	}
+
+	private boolean processRod(Player player, int rodLvl)
+	{
+		if(!player.isBattling() && !player.isFishing())
+		{
+			if(player.getFishingLevel() >= rodLvl)
+				player.fish(rodLvl);
+			else
+			{
+				ServerMessage message = new ServerMessage(m_player.getSession());
+				message.init(ClientPacket.CANT_USE_ROD.getValue());
+				message.addInt(rodLvl);
+				message.sendResponse();
+				return false;
+			}
+		}
+		return true;
 	}
 }

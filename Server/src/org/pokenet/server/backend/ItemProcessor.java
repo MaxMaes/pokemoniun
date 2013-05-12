@@ -20,6 +20,7 @@ import org.pokenet.server.battle.mechanics.statuses.PoisonEffect;
 import org.pokenet.server.battle.mechanics.statuses.SleepEffect;
 import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.ItemID;
+import org.pokenet.server.constants.Potion;
 import org.pokenet.server.constants.Rod;
 import org.pokenet.server.protocol.ServerMessage;
 
@@ -74,25 +75,23 @@ public class ItemProcessor implements Runnable
 	}
 
 	/**
-	 * Uses an item in the player's bag. Returns true if it was used.
+	 * Uses an item in the player's bag.
 	 * 
-	 * @param player
-	 * @param itemId
-	 * @param data
-	 *        - extra data received from client
-	 * @return
+	 * @param player Reference to the player.
+	 * @param itemId The id of the item to be used.
+	 * @param data Extra data received from client
+	 * @return True if the item can be used, otherwise false.
 	 */
 	public boolean useItem(Player player, int itemId, String[] data)
 	{
-		/* TODO: Rewrite this thread/function/monster in iterations. */
-		/* Check that the bag contains the item */
-		boolean returnValue = false;
 		if(player.getBag().containsItem(itemId) < 0)
 			return false;
-		/* We have the item, so let us use it */
+		/* TODO: Rewrite this thread/function/monster in iterations. */
+		int pokePartyPos = Integer.parseInt(data[0]);
+		Pokemon poke = player.getParty()[pokePartyPos];
 		Item item = GameServer.getServiceManager().getItemDatabase().getItem(itemId);
 		String itemName = item.getName().toUpperCase();
-		Pokemon poke = null;
+		boolean returnValue = false;
 		try
 		{
 			switch(itemId)
@@ -129,24 +128,18 @@ public class ItemProcessor implements Runnable
 					/* default:
 					 * return false; */
 			}
-			/* Else, determine what do to with the item */
+			/* Determine what do to with the item */
 			if(item.getAttributes().contains(ItemAttribute.MOVESLOT))
 			{
 				/* TMs & HMs */
-				/* Can't use a TM/HM during battle */
-				if(player.isBattling())
-					return false;
-				/* Player is not in battle, learn the move */
-				poke = player.getParty()[Integer.parseInt(data[0])];
-				if(poke == null)
+				if(player.isBattling() || poke == null)
 					return false;
 				String moveName = itemName.substring(5);
-				/* Ensure the Pokemon can learn this move */
 				if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
 				{
 					poke.getMovesLearning().add(moveName);
 					ServerMessage message = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
-					message.addInt(Integer.parseInt(data[0]));
+					message.addInt(pokePartyPos);
 					message.addString(moveName);
 					m_player.getSession().Send(message);
 					return true;
@@ -158,74 +151,44 @@ public class ItemProcessor implements Runnable
 				if(item.getCategory().equalsIgnoreCase("POTIONS"))
 				{
 					/* Potions */
-					int hpBoost = 0;
-					poke = player.getParty()[Integer.parseInt(data[0])];
-					String message = "";
 					if(poke == null)
 						return false;
-
 					if(poke.getHealth() <= 0)
 					{
 						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
 						player.getSession().Send(cantUse);
 						return false;
 					}
-
-					if(itemId == 1)
-					{ // Potion
-						hpBoost = 20;
-						poke.changeHealth(hpBoost);
-						message = "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP";
-					}
-					else if(itemId == 2)
-					{// Super Potion
-						hpBoost = 50;
-						poke.changeHealth(hpBoost);
-						message = "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP";
-					}
-					else if(itemId == 3)
-					{ // Hyper Potion
-						hpBoost = 200;
-						poke.changeHealth(hpBoost);
-						message = "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP";
-					}
-					else if(itemId == 4)
-					{// Max Potion
-						poke.changeHealth(poke.getRawStat(0));
-						message = "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP";
-					}
-					else
+					switch(itemId)
 					{
-						return false;
+						case 1:
+							poke.changeHealth(Potion.POTION_HP);
+							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP");
+							break;
+						case 2:
+							poke.changeHealth(Potion.SUPER_POTION_HP);
+							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP");
+							break;
+						case 3:
+							poke.changeHealth(Potion.HYPER_POTION_HP);
+							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP");
+							break;
+						case 4:
+							poke.changeHealth(poke.getRawStat(0));
+							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP");
+							break;
+						default:
+							returnValue = false;
+							break;
 					}
-					if(!player.isBattling())
-					{
-						/* Update the client */
-						ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-						hpChange.addInt(Integer.parseInt(data[0]));
-						hpChange.addInt(poke.getHealth());
-						m_player.getSession().Send(hpChange);
-						ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-						itemUse.addString(message);
-						m_player.getSession().Send(itemUse);
-					}
-					else
-					{
-						/* Player is in battle, take a hit from enemy */
-						player.getBattleField().executeItemTurn(itemId);
-					}
-					return true;
+					return returnValue;
 				}
 				else if(item.getCategory().equalsIgnoreCase("EVOLUTION"))
 				{
-					/* Evolution items can't be used in battle */
-					if(player.isBattling())
+					/* Evolution items can't be used in battle, Pokemon shouldn't be null */
+					if(player.isBattling() || poke == null)
 						return false;
 					/* Get the pokemon's evolution data */
-					poke = player.getParty()[Integer.parseInt(data[0])];
-					/* Ensure poke exists */
-					if(poke == null)
-						return false;
 					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(poke.getSpeciesName());
 					for(int j = 0; j < pokeData.getEvolutions().length; j++)
 					{
@@ -233,73 +196,35 @@ public class ItemProcessor implements Runnable
 						/* Check if this pokemon evolves by item */
 						if(evolution.getType() == EvolutionTypes.Item)
 						{
-							/* Check if the item is an evolution stone If so, evolve the
-							 * Pokemon */
-							if(itemId == 164 && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 165 && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 166 && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 173 && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 168 && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 167 && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 169 && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 170 && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-							}
-							else if(itemId == 171 && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
-							{
-								poke.setEvolution(evolution);
-								poke.evolutionResponse(true, player);
-								return true;
-								/* TODO: Add Oval Stone? */
-							}
+							/* TODO: Add Oval Stone? */
+							/* Check if the item is an evolution stone If so, evolve the Pokemon */
+							if(itemId == ItemID.FIRE_STONE && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.WATER_STONE && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.THUNDER_STONE && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.LEAF_STONE && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.MOON_STONE && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.SUN_STONE && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.SHINY_STONE && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.DUSK_STONE && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							else if(itemId == ItemID.DAWN_STONE && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
+								returnValue = evolveWithItem(evolution, poke, player);
+							return returnValue;
 						}
 					}
 				}
 				else if(item.getCategory().equalsIgnoreCase("MEDICINE"))
 				{
-					poke = player.getParty()[Integer.parseInt(data[0])];
 					if(poke == null)
 						return false;
-
-					// Check if this pokemon is alive to use all items but revive, REVIVE NOT IMPLEMENTED!!! Implement it before this piece of code!
+					// Check if this pokemon is alive to use all items but revive, TODO: Implement revive before this piece of code!
 					if(poke.getHealth() <= 0)
 					{
 						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
@@ -419,7 +344,6 @@ public class ItemProcessor implements Runnable
 				}
 				else if(item.getCategory().equalsIgnoreCase("FOOD"))
 				{
-					poke = player.getParty()[Integer.parseInt(data[0])];
 					Random rand = new Random();
 					if(poke == null)
 						return false;
@@ -519,7 +443,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -565,7 +489,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -583,7 +507,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -601,7 +525,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -619,7 +543,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -637,7 +561,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -655,7 +579,7 @@ public class ItemProcessor implements Runnable
 						if(!player.isBattling())
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -683,7 +607,7 @@ public class ItemProcessor implements Runnable
 						else
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -741,7 +665,7 @@ public class ItemProcessor implements Runnable
 						else
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -842,7 +766,7 @@ public class ItemProcessor implements Runnable
 						else
 						{
 							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(Integer.parseInt(data[0]));
+							hpChange.addInt(pokePartyPos);
 							hpChange.addInt(poke.getHealth());
 							player.getSession().Send(hpChange);
 							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
@@ -1095,6 +1019,13 @@ public class ItemProcessor implements Runnable
 		}
 	}
 
+	/**
+	 * Processes the type of fishing rod and fishes if the player can use it.
+	 * 
+	 * @param player Reference to the player.
+	 * @param rodLvl The required lvl to use the fishing rod.
+	 * @return True is the player can use the fishing rod, otherwise false.
+	 */
 	private boolean processRod(Player player, int rodLvl)
 	{
 		if(!player.isBattling() && !player.isFishing())
@@ -1110,6 +1041,50 @@ public class ItemProcessor implements Runnable
 				return false;
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * Processes the potion's effects and sends them to the client.
+	 * 
+	 * @param player Reference to the player.
+	 * @param pokeHp The pokemons current HP.
+	 * @param itemId The id of the used item.
+	 * @param pokeId The pokemons position in the players party.
+	 * @param message The message to be sent to the client.
+	 * @return True, unless an exception is thrown.
+	 */
+	private boolean processPotion(Player player, int pokeHp, int itemId, int pokeId, String message)
+	{
+		if(!player.isBattling())
+		{
+			ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+			hpChange.addInt(pokeId);
+			hpChange.addInt(pokeHp);
+			m_player.getSession().Send(hpChange);
+			ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+			itemUse.addString(message);
+			m_player.getSession().Send(itemUse);
+		}
+		else
+		{
+			player.getBattleField().executeItemTurn(itemId);
+		}
+		return true;
+	}
+
+	/**
+	 * Starts the evolution progress for the Pokemon.
+	 * 
+	 * @param evolution The evolution type.
+	 * @param poke The Pokemon to evolve.
+	 * @param player The owner of the Pokemon
+	 * @return True in all cases.
+	 */
+	private boolean evolveWithItem(PokemonEvolution evolution, Pokemon poke, Player player)
+	{
+		poke.setEvolution(evolution);
+		poke.evolutionResponse(true, player);
 		return true;
 	}
 }

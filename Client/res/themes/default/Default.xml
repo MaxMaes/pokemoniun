@@ -130,12 +130,23 @@
     <theme name="popup_untitled" ref="resizableframe">
         <param name="background"><image>popup_untitled</image></param>
     </theme>
+    <theme name="downbutton" ref="-defaults">
+        <param name="background"><image>scrollbar_vertical_button_down_background</image></param>
+    </theme>
+
+    <theme name="upbutton" ref="-defaults">
+        <param name="background"><image>scrollbar_vertical_button_up_background</image></param>
+    </theme>
+    <theme name="leftbutton" ref="-defaults">
+        <param name="background"><image>scrollbar_horizontal_button_left_background</image></param>
+    </theme>
+    <theme name="rightbutton" ref="-defaults">
+        <param name="background"><image>scrollbar_horizontal_button_right_background</image></param>
+    </theme>
     <theme name="hscrollbar" ref="-defaults">
-        <theme name="leftbutton" ref="-defaults">
-            <param name="background"><image>scrollbar_horizontal_button_left_background</image></param>
+        <theme name="leftbutton" ref="leftbutton">
         </theme>
-        <theme name="rightbutton" ref="-defaults">
-            <param name="background"><image>scrollbar_horizontal_button_right_background</image></param>
+        <theme name="rightbutton" ref="rightbutton">
         </theme>
         <theme name="thumb" ref="-defaults">
             <param name="background"><image>scrollbar_horizontal_thumb_background</image></param>
@@ -144,11 +155,9 @@
         <param name="scaleThumb"><bool>true</bool></param>
     </theme>
     <theme name="vscrollbar" ref="-defaults">
-        <theme name="upbutton" ref="-defaults">
-            <param name="background"><image>scrollbar_vertical_button_up_background</image></param>
+        <theme name="upbutton" ref="upbutton">
         </theme>
-        <theme name="downbutton" ref="-defaults">
-            <param name="background"><image>scrollbar_vertical_button_down_background</image></param>
+        <theme name="downbutton" ref="downbutton">
         </theme>
         <theme name="thumb" ref="-defaults">
             <param name="background"><image>scrollbar_vertical_thumb_background</image></param>
@@ -156,6 +165,7 @@
         <param name="background"><image>scrollbar_vertical_bar</image></param>
         <param name="scaleThumb"><bool>true</bool></param>
     </theme>
+
     <theme name="scrollpane" ref="-defaults">
         <theme name="hscrollbar" ref="hscrollbar"/>
         <theme name="vscrollbar" ref="vscrollbar"/>

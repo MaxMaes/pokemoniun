@@ -2,6 +2,7 @@ package org.pokenet.client.twl.ui;
 
 import org.pokenet.client.twl.ui.frames.AlertDialog;
 import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
+
 import de.matthiasmann.twl.DesktopArea;
 
 /**
@@ -24,9 +25,7 @@ public class GUIPane extends DesktopArea
 		loginScreen = new LoginScreen();
 		add(loginScreen);
 
-		confirmationDialog = new ConfirmationDialog("");
-		confirmationDialog.setVisible(false);
-		add(confirmationDialog);
+		confirmationDialog = new ConfirmationDialog("", this);
 
 		alertDialog = new AlertDialog("Alert!", "");
 		alertDialog.setVisible(false);
@@ -94,7 +93,6 @@ public class GUIPane extends DesktopArea
 
 	public void hideConfirmationDialog()
 	{
-		confirmationDialog.setText("");
 		confirmationDialog.setVisible(false);
 	}
 

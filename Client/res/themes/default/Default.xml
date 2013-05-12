@@ -444,13 +444,32 @@
                 <theme name="button" ref="button">
                     <param name="font"><font>normal</font></param>
                 </theme>
-                <theme name="label" ref="label">
-                    <param name="font"><font>normal_black</font></param>
-                </theme>
+                <theme name="label" ref="label"/>
             </theme>
             <theme name="title" ref="title"/>
             <param name="hasCloseButton"><bool>false</bool></param>
             <param name="hasResizeHandle"><bool>false</bool></param>
+        </theme>
+    </theme>
+    <theme name="confirmationPopup" ref="-defaults">
+        <theme name="confirmationdialog" ref="popup_untitled">
+            <theme name="content" ref="-defaults">
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="title" ref="title"/>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>normal_black</font></param>
+                    </map>
+                </param>
+                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
         </theme>
     </theme>
 </themes>

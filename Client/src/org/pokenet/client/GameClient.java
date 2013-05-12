@@ -239,13 +239,6 @@ public class GameClient extends BasicGame
 				}
 			};
 
-			if(root.getConfirmationDialog().isVisible())
-			{
-				if(root.getConfirmationDialog().getText().equals("Are you sure you want to exit?"))
-					yes.run();
-				root.hideConfirmationDialog();
-			}
-
 			Runnable no = new Runnable()
 			{
 				@Override

@@ -33,7 +33,6 @@ public class Image extends de.matthiasmann.twl.Widget
 		if(img != null)
 		{
 			img = FileLoader.loadImage(path);
-			setSize(img.getWidth(), img.getHeight());
 		}
 		else
 		{
@@ -52,7 +51,6 @@ public class Image extends de.matthiasmann.twl.Widget
 		if(image != null)
 		{
 			img = image;
-			setSize(img.getWidth(), img.getHeight());
 		}
 		else
 		{
@@ -69,6 +67,23 @@ public class Image extends de.matthiasmann.twl.Widget
 	public void setImage(de.matthiasmann.twl.renderer.Image image)
 	{
 		img = image;
+	}
+
+	@Override
+	public int getPreferredHeight()
+	{
+		return img.getHeight();
+	}
+
+	@Override
+	public int getPreferredWidth()
+	{
+		return img.getWidth();
+	}
+
+	@Override
+	public void layout()
+	{
 		setSize(img.getWidth(), img.getHeight());
 	}
 

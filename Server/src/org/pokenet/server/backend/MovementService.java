@@ -22,7 +22,6 @@ public class MovementService
 	private final ServerMapMatrix m_mapMatrix;
 	private final MovementManager[] m_movementManager;
 	private final NpcSleepTimer m_sleepTimer;
-	private ServerMap m_tempMap;
 
 	/**
 	 * Default constructor

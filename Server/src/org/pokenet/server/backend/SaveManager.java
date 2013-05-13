@@ -126,15 +126,15 @@ public class SaveManager
 				if(p.isTrading())
 					/* If the trade is still executing, don't save them yet */
 					if(!p.getTrade().endTrade())
-						fail += 1;
+						fail++;
 				// return false;
 				/* Update the player row */
 				String badges = "";
-				for(int i = 0; i < 42; i++)
-					if(p.getBadges()[i] == 1)
-						badges = badges + "1";
+				for(int i = 0; i < p.getBadges().length; i++)
+					if(p.hasBadge(i))
+						badges += "1";
 					else
-						badges = badges + "0";
+						badges += "0";
 				m_database.query("UPDATE pn_members SET " + "muted='" + p.isMuted() + "', " + "sprite='" + p.getRawSprite() + "', " + "money='" + p.getMoney() + "', " + "skHerb='"
 						+ p.getHerbalismExp() + "', " + "skCraft='" + p.getCraftingExp() + "', " + "skFish='" + p.getFishingExp() + "', " + "skTrain='" + p.getTrainingExp() + "', " + "skCoord='"
 						+ p.getCoordinatingExp() + "', " + "skBreed='" + p.getBreedingExp() + "', " + "x='" + p.getX() + "', " + "y='" + p.getY() + "', " + "mapX='" + p.getMapX() + "', " + "mapY='"

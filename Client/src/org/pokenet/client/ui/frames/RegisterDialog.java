@@ -16,6 +16,7 @@ import org.newdawn.slick.Image;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
+import org.pokenet.client.backend.entity.Pokemon;
 
 /**
  * Handles registration dialog
@@ -24,7 +25,7 @@ import org.pokenet.client.backend.Translator;
  */
 public class RegisterDialog extends Frame
 {
-	private int m_gender = 0;
+	private int m_gender = Pokemon.MALE;
 	private int m_region = 0;
 	private Button[] m_regions;
 	private Button m_register, m_cancel, m_male, m_female, m_terms;
@@ -174,7 +175,7 @@ public class RegisterDialog extends Frame
 			public void actionPerformed(ActionEvent arg0)
 			{
 				m_female.setEnabled(true);
-				m_gender = 0;
+				m_gender = Pokemon.MALE;
 				m_male.setEnabled(false);
 			}
 		});
@@ -189,7 +190,7 @@ public class RegisterDialog extends Frame
 			public void actionPerformed(ActionEvent arg0)
 			{
 				m_female.setEnabled(false);
-				m_gender = 1;
+				m_gender = Pokemon.FEMALE;
 				m_male.setEnabled(true);
 			}
 		});

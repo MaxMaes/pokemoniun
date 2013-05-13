@@ -8,9 +8,11 @@ import org.pokenet.client.backend.FileLoader;
 
 public class Pokemon
 {
+	public static final int MALE = 0;
+	public static final int FEMALE = 1;
+	
 	static final long serialVersionUID = 1;
 
-	// 0 or 1
 	private int m_gender;
 
 	private Image m_icon;

@@ -1,8 +1,8 @@
 package org.pokenet.client.backend;
 
 import java.util.Iterator;
+
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Game;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

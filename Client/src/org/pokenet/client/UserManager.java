@@ -34,23 +34,36 @@ public class UserManager
 	 */
 	public void login(String username, String password)
 	{
-		char language = '0';
-		if(GameClient.getInstance().getLanguage().equals(Language.ENGLISH))
-			language = '0';
-		else if(GameClient.getInstance().getLanguage().equals(Language.PORTUGESE))
-			language = '1';
-		else if(GameClient.getInstance().getLanguage().equals(Language.ITALIAN))
-			language = '2';
-		else if(GameClient.getInstance().getLanguage().equals(Language.FRENCH))
-			language = '3';
-		else if(GameClient.getInstance().getLanguage().equals(Language.FINNISH))
-			language = '4';
-		else if(GameClient.getInstance().getLanguage().equals(Language.SPANISH))
-			language = '5';
-		else if(GameClient.getInstance().getLanguage().equals(Language.DUTCH))
-			language = '6';
-		else if(GameClient.getInstance().getLanguage().equals(Language.GERMAN))
-			language = '7';
+		byte language = 0;
+		switch(GameClient.getInstance().getLanguage()) {
+		case Language.ENGLISH:
+			language = 0;
+			break;
+		case Language.PORTUGESE:
+			language = 1;
+			break;
+		case Language.ITALIAN:
+			language = 2;
+			break;
+		case Language.FRENCH:
+			language = 3;
+			break;
+		case Language.FINNISH:
+			language = 4;
+			break;
+		case Language.SPANISH:
+			language = 5;
+			break;
+		case Language.DUTCH:
+			language = 6;
+			break;
+		case Language.GERMAN:
+			language = 7;
+			break;
+		default:
+			language = 0;
+			break;
+		}
 
 		ClientMessage message = new ClientMessage(ServerPacket.LOGIN);
 		message.addString(language + username + "," + getPasswordHash(username, password));
@@ -89,10 +102,10 @@ public class UserManager
 		String uniqueSalt = "";
 		for(int i = 0; i < user_lowercase.length(); i++)
 		{
-			uniqueSalt = uniqueSalt + user_lowercase.substring(i, i + 1) + salt.substring(i, i + 1);
+			uniqueSalt += user_lowercase.substring(i, i + 1) + salt.substring(i, i + 1);
 			// last iteration, add remaining salt to the end
 			if(i == user_lowercase.length() - 1)
-				uniqueSalt = uniqueSalt + salt.substring(i + 1);
+				uniqueSalt += salt.substring(i + 1);
 		}
 
 		Whirlpool hasher = new Whirlpool();

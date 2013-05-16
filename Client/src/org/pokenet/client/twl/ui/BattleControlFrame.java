@@ -8,7 +8,6 @@ import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.base.Image;
-
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
@@ -484,11 +483,10 @@ public class BattleControlFrame extends Widget
 	}
 
 	/**
-	 * Sends the run packer
+	 * Sends the run packet
 	 */
 	private void run()
 	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2E");
 		ClientMessage message = new ClientMessage(ServerPacket.BATTLE_RUN);
 		GameClient.getInstance().getSession().send(message);
 	}
@@ -522,17 +520,17 @@ public class BattleControlFrame extends Widget
 	{
 		return m_moveTypeLabels;
 	}
-	
+
 	public List<Button> getPokeButtons()
 	{
 		return m_pokeButtons;
 	}
-	
+
 	public List<Image> getPokeStatus()
 	{
 		return m_pokeStatus;
 	}
-	
+
 	public List<Label> getPokeInfo()
 	{
 		return m_pokeInfo;

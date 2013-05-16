@@ -14,7 +14,7 @@ Weedle 206 95 202 5
 Kakuna 206 95 202 5
 Beedrill 206 95 202 5
 Pidgey 206 75 35 25
-Pidgeotto 206 95 35 5
+Pidgeotto 206 90 626 10
 Pidgeot 206 95 35 4 615 1
 Rattata 206 100
 Raticate 206 95 205 5
@@ -259,7 +259,7 @@ Mudkip 204 80 237 10 310 10
 Marshtomp 204 80 237 10 310 10
 Swampert 204 80 237 10 310 9 668 1
 Poochyena 206 100
-Mightyena 206 100
+Mightyena 206 90 587 10
 Zigzagoon 200 35 201 35 206 30
 Linoone 206 75 209 25
 Wurmple 203 100

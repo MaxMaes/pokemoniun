@@ -192,8 +192,6 @@ public class LoginScreen extends DesktopArea
 		m_login.setVisible(false);
 		m_select.reloadStrings();
 		m_select.setVisible(true);
-		m_openAbout.setVisible(false);
-		m_openToS.setVisible(false);
 		m_languageDialog.setVisible(false);
 	}
 
@@ -204,8 +202,6 @@ public class LoginScreen extends DesktopArea
 	{
 		m_select.setVisible(false);
 		m_login.setVisible(false);
-		m_openAbout.setVisible(true);
-		m_openToS.setVisible(true);
 		m_languageDialog.setVisible(false);
 		m_register.reloadStrings();
 		m_register.setVisible(true);
@@ -220,8 +216,6 @@ public class LoginScreen extends DesktopArea
 		m_select.setVisible(false);
 		m_register.setVisible(false);
 		m_login.setVisible(true);
-		m_openAbout.setVisible(true);
-		m_openToS.setVisible(true);
 		m_login.getLoginButton().setEnabled(true);
 		m_languageDialog.setVisible(false);
 	}
@@ -235,8 +229,6 @@ public class LoginScreen extends DesktopArea
 		m_login.setVisible(false);
 		m_select.setVisible(false);
 		m_languageDialog.setVisible(true);
-		m_openAbout.setVisible(false);
-		m_openToS.setVisible(false);
 	}
 
 	/**

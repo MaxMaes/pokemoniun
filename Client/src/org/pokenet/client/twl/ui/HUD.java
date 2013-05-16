@@ -234,15 +234,18 @@ public class HUD extends DesktopArea
 
 	public void togglePokemon()
 	{
-		if(partyInfo.isVisible())
+		if(partyInfo != null)
 		{
-			partyInfo.setVisible(false);
+			removeChild(partyInfo);
+			hideHUDElements();
 		}
 		else
 		{
 			hideHUDElements();
-			partyInfo.setPosition(150, 50);
-			partyInfo.setVisible(true);
+			partyInfo = new PartyInfoDialog(GameClient.getInstance().getOurPlayer().getPokemon());
+			partyInfo.setSize(175, 0);
+			partyInfo.setPosition(topbar.getBarButton(1).getX(), 67 - 48 * 2);
+			add(partyInfo);
 		}
 	}
 

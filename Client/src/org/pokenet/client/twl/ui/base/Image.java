@@ -13,9 +13,7 @@ public class Image extends de.matthiasmann.twl.Widget
 	private de.matthiasmann.twl.renderer.Image img;
 
 	/**
-	 * Creates an empty image object.
-	 * 
-	 * @param path
+	 * Creates an empty image object;
 	 */
 	public Image()
 	{
@@ -36,7 +34,11 @@ public class Image extends de.matthiasmann.twl.Widget
 		}
 		else
 		{
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Path cannot be null");
+		}
+		if(img == null)
+		{
+			throw new IllegalArgumentException("Could not load image from path: " + path);
 		}
 	}
 
@@ -54,7 +56,7 @@ public class Image extends de.matthiasmann.twl.Widget
 		}
 		else
 		{
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Image cannot be null");
 		}
 	}
 
@@ -66,25 +68,49 @@ public class Image extends de.matthiasmann.twl.Widget
 	 */
 	public void setImage(de.matthiasmann.twl.renderer.Image image)
 	{
-		img = image;
+		if(image != null)
+		{
+			img = image;
+		}
+		else
+		{
+			throw new IllegalArgumentException("Image cannot be null");
+		}
 	}
 
 	@Override
 	public int getPreferredHeight()
 	{
-		return img.getHeight();
+		if(img != null)
+		{
+			return img.getHeight();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	@Override
 	public int getPreferredWidth()
 	{
-		return img.getWidth();
+		if(img != null)
+		{
+			return img.getWidth();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	@Override
 	public void layout()
 	{
-		setSize(img.getWidth(), img.getHeight());
+		if(img != null)
+		{
+			setSize(img.getWidth(), img.getHeight());
+		}
 	}
 
 	@Override

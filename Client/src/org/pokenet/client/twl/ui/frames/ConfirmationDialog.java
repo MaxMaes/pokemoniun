@@ -1,12 +1,10 @@
 package org.pokenet.client.twl.ui.frames;
 
-import org.pokenet.client.GameClient;
-import org.pokenet.client.twl.ui.GUIPane;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.TextArea;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
 /**
@@ -22,50 +20,47 @@ public class ConfirmationDialog extends ResizableFrame
 	private TextArea dialogText;
 	private SimpleTextAreaModel textModel;
 	private PopupWindow popup;
+
 	/*
 	 * 
 	 */
-	public ConfirmationDialog(String text, GUIPane guiPane)
+	public ConfirmationDialog(String text, Widget guiPane)
 	{
 		setTheme("confirmationdialog");
-		
+
 		textModel = new SimpleTextAreaModel(text);
 		dialogText = new TextArea(textModel);
 
-		yesButton = new Button();
-		noButton = new Button();
-		
-		yesButton.setText("Yes");
-		noButton.setText("No");
+		yesButton = new Button("Yes");
+		noButton = new Button("No");
 
 		popup = new PopupWindow(guiPane);
 		popup.setTheme("confirmationPopup");
-		
+
 		this.add(dialogText);
 		this.add(yesButton);
 		this.add(noButton);
-		
+
 		popup.add(this);
-		
+
 		popup.setCloseOnClickedOutside(false);
 		popup.setCloseOnEscape(true);
-		
+
 		setVisible(false);
 	}
-	
+
 	@Override
 	public void layout()
 	{
-		
-		yesButton.setSize(50,25);
-		noButton.setSize(50,25);
+		yesButton.setSize(50, 25);
+		noButton.setSize(50, 25);
 		dialogText.setMaxSize(300, popup.getRootWidget().getHeight());
 		dialogText.adjustSize();
-		
-		dialogText.setPosition((getInnerX() + (popup.getWidth() / 2 - dialogText.getWidth() / 2)+5), getInnerY() + 10);
+
+		dialogText.setPosition((getInnerX() + (popup.getWidth() / 2 - dialogText.getWidth() / 2) + 5), getInnerY() + 10);
 		yesButton.setPosition(getInnerX() + (popup.getWidth() / 2 - 60), dialogText.getY() + dialogText.getHeight() + 10);
 		noButton.setPosition(getInnerX() + (popup.getWidth() / 2 + 10), yesButton.getY());
-		setSize(dialogText.getWidth() + 15,dialogText.getHeight() + yesButton.getHeight() + 30);
+		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + yesButton.getHeight() + 30);
 		popup.adjustSize();
 	}
 
@@ -97,24 +92,11 @@ public class ConfirmationDialog extends ResizableFrame
 		noButton.removeCallback(noCallback);
 	}
 
-	/* Centers the dialog */
-	public void setCenter()
-	{
-		if(GameClient.getInstance().getGUI() != null)
-		{
-			int height = (int) GameClient.getInstance().getGUI().getHeight();
-			int width = (int) GameClient.getInstance().getGUI().getWidth();
-			int x = width / 2 - (int) getWidth() / 2;
-			int y = height / 2 - (int) getHeight() / 2;
-			this.setPosition(x, y);
-		}
-	}
-
 	public void setText(String text)
 	{
 		textModel.setText(text);
 	}
-	
+
 	@Override
 	public void setVisible(boolean b)
 	{

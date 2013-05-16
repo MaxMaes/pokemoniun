@@ -12,6 +12,6 @@ public class TradeRequestEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().getReqWindow().addRequest(Request.readString(), "trade");
+		GameClient.getInstance().getHUD().getRequestDialog().addRequest(Request.readString(), "trade");
 	}
 }

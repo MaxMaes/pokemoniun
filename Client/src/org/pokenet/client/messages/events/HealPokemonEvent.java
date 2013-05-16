@@ -19,6 +19,6 @@ public class HealPokemonEvent implements MessageEvent
 				for(int x = 0; x < 4; x++)
 					GameClient.getInstance().getOurPlayer().getPokemon()[i].setMoveCurPP(x, GameClient.getInstance().getOurPlayer().getPokemon()[i].getMoveMaxPP()[x]);
 			}
-		GameClient.getInstance().getUi().update(false);
+		GameClient.getInstance().getHUD().update(false);
 	}
 }

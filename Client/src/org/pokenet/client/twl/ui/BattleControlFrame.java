@@ -7,12 +7,12 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.frames.BattleBag;
+import org.pokenet.client.twl.ui.base.Image;
+
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.Image;
 
 /**
  * Battle window interface
@@ -24,14 +24,12 @@ public class BattleControlFrame extends Widget
 	// Image Loading tools
 	private static String m_path = "res/battle/";
 
-	private static HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
-	static final long serialVersionUID = -4351471892179339349L;
-	private BattleBag m_bag;
+	private static HashMap<String, de.matthiasmann.twl.renderer.Image> m_statusIcons = new HashMap<String, de.matthiasmann.twl.renderer.Image>();
 	private List<Button> m_moveButtons = new ArrayList<Button>();
 	private List<Label> m_moveTypeLabels = new ArrayList<Label>();
 	private List<Button> m_pokeButtons = new ArrayList<Button>();
 	private List<Label> m_pokeInfo = new ArrayList<Label>();
-	private List<Label> m_pokeStatus = new ArrayList<Label>();
+	private List<Image> m_pokeStatus = new ArrayList<Image>();
 	private List<Label> m_ppLabels = new ArrayList<Label>();
 	private Button btnBag;
 	private Button btnPoke;
@@ -97,7 +95,7 @@ public class BattleControlFrame extends Widget
 		cancel.setVisible(false);
 	}
 
-	public HashMap<String, Image> getStatusIcons()
+	public HashMap<String, de.matthiasmann.twl.renderer.Image> getStatusIcons()
 	{
 		return m_statusIcons;
 	}
@@ -155,10 +153,7 @@ public class BattleControlFrame extends Widget
 	{
 		attackPane.setVisible(false);
 		pokePane.setVisible(false);
-		m_bag = new BattleBag();
-		m_bag.setAlwaysOnTop(true);
-		m_bag.setZIndex(10000000); // Ridiculous z-index ensures that the bag is on top.
-		GameClient.getInstance().getDisplay().add(m_bag);
+		GameClient.getInstance().getHUD().showBattlebag();
 	}
 
 	/**
@@ -458,10 +453,11 @@ public class BattleControlFrame extends Widget
 		m_pokeButtons.add(pokeBtn6);
 		for(int i = 0; i < 6; i++)
 		{
-			Label status = new Label();
+			Image status = new Image();
 			status.setSize(30, 12);
 			m_pokeButtons.get(i).add(status);
 			status.setPosition(6, 5);
+			m_pokeStatus.add(status);
 			Label info = new Label();
 			m_pokeButtons.get(i).add(info);
 			info.setText("                               ");
@@ -510,5 +506,35 @@ public class BattleControlFrame extends Widget
 		ClientMessage message = new ClientMessage(ServerPacket.SWITCH_POKEMON);
 		message.addInt(i);
 		GameClient.getInstance().getSession().send(message);
+	}
+
+	public List<Button> getMoveButtons()
+	{
+		return m_moveButtons;
+	}
+
+	public List<Label> getPPLabels()
+	{
+		return m_ppLabels;
+	}
+
+	public List<Label> getMoveTypeLabels()
+	{
+		return m_moveTypeLabels;
+	}
+	
+	public List<Button> getPokeButtons()
+	{
+		return m_pokeButtons;
+	}
+	
+	public List<Image> getPokeStatus()
+	{
+		return m_pokeStatus;
+	}
+	
+	public List<Label> getPokeInfo()
+	{
+		return m_pokeInfo;
 	}
 }

@@ -13,7 +13,7 @@ import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.base.Image;
-import org.pokenet.client.ui.base.TWLImageButton;
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ListBox;
@@ -30,7 +30,7 @@ public class ShopDialog extends ResizableFrame
 	public Timer m_timer;
 	private Button m_buy;
 	private Button m_cancel;
-	private TWLImageButton[] m_categoryButtons;
+	private ImageButton[] m_categoryButtons;
 	private Label[] m_categoryLabels;
 	private Button[] m_itemButtons;
 	private Label[] m_itemLabels;
@@ -69,9 +69,9 @@ public class ShopDialog extends ResizableFrame
 		m_buy.setVisible(false);
 		m_sell.setVisible(false);
 		m_cancel.setVisible(false);
-		m_categoryButtons = new TWLImageButton[4];
+		m_categoryButtons = new ImageButton[4];
 		m_categoryLabels = new Label[4];
-		m_categoryButtons[0] = new TWLImageButton(" ");
+		m_categoryButtons[0] = new ImageButton(" ");
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
@@ -91,7 +91,7 @@ public class ShopDialog extends ResizableFrame
 		m_categoryLabels[0].setPosition(0, 0);
 		m_categoryLabels[0].setSize(150, 10);
 		add(m_categoryLabels[0]);
-		m_categoryButtons[1] = new TWLImageButton(" ");
+		m_categoryButtons[1] = new ImageButton(" ");
 		m_categoryButtons[1].setImage(FileLoader.loadImage(respath + "res/ui/shop/potion.png"));  // TODO: THEME
 		m_categoryButtons[1].setSize(150, 160);
 		m_categoryButtons[1].setPosition(151, 0);
@@ -110,7 +110,7 @@ public class ShopDialog extends ResizableFrame
 		m_categoryLabels[1].setSize(150, 10);
 		add(m_categoryLabels[1]);
 
-		m_categoryButtons[2] = new TWLImageButton(" ");
+		m_categoryButtons[2] = new ImageButton(" ");
 		m_categoryButtons[2].setImage(FileLoader.loadImage(respath + "res/ui/shop/status.png"));
 		m_categoryButtons[2].setSize(150, 160);
 		m_categoryButtons[2].setPosition(0, 161);
@@ -130,7 +130,7 @@ public class ShopDialog extends ResizableFrame
 		m_categoryLabels[2].setSize(150, 10);
 		add(m_categoryLabels[2]);
 
-		m_categoryButtons[3] = new TWLImageButton(" ");
+		m_categoryButtons[3] = new ImageButton(" ");
 		LoadingList.setDeferredLoading(true);
 		try
 		{
@@ -198,7 +198,7 @@ public class ShopDialog extends ResizableFrame
 		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 		message.addInt(2);
 		GameClient.getInstance().getSession().send(message);
-		GameClient.getInstance().getUi().stopShop();
+		GameClient.getInstance().getGUIPane().getHUD().removeShop();
 	}
 
 	/**

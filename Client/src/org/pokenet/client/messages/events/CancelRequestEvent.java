@@ -12,6 +12,6 @@ public class CancelRequestEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().getReqWindow().removeOffer(Request.readString());
+		GameClient.getInstance().getHUD().getRequestDialog().removeOffer(Request.readString());
 	}
 }

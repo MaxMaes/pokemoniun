@@ -76,14 +76,14 @@ public class OurPlayer extends Player
 			{
 				m_items.get(i).setQuantity(m_items.get(i).getQuantity() + quantity);
 				exists = true;
-				if(GameClient.getInstance().getUi().getBag() != null)
-					GameClient.getInstance().getUi().getBag().addItem(number, false);
+				if(GameClient.getInstance().getHUD().getBag() != null)
+					GameClient.getInstance().getHUD().getBag().addItem(number, false);
 			}
 		if(!exists)
 		{
 			m_items.add(new PlayerItem(number, quantity));
-			if(GameClient.getInstance().getUi().getBag() != null)
-				GameClient.getInstance().getUi().getBag().addItem(number, true);
+			if(GameClient.getInstance().getHUD().getBag() != null)
+				GameClient.getInstance().getHUD().getBag().addItem(number, true);
 		}
 	}
 
@@ -224,7 +224,7 @@ public class OurPlayer extends Player
 			id++;
 		}
 
-		GameClient.getInstance().getUi().getPokedex().initGUI();
+		GameClient.getInstance().getHUD().getPokedex().initGUI();
 	}
 
 	/**
@@ -241,14 +241,14 @@ public class OurPlayer extends Player
 				if(m_items.get(i).getQuantity() - quantity > 0)
 				{
 					m_items.get(i).setQuantity(m_items.get(i).getQuantity() - quantity);
-					if(GameClient.getInstance().getUi().getBag() != null)
-						GameClient.getInstance().getUi().getBag().removeItem(number, false);
+					if(GameClient.getInstance().getHUD().getBag() != null)
+						GameClient.getInstance().getHUD().getBag().removeItem(number, false);
 				}
 				else
 				{
 					m_items.remove(i);
-					if(GameClient.getInstance().getUi().getBag() != null)
-						GameClient.getInstance().getUi().getBag().removeItem(number, true);
+					if(GameClient.getInstance().getHUD().getBag() != null)
+						GameClient.getInstance().getHUD().getBag().removeItem(number, true);
 				}
 				return;
 			}
@@ -395,7 +395,7 @@ public class OurPlayer extends Player
 		OurPokemon temp1 = m_pokemon[Poke1];
 		m_pokemon[Poke1] = m_pokemon[Poke2];
 		m_pokemon[Poke2] = temp1;
-		GameClient.getInstance().getUi().refreshParty();
+		GameClient.getInstance().getHUD().refreshParty();
 	}
 
 	public void updatePokedex(int id, int value)
@@ -422,7 +422,7 @@ public class OurPlayer extends Player
 			m_pokemon[i].setSpdef(Integer.parseInt(info[6]));
 		}
 	}
-	
+
 	/**
 	 * Returns the amount of Pokemon in this player's party
 	 * 

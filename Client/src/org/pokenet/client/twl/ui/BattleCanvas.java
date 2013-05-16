@@ -8,11 +8,10 @@ import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.FileLoader;
+import org.pokenet.client.twl.ui.base.Image;
 import org.pokenet.client.twl.ui.base.ProgressBar;
-import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.Image;
 
 /**
  * Canvas for drawing the battle and it's animations. This is the topside of the battleFrame
@@ -57,19 +56,9 @@ public class BattleCanvas extends Widget
 	private Label playerNameLabel;
 	private ProgressBar playerXP, playerXPEND;
 
-	private Image hp_high = GameClient.getInstance().getTheme().getImage("hpbar_high");
-	private Image hp_middle = GameClient.getInstance().getTheme().getImage("hpbar_middle");
-	private Image hp_low = GameClient.getInstance().getTheme().getImage("hpbar_low");
-	private Image expbar = GameClient.getInstance().getTheme().getImage("expbar");
-
-	private int playerBGX = -999;
-	private int playerBGY = -999;
-	private int enemyBGX = -999;
-	private int enemyBGY = -999;
-	private int playerHPX = -999;
-	private int playerHPY = -999;
-	private int enemyHPX = -999;
-	private int enemyHPY = -999;
+	private de.matthiasmann.twl.renderer.Image hp_high = GameClient.getInstance().getTheme().getImage("hpbar_high");
+	private de.matthiasmann.twl.renderer.Image hp_middle = GameClient.getInstance().getTheme().getImage("hpbar_middle");
+	private de.matthiasmann.twl.renderer.Image hp_low = GameClient.getInstance().getTheme().getImage("hpbar_low");
 
 	/**
 	 * Default constructor
@@ -104,25 +93,31 @@ public class BattleCanvas extends Widget
 	public void drawEnemyInfo()
 	{
 		// display enemy's data
+		enemyDataBG.setPosition(-10 + getInnerX(), 10 + getInnerY());
+
 		enemyNameLabel.setText(BattleManager.getInstance().getCurEnemyPoke().getName());
 		enemyNameLabel.setTheme("label_enemyname");
 		enemyNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyNameLabel.getText()));
-		enemyNameLabel.setPosition(enemyBGX + 15, enemyBGY + 7);
+		enemyNameLabel.setPosition(enemyDataBG.getX() + 15, enemyDataBG.getY() + 7);
 
 		if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 2)
 		{
 			enemyGender = genderFemale;
+			enemyGender.setPosition(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()) + 3 + getInnerX(), enemyNameLabel.getY() + getInnerY());
 		}
 		else if(BattleManager.getInstance().getCurEnemyPoke().getGender() == 1)
 		{
 			enemyGender = genderMale;
+			enemyGender.setPosition(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()) + 3 + getInnerX(), enemyNameLabel.getY() + getInnerY());
 		}
 
 		enemyLv.setText("Lv: " + BattleManager.getInstance().getCurEnemyPoke().getLevel());
 		enemyLv.setTheme("label_enemy_level");
 		enemyLv.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyLv.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyLv.getText()));
-		enemyLv.setPosition(enemyBGX + enemyDataBG.getWidth() - enemyLv.getWidth() - 25, enemyBGY + 7);
+		enemyLv.setPosition(enemyDataBG.getX() + enemyDataBG.getWidth() - enemyLv.getWidth() - 25, enemyDataBG.getY() + 7);
 
+		enemyHPBar.setPosition(enemyNameLabel.getX() + getInnerX(), 37 + getInnerY());
+		add(enemyDataBG);
 		add(enemyNameLabel);
 		add(enemyLv);
 		// initEnemyHPBar();
@@ -133,7 +128,8 @@ public class BattleCanvas extends Widget
 	 */
 	public void drawEnemyPoke()
 	{
-		enemyPokeSprite = FileLoader.toTWLImage(BattleManager.getInstance().getCurEnemyPoke().getSprite(), true);
+		enemyPokeSprite = new Image(FileLoader.toTWLImage(BattleManager.getInstance().getCurEnemyPoke().getSprite(), true));
+		enemyPokeSprite.setPosition(150 + getInnerX(), 21 + getInnerY());
 	}
 
 	/**
@@ -142,25 +138,32 @@ public class BattleCanvas extends Widget
 	public void drawOurInfo()
 	{
 		// display player's data
+		playerDataBG.setPosition(82 + getInnerX(), 96 + getInnerY());
+
 		playerNameLabel.setTheme("label_playername");
 		playerNameLabel.setText(BattleManager.getInstance().getCurPoke().getName());
 		playerNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(playerNameLabel.getText()));
-		playerNameLabel.setPosition(playerBGX + 30, playerBGY + 7);
+		playerNameLabel.setPosition(playerDataBG.getX() + 30, playerDataBG.getY() + 7);
 
 		if(BattleManager.getInstance().getCurPoke().getGender() == 2)
 		{
 			playerGender = genderFemale;
+			playerGender.setPosition(playerNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()) + 3 + getInnerX(), playerNameLabel.getY() + getInnerY());
 		}
 		else if(BattleManager.getInstance().getCurPoke().getGender() == 1)
 		{
 			playerGender = genderMale;
+			playerGender.setPosition(playerNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()) + 3 + getInnerX(), playerNameLabel.getY() + getInnerY());
 		}
 
 		playerLv.setText("Lv:" + BattleManager.getInstance().getCurPoke().getLevel());
 		playerLv.setTheme("label_playerlevel");
 		playerLv.setSize(GameClient.getInstance().getFontSmall().getWidth(playerLv.getText()), GameClient.getInstance().getFontSmall().getHeight(playerLv.getText()));
-		playerLv.setPosition(playerBGX + playerDataBG.getWidth() - playerLv.getWidth() - 5, playerBGY + 7);
+		playerLv.setPosition(playerDataBG.getX() + playerDataBG.getWidth() - playerLv.getWidth() - 5, playerDataBG.getY() + 7);
 
+		playerHPBar.setPosition(playerLv.getX() + playerLv.getWidth() - 105 + getInnerX(), 119 + getInnerY());
+
+		add(playerDataBG);
 		add(playerNameLabel);
 		add(playerLv);
 
@@ -173,7 +176,8 @@ public class BattleCanvas extends Widget
 	 */
 	public void drawOurPoke()
 	{
-		playerPokeSprite = FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite(), true);
+		playerPokeSprite = new Image(FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite(), true));
+		playerPokeSprite.setPosition(20, 76);
 	}
 
 	/**
@@ -181,9 +185,9 @@ public class BattleCanvas extends Widget
 	 */
 	public void hidePokeballs()
 	{
-		for(Image l : m_enemyPokeballs)
+		for(int i = 0; i < 6; i++)
 		{
-			l = m_pokeballIcons.get("empty");
+			m_enemyPokeballs.set(i, m_pokeballIcons.get("empty"));
 		}
 	}
 
@@ -211,7 +215,7 @@ public class BattleCanvas extends Widget
 			setEnemyHPColor(Color.red);
 		}
 
-		enemyHP.setPosition(enemyHPX + 23, enemyHPY + 3);
+		enemyHP.setPosition(enemyNameLabel.getX() + getInnerX() + 23, 37 + getInnerY() + 3);
 
 		add(enemyHP);
 	}
@@ -239,7 +243,7 @@ public class BattleCanvas extends Widget
 			setPlayerHPColor(Color.red);
 		}
 
-		playerHP.setPosition(playerHPX + 29, playerHPY + 5);
+		playerHP.setPosition(playerLv.getX() + playerLv.getWidth() - 105 + getInnerX() + 29, 119 + getInnerY() + 5);
 		add(playerHP);
 	}
 
@@ -259,7 +263,9 @@ public class BattleCanvas extends Widget
 		{
 			/* playerXP = new ProgressBar((int)BattleManager.getInstance().getCurPoke().getExpLvl(), (int)BattleManager.getInstance().getCurPoke().getExpLvlUp(), true); */
 			playerXP = new ProgressBar(BattleManager.getInstance().getCurPoke().getExpLvl(), xpMax, true);
+			playerXP.setTheme("expbar");
 			playerXPEND = new ProgressBar(xpENDMin, max, true);
+			playerXPEND.setTheme("expbar");
 		}
 		else
 		{
@@ -284,19 +290,19 @@ public class BattleCanvas extends Widget
 	 */
 	public void loadImages()
 	{
-		playerDataBG = GameClient.getInstance().getTheme().getImage("battle_playerdata_background");
-		enemyDataBG = GameClient.getInstance().getTheme().getImage("battle_enemydata_background");
+		playerDataBG = new Image(GameClient.getInstance().getTheme().getImage("battle_playerdata_background"));
+		enemyDataBG = new Image(GameClient.getInstance().getTheme().getImage("battle_enemydata_background"));
 
-		enemyHPBar = GameClient.getInstance().getTheme().getImage("enemyhp");
-		playerHPBar = GameClient.getInstance().getTheme().getImage("playerhp");
+		enemyHPBar = new Image(GameClient.getInstance().getTheme().getImage("enemyhp"));
+		playerHPBar = new Image(GameClient.getInstance().getTheme().getImage("playerhp"));
 		// Gender Image Load
-		genderFemale = GameClient.getInstance().getTheme().getImage("gender_female");
-		genderMale = GameClient.getInstance().getTheme().getImage("gender_male");
+		genderFemale = new Image(GameClient.getInstance().getTheme().getImage("gender_female"));
+		genderMale = new Image(GameClient.getInstance().getTheme().getImage("gender_male"));
 
-		m_pokeballIcons.put("empty", GameClient.getInstance().getTheme().getImage("pokeball_empty"));
-		m_pokeballIcons.put("normal", GameClient.getInstance().getTheme().getImage("pokeball_normal"));
-		m_pokeballIcons.put("status", GameClient.getInstance().getTheme().getImage("pokeball_status"));
-		m_pokeballIcons.put("fainted", GameClient.getInstance().getTheme().getImage("pokeball_fainted"));
+		m_pokeballIcons.put("empty", new Image(GameClient.getInstance().getTheme().getImage("pokeball_empty")));
+		m_pokeballIcons.put("normal", new Image(GameClient.getInstance().getTheme().getImage("pokeball_normal")));
+		m_pokeballIcons.put("status", new Image(GameClient.getInstance().getTheme().getImage("pokeball_status")));
+		m_pokeballIcons.put("fainted", new Image(GameClient.getInstance().getTheme().getImage("pokeball_fainted")));
 
 		// playerXPBar.setSize(101, 4);
 	}
@@ -306,11 +312,11 @@ public class BattleCanvas extends Widget
 	 */
 	public void loadStatusIcons()
 	{
-		m_statusIcons.put("poison", GameClient.getInstance().getTheme().getImage("status_psn"));
-		m_statusIcons.put("sleep", GameClient.getInstance().getTheme().getImage("status_slp"));
-		m_statusIcons.put("freeze", GameClient.getInstance().getTheme().getImage("status_frz"));
-		m_statusIcons.put("burn", GameClient.getInstance().getTheme().getImage("status_brn"));
-		m_statusIcons.put("paralysis", GameClient.getInstance().getTheme().getImage("status_par"));
+		m_statusIcons.put("poison", new Image(GameClient.getInstance().getTheme().getImage("status_psn")));
+		m_statusIcons.put("sleep", new Image(GameClient.getInstance().getTheme().getImage("status_slp")));
+		m_statusIcons.put("freeze", new Image(GameClient.getInstance().getTheme().getImage("status_frz")));
+		m_statusIcons.put("burn", new Image(GameClient.getInstance().getTheme().getImage("status_brn")));
+		m_statusIcons.put("paralysis", new Image(GameClient.getInstance().getTheme().getImage("status_par")));
 	}
 
 	/**
@@ -318,7 +324,7 @@ public class BattleCanvas extends Widget
 	 */
 	public void positionCanvas()
 	{
-		float y = BattleManager.getInstance().getBattleWindow().getY() + BattleManager.getInstance().getBattleWindow().getTitleBar().getHeight();
+		float y = BattleManager.getInstance().getBattleWindow().getY() + 48;
 		float x = BattleManager.getInstance().getBattleWindow().getX() + 1;
 		setPosition(Math.round(x), Math.round(y));
 	}
@@ -349,6 +355,7 @@ public class BattleCanvas extends Widget
 			{
 				BattleManager.getInstance().getOurStatuses().put(BattleManager.getInstance().getCurPokeIndex(), status);
 				playerStatus = m_statusIcons.get(status.toLowerCase());
+				playerStatus.setPosition(playerNameLabel.getX() + getInnerX(), 125 + getInnerY());
 			}
 			else if(status.equalsIgnoreCase("normal"))
 			{
@@ -358,7 +365,10 @@ public class BattleCanvas extends Widget
 		}
 		else // The enemy's pokemon
 		if(status.equalsIgnoreCase("poison") || status.equalsIgnoreCase("freeze") || status.equalsIgnoreCase("burn") || status.equalsIgnoreCase("paralysis") || status.equalsIgnoreCase("sleep"))
+		{
 			enemyStatus = m_statusIcons.get(status.toLowerCase());
+			enemyStatus.setPosition(105 + getInnerX(), 40 + getInnerY());
+		}
 		else if(status.equalsIgnoreCase("normal"))
 			enemyStatus = null;
 	}
@@ -395,7 +405,9 @@ public class BattleCanvas extends Widget
 		m_enemyPokeballs.clear();
 		for(int i = 0; i < 6; i++)
 		{
+			m_enemyPokeballs.add(new Image());
 			m_enemyPokeballs.set(i, m_pokeballIcons.get("empty"));
+			m_enemyPokeballs.get(i).setPosition((125 + 14 * i + i * 5) + getInnerX(), 3 + getInnerY());
 		}
 	}
 
@@ -573,42 +585,5 @@ public class BattleCanvas extends Widget
 		{
 			playerHP.setProgressImage(hp_low);
 		}
-	}
-
-	@Override
-	public void paintWidget(GUI gui)
-	{
-		if(playerBGX == -999)
-		{
-			playerBGX = 82 + getInnerX();
-			playerBGY = 96 + getInnerY();
-			enemyBGX = -10 + getInnerX();
-			enemyBGY = 10 + getInnerY();
-			playerHPX = playerLv.getX() + playerLv.getWidth() - 105 + getInnerX();
-			playerHPY = 119 + getInnerY();
-			enemyHPX = enemyNameLabel.getX() + getInnerX();
-			enemyHPY = 37 + getInnerY();
-		}
-		playerDataBG.draw(getAnimationState(), 82 + getInnerX(), 96 + getInnerY());
-		enemyDataBG.draw(getAnimationState(), -10 + getInnerX(), 10 + getInnerY());
-		enemyGender
-				.draw(getAnimationState(), enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()) + 3 + getInnerX(), enemyNameLabel.getY() + getInnerY());
-		playerGender.draw(getAnimationState(), playerNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()) + 3 + getInnerX(), playerNameLabel.getY()
-				+ getInnerY());
-		enemyPokeSprite.draw(getAnimationState(), 150 + getInnerX(), 21 + getInnerY());
-		playerPokeSprite.draw(getAnimationState(), 20, 76);
-
-		int x = 1;
-		for(Image i : m_enemyPokeballs)
-		{
-			i.draw(getAnimationState(), (125 + 14 * x + x * 5) + getInnerX(), 3 + getInnerY());
-			x++;
-		}
-
-		enemyStatus.draw(getAnimationState(), 105 + getInnerX(), 40 + getInnerY());
-		playerStatus.draw(getAnimationState(), playerNameLabel.getX() + getInnerX(), 125 + getInnerY());
-
-		enemyHPBar.draw(getAnimationState(), enemyNameLabel.getX() + getInnerX(), 37 + getInnerY());
-		playerHPBar.draw(getAnimationState(), playerLv.getX() + playerLv.getWidth() - 105 + getInnerX(), 119 + getInnerY());
 	}
 }

@@ -19,8 +19,8 @@ public class RegistrationSuccessEvent implements MessageEvent
 		translated = Translator.translate("_LOGIN");
 
 		GameClient.getInstance().messageDialog(translated.get(23));
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().showLogin();
-		//GameClient.getInstance().getLoginScreen().getRegistration().clear();
+		// GameClient.getInstance().getLoginScreen().getRegistration().clear();
 	}
 }

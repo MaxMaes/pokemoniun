@@ -1,14 +1,14 @@
 package org.pokenet.client.twl.ui;
 
 import org.pokenet.client.GameClient;
-import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 
 /**
  * The loading screen
  * 
  * @author Myth1c
  */
-public class LoadingScreen extends ResizableFrame
+public class LoadingScreen extends Widget
 {
 
 	/**
@@ -18,7 +18,6 @@ public class LoadingScreen extends ResizableFrame
 	{
 		this.setSize(800, 632);
 		this.setPosition(0, -32);
-		setResizableAxis(ResizableAxis.NONE);
 
 		setVisible(false);
 		// setAlwaysOnTop(true);

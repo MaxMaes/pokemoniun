@@ -15,10 +15,10 @@ public class LoginSuccessEvent implements MessageEvent
 		int id = Request.readInt();
 		String time = Request.readString();
 		GameClient.getInstance().getGUIPane().hideLoginScreen();
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().setPlayerId(id);
-		GameClient.getInstance().getUi().setVisible(true);
-		GameClient.getInstance().getUi().getChat().setVisible(true);
+		GameClient.getInstance().getHUD().setVisible(true);
+		GameClient.getInstance().getHUD().getChat().setVisible(true);
 		GameClient.getInstance().getTimeService().setTime(Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
 	}
 }

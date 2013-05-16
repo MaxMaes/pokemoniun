@@ -9,8 +9,8 @@ import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.ComboBox;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Event;
-import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.TextArea;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
@@ -19,7 +19,7 @@ import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
  * 
  * @author Myth1c
  */
-public class ChatDialog extends ResizableFrame
+public class ChatDialog extends Widget
 {
 	private TextArea chatView;
 	private EditField input;
@@ -158,5 +158,25 @@ public class ChatDialog extends ResizableFrame
 	private String getSelectedChatboxName()
 	{
 		return possibleBoxesModel.getEntry(possibleBoxes.getSelected());
+	}
+
+	/**
+	 * Adds the text to every chatbox.
+	 * TODO: Add chatbox: SYSTEM and autochange to it on line add.
+	 * 
+	 * @param text
+	 */
+	public void addSystemMessage(String text)
+	{
+		for(String chatbox : chats.keySet())
+		{
+			addLineTo(text, chatbox);
+		}
+	}
+
+	public void addAnnouncement(String readString)
+	{
+		// TODO Auto-generated method stub
+
 	}
 }

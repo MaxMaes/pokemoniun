@@ -13,6 +13,6 @@ public class TradeOfferEvent implements MessageEvent
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// String[] offerData = Request.readString().split(",");
-		GameClient.getInstance().getUi().getTrade().getOffer(Request.readInt(), Request.readInt());
+		GameClient.getInstance().getHUD().getTradeDialog().getOffer(Request.readInt(), Request.readInt());
 	}
 }

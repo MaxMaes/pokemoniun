@@ -2,14 +2,13 @@ package org.pokenet.client.backend;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.Music;
-import org.pokenet.client.ui.BattleWindow;
+import org.pokenet.client.twl.ui.BattleDialog;
 
 /**
  * Handles battle events and controls the battle window
@@ -20,7 +19,7 @@ public class BattleManager
 {
 	private static BattleManager m_instance;
 	private boolean m_isBattling = false;
-	private BattleWindow m_battle;
+	private BattleDialog m_battle;
 	private boolean m_canFinish = false;
 	private int m_curEnemyIndex;
 	private Pokemon m_curEnemyPoke;
@@ -40,10 +39,10 @@ public class BattleManager
 	 */
 	private BattleManager()
 	{
-		m_battle = new BattleWindow("Battle!");
+		m_battle = new BattleDialog();
 		m_timeLine = new BattleTimeLine();
 		m_battle.setVisible(false);
-		m_battle.setAlwaysOnTop(true);
+		// m_battle.setAlwaysOnTop(true); // TODO: Chappie magic :D
 	}
 
 	/**
@@ -79,14 +78,14 @@ public class BattleManager
 	public void endBattle()
 	{
 		BattleManager.getInstance().setFinish(true);
-		GameClient.getInstance().getUi().hideHUD(false);
+		GameClient.getInstance().getGUIPane().showHUD();
 		m_timeLine.endBattle();
 		m_battle.setVisible(false);
 		m_isBattling = false;
-		if(GameClient.getInstance().getDisplay().containsChild(m_battle.m_bag))
-			GameClient.getInstance().getDisplay().remove(m_battle.m_bag);
-		GameClient.getInstance().getDisplay().remove(m_battle);
-		while(GameClient.getInstance().getDisplay().containsChild(m_battle))
+		if(GameClient.getInstance().getHUD().hasBattlebag())
+			GameClient.getInstance().getHUD().removeBattlebag();
+		GameClient.getInstance().getGUIPane().removeChild(m_battle);
+		while(GameClient.getInstance().getHUD().hasBattleDialog())
 			;
 		GameClient.getInstance().getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
 		if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
@@ -98,7 +97,7 @@ public class BattleManager
 	 * 
 	 * @return
 	 */
-	public BattleWindow getBattleWindow()
+	public BattleDialog getBattleWindow()
 	{
 		return m_battle;
 	}
@@ -230,7 +229,6 @@ public class BattleManager
 		m_enemyPokes[index].setCurHP(curHP);
 		m_enemyPokes[index].setShiny(isShiny);
 		m_enemyPokes[index].setSpriteNumber(spriteNum + 1);
-		
 
 		if(index + 1 == m_enemyPokes.length)
 			setEnemyData();
@@ -262,7 +260,7 @@ public class BattleManager
 	{
 		/* boolean was a char with the TcpProtocolHandler system. */
 		m_isBattling = true;
-		GameClient.getInstance().getUi().hideHUD(true);
+		GameClient.getInstance().getHUD().hideHUDElements();
 		if(isWild)
 			setWild(true);
 		else
@@ -277,7 +275,7 @@ public class BattleManager
 		m_timeLine.startBattle();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
-		GameClient.getInstance().getDisplay().add(m_battle);
+		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
 		GameClient.getInstance().changeTrack(Music.PVNPC);
 	}
 
@@ -305,8 +303,8 @@ public class BattleManager
 			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
 				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.red);
 			m_timeLine.getBattleCanvas().initPlayerXPBar();
-//			m_timeLine.getBattleCanvas().drawOurPoke();
-//			m_timeLine.getBattleCanvas().drawOurInfo();
+			// m_timeLine.getBattleCanvas().drawOurPoke();
+			// m_timeLine.getBattleCanvas().drawOurInfo();
 		}
 		else
 		{
@@ -332,15 +330,15 @@ public class BattleManager
 		for(int i = 0; i < 4; i++)
 			if(m_curPoke != null && m_curPoke.getMoves()[i] != null && !m_curPoke.getMoves()[i].equals(""))
 			{
-				m_battle.m_moveButtons.get(i).setText(m_curPoke.getMoves()[i]);
-				m_battle.m_ppLabels.get(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
-				m_battle.m_moveTypeLabels.get(i).setText(m_curPoke.getMoveType(i));
+				m_battle.getMoveButton(i).setText(m_curPoke.getMoves()[i]);
+				m_battle.getPPLabel(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
+				m_battle.getMoveTypeLabel(i).setText(m_curPoke.getMoveType(i));
 			}
 			else
 			{
-				m_battle.m_moveButtons.get(i).setText("");
-				m_battle.m_ppLabels.get(i).setText("");
-				m_battle.m_moveButtons.get(i).setEnabled(false);
+				m_battle.getMoveButton(i).setText("");
+				m_battle.getPPLabel(i).setText("");
+				m_battle.getMoveButton(i).setEnabled(false);
 			}
 	}
 
@@ -354,13 +352,13 @@ public class BattleManager
 		for(int i = 0; i < 4; i++)
 			if(m_ourPokes[pokeIndex].getMoves()[i] != null)
 			{
-				m_battle.m_moveButtons.get(i).setText(m_ourPokes[pokeIndex].getMoves()[i]);
-				m_battle.m_ppLabels.get(i).setText(m_ourPokes[pokeIndex].getMoveCurPP()[i] + "/" + m_ourPokes[pokeIndex].getMoveMaxPP()[i]);
+				m_battle.getMoveButton(i).setText(m_ourPokes[pokeIndex].getMoves()[i]);
+				m_battle.getPPLabel(i).setText(m_ourPokes[pokeIndex].getMoveCurPP()[i] + "/" + m_ourPokes[pokeIndex].getMoveMaxPP()[i]);
 			}
 			else
 			{
-				m_battle.m_moveButtons.get(i).setText("");
-				m_battle.m_ppLabels.get(i).setText("");
+				m_battle.getMoveButton(i).setText("");
+				m_battle.getPPLabel(i).setText("");
 			}
 	}
 
@@ -372,22 +370,22 @@ public class BattleManager
 		for(int i = 0; i < 6; i++)
 			try
 			{
-				m_battle.m_pokeButtons.get(i).setText(m_ourPokes[i].getName());
-				m_battle.m_pokeInfo.get(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:" + m_ourPokes[i].getCurHP() + "/" + m_ourPokes[i].getMaxHP());
+				m_battle.getPokeButton(i).setText(m_ourPokes[i].getName());
+				m_battle.getPokeInfo(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:" + m_ourPokes[i].getCurHP() + "/" + m_ourPokes[i].getMaxHP());
 				try
 				{
 					if(m_ourStatuses.containsKey(i) && m_battle.getStatusIcons().containsKey(m_ourStatuses.get(i)))
-						m_battle.m_pokeStatus.get(i).setImage(m_battle.getStatusIcons().get(m_ourStatuses.get(i)));
+						m_battle.getPokeStatus(i).setImage(m_battle.getStatusIcons().get(m_ourStatuses.get(i)));
 					else
-						m_battle.m_pokeStatus.get(i).setImage(null);
+						m_battle.getPokeStatus(i).setImage(null);
 				}
 				catch(Exception e2)
 				{
 				}
 				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i || m_ourPokes[i] == null)
-					m_battle.m_pokeButtons.get(i).setEnabled(false);
+					m_battle.getPokeButton(i).setEnabled(false);
 				else
-					m_battle.m_pokeButtons.get(i).setEnabled(true);
+					m_battle.getPokeButton(i).setEnabled(true);
 			}
 			catch(Exception e)
 			{

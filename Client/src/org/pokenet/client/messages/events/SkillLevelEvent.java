@@ -21,19 +21,19 @@ public class SkillLevelEvent implements MessageEvent
 		int fishingLvl = request.readInt();
 		int coordinatingLvl = request.readInt();
 		if(GameClient.getInstance().getOurPlayer().getTrainerLevel() != -1 && GameClient.getInstance().getOurPlayer().getTrainerLevel() != trainerLvl)
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + "Congratulations! Your trainer level is now " + trainerLvl + ".");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + "Congratulations! Your trainer level is now " + trainerLvl + ".");
 		GameClient.getInstance().getOurPlayer().setTrainerLevel(trainerLvl);
 
 		if(GameClient.getInstance().getOurPlayer().getBreedingLevel() != -1 && GameClient.getInstance().getOurPlayer().getBreedingLevel() != breedingLvl)
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + "Congratulations! Your breeding level is now " + breedingLvl + ".");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + "Congratulations! Your breeding level is now " + breedingLvl + ".");
 		GameClient.getInstance().getOurPlayer().setBreedingLevel(breedingLvl);
 
 		if(GameClient.getInstance().getOurPlayer().getFishingLevel() != -1 && GameClient.getInstance().getOurPlayer().getFishingLevel() != fishingLvl)
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + "Congratulations! Your fishing level is now " + fishingLvl + ".");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + "Congratulations! Your fishing level is now " + fishingLvl + ".");
 		GameClient.getInstance().getOurPlayer().setFishingLevel(fishingLvl);
 
 		if(GameClient.getInstance().getOurPlayer().getCoordinatingLevel() != -1 && GameClient.getInstance().getOurPlayer().getCoordinatingLevel() != coordinatingLvl)
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + "Congratulations! Your fishing level is now " + coordinatingLvl + ".");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + "Congratulations! Your fishing level is now " + coordinatingLvl + ".");
 		GameClient.getInstance().getOurPlayer().setCoordinatingLevel(coordinatingLvl);
 	}
 

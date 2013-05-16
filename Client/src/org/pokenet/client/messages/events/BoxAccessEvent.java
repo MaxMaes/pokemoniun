@@ -30,9 +30,9 @@ public class BoxAccessEvent implements MessageEvent
 		else
 			for(int i = 0; i < pokes.length; i++)
 				pokes[i] = -1;
-		if(GameClient.getInstance().getUi().getStorageBox() == null)
-			GameClient.getInstance().getUi().useStorageBox(pokes);
+		if(GameClient.getInstance().getHUD().hasBoxDialog())
+			GameClient.getInstance().getHUD().showBoxDialog(pokes);
 		else
-			GameClient.getInstance().getUi().getStorageBox().changeBox(pokes);
+			GameClient.getInstance().getHUD().getBoxDialog().changeBox(pokes);
 	}
 }

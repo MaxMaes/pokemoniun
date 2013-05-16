@@ -6,8 +6,7 @@ import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
-import org.pokenet.client.ui.base.TWLImageButton;
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Label;
@@ -28,11 +27,11 @@ public class TradeDialog extends ResizableFrame
 	private int m_offerNum = 6;
 	private Label m_ourCashLabel;
 	private EditField m_ourMoneyOffer;
-	private TWLImageButton[] m_ourPokes;
+	private ImageButton[] m_ourPokes;
 	private boolean m_receivedOffer = false;
 	private Label m_theirMoneyOffer;
 	private PokemonInfoDialog[] m_theirPokeInfo;
-	private TWLImageButton[] m_theirPokes;
+	private ImageButton[] m_theirPokes;
 	private Button m_tradeBtn;
 
 	/**
@@ -127,8 +126,8 @@ public class TradeDialog extends ResizableFrame
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int height = (int) GameClient.getInstance().getGUIPane().getHeight();
+		int width = (int) GameClient.getInstance().getGUIPane().getWidth();
 		int x = width / 2 - (int) getWidth() / 2;
 		int y = height / 2 - (int) getHeight() / 2;
 		this.setPosition(x, y);
@@ -163,16 +162,15 @@ public class TradeDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("38");
 				ClientMessage message = new ClientMessage(ServerPacket.TRADE_CANCEL);
 				// message.addInt(m_offerNum);
 				// message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 				GameClient.getInstance().getSession().send(message);
 				m_confirm.setVisible(false);
-				// removeChild(m_confirm); TODO:
+				GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 				m_confirm = null;
 				setVisible(false);
-				GameClient.getInstance().getUi().stopTrade();
+				GameClient.getInstance().getGUIPane().getHUD().removeTradeDialog();
 				System.out.println("Trade Cancelled");
 			}
 
@@ -182,11 +180,11 @@ public class TradeDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				// removeChild(m_confirm); TODO:
+				GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 				m_confirm = null;
 			}
 		};
-		// m_confirm = new ConfirmationDialog("Are you sure you want to cancel the trade?", yes, no); TODO: Waiting for Chappie
+		GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to cancel the trade?", yes, no);
 	}
 
 	/**
@@ -194,8 +192,8 @@ public class TradeDialog extends ResizableFrame
 	 */
 	private void initGUI()
 	{
-		m_ourPokes = new TWLImageButton[6];
-		m_theirPokes = new TWLImageButton[6];
+		m_ourPokes = new ImageButton[6];
+		m_theirPokes = new ImageButton[6];
 		m_theirPokeInfo = new PokemonInfoDialog[6];
 		m_ourMoneyOffer = new EditField();
 		m_makeOfferBtn = new Button();
@@ -223,7 +221,7 @@ public class TradeDialog extends ResizableFrame
 		for(int i = 0; i < 6; i++)
 		{
 			// Show Our Pokemon for Trade
-			m_ourPokes[i] = new TWLImageButton(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon(), true));
+			m_ourPokes[i] = new ImageButton(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon(), true));
 			m_ourPokes[i].setSize(32, 32);
 			m_ourPokes[i].setVisible(true);
 			add(m_ourPokes[i]);
@@ -232,7 +230,7 @@ public class TradeDialog extends ResizableFrame
 			else
 				m_ourPokes[i].setPosition(x + 40, y);
 			// Show the Other Character's Pokemon for Trade
-			m_theirPokes[i] = new TWLImageButton();
+			m_theirPokes[i] = new ImageButton();
 			m_theirPokes[i].setSize(32, 32);
 			m_theirPokes[i].setVisible(true);
 			add(m_theirPokes[i]);
@@ -497,7 +495,7 @@ public class TradeDialog extends ResizableFrame
 	public void forceCancelTrade()
 	{
 		setVisible(false);
-		GameClient.getInstance().getUi().stopTrade();
+		GameClient.getInstance().getHUD().removeTradeDialog();
 		System.out.println("Trade Cancelled");
 	}
 }

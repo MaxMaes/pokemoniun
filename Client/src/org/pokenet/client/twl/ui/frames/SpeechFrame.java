@@ -20,17 +20,18 @@ public class SpeechFrame extends Widget
 {
 	protected String stringToPrint;
 
-	TimerTask animAction;
+	private TimerTask animAction;
 
-	Image bg;
-	Image triangle;
+	private Image bg;
+	protected Image triangle;
 
-	boolean isGoingDown = true;
+	private boolean isGoingDown = true;
 
-	Timer printingTimer = new Timer();
+	private Timer printingTimer = new Timer();
 
-	TextArea speechDisplay;
-	Queue<String> speechQueue;
+	private TextArea speechDisplay;
+	private SimpleTextAreaModel speechModel;
+	protected Queue<String> speechQueue;
 
 	/**
 	 * Default constructor
@@ -193,7 +194,8 @@ public class SpeechFrame extends Widget
 	 */
 	public void initGUI()
 	{
-		speechDisplay = new TextArea();
+		speechModel = new SimpleTextAreaModel();
+		speechDisplay = new TextArea(speechModel);
 
 		speechDisplay.setCanAcceptKeyboardFocus(false);
 		speechDisplay.setSize(384, 100);
@@ -202,7 +204,7 @@ public class SpeechFrame extends Widget
 
 		setSize(400, 100);
 
-		setPosition(Math.round(GameClient.getInstance().getDisplay().getWidth() / 2 - getWidth() / 2), Math.round(GameClient.getInstance().getDisplay().getHeight() / 2 + getWidth() / 2));
+		setPosition(Math.round(GameClient.getInstance().getGUIPane().getWidth() / 2 - getWidth() / 2), Math.round(GameClient.getInstance().getGUIPane().getHeight() / 2 + getWidth() / 2));
 
 		setCanAcceptKeyboardFocus(false);
 		setFocusKeyEnabled(false);

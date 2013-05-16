@@ -3,7 +3,7 @@ package org.pokenet.client.backend;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.ui.MoveLearning;
+import org.pokenet.client.twl.ui.MoveLearning;
 
 /**
  * Handles move learning, and allowis for queing items.
@@ -58,9 +58,9 @@ public class MoveLearningManager extends Thread
 	 */
 	public void learnMove(int pokeIndex, String move)
 	{
-		BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false);
+		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false); // TODO: Chappie magic :D
 		m_moveLearning.learnMove(pokeIndex, move);
-		GameClient.getInstance().getDisplay().add(m_moveLearning);
+		GameClient.getInstance().getGUIPane().add(m_moveLearning);
 	}
 
 	/**
@@ -82,11 +82,10 @@ public class MoveLearningManager extends Thread
 	 */
 	public void removeMoveLearning()
 	{
-		BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(true);
+		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(true); TODO: //Chappie magic :D
 		if(!m_moveLearningQueue.isEmpty())
 			m_canLearn = true;
-		GameClient.getInstance().getUi().nullSpeechFrame();
-		GameClient.getInstance().getDisplay().remove(m_moveLearning);
+		GameClient.getInstance().getGUIPane().removeChild(m_moveLearning);
 	}
 
 	/**

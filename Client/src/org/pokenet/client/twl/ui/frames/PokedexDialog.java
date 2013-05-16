@@ -1,14 +1,12 @@
 package org.pokenet.client.twl.ui.frames;
 
 import java.util.ArrayList;
-
 import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokedexData;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon.PokedexMap;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
@@ -24,18 +22,18 @@ public class PokedexDialog extends ResizableFrame
 {
 	// Images
 	private Image icon_caught = GameClient.getInstance().getTheme().getImage("pokemoncaught");
-	private Image icon_location =GameClient.getInstance().getTheme().getImage("pokemonlocation");
+	private Image icon_location = GameClient.getInstance().getTheme().getImage("pokemonlocation");
 	private Image map_kantojohto = GameClient.getInstance().getTheme().getImage("map_kantojohto");
 	private Image map_hoenn = GameClient.getInstance().getTheme().getImage("map_hoenn");
 	private Image map_sinnoh = GameClient.getInstance().getTheme().getImage("map_sinnoh");
 	private Image selectionFrame = GameClient.getInstance().getTheme().getImage("pokemonselection");
 	private Image[] pokemonIcons = loadPokemonIcons();
-	
-	//Buttons
+
+	// Buttons
 	private Button inc1, inc5, inc10, inc50, currIncButton;
 	private Button up, down, left, right;
-	
-	//Labels
+
+	// Labels
 	private Label[] loreLabels;
 	private Label[] pokemonBiologyLabels;
 	private Label[] pokemonCaughtLabels;
@@ -46,8 +44,8 @@ public class PokedexDialog extends ResizableFrame
 	private Label[] pokemonMoveLabels;
 	private Label pokemonname;
 	private Label tabname;
-	
-	//Variables
+
+	// Variables
 	private int incrementer = 1;
 	private int scrollindex = 0;
 	private int selection = 1;
@@ -124,7 +122,7 @@ public class PokedexDialog extends ResizableFrame
 
 		pokemonnumber = new Label();
 		pokemonnumber.setTheme("label_large");
-		
+
 		tabname = new Label();
 		tabname.setTheme("label_large");
 
@@ -223,7 +221,7 @@ public class PokedexDialog extends ResizableFrame
 		}
 		else if(tabindex == 2)
 		{
-			tabname.setText("Hoenn");			
+			tabname.setText("Hoenn");
 		}
 		else if(tabindex == 3)
 		{
@@ -260,7 +258,6 @@ public class PokedexDialog extends ResizableFrame
 			number = "#" + selection;
 
 		pokemonnumber.setText(number);
-		
 
 		if(getPokemon(selection) < 1)
 		{
@@ -273,13 +270,14 @@ public class PokedexDialog extends ResizableFrame
 			for(int i = 0; i < loreLabels.length; i++)
 				removeChild(loreLabels[i]);
 			for(int i = 0; i < pokemonBiologyLabels.length; i++)
-				pokemonBiologyLabels[i].setVisible(false);;
+				pokemonBiologyLabels[i].setVisible(false);
+			;
 		}
 		else if(getPokemon(selection) >= 1)
 		{
 			pokemonname.setText(PokedexData.getName(selection));
 			pokemontypes.setText(PokedexData.getTypestring(selection));
-			
+
 			initLocationLabels();
 			initMoveLabels();
 		}
@@ -407,7 +405,7 @@ public class PokedexDialog extends ResizableFrame
 			int x = (int) ((int) mapX + Integer.parseInt((String) locationInfo[1]) - icon_location.getWidth() / 2);
 			int y = (int) ((int) mapY + Integer.parseInt((String) locationInfo[2]) - icon_location.getHeight() / 2);
 			int locationid = (Integer) locationInfo[3];
-			if(locationid < 92) 
+			if(locationid < 92)
 				pokemonLocationLabels[idx] = new PokemonLocationIcon(PokedexMap.MAP_KANTOJOHTO, x, y, icon_location);
 			else if(locationid >= 92 && locationid < 161)
 				pokemonLocationLabels[idx] = new PokemonLocationIcon(PokedexMap.MAP_HOENN, x, y, icon_location);
@@ -551,7 +549,7 @@ public class PokedexDialog extends ResizableFrame
 				if(tabindex < 1)
 					tabindex = 6;
 
-					updateInfoTab();
+				updateInfoTab();
 			}
 		});
 
@@ -564,8 +562,8 @@ public class PokedexDialog extends ResizableFrame
 				tabindex++;
 				if(tabindex > 6)
 					tabindex = 1;
-				
-					updateInfoTab();
+
+				updateInfoTab();
 			}
 		});
 
@@ -589,7 +587,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc5.setTheme("button_incrementer");
-		inc5.setText("5");		
+		inc5.setText("5");
 		inc5.addCallback(new Runnable()
 		{
 			@Override
@@ -606,7 +604,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc10.setTheme("button_incrementer");
-		inc10.setText("10");	
+		inc10.setText("10");
 		inc10.addCallback(new Runnable()
 		{
 			@Override
@@ -623,7 +621,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		inc50.setTheme("button_incrementer");
-		inc50.setText("50");	
+		inc50.setText("50");
 		inc50.addCallback(new Runnable()
 		{
 			@Override
@@ -653,48 +651,56 @@ public class PokedexDialog extends ResizableFrame
 	{
 		fillNameList();
 	}
-	
+
 	@Override
-	public void paintWidget(GUI gui) {	
-		//Render the maps
+	public void paintWidget(GUI gui)
+	{
+		// Render the maps
 		int mapX = getInnerX() + 33;
 		int mapY = getInnerY() + 132;
-		if(tabindex == 1) {
+		if(tabindex == 1)
+		{
 			map_kantojohto.draw(getAnimationState(), mapX, mapY);
 			for(PokemonLocationIcon icon : pokemonLocationLabels)
 				if(icon.getMap() == PokedexMap.MAP_KANTOJOHTO)
 					icon.draw(getAnimationState());
-		} else if(tabindex == 2) {
+		}
+		else if(tabindex == 2)
+		{
 			map_hoenn.draw(getAnimationState(), mapX, mapY);
 			for(PokemonLocationIcon icon : pokemonLocationLabels)
 				if(icon.getMap() == PokedexMap.MAP_HOENN)
 					icon.draw(getAnimationState());
-		} else if(tabindex == 3) {
+		}
+		else if(tabindex == 3)
+		{
 			map_sinnoh.draw(getAnimationState(), mapX, mapY);
 			for(PokemonLocationIcon icon : pokemonLocationLabels)
 				if(icon.getMap() == PokedexMap.MAP_SINNOH)
 					icon.draw(getAnimationState());
 		}
-		
-		//Render the selection rectangle around the name
+
+		// Render the selection rectangle around the name
 		int selectionX = getInnerX() + 295;
 		int selectionY = getInnerY() + 59 + 22 * ((selection - 1) % 13);
 		selectionFrame.draw(getAnimationState(), selectionX, selectionY);
-		
-		//Render the pokemon sprite
-		if(getPokemon(selection) > 1) {
+
+		// Render the pokemon sprite
+		if(getPokemon(selection) > 1)
+		{
 			pokemonIcons[selection].draw(getAnimationState(), getInnerX() + 33, getInnerY() + 39);
 		}
-		
-		//Render the pokemon caught icon
+
+		// Render the pokemon caught icon
 		int first = scrollindex * 13 + 1;
 		for(int i = 0; i < 13; i++)
 			if(getPokemon(first + i) == 2)
 				icon_caught.draw(getAnimationState(), getInnerX() + 299, getInnerY() + 60 + 22 * i);
 	}
-	
+
 	@Override
-	public void layout() {
+	public void layout()
+	{
 		down.setSize(29, 26);
 		down.setPosition(getInnerX() + getWidth() - down.getWidth() - 8, getInnerY() + getHeight() - down.getHeight() - 47);
 		up.setSize(29, 26);
@@ -702,8 +708,8 @@ public class PokedexDialog extends ResizableFrame
 		left.setSize(20, 35);
 		left.setPosition(getInnerX() + 32, getInnerY() + getHeight() - left.getHeight() - 76);
 		right.setSize(20, 35);
-		right.setPosition(left.getX() + 177, left.getY());		
-		
+		right.setPosition(left.getX() + 177, left.getY());
+
 		inc1.setSize(36, 14);
 		inc1.setPosition(down.getX() - 3, getInnerY() + 70);
 		inc5.setSize(36, 14);
@@ -712,13 +718,13 @@ public class PokedexDialog extends ResizableFrame
 		inc10.setPosition(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
 		inc50.setSize(36, 14);
 		inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
-		
-		tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);	
-		
+
+		tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);
+
 		pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.computeTextWidth() / 2, pokemonname.getY() - 25);
 		pokemonname.setPosition(getInnerX() + 178 - pokemonname.computeTextWidth() / 2, getInnerY() + 75);
 		pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.computeTextWidth() / 2, pokemonname.getY() + 17);
-		
-		setSize(519, 377);	
+
+		setSize(519, 377);
 	}
 }

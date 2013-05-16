@@ -69,7 +69,7 @@ public class RequestDialog extends ResizableFrame
 				m_offers.put(username, new Button("Trade"));
 				m_update = true;
 			}
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + username + " sent you a trade request.");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " sent you a trade request.");
 		}
 		else if(request.equalsIgnoreCase("battle"))
 		{
@@ -79,7 +79,7 @@ public class RequestDialog extends ResizableFrame
 				m_offers.put(username, new Button("Battle"));
 				m_update = true;
 			}
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + username + " would like to battle!");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " would like to battle!");
 		}
 	}
 

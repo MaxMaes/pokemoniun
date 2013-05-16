@@ -10,7 +10,6 @@ import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.base.Image;
-import org.pokenet.client.ui.base.ConfirmationDialog;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
@@ -31,7 +30,6 @@ public class MoveLearning extends ResizableFrame
 	private String m_move;
 	private Widget m_movePane;
 	private int m_pokeIndex;
-	private ConfirmationDialog m_replace;
 	private Button move1, move2, move3, move4;
 	private Label pp1, pp2, pp3, pp4;
 
@@ -220,8 +218,8 @@ public class MoveLearning extends ResizableFrame
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int height = (int) GameClient.getInstance().getGUIPane().getHeight();
+		int width = (int) GameClient.getInstance().getGUIPane().getWidth();
 		int x = width / 2 - 130;
 		int y = height / 2 - 238;
 		this.setPosition(x, y);
@@ -235,53 +233,49 @@ public class MoveLearning extends ResizableFrame
 	private void replaceMove(int i)
 	{
 		final int j = i;
-		if(!GameClient.getInstance().getDisplay().containsChild(m_replace))
-			if(m_moveButtons.get(i).getText().equals(""))
+		if(m_moveButtons.get(i).getText().equals(""))
+		{
+			GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
+			if(BattleManager.getInstance().getBattleWindow().isVisible())
+				BattleManager.getInstance().updateMoves();
+			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + i + m_move);
+			ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
+			message.addInt(m_pokeIndex);
+			message.addInt(i);
+			message.addString(m_move);
+			GameClient.getInstance().getSession().send(message);
+			MoveLearningManager.getInstance().removeMoveLearning();
+		}
+		else
+		{
+			// setAlwaysOnTop(false); TODO: Chappie magic :D
+			Runnable yes = new Runnable()
 			{
-				GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
-				if(BattleManager.getInstance().getBattleWindow().isVisible())
+				@Override
+				public void run()
+				{
+					GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
 					BattleManager.getInstance().updateMoves();
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + i + m_move);
-				ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
-				message.addInt(m_pokeIndex);
-				message.addInt(i);
-				message.addString(m_move);
-				GameClient.getInstance().getSession().send(message);
-				MoveLearningManager.getInstance().removeMoveLearning();
-			}
-			else
+					ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
+					message.addInt(m_pokeIndex);
+					message.addInt(j);
+					message.addString(m_move);
+					GameClient.getInstance().getSession().send(message);
+					MoveLearningManager.getInstance().removeMoveLearning();
+					GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+				}
+			};
+			Runnable no = new Runnable()
 			{
-				// setAlwaysOnTop(false); TODO: Chappie magic :D
-				Runnable yes = new Runnable()
+				@Override
+				public void run()
 				{
-					@Override
-					public void run()
-					{
-						GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
-						BattleManager.getInstance().updateMoves();
-						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("09" + m_pokeIndex + j + m_move);
-						ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
-						message.addInt(m_pokeIndex);
-						message.addInt(j);
-						message.addString(m_move);
-						GameClient.getInstance().getSession().send(message);
-						GameClient.getInstance().getDisplay().remove(m_replace);
-						m_replace = null;
-						MoveLearningManager.getInstance().removeMoveLearning();
-					}
-				};
-				Runnable no = new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						GameClient.getInstance().getDisplay().remove(m_replace);
-						m_replace = null;
-						// setAlwaysOnTop(true); TODO: Chappie magic :D
-					}
-				};
-				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to forget " + m_moveButtons.get(i).getText() + " to learn " + m_move + "?", yes, no);
-			}
+					GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+					// setAlwaysOnTop(true); TODO: Chappie magic :D
+				}
+			};
+			GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to forget " + m_moveButtons.get(i).getText() + " to learn " + m_move + "?", yes, no);
+		}
 	}
 }
 

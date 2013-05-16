@@ -263,7 +263,7 @@
         <area name="battle_enemydata_background" xywh="2,350,164,48"/>
         <area name="battle_playerdata_background" xywh="2,399,164,48"/>
         <area name="pokeball_empty" xywh="1,1,14,14"/>
-        <area name="pokeball_faint" xywh="16,1,14,14"/>
+        <area name="pokeball_fainted" xywh="16,1,14,14"/>
         <area name="pokeball_normal" xywh="31,1,14,14"/>
         <area name="pokeball_status" xywh="46,1,14,14"/>
         <area name="gender_female" xywh="67,2,10,14"/>
@@ -300,5 +300,40 @@
         <area name="pokeball" xywh="66,92,32,32"/>
         <area name="berrie" xywh="100,91,32,32"/>
         <area name="item" xywh="133,91,32,32"/>
+    </images>
+    <images file="loading.png">
+        <area name="loadingscreen" xywh="*"/>
+    </images>
+    <images file="topbarbuttons.png">
+        <area name="topbar_stats" xywh="0,0,32,32"/>
+        <area name="topbar_stats_pressed" xywh="0,32,32,32"/>
+        <area name="topbar_stats_hover" xywh="0,64,32,32"/>
+        <area name="topbar_pokemon" xywh="65,0,32,32"/>
+        <area name="topbar_pokemon_pressed" xywh="65,32,32,32"/>
+        <area name="topbar_pokemon_hover" xywh="65,64,32,32"/>
+        <area name="topbar_requests" xywh="192,0,32,32"/>
+        <area name="topbar_requests_pressed" xywh="192,32,32,32"/>
+        <area name="topbar_requests_hover" xywh="192,64,32,32"/>
+        <area name="topbar_options" xywh="224,0,32,32"/>
+        <area name="topbar_options_pressed" xywh="224,32,32,32"/>
+        <area name="topbar_options_hover" xywh="224,64,32,32"/>
+        <area name="topbar_bag" xywh="97,0,32,32"/>
+        <area name="topbar_bag_pressed" xywh="97,32,32,32"/>
+        <area name="topbar_bag_hover" xywh="97,64,32,32"/>
+        <area name="topbar_map" xywh="128,0,32,32"/>
+        <area name="topbar_map_pressed" xywh="128,32,32,32"/>
+        <area name="topbar_map_hover" xywh="128,64,32,32"/>
+        <area name="topbar_friends" xywh="160,0,32,32"/>
+        <area name="topbar_friends_pressed" xywh="160,32,32,32"/>
+        <area name="topbar_friends_hover" xywh="160,64,32,32"/>
+        <area name="topbar_help" xywh="255,0,32,32"/>
+        <area name="topbar_help_pressed" xywh="255,32,32,32"/>
+        <area name="topbar_help_hover" xywh="255,64,32,32"/>
+        <area name="topbar_disconnect" xywh="288,0,32,32"/>
+        <area name="topbar_disconnect_pressed" xywh="288,32,32,32"/>
+        <area name="topbar_disconnect_hover" xywh="288,64,32,32"/>
+        <area name="topbar_pokedex" xywh="32,0,32,32"/>
+        <area name="topbar_pokedex_pressed" xywh="32,32,32,32"/>
+        <area name="topbar_pokedex_hover" xywh="32,64,32,32"/>
     </images>
 </themes>

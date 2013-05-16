@@ -13,6 +13,6 @@ public class TradeOfferCancelEvent implements MessageEvent
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		// String[] offerData = Request.readString().split(",");
-		GameClient.getInstance().getUi().getTrade().cancelTheirOffer();
+		GameClient.getInstance().getHUD().getTradeDialog().cancelTheirOffer();
 	}
 }

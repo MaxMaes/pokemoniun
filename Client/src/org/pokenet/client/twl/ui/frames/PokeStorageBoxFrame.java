@@ -8,7 +8,7 @@ import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.base.ProgressBar;
-import org.pokenet.client.ui.base.TWLImageButton;
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ComboBox;
 import de.matthiasmann.twl.Label;
@@ -25,7 +25,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 {
 	private int m_boxNum, m_boxIndex;
 	private int m_buttonChosen = 0;
-	private TWLImageButton[] m_buttons = new TWLImageButton[30];
+	private ImageButton[] m_buttons = new ImageButton[30];
 	private ComboBox<String> m_changeBox;
 	private SimpleChangableListModel<String> boxmodel;
 	private int[] m_pokeNums = new int[30];
@@ -108,7 +108,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 
 		for(int i = 0; i <= 29; i++)
 		{
-			m_buttons[i] = new TWLImageButton();
+			m_buttons[i] = new ImageButton();
 			final int j = i;
 			m_buttons[i].addCallback(new Runnable()
 			{
@@ -203,7 +203,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 						GameClient.getInstance().getSession().send(message);
 						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getInstance().getSession().send(finishBoxing);
-						GameClient.getInstance().getUi().stopUsingBox();
+						GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 					}
 				};
 
@@ -215,7 +215,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getInstance().getSession().send(finishBoxing);
-						GameClient.getInstance().getUi().stopUsingBox();
+						GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 					}
 				};
 				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to release your Pokemon?", yes, no);
@@ -233,7 +233,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 				setVisible(false);
 				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
+				GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 			}
 		});
 		add(m_switchPoke);
@@ -297,7 +297,7 @@ class TeamForBox extends Widget
 	private Button m_cancel = new Button();
 	private ProgressBar[] m_hp = new ProgressBar[6];
 	private Label[] m_level = new Label[6];
-	private TWLImageButton[] m_pokeIcon = new TWLImageButton[6];
+	private ImageButton[] m_pokeIcon = new ImageButton[6];
 	private Label[] m_pokeName = new Label[6];
 	private Widget[] m_pokes = new Widget[6];
 
@@ -361,7 +361,7 @@ class TeamForBox extends Widget
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
 				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
+				GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 				setVisible(false);
 			}
 		});
@@ -377,7 +377,7 @@ class TeamForBox extends Widget
 				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
 				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
+				GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 				setVisible(false);
 			}
 		});
@@ -394,7 +394,7 @@ class TeamForBox extends Widget
 		LoadingList.setDeferredLoading(true);
 		for(int i = 0; i < 6; i++)
 		{
-			m_pokeIcon[i] = new TWLImageButton();
+			m_pokeIcon[i] = new ImageButton();
 			m_pokeName[i] = new Label();
 			m_level[i] = new Label();
 			m_hp[i] = new ProgressBar(0, 0);
@@ -465,8 +465,6 @@ class TeamForBox extends Widget
 	 */
 	public void switchPokes(int boxNum, int boxIndex, int teamIndex)
 	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("19" + (boxNum - 1) + "," + boxIndex + "," + teamIndex);
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
 		ClientMessage message = new ClientMessage(ServerPacket.SWAP_POKEMON_FROM_BOX);
 		message.addInt(boxNum - 1);
 		message.addInt(boxIndex);
@@ -475,6 +473,5 @@ class TeamForBox extends Widget
 
 		ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 		GameClient.getInstance().getSession().send(finishBoxing);
-		GameClient.getInstance().getUi().update(false);
 	}
 }

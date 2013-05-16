@@ -7,7 +7,7 @@ import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.TWLImageButton;
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Event;
@@ -24,7 +24,7 @@ import de.matthiasmann.twl.renderer.Image;
  */
 public class BigBagDialog extends ResizableFrame
 {
-	protected TWLImageButton[] m_categoryButtons;
+	protected ImageButton[] m_categoryButtons;
 	protected int m_curCategory = 0;
 	protected ArrayList<Button> m_itemBtns;
 	protected Button m_leftButton, m_rightButton, m_cancel;
@@ -97,7 +97,7 @@ public class BigBagDialog extends ResizableFrame
 		m_scrollIndex = new HashMap<Integer, Integer>();
 		m_itemBtns = new ArrayList<Button>();
 		m_stockLabels = new ArrayList<Label>();
-		m_categoryButtons = new TWLImageButton[5];
+		m_categoryButtons = new ImageButton[5];
 		// remove any existing Bag gui content
 		removeAllChildren();
 		String respath = System.getProperty("res.path");
@@ -126,23 +126,23 @@ public class BigBagDialog extends ResizableFrame
 				switch(i)
 				{
 					case 0:
-						m_categoryButtons[i] = new TWLImageButton(bagcat[0], bagcat[1], bagcat[2]);
+						m_categoryButtons[i] = new ImageButton(bagcat[0], bagcat[1], bagcat[2]);
 						m_categoryButtons[i].setTooltipContent("Bag");
 						break;
 					case 1:
-						m_categoryButtons[i] = new TWLImageButton(potioncat[0], potioncat[1], potioncat[2]);
+						m_categoryButtons[i] = new ImageButton(potioncat[0], potioncat[1], potioncat[2]);
 						m_categoryButtons[i].setTooltipContent("Potions");
 						break;
 					case 2:
-						m_categoryButtons[i] = new TWLImageButton(berriescat[0], berriescat[1], berriescat[2]);
+						m_categoryButtons[i] = new ImageButton(berriescat[0], berriescat[1], berriescat[2]);
 						m_categoryButtons[i].setTooltipContent("Food");
 						break;
 					case 3:
-						m_categoryButtons[i] = new TWLImageButton(pokecat[0], pokecat[1], pokecat[2]);
+						m_categoryButtons[i] = new ImageButton(pokecat[0], pokecat[1], pokecat[2]);
 						m_categoryButtons[i].setTooltipContent("Pokeballs");
 						break;
 					case 4:
-						m_categoryButtons[i] = new TWLImageButton(tmscat[0], tmscat[1], tmscat[2]);
+						m_categoryButtons[i] = new ImageButton(tmscat[0], tmscat[1], tmscat[2]);
 						m_categoryButtons[i].setTooltipContent("TMs");
 						break;
 				}
@@ -313,8 +313,8 @@ public class BigBagDialog extends ResizableFrame
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int height = (int) GameClient.getInstance().getGUIPane().getHeight();
+		int width = (int) GameClient.getInstance().getGUIPane().getWidth();
 		int x = width / 2 - 200;
 		int y = height / 2 - 200;
 		setSize(getWidth(), getHeight());

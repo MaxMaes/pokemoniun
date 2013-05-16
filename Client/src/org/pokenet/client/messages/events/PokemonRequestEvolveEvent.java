@@ -12,6 +12,6 @@ public class PokemonRequestEvolveEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().tryEvolve(Request.readInt());
+		GameClient.getInstance().getHUD().tryEvolve(Request.readInt());
 	}
 }

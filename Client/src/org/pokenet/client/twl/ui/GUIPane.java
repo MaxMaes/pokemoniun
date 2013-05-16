@@ -2,7 +2,6 @@ package org.pokenet.client.twl.ui;
 
 import org.pokenet.client.twl.ui.frames.AlertDialog;
 import org.pokenet.client.twl.ui.frames.ConfirmationDialog;
-
 import de.matthiasmann.twl.DesktopArea;
 
 /**
@@ -17,6 +16,7 @@ public class GUIPane extends DesktopArea
 	private ConfirmationDialog confirmationDialog;
 	private AlertDialog alertDialog;
 	private AlertDialog messageDialog;
+	private LoadingScreen loadingScreen;
 
 	private HUD hud;
 
@@ -27,17 +27,16 @@ public class GUIPane extends DesktopArea
 
 		confirmationDialog = new ConfirmationDialog("", this);
 
-		alertDialog = new AlertDialog("Alert!", "");
-		alertDialog.setVisible(false);
-		add(alertDialog);
+		alertDialog = new AlertDialog("Alert!", "",loginScreen);
 
-		messageDialog = new AlertDialog("Message!", "");
-		messageDialog.setVisible(false);
-		add(messageDialog);
+		messageDialog = new AlertDialog("Message!", "",loginScreen);
 
-		/* hud = new HUD();
-		 * add(hud);
-		 * hud.setVisible(false); */
+		loadingScreen = new LoadingScreen();
+		add(loadingScreen);
+
+		hud = new HUD();
+		add(hud);
+		hud.setVisible(false);
 		setTheme("guipane");
 	}
 
@@ -75,9 +74,12 @@ public class GUIPane extends DesktopArea
 
 	public HUD getHUD()
 	{
-		if(hud == null) // TODO: Dirty hack, remove when UserInterface.java class is removed.
-			hud = new HUD();
 		return hud;
+	}
+
+	public void hideHUD()
+	{
+		hud.setVisible(false);
 	}
 
 	/**
@@ -115,8 +117,6 @@ public class GUIPane extends DesktopArea
 	public void hideAlertDialog()
 	{
 		alertDialog.setVisible(false);
-		alertDialog.setText("");
-		alertDialog.setTitle("Alert!");
 	}
 
 	public AlertDialog getAlertDialog()
@@ -137,12 +137,25 @@ public class GUIPane extends DesktopArea
 	public void hideMessageDialog()
 	{
 		messageDialog.setVisible(false);
-		messageDialog.setText("");
-		messageDialog.setTitle("Message!");
 	}
 
 	public AlertDialog getMessageDialog()
 	{
 		return messageDialog;
+	}
+
+	public void hideLoadingScreen()
+	{
+		loadingScreen.setVisible(false);
+	}
+
+	public void showLoadingScreen()
+	{
+		loadingScreen.setVisible(true);
+	}
+
+	public boolean isLoadingScreenVisible()
+	{
+		return loadingScreen.isVisible();
 	}
 }

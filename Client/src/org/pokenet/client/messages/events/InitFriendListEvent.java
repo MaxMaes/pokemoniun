@@ -12,6 +12,6 @@ public class InitFriendListEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().initFriendsList(Request.readString().split(","));
+		GameClient.getInstance().getHUD().initFriendsList(Request.readString().split(","));
 	}
 }

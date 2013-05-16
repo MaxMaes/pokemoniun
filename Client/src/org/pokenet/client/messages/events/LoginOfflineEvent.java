@@ -19,7 +19,7 @@ public class LoginOfflineEvent implements MessageEvent
 		translated = Translator.translate("_LOGIN");
 
 		GameClient.getInstance().messageDialog(translated.get(22));
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().showLogin();
 	}
 }

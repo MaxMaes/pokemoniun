@@ -5,7 +5,7 @@ import java.util.List;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.entity.PlayerItem;
-import org.pokenet.client.ui.base.TWLImageButton;
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
@@ -19,7 +19,7 @@ public abstract class BagDialog extends Widget
 {
 	private Button m_bag;
 	private Button m_cancel;
-	private TWLImageButton[] m_itemButtons;
+	private ImageButton[] m_itemButtons;
 	private List<PlayerItem> m_items;
 
 	/**
@@ -82,7 +82,7 @@ public abstract class BagDialog extends Widget
 	 */
 	public void initGUI()
 	{
-		m_itemButtons = new TWLImageButton[m_items.size()];
+		m_itemButtons = new ImageButton[m_items.size()];
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
@@ -90,7 +90,7 @@ public abstract class BagDialog extends Widget
 		{
 			final int j = i;
 			Image img = FileLoader.loadImage(respath + "res/items/24/" + m_items.get(i).getNumber() + ".png");
-			m_itemButtons[i] = new TWLImageButton(img, "       x" + m_items.get(i).getQuantity());
+			m_itemButtons[i] = new ImageButton(img, "       x" + m_items.get(i).getQuantity());
 			m_itemButtons[i].setTooltipContent(m_items.get(i).getItem().getName() + "\n" + m_items.get(i).getItem().getDescription());
 			m_itemButtons[i].setImagePosition(5, 5);
 

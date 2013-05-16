@@ -14,7 +14,7 @@ public class LoginUnknownEvent implements MessageEvent
 	{
 		// Unknown problem occurred
 		GameClient.getInstance().messageDialog("An unknown problem occurred!");
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().enableLogin();
 	}
 }

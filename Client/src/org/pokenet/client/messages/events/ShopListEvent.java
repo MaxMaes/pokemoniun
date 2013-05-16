@@ -20,6 +20,6 @@ public class ShopListEvent implements MessageEvent
 			String[] tempStockData = merchData[i].split(":");
 			stock.put(Integer.parseInt(tempStockData[0]), Integer.parseInt(tempStockData[1]));
 		}
-		GameClient.getInstance().getUi().startShop(stock);
+		GameClient.getInstance().getHUD().showShop(stock);
 	}
 }

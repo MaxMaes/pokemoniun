@@ -30,7 +30,7 @@ public class Image extends de.matthiasmann.twl.Widget
 	 */
 	public Image(String path)
 	{
-		if(img != null)
+		if(path != null)
 		{
 			img = FileLoader.loadImage(path);
 		}

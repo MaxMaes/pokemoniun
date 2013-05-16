@@ -63,7 +63,7 @@ public class BattleFrontierDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getGUIPane().getHUD().hideBattleFrontierDialog();
+				GameClient.getInstance().getGUIPane().getHUD().removeBattleFrontierDialog();
 			}
 		});
 		use.addCallback(new Runnable()
@@ -106,7 +106,7 @@ public class BattleFrontierDialog extends ResizableFrame
 							message.addString(choice);
 							GameClient.getInstance().getSession().send(message);
 						}
-						GameClient.getInstance().getGUIPane().getHUD().hideBattleFrontierDialog();
+						GameClient.getInstance().getGUIPane().getHUD().removeBattleFrontierDialog();
 					}
 				};
 				Runnable no = new Runnable()

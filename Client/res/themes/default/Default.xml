@@ -74,7 +74,7 @@
         <param name="maxHeight"><int>14</int></param>
         <param name="background"><image>closebutton_background</image></param>
     </theme>
-    <theme name="twlimagebutton" ref="button">
+    <theme name="imagebutton" ref="button">
     </theme>
     <theme name="editfield" ref="-defaults">
         <param name="background"><image>editfield</image></param>
@@ -235,6 +235,29 @@
     <theme name="progressbar" ref="-defaults">
         <param name="progressImage"><image>hpbar_high</image></param>
     </theme>
+    <theme name="image" ref="-defaults"/>
+    <theme name="confirmationPopup" ref="-defaults">
+        <theme name="confirmationdialog" ref="popup_untitled">
+            <theme name="content" ref="-defaults">
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="title" ref="title"/>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>normal_black</font></param>
+                    </map>
+                </param>
+                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+        </theme>
+    </theme>
+
 
 
 
@@ -362,11 +385,15 @@
                     <theme name="label" ref="label">
                         <param name="font"><font>pokefont</font></param>
                     </theme>
-                    <theme name="twlimagebutton" ref="twlimagebutton"/>
+                    <theme name="imagebutton" ref="imagebutton"/>
                 </theme>
             </theme>
         </theme>
         <theme name="hud" ref="-defaults">
+            <theme name="topbar" ref="resizableframe_borderless">
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="label" ref="label"/>
+            </theme>
             <theme name="pokedexdialog" ref="resizableframe">
                 <param name="background"><image>pokedex</image></param>
                 <theme name="label_small" ref="label">
@@ -430,6 +457,33 @@
                     </theme>
                 </theme>
             </theme>
+            <theme name="chatdialog" ref="-defaults">
+                <theme name="combobox" ref="combobox"/>
+                <theme name="editfield" ref="editfield"/>
+                <theme name="textarea" ref="textarea"/>
+            </theme>
+            <theme name="requestdialog" ref="resizableframe_titled">
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="townmap" ref="resizableframe_titled">
+                <theme name="widget" ref="-defaults"/>
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="friendslistdialog" ref="resizableframe_titled">
+                <theme name="label" ref="label"/>
+                <theme name="upbutton" ref="upbutton"/>
+                <theme name="downbutton" ref="downbutton"/>
+            
+            </theme>
+        
+        
         </theme>
         <theme name="confirmationdialog" ref="popup_titled">
             <theme name="content" ref="-defaults">
@@ -450,26 +504,8 @@
             <param name="hasCloseButton"><bool>false</bool></param>
             <param name="hasResizeHandle"><bool>false</bool></param>
         </theme>
-    </theme>
-    <theme name="confirmationPopup" ref="-defaults">
-        <theme name="confirmationdialog" ref="popup_untitled">
-            <theme name="content" ref="-defaults">
-                <theme name="label" ref="label"/>
-            </theme>
-            <theme name="title" ref="title"/>
-            <param name="hasCloseButton"><bool>false</bool></param>
-            <param name="hasResizeHandle"><bool>false</bool></param>
-            <theme name="textarea" ref="textarea">
-                <param name="fonts">
-                    <map>
-                        <param name="default"><font>normal_black</font></param>
-                    </map>
-                </param>
-                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
-            </theme>
-            <theme name="button" ref="button">
-                <param name="font"><font>normal</font></param>
-            </theme>
+        <theme name="loadingscreen" ref="-defaults">
+            <param name="background"><image>loadingscreen</image></param>
         </theme>
     </theme>
 </themes>

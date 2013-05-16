@@ -2,20 +2,17 @@ package org.pokenet.client.twl.ui.frames;
 
 import java.util.List;
 import java.util.regex.Pattern;
-
-import mdes.slick.sui.Display;
-
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
-import org.pokenet.client.ui.base.TWLImageButton;
-
+import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
+
 /**
  * Handles registration dialog
  * 
@@ -28,10 +25,10 @@ public class RegisterDialog extends ResizableFrame
 	private Button[] m_regions;
 	private Button m_register, m_cancel, m_male, m_female, m_terms;
 	private int m_starter;
-	private TWLImageButton[] m_starters;
+	private ImageButton[] m_starters;
 	private Label m_u, m_p, m_cp, m_d, m_e, m_ce, m_s, m_g, m_tos, m_reg;
 	private EditField m_username, m_password, m_confirmPass, m_email, m_confirmEmail, m_day, m_month, m_year;
-	
+
 	private Widget pane;
 
 	/**
@@ -46,7 +43,7 @@ public class RegisterDialog extends ResizableFrame
 		setPosition(420, 220);
 		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(false);
-		
+
 		pane = new Widget();
 		pane.setTheme("content");
 		pane.setSize(320, 360);
@@ -266,7 +263,7 @@ public class RegisterDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				m_terms.setEnabled(false);
+				m_terms.setEnabled(true);
 			}
 		});
 		pane.add(m_terms);
@@ -298,8 +295,6 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_cancel);
 		add(pane);
 	}
-	
-	
 
 	/**
 	 * Enables the registration
@@ -392,30 +387,55 @@ public class RegisterDialog extends ResizableFrame
 			respath = "";
 		try
 		{
-			m_starters = new TWLImageButton[12];
+			m_starters = new ImageButton[12];
 			for(int i = 0; i < m_starters.length; i++)
 			{
 				String starterPath = "";
-				switch(i){
-				case 0: starterPath = "res/pokemon/icons/001.png"; break;
-				case 1: starterPath = "res/pokemon/icons/152.png"; break;
-				case 2: starterPath = "res/pokemon/icons/252.png"; break;
-				case 3: starterPath = "res/pokemon/icons/387.png"; break;
-				case 4: starterPath = "res/pokemon/icons/004.png"; break;
-				case 5: starterPath = "res/pokemon/icons/155.png"; break;
-				case 6: starterPath = "res/pokemon/icons/255.png"; break;
-				case 7: starterPath = "res/pokemon/icons/390.png"; break;
-				case 8: starterPath = "res/pokemon/icons/007.png"; break;
-				case 9: starterPath = "res/pokemon/icons/158.png"; break;
-				case 10: starterPath = "res/pokemon/icons/258.png"; break;
-				case 11: starterPath = "res/pokemon/icons/393.png"; break;
+				switch(i)
+				{
+					case 0:
+						starterPath = "res/pokemon/icons/001.png";
+						break;
+					case 1:
+						starterPath = "res/pokemon/icons/152.png";
+						break;
+					case 2:
+						starterPath = "res/pokemon/icons/252.png";
+						break;
+					case 3:
+						starterPath = "res/pokemon/icons/387.png";
+						break;
+					case 4:
+						starterPath = "res/pokemon/icons/004.png";
+						break;
+					case 5:
+						starterPath = "res/pokemon/icons/155.png";
+						break;
+					case 6:
+						starterPath = "res/pokemon/icons/255.png";
+						break;
+					case 7:
+						starterPath = "res/pokemon/icons/390.png";
+						break;
+					case 8:
+						starterPath = "res/pokemon/icons/007.png";
+						break;
+					case 9:
+						starterPath = "res/pokemon/icons/158.png";
+						break;
+					case 10:
+						starterPath = "res/pokemon/icons/258.png";
+						break;
+					case 11:
+						starterPath = "res/pokemon/icons/393.png";
+						break;
 				}
 				Image img = FileLoader.loadImage(respath + starterPath);
-				m_starters[i] = new TWLImageButton(img);
+				m_starters[i] = new ImageButton(img);
 				m_starters[i].setSize(22, 32);
 				m_starters[i].setVisible(true);
 			}
-			
+
 			m_starters[0].setPosition(170, 24 + 22);
 			m_starters[0].addCallback(new Runnable()
 			{
@@ -426,7 +446,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[0]);
 
 			m_starters[1].setPosition(202, 24 + 22);
 			m_starters[1].addCallback(new Runnable()
@@ -438,7 +457,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[1]);
 
 			m_starters[2].setPosition(234, 24 + 22);
 			m_starters[2].addCallback(new Runnable()
@@ -450,7 +468,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[2]);
 
 			m_starters[3].setPosition(266, 24 + 22);
 			m_starters[3].addCallback(new Runnable()
@@ -462,7 +479,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[3]);
 
 			m_starters[4].setPosition(170, 56 + 22);
 			m_starters[4].addCallback(new Runnable()
@@ -474,7 +490,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[4]);
 
 			m_starters[5].setPosition(202, 56 + 22);
 			m_starters[5].addCallback(new Runnable()
@@ -486,7 +501,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[5]);
 
 			m_starters[6].setPosition(234, 56 + 22);
 			m_starters[6].addCallback(new Runnable()
@@ -498,7 +512,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[6]);
 
 			m_starters[7].setPosition(266, 56 + 22);
 			m_starters[7].addCallback(new Runnable()
@@ -510,7 +523,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[7]);
 
 			m_starters[8].setPosition(170, 88 + 22);
 			m_starters[8].addCallback(new Runnable()
@@ -522,7 +534,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[8]);
 
 			m_starters[9].setPosition(202, 88 + 22);
 			m_starters[9].addCallback(new Runnable()
@@ -534,7 +545,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[9]);
 
 			m_starters[10].setPosition(234, 88 + 22);
 			m_starters[10].addCallback(new Runnable()
@@ -546,7 +556,6 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[10]);
 
 			m_starters[11].setPosition(266, 88 + 22);
 			m_starters[11].addCallback(new Runnable()
@@ -558,7 +567,12 @@ public class RegisterDialog extends ResizableFrame
 					selectStarter(m_starter);
 				}
 			});
-			pane.add(m_starters[11]);
+
+			for(ImageButton i : m_starters)
+			{
+				i.setImagePosition(-4, -4);
+				pane.add(i);
+			}
 		}
 		catch(Exception e)
 		{
@@ -588,7 +602,6 @@ public class RegisterDialog extends ResizableFrame
 	 */
 	private void register()
 	{
-		final Display display = GameClient.getInstance().getDisplay();
 		List<String> translated = Translator.translate("_LOGIN");
 		if(m_username.getText() != null && m_username.getText().length() >= 4 && m_username.getText().length() <= 12)
 		{
@@ -605,33 +618,33 @@ public class RegisterDialog extends ResizableFrame
 							if(!m_terms.isEnabled())
 							{
 								m_register.setEnabled(false);
-								GameClient.getInstance().getLoadingScreen().setVisible(true);
+								GameClient.getInstance().getGUIPane().showLoadingScreen();
 								String bday = m_day.getText() + "/" + m_month.getText() + "/" + m_year.getText();
 								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
-							} 
+							}
 							else
 								System.out.println(translated.get(28));
-								GameClient.getInstance().messageDialog(translated.get(28));
+							GameClient.getInstance().messageDialog(translated.get(28));
 						}
 						else
 							System.out.println(translated.get(28));
-							GameClient.getInstance().messageDialog("No starter selected");
+						GameClient.getInstance().messageDialog("No starter selected");
 					}
 					else
 						System.out.println(translated.get(28));
-						GameClient.getInstance().messageDialog(translated.get(29));
+					GameClient.getInstance().messageDialog(translated.get(29));
 				}
 				else
 					System.out.println(translated.get(28));
-					GameClient.getInstance().messageDialog(translated.get(30));
+				GameClient.getInstance().messageDialog(translated.get(30));
 			}
 			else
 				System.out.println(translated.get(28));
-				GameClient.getInstance().messageDialog(translated.get(31));
+			GameClient.getInstance().messageDialog(translated.get(31));
 		}
 		else
 			System.out.println(translated.get(28));
-			GameClient.getInstance().messageDialog(translated.get(32));
+		GameClient.getInstance().messageDialog(translated.get(32));
 	}
 
 	/**
@@ -683,16 +696,14 @@ public class RegisterDialog extends ResizableFrame
 				break;
 		}
 	}
-	
-	/*
-	 * Resets the registration dialog. Called when registration is successfull.
-	 */
+
+	/* Resets the registration dialog. Called when registration is successfull. */
 	public void clear()
 	{
-		//Enable all starters
+		// Enable all starters
 		for(int i = 0; i < m_starters.length; i++)
 			m_starters[i].setEnabled(true);
-		
+
 		m_confirmEmail.setText("");
 		m_email.setText("");
 		m_username.setText("");

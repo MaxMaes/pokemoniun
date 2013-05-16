@@ -77,7 +77,7 @@ public class PlayerPopupDialog extends Widget
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getUi().getChat().addChat(m_name.getText(), true);
+				GameClient.getInstance().getHUD().getChat().addChat(m_name.getText(), true);
 				destroy();
 			}
 		});
@@ -89,8 +89,8 @@ public class PlayerPopupDialog extends Widget
 				ClientMessage message = new ClientMessage(ServerPacket.FRIEND_ADD);
 				message.addString(m_name.getText());
 				GameClient.getInstance().getSession().send(message);
-				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());
-				GameClient.getInstance().getUi().getFriendsList().setFriendOnline(m_name.getText(), true);
+				GameClient.getInstance().getHUD().getFriendsList().addFriend(m_name.getText());
+				GameClient.getInstance().getHUD().getFriendsList().setFriendOnline(m_name.getText(), true);
 				destroy();
 			}
 		});

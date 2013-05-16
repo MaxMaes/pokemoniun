@@ -1,7 +1,6 @@
 package org.pokenet.client.backend;
 
 import java.util.Iterator;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -192,15 +191,18 @@ public class ClientMap extends TiledMap
 					ledgeLayer = getLayer("LedgesDown").getTileID(newX / 32, (newY + 8) / 32);
 			}
 		// Maybe not the right place, but it works :)
-		if(p.getDirection() == Direction.Down && getLayer("LedgesDown") != null && getLayer("LedgesDown").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+		if(p.getDirection() == Direction.Down && getLayer("LedgesDown") != null && getLayer("LedgesDown").getTileID(newX / 32, (newY + 8) / 32) > 0)
+		{
 			GameClient.getInstance().move(Direction.Down);
 			p.moveDown();
 		}
-		if(p.getDirection() == Direction.Right && getLayer("LedgesRight") != null && getLayer("LedgesRight").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+		if(p.getDirection() == Direction.Right && getLayer("LedgesRight") != null && getLayer("LedgesRight").getTileID(newX / 32, (newY + 8) / 32) > 0)
+		{
 			GameClient.getInstance().move(Direction.Right);
 			p.moveRight();
 		}
-		if(p.getDirection() == Direction.Left && getLayer("LedgesLeft") != null && getLayer("LedgesLeft").getTileID(newX / 32, (newY + 8) / 32) > 0) {
+		if(p.getDirection() == Direction.Left && getLayer("LedgesLeft") != null && getLayer("LedgesLeft").getTileID(newX / 32, (newY + 8) / 32) > 0)
+		{
 			GameClient.getInstance().move(Direction.Left);
 			p.moveLeft();
 		}
@@ -381,7 +383,7 @@ public class ClientMap extends TiledMap
 					{
 						for(int i = 0; i < getLayer("WalkBehind").height; i++)
 							getLayer("WalkBehind")
-									.render(getXOffset() / 2, getYOffset() / 2, 0, 0, (int) (GameClient.getInstance().getDisplay().getWidth() - getXOffset()) / 32 + 32, i, false, 16, 16);
+									.render(getXOffset() / 2, getYOffset() / 2, 0, 0, (int) (GameClient.getInstance().getGUIPane().getWidth() - getXOffset()) / 32 + 32, i, false, 16, 16);
 					}
 					catch(Exception e)
 					{

@@ -15,14 +15,14 @@ public class ShopSellItemEvent implements MessageEvent
 	{
 		try
 		{
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
 		}
 		catch(Exception e)
 		{
 		}
-		GameClient.getInstance().getUi().talkToNPC("You sold a " + ItemDatabase.getInstance().getItem(Request.readInt()).getName());
-		GameClient.getInstance().getUi().getShop().m_timer.reset();
-		GameClient.getInstance().getUi().getShop().m_timer.resume();
+		GameClient.getInstance().getHUD().talkToNPC("You sold a " + ItemDatabase.getInstance().getItem(Request.readInt()).getName());
+		GameClient.getInstance().getHUD().getShop().m_timer.reset();
+		GameClient.getInstance().getHUD().getShop().m_timer.resume();
 	}
 }

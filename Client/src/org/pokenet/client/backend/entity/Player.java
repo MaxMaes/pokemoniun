@@ -3,8 +3,6 @@ package org.pokenet.client.backend.entity;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.Image;
-import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.SpriteFactory;
 
 /**
@@ -41,7 +39,7 @@ public class Player
 
 	protected int m_x;
 	protected int m_y;
-	
+
 	protected int m_adminLevel;
 
 	/**
@@ -262,9 +260,9 @@ public class Player
 	 */
 	public void queueMovement(Direction d)
 	{
-		if(m_direction != d || !GameClient.getInstance().getMapMatrix().getCurrentMap().isColliding(this, d)
-				&& !GameClient.getInstance().getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
-			;
+		/* if(m_direction != d || !GameClient.getInstance().getMapMatrix().getCurrentMap().isColliding(this, d) && !GameClient.getInstance().getHUD().getBattleDialog().isVisible())
+		 * ;
+		 * ; // TODO: Owh yeah... Lets make an awesome big IF statement and DO ABSOLUTELY NOTHING WITH IT. */
 		m_movementQueue.offer(d);
 	}
 
@@ -387,12 +385,12 @@ public class Player
 	{
 		m_y = y;
 	}
-	
+
 	public void setAdminLevel(int admin)
 	{
 		m_adminLevel = admin;
 	}
-	
+
 	public int getAdminLevel()
 	{
 		return m_adminLevel;

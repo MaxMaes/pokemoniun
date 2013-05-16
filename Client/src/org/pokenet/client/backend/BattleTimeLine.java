@@ -3,8 +3,8 @@ package org.pokenet.client.backend;
 import java.util.ArrayList;
 import java.util.List;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.ui.BattleCanvas;
-import org.pokenet.client.ui.frames.BattleSpeechFrame;
+import org.pokenet.client.twl.ui.BattleCanvas;
+import org.pokenet.client.twl.ui.frames.BattleSpeechFrame;
 
 /**
  * Handles Battle Events and arranges them for visual purposes.
@@ -30,7 +30,6 @@ public class BattleTimeLine
 		try
 		{
 			m_canvas = new BattleCanvas();
-			m_canvas.setZIndex(0);
 		}
 		catch(Exception e)
 		{
@@ -60,25 +59,11 @@ public class BattleTimeLine
 	public void endBattle()
 	{
 		m_canvas.stop();
-		try
-		{
-			GameClient.getInstance().getDisplay().remove(m_canvas);
-		}
-		catch(Exception e)
-		{
-		}
-		;
-		while(GameClient.getInstance().getDisplay().containsChild(m_canvas))
+		GameClient.getInstance().getHUD().removeBattleCanvas();
+		while(GameClient.getInstance().getHUD().hasBattleCanvas())
 			;
-		try
-		{
-			GameClient.getInstance().getDisplay().remove(m_narrator);
-		}
-		catch(Exception e)
-		{
-		}
-		;
-		while(GameClient.getInstance().getDisplay().containsChild(m_narrator))
+		GameClient.getInstance().getHUD().removeBattleSpeechFrame();
+		while(GameClient.getInstance().getHUD().hasBattleSpeechFrame())
 			;
 	}
 
@@ -411,8 +396,7 @@ public class BattleTimeLine
 	{
 		m_canvas.startBattle();
 		m_isBattling = true;
-		GameClient.getInstance().getDisplay().add(m_canvas);
-		GameClient.getInstance().getDisplay().add(m_narrator);
-		GameClient.getInstance().getUi().nullSpeechFrame();
+		GameClient.getInstance().getHUD().setBattleCanvas(m_canvas);
+		GameClient.getInstance().getHUD().setBattleSpeechFrame(m_narrator);
 	}
 }

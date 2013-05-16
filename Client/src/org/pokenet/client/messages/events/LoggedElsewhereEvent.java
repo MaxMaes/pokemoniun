@@ -13,7 +13,7 @@ public class LoggedElsewhereEvent implements MessageEvent
 	public void parse(Session session, ServerMessage request, ClientMessage message)
 	{
 		GameClient.getInstance().messageDialog("You seem to be logged onto another server, please log out there first.");
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().showLogin();
 	}
 }

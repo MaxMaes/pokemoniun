@@ -5,7 +5,6 @@ import java.util.List;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
@@ -14,17 +13,16 @@ import de.matthiasmann.twl.Widget;
 /**
  * Friends List
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-@SuppressWarnings("deprecation")
 public class FriendsListDialog extends ResizableFrame
 {
-	List<String> m_friends = new ArrayList<String>();
-	int m_index;
-	List<String> m_online = new ArrayList<String>();
-	PopUp m_popup;
-	Label[] m_shownFriends = new Label[10];
-	Button m_up, m_down;
+	private List<String> m_friends = new ArrayList<String>();
+	private int m_index;
+	private List<String> m_online = new ArrayList<String>();
+	private PopUp m_popup;
+	private Label[] m_shownFriends = new Label[10];
+	private Button m_up, m_down;
 
 	/** Default Constructor */
 	public FriendsListDialog()
@@ -66,8 +64,7 @@ public class FriendsListDialog extends ResizableFrame
 			}
 		});
 		m_up.setEnabled(false);
-		m_up.setSize(15, 15);
-		m_up.setPosition(getWidth() - 15, 0);
+
 		add(m_up);
 		m_down = new Button();
 		m_down.setTheme("downbutton");
@@ -81,8 +78,7 @@ public class FriendsListDialog extends ResizableFrame
 				scroll(1);
 			}
 		});
-		m_down.setSize(15, 15);
-		m_down.setPosition(getWidth() - 15, getHeight() - 15 - 48);
+
 		add(m_down);
 		scroll(0);
 		setResizableAxis(ResizableAxis.NONE);
@@ -191,6 +187,15 @@ public class FriendsListDialog extends ResizableFrame
 			m_online.remove(friend);
 		scroll(0);
 	}
+
+	@Override
+	public void layout()
+	{
+		m_up.setSize(15, 15);
+		m_up.setPosition(getWidth() - 15, 0);
+		m_down.setSize(15, 15);
+		m_down.setPosition(getWidth() - 15, getHeight() - 15 - 48);
+	}
 }
 
 /**
@@ -200,9 +205,8 @@ public class FriendsListDialog extends ResizableFrame
  */
 class PopUp extends Widget
 {
-	ConfirmationDialog m_confirm;
-	Label m_name;
-	Button m_remove, m_whisper, m_cancel;
+	private Label m_name;
+	private Button m_remove, m_whisper, m_cancel;
 
 	/**
 	 * Default Constructor
@@ -248,8 +252,7 @@ class PopUp extends Widget
 						ClientMessage message = new ClientMessage(ServerPacket.FRIEND_REMOVE);
 						message.addString(m_name.getText());
 						GameClient.getInstance().getSession().send(message);
-						GameClient.getInstance().getDisplay().remove(m_confirm);
-						m_confirm = null;
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
 				};
 				Runnable no = new Runnable()
@@ -257,8 +260,7 @@ class PopUp extends Widget
 					@Override
 					public void run()
 					{
-						GameClient.getInstance().getDisplay().remove(m_confirm);
-						m_confirm = null;
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
 				};
 				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to remove " + m_name.getText() + " from your friends?", yes, no);
@@ -270,7 +272,7 @@ class PopUp extends Widget
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getUi().getChat().addChat(m_name.getText(), true);
+				GameClient.getInstance().getGUIPane().getHUD().getChat().addChat(m_name.getText(), true);
 				destroy();
 			}
 		});

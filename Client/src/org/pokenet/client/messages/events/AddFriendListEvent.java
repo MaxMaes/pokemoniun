@@ -12,6 +12,6 @@ public class AddFriendListEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().getFriendsList().addFriend(Request.readString());
+		GameClient.getInstance().getHUD().getFriendsList().addFriend(Request.readString());
 	}
 }

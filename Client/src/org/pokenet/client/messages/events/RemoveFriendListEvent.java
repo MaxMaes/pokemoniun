@@ -12,6 +12,6 @@ public class RemoveFriendListEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().getFriendsList().removeFriend(Request.readString());
+		GameClient.getInstance().getHUD().getFriendsList().removeFriend(Request.readString());
 	}
 }

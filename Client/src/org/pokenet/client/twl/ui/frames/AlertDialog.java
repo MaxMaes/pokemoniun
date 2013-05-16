@@ -1,64 +1,65 @@
 package org.pokenet.client.twl.ui.frames;
 
-import org.pokenet.client.GameClient;
-
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.Widget;
-
+import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
 /**
  * The Alert dialog
+ * 
  * @author Chappie112
- *
  */
 
 public class AlertDialog extends ResizableFrame
 {
 	private Runnable okCallback;
 	private Button okButton;
-	private Widget pane;
-	private Label dialogText;
+	private TextArea dialogText;
+	private SimpleTextAreaModel textModel;
+	private PopupWindow popup;
 
 	/*
 	 * 
 	 */
-	public AlertDialog(String Title,String text)
+	public AlertDialog(String Title, String text, Widget widget)
 	{
 		setTitle(Title);
-		setTheme("confirmationdialog");
-		setDraggable(true);
-		setSize(300,80);
-		setVisible(false);
+		setTheme("alertDialog");
 
-		pane = new Widget();
-		pane.setTheme("content");
-		pane.setSize(getWidth(), 190);
-		pane.setPosition(0, 0);
-
-		dialogText = new Label(text);
-		pane.add(dialogText);
+		textModel = new SimpleTextAreaModel(text);
+		dialogText = new TextArea(textModel);
 
 		okButton = new Button("Ok");
-		pane.add(okButton);
-		add(pane);
 
-		setCenter();
+		popup = new PopupWindow(widget);
+		popup.setTheme("alertPopup");
+		
+		this.add(dialogText);
+		this.add(okButton);
+		popup.add(this);
+		
+		popup.setCloseOnClickedOutside(false);
+		popup.setCloseOnEscape(true);
+		setVisible(false);
+		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + okButton.getHeight() + 30);
+		popup.adjustSize();
 	}
 
 	@Override
 	public void layout()
 	{
-		dialogText.adjustSize();
-		dialogText.setPosition(getInnerX() +( pane.getWidth()/2 - dialogText.getWidth()/2), getInnerY() + 30);
 		okButton.setSize(50, 25);
-		okButton.setPosition(getInnerX() + (pane.getWidth() / 2 - okButton.getWidth()/2), getInnerY() + dialogText.getY() + 10);
-	} 
+		dialogText.setMaxSize(300, popup.getRootWidget().getHeight());
+		dialogText.adjustSize();
+		
+		dialogText.setPosition((getInnerX() + (popup.getWidth() / 2 - dialogText.getWidth() / 2) + 5), getInnerY() + 10);
+		okButton.setPosition(getInnerX() + (popup.getWidth() / 2), dialogText.getY() + dialogText.getHeight() + 10);
+	}
 
-	/*
-	 * adds the callback method for the "Ok" button
-	 */
+	/* adds the callback method for the "Ok" button */
 	public void addOkListener(Runnable callback)
 	{
 		if(okCallback != null)
@@ -67,31 +68,30 @@ public class AlertDialog extends ResizableFrame
 		okCallback = callback;
 	}
 
-	private void removeOkCallback() 
+	private void removeOkCallback()
 	{
 		okButton.removeCallback(okCallback);
 	}
 
-	/*
-	 * Centers the dialog
-	 */
-	public void setCenter()
+	public void setText(String text)
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
-		int x = width / 2 - (int) getWidth() / 2;
-		int y = height / 2 - (int) getHeight() / 2;
-		this.setPosition(x, y);
+		textModel.setText(text);
 	}
-
-	public void setText(String text) 
+	
+	@Override
+	public void setVisible(boolean b)
 	{
-		dialogText.setText(text);
-		dialogText.adjustSize();
-	}
-
-	public String getText()
-	{
-		return dialogText.getText();
+		if(b)
+		{
+			super.setVisible(b);
+			popup.openPopupCentered();
+		}
+		else
+		{
+			super.setVisible(b);
+			if(popup.isOpen())
+				popup.closePopup();
+			setText("");
+		}
 	}
 }

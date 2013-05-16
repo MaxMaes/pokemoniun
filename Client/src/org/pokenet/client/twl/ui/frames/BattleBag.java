@@ -1,5 +1,6 @@
 package org.pokenet.client.twl.ui.frames;
 
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 
 /**
@@ -24,10 +25,8 @@ public class BattleBag extends BigBagDialog
 	@Override
 	public void closeBag()
 	{
-		setVisible(false);
-		// BattleManager.getInstance().getBattleWindow().getDisplay().remove(this); TODO:
 		BattleManager.getInstance().getBattleWindow().showAttack();
-		BattleManager.getInstance().getBattleWindow().m_bag = null;
+		GameClient.getInstance().getHUD().removeBattlebag();
 	}
 
 	@Override

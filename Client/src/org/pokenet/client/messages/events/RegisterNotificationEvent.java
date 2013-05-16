@@ -44,6 +44,6 @@ public class RegisterNotificationEvent implements MessageEvent
 
 		}
 		// GameClient.getInstance().getLoginScreen().getRegistration().enableRegistration(); TODO: uncomment when registration is done
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
+		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 	}
 }

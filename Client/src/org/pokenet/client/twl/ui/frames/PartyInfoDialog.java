@@ -2,7 +2,6 @@ package org.pokenet.client.twl.ui.frames;
 
 import java.util.List;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.constants.ServerPacket;
@@ -22,9 +21,8 @@ public class PartyInfoDialog extends Widget
 {
 	private Widget[] m_Widget;
 	private ProgressBar[] m_hp;
-	private Label[] m_hpBar;
+	private Image[] m_hpBar;
 	private Label[] m_level;
-	// private Image[] m_pokeBall;
 	private Image[] m_pokeIcon;
 	private Label[] m_pokeName;
 	private OurPokemon[] m_pokes;
@@ -51,9 +49,15 @@ public class PartyInfoDialog extends Widget
 	public void initGUI()
 	{
 		int y = -8;
-		/* Init damn pokemon count! (FabianPass Code) int pokemonCount = -1; for(int i = 0; i < 6; i++) { if(m_pokes[i] != null) { pokemonCount++; } } */
-		/* TODO: Change magic cookies to pokemonCount or keep it this way. */
+		int pokemonCount = -1;
 		for(int i = 0; i < 6; i++)
+		{
+			if(m_pokes[i] != null)
+			{
+				pokemonCount++;
+			}
+		}
+		for(int i = 0; i < pokemonCount; i++)
 		{
 			final int j = i;
 			m_Widget[i] = new Widget();
@@ -68,18 +72,18 @@ public class PartyInfoDialog extends Widget
 				respath = "";
 			try
 			{
-				Label tempLabel = new Label();
+				Image tempImage = new Image();
 				if(i == 0)
 				{
-					// tempLabel = new Label(new Image(f, respath + "res/ui/party_info/partyActive.png", false)); TODO: Theme
+					tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_active"));
 				}
 				else
 				{
-					// tempLabel = new Label(new Image(f, respath + "res/ui/party_info/partyInactive.png", false)); TODO: Theme
+					tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_inactive"));
 				}
-				tempLabel.setSize(170, 42);
-				tempLabel.setPosition(0, -4);
-				m_Widget[i].add(tempLabel);
+				tempImage.setSize(170, 42);
+				tempImage.setPosition(0, -4);
+				m_Widget[i].add(tempImage);
 			}
 			catch(Exception e)
 			{
@@ -88,7 +92,7 @@ public class PartyInfoDialog extends Widget
 
 			try
 			{
-				// m_hpBar[i] = new Label(new Image(f, respath + "res/ui/party_info/HPBar.png", false)); TODO: Theme
+				m_hpBar[i] = new Image(GameClient.getInstance().getTheme().getImage("party_hpbar"));
 				m_hpBar[i].setSize(98, 11);
 				m_hpBar[i].setVisible(false);
 				m_Widget[i].add(m_hpBar[i]);
@@ -200,9 +204,8 @@ public class PartyInfoDialog extends Widget
 	 */
 	public void loadImages(OurPokemon[] pokes)
 	{
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < pokes.length; i++)
 		{
-			// m_pokeBall[i] = new Image();
 			m_pokeName[i] = new Label();
 
 			m_level[i] = new Label();
@@ -212,8 +215,6 @@ public class PartyInfoDialog extends Widget
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";
-			// m_pokeBall[i].setImage(FileLoader.loadImage(respath + "res/ui/Pokeball.gif"));
-			// m_pokeBall[i].setSize(30, 30);
 			try
 			{
 				List<String> translated = Translator.translate("_GUI");
@@ -221,7 +222,7 @@ public class PartyInfoDialog extends Widget
 				{
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_pokeName[i].setText(pokes[i].getName());
-					m_pokeIcon[i] = new Image(FileLoader.toTWLImage(pokes[i].getIcon(), true));
+					m_pokeIcon[i] = new Image(pokes[i].getIcon());
 					m_pokeIcon[i].setSize(32, 32);
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
@@ -232,7 +233,7 @@ public class PartyInfoDialog extends Widget
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
-					m_pokeIcon[i].setImage(FileLoader.toTWLImage(pokes[i].getIcon(), true));
+					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_pokeIcon[i].setSize(32, 32);
 					m_pokeName[i].setText(pokes[i].getName());
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
@@ -299,12 +300,11 @@ public class PartyInfoDialog extends Widget
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
 					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
-					m_pokeIcon[i].setImage(FileLoader.toTWLImage(pokes[i].getIcon(), true));
+					m_pokeIcon[i].setImage((pokes[i].getIcon()));
 					m_pokeName[i].setText(pokes[i].getName());
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
 
-					// m_pokeBall[i].setPosition(4, 4);
 					m_pokeIcon[i].setPosition(2, 3);
 					m_pokeName[i].setPosition(45, 5);
 					m_hpBar[i].setPosition(45, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 3);
@@ -342,8 +342,7 @@ public class PartyInfoDialog extends Widget
 		m_level = new Label[6];
 		m_pokeName = new Label[6];
 		m_pokeIcon = new Image[6];
-		m_hpBar = new Label[6];
-		// m_pokeBall = new Image[6];
+		m_hpBar = new Image[6];
 		m_Widget = new Widget[6];
 	}
 }

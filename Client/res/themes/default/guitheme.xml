@@ -336,4 +336,9 @@
         <area name="topbar_pokedex_pressed" xywh="32,32,32,32"/>
         <area name="topbar_pokedex_hover" xywh="32,64,32,32"/>
     </images>
+    <images file="partyinfo.png">
+        <area name="party_active" xywh="1,1,171,42"/>
+        <area name="party_inactive" xywh="1,44,169,42"/>
+        <area name="party_hpbar" xywh="1,87,98,11"/>
+    </images>
 </themes>

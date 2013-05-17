@@ -480,6 +480,8 @@
                 <theme name="label" ref="label"/>
                 <theme name="upbutton" ref="upbutton"/>
                 <theme name="downbutton" ref="downbutton"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
             
             </theme>
         

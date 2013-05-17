@@ -128,7 +128,7 @@ public class BattleCanvas extends Widget
 	 */
 	public void drawEnemyPoke()
 	{
-		enemyPokeSprite = new Image(FileLoader.toTWLImage(BattleManager.getInstance().getCurEnemyPoke().getSprite(), true));
+		enemyPokeSprite = new Image(BattleManager.getInstance().getCurEnemyPoke().getSprite());
 		enemyPokeSprite.setPosition(150 + getInnerX(), 21 + getInnerY());
 	}
 

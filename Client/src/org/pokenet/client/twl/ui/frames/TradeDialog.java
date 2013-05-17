@@ -221,7 +221,7 @@ public class TradeDialog extends ResizableFrame
 		for(int i = 0; i < 6; i++)
 		{
 			// Show Our Pokemon for Trade
-			m_ourPokes[i] = new ImageButton(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon(), true));
+			m_ourPokes[i] = new ImageButton(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
 			m_ourPokes[i].setSize(32, 32);
 			m_ourPokes[i].setVisible(true);
 			add(m_ourPokes[i]);

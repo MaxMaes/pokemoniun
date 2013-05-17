@@ -7,8 +7,8 @@ import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.twl.ui.base.ProgressBar;
 import org.pokenet.client.twl.ui.base.ImageButton;
+import org.pokenet.client.twl.ui.base.ProgressBar;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ComboBox;
 import de.matthiasmann.twl.Label;
@@ -415,7 +415,7 @@ class TeamForBox extends Widget
 				{
 					m_level[i].setText("Lv: " + String.valueOf(GameClient.getInstance().getOurPlayer().getPokemon()[i].getLevel()));
 					m_pokeName[i].setText(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
-					m_pokeIcon[i].setImage(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon(), true));
+					m_pokeIcon[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
 					m_hp[i].setMaximum(GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP());
 					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
 					m_hp[i].setValue(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP());
@@ -426,7 +426,7 @@ class TeamForBox extends Widget
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
 					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
 						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
-					m_pokeIcon[i].setImage(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon(), true));
+					m_pokeIcon[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
 					m_pokeIcon[i].setSize(32, 32);
 					m_pokeName[i].setText(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
 					m_level[i].setText("Lv: " + String.valueOf(GameClient.getInstance().getOurPlayer().getPokemon()[i].getLevel()));

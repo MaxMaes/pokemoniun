@@ -3,7 +3,6 @@ package org.pokenet.client.twl.ui.frames;
 import java.util.List;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
-
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
@@ -141,7 +140,7 @@ public class PokemonInfoDialog extends ResizableFrame
 
 	public void loadImage(OurPokemon poke)
 	{
-		icon = poke.getTWLSprite();
+		icon = poke.getSprite();
 	}
 
 	public int setSpriteNumber(int x)
@@ -161,7 +160,7 @@ public class PokemonInfoDialog extends ResizableFrame
 			i = x - 4;
 		return i;
 	}
-	
+
 	@Override
 	public void paintWidget(GUI gui)
 	{

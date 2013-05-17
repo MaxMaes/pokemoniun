@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
-import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
@@ -296,7 +295,7 @@ class MoveLearnCanvas extends Widget
 
 	public void draw(int pokeIndex)
 	{
-		poke.setImage(FileLoader.toTWLImage(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getSprite(), true));
+		poke.setImage(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getSprite());
 		poke.setPosition(getWidth() / 2 - 40, getHeight() / 2 - 40);
 		this.add(poke);
 	}

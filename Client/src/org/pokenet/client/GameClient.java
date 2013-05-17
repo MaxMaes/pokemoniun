@@ -33,6 +33,7 @@ import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.PokedexData;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
 import org.pokenet.client.backend.TWLInputAdapter;
@@ -908,6 +909,7 @@ public class GameClient extends BasicGame
 		gc.getInput().enableKeyRepeat();
 
 		setPlayerSpriteFactory();
+		PokemonSpriteDatabase.loadPokemonSprites();
 
 		m_weather = new WeatherService();
 		m_time = new TimeService();

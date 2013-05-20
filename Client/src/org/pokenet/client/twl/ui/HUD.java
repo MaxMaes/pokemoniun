@@ -237,6 +237,7 @@ public class HUD extends DesktopArea
 		if(partyInfo != null)
 		{
 			removeChild(partyInfo);
+			partyInfo = null;
 			hideHUDElements();
 		}
 		else

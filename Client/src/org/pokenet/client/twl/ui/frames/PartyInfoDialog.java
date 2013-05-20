@@ -19,7 +19,7 @@ import de.matthiasmann.twl.Widget;
  */
 public class PartyInfoDialog extends Widget
 {
-	private Widget[] m_Widget;
+	private Widget[] m_container;
 	private ProgressBar[] m_hp;
 	private Image[] m_hpBar;
 	private Label[] m_level;
@@ -49,7 +49,7 @@ public class PartyInfoDialog extends Widget
 	public void initGUI()
 	{
 		int y = -8;
-		int pokemonCount = -1;
+		int pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
 			if(m_pokes[i] != null)
@@ -60,12 +60,13 @@ public class PartyInfoDialog extends Widget
 		for(int i = 0; i < pokemonCount; i++)
 		{
 			final int j = i;
-			m_Widget[i] = new Widget();
-			m_Widget[i].setSize(170, 42);
-			m_Widget[i].setVisible(true);
-			m_Widget[i].setPosition(2, y + 10);
+			m_container[i] = new Widget();
+			m_container[i].setTheme("partyslot");
+			m_container[i].setSize(170, 42);
+			m_container[i].setVisible(true);
+			m_container[i].setPosition(2, y + 10);
 			System.out.println("Y: " + y);
-			add(m_Widget[i]);
+			add(m_container[i]);
 			y += 41;
 			String respath = System.getProperty("res.path");
 			if(respath == null)
@@ -83,7 +84,7 @@ public class PartyInfoDialog extends Widget
 				}
 				tempImage.setSize(170, 42);
 				tempImage.setPosition(0, -4);
-				m_Widget[i].add(tempImage);
+				m_container[i].add(tempImage);
 			}
 			catch(Exception e)
 			{
@@ -95,7 +96,7 @@ public class PartyInfoDialog extends Widget
 				m_hpBar[i] = new Image(GameClient.getInstance().getTheme().getImage("party_hpbar"));
 				m_hpBar[i].setSize(98, 11);
 				m_hpBar[i].setVisible(false);
-				m_Widget[i].add(m_hpBar[i]);
+				m_container[i].add(m_hpBar[i]);
 			}
 			catch(Exception e)
 			{
@@ -129,13 +130,13 @@ public class PartyInfoDialog extends Widget
 				 * getDisplay().add(info);
 				 * }
 				 * }); */
-				m_Widget[i].add(m_pokeIcon[i]);
+				m_container[i].add(m_pokeIcon[i]);
 				m_pokeIcon[i].setPosition(2, 3);
-				m_Widget[i].add(m_pokeName[i]);
+				m_container[i].add(m_pokeName[i]);
 				m_pokeName[i].setPosition(42, 5);
-				m_Widget[i].add(m_level[i]);
+				m_container[i].add(m_level[i]);
 				m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
-				m_Widget[i].add(m_hp[i]);
+				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
 				m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
 				if(i != 0)
@@ -160,7 +161,7 @@ public class PartyInfoDialog extends Widget
 						}
 					});
 					m_switchUp[i].setSize(16, 16);
-					m_Widget[i].add(m_switchUp[i]);
+					m_container[i].add(m_switchUp[i]);
 				}
 				if(i != 5)
 				{
@@ -185,7 +186,7 @@ public class PartyInfoDialog extends Widget
 					});
 					m_switchDown[i].setSize(16, 16);
 					m_switchDown[i].setPosition(24, 0);
-					m_Widget[i].add(m_switchDown[i]);
+					m_container[i].add(m_switchDown[i]);
 				}
 			}
 			catch(NullPointerException npe)
@@ -279,15 +280,13 @@ public class PartyInfoDialog extends Widget
 	{
 		m_pokes = pokes;
 		List<String> translated = Translator.translate("_GUI");
-		int pokemonCount = -1;
-		/* Init damn pokemon count! (Fabian Code) */
-		/* TODO: Change magic cookies to pokemonCount or keep it this way. */
+		int pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
 			if(m_pokes[i] != null)
 				pokemonCount++;
 		}
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < pokemonCount; i++)
 			try
 			{
 				if(pokes[i] != null)
@@ -343,6 +342,6 @@ public class PartyInfoDialog extends Widget
 		m_pokeName = new Label[6];
 		m_pokeIcon = new Image[6];
 		m_hpBar = new Image[6];
-		m_Widget = new Widget[6];
+		m_container = new Widget[6];
 	}
 }

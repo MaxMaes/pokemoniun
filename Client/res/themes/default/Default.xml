@@ -486,6 +486,7 @@
             </theme>
             <theme name="partyinfodialog" ref="-defaults">
                 <theme name="partyslot" ref="-defaults">
+                    <param name="background"><image>party_active</image></param>
                     <theme name="image" ref="image"/>
                     <theme name="label" ref="label"/>
                     <theme name="progressbar" ref="progressbar"/>

@@ -27,8 +27,9 @@ public class PartyInfoDialog extends Widget
 	private Label[] m_pokeName;
 	private OurPokemon[] m_pokes;
 	private Button[] m_switchDown;
-
 	private Button[] m_switchUp;
+
+	private int pokemonCount = 0;
 
 	/**
 	 * Default constructor
@@ -49,7 +50,6 @@ public class PartyInfoDialog extends Widget
 	public void initGUI()
 	{
 		int y = -8;
-		int pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
 			if(m_pokes[i] != null)
@@ -64,7 +64,7 @@ public class PartyInfoDialog extends Widget
 			m_container[i].setTheme("partyslot");
 			m_container[i].setSize(170, 42);
 			m_container[i].setVisible(true);
-			m_container[i].setPosition(2, y + 10);
+
 			System.out.println("Y: " + y);
 			add(m_container[i]);
 			y += 41;
@@ -73,18 +73,17 @@ public class PartyInfoDialog extends Widget
 				respath = "";
 			try
 			{
-				Image tempImage = new Image();
-				if(i == 0)
-				{
-					tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_active"));
-				}
-				else
-				{
-					tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_inactive"));
-				}
-				tempImage.setSize(170, 42);
-				tempImage.setPosition(0, -4);
-				m_container[i].add(tempImage);
+				/* Image tempImage = new Image();
+				 * if(i == 0)
+				 * {
+				 * tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_active"));
+				 * }
+				 * else
+				 * {
+				 * tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_inactive"));
+				 * }
+				 * tempImage.setSize(170, 42);
+				 * m_container[i].add(tempImage); */
 			}
 			catch(Exception e)
 			{
@@ -131,14 +130,14 @@ public class PartyInfoDialog extends Widget
 				 * }
 				 * }); */
 				m_container[i].add(m_pokeIcon[i]);
-				m_pokeIcon[i].setPosition(2, 3);
+
 				m_container[i].add(m_pokeName[i]);
-				m_pokeName[i].setPosition(42, 5);
+
 				m_container[i].add(m_level[i]);
-				m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
+
 				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
-				m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+
 				if(i != 0)
 				{
 					m_switchUp[i] = new Button();
@@ -185,7 +184,7 @@ public class PartyInfoDialog extends Widget
 						}
 					});
 					m_switchDown[i].setSize(16, 16);
-					m_switchDown[i].setPosition(24, 0);
+
 					m_container[i].add(m_switchDown[i]);
 				}
 			}
@@ -302,12 +301,7 @@ public class PartyInfoDialog extends Widget
 					m_pokeIcon[i].setImage((pokes[i].getIcon()));
 					m_pokeName[i].setText(pokes[i].getName());
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
-					m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
 
-					m_pokeIcon[i].setPosition(2, 3);
-					m_pokeName[i].setPosition(45, 5);
-					m_hpBar[i].setPosition(45, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 3);
-					m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
 					m_hpBar[i].setVisible(true);
 					m_hp[i].setVisible(true);
 					if(i != 0)
@@ -343,5 +337,24 @@ public class PartyInfoDialog extends Widget
 		m_pokeIcon = new Image[6];
 		m_hpBar = new Image[6];
 		m_container = new Widget[6];
+	}
+
+	@Override
+	public void layout()
+	{
+		for(int i = 0; i < pokemonCount; i++)
+		{
+			m_container[i].setPosition(2, -8 + 10);
+			// tempImage.setPosition(0, -4);
+			m_pokeIcon[i].setPosition(2, 3);
+			m_pokeName[i].setPosition(42, 5);
+			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
+			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
+			m_pokeIcon[i].setPosition(2, 3);
+			m_pokeName[i].setPosition(45, 5);
+			m_hpBar[i].setPosition(45, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 3);
+			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+		}
 	}
 }

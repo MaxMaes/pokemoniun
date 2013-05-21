@@ -13,7 +13,7 @@ import de.matthiasmann.twl.DesktopArea;
 public class GUIPane extends DesktopArea
 {
 	private LoginScreen loginScreen;
-	private ConfirmationDialog confirmationDialog;
+	private ConfirmationDialog confirmationdialog;
 	private AlertDialog alertDialog;
 	private AlertDialog messageDialog;
 	private LoadingScreen loadingScreen;
@@ -25,11 +25,11 @@ public class GUIPane extends DesktopArea
 		loginScreen = new LoginScreen();
 		add(loginScreen);
 
-		confirmationDialog = new ConfirmationDialog("", this);
+		confirmationdialog = new ConfirmationDialog("", this);
 
-		alertDialog = new AlertDialog("Alert!", "",loginScreen);
+		alertDialog = new AlertDialog("Alert!", "", loginScreen);
 
-		messageDialog = new AlertDialog("Message!", "",loginScreen);
+		messageDialog = new AlertDialog("Message!", "", loginScreen);
 
 		loadingScreen = new LoadingScreen();
 		add(loadingScreen);
@@ -87,20 +87,20 @@ public class GUIPane extends DesktopArea
 	 */
 	public void showConfirmationDialog(String text, Runnable yes, Runnable no)
 	{
-		confirmationDialog.setText(text);
-		confirmationDialog.setYesListener(yes);
-		confirmationDialog.setNoListener(no);
-		confirmationDialog.setVisible(true);
+		confirmationdialog.setText(text);
+		confirmationdialog.setYesListener(yes);
+		confirmationdialog.setNoListener(no);
+		confirmationdialog.setVisible(true);
 	}
 
 	public void hideConfirmationDialog()
 	{
-		confirmationDialog.setVisible(false);
+		confirmationdialog.setVisible(false);
 	}
 
 	public ConfirmationDialog getConfirmationDialog()
 	{
-		return confirmationDialog;
+		return confirmationdialog;
 	}
 
 	/**

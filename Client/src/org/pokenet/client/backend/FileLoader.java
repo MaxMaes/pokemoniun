@@ -76,6 +76,25 @@ public class FileLoader
 		return img;
 	}
 
+	/**
+	 * Returns an Image object
+	 */
+	public static Texture loadImageAsTexture(String path)
+	{
+		File fl = new File(path);
+		Texture text = null;
+		try
+		{
+			URL flURL = fl.getAbsoluteFile().toURI().toURL();
+			text = GameClient.getInstance().getRenderer().loadTexture(flURL, "RGBA", "linear");
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+		return text;
+	}
+
 	public static de.matthiasmann.twl.renderer.Image toTWLImage(org.newdawn.slick.Image image, boolean hasAlpha)
 	{
 		// conver the image into a byte buffer by reading each pixel in turn

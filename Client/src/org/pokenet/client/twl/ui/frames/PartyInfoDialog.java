@@ -344,17 +344,14 @@ public class PartyInfoDialog extends Widget
 	{
 		for(int i = 0; i < pokemonCount; i++)
 		{
-			m_container[i].setPosition(2, -8 + 10);
-			// tempImage.setPosition(0, -4);
-			m_pokeIcon[i].setPosition(2, 3);
-			m_pokeName[i].setPosition(42, 5);
-			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, m_pokeName[i].getY());
-			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
-			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
-			m_pokeIcon[i].setPosition(2, 3);
-			m_pokeName[i].setPosition(45, 5);
-			m_hpBar[i].setPosition(45, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 3);
-			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+			m_pokeIcon[i].setPosition(2 + getInnerX(), -1 + getInnerY());
+			m_pokeName[i].setPosition(42 + getInnerX(), 10 + getInnerY());
+			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10 + getInnerX(), m_pokeName[i].getY() + getInnerY());
+			m_hp[i].setPosition(m_hpBar[i].getX() + 23 + getInnerX(), m_hpBar[i].getY() + 3 + getInnerY());
+			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10 + getInnerX(), 5 + getInnerY());
+			m_hpBar[i].setPosition(45 + getInnerX(), m_pokeName[i].getY() + m_pokeName[i].computeTextHeight() + 3);
+			m_hp[i].setPosition(m_hpBar[i].getX() + 23 , 3 + m_hpBar[i].getY());
+			m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY());
 		}
 	}
 }

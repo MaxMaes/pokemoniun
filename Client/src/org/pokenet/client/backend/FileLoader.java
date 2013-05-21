@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.Language;
 import de.matthiasmann.twl.renderer.DynamicImage;
@@ -95,35 +97,31 @@ public class FileLoader
 		return text;
 	}
 
-	public static de.matthiasmann.twl.renderer.Image toTWLImage(org.newdawn.slick.Image image, boolean hasAlpha)
+	public static Image toTWLImage(org.newdawn.slick.Image image)
 	{
-		// conver the image into a byte buffer by reading each pixel in turn
-		int len = 4 * image.getWidth() * image.getHeight();
-		if(!hasAlpha)
-		{
-			len = 3 * image.getWidth() * image.getHeight();
-		}
+		ByteBuffer bb = ByteBuffer.allocateDirect(image.getWidth() * image.getHeight() * 4);
 
-		ByteBuffer out = ByteBuffer.allocate(len);
-		org.newdawn.slick.Color c;
-
-		for(int y = image.getHeight() - 1; y >= 0; y--)
+		for(int i = 0; i < image.getHeight(); i++)
 		{
-			for(int x = 0; x < image.getWidth(); x++)
+			for(int j = 0; j < image.getWidth(); j++)
 			{
-				c = image.getColor(x, y);
+				Color c = image.getColor(i, j);
+				byte alpha = (byte) c.getAlphaByte();
+				byte red = (byte) c.getRedByte();
+				byte green = (byte) c.getGreenByte();
+				byte blue = (byte) c.getBlueByte();
 
-				out.put((byte) (c.r * 255.0f));
-				out.put((byte) (c.g * 255.0f));
-				out.put((byte) (c.b * 255.0f));
-				if(hasAlpha)
-				{
-					out.put((byte) (c.a * 255.0f));
-				}
+				bb.put(red);
+				bb.put(green);
+				bb.put(blue);
+				bb.put(alpha);
 			}
 		}
-		DynamicImage dynImage = GameClient.getInstance().getRenderer().createDynamicImage(image.getWidth(), image.getHeight());
-		dynImage.update(out, de.matthiasmann.twl.renderer.DynamicImage.Format.RGBA);
-		return dynImage;
+		bb.flip();
+
+		DynamicImage dymage = GameClient.getInstance().getRenderer().createDynamicImage(image.getWidth(), image.getHeight());
+		dymage.update(bb, DynamicImage.Format.RGBA);
+		return dymage;
 	}
+
 }

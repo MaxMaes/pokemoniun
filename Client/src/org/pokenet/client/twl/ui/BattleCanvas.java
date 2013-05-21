@@ -176,7 +176,7 @@ public class BattleCanvas extends Widget
 	 */
 	public void drawOurPoke()
 	{
-		playerPokeSprite = new Image(FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite(), true));
+		playerPokeSprite = new Image(FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite()));
 		playerPokeSprite.setPosition(20, 76);
 	}
 

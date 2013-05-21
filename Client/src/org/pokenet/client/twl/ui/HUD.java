@@ -152,25 +152,6 @@ public class HUD extends DesktopArea
 	}
 
 	/**
-	 * Toggles the Player Stats pane
-	 */
-	public void togglePlayerStats()
-	{
-		hideHUDElements();
-		if(playerinfo != null)
-		{
-			removeChild(playerinfo);
-		}
-		else
-		{
-			hideHUDElements();
-			playerinfo = new PlayerInfoDialog();
-			playerinfo.setPosition(topbar.getBarButton(0).getX(), 67);
-			add(playerinfo);
-		}
-	}
-
-	/**
 	 * Shows the boat chooser dialog
 	 */
 	public void showBoatDialog(String currentLocation)
@@ -200,6 +181,26 @@ public class HUD extends DesktopArea
 		trainChooserDialog.setVisible(true);
 	}
 
+	/**
+	 * Toggles the Player Stats pane
+	 */
+	public void togglePlayerStats()
+	{
+		hideHUDElements();
+		if(playerinfo != null)
+		{
+			removeChild(playerinfo);
+			playerinfo = null;
+		}
+		else
+		{
+			hideHUDElements();
+			playerinfo = new PlayerInfoDialog();
+			playerinfo.setPosition(topbar.getBarButton(0).getX(), 47);
+			add(playerinfo);
+		}
+	}
+
 	public void togglePokedex()
 	{
 		if(pokedex.isVisible())
@@ -225,20 +226,6 @@ public class HUD extends DesktopArea
 			hideHUDElements();
 			chat.setPosition(150, 50);
 			chat.setVisible(true);
-		}
-	}
-
-	public void toggleStats()
-	{
-		if(playerStats.isVisible())
-		{
-			playerStats.setVisible(false);
-		}
-		else
-		{
-			hideHUDElements();
-			playerStats.setPosition(150, 50);
-			playerStats.setVisible(true);
 		}
 	}
 

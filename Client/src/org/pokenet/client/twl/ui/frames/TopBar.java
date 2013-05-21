@@ -50,7 +50,7 @@ public class TopBar extends Widget
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getHUD().toggleStats();
+				GameClient.getInstance().getHUD().togglePlayerStats();
 			}
 		});
 		barbuttons[1].addCallback(new Runnable()

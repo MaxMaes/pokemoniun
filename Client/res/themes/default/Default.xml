@@ -500,6 +500,12 @@
                     <theme name="arrow_down" ref="downbutton"/>
                 </theme>
             </theme>
+            <theme name="playerinfodialog" ref="resizableframe">
+                <theme name="label" ref="label">
+                    <param name="font"><font>normal_white</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+            </theme>
         
         
         </theme>

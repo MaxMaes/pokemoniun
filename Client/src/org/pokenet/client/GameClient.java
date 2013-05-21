@@ -739,7 +739,7 @@ public class GameClient extends BasicGame
 				else if(key == Input.KEY_C)
 					getHUD().toggleChat();
 				else if(key == Input.KEY_1)
-					getHUD().toggleStats();
+					getHUD().togglePlayerStats();
 				else if(key == Input.KEY_2)
 					getHUD().togglePokedex();
 				else if(key == Input.KEY_3)

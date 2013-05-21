@@ -2,10 +2,10 @@
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
     <include filename="guitheme.xml"/>
-    <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
+    <fontDef name="battlebuttonfont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
-    <fontDef name="battlebuttonfont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
+    <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
     <fontDef name="pokefont_large" filename="dp.fnt" color="#FFFFFF">
@@ -176,7 +176,11 @@
     </theme>
     <theme name="tooltipwindow" ref="-defaults">
         <param name="background"><image>resizableframe</image></param>
-        <param name="fadeInTime"><int>250</int></param>
+        <param name="fadeInTime"><int>500</int></param>
+        <theme name="label" ref="label">
+            <param name="font"><font>normal_white</font></param>
+        </theme>
+        <param name="border"><border>2</border></param>
     </theme>
     <theme name="textarea" ref="-defaults">
         <param name="fonts">
@@ -488,7 +492,9 @@
                 <theme name="partyslot" ref="-defaults">
                     <param name="background"><image>party_active</image></param>
                     <theme name="image" ref="image"/>
-                    <theme name="label" ref="label"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
                     <theme name="progressbar" ref="progressbar"/>
                     <theme name="arrow_up" ref="upbutton"/>
                     <theme name="arrow_down" ref="downbutton"/>

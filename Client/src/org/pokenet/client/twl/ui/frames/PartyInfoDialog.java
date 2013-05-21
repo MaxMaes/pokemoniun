@@ -71,24 +71,6 @@ public class PartyInfoDialog extends Widget
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";
-			try
-			{
-				/* Image tempImage = new Image();
-				 * if(i == 0)
-				 * {
-				 * tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_active"));
-				 * }
-				 * else
-				 * {
-				 * tempImage = new Image(GameClient.getInstance().getTheme().getImage("party_inactive"));
-				 * }
-				 * tempImage.setSize(170, 42);
-				 * m_container[i].add(tempImage); */
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
 
 			try
 			{
@@ -96,45 +78,9 @@ public class PartyInfoDialog extends Widget
 				m_hpBar[i].setSize(98, 11);
 				m_hpBar[i].setVisible(false);
 				m_container[i].add(m_hpBar[i]);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			try
-			{
-				// m_Widget[i].add(m_pokeBall[i]);
-				// m_pokeBall[i].setPosition(4, 4);
-				/* TODO:
-				 * m_pokeName[i].addMouseListener(new MouseAdapter()
-				 * {
-				 * @Override
-				 * public void mouseEntered(MouseEvent e)
-				 * {
-				 * super.mouseEntered(e);
-				 * m_pokeName[j].setForeground(new Color(255, 215, 0));
-				 * }
-				 * @Override
-				 * public void mouseExited(MouseEvent e)
-				 * {
-				 * super.mouseExited(e);
-				 * m_pokeName[j].setForeground(new Color(255, 255, 255));
-				 * }
-				 * @Override
-				 * public void mouseReleased(MouseEvent e)
-				 * {
-				 * super.mouseReleased(e);
-				 * PokemonInfoDialog info = new PokemonInfoDialog(m_pokes[j]);
-				 * // info.setAlwaysOnTop(true); //TODO: Chappie magic :D
-				 * getDisplay().add(info);
-				 * }
-				 * }); */
 				m_container[i].add(m_pokeIcon[i]);
-
 				m_container[i].add(m_pokeName[i]);
-
 				m_container[i].add(m_level[i]);
-
 				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
 
@@ -292,12 +238,6 @@ public class PartyInfoDialog extends Widget
 				{
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setValue(pokes[i].getCurHP());
-					if(pokes[i].getCurHP() > pokes[i].getMaxHP() / 2)
-						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
-					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 2 && pokes[i].getCurHP() > pokes[i].getMaxHP() / 3)
-						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
-					else if(pokes[i].getCurHP() < pokes[i].getMaxHP() / 3)
-						m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
 					m_pokeIcon[i].setImage((pokes[i].getIcon()));
 					m_pokeName[i].setText(pokes[i].getName());
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
@@ -342,16 +282,25 @@ public class PartyInfoDialog extends Widget
 	@Override
 	public void layout()
 	{
+		int containerHeight = 42;
+		int containerOffset;
 		for(int i = 0; i < pokemonCount; i++)
 		{
-			m_pokeIcon[i].setPosition(2 + getInnerX(), -1 + getInnerY());
-			m_pokeName[i].setPosition(42 + getInnerX(), 10 + getInnerY());
-			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10 + getInnerX(), m_pokeName[i].getY() + getInnerY());
-			m_hp[i].setPosition(m_hpBar[i].getX() + 23 + getInnerX(), m_hpBar[i].getY() + 3 + getInnerY());
-			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10 + getInnerX(), 5 + getInnerY());
+			containerOffset = containerHeight * i;
+			m_container[i].setPosition(getInnerX(), 5 + getInnerY() + containerOffset);
+			m_pokeIcon[i].setPosition(3 + getInnerX(), 3 + getInnerY() + containerOffset);
+			m_pokeName[i].setPosition(42 + getInnerX(), 16 + getInnerY() + containerOffset);
+			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 25 + getInnerX(), 16 + getInnerY() + containerOffset);
 			m_hpBar[i].setPosition(45 + getInnerX(), m_pokeName[i].getY() + m_pokeName[i].computeTextHeight() + 3);
-			m_hp[i].setPosition(m_hpBar[i].getX() + 23 , 3 + m_hpBar[i].getY());
-			m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY());
+			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
+			m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY() + containerOffset);
+			if(m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 2)
+				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
+			else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 2 && m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 3)
+				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
+			else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 3)
+				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
+
 		}
 	}
 }

@@ -5,8 +5,8 @@ import de.matthiasmann.twl.renderer.Image;
 
 public class Pokemon
 {
-	public static final int MALE = 0;
-	public static final int FEMALE = 1;
+	public static final int MALE = 1;
+	public static final int FEMALE = 0;
 
 	static final long serialVersionUID = 1;
 
@@ -268,7 +268,14 @@ public class Pokemon
 	 */
 	public void setGender(int gender)
 	{
-		m_gender = gender;
+		if(gender == 0 || gender == 2)
+		{
+			m_gender = FEMALE;
+		}
+		else
+		{
+			m_gender = MALE;
+		}
 	}
 
 	/**

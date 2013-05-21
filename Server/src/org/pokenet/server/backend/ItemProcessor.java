@@ -12,6 +12,7 @@ import org.pokenet.server.battle.PokemonEvolution;
 import org.pokenet.server.battle.PokemonEvolution.EvolutionTypes;
 import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.WildBattleField;
+import org.pokenet.server.battle.mechanics.MoveQueueException;
 import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.ConfuseEffect;
 import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
@@ -43,12 +44,12 @@ public class ItemProcessor implements Runnable
 	/**
 	 * Constructor
 	 * 
-	 * @param p
-	 * @param details
+	 * @param player Reference to the player.
+	 * @param details The data regarding the item.
 	 */
-	public ItemProcessor(Player p, String[] details)
+	public ItemProcessor(Player player, String[] details)
 	{
-		m_player = p;
+		m_player = player;
 		m_details = details;
 	}
 
@@ -80,10 +81,11 @@ public class ItemProcessor implements Runnable
 	 * @param player Reference to the player.
 	 * @param itemId The id of the item to be used.
 	 * @param data Extra data received from client
-	 * @return True if the item can be used, otherwise false.
+	 * @return True if the item has been used correctly, otherwise false.
 	 */
 	public boolean useItem(Player player, int itemId, String[] data)
 	{
+		/* TODO: Test all item uses in-game to verify changes and possible improvements (Might include fixes). */
 		if(player.getBag().containsItem(itemId) < 0)
 			return false;
 		/* TODO: Rewrite this thread/function/monster in iterations. */
@@ -91,6 +93,7 @@ public class ItemProcessor implements Runnable
 		Pokemon poke = player.getParty()[pokePartyPos];
 		Item item = GameServer.getServiceManager().getItemDatabase().getItem(itemId);
 		String itemName = item.getName().toUpperCase();
+		String itemCategory = item.getCategory().toUpperCase();
 		boolean returnValue = false;
 		try
 		{
@@ -148,872 +151,648 @@ public class ItemProcessor implements Runnable
 			else if(item.getAttributes().contains(ItemAttribute.POKEMON))
 			{
 				/* Status healers, hold items, etc. */
-				if(item.getCategory().equalsIgnoreCase("POTIONS"))
+				switch(itemCategory)
 				{
-					/* Potions */
-					if(poke == null)
-						return false;
-					if(poke.getHealth() <= 0)
-					{
-						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
-						player.getSession().Send(cantUse);
-						return false;
-					}
-					switch(itemId)
-					{
-						case 1:
-							poke.changeHealth(Potion.POTION_HP);
-							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP");
-							break;
-						case 2:
-							poke.changeHealth(Potion.SUPER_POTION_HP);
-							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP");
-							break;
-						case 3:
-							poke.changeHealth(Potion.HYPER_POTION_HP);
-							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP");
-							break;
-						case 4:
-							poke.changeHealth(poke.getRawStat(0));
-							returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP");
-							break;
-						default:
-							returnValue = false;
-							break;
-					}
-					return returnValue;
-				}
-				else if(item.getCategory().equalsIgnoreCase("EVOLUTION"))
-				{
-					/* Evolution items can't be used in battle, Pokemon shouldn't be null */
-					if(player.isBattling() || poke == null)
-						return false;
-					/* Get the pokemon's evolution data */
-					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(poke.getSpeciesName());
-					for(int j = 0; j < pokeData.getEvolutions().length; j++)
-					{
-						PokemonEvolution evolution = pokeData.getEvolutions()[j];
-						/* Check if this pokemon evolves by item */
-						if(evolution.getType() == EvolutionTypes.Item)
+					case "POTIONS":
+						if(poke == null)
+							return false;
+						if(poke.getHealth() <= 0)
 						{
-							/* TODO: Add Oval Stone? */
-							/* Check if the item is an evolution stone If so, evolve the Pokemon */
-							if(itemId == ItemID.FIRE_STONE && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.WATER_STONE && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.THUNDER_STONE && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.LEAF_STONE && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.MOON_STONE && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.SUN_STONE && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.SHINY_STONE && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.DUSK_STONE && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							else if(itemId == ItemID.DAWN_STONE && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
-								returnValue = evolveWithItem(evolution, poke, player);
-							return returnValue;
+							ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
+							player.getSession().Send(cantUse);
+							return false;
 						}
-					}
-				}
-				else if(item.getCategory().equalsIgnoreCase("MEDICINE"))
-				{
-					if(poke == null)
-						return false;
-					// Check if this pokemon is alive to use all items but revive, TODO: Implement revive before this piece of code!
-					if(poke.getHealth() <= 0)
-					{
-						ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
-						player.getSession().Send(cantUse);
-						return false;
-					}
-
-					if(itemId == 16)
-					{ // Antidote
-						String message = "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName() + " status to normal";
-						poke.removeStatus(PoisonEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
+						switch(itemId)
 						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							case 1:
+								poke.changeHealth(Potion.POTION_HP);
+								returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP");
+								break;
+							case 2:
+								poke.changeHealth(Potion.SUPER_POTION_HP);
+								returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP");
+								break;
+							case 3:
+								poke.changeHealth(Potion.HYPER_POTION_HP);
+								returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP");
+								break;
+							case 4:
+								poke.changeHealth(poke.getRawStat(0));
+								returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP");
+								break;
+							default:
+								returnValue = false;
+								break;
 						}
-						return true;
-					}
-					else if(itemId == 17)
-					{ // Parlyz Heal
-						String message = "You used Parlyz Heal on " + poke.getName() + "/nThe Parlyz Heal restored " + poke.getName() + " status to normal";
-						poke.removeStatus(ParalysisEffect.class);
-						if(player.isBattling())
-							player.getBattleField().forceExecuteTurn();
-						else
+						return returnValue;
+					case "EVOLUTION":
+						/* Evolution items can't be used in battle, Pokemon shouldn't be null */
+						if(player.isBattling() || poke == null)
+							return false;
+						/* Get the pokemon's evolution data */
+						PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(poke.getSpeciesName());
+						for(int j = 0; j < pokeData.getEvolutions().length; j++)
 						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							PokemonEvolution evolution = pokeData.getEvolutions()[j];
+							/* Check if this pokemon evolves by item */
+							if(evolution.getType() == EvolutionTypes.Item)
+							{
+								/* TODO: Add Oval Stone? */
+								/* Check if the item is an evolution stone If so, evolve the Pokemon */
+								if(itemId == ItemID.FIRE_STONE && evolution.getAttribute().equalsIgnoreCase("FIRESTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.WATER_STONE && evolution.getAttribute().equalsIgnoreCase("WATERSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.THUNDER_STONE && evolution.getAttribute().equalsIgnoreCase("THUNDERSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.LEAF_STONE && evolution.getAttribute().equalsIgnoreCase("LEAFSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.MOON_STONE && evolution.getAttribute().equalsIgnoreCase("MOONSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.SUN_STONE && evolution.getAttribute().equalsIgnoreCase("SUNSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.SHINY_STONE && evolution.getAttribute().equalsIgnoreCase("SHINYSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.DUSK_STONE && evolution.getAttribute().equalsIgnoreCase("DUSKSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								else if(itemId == ItemID.DAWN_STONE && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
+									returnValue = evolveWithItem(evolution, poke, player);
+								return returnValue;
+							}
 						}
-						return true;
-					}
-					else if(itemId == 18)
-					{ // Awakening
-						String message = "You used Awakening on " + poke.getName() + "/nThe Awakening restored " + poke.getName() + " status to normal";
-						poke.removeStatus(SleepEffect.class);
-						if(player.isBattling())
-							player.getBattleField().forceExecuteTurn();
-						else
+						break;
+					case "MEDICINE":
+						if(poke == null)
+							return false;
+						/* Check if this pokemon is alive to use all items but revive, TODO: Implement revive before this piece of code! */
+						if(poke.getHealth() <= 0)
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							ServerMessage cantUse = new ServerMessage(ClientPacket.CANT_USE_ITEM);
+							player.getSession().Send(cantUse);
+							return false;
 						}
-						return true;
-					}
-					else if(itemId == 19)
-					{ // Burn Heal
-						String message = "You used Burn Heal on " + poke.getName() + "/nThe Burn Heal restored " + poke.getName() + " status to normal";
-						poke.removeStatus(BurnEffect.class);
-						if(player.isBattling())
-							player.getBattleField().forceExecuteTurn();
-						else
+						switch(itemId)
 						{
-							// p.getTcpSession().write("Ii" + message);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							case ItemID.ANTIDOTE:
+								returnValue = processEffectRemoval(itemId, PoisonEffect.class, "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName()
+										+ " status to normal", poke, player);
+								break;
+							case ItemID.PARALYZ_HEAL:
+								returnValue = processEffectRemoval(itemId, ParalysisEffect.class, "You used Parlyz Heal on " + poke.getName() + "/nThe Parlyz Heal restored " + poke.getName()
+										+ " status to normal", poke, player);
+								break;
+							case ItemID.AWAKENING:
+								returnValue = processEffectRemoval(itemId, SleepEffect.class, "You used Awakening on " + poke.getName() + "/nThe Awakening restored " + poke.getName()
+										+ " status to normal", poke, player);
+								break;
+							case ItemID.BURN_HEAL:
+								returnValue = processEffectRemoval(itemId, BurnEffect.class, "You used Burn Heal on " + poke.getName() + "/nThe Burn Heal restored " + poke.getName()
+										+ " status to normal", poke, player);
+								break;
+							case ItemID.ICE_HEAL:
+								returnValue = processEffectRemoval(itemId, FreezeEffect.class, "You used Ice Heal on " + poke.getName() + "/nThe Ice Heal restored " + poke.getName()
+										+ " status to normal", poke, player);
+								break;
+							case ItemID.FULL_HEAL:
+								returnValue = processClearEffects(itemId, "You used Full Heal on " + poke.getName() + "/nThe Full Heal restored " + poke.getName() + " status to normal", poke, player);
+								break;
+							case ItemID.LAVA_COOKIES:
+								returnValue = processClearEffects(itemId, "You used Lava Cookies on " + poke.getName() + "/nThe Lava Cookies restored " + poke.getName() + " status to normal", poke,
+										player);
+								break;
+							case ItemID.OLD_GATEAU:
+								returnValue = processClearEffects(itemId, "You used Old Gateau on " + poke.getName() + "/nThe Old Gateau restored " + poke.getName() + " status to normal", poke,
+										player);
+								break;
 						}
-						return true;
-					}
-					else if(itemId == 20)
-					{ // Ice Heal
-						String message = "You used Ice Heal on " + poke.getName() + "/nThe Ice Heal restored " + poke.getName() + " status to normal";
-						poke.removeStatus(FreezeEffect.class);
-						if(player.isBattling())
-							player.getBattleField().forceExecuteTurn();
-						else
+						return returnValue;
+					case "FOOD":
+						Random rand = new Random();
+						if(poke == null)
+							return false;
+						if(itemId == ItemID.CHERI_BERRY)
 						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 21)
-					{ // Full Heal
-						String message = "You used Full Heal on " + poke.getName() + "/nThe Full Heal restored " + poke.getName() + " status to normal";
-						poke.removeStatusEffects(true);
-						if(player.isBattling())
-							player.getBattleField().forceExecuteTurn();
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemName.equalsIgnoreCase("LAVA COOKIE"))
-					{
-						// just like a FULL HEAL
-						poke.removeStatusEffects(true);
-						if(player.isBattling())
-						{
-							player.getBattleField().executeItemTurn(itemId);
-						}
-						return true;
-					}
-					else if(itemName.equalsIgnoreCase("OLD GATEAU"))
-					{
-						// just like a FULL HEAL
-						poke.removeStatusEffects(true);
-						if(player.isBattling())
-						{
-							player.getBattleField().executeItemTurn(itemId);
-						}
-						return true;
-					}
-				}
-				else if(item.getCategory().equalsIgnoreCase("FOOD"))
-				{
-					Random rand = new Random();
-					if(poke == null)
-						return false;
-					if(itemId == 200)
-					{ // Cheri Berry
-						String message = poke.getName() + " ate the Cheri Berry/nThe Cheri Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(ParalysisEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 201)
-					{ // Chesto Berry
-						String message = poke.getName() + " ate the Chesto Berry/nThe Chesto Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(SleepEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 202)
-					{ // Pecha Berry
-						String message = poke.getName() + " ate the Pecha Berry/nThe Pecha Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(PoisonEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 203)
-					{ // Rawst Berry
-						String message = poke.getName() + " ate the Rawst Berry/nThe Rawst Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(BurnEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 204)
-					{ // Aspear Berry
-						String message = poke.getName() + " ate the Aspear Berry/nThe Aspear Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(FreezeEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 205)
-					{ // Leppa Berry
-						String message = "Leppa Berry had no effect";
-						/* Move selection not completed, temp message TODO: Add support for this */
-						int ppSlot = Integer.parseInt(data[1]);
-						if(poke.getPp(ppSlot) + 10 <= poke.getMaxPp(ppSlot))
-							poke.setPp(ppSlot, poke.getPp(ppSlot) + 10);
-						else
-							poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 206)
-					{ // Oran Berry
-						String message = poke.getName() + " ate the Oran Berry/nThe Oran Berry restored 10HP";
-						poke.changeHealth(10);
-						if(!player.isBattling())
-						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 207)
-					{ // Persim Berry
-						String message = poke.getName() + " ate the Persim Berry/nThe Persim Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatus(ConfuseEffect.class);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Cheri Berry/nThe Cheri Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(ParalysisEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
 							return true;
 						}
-					}
-					else if(itemId == 208)
-					{ // Lum Berry
-						String message = poke.getName() + " ate the Lum Berry/nThe Lum Berry restored " + poke.getName() + " status to normal";
-						poke.removeStatusEffects(true);
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
+						else if(itemId == ItemID.CHESTO_BERRY)
 						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Chesto Berry/nThe Chesto Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(SleepEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
 							return true;
 						}
-					}
-					else if(itemId == 209)
-					{ // Sitrus Berry
-						String message = poke.getName() + " ate the Sitrus Berry/nThe Sitrus Berry restored 30HP";
-						poke.changeHealth(30);
-						if(!player.isBattling())
+						else if(itemId == ItemID.PECHA_BERRY)
 						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Pecha Berry/nThe Pecha Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(PoisonEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
 						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 210)
-					{ // Figy Berry
-						String message = poke.getName() + " ate the Figy Berry/nThe Figy Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
-						poke.changeHealth(poke.getRawStat(0) / 8);
-						if(!player.isBattling())
+						else if(itemId == ItemID.RAWST_BERRY)
 						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Rawst Berry/nThe Rawst Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(BurnEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
 						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 214)
-					{ // Wiki Berry
-						String message = poke.getName() + " ate the Wiki Berry/nThe Wiki Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
-						poke.changeHealth(poke.getRawStat(0) / 8);
-						if(!player.isBattling())
+						else if(itemId == ItemID.ASPEAR_BERRY)
 						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Aspear Berry/nThe Aspear Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(FreezeEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
 						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 212)
-					{ // Mago Berry
-						String message = poke.getName() + " ate the Mago Berry/nThe Mago Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
-						poke.changeHealth(poke.getRawStat(0) / 8);
-						if(!player.isBattling())
+						else if(itemId == ItemID.LEPPA_BERRY)
 						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 213)
-					{ // Aguav Berry
-						String message = poke.getName() + " ate the Aguav Berry/nThe Aguav Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
-						poke.changeHealth(poke.getRawStat(0) / 8);
-						if(!player.isBattling())
-						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 214)
-					{ // Iapapa Berry
-						String message = poke.getName() + " ate the Iapapa Berry/nThe Iapapa Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
-						poke.changeHealth(poke.getRawStat(0) / 8);
-						if(!player.isBattling())
-						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						else
-							player.getBattleField().executeItemTurn(itemId);
-						return true;
-					}
-					else if(itemId == 800)
-					{ // Voltorb Lollipop
-						String message = poke.getName() + " ate the Voltorb Lollipop/nThe Lollipop restored 50 HP to " + poke.getName() + "!";
-						poke.changeHealth(50);
-						int random = rand.nextInt(10);
-						if(random < 3)
-						{
-							poke.addStatus(new ParalysisEffect());
-							message += "/n" + poke.getName() + " was Paralyzed from the Lollipop!";
-						}
-						if(player.isBattling())
-						{
-							player.getBattleField().executeItemTurn(itemId);
-						}
-						else
-						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 801)
-					{ // Sweet Chills
-						String message = poke.getName() + " ate the Sweet Chill/nThe Sweet Chill restored " + poke.getName() + "'s moves!";
-						for(int ppSlot = 0; ppSlot < 4; ppSlot++)
-						{
-							if(poke.getPp(ppSlot) + 5 <= poke.getMaxPp(ppSlot))
-								poke.setPp(ppSlot, poke.getPp(ppSlot) + 5);
+							String message = "Leppa Berry had no effect";
+							/* Move selection not completed, temp message TODO: Add support for this */
+							int ppSlot = Integer.parseInt(data[1]);
+							if(poke.getPp(ppSlot) + 10 <= poke.getMaxPp(ppSlot))
+								poke.setPp(ppSlot, poke.getPp(ppSlot) + 10);
 							else
 								poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
-						}
-						int random = rand.nextInt(10);
-						if(random < 3)
-						{
-							try
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
 							{
-								poke.addStatus(new FreezeEffect());
-								message += "/n" + poke.getName() + " was frozen solid from the cold candy!";
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
 							}
-							catch(Exception e)
+							return true;
+						}
+						else if(itemId == ItemID.ORAN_BERRY)
+						{
+							String message = poke.getName() + " ate the Oran Berry/nThe Oran Berry restored 10HP";
+							poke.changeHealth(10);
+							if(!player.isBattling())
 							{
-							}// Already under a status effect.
-						}
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 802)
-					{ // Cinnamon Candy
-						String message = poke.getName() + " ate the Cinnamon Candy./nThe Cinnamon Candy restored " + poke.getName() + "'s status to normal!";
-						poke.removeStatusEffects(true);
-						int random = rand.nextInt(10);
-						if(random < 3)
-						{
-							poke.addStatus(new BurnEffect());
-							message += "/n" + poke.getName() + " was burned from the candy!";
-						}
-						if(player.isBattling())
-						{
-							player.getBattleField().executeItemTurn(itemId);
-						}
-						else
-						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
-						}
-						return true;
-					}
-					else if(itemId == 803)
-					{ // Candy Corn
-						String message = poke.getName() + " ate the Candy Corn./n" + poke.getName() + " is happier!";
-						int happiness = poke.getHappiness() + 15;
-						if(happiness <= 300)
-							poke.setHappiness(happiness);
-						else
-							poke.setHappiness(300);
-						int random = rand.nextInt(10);
-						if(random < 3)
-						{
-							poke.addStatus(new PoisonEffect());
-							message += "/n" + poke.getName() + " got Poisoned from the rotten candy!";
-						}
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
 							return true;
 						}
-					}
-					else if(itemId == 804)
-					{ // Poke'Choc
-						String message = poke.getName() + " ate the Poke'Choc Bar!/n" + poke.getName() + " is happier!";
-						int happiness = poke.getHappiness() + 10;
-						if(happiness <= 300)
-							poke.setHappiness(happiness);
-						else
-							poke.setHappiness(300);
-						int random = rand.nextInt(10);
-						if(random <= 3)
+						else if(itemId == ItemID.PERSIM_BERRY)
 						{
+							String message = poke.getName() + " ate the Persim Berry/nThe Persim Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatus(ConfuseEffect.class);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+								return true;
+							}
+						}
+						else if(itemId == ItemID.LUM_BERRY)
+						{
+							String message = poke.getName() + " ate the Lum Berry/nThe Lum Berry restored " + poke.getName() + " status to normal";
+							poke.removeStatusEffects(true);
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+								return true;
+							}
+						}
+						else if(itemId == ItemID.SITRUS_BERRY)
+						{
+							String message = poke.getName() + " ate the Sitrus Berry/nThe Sitrus Berry restored 30HP";
 							poke.changeHealth(30);
-							message += "/n" + poke.getName() + " recovered 30HP.";
-						}
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
 							return true;
 						}
-					}
-					else if(itemId == 805)
-					{ // Gummilax
-						String message = poke.getName() + " ate the Gummilax./n" + poke.getName() + " is happier!";
-						int happiness = poke.getHappiness() + rand.nextInt(30);
-						if(happiness <= 255)
-							poke.setHappiness(happiness);
-						else
-							poke.setHappiness(255);
-						int random = rand.nextInt(10);
-						if(random < 3)
+						else if(itemId == ItemID.FIGY_BERRY)
 						{
-							poke.addStatus(new ParalysisEffect());
-							message += "/nThe gummi was too sweet for " + poke.getName() + "./n" + poke.getName() + " fell asleep!";
-						}
-						if(player.isBattling())
-							player.getBattleField().executeItemTurn(itemId);
-						else
-						{
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Figy Berry/nThe Figy Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+							poke.changeHealth(poke.getRawStat(0) / 8);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
 							return true;
 						}
-					}
-					else if(itemId == 806)
-					{ // Gengum
-						String message = poke.getName() + " ate the Gengum.";
-						int randHealth = rand.nextInt(100);
-						randHealth -= 20;
-						if(poke.getHealth() + randHealth < 0)
-							poke.setHealth(1);
-						else
-							poke.changeHealth(randHealth);
-						if(randHealth > 0)
-							message += "/n" + poke.getName() + " healed " + randHealth + "HP";
-						else
-							message += "/n" + poke.getName() + " lost " + -randHealth + "HP";
-						if(player.isBattling())
+						else if(itemId == ItemID.WIKI_BERRY)
 						{
-							player.getBattleField().queueMove(0, BattleTurn.getMoveTurn(-1));
+							String message = poke.getName() + " ate the Wiki Berry/nThe Wiki Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+							poke.changeHealth(poke.getRawStat(0) / 8);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
+							return true;
 						}
-						else
+						else if(itemId == ItemID.MAGO_BERRY)
 						{
-							ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-							hpChange.addInt(pokePartyPos);
-							hpChange.addInt(poke.getHealth());
-							player.getSession().Send(hpChange);
-							ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-							itemUse.addString(message);
-							player.getSession().Send(itemUse);
+							String message = poke.getName() + " ate the Mago Berry/nThe Mago Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+							poke.changeHealth(poke.getRawStat(0) / 8);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
+							return true;
 						}
-						return true;
-					}
+						else if(itemId == ItemID.AGUAV_BERRY)
+						{
+							String message = poke.getName() + " ate the Aguav Berry/nThe Aguav Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+							poke.changeHealth(poke.getRawStat(0) / 8);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
+							return true;
+						}
+						else if(itemId == ItemID.IAPAPA_BERRY)
+						{
+							String message = poke.getName() + " ate the Iapapa Berry/nThe Iapapa Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+							poke.changeHealth(poke.getRawStat(0) / 8);
+							if(!player.isBattling())
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							else
+								player.getBattleField().executeItemTurn(itemId);
+							return true;
+						}
+						else if(itemId == ItemID.VOLTORB_LOLLIPOP)
+						{
+							String message = poke.getName() + " ate the Voltorb Lollipop/nThe Lollipop restored 50 HP to " + poke.getName() + "!";
+							poke.changeHealth(50);
+							int random = rand.nextInt(10);
+							if(random < 3)
+							{
+								poke.addStatus(new ParalysisEffect());
+								message += "/n" + poke.getName() + " was Paralyzed from the Lollipop!";
+							}
+							if(player.isBattling())
+							{
+								player.getBattleField().executeItemTurn(itemId);
+							}
+							else
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
+						}
+						else if(itemId == ItemID.SWEET_CHILLS)
+						{
+							String message = poke.getName() + " ate the Sweet Chill/nThe Sweet Chill restored " + poke.getName() + "'s moves!";
+							for(int ppSlot = 0; ppSlot < 4; ppSlot++)
+							{
+								if(poke.getPp(ppSlot) + 5 <= poke.getMaxPp(ppSlot))
+									poke.setPp(ppSlot, poke.getPp(ppSlot) + 5);
+								else
+									poke.setPp(ppSlot, poke.getMaxPp(ppSlot));
+							}
+							int random = rand.nextInt(10);
+							if(random < 3)
+							{
+								try
+								{
+									poke.addStatus(new FreezeEffect());
+									message += "/n" + poke.getName() + " was frozen solid from the cold candy!";
+								}
+								catch(Exception e)
+								{
+								}// Already under a status effect.
+							}
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
+						}
+						else if(itemId == ItemID.CINNAMON_CANDY)
+						{
+							String message = poke.getName() + " ate the Cinnamon Candy./nThe Cinnamon Candy restored " + poke.getName() + "'s status to normal!";
+							poke.removeStatusEffects(true);
+							int random = rand.nextInt(10);
+							if(random < 3)
+							{
+								poke.addStatus(new BurnEffect());
+								message += "/n" + poke.getName() + " was burned from the candy!";
+							}
+							if(player.isBattling())
+							{
+								player.getBattleField().executeItemTurn(itemId);
+							}
+							else
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
+						}
+						else if(itemId == ItemID.CANDY_CORN)
+						{
+							String message = poke.getName() + " ate the Candy Corn./n" + poke.getName() + " is happier!";
+							int happiness = poke.getHappiness() + 15;
+							if(happiness <= 300)
+								poke.setHappiness(happiness);
+							else
+								poke.setHappiness(300);
+							int random = rand.nextInt(10);
+							if(random < 3)
+							{
+								poke.addStatus(new PoisonEffect());
+								message += "/n" + poke.getName() + " got Poisoned from the rotten candy!";
+							}
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+								return true;
+							}
+						}
+						else if(itemId == ItemID.POKE_CHOC)
+						{
+							String message = poke.getName() + " ate the Poke'Choc Bar!/n" + poke.getName() + " is happier!";
+							int happiness = poke.getHappiness() + 10;
+							if(happiness <= 300)
+								poke.setHappiness(happiness);
+							else
+								poke.setHappiness(300);
+							int random = rand.nextInt(10);
+							if(random <= 3)
+							{
+								poke.changeHealth(30);
+								message += "/n" + poke.getName() + " recovered 30HP.";
+							}
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+								return true;
+							}
+						}
+						else if(itemId == ItemID.GUMMILAX)
+						{
+							String message = poke.getName() + " ate the Gummilax./n" + poke.getName() + " is happier!";
+							int happiness = poke.getHappiness() + rand.nextInt(30);
+							if(happiness <= 255)
+								poke.setHappiness(happiness);
+							else
+								poke.setHappiness(255);
+							int random = rand.nextInt(10);
+							if(random < 3)
+							{
+								poke.addStatus(new ParalysisEffect());
+								message += "/nThe gummi was too sweet for " + poke.getName() + "./n" + poke.getName() + " fell asleep!";
+							}
+							if(player.isBattling())
+								player.getBattleField().executeItemTurn(itemId);
+							else
+							{
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+								return true;
+							}
+						}
+						else if(itemId == ItemID.GENGUM)
+						{
+							String message = poke.getName() + " ate the Gengum.";
+							int randHealth = rand.nextInt(100);
+							randHealth -= 20;
+							if(poke.getHealth() + randHealth < 0)
+								poke.setHealth(1);
+							else
+								poke.changeHealth(randHealth);
+							if(randHealth > 0)
+								message += "/n" + poke.getName() + " healed " + randHealth + "HP";
+							else
+								message += "/n" + poke.getName() + " lost " + -randHealth + "HP";
+							if(player.isBattling())
+							{
+								player.getBattleField().queueMove(0, BattleTurn.getMoveTurn(-1));
+							}
+							else
+							{
+								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+								hpChange.addInt(pokePartyPos);
+								hpChange.addInt(poke.getHealth());
+								player.getSession().Send(hpChange);
+								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+								itemUse.addString(message);
+								player.getSession().Send(itemUse);
+							}
+							return true;
+						}
+						break;
 				}
+				/* if(item.getCategory().equalsIgnoreCase("POTIONS"))
+				 * {
+				 * }
+				 * else if(item.getCategory().equalsIgnoreCase("EVOLUTION"))
+				 * {
+				 * }
+				 * else if(item.getCategory().equalsIgnoreCase("MEDICINE"))
+				 * {
+				 * }
+				 * else if(item.getCategory().equalsIgnoreCase("FOOD"))
+				 * {
+				 * } */
 			}
 			else if(item.getAttributes().contains(ItemAttribute.BATTLE))
 			{
-				/* Pokeballs */
-				if(itemName.equalsIgnoreCase("POKE BALL"))
+				/* TODO: Check Luxury ball inconsistent name. */
+				switch(itemName)
 				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.POKEBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
+					case "POKE BALL":
+						returnValue = processPokeBalls(player, PokeBall.POKEBALL);
+						break;
+					case "GREAT BALL":
+						returnValue = processPokeBalls(player, PokeBall.GREATBALL);
+						break;
+					case "ULTRA BALL":
+						returnValue = processPokeBalls(player, PokeBall.ULTRABALL);
+						break;
+					case "MASTER BALL":
+						returnValue = processPokeBalls(player, PokeBall.MASTERBALL);
+						break;
+					case "LEVEL BALL":
+						returnValue = processPokeBalls(player, PokeBall.LEVELBALL);
+						break;
+					case "LURE BALL":
+						returnValue = processPokeBalls(player, PokeBall.LUREBALL);
+						break;
+					case "MOON BALL":
+						returnValue = processPokeBalls(player, PokeBall.MOONBALL);
+						break;
+					case "FRIEND BALL":
+						returnValue = processPokeBalls(player, PokeBall.FRIENDBALL);
+						break;
+					case "LOVE BALL":
+						returnValue = processPokeBalls(player, PokeBall.LOVEBALL);
+						break;
+					case "HEAVY BALL":
+						returnValue = processPokeBalls(player, PokeBall.HEAVYBALL);
+						break;
+					case "FAST BALL":
+						returnValue = processPokeBalls(player, PokeBall.FASTBALL);
+						break;
+					case "PARK BALL":
+						returnValue = processPokeBalls(player, PokeBall.PARKBALL);
+						break;
+					case "PREMIER BALL":
+						returnValue = processPokeBalls(player, PokeBall.PREMIERBALL);
+						break;
+					case "REPEAT BALL":
+						returnValue = processPokeBalls(player, PokeBall.REPEATBALL);
+						break;
+					case "TIMER BALL":
+						returnValue = processPokeBalls(player, PokeBall.TIMERBALL);
+						break;
+					case "NEST BALL":
+						returnValue = processPokeBalls(player, PokeBall.NESTBALL);
+						break;
+					case "NET BALL":
+						returnValue = processPokeBalls(player, PokeBall.NETBALL);
+						break;
+					case "DIVE BALL":
+						returnValue = processPokeBalls(player, PokeBall.DIVEBALL);
+						break;
+					case "LUXURY BALL":
+						returnValue = processPokeBalls(player, PokeBall.LUXURY);
+						break;
+					case "HEAL BALL":
+						returnValue = processPokeBalls(player, PokeBall.HEALBALL);
+						break;
+					case "QUICK BALL":
+						returnValue = processPokeBalls(player, PokeBall.QUICKBALL);
+						break;
+					case "DUSK BALL":
+						returnValue = processPokeBalls(player, PokeBall.DUSKBALL);
+						break;
+					case "CHERISH BALL":
+						returnValue = processPokeBalls(player, PokeBall.CHERISHBALL);
+						break;
 				}
-				else if(itemName.equalsIgnoreCase("GREAT BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.GREATBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("ULTRA BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.ULTRABALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("MASTER BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.MASTERBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("LEVEL BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.LEVELBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("LURE BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.LUREBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("MOON BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.MOONBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("FRIEND BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.FRIENDBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("LOVE BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.LOVEBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("HEAVY BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.HEAVYBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("FAST BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.FASTBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("PARK BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.PARKBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("PREMIER BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.PREMIERBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("REPEAT BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.REPEATBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("TIMER BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.TIMERBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("NEST BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.NESTBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("NET BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.NETBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("DIVE BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.DIVEBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("LUXURY BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.LUXURY))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("HEAL BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.HEALBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("QUICK BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.QUICKBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("DUSK BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.DUSKBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
-				else if(itemName.equalsIgnoreCase("CHERISH BALL"))
-				{
-					if(player.getBattleField() instanceof WildBattleField)
-					{
-						WildBattleField w = (WildBattleField) player.getBattleField();
-						if(!w.throwPokeball(PokeBall.CHERISHBALL))
-							w.queueMove(0, BattleTurn.getMoveTurn(-1));
-						return true;
-					}
-				}
+				return returnValue;
 			}
 			return false;
 		}
-		catch(Exception e)
+		catch(MoveQueueException mqe)
 		{
 			return false;
 		}
@@ -1086,5 +865,72 @@ public class ItemProcessor implements Runnable
 		poke.setEvolution(evolution);
 		poke.evolutionResponse(true, player);
 		return true;
+	}
+
+	/**
+	 * Processes effect removal through item usage and sends the information to the client.
+	 * 
+	 * @param itemId The id of the used item.
+	 * @param effect The status effect to remove.
+	 * @param message The message to send to the client.
+	 * @param player The owner of the pokemon.
+	 * @param poke The pokemon to receive the medicine.
+	 * @return True, unless an exception is thrown.
+	 */
+	private boolean processEffectRemoval(int itemId, Class<?> effect, String message, Pokemon poke, Player player)
+	{
+		poke.removeStatus(effect);
+		if(player.isBattling())
+			player.getBattleField().executeItemTurn(itemId);
+		else
+		{
+			ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+			itemUse.addString(message);
+			player.getSession().Send(itemUse);
+		}
+		return true;
+	}
+
+	/**
+	 * Processes removing all effects through item usage and sends the information to the client.
+	 * 
+	 * @param itemId The id of the used item.
+	 * @param message The message to send to the client.
+	 * @param player The owner of the pokemon.
+	 * @param poke The pokemon to receive the medicine.
+	 * @return True, unless an exception is thrown.
+	 */
+	private boolean processClearEffects(int itemId, String message, Pokemon poke, Player player)
+	{
+		poke.removeStatusEffects(true);
+		if(player.isBattling())
+			player.getBattleField().executeItemTurn(itemId);
+		else
+		{
+			ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+			itemUse.addString(message);
+			player.getSession().Send(itemUse);
+		}
+		return true;
+	}
+
+	/**
+	 * Throws a pokeball and checks if the Pokemon is caught.
+	 * 
+	 * @param player Owner of the Pokeball.
+	 * @param pokeBall The Pokeball that was thrown.
+	 * @return True if the player is in battle, otherwise false.
+	 * @throws MoveQueueException If the battle turn doesn't get queued correctly.
+	 */
+	private boolean processPokeBalls(Player player, PokeBall pokeBall) throws MoveQueueException
+	{
+		if(player.getBattleField() instanceof WildBattleField)
+		{
+			WildBattleField wildbf = (WildBattleField) player.getBattleField();
+			if(!wildbf.throwPokeball(pokeBall))
+				wildbf.queueMove(0, BattleTurn.getMoveTurn(-1));
+			return true;
+		}
+		return false;
 	}
 }

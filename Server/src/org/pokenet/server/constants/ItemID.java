@@ -118,7 +118,7 @@ public class ItemID
 	public static final int FIGY_BERRY = 210;
 	public static final int WIKI_BERRY = 211;
 	public static final int MAGO_BERRY = 212;
-	public static final int AUGUAV_BERRY = 213;
+	public static final int AGUAV_BERRY = 213;
 	public static final int IAPAPA_BERRY = 214;
 	public static final int RAZZ_BERRY = 215;
 	public static final int BLUK_BERRY = 216;

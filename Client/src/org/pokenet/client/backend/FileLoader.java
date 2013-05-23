@@ -105,7 +105,7 @@ public class FileLoader
 		{
 			for(int j = 0; j < image.getWidth(); j++)
 			{
-				Color c = image.getColor(i, j);
+				Color c = image.getColor(j, i);
 				byte alpha = (byte) c.getAlphaByte();
 				byte red = (byte) c.getRedByte();
 				byte green = (byte) c.getGreenByte();

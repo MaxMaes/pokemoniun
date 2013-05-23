@@ -7,7 +7,7 @@ import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.renderer.Image;
 
 /**
@@ -15,7 +15,7 @@ import de.matthiasmann.twl.renderer.Image;
  * 
  * @author Myth1c
  */
-public abstract class BagDialog extends Widget
+public abstract class BagDialog extends ResizableFrame
 {
 	private Button m_bag;
 	private Button m_cancel;
@@ -27,7 +27,7 @@ public abstract class BagDialog extends Widget
 	 * 
 	 * @param bag
 	 */
-	public BagDialog(ArrayList<PlayerItem> bag)
+	public BagDialog(ArrayList<PlayerItem> bag, Runnable cancel, Runnable bagOpen)
 	{
 		m_items = new ArrayList<PlayerItem>();
 		// Assign Potion Fave
@@ -69,19 +69,15 @@ public abstract class BagDialog extends Widget
 		else
 			m_items.add(new PlayerItem(35, GameClient.getInstance().getOurPlayer().getItemQuantity(35)));
 
-		initGUI();
+		initGUI(cancel, bagOpen);
 	}
-
-	/**
-	 * Handles cancelation
-	 */
-	public abstract void cancelled();
 
 	/**
 	 * Initializes the interface
 	 */
-	public void initGUI()
+	public void initGUI(Runnable cancel, Runnable openBag)
 	{
+		setClip(true);
 		m_itemButtons = new ImageButton[m_items.size()];
 		String respath = System.getProperty("res.path");
 		if(respath == null)
@@ -99,35 +95,20 @@ public abstract class BagDialog extends Widget
 				@Override
 				public void run()
 				{
-					itemClicked(m_items.get(j));
+					itemClicked(m_items.get(j)); // TODO: this has to be done different I guess. Don't like the final int j.
 				}
 			});
 			add(m_itemButtons[i]);
 		}
 		m_bag = new Button("Bag");
 		m_bag.setTooltipContent("Opens the Bag to see your items");
-		m_bag.addCallback(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				loadBag();
-			}
-		});
+		m_bag.addCallback(cancel);
 		add(m_bag);
 
 		m_cancel = new Button("Cancel");
 		m_cancel.setTooltipContent("Closes this dialog");
-		m_cancel.addCallback(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				cancelled();
-			}
-		});
+		m_cancel.addCallback(cancel);
 		add(m_cancel);
-		pack();
 		setVisible(true);
 	}
 
@@ -138,26 +119,19 @@ public abstract class BagDialog extends Widget
 	 */
 	public abstract void itemClicked(PlayerItem item);
 
-	/**
-	 * Handles loading Big Bag
-	 */
-	public abstract void loadBag();
-
-	/**
-	 * Resizes items for optimal size
-	 */
-	public void pack()
+	@Override
+	public void layout()
 	{
-		m_cancel.setSize(getWidth(), 20);
-		m_cancel.setPosition(getHeight() - 20, 0);
-		m_bag.setSize(getWidth(), 40);
-		m_bag.setPosition(0, m_cancel.getY() - 40);
-
 		for(int i = 0; i < m_itemButtons.length; i++)
 		{
 			if(i > 0)
-				m_itemButtons[i].setPosition(0, m_itemButtons[i - 1].getY() + m_itemButtons[i - 1].getHeight());
-			m_itemButtons[i].setSize(getWidth(), (getHeight() - 60) / m_items.size());
+				m_itemButtons[i].setPosition(getInnerX(), m_itemButtons[i - 1].getY() + m_itemButtons[i - 1].getHeight());
+			m_itemButtons[i].setSize(60, 30);
 		}
+
+		m_cancel.setSize(60, 20);
+		m_cancel.setPosition(m_itemButtons[m_itemButtons.length - 1].getX(), m_itemButtons[m_itemButtons.length - 1].getY() + m_itemButtons[m_itemButtons.length - 1].getHeight());
+		m_bag.setSize(60, 40);
+		m_bag.setPosition(m_cancel.getX(), m_cancel.getY() + m_cancel.getHeight());
 	}
 }

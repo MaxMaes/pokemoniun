@@ -50,7 +50,6 @@ public class HUD extends DesktopArea
 	private PlayerPopupDialog playerPopupDialog;
 	private TrainChooserDialog trainChooserDialog;
 	private FriendsListDialog friends;
-	private PlayerInfoDialog playerStats;
 	private PartyInfoDialog partyInfo;
 	private TownMap map;
 	private RequestDialog requests;
@@ -77,10 +76,6 @@ public class HUD extends DesktopArea
 
 		friends = new FriendsListDialog();
 		add(friends);
-		// playerStats = new PlayerInfoDialog();
-		// add(playerStats);
-		// partyInfo = new PartyInfoDialog(ourPokes);
-		// add(partyInfo);
 		pokedex = new PokedexDialog();
 		add(pokedex);
 		help = new HelpWindow();
@@ -116,37 +111,50 @@ public class HUD extends DesktopArea
 
 	public void toggleBag()
 	{
+		if(bigBag != null)
+		{
+			removeChild(bigBag);
+			bigBag = null;
+		}
+		hideHUDElements();
 		if(bag == null)
 		{
-			bag = new BagDialog(GameClient.getInstance().getOurPlayer().getItems())
+			Runnable cancel = new Runnable()
 			{
 				@Override
-				public void cancelled()
+				public void run()
 				{
 					bag.setVisible(false);
 					bag = null;
 				}
+			};
 
+			Runnable openBag = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					bag.setVisible(false);
+					bag = null;
+					bigBag = new BigBagDialog();
+					add(bigBag);
+				}
+			};
+			bag = new BagDialog(GameClient.getInstance().getOurPlayer().getItems(), cancel, openBag)
+			{
 				@Override
 				public void itemClicked(PlayerItem item)
 				{
-					/* TODO: Implement 'Hotbar' functionality or remove completely */
-					/* ClientMessage message = new ClientMessage(); message.Init(-); GameClient.m_Session.Send(message); */
-				}
-
-				@Override
-				public void loadBag()
-				{
-					bag.setVisible(false);
-					bag = null;
-					/* m_bag = new BigBagDialog();
-					 * getDisplay().add(m_bag); */
+					// TODO: Implement the hotbar or remove it. I propose to remove it completely and let the bag button open the big bag (thus removing this dialog).
 				}
 			};
+			bag.setPosition(topbar.getBarButton(3).getX(), 47);
+			bag.setSize(60, 210);
+			add(bag);
 		}
 		else
 		{
-			bag.setVisible(false);
+			removeChild(bag);
 			bag = null;
 		}
 	}
@@ -328,13 +336,17 @@ public class HUD extends DesktopArea
 		options.setVisible(false);
 		pokedex.setVisible(false);
 		if(bag != null)
-		{
 			bag.setVisible(false);
-		}
 		if(boatChooser != null)
 			boatChooser.setVisible(false);
 		if(trainChooserDialog != null)
 			trainChooserDialog.setVisible(false);
+		if(playerinfo != null)
+			playerinfo.setVisible(false);
+		if(requests != null)
+			requests.setVisible(false);
+		if(friends != null)
+			friends.setVisible(false);
 
 		removeBattleFrontierDialog();
 	}

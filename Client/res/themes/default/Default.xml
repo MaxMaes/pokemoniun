@@ -506,6 +506,12 @@
                 </theme>
                 <theme name="image" ref="image"/>
             </theme>
+            <theme name="bagdialog" ref="resizableframe_borderless">
+                <theme name="button" ref="button"/>
+                <theme name="imagebutton" ref="imagebutton"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+            </theme>
         
         
         </theme>

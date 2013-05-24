@@ -99,16 +99,6 @@ public class HUD extends DesktopArea
 		friends.setVisible(false);
 	}
 
-	@Override
-	public void layout()
-	{
-		if(partyInfo != null)
-		{
-			partyInfo.setPosition(topbar.getBarButton(1).getInnerX(), ((67 - 48) * 2) + getInnerY());
-			System.out.println("X: " + topbar.getBarButton(1).getInnerX() + "," + ((67 - 48) * 2) + getInnerY());
-		}
-	}
-
 	public void toggleBag()
 	{
 		if(bigBag != null)
@@ -249,7 +239,7 @@ public class HUD extends DesktopArea
 		{
 			hideHUDElements();
 			partyInfo = new PartyInfoDialog(GameClient.getInstance().getOurPlayer().getPokemon());
-			partyInfo.setSize(175, 0);
+			partyInfo.setPosition(topbar.getBarButton(1).getInnerX(), topbar.getBarButton(1).getInnerY() + topbar.getBarButton(1).getHeight());
 			add(partyInfo);
 		}
 	}

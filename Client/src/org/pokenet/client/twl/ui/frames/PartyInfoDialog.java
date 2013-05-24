@@ -293,7 +293,8 @@ public class PartyInfoDialog extends Widget
 			m_level[i].setPosition(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 25 + getInnerX(), 16 + getInnerY() + containerOffset);
 			m_hpBar[i].setPosition(45 + getInnerX(), m_pokeName[i].getY() + m_pokeName[i].computeTextHeight() + 3);
 			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
-			m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY() + containerOffset);
+			if(m_switchDown[i] != null)
+				m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY() + containerOffset);
 			if(m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 2)
 				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
 			else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 2 && m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 3)

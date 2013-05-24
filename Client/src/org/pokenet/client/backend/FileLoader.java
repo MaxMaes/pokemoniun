@@ -124,4 +124,27 @@ public class FileLoader
 		return dymage;
 	}
 
+	public static ByteBuffer loadImageAsByteBuffer(org.newdawn.slick.Image image)
+	{
+		ByteBuffer bb = ByteBuffer.allocateDirect(image.getWidth() * image.getHeight() * 4);
+
+		for(int i = 0; i < image.getHeight(); i++)
+		{
+			for(int j = 0; j < image.getWidth(); j++)
+			{
+				Color c = image.getColor(j, i);
+				byte alpha = (byte) c.getAlphaByte();
+				byte red = (byte) c.getRedByte();
+				byte green = (byte) c.getGreenByte();
+				byte blue = (byte) c.getBlueByte();
+
+				bb.put(red);
+				bb.put(green);
+				bb.put(blue);
+				bb.put(alpha);
+			}
+		}
+		bb.flip();
+		return bb;
+	}
 }

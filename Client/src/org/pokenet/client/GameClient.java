@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import org.jboss.netty.channel.ChannelFuture;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.AppGameContainer;
@@ -27,6 +29,7 @@ import org.pokenet.client.backend.Animator;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
+import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.KeyManager.Action;
@@ -816,8 +819,16 @@ public class GameClient extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
-		// gc.getGraphics().setBackground(Color.white);
-
+		Image x16 = new Image("res/icon_16.png");
+		Image x32 = new Image("res/icon_32.png");
+		Image x128 = new Image("res/icon_128.png");
+		
+		ByteBuffer[] buff = new ByteBuffer[3];
+		buff[0] = FileLoader.loadImageAsByteBuffer(x16);
+		buff[1] = FileLoader.loadImageAsByteBuffer(x32);
+		buff[2] = FileLoader.loadImageAsByteBuffer(x128);
+		Display.setIcon(buff);
+		
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
 		m_loadBarLeft = new Image("res/ui/loadbar/left.png");

@@ -50,6 +50,7 @@ public class PartyInfoDialog extends Widget
 	public void initGUI()
 	{
 		int y = -8;
+		pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
 			if(m_pokes[i] != null)
@@ -65,7 +66,6 @@ public class PartyInfoDialog extends Widget
 			m_container[i].setSize(170, 42);
 			m_container[i].setVisible(true);
 
-			System.out.println("Y: " + y);
 			add(m_container[i]);
 			y += 41;
 			String respath = System.getProperty("res.path");
@@ -97,7 +97,6 @@ public class PartyInfoDialog extends Widget
 							message.addInt(j);
 							message.addInt(j - 1);
 							GameClient.getInstance().getSession().send(message);
-							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j - 1));
 							// reinitialize the gui
 							removeAllChildren();
 							allocateVariables();
@@ -108,7 +107,7 @@ public class PartyInfoDialog extends Widget
 					m_switchUp[i].setSize(16, 16);
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != 5)
+				if(i != pokemonCount-1)
 				{
 					m_switchDown[i] = new Button();
 					m_switchDown[i].setTheme("arrow_down");
@@ -121,7 +120,6 @@ public class PartyInfoDialog extends Widget
 							message.addInt(j);
 							message.addInt(j + 1);
 							GameClient.getInstance().getSession().send(message);
-							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0D" + String.valueOf(j) + "," + String.valueOf(j + 1));
 							// reinitialize the gui
 							removeAllChildren();
 							allocateVariables();
@@ -241,12 +239,11 @@ public class PartyInfoDialog extends Widget
 					m_pokeIcon[i].setImage((pokes[i].getIcon()));
 					m_pokeName[i].setText(pokes[i].getName());
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
-
 					m_hpBar[i].setVisible(true);
 					m_hp[i].setVisible(true);
 					if(i != 0)
 						m_switchUp[i].setVisible(true);
-					if(i != 5)
+					if(i != pokemonCount-1)
 						m_switchDown[i].setVisible(true);
 				}
 				else
@@ -282,6 +279,8 @@ public class PartyInfoDialog extends Widget
 	@Override
 	public void layout()
 	{
+		setClip(true);
+		setSize(170, 42 * pokemonCount);
 		int containerHeight = 42;
 		int containerOffset;
 		for(int i = 0; i < pokemonCount; i++)

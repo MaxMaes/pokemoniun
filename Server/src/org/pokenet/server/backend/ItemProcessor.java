@@ -35,7 +35,7 @@ public class ItemProcessor implements Runnable
 	/* The enum that handles Pokeball types */
 	public enum PokeBall
 	{
-		CHERISHBALL, DIVEBALL, DUSKBALL, FASTBALL, FRIENDBALL, GREATBALL, HEALBALL, HEAVYBALL, LEVELBALL, LOVEBALL, LUREBALL, LUXURY, MASTERBALL, MOONBALL, NESTBALL, NETBALL, PARKBALL, POKEBALL, PREMIERBALL, QUICKBALL, REPEATBALL, SAFARIBALL, TIMERBALL, ULTRABALL,
+		CHERISHBALL, DIVEBALL, DUSKBALL, FASTBALL, FRIENDBALL, GREATBALL, HEALBALL, HEAVYBALL, LEVELBALL, LOVEBALL, LUREBALL, LUXURYBALL, MASTERBALL, MOONBALL, NESTBALL, NETBALL, PARKBALL, POKEBALL, PREMIERBALL, QUICKBALL, REPEATBALL, SAFARIBALL, TIMERBALL, ULTRABALL,
 	};
 
 	private final Player m_player;
@@ -358,21 +358,7 @@ public class ItemProcessor implements Runnable
 								poke.addStatus(new BurnEffect());
 								message += "/n" + poke.getName() + " was burned from the candy!";
 							}
-							if(player.isBattling())
-							{
-								player.getBattleField().executeItemTurn(itemId);
-							}
-							else
-							{
-								ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-								hpChange.addInt(pokePartyPos);
-								hpChange.addInt(poke.getHealth());
-								player.getSession().Send(hpChange);
-								ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-								itemUse.addString(message);
-								player.getSession().Send(itemUse);
-							}
-							returnValue = true;
+							returnValue = processHealItem(player, poke, itemId, pokePartyPos, message, 0);
 							break;
 						case ItemID.CANDY_CORN:
 							message = poke.getName() + " ate the Candy Corn./n" + poke.getName() + " is happier!";
@@ -417,15 +403,7 @@ public class ItemProcessor implements Runnable
 							returnValue = processItemUse(player, itemId, message);
 							break;
 						case ItemID.GENGUM:
-							try
-							{
-								returnValue = processGengum(player, poke, itemId, pokePartyPos, poke.getName() + " ate the Gengum./n" + poke.getName());
-							}
-							catch(MoveQueueException mqe)
-							{
-								mqe.printStackTrace();
-								return false;
-							}
+							returnValue = processGengum(player, poke, itemId, pokePartyPos, poke.getName() + " ate the Gengum./n" + poke.getName());
 							break;
 					}
 					return returnValue;
@@ -433,88 +411,79 @@ public class ItemProcessor implements Runnable
 		}
 		else if(item.getAttributes().contains(ItemAttribute.BATTLE))
 		{
-			try
+			switch(itemId)
 			{
-				/* TODO: Check Luxury ball inconsistent name in enum. */
-				switch(itemId)
-				{
-					case ItemID.POKE_BALL:
-						returnValue = processPokeBalls(player, PokeBall.POKEBALL);
-						break;
-					case ItemID.GREAT_BALL:
-						returnValue = processPokeBalls(player, PokeBall.GREATBALL);
-						break;
-					case ItemID.ULTRA_BALL:
-						returnValue = processPokeBalls(player, PokeBall.ULTRABALL);
-						break;
-					case ItemID.MASTER_BALL:
-						returnValue = processPokeBalls(player, PokeBall.MASTERBALL);
-						break;
-					case ItemID.LEVEL_BALL:
-						returnValue = processPokeBalls(player, PokeBall.LEVELBALL);
-						break;
-					case ItemID.LURE_BALL:
-						returnValue = processPokeBalls(player, PokeBall.LUREBALL);
-						break;
-					case ItemID.MOON_BALL:
-						returnValue = processPokeBalls(player, PokeBall.MOONBALL);
-						break;
-					case ItemID.FRIEND_BALL:
-						returnValue = processPokeBalls(player, PokeBall.FRIENDBALL);
-						break;
-					case ItemID.LOVE_BALL:
-						returnValue = processPokeBalls(player, PokeBall.LOVEBALL);
-						break;
-					case ItemID.HEAVY_BALL:
-						returnValue = processPokeBalls(player, PokeBall.HEAVYBALL);
-						break;
-					case ItemID.FAST_BALL:
-						returnValue = processPokeBalls(player, PokeBall.FASTBALL);
-						break;
-					case ItemID.PARK_BALL:
-						returnValue = processPokeBalls(player, PokeBall.PARKBALL);
-						break;
-					case ItemID.PREMIER_BALL:
-						returnValue = processPokeBalls(player, PokeBall.PREMIERBALL);
-						break;
-					case ItemID.REPEAT_BALL:
-						returnValue = processPokeBalls(player, PokeBall.REPEATBALL);
-						break;
-					case ItemID.TIMER_BALL:
-						returnValue = processPokeBalls(player, PokeBall.TIMERBALL);
-						break;
-					case ItemID.NEST_BALL:
-						returnValue = processPokeBalls(player, PokeBall.NESTBALL);
-						break;
-					case ItemID.NET_BALL:
-						returnValue = processPokeBalls(player, PokeBall.NETBALL);
-						break;
-					case ItemID.DIVE_BALL:
-						returnValue = processPokeBalls(player, PokeBall.DIVEBALL);
-						break;
-					case ItemID.LUXURY_BALL:
-						returnValue = processPokeBalls(player, PokeBall.LUXURY);
-						break;
-					case ItemID.HEAL_BALL:
-						returnValue = processPokeBalls(player, PokeBall.HEALBALL);
-						break;
-					case ItemID.QUICK_BALL:
-						returnValue = processPokeBalls(player, PokeBall.QUICKBALL);
-						break;
-					case ItemID.DUSK_BALL:
-						returnValue = processPokeBalls(player, PokeBall.DUSKBALL);
-						break;
-					case ItemID.CHERISH_BALL:
-						returnValue = processPokeBalls(player, PokeBall.CHERISHBALL);
-						break;
-				}
-				return returnValue;
+				case ItemID.POKE_BALL:
+					returnValue = processPokeBalls(player, PokeBall.POKEBALL);
+					break;
+				case ItemID.GREAT_BALL:
+					returnValue = processPokeBalls(player, PokeBall.GREATBALL);
+					break;
+				case ItemID.ULTRA_BALL:
+					returnValue = processPokeBalls(player, PokeBall.ULTRABALL);
+					break;
+				case ItemID.MASTER_BALL:
+					returnValue = processPokeBalls(player, PokeBall.MASTERBALL);
+					break;
+				case ItemID.LEVEL_BALL:
+					returnValue = processPokeBalls(player, PokeBall.LEVELBALL);
+					break;
+				case ItemID.LURE_BALL:
+					returnValue = processPokeBalls(player, PokeBall.LUREBALL);
+					break;
+				case ItemID.MOON_BALL:
+					returnValue = processPokeBalls(player, PokeBall.MOONBALL);
+					break;
+				case ItemID.FRIEND_BALL:
+					returnValue = processPokeBalls(player, PokeBall.FRIENDBALL);
+					break;
+				case ItemID.LOVE_BALL:
+					returnValue = processPokeBalls(player, PokeBall.LOVEBALL);
+					break;
+				case ItemID.HEAVY_BALL:
+					returnValue = processPokeBalls(player, PokeBall.HEAVYBALL);
+					break;
+				case ItemID.FAST_BALL:
+					returnValue = processPokeBalls(player, PokeBall.FASTBALL);
+					break;
+				case ItemID.PARK_BALL:
+					returnValue = processPokeBalls(player, PokeBall.PARKBALL);
+					break;
+				case ItemID.PREMIER_BALL:
+					returnValue = processPokeBalls(player, PokeBall.PREMIERBALL);
+					break;
+				case ItemID.REPEAT_BALL:
+					returnValue = processPokeBalls(player, PokeBall.REPEATBALL);
+					break;
+				case ItemID.TIMER_BALL:
+					returnValue = processPokeBalls(player, PokeBall.TIMERBALL);
+					break;
+				case ItemID.NEST_BALL:
+					returnValue = processPokeBalls(player, PokeBall.NESTBALL);
+					break;
+				case ItemID.NET_BALL:
+					returnValue = processPokeBalls(player, PokeBall.NETBALL);
+					break;
+				case ItemID.DIVE_BALL:
+					returnValue = processPokeBalls(player, PokeBall.DIVEBALL);
+					break;
+				case ItemID.LUXURY_BALL:
+					returnValue = processPokeBalls(player, PokeBall.LUXURYBALL);
+					break;
+				case ItemID.HEAL_BALL:
+					returnValue = processPokeBalls(player, PokeBall.HEALBALL);
+					break;
+				case ItemID.QUICK_BALL:
+					returnValue = processPokeBalls(player, PokeBall.QUICKBALL);
+					break;
+				case ItemID.DUSK_BALL:
+					returnValue = processPokeBalls(player, PokeBall.DUSKBALL);
+					break;
+				case ItemID.CHERISH_BALL:
+					returnValue = processPokeBalls(player, PokeBall.CHERISHBALL);
+					break;
 			}
-			catch(MoveQueueException mqe)
-			{
-				mqe.printStackTrace();
-				return false;
-			}
+			return returnValue;
 		}
 		return false;
 	}
@@ -622,26 +591,6 @@ public class ItemProcessor implements Runnable
 	}
 
 	/**
-	 * Throws a pokeball and checks if the Pokemon is caught.
-	 * 
-	 * @param player Owner of the Pokeball.
-	 * @param pokeBall The Pokeball that was thrown.
-	 * @return True if the player is in a wild battle, otherwise false.
-	 * @throws MoveQueueException If the battle turn doesn't get queued correctly.
-	 */
-	private boolean processPokeBalls(Player player, PokeBall pokeBall) throws MoveQueueException
-	{
-		if(player.getBattleField() instanceof WildBattleField)
-		{
-			WildBattleField wildbf = (WildBattleField) player.getBattleField();
-			if(!wildbf.throwPokeball(pokeBall))
-				wildbf.queueMove(0, BattleTurn.getMoveTurn(-1));
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Checks if the item is used in or outside of battle and handles it.
 	 * 
 	 * @param player The player using the item.
@@ -661,7 +610,35 @@ public class ItemProcessor implements Runnable
 		return true;
 	}
 
-	private boolean processGengum(Player player, Pokemon poke, int itemId, int pokeId, String message) throws MoveQueueException
+	/**
+	 * Throws a pokeball and checks if the Pokemon is caught.
+	 * 
+	 * @param player Owner of the Pokeball.
+	 * @param pokeBall The Pokeball that was thrown.
+	 * @return True if the player is in a wild battle, otherwise false.
+	 * @throws MoveQueueException If the battle turn doesn't get queued correctly.
+	 */
+	private boolean processPokeBalls(Player player, PokeBall pokeBall)
+	{
+		if(player.getBattleField() instanceof WildBattleField)
+		{
+			WildBattleField wildbf = (WildBattleField) player.getBattleField();
+			try
+			{
+				if(!wildbf.throwPokeball(pokeBall))
+					wildbf.queueMove(0, BattleTurn.getMoveTurn(-1));
+			}
+			catch(MoveQueueException mqe)
+			{
+				mqe.printStackTrace();
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private boolean processGengum(Player player, Pokemon poke, int itemId, int pokeId, String message)
 	{
 		Random rand = new Random();
 		int randHealth = rand.nextInt(100) - 20;
@@ -673,17 +650,25 @@ public class ItemProcessor implements Runnable
 			poke.setHealth(1);
 		else
 			poke.changeHealth(randHealth);
-		if(player.isBattling())
-			player.getBattleField().queueMove(0, BattleTurn.getMoveTurn(-1));
-		else
+		try
 		{
-			ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
-			hpChange.addInt(pokeId);
-			hpChange.addInt(poke.getHealth());
-			m_player.getSession().Send(hpChange);
-			ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
-			itemUse.addString(message);
-			m_player.getSession().Send(itemUse);
+			if(player.isBattling())
+				player.getBattleField().queueMove(0, BattleTurn.getMoveTurn(-1));
+			else
+			{
+				ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+				hpChange.addInt(pokeId);
+				hpChange.addInt(poke.getHealth());
+				m_player.getSession().Send(hpChange);
+				ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
+				itemUse.addString(message);
+				m_player.getSession().Send(itemUse);
+			}
+		}
+		catch(MoveQueueException mqe)
+		{
+			mqe.printStackTrace();
+			return false;
 		}
 		return true;
 	}

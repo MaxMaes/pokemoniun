@@ -832,7 +832,7 @@ public class WildBattleField extends BattleField
 				if(m_player.isSurfing() || m_player.isFishing())
 					catchRate = 3.5;
 				break;
-			case LUXURY:
+			case LUXURYBALL:
 				showMessage(m_player.getName() + " threw a Luxery Ball!");
 				m_wildPoke.setCaughtWith(48);
 				break;

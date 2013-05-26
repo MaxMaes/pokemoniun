@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Bag
 {
-	private static final int m_bagsize = 600; // 30 is the artificial bag size, right? // sadhi set it to 600 because then it should prevent your bag becomming full
+	private static final int BAG_SIZE = 600; // 30 is the artificial bag size, right? // sadhi set it to 600 because then it should prevent your bag becomming full
 	private final ArrayList<BagItem> m_items;
 	private final int m_memberId;
 
@@ -36,7 +36,7 @@ public class Bag
 			m_items.get(bagIndex).increaseQuantity(quantity);
 			return true;
 		}
-		else if(m_items.size() < m_bagsize)
+		else if(m_items.size() < BAG_SIZE)
 		{
 			m_items.add(new BagItem(itemNumber, quantity));
 			return true;
@@ -106,7 +106,7 @@ public class Bag
 	 */
 	public boolean hasSpace(int itemid)
 	{
-		if(containsItem(itemid) >= 0 || m_items.size() < m_bagsize)
+		if(containsItem(itemid) >= 0 || m_items.size() < BAG_SIZE)
 			return true;
 		return false;
 	}

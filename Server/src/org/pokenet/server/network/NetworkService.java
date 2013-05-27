@@ -39,7 +39,7 @@ public class NetworkService
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManager = new ChatManager[3];
-		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
+		autosaver = new Timer(1000 * 60 * GameServer.AUTOSAVE_INTERVAL, new ActionListener()
 				{
 					public void actionPerformed(ActionEvent arg0)
 					{

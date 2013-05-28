@@ -116,7 +116,6 @@ public class ImageButton extends Button
 	{
 		image = img;
 		currImage = image;
-		setSize(image.getWidth(), image.getHeight());
 	}
 
 	/**
@@ -139,9 +138,16 @@ public class ImageButton extends Button
 	public void paintWidget(GUI gui)
 	{
 		super.paintWidget(gui);
-		if(alignment == ImageAlignment.CENTER)
-			currImage.draw(getAnimationState(), getInnerX(), getInnerY(), currImage.getWidth(), currImage.getHeight());
-		else
-			currImage.draw(getAnimationState(), x + getInnerX(), y + getInnerY(), currImage.getWidth(), currImage.getHeight());
+		if(currImage != null)
+		{
+			if(alignment == ImageAlignment.CENTER)
+			{
+				currImage.draw(getAnimationState(), getInnerX(), getInnerY(), currImage.getWidth(), currImage.getHeight());
+			}
+			else
+			{
+				currImage.draw(getAnimationState(), x + getInnerX(), y + getInnerY(), currImage.getWidth(), currImage.getHeight());
+			}
+		}
 	}
 }

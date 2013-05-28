@@ -19,7 +19,7 @@ public class BattleBag extends BigBagDialog
 		m_categoryButtons[0].setEnabled(false);
 		m_categoryButtons[4].setEnabled(false);
 		m_curCategory = 1;
-		m_update = true;
+		update();
 	}
 
 	@Override

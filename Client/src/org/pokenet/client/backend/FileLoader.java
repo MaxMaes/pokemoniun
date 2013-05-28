@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.Language;
@@ -65,6 +64,10 @@ public class FileLoader
 	{
 		File fl = new File(path);
 		Image img = null;
+		if(!fl.exists())
+		{
+			return null;
+		}
 		try
 		{
 			URL flURL = fl.getAbsoluteFile().toURI().toURL();

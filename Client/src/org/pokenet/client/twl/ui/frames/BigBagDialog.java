@@ -11,7 +11,6 @@ import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Event;
-import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
@@ -26,15 +25,14 @@ public class BigBagDialog extends ResizableFrame
 {
 	protected ImageButton[] m_categoryButtons;
 	protected int m_curCategory = 0;
-	protected ArrayList<Button> m_itemBtns;
+	protected ArrayList<ImageButton> m_itemBtns;
 	protected Button m_leftButton, m_rightButton, m_cancel;
 	protected ItemPopup m_popup;
 	protected ArrayList<Label> m_stockLabels;
-	protected boolean m_update = false;
 	private HashMap<Integer, ArrayList<PlayerItem>> m_items;
-	private HashMap<Integer, Integer> m_scrollIndex;
+	private HashMap<Integer, Integer> m_scrollIndex; // Used to memorize scrolling through different categories
 	private Image[] bagicons;
-	private Image bagicon;
+	private org.pokenet.client.twl.ui.base.Image bagicon;
 
 	public BigBagDialog()
 	{
@@ -52,20 +50,36 @@ public class BigBagDialog extends ResizableFrame
 	public void addItem(int id, boolean newItem)
 	{
 		if(newItem)
+		{
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				if(item.getNumber() == id)
+				{
 					// Potions and medicine
 					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					{
 						m_items.get(1).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+					{
 						m_items.get(2).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+					{
 						m_items.get(3).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+					{
 						m_items.get(4).add(item);
+					}
 					else
+					{
 						m_items.get(0).add(item);
-		m_update = true;
+					}
+				}
+			}
+		}
+		update();
 	}
 
 	/**
@@ -95,7 +109,7 @@ public class BigBagDialog extends ResizableFrame
 		/* Does this cause a memory leak in JAVA if called more than once? If so does java have a delete keyword? */
 		m_items = new HashMap<Integer, ArrayList<PlayerItem>>();
 		m_scrollIndex = new HashMap<Integer, Integer>();
-		m_itemBtns = new ArrayList<Button>();
+		m_itemBtns = new ArrayList<ImageButton>();
 		m_stockLabels = new ArrayList<Label>();
 		m_categoryButtons = new ImageButton[5];
 		// remove any existing Bag gui content
@@ -114,8 +128,8 @@ public class BigBagDialog extends ResizableFrame
 			Image[] berriescat = new Image[] { GameClient.getInstance().getTheme().getImage("berrie"), GameClient.getInstance().getTheme().getImage("berrie_hover"),
 					GameClient.getInstance().getTheme().getImage("berrie_pressed") };
 
-			Image[] pokecat = new Image[] { GameClient.getInstance().getTheme().getImage("pokeball"), GameClient.getInstance().getTheme().getImage("berrie_hover"),
-					GameClient.getInstance().getTheme().getImage("berrie_pressed") };
+			Image[] pokecat = new Image[] { GameClient.getInstance().getTheme().getImage("pokeball"), GameClient.getInstance().getTheme().getImage("pokeball_hover"),
+					GameClient.getInstance().getTheme().getImage("pokeball_pressed") };
 
 			Image[] tmscat = new Image[] { GameClient.getInstance().getTheme().getImage("tm"), GameClient.getInstance().getTheme().getImage("tm_hover"),
 					GameClient.getInstance().getTheme().getImage("tm_pressed") };
@@ -148,11 +162,6 @@ public class BigBagDialog extends ResizableFrame
 				}
 				m_items.put(i, new ArrayList<PlayerItem>());
 				m_scrollIndex.put(i, 0);
-				m_categoryButtons[i].setSize(40, 40);
-				if(i == 0)
-					m_categoryButtons[i].setPosition(80, 10);
-				else
-					m_categoryButtons[i].setPosition(m_categoryButtons[i - 1].getX() + 65, 10);
 				m_categoryButtons[i].addCallback(new Runnable()
 				{
 					@Override
@@ -160,7 +169,7 @@ public class BigBagDialog extends ResizableFrame
 					{
 						destroyPopup();
 						m_curCategory = j;
-						m_update = true;
+						update();
 					}
 				});
 				add(m_categoryButtons[i]);
@@ -175,8 +184,6 @@ public class BigBagDialog extends ResizableFrame
 
 		// Scrolling Button LEFT
 		m_leftButton = new Button("<");
-		m_leftButton.setSize(20, 40);
-		m_leftButton.setPosition(15, 95);
 		m_leftButton.addCallback(new Runnable()
 		{
 			@Override
@@ -186,7 +193,7 @@ public class BigBagDialog extends ResizableFrame
 				int i = m_scrollIndex.get(m_curCategory) - 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
-				m_update = true;
+				update();
 			}
 		});
 		add(m_leftButton);
@@ -195,9 +202,8 @@ public class BigBagDialog extends ResizableFrame
 		{
 			final int j = i;
 			// Starts the item buttons
-			Button item = new Button();
+			ImageButton item = new ImageButton();
 			item.setSize(60, 60);
-			item.setPosition(50 + 80 * i, 85);
 			item.addCallback(new Runnable()
 			{
 				@Override
@@ -205,6 +211,7 @@ public class BigBagDialog extends ResizableFrame
 				{
 					destroyPopup();
 					useItem(j);
+					update();
 				}
 			});
 			m_itemBtns.add(item);
@@ -212,7 +219,7 @@ public class BigBagDialog extends ResizableFrame
 			// Starts the item labels
 			Label stock = new Label();
 			stock.setSize(60, 40);
-			stock.setPosition(50 + 80 * i, 135);
+
 			stock.setAlignment(Alignment.CENTER);
 			m_stockLabels.add(stock);
 			add(stock);
@@ -220,8 +227,7 @@ public class BigBagDialog extends ResizableFrame
 
 		// Scrolling Button Right
 		m_rightButton = new Button(">");
-		m_rightButton.setSize(20, 40);
-		m_rightButton.setPosition(365, 95);
+
 		m_rightButton.addCallback(new Runnable()
 		{
 			@Override
@@ -231,14 +237,13 @@ public class BigBagDialog extends ResizableFrame
 				int i = m_scrollIndex.get(m_curCategory) + 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
-				m_update = true;
+				update();
 			}
 		});
 		add(m_rightButton);
 		// Close Button
 		m_cancel = new Button("Close");
-		m_cancel.setSize(400, 32);
-		m_cancel.setPosition(0, 195);
+
 		m_cancel.addCallback(new Runnable()
 		{
 			@Override
@@ -259,7 +264,7 @@ public class BigBagDialog extends ResizableFrame
 				closeBag();
 			}
 		});
-
+		update();
 		setTitle("Bag");
 		setResizableAxis(ResizableAxis.NONE);
 		setSize(m_categoryButtons.length * 80, 250);
@@ -272,7 +277,8 @@ public class BigBagDialog extends ResizableFrame
 		bagicons = new Image[] { GameClient.getInstance().getTheme().getImage("bag_topleft"), GameClient.getInstance().getTheme().getImage("bag_topright"),
 				GameClient.getInstance().getTheme().getImage("bag_middle"), GameClient.getInstance().getTheme().getImage("bag_front"), GameClient.getInstance().getTheme().getImage("bag_bottom"),
 				GameClient.getInstance().getTheme().getImage("bag_topleft") };
-		bagicon = bagicons[3];
+		bagicon = new org.pokenet.client.twl.ui.base.Image(bagicons[3]);
+		add(bagicon);
 	}
 
 	/**
@@ -287,25 +293,39 @@ public class BigBagDialog extends ResizableFrame
 		if(remove)
 		{
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				if(item.getNumber() == id)
+				{
 					// Potions and medicine
 					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					{
 						m_items.get(1).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+					{
 						m_items.get(2).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+					{
 						m_items.get(3).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+					{
 						m_items.get(4).remove(item);
+					}
 					else
+					{
 						m_items.get(0).remove(item);
+					}
+				}
+			}
 			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
 			int tmpCurCategory = m_curCategory;
 			initGUI();
 			loadItems();
 			m_curCategory = tmpCurCategory;
+			update();
 		}
-		m_update = true;
 	}
 
 	/**
@@ -321,46 +341,48 @@ public class BigBagDialog extends ResizableFrame
 		setPosition(x, y);
 	}
 
-	// TODO: dunno what to do with this yet
-	/* @Override
-	 * public void update(GUIContext gc, int delta)
-	 * {
-	 * super.update(gc, delta);
-	 * if(m_update)
-	 * {
-	 * m_update = false;
-	 * // Enable/disable scrolling
-	 * if(m_scrollIndex.get(m_curCategory) == 0)
-	 * m_leftButton.setEnabled(false);
-	 * else
-	 * m_leftButton.setEnabled(true);
-	 * if(m_scrollIndex.get(m_curCategory) + 4 >= m_items.get(m_curCategory).size())
-	 * m_rightButton.setEnabled(false);
-	 * else
-	 * m_rightButton.setEnabled(true);
-	 * // Update items and stocks
-	 * System.out.println("Looping through items to display");
-	 * for(int i = 0; i < 5; i++)
-	 * try
-	 * {
-	 * m_itemBtns.get(i).setName(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
-	 * m_itemBtns.get(i).setTooltipContent(
-	 * m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getName() + "\n"
-	 * + m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getDescription());
-	 * m_itemBtns.get(i).setImage(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getBagImage());
-	 * m_stockLabels.get(i).setText("x" + m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getQuantity());
-	 * m_itemBtns.get(i).setEnabled(true);
-	 * }
-	 * catch(Exception e)
-	 * {
-	 * m_itemBtns.get(i).setImage(null);
-	 * m_itemBtns.get(i).setTooltipContent("");
-	 * m_itemBtns.get(i).setText("");
-	 * m_stockLabels.get(i).setText("");
-	 * m_itemBtns.get(i).setEnabled(false);
-	 * }
-	 * }
-	 * } */
+	public void update()
+	{
+		// Enable/disable scrolling
+		if(m_scrollIndex.get(m_curCategory) == 0)
+		{
+			m_leftButton.setEnabled(false);
+		}
+		else
+		{
+			m_leftButton.setEnabled(true);
+		}
+		if(m_scrollIndex.get(m_curCategory) + 4 >= m_items.get(m_curCategory).size())
+		{
+			m_rightButton.setEnabled(false);
+		}
+		else
+		{
+			m_rightButton.setEnabled(true);
+		}
+		// Update items and stocks
+		for(int i = 0; i < 4; i++)
+		{
+			try
+			{
+				// m_itemBtns.get(i).setName(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
+				m_itemBtns.get(i).setTooltipContent(
+						m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getName() + "\n"
+								+ m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getDescription());
+				m_itemBtns.get(i).setImage(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getBagImage());
+				m_stockLabels.get(i).setText("x" + m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getQuantity());
+				m_itemBtns.get(i).setEnabled(true);
+			}
+			catch(Exception e)
+			{
+				m_itemBtns.get(i).setImage(null);
+				m_itemBtns.get(i).setTooltipContent("");
+				m_itemBtns.get(i).setText("");
+				m_stockLabels.get(i).setText("");
+				m_itemBtns.get(i).setEnabled(false);
+			}
+		}
+	}
 
 	/**
 	 * An item was used!
@@ -399,19 +421,30 @@ public class BigBagDialog extends ResizableFrame
 		{
 			// Load the player's items and sort them by category
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				// Field items
 				if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution") || item.getItem().getCategory().equalsIgnoreCase("Held"))
+				{
 					m_items.get(0).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine")
 						|| item.getItem().getCategory().equalsIgnoreCase("Vitamins"))
+				{
 					m_items.get(1).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+				{
 					m_items.get(2).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+				{
 					m_items.get(3).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+				{
 					m_items.get(4).add(item);
-			m_update = true;
+				}
+			}
 		}
 		catch(Exception e)
 		{
@@ -421,9 +454,38 @@ public class BigBagDialog extends ResizableFrame
 	}
 
 	@Override
-	public void paintWidget(GUI gui)
+	public void layout()
 	{
-		bagicon.draw(getAnimationState(), 18 + getInnerX(), 0 + getInnerY());
+		for(int i = 0; i < m_categoryButtons.length; i++)
+		{
+			m_categoryButtons[i].setSize(40, 40);
+			if(i == 0)
+			{
+				m_categoryButtons[i].setPosition(80 + getInnerX(), 37 + getInnerY());
+			}
+			else
+			{
+				m_categoryButtons[i].setPosition(m_categoryButtons[i - 1].getX() + 65, m_categoryButtons[i - 1].getY());
+			}
+		}
+		bagicon.setPosition(10 + getInnerX(), 30 + getInnerY());
+		for(int i = 0; i < m_itemBtns.size(); i++)
+		{
+			Button btn = m_itemBtns.get(i);
+			btn.setPosition(50 + 80 * i + getInnerX(), 95 + getInnerY());
+		}
+
+		for(int i = 0; i < m_stockLabels.size(); i++)
+		{
+			Label btn = m_stockLabels.get(i);
+			btn.setPosition(50 + 80 * i + getInnerX(), 145 + getInnerY());
+		}
+		m_leftButton.setSize(20, 40);
+		m_leftButton.setPosition(15 + getInnerX(), 105 + getInnerY());
+		m_rightButton.setSize(20, 40);
+		m_rightButton.setPosition(365 + getInnerX(), 105 + getInnerY());
+		m_cancel.setSize(400, 32);
+		m_cancel.setPosition(0 + getInnerX(), 195 + getInnerY());
 	}
 }
 

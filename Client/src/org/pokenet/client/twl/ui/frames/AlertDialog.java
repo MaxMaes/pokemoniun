@@ -27,7 +27,7 @@ public class AlertDialog extends ResizableFrame
 	public AlertDialog(String Title, String text, Widget widget)
 	{
 		setTitle(Title);
-		setTheme("alertDialog");
+		setTheme("alertdialog");
 
 		textModel = new SimpleTextAreaModel(text);
 		dialogText = new TextArea(textModel);
@@ -35,7 +35,7 @@ public class AlertDialog extends ResizableFrame
 		okButton = new Button("Ok");
 
 		popup = new PopupWindow(widget);
-		popup.setTheme("alertPopup");
+		popup.setTheme("alertpopup");
 		
 		this.add(dialogText);
 		this.add(okButton);

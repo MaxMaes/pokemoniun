@@ -261,6 +261,24 @@
             </theme>
         </theme>
     </theme>
+    <theme name="alertpopup" ref="-defaults">
+        <theme name="alertdialog" ref="popup_untitled">
+            <theme name="title" ref="title"/>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>normal_black</font></param>
+                    </map>
+                </param>
+                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+        </theme>
+    </theme>
 
 
 
@@ -506,11 +524,14 @@
                 </theme>
                 <theme name="image" ref="image"/>
             </theme>
-            <theme name="bagdialog" ref="resizableframe_borderless">
-                <theme name="button" ref="button"/>
+            <theme name="bigbagdialog" ref="resizableframe_titled">
                 <theme name="imagebutton" ref="imagebutton"/>
-                <param name="hasCloseButton"><bool>false</bool></param>
+                <theme name="button" ref="button"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label"/>
+                <theme name="title" ref="title"/>
                 <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
             </theme>
         
         

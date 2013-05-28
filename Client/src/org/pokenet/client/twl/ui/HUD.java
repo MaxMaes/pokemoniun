@@ -7,7 +7,6 @@ import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.twl.ui.frames.BagDialog;
 import org.pokenet.client.twl.ui.frames.BattleBag;
 import org.pokenet.client.twl.ui.frames.BattleFrontierDialog;
 import org.pokenet.client.twl.ui.frames.BattleSpeechFrame;
@@ -56,7 +55,6 @@ public class HUD extends DesktopArea
 	private ShopDialog shop;
 	private MoveLearning moveLearning;
 	private NPCSpeechFrame npcSpeech;
-	private BagDialog bag;
 	private BigBagDialog bigBag;
 	private BattleBag battleBag;
 	private BattleDialog battleDialog;
@@ -97,56 +95,6 @@ public class HUD extends DesktopArea
 		requests.setVisible(false);
 		map.setVisible(false);
 		friends.setVisible(false);
-	}
-
-	public void toggleBag()
-	{
-		if(bigBag != null)
-		{
-			removeChild(bigBag);
-			bigBag = null;
-		}
-		hideHUDElements();
-		if(bag == null)
-		{
-			Runnable cancel = new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					bag.setVisible(false);
-					bag = null;
-				}
-			};
-
-			Runnable openBag = new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					bag.setVisible(false);
-					bag = null;
-					bigBag = new BigBagDialog();
-					add(bigBag);
-				}
-			};
-			bag = new BagDialog(GameClient.getInstance().getOurPlayer().getItems(), cancel, openBag)
-			{
-				@Override
-				public void itemClicked(PlayerItem item)
-				{
-					// TODO: Implement the hotbar or remove it. I propose to remove it completely and let the bag button open the big bag (thus removing this dialog).
-				}
-			};
-			bag.setPosition(topbar.getBarButton(3).getX(), 47);
-			bag.setSize(60, 210);
-			add(bag);
-		}
-		else
-		{
-			removeChild(bag);
-			bag = null;
-		}
 	}
 
 	/**
@@ -243,6 +191,23 @@ public class HUD extends DesktopArea
 			add(partyInfo);
 		}
 	}
+	
+	public void toggleBag()
+	{
+		if(bigBag != null)
+		{
+			removeChild(bigBag);
+			bigBag = null;
+			hideHUDElements();
+		}
+		else
+		{
+			hideHUDElements();
+			bigBag = new BigBagDialog();
+			bigBag.setPosition(topbar.getBarButton(3).getInnerX(), topbar.getBarButton(3).getInnerY() + topbar.getBarButton(3).getHeight());
+			add(bigBag);
+		}
+	}
 
 	public void toggleMap()
 	{
@@ -325,8 +290,6 @@ public class HUD extends DesktopArea
 		help.setVisible(false);
 		options.setVisible(false);
 		pokedex.setVisible(false);
-		if(bag != null)
-			bag.setVisible(false);
 		if(boatChooser != null)
 			boatChooser.setVisible(false);
 		if(trainChooserDialog != null)

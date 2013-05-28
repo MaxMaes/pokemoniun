@@ -31,6 +31,7 @@ import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
+import org.pokenet.client.backend.ItemSpriteDatabase;
 import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
@@ -822,13 +823,13 @@ public class GameClient extends BasicGame
 		Image x16 = new Image("res/icon_16.png");
 		Image x32 = new Image("res/icon_32.png");
 		Image x128 = new Image("res/icon_128.png");
-		
+
 		ByteBuffer[] buff = new ByteBuffer[3];
 		buff[0] = FileLoader.loadImageAsByteBuffer(x16);
 		buff[1] = FileLoader.loadImageAsByteBuffer(x32);
 		buff[2] = FileLoader.loadImageAsByteBuffer(x128);
 		Display.setIcon(buff);
-		
+
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
 		m_loadBarLeft = new Image("res/ui/loadbar/left.png");
@@ -921,6 +922,7 @@ public class GameClient extends BasicGame
 
 		setPlayerSpriteFactory();
 		PokemonSpriteDatabase.loadPokemonSprites();
+		ItemSpriteDatabase.loadItemSprites();
 
 		m_weather = new WeatherService();
 		m_time = new TimeService();
@@ -1331,7 +1333,6 @@ public class GameClient extends BasicGame
 			root.hideAlertDialog();
 		Runnable ok = new Runnable()
 		{
-
 			@Override
 			public void run()
 			{

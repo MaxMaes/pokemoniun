@@ -365,7 +365,7 @@ public class BigBagDialog extends ResizableFrame
 		{
 			try
 			{
-				// m_itemBtns.get(i).setName(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
+				m_itemBtns.get(i).setText(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
 				m_itemBtns.get(i).setTooltipContent(
 						m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getName() + "\n"
 								+ m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getDescription());

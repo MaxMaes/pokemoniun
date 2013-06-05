@@ -30,7 +30,7 @@
  </layer>
  <layer name="Walkable" width="48" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XTQrCMBBGZ9GFxSu40p2SAxS8gjv1Fp5R0Yu4dFlv4AgKdYjkp2mSGebB0EJD8yakX1uAX8ynOMOpB0MKgJf/EFsvijKW7dx93TWmJD5uNfnTZ5eL/7/sUX9/Touw8Yac23oY69/PwpxCSOFfMn+oq+29W7P/G9d3Q+3+LiT4+1TNfP1iPJctwKqNmy8lseu8RveNh/+9Cb+3Lzn2yKOpfx+mhmYnt/8ubr4U2/pz70mRwxkz8YK16wCueLxNmPFTsUf3A9axK21SHxLyRkpuSuiDu790enLMwTPjXIqi5OMFgheDRQAeAAA=
+   H4sIAAAAAAAAC+2XUQrCMAyG87AHh1fwBEoPMPAKvqm38IwOvYiPPs4bGEFBQ6XttrZJyAdhg5X1S+n+bQC/uHdJRlIPjhSALP9vfL0YxlS2y/D10JiaxLhx8qfPrhT/f9lj/vGcVmnjHTn39TDVf1ikOaUwh3/N/KGuvvcuZ/8Xoe8G7v4hNPjHFGc+fqU8c8wzdp3XLcCmDY+7Nen3jqXEHrk3/Pfh3NDslPbfJc2X4lt/6T0ZejhjJvZYuw7ggsdrxozPxR7dD1jHrrYJPzTkjZbc1NCHdH/tDORYgkfBuQzDKMcTS9Jq+AAeAAA=
   </data>
  </layer>
  <layer name="LedgesDown" width="48" height="40">
@@ -55,7 +55,7 @@
  </layer>
  <layer name="WalkBehind" width="48" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YyU7DMBRF3RJQyw8AgX4B04IF6ooVv8f8TwwLOoDEuIMlSLBqG4ZyIxXhBsfNs59dRcmRjqI2qf3elVM5ESKdoeZckmrl/3eviusiwpi29AjXqupK9h+Pp+rTFbb5q/r3mT+FeUX9qv5N8qesgzTe4Lvm6BLKOlAR99+HA83RZl0shEIswiUYwmW4Ahvh3/w2ZOnf5r7cQ5378AAewiN4DE/C7PPryNJ/Wv6tmhBt2IHdmrv5ddjkf4Oab+EdvDesf5r5T+KyPv55q2E2vw7X659jfh0u8+eaX0cR8+/hXu3DAYzgB/yEX/AbbteVwxjPr8Mk/2H8X4MaK7AKZ2AAZ+Ec3CHUb5s/hRfD350GQpzBc3gRjJ/j2P+4poWa27ADu/AKXo/68Jk/Fw+o/XFUfx7yT/KE2p9znL9MHvOXKWL+XM9Zq00h1uA63ICbTfoY1Px1z1vTeP6m5h/3m5a/z/cfcj0UXOS/a7Bu5HoolPnzUuZfnPxV75xtKWL+MeX654F7/f/ugyjvoye9v9YdOfPPeoyYx6PAsd+W7xPf+3eO551k/j4p8/eX/w9NAOpUAB4AAA==
+   H4sIAAAAAAAAC+2YuU7DQBCGN8GghBcADGmg5CooUCoqXo/7nTgKcoDE2UEJElS5gPCvFIRj1hvP7uyGyP6kT1au3Zlf48i2EMn0NZ/FKRb+vveq+F6XsKYtLcJ3VXXF+5frqfp0hW3+qv595k9hVlG/qn+T/ClzkMQbfNccXUKZAxWy/zbsaI42czEXCjEPF2AIF+ESrIS/+9uQpn+b83IPde7DA3gIj+AxPAnT768jTf9J+ddKQtRhAzZL7vbXYZP/DWq+hXfw3rD+ceY/isvy8Outitn+OlzPP8f+Olzmz7W/jizm38K52oYd2IU9+AE/4RfcLiuXMd5fh0n+fflfgxoLsAinYACn4QzcIdRvmz+FF8PfnQZCnMFzeBEMf8Zx/eOaGmquwwZswit4PejDZ/4qljErK4R5kTyg9sdB/ZOQf5wn1P78T/K3ZRLzj5LF/Lnus1arQqzBdbgBN6v0Naj56+63xnH/Tc1f9puUv8/nH9F6KLjIf9dgbqL1UMjz5yXPPzv5q54525LF/CX5/PPAPf8/10GU59Gjnl/rjpz5pz12mdejwHG9HT1PfF+/c9zvxPP3SZ6/v/y/AYTFA+kAHgAA
   </data>
  </layer>
 </map>

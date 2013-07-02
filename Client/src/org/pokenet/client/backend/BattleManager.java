@@ -40,6 +40,7 @@ public class BattleManager
 	private BattleManager()
 	{
 		m_battle = new BattleDialog();
+		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
 		m_timeLine = new BattleTimeLine();
 		m_battle.setVisible(false);
 		// m_battle.setAlwaysOnTop(true); // TODO: Chappie magic :D
@@ -265,8 +266,10 @@ public class BattleManager
 			setWild(true);
 		else
 			setWild(false);
+		m_battle.setPosition(272, 40);
 		m_battle.showAttack();
-		m_battle.setVisible(true);
+		m_battle.getCanvas().setVisible(true);
+		m_battle.getControlFrame().setVisible(true);
 		m_enemyPokes = new Pokemon[pokeAmount];
 		getPlayerData();
 		m_battle.disableMoves();
@@ -275,7 +278,9 @@ public class BattleManager
 		m_timeLine.startBattle();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
-		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
+		// GameClient.getInstance().getHUD().setBattleDialog(m_battle);
+		GameClient.getInstance().getHUD().showBattleDialog();
+		m_battle.enableMoves();
 		GameClient.getInstance().changeTrack(Music.PVNPC);
 	}
 
@@ -333,6 +338,10 @@ public class BattleManager
 				m_battle.getMoveButton(i).setText(m_curPoke.getMoves()[i]);
 				m_battle.getPPLabel(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
 				m_battle.getMoveTypeLabel(i).setText(m_curPoke.getMoveType(i));
+
+				m_battle.getMoveButton(i).setVisible(true);
+				m_battle.getPPLabel(i).setVisible(true);
+				m_battle.getMoveTypeLabel(i).setVisible(true);
 			}
 			else
 			{

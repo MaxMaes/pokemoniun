@@ -333,6 +333,16 @@ public class GameClient extends BasicGame
 						move(Direction.Left);
 	}
 
+	public int getGameContainerWidth()
+	{
+		return gameContainer.getWidth();
+	}
+
+	public int getGameContainerHeight()
+	{
+		return gameContainer.getHeight();
+	}
+
 	@Override
 	public void controllerRightPressed(int controller)
 	{

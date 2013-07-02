@@ -53,8 +53,9 @@ public class BattleControlFrame extends Widget
 		m_path = respath + m_path;
 		loadStatusIcons();
 		initComponents();
-		setCenter();
-		setSize(259, 369);
+		setPosition(272, 224);
+		setSize(259, 200);
+		setVisible(true);
 	}
 
 	/**
@@ -196,6 +197,8 @@ public class BattleControlFrame extends Widget
 	private void initComponents()
 	{
 		attackPane = new Widget();
+		attackPane.setTheme("attackPane");
+		// attackPane.setTheme("battlecontrolframe");
 		Button move1 = new Button("");
 		move1.setTheme("battlebutton");
 		Button move2 = new Button("");
@@ -312,7 +315,7 @@ public class BattleControlFrame extends Widget
 			@Override
 			public void run()
 			{
-				run();
+				flee();
 			}
 		});
 		attackPane.add(btnRun);
@@ -360,12 +363,13 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		attackPane.setSize(257, 201);
-		attackPane.setPosition(2, 140);
+		// attackPane.setPosition(2, 140);
 		add(attackPane);
 
 		pokePane = new Widget();
+		pokePane.setTheme("attackPane");
 		pokePane.setSize(257, 201);
-		pokePane.setPosition(2, 140);
+		// pokePane.setPosition(0, -100);
 		Button pokeBtn1 = new Button(" ");
 		pokeBtn1.setTheme("battlebutton");
 		pokePane.add(pokeBtn1);
@@ -485,7 +489,7 @@ public class BattleControlFrame extends Widget
 	/**
 	 * Sends the run packet
 	 */
-	private void run()
+	private void flee()
 	{
 		ClientMessage message = new ClientMessage(ServerPacket.BATTLE_RUN);
 		GameClient.getInstance().getSession().send(message);

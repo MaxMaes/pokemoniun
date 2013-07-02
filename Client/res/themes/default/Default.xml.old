@@ -595,20 +595,6 @@
                     <theme name="label" ref="label"/>
                 </theme>
             </theme>
-            <theme name="battlebag" ref="resizableframe_titled">
-                <theme name="imagebutton" ref="imagebutton"/>
-                <theme name="button" ref="button"/>
-                <theme name="image" ref="image"/>
-                <theme name="label" ref="label"/>
-                <theme name="title" ref="title"/>
-                <param name="hasResizeHandle"><bool>false</bool></param>
-                <param name="hasCloseButton"><bool>false</bool></param>
-                <theme name="itempopup" ref="-defaults">
-                    <theme name="button" ref="button"/>
-                    <theme name="label" ref="label"/>
-                    <param name="background"><image>resizableframe</image></param>
-                </theme>
-            </theme>
         
         
         

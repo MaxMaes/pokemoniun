@@ -4,7 +4,6 @@ import java.util.HashMap;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
-import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.frames.BattleBag;
@@ -191,7 +190,7 @@ public class HUD extends DesktopArea
 			add(partyInfo);
 		}
 	}
-	
+
 	public void toggleBag()
 	{
 		if(bigBag != null)
@@ -437,8 +436,9 @@ public class HUD extends DesktopArea
 	 */
 	public void showBattleDialog()
 	{
-		battleDialog = new BattleDialog();
-		add(battleDialog);
+		if(battleDialog == null)
+			battleDialog = new BattleDialog();
+		add(battleDialog.getControlFrame());
 	}
 
 	/**
@@ -446,7 +446,7 @@ public class HUD extends DesktopArea
 	 */
 	public void removeBattleDialog()
 	{
-		removeChild(battleDialog);
+		removeChild(battleDialog.getControlFrame());
 		battleDialog = null;
 	}
 

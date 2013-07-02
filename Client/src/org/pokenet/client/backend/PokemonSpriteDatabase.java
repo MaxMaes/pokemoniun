@@ -7,8 +7,8 @@ import de.matthiasmann.twl.renderer.Texture;
 
 public class PokemonSpriteDatabase
 {
-	public static int MALE;
-	public static int FEMALE;
+	public static int MALE = 0;
+	public static int FEMALE = 1;
 	private static int spriteamount = 494;
 	private static Image[][] front = new Image[2][spriteamount];
 	private static Image[][] front_shiney = new Image[2][spriteamount];
@@ -49,7 +49,7 @@ public class PokemonSpriteDatabase
 		return front[gender][pokenum];
 	}
 
-	public static Image getShineyFrontk(int gender, int pokenum)
+	public static Image getShineyFront(int gender, int pokenum)
 	{
 		return front_shiney[gender][pokenum];
 	}

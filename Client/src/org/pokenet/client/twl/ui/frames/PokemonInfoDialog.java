@@ -79,7 +79,7 @@ public class PokemonInfoDialog extends ResizableFrame
 				data[12].setText(String.valueOf(poke.getType2()));
 			if(poke.getGender() == 1)
 				data[13].setText(translated.get(29));
-			else if(poke.getGender() == 2)
+			else if(poke.getGender() == 0)
 				data[13].setText(translated.get(30));
 			else
 				data[13].setText(translated.get(31));

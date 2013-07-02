@@ -1,9 +1,7 @@
 package org.pokenet.client.twl.ui;
 
 import java.util.HashMap;
-
 import org.pokenet.client.twl.ui.base.Image;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
@@ -73,22 +71,22 @@ public class BattleDialog extends Widget
 	{
 		return control.getMoveTypeLabels().get(i);
 	}
-	
+
 	public Button getPokeButton(int i)
 	{
 		return control.getPokeButtons().get(i);
 	}
-	
+
 	public Image getPokeStatus(int i)
 	{
 		return control.getPokeStatus().get(i);
 	}
-	
+
 	public Label getPokeInfo(int i)
 	{
 		return control.getPokeInfo().get(i);
 	}
-	
+
 	public HashMap<String, de.matthiasmann.twl.renderer.Image> getStatusIcons()
 	{
 		return control.getStatusIcons();

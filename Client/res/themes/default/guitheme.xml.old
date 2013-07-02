@@ -253,8 +253,8 @@
         <area name="battlebutton_small_pressed" xywh="42,197,82,48"/>
         <area name="battlebutton_small" xywh="42,148,82,48"/>
         <select name="battlebutton_small_background">
-            <alias ref="battlebutton_small" if="pressed"/>
-            <alias ref="battlebutton_small_pressed"/>
+            <alias ref="battlebutton_small_pressed" if="pressed"/>
+            <alias ref="battlebutton_small"/>
         </select>
     
         <area name="enemyhp" xywh="25,134,98,11"/>

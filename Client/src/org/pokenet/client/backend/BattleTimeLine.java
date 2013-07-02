@@ -65,6 +65,9 @@ public class BattleTimeLine
 		GameClient.getInstance().getHUD().removeBattleSpeechFrame();
 		while(GameClient.getInstance().getHUD().hasBattleSpeechFrame())
 			;
+		GameClient.getInstance().getHUD().removeBattleDialog();
+		while(GameClient.getInstance().getHUD().hasBattleDialog())
+			;
 	}
 
 	/**

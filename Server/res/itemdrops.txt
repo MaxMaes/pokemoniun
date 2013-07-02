@@ -302,7 +302,7 @@ Delcatty 209 100
 Sableye 207 100
 Mawile 203 97 157 3
 Aron 206 100
-Lairon 206 30 209 40 305 3
+Lairon 206 30 209 40 305 30
 Aggron 206 15 157 5 209 80
 Meditite 201 90 585 10
 Medicham 201 75 205 25

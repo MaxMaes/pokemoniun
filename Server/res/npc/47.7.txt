@@ -473,7 +473,7 @@ right
 Pichu,25,Pikachu,40,Raichu,45
 3
 -1
-4
+1
 false
 false
 false
@@ -487,7 +487,7 @@ up
 Starmie,50
 1
 -1
-5
+4
 false
 false
 false
@@ -501,7 +501,7 @@ left
 Machamp,50
 1
 -1
-6
+5
 false
 false
 false
@@ -515,7 +515,7 @@ up
 Togekiss,50
 1
 -1
-7
+1
 false
 false
 false
@@ -529,7 +529,7 @@ left
 NULL
 0
 -1
-8
+3
 false
 false
 false
@@ -543,7 +543,7 @@ up
 Ninetails,50
 1
 -1
-9
+2
 false
 false
 false
@@ -557,7 +557,7 @@ left
 Quilava,35
 1
 -1
-10
+3
 false
 false
 false
@@ -571,7 +571,7 @@ right
 Mightyena,50,Honchkrow,50
 2
 -1
-11
+3
 false
 false
 false
@@ -585,7 +585,7 @@ up
 Bayleef,35
 1
 -1
-12
+3
 false
 false
 false
@@ -599,7 +599,7 @@ down
 NULL
 0
 -1
-13
+6
 true
 false
 false
@@ -613,7 +613,7 @@ right
 NULL
 0
 -1
-14
+7
 false
 false
 false
@@ -627,7 +627,7 @@ down
 NULL
 0
 -1
-15
+8
 false
 false
 false
@@ -641,7 +641,7 @@ down
 NULL
 0
 -1
-16
+9
 false
 false
 false
@@ -655,7 +655,7 @@ down
 NULL
 0
 -1
-17
+9
 false
 false
 false
@@ -669,7 +669,7 @@ down
 NULL
 0
 -1
-18
+1
 false
 false
 false
@@ -683,7 +683,7 @@ down
 NULL
 0
 -1
-19
+10
 false
 false
 false
@@ -697,7 +697,7 @@ down
 Skarmory,45,Ursaring,45,Ariados,45
 3
 -1
-20
+0
 false
 false
 false
@@ -711,7 +711,7 @@ left
 Rapidash,50,Dodrio,50
 2
 -1
-21
+3
 false
 false
 false
@@ -725,7 +725,7 @@ right
 Weavile,60
 1
 -1
-22
+3
 false
 false
 false
@@ -739,7 +739,7 @@ left
 Gengar,50
 1
 -1
-23
+0
 false
 false
 false
@@ -753,7 +753,7 @@ down
 Dewgong,45,Tangela,45
 2
 -1
-24
+1
 false
 false
 false
@@ -767,7 +767,7 @@ left
 Hypno,50
 1
 -1
-25
+0
 false
 false
 false
@@ -781,7 +781,7 @@ down
 Crobat,50,Snorlax,50
 2
 -1
-26
+3
 false
 false
 false
@@ -795,7 +795,7 @@ right
 Aggron,50
 1
 -1
-27
+3
 false
 false
 false
@@ -809,7 +809,7 @@ left
 Tyranitar,50
 1
 -1
-27
+3
 false
 false
 false
@@ -823,7 +823,7 @@ right
 Magnezone,50
 1
 -1
-28
+0
 false
 false
 false
@@ -837,7 +837,7 @@ right
 Aggron,50
 1
 -1
-27
+3
 false
 false
 false
@@ -851,8 +851,25 @@ down
 Golem,50
 1
 -1
-29
+0
 false
 false
 false
 [/npc]
+[npc]
+NULL
+down
+328
+53
+63
+NULL
+0
+-1
+9
+false
+false
+false
+[/npc]
+
+
+

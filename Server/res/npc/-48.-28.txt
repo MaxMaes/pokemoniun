@@ -2,34 +2,6 @@
 NULL
 down
 0
-19
-31
-NULL
-0
--1
-0
-false
-false
-false
-[/npc]
-[npc]
-NULL
-down
-0
-23
-31
-NULL
-0
--1
-0
-false
-false
-false
-[/npc]
-[npc]
-NULL
-down
-0
 18
 31
 NULL
@@ -127,7 +99,7 @@ false
 [npc]
 Advisor
 down
-195
+344
 20
 31
 NULL
@@ -141,7 +113,7 @@ false
 [npc]
 Supernerd Erik
 down
-169
+352
 12
 4
 Vulpix,36,Vulpix,36,Ninetales,36
@@ -155,7 +127,7 @@ false
 [npc]
 Supernerd Avery
 left
-169
+352
 17
 4
 Ponyta,34,Charmander,34,Vulpix,34,Growlithe,34
@@ -169,7 +141,7 @@ false
 [npc]
 Burglar Ramon
 down
-195
+359
 35
 4
 Ponyta,41
@@ -183,7 +155,7 @@ false
 [npc]
 Supernerd Derek
 left
-169
+352
 40
 4
 Rapidash,41
@@ -197,7 +169,7 @@ false
 [npc]
 Burglar Dusty
 down
-195
+359
 52
 15
 Vulpix,37,Growlithe,37
@@ -211,7 +183,7 @@ false
 [npc]
 Supernerd Zac
 down
-169
+352
 39
 32
 Growlithe,37,Vulpix,37
@@ -225,7 +197,7 @@ false
 [npc]
 Blaine
 down
-13
+304
 35
 13
 Arcanine,44,Rapidash,44,Ninetales,44,Charizard,44,Flareon,44,Houndoom,44

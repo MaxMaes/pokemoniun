@@ -2,6 +2,7 @@ package org.pokenet.server.backend;
 
 import java.sql.ResultSet;
 import org.pokenet.server.backend.entity.Bag;
+import org.pokenet.server.backend.entity.BagItem;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -22,24 +23,20 @@ public class SaveManager
 	/**
 	 * Saves a bag to the database.
 	 * 
-	 * @param b
-	 * @return
+	 * @param bag The bag to be saved.
+	 * @return True if the bag has been saved succesfully, otherwise false.
 	 */
-	public boolean saveBag(Bag b)
+	public boolean saveBag(Bag bag)
 	{
-			/* Destroy item data to prevent dupes.
-			 * TODO: UPDATE when exists, otherwise INSERT. More efficient and FK safer. */
-			m_database.query("DELETE FROM pn_bag WHERE member='" + b.getMemberId() + "'");
-			for(int i = 0; i < b.getItems().size(); i++)
-			{
-				if(b.getItems().get(i) != null)
-				{
-					/* NOTE: Items are stored as values 1 - 999 */
-					m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + b.getMemberId() + "', '" + b.getItems().get(i).getItemNumber() + "', '"
-							+ b.getItems().get(i).getQuantity() + "')");
-				}
-			}
-			return true;
+		/* Destroy item data to prevent dupes. */
+		/* TODO: Check atleast once to make sure it works properly. */
+		for(BagItem item : bag.getItems())
+		{
+			if(item != null)
+				m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES (" + bag.getMemberId() + ", " + item.getItemNumber() + ", " + item.getQuantity()
+						+ ") ON DUPLICATE KEY UPDATE quantity = " + item.getQuantity() + ";");
+		}
+		return true;
 	}
 
 	/**
@@ -280,6 +277,10 @@ public class SaveManager
 		}
 		catch(Exception e)
 		{
+			System.err.println("UPDATE pn_pokemon SET ivHP='" + p.getIv(0) + "', ivATK='" + p.getIv(1) + "', ivDEF='" + p.getIv(2) + "', ivSPD='" + p.getIv(3) + "', ivSPATK='" + p.getIv(4)
+					+ "', ivSPDEF='" + p.getIv(5) + "', pp0='" + p.getPp(0) + "', pp1='" + p.getPp(1) + "', pp2='" + p.getPp(2) + "', pp3='" + p.getPp(3) + "', maxpp0='" + p.getMaxPp(0)
+					+ "', maxpp1='" + p.getMaxPp(1) + "', maxpp2='" + p.getMaxPp(2) + "', maxpp3='" + p.getMaxPp(3) + "', ppUp0='" + p.getPpUpCount(0) + "', ppUp1='" + p.getPpUpCount(1)
+					+ "', ppUp2='" + p.getPpUpCount(2) + "', ppUp3='" + p.getPpUpCount(3) + "' WHERE id='" + p.getDatabaseID() + "'");
 			e.printStackTrace();
 			return false;
 		}

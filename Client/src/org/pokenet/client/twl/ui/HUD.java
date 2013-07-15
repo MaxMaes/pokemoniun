@@ -894,7 +894,7 @@ public class HUD extends DesktopArea
 	public void setBattleDialog(BattleDialog m_battle)
 	{
 		this.battleDialog = m_battle;
-		this.add(m_battle);
+		// this.add(m_battle);
 	}
 
 	public void setBattleCanvas(BattleCanvas battleCanvas)

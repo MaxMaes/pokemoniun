@@ -405,7 +405,7 @@ public class BattleCanvas extends Widget
 	{
 		initComponents();
 		positionCanvas();
-		drawBackground();
+		// drawBackground();
 		drawOurPoke();
 		drawOurInfo();
 		initPlayerHPBar();

@@ -221,15 +221,18 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp1 = new Label();
-		pp1.setAlignment(Alignment.RIGHT);
-		pp1.setSize(move1.getWidth() - 5, 20);
-		pp1.setPosition(0, move1.getHeight() - 20);
+		pp1.setText("10/10");
+		// pp1.setAlignment(Alignment.RIGHT);
+		pp1.setSize(GameClient.getInstance().getFontSmall().getWidth(pp1.getText()), GameClient.getInstance().getFontSmall().getHeight(pp1.getText()));
+		pp1.setPosition(95, 40);
 		Label move1Type = new Label();
-		move1Type.setAlignment(Alignment.LEFT);
-		move1Type.setSize(move1.getWidth() - 5, 20);
-		move1Type.setPosition(2, move1.getHeight() - 20);
-		move1.add(move1Type);
-		move1.add(pp1);
+		// move1Type.setAlignment(Alignment.LEFT);
+		move1Type.setText("???");
+		move1Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move1Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move1Type.getText()));
+		move1Type.setPosition(12, 40);
+		attackPane.add(move1Type);
+		attackPane.add(pp1);
+
 		attackPane.add(move2);
 		move2.setPosition(130, 10);
 		move2.setSize(116, 51);
@@ -242,15 +245,18 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp2 = new Label();
-		pp2.setAlignment(Alignment.RIGHT);
-		pp2.setSize(move2.getWidth() - 5, 20);
-		pp2.setPosition(0, move2.getHeight() - 20);
+		pp2.setText("10/10");
+		// pp2.setAlignment(Alignment.RIGHT);
+		pp2.setSize(GameClient.getInstance().getFontSmall().getWidth(pp2.getText()), GameClient.getInstance().getFontSmall().getHeight(pp2.getText()));
+		pp2.setPosition(225, 40);
 		Label move2Type = new Label();
-		move2Type.setAlignment(Alignment.LEFT);
-		move2Type.setSize(move2.getWidth() - 5, 20);
-		move2Type.setPosition(2, move2.getHeight() - 20);
-		move2.add(move2Type);
-		move2.add(pp2);
+		move2Type.setText("???");
+		// move2Type.setAlignment(Alignment.LEFT);
+		move2Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move2Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move2Type.getText()));
+		move2Type.setPosition(135, 40);
+		attackPane.add(move2Type);
+		attackPane.add(pp2);
+
 		attackPane.add(move3);
 		move3.setPosition(7, 65);
 		move3.setSize(116, 51);
@@ -263,15 +269,17 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp3 = new Label();
-		pp3.setAlignment(Alignment.RIGHT);
-		pp3.setSize(move3.getWidth() - 5, 20);
-		pp3.setPosition(0, move3.getHeight() - 20);
+		pp3.setText("10/10");
+		// pp3.setAlignment(Alignment.RIGHT);
+		pp3.setSize(GameClient.getInstance().getFontSmall().getWidth(pp3.getText()), GameClient.getInstance().getFontSmall().getHeight(pp3.getText()));
+		pp3.setPosition(96, 95);
 		Label move3Type = new Label();
+		move3Type.setText("???");
 		move3Type.setAlignment(Alignment.LEFT);
-		move3Type.setSize(move3.getWidth() - 5, 20);
-		move3Type.setPosition(2, move3.getHeight() - 20);
-		move3.add(move3Type);
-		move3.add(pp3);
+		move3Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move3Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move3Type.getText()));
+		move3Type.setPosition(12, 95);
+		attackPane.add(move3Type);
+		attackPane.add(pp3);
 
 		attackPane.add(move4);
 		move4.setPosition(130, 65);
@@ -285,15 +293,17 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp4 = new Label();
-		pp4.setAlignment(Alignment.RIGHT);
-		pp4.setSize(move4.getWidth() - 5, 20);
-		pp4.setPosition(0, move4.getHeight() - 20);
+		pp4.setText("10/10");
+		// pp4.setAlignment(Alignment.RIGHT);
+		pp4.setSize(GameClient.getInstance().getFontSmall().getWidth(pp4.getText()), GameClient.getInstance().getFontSmall().getHeight(pp4.getText()));
+		pp4.setPosition(225, 95);
 		Label move4Type = new Label();
-		move4Type.setAlignment(Alignment.LEFT);
-		move4Type.setSize(move4.getWidth() - 5, 20);
-		move4Type.setPosition(2, move4.getHeight() - 20);
-		move4.add(move4Type);
-		move4.add(pp4);
+		move4Type.setText("???");
+		// move4Type.setAlignment(Alignment.LEFT);
+		move4Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move4Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move4Type.getText()));
+		move4Type.setPosition(135, 950);
+		attackPane.add(move4Type);
+		attackPane.add(pp4);
 
 		m_moveButtons.add(move1);
 		m_moveButtons.add(move2);
@@ -459,12 +469,12 @@ public class BattleControlFrame extends Widget
 			Image status = new Image();
 			status.setSize(30, 12);
 			m_pokeButtons.get(i).add(status);
-			status.setPosition(6, 5);
+			status.setPosition(m_pokeButtons.get(i).getX() + 6, m_pokeButtons.get(i).getY() + 5);
 			m_pokeStatus.add(status);
 			Label info = new Label();
 			m_pokeButtons.get(i).add(info);
 			info.setText("                               ");
-			info.setPosition(3, 34);
+			info.setPosition(m_pokeButtons.get(i).getX() + 3, m_pokeButtons.get(i).getY() + 34);
 			info.setSize(107, 14);
 			m_pokeInfo.add(info);
 		}

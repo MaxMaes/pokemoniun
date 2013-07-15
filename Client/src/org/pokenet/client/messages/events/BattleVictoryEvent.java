@@ -18,12 +18,15 @@ public class BattleVictoryEvent implements MessageEvent
 		{
 			case 0: // YOU WIN!
 				BattleManager.getInstance().getTimeLine().informVictory();
+				BattleManager.getInstance().deleteInstance();
 				break;
 			case 1: // YOU LOSE
 				BattleManager.getInstance().getTimeLine().informLoss();
+				BattleManager.getInstance().deleteInstance();
 				break;
 			case 2: // WE CAUGHT HE WOKEMON
 				BattleManager.getInstance().endBattle();
+				BattleManager.getInstance().deleteInstance();
 				break;
 		}
 	}

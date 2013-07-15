@@ -40,6 +40,7 @@ public class BattleManager
 	private BattleManager()
 	{
 		m_battle = new BattleDialog();
+		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
 		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
 		m_timeLine = new BattleTimeLine();
 		m_battle.setVisible(false);
@@ -81,6 +82,11 @@ public class BattleManager
 		BattleManager.getInstance().setFinish(true);
 		GameClient.getInstance().getGUIPane().showHUD();
 		m_timeLine.endBattle();
+		if(m_battle.getControlFrame() != null)
+		{
+			m_battle.getControlFrame().removeAllChildren();
+			m_battle.getControlFrame().destroy();
+		}
 		m_battle.setVisible(false);
 		m_isBattling = false;
 		if(GameClient.getInstance().getHUD().hasBattlebag())
@@ -91,6 +97,8 @@ public class BattleManager
 		GameClient.getInstance().getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
 		if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
 			GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
+		m_battle = null;
+		m_timeLine = null;
 	}
 
 	/**
@@ -444,6 +452,11 @@ public class BattleManager
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void deleteInstance()
+	{
+		m_instance = null;
 	}
 
 }

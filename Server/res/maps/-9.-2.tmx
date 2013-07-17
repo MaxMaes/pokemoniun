@@ -10,8 +10,8 @@
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>
-  <property name="xOffsetModifier" value="0"/>
-  <property name="yOffsetModifier" value="0"/>
+  <property name="xOffsetModifier" value="-1152"/>
+  <property name="yOffsetModifier" value="576"/>
  </properties>
  <tileset firstgid="1" source="Path0.tsx"/>
  <tileset firstgid="297" source="Buildings7.tsx"/>

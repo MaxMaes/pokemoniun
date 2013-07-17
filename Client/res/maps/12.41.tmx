@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Cliffs01.tsx"/>
+ <tileset firstgid="231" source="Cliffs02.tsx"/>
+ <tileset firstgid="343" source="SinnohInteriorSet1.tsx"/>
+ <tileset firstgid="2711" source="Water02.tsx"/>
+ <tileset firstgid="2903" source="Orre Tileset 1.tsx"/>
+ <layer name="Grass" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RgQUAQAwEwZA+038Z38MTjswyBZybrhoAAAAAAAAAgE8bXd6R2NU/UrMjKzuyeqHMJSwQJwAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3ZsQ6CMBCA4XMSBwdxVGN8Dx+K918UNlLJNbS99oT/T86N0I9qtLEXkT5jruKjHAOO8uHAYREOHBZtxfGSbTguUs/xLrbq32o6LMOBw6KY4znOXZlHxr2Hc8bFQTGHl+cdC4evcPhqL45uYU5NVqqX8j3Yao+035n/5NDC4Ssc6/tMLwebqek4jvfrjGZvjvk5JPXM4cGxtAcp73ePDsvniwOHh1nrCD/brdef6vC0BzjKOCzCgQMHDhx1HTfR/6cJz05eHV8nt9AfECcAAA==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQ0AMAgAMAQMPfNvbJkFDghPq6ARAADAhHe2Bz1ubg8AAAAAAACg5gM5jj6rECcAAA==
+  </data>
+ </layer>
+</map>

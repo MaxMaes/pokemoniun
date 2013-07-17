@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="SinnohInteriorSet1.tsx"/>
+ <tileset firstgid="2369" source="Cliffs01.tsx"/>
+ <tileset firstgid="2599" source="Orre Tileset 1.tsx"/>
+ <layer name="Grass" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztlktOxjAMhMu2ORlXby/FhkijYezYebQBsbB+UdLEX2Zs9/w4jnMwruNn4P9ueFboGf7WKLB3gTjpOf59H33R4uHnq1l6OSJMv41D8TzNobwdiSjTU/Uxo7Z34OjVQ+3xFkMZ4LB67Bs9dxbHW70W163geJrhn2Mvhr/E0Tu7d2IY0ePNWTGTYxcdijjvrRxaXj8/2rEzQ/a9XTky7+/KYJ1lxc4M2Xd31iS69prE0WKJhtqvNZM57yjLU9xRDXGOPcHheWWGlllNejlWsdQ8spo8xZEJ5IjmOMoRZYkyoa8ymozUxypfMUckz1n9albfqneU1WTEV5E7L5R/RBPFEdFkpO9GWaIcBTybYZnpK48pMwctDi/fEV9lWLK+ymiygsNiyXJcgsOreasXq+8XvqOV81ydpzRBPThO2gtzVhr1+MuL+9DeUn34NvLnQIa6J563ggNz8mqePed5nrW54b0MR0s/i+OiM5UO7Ek+k33I9ZfhqGdGe6/qX6pO1D3fxIK/uNaq2xlzxPM25+3VuuV/voNssCe9+PwOrmevTqy+x/eLvYpzU3Wj7tQ601rL76hz1J6cp8XBnNY8wjqK6tG6AzXD+T6tGaGiVR/q+yASana3vkVUL4zMuJprxFe81pu/agZzf2V/j8xk1Xtm+spiZj0sLaIMqvfiXuzPrK8sjU7Yn+dArw5effKcxLNavlJzmjl4FvZqgT1PfTvgGuaJxBfNjKVa
+  </data>
+ </layer>
+ <layer name="Walkable" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt17ENACAIBEBa59ZWZ9YdSNTo3QR88QQigB1qiWjl9BR5fWUYD+QAAOAs9zHwMzsQAADI8lfAffQS7jEB+bwLXw==
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmLEOgzAMRFmR+lFstCN0TKv+SFe6lk+uO1RiIArUTmyHe5JHwGejHMfYNs24UlcqbQL1cGPW3YAOkJ/upN1BHZSYI3YFvNCTf5wTdXHgMUPE5/d6/lNZ60/Hw7nnDztmziH3WcvRkaO3f9/PUvvIjRcdqd170ZECOmyxVYf1b9Ra9hGUPXui576UZyjRw5uunwvpiHlsyR4AAHpwcrGkt3LvJZWLpXri5hdJHRosdcQyvod8H5z1C46F9XxjmS2z+57j2v9KAZCk1jODk78tzQT5+7hYeg8B8MoHlW09Jw==
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt17ERgCAMBVA6C91/LGeysrQQOcl93lsguQQSaI2VnXt+/D9ibEdGDIBes/fJKJVnbUqNeU/vM6X0tfLcBIBeM/f0U+yenCru6Yo5AdxS/mkzqB0rGnnuU+6Qtx4VpNwn4LsLP1YNPQ==
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="SinnohSet7.tsx"/>
+ <tileset firstgid="1777" source="SinnohInteriorSet1.tsx"/>
+ <tileset firstgid="4145" source="Orre Tileset 1.tsx"/>
+ <tileset firstgid="5228" source="Orre Tileset 2.tsx"/>
+ <layer name="Grass" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UwQ2AMAwEwTzpv5qURwU8jEGnWGNp/rdSYF9rbQAAAPjA06V3dfef1FO99N7JHW8vvVuHDh3/tqT3Tu+otKR3dnvSu7o96R06ZnSc/n1M+F9VL713eseUdwUA0HUDmbgnohAnAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VsQqAMBBEwfjnfrqkEEQUFC3ulhlIv69IMgYAAAD8Y12uTxd3+zv1PG2o3pLQ8bahaouOWnTUk9AwpXRMCQ1H3fefdd+/01FD9/uR8F6l/B8pHVNCAwDAVxsA7n+wECcAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3XsQ3CMBAF0JNiMwANSDARU0GDoEg2gBmgQIIi2QDWACkMwRUgW1EgJgbOMf9VtkhxXyR3NhEAAAAAwPsmfekKZOx60hV8TqqJMm32C862bJlP8n3IOUNh5dhzhkNH/qcp1zlzqHXF+da6+TkpG86wdchx5AyngHO0IdETfL7VkNR9qynvM49s1b72S/a7kPO68MhR7WsAUv71vOfCdzaHMtt9Z3OMsz0Usdw7XGfz41xcl/vbZx+XXmfP5nNCdEnMbyWvr/f9q3NxaPeUgSIaKrMf8Xqsnj8PABCauXQB0Dm43wBAE/SJuNwAjXzp2hAnAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Xyw2CQBAG4Ek2cMcKtADoQGvQi9EDdKBt+OzHBxZiGdqBv9EDIUFXVpwl/l8y4UBC/uGxs4gQERERtcM50k7wHVFHO4GeOBBJAu0U9VyQ+/rMnuKYFfqYhCLTsN51f/1ed5GzZ5G1j/4GHj+rIXoYWfQxQw9zj/toqxj3Pqn5zmsqf6v3Plx78WVdS9FD5tBHeV0j0sL9XjXX2ezLbHedzZzt+or7Yh/ZzmbbfbGW4mxeGJElaoVaozaorXmce7UvdvlPsfHpmr1D5j3qgDqictTJNJONiIiqjbUD/BH+3xDRO1wniJpzAyXKIjgQJwAA
+  </data>
+ </layer>
+</map>

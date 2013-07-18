@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+<properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ 
+<tileset firstgid="1" source="Cliffs01.tsx"/>
+ <tileset firstgid="231" source="Cliffs02.tsx"/>
+ <tileset firstgid="343" source="SinnohInteriorSet1.tsx"/>
+ <layer name="Grass" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQkAAAwDoPGm619iOQ4K9pKqqqqqqqqqqqrq8wPfLFQWECcAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3XvQ5AQBBF4elQokTw/i9ptH4iZGdyJecmp93NR7VmjDHGMld5dVJNoKP1uqQiv0+mI6oeh1Q4tMKhFQ6tcGiFQyscWuHQCodWOLQq6Zi98dDirT9z7GddLeN/48CBAwcOHDhw4MCBAweO93cPdn6Pfmm6cZQ6/+nuDY3IYLEQJwAA
+  </data>
+ </layer>
+</map>

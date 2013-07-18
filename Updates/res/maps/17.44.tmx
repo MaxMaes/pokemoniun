@@ -6,7 +6,7 @@
  <tileset firstgid="12881" source="Orre Tileset 2.tsx"/>
  <layer name="Grass" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PwQmAQBAEwY3F/CMxKlMQ9I5WaqDfQ83MnMf3G45UHK04WnG04mjF0YqjFUcrjlYcrThacbTiaMXRiqMVRyuOVk8db4yDg4Njh+OucdXHDsfOOFpxtOJo9RfHBXuggUoQJwAA
+   H4sIAAAAAAAAC+3PsQ0AMAgDQWbJ/pMwFQukSBFEwVm63p8nIgEAAAAAAIBWPzbdoEOHjh0dr43TXwDgpgBq5QRVECcAAA==
   </data>
  </layer>
  <layer name="Walkable" width="50" height="50">

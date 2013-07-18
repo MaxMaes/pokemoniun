@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="10" height="15" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Krabby,40;Zubat,30;Seel,25;Golbat,5;"/>
@@ -12,26 +11,26 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal7.tsx"/>
+ <tileset firstgid="1" source="Caveset 2.tsx"/>
+ <tileset firstgid="1025" source="Path0.tsx"/>
  <layer name="Walkable" width="10" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAUwIMU20C4YHMCKhXIzAKVfQzJYAgAA
+   H4sIAAAAAAAACytlYWAoHcWjmMoYABd3d6BYAgAA
   </data>
  </layer>
  <layer name="Grass" width="10" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAADvKzMBwlIbYnRETY1ODTT0hc0hRh89dMDEQIEYdIX8So47YcCMlfKmlbj8LcfbikwcA7YXrRFgCAAA=
+   H4sIAAAAAAAACytlYWAoHcY4iJGBIRiIQxjxqysCyhcDcQkBdUMVXwb66woRfvsMVPOFCmEAAD9UP2NYAgAA
   </data>
  </layer>
  <layer name="Collisions" width="10" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAADvEzMBwiETcDMSP0HALFnXHgHgJEC8DYhUGCD6CxZxnQPwESsPAETRzVBiwA3LVwQDIfUuhGASW4lCHrB+bP6mtTmWA7CVG3VI0jE0NAGxOHXVYAgAA
+   H4sIAAAAAAAAC+NjZGDgIxELA7EeFiyEpo4fiN8yMDC8B2IPRgTmRTNHH4h1oTQy4EUyxwNNjlJ1MABy3zsgLoKKlaC5H10vNkwLdTB/0NteYtS9Y0DF2NQAAB4AC+BYAgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="10" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjgPoAACOi7XdYAgAA
+   H4sIAAAAAAAAC2NgGAWjgPoAACOi7XdYAgAA
   </data>
  </layer>
 </map>

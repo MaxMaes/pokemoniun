@@ -13,22 +13,25 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal7.tsx"/>
- <tileset firstgid="2049" source="Black.tsx"/>
+ <tileset firstgid="1" source="Caveset 2.tsx"/>
  <layer name="Walkable" width="26" height="11">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMFNBmYmDQYRpoV9AfAAA/TkyEeAQAAA==
+   H4sIAAAAAAAAC2NgGAWjYOgAJiYEHg72jFQAAJAzCEZ4BAAA
   </data>
  </layer>
  <layer name="Grass" width="26" height="11">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+tlZmDohWJbFurhXmbceNSeUXuGoj347CDXHhigtT2DLX4AsiKL1ngEAAA=
+   H4sIAAAAAAAAC2NgQAAmJuphfGDUnlF7yLWnlpmBoQ6I65lpa89coPnzgHg+M6YcNe3ZCzR/HxDvZybOL+Tacxdo/j0gvk/jcCM2HQAAl9Fc93gEAAA=
   </data>
  </layer>
  <layer name="Collisions" width="26" height="11">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgQIBeZuphfGC42ZMPlF9LBVxAwJ4+AvLEgp5Re2hiTy4z6RiXXnxgOOQfAC+6Mbx4BAAA
+   H4sIAAAAAAAAC5NhYmCQGcUU4WggtqECjiFgjywQUwNIj9pDE3v+MJKHQQBdbKDTNK0xAADqSN54BAAA
+  </data>
+ </layer>
+ <layer name="Walkbehind" width="26" height="11">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBQMFNjLDKH3Mw+sO+gNAIgVRXx4BAAA
   </data>
  </layer>
 </map>

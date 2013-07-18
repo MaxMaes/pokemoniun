@@ -125,8 +125,8 @@ false
 false
 [/npc]
 [warp]
-15
 24
+35
 46
 13
 6

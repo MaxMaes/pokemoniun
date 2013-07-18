@@ -8,23 +8,23 @@
  <tileset firstgid="4018" source="Path1.tsx"/>
  <tileset firstgid="4442" source="Path0.tsx"/>
  <layer name="Grass" width="50" height="50">
-  <data encoding="base64" compression="zlib">
-   eJzNll1ug0AMhOkrOVmvTi7VVOpKo+mMf9ak6sOKQID15xnbXMdxnB/H8Xit6/X7efw+rvV9z/mznj/PrXui3+vZC96z/uOFz5x034PixH1WvDssF92nfjvmxcIr2h95MRcc9y5PJR7mwPziQr3wyPuv51VOJ9qoeJjroj06vlr7sa+Q6zL7dFlYd8cUsUQceM+D2FiXib+QwTEhG+/p9mI/Ol+ddH6nJs4/Tqdocf/gHnI3C+a9q5NbzpcrNvaUOp/WfFWjaCmmFR/qo1i6mvwVN/LwLFH10tVkMn+cnzJfoiaOpavJpDfssmAP5jmpauW/cuA9jqWryZRjlwXjZA5meSfHlOEBMfJ31o4md/Wrqp+yPu1Y3sWhYqheX+9Se080mfTdKgvPwGzvLsudvso8he90ekQcUbwTX01ZMo6qJu/gqM7zqqeRI6p514uZQem923crXq/WCfdu1gffxZ5mjSYcarkZr/qweo/qNciw3rli3eXgOHlVNLnomuqRHI965znkiPyg9MG88ju49rCncI9X9fcuDs5tVCcqz09iwSPeG827zvehekfkbY47qnXn/539FWf2nk9YXM9Rnai9mId7o6tXvB7lNetXzmdqH8XBcToO5nTzCOvIcVXqQ80+pRXPA9XDXe5dfagZHTFFnNm3iJpllRm3Yq34CrmUVpE2PE+Uv6czecdXTiunv+tBmRad/u+uca+OfKVy7uqF5xvPgV0d+JryFc8g1qozD1kPzMOuFtjz1LcD517N16xHZf1K+aDDwflVuY28xHmoxM8cqM+kT+FRPc9sGLPrv5364Nqa+CrqXY6NtXLXVB+5WwvXrypsmV4ZBz4zqY2lhZoPXa4OA1533yI8w9xSnlRxML/jc304m0uuT1U9hTHyucsH5k0xVfRgP1fizTzlfKU4cUYpvqxHRd8kk/pWfna+qvB1F8/cHS3Oj9/5VfnOfIVMHS3Ut8wuC3974DlzMdMdvlJcO97CuPlccbFWii/r05zHO7yF3mEvMVf2G+fAzlJ57/Rdt5irwvR9/AId9ACy
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC82WXW6DQAyE6Ss5Wa9OLtVU6kqj6Yx/1qTqw4pAgPXnGdtcx3GcH8fxeK3r9ft5/D6u9X3P+bOeP8+te6Lf69kL3rP+44XPnHTfg+LEfVa8OywX3ad+O+bFwivaH3kxFxz3Lk8lHubA/OJCvfDI+6/nVU4n2qh4mOuiPTq+Wvuxr5DrMvt0WVh3xxSxRBx4z4PYWJeJv5DBMSEb7+n2Yj86X510fqcmzj9Op2hx/+AecjcL5r2rk1vOlys29pQ6n9Z8VaNoKaYVH+qjWLqa/BU38vAsUfXS1WQyf5yfMl+iJo6lq8mkN+yyYA/mOalq5b9y4D2OpavJlGOXBeNkDmZ5J8eU4QEx8nfWjiZ39auqn7I+7VjexaFiqF5f71J7TzSZ9N0qC8/AbO8uy52+yjyF73R6RBxRvBNfTVkyjqom7+CozvOqp5EjqnnXi5lB6b3bdyter9YJ927WB9/FnmaNJhxquRmv+rB6j+o1yLDeuWLd5eA4eVU0ueia6pEcj3rnOeSI/KD0wbzyO7j2sKdwj1f19y4Ozm1UJyrPT2LBI94bzbvO96F6R+Rtjjuqdef/nf0VZ/aeT1hcz1GdqL2Yh3ujq1e8HuU161fOZ2ofxcFxOg7mdPMI68hxVepDzT6lFc8D1cNd7l19qBkdMUWc2beImmWVGbdirfgKuZRWkTY8T5S/pzN5x1dOK6e/60GZFp3+765xr458pXLu6oXnG8+BXR34mvIVzyDWqjMPWQ/Mw64W2PPUtwPnXs3XrEdl/Ur5oMPB+VW5jbzEeajEzxyoz6RP4VE9z2wYs+u/nfrg2pr4Kupdjo21ctdUH7lbC9evKmyZXhkHPjOpjaWFmg9drg4DXnffIjzD3FKeVHEwv+NzfTibS65PVT2FMfK5ywfmTTFV9GA/V+LNPOV8pThxRim+rEdF3yST+lZ+dr6q8HUXz9wdLc6P3/lV+c58hUwdLdS3zC4Lf3vgOXMx0x2+Ulw73sK4+VxxsVaKL+vTnMc7vIXeYS8xV/Yb58DOUnnv9F23mKvC9H38Anu2aUsQJwAA
   </data>
  </layer>
  <layer name="Walkable" width="50" height="50">
-  <data encoding="base64" compression="zlib">
-   eJzt0UsOABAMBUAXcHR3thURqd9CMrOUPm1JKabktfNRTaQ22mP3rja/M1ebO8mczj/q8TIze6vbu7zU//tPswMAAAAAAAAAAHMVAfUN1w==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RSw4AEAwFQBdwdHe2FRGp30Iys5Q+bUkppuS181FNpDbaY/euNr8zV5s7yZzOP+rxMjN7q9u7vNT/+0+zAwAAAAAAAAAAcxUk7Sp9ECcAAA==
   </data>
  </layer>
  <layer name="Collisions" width="50" height="50">
-  <data encoding="base64" compression="zlib">
-   eJztmk0OwiAQhbs3XtDjWJetS9po7+FWt3opx4RJkFA60B+geV/yFjUpw2MKZajdsao6gXpSS7oZvw0kJbz3qvW7/+7RoOM0WnzN4nYkcaf6pAI8uLz4aAwfyhGD22FfPK5tpGLGg/sg8eFr33w2et1eSD/sHMfI9nE6uH1MyfQQylgMc85IcuJDmudYD74Yc9oEYCnsuQ3+eWCeAgCqtGvBk2K/drAWvcnDZwc+1gTvZCDlTHOpJl0Kn1Nc703V0Llj160p8zJnHbF9lJqXNXyk2AfsJR+uszsAAEjF0rVVqv07aqttwJ47L+AjL9b0seU5mLnnrkcUuwZsuVZLvteW8MxJ/x8BygFnnTIwTqA0voFowg8=
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2aTQ7CIBCFuzde0ONYl61L2mjv4Va3einHhEmQUDrQH6B5X/IWNSnDYwplqN2xqjqBelJLuhm/DSQlvPeq9bv/7tGg4zRafM3idiRxp/qkAjy4vPhoDB/KEYPbYV88rm2kYsaD+yDx4WvffDZ63V5IP+wcx8j2cTq4fUzJ9BDKWAxzzkhy4kOa51gPvhhz2gRgKey5Df55YJ4CAKq0a8GTYr92sBa9ycNnBz7WBO9kIOVMc6kmXQqfU1zvTdXQuWPXrSnzMmcdsX2Umpc1fKTYB+wlH66zOwAASMXStVWq/Ttqq23Anjsv4CMv1vSx5TmYueeuRxS7Bmy5Vku+15bwzEn/HwHKAWedMjBOoDS+QNv/wxAnAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="50">
-  <data encoding="base64" compression="zlib">
-   eJzt1rERABAAA0A1U9h/MWOYQIVzF/8TpEpSCieM+jrBGb29TgDckNJRAPwrZcv8bWBXSh8CkC1lr/x3AIC125/PpwR2TDByB08=
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WsREAEAADQDVT2H8xY5hAhXMX/xOkSlIKJ4z6OsEZvb1OANyQ0lEA/Ctly/xtYFdKHwKQLWWv/HcAgLXbn8+nBHZM/Mo85hAnAAA=
   </data>
  </layer>
 </map>

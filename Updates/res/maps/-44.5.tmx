@@ -3,14 +3,14 @@
  <properties>
   <property name="dayPokemonChances" value="Oddish,30;Spearow,20;Gloom,15;Fearow,10;Meowth,10;Persian,5;Psyduck,10;"/>
   <property name="dayPokemonLevels" value="50-55;50-55;53-58;55-60;52-56;54-56;57-59;"/>
-  <property name="nightPokemonChances" value="Bellsprout,30;Spearow,20;Weepinbell,15;Fearow,10;Meowth,10,Persian,5,Slowpoke,10;"/>
+  <property name="fishPokemonChances" value="Poliwag,40;Poliwhirl,40;Slowpoke,15;Gyarados,5;"/>
+  <property name="fishPokemonLevels" value="15-55;40-65;50-55;60-65;"/>
+  <property name="nightPokemonChances" value="Bellsprout,30;Spearow,20;Weepinbell,15;Fearow,10;Meowth,10;Persian,5;Slowpoke,10;"/>
   <property name="nightPokemonLevels" value="50-55;50-55;53-58;55-60;52-56;54-56;57-59;"/>
   <property name="pvp" value="enforced"/>
   <property name="surfProbability" value="10"/>
   <property name="waterPokemonChances" value="Psyduck,40;Slowpoke,40;Slowbro,10;Golduck,10;"/>
   <property name="waterPokemonLevels" value="55-57;55-57;58-62;58-62;"/>
-  <property name="fishPokemonChances" value="Poliwag,40;Poliwhirl,40;Slowpoke,15;Gyarados,5;"/>
-  <property name="fishPokemonLevels" value="15-55;40-65;50-55;60-65;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

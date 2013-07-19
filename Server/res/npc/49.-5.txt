@@ -13,8 +13,8 @@ false
 false
 [/npc]
 [warp]
-17
-58
+18
+59
 36
 2
 49

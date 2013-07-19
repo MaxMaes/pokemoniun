@@ -7,7 +7,7 @@
  <tileset firstgid="2903" source="Orre Tileset 1.tsx"/>
  <layer name="Grass" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SQQoAEBRFUWWd9r8NUwNFEb/fuXXGvGi1lAYAAAAAAABsGft9l9P7r7p5zs8dr8qyY5Yd8bIjTln+lR3xyrAjy3vYEavVjg4RRuXTECcAAA==
+   H4sIAAAAAAAAC+3DAQkAAAwDoMFzrn+N5Tgo2Euqqqqqqqqqqqqqzw+zK6q2ECcAAA==
   </data>
  </layer>
  <layer name="Walkable" width="50" height="50">
@@ -17,7 +17,7 @@
  </layer>
  <layer name="Collisions" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XQQ6AIAwE5YYHf+Sj/P/JOzGApLC1ziS972QbUrYNACAO16FOAGADuxyTUx0AAACmwjv/Tbi7/gV9Azgm1SclYbYX5FSfPYhHbvTVO7N77fGwmNm9rvIoe7XuZ6VH764+ObbuepWH9Q6qM1t05dVjpCt1rtGuyl7Uuax6UefBI6aHB/DwBR6+GPHw+F+N8m5ZeNx4vRw1ECcAAA==
+   H4sIAAAAAAAAC+3WWw0AIAwDQAzgCFH4/8IEZA/uFDTZ0nQMgD72jE4Ad/jlnlZ0AACe0vM12V1/cW8AyM+uBqhJfwOQyQH07XSIECcAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="50">

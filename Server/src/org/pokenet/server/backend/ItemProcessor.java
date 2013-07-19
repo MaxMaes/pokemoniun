@@ -88,7 +88,15 @@ public class ItemProcessor implements Runnable
 		/* TODO: Test all item uses in-game to verify changes and possible improvements (Code might include fixes). */
 		if(player.getBag().containsItem(itemId) < 0)
 			return false;
-		int pokePartyPos = Integer.parseInt(data[0]);
+		int pokePartyPos;
+		try
+		{
+			pokePartyPos = Integer.parseInt(data[0]);
+		}
+		catch(Exception e)
+		{
+			pokePartyPos = 0;
+		}
 		Pokemon poke = player.getParty()[pokePartyPos];
 		Item item = GameServer.getServiceManager().getItemDatabase().getItem(itemId);
 		String itemName = item.getName().toUpperCase();

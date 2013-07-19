@@ -893,24 +893,47 @@ public abstract class BattleField
 					switch(psource.getItemName())
 					{
 						case "Leftovers":
-							psource.changeHealth(psource.getStat(psource.S_HP) / 16);
-							System.out.println(psource.getStat(psource.S_HP) / 16);
+							if(psource.getHealth() < psource.getRawStat(psource.S_HP))
+							{
+								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)
+									psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								else
+									psource.changeHealth(psource.getRawStat(psource.S_HP) - psource.getHealth());
+								System.out.println(psource.getStat(psource.S_HP) / 16);
+							}
 							this.showMessage(psource.getName() + "'s leftovers heals a bit of HP");
 							break;
 						case "Black Sludge":
 							if(psource.m_type1.equalsIgnoreCase("Poison") || psource.m_type2.equalsIgnoreCase("Poison"))
 							{
-								psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)
+									psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								else
+									psource.changeHealth(psource.getRawStat(psource.S_HP) - psource.getHealth());
 								this.showMessage(psource.getName() + "'s black sludge heals a bit of HP");
 							}
 							else
 							{
-								psource.changeHealth(-psource.getStat(psource.S_HP) / 16);
+								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)	// if hp is bigger than 1/16 of total just remove
+									psource.changeHealth(-psource.getStat(psource.S_HP) / 16);
+								else if(psource.getRawStat(psource.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
+								{
+								}
+								else
+									// less than 1/16 of hp, remove what is left but leave 1 hp
+									psource.changeHealth(-psource.getRawStat(psource.S_HP) - psource.getHealth() + 1);
 								this.showMessage(psource.getName() + " is hurt by black sludge");
 							}
 							break;
 						case "Sticky Barb":
-							psource.changeHealth(-psource.getStat(psource.S_HP) / 8);
+							if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 8)	// if hp is bigger than 1/8 of total just remove
+								psource.changeHealth(-psource.getStat(psource.S_HP) / 8);
+							else if(psource.getRawStat(psource.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
+							{
+							}
+							else
+								// less than 1/16 of hp, remove what is left but leave 1 hp
+								psource.changeHealth(-psource.getRawStat(psource.S_HP) - psource.getHealth() + 1);
 							this.showMessage(psource.getName() + " is hurt by Sticky Barb");
 							break;
 						default:

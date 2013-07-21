@@ -35,7 +35,7 @@ public class BattleTimeLine
 		{
 			e.printStackTrace();
 		}
-		m_narrator = new BattleSpeechFrame();
+		m_narrator = new BattleSpeechFrame(GameClient.getInstance().getHUD());
 	}
 
 	/**

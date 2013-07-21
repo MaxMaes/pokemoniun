@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Enums.Poketype;
 
+import de.matthiasmann.twl.Widget;
+
 /**
  * Represents our player
  * 
@@ -233,7 +235,7 @@ public class OurPlayer extends Player
 	 * @param number
 	 * @param quantity
 	 */
-	public void removeItem(int number, int quantity)
+	public void removeItem(int number, int quantity, Widget root)
 	{
 		for(int i = 0; i < m_items.size(); i++)
 			if(m_items.get(i) != null && m_items.get(i).getNumber() == number)
@@ -242,13 +244,13 @@ public class OurPlayer extends Player
 				{
 					m_items.get(i).setQuantity(m_items.get(i).getQuantity() - quantity);
 					if(GameClient.getInstance().getHUD().getBag() != null)
-						GameClient.getInstance().getHUD().getBag().removeItem(number, false);
+						GameClient.getInstance().getHUD().getBag().removeItem(number, false, root);
 				}
 				else
 				{
 					m_items.remove(i);
 					if(GameClient.getInstance().getHUD().getBag() != null)
-						GameClient.getInstance().getHUD().getBag().removeItem(number, true);
+						GameClient.getInstance().getHUD().getBag().removeItem(number, true, root);
 				}
 				return;
 			}

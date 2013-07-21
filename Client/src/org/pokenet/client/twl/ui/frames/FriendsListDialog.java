@@ -7,6 +7,7 @@ import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 
@@ -207,6 +208,7 @@ class PopUp extends Widget
 {
 	private Label m_name;
 	private Button m_remove, m_whisper, m_cancel;
+	private PopupWindow popup;
 
 	/**
 	 * Default Constructor
@@ -214,7 +216,7 @@ class PopUp extends Widget
 	 * @param friend The username of the friend.
 	 * @param online True if the friend is online, otherwise false.
 	 */
-	public PopUp(String friend, boolean online)
+	public PopUp(String friend, boolean online,Widget root)
 	{
 		setPosition(getX() - 1, getY() + 1);
 		m_name = new Label(friend);
@@ -236,7 +238,12 @@ class PopUp extends Widget
 		add(m_cancel);
 		setSize(100, 103 + m_name.computeTextHeight());
 		setVisible(true);
-		// setAlwaysOnTop(true); //TODO: Chappie magic :D
+		popup = new PopupWindow(root);
+		popup.setTheme("FriendsListPopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(true);
+		popup.setCloseOnEscape(true);
+		
 		m_remove.addCallback(new Runnable()
 		{
 			@Override

@@ -202,7 +202,7 @@ public class HUD extends DesktopArea
 		else
 		{
 			hideHUDElements();
-			bigBag = new BigBagDialog();
+			bigBag = new BigBagDialog(this);
 			bigBag.setPosition(topbar.getBarButton(3).getInnerX(), topbar.getBarButton(3).getInnerY() + topbar.getBarButton(3).getHeight());
 			add(bigBag);
 		}
@@ -326,7 +326,7 @@ public class HUD extends DesktopArea
 	 */
 	public void createPlayerPopupDialog(String player)
 	{
-		playerPopupDialog = new PlayerPopupDialog(player);
+		playerPopupDialog = new PlayerPopupDialog(player, this);
 		playerPopupDialog.setVisible(false);
 		add(playerPopupDialog);
 	}
@@ -368,7 +368,7 @@ public class HUD extends DesktopArea
 
 	public void showMoveLearning()
 	{
-		moveLearning = new MoveLearning();
+		moveLearning = new MoveLearning(this);
 		add(moveLearning);
 	}
 
@@ -475,7 +475,7 @@ public class HUD extends DesktopArea
 	 */
 	public void showBattlebag()
 	{
-		battleBag = new BattleBag();
+		battleBag = new BattleBag(this);
 		add(battleBag);
 	}
 
@@ -603,7 +603,7 @@ public class HUD extends DesktopArea
 
 	public void showBoxDialog(int[] pokes)
 	{
-		boxDialog = new PokeStorageBoxFrame(pokes);
+		boxDialog = new PokeStorageBoxFrame(pokes, this);
 		add(boxDialog);
 	}
 
@@ -618,7 +618,7 @@ public class HUD extends DesktopArea
 
 	public void showBattleSpeechFrame()
 	{
-		battleSpeechFrame = new BattleSpeechFrame();
+		battleSpeechFrame = new BattleSpeechFrame(this);
 		add(battleSpeechFrame);
 	}
 
@@ -767,7 +767,7 @@ public class HUD extends DesktopArea
 	 */
 	public void talkToNPC(String speech)
 	{
-		npcSpeech = new NPCSpeechFrame(speech);
+		npcSpeech = new NPCSpeechFrame(speech, this);
 		add(npcSpeech);
 	}
 

@@ -12,6 +12,7 @@ import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Event;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
@@ -34,10 +35,10 @@ public class BigBagDialog extends ResizableFrame
 	private Image[] bagicons;
 	private org.pokenet.client.twl.ui.base.Image bagicon;
 
-	public BigBagDialog()
+	public BigBagDialog(Widget root)
 	{
 		setCenter();
-		initGUI();
+		initGUI(root);
 		loadItems();
 	}
 
@@ -104,7 +105,7 @@ public class BigBagDialog extends ResizableFrame
 	}
 
 	/** Initializes the interface */
-	public void initGUI()
+	public void initGUI(final Widget root)
 	{
 		/* Does this cause a memory leak in JAVA if called more than once? If so does java have a delete keyword? */
 		m_items = new HashMap<Integer, ArrayList<PlayerItem>>();
@@ -210,7 +211,7 @@ public class BigBagDialog extends ResizableFrame
 				public void run()
 				{
 					destroyPopup();
-					useItem(j);
+					useItem(j,root);
 					update();
 				}
 			});
@@ -287,7 +288,7 @@ public class BigBagDialog extends ResizableFrame
 	 * @param id
 	 * @param amount
 	 */
-	public void removeItem(int id, boolean remove)
+	public void removeItem(int id, boolean remove, Widget root)
 	{
 		/* The remove variable indicates that this is the last of the item, and it should be removed from the inventory */
 		if(remove)
@@ -321,7 +322,7 @@ public class BigBagDialog extends ResizableFrame
 			}
 			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
 			int tmpCurCategory = m_curCategory;
-			initGUI();
+			initGUI(root);
 			loadItems();
 			m_curCategory = tmpCurCategory;
 			update();
@@ -389,17 +390,17 @@ public class BigBagDialog extends ResizableFrame
 	 * 
 	 * @param i
 	 */
-	public void useItem(int i)
+	public void useItem(int i, Widget root)
 	{
 		destroyPopup();
 		if(m_curCategory == 3)
 		// if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getText())).getCategory().equalsIgnoreCase("Field"))
-				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, false);
+				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, false, root);
 			// System.out.println("win " + i);
 			else
-				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false);
+				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
 			// System.out.println("fail " + i);
 			// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
 			// .getCategory());
@@ -408,7 +409,7 @@ public class BigBagDialog extends ResizableFrame
 		}
 		else
 		{
-			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false);
+			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
 			m_popup.setPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
 			add(m_popup);
 			// System.out.println("check " + i);
@@ -502,6 +503,8 @@ class ItemPopup extends Widget
 	private Label m_name;
 	private TeamPopup m_team;
 	private Button m_use;
+	
+	private PopupWindow popup;
 
 	/**
 	 * Default Constructor
@@ -511,7 +514,7 @@ class ItemPopup extends Widget
 	 * @param useOnPokemon
 	 * @param isBattle
 	 */
-	public ItemPopup(String item, int id, boolean useOnPokemon, boolean isBattle)
+	public ItemPopup(String item, int id, boolean useOnPokemon, boolean isBattle, Widget root)
 	{
 		final int m_id = id;
 		final boolean m_useOnPoke = useOnPokemon;
@@ -588,7 +591,12 @@ class ItemPopup extends Widget
 		else
 			setSize(100, 115);
 		setVisible(true);
-		// setAlwaysOnTop(true); //TODO: Chappie magic :D
+		popup = new PopupWindow(root);
+		popup.setTheme("BigBagDialogPopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(false);
+		popup.setCloseOnEscape(false);
+		popup.adjustSize();
 	}
 
 	/**
@@ -599,6 +607,7 @@ class ItemPopup extends Widget
 		removeChild(m_team);
 		m_team = null;
 		removeChild(this);
+		popup.destroy();
 	}
 
 	/**
@@ -608,7 +617,7 @@ class ItemPopup extends Widget
 	 */
 	public void giveItem(int id)
 	{
-		// setAlwaysOnTop(false); //TODO: Chappie magic :D
+		popup.setVisible(false);
 		removeChild(m_team);
 		m_team = null;
 		m_team = new TeamPopup(this, id, false, false);
@@ -629,7 +638,7 @@ class ItemPopup extends Widget
 		m_team = null;
 		if(usedOnPoke)
 		{
-			// setAlwaysOnTop(false); //TODO: Chappie magic :D
+			popup.setVisible(false);
 			m_team = new TeamPopup(this, id, true, isBattle);
 			m_team.setPosition(m_use.getInnerX() + getWidth(), m_use.getInnerY() - 15);
 			add(m_team);

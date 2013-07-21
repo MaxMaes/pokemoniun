@@ -24,7 +24,7 @@ public class MoveLearningManager extends Thread
 	private MoveLearningManager()
 	{
 		m_moveLearningQueue = new LinkedList<MoveLearnQueueObject>();
-		m_moveLearning = new MoveLearning();
+		m_moveLearning = new MoveLearning(GameClient.getInstance().getHUD());
 		System.out.println("Move Learning Manager started.");
 	}
 

@@ -5,6 +5,7 @@ import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -16,13 +17,14 @@ public class PlayerPopupDialog extends Widget
 {
 	private Button m_battle, m_trade, m_addFriend, m_whisper, m_cancel;
 	private Label m_name;
+	private PopupWindow popup;
 
 	/**
 	 * Default Constructor
 	 * 
 	 * @param player
 	 */
-	public PlayerPopupDialog(String player)
+	public PlayerPopupDialog(String player, Widget root)
 	{
 		m_name = new Label(player);
 		m_name.setPosition(0, 0);
@@ -102,6 +104,11 @@ public class PlayerPopupDialog extends Widget
 				destroy();
 			}
 		});
+		
+		popup = new PopupWindow(root);
+		popup.setTheme("PlayerPopup");
+		popup.add(this);
+		popup.adjustSize();
 	}
 
 	/**
@@ -109,7 +116,7 @@ public class PlayerPopupDialog extends Widget
 	 */
 	public void destroy()
 	{
-		// GameClient.getInstance().getDisplay().remove(this); TODO: Requires new way
+		popup.destroy();
 	}
 
 	@Override
@@ -121,5 +128,6 @@ public class PlayerPopupDialog extends Widget
 		m_addFriend.setPosition(0, m_whisper.getY() + 25);
 		m_cancel.setPosition(0, m_addFriend.getY() + 25);
 		setSize(100, 150 + m_name.computeTextHeight());
+		popup.adjustSize();
 	}
 }

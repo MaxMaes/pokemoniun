@@ -143,7 +143,7 @@ false
 [npc]
 Seasond_Sailor
 up
-142
+395
 23
 34
 NULL

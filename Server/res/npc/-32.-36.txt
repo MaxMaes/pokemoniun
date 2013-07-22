@@ -1,7 +1,7 @@
 [npc]
 Photographer
 down
-9
+352
 3
 5
 NULL

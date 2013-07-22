@@ -1,7 +1,7 @@
 [npc]
 Burglar Arnie
 left
-195
+320
 9
 7
 Charmander,34,Charmeleon,34
@@ -15,7 +15,7 @@ false
 [npc]
 Scientist Braydon
 right
-169
+344
 28
 18
 Magnemite,33,Magneton,33,Voltorb,33
@@ -29,7 +29,7 @@ false
 [npc]
 Burglar Simon
 right
-195
+314
 24
 25
 Ninetales,38

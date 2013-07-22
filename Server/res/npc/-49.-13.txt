@@ -1,7 +1,7 @@
 [npc]
 Fanclub member
 down
-132
+262
 7
 12
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Fanclub member
 left
-54
+282
 8
 14
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Fanclub member
 right
-210
+261
 4
 14
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Fanclub member
 right
-159
+280
 4
 13
 NULL

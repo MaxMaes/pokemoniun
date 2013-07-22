@@ -57,7 +57,7 @@ false
 [npc]
 Receptionist
 up
-64
+328
 7
 7
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Receptionist
 up
-57
+328
 11
 7
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Radio Tower Visitor
 right
-82
+373
 16
 5
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Radio Tower Visitor
 left
-54
+374
 17
 5
 NULL

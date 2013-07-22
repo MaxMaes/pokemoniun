@@ -1,7 +1,7 @@
 [npc]
 Fisherman
 up
-46
+368
 4
 14
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Fisherman
 up
-46
+368
 17
 14
 NULL

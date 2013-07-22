@@ -1,7 +1,7 @@
 [npc]
 Pokemaniac Ashton
 left
-195
+278
 27
 10
 Cubone,23,Slowpoke,23
@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Lenny
 down
-101
+365
 7
 5
 Geodude,19,Geodude,19,Geodude,19,Machop,19
@@ -29,7 +29,7 @@ false
 [npc]
 Hiker Oliver
 down
-101
+366
 5
 20
 Onix,20,Onix,20,Geodude,20
@@ -43,7 +43,7 @@ false
 [npc]
 Hiker Lucas
 left
-101
+366
 20
 17
 Geodude,21,Graveler,21
@@ -57,7 +57,7 @@ false
 [npc]
 Picnicker Leah
 left
-30
+357
 45
 24
 Bellsprout,22,Clefairy,22
@@ -71,7 +71,7 @@ false
 [npc]
 Picnicker Ariana
 right
-30
+357
 39
 27
 Pidgey,19,Bellsprout,19,Rattata,19,Rattata,19
@@ -85,7 +85,7 @@ false
 [npc]
 Picnicker Dana
 down
-30
+357
 26
 28
 Meowth,20,Oddish,20,Pidgey,20

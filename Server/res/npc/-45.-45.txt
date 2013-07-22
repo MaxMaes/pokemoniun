@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer Fran
 left
-55
+268
 5
 13
 Seadra,37
@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Cody
 right
-81
+265
 5
 3
 Horsea,34,Seadra,36

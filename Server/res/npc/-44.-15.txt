@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer George
 left
-83
+265
 38
 8
 Exeggutor,42,Cloyster,42,Arcanine,42,Electrode,42,Sandslash,42
@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Alexa
 down
-57
+271
 19
 6
 Clefairy,42,Dewgong,42,Jigglypuff,42,Persian,42,Chansey,42
@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Ray
 right
-83
+268
 34
 13
 Nidoking,45
@@ -43,7 +43,7 @@ false
 [npc]
 Cooltrainer Tyra
 left
-57
+271
 38
 15
 Nidoqueen,45
@@ -57,7 +57,7 @@ false
 [npc]
 Cooltrainer Caroline
 up
-57
+265
 9
 17
 Bellsprout,42,Weepinbell,42,Victreebel,42,Parasect,42,Paras,42
@@ -71,7 +71,7 @@ false
 [npc]
 Cooltrainer Colby
 down
-83
+273
 8
 18
 Kingler,41,Poliwhirl,42,Tentacruel,42,Seadra,42,Blastoise,43

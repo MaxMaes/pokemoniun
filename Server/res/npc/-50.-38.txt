@@ -1,7 +1,7 @@
 [npc]
 Charcoal Kiln
 down
-101
+365
 17
 18
 NULL

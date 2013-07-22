@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Samuel
 down
-210
+353
 17
 25
 Rattata,7,Sandshrew,10,Spearow,8,Spearow,8
@@ -43,7 +43,7 @@ false
 [npc]
 Pokefan Brandon
 down
-141
+319
 19
 22
 Snubbull,13
@@ -57,7 +57,7 @@ false
 [npc]
 Picnicker Gina
 right
-29
+357
 9
 20
 Hoppip,9,Hoppip,9,Bulbasaur,12
@@ -71,7 +71,7 @@ false
 [npc]
 Youngster Ian
 down
-210
+353
 12
 13
 Mankey,10,Diglett,12

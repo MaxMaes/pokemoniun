@@ -1,7 +1,7 @@
 [npc]
 Kurt
 down
-145
+329
 3
 3
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Kurt's granddaughter
 down
-68
+262
 6
 4
 NULL

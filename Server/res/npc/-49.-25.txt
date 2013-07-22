@@ -1,7 +1,7 @@
 [npc]
 Visitor
 down
-141
+274
 2
 2
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Visitor
 left
-96
+351
 4
 7
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Visitor
 right
-44
+279
 10
 4
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Waitress
 left
-51
+382
 12
 4
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Cook
 down
-32
+33
 13
 7
 NULL

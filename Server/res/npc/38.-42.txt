@@ -1,7 +1,7 @@
 [npc]
 NPC
 up
-47
+261
 41
 36
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 NPC
 up
-47
+351
 57
 52
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 NPC
 right
-47
+357
 53
 37
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 NPC
 up
-47
+382
 47
 23
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 NPC
 left
-47
+349
 20
 14
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 NPC
 right
-47
+320
 32
 17
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 NPC
 down
-47
+317
 13
 23
 NULL
@@ -113,7 +113,7 @@ false
 [npc]
 NULL
 down
-47
+319
 23
 19
 NULL

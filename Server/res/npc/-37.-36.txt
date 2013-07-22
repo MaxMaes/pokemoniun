@@ -1,7 +1,7 @@
 [npc]
 Bird Keeper Theo
 up
-83
+269
 3
 9
 Pidgey,17,Pidgey,15,Pidgey,19,Pidgey,15,Pidgey,15
@@ -15,7 +15,7 @@ false
 [npc]
 Gentleman Preston
 right
-160
+280
 13
 5
 Growlithe,18,Growlithe,18
@@ -29,7 +29,7 @@ false
 [npc]
 Sailor Terrell
 down
-184
+395
 9
 2
 Poliwhirl,20

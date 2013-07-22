@@ -1,7 +1,7 @@
 [npc]
 Youngster Calvin
 down
-110
+353
 43
 11
 Poochyena,5
@@ -15,7 +15,7 @@ false
 [npc]
 Bug Catcher Rick
 down
-24
+354
 33
 16
 Wurmple,4,Wurmple,4
@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Allen
 down
-110
+353
 25
 11
 Zigzagoon,5,Tailow,3
@@ -43,7 +43,7 @@ false
 [npc]
 Lass Tiana
 right
-20
+272
 18
 18
 Zigzagoon,4,Shroomish,4

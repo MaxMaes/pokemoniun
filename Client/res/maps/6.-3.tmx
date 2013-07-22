@@ -27,7 +27,7 @@
  </layer>
  <layer name="Walkable" width="48" height="41">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YwQmAMBBE0RXSka1ZRrQCFTyrsSWr8OwcLEACsqz8B3MM/NxCzOrlZNY/G9L35wAAAIA/G/U2nrSZNzIQztJ6F9RZ1b1pu1a0I+A9cvC/hej9AN45vQMQ0uUdADdd410AAL5uN4pBh8AeAAA=
+   H4sIAAAAAAAAC+3YwQmAMAxG4QjdyNUco3YCFbpZp+jZHDqACPKT+j7IMfCOIWbv5WS2jynp+z0AAABgZoffxqfPxY0MhFNXdcF/5eC/hej9AJ5p6gCE1NUBkNkWdQEAaN0VZnsIwB4AAA==
   </data>
  </layer>
  <layer name="Grass" width="48" height="41">

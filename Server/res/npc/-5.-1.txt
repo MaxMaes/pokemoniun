@@ -1,7 +1,7 @@
 [npc]
 Picnicker Kim
 down
-29
+357
 49
 14
 Vulpix,15
@@ -15,7 +15,7 @@ false
 [npc]
 Camper Elliot
 down
-28
+345
 50
 29
 Sandshrew,13,Marill,15
@@ -29,7 +29,7 @@ false
 [npc]
 Picnicker Brooke
 down
-30
+355
 37
 21
 Pikachu,16
@@ -43,7 +43,7 @@ false
 [npc]
 Camper Ivan
 down
-27
+331
 37
 27
 Diglett,10,Zubat,10,Diglett,14
@@ -57,7 +57,7 @@ false
 [npc]
 Juggler Irwin
 down
-83
+359
 6
 7
 Voltorb,2,Voltorb,6,Voltorb,10,Voltorb,14
@@ -71,7 +71,7 @@ false
 [npc]
 Firebreather Walt
 down
-91
+320
 17
 22
 Magmar,10,Magmar,13
@@ -85,7 +85,7 @@ false
 [npc]
 Officer Dirk
 down
-36
+327
 19
 36
 Growlithe,14,Growlithe,14
@@ -99,7 +99,7 @@ false
 [npc]
 Bug Catcher Arnie
 right
-24
+254
 10
 24
 Venonat,15
@@ -113,7 +113,7 @@ false
 [npc]
 Bird Keeper Bryan
 down
-190
+269
 5
 17
 Pidgey,12,Pidgeotto,14

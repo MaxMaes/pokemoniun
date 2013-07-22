@@ -29,7 +29,7 @@ false
 [npc]
 Black Belt Hideki
 right
-104
+367
 1
 9
 Machop,32,Machoke,32
@@ -43,7 +43,7 @@ false
 [npc]
 Black Belt Mike
 right
-104
+367
 1
 7
 Mankey,31,Mankey,31,Primeape,31
@@ -57,7 +57,7 @@ false
 [npc]
 Black Belt Hitoshi
 left
-104
+367
 11
 9
 Machop,31,Mankey,31,Primeape,31
@@ -71,7 +71,7 @@ false
 [npc]
 Black Belt Aaron
 left
-104
+367
 11
 7
 Primeape,36

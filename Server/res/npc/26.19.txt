@@ -1,7 +1,7 @@
 [npc]
 Youngster Neal
 down
-210
+353
 32
 6
 Trapinch,18,Linoone,20
@@ -15,7 +15,7 @@ false
 [npc]
 Ninja Boy Lao
 left
-222
+261
 29
 3
 Koffing,17,Koffing,17,Koffing,17,Koffing,19

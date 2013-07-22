@@ -1,7 +1,7 @@
 [npc]
 Channeler Carly
 down
-63
+260
 8
 9
 Gastly,24
@@ -15,7 +15,7 @@ false
 [npc]
 Channeler Patricia
 down
-63
+259
 9
 14
 Gastly,22
@@ -29,7 +29,7 @@ false
 [npc]
 Channeler Hope
 up
-63
+260
 11
 4
 Gastly,23

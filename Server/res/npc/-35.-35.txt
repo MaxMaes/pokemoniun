@@ -1,7 +1,7 @@
 [npc]
 Sage Ping
 right
-259
+276
 21
 18
 Gastly,16,Gastly,16,Gastly,16,Gastly,16,Gastly,16
@@ -29,7 +29,7 @@ false
 [npc]
 Sage Jeffrey
 right
-164
+276
 20
 25
 Haunter,22

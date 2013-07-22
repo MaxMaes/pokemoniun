@@ -1,7 +1,7 @@
 [npc]
 Pokemaniac Miller
 left
-152
+278
 33
 44
 Nidoking,17,Nidoqueen,17
@@ -15,7 +15,7 @@ false
 [npc]
 Supernerd Markus
 down
-195
+352
 24
 28
 Slowpoke,19

@@ -1,7 +1,7 @@
 [npc]
 Picnicker Alicia
 left
-30
+357
 14
 11
 Oddish,18,Bellsprout,18,Oddish,18,Bellsprout,18
@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Jeremy
 up
-101
+366
 19
 17
 Machop,20,Onix,20
@@ -29,7 +29,7 @@ false
 [npc]
 Camper Chris
 right
-28
+355
 27
 5
 Growlithe,21,Charmander,21
@@ -43,7 +43,7 @@ false
 [npc]
 Bug Catcher Brent
 down
-23
+354
 26
 1
 Beedrill,19,Beedrill,19
@@ -57,7 +57,7 @@ false
 [npc]
 Hiker Alan
 down
-101
+366
 61
 16
 Geodude,21,Onix,21
@@ -71,7 +71,7 @@ false
 [npc]
 Bug Catcher Conner
 right
-23
+354
 49
 7
 Caterpie,20,Weedle,20,Venonat,20
@@ -85,7 +85,7 @@ false
 [npc]
 Camper Drew
 right
-28
+355
 36
 6
 Rattata,19,Sandshrew,19,Sandshrew,19,Ekans,19
@@ -99,7 +99,7 @@ false
 [npc]
 Hiker Brice
 down
-101
+365
 52
 1
 Geodude,20,Geodude,20,Machop,20
@@ -113,7 +113,7 @@ false
 [npc]
 Picnicker Caitlin
 right
-30
+357
 60
 9
 Meowth,23

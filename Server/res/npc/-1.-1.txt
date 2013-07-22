@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Bailey
 left
-102
+365
 16
 19
 Geodude,13,Geodude,13,Geodude,13,Geodude,13,Geodude,13

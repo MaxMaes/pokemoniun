@@ -1,7 +1,7 @@
 [npc]
 Member
 right
-127
+347
 5
 6
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Member
 left
-44
+274
 8
 6
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Member
 down
-70
+343
 7
 5
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Chairman
 down
-159
+280
 6
 5
 NULL

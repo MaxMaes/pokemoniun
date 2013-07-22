@@ -1,7 +1,7 @@
 [npc]
 Fly teacher
 down
-127
+267
 5
 2
 NULL

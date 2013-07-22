@@ -1,7 +1,7 @@
 [npc]
 Fisherman Wade
 down
-47
+368
 15
 26
 Magikarp,27,Magikarp,27,Magikarp,27,Magikarp,27,Magikarp,27,Magikarp,27
@@ -15,7 +15,7 @@ false
 [npc]
 Fisherman Ronald
 up
-47
+368
 7
 26
 Seaking,28,Goldeen,28,Seaking,28,Seaking,28
@@ -29,7 +29,7 @@ false
 [npc]
 Swimmer Ian
 down
-200
+281
 14
 35
 Seadra,33
@@ -43,7 +43,7 @@ false
 [npc]
 Swimmer Lil
 down
-197
+282
 13
 35
 Starmie,33
@@ -57,7 +57,7 @@ false
 [npc]
 Swimmer Spencer
 right
-200
+281
 8
 42
 Seadra,33,Tentacruel,33
@@ -71,7 +71,7 @@ false
 [npc]
 Fisherman Claude
 right
-47
+368
 11
 58
 Shellder,31,Cloyster,31
@@ -85,7 +85,7 @@ false
 [npc]
 Fisherman Nolan
 left
-47
+368
 14
 65
 Seaking,33,Goldeen,33
@@ -99,7 +99,7 @@ false
 [npc]
 Swimmer Jack
 right
-200
+281
 15
 73
 Starmie,37
@@ -113,7 +113,7 @@ false
 [npc]
 Swimmer Roland
 right
-200
+281
 11
 76
 Poliwhirl,32,Tentacool,32,Seadra,32
@@ -127,7 +127,7 @@ false
 [npc]
 Swimmer Jerome
 left
-200
+281
 15
 86
 Staryu,33,Wartortle,33

@@ -1,7 +1,7 @@
 [npc]
 Red
 down
-176
+306
 17
 7
 Pikachu,100,Lapras,100,Snorlax,100,Venusaur,100,Charizard,100,Blastoise,100

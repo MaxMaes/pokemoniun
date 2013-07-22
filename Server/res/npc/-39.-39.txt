@@ -1,7 +1,7 @@
 [npc]
 Cherrygrove citizen
 down
-81
+317
 15
 13
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Cherrygrove citizen
 down
-141
+274
 10
 12
 NULL

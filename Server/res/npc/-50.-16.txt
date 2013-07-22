@@ -15,7 +15,7 @@ false
 [npc]
 Gambler
 right
-2
+161
 4
 10
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Gambler
 left
-167
+332
 2
 11
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Gambler
 left
-213
+365
 2
 13
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Gambler
 right
-143
+274
 4
 13
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Gambler
 left
-112
+382
 7
 12
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Gambler
 right
-113
+271
 9
 10
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Gambler
 left
-88
+280
 12
 10
 NULL
@@ -113,7 +113,7 @@ false
 [npc]
 Gambler
 left
-96
+355
 12
 13
 NULL
@@ -127,7 +127,7 @@ false
 [npc]
 Receptionist
 down
-113
+328
 6
 5
 NULL
@@ -141,7 +141,7 @@ false
 [npc]
 Coin Seller
 down
-87
+279
 9
 5
 NULL

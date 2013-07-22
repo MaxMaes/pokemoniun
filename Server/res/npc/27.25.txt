@@ -1,7 +1,7 @@
 [npc]
 Sailor Huey
 down
-184
+395
 20
 9
 Machop,14
@@ -15,7 +15,7 @@ false
 [npc]
 Tuber Ricky
 down
-124
+339
 18
 7
 Zigzagoon,14
@@ -29,7 +29,7 @@ false
 [npc]
 Sailor Edmond
 Left
-184
+395
 23
 20
 Wingull,12,Machop,12,Wingull,12
@@ -43,7 +43,7 @@ false
 [npc]
 Tuber Lola
 down
-130
+360
 27
 14
 Azurill,13,Azurill,13

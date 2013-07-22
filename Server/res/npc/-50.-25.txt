@@ -1,7 +1,7 @@
 [npc]
 PN Staff
 up
-79
+317
 6
 10
 NULL

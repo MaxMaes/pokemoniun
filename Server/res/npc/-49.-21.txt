@@ -1,7 +1,7 @@
 [npc]
 Citizen
 up
-167
+276
 3
 2
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Wife
 left
-163
+277
 8
 5
 NULL

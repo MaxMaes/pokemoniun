@@ -1,7 +1,7 @@
 [npc]
 Tin Tower Sage
 right
-167
+276
 2
 11
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Tin Tower Sage
 left
-164
+276
 7
 9
 NULL

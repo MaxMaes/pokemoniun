@@ -3,7 +3,6 @@ package org.pokenet.client.backend.entity;
 import java.util.ArrayList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Enums.Poketype;
-
 import de.matthiasmann.twl.Widget;
 
 /**

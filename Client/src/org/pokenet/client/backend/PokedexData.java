@@ -17,6 +17,9 @@ public class PokedexData
 	private static HashMap<Integer, String[]> dexdata;
 	private static HashMap<Integer, Object[]> locationids;
 	private static HashMap<Integer, ArrayList<Integer>[]> locations;
+	public static int POKEMON_UNKNOWN = 0;
+	public static int POKEMON_SEEN = 1;
+	public static int POKEMON_CAUGHT = 2;
 
 	public static String getAbilities(int id)
 	{

@@ -5,13 +5,12 @@ import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokedexData;
+import org.pokenet.client.twl.ui.base.Image;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon.PokedexMap;
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
-import de.matthiasmann.twl.renderer.Image;
 
 /**
  * Pokedex dialog
@@ -21,13 +20,16 @@ import de.matthiasmann.twl.renderer.Image;
 public class PokedexDialog extends ResizableFrame
 {
 	// Images
-	private Image icon_caught = GameClient.getInstance().getTheme().getImage("pokemoncaught");
-	private Image icon_location = GameClient.getInstance().getTheme().getImage("pokemonlocation");
-	private Image map_kantojohto = GameClient.getInstance().getTheme().getImage("map_kantojohto");
-	private Image map_hoenn = GameClient.getInstance().getTheme().getImage("map_hoenn");
-	private Image map_sinnoh = GameClient.getInstance().getTheme().getImage("map_sinnoh");
-	private Image selectionFrame = GameClient.getInstance().getTheme().getImage("pokemonselection");
-	private Image[] pokemonIcons = loadPokemonIcons();
+	private de.matthiasmann.twl.renderer.Image icon_caught = GameClient.getInstance().getTheme().getImage("pokemoncaught");
+	private de.matthiasmann.twl.renderer.Image icon_location = GameClient.getInstance().getTheme().getImage("pokemonlocation");
+	private de.matthiasmann.twl.renderer.Image[] pokemonIcons = loadPokemonIcons();
+
+	// Image widgets
+	private Image map_kantojohto = new Image(GameClient.getInstance().getTheme().getImage("map_kantojohto"));
+	private Image map_hoenn = new Image(GameClient.getInstance().getTheme().getImage("map_hoenn"));
+	private Image map_sinnoh = new Image(GameClient.getInstance().getTheme().getImage("map_sinnoh"));
+	private Image selectionFrame = new Image(GameClient.getInstance().getTheme().getImage("pokemonselection"));
+	private Image pokemonIcon;
 
 	// Buttons
 	private Button inc1, inc5, inc10, inc50, currIncButton;
@@ -36,7 +38,7 @@ public class PokedexDialog extends ResizableFrame
 	// Labels
 	private Label[] loreLabels;
 	private Label[] pokemonBiologyLabels;
-	private Label[] pokemonCaughtLabels;
+	private Image[] pokemonCaughtIcons;
 	private PokemonLocationIcon[] pokemonLocationLabels;
 	private Label[] pokemonNameList;
 	private Label pokemonnumber;
@@ -51,16 +53,13 @@ public class PokedexDialog extends ResizableFrame
 	private int selection = 1;
 	private int tabindex = 1;
 	private int[] trainerPokedex;
-	private static final int MAX = 493; // Change this to the amount of pokemon we've got
+	private static final int MAX = 495; // Change this to the amount of pokemon we've got
+	private boolean initialized = false;
 
 	public PokedexDialog()
 	{
 		trainerPokedex = new int[MAX + 1];
-		trainerPokedex[1] = 2;
-		trainerPokedex[2] = 1;
-		trainerPokedex[3] = 0;
-		trainerPokedex[4] = 2;
-		initGUI();
+		// initGUI();
 	}
 
 	public void fillNameList()
@@ -75,7 +74,7 @@ public class PokedexDialog extends ResizableFrame
 			}
 			else
 			{
-				if(getPokemon(first + i) == 0)
+				if(getPokemon(first + i) == PokedexData.POKEMON_UNKNOWN)
 				{
 					String number = new String();
 					if(first + i < 10)
@@ -87,7 +86,7 @@ public class PokedexDialog extends ResizableFrame
 
 					pokemonNameList[i].setText("#" + number + "                ???");
 				}
-				if(getPokemon(first + i) > 0)
+				if(getPokemon(first + i) > PokedexData.POKEMON_UNKNOWN)
 				{
 					String number = new String();
 					if(first + i < 10)
@@ -99,11 +98,25 @@ public class PokedexDialog extends ResizableFrame
 
 					pokemonNameList[i].setText("#" + number + " " + PokedexData.getName(first + i));
 				}
+				if(getPokemon(first + i) == PokedexData.POKEMON_CAUGHT)
+				{
+					pokemonCaughtIcons[i].setVisible(true);
+				}
+				else
+				{
+					pokemonCaughtIcons[i].setVisible(false);
+				}
 			}
 		}
 
 	}
 
+	/**
+	 * Returns the pokedex state of this pokemon
+	 * 
+	 * @param id
+	 * @return Pokedex
+	 */
 	public int getPokemon(int id)
 	{
 		return trainerPokedex[id];
@@ -128,7 +141,7 @@ public class PokedexDialog extends ResizableFrame
 
 		loreLabels = new Label[0];
 		pokemonNameList = new Label[13];
-		pokemonCaughtLabels = new Label[13];
+		pokemonCaughtIcons = new Image[13];
 		pokemonLocationLabels = new PokemonLocationIcon[0];
 		pokemonMoveLabels = new Label[0];
 		pokemonBiologyLabels = new Label[14];
@@ -145,44 +158,48 @@ public class PokedexDialog extends ResizableFrame
 			pokemonNameList[i] = new Label();
 			pokemonNameList[i].setTheme("label_small");
 			pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 67 + (22 * i));
-			pokemonCaughtLabels[i] = new Label();
-			pokemonCaughtLabels[i].setPosition(getInnerX() + 299, getInnerY() + 60 + 22 * i);
+			pokemonCaughtIcons[i] = new Image(icon_caught);
 		}
-
-		updateNameList();
-
-		updatePokemonInfo();
 
 		add(pokemonname);
 		add(pokemontypes);
 		add(pokemonnumber);
 		add(tabname);
+		add(map_kantojohto);
+		add(map_hoenn);
+		add(map_sinnoh);
+		add(selectionFrame);
+
+		updateNameList();
+
+		updatePokemonInfo();
 
 		for(int i = 0; i < 13; i++)
 		{
 			add(pokemonNameList[i]);
-			add(pokemonCaughtLabels[i]);
+			add(pokemonCaughtIcons[i]);
 		}
 		setDraggable(true);
 		setResizableAxis(ResizableAxis.NONE);
+		initialized = true;
 	}
 
-	public Image loadImage(String path)
+	public de.matthiasmann.twl.renderer.Image loadImage(String path)
 	{
 		boolean old = LoadingList.isDeferredLoading();
 		LoadingList.setDeferredLoading(false);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		Image i = null;
+		de.matthiasmann.twl.renderer.Image i = null;
 		i = FileLoader.loadImage(respath + path);
 		LoadingList.setDeferredLoading(old);
 		return i;
 	}
 
-	public Image[] loadPokemonIcons()
+	public de.matthiasmann.twl.renderer.Image[] loadPokemonIcons()
 	{
-		Image[] sprites = new Image[MAX + 1];
+		de.matthiasmann.twl.renderer.Image[] sprites = new de.matthiasmann.twl.renderer.Image[MAX + 1];
 
 		for(int i = 1; i < MAX + 1; i++)
 			sprites[i] = getSprite(i, 2);
@@ -214,36 +231,75 @@ public class PokedexDialog extends ResizableFrame
 			l.setVisible(false);
 		for(Label l : pokemonBiologyLabels)
 			l.setVisible(false);
+		for(PokemonLocationIcon icon : pokemonLocationLabels)
+			icon.setVisible(false);
+
+		map_kantojohto.setVisible(false);
+		map_hoenn.setVisible(false);
+		map_sinnoh.setVisible(false);
 
 		if(tabindex == 1)
 		{
 			tabname.setText("Kanto/Johto");
+			map_kantojohto.setVisible(true);
+			for(PokemonLocationIcon icon : pokemonLocationLabels)
+			{
+				if(icon.getMap() == PokedexMap.MAP_KANTOJOHTO)
+				{
+					icon.setVisible(true);
+				}
+			}
 		}
 		else if(tabindex == 2)
 		{
 			tabname.setText("Hoenn");
+			map_hoenn.setVisible(true);
+			for(PokemonLocationIcon icon : pokemonLocationLabels)
+			{
+				if(icon.getMap() == PokedexMap.MAP_HOENN)
+				{
+					icon.setVisible(true);
+				}
+			}
 		}
 		else if(tabindex == 3)
 		{
 			tabname.setText("Sinnoh");
+			map_sinnoh.setVisible(true);
+			for(PokemonLocationIcon icon : pokemonLocationLabels)
+			{
+				if(icon.getMap() == PokedexMap.MAP_SINNOH)
+				{
+					icon.setVisible(true);
+				}
+			}
 		}
 		else if(tabindex == 4)
 		{
 			tabname.setText("Lore");
-			for(Label l : loreLabels)
-				l.setVisible(true);
+			if(getPokemon(selection) == PokedexData.POKEMON_CAUGHT)
+			{
+				for(Label l : loreLabels)
+					l.setVisible(true);
+			}
 		}
 		else if(tabindex == 5)
 		{
 			tabname.setText("Moves");
-			for(Label l : pokemonMoveLabels)
-				l.setVisible(true);
+			if(getPokemon(selection) >= PokedexData.POKEMON_SEEN)
+			{
+				for(Label l : pokemonMoveLabels)
+					l.setVisible(true);
+			}
 		}
 		else if(tabindex == 6)
 		{
 			tabname.setText("Biology");
-			for(Label l : pokemonBiologyLabels)
-				l.setVisible(true);
+			if(getPokemon(selection) == PokedexData.POKEMON_CAUGHT)
+			{
+				for(Label l : pokemonBiologyLabels)
+					l.setVisible(true);
+			}
 		}
 	}
 
@@ -259,7 +315,7 @@ public class PokedexDialog extends ResizableFrame
 
 		pokemonnumber.setText(number);
 
-		if(getPokemon(selection) < 1)
+		if(getPokemon(selection) < PokedexData.POKEMON_SEEN)
 		{
 			pokemonname.setText("???");
 			pokemonname.setPosition(getInnerX() + 178 - pokemonname.getWidth() / 2, getInnerY() + 75);
@@ -271,17 +327,24 @@ public class PokedexDialog extends ResizableFrame
 				removeChild(loreLabels[i]);
 			for(int i = 0; i < pokemonBiologyLabels.length; i++)
 				pokemonBiologyLabels[i].setVisible(false);
-			;
+
+			if(pokemonIcon != null)
+			{
+				pokemonIcon.setVisible(false);
+			}
 		}
-		else if(getPokemon(selection) >= 1)
+		else if(getPokemon(selection) >= PokedexData.POKEMON_SEEN)
 		{
 			pokemonname.setText(PokedexData.getName(selection));
 			pokemontypes.setText(PokedexData.getTypestring(selection));
 
 			initLocationLabels();
 			initMoveLabels();
+			removeChild(pokemonIcon);
+			pokemonIcon = new Image(pokemonIcons[selection]);
+			add(pokemonIcon);
 		}
-		if(getPokemon(selection) == 2)
+		if(getPokemon(selection) == PokedexData.POKEMON_CAUGHT)
 		{
 			initLoreLabels();
 			initBiologyLabels();
@@ -296,13 +359,13 @@ public class PokedexDialog extends ResizableFrame
 	 * @param male 2=male, 3=female
 	 * @return
 	 */
-	private Image getSprite(int pokenumber, int male)
+	private de.matthiasmann.twl.renderer.Image getSprite(int pokenumber, int male)
 	{
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		LoadingList.setDeferredLoading(true);
-		Image i = null;
+		de.matthiasmann.twl.renderer.Image i = null;
 		String path = new String();
 		String index = new String();
 
@@ -370,14 +433,6 @@ public class PokedexDialog extends ResizableFrame
 		pokemonBiologyLabels[13].setText("Compatibility: " + compatibility);
 
 		for(int i = 0; i < pokemonBiologyLabels.length; i++)
-		{
-			if(i < 9)
-				pokemonBiologyLabels[i].setPosition(getInnerX() + 35 + 15 * (i / 9), getInnerY() + 132 + 11 * i);
-			else
-				pokemonBiologyLabels[i].setPosition(getInnerX() + 125, getInnerY() + 132 + 11 * (i % 9));
-		}
-
-		for(int i = 0; i < pokemonBiologyLabels.length; i++)
 			pokemonBiologyLabels[i].setVisible(true);
 	}
 
@@ -390,6 +445,11 @@ public class PokedexDialog extends ResizableFrame
 
 		int size = day + night + fish + surf;
 
+		for(PokemonLocationIcon icon : pokemonLocationLabels)
+		{
+			removeChild(icon);
+		}
+
 		pokemonLocationLabels = new PokemonLocationIcon[size];
 
 		int idx = 0;
@@ -400,8 +460,8 @@ public class PokedexDialog extends ResizableFrame
 		for(Integer i : data)
 		{
 			Object[] locationInfo = PokedexData.getLocationInfo(i);
-			int mapX = getInnerX() + 33;
-			int mapY = getInnerY() + 132;
+			int mapX = 33;
+			int mapY = 132;
 			int x = (int) ((int) mapX + Integer.parseInt((String) locationInfo[1]) - icon_location.getWidth() / 2);
 			int y = (int) ((int) mapY + Integer.parseInt((String) locationInfo[2]) - icon_location.getHeight() / 2);
 			int locationid = (Integer) locationInfo[3];
@@ -411,6 +471,8 @@ public class PokedexDialog extends ResizableFrame
 				pokemonLocationLabels[idx] = new PokemonLocationIcon(PokedexMap.MAP_HOENN, x, y, icon_location);
 			else if(locationid > 170)
 				pokemonLocationLabels[idx] = new PokemonLocationIcon(PokedexMap.MAP_SINNOH, x, y, icon_location);
+			add(pokemonLocationLabels[idx]);
+			pokemonLocationLabels[idx].setVisible(true);
 			idx++;
 		}
 	}
@@ -434,7 +496,6 @@ public class PokedexDialog extends ResizableFrame
 				end = loreString.length();
 			loreLabels[i].setTheme("label_minismall");
 			loreLabels[i].setText(loreString.substring(begin, end));
-			loreLabels[i].setPosition(getInnerX() + 34, getInnerY() + 132 + 10 * i);
 			add(loreLabels[i]);
 		}
 	}
@@ -451,10 +512,7 @@ public class PokedexDialog extends ResizableFrame
 		{
 			pokemonMoveLabels[i] = new Label();
 			pokemonMoveLabels[i].setTheme("label_minismall");
-			if(i < 9)
-				pokemonMoveLabels[i].setPosition(getInnerX() + 34 + 15 * (i / 9), getInnerY() + 132 + 10 * i);
-			else
-				pokemonMoveLabels[i].setPosition(getInnerX() + 135, getInnerY() + 132 + 10 * (i % 9));
+
 			add(pokemonMoveLabels[i]);
 		}
 
@@ -653,78 +711,88 @@ public class PokedexDialog extends ResizableFrame
 	}
 
 	@Override
-	public void paintWidget(GUI gui)
-	{
-		// Render the maps
-		int mapX = getInnerX() + 33;
-		int mapY = getInnerY() + 132;
-		if(tabindex == 1)
-		{
-			map_kantojohto.draw(getAnimationState(), mapX, mapY);
-			for(PokemonLocationIcon icon : pokemonLocationLabels)
-				if(icon.getMap() == PokedexMap.MAP_KANTOJOHTO)
-					icon.draw(getAnimationState());
-		}
-		else if(tabindex == 2)
-		{
-			map_hoenn.draw(getAnimationState(), mapX, mapY);
-			for(PokemonLocationIcon icon : pokemonLocationLabels)
-				if(icon.getMap() == PokedexMap.MAP_HOENN)
-					icon.draw(getAnimationState());
-		}
-		else if(tabindex == 3)
-		{
-			map_sinnoh.draw(getAnimationState(), mapX, mapY);
-			for(PokemonLocationIcon icon : pokemonLocationLabels)
-				if(icon.getMap() == PokedexMap.MAP_SINNOH)
-					icon.draw(getAnimationState());
-		}
-
-		// Render the selection rectangle around the name
-		int selectionX = getInnerX() + 295;
-		int selectionY = getInnerY() + 59 + 22 * ((selection - 1) % 13);
-		selectionFrame.draw(getAnimationState(), selectionX, selectionY);
-
-		// Render the pokemon sprite
-		if(getPokemon(selection) > 1)
-		{
-			pokemonIcons[selection].draw(getAnimationState(), getInnerX() + 33, getInnerY() + 39);
-		}
-
-		// Render the pokemon caught icon
-		int first = scrollindex * 13 + 1;
-		for(int i = 0; i < 13; i++)
-			if(getPokemon(first + i) == 2)
-				icon_caught.draw(getAnimationState(), getInnerX() + 299, getInnerY() + 60 + 22 * i);
-	}
-
-	@Override
 	public void layout()
 	{
-		down.setSize(29, 26);
-		down.setPosition(getInnerX() + getWidth() - down.getWidth() - 8, getInnerY() + getHeight() - down.getHeight() - 47);
-		up.setSize(29, 26);
-		up.setPosition(down.getX(), down.getY() - down.getHeight() - 5);
-		left.setSize(20, 35);
-		left.setPosition(getInnerX() + 32, getInnerY() + getHeight() - left.getHeight() - 76);
-		right.setSize(20, 35);
-		right.setPosition(left.getX() + 177, left.getY());
+		if(initialized)
+		{
+			down.setSize(29, 26);
+			down.setPosition(getInnerX() + getWidth() - down.getWidth() - 8, getInnerY() + getHeight() - down.getHeight() - 47);
+			up.setSize(29, 26);
+			up.setPosition(down.getX(), down.getY() - down.getHeight() - 5);
+			left.setSize(20, 35);
+			left.setPosition(getInnerX() + 32, getInnerY() + getHeight() - left.getHeight() - 76);
+			right.setSize(20, 35);
+			right.setPosition(left.getX() + 177, left.getY());
 
-		inc1.setSize(36, 14);
-		inc1.setPosition(down.getX() - 3, getInnerY() + 70);
-		inc5.setSize(36, 14);
-		inc5.setPosition(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
-		inc10.setSize(36, 14);
-		inc10.setPosition(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
-		inc50.setSize(36, 14);
-		inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
+			inc1.setSize(36, 14);
+			inc1.setPosition(down.getX() - 3, getInnerY() + 70);
+			inc5.setSize(36, 14);
+			inc5.setPosition(inc1.getX(), inc1.getY() + inc1.getHeight() + 5);
+			inc10.setSize(36, 14);
+			inc10.setPosition(inc5.getX(), inc5.getY() + inc5.getHeight() + 5);
+			inc50.setSize(36, 14);
+			inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
 
-		tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);
+			tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);
 
-		pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.computeTextWidth() / 2, pokemonname.getY() - 25);
-		pokemonname.setPosition(getInnerX() + 178 - pokemonname.computeTextWidth() / 2, getInnerY() + 75);
-		pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.computeTextWidth() / 2, pokemonname.getY() + 17);
+			pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.computeTextWidth() / 2, pokemonname.getY() - 25);
+			pokemonname.setPosition(getInnerX() + 178 - pokemonname.computeTextWidth() / 2, getInnerY() + 75);
+			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.computeTextWidth() / 2, pokemonname.getY() + 17);
 
-		setSize(519, 377);
+			if(loreLabels != null)
+			{
+				for(int i = 0; i < loreLabels.length; i++)
+				{
+					loreLabels[i].setPosition(getInnerX() + 36, getInnerY() + 136 + 10 * i);
+				}
+			}
+			if(pokemonBiologyLabels != null)
+			{
+				for(int i = 0; i < pokemonBiologyLabels.length; i++)
+				{
+					if(i < 9)
+						pokemonBiologyLabels[i].setPosition(getInnerX() + 35 + 15 * (i / 9), getInnerY() + 136 + 10 * i);
+					else
+						pokemonBiologyLabels[i].setPosition(getInnerX() + 125, getInnerY() + 136 + 10 * (i % 9));
+				}
+			}
+			if(pokemonMoveLabels != null)
+			{
+				for(int i = 0; i < pokemonMoveLabels.length; i++)
+				{
+					if(i < 9)
+						pokemonMoveLabels[i].setPosition(getInnerX() + 34 + 15 * (i / 9), getInnerY() + 136 + 10 * i);
+					else
+						pokemonMoveLabels[i].setPosition(getInnerX() + 135, getInnerY() + 136 + 10 * (i % 9));
+				}
+			}
+
+			int mapX = getInnerX() + 33;
+			int mapY = getInnerY() + 132;
+			map_kantojohto.setPosition(mapX, mapY);
+			map_hoenn.setPosition(mapX, mapY);
+			map_sinnoh.setPosition(mapX, mapY);
+
+			int selectionX = getInnerX() + 295;
+			int selectionY = getInnerY() + 59 + 22 * ((selection - 1) % 13);
+			selectionFrame.setPosition(selectionX, selectionY);
+
+			if(pokemonIcon != null)
+			{
+				pokemonIcon.setPosition(getInnerX() + 33, getInnerY() + 39);
+			}
+
+			for(PokemonLocationIcon icon : pokemonLocationLabels)
+			{
+				icon.applyPosition(getInnerX(), getInnerY());
+			}
+
+			for(int i = 0; i < pokemonCaughtIcons.length; i++)
+			{
+				pokemonCaughtIcons[i].setPosition(getInnerX() + 299, getInnerY() + 60 + 22 * i);
+			}
+
+			setSize(519, 377);
+		}
 	}
 }

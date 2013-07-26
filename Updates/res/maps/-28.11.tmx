@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="115" height="55" tilewidth="16" tileheight="16">
- <tileset firstgid="1" source="Tileset 3.tsx"/>
- <tileset firstgid="1025" source="Tileset 2.tsx"/>
- <tileset firstgid="2049" source="Tileset 5.tsx"/>
- <tileset firstgid="3073" source="Tileset 1.tsx"/>
- <tileset firstgid="4097" source="Tileset 4.tsx"/>
- <tileset firstgid="5121" source="Fire Red Tileset 7.tsx"/>
- <tileset firstgid="5377" source="Fire Red Tileset 6.tsx"/>
- <tileset firstgid="5633" source="Tileset 6.tsx"/>
+ <tileset firstgid="1" source="Sevii Island Set 1.tsx"/>
+ <tileset firstgid="4051" source="Path0.tsx"/>
+ <tileset firstgid="4347" source="Deep Water.tsx"/>
+ <tileset firstgid="4442" source="Buildings7.tsx"/>
+ <tileset firstgid="4794" source="various3.tsx"/>
  <layer name="Walkable" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3cQQrCMBBAUelO3HoS97rzWHpS0RzFBgkOJY0ZLXRm/A9mpYLwSRsDdbPBL27b1yAOmsaTBpp69RjegxgSPUOhJwAA+Dfsf2KhJQAAAABA67Bb+xtgKbmlHPhVa0lTn6YtyyTO8dyZa9ka+TnYQcs4jmOPEy1DuIw9rrQModWr53Owo9Wjd43ChrkemustbKBlHLSMY65HPvehpS+1Hkk8+0VLP+4fzl1pGcc353uwp+caS0sfcsvePRAtbSvPImjWJ2zS7Gdp6YP2vol1yP8RmY58Dy19mutKS59kx6Tcz8Km3udqaWkfLeOqtTrvaWmd3PfkXq2hpT3yrEdeX2npj2yZlT61fhIt7ZmewbbWYsZvEtvkGSwt/dLcJzNa2iU7ttZleZ2OdmlaLu0J8WVP7tRiAAA=
+   H4sIAAAAAAAAC+3bMYrDMBRF0TRTpRnIoman2UA2OKgIKMJyLFvvS3rcC8JVqsNXhIxvN1qhn/vnonXD0ics9T0fn0sVljHh6RWWPkXMZmmJpy5m0ycsfRqxx+KpCUufsPQJS5+w9AlLn7D0CUufsPQJy7V7ZW5Yrl2yzFf0fSyW/SotU9ytr1lpmZse/U1rWGqqWbaslphLXT0sWzyx1IWlT5GWnGG1tfhgOXetZljOG5Y+jbKk/jGXPtUs30+1Jab92nLI35dEWeKp6YzlEVssx3TV8tu8YhlTj7nEclzlN3v5O2ks16pmGfW/Sf0aaUl929pbsVwz1VyWnjjGpTgD5WEZG5Y+1Sz3wnK+zjj+/Z63xFMXlj7VLJPX3sJyvmrziOV6tVgmJyznrNxbr8zi3t0Plvqw9ElhuRWW+lrOrqmzliks9R21vOKY2rL8By+MpGDUYgAA
   </data>
  </layer>
  <layer name="Water" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2bQW4DIQxFs2zvf5yoN+lNokpNF42SiQ02HsCg9yQ2I6Qs3nywPcrlAlG+P4X18bpu92c/wnNtXe97v477pd95WnAukkvRS2WJ7nE5hUgmtffghstpRLL5v//tPcDlFCLZ1PaXsgn9MNUz3vqnkE3oR7SWVffjcjiRXBb34nI4kVwW9+JyOO68cV+mxZ037su0cF/uwxmZ9MxloR/R+1L1j8vhSO482aT2yYPmzppNap88uB1Z84nL4ZxxX0rutfk69KNLJgtnLfSjyY/HPS6HcdZ9qfrH5TCaz05hn6XPhPF4sskZuw4tZ+uVOjYlTbnEZUpqeWS2vg61WueYS+18xeV8Smeq938IMJez7kpczsfdf+IyLe6+EpdpcfeXuEyLtb98rm9xmZOaS+3MfeQVl2mwujyetw+3uExLpEeBXERm7JCLyNwAchGZG0AuInMDyIclm9L3EsiHKZu4XAJTLYvLJdAcvmQTl0tgqX2kuSzkw9yX4DI91fMVl8tg6i1xuQTMffaBuc8+UPvsA99J9qHl2yUu89Haj+ByLtrctaUf+Vu/qjvL/NRiAAA=
+   H4sIAAAAAAAAC+3bQQ6CMBBG4S50IawM3sBEz6CXgOvqSTyOstJgwRYYGX/fl3Tt4qWxHSAETHXcvq91Of86RH7ndWFetNRj0fJEy0VYtPy0N2HDquXQ3oQNq5ZDexM2aKmDljpoqYOWOmipg5Y6aKmDljpoqYOWOmipw7JlO18/0/JrLFv27U/YoKUOWuqg5X9oyufaF7RUsRrRsHp023GOdWdMS+6XPtFSR27Livfw3MptyfuxftFSBy110FIHLXXktuR7Er/G3C/79imWVZfT5rO09GvK/yd8yWnZnQHBl5yWPPPyjZY66ozzDy39S9mbsecl8CelZWz+A39oqYOWOlJaxuay8Cf1XsI51j9a6qClDlrqoKUOWuqgpQ7msRouRQi3DXOfX9N2u3ZWSse+lndAdYJx1GIAAA==
   </data>
  </layer>
  <layer name="Walkable" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3aMQrCQBRAwSQ2djmE3v9KFgp6DAULERvBQMxjBn6TauHBZll2GABge27j2itgKbtp7RWwFC07tOzQskPLDi07tOzQskPLDi07tOzQskPLDi07tOzQskPLDi37jtNr6PAmqMM+3KFlh5bbdJ0f/8f5/ZuWHVp2aNmhZYeWHVp2aNlxmNzPVrmf7bDndmj5v07Tc76lZcdByxTnnw77bIeWHVp2aNmhZYeWHVp2aLlN3ua1admhZYeWDedxGPZabs5l/JxfOt4BKSTr4tRiAAA=
+   H4sIAAAAAAAAC+3awQkAIAwEwfRgKhTrslYb8CVCBGcq2PdxEQAAAAAAAAAAAAAAALykZ8TI6goAgLtmqy4AAAAAAGDHfgsA/MI3DwDgzAK3TWIc1GIAAA==
   </data>
  </layer>
  <layer name="Grass" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YuQnAMBAAQfXg/ktxb46cCD/xLTOgCpaTxK0FAAAAAAAAAAAAAAAAwO48ng/zvLXUc6a7m5bz7f20nM0d26Jlgz9Qx19LXef5aqrlLOayw1w2/HXUchY9W97eSi0bdGzRs0XLBnPZoWOHuezQcjY72Q57gg4toe0CkifIk9RiAAA=
+   H4sIAAAAAAAAC+3YuQnAMBAAQXXg/ut0A46cCD/xLTOgCpaTxK0FAAAAAAAAAAAAAAAAwO48ng/zvLXUc6a7m5bz7f20nM0d26Jlgz9Qx19LXef5aqrlLOayw1w2/HXUchY9W97eSi0bdGzRs0XLBnPZoWOHuezQcjY72Q57gg4toe0CNi1wUNRiAAA=
   </data>
  </layer>
  <layer name="Collisions" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2czU3EMBCFo2S5IMoAQSdwpoHlSBd0xlIJbCVADJi1LP/MxOO3PrxP8gVZuXx6M+Pg7DSRFg7z73qbbZ97u5umu53tM0mZj/m0ck63eLlf9z/QJZTQZc5pixfmE0dYY0Ofxyifu9XHhcKJ38984oizmHN5vfq4UTjR7iftpGpryqVDWy9ZX7HEvfJYcKmtl6yvWDQuNT1T219JOxqXmh7IfolH49LBbI5L7myZc8lsjkvqXcHRYI7lDItH41Izl/q9dIpD49KhdcNzCY6ay9idxg1nHyw1lyl3UkecfbBoa6xD64g9E0Pvfulgz8TwtOhcar2wZ+L4XJ19/S3vtVZjNdlkzzwP78J+uaVmsmdi8RmdlrJLh7R28n7B+Xm8zC/3vlZaO1ljx6aW2RDW1rHxLp+v6ntZW8dGkkufR+ZybEou41mHucTxOp/uyIZ3ZffL6dzp1z9L/nnhrMP3BFj8mVLzPlYKZ1gsvVyyT+Lp5ZJ9Ek/O5UuhJ2pgPnGkXDqPVt9l+nxyDupPymXo0WIGcsRzEPNqzyHh0nqe9YT+2E/tyXns4ZL++oJyyZran5pL6xmI9KPm0tOST86wGEoureZZvsvDUHJp2TeZzf7E/yMJs2jpktnsTymL1vMsZ9m+SHplLrvSGZd38TBIeqVkT8kn6ysGK5e1Gsz62h+py9SdEb9Kd6NZX3HkHHp3U/CNSQmL36ogbUhr61aXDp4tMZRchnU1dfduH/5NeDeP9KNlnuG3CGNR6pOWLjn79Kf2vqeE1CUziWGry59eWbmrx/MIlq0uJZnUzjzfcLKVZ9RiAAA=
+   H4sIAAAAAAAAC+2cTU7DMBCFcwWULmAHp+NMLCCwgDbipxt2cDhqFauWsZ0Zx/NqpPdJlqom7ebTm7ETJ8NA1vAwHsc0/j12uRmGq03d/675LanjZTyOx4TT64OLm02dF/9bgsO7lDitgfnEEdbY0Ok2qrlaJ/585hNHmMep4FLrhA7xxPV1yrh01GaTYIj75bbgktnsG41LTc6YSTxWuWQm8WhcOpjNfkmtL6eCS2azX2KXPpPsl/8PjcuaTNIpDo1Lh9YN6yyOJZexO40bZhLLksuUO6kjZhKLtsY6tI6YTwzW/dLBfGLYKV0yk/3yfnD28Tt2whqr8cNMnodno37pYD6x+IzuF1xq4P6C8/M65sebwjMd9s2nwiVra994l7cXy+cyl30jyaXPI3PZNyWX8VyHucRxP572yIZ7Ze8O4ysanm/heoWZxOLXlPF1H838Jsea6/JEj5XLnDPWXDusXNIZHssa62BNxZFzmXreqwbu+8GRchnOZ1tdl41rLt225ynhUrq/QEvoj/20PTmPFi7pzxaUS9ZUe5Zctp4DETuWXIafa2EmMZRctprPMpMYSi5b9k1m0574HknqvSItXDKb9kh7ZYv5LLNpi6RX5rJbev9aCPfiYZD0Ssk5JZ90iKGVy6UazPpqj9TlPJ6eVYhHaW806yuOnMM58CS5VtDqWSJSj7S21rp0sL5iKLkM6+o+4WoOvksd9zCbGNbMZzRrTmbTnlKfbOmS2bRnzb0RqUtmEkOtyznTQ0O4HsFS61KSSa3DH1fNyurUYgAA
   </data>
  </layer>
  <layer name="Collisions" width="115" height="55">
@@ -40,7 +37,7 @@
  </layer>
  <layer name="WalkBehind" width="115" height="55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BMQEAAADCoPVP7W0HoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOANu5J0FdRiAAA=
+   H4sIAAAAAAAAC+3OMQEAAAgDoFUwof1bWMB/DyQgAQAAAAAAAAAAAICenfYAAAAAAAAAAAAAAAAAAPgcDlLdAdRiAAA=
   </data>
  </layer>
 </map>

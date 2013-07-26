@@ -37,9 +37,9 @@
 [npc]
 Biker Dale
 down
-15
-11
 339
+11
+15
 Gulpin,29
 1
 -1
@@ -51,9 +51,9 @@ false
 [npc]
 Biker Reese
 up
+361
 12
 15
-361
 Weezing,31
 1
 -1
@@ -65,9 +65,9 @@ false
 [npc]
 Biker Jacob
 right
+315
 9
 13
-315
 Tentacruel,31
 1
 -1
@@ -79,9 +79,9 @@ false
 [npc]
 Biker Aiden
 right
+339
 5
 14
-339
 Tentacruel,31,Hypno,35
 2
 -1
@@ -93,9 +93,9 @@ false
 [npc]
 Biker Dan
 right
+315
 18
 74
-315
 Gulpin,31,Weezing,35,Weezing,35
 3
 -1
@@ -107,9 +107,9 @@ false
 [npc]
 Biker Thereon
 left
+339
 8
 110
-339
 Toxicroak,37
 1
 -1
@@ -121,9 +121,9 @@ false
 [npc]
 Biker Nash
 right
+362
 22
 112
-362
 Toxicroak,31,Weezing,31,Magmar,34
 3
 -1
@@ -135,9 +135,9 @@ false
 [npc]
 Biker Teddy
 left
+361
 6
 92
-361
 Seviper,34
 1
 -1
@@ -149,9 +149,9 @@ false
 [npc]
 Biker Ernest
 left
+315
 22
 91
-315
 Ursaring,34,Azumarill,33
 2
 -1

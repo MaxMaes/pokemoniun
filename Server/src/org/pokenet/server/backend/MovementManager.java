@@ -93,32 +93,24 @@ public class MovementManager implements Runnable
 		/* Check waiting list */
 		synchronized(m_waiting)
 		{
-			Iterator<Character> it = m_waiting.iterator();
-			while(it.hasNext())
-			{
-				Character c = it.next();
+			for(Character c : m_waiting)
 				if(c.getName().equalsIgnoreCase(player))
 				{
 					m_waiting.remove(c);
 					m_pLoad--;
 					return true;
 				}
-			}
 		}
 		/* Check moved list */
 		synchronized(m_moved)
 		{
-			Iterator<Character> it = m_moved.iterator();
-			while(it.hasNext())
-			{
-				Character c = it.next();
+			for(Character c : m_moved)
 				if(c.getName().equalsIgnoreCase(player))
 				{
 					m_moved.remove(c);
 					m_pLoad--;
 					return true;
 				}
-			}
 		}
 		return false;
 	}
@@ -161,7 +153,7 @@ public class MovementManager implements Runnable
 			}
 			try
 			{
-				Thread.sleep(10);
+				Thread.sleep(5);
 			}
 			catch(InterruptedException e)
 			{
@@ -187,5 +179,4 @@ public class MovementManager implements Runnable
 		m_waiting.clear();
 		m_isRunning = false;
 	}
-
 }

@@ -807,7 +807,7 @@ public class GameClient extends BasicGame
 			BattleManager.getInstance().getBattleWindow().useMove(3);
 		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !getHUD().hasMoveLearning() && !getHUD().hasShop())
 		{
-			if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog())// BattleManager.getInstance().getBattleWindow()))
+			if(getHUD().getNPCSpeech() == null && !BattleManager.getInstance().isBattling())// BattleManager.getInstance().getBattleWindow()))
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
@@ -821,7 +821,7 @@ public class GameClient extends BasicGame
 				}
 				catch(Exception e)
 				{
-					// TODO: Handle this exception?
+					getHUD().removeNPCSpeechFrame();
 				}
 		}
 	}

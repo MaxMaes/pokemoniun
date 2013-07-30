@@ -352,6 +352,7 @@ public class HUD extends DesktopArea
 	{
 		removeChild(shop);
 		shop = null;
+		removeNPCSpeechFrame();
 	}
 
 	public boolean hasShop()
@@ -924,5 +925,11 @@ public class HUD extends DesktopArea
 		{
 			return false;
 		}
+	}
+
+	public void removeNPCSpeechFrame()
+	{
+		this.removeChild(this.npcSpeech);
+		npcSpeech = null;
 	}
 }

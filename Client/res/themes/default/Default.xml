@@ -609,6 +609,18 @@
                     <param name="background"><image>resizableframe</image></param>
                 </theme>
             </theme>
+            <theme name="shopdialog" ref="resizableframe_titled">
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="button" ref="button"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label"/>
+                <theme name="title" ref="title"/>
+                <theme name="listbox" ref="listbox"/>
+            </theme>
+            <theme name="npcspeechframe" ref="-defaults">
+                <param name="background"><image>speechframe</image></param>
+                <theme name="textarea" ref="textarea"/>
+            </theme>
         
         
         

@@ -44,7 +44,6 @@ public class BattleManager
 		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
 		m_timeLine = new BattleTimeLine();
 		m_battle.setVisible(false);
-		// m_battle.setAlwaysOnTop(true); // TODO: Chappie magic :D
 	}
 
 	/**

@@ -1,14 +1,16 @@
 package org.pokenet.client.twl.ui.frames;
 
+import de.matthiasmann.twl.Widget;
+
 public class BattleSpeechFrame extends SpeechFrame implements Runnable
 {
 	private String advancedLine;
 	private Thread m_thread;
 	private String newMsg;
 
-	public BattleSpeechFrame()
+	public BattleSpeechFrame(Widget root)
 	{
-		super("");
+		super("",root);
 		if(m_thread == null || !m_thread.isAlive())
 			start();
 	}

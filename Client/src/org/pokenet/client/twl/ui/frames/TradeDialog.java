@@ -380,7 +380,7 @@ public class TradeDialog extends ResizableFrame
 					public void run()
 					{
 						performTrade();
-						// removeChild(m_confirm); TODO:
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						m_confirm = null;
 						setVisible(false);
 					}
@@ -392,13 +392,13 @@ public class TradeDialog extends ResizableFrame
 					public void run()
 					{
 						m_confirm.setVisible(false);
-						// remove(m_confirm); TODO:
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						m_confirm = null;
 						setVisible(true);
 					}
 
 				};
-				// m_confirm = new ConfirmationDialog("Are you sure you want to trade?", yes, no); TODO: Chappie
+				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to trade?", yes, no);
 				setVisible(false);
 			}
 		});

@@ -453,6 +453,8 @@
                 <param name="hasCloseButton"><bool>false</bool></param>
                 <param name="hasResizeHandle"><bool>false</bool></param>
                 <theme name="label" ref="label"/>
+                <theme name="image" ref="image"/>
+                <theme name="pokemonlocationicon" ref="image"/>
             </theme>
             <theme name="helpwindow" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>false</bool></param>

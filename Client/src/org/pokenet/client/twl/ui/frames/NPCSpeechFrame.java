@@ -4,6 +4,8 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 
+import de.matthiasmann.twl.Widget;
+
 /**
  * NPC speech pop-up
  * 
@@ -16,9 +18,9 @@ public class NPCSpeechFrame extends SpeechFrame
 	 * 
 	 * @param text
 	 */
-	public NPCSpeechFrame(String text)
+	public NPCSpeechFrame(String text, Widget root)
 	{
-		super(text);
+		super(text, root);
 	}
 
 	/**
@@ -27,9 +29,9 @@ public class NPCSpeechFrame extends SpeechFrame
 	 * @param text
 	 * @param seconds
 	 */
-	public NPCSpeechFrame(String text, int seconds)
+	public NPCSpeechFrame(String text, int seconds, Widget root)
 	{
-		super(text, seconds);
+		super(text, seconds, root);
 	}
 
 	/**

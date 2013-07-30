@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import org.pokenet.client.GameClient;
 import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.Image;
@@ -33,18 +34,19 @@ public class SpeechFrame extends Widget
 	private SimpleTextAreaModel speechModel;
 	protected Queue<String> speechQueue;
 
+	private PopupWindow popup;
 	/**
 	 * Default constructor
 	 * 
 	 * @param speech
 	 */
-	public SpeechFrame(String speech)
+	public SpeechFrame(String speech, Widget root)
 	{
 		speechQueue = new LinkedList<String>();
 		for(String line : speech.split("/n"))
 			speechQueue.add(line);
 		triangulate();
-		initGUI();
+		initGUI(root);
 	}
 
 	/**
@@ -53,13 +55,13 @@ public class SpeechFrame extends Widget
 	 * @param speech
 	 * @param seconds
 	 */
-	public SpeechFrame(String speech, int seconds)
+	public SpeechFrame(String speech, int seconds, Widget root)
 	{
 		speechQueue = new LinkedList<String>();
 		for(String line : speech.split("/n"))
 			speechQueue.add(line);
 		triangulate();
-		initGUI();
+		initGUI(root);
 		advance();
 		// this.advance();
 		// while(canAdvance()){
@@ -192,7 +194,7 @@ public class SpeechFrame extends Widget
 	/**
 	 * Initializes the interface
 	 */
-	public void initGUI()
+	public void initGUI(Widget root)
 	{
 		speechModel = new SimpleTextAreaModel();
 		speechDisplay = new TextArea(speechModel);
@@ -209,7 +211,13 @@ public class SpeechFrame extends Widget
 		setCanAcceptKeyboardFocus(false);
 		setFocusKeyEnabled(false);
 
-		// setAlwaysOnTop(true); //TODO: Chappie, teach me your ways :D
+		popup = new PopupWindow(root);
+		popup.setTheme("SpeechFramePopup"); 
+		popup.add(this);
+		popup.setCloseOnClickedOutside(false);
+		popup.setCloseOnEscape(false);
+		popup.adjustSize();
+		
 		advance();
 	}
 

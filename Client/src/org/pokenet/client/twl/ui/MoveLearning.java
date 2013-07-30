@@ -3,6 +3,9 @@ package org.pokenet.client.twl.ui;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.Popup;
+
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.MoveLearningManager;
@@ -12,6 +15,7 @@ import org.pokenet.client.twl.ui.base.Image;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 
@@ -31,7 +35,7 @@ public class MoveLearning extends ResizableFrame
 	private int m_pokeIndex;
 	private Button move1, move2, move3, move4;
 	private Label pp1, pp2, pp3, pp4;
-
+	private PopupWindow popup;
 	InputStream f;
 	// Image Loading tools
 	String m_path = "res/battle/";
@@ -43,7 +47,7 @@ public class MoveLearning extends ResizableFrame
 	 * @param move
 	 * @param isMoveLearning
 	 */
-	public MoveLearning()
+	public MoveLearning(Widget root)
 	{
 		String respath = System.getProperty("res.path");
 		if(respath == null)
@@ -53,7 +57,7 @@ public class MoveLearning extends ResizableFrame
 		m_canvas = new MoveLearnCanvas();
 		add(m_canvas);
 		setSize(259, 369);
-		initGUI();
+		initGUI(root);
 		setCenter();
 	}
 
@@ -62,7 +66,7 @@ public class MoveLearning extends ResizableFrame
 	 * 
 	 * @param isMoveLearning
 	 */
-	public void initGUI()
+	public void initGUI(Widget root)
 	{
 		/* TRUE = Move Learning, FALSE = Evolution TODO: Whut is this comment? */
 		String respath = System.getProperty("res.path");
@@ -182,11 +186,17 @@ public class MoveLearning extends ResizableFrame
 		m_movePane.add(m_cancel);
 
 		add(m_movePane);
+		popup = new PopupWindow(root);
+		popup.setTheme("MoveLearningPopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(false);
+		popup.setCloseOnEscape(false);
+		popup.adjustSize();
+		
 	}
 
 	public void learnMove(int pokeIndex, String move)
 	{
-		// setAlwaysOnTop(true); TODO: Chappie magic :D
 		m_pokeIndex = pokeIndex;
 
 		// GameClient.getInstance().getGUIPane().talkToNPC(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getName() + " wants to learn " + move); TODO:
@@ -247,7 +257,7 @@ public class MoveLearning extends ResizableFrame
 		}
 		else
 		{
-			// setAlwaysOnTop(false); TODO: Chappie magic :D
+			this.setVisible(false);
 			Runnable yes = new Runnable()
 			{
 				@Override
@@ -270,7 +280,7 @@ public class MoveLearning extends ResizableFrame
 				public void run()
 				{
 					GameClient.getInstance().getGUIPane().hideConfirmationDialog();
-					// setAlwaysOnTop(true); TODO: Chappie magic :D
+					setVisible(true);
 				}
 			};
 			GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to forget " + m_moveButtons.get(i).getText() + " to learn " + m_move + "?", yes, no);

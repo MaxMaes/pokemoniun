@@ -12,6 +12,7 @@ import org.pokenet.client.twl.ui.base.ProgressBar;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ComboBox;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
@@ -38,7 +39,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 	 * @param pokes
 	 * @throws SlickException
 	 */
-	public PokeStorageBoxFrame(int[] pokes)
+	public PokeStorageBoxFrame(int[] pokes, Widget root)
 	{
 		setPosition(getX() - 1, getY() + 1);
 
@@ -46,7 +47,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 		m_boxIndex = 0;
 		m_boxNum = m_boxIndex + 1;
 
-		initGUI();
+		initGUI(root);
 
 		setSize(231, 248);
 		setPosition(400 - getWidth() / 2, 300 - getHeight() / 2);
@@ -100,7 +101,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 	/**
 	 * Initializes the interface
 	 */
-	public void initGUI()
+	public void initGUI(final Widget root)
 	{
 		int buttonX = 7;
 		int buttonY = 5;
@@ -150,7 +151,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 			public void run()
 			{
 				setVisible(false);
-				TeamForBox teamPanel = new TeamForBox(m_boxNum, m_buttonChosen);
+				TeamForBox teamPanel = new TeamForBox(m_boxNum, m_buttonChosen, root);
 				add(teamPanel);
 				teamPanel.setPosition(getWidth() / 2 - teamPanel.getWidth() / 2, getHeight() / 2 - teamPanel.getHeight() / 2);
 			}
@@ -300,26 +301,26 @@ class TeamForBox extends Widget
 	private ImageButton[] m_pokeIcon = new ImageButton[6];
 	private Label[] m_pokeName = new Label[6];
 	private Widget[] m_pokes = new Widget[6];
-
+	private PopupWindow popup;
 	/**
 	 * Default Constractor
 	 * 
 	 * @param boxNum
 	 * @param boxInd
 	 */
-	public TeamForBox(int boxNum, int boxInd)
+	public TeamForBox(int boxNum, int boxInd, Widget root)
 	{
 		m_boxNumber = boxNum;
 		m_boxIndex = boxInd;
 		loadPokes();
-		initGUI();
+		initGUI(root);
 		setVisible(true);
 	}
 
 	/**
 	 * Initializes the interface
 	 */
-	public void initGUI()
+	public void initGUI(Widget root)
 	{
 		int y = 0;
 		for(int i = 0; i < 6; i++)
@@ -383,7 +384,10 @@ class TeamForBox extends Widget
 		});
 		add(m_cancel);
 		setSize(170, 302);
-		// setAlwaysOnTop(true); //TODO: Chappie magic
+		popup = new PopupWindow(root);
+		popup.setTheme("PokeStorageBoxPopup");
+		popup.add(this);
+		popup.adjustSize();
 	}
 
 	/**

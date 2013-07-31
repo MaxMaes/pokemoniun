@@ -56,8 +56,8 @@ public class NpcBattleField extends BattleField
 		startBattle.addInt(getAliveCount(1));
 		startBattle.sendResponse();
 		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
-		if(!m_player.isPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1))
-			m_player.setPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1);
+		if(!m_player.isPokemonSeen(getActivePokemon()[1].getPokedexNumber()))
+			m_player.setPokemonSeen(getActivePokemon()[1].getPokedexNumber());
 		/* Send enemy name */
 		ServerMessage enemyName = new ServerMessage(m_player.getSession());
 		enemyName.init(ClientPacket.ENEMY_TRAINER_NAME.getValue());
@@ -752,8 +752,8 @@ public class NpcBattleField extends BattleField
 				switchInPokemon(1, BattleTurn.getSwitchTurn(index).getId());
 
 				// Check if this player has seen this wild pokemon before, if not, update pokedex
-				if(!m_player.isPokemonSeen(m_pokemon[1][index].getSpeciesNumber() + 1))
-					m_player.setPokemonSeen(m_pokemon[1][index].getSpeciesNumber() + 1);
+				if(!m_player.isPokemonSeen(m_pokemon[1][index].getPokedexNumber()))
+					m_player.setPokemonSeen(m_pokemon[1][index].getPokedexNumber());
 				requestMoves();
 			}
 			catch(Exception e)

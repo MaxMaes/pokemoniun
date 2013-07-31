@@ -66,8 +66,8 @@ public class PvPBattleField extends BattleField
 		startBattleSecond.addInt(p1.getPartyCount());
 		startBattleSecond.sendResponse();
 		/* Check if p1 player has seen this enemy pokemon before, if not, update pokedex */
-		if(!p1.isPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1))
-			p1.setPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1);
+		if(!p1.isPokemonSeen(getActivePokemon()[1].getPokedexNumber()))
+			p1.setPokemonSeen(getActivePokemon()[1].getPokedexNumber());
 		/* Check if p2 player has seen this enemy pokemon before, if not, update pokedex */
 		if(!p2.isPokemonSeen(getActivePokemon()[0].getSpeciesNumber() + 1))
 			p2.setPokemonSeen(getActivePokemon()[0].getSpeciesNumber() + 1);
@@ -368,8 +368,8 @@ public class PvPBattleField extends BattleField
 		// Check if the enemy of the player switching has seen this pokemon before, if not, update the pokedex
 		if(m_players != null)
 		{
-			if(!m_players[trainer].isPokemonSeen(poke.getSpeciesNumber() + 1))
-				m_players[trainer].setPokemonSeen(poke.getSpeciesNumber() + 1);
+			if(!m_players[trainer].isPokemonSeen(poke.getPokedexNumber()))
+				m_players[trainer].setPokemonSeen(poke.getPokedexNumber());
 
 			if(trainer == 0)
 			{

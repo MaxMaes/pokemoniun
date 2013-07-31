@@ -236,7 +236,7 @@ public class BattleManager
 		m_enemyPokes[index].setMaxHP(maxHP);
 		m_enemyPokes[index].setCurHP(curHP);
 		m_enemyPokes[index].setShiny(isShiny);
-		m_enemyPokes[index].setSpriteNumber(spriteNum + 1);
+		m_enemyPokes[index].setSpriteNumber(spriteNum);
 
 		if(index + 1 == m_enemyPokes.length)
 			setEnemyData();

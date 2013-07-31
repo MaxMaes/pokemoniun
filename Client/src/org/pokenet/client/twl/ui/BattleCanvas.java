@@ -131,11 +131,15 @@ public class BattleCanvas extends Widget
 	{
 		// enemyPokeSprite = new Image(BattleManager.getInstance().getCurEnemyPoke().getSprite());
 		if(BattleManager.getInstance().getCurEnemyPoke().isShiny())
+		{
 			enemyPokeSprite = new Image(
 					PokemonSpriteDatabase.getShineyFront(BattleManager.getInstance().getCurEnemyPoke().getGender(), BattleManager.getInstance().getCurEnemyPoke().getSpriteNumber()));
+		}
 		else
+		{
 			enemyPokeSprite = new Image(
 					PokemonSpriteDatabase.getNormalFront(BattleManager.getInstance().getCurEnemyPoke().getGender(), BattleManager.getInstance().getCurEnemyPoke().getSpriteNumber()));// FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite()));
+		}
 		enemyPokeSprite.setPosition(150, 21);
 		add(enemyPokeSprite);
 	}

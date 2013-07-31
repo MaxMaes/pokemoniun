@@ -5,6 +5,7 @@ import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokedexData;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.twl.ui.base.Image;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon;
 import org.pokenet.client.twl.ui.base.PokemonLocationIcon.PokedexMap;
@@ -22,7 +23,6 @@ public class PokedexDialog extends ResizableFrame
 	// Images
 	private de.matthiasmann.twl.renderer.Image icon_caught = GameClient.getInstance().getTheme().getImage("pokemoncaught");
 	private de.matthiasmann.twl.renderer.Image icon_location = GameClient.getInstance().getTheme().getImage("pokemonlocation");
-	private de.matthiasmann.twl.renderer.Image[] pokemonIcons = loadPokemonIcons();
 
 	// Image widgets
 	private Image map_kantojohto = new Image(GameClient.getInstance().getTheme().getImage("map_kantojohto"));
@@ -53,7 +53,7 @@ public class PokedexDialog extends ResizableFrame
 	private int selection = 1;
 	private int tabindex = 1;
 	private int[] trainerPokedex;
-	private static final int MAX = 495; // Change this to the amount of pokemon we've got
+	private static final int MAX = 493; // Change this to the amount of pokemon we've got
 	private boolean initialized = false;
 
 	public PokedexDialog()
@@ -74,6 +74,10 @@ public class PokedexDialog extends ResizableFrame
 			}
 			else
 			{
+				if(first + i == 490)
+				{
+					System.out.println("");
+				}
 				if(getPokemon(first + i) == PokedexData.POKEMON_UNKNOWN)
 				{
 					String number = new String();
@@ -186,14 +190,11 @@ public class PokedexDialog extends ResizableFrame
 
 	public de.matthiasmann.twl.renderer.Image loadImage(String path)
 	{
-		boolean old = LoadingList.isDeferredLoading();
-		LoadingList.setDeferredLoading(false);
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		de.matthiasmann.twl.renderer.Image i = null;
 		i = FileLoader.loadImage(respath + path);
-		LoadingList.setDeferredLoading(old);
 		return i;
 	}
 
@@ -341,7 +342,14 @@ public class PokedexDialog extends ResizableFrame
 			initLocationLabels();
 			initMoveLabels();
 			removeChild(pokemonIcon);
-			pokemonIcon = new Image(pokemonIcons[selection]);
+			if(selection == 29 || selection == 30 || selection == 31) // female only pokemon
+			{
+				pokemonIcon = new Image(PokemonSpriteDatabase.getNormalFront(PokemonSpriteDatabase.FEMALE, selection));
+			}
+			else
+			{
+				pokemonIcon = new Image(PokemonSpriteDatabase.getNormalFront(PokemonSpriteDatabase.MALE, selection));
+			}
 			add(pokemonIcon);
 		}
 		if(getPokemon(selection) == PokedexData.POKEMON_CAUGHT)
@@ -545,7 +553,7 @@ public class PokedexDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				if(selection + incrementer <= 493)
+				if(selection + incrementer <= MAX)
 				{
 					selection += incrementer;
 					if((selection - 1) / 13 != scrollindex)

@@ -315,7 +315,7 @@ public class LoginManager implements Runnable
 			while(pokemons.next())
 			{
 				String pokemonSpecie = pokemons.getString("speciesName");
-				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getPokemonNumber() + 1;
+				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getPokedexNumber();
 				if(isThirdStageStarter(pokemonNumber))
 					for(int i = 0; i < 3; i++)
 					{

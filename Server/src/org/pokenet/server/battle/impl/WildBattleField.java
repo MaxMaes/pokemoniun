@@ -117,7 +117,7 @@ public class WildBattleField extends BattleField
 		enemyData.addInt(wild.getGender());
 		enemyData.addInt(wild.getHealth());
 		enemyData.addInt(wild.getHealth());
-		enemyData.addInt(wild.getSpeciesNumber());
+		enemyData.addInt(wild.getPokedexNumber()); // TODO: Changed this from species number to pokedex number, verify if this doesnt cause any trouble
 		enemyData.addBool(wild.isShiny());
 		enemyData.sendResponse();
 		/* Store variables */
@@ -125,8 +125,8 @@ public class WildBattleField extends BattleField
 		m_wildPoke = wild;
 		m_participatingPokemon.add(p.getParty()[0]);
 		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
-		if(!m_player.isPokemonSeen(wild.getSpeciesNumber() + 1))
-			m_player.setPokemonSeen(wild.getSpeciesNumber() + 1);
+		if(!m_player.isPokemonSeen(wild.getPokedexNumber()))
+			m_player.setPokemonSeen(wild.getPokedexNumber());
 		/* Call methods */
 		// applyWeather();
 		requestMoves();
@@ -702,7 +702,7 @@ public class WildBattleField extends BattleField
 			{
 			}
 		double catchRate = 1.0;
-		int pokeID = m_wildPoke.getPokemonNumber() + 1;
+		int pokeID = m_wildPoke.getPokedexNumber();
 		boolean resetAfterCaught = false;
 		switch(p)
 		{

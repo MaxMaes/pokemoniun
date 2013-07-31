@@ -515,6 +515,7 @@ public class Pokemon extends PokemonSpecies
 		p.setExp(DataService.getBattleMechanics().getExpForLevel(p, level));
 		p.setHappiness(ps.getHappiness());
 		p.setRareness(ps.getRareness());
+		p.setPokemonNumber(ps.getPokemonNumber());
 		if(random.nextDouble() < (1 / 8192))
 			p.setShiny(true);
 		return p;
@@ -1045,7 +1046,7 @@ public class Pokemon extends PokemonSpecies
 			}
 			p.updateClientPokemonStats(index);
 			/* Enter this pokemon in the pokedex. */
-			p.setPokemonCaught(pokeData.getSpeciesNumber() + 1);
+			p.setPokemonCaught(pokeData.getPokedexNumber());
 		}
 	}
 

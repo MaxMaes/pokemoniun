@@ -194,7 +194,7 @@ public class PokedexData
 			return;
 		}
 
-		for(int i = 0; i < 235; i++)
+		for(int i = 0; i < 239; i++)
 		{
 			Ini.Section s = locationid.get(String.valueOf(i));
 

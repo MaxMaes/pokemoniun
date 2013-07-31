@@ -36,6 +36,10 @@ public class PokemonSpriteDatabase
 
 	public static Image getNormalBack(int gender, int pokenum)
 	{
+		if(back[gender][pokenum] == null)
+		{
+			System.out.println("Returning null image for pokenum: " + pokenum + " gender: " + gender);
+		}
 		return back[gender][pokenum];
 	}
 
@@ -176,25 +180,7 @@ public class PokemonSpriteDatabase
 		}
 		else
 		{
-			if(pokenum > 389)
-			{
-				if(pokenum < 413)
-				{
-					index = String.valueOf(pokenum - 3);
-				}
-				else if(pokenum < 416)
-				{
-					index = String.valueOf(413);
-				}
-				else
-				{
-					index = String.valueOf(pokenum - 5);
-				}
-			}
-			else
-			{
-				index = String.valueOf(pokenum);
-			}
+			index = String.valueOf(pokenum);
 		}
 		return index;
 	}

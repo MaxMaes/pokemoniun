@@ -263,7 +263,7 @@ public class RegisterDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				m_terms.setEnabled(true);
+				m_terms.setEnabled(false);
 			}
 		});
 		pane.add(m_terms);

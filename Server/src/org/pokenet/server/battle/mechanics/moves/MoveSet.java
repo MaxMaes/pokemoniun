@@ -103,9 +103,15 @@ public class MoveSet implements Serializable
 	public boolean canLearn(String moveName)
 	{
 		for(int i = 0; i < m_moves.length; i++)
+		{
+			if(m_moves[i] == null)
+				i++;
 			for(int j = 0; j < m_moves[i].length; j++)
+			{
 				if(m_moves[i][j].equalsIgnoreCase(moveName))
 					return true;
+			}
+		}
 		return false;
 	}
 

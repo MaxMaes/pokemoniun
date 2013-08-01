@@ -98,7 +98,7 @@ public class ShopDialog extends Widget
 		});
 		m_shopdialog.add(m_categoryButtons[0]);
 		m_categoryLabels[0] = new Label("Pokeballs");
-		m_categoryLabels[0].setPosition(0, 0);
+		m_categoryLabels[0].setPosition(20, 140);
 		m_categoryLabels[0].setSize(GameClient.getInstance().getFontSmall().getWidth(m_categoryLabels[0].getText()), GameClient.getInstance().getFontSmall().getHeight(m_categoryLabels[0].getText()));
 		m_shopdialog.add(m_categoryLabels[0]);
 		m_categoryButtons[1] = new ImageButton(" ");
@@ -116,7 +116,7 @@ public class ShopDialog extends Widget
 		m_shopdialog.add(m_categoryButtons[1]);
 
 		m_categoryLabels[1] = new Label("Potions");
-		m_categoryLabels[1].setPosition(151, 0);
+		m_categoryLabels[1].setPosition(171, 140);
 		m_categoryLabels[1].setSize(GameClient.getInstance().getFontSmall().getWidth(m_categoryLabels[1].getText()), GameClient.getInstance().getFontSmall().getHeight(m_categoryLabels[1].getText()));
 		m_shopdialog.add(m_categoryLabels[1]);
 
@@ -136,7 +136,7 @@ public class ShopDialog extends Widget
 		m_shopdialog.add(m_categoryButtons[2]);
 
 		m_categoryLabels[2] = new Label("Status Heals");
-		m_categoryLabels[2].setPosition(0, 161);
+		m_categoryLabels[2].setPosition(20, 300);
 		m_categoryLabels[2].setSize(GameClient.getInstance().getFontSmall().getWidth(m_categoryLabels[2].getText()), GameClient.getInstance().getFontSmall().getHeight(m_categoryLabels[2].getText()));
 		m_shopdialog.add(m_categoryLabels[2]);
 
@@ -164,7 +164,7 @@ public class ShopDialog extends Widget
 		m_shopdialog.add(m_categoryButtons[3]);
 
 		m_categoryLabels[3] = new Label("Field Tools");
-		m_categoryLabels[3].setPosition(151, 161);
+		m_categoryLabels[3].setPosition(171, 300);
 		m_categoryLabels[3].setSize(GameClient.getInstance().getFontSmall().getWidth(m_categoryLabels[3].getText()), GameClient.getInstance().getFontSmall().getHeight(m_categoryLabels[3].getText()));
 		m_shopdialog.add(m_categoryLabels[3]);
 
@@ -271,14 +271,14 @@ public class ShopDialog extends Widget
 			{
 				if(m_buyCancel == null)
 				{
-					removeMain();
 					state = 1;
+					removeMain();
 					buyGUI();
 				}
 				else
 				{
-					removeMain();
 					state = 1;
+					removeMain();
 					switchUI();
 				}
 				// buyGUI();
@@ -301,8 +301,8 @@ public class ShopDialog extends Widget
 				}
 				else
 				{
-					removeMain();
 					state = 2;
+					removeMain();
 					switchUI();
 				}
 				// sellGUI();
@@ -434,7 +434,7 @@ public class ShopDialog extends Widget
 		int width = (int) GameClient.getInstance().getGUI().getWidth();
 		int x = width / 2 - 130;
 		int y = height / 2 - 238;
-		setSize(300, 400);
+		setSize(310, 375);
 		setPosition(x, y);
 	}
 
@@ -548,7 +548,7 @@ public class ShopDialog extends Widget
 			if(i > 0)
 				m_itemLabels[i].setPosition(30, m_itemLabels[i - 1].getY());
 			else
-				m_itemLabels[i].setPosition(30, 0);
+				m_itemLabels[i].setPosition(30, 20);
 			m_itemButtons[i].addCallback(new Runnable()
 			{
 				@Override
@@ -577,12 +577,16 @@ public class ShopDialog extends Widget
 				for(int i = 0; i < m_itemStockPics.length; i++)
 					removeChild(m_itemStockPics[i]);
 				removeChild(m_buyCancel);
+				m_buyCancel = null;
 
 				// re-add the buy ui
 				for(int i = 0; i < m_categoryButtons.length; i++)
 					m_shopdialog.add(m_categoryButtons[i]);
 				for(int i = 0; i < m_categoryLabels.length; i++)
 					m_shopdialog.add(m_categoryLabels[i]);
+				m_buyCancel = new Button("Cancel");
+				m_buyCancel.setSize(300, 56);
+				m_buyCancel.setPosition(0, 321);
 				m_shopdialog.add(m_buyCancel);
 				m_buyCancel.addCallback(new Runnable()
 				{

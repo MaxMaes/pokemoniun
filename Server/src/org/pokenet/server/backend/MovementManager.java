@@ -1,5 +1,6 @@
 package org.pokenet.server.backend;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -18,10 +19,11 @@ public class MovementManager implements Runnable
 	/** Comparator for comparing chars */
 	private Comparator<Character> m_comp;
 	private boolean m_isRunning = true;
-	private Queue<Character> m_moved;
+	private Queue<Character> m_done;
 	private int m_pLoad = 0;
 	private Thread m_thread;
 	private Queue<Character> m_waiting;
+	private Queue<Character> m_moving;
 
 	/**
 	 * Default constructor.
@@ -36,7 +38,8 @@ public class MovementManager implements Runnable
 			}
 		};
 		m_waiting = new PriorityQueue<Character>(11, m_comp);
-		m_moved = new PriorityQueue<Character>(1, m_comp);
+		m_done = new PriorityQueue<Character>(10, m_comp);
+		m_moving = new PriorityQueue<Character>(1,m_comp);
 	}
 
 	public void addHMObject(HMObject obj)
@@ -101,13 +104,24 @@ public class MovementManager implements Runnable
 					return true;
 				}
 		}
-		/* Check moved list */
-		synchronized(m_moved)
+		/* Check done list */
+		synchronized(m_done)
 		{
-			for(Character c : m_moved)
+			for(Character c : m_done)
 				if(c.getName().equalsIgnoreCase(player))
 				{
-					m_moved.remove(c);
+					m_done.remove(c);
+					m_pLoad--;
+					return true;
+				}
+		}
+		/* Check moving list */
+		synchronized(m_moving)
+		{
+			for(Character c : m_moving)
+				if(c.getName().equalsIgnoreCase(player))
+				{
+					m_moving.remove(c);
 					m_pLoad--;
 					return true;
 				}
@@ -116,12 +130,12 @@ public class MovementManager implements Runnable
 	}
 
 	/**
-	 * Called by m_thread.start(). Loops through all players calling Player.move() if the player requested to be moved.
+	 * 	Called by m_thread.start().
+	 *	Looping through the waiting and moving queues and moving the character with highest priority from both queues.
 	 */
 	public void run()
 	{
 		Character tmp = null;
-		// ArrayList<Char> tmpArray = null;
 		while(m_isRunning)
 		{
 			/* Pull char of highest priority */
@@ -132,31 +146,68 @@ public class MovementManager implements Runnable
 					tmp = m_waiting.poll();
 				}
 				/* Move character */
-				tmp.move();
-				/* Place him in moved array */
-				synchronized(m_moved)
+				if(tmp.move())
 				{
-					m_moved.offer(tmp);
-				}
-			}
-			if(m_waiting != null)
-			{
-				/* If waiting array is empty, swap arrays */
-				synchronized(m_waiting)
-				{
-					if(m_waiting.isEmpty())
+					/* Place him in moving queue */
+					synchronized(m_moving)
 					{
-						m_waiting.addAll(m_moved);
-						m_moved.clear();
+						m_moving.offer(tmp);
+					}
+				}
+				
+				synchronized(m_moving)
+				{
+					/* Get character */
+					tmp = m_moving.poll();
+				}
+				/* Move character */
+				if(!tmp.move())
+				{
+					/* Place him in the done queue */
+					synchronized(m_done)
+					{
+						m_done.offer(tmp);
+					}
+				}
+				else
+				{
+					/* Keep him in the Moving queue, but place him last */
+					synchronized(m_moving)
+					{
+						m_moving.offer(tmp);
+					}
+				}
+				
+				
+			}
+			if(m_waiting != null && m_done != null)
+			{
+				if(m_waiting.isEmpty())
+				{
+					/* If waiting is empty transfer the characters with movement remaining */
+					ArrayList<Character> transfer = new ArrayList<Character>();
+					for(int i = 0; i < m_done.size(); i++)
+					{
+						if(m_done.peek().peekNextMovement() != null)
+							/* Character has movement remaining. Adding to the transfer list */
+							transfer.add(m_done.poll());
+						else
+							/* Character has no movement remaining. Removing from movement service */
+							m_done.poll();
+					}
+					synchronized(m_waiting)
+					{
+						m_waiting.addAll(transfer);
+						/* the done queue should be clear, this is just to be sure! */
+						m_done.clear();
 					}
 				}
 			}
-			try
-			{
-				Thread.sleep(5);
-			}
-			catch(InterruptedException e)
-			{
+			try {
+				Thread.currentThread().sleep(3);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -175,7 +226,8 @@ public class MovementManager implements Runnable
 	 */
 	public void stop()
 	{
-		m_moved.clear();
+		m_moving.clear();
+		m_done.clear();
 		m_waiting.clear();
 		m_isRunning = false;
 	}

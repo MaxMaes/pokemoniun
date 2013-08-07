@@ -624,27 +624,27 @@ public class RegisterDialog extends ResizableFrame
 							}
 							else
 								System.out.println(translated.get(28));
-							GameClient.getInstance().messageDialog(translated.get(28));
+							GameClient.getInstance().showMessageDialog(translated.get(28));
 						}
 						else
 							System.out.println(translated.get(28));
-						GameClient.getInstance().messageDialog("No starter selected");
+						GameClient.getInstance().showMessageDialog("No starter selected");
 					}
 					else
 						System.out.println(translated.get(28));
-					GameClient.getInstance().messageDialog(translated.get(29));
+					GameClient.getInstance().showMessageDialog(translated.get(29));
 				}
 				else
 					System.out.println(translated.get(28));
-				GameClient.getInstance().messageDialog(translated.get(30));
+				GameClient.getInstance().showMessageDialog(translated.get(30));
 			}
 			else
 				System.out.println(translated.get(28));
-			GameClient.getInstance().messageDialog(translated.get(31));
+			GameClient.getInstance().showMessageDialog(translated.get(31));
 		}
 		else
 			System.out.println(translated.get(28));
-		GameClient.getInstance().messageDialog(translated.get(32));
+		GameClient.getInstance().showMessageDialog(translated.get(32));
 	}
 
 	/**

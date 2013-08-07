@@ -12,7 +12,7 @@ public class TradeInvalidOfferEvent implements MessageEvent
 	@Override
 	public void parse(Session session, ServerMessage request, ClientMessage message)
 	{
-		GameClient.getInstance().showAlert("Trading Alert!", "You cannot trade starters");
+		GameClient.getInstance().showMessageDialog("You cannot trade starters");
 		GameClient.getInstance().getHUD().getTradeDialog().cancelOurOffer();
 	}
 }

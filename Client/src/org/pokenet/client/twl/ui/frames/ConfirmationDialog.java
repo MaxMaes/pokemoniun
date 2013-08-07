@@ -22,7 +22,10 @@ public class ConfirmationDialog extends ResizableFrame
 	private PopupWindow popup;
 
 	/*
+	 * Creates a new ConfirmationDialog
+	 * - This Dialog is only used for questions as "Do you really want to exit".
 	 * 
+	 * note: this constructor should only be called by GuiPane!
 	 */
 	public ConfirmationDialog(String text, Widget guiPane)
 	{
@@ -64,7 +67,7 @@ public class ConfirmationDialog extends ResizableFrame
 		popup.adjustSize();
 	}
 
-	/* adds the callback method for the "yes" button */
+	/* Sets the callback method for the "yes" button */
 	public void setYesListener(Runnable callback)
 	{
 		if(yesCallback != null)
@@ -72,13 +75,13 @@ public class ConfirmationDialog extends ResizableFrame
 		yesButton.addCallback(callback);
 		yesCallback = callback;
 	}
-
+	/* removes the callback method for the "yes" button */
 	private void removeYesCallback()
 	{
 		yesButton.removeCallback(yesCallback);
 	}
 
-	/* adds the callbackmethod for the "no" button */
+	/* Sets the callbackmethod for the "no" button */
 	public void setNoListener(Runnable callback)
 	{
 		if(noCallback != null)
@@ -86,12 +89,14 @@ public class ConfirmationDialog extends ResizableFrame
 		noButton.addCallback(callback);
 		noCallback = callback;
 	}
-
+	
+	/* Removes the callback method for the "no" button */
 	private void removeNoCallback()
 	{
 		noButton.removeCallback(noCallback);
 	}
 
+	/* Sets the text for the message */
 	public void setText(String text)
 	{
 		textModel.setText(text);
@@ -114,8 +119,16 @@ public class ConfirmationDialog extends ResizableFrame
 		}
 	}
 
+	/* Simulates the events for the "yes" button */
 	public void runYes()
 	{
 		yesCallback.run();
+	}
+	
+	/* Simulates the events for the "no" button */
+	
+	public void runNo()
+	{
+		noCallback.run();
 	}
 }

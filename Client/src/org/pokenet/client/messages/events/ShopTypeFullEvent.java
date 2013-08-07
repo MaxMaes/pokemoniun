@@ -12,6 +12,6 @@ public class ShopTypeFullEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().messageDialog("You can't carry any more " + Request.readString());
+		GameClient.getInstance().showMessageDialog("You can't carry any more " + Request.readString());
 	}
 }

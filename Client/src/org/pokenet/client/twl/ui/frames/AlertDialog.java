@@ -1,5 +1,8 @@
 package org.pokenet.client.twl.ui.frames;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
@@ -20,15 +23,22 @@ public class AlertDialog extends ResizableFrame
 	private TextArea dialogText;
 	private SimpleTextAreaModel textModel;
 	private PopupWindow popup;
+	private Queue<String> textQueue;
+	private Queue<Runnable> okButtonQueue;
 
 	/*
+	 * Creates a new alertdialog
 	 * 
+	 * note: This constructor should be only called by GuiPane!
 	 */
 	public AlertDialog(String Title, String text, Widget widget)
 	{
 		setTitle(Title);
 		setTheme("alertdialog");
-
+		
+		textQueue = new LinkedList<String>();
+		okButtonQueue = new LinkedList<Runnable>();
+		
 		textModel = new SimpleTextAreaModel(text);
 		dialogText = new TextArea(textModel);
 
@@ -44,8 +54,7 @@ public class AlertDialog extends ResizableFrame
 		popup.setCloseOnClickedOutside(false);
 		popup.setCloseOnEscape(true);
 		setVisible(false);
-		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + okButton.getHeight() + 30);
-		popup.adjustSize();
+		
 	}
 
 	@Override
@@ -57,10 +66,12 @@ public class AlertDialog extends ResizableFrame
 		
 		dialogText.setPosition((getInnerX() + (popup.getWidth() / 2 - dialogText.getWidth() / 2) + 5), getInnerY() + 10);
 		okButton.setPosition(getInnerX() + (popup.getWidth() / 2), dialogText.getY() + dialogText.getHeight() + 10);
+		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + okButton.getHeight() + 30);
+		popup.adjustSize();
 	}
 
-	/* adds the callback method for the "Ok" button */
-	public void addOkListener(Runnable callback)
+	/* sets the callback method for the "Ok" button */
+	public void setOkListener(Runnable callback)
 	{
 		if(okCallback != null)
 			removeOkCallback();
@@ -68,11 +79,13 @@ public class AlertDialog extends ResizableFrame
 		okCallback = callback;
 	}
 
+	/* removes the callback method for the "Ok" button */
 	private void removeOkCallback()
 	{
 		okButton.removeCallback(okCallback);
 	}
 
+	/* Sets the text to be shown in the message */
 	public void setText(String text)
 	{
 		textModel.setText(text);
@@ -84,7 +97,15 @@ public class AlertDialog extends ResizableFrame
 		if(b)
 		{
 			super.setVisible(b);
+			popup.adjustSize();
 			popup.openPopupCentered();
+		}
+		else if(!textQueue.isEmpty() && !okButtonQueue.isEmpty())
+		{
+			super.setVisible(true);
+			setText(textQueue.poll());
+			setOkListener(okButtonQueue.poll());
+			popup.adjustSize();
 		}
 		else
 		{
@@ -93,5 +114,12 @@ public class AlertDialog extends ResizableFrame
 				popup.closePopup();
 			setText("");
 		}
+	}
+
+	/* Adds the message to the queue so it does not get lost. */
+	public void queue(String message, Runnable runnable) 
+	{
+		textQueue.offer(message);
+		okButtonQueue.offer(runnable);
 	}
 }

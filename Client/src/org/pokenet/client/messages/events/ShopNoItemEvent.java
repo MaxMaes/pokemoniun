@@ -12,6 +12,6 @@ public class ShopNoItemEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().messageDialog("You don't have a " + Request.readString());
+		GameClient.getInstance().showMessageDialog("You don't have a " + Request.readString());
 	}
 }

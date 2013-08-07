@@ -18,7 +18,7 @@ public class LoginErrorEvent implements MessageEvent
 		List<String> translated = new ArrayList<String>();
 		translated = Translator.translate("_LOGIN");
 
-		GameClient.getInstance().messageDialog(translated.get(21));
+		GameClient.getInstance().showMessageDialog(translated.get(21));
 		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().enableLogin();
 	}

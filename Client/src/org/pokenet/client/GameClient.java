@@ -304,7 +304,7 @@ public class GameClient extends BasicGame
 		}
 		catch(Exception e)
 		{
-			GameClient.getInstance().messageDialog("The server is offline, please check back later.");
+			GameClient.getInstance().showMessageDialog("The server is offline, please check back later.");
 			getGUIPane().hideLoadingScreen();
 		}
 	}
@@ -1009,10 +1009,19 @@ public class GameClient extends BasicGame
 	}
 
 	/** Creates a message Box */
-	public void messageDialog(String message)
+	public void showMessageDialog(String message)
 	{
 		if(!root.getMessageDialog().isVisible())
 			root.showMessageDialog(message, new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					root.hideMessageDialog();
+				}
+			});
+		else
+			root.getMessageDialog().queue(message, new Runnable() 
 			{
 				@Override
 				public void run()
@@ -1337,20 +1346,20 @@ public class GameClient extends BasicGame
 		m_session = session;
 	}
 
-	public void showAlert(String title, String text)
-	{
-		if(root.getAlertDialog().isVisible())
-			root.hideAlertDialog();
-		Runnable ok = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				root.hideAlertDialog();
-			}
-		};
-		root.showAlertDialog(title, text, ok);
-	}
+//	public void showAlert(String title, String text)
+//	{
+//		if(root.getAlertDialog().isVisible())
+//			root.hideAlertDialog();
+//		Runnable ok = new Runnable()
+//		{
+//			@Override
+//			public void run()
+//			{
+//				root.hideAlertDialog();
+//			}
+//		};
+//		root.showAlertDialog(title, text, ok);
+//	}
 
 	/** Updates the game window */
 	/* ! Keep in mind, no calculations in here. Only repaint ! */

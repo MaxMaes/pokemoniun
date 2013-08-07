@@ -12,7 +12,9 @@ public class AlertMessageEvent implements MessageEvent
 	@Override
 	public void parse(Session session, ServerMessage request, ClientMessage message)
 	{
-		GameClient.getInstance().showAlert(request.readString(), request.readString());
+		//discard the title for now...
+		request.readString();
+		GameClient.getInstance().showMessageDialog(request.readString());
 	}
 
 }

@@ -211,7 +211,7 @@ public class BigBagDialog extends ResizableFrame
 				public void run()
 				{
 					destroyPopup();
-					useItem(j,root);
+					useItem(j, root);
 					update();
 				}
 			});
@@ -486,7 +486,7 @@ public class BigBagDialog extends ResizableFrame
 		m_rightButton.setSize(20, 40);
 		m_rightButton.setPosition(365 + getInnerX(), 105 + getInnerY());
 		m_cancel.setSize(400, 32);
-		m_cancel.setPosition(0 + getInnerX(), 195 + getInnerY());
+		m_cancel.setPosition(0 + getInnerX(), 218 + getInnerY());
 	}
 }
 
@@ -503,7 +503,7 @@ class ItemPopup extends Widget
 	private Label m_name;
 	private TeamPopup m_team;
 	private Button m_use;
-	
+
 	private PopupWindow popup;
 
 	/**

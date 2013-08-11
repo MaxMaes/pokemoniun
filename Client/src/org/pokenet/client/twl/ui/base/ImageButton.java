@@ -142,7 +142,8 @@ public class ImageButton extends Button
 		{
 			if(alignment == ImageAlignment.CENTER)
 			{
-				currImage.draw(getAnimationState(), getInnerX(), getInnerY(), currImage.getWidth(), currImage.getHeight());
+				currImage.draw(getAnimationState(), getInnerX() + (getWidth() / 2) - (currImage.getWidth() / 2) - 5, getInnerY() + (getHeight() / 2) - (currImage.getHeight() / 2),
+						currImage.getWidth(), currImage.getHeight());
 			}
 			else
 			{

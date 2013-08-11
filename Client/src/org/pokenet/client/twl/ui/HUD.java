@@ -659,6 +659,11 @@ public class HUD extends DesktopArea
 		}
 	}
 
+	/**
+	 * Creates a new friendslist dialog and adds it to the UI.
+	 * 
+	 * @param split
+	 */
 	public void showFriendsList(String[] split)
 	{
 		friends = new FriendsListDialog();
@@ -849,14 +854,16 @@ public class HUD extends DesktopArea
 	}
 
 	/**
-	 * Initializes the Friends List
+	 * Initializes the Friends List DATAWISE
 	 * 
 	 * @param friends
 	 */
 	public void initFriendsList(String[] list)
 	{
 		for(int i = 0; i < list.length; i++)
+		{
 			friends.addFriend(list[i]);
+		}
 	}
 
 	/**

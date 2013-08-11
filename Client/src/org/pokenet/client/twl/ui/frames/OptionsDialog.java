@@ -1,16 +1,15 @@
 package org.pokenet.client.twl.ui.frames;
 
 import java.util.List;
-
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.twl.ui.base.Checkbox;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ResizableFrame;
 
-public class OptionsDialog extends ResizableFrame {
+public class OptionsDialog extends ResizableFrame
+{
 	private Checkbox m_disableMaps;
 	private Checkbox m_disableWeather;
 	private Checkbox m_fullScreen;
@@ -19,20 +18,20 @@ public class OptionsDialog extends ResizableFrame {
 	private Options m_options;
 	private Button m_save;
 
-	public OptionsDialog() {
+	public OptionsDialog()
+	{
 		m_options = GameClient.getInstance().getOptions();
 		initGUI();
 	}
 
-	public void initGUI() {
+	public void initGUI()
+	{
 		List<String> translated = Translator.translate("_GUI");
 		m_fullScreen = new Checkbox(translated.get(16));
-		
 
 		m_fullScreen.setActive(m_options.isFullscreenEnabled());
 		add(m_fullScreen);
 		m_muteSound = new Checkbox(translated.get(17));
-		
 
 		m_muteSound.setActive(m_options.isSoundMuted());
 		add(m_muteSound);
@@ -41,34 +40,33 @@ public class OptionsDialog extends ResizableFrame {
 		add(m_disableMaps);
 
 		m_disableWeather = new Checkbox("Disable Weather");
-		
+
 		m_disableWeather.setActive(!m_options.isWeatherEnabled());
 		add(m_disableWeather);
 
 		m_save = new Button(translated.get(18));
-		
+
 		add(m_save);
 
-		m_save.addCallback(new Runnable() {
+		m_save.addCallback(new Runnable()
+		{
 			@Override
-			public void run() {
+			public void run()
+			{
 				List<String> translated = Translator.translate("_GUI");
 
 				m_options.setFullscreenEnabled(m_fullScreen.isActive());
-				if (m_muteSound.isActive())
+				if(m_muteSound.isActive())
 					m_options.setVolume(0);
 				else
 					m_options.setVolume(100);
-				GameClient.getInstance().getSoundPlayer()
-						.mute(m_options.isSoundMuted());
+				GameClient.getInstance().getSoundPlayer().mute(m_options.isSoundMuted());
 
 				m_options.setSurroundingMapsEnabled(!m_disableMaps.isActive());
-				GameClient.getInstance().setLoadSurroundingMaps(
-						m_options.isSurroundingMapsEnabled());
+				GameClient.getInstance().setLoadSurroundingMaps(m_options.isSurroundingMapsEnabled());
 
 				m_options.setWeatherEnabled(!m_disableWeather.isActive());
-				GameClient.getInstance().getWeatherService()
-						.setEnabled(!m_disableWeather.isActive());
+				GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isActive());
 
 				m_options.saveSettings();
 				// GameClient.getInstance().messageDialog(translated.get(19),
@@ -77,18 +75,19 @@ public class OptionsDialog extends ResizableFrame {
 			}
 		});
 		setTitle(translated.get(15));
-		
 		setResizableAxis(ResizableAxis.NONE);
 	}
 
 	@Override
-	public void setVisible(boolean state) {
+	public void setVisible(boolean state)
+	{
 		m_options = GameClient.getInstance().getOptions();
 		super.setVisible(state);
 	}
-	
+
 	@Override
-	public void layout() {
+	public void layout()
+	{
 		m_fullScreen.setPosition(10, 30);
 		m_muteSound.setPosition(150, 30);
 		m_disableMaps.setPosition(10, 65);

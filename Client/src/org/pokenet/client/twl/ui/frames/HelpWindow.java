@@ -2,7 +2,6 @@ package org.pokenet.client.twl.ui.frames;
 
 import java.util.List;
 import org.pokenet.client.backend.Translator;
-
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
@@ -68,11 +67,11 @@ public class HelpWindow extends ResizableFrame
 		// setText Mover stuff to help panel.
 		TextAreaModel model = new SimpleTextAreaModel(translated.get(21) + translated.get(22) + translated.get(23) + translated.get(24) + translated.get(25) + translated.get(26));
 		helptext.setModel(model);
-		setSize(360, 460);
+		setSize(360, 200);
 		add(helptext);
-		setDraggable(false);
+		setDraggable(true);
 	}
-	
+
 	@Override
 	public void layout()
 	{

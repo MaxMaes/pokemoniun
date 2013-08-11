@@ -1012,6 +1012,7 @@ public class GameClient extends BasicGame
 	public void showMessageDialog(String message)
 	{
 		if(!root.getMessageDialog().isVisible())
+		{
 			root.showMessageDialog(message, new Runnable()
 			{
 				@Override
@@ -1020,8 +1021,10 @@ public class GameClient extends BasicGame
 					root.hideMessageDialog();
 				}
 			});
+		}
 		else
-			root.getMessageDialog().queue(message, new Runnable() 
+		{
+			root.getMessageDialog().queue(message, new Runnable()
 			{
 				@Override
 				public void run()
@@ -1029,6 +1032,7 @@ public class GameClient extends BasicGame
 					root.hideMessageDialog();
 				}
 			});
+		}
 	}
 
 	/** Accepts the mouse input */
@@ -1346,20 +1350,20 @@ public class GameClient extends BasicGame
 		m_session = session;
 	}
 
-//	public void showAlert(String title, String text)
-//	{
-//		if(root.getAlertDialog().isVisible())
-//			root.hideAlertDialog();
-//		Runnable ok = new Runnable()
-//		{
-//			@Override
-//			public void run()
-//			{
-//				root.hideAlertDialog();
-//			}
-//		};
-//		root.showAlertDialog(title, text, ok);
-//	}
+	// public void showAlert(String title, String text)
+	// {
+	// if(root.getAlertDialog().isVisible())
+	// root.hideAlertDialog();
+	// Runnable ok = new Runnable()
+	// {
+	// @Override
+	// public void run()
+	// {
+	// root.hideAlertDialog();
+	// }
+	// };
+	// root.showAlertDialog(title, text, ok);
+	// }
 
 	/** Updates the game window */
 	/* ! Keep in mind, no calculations in here. Only repaint ! */

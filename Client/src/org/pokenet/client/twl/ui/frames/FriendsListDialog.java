@@ -41,11 +41,17 @@ public class FriendsListDialog extends ResizableFrame
 	{
 		boolean knownFriend = false;
 		if(m_friends.contains(friend))
+		{
 			knownFriend = true;
+		}
 		if(!knownFriend)
+		{
 			m_friends.add(friend);
+		}
 		else
+		{
 			System.out.println("This friend is already present in your Friendlist!");
+		}
 		scroll(0);
 	}
 
@@ -70,7 +76,9 @@ public class FriendsListDialog extends ResizableFrame
 		m_down = new Button();
 		m_down.setTheme("downbutton");
 		if(m_friends.size() <= 10)
+		{
 			m_down.setEnabled(false);
+		}
 		m_down.addCallback(new Runnable()
 		{
 			@Override
@@ -93,8 +101,12 @@ public class FriendsListDialog extends ResizableFrame
 	public void removeFriend(String friend)
 	{
 		for(int i = 0; i < m_friends.size(); i++)
+		{
 			if(m_friends.get(i).equals(friend))
+			{
 				m_friends.remove(friend);
+			}
+		}
 		scroll(0);
 	}
 
@@ -193,9 +205,9 @@ public class FriendsListDialog extends ResizableFrame
 	public void layout()
 	{
 		m_up.setSize(15, 15);
-		m_up.setPosition(getWidth() - 15, 0);
+		m_up.setPosition(getWidth() - 15, 24);
 		m_down.setSize(15, 15);
-		m_down.setPosition(getWidth() - 15, getHeight() - 15 - 48);
+		m_down.setPosition(getWidth() - 15, getHeight() - 15 - 25 + 25);
 	}
 }
 
@@ -216,7 +228,7 @@ class PopUp extends Widget
 	 * @param friend The username of the friend.
 	 * @param online True if the friend is online, otherwise false.
 	 */
-	public PopUp(String friend, boolean online,Widget root)
+	public PopUp(String friend, boolean online, Widget root)
 	{
 		setPosition(getX() - 1, getY() + 1);
 		m_name = new Label(friend);
@@ -243,7 +255,7 @@ class PopUp extends Widget
 		popup.add(this);
 		popup.setCloseOnClickedOutside(true);
 		popup.setCloseOnEscape(true);
-		
+
 		m_remove.addCallback(new Runnable()
 		{
 			@Override

@@ -202,7 +202,7 @@
             <param name="background"><image>checkbox_background</image></param>
         </theme>
         <theme name="label" ref="label">
-            <param name="font"><font>normal_black</font></param>
+            <param name="font"><font>normal_white</font></param>
         </theme>
     </theme>
     <theme name="listbox" ref="-defaults">

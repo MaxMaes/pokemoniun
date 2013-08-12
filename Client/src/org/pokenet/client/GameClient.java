@@ -931,8 +931,8 @@ public class GameClient extends BasicGame
 		gc.getInput().enableKeyRepeat();
 
 		setPlayerSpriteFactory();
-		PokemonSpriteDatabase.loadPokemonSprites();
-		ItemSpriteDatabase.loadItemSprites();
+		PokemonSpriteDatabase.Init();
+		ItemSpriteDatabase.Init();
 
 		m_weather = new WeatherService();
 		m_time = new TimeService();
@@ -1395,8 +1395,10 @@ public class GameClient extends BasicGame
 					lastPressedKey = -2;
 			}
 			/* Check if we need to loads maps */
-			if(m_isNewMap && getGUIPane().isLoadingScreenVisible() && m_ourPlayer != null)
+			if(m_isNewMap && m_ourPlayer != null)
 			{
+				getGUIPane().hideHUD();
+				getGUIPane().showLoadingScreen();
 				m_mapMatrix.loadMaps(m_mapX, m_mapY, gc.getGraphics());
 				m_mapMatrix.getCurrentMap().setName(m_mapMatrix.getMapName(m_mapX, m_mapY));
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
@@ -1405,6 +1407,7 @@ public class GameClient extends BasicGame
 				getHUD().getMap().setPlayerLocation();
 				m_isNewMap = false;
 				getGUIPane().hideLoadingScreen();
+				getGUIPane().showHUD();
 			}
 			/* Animate the player */
 			if(m_ourPlayer != null)

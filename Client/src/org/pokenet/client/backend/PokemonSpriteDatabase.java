@@ -19,11 +19,35 @@ public class PokemonSpriteDatabase
 	private static ArrayList<HashMap<String, Image[]>> overworldnormal;
 	private static ArrayList<HashMap<String, Image[]>> overworldshiny;
 
+	public static void Init()
+	{
+		respath = System.getProperty("res.path");
+		if(respath == null)
+			respath = "";
+
+		overworldnormal = new ArrayList<HashMap<String, Image[]>>();
+		overworldshiny = new ArrayList<HashMap<String, Image[]>>();
+	}
+
+	/**
+	 * Returns an array with images, based on a direction.
+	 * 
+	 * @param key UP, DOWN, LEFT, RIGHT
+	 * @param pokenum number of the pokemon
+	 * @return
+	 */
 	public static Image[] getOverworldNormal(String key, int pokenum)
 	{
 		return overworldnormal.get(pokenum).get(key);
 	}
 
+	/**
+	 * Returns an array with images, based on a direction.
+	 * 
+	 * @param key UP, DOWN, LEFT, RIGHT
+	 * @param pokenum number of the pokemon
+	 * @return
+	 */
 	public static Image[] getOverworldShiny(String key, int pokenum)
 	{
 		return overworldshiny.get(pokenum).get(key);
@@ -38,35 +62,44 @@ public class PokemonSpriteDatabase
 	{
 		if(back[gender][pokenum] == null)
 		{
-			System.out.println("Returning null image for pokenum: " + pokenum + " gender: " + gender);
+			System.out.println("Loading sprite for pokemon: " + pokenum);
+			loadSpriteWithNumber(pokenum);
 		}
 		return back[gender][pokenum];
 	}
 
 	public static Image getShineyBack(int gender, int pokenum)
 	{
+		if(back_shiney[gender][pokenum] == null)
+		{
+			System.out.println("Loading sprite for pokemon: " + pokenum);
+			loadSpriteWithNumber(pokenum);
+		}
 		return back_shiney[gender][pokenum];
 	}
 
 	public static Image getNormalFront(int gender, int pokenum)
 	{
+		if(front[gender][pokenum] == null)
+		{
+			System.out.println("Loading sprite for pokemon: " + pokenum);
+			loadSpriteWithNumber(pokenum);
+		}
 		return front[gender][pokenum];
 	}
 
 	public static Image getShineyFront(int gender, int pokenum)
 	{
+		if(front_shiney[gender][pokenum] == null)
+		{
+			System.out.println("Loading sprite for pokemon: " + pokenum);
+			loadSpriteWithNumber(pokenum);
+		}
 		return front_shiney[gender][pokenum];
 	}
 
-	public static void loadPokemonSprites()
+	public static void loadAllPokemonSprites()
 	{
-		respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-
-		overworldnormal = new ArrayList<HashMap<String, Image[]>>();
-		overworldshiny = new ArrayList<HashMap<String, Image[]>>();
-
 		System.out.println("Filling pokemon sprites database.");
 		for(int pokenum = 1; pokenum < spriteamount; pokenum++)
 		{
@@ -82,6 +115,20 @@ public class PokemonSpriteDatabase
 			loadSpritesheet(pokenum);
 		}
 		System.out.println("Done loading pokemon sprites.");
+	}
+
+	private static void loadSpriteWithNumber(int pokenum)
+	{
+		if(pokenum != 29 && pokenum != 30 && pokenum != 31)
+		{
+			loadMaleSprites(pokenum);
+		}
+		if(pokenum != 32 && pokenum != 33 && pokenum != 34)
+		{
+			loadFemaleSprites(pokenum);
+		}
+		loadIcon(pokenum);
+		loadSpritesheet(pokenum);
 	}
 
 	private static void loadSpritesheet(int pokenum)
@@ -151,7 +198,6 @@ public class PokemonSpriteDatabase
 		front[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/normal/" + getSpriteIndex(pokenum) + "-3.png");
 		back_shiney[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/shiny/" + getSpriteIndex(pokenum) + "-1.png");
 		back[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/normal/" + getSpriteIndex(pokenum) + "-1.png");
-
 	}
 
 	private static void loadFemaleSprites(int pokenum)

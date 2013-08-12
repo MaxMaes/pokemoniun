@@ -27,32 +27,6 @@ public class PlayerItem
 		m_number = number;
 		m_quantity = quantity;
 		m_item = getItem(m_number);
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		try
-		{
-
-			if(m_item.getCategory().equalsIgnoreCase("TM"))
-			{
-				m_bagImage = ItemSpriteDatabase.getTM48();
-			}
-			else
-			{
-				m_bagImage = ItemSpriteDatabase.getItemsprite48(m_item.getId());
-			}
-		}
-		catch(Exception e)
-		{
-			try
-			{
-				m_bagImage = ItemSpriteDatabase.getItemsprite48(0);
-			}
-			catch(Exception e2)
-			{
-				e2.printStackTrace();
-			}
-		}
 	}
 
 	public static List<Item> generateFieldItems()
@@ -97,6 +71,28 @@ public class PlayerItem
 
 	public Image getBagImage()
 	{
+		try
+		{
+			if(m_item.getCategory().equalsIgnoreCase("TM"))
+			{
+				m_bagImage = ItemSpriteDatabase.getTM48();
+			}
+			else
+			{
+				m_bagImage = ItemSpriteDatabase.getItemsprite48(m_item.getId());
+			}
+		}
+		catch(Exception e)
+		{
+			try
+			{
+				m_bagImage = ItemSpriteDatabase.getItemsprite48(0);
+			}
+			catch(Exception e2)
+			{
+				e2.printStackTrace();
+			}
+		}
 		return m_bagImage;
 	}
 

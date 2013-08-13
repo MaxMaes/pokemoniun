@@ -101,9 +101,9 @@ public class TimeService implements Runnable
 				return 1;
 			case HAIL:
 				return 2;
-			case SANDSTORM:
-				return 3;
 			case FOG:
+				return 3;
+			case SANDSTORM:
 				return 4;
 			default:
 				return 0;
@@ -218,7 +218,7 @@ public class TimeService implements Runnable
 	}
 
 	/**
-	 * Sets the weather. 0: Weather.NORMAL; 1: Weather.RAIN; 2: Weather.HAIL; 3: Weather.FOG; 9: Weather.RANDOM;
+	 * Sets the weather.
 	 * 
 	 * @return
 	 */

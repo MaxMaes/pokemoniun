@@ -3,7 +3,6 @@ package org.pokenet.client.twl.ui.frames;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.ModerationManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.ComboBox;
@@ -58,10 +57,13 @@ public class ChatDialog extends Widget
 				{
 					if(input.getText() != null && input.getText().length() != 0)
 						if(input.getText().charAt(0) == '/')
-							ModerationManager.parseLine(input.getText().substring(1));
+						{
+							ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COMMAND);
+							message.addString(input.getText().substring(1));
+							GameClient.getInstance().getSession().send(message);
+						}
 						else if(getSelectedChatboxName().equalsIgnoreCase("global"))
 						{
-							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
 							ClientMessage message = new ClientMessage(ServerPacket.CHAT);
 							message.addInt(1);
 							message.addString(input.getText());
@@ -73,7 +75,6 @@ public class ChatDialog extends Widget
 							message.addInt(2);
 							message.addString(getSelectedChatboxName() + "," + input.getText());
 							GameClient.getInstance().getSession().send(message);
-							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
 							addWhisperLine(getSelectedChatboxName(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + input.getText());
 						}
 					input.setText("");

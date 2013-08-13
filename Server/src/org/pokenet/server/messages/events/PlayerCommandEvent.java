@@ -1,0 +1,434 @@
+package org.pokenet.server.messages.events;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.pokenet.server.GameServer;
+import org.pokenet.server.backend.entity.Player;
+import org.pokenet.server.client.Session;
+import org.pokenet.server.connections.ActiveConnections;
+import org.pokenet.server.constants.ClientPacket;
+import org.pokenet.server.constants.UserClasses;
+import org.pokenet.server.constants.Weather;
+import org.pokenet.server.messages.MessageEvent;
+import org.pokenet.server.network.MySqlManager;
+import org.pokenet.server.protocol.ClientMessage;
+import org.pokenet.server.protocol.ServerMessage;
+
+public class PlayerCommandEvent implements MessageEvent
+{
+
+	@Override
+	public void Parse(Session session, ClientMessage request, ServerMessage message)
+	{
+		/* TODO: After implementation test all commands thorougly.
+		 * Done:
+		 * Online Part:
+		 * Offline Part: */
+		String command = request.readString();
+		if(command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("ban "))
+		{
+			String playername = command.substring(4);
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+				processPlayerBan(session, playername, ActiveConnections.getPlayer(playername));
+		}
+		else if(command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("help"))
+		{
+			/* TODO: Think of a practical way to implement help. */
+		}
+		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("mute "))
+		{
+			String playername = command.substring(5);
+			if(checkPermission(session, UserClasses.MODERATOR))
+				processPlayerMute(session, playername, ActiveConnections.getPlayer(playername));
+		}
+		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("kick "))
+		{
+			String playername = command.substring(5);
+			if(checkPermission(session, UserClasses.MODERATOR))
+				processPlayerKick(session, playername, ActiveConnections.getPlayer(playername));
+		}
+		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("jump "))
+		{
+			String playernames = command.substring(5);
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+				processPlayerWarp(session, playernames);
+		}
+		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("reset "))
+		{
+			String playername = command.substring(6);
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+				processPlayerReset(session, playername, ActiveConnections.getPlayer(playername));
+		}
+		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("unban "))
+		{
+			String playername = command.substring(6);
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+				procesPlayerUnBan(session, playername);
+		}
+		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("class "))
+		{
+			String[] playerdata = command.substring(6).split(",");
+			String playername = playerdata[0];
+			int adminLvl = Integer.parseInt(playerdata[1]);
+			if(checkPermission(session, UserClasses.DEVELOPER))
+				processPlayerClassChange(session, playername, adminLvl);
+		}
+		else if(command.length() >= 7 && command.substring(0, 7).equalsIgnoreCase("notify "))
+		{
+			String notification = command.substring(7);
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+			{
+				for(Session s : ActiveConnections.allSessions().values())
+				{
+					if(s.getPlayer() != null)
+					{
+						message.init(ClientPacket.SERVER_NOTIFICATION.getValue());
+						message.addString(notification);
+						s.Send(message);
+					}
+				}
+			}
+		}
+		else if(command.length() >= 7 && command.substring(0, 7).equalsIgnoreCase("unmute "))
+		{
+			String playername = command.substring(7);
+			if(checkPermission(session, UserClasses.MODERATOR))
+				processPlayerUnMute(session, playername, ActiveConnections.getPlayer(playername));
+		}
+		else if(command.length() >= 8 && command.substring(0, 8).equalsIgnoreCase("weather "))
+		{
+			if(checkPermission(session, UserClasses.SUPER_MOD))
+				processWeather(command.substring(8).toLowerCase(), session);
+		}
+		else if(command.length() >= 9 && command.substring(0, 9).equalsIgnoreCase("announce "))
+		{
+			String announcement = command.substring(9);
+			if(checkPermission(session, UserClasses.MODERATOR))
+			{
+				for(Session s : ActiveConnections.allSessions().values())
+				{
+					if(s.getPlayer() != null)
+					{
+						message.init(ClientPacket.SERVER_ANNOUNCEMENT.getValue());
+						message.addString(announcement);
+						s.Send(message);
+					}
+				}
+			}
+		}
+		else if(command.length() >= 11 && command.substring(0, 11).equalsIgnoreCase("playercount"))
+		{
+			message = new ServerMessage(ClientPacket.CHAT_PACKET);
+			message.addInt(4);
+			message.addString("Currently there are " + ActiveConnections.getActiveConnections() + " player(s) online");
+			session.Send(message);
+		}
+		else
+		{
+			message = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+			message.addString("Invalid or unkown command.\nUse /help if you need more information");
+			session.Send(message);
+		}
+	}
+
+	private void processPlayerClassChange(Session session, String playername, int adminLvl)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet playerNameResult = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(playerNameResult.first())
+			{
+				m_database.query("UPDATE pn_members SET adminLevel = " + adminLvl + " WHERE username = '" + playername + "';");
+				message.addString("The class of " + playername + " has been changed to " + adminLvl);
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void procesPlayerUnBan(Session session, String playername)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet bannedPlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(bannedPlayername.first())
+			{
+				m_database.query("DELETE FROM pn_bans WHERE playername = '" + playername + "';");
+				message.addString("Player " + playername + " has been unbanned.");
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void processPlayerUnMute(Session session, String playername, Player player)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet unMutePlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(unMutePlayername.first())
+			{
+				if(player != null)
+				{
+					player.setMuted(false);
+					ServerMessage muteMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+					muteMessage.addString("You have been unmuted.");
+					player.getSession().Send(muteMessage);
+				}
+				m_database.query("UPDATE pn_members SET muted = 'false' WHERE username = '" + playername + "';");
+				message.addString("Player " + playername + " has been unmuted.");
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+	}
+
+	private void processPlayerReset(Session session, String playername, Player player)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet playerNameResult = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(playerNameResult.first())
+			{
+				if(player != null)
+				{
+					player.setX(player.getHealX());
+					player.setY(player.getHealY());
+					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getHealMapX(), player.getHealMapY()), player.getFacing());
+				}
+				m_database.query("UPDATE pn_members SET x = " + player.getHealX() + ", y = " + player.getHealY() + ", mapX = " + player.getHealMapX() + ", mapY = " + player.getHealMapY()
+						+ " WHERE username = '" + playername + "';");
+				message.addString("Player " + playername + " has been teleported to his last heal location.");
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void processPlayerWarp(Session session, String playernames)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		String[] players = playernames.split(",");
+		Player player1 = ActiveConnections.getPlayer(players[0]);
+		Player player2 = ActiveConnections.getPlayer(players[1]);
+		ResultSet player1Result = m_database.query("SELECT username FROM pn_members WHERE username = '" + players[0] + "';");
+		ResultSet player2Result = m_database.query("SELECT username FROM pn_members WHERE username = '" + players[1] + "';");
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		try
+		{
+			/* Both players are online, easy. */
+			if(player1 != null && player2 != null)
+			{
+				player1.setX(player2.getX());
+				player1.setY(player2.getY());
+				player1.setMap(player2.getMap(), player1.getFacing());
+				message.addString("Teleported player " + players[0] + " to " + players[1] + " succesfully.");
+			}
+			/* Player 1 is online, get player 2 data from DB. */
+			else if(player1 != null)
+			{
+				if(player2Result.first())
+				{
+					ResultSet player2Location = m_database.query("SELECT x,y,mapX,mapY FROM pn_members WHERE username = '" + players[1] + "';");
+					int p2x = player2Location.getInt("x"), p2y = player2Location.getInt("y"), p2mapX = player2Location.getInt("mapX"), p2mapY = player2Location.getInt("mapY");
+					player1.setX(p2x);
+					player1.setY(p2y);
+					player1.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(p2mapX, p2mapY), player1.getFacing());
+					message.addString("Teleported player " + players[0] + " to " + players[1] + " succesfully.");
+				}
+				else
+					message.addString("Player " + players[1] + "does not exist.");
+			}
+			/* Player 2 is online, update player 1 data in DB. */
+			else if(player2 != null)
+			{
+				if(player1Result.first())
+					m_database.query("UPDATE pn_members SET x = " + player2.getX() + ", y = " + player2.getY() + ", mapX = " + player2.getMap().getX() + ", mapY = " + player2.getMap().getY()
+							+ " WHERE username = '" + players[0] + "';");
+				else
+					message.addString("Player " + players[0] + "does not exist.");
+			}
+			/* Both players are offline, DB party. */
+			else
+			{
+				if(player1Result.first())
+				{
+					if(player2Result.first())
+					{
+						ResultSet player2Location = m_database.query("SELECT x,y,mapX,mapY FROM pn_members WHERE username = '" + players[1] + "';");
+						int p2x = player2Location.getInt("x"), p2y = player2Location.getInt("y"), p2mapX = player2Location.getInt("mapX"), p2mapY = player2Location.getInt("mapY");
+						m_database.query("UPDATE pn_members SET x = " + p2x + ", y = " + p2y + ", mapX = " + p2mapX + ", mapY = " + p2mapY + " WHERE username = '" + players[0] + "';");
+					}
+					else
+						message.addString("Player " + players[1] + "does not exist.");
+				}
+				else
+					message.addString("Player " + players[0] + "does not exist.");
+			}
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void processPlayerKick(Session session, String playername, Player player)
+	{
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		if(player != null)
+		{
+
+			ServerMessage kickMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+			kickMessage.addString("You have been kicked from the server!");
+			player.getSession().Send(kickMessage);
+			message.init(ClientPacket.RETURN_TO_LOGIN.getValue());
+			player.getSession().Send(message);
+			GameServer.getServiceManager().getNetworkService().getLogoutManager().queuePlayer(player);
+			GameServer.getServiceManager().getMovementService().removePlayer(player.getName());
+			message.addString("Player " + playername + " has been kicked from the server.");
+		}
+		else
+			message.addString("Player " + playername + " is not online or does not exist.");
+		session.Send(message);
+	}
+
+	private void processPlayerBan(Session session, String playername, Player player)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet banPlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(banPlayername.first())
+			{
+				if(player != null)
+					m_database.query("INSERT INTO pn_bans VALUES ('" + playername + "', '" + player.getIpAddress() + "');");
+				else
+					m_database.query("INSERT INTO pn_bans (playername) VALUES ('" + playername + "';");
+				message.addString("Player " + playername + " has been banned.");
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void processPlayerMute(Session session, String playername, Player player)
+	{
+		MySqlManager m_database = MySqlManager.getInstance();
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
+		ResultSet mutePlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
+		try
+		{
+			if(mutePlayername.first())
+			{
+				if(player != null)
+				{
+					player.setMuted(true);
+					ServerMessage muteMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+					muteMessage.addString("You have been muted.");
+					player.getSession().Send(muteMessage);
+				}
+				m_database.query("UPDATE pn_members SET muted = 'true' WHERE username = '" + playername + "';");
+				message.addString("Player " + playername + " has been muted.");
+			}
+			else
+				message.addString("Player " + playername + "does not exist.");
+		}
+		catch(SQLException sqle)
+		{
+			message.addString("An error occured trying to process the command.");
+			sqle.printStackTrace();
+		}
+		session.Send(message);
+	}
+
+	private void processWeather(String weather, Session session)
+	{
+		ServerMessage message = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+		String weatherChange = "The weather has been changed to: " + weather + "!";
+		switch(weather)
+		{
+			case "normal":
+			case "sunny":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.NORMAL);
+			case "rain":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.FOG);
+			case "hail":
+			case "snow":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.HAIL);
+			case "fog":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.FOG);
+			case "sandstorm":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.SANDSTORM);
+			case "random":
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.RANDOM);
+			default:
+				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.NORMAL);
+				weatherChange = "Unknown weather type, changed weather to normal!";
+		}
+		message.addString(weatherChange);
+		session.Send(message);
+	}
+
+	private boolean checkPermission(Session session, int reqAdminLvl)
+	{
+		if(session.getPlayer().getAdminLevel() >= reqAdminLvl)
+		{
+			return true;
+		}
+		else
+		{
+			ServerMessage message = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+			message.addString("You don't have permission to use this command!");
+			session.Send(message);
+			return false;
+		}
+	}
+}

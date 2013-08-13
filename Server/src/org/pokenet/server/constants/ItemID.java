@@ -13,7 +13,7 @@ public class ItemID
 	public static final int BURN_HEAL = 19;
 	public static final int ICE_HEAL = 20;
 	public static final int FULL_HEAL = 21;
-	public static final int LAVA_COOKIES = 22;
+	public static final int LAVA_COOKIE = 22;
 	public static final int OLD_GATEAU = 23;
 	public static final int POKE_BALL = 35;
 	public static final int GREAT_BALL = 36;
@@ -118,7 +118,7 @@ public class ItemID
 	public static final int FIGY_BERRY = 210;
 	public static final int WIKI_BERRY = 211;
 	public static final int MAGO_BERRY = 212;
-	public static final int AUGUAV_BERRY = 213;
+	public static final int AGUAV_BERRY = 213;
 	public static final int IAPAPA_BERRY = 214;
 	public static final int RAZZ_BERRY = 215;
 	public static final int BLUK_BERRY = 216;

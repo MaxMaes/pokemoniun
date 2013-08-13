@@ -896,6 +896,7 @@ public class GameClient extends BasicGame
 			root = new GUIPane();
 			gui = new GUI(root, lwjglRenderer);
 			gui.applyTheme(theme);
+			gui.setSize(800, 600);
 		}
 		catch(LWJGLException e)
 		{

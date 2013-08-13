@@ -65,9 +65,6 @@ public class HUD extends DesktopArea
 
 	public HUD()
 	{
-		setSize(800, 600);
-		setPosition(0, 0);
-
 		topbar = new TopBar();
 		add(topbar);
 
@@ -76,7 +73,6 @@ public class HUD extends DesktopArea
 		pokedex = new PokedexDialog();
 		add(pokedex);
 		help = new HelpWindow();
-		help.setSize(360, 460);
 		add(help);
 		options = new OptionsDialog();
 		add(options);
@@ -94,6 +90,13 @@ public class HUD extends DesktopArea
 		requests.setVisible(false);
 		map.setVisible(false);
 		friends.setVisible(false);
+	}
+
+	@Override
+	public void layout()
+	{
+		setSize(800, 600);
+		setPosition(0, 0);
 	}
 
 	/**
@@ -169,8 +172,8 @@ public class HUD extends DesktopArea
 		else
 		{
 			hideHUDElements();
-			chat.setPosition(150, 50);
 			chat.setVisible(true);
+			chat.invalidateLayout();
 		}
 	}
 

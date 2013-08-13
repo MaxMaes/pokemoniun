@@ -14,7 +14,7 @@ public class GUIPane extends DesktopArea
 {
 	private LoginScreen loginScreen;
 	private ConfirmationDialog confirmationdialog;
-//	private AlertDialog alertDialog;
+	// private AlertDialog alertDialog;
 	private AlertDialog messageDialog;
 	private LoadingScreen loadingScreen;
 
@@ -27,7 +27,7 @@ public class GUIPane extends DesktopArea
 
 		confirmationdialog = new ConfirmationDialog("", this);
 
-//		alertDialog = new AlertDialog("Alert!", "", loginScreen);
+		// alertDialog = new AlertDialog("Alert!", "", loginScreen);
 
 		messageDialog = new AlertDialog("Message!", "", loginScreen);
 
@@ -38,6 +38,7 @@ public class GUIPane extends DesktopArea
 		add(hud);
 		hud.setVisible(false);
 		setTheme("guipane");
+		setSize(800, 600);
 	}
 
 	public void showLoginScreen()
@@ -103,26 +104,26 @@ public class GUIPane extends DesktopArea
 		return confirmationdialog;
 	}
 
-//	/**
-//	 * functions for the alert dialog
-//	 */
-//	public void showAlertDialog(String title, String text, Runnable ok)
-//	{
-//		alertDialog.setText(text);
-//		alertDialog.setTitle(title);
-//		alertDialog.addOkListener(ok);
-//		alertDialog.setVisible(true);
-//	}
-//
-//	public void hideAlertDialog()
-//	{
-//		alertDialog.setVisible(false);
-//	}
-//
-//	public AlertDialog getAlertDialog()
-//	{
-//		return alertDialog;
-//	}
+	// /**
+	// * functions for the alert dialog
+	// */
+	// public void showAlertDialog(String title, String text, Runnable ok)
+	// {
+	// alertDialog.setText(text);
+	// alertDialog.setTitle(title);
+	// alertDialog.addOkListener(ok);
+	// alertDialog.setVisible(true);
+	// }
+	//
+	// public void hideAlertDialog()
+	// {
+	// alertDialog.setVisible(false);
+	// }
+	//
+	// public AlertDialog getAlertDialog()
+	// {
+	// return alertDialog;
+	// }
 
 	/**
 	 * functions for the message dialog

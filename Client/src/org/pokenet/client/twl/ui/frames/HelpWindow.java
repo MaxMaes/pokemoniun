@@ -60,14 +60,12 @@ public class HelpWindow extends ResizableFrame
 	{
 		List<String> translated = Translator.translate("_GUI");
 		setTitle(translated.get(20));
-
 		setResizableAxis(ResizableAxis.NONE);
 		helptext = new TextArea();
 		helptext.setSize(355, 455);
 		// setText Mover stuff to help panel.
 		TextAreaModel model = new SimpleTextAreaModel(translated.get(21) + translated.get(22) + translated.get(23) + translated.get(24) + translated.get(25) + translated.get(26));
 		helptext.setModel(model);
-		setSize(360, 200);
 		add(helptext);
 		setDraggable(true);
 	}
@@ -76,6 +74,7 @@ public class HelpWindow extends ResizableFrame
 	public void layout()
 	{
 		setPosition(200, 0);
+		setSize(360, 460);
 		helptext.setPosition(getInnerX() + 5, getInnerY() + 40);
 	}
 }

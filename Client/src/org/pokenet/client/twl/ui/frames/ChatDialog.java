@@ -33,21 +33,20 @@ public class ChatDialog extends Widget
 
 	public ChatDialog()
 	{
-		setSize(400, 195);
-
 		chats = new HashMap<String, SimpleTextAreaModel>();
 		chatlines = new HashMap<String, ArrayList<String>>();
 
 		SimpleTextAreaModel global = new SimpleTextAreaModel();
-		chats.put("global", global);
+		chats.put("Global", global);
 		ArrayList<String> globallines = new ArrayList<String>();
-		chatlines.put("global", globallines);
+		chatlines.put("Global", globallines);
 
 		chatView = new TextArea(global);
 		input = new EditField();
 
-		possibleBoxesModel = new SimpleChangableListModel<>("global");
+		possibleBoxesModel = new SimpleChangableListModel<>("Global");
 		possibleBoxes = new ComboBox<String>(possibleBoxesModel);
+		possibleBoxes.setSelected(0);
 
 		enterCallback = new EditField.Callback()
 		{
@@ -59,7 +58,7 @@ public class ChatDialog extends Widget
 					if(input.getText() != null && input.getText().length() != 0)
 						if(input.getText().charAt(0) == '/')
 							ModerationManager.parseLine(input.getText().substring(1));
-						else if(getSelectedChatboxName().equalsIgnoreCase("global"))
+						else if(getSelectedChatboxName().equalsIgnoreCase("Global"))
 						{
 							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
 							ClientMessage message = new ClientMessage(ServerPacket.CHAT);
@@ -94,8 +93,9 @@ public class ChatDialog extends Widget
 	 */
 	public void addLine(String text)
 	{
-		SimpleTextAreaModel global = chats.get("global");
-		ArrayList<String> lines = chatlines.get("global");
+		SimpleTextAreaModel global = chats.get("Global");
+		ArrayList<String> lines = chatlines.get("Global");
+		lines.add(text);
 
 		String txt = "";
 		for(String s : lines)
@@ -177,6 +177,19 @@ public class ChatDialog extends Widget
 	public void addAnnouncement(String readString)
 	{
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void layout()
+	{
+		setSize(300, 200);
+		setPosition(0, GameClient.getInstance().getGUI().getHeight() - getHeight());
+		possibleBoxes.setSize(getWidth(), 22);
+		possibleBoxes.setPosition(getInnerX(), getInnerY());
+		chatView.setSize(getWidth(), 300);
+		chatView.setPosition(getInnerX(), getInnerY() + possibleBoxes.getHeight() + 2);
+		input.setSize(getWidth(), 25);
+		input.setPosition(getInnerX(), getInnerY() + getHeight() - input.getHeight());
 
 	}
 }

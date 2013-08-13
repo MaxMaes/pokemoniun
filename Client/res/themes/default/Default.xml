@@ -492,7 +492,7 @@
                     </theme>
                 </theme>
             </theme>
-            <theme name="chatdialog" ref="-defaults">
+            <theme name="chatdialog" ref="resizableframe_borderless">
                 <theme name="combobox" ref="combobox"/>
                 <theme name="editfield" ref="editfield"/>
                 <theme name="textarea" ref="textarea"/>

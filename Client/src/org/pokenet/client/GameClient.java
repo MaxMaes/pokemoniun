@@ -1282,6 +1282,7 @@ public class GameClient extends BasicGame
 		getLoginScreen().hideServerRevision();
 		disconnect();
 		getLoginScreen().showServerSelect();
+		root.hideHUD();
 	}
 
 	/**

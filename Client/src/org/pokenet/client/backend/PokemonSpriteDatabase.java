@@ -55,6 +55,11 @@ public class PokemonSpriteDatabase
 
 	public static Image getIcon(int pokenum)
 	{
+		if(icons[pokenum] == null)
+		{
+			System.out.println("Loading sprite for pokemon: " + pokenum);
+			loadSpriteWithNumber(pokenum);
+		}
 		return icons[pokenum];
 	}
 

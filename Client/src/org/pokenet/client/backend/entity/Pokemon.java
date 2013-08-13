@@ -98,6 +98,10 @@ public class Pokemon
 	 */
 	public Image getIcon()
 	{
+		if(m_icon == null)
+		{
+			setIcon();
+		}
 		return m_icon;
 	}
 
@@ -198,6 +202,10 @@ public class Pokemon
 	 */
 	public Image getSprite()
 	{
+		if(m_sprite == null)
+		{
+			setSprite();
+		}
 		return m_sprite;
 	}
 
@@ -410,7 +418,7 @@ public class Pokemon
 	}
 
 	/**
-	 * Sets sprite number and loads sprites
+	 * Sets sprite number
 	 * 
 	 * @param x
 	 * @return
@@ -418,22 +426,6 @@ public class Pokemon
 	public void setSpriteNumber(int x)
 	{
 		m_spriteNum = x;
-		try
-		{
-			setSprite();
-		}
-		catch(Exception e)
-		{
-			setSprite();
-		}
-		try
-		{
-			setIcon();
-		}
-		catch(Exception e)
-		{
-			setIcon();
-		}
 	}
 
 	/**

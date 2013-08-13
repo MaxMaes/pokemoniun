@@ -15,11 +15,11 @@ public class Session
 	private String ipAddress;
 	private Player player;
 
-	public Session(Channel channel, String IP)
+	public Session(Channel channel, String Ip)
 	{
 		this.channel = channel;
 		authenticated = false;
-		ipAddress = IP;
+		ipAddress = Ip;
 
 		ServerMessage message = new ServerMessage(this);
 		message.init(ClientPacket.SERVER_REVISION.getValue());

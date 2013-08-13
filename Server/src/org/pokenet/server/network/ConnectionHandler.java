@@ -1,5 +1,6 @@
 package org.pokenet.server.network;
 
+import java.net.InetSocketAddress;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
@@ -12,7 +13,7 @@ import org.pokenet.server.protocol.ClientMessage;
 
 public class ConnectionHandler extends SimpleChannelHandler
 {
-	
+
 	private String name = "";
 	private LogoutManager m_logoutManager;
 
@@ -58,7 +59,8 @@ public class ConnectionHandler extends SimpleChannelHandler
 	@Override
 	public void channelOpen(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
-		if(!ActiveConnections.addSession(channelContext.getChannel(), channelContext.getChannel().getRemoteAddress().toString()))
+		InetSocketAddress clientAddress = (InetSocketAddress) (channelContext.getChannel()).getRemoteAddress();
+		if(!ActiveConnections.addSession(channelContext.getChannel(), clientAddress.getAddress().getHostAddress()))
 			channelContext.getChannel().disconnect(); // failed to connect
 	}
 
@@ -92,7 +94,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 		{
 			channelContext.getChannel().close();
 			System.err.println(name + "'s connection terminated");
-//			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println(channelState);
 		}
 

@@ -11,7 +11,6 @@ public class ShopEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-
 		Player p = session.getPlayer();
 		int i = request.readInt();
 		int item;
@@ -32,6 +31,5 @@ public class ShopEvent implements MessageEvent
 				p.setShopping(false);
 				break;
 		}
-
 	}
 }

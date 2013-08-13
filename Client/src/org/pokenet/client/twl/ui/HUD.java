@@ -831,7 +831,7 @@ public class HUD extends DesktopArea
 			case 1:
 				// Private Chat
 				String[] details = msg.split(",");
-				getChat().addChat(details[0], true);
+				getChat().addChatChannel(details[0], true);
 				getChat().addWhisperLine(details[0], details[1]);
 				break;
 			case 2:

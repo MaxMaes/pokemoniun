@@ -291,7 +291,7 @@ class PopUp extends Widget
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getGUIPane().getHUD().getChat().addChat(m_name.getText(), true);
+				GameClient.getInstance().getGUIPane().getHUD().getChat().addChatChannel(m_name.getText(), true);
 				destroy();
 			}
 		});

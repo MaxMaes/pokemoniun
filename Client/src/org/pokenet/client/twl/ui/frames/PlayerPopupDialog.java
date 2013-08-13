@@ -79,7 +79,7 @@ public class PlayerPopupDialog extends Widget
 			@Override
 			public void run()
 			{
-				GameClient.getInstance().getHUD().getChat().addChat(m_name.getText(), true);
+				GameClient.getInstance().getHUD().getChat().addChatChannel(m_name.getText(), true);
 				destroy();
 			}
 		});
@@ -104,7 +104,7 @@ public class PlayerPopupDialog extends Widget
 				destroy();
 			}
 		});
-		
+
 		popup = new PopupWindow(root);
 		popup.setTheme("PlayerPopup");
 		popup.add(this);

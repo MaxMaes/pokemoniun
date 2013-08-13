@@ -8,6 +8,7 @@ import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.ComboBox;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Event;
+import de.matthiasmann.twl.ScrollPane;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
@@ -20,6 +21,7 @@ import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
  */
 public class ChatDialog extends Widget
 {
+	private ScrollPane chat;
 	private TextArea chatView;
 	private EditField input;
 	private ComboBox<String> possibleBoxes;
@@ -35,17 +37,21 @@ public class ChatDialog extends Widget
 		chats = new HashMap<String, SimpleTextAreaModel>();
 		chatlines = new HashMap<String, ArrayList<String>>();
 
-		SimpleTextAreaModel global = new SimpleTextAreaModel();
-		chats.put("Global", global);
-		ArrayList<String> globallines = new ArrayList<String>();
-		chatlines.put("Global", globallines);
-
-		chatView = new TextArea(global);
+		chatView = new TextArea(chats.get("Global"));
 		input = new EditField();
 
-		possibleBoxesModel = new SimpleChangableListModel<>("Global");
+		chat = new ScrollPane(chatView);
+
+		possibleBoxesModel = new SimpleChangableListModel<>();
 		possibleBoxes = new ComboBox<String>(possibleBoxesModel);
-		possibleBoxes.setSelected(0);
+		possibleBoxes.addCallback(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				updateChatview();
+			}
+		});
 
 		enterCallback = new EditField.Callback()
 		{
@@ -68,6 +74,10 @@ public class ChatDialog extends Widget
 							message.addString(input.getText());
 							GameClient.getInstance().getSession().send(message);
 						}
+						else if(getSelectedChatboxName().equalsIgnoreCase("System"))
+						{
+							// Ignore
+						}
 						else
 						{
 							ClientMessage message = new ClientMessage(ServerPacket.CHAT);
@@ -82,33 +92,35 @@ public class ChatDialog extends Widget
 			}
 		};
 		input.addCallback(enterCallback);
-		add(chatView);
+
+		addChatChannel("Global", false);
+		addChatChannel("System", false);
+		possibleBoxes.setSelected(0);
+
+		// add(chatView);
 		add(possibleBoxes);
 		add(input);
+		add(chat);
 	}
 
-	/**
-	 * Adds a line to the global chat
-	 * 
-	 * @param text
-	 */
-	public void addLine(String text)
+	private void updateChatview()
 	{
-		SimpleTextAreaModel global = chats.get("Global");
-		ArrayList<String> lines = chatlines.get("Global");
-		lines.add(text);
-
-		String txt = "";
-		for(String s : lines)
+		String selected = possibleBoxesModel.getEntry(possibleBoxes.getSelected());
+		chatView.setModel(chats.get(selected));
+		if(selected.equalsIgnoreCase("System"))
 		{
-			txt += s;
-			txt += "\n";
+			input.setEnabled(false);
+			input.setVisible(false);
 		}
-		global.setText(txt);
+		else
+		{
+			input.setEnabled(true);
+			input.setVisible(true);
+		}
 	}
 
 	/**
-	 * Adds a line to the global chat
+	 * Adds a line to the given chatbox
 	 * 
 	 * @param text
 	 */
@@ -116,6 +128,7 @@ public class ChatDialog extends Widget
 	{
 		SimpleTextAreaModel chat = chats.get(chatbox);
 		ArrayList<String> lines = chatlines.get(chatbox);
+		lines.add(text);
 
 		String txt = "";
 		for(String s : lines)
@@ -127,18 +140,22 @@ public class ChatDialog extends Widget
 	}
 
 	/**
-	 * Creates a new private chat channel
+	 * Creates a new chat channel
 	 * 
 	 * @param chat
 	 */
-	public void addChat(String chat, boolean isWhisper)
+	public void addChatChannel(String chattitle, boolean isWhisper)
 	{
-		if(!chats.containsKey(chat))
+		if(!chats.containsKey(chattitle))
 		{
-			chatlines.put(chat, new ArrayList<String>());
-			possibleBoxesModel.addElement(chat);
+			SimpleTextAreaModel newModel = new SimpleTextAreaModel();
+			chats.put(chattitle, newModel);
+			ArrayList<String> newLines = new ArrayList<String>();
+			chatlines.put(chattitle, newLines);
+			possibleBoxesModel.addElement(chattitle);
 		}
-		possibleBoxes.setSelected(possibleBoxesModel.findElement(chat));
+
+		possibleBoxes.setSelected(possibleBoxesModel.findElement(chattitle));
 	}
 
 	/**
@@ -151,7 +168,7 @@ public class ChatDialog extends Widget
 	{
 		if(!chats.containsKey(chat))
 		{
-			addChat(chat, true);
+			addChatChannel(chat, true);
 		}
 		addLineTo(line, chat);
 	}
@@ -162,22 +179,25 @@ public class ChatDialog extends Widget
 	}
 
 	/**
-	 * Adds the text to every chatbox.
-	 * TODO: Add chatbox: SYSTEM and autochange to it on line add.
+	 * Add a line to the System chatbox and change to it.
 	 * 
 	 * @param text
 	 */
 	public void addSystemMessage(String text)
 	{
-		for(String chatbox : chats.keySet())
-		{
-			addLineTo(text, chatbox);
-		}
+		addLineTo(text, "System");
+		possibleBoxes.setSelected(possibleBoxesModel.findElement("System"));
+		setVisible(true);
 	}
 
-	public void addAnnouncement(String readString)
+	/**
+	 * Adds a line to the global chat
+	 * 
+	 * @param text
+	 */
+	public void addLine(String text)
 	{
-		// TODO Auto-generated method stub
+		addLineTo(text, "Global");
 	}
 
 	@Override
@@ -185,12 +205,15 @@ public class ChatDialog extends Widget
 	{
 		setSize(300, 200);
 		setPosition(0, GameClient.getInstance().getGUI().getHeight() - getHeight());
+		input.setSize(getWidth(), 25);
 		possibleBoxes.setSize(getWidth(), 22);
 		possibleBoxes.setPosition(getInnerX(), getInnerY());
-		chatView.setSize(getWidth(), 300);
-		chatView.setPosition(getInnerX(), getInnerY() + possibleBoxes.getHeight() + 2);
-		input.setSize(getWidth(), 25);
 		input.setPosition(getInnerX(), getInnerY() + getHeight() - input.getHeight());
 
+		chatView.setSize(getWidth() - 25, getHeight() - possibleBoxes.getHeight() - input.getHeight() - 10);
+		chatView.setPosition(0, 0);
+
+		chat.setPosition(getInnerX(), getInnerY() + possibleBoxes.getHeight() + 2);
+		chat.setSize(getWidth(), getHeight() - possibleBoxes.getHeight() - input.getHeight() - 4);
 	}
 }

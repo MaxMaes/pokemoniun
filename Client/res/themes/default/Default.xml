@@ -495,7 +495,9 @@
             <theme name="chatdialog" ref="resizableframe_borderless">
                 <theme name="combobox" ref="combobox"/>
                 <theme name="editfield" ref="editfield"/>
-                <theme name="textarea" ref="textarea"/>
+                <theme name="scrollpane" ref="scrollpane">
+                    <theme name="textarea" ref="textarea"/>
+                </theme>
             </theme>
             <theme name="requestdialog" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>false</bool></param>

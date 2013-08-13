@@ -22,6 +22,10 @@ public class PlayerCommandEvent implements MessageEvent
 	{
 		/* TODO: After implementation test all commands thorougly.
 		 * Done:
+		 * (Un)Mute
+		 * Kick
+		 * (Un)Ban
+		 * Reset
 		 * Online Part:
 		 * Offline Part: */
 		String command = request.readString();
@@ -207,6 +211,7 @@ public class PlayerCommandEvent implements MessageEvent
 			message.addString("An error occured trying to process the command.");
 			sqle.printStackTrace();
 		}
+		session.Send(message);
 	}
 
 	private void processPlayerReset(Session session, String playername, Player player)
@@ -225,8 +230,10 @@ public class PlayerCommandEvent implements MessageEvent
 					player.setY(player.getHealY());
 					player.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(player.getHealMapX(), player.getHealMapY()), player.getFacing());
 				}
-				m_database.query("UPDATE pn_members SET x = " + player.getHealX() + ", y = " + player.getHealY() + ", mapX = " + player.getHealMapX() + ", mapY = " + player.getHealMapY()
-						+ " WHERE username = '" + playername + "';");
+				ResultSet playerLocation = m_database.query("SELECT healX,healY,healMapX,healMapY FROM pn_members WHERE username = '" + playername + "';");
+				playerLocation.first();
+				int px = playerLocation.getInt("healX"), py = playerLocation.getInt("healY"), pmapX = playerLocation.getInt("healMapX"), pmapY = playerLocation.getInt("healMapY");
+				m_database.query("UPDATE pn_members SET x = " + px + ", y = " + py + ", mapX = " + pmapX + ", mapY = " + pmapY + " WHERE username = '" + playername + "';");
 				message.addString("Player " + playername + " has been teleported to his last heal location.");
 			}
 			else
@@ -266,6 +273,7 @@ public class PlayerCommandEvent implements MessageEvent
 				if(player2Result.first())
 				{
 					ResultSet player2Location = m_database.query("SELECT x,y,mapX,mapY FROM pn_members WHERE username = '" + players[1] + "';");
+					player2Location.first();
 					int p2x = player2Location.getInt("x"), p2y = player2Location.getInt("y"), p2mapX = player2Location.getInt("mapX"), p2mapY = player2Location.getInt("mapY");
 					player1.setX(p2x);
 					player1.setY(p2y);
@@ -292,6 +300,7 @@ public class PlayerCommandEvent implements MessageEvent
 					if(player2Result.first())
 					{
 						ResultSet player2Location = m_database.query("SELECT x,y,mapX,mapY FROM pn_members WHERE username = '" + players[1] + "';");
+						player2Location.first();
 						int p2x = player2Location.getInt("x"), p2y = player2Location.getInt("y"), p2mapX = player2Location.getInt("mapX"), p2mapY = player2Location.getInt("mapY");
 						m_database.query("UPDATE pn_members SET x = " + p2x + ", y = " + p2y + ", mapX = " + p2mapX + ", mapY = " + p2mapY + " WHERE username = '" + players[0] + "';");
 					}
@@ -316,7 +325,6 @@ public class PlayerCommandEvent implements MessageEvent
 		message.addInt(4);
 		if(player != null)
 		{
-
 			ServerMessage kickMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
 			kickMessage.addString("You have been kicked from the server!");
 			player.getSession().Send(kickMessage);
@@ -342,7 +350,14 @@ public class PlayerCommandEvent implements MessageEvent
 			if(banPlayername.first())
 			{
 				if(player != null)
+				{
 					m_database.query("INSERT INTO pn_bans VALUES ('" + playername + "', '" + player.getIpAddress() + "');");
+					ServerMessage kickMessage = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+					kickMessage.addString("You have been kicked from the server!");
+					player.getSession().Send(kickMessage);
+					ServerMessage revert = new ServerMessage(ClientPacket.RETURN_TO_LOGIN);
+					player.getSession().Send(revert);
+				}
 				else
 					m_database.query("INSERT INTO pn_bans (playername) VALUES ('" + playername + "';");
 				message.addString("Player " + playername + " has been banned.");

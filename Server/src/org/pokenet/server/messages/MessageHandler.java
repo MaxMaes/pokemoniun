@@ -91,17 +91,18 @@ public class MessageHandler
 		messages.put(20, new ReleasePokemonEvent());
 		messages.put(21, new SwapPokemonBoxPartyEvent());
 		messages.put(22, new FinishBoxingEvent());
-		// messages.put(23, new PlayersOnlineEvent());
-		// messages.put(24, new ServerAnnouncementEvent());
-		// messages.put(25, new ServerNotificationEvent());
-		// messages.put(26, new BanPlayerEvent());
-		// messages.put(27, new UnbanEvent());
-		// messages.put(28, new WarpEvent());
-		// messages.put(29, new MuteEvent());
-		// messages.put(30, new UnMuteEvent());
-		// messages.put(31, new KickEvent());
-		// messages.put(32, new WeatherEvent());
+		// messages.put(23, new ());
+		// messages.put(24, new ());
+		// messages.put(25, new ());
+		// messages.put(26, new ());
+		// messages.put(27, new ());
+		// messages.put(28, new ());
+		// messages.put(29, new ());
+		// messages.put(30, new ());
+		// messages.put(31, new ());
+		// messages.put(32, new ());
 		messages.put(33, new PlayerCommandEvent());
+		// messages.put(34, new ());
 		messages.put(35, new SelectedMoveEvent());
 		messages.put(36, new PokemonSwitchEvent());
 		messages.put(37, new RunEvent());
@@ -119,12 +120,13 @@ public class MessageHandler
 		messages.put(49, new LogoutRequestEvent());
 		messages.put(50, new LoginEvent());
 		messages.put(51, new GiveItemEvent());
+		// messages.put(52, new ());
 		messages.put(53, new TravelEvent());
-		// messages.put(54, new WarpPlayerToMeEvent());
-		// messages.put(55, new WarpPlayerToPlayerEvent());
-		// messages.put(56, new ChangeUserClassEvent());
-		// messages.put(57, new UserUnstickEvent());
+		// messages.put(54, new ());
+		// messages.put(55, new ());
+		// messages.put(56, new ());
+		// messages.put(57, new ());
 		messages.put(58, new StartBattlefrontierEvent());
-		/* TODO: Server id's 34 and 52 are now free to use. */
+		/* TODO: Use commented numbers for future messages. */
 	}
 }

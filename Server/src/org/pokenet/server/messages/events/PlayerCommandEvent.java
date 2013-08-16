@@ -20,14 +20,6 @@ public class PlayerCommandEvent implements MessageEvent
 	@Override
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		/* TODO: After implementation test all commands thorougly.
-		 * Done:
-		 * (Un)Mute
-		 * Kick
-		 * (Un)Ban
-		 * Reset
-		 * Online Part:
-		 * Offline Part: */
 		String command = request.readString();
 		if(command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("ban "))
 		{
@@ -124,13 +116,14 @@ public class PlayerCommandEvent implements MessageEvent
 		{
 			message = new ServerMessage(ClientPacket.CHAT_PACKET);
 			message.addInt(4);
-			message.addString("Currently there are " + ActiveConnections.getActiveConnections() + " player(s) online");
+			message.addString("Currently there are " + ActiveConnections.getActiveConnections() + " player(s) online.");
 			session.Send(message);
 		}
 		else
 		{
-			message = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
-			message.addString("Invalid or unkown command.\nUse /help if you need more information");
+			message = new ServerMessage(ClientPacket.CHAT_PACKET);
+			message.addInt(4);
+			message.addString("Invalid or unkown command.\nUse /help if you need more information.");
 			session.Send(message);
 		}
 	}
@@ -138,6 +131,7 @@ public class PlayerCommandEvent implements MessageEvent
 	private void processPlayerClassChange(Session session, String playername, int adminLvl)
 	{
 		MySqlManager m_database = MySqlManager.getInstance();
+		Player player = ActiveConnections.getPlayer(playername);
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet playerNameResult = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
@@ -145,11 +139,13 @@ public class PlayerCommandEvent implements MessageEvent
 		{
 			if(playerNameResult.first())
 			{
+				if(player != null)
+					player.setAdminLevel(adminLvl);
 				m_database.query("UPDATE pn_members SET adminLevel = " + adminLvl + " WHERE username = '" + playername + "';");
-				message.addString("The class of " + playername + " has been changed to " + adminLvl);
+				message.addString("The class of " + playername + " has been changed to " + adminLvl + ".");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -173,7 +169,7 @@ public class PlayerCommandEvent implements MessageEvent
 				message.addString("Player " + playername + " has been unbanned.");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -204,7 +200,7 @@ public class PlayerCommandEvent implements MessageEvent
 				message.addString("Player " + playername + " has been unmuted.");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -237,7 +233,7 @@ public class PlayerCommandEvent implements MessageEvent
 				message.addString("Player " + playername + " has been teleported to his last heal location.");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -281,16 +277,19 @@ public class PlayerCommandEvent implements MessageEvent
 					message.addString("Teleported player " + players[0] + " to " + players[1] + " succesfully.");
 				}
 				else
-					message.addString("Player " + players[1] + "does not exist.");
+					message.addString("Player " + players[1] + " does not exist.");
 			}
 			/* Player 2 is online, update player 1 data in DB. */
 			else if(player2 != null)
 			{
 				if(player1Result.first())
+				{
 					m_database.query("UPDATE pn_members SET x = " + player2.getX() + ", y = " + player2.getY() + ", mapX = " + player2.getMap().getX() + ", mapY = " + player2.getMap().getY()
 							+ " WHERE username = '" + players[0] + "';");
+					message.addString("Teleported player " + players[0] + " to " + players[1] + " succesfully.");
+				}
 				else
-					message.addString("Player " + players[0] + "does not exist.");
+					message.addString("Player " + players[0] + " does not exist.");
 			}
 			/* Both players are offline, DB party. */
 			else
@@ -303,12 +302,13 @@ public class PlayerCommandEvent implements MessageEvent
 						player2Location.first();
 						int p2x = player2Location.getInt("x"), p2y = player2Location.getInt("y"), p2mapX = player2Location.getInt("mapX"), p2mapY = player2Location.getInt("mapY");
 						m_database.query("UPDATE pn_members SET x = " + p2x + ", y = " + p2y + ", mapX = " + p2mapX + ", mapY = " + p2mapY + " WHERE username = '" + players[0] + "';");
+						message.addString("Teleported player " + players[0] + " to " + players[1] + " succesfully.");
 					}
 					else
-						message.addString("Player " + players[1] + "does not exist.");
+						message.addString("Player " + players[1] + " does not exist.");
 				}
 				else
-					message.addString("Player " + players[0] + "does not exist.");
+					message.addString("Player " + players[0] + " does not exist.");
 			}
 		}
 		catch(SQLException sqle)
@@ -363,7 +363,7 @@ public class PlayerCommandEvent implements MessageEvent
 				message.addString("Player " + playername + " has been banned.");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -394,7 +394,7 @@ public class PlayerCommandEvent implements MessageEvent
 				message.addString("Player " + playername + " has been muted.");
 			}
 			else
-				message.addString("Player " + playername + "does not exist.");
+				message.addString("Player " + playername + " does not exist.");
 		}
 		catch(SQLException sqle)
 		{
@@ -406,27 +406,35 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processWeather(String weather, Session session)
 	{
-		ServerMessage message = new ServerMessage(ClientPacket.SERVER_NOTIFICATION);
+		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
+		message.addInt(4);
 		String weatherChange = "The weather has been changed to: " + weather + "!";
 		switch(weather)
 		{
 			case "normal":
 			case "sunny":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.NORMAL);
+				break;
 			case "rain":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.FOG);
+				break;
 			case "hail":
 			case "snow":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.HAIL);
+				break;
 			case "fog":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.FOG);
+				break;
 			case "sandstorm":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.SANDSTORM);
+				break;
 			case "random":
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.RANDOM);
+				break;
 			default:
 				GameServer.getServiceManager().getTimeService().setForcedWeather(Weather.NORMAL);
 				weatherChange = "Unknown weather type, changed weather to normal!";
+				break;
 		}
 		message.addString(weatherChange);
 		session.Send(message);

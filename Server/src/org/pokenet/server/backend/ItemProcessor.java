@@ -85,13 +85,10 @@ public class ItemProcessor implements Runnable
 	 */
 	public boolean useItem(Player player, int itemId, String[] data)
 	{
+		/* TODO: TM's and Balls left to test. */
 		if(player.getBag().containsItem(itemId) < 0)
 			return false;
-		/* TODO: Rewrite this thread/function/monster in iterations. */
-		int pokePartyPos = Integer.parseInt(data[0]);
-		Pokemon poke = player.getParty()[pokePartyPos];
 		Item item = GameServer.getServiceManager().getItemDatabase().getItem(itemId);
-		String itemName = item.getName().toUpperCase();
 		boolean returnValue = false;
 		switch(itemId)
 		{
@@ -128,10 +125,12 @@ public class ItemProcessor implements Runnable
 		/* Determine what do to with the item */
 		if(item.getAttributes().contains(ItemAttribute.MOVESLOT))
 		{
+			int pokePartyPos = Integer.parseInt(data[0]);
+			Pokemon poke = player.getParty()[pokePartyPos];
 			/* TMs & HMs */
 			if(player.isBattling() || poke == null)
 				return false;
-			String moveName = itemName.substring(5);
+			String moveName = item.getName().toUpperCase().substring(5);
 			if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
 			{
 				poke.getMovesLearning().add(moveName);
@@ -144,6 +143,8 @@ public class ItemProcessor implements Runnable
 		}
 		else if(item.getAttributes().contains(ItemAttribute.POKEMON))
 		{
+			int pokePartyPos = Integer.parseInt(data[0]);
+			Pokemon poke = player.getParty()[pokePartyPos];
 			/* Status healers, hold items, etc. */
 			if(item.getCategory().equalsIgnoreCase("POTIONS"))
 			{

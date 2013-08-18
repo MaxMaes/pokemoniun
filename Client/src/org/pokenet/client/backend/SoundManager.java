@@ -2,7 +2,10 @@ package org.pokenet.client.backend;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.newdawn.slick.openal.Audio;
@@ -16,7 +19,6 @@ import org.newdawn.slick.openal.AudioLoader;
  */
 public class SoundManager extends Thread
 {
-	private static final int MAX_SOUND_THREADS = 3;
 	private static String m_audioPath = "res/music/";
 	protected String m_trackName;
 	private HashMap<String, String> m_fileList = new HashMap<String, String>();
@@ -68,6 +70,7 @@ public class SoundManager extends Thread
 				while(!m_tracksLoaded)
 					loadFiles();
 			if(m_trackChanged && m_tracksLoaded)
+			{
 				try
 				{
 					m_trackChanged = false;
@@ -87,6 +90,7 @@ public class SoundManager extends Thread
 					System.err.println("Failed to load " + m_trackName);
 					m_trackChanged = false;
 				}
+			}
 			try
 			{
 				Thread.sleep(1000);
@@ -191,14 +195,19 @@ public class SoundManager extends Thread
 	 */
 	private void loadFiles()
 	{
-		ExecutorService soundLoader = Executors.newFixedThreadPool(MAX_SOUND_THREADS);
+		ExecutorService musicLoader = Executors.newSingleThreadExecutor();
+		List<Callable<Object>> musicToLoad = new ArrayList<Callable<Object>>();
 		for(String key : m_fileList.keySet())
-			soundLoader.submit(new SoundThread(key));
-		soundLoader.shutdown();
-		while(!soundLoader.isTerminated())
+			musicToLoad.add(Executors.callable(new SoundThread(key)));
+		try
 		{
-			/* Wait for the soundLoader to finish loading the in-game music. */
+			musicLoader.invokeAll(musicToLoad);
 		}
+		catch(InterruptedException ie)
+		{
+			ie.printStackTrace();
+		}
+		musicLoader.shutdown();
 		System.out.println("Background music loading complete");
 		m_tracksLoaded = true;
 	}
@@ -235,27 +244,18 @@ public class SoundManager extends Thread
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
-		try
+		try(BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt"))
 		{
-			BufferedReader stream = FileLoader.loadTextFile(respath + "res/language/english/_MUSICKEYS.txt");
-
 			String f;
 			while((f = stream.readLine()) != null)
 			{
 				String[] addFile = f.split(":", 2);
-				try
-				{
-					m_locations.put(addFile[0], addFile[1]);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+				m_locations.put(addFile[0], addFile[1]);
 			}
 		}
-		catch(Exception e)
+		catch(IOException ioe)
 		{
-			e.printStackTrace();
+			ioe.printStackTrace();
 		}
 	}
 }

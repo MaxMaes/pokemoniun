@@ -37,9 +37,8 @@ public class DataLoader implements Runnable
 	 */
 	public void run()
 	{
-		try
+		try(Scanner reader = new Scanner(m_file))
 		{
-			Scanner reader = new Scanner(m_file);
 			NPC npc = null;
 			WarpTile warp = null;
 			HMObject hmObject = null;

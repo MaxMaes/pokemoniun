@@ -20,58 +20,58 @@ public class PlayerCommandEvent implements MessageEvent
 	@Override
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		String command = request.readString();
-		if(command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("ban "))
+		String input = request.readString();
+		if(input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("ban "))
 		{
-			String playername = command.substring(4);
+			String playername = input.substring(4);
 			if(checkPermission(session, UserClasses.SUPER_MOD))
 				processPlayerBan(session, playername, ActiveConnections.getPlayer(playername));
 		}
-		else if(command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("help"))
+		else if(input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("help"))
 		{
 			/* TODO: Think of a practical way to implement help. */
 		}
-		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("mute "))
+		else if(input.length() >= 5 && input.substring(0, 5).equalsIgnoreCase("mute "))
 		{
-			String playername = command.substring(5);
+			String playername = input.substring(5);
 			if(checkPermission(session, UserClasses.MODERATOR))
 				processPlayerMute(session, playername, ActiveConnections.getPlayer(playername));
 		}
-		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("kick "))
+		else if(input.length() >= 5 && input.substring(0, 5).equalsIgnoreCase("kick "))
 		{
-			String playername = command.substring(5);
+			String playername = input.substring(5);
 			if(checkPermission(session, UserClasses.MODERATOR))
 				processPlayerKick(session, playername, ActiveConnections.getPlayer(playername));
 		}
-		else if(command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("jump "))
+		else if(input.length() >= 5 && input.substring(0, 5).equalsIgnoreCase("jump "))
 		{
-			String playernames = command.substring(5);
+			String playernames = input.substring(5);
 			if(checkPermission(session, UserClasses.SUPER_MOD))
 				processPlayerWarp(session, playernames);
 		}
-		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("reset "))
+		else if(input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("reset "))
 		{
-			String playername = command.substring(6);
+			String playername = input.substring(6);
 			if(checkPermission(session, UserClasses.SUPER_MOD))
 				processPlayerReset(session, playername, ActiveConnections.getPlayer(playername));
 		}
-		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("unban "))
+		else if(input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("unban "))
 		{
-			String playername = command.substring(6);
+			String playername = input.substring(6);
 			if(checkPermission(session, UserClasses.SUPER_MOD))
 				procesPlayerUnBan(session, playername);
 		}
-		else if(command.length() >= 6 && command.substring(0, 6).equalsIgnoreCase("class "))
+		else if(input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("class "))
 		{
-			String[] playerdata = command.substring(6).split(",");
+			String[] playerdata = input.substring(6).split(",");
 			String playername = playerdata[0];
 			int adminLvl = Integer.parseInt(playerdata[1]);
 			if(checkPermission(session, UserClasses.DEVELOPER))
 				processPlayerClassChange(session, playername, adminLvl);
 		}
-		else if(command.length() >= 7 && command.substring(0, 7).equalsIgnoreCase("notify "))
+		else if(input.length() >= 7 && input.substring(0, 7).equalsIgnoreCase("notify "))
 		{
-			String notification = command.substring(7);
+			String notification = input.substring(7);
 			if(checkPermission(session, UserClasses.SUPER_MOD))
 			{
 				for(Session s : ActiveConnections.allSessions().values())
@@ -85,20 +85,20 @@ public class PlayerCommandEvent implements MessageEvent
 				}
 			}
 		}
-		else if(command.length() >= 7 && command.substring(0, 7).equalsIgnoreCase("unmute "))
+		else if(input.length() >= 7 && input.substring(0, 7).equalsIgnoreCase("unmute "))
 		{
-			String playername = command.substring(7);
+			String playername = input.substring(7);
 			if(checkPermission(session, UserClasses.MODERATOR))
 				processPlayerUnMute(session, playername, ActiveConnections.getPlayer(playername));
 		}
-		else if(command.length() >= 8 && command.substring(0, 8).equalsIgnoreCase("weather "))
+		else if(input.length() >= 8 && input.substring(0, 8).equalsIgnoreCase("weather "))
 		{
 			if(checkPermission(session, UserClasses.SUPER_MOD))
-				processWeather(command.substring(8).toLowerCase(), session);
+				processWeather(input.substring(8).toLowerCase(), session);
 		}
-		else if(command.length() >= 9 && command.substring(0, 9).equalsIgnoreCase("announce "))
+		else if(input.length() >= 9 && input.substring(0, 9).equalsIgnoreCase("announce "))
 		{
-			String announcement = command.substring(9);
+			String announcement = input.substring(9);
 			if(checkPermission(session, UserClasses.MODERATOR))
 			{
 				for(Session s : ActiveConnections.allSessions().values())
@@ -112,7 +112,7 @@ public class PlayerCommandEvent implements MessageEvent
 				}
 			}
 		}
-		else if(command.length() >= 11 && command.substring(0, 11).equalsIgnoreCase("playercount"))
+		else if(input.length() >= 11 && input.substring(0, 11).equalsIgnoreCase("playercount"))
 		{
 			message = new ServerMessage(ClientPacket.CHAT_PACKET);
 			message.addInt(4);
@@ -121,9 +121,10 @@ public class PlayerCommandEvent implements MessageEvent
 		}
 		else
 		{
+			String[] command = input.split(" ");
 			message = new ServerMessage(ClientPacket.CHAT_PACKET);
 			message.addInt(4);
-			message.addString("Invalid or unkown command.\nUse /help if you need more information.");
+			message.addString("Invalid or unknown command: " + command[0] + "\nUse /help if you need more information.");
 			session.Send(message);
 		}
 	}

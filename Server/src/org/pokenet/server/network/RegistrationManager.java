@@ -126,7 +126,6 @@ public class RegistrationManager implements Runnable
 					return;
 				}
 			}
-
 			catch(Exception e)
 			{
 			}

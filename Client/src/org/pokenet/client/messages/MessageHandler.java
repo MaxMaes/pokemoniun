@@ -180,6 +180,8 @@ public class MessageHandler
 		messages.put(52, new BadgeChangeEvent());
 		messages.put(53, new SkillLevelEvent());
 		messages.put(54, new ReturnToLoginEvent());
+		// messages.put(55, ());
+		// messages.put(56, ());
 		messages.put(57, new WeatherChangeEvent());
 		messages.put(58, new HealPokemonEvent());
 		messages.put(59, new FaceDownEvent());
@@ -223,6 +225,6 @@ public class MessageHandler
 		messages.put(97, new LoggedElsewhereEvent());
 		messages.put(98, new ItemCantUseEvent());
 		messages.put(99, new BattlefrontierEvent());
-		/* TODO: ID's 55 and 56 are now free to use. */
+		/* TODO: Use commented numbers for future messages. */
 	}
 }

@@ -15,17 +15,17 @@ public class Options
 	private boolean weatherEnabled;
 	private boolean surroundingMapsEnabled;
 	private boolean loadSoundEnabled;
-	
+
 	private Ini optionsIni;
-	
+
 	public Options()
 	{
 		try
-		{		
+		{
 			optionsIni = new Ini(new FileInputStream("res/options.ini"));
 			Section interfaceSection = optionsIni.get("INTERFACE");
 			Section soundSection = optionsIni.get("SOUND");
-			
+
 			setFullscreenEnabled(convertIntToBoolean(Integer.parseInt(interfaceSection.get("FULLSCREEN"))));
 			setSurroundingMapsEnabled(convertIntToBoolean(Integer.parseInt(interfaceSection.get("SHOW_SURROUNDING_MAPS"))));
 			setWeatherEnabled(convertIntToBoolean(Integer.parseInt(interfaceSection.get("SHOW_WEATHER"))));
@@ -41,13 +41,11 @@ public class Options
 			ioe.printStackTrace();
 		}
 	}
-	
+
 	public void saveSettings()
 	{
-		try
+		try(FileWriter fstream = new FileWriter("res/options.ini"); BufferedWriter out = new BufferedWriter(fstream))
 		{
-			FileWriter fstream = new FileWriter("res/options.ini");
-			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("[INTERFACE]");
 			out.newLine();
 			out.write("FULLSCREEN=" + convertBoolean(fullscreenEnabled));
@@ -66,8 +64,8 @@ public class Options
 		}
 		catch(IOException ioe)
 		{
-			ioe.printStackTrace();	
-		}		
+			ioe.printStackTrace();
+		}
 	}
 
 	public boolean isFullscreenEnabled()
@@ -109,13 +107,12 @@ public class Options
 	{
 		surroundingMapsEnabled = isEnabled;
 	}
-	
-	
+
 	public void setVolume(int newVolume)
 	{
 		volume = newVolume;
 	}
-	
+
 	public int getVolume()
 	{
 		return volume;
@@ -127,12 +124,12 @@ public class Options
 			return true;
 		return false;
 	}
-	
+
 	public boolean convertIntToBoolean(int intValue)
 	{
 		return (intValue != 0);
 	}
-	
+
 	public int convertBoolean(boolean boolValue)
 	{
 		return boolValue ? 1 : 0;

@@ -2,9 +2,9 @@ package org.pokenet.server.backend;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.HMObject.ObjectType;
@@ -24,6 +24,7 @@ public class MovementManager implements Runnable
 	private Thread m_thread;
 	private Queue<Character> m_waiting;
 	private Queue<Character> m_moving;
+	private ReentrantReadWriteLock queueLock = new ReentrantReadWriteLock(true);
 
 	/**
 	 * Default constructor.
@@ -39,18 +40,23 @@ public class MovementManager implements Runnable
 		};
 		m_waiting = new PriorityQueue<Character>(11, m_comp);
 		m_done = new PriorityQueue<Character>(10, m_comp);
-		m_moving = new PriorityQueue<Character>(1,m_comp);
+		m_moving = new PriorityQueue<Character>(1, m_comp);
 	}
 
 	public void addHMObject(HMObject obj)
 	{
-		synchronized(m_waiting)
+		queueLock.writeLock().lock();
+		try
 		{
 			if(obj.getType() == ObjectType.STRENGTH_BOULDER)
 			{
 				m_pLoad++;
 				m_waiting.add(obj);
 			}
+		}
+		finally
+		{
+			queueLock.writeLock().unlock();
 		}
 	}
 
@@ -61,10 +67,15 @@ public class MovementManager implements Runnable
 	 */
 	public void addPlayer(Character player)
 	{
-		synchronized(m_waiting)
+		queueLock.writeLock().lock();
+		try
 		{
 			m_pLoad++;
 			m_waiting.offer(player);
+		}
+		finally
+		{
+			queueLock.writeLock().unlock();
 		}
 	}
 
@@ -94,7 +105,8 @@ public class MovementManager implements Runnable
 	public boolean removePlayer(String player)
 	{
 		/* Check waiting list */
-		synchronized(m_waiting)
+		queueLock.writeLock().lock();
+		try
 		{
 			for(Character c : m_waiting)
 				if(c.getName().equalsIgnoreCase(player))
@@ -103,6 +115,10 @@ public class MovementManager implements Runnable
 					m_pLoad--;
 					return true;
 				}
+		}
+		finally
+		{
+			queueLock.writeLock().unlock();
 		}
 		/* Check done list */
 		synchronized(m_done)
@@ -130,8 +146,8 @@ public class MovementManager implements Runnable
 	}
 
 	/**
-	 * 	Called by m_thread.start().
-	 *	Looping through the waiting and moving queues and moving the character with highest priority from both queues.
+	 * Called by m_thread.start().
+	 * Looping through the waiting and moving queues and moving the character with highest priority from both queues.
 	 */
 	public void run()
 	{
@@ -149,12 +165,17 @@ public class MovementManager implements Runnable
 				if(tmp.move())
 				{
 					/* Place him in moving queue */
-					synchronized(m_moving)
+					queueLock.readLock().lock();
+					try
 					{
 						m_moving.offer(tmp);
 					}
+					finally
+					{
+						queueLock.readLock().unlock();
+					}
 				}
-				
+
 				synchronized(m_moving)
 				{
 					/* Get character */
@@ -164,21 +185,30 @@ public class MovementManager implements Runnable
 				if(!tmp.move())
 				{
 					/* Place him in the done queue */
-					synchronized(m_done)
+					queueLock.readLock().lock();
+					try
 					{
 						m_done.offer(tmp);
+					}
+					finally
+					{
+						queueLock.readLock().unlock();
 					}
 				}
 				else
 				{
 					/* Keep him in the Moving queue, but place him last */
-					synchronized(m_moving)
+					queueLock.readLock().lock();
+					try
 					{
 						m_moving.offer(tmp);
 					}
+					finally
+					{
+						queueLock.readLock().unlock();
+					}
 				}
-				
-				
+
 			}
 			if(m_waiting != null && m_done != null)
 			{
@@ -195,19 +225,26 @@ public class MovementManager implements Runnable
 							/* Character has no movement remaining. Removing from movement service */
 							m_done.poll();
 					}
-					synchronized(m_waiting)
+					queueLock.readLock().lock();
+					try
 					{
 						m_waiting.addAll(transfer);
 						/* the done queue should be clear, this is just to be sure! */
 						m_done.clear();
 					}
+					finally
+					{
+						queueLock.readLock().unlock();
+					}
 				}
 			}
-			try {
-				Thread.currentThread().sleep(3);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			try
+			{
+				Thread.sleep(3);
+			}
+			catch(InterruptedException ie)
+			{
+				ie.printStackTrace();
 			}
 		}
 	}

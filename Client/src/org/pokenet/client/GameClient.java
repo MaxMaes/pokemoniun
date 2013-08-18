@@ -343,6 +343,18 @@ public class GameClient extends BasicGame
 		return gameContainer.getHeight();
 	}
 
+	public void setFullscreen(boolean toSet)
+	{
+		try
+		{
+			gameContainer.setFullscreen(toSet);
+		}
+		catch(SlickException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void controllerRightPressed(int controller)
 	{
@@ -1134,6 +1146,7 @@ public class GameClient extends BasicGame
 		try
 		{
 			GameClient.setOptions(new Options());
+			setFullscreen(options.isFullscreenEnabled());
 		}
 		catch(Exception e)
 		{

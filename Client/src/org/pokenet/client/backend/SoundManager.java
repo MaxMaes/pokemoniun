@@ -108,9 +108,6 @@ public class SoundManager extends Thread
 	 */
 	public void setTrack(String key)
 	{
-		if(m_mute)
-			while(!m_tracksLoaded)
-				yield();
 		if(key != null && !key.equalsIgnoreCase(m_trackName))
 		{
 			m_trackName = key;

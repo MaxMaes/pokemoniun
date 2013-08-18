@@ -72,6 +72,7 @@ public class OptionsDialog extends ResizableFrame
 				// GameClient.getInstance().messageDialog(translated.get(19),
 				// getDisplay()); TODO
 				GameClient.getInstance().reloadOptions();
+				GameClient.getInstance().getHUD().toggleOptions();
 			}
 		});
 		setTitle(translated.get(15));

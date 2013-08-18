@@ -206,7 +206,7 @@ public class HUD extends DesktopArea
 		{
 			hideHUDElements();
 			bigBag = new BigBagDialog(this);
-			bigBag.setPosition(topbar.getBarButton(3).getInnerX(), topbar.getBarButton(3).getInnerY() + topbar.getBarButton(3).getHeight());
+			// bigBag.setPosition(topbar.getBarButton(3).getInnerX(), topbar.getBarButton(3).getInnerY() + topbar.getBarButton(3).getHeight());
 			add(bigBag);
 		}
 	}

@@ -2,7 +2,6 @@ package org.pokenet.client.twl.ui.frames;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
@@ -26,35 +25,31 @@ public class AlertDialog extends ResizableFrame
 	private Queue<String> textQueue;
 	private Queue<Runnable> okButtonQueue;
 
-	/*
-	 * Creates a new alertdialog
-	 * 
-	 * note: This constructor should be only called by GuiPane!
-	 */
+	/* Creates a new alertdialog
+	 * note: This constructor should be only called by GuiPane! */
 	public AlertDialog(String Title, String text, Widget widget)
 	{
 		setTitle(Title);
 		setTheme("alertdialog");
-		
+
 		textQueue = new LinkedList<String>();
 		okButtonQueue = new LinkedList<Runnable>();
-		
+
 		textModel = new SimpleTextAreaModel(text);
 		dialogText = new TextArea(textModel);
 
 		okButton = new Button("Ok");
 
-		popup = new PopupWindow(widget);
-		popup.setTheme("alertpopup");
-		
 		this.add(dialogText);
 		this.add(okButton);
+
+		popup = new PopupWindow(widget);
+		popup.setTheme("alertpopup");
 		popup.add(this);
-		
 		popup.setCloseOnClickedOutside(false);
 		popup.setCloseOnEscape(true);
+
 		setVisible(false);
-		
 	}
 
 	@Override
@@ -63,7 +58,7 @@ public class AlertDialog extends ResizableFrame
 		okButton.setSize(50, 25);
 		dialogText.setMaxSize(300, popup.getRootWidget().getHeight());
 		dialogText.adjustSize();
-		
+
 		dialogText.setPosition((getInnerX() + (popup.getWidth() / 2 - dialogText.getWidth() / 2) + 5), getInnerY() + 10);
 		okButton.setPosition(getInnerX() + (popup.getWidth() / 2), dialogText.getY() + dialogText.getHeight() + 10);
 		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + okButton.getHeight() + 30);
@@ -90,7 +85,7 @@ public class AlertDialog extends ResizableFrame
 	{
 		textModel.setText(text);
 	}
-	
+
 	@Override
 	public void setVisible(boolean b)
 	{
@@ -117,7 +112,7 @@ public class AlertDialog extends ResizableFrame
 	}
 
 	/* Adds the message to the queue so it does not get lost. */
-	public void queue(String message, Runnable runnable) 
+	public void queue(String message, Runnable runnable)
 	{
 		textQueue.offer(message);
 		okButtonQueue.offer(runnable);

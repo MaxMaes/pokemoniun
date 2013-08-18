@@ -2,7 +2,6 @@ package org.pokenet.client.twl.ui.frames;
 
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
-
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -34,7 +33,7 @@ public class BattleBag extends BigBagDialog
 	@Override
 	public void useItem(int i, Widget root)
 	{
-		destroyPopup();
+		destroyPopup(root);
 		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, true, root);

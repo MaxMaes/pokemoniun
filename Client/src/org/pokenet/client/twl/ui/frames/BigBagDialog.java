@@ -10,7 +10,6 @@ import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.twl.ui.base.ImageButton;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.Event;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
@@ -88,26 +87,21 @@ public class BigBagDialog extends ResizableFrame
 	 */
 	public void closeBag()
 	{
-		setVisible(false);
-		// GameClient.getInstance().getDisplay().remove(this); TODO:
+		GameClient.getInstance().getHUD().toggleBag();
 	}
 
 	/**
 	 * Destroys the item popup
 	 */
-	public void destroyPopup()
+	public void destroyPopup(Widget root)
 	{
-		/* if(getDisplay().containsChild(m_popup)) //TODO: Chappie popup?
-		 * {
-		 * m_popup.destroyPopup();
-		 * m_popup = null;
-		 * } */
+		root.removeChild(m_popup);
+		m_popup = null;
 	}
 
 	/** Initializes the interface */
 	public void initGUI(final Widget root)
 	{
-		/* Does this cause a memory leak in JAVA if called more than once? If so does java have a delete keyword? */
 		m_items = new HashMap<Integer, ArrayList<PlayerItem>>();
 		m_scrollIndex = new HashMap<Integer, Integer>();
 		m_itemBtns = new ArrayList<ImageButton>();
@@ -168,7 +162,7 @@ public class BigBagDialog extends ResizableFrame
 					@Override
 					public void run()
 					{
-						destroyPopup();
+						destroyPopup(root);
 						m_curCategory = j;
 						update();
 					}
@@ -190,7 +184,7 @@ public class BigBagDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				int i = m_scrollIndex.get(m_curCategory) - 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
@@ -210,7 +204,7 @@ public class BigBagDialog extends ResizableFrame
 				@Override
 				public void run()
 				{
-					destroyPopup();
+					destroyPopup(root);
 					useItem(j, root);
 					update();
 				}
@@ -234,7 +228,7 @@ public class BigBagDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				int i = m_scrollIndex.get(m_curCategory) + 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
@@ -250,7 +244,7 @@ public class BigBagDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				closeBag();
 			}
 		});
@@ -261,7 +255,7 @@ public class BigBagDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				closeBag();
 			}
 		});
@@ -320,13 +314,14 @@ public class BigBagDialog extends ResizableFrame
 					}
 				}
 			}
-			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
+			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The effect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
 			int tmpCurCategory = m_curCategory;
 			initGUI(root);
 			loadItems();
 			m_curCategory = tmpCurCategory;
-			update();
+
 		}
+		update();
 	}
 
 	/**
@@ -392,27 +387,26 @@ public class BigBagDialog extends ResizableFrame
 	 */
 	public void useItem(int i, Widget root)
 	{
-		destroyPopup();
+		destroyPopup(root);
 		if(m_curCategory == 3)
 		// if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getText())).getCategory().equalsIgnoreCase("Field"))
+			{
 				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, false, root);
-			// System.out.println("win " + i);
+			}
 			else
+			{
 				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
-			// System.out.println("fail " + i);
-			// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
-			// .getCategory());
-			m_popup.setPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
-			add(m_popup);
+			}
+
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
+
 		}
 		else
 		{
 			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
-			m_popup.setPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
-			add(m_popup);
-			// System.out.println("check " + i);
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
 		}
 	}
 
@@ -504,7 +498,12 @@ class ItemPopup extends Widget
 	private TeamPopup m_team;
 	private Button m_use;
 
+	private boolean isInBattle;
+	private boolean usedOnPokemon;
+	private int itemID;
+
 	private PopupWindow popup;
+	private Widget rootWidget;
 
 	/**
 	 * Default Constructor
@@ -516,57 +515,52 @@ class ItemPopup extends Widget
 	 */
 	public ItemPopup(String item, int id, boolean useOnPokemon, boolean isBattle, Widget root)
 	{
-		final int m_id = id;
-		final boolean m_useOnPoke = useOnPokemon;
-		final boolean m_isBattle = isBattle;
-		setPosition(getX() - 1, getY() + 1);
+		rootWidget = root;
+		itemID = id;
+		usedOnPokemon = useOnPokemon;
+		isInBattle = isBattle;
+
 		// Item name label
 		m_name = new Label(item.split("\n")[0]);
-		m_name.setPosition(0, 0);
 		add(m_name);
+
 		// Use button
 		m_use = new Button("Use");
-		m_use.setSize(100, 25);
-		m_use.setPosition(0, m_name.getY() + m_name.getHeight() + 3);
+
 		m_use.addCallback(new Runnable()
 		{
 			@Override
 			public void run()
 			{
-				useItem(m_id, m_useOnPoke, m_isBattle);
+				useItem(itemID, usedOnPokemon, isInBattle);
 			}
 		});
 		add(m_use);
-		if(!isBattle)
+
+		m_give = new Button("Give");
+		m_give.addCallback(new Runnable()
 		{
-			m_give = new Button("Give");
-			m_give.setSize(100, 25);
-			m_give.setPosition(0, m_use.getY() + 25);
-			// m_give.setEnabled(false);
-			m_give.addCallback(new Runnable()
+			@Override
+			public void run()
 			{
-				@Override
-				public void run()
-				{
-					giveItem(m_id);
-				}
-			});
-			add(m_give);
+				giveItem(itemID);
+			}
+		});
+		if(isBattle)
+		{
+			m_give.setEnabled(false);
 		}
+		add(m_give);
+
 		// Destroy the item
 		m_destroy = new Button("Drop");
-		m_destroy.setSize(100, 25);
-		if(!isBattle)
-			m_destroy.setPosition(0, m_give.getY() + 25);
-		else
-			m_destroy.setPosition(0, m_use.getY() + 25);
 		m_destroy.addCallback(new Runnable()
 		{
 			@Override
 			public void run()
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.ITEM_DESTROY);
-				message.addInt(m_id);
+				message.addInt(itemID);
 				GameClient.getInstance().getSession().send(message);
 				destroyPopup();
 			}
@@ -575,8 +569,6 @@ class ItemPopup extends Widget
 
 		// Close the popup
 		m_cancel = new Button("Cancel");
-		m_cancel.setSize(100, 25);
-		m_cancel.setPosition(0, m_destroy.getY() + 25);
 		m_cancel.addCallback(new Runnable()
 		{
 			@Override
@@ -586,17 +578,20 @@ class ItemPopup extends Widget
 			}
 		});
 		add(m_cancel);
-		if(!isBattle)
-			setSize(100, 140);
-		else
-			setSize(100, 115);
+
 		setVisible(true);
+
 		popup = new PopupWindow(root);
-		popup.setTheme("BigBagDialogPopup");
+		popup.setTheme("bigbagdialogpopup");
 		popup.add(this);
-		popup.setCloseOnClickedOutside(false);
-		popup.setCloseOnEscape(false);
-		popup.adjustSize();
+		popup.setCloseOnClickedOutside(true);
+		popup.setCloseOnEscape(true);
+		popup.openPopup();
+	}
+
+	public void setPopupPosition(int x, int y)
+	{
+		popup.setPosition(x, y);
 	}
 
 	/**
@@ -604,9 +599,13 @@ class ItemPopup extends Widget
 	 */
 	public void destroyPopup()
 	{
-		removeChild(m_team);
-		m_team = null;
+		if(m_team != null)
+		{
+			m_team.destroy();
+			m_team = null;
+		}
 		removeChild(this);
+		popup.closePopup();
 		popup.destroy();
 	}
 
@@ -617,13 +616,12 @@ class ItemPopup extends Widget
 	 */
 	public void giveItem(int id)
 	{
-		popup.setVisible(false);
-		removeChild(m_team);
-		m_team = null;
-		m_team = new TeamPopup(this, id, false, false);
-		m_team.setPosition(m_give.getInnerX() + getWidth(), m_give.getInnerY() - 15);
-		add(m_team);
-
+		if(m_team != null)
+		{
+			m_team.destroy();
+		}
+		m_team = new TeamPopup(this, id, false, false, rootWidget);
+		m_team.setPopupPosition(popup.getInnerX() + popup.getWidth() - 1, m_give.getInnerY() - 15);
 	}
 
 	/**
@@ -634,15 +632,14 @@ class ItemPopup extends Widget
 	 */
 	public void useItem(int id, boolean usedOnPoke, boolean isBattle)
 	{
-		removeChild(m_team);
-		m_team = null;
+		if(m_team != null)
+		{
+			m_team.destroy();
+		}
 		if(usedOnPoke)
 		{
-			popup.setVisible(false);
-			m_team = new TeamPopup(this, id, true, isBattle);
-			m_team.setPosition(m_use.getInnerX() + getWidth(), m_use.getInnerY() - 15);
-			add(m_team);
-			// System.out.println("i use");
+			m_team = new TeamPopup(this, id, true, isBattle, rootWidget);
+			m_team.setPopupPosition(popup.getInnerX() + popup.getWidth() - 1, m_use.getInnerY() - 15);
 		}
 		else
 		{
@@ -652,21 +649,49 @@ class ItemPopup extends Widget
 			destroyPopup();
 		}
 	}
+
+	@Override
+	public void layout()
+	{
+		m_name.setPosition(getInnerX() + getWidth() / 2 - m_name.computeTextWidth() / 2, getInnerY() + m_name.computeTextHeight());
+		m_use.setSize(100, 25);
+		m_use.setPosition(getInnerX() + 5, m_name.getInnerY() + m_name.computeTextHeight() + 3);
+		m_give.setSize(100, 25);
+		m_give.setPosition(getInnerX() + 5, m_use.getInnerY() + 25);
+		m_destroy.setSize(100, 25);
+		// if(!isInBattle)
+		// {
+		m_destroy.setPosition(getInnerX() + 5, m_give.getInnerY() + 25);
+		setSize(110, 140);
+		popup.setSize(110, 140);
+		// }
+		// else
+		// {
+		// m_destroy.setPosition(0, m_use.getY() + 25);
+		// setSize(100, 115);
+		// }
+		m_cancel.setSize(100, 25);
+		m_cancel.setPosition(getInnerX() + 5, m_destroy.getInnerY() + 25);
+
+		// popup.adjustSize();
+	}
 }
 
 /**
  * PopUp that lists the player's pokemon in order to use/give an item
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
 class TeamPopup extends Widget
 {
-	private Label[] pokelabels;
+	private Button[] pokeButtons;
 	private Label m_details;
 	private ItemPopup m_parent;
 	private int item;
 	private boolean use;
 	private boolean isBattle;
+
+	private PopupWindow popup;
 
 	/**
 	 * Default constructor
@@ -675,7 +700,7 @@ class TeamPopup extends Widget
 	 * @param use
 	 * @param useOnPoke
 	 */
-	public TeamPopup(ItemPopup parent, int itemId, boolean isuse, boolean isbattle)
+	public TeamPopup(ItemPopup parent, int itemId, boolean isuse, boolean isbattle, Widget root)
 	{
 		setPosition(getX() - 1, getY() + 1);
 
@@ -683,21 +708,32 @@ class TeamPopup extends Widget
 		item = itemId;
 		use = isuse;
 		isBattle = isbattle;
-		int y = 0;
-		pokelabels = new Label[GameClient.getInstance().getOurPlayer().getPokemon().length];
-		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++)
+		pokeButtons = new Button[GameClient.getInstance().getOurPlayer().getPokemon().length];
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPartyCount(); i++)
 		{
-			pokelabels[i] = new Label(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
-			pokelabels[i].setSize(100, 15);
-			pokelabels[i].setPosition(0, y);
-			y += 18;
-			add(pokelabels[i]);
+			final int idx = i;
+			pokeButtons[i] = new Button(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
+			pokeButtons[i].addCallback(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					destroyPopup();
+					processItemUse(use, item, idx, isBattle);
+				}
+			});
+			add(pokeButtons[i]);
 		}
 
 		// Frame configuration
-		setSize(100, 135);
 		setVisible(true);
-		// setAlwaysOnTop(true); //TODO: Chappie magic :D
+
+		popup = new PopupWindow(root);
+		popup.setTheme("itemuseteampopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(true);
+		popup.setCloseOnEscape(true);
+		popup.openPopup();
 	}
 
 	/**
@@ -726,34 +762,28 @@ class TeamPopup extends Widget
 		m_parent.destroyPopup();
 	}
 
-	@Override
-	public boolean handleEvent(Event evt)
+	public void destroyPopup()
 	{
-		if(evt.isMouseEvent())
+		popup.closePopup();
+		popup.destroy();
+	}
+
+	public void setPopupPosition(int x, int y)
+	{
+		popup.setPosition(x, y);
+	}
+
+	@Override
+	public void layout()
+	{
+		int y = 10;
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPartyCount(); i++)
 		{
-			int idx = 0;
-			for(Label l : pokelabels)
-			{
-				isMouseInside(evt);
-				if(evt.getType() == Event.Type.MOUSE_ENTERED)
-				{
-					// l.setForeground(new Color(255, 215, 0)); TODO: Set color
-				}
-				else if(evt.getType() == Event.Type.MOUSE_EXITED)
-				{
-					// l.setForeground(new Color(255, 255, 255)); TODO: Set color
-				}
-				else if(evt.getType() == Event.Type.MOUSE_CLICKED)
-				{
-					processItemUse(use, item, idx, isBattle);
-				}
-				idx++;
-			}
-			return true;
+			pokeButtons[i].setSize(100, 25);
+			pokeButtons[i].setPosition(getInnerX() + 5, getInnerY() + y);
+			y += 25;
 		}
-		else
-		{
-			return false;
-		}
+
+		setSize(110, GameClient.getInstance().getOurPlayer().getPartyCount() * 25 + 20);
 	}
 }

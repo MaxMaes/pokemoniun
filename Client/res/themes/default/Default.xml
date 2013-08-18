@@ -279,6 +279,20 @@
             </theme>
         </theme>
     </theme>
+    <theme name="bigbagdialogpopup" ref="-defaults">
+        <theme name="itempopup" ref="resizableframe">
+            <theme name="button" ref="button"/>
+            <theme name="label" ref="label">
+                <param name="font"><font>pokefont</font></param>
+            </theme>
+        </theme>
+    </theme>
+    <theme name="itemuseteampopup" ref="-defaults">
+        <theme name="teampopup" ref="resizableframe">
+            <theme name="button" ref="button"/>
+            <theme name="label" ref="label"/>
+        </theme>
+    </theme>
 
 
 
@@ -543,7 +557,9 @@
                 <theme name="imagebutton" ref="imagebutton"/>
                 <theme name="button" ref="button"/>
                 <theme name="image" ref="image"/>
-                <theme name="label" ref="label"/>
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
                 <theme name="title" ref="title"/>
                 <param name="hasResizeHandle"><bool>false</bool></param>
                 <param name="hasCloseButton"><bool>false</bool></param>

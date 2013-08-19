@@ -809,13 +809,13 @@ public class GameClient extends BasicGame
 					m_session.send(message);
 				}
 			}
-		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
+		if(key == KeyManager.getKey(Action.POKEMOVE_1) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(0);
-		if(key == KeyManager.getKey(Action.POKEMOVE_2) && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
+		if(key == KeyManager.getKey(Action.POKEMOVE_2) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(1);
-		if(key == KeyManager.getKey(Action.POKEMOVE_3) && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
+		if(key == KeyManager.getKey(Action.POKEMOVE_3) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(2);
-		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
+		if(key == KeyManager.getKey(Action.POKEMOVE_4) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(3);
 		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !getHUD().hasMoveLearning() && !getHUD().hasShop())
 		{
@@ -825,8 +825,11 @@ public class GameClient extends BasicGame
 				m_session.send(message);
 			}
 			if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
+			{
 				BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+			}
 			else
+			{
 				try
 				{
 					getHUD().getNPCSpeech().advance();
@@ -835,6 +838,7 @@ public class GameClient extends BasicGame
 				{
 					getHUD().removeNPCSpeechFrame();
 				}
+			}
 		}
 	}
 
@@ -1101,6 +1105,7 @@ public class GameClient extends BasicGame
 				{
 					try
 					{
+						System.out.println("Advancing from 1108");
 						getHUD().getNPCSpeech().advance();
 					}
 					catch(Exception e)

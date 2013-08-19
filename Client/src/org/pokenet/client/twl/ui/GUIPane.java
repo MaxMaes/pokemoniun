@@ -22,6 +22,10 @@ public class GUIPane extends DesktopArea
 
 	public GUIPane()
 	{
+		hud = new HUD();
+		add(hud);
+		hud.setVisible(false);
+
 		loginScreen = new LoginScreen();
 		add(loginScreen);
 
@@ -34,9 +38,6 @@ public class GUIPane extends DesktopArea
 		loadingScreen = new LoadingScreen();
 		add(loadingScreen);
 
-		hud = new HUD();
-		add(hud);
-		hud.setVisible(false);
 		setTheme("guipane");
 		setSize(800, 600);
 	}

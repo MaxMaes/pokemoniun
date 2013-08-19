@@ -63,6 +63,7 @@ public class AlertDialog extends ResizableFrame
 		okButton.setPosition(getInnerX() + (popup.getWidth() / 2), dialogText.getY() + dialogText.getHeight() + 10);
 		setSize(dialogText.getWidth() + 15, dialogText.getHeight() + okButton.getHeight() + 30);
 		popup.adjustSize();
+		popup.centerPopup();
 	}
 
 	/* sets the callback method for the "Ok" button */

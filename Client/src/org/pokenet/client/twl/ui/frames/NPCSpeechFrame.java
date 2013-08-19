@@ -3,7 +3,6 @@ package org.pokenet.client.twl.ui.frames;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -43,7 +42,7 @@ public class NPCSpeechFrame extends SpeechFrame
 		if(speechQueue.peek() == null)
 		{
 			triangle = null;
-			setVisible(false);
+			GameClient.getInstance().getHUD().hideNPCSpeech();
 			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3D");
 			ClientMessage message = new ClientMessage(ServerPacket.TALKING_FINISH);
 			GameClient.getInstance().getSession().send(message);

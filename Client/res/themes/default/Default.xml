@@ -8,7 +8,7 @@
     <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
-    <fontDef name="pokefont_large" filename="dp.fnt" color="#FFFFFF">
+    <fontDef name="pokefont_large" filename="pokefont-large.fnt" color="#000000">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
     <fontDef name="normal" filename="font.fnt" color="#49432D">
@@ -291,6 +291,19 @@
         <theme name="teampopup" ref="resizableframe">
             <theme name="button" ref="button"/>
             <theme name="label" ref="label"/>
+        </theme>
+    </theme>
+    <theme name="speechframepopup" ref="-defaults">
+        <theme name="npcspeechframe" ref="resizableframe">
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>pokefont_large</font></param>
+                    </map>
+                </param>
+            </theme>
+            <theme name="image" ref="image"/>
+            <param name="background"><image>speechframe</image></param>
         </theme>
     </theme>
 

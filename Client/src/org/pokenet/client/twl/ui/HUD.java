@@ -206,7 +206,6 @@ public class HUD extends DesktopArea
 		{
 			hideHUDElements();
 			bigBag = new BigBagDialog(this);
-			// bigBag.setPosition(topbar.getBarButton(3).getInnerX(), topbar.getBarButton(3).getInnerY() + topbar.getBarButton(3).getHeight());
 			add(bigBag);
 		}
 	}
@@ -675,12 +674,11 @@ public class HUD extends DesktopArea
 
 	public void hideNPCSpeech()
 	{
-		npcSpeech.setVisible(false);
-	}
-
-	public void showNPCSpeech()
-	{
-		npcSpeech.setVisible(true);
+		if(npcSpeech != null)
+		{
+			npcSpeech.destroyPopup();
+			npcSpeech = null;
+		}
 	}
 
 	public void hideChat()
@@ -777,7 +775,7 @@ public class HUD extends DesktopArea
 	public void talkToNPC(String speech)
 	{
 		npcSpeech = new NPCSpeechFrame(speech, this);
-		add(npcSpeech);
+		npcSpeech.setSpeechOpened(true);
 	}
 
 	public void refreshParty()
@@ -794,6 +792,7 @@ public class HUD extends DesktopArea
 	public void update(boolean money)
 	{
 		if(money)
+		{
 			try
 			{
 				topbar.getMoneyLabel().setText("$" + String.valueOf(GameClient.getInstance().getOurPlayer().getMoney()));
@@ -802,7 +801,9 @@ public class HUD extends DesktopArea
 			{
 				System.err.println("Failed to update money");
 			}
+		}
 		else
+		{
 			try
 			{
 				if(partyInfo != null)
@@ -812,6 +813,7 @@ public class HUD extends DesktopArea
 			{
 				System.err.println("Failed to update pokemon data");
 			}
+		}
 	}
 
 	/**
@@ -939,7 +941,10 @@ public class HUD extends DesktopArea
 
 	public void removeNPCSpeechFrame()
 	{
-		this.removeChild(this.npcSpeech);
+		if(npcSpeech != null)
+		{
+			npcSpeech.destroyPopup();
+		}
 		npcSpeech = null;
 	}
 }

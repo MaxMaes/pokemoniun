@@ -262,6 +262,7 @@ public class BigBagDialog extends ResizableFrame
 		update();
 		setTitle("Bag");
 		setResizableAxis(ResizableAxis.NONE);
+		setDraggable(true);
 		setSize(m_categoryButtons.length * 80, 250);
 		setVisible(true);
 		setCenter();

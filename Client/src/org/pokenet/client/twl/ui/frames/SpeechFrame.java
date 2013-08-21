@@ -10,8 +10,8 @@ import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.Widget;
-// import de.matthiasmann.twl.renderer.Image;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
+// import de.matthiasmann.twl.renderer.Image;
 
 /**
  * Base for speech pop-ups
@@ -131,9 +131,9 @@ public class SpeechFrame extends Widget
 			stringToPrint = speechQueue.poll();
 			if(stringToPrint != null)
 			{
-				// textModel.setText(stringToPrint, false);
-
-				TimerTask textAnimation = new TimerTask()
+				textModel.setText(stringToPrint, false);
+				/* TODO: Animation breaks Speech interaction and leaves lines after the first out. */
+				/*TimerTask textAnimation = new TimerTask()
 				{
 
 					@Override
@@ -161,7 +161,7 @@ public class SpeechFrame extends Widget
 						}
 					}
 				};
-				textAnimationTimer.schedule(textAnimation, 0, 30);
+				textAnimationTimer.schedule(textAnimation, 0, 30);*/
 			}
 		}
 	}

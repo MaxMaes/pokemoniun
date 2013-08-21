@@ -159,20 +159,33 @@ public class ItemProcessor implements Runnable
 				switch(itemId)
 				{
 					case ItemID.POTION:
+						String message = "You used a Potion on " + poke.getName() + "./nThe Potion restored 20 HP.";
 						poke.changeHealth(Potion.POTION_HP);
-						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Potion on " + poke.getName() + "/nThe Potion restored 20 HP");
+						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.SUPER_POTION:
+						message = "You used a Super Potion on " + poke.getName() + "./nThe Super Potion restored 50 HP.";
 						poke.changeHealth(Potion.SUPER_POTION_HP);
-						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Super Potion on " + poke.getName() + "/nThe Super Potion restored 50 HP");
+						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.HYPER_POTION:
+						message = "You used a Hyper Potion on " + poke.getName() + "./nThe Hyper Potion restored 200 HP.";
 						poke.changeHealth(Potion.HYPER_POTION_HP);
-						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Hyper Potion on " + poke.getName() + "/nThe Hyper Potion restored 200 HP");
+						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.MAX_POTION:
+						message = "You used a Max Potion on " + poke.getName() + "./nThe Max Potion restored " + poke.getRawStat(0) + " HP.";
 						poke.changeHealth(poke.getRawStat(0));
-						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, "You used Max Potion on " + poke.getName() + "/nThe Max Potion restored All HP");
+						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
+						break;
+					case ItemID.FULL_RESTORE:
+						message = "You used a Full Restore on " + poke.getName() + "./nThe Full Restore restored " + poke.getRawStat(0) + " HP.";
+						poke.changeHealth(poke.getRawStat(0));
+						ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
+						hpChange.addInt(pokePartyPos);
+						hpChange.addInt(poke.getHealth());
+						player.getSession().Send(hpChange);
+						returnValue = processCureStatus(player, poke, itemId, message);
 						break;
 					default:
 						returnValue = false;
@@ -230,35 +243,35 @@ public class ItemProcessor implements Runnable
 				switch(itemId)
 				{
 					case ItemID.ANTIDOTE:
-						String message = "You used Antidote on " + poke.getName() + "/nThe Antidote restored " + poke.getName() + " status to normal";
+						String message = "You used an Antidote on " + poke.getName() + "./nThe Antidote restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, PoisonEffect.class, message);
 						break;
 					case ItemID.PARALYZ_HEAL:
-						message = "You used Paralyz Heal on " + poke.getName() + "/nThe Paralyz Heal restored " + poke.getName() + " status to normal";
+						message = "You used a Paralyz Heal on " + poke.getName() + "./nThe Paralyz Heal restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, ParalysisEffect.class, message);
 						break;
 					case ItemID.AWAKENING:
-						message = "You used Awakening on " + poke.getName() + "/nThe Awakening restored " + poke.getName() + " status to normal";
+						message = "You used an Awakening on " + poke.getName() + "./nThe Awakening restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, SleepEffect.class, message);
 						break;
 					case ItemID.BURN_HEAL:
-						message = "You used Burn Heal on " + poke.getName() + "/nThe Burn Heal restored " + poke.getName() + " status to normal";
+						message = "You used a Burn Heal on " + poke.getName() + "./nThe Burn Heal restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, BurnEffect.class, message);
 						break;
 					case ItemID.ICE_HEAL:
-						message = "You used Ice Heal on " + poke.getName() + "/nThe Ice Heal restored " + poke.getName() + " status to normal";
+						message = "You used an Ice Heal on " + poke.getName() + "./nThe Ice Heal restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, FreezeEffect.class, message);
 						break;
 					case ItemID.FULL_HEAL:
-						message = "You used Full Heal on " + poke.getName() + "/nThe Full Heal restored " + poke.getName() + " status to normal";
+						message = "You used a Full Heal on " + poke.getName() + "./nThe Full Heal restored " + poke.getName() + " status to normal";
 						returnValue = processCureStatus(player, poke, itemId, message);
 						break;
 					case ItemID.LAVA_COOKIE:
-						message = "You used Lava Cookie on " + poke.getName() + "/nThe Lava Cookie restored " + poke.getName() + " status to normal";
+						message = "You used a Lava Cookie on " + poke.getName() + "./nThe Lava Cookie restored " + poke.getName() + " status to normal";
 						returnValue = processCureStatus(player, poke, itemId, message);
 						break;
 					case ItemID.OLD_GATEAU:
-						message = "You used Old Gateau on " + poke.getName() + "/nThe Old Gateau restored " + poke.getName() + " status to normal";
+						message = "You used an Old Gateau on " + poke.getName() + "./nThe Old Gateau restored " + poke.getName() + " status to normal";
 						returnValue = processCureStatus(player, poke, itemId, message);
 						break;
 				}
@@ -272,27 +285,27 @@ public class ItemProcessor implements Runnable
 				switch(itemId)
 				{
 					case ItemID.CHERI_BERRY:
-						String message = poke.getName() + " ate the Cheri Berry/nThe Cheri Berry restored " + poke.getName() + " status to normal";
+						String message = poke.getName() + " ate the Cheri Berry./nThe Cheri Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, ParalysisEffect.class, message);
 						break;
 					case ItemID.CHESTO_BERRY:
-						message = poke.getName() + " ate the Chesto Berry/nThe Chesto Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Chesto Berry./nThe Chesto Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, SleepEffect.class, message);
 						break;
 					case ItemID.PECHA_BERRY:
-						message = poke.getName() + " ate the Pecha Berry/nThe Pecha Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Pecha Berry./nThe Pecha Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, PoisonEffect.class, message);
 						break;
 					case ItemID.RAWST_BERRY:
-						message = poke.getName() + " ate the Rawst Berry/nThe Rawst Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Rawst Berry./nThe Rawst Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, BurnEffect.class, message);
 						break;
 					case ItemID.ASPEAR_BERRY:
-						message = poke.getName() + " ate the Aspear Berry/nThe Aspear Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Aspear Berry./nThe Aspear Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, FreezeEffect.class, message);
 						break;
 					case ItemID.LEPPA_BERRY:
-						message = "Leppa Berry had no effect";
+						message = "Leppa Berry had no effect.";
 						/* Move selection not completed, temp message TODO: Add support for this */
 						int ppSlot = Integer.parseInt(data[1]);
 						if(poke.getPp(ppSlot) + 10 <= poke.getMaxPp(ppSlot))
@@ -303,14 +316,14 @@ public class ItemProcessor implements Runnable
 						break;
 					case ItemID.ORAN_BERRY:
 						poke.changeHealth(10);
-						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, poke.getName() + " ate the Oran Berry/nThe Oran Berry restored 10HP");
+						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, poke.getName() + " ate the Oran Berry./nThe Oran Berry restored 10HP");
 						break;
 					case ItemID.PERSIM_BERRY:
-						message = poke.getName() + " ate the Persim Berry/nThe Persim Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Persim Berry./nThe Persim Berry restored " + poke.getName() + " status to normal";
 						returnValue = processStatusRemoval(player, poke, itemId, ConfuseEffect.class, message);
 						break;
 					case ItemID.LUM_BERRY:
-						message = poke.getName() + " ate the Lum Berry/nThe Lum Berry restored " + poke.getName() + " status to normal";
+						message = poke.getName() + " ate the Lum Berry./nThe Lum Berry restored " + poke.getName() + " status to normal";
 						returnValue = processCureStatus(player, poke, itemId, message);
 						break;
 					case ItemID.SITRUS_BERRY:
@@ -319,31 +332,31 @@ public class ItemProcessor implements Runnable
 						break;
 					case ItemID.FIGY_BERRY:
 						poke.changeHealth(poke.getRawStat(0) / 8);
-						message = poke.getName() + " ate the Figy Berry/nThe Figy Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Figy Berry./nThe Figy Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.WIKI_BERRY:
 						poke.changeHealth(poke.getRawStat(0) / 8);
-						message = poke.getName() + " ate the Wiki Berry/nThe Wiki Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Wiki Berry./nThe Wiki Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.MAGO_BERRY:
 						poke.changeHealth(poke.getRawStat(0) / 8);
-						message = poke.getName() + " ate the Mago Berry/nThe Mago Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Mago Berry./nThe Mago Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.AGUAV_BERRY:
 						poke.changeHealth(poke.getRawStat(0) / 8);
-						message = poke.getName() + " ate the Aguav Berry/nThe Aguav Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Aguav Berry./nThe Aguav Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.IAPAPA_BERRY:
 						poke.changeHealth(poke.getRawStat(0) / 8);
-						message = poke.getName() + " ate the Iapapa Berry/nThe Iapapa Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Iapapa Berry./nThe Iapapa Berry restored" + poke.getRawStat(0) / 8 + " HP to " + poke.getName() + "!";
 						returnValue = processPotion(player, poke.getHealth(), itemId, pokePartyPos, message);
 						break;
 					case ItemID.VOLTORB_LOLLIPOP:
-						message = poke.getName() + " ate the Voltorb Lollipop/nThe Lollipop restored 50 HP to " + poke.getName() + "!";
+						message = poke.getName() + " ate the Voltorb Lollipop./nThe Lollipop restored 50 HP to " + poke.getName() + "!";
 						poke.changeHealth(50);
 						int random = rand.nextInt(10);
 						if(random < 3)
@@ -576,10 +589,10 @@ public class ItemProcessor implements Runnable
 			ServerMessage hpChange = new ServerMessage(ClientPacket.POKE_HP_CHANGE);
 			hpChange.addInt(pokeId);
 			hpChange.addInt(pokeHp);
-			m_player.getSession().Send(hpChange);
+			player.getSession().Send(hpChange);
 			ServerMessage itemUse = new ServerMessage(ClientPacket.USE_ITEM);
 			itemUse.addString(message);
-			m_player.getSession().Send(itemUse);
+			player.getSession().Send(itemUse);
 		}
 		else
 			player.getBattleField().executeItemTurn(itemId);

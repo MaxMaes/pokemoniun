@@ -65,14 +65,6 @@ public class MovementService
 	}
 
 	/**
-	 * Reloads all maps while the server is still running.
-	 */
-	public void reloadMaps()
-	{
-		this.reloadMaps(false);
-	}
-
-	/**
 	 * Reloads all maps while the server is running. Puts all players in m_tempMap.
 	 * An NPC is there to allow them to return to where they last where when they are ready.
 	 * Optionally, we can skip saving players in a temporary map.
@@ -93,7 +85,7 @@ public class MovementService
 						for(Player player : players.values())
 						{
 							player.setLastHeal(player.getX(), player.getY(), player.getMapX(), player.getMapY());
-							player.setMap(m_mapMatrix.getMapByRealPosition(x, y), null);
+							player.setMap(m_mapMatrix.getMapByRealPosition(x, y), player.getFacing());
 						}
 					}
 		}

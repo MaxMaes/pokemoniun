@@ -100,16 +100,16 @@ public class PlayerCommandEvent implements MessageEvent
 		{
 			String announcement = input.substring(9);
 			if(checkPermission(session, UserClasses.MODERATOR))
+				processAnnouncement(session, announcement);
+		}
+		else if(input.length() >= 10 && input.substring(0, 10).equalsIgnoreCase("reloadmaps"))
+		{
+			/* Possible future feature, currently a placeholder. Note: Do not use D: */
+			if(checkPermission(session, UserClasses.DEVELOPER))
 			{
-				for(Session s : ActiveConnections.allSessions().values())
-				{
-					if(s.getPlayer() != null)
-					{
-						message.init(ClientPacket.SERVER_ANNOUNCEMENT.getValue());
-						message.addString(announcement);
-						s.Send(message);
-					}
-				}
+				processAnnouncement(session, "Reloading maps, you will be notified when you will be able to move again.");
+				GameServer.getServiceManager().getMovementService().reloadMaps(false);
+				processAnnouncement(session, "Maps have been reloaded, thank you for your patience.");
 			}
 		}
 		else if(input.length() >= 11 && input.substring(0, 11).equalsIgnoreCase("playercount"))
@@ -126,6 +126,19 @@ public class PlayerCommandEvent implements MessageEvent
 			message.addInt(4);
 			message.addString("Invalid or unknown command: " + command[0] + "\nUse /help if you need more information.");
 			session.Send(message);
+		}
+	}
+
+	private void processAnnouncement(Session session, String announcement)
+	{
+		for(Session s : ActiveConnections.allSessions().values())
+		{
+			if(s.getPlayer() != null)
+			{
+				ServerMessage message = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
+				message.addString(announcement);
+				s.Send(message);
+			}
 		}
 	}
 

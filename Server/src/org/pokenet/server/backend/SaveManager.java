@@ -2,6 +2,7 @@ package org.pokenet.server.backend;
 
 import java.sql.ResultSet;
 import org.pokenet.server.backend.entity.Bag;
+import org.pokenet.server.backend.entity.BagItem;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.battle.DataService;
 import org.pokenet.server.battle.Pokemon;
@@ -22,24 +23,18 @@ public class SaveManager
 	/**
 	 * Saves a bag to the database.
 	 * 
-	 * @param b
+	 * @param bag
 	 * @return
 	 */
-	public boolean saveBag(Bag b)
+	public boolean saveBag(Bag bag)
 	{
-			/* Destroy item data to prevent dupes.
-			 * TODO: UPDATE when exists, otherwise INSERT. More efficient and FK safer. */
-			m_database.query("DELETE FROM pn_bag WHERE member='" + b.getMemberId() + "'");
-			for(int i = 0; i < b.getItems().size(); i++)
-			{
-				if(b.getItems().get(i) != null)
-				{
-					/* NOTE: Items are stored as values 1 - 999 */
-					m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES ('" + b.getMemberId() + "', '" + b.getItems().get(i).getItemNumber() + "', '"
-							+ b.getItems().get(i).getQuantity() + "')");
-				}
-			}
-			return true;
+		for(BagItem item : bag.getItems())
+		{
+			if(item != null)
+				m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES (" + bag.getMemberId() + ", " + item.getItemNumber() + ", " + item.getQuantity()
+						+ ") ON DUPLICATE KEY UPDATE quantity = " + item.getQuantity() + ";");
+		}
+		return true;
 	}
 
 	/**
@@ -150,14 +145,14 @@ public class SaveManager
 							if(saveNewPokemon(p.getParty()[i], p.getName(), m_database) < 1)
 							{
 								System.out.println("failed to save pokemon: " + p.getParty()[i].getName() + " of " + p.getName());
-								fail += 1;
+								fail++;
 								// return false;
 							}
 						}
 						else // Old Pokemon, just update
 						if(!savePokemon(p.getParty()[i], p.getName()))
 						{
-							fail += 1;
+							fail++;
 							// return false;
 						}
 				// Save all the Pokemon id's in the player's party
@@ -171,7 +166,7 @@ public class SaveManager
 				/* Save the player's bag */
 				if(p.getBag() == null || !saveBag(p.getBag()))
 				{
-					fail += 1;
+					fail++;
 					// return false;
 				}
 				/* Finally, update all the boxes */
@@ -187,14 +182,14 @@ public class SaveManager
 										if(saveNewPokemon(p.getBoxes()[i].getPokemon(j), p.getName(), m_database) < 1)
 										{
 											System.out.println("failed to save pokemon: " + p.getBoxes()[i].getPokemon(j).getName() + " of " + p.getName());
-											fail += 1;
+											fail++;
 											// return false;
 										}
 									}
 									else /* Update an existing pokemon */
 									if(!savePokemon(p.getBoxes()[i].getPokemon()[j], p.getName()))
 									{
-										fail += 1;
+										fail++;
 										// return false;
 									}
 				// Dispose of the player object

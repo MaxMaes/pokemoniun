@@ -21,7 +21,7 @@ import de.matthiasmann.twl.Widget;
 public class BattleCanvas extends Widget
 {
 	// Images
-	private Image enemyDataBG;
+	public Image enemyDataBG;
 	private Image enemyHPBar;
 	private Image playerDataBG;
 	private Image playerHPBar;
@@ -29,7 +29,7 @@ public class BattleCanvas extends Widget
 	private Image genderFemale;
 	private Image genderMale;
 
-	private Image enemyGender;
+	public Image enemyGender;
 	private Image playerGender;
 
 	private Image enemyStatus;
@@ -40,8 +40,8 @@ public class BattleCanvas extends Widget
 
 	private ProgressBar enemyHP;
 
-	private Label enemyLv;
-	private Label enemyNameLabel;
+	public Label enemyLv;
+	public Label enemyNameLabel;
 
 	private List<Image> m_enemyPokeballs = new ArrayList<Image>();
 	// Image Loading stuff
@@ -49,6 +49,7 @@ public class BattleCanvas extends Widget
 	private HashMap<String, Image> m_pokeballIcons = new HashMap<String, Image>();
 	private HashMap<String, Image> m_statusIcons = new HashMap<String, Image>();
 	private Timer mTimer = new Timer();
+	private boolean firstE, firstO;
 
 	private ProgressBar playerHP;
 
@@ -69,6 +70,7 @@ public class BattleCanvas extends Widget
 		if(respath == null)
 			respath = "";
 		m_path = respath + m_path;
+		firstE = firstO = false;
 		setSize(257, 144);
 		setVisible(true);
 		loadImages();
@@ -95,6 +97,7 @@ public class BattleCanvas extends Widget
 		// display enemy's data
 		enemyDataBG.setPosition(0, 0);
 
+		enemyNameLabel = new Label();
 		enemyNameLabel.setText(BattleManager.getInstance().getCurEnemyPoke().getName());
 		enemyNameLabel.setTheme("label_enemyname");
 		enemyNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyNameLabel.getText()));
@@ -111,6 +114,7 @@ public class BattleCanvas extends Widget
 			enemyGender.setPosition(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()), enemyNameLabel.getY());
 		}
 
+		enemyLv = new Label();
 		enemyLv.setText("Lv: " + BattleManager.getInstance().getCurEnemyPoke().getLevel());
 		enemyLv.setTheme("label_enemy_level");
 		enemyLv.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyLv.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyLv.getText()));
@@ -141,7 +145,11 @@ public class BattleCanvas extends Widget
 					PokemonSpriteDatabase.getNormalFront(BattleManager.getInstance().getCurEnemyPoke().getGender(), BattleManager.getInstance().getCurEnemyPoke().getSpriteNumber()));// FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite()));
 		}
 		enemyPokeSprite.setPosition(150, 21);
-		add(enemyPokeSprite);
+		if(!firstE)
+		{
+			add(enemyPokeSprite);
+			firstE = true;
+		}
 	}
 
 	/**
@@ -192,7 +200,11 @@ public class BattleCanvas extends Widget
 		else
 			playerPokeSprite = new Image(PokemonSpriteDatabase.getNormalBack(BattleManager.getInstance().getCurPoke().getGender(), BattleManager.getInstance().getCurPoke().getSpriteNumber()));// FileLoader.toTWLImage(BattleManager.getInstance().getCurPoke().getBackSprite()));
 		playerPokeSprite.setPosition(15, 70);
-		add(playerPokeSprite);
+		if(!firstO)
+		{
+			add(playerPokeSprite);
+			firstO = true;
+		}
 	}
 
 	/**
@@ -407,13 +419,29 @@ public class BattleCanvas extends Widget
 	 */
 	public void startBattle()
 	{
+
 		initComponents();
 		positionCanvas();
 		// drawBackground();
-		drawOurPoke();
-		drawOurInfo();
+		// drawOurPoke();
+		try
+		{
+			drawOurInfo();
+		}
+		catch(IllegalArgumentException e)
+		{
+
+			removeChild(playerDataBG);
+			removeChild(playerNameLabel);
+			removeChild(playerLv);
+			removeChild(playerGender);
+			drawOurInfo();
+		}
 		initPlayerHPBar();
 		initPlayerXPBar();
+		// drawEnemyPoke();
+		// drawEnemyInfo();
+
 	}
 
 	/**
@@ -437,12 +465,13 @@ public class BattleCanvas extends Widget
 	{
 		try
 		{
-			removeAllChildren();
+			for(int i = 0; i < getNumChildren(); i++)
+				removeChild(i);
 			hidePokeballs();
 		}
 		catch(Exception e)
 		{
-			System.err.println(e);
+			e.printStackTrace();
 		}
 		playerHP = null;
 		playerXP = null;
@@ -611,6 +640,16 @@ public class BattleCanvas extends Widget
 		{
 			enemyHP.setProgressImage(hp_low);
 		}
+	}
+
+	public void update()
+	{
+		drawOurPoke();
+		// drawOurInfo();
+		// initPlayerHPBar();
+		// initPlayerXPBar();
+		drawEnemyPoke();
+		// drawEnemyInfo();
 	}
 
 }

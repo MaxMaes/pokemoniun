@@ -1431,7 +1431,12 @@ public class GameClient extends BasicGame
 			}
 			/* Animate the player */
 			if(m_ourPlayer != null)
+			{
 				m_animator.animate();
+				/* update battle */
+				if(BattleManager.getInstance().isBattling() && BattleManager.getInstance().getCurEnemyPoke() != null && BattleManager.getInstance().getCurPoke() != null)
+					BattleManager.getInstance().getTimeLine().getBattleCanvas().update();
+			}
 			/* Update weather and daylight */
 			if(!m_isNewMap)
 			{

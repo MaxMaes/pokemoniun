@@ -83,8 +83,9 @@ public class BattleManager
 		m_timeLine.endBattle();
 		if(m_battle.getControlFrame() != null)
 		{
-			m_battle.getControlFrame().removeAllChildren();
-			m_battle.getControlFrame().destroy();
+			for(int i = 0; i < m_battle.getControlFrame().getNumChildren(); i++)
+				m_battle.getControlFrame().removeChild(i);
+			// m_battle.getControlFrame();//TODO
 		}
 		m_battle.setVisible(false);
 		m_isBattling = false;
@@ -275,7 +276,7 @@ public class BattleManager
 			setWild(false);
 		m_battle.setPosition(272, 40);
 		m_battle.showAttack();
-		m_battle.getCanvas().setVisible(true);
+		m_timeLine.getBattleCanvas().setVisible(true);
 		m_battle.getControlFrame().setVisible(true);
 		m_enemyPokes = new Pokemon[pokeAmount];
 		getPlayerData();
@@ -433,8 +434,19 @@ public class BattleManager
 		m_curEnemyIndex = 0;
 		try
 		{
-			m_timeLine.getBattleCanvas().drawEnemyPoke();
-			m_timeLine.getBattleCanvas().drawEnemyInfo();
+			// m_timeLine.getBattleCanvas().drawEnemyPoke();
+			try
+			{
+				m_timeLine.getBattleCanvas().drawEnemyInfo();
+			}
+			catch(Exception e)
+			{
+				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyDataBG);
+				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyNameLabel);
+				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyLv);
+				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyGender);
+				m_timeLine.getBattleCanvas().drawEnemyInfo();
+			}
 			m_timeLine.getBattleCanvas().initEnemyHPBar();
 			if(m_isWild)
 			{

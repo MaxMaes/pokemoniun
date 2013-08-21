@@ -15,7 +15,7 @@ public class BattleTimeLine
 {
 	private BattleCanvas m_canvas;
 	private boolean m_isBattling;
-	private final BattleSpeechFrame m_narrator;
+	private BattleSpeechFrame m_narrator;
 	int m_newHPValue, m_exp, m_dmg, m_earnings, m_level, m_expRemaining;
 	// Lines for REGEX needed for l10n
 	String m_pokeName, m_move, m_trainer, m_foundItem;
@@ -35,7 +35,15 @@ public class BattleTimeLine
 		{
 			e.printStackTrace();
 		}
-		m_narrator = new BattleSpeechFrame(GameClient.getInstance().getHUD());
+		// try
+		// {
+		// m_narrator = new BattleSpeechFrame(GameClient.getInstance().getHUD());
+		// }
+		// catch(Exception e)
+		// {
+		// System.err.println("new BattleSpeechFrame");
+		// e.printStackTrace();
+		// }
 	}
 
 	/**
@@ -62,6 +70,7 @@ public class BattleTimeLine
 		GameClient.getInstance().getHUD().removeBattleCanvas();
 		while(GameClient.getInstance().getHUD().hasBattleCanvas())
 			;
+		m_narrator = null;
 		GameClient.getInstance().getHUD().removeBattleSpeechFrame();
 		while(GameClient.getInstance().getHUD().hasBattleSpeechFrame())
 			;
@@ -400,6 +409,19 @@ public class BattleTimeLine
 		m_canvas.startBattle();
 		m_isBattling = true;
 		GameClient.getInstance().getHUD().setBattleCanvas(m_canvas);
-		GameClient.getInstance().getHUD().setBattleSpeechFrame(m_narrator);
+		m_narrator = new BattleSpeechFrame(GameClient.getInstance().getHUD());
+		GameClient.getInstance().getHUD().setBattleSpeechFrame();
+		// Widget[] w = new Widget[GameClient.getInstance().getHUD().getNumChildren()];
+		// for(int i = 0; i < GameClient.getInstance().getHUD().getNumChildren(); i++)
+		// w[i] = GameClient.getInstance().getHUD().getChild(i);
+		try
+		{
+			GameClient.getInstance().getHUD().add(m_narrator);
+		}
+		catch(Exception e)
+		{
+			System.err.println("failed to add battleSpeechFrame");
+		}
+		m_narrator.setVisible(true);
 	}
 }

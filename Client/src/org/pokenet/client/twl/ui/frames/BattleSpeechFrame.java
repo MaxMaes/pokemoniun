@@ -10,7 +10,7 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 
 	public BattleSpeechFrame(Widget root)
 	{
-		super("",root);
+		super("", root);
 		if(m_thread == null || !m_thread.isAlive())
 			start();
 	}
@@ -26,7 +26,17 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 			triangulate();
 		speechQueue.add(speech);
 		if(stringToPrint == null || stringToPrint.equals(""))
-			advance();
+		{
+			try
+			{
+				advance();
+			}
+			catch(Exception e)
+			{
+				System.out.println(newMsg);
+				System.err.println("Failed to advance the text");
+			}
+		}
 	}
 
 	@Override

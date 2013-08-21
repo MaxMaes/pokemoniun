@@ -8,19 +8,19 @@ import de.matthiasmann.twl.Widget;
 
 public class BattleDialog extends Widget
 {
-	private BattleCanvas canvas;
+	// private BattleCanvas canvas;
 	private BattleControlFrame control;
 
 	public BattleDialog()
 	{
-		canvas = new BattleCanvas();
+		// canvas = new BattleCanvas();
 		control = new BattleControlFrame();
 	}
 
-	public BattleCanvas getCanvas()
-	{
-		return canvas;
-	}
+	// public BattleCanvas getCanvas()
+	// {
+	// return canvas;
+	// }
 
 	public BattleControlFrame getControlFrame()
 	{

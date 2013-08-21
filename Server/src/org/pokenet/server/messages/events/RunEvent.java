@@ -15,7 +15,7 @@ public class RunEvent implements MessageEvent
 		Player p = session.getPlayer();
 		if(p.isBattling())
 			if(p.getBattleField() instanceof WildBattleField)
-				((WildBattleField) p.getBattleField()).run();
+				((WildBattleField) p.getBattleField()).flee();
 	}
 
 }

@@ -635,7 +635,7 @@ public class WildBattleField extends BattleField
 	/**
 	 * Attempts to run from this battle
 	 */
-	public void run()
+	public void flee()
 	{
 		if(canRun())
 		{

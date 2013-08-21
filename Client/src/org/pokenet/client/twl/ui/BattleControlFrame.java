@@ -33,7 +33,7 @@ public class BattleControlFrame extends Widget
 	private Button btnBag;
 	private Button btnPoke;
 	private Button btnRun;
-	private Button cancel;
+	// private Button cancel;
 	private boolean isWild;
 	private Button pokeCancelBtn;
 	private Widget attackPane;
@@ -72,7 +72,7 @@ public class BattleControlFrame extends Widget
 		btnPoke.setEnabled(false);
 		btnBag.setEnabled(false);
 		btnRun.setEnabled(false);
-		cancel.setVisible(false);
+		// cancel.setVisible(false);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class BattleControlFrame extends Widget
 				m_moveButtons.get(idx).setEnabled(true);
 				m_ppLabels.get(idx).setEnabled(true);
 			}
-		cancel.setVisible(false);
+		// cancel.setVisible(false);
 	}
 
 	public HashMap<String, de.matthiasmann.twl.renderer.Image> getStatusIcons()
@@ -358,20 +358,22 @@ public class BattleControlFrame extends Widget
 				showPokePane(false);
 			}
 		});
-		cancel = new Button("Cancel");
-		cancel.setTheme("battlebutton_small");
-		attackPane.add(cancel);
-		cancel.setVisible(false);
-		cancel.setPosition(162, 110);
-		cancel.setSize(82, 48);
-		cancel.addCallback(new Runnable()
-		{
-			@Override
-			public void run()
-			{
+		/* why is there a cancel button on the attack pane? */
 
-			}
-		});
+		// cancel = new Button("Cancel");
+		// cancel.setTheme("battlebutton_small");
+		// attackPane.add(cancel);
+		// cancel.setVisible(false);
+		// cancel.setPosition(162, 110);
+		// cancel.setSize(82, 48);
+		// cancel.addCallback(new Runnable()
+		// {
+		// @Override
+		// public void run()
+		// {
+		//
+		// }
+		// });
 		attackPane.setSize(257, 201);
 		// attackPane.setPosition(2, 140);
 		add(attackPane);

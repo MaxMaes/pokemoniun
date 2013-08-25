@@ -23,7 +23,7 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 
 		newMsg = speech;
 		if(stringToPrint != null && (stringToPrint.equals("Awaiting your move.") || stringToPrint.equals("Awaiting players' moves.")) && speechQueue.peek() == null)
-			triangulate();
+			loadTriangle();
 		speechQueue.add(speech);
 		if(stringToPrint == null || stringToPrint.equals(""))
 		{
@@ -55,9 +55,13 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 	{
 		if(speechQueue.peek() == null && stringToPrint != null
 				&& (stringToPrint.equals("Awaiting your move.") || stringToPrint.equals("Awaiting players' moves.") || stringToPrint.equals("Awaiting opponent's Pokemon switch.")))
+		{
 			return false;
+		}
 		else
+		{
 			return true;
+		}
 	}
 
 	public String getAdvancedLine()

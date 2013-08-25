@@ -293,19 +293,6 @@
             <theme name="label" ref="label"/>
         </theme>
     </theme>
-    <theme name="speechframepopup" ref="-defaults">
-        <theme name="npcspeechframe" ref="resizableframe">
-            <theme name="textarea" ref="textarea">
-                <param name="fonts">
-                    <map>
-                        <param name="default"><font>pokefont_large</font></param>
-                    </map>
-                </param>
-            </theme>
-            <theme name="image" ref="image"/>
-            <param name="background"><image>speechframe</image></param>
-        </theme>
-    </theme>
 
 
 
@@ -652,7 +639,14 @@
             </theme>
             <theme name="npcspeechframe" ref="-defaults">
                 <param name="background"><image>speechframe</image></param>
-                <theme name="textarea" ref="textarea"/>
+                <theme name="textarea" ref="textarea">
+                    <param name="fonts">
+                        <map>
+                            <param name="default"><font>pokefont_large</font></param>
+                        </map>
+                    </param>
+                </theme>
+                <theme name="image" ref="image"/>
             </theme>
         
         

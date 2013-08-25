@@ -3,14 +3,12 @@ package org.pokenet.client.twl.ui.frames;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Timer;
-import java.util.TimerTask;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.twl.ui.base.Image;
-import de.matthiasmann.twl.GUI;
-import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
+
 // import de.matthiasmann.twl.renderer.Image;
 
 /**
@@ -33,8 +31,6 @@ public class SpeechFrame extends Widget
 	private SimpleTextAreaModel speechModel;
 	protected Queue<String> speechQueue;
 
-	private PopupWindow popup;
-
 	/**
 	 * Default constructor
 	 * 
@@ -45,9 +41,12 @@ public class SpeechFrame extends Widget
 		speechQueue = new LinkedList<String>();
 		currentString = "";
 		for(String line : speech.split("/n"))
+		{
 			speechQueue.add(line);
-		triangulate();
+		}
+		loadTriangle();
 		initGUI(root);
+		advance();
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class SpeechFrame extends Widget
 		currentString = "";
 		for(String line : speech.split("/n"))
 			speechQueue.add(line);
-		triangulate();
+		loadTriangle();
 		initGUI(root);
 		advance();
 		this.advance();
@@ -92,18 +91,8 @@ public class SpeechFrame extends Widget
 		add(speechDisplay);
 
 		setPosition(Math.round(GameClient.getInstance().getGUIPane().getWidth() / 2 - getWidth() / 2), Math.round(GameClient.getInstance().getGUIPane().getHeight() / 2 + getWidth() / 2));
-
 		setCanAcceptKeyboardFocus(false);
 		setFocusKeyEnabled(false);
-
-		popup = new PopupWindow(root);
-		popup.setTheme("speechframepopup");
-		popup.add(this);
-		popup.setCloseOnClickedOutside(false);
-		popup.setCloseOnEscape(false);
-		popup.adjustSize();
-
-		advance();
 	}
 
 	/**
@@ -132,36 +121,6 @@ public class SpeechFrame extends Widget
 			if(stringToPrint != null)
 			{
 				textModel.setText(stringToPrint, false);
-				/* TODO: Animation breaks Speech interaction and leaves lines after the first out. */
-				/*TimerTask textAnimation = new TimerTask()
-				{
-
-					@Override
-					public void run()
-					{
-						SimpleTextAreaModel textModel = (SimpleTextAreaModel) speechDisplay.getModel();
-						if(currentString.equalsIgnoreCase(stringToPrint))
-						{
-							// The string is fully displayed, no need to run this any further.
-							textAnimationTimer.cancel();
-						}
-						else
-						{
-							// Take a substring of 1 more character than current length.
-							if(currentString.length() + 1 <= stringToPrint.length())
-							{
-								currentString = stringToPrint.substring(0, currentString.length() + 1);
-								textModel.setText(currentString, false);
-							}
-							else
-							{
-								currentString = stringToPrint;
-								textModel.setText(currentString, false);
-							}
-						}
-					}
-				};
-				textAnimationTimer.schedule(textAnimation, 0, 30);*/
 			}
 		}
 	}
@@ -209,72 +168,10 @@ public class SpeechFrame extends Widget
 	/**
 	 * Generates the triangle to show when you can continue
 	 */
-	public void triangulate()
+	public void loadTriangle()
 	{
 		triangle = new Image(GameClient.getInstance().getTheme().getImage("speechframe_triangle"));
 		add(triangle);
-	}
-
-	public void setSpeechOpened(boolean isOpen)
-	{
-		if(isOpen)
-		{
-			popup.openPopup();
-		}
-		else
-		{
-			popup.closePopup();
-		}
-	}
-
-	public boolean isOpen()
-	{
-		return popup.isOpen();
-	}
-
-	public void destroyPopup()
-	{
-		popup.closePopup();
-		popup.destroy();
-	}
-
-	@Override
-	public void paintWidget(GUI gui)
-	{
-		super.paintWidget(gui);
-		/* if(triangle != null)
-		 * {
-		 * float triangleX = getWidth() - 30 + getInnerX();
-		 * float triangleY = 60 + getInnerY() + 10;
-		 * if(canAdvance())
-		 * {
-		 * if(triangleY > 584)
-		 * {
-		 * triangleY = 584;
-		 * }
-		 * else if(triangleY < 574)
-		 * {
-		 * triangleY = 574;
-		 * }
-		 * if(triangleY == 574)
-		 * {
-		 * isGoingDown = true;
-		 * }
-		 * else if(triangleY == 584)
-		 * {
-		 * isGoingDown = false;
-		 * }
-		 * if(isGoingDown)
-		 * {
-		 * triangleY += 0.5f;
-		 * }
-		 * else
-		 * {
-		 * triangleY -= 0.5f;
-		 * }
-		 * }
-		 * triangle.draw(getAnimationState(), Math.round(triangleX), Math.round(triangleY));
-		 * } */
 	}
 
 	@Override
@@ -284,8 +181,6 @@ public class SpeechFrame extends Widget
 		speechDisplay.setPosition(getInnerX() + 12, getInnerY() + 15);
 		setSize(400, 78);
 
-		popup.setPosition(200, 500);
-
 		if(triangle != null)
 		{
 			int triangleX = getWidth() - 20 + getInnerX();
@@ -293,19 +188,19 @@ public class SpeechFrame extends Widget
 
 			if(canAdvance())
 			{
-				if(triangleY > 560)
+				if(triangleY > 590)
 				{
-					triangleY = 560;
+					triangleY = 590;
 				}
-				else if(triangleY < 550)
+				else if(triangleY < 580)
 				{
-					triangleY = 550;
+					triangleY = 580;
 				}
-				if(triangleY == 550)
+				if(triangleY == 580)
 				{
 					isGoingDown = true;
 				}
-				else if(triangleY == 560)
+				else if(triangleY == 590)
 				{
 					isGoingDown = false;
 				}

@@ -22,7 +22,5 @@ public class ShopSellItemEvent implements MessageEvent
 		{
 		}
 		GameClient.getInstance().getHUD().talkToNPC("You sold a " + ItemDatabase.getInstance().getItem(Request.readInt()).getName());
-		GameClient.getInstance().getHUD().getShop().m_timer.reset();
-		GameClient.getInstance().getHUD().getShop().m_timer.resume();
 	}
 }

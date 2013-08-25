@@ -23,12 +23,12 @@ import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.twl.ui.frames.PokeStorageBoxFrame;
 import org.pokenet.client.twl.ui.frames.PokedexDialog;
 import org.pokenet.client.twl.ui.frames.RequestDialog;
-import org.pokenet.client.twl.ui.frames.ShopDialog;
 import org.pokenet.client.twl.ui.frames.SpriteChooserDialog;
 import org.pokenet.client.twl.ui.frames.TopBar;
 import org.pokenet.client.twl.ui.frames.TownMap;
 import org.pokenet.client.twl.ui.frames.TradeDialog;
 import org.pokenet.client.twl.ui.frames.TrainChooserDialog;
+import org.pokenet.client.twl.ui.frames.shop.ShopDialog;
 import de.matthiasmann.twl.DesktopArea;
 
 /**
@@ -680,13 +680,13 @@ public class HUD extends DesktopArea
 		add(friends);
 	}
 
-	public void hideNPCSpeech()
+	public void removeNPCSpeechFrame()
 	{
 		if(npcSpeech != null)
 		{
-			npcSpeech.destroyPopup();
-			npcSpeech = null;
+			removeChild(npcSpeech);
 		}
+		npcSpeech = null;
 	}
 
 	public void hideChat()
@@ -783,7 +783,8 @@ public class HUD extends DesktopArea
 	public void talkToNPC(String speech)
 	{
 		npcSpeech = new NPCSpeechFrame(speech, this);
-		npcSpeech.setSpeechOpened(true);
+		npcSpeech.setPosition(200, 522);
+		add(npcSpeech);
 	}
 
 	public void refreshParty()
@@ -945,14 +946,5 @@ public class HUD extends DesktopArea
 		{
 			return false;
 		}
-	}
-
-	public void removeNPCSpeechFrame()
-	{
-		if(npcSpeech != null)
-		{
-			npcSpeech.destroyPopup();
-		}
-		npcSpeech = null;
 	}
 }

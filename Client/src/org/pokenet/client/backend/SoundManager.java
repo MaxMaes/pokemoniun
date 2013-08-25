@@ -15,7 +15,7 @@ import org.newdawn.slick.openal.AudioLoader;
 /**
  * Handles music throughout the game
  * 
- * @author ZombieBear
+ * @author Chappie112
  */
 public class SoundManager extends Thread
 {
@@ -24,8 +24,7 @@ public class SoundManager extends Thread
 	private HashMap<String, String> m_fileList = new HashMap<String, String>();
 	private HashMap<String, AudioImpl> m_files = new HashMap<String, AudioImpl>();
 	private HashMap<String, String> m_locations = new HashMap<String, String>();
-	private boolean m_tracksLoaded = false;
-	private boolean m_trackChanged = true;
+	private boolean m_trackChanged = false;
 	private boolean m_isRunning = false;
 	private boolean m_mute = false;
 
@@ -39,7 +38,6 @@ public class SoundManager extends Thread
 			respath = "";
 		m_audioPath = respath + m_audioPath;
 		m_mute = muted;
-		loadFileList();
 		loadLocations();
 	}
 
@@ -56,6 +54,10 @@ public class SoundManager extends Thread
 	public void mute(boolean mute)
 	{
 		m_mute = mute;
+		if(mute)
+			AudioImpl.pauseMusic();
+		else
+			AudioImpl.restartMusic();
 	}
 
 	/**
@@ -64,40 +66,59 @@ public class SoundManager extends Thread
 	@Override
 	public void run()
 	{
-		while(m_isRunning)
+		while(m_isRunning && ! m_mute)
 		{
-			if(!m_mute)
-				while(!m_tracksLoaded)
-					loadFiles();
-			if(m_trackChanged && m_tracksLoaded)
+			if(m_trackChanged && m_trackName != null)
 			{
-				try
+				if(!m_fileList.containsKey(m_trackName))
 				{
-					m_trackChanged = false;
-					if(!m_mute && m_trackName != null)
-					{
-						System.out.println("Playing: " + m_trackName);
-						// LoadingList.setDeferredLoading(true);
-						m_files.get(m_trackName).playAsMusic(1, 20, true);
-						// LoadingList.setDeferredLoading(false);
-					}
-					else if(m_mute && m_trackName != null)
-						m_files.clear();
+					loadFile(m_trackName);
 				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					System.err.println("Failed to load " + m_trackName);
-					m_trackChanged = false;
-				}
+				m_trackChanged = false;
+				System.out.println("Playing: " + m_trackName);
+				m_files.get(m_trackName).playAsMusic(1, 20, true);
 			}
-			try
+			try 
 			{
 				Thread.sleep(1000);
-			}
-			catch(Exception e)
+			} 
+			catch (InterruptedException e)
 			{
+				e.printStackTrace();
 			}
+		}
+	}
+
+	private void loadFile(String track) 
+	{
+		BufferedReader readerStream = FileLoader.loadTextFile(m_audioPath + "index.txt");
+		try {
+			String f;
+			while((f = readerStream.readLine()) != null)
+			{
+				String[] loadFile = f.split(":", 2);
+				if(loadFile[0].equals(track))
+				{
+					m_fileList.put(loadFile[0], loadFile[1]);
+					break;
+				}
+				else
+					continue;
+			}
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			System.err.println("ERROR: Failed to open music index!");
+		}
+		try 
+		{
+			m_files.put(track,(AudioImpl)AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(track))));
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			System.err.println("Could nOt get audio:" + track);
 		}
 	}
 
@@ -148,89 +169,8 @@ public class SoundManager extends Thread
 	@Override
 	public void start()
 	{
-		if(!m_mute)
-		{
-			m_isRunning = true;
-			super.start();
-		}
-	}
-
-	/**
-	 * Loads the file list
-	 */
-	private void loadFileList()
-	{
-		try
-		{
-			BufferedReader stream = FileLoader.loadTextFile(m_audioPath + "index.txt");
-
-			String f;
-			while((f = stream.readLine()) != null)
-			{
-				String[] addFile = f.split(":", 2);
-				try
-				{
-					if(f.charAt(1) != '*')
-						m_fileList.put(addFile[0], addFile[1]);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					System.err.println("Failed to add file: " + addFile[1]);
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.err.println("Failed to load music");
-		}
-	}
-
-	/**
-	 * Loads the files
-	 */
-	private void loadFiles()
-	{
-		ExecutorService musicLoader = Executors.newSingleThreadExecutor();
-		List<Callable<Object>> musicToLoad = new ArrayList<Callable<Object>>();
-		for(String key : m_fileList.keySet())
-			musicToLoad.add(Executors.callable(new SoundThread(key)));
-		try
-		{
-			musicLoader.invokeAll(musicToLoad);
-		}
-		catch(InterruptedException ie)
-		{
-			ie.printStackTrace();
-		}
-		musicLoader.shutdown();
-		System.out.println("Background music loading complete");
-		m_tracksLoaded = true;
-	}
-
-	private class SoundThread implements Runnable
-	{
-		private String key;
-		private Audio music;
-
-		public SoundThread(String audioKey)
-		{
-			key = audioKey;
-		}
-
-		public void run()
-		{
-			try
-			{
-				music = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
-				m_files.put(key, (AudioImpl) music);
-			}
-			catch(IOException ioe)
-			{
-				ioe.printStackTrace();
-			}
-		}
+		m_isRunning = true;
+		super.start();
 	}
 
 	/**
@@ -253,6 +193,30 @@ public class SoundManager extends Thread
 		catch(IOException ioe)
 		{
 			ioe.printStackTrace();
+		}
+	}
+	
+	private class SoundThread implements Runnable
+	{
+		private String key;
+		private Audio music;
+
+		public SoundThread(String audioKey)
+		{
+			key = audioKey;
+		}
+
+		public void run()
+		{
+			try
+			{
+				music = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
+				m_files.put(key, (AudioImpl) music);
+			}
+			catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
 		}
 	}
 }

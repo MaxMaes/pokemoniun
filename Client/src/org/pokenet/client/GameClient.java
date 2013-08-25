@@ -665,7 +665,7 @@ public class GameClient extends BasicGame
 		}
 
 		if(key == Input.KEY_ESCAPE)
-
+		{
 			if(!root.getConfirmationDialog().isVisible())
 			{
 				Runnable yes = new Runnable()
@@ -703,12 +703,12 @@ public class GameClient extends BasicGame
 				root.showConfirmationDialog("Are you sure you want to exit?", yes, no);
 			}
 			else
+			{
 				root.hideConfirmationDialog();
-
+			}
+		}
 		if(getHUD().getNPCSpeech() == null && !getHUD().getChat().hasKeyboardFocus() && !root.getLoginScreen().isVisible() && !BattleManager.getInstance().isBattling() && !m_isNewMap)
-			if(m_ourPlayer != null && !m_isNewMap
-			/* && m_loading != null && !m_loading.isVisible() */
-			&& !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
+			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
 			{
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
@@ -817,7 +817,7 @@ public class GameClient extends BasicGame
 			BattleManager.getInstance().getBattleWindow().useMove(2);
 		if(key == KeyManager.getKey(Action.POKEMOVE_4) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(3);
-		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !getHUD().hasMoveLearning() && !getHUD().hasShop())
+		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !getHUD().hasMoveLearning())
 		{
 			if(getHUD().getNPCSpeech() == null && !BattleManager.getInstance().isBattling())// BattleManager.getInstance().getBattleWindow()))
 			{
@@ -1275,7 +1275,7 @@ public class GameClient extends BasicGame
 		if(BattleManager.getInstance() != null)
 			BattleManager.getInstance().endBattle();
 		if(getHUD().getNPCSpeech() != null)
-			getHUD().hideNPCSpeech();
+			getHUD().removeNPCSpeechFrame();
 		if(getHUD().getChat() != null)
 			getHUD().hideChat();
 		root.hideHUD();

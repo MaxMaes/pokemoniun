@@ -214,7 +214,7 @@
         <param name="fixedCellHeight"><bool>false</bool></param>
         <theme name="vscrollbar" ref="vscrollbar"/>
         <theme name="display" ref="label">
-            <param name="background"><image>listbox_display_background</image></param>
+            <param name=""><image>listbox.display.*</image></param>
             <param name="border"><border>5,0</border></param>
         </theme>
         <param name="minDisplayedRows"><int>0</int></param>
@@ -630,12 +630,24 @@
                 </theme>
             </theme>
             <theme name="shopdialog" ref="resizableframe_titled">
-                <theme name="imagebutton" ref="imagebutton"/>
-                <theme name="button" ref="button"/>
-                <theme name="image" ref="image"/>
-                <theme name="label" ref="label"/>
-                <theme name="title" ref="title"/>
-                <theme name="listbox" ref="listbox"/>
+                <theme name="mainscreen" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                </theme>
+                <theme name="buydialog" ref="-defaults">
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="label" ref="label"/>
+                    <theme name="button" ref="button"/>
+                    <theme name="image" ref="image"/>
+                </theme>
+                <theme name="selldialog" ref="-defaults">
+                    <theme name="listbox" ref="listbox"/>
+                    <theme name="button" ref="button"/>
+                </theme>
+                <theme name="buycategorydialog" ref="-defaults">
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="label" ref="label"/>
+                    <theme name="button" ref="button"/>
+                </theme>
             </theme>
             <theme name="npcspeechframe" ref="-defaults">
                 <param name="background"><image>speechframe</image></param>

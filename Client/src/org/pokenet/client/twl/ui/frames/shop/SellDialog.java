@@ -21,23 +21,17 @@ public class SellDialog extends Widget
 	public SellDialog(ShopDialog shop)
 	{
 		shopDialog = shop;
+		initGUI();
 	}
 
 	/**
 	 * Displays the selling item gui
 	 */
-	public void sellGUI()
+	public void initGUI()
 	{
-		sellModel = new SimpleChangableListModel<>();
-		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getItems().size(); i++)
-		{
-			if(!GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getCategory().equals("Key"))
-				sellModel.addElement(GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getName());
-		}
+		loadBag();
 		sellList = new ListBox<String>(sellModel);
 		sellButton = new Button("Sell");
-		sellButton.setSize(getWidth(), 35);
-		sellButton.setPosition(0, cancelButton.getY() - 35);
 		sellButton.addCallback(new Runnable()
 		{
 			@Override
@@ -50,7 +44,6 @@ public class SellDialog extends Widget
 						@Override
 						public void run()
 						{
-							// GameClient.getInstance().getPacketGenerator().writeTcpMessage("10" + ItemDatabase.getInstance().getItem(m_sellList.getSelectedName()).getId() + ",");
 							ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 							message.addInt(1);
 							message.addInt(ItemDatabase.getInstance().getItem(sellModel.getEntry(sellList.getSelected())).getId());
@@ -79,11 +72,9 @@ public class SellDialog extends Widget
 				}
 			}
 		});
-		sellList.setSize(getWidth(), sellButton.getY());
+
 		// Start the UI
 		cancelButton = new Button("Cancel");
-		cancelButton.setSize(300, 56);
-		cancelButton.setPosition(0, 321);
 		cancelButton.addCallback(new Runnable()
 		{
 			@Override
@@ -95,12 +86,34 @@ public class SellDialog extends Widget
 		add(cancelButton);
 		add(sellList);
 		add(sellButton);
-		// int height = (int) GameClient.getInstance().getGUI().getHeight();
-		// int width = (int) GameClient.getInstance().getGUI().getWidth();
-		// int x = width / 2 - 130;
-		// int y = height / 2 - 238;
-		// m_shopdialog.setSize(259, 475);
-		// m_shopdialog.setPosition(x, y);
-		// m_shopdialog.setVisible(false);
+	}
+
+	public void loadBag()
+	{
+		sellModel = new SimpleChangableListModel<>();
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getItems().size(); i++)
+		{
+			if(!GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getCategory().equals("Key"))
+			{
+				sellModel.addElement(GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getName());
+			}
+		}
+		if(sellList != null)
+		{
+			int selection = sellList.getSelected();
+			sellList.setModel(sellModel);
+			sellList.setSelected(selection);
+		}
+	}
+
+	@Override
+	public void layout()
+	{
+		sellList.setSize(getWidth(), 300);
+		sellButton.setSize(getWidth(), 35);
+		sellButton.setPosition(getInnerX(), getInnerY() + 300);
+		cancelButton.setSize(300, 56);
+		cancelButton.setPosition(getInnerX(), getInnerY() + 335);
+		setSize(300, 391);
 	}
 }

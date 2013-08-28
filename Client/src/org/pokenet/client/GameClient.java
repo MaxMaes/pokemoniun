@@ -708,7 +708,8 @@ public class GameClient extends BasicGame
 			}
 		}
 		if(getHUD().getNPCSpeech() == null && !getHUD().getChat().hasKeyboardFocus() && !root.getLoginScreen().isVisible() && !BattleManager.getInstance().isBattling() && !m_isNewMap)
-			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
+		{
+			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove() && !getHUD().hasShop())
 			{
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
@@ -809,6 +810,7 @@ public class GameClient extends BasicGame
 					m_session.send(message);
 				}
 			}
+		}
 		if(key == KeyManager.getKey(Action.POKEMOVE_1) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(0);
 		if(key == KeyManager.getKey(Action.POKEMOVE_2) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())

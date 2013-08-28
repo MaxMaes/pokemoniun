@@ -107,7 +107,9 @@
             </grid>
         </select>
         <area name="listbox_background" xywh="64,137,9,4"/>
-        <area name="listbox_display_background" xywh="77,136,24,6" splitx="L2,R2" splity="T5,B2"/>
+        <area name="listbox.display.background" xywh="77,136,24,6" splitx="L2,R2" splity="T2,B2" if="selected"/>
+        <alias name="listbox.display.overlay" ref="none"/>
+    
     
         <select name="combobox_button_background">
             <grid weightsX="0,0,1,0,1,0,0" weightsY="0,0,1,0,1,0,0" if="pressed">

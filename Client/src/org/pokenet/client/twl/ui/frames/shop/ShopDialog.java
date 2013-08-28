@@ -1,9 +1,9 @@
 package org.pokenet.client.twl.ui.frames.shop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.constants.ServerPacket;
-import org.pokenet.client.protocol.ClientMessage;
+import org.pokenet.client.backend.entity.Item;
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -13,43 +13,48 @@ import de.matthiasmann.twl.Widget;
  */
 public class ShopDialog extends Widget
 {
-	private HashMap<Integer, Integer> m_stock;
-	private Widget m_shopdialog;
-	private Widget m_buyShopdialog;
-	private Widget m_sellShopdialog;
+	private HashMap<Integer, Integer> stock;
+	private MainShopDialog m_shopdialog;
+	private BuyDialog m_buyShopdialog;
+	private SellDialog m_sellShopdialog;
+	private BuyCategoryDialog buycategory;
 	private Widget currentScreen;
 	private int currentState;
 
+	public final static int SHOPSTATE_NONE = -1;
 	public final static int SHOPSTATE_MAIN = 0;
 	public final static int SHOPSTATE_BUY = 1;
 	public final static int SHOPSTATE_SELL = 2;
+	public final static int BUYSTATE_ITEM = 3;
 
 	/**
 	 * Constructor
 	 * 
 	 * @param stock
 	 */
-	public ShopDialog(HashMap<Integer, Integer> stock)
+	public ShopDialog(HashMap<Integer, Integer> stockMap)
 	{
-		m_stock = stock;
+		stock = stockMap;
 		m_shopdialog = new MainShopDialog(this);
-		m_buyShopdialog = new BuyDialog(this, stock);
+		m_shopdialog.validateLayout();
 		m_sellShopdialog = new SellDialog(this);
-		setCenter();
+		m_sellShopdialog.validateLayout();
+		buycategory = new BuyCategoryDialog(this, stock);
+		buycategory.validateLayout();
 		switchUI(SHOPSTATE_MAIN);
 	}
 
-	public void cancelled()
-	{
-		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-		message.addInt(2);
-		GameClient.getInstance().getSession().send(message);
-		GameClient.getInstance().getGUIPane().getHUD().removeShop();
-	}
-
+	/**
+	 * Switches the shop to the given state.
+	 * 
+	 * @param state DO NOT PASS BUYSTATE_ITEM. This value should only be passed from the switchToItemBuy function because it reinitialises that screen.
+	 */
 	public void switchUI(int state)
 	{
-		removeUI(currentState);
+		if(currentState != SHOPSTATE_NONE)
+		{
+			removeUI(currentState);
+		}
 		switch(state)
 		{
 			case SHOPSTATE_MAIN:
@@ -57,15 +62,34 @@ public class ShopDialog extends Widget
 				currentScreen = m_shopdialog;
 				break;
 			case SHOPSTATE_BUY:
-				add(m_buyShopdialog);
-				currentScreen = m_buyShopdialog;
+				add(buycategory);
+				currentScreen = buycategory;
 				break;
 			case SHOPSTATE_SELL:
 				add(m_sellShopdialog);
 				currentScreen = m_sellShopdialog;
 				break;
+			case BUYSTATE_ITEM:
+				add(m_buyShopdialog);
+				currentScreen = m_buyShopdialog;
 		}
 		currentState = state;
+		currentScreen.validateLayout();
+	}
+
+	public void refreshSell()
+	{
+		if(currentScreen == m_sellShopdialog)
+		{
+			m_sellShopdialog.loadBag();
+		}
+	}
+
+	public void switchToItemBuy(ArrayList<Item> items)
+	{
+		removeUI(currentState);
+		m_buyShopdialog = new BuyDialog(this, stock, items);
+		switchUI(BUYSTATE_ITEM);
 	}
 
 	private void removeUI(int state)
@@ -76,11 +100,13 @@ public class ShopDialog extends Widget
 				removeChild(m_shopdialog);
 				break;
 			case SHOPSTATE_BUY:
-				removeChild(m_buyShopdialog);
+				removeChild(buycategory);
 				break;
 			case SHOPSTATE_SELL:
 				removeChild(m_sellShopdialog);
 				break;
+			case BUYSTATE_ITEM:
+				removeChild(m_buyShopdialog);
 		}
 	}
 
@@ -89,10 +115,12 @@ public class ShopDialog extends Widget
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getHUD().getHeight();
-		int width = (int) GameClient.getInstance().getHUD().getWidth();
-		int x = width / 2 - getWidth() / 2;
-		int y = height / 2 - getHeight() / 2;
+		int screenHeight = (int) GameClient.getInstance().getHUD().getHeight();
+		int screenWidth = (int) GameClient.getInstance().getHUD().getWidth();
+		int ourWidth = getWidth();
+		int ourHeight = getHeight();
+		int x = screenWidth / 2 - ourWidth / 2;
+		int y = screenHeight / 2 - ourHeight / 2;
 		setPosition(x, y);
 	}
 

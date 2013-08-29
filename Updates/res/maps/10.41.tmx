@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value="Magikarp,60;Chinchou,10;Lanturn,15;Horsea,15;"/>
+  <property name="fishPokemonLevels" value="15-20;20-35;40-40;25-30;"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Tentacruel,40;"/>
+  <property name="waterPokemonLevels" value="35-40;40-40;"/>
+  <property name="wildProbability" value="4"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" name="SinnohCityGroundSet" tilewidth="16" tileheight="16">
   <image source="SinnohCityGroundSet.png" width="738" height="480"/>
  </tileset>

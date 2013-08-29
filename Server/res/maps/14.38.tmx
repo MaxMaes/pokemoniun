@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="66" height="38" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value="Magikarp,60;Staryu,20;Starmie,5;Qwilfish,13;Feebas,2;"/>
+  <property name="fishPokemonLevels" value="15-20;20-35;40-40;25-30;15-20;"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,80;Tentacruel,20;"/>
+  <property name="waterPokemonLevels" value="35-40;40-40;"/>
+  <property name="wildProbability" value="4"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Agate Tileset.tsx"/>
  <tileset firstgid="2357" source="Water02.tsx"/>
  <tileset firstgid="2549" source="Cliffs02.tsx"/>

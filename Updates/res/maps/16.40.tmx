@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
+  <property name="dayPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="nightPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
+  <property name="nightPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="4"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="SinnohInteriorSet1.tsx"/>
  <tileset firstgid="2369" source="Orre Tileset 1.tsx"/>
  <tileset firstgid="3452" source="Cliffs01.tsx"/>
@@ -19,7 +33,7 @@
  </layer>
  <layer name="Collisions" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2aTQ7CIBCFuzde0ONYl61L2mjv4Va3einHhEmQUDrQH6B5X/IWNSnDYwplqN2xqjqBelJLuhm/DSQlvPeq9bv/7tGg4zRafM3idiRxp/qkAjy4vPhoDB/KEYPbYV88rm2kYsaD+yDx4WvffDZ63V5IP+wcx8j2cTq4fUzJ9BDKWAxzzkhy4kOa51gPvhhz2gRgKey5Df55YJ4CAKq0a8GTYr92sBa9ycNnBz7WBO9kIOVMc6kmXQqfU1zvTdXQuWPXrSnzMmcdsX2Umpc1fKTYB+wlH66zOwAASMXStVWq/Ttqq23Anjsv4CMv1vSx5TmYueeuRxS7Bmy5Vku+15bwzEn/HwHKAWedMjBOoDS+QNv/wxAnAAA=
+   H4sIAAAAAAAAC+2aQQ7CIBBFuzde0ONYl8WlbWrv0a1u9VKOCZMgsXQoUErzX/I3Jp2ZX2AEtD1WVStQR1Kk3vhsIN2Ez161vs/fHRp0nkZLWeI4krwSP8ozlunFBdfeTMTnOFxD71FDLHENEh+ud2TOjU7H86mDxzxEto/T4b+POZkefJnK4TO2c7mlc3WpB1eOkJgAxMJe2+CXEesUAFDl7QUPyv3cQS96kYf3DnykBN/JQMqZ1lJNuhS+pvi8N3eG3jr2uTXnuIT0EdtHqeOSwkeOfcBexsO+D8E9CAAgJ7HPVrn27zhbrQP23NsCPrZFSh9r3oOZe+56Qkt7wJq9WvJ7bQlzTvr/CFAOuOuUgfcESuMD8q6yXxAnAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="50">

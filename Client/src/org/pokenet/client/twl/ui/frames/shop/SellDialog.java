@@ -1,7 +1,7 @@
 package org.pokenet.client.twl.ui.frames.shop;
 
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.ItemDatabase;
+import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
@@ -37,6 +37,7 @@ public class SellDialog extends Widget
 			@Override
 			public void run()
 			{
+				PlayerItem selectedItem = getSelectedItem();
 				try
 				{
 					Runnable yes = new Runnable()
@@ -46,7 +47,8 @@ public class SellDialog extends Widget
 						{
 							ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
 							message.addInt(1);
-							message.addInt(ItemDatabase.getInstance().getItem(sellModel.getEntry(sellList.getSelected())).getId());
+							PlayerItem selectedItem = getSelectedItem();
+							message.addInt(selectedItem.getItem().getId());
 							GameClient.getInstance().getSession().send(message);
 							GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						}
@@ -59,12 +61,8 @@ public class SellDialog extends Widget
 							GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						}
 					};
-					GameClient
-							.getInstance()
-							.getGUIPane()
-							.showConfirmationDialog(
-									"Are you sure you want to sell " + sellModel.getEntry(sellList.getSelected()) + " for $"
-											+ ItemDatabase.getInstance().getItem(sellModel.getEntry(sellList.getSelected())).getPrice() / 2 + "?", yes, no);
+					GameClient.getInstance().getGUIPane()
+							.showConfirmationDialog("Are you sure you want to sell " + selectedItem.getItem().getName() + " for $" + selectedItem.getItem().getPrice() / 2 + "?", yes, no);
 				}
 				catch(Exception e2)
 				{
@@ -95,7 +93,8 @@ public class SellDialog extends Widget
 		{
 			if(!GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getCategory().equals("Key"))
 			{
-				sellModel.addElement(GameClient.getInstance().getOurPlayer().getItems().get(i).getItem().getName());
+				PlayerItem playerItem = GameClient.getInstance().getOurPlayer().getItems().get(i);
+				sellModel.addElement(playerItem.getItem().getName() + "    X" + playerItem.getQuantity());
 			}
 		}
 		if(sellList != null)
@@ -104,6 +103,11 @@ public class SellDialog extends Widget
 			sellList.setModel(sellModel);
 			sellList.setSelected(selection);
 		}
+	}
+
+	private PlayerItem getSelectedItem()
+	{
+		return GameClient.getInstance().getOurPlayer().getItems().get(sellList.getSelected());
 	}
 
 	@Override

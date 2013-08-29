@@ -77,7 +77,6 @@ public class Player extends Character implements Battleable, Tradeable
 	private int m_repel = 0;
 	/* Stores the list of requests the player has sent */
 	private HashMap<String, RequestType> m_requests;
-	// private IoSession m_tcpSession = null;
 	private Session m_Session = null;
 	private int m_skillBreedExp = 0;
 	private int m_skillCoordExp = 0;
@@ -97,7 +96,6 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)
 	{
-		// m_database = MySqlManager.getInstance();
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -1897,7 +1895,6 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(m_map != null)
 			getMap().talkToNpc(this);
-		System.out.println("TALK");
 	}
 
 	/**

@@ -51,7 +51,6 @@ public class RegistrationManager implements Runnable
 	 */
 	public void register(Session session, int region, String packet /* IoSession session */) throws Exception
 	{
-		m_database = MySqlManager.getInstance();
 		if(session.getChannel() == null)
 			return;
 		String[] info = packet.split(",");

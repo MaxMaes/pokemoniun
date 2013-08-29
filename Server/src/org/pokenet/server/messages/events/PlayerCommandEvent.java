@@ -17,9 +17,12 @@ import org.pokenet.server.protocol.ServerMessage;
 public class PlayerCommandEvent implements MessageEvent
 {
 
+	private MySqlManager m_database;
+
 	@Override
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
+		m_database = MySqlManager.getInstance();
 		String input = request.readString();
 		if(input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("ban "))
 		{
@@ -144,7 +147,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerClassChange(Session session, String playername, int adminLvl)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		Player player = ActiveConnections.getPlayer(playername);
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
@@ -171,7 +173,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void procesPlayerUnBan(Session session, String playername)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet bannedPlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
@@ -195,7 +196,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerUnMute(Session session, String playername, Player player)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet unMutePlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
@@ -226,7 +226,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerReset(Session session, String playername, Player player)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet playerNameResult = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
@@ -259,7 +258,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerWarp(Session session, String playernames)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		String[] players = playernames.split(",");
 		Player player1 = ActiveConnections.getPlayer(players[0]);
 		Player player2 = ActiveConnections.getPlayer(players[1]);
@@ -355,7 +353,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerBan(Session session, String playername, Player player)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet banPlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");
@@ -389,7 +386,6 @@ public class PlayerCommandEvent implements MessageEvent
 
 	private void processPlayerMute(Session session, String playername, Player player)
 	{
-		MySqlManager m_database = MySqlManager.getInstance();
 		ServerMessage message = new ServerMessage(ClientPacket.CHAT_PACKET);
 		message.addInt(4);
 		ResultSet mutePlayername = m_database.query("SELECT username FROM pn_members WHERE username = '" + playername + "';");

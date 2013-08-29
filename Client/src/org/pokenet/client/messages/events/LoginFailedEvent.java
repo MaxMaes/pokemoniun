@@ -6,14 +6,13 @@ import org.pokenet.client.messages.MessageEvent;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
 
-public class LoginUnknownEvent implements MessageEvent
+public class LoginFailedEvent implements MessageEvent
 {
 
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		// Unknown problem occurred
-		GameClient.getInstance().showMessageDialog("An unknown problem occurred!");
+		GameClient.getInstance().showMessageDialog("Login failed, please try again!");
 		GameClient.getInstance().getGUIPane().hideLoadingScreen();
 		GameClient.getInstance().getLoginScreen().enableLogin();
 	}

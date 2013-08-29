@@ -1019,47 +1019,50 @@ public class WildBattleField extends BattleField
 		{
 
 			/* Finally, add the EVs and exp to the participating Pokemon */
-			for(Pokemon p : m_participatingPokemon)
+			for(Pokemon poke : m_participatingPokemon)
 			{
 				/* Add the EV's and Ensure EVs don't go over limit, before or during addition */
 				for(String s : HP_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 0, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 0, Integer.parseInt(s.split(",")[1]));
 				for(String s : ATK_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 1, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 1, Integer.parseInt(s.split(",")[1]));
 
 				for(String s : DEF_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 2, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 2, Integer.parseInt(s.split(",")[1]));
 
 				for(String s : SP_ATK_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 4, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 4, Integer.parseInt(s.split(",")[1]));
 
 				for(String s : SP_DEF_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 5, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 5, Integer.parseInt(s.split(",")[1]));
 
 				for(String s : SPD_EV)
 					if(m_wildPoke.getSpeciesName().equalsIgnoreCase(s.split(",")[0]))
-						calcEV(p, 3, Integer.parseInt(s.split(",")[1]));
+						calcEV(poke, 3, Integer.parseInt(s.split(",")[1]));
 
 				/* Gain exp/level up and update client */
-				int index = m_player.getPokemonIndex(p);
+				int index = m_player.getPokemonIndex(poke);
 				double user = 1;
-				if(!p.getOriginalTrainer().equals(m_player.getName()))
+				if(!poke.getOriginalTrainer().equals(m_player.getName()))
 					user = 1.5;
-				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, p, m_participatingPokemon.size(), user);
-				p.setExp(p.getExp() + exp);
+				double exp = DataService.getBattleMechanics().calculateExpGain(m_wildPoke, poke, m_participatingPokemon.size(), user);
+				/* TODO: Test scaling effect. */
+				if(poke.getLevel() <= 10 && exp < 5)
+					exp *= 11.5 - poke.getLevel();
+				poke.setExp(poke.getExp() + exp);
 				/* Calculate how much exp is left to next level. */
-				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp());
+				int expTillLvl = (int) (DataService.getBattleMechanics().getExpForLevel(poke, poke.getLevel() + 1) - poke.getExp());
 				/* Make sure that value isn't negative. */
 				if(expTillLvl < 0)
 					expTillLvl = 0;
 				ServerMessage expMessage = new ServerMessage(m_player.getSession());
 				expMessage.init(ClientPacket.EXP_GAINED.getValue());
-				expMessage.addString(p.getSpeciesName() + "," + exp + "," + expTillLvl);
+				expMessage.addString(poke.getSpeciesName() + "," + exp + "," + expTillLvl);
 				expMessage.sendResponse();
 				String expGain = exp + "";
 				expGain = expGain.substring(0, expGain.indexOf('.'));
@@ -1068,10 +1071,10 @@ public class WildBattleField extends BattleField
 				expGainMessage.addInt(index);
 				expGainMessage.addInt(Integer.parseInt(expGain));
 				expGainMessage.sendResponse();
-				double levelExp = DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) - p.getExp();
+				double levelExp = DataService.getBattleMechanics().getExpForLevel(poke, poke.getLevel() + 1) - poke.getExp();
 				if(levelExp <= 0)
 				{
-					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(p.getSpeciesName());
+					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(poke.getSpeciesName());
 					boolean evolve = false;
 					/* Handle evolution */
 					for(int i = 0; i < pokeData.getEvolutions().length; i++)
@@ -1079,9 +1082,9 @@ public class WildBattleField extends BattleField
 						PokemonEvolution evolution = pokeData.getEvolutions()[i];
 						if(evolution.getType() == EvolutionTypes.Level)
 						{
-							if(evolution.getLevel() <= p.getLevel() + 1)
+							if(evolution.getLevel() <= poke.getLevel() + 1)
 							{
-								p.setEvolution(evolution);
+								poke.setEvolution(evolution);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
 								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
@@ -1092,9 +1095,9 @@ public class WildBattleField extends BattleField
 						}
 						else if(evolution.getType() == EvolutionTypes.HappinessDay)
 						{
-							if(p.getHappiness() > 220 && !TimeService.isNight())
+							if(poke.getHappiness() > 220 && !TimeService.isNight())
 							{
-								p.setEvolution(evolution);
+								poke.setEvolution(evolution);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
 								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
@@ -1105,9 +1108,9 @@ public class WildBattleField extends BattleField
 						}
 						else if(evolution.getType() == EvolutionTypes.HappinessNight)
 						{
-							if(p.getHappiness() > 220 && TimeService.isNight())
+							if(poke.getHappiness() > 220 && TimeService.isNight())
 							{
-								p.setEvolution(evolution);
+								poke.setEvolution(evolution);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
 								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
@@ -1118,9 +1121,9 @@ public class WildBattleField extends BattleField
 						}
 						else if(evolution.getType() == EvolutionTypes.Happiness)
 						{
-							if(p.getHappiness() > 220)
+							if(poke.getHappiness() > 220)
 							{
-								p.setEvolution(evolution);
+								poke.setEvolution(evolution);
 								ServerMessage evolveMessage = new ServerMessage(m_player.getSession());
 								evolveMessage.init(ClientPacket.POKE_REQUEST_EVOLVE.getValue());
 								evolveMessage.addInt(index);
@@ -1134,19 +1137,19 @@ public class WildBattleField extends BattleField
 					if(evolve)
 						continue;
 					/* This Pokemon just levelled up! */
-					p.setHappiness(p.getHappiness() + 5);
-					p.calculateStats(false);
-					int level = DataService.getBattleMechanics().calculateLevel(p);
+					poke.setHappiness(poke.getHappiness() + 5);
+					poke.calculateStats(false);
+					int level = DataService.getBattleMechanics().calculateLevel(poke);
 					m_player.addTrainingExp(level * 5);
-					int oldLevel = p.getLevel();
+					int oldLevel = poke.getLevel();
 					String move = "";
 					/* Move learning */
-					p.getMovesLearning().clear();
+					poke.getMovesLearning().clear();
 					for(int i = oldLevel + 1; i <= level; i++)
 						if(pokeData.getLevelMoves().get(i) != null)
 						{
 							move = pokeData.getLevelMoves().get(i);
-							p.getMovesLearning().add(move);
+							poke.getMovesLearning().add(move);
 							ServerMessage moveLearn = new ServerMessage(m_player.getSession());
 							moveLearn.init(ClientPacket.MOVE_LEARN_LVL.getValue());
 							moveLearn.addInt(index);
@@ -1155,15 +1158,15 @@ public class WildBattleField extends BattleField
 						}
 
 					/* Save the level and update the client */
-					p.setLevel(level);
+					poke.setLevel(level);
 					ServerMessage levelMessage = new ServerMessage(m_player.getSession());
 					levelMessage.init(ClientPacket.POKE_LVL_CHANGE.getValue());
-					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel() + 1) + ","
-							+ (int) DataService.getBattleMechanics().getExpForLevel(p, p.getLevel()));
+					levelMessage.addString(index + "," + level + "," + (int) DataService.getBattleMechanics().getExpForLevel(poke, poke.getLevel() + 1) + ","
+							+ (int) DataService.getBattleMechanics().getExpForLevel(poke, poke.getLevel()));
 					levelMessage.sendResponse();
 					ServerMessage BattlelevelMessage = new ServerMessage(m_player.getSession());
 					BattlelevelMessage.init(ClientPacket.POKE_LVL_UP.getValue());
-					BattlelevelMessage.addString(p.getSpeciesName() + "," + level);
+					BattlelevelMessage.addString(poke.getSpeciesName() + "," + level);
 					BattlelevelMessage.sendResponse();
 					m_player.updateClientPokemonStats(index);
 				}

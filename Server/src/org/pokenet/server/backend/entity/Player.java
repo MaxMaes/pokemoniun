@@ -214,7 +214,8 @@ public class Player extends Character implements Battleable, Tradeable
 		{
 			m_friends.add(friend);
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
-					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "')) ON DUPLICATE KEY UPDATE friendId = (SELECT id FROM `pn_members` WHERE username = '"
+					+ MySqlManager.parseSQL(friend) + "');");
 			ServerMessage addFriend = new ServerMessage(ClientPacket.FRIEND_ADDED);
 			addFriend.addString(friend);
 			getSession().Send(addFriend);

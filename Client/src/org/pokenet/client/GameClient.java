@@ -828,7 +828,7 @@ public class GameClient extends BasicGame
 			}
 			if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
 			{
-				BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+				getHUD().getBattleSpeechFrame().advance();
 			}
 			else
 			{
@@ -1101,7 +1101,7 @@ public class GameClient extends BasicGame
 				}
 				if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
 				{
-					BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+					getHUD().getBattleSpeechFrame().advance();
 				}
 				else if(getHUD().hasNPCSpeechFrame())
 				{
@@ -1437,7 +1437,7 @@ public class GameClient extends BasicGame
 				m_animator.animate();
 				/* update battle */
 				if(BattleManager.getInstance().isBattling() && BattleManager.getInstance().getCurEnemyPoke() != null && BattleManager.getInstance().getCurPoke() != null)
-					BattleManager.getInstance().getTimeLine().getBattleCanvas().update();
+					BattleManager.getInstance().getBattleWindow().getCanvas().update();
 			}
 			/* Update weather and daylight */
 			if(!m_isNewMap)

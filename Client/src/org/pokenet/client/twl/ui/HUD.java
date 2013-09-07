@@ -3,7 +3,6 @@ package org.pokenet.client.twl.ui;
 import java.util.HashMap;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
@@ -630,13 +629,13 @@ public class HUD extends DesktopArea
 	{
 		if(battleSpeechFrame == null)
 		{
-			battleSpeechFrame = BattleManager.getInstance().getTimeLine().getBattleSpeech();
+			battleSpeechFrame = new BattleSpeechFrame(this);
 			// add(battleSpeechFrame);
 		}
 		else
 		{
 			removeChild(this.battleSpeechFrame);
-			battleSpeechFrame = BattleManager.getInstance().getTimeLine().getBattleSpeech();// battleSpeechFrame;
+			battleSpeechFrame = new BattleSpeechFrame(this);// battleSpeechFrame;
 			// add(battleSpeechFrame);
 		}
 	}

@@ -226,9 +226,9 @@ public class BattleManager
 	public void setEnemyPoke(int index, String name, int level, int gender, int maxHP, int curHP, int spriteNum, boolean isShiny)
 	{
 		if(curHP != 0)
-			m_timeLine.getBattleCanvas().setPokeballImage(index, "normal");
+			getBattleWindow().getCanvas().setPokeballImage(index, "normal");
 		else
-			m_timeLine.getBattleCanvas().setPokeballImage(index, "fainted");
+			getBattleWindow().getCanvas().setPokeballImage(index, "fainted");
 
 		m_enemyPokes[index] = new Pokemon();
 		m_enemyPokes[index].setName(name);
@@ -276,7 +276,7 @@ public class BattleManager
 			setWild(false);
 		m_battle.setPosition(272, 40);
 		m_battle.showAttack();
-		m_timeLine.getBattleCanvas().setVisible(true);
+		getBattleWindow().getCanvas().setVisible(true);
 		m_battle.getControlFrame().setVisible(true);
 		m_enemyPokes = new Pokemon[pokeAmount];
 		getPlayerData();
@@ -306,32 +306,32 @@ public class BattleManager
 			m_curPokeIndex = pokeIndex;
 			updateMoves();
 			updatePokePane();
-			m_timeLine.getBattleCanvas().setPlayerHP(m_curPoke.getMaxHP());
-			m_timeLine.getBattleCanvas().setPlayerMaxHP(m_curPoke.getCurHP());
+			getBattleWindow().getCanvas().setPlayerHP(m_curPoke.getMaxHP());
+			getBattleWindow().getCanvas().setPlayerMaxHP(m_curPoke.getCurHP());
 			if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
-				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.green);
+				getBattleWindow().getCanvas().setPlayerHPColor(Color.green);
 			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
 					&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.orange);
+				getBattleWindow().getCanvas().setPlayerHPColor(Color.orange);
 			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-				m_timeLine.getBattleCanvas().setPlayerHPColor(Color.red);
-			m_timeLine.getBattleCanvas().initPlayerXPBar();
-			// m_timeLine.getBattleCanvas().drawOurPoke();
-			// m_timeLine.getBattleCanvas().drawOurInfo();
+				getBattleWindow().getCanvas().setPlayerHPColor(Color.red);
+			getBattleWindow().getCanvas().initPlayerXPBar();
+			// getBattleWindow().getCanvas().drawOurPoke();
+			// getBattleWindow().getCanvas().drawOurInfo();
 		}
 		else
 		{
 			m_curEnemyPoke = m_enemyPokes[pokeIndex];
 			m_curEnemyIndex = pokeIndex;
-			m_timeLine.getBattleCanvas().setEnemyHP(m_curEnemyPoke.getMaxHP());
-			m_timeLine.getBattleCanvas().setEnemyMaxHP(m_curEnemyPoke.getCurHP());
+			getBattleWindow().getCanvas().setEnemyHP(m_curEnemyPoke.getMaxHP());
+			getBattleWindow().getCanvas().setEnemyMaxHP(m_curEnemyPoke.getCurHP());
 			if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
-				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.green);
+				getBattleWindow().getCanvas().setEnemyHPColor(Color.green);
 			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
 					&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.orange);
+				getBattleWindow().getCanvas().setEnemyHPColor(Color.orange);
 			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-				m_timeLine.getBattleCanvas().setEnemyHPColor(Color.red);
+				getBattleWindow().getCanvas().setEnemyHPColor(Color.red);
 		}
 	}
 
@@ -434,28 +434,28 @@ public class BattleManager
 		m_curEnemyIndex = 0;
 		try
 		{
-			// m_timeLine.getBattleCanvas().drawEnemyPoke();
+			// getBattleWindow().getCanvas().drawEnemyPoke();
 			try
 			{
-				m_timeLine.getBattleCanvas().drawEnemyInfo();
+				getBattleWindow().getCanvas().drawEnemyInfo();
 			}
 			catch(Exception e)
 			{
-				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyDataBG);
-				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyNameLabel);
-				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyLv);
-				m_timeLine.getBattleCanvas().removeChild(m_timeLine.getBattleCanvas().enemyGender);
-				m_timeLine.getBattleCanvas().drawEnemyInfo();
+				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyDataBG);
+				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyNameLabel);
+				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyLv);
+				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyGender);
+				getBattleWindow().getCanvas().drawEnemyInfo();
 			}
-			m_timeLine.getBattleCanvas().initEnemyHPBar();
+			getBattleWindow().getCanvas().initEnemyHPBar();
 			if(m_isWild)
 			{
-				m_timeLine.getBattleCanvas().hidePokeballs();
+				getBattleWindow().getCanvas().hidePokeballs();
 				m_timeLine.addSpeech("A wild " + m_curEnemyPoke.getName() + " appeared!");
 			}
 			else
 			{
-				m_timeLine.getBattleCanvas().showPokeballs();
+				getBattleWindow().getCanvas().showPokeballs();
 				m_timeLine.addSpeech(m_enemy + " sent out " + m_curEnemyPoke.getName());
 			}
 		}

@@ -293,6 +293,18 @@
             <theme name="label" ref="label"/>
         </theme>
     </theme>
+    <theme name="speechframe" ref="-defaults">
+        <param name="background"><image>speechframe</image></param>
+        <theme name="textarea" ref="textarea">
+            <param name="fonts">
+                <map>
+                    <param name="default"><font>pokefont_large</font></param>
+                </map>
+            </param>
+        </theme>
+        <theme name="image" ref="image"/>
+    </theme>
+
 
 
 
@@ -484,24 +496,21 @@
             </theme>
             <theme name="battledialog" ref="-defaults">
                 <theme name="battlecontrolframe" ref="-defaults">
-                    <theme name="battlebutton" ref="button">
-                        <param name="background"><image>battlebutton_background</image></param>
-                        <param name="font"><font>pokefont</font></param>
-                    </theme>
                     <theme name="battlebutton_small" ref="button">
                         <param name="background"><image>battlebutton_small_background</image></param>
                         <param name="font"><font>pokefont</font></param>
                     </theme>
                     <param name="background"><image>interfacebackground</image></param>
                     <theme name="attackPane" ref="-defaults">
-                        <param name="background"><image>interfacebackground</image></param>
-                        <theme name="battlebutton_small" ref="button">
-                            <param name="background"><image>battlebutton_small_background</image></param>
-                            <param name="font"><font>pokefont</font></param>
-                        </theme>
                         <theme name="battlebutton" ref="button">
                             <param name="background"><image>battlebutton_background</image></param>
                             <param name="font"><font>pokefont</font></param>
+                        </theme>
+                        <theme name="pplabel" ref="label">
+                            <param name="font"><font>normal_white</font></param>
+                        </theme>
+                        <theme name="movetypelabel" ref="label">
+                            <param name="font"><font>normal_white</font></param>
                         </theme>
                     </theme>
                 </theme>
@@ -581,10 +590,6 @@
                 </theme>
                 <theme name="image" ref="image"/>
             </theme>
-            <theme name="battlespeechframe" ref="-defaults">
-                <param name="background"><image>speechframe</image></param>
-                <theme name="textarea" ref="textarea"/>
-            </theme>
             <theme name="battlecontrolframe" ref="-defaults">
                 <theme name="battlebutton" ref="button">
                     <param name="background"><image>battlebutton_background</image></param>
@@ -613,6 +618,12 @@
                         <theme name="image" ref="image"/>
                     </theme>
                     <theme name="label" ref="label"/>
+                    <theme name="pplabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="movetypelabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
                 </theme>
             </theme>
             <theme name="battlebag" ref="resizableframe_titled">
@@ -649,16 +660,9 @@
                     <theme name="button" ref="button"/>
                 </theme>
             </theme>
+            <theme name="battlespeechframe" ref="speechframe">
+            </theme>
             <theme name="npcspeechframe" ref="-defaults">
-                <param name="background"><image>speechframe</image></param>
-                <theme name="textarea" ref="textarea">
-                    <param name="fonts">
-                        <map>
-                            <param name="default"><font>pokefont_large</font></param>
-                        </map>
-                    </param>
-                </theme>
-                <theme name="image" ref="image"/>
             </theme>
         
         

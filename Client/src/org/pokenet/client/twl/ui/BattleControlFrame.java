@@ -16,7 +16,7 @@ import de.matthiasmann.twl.Widget;
 /**
  * Battle window interface
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
 public class BattleControlFrame extends Widget
 {
@@ -222,10 +222,12 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp1 = new Label();
 		pp1.setText("10/10");
+		pp1.setTheme("pplabel");
 		// pp1.setAlignment(Alignment.RIGHT);
 		pp1.setSize(GameClient.getInstance().getFontSmall().getWidth(pp1.getText()), GameClient.getInstance().getFontSmall().getHeight(pp1.getText()));
-		pp1.setPosition(95, 40);
+		pp1.setPosition(85, 40);
 		Label move1Type = new Label();
+		move1Type.setTheme("movetypelabel");
 		// move1Type.setAlignment(Alignment.LEFT);
 		move1Type.setText("???");
 		move1Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move1Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move1Type.getText()));
@@ -245,11 +247,14 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp2 = new Label();
+		pp2.setTheme("pplabel");
 		pp2.setText("10/10");
 		// pp2.setAlignment(Alignment.RIGHT);
+		pp2.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp2.setSize(GameClient.getInstance().getFontSmall().getWidth(pp2.getText()), GameClient.getInstance().getFontSmall().getHeight(pp2.getText()));
-		pp2.setPosition(225, 40);
+		pp2.setPosition(210, 40);
 		Label move2Type = new Label();
+		move2Type.setTheme("movetypelabel");
 		move2Type.setText("???");
 		// move2Type.setAlignment(Alignment.LEFT);
 		move2Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move2Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move2Type.getText()));
@@ -269,11 +274,14 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp3 = new Label();
+		pp3.setTheme("pplabel");
 		pp3.setText("10/10");
 		// pp3.setAlignment(Alignment.RIGHT);
+		pp3.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp3.setSize(GameClient.getInstance().getFontSmall().getWidth(pp3.getText()), GameClient.getInstance().getFontSmall().getHeight(pp3.getText()));
-		pp3.setPosition(96, 95);
+		pp3.setPosition(86, 95);
 		Label move3Type = new Label();
+		move3Type.setTheme("movetypelabel");
 		move3Type.setText("???");
 		move3Type.setAlignment(Alignment.LEFT);
 		move3Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move3Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move3Type.getText()));
@@ -293,11 +301,14 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp4 = new Label();
+		pp4.setTheme("pplabel");
 		pp4.setText("10/10");
 		// pp4.setAlignment(Alignment.RIGHT);
+		pp4.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp4.setSize(GameClient.getInstance().getFontSmall().getWidth(pp4.getText()), GameClient.getInstance().getFontSmall().getHeight(pp4.getText()));
-		pp4.setPosition(225, 95);
+		pp4.setPosition(210, 95);
 		Label move4Type = new Label();
+		move4Type.setTheme("movetypelabel");
 		move4Type.setText("???");
 		// move4Type.setAlignment(Alignment.LEFT);
 		move4Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move4Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move4Type.getText()));

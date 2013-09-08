@@ -3,10 +3,9 @@ package org.pokenet.client.twl.ui.frames;
 import java.util.List;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
-import de.matthiasmann.twl.GUI;
+import org.pokenet.client.twl.ui.base.Image;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
-import de.matthiasmann.twl.renderer.Image;
 
 public class PokemonInfoDialog extends ResizableFrame
 {
@@ -24,15 +23,12 @@ public class PokemonInfoDialog extends ResizableFrame
 		try
 		{
 			List<String> translated = Translator.translate("_GUI");
-			int x = 70;
-			int y = 5;
+
 			for(int i = 0; i < 24; i++)
 			{
 				data[i] = new Label();
 				labels[i] = new Label();
-				data[i].setPosition(x + 80, y);
-				labels[i].setPosition(x, y);
-				y += 20;
+
 				add(labels[i]);
 				add(data[i]);
 			}
@@ -127,20 +123,16 @@ public class PokemonInfoDialog extends ResizableFrame
 				data[23].setText("-");
 			}
 
-			loadImage(poke);
+			icon = new Image(poke.getSprite());
+			add(icon);
+
 			setVisible(true);
-			setSize(270, 510);
 			setTitle(poke.getName());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public void loadImage(OurPokemon poke)
-	{
-		icon = poke.getSprite();
 	}
 
 	public int setSpriteNumber(int x)
@@ -162,8 +154,17 @@ public class PokemonInfoDialog extends ResizableFrame
 	}
 
 	@Override
-	public void paintWidget(GUI gui)
+	public void layout()
 	{
-		icon.draw(getAnimationState(), 5, 5);
+		int x = 70;
+		int y = 5;
+		for(int i = 0; i < 24; i++)
+		{
+			data[i].setPosition(x + 80, y);
+			labels[i].setPosition(x, y);
+			y += 20;
+		}
+		icon.setPosition(5, 5);
+		setSize(270, 510);
 	}
 }

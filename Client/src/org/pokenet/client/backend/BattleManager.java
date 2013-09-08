@@ -8,7 +8,7 @@ import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.Music;
-import org.pokenet.client.twl.ui.BattleDialog;
+import org.pokenet.client.ui.frames.battle.BattleDialog;
 
 /**
  * Handles battle events and controls the battle window
@@ -32,7 +32,7 @@ public class BattleManager
 	private OurPokemon[] m_ourPokes;
 	private Map<Integer, String> m_ourStatuses = new HashMap<Integer, String>();
 	private OurPlayer m_player;
-	private BattleTimeLine m_timeLine;
+	private BattleNarrator m_timeLine;
 
 	/**
 	 * Default Constructor
@@ -42,7 +42,7 @@ public class BattleManager
 		m_battle = new BattleDialog();
 		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
 		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
-		m_timeLine = new BattleTimeLine();
+		m_timeLine = new BattleNarrator();
 		m_battle.setVisible(false);
 	}
 
@@ -167,7 +167,7 @@ public class BattleManager
 	 * 
 	 * @return m_timeLine
 	 */
-	public BattleTimeLine getTimeLine()
+	public BattleNarrator getTimeLine()
 	{
 		return m_timeLine;
 	}
@@ -283,7 +283,7 @@ public class BattleManager
 		m_battle.disableMoves();
 		updateMoves();
 		updatePokePane();
-		m_timeLine.startBattle();
+		m_timeLine.startTimeline();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
 		// GameClient.getInstance().getHUD().setBattleDialog(m_battle);

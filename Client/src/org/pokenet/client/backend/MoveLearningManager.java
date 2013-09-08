@@ -3,7 +3,7 @@ package org.pokenet.client.backend;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.twl.ui.MoveLearning;
+import org.pokenet.client.ui.frames.MoveLearningDialog;
 
 /**
  * Handles move learning, and allowis for queing items.
@@ -15,7 +15,7 @@ public class MoveLearningManager extends Thread
 	private static MoveLearningManager m_instance;
 	private boolean m_canLearn = false;
 	private boolean m_running = true;
-	private MoveLearning m_moveLearning;
+	private MoveLearningDialog m_moveLearning;
 	private Queue<MoveLearnQueueObject> m_moveLearningQueue;
 
 	/**
@@ -24,7 +24,7 @@ public class MoveLearningManager extends Thread
 	private MoveLearningManager()
 	{
 		m_moveLearningQueue = new LinkedList<MoveLearnQueueObject>();
-		m_moveLearning = new MoveLearning(GameClient.getInstance().getHUD());
+		m_moveLearning = new MoveLearningDialog(GameClient.getInstance().getHUD());
 		System.out.println("Move Learning Manager started.");
 	}
 
@@ -45,7 +45,7 @@ public class MoveLearningManager extends Thread
 	 * 
 	 * @return the Move Learning window
 	 */
-	public MoveLearning getMoveLearning()
+	public MoveLearningDialog getMoveLearning()
 	{
 		return m_moveLearning;
 	}

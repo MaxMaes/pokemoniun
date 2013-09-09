@@ -1,4 +1,4 @@
-package org.pokenet.client.ui.frames.battle;
+package org.pokenet.client.ui.frames;
 
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
@@ -9,6 +9,7 @@ import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 /**
@@ -22,23 +23,31 @@ public class BattleFrontierDialog extends ResizableFrame
 	private SimpleChangableListModel<String> m_locations;
 	private String choice, pick;
 	private OurPlayer p;
+	private Widget pane;
 
 	public BattleFrontierDialog(String battle, final OurPlayer p)
 	{
 		this.p = p;
 		choice = battle;
+		setTheme("chooserDialog");
 		m_locations = new SimpleChangableListModel<String>();
 		m_locations.addElement("Challenge");
 		m_locations.addElement("Info");
+
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(180, 130);
+		pane.setPosition(0, 0);
 
 		// m_travelDisplay = new Label();
 		// m_travelDisplay.setSize(124,204);
 		// m_travelDisplay.setPosition(105, 20);
 		// add(m_travelDisplay);
 		m_travelList = new ListBox<String>(m_locations);
-
+		m_travelList.setTheme("listbox");
+		m_travelList.setPosition(2, 25);
 		m_travelList.setSize(175, 70);
-		add(m_travelList);
+		pane.add(m_travelList);
 		setTitle("Please choose..");
 		setSize(180, 130);
 		setPosition(300, 150);
@@ -46,17 +55,22 @@ public class BattleFrontierDialog extends ResizableFrame
 		setDraggable(true);
 		setVisible(true);
 		initUse();
+		add(pane);
 		// System.out.println("end dialog");
 	}
 
 	public void initUse()
 	{
 		Button use = new Button("Ok");
-		use.setPosition(25, 75);
-		add(use);
+		use.setTheme("button");
+		use.setSize(60, 20);
+		use.setPosition(10, 100);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.setPosition(80, 75);
-		add(cancel);
+		cancel.setPosition(90, 100);
+		cancel.setSize(70, 20);
+		cancel.setTheme("button");
+		pane.add(cancel);
 
 		cancel.addCallback(new Runnable()
 		{

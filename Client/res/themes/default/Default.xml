@@ -662,7 +662,30 @@
             </theme>
             <theme name="battlespeechframe" ref="speechframe">
             </theme>
-            <theme name="npcspeechframe" ref="-defaults">
+            <theme name="npcspeechframe" ref="speechframe">
+            </theme>
+            <theme name="chooserDialog" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                    <theme name="image" ref="image"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="listbox" ref="listbox"/>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <theme name="button" ref="button">
+                    <param name="font"><font>normal</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
+                <theme name="listbox" ref="listbox"/>
             </theme>
         
         

@@ -15,6 +15,7 @@ import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.ListBox.CallbackReason;
 import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 public class SpriteChooserDialog extends ResizableFrame
@@ -25,9 +26,16 @@ public class SpriteChooserDialog extends ResizableFrame
 	private SimpleChangableListModel<String> spritelistmodel;
 	private String m_respath;
 	private List<String> m_sprites;
+	private Widget pane;
 
 	public SpriteChooserDialog()
 	{
+		setTheme("chooserDialog");
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(265, 340);
+		pane.setPosition(0, 0);
+
 		m_sprites = new ArrayList<String>();
 		m_respath = System.getProperty("res.path");
 		if(m_respath == null)
@@ -44,8 +52,10 @@ public class SpriteChooserDialog extends ResizableFrame
 		m_spriteDisplay = new Image();
 		m_spriteDisplay.setSize(124, 204);
 		m_spriteDisplay.setPosition(105, 20);
-		add(m_spriteDisplay);
+		pane.add(m_spriteDisplay);
 		spritelistmodel = new SimpleChangableListModel<>();
+		for(String sp : m_sprites)
+			spritelistmodel.addElement(sp);
 		m_spriteList = new ListBox<String>(spritelistmodel);
 		m_spriteList.addCallback(new CallbackWithReason<ListBox.CallbackReason>()
 		{
@@ -53,20 +63,22 @@ public class SpriteChooserDialog extends ResizableFrame
 			@Override
 			public void callback(CallbackReason arg0)
 			{
-				if(arg0 == CallbackReason.SET_SELECTED)
+				if(arg0 == CallbackReason.KEYBOARD || arg0 == CallbackReason.MOUSE_CLICK)
 				{
 					m_mustLoadSprite = m_respath + "res/characters/" + spritelistmodel.getEntry(m_spriteList.getSelected()) + ".png";
 				}
 			}
 		});
+		m_spriteList.setPosition(2, 25);
 		m_spriteList.setSize(105, 317);
-		add(m_spriteList);
+		pane.add(m_spriteList);
 		setTitle("Please choose your character..");
 		setSize(265, 340);
 		setResizableAxis(ResizableAxis.NONE);
-		setDraggable(false);
+		setDraggable(true);
 		setVisible(true);
 		initUse();
+		add(pane);
 	}
 
 	public int getChoice()
@@ -78,16 +90,18 @@ public class SpriteChooserDialog extends ResizableFrame
 	{
 		Button use = new Button("Use new sprite!");
 		use.setPosition(130, 245);
-		add(use);
+		use.setSize(80, 20);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
 		cancel.setPosition(130, 280);
-		add(cancel);
+		cancel.setSize(80, 20);
+		pane.add(cancel);
 		cancel.addCallback(new Runnable()
 		{
 			@Override
 			public void run()
 			{
-				// GameClient.getInstance().getDisplay().remove(thisDialog); TODO:
+				GameClient.getInstance().getHUD().removeSpritechooser();
 			}
 		});
 		use.addCallback(new Runnable()
@@ -95,7 +109,7 @@ public class SpriteChooserDialog extends ResizableFrame
 			@Override
 			public void run()
 			{
-				// GameClient.getInstance().getDisplay().remove(thisDialog); TODO:
+				GameClient.getInstance().getHUD().removeSpritechooser();
 				Runnable yes = new Runnable()
 				{
 					@Override

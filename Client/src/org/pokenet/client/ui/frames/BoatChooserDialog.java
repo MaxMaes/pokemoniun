@@ -4,9 +4,9 @@ import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 /**
@@ -18,16 +18,20 @@ import de.matthiasmann.twl.model.SimpleChangableListModel;
 public class BoatChooserDialog extends ResizableFrame
 {
 	protected ListBox<String> m_travelList;
-	protected Label m_travelDisplay;
+	// protected Label m_travelDisplay;
 	private SimpleChangableListModel<String> m_locations;
 	private String choice;
+	private Widget pane;
 
 	public BoatChooserDialog(String currentLocation)
 	{
+		setTheme("chooserDialog");
 		initUse(currentLocation);
-		m_travelList = new ListBox<String>();
+		m_travelList = new ListBox<String>(m_locations);
+		m_travelList.setTheme("listbox");
 		m_travelList.setSize(245, 70);
-		add(m_travelList);
+		m_travelList.setPosition(2, 25);
+		pane.add(m_travelList);
 		setTitle("Please choose your destination..");
 		setVisible(false);
 		setSize(250, 130);
@@ -35,17 +39,27 @@ public class BoatChooserDialog extends ResizableFrame
 		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(true);
 		setVisible(false);
+		add(pane);
 	}
 
 	private void initUse(String currentLocation)
 	{
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(250, 130);
+		pane.setPosition(0, 0);
+
 		initList(currentLocation);
 		Button use = new Button("Let's travel!");
-		use.setPosition(25, 75);
-		add(use);
+		use.setTheme("button");
+		use.setSize(70, 20);
+		use.setPosition(25, 100);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.setPosition(150, 75);
-		add(cancel);
+		cancel.setPosition(150, 100);
+		cancel.setSize(70, 20);
+		cancel.setTheme("button");
+		pane.add(cancel);
 
 		cancel.addCallback(new Runnable()
 		{

@@ -8,6 +8,7 @@ import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 /**
@@ -21,9 +22,16 @@ public class TrainChooserDialog extends ResizableFrame
 	protected Label m_travelDisplay;
 	private SimpleChangableListModel<String> m_locations;
 	private String choice;
+	private Widget pane;
 
 	public TrainChooserDialog(String travel, final OurPlayer p)
 	{
+		setTheme("chooserDialog");
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(getWidth(), 190);
+		pane.setPosition(0, 0);
+
 		m_locations = new SimpleChangableListModel<String>();
 		if(travel.equalsIgnoreCase("kanto"))
 		{
@@ -55,8 +63,11 @@ public class TrainChooserDialog extends ResizableFrame
 		// m_travelDisplay.setPosition(105, 20);
 		// add(m_travelDisplay);
 		m_travelList = new ListBox<String>(m_locations);
+		m_travelList.setTheme("listbox");
 		m_travelList.setSize(245, 70);
-		add(m_travelList);
+		m_travelList.setPosition(2, 25);
+		pane.add(m_travelList);
+
 		setTitle("Please choose your destination..");
 		setSize(250, 130);
 		setPosition(300, 150);
@@ -70,11 +81,15 @@ public class TrainChooserDialog extends ResizableFrame
 	public void initUse()
 	{
 		Button use = new Button("Let's travel!");
-		use.setPosition(25, 75);
-		add(use);
+		use.setTheme("button");
+		use.setSize(70, 20);
+		use.setPosition(25, 100);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.setPosition(150, 75);
-		add(cancel);
+		cancel.setPosition(150, 100);
+		cancel.setSize(70, 20);
+		cancel.setTheme("button");
+		pane.add(cancel);
 
 		cancel.addCallback(new Runnable()
 		{

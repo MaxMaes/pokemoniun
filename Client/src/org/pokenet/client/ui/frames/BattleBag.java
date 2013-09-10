@@ -37,15 +37,21 @@ public class BattleBag extends BigBagDialog
 		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, true, root);
-			m_popup.setPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
-			add(m_popup);
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
 		}
 		else
 		{
 			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, true, root);
-			m_popup.setPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
-			add(m_popup);
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
 		}
-		closeBag();
+
+		m_popup.setItemUsedCallback(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				closeBag();
+			}
+		});
 	}
 }

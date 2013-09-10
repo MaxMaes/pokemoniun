@@ -17,11 +17,11 @@ public class BattleVictoryEvent implements MessageEvent
 		switch(condition)
 		{
 			case 0: // YOU WIN!
-				BattleManager.getInstance().getTimeLine().informVictory();
+				BattleManager.getInstance().getNarrator().informVictory();
 				BattleManager.getInstance().deleteInstance();
 				break;
 			case 1: // YOU LOSE
-				BattleManager.getInstance().getTimeLine().informLoss();
+				BattleManager.getInstance().getNarrator().informLoss();
 				BattleManager.getInstance().deleteInstance();
 				break;
 			case 2: // WE CAUGHT HE WOKEMON

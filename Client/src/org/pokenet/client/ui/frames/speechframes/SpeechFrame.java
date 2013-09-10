@@ -2,7 +2,6 @@ package org.pokenet.client.ui.frames.speechframes;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Timer;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.ui.components.Image;
 import de.matthiasmann.twl.TextArea;
@@ -25,7 +24,7 @@ public class SpeechFrame extends Widget
 
 	private boolean isGoingDown = true;
 
-	private Timer textAnimationTimer = new Timer();
+	// private Timer textAnimationTimer = new Timer();
 
 	private TextArea speechDisplay;
 	private SimpleTextAreaModel speechModel;

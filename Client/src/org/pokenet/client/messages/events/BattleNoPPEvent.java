@@ -12,6 +12,6 @@ public class BattleNoPPEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informNoPP(Request.readString());
+		BattleManager.getInstance().getNarrator().informNoPP(Request.readString());
 	}
 }

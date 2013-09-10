@@ -2,7 +2,6 @@ package org.pokenet.client.backend;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.backend.entity.OurPokemon;
@@ -32,7 +31,7 @@ public class BattleManager
 	private OurPokemon[] m_ourPokes;
 	private Map<Integer, String> m_ourStatuses = new HashMap<Integer, String>();
 	private OurPlayer m_player;
-	private BattleNarrator m_timeLine;
+	private BattleNarrator m_narrator;
 
 	/**
 	 * Default Constructor
@@ -42,7 +41,7 @@ public class BattleManager
 		m_battle = new BattleDialog();
 		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
 		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
-		m_timeLine = new BattleNarrator();
+		m_narrator = new BattleNarrator();
 		m_battle.setVisible(false);
 	}
 
@@ -78,9 +77,9 @@ public class BattleManager
 	 */
 	public void endBattle()
 	{
-		BattleManager.getInstance().setFinish(true);
+		setFinish(true);
 		GameClient.getInstance().getGUIPane().showHUD();
-		m_timeLine.endBattle();
+		m_narrator.endBattle();
 		if(m_battle.getControlFrame() != null)
 		{
 			for(int i = 0; i < m_battle.getControlFrame().getNumChildren(); i++)
@@ -98,7 +97,7 @@ public class BattleManager
 		if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
 			GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
 		m_battle = null;
-		m_timeLine = null;
+		m_narrator = null;
 	}
 
 	/**
@@ -163,13 +162,13 @@ public class BattleManager
 	}
 
 	/**
-	 * Returns the TimeLine
+	 * Returns the Narrator
 	 * 
-	 * @return m_timeLine
+	 * @return m_narrator
 	 */
-	public BattleNarrator getTimeLine()
+	public BattleNarrator getNarrator()
 	{
-		return m_timeLine;
+		return m_narrator;
 	}
 
 	/**
@@ -283,7 +282,7 @@ public class BattleManager
 		m_battle.disableMoves();
 		updateMoves();
 		updatePokePane();
-		m_timeLine.startTimeline();
+		m_narrator.startTimeline();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
 		// GameClient.getInstance().getHUD().setBattleDialog(m_battle);
@@ -308,13 +307,7 @@ public class BattleManager
 			updatePokePane();
 			getBattleWindow().getCanvas().setPlayerHP(m_curPoke.getMaxHP());
 			getBattleWindow().getCanvas().setPlayerMaxHP(m_curPoke.getCurHP());
-			if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
-				getBattleWindow().getCanvas().setPlayerHPColor(Color.green);
-			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-					&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-				getBattleWindow().getCanvas().setPlayerHPColor(Color.orange);
-			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-				getBattleWindow().getCanvas().setPlayerHPColor(Color.red);
+			getBattleWindow().getCanvas().updatePlayerHPBarColor();
 			getBattleWindow().getCanvas().initPlayerXPBar();
 			// getBattleWindow().getCanvas().drawOurPoke();
 			// getBattleWindow().getCanvas().drawOurInfo();
@@ -325,13 +318,7 @@ public class BattleManager
 			m_curEnemyIndex = pokeIndex;
 			getBattleWindow().getCanvas().setEnemyHP(m_curEnemyPoke.getMaxHP());
 			getBattleWindow().getCanvas().setEnemyMaxHP(m_curEnemyPoke.getCurHP());
-			if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
-				getBattleWindow().getCanvas().setEnemyHPColor(Color.green);
-			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-					&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-				getBattleWindow().getCanvas().setEnemyHPColor(Color.orange);
-			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-				getBattleWindow().getCanvas().setEnemyHPColor(Color.red);
+			getBattleWindow().getCanvas().updateEnemyHPBarColor();
 		}
 	}
 
@@ -451,12 +438,12 @@ public class BattleManager
 			if(m_isWild)
 			{
 				getBattleWindow().getCanvas().hidePokeballs();
-				m_timeLine.addSpeech("A wild " + m_curEnemyPoke.getName() + " appeared!");
+				m_narrator.addSpeech("A wild " + m_curEnemyPoke.getName() + " appeared!");
 			}
 			else
 			{
 				getBattleWindow().getCanvas().showPokeballs();
-				m_timeLine.addSpeech(m_enemy + " sent out " + m_curEnemyPoke.getName());
+				m_narrator.addSpeech(m_enemy + " sent out " + m_curEnemyPoke.getName());
 			}
 		}
 		catch(Exception e)
@@ -467,7 +454,15 @@ public class BattleManager
 
 	public void deleteInstance()
 	{
-		m_instance = null;
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				endBattle();
+				m_instance = null;
+			}
+		});
 	}
 
 }

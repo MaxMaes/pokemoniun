@@ -1060,11 +1060,14 @@ public class GameClient extends BasicGame
 	{
 		// Right Click
 		if(button == 1)
+		{
 			// loop through the players and look for one that's in the
 			// place where the user just right-clicked
 			for(Player p : m_mapMatrix.getPlayers())
+			{
 				if(x >= p.getX() + m_mapMatrix.getCurrentMap().getXOffset() && x <= p.getX() + 32 + m_mapMatrix.getCurrentMap().getXOffset()
 						&& y >= p.getY() + m_mapMatrix.getCurrentMap().getYOffset() && y <= p.getY() + 40 + m_mapMatrix.getCurrentMap().getYOffset())
+				{
 					// Brings up a popup menu with player options
 					if(!p.isOurPlayer())
 					{
@@ -1073,6 +1076,9 @@ public class GameClient extends BasicGame
 						root.getHUD().createPlayerPopupDialog(p.getUsername());
 						root.getHUD().showPlayerPopupDialogAt(x, y);
 					}
+				}
+			}
+		}
 		// Left click
 		if(button == 0)
 		{

@@ -505,6 +505,7 @@ class ItemPopup extends Widget
 
 	private PopupWindow popup;
 	private Widget rootWidget;
+	private Runnable usedCallback;
 
 	/**
 	 * Default Constructor
@@ -641,6 +642,10 @@ class ItemPopup extends Widget
 		{
 			m_team = new TeamPopup(this, id, true, isBattle, rootWidget);
 			m_team.setPopupPosition(popup.getInnerX() + popup.getWidth() - 1, m_use.getInnerY() - 15);
+			if(usedCallback != null)
+			{
+				m_team.setItemUsedCallback(usedCallback);
+			}
 		}
 		else
 		{
@@ -676,6 +681,11 @@ class ItemPopup extends Widget
 
 		// popup.adjustSize();
 	}
+
+	public void setItemUsedCallback(Runnable callback)
+	{
+		usedCallback = callback;
+	}
 }
 
 /**
@@ -693,6 +703,7 @@ class TeamPopup extends Widget
 	private boolean isBattle;
 
 	private PopupWindow popup;
+	private Runnable itemUsedCallback;
 
 	/**
 	 * Default constructor
@@ -752,6 +763,10 @@ class TeamPopup extends Widget
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(id + "," + pokeIndex);
 			GameClient.getInstance().getSession().send(message);
+			if(itemUsedCallback != null)
+			{
+				itemUsedCallback.run();
+			}
 		}
 		else
 		{
@@ -786,5 +801,10 @@ class TeamPopup extends Widget
 		}
 
 		setSize(110, GameClient.getInstance().getOurPlayer().getPartyCount() * 25 + 20);
+	}
+
+	public void setItemUsedCallback(Runnable callback)
+	{
+		itemUsedCallback = callback;
 	}
 }

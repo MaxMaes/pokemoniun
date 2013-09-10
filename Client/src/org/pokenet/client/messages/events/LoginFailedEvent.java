@@ -12,8 +12,15 @@ public class LoginFailedEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().showMessageDialog("Login failed, please try again!");
-		GameClient.getInstance().getGUIPane().hideLoadingScreen();
-		GameClient.getInstance().getLoginScreen().enableLogin();
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				GameClient.getInstance().showMessageDialog("Login failed, please try again!");
+				GameClient.getInstance().getGUIPane().hideLoadingScreen();
+				GameClient.getInstance().getLoginScreen().enableLogin();
+			}
+		});
 	}
 }

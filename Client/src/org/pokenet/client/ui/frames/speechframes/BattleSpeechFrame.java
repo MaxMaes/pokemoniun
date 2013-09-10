@@ -1,7 +1,5 @@
 package org.pokenet.client.ui.frames.speechframes;
 
-
-
 public class BattleSpeechFrame extends SpeechFrame implements Runnable
 {
 	private String advancedLine;

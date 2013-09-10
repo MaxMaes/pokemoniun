@@ -239,10 +239,16 @@ public class LoginScreen extends DesktopArea
 	public void enterKeyDefault()
 	{
 		if(!m_languageDialog.isVisible())
+		{
 			if(m_select.isVisible())
+			{
 				m_select.goServer();
+			}
 			else
+			{
 				m_login.goLogin();
+			}
+		}
 	}
 
 	public void loadBackground(GUI gui)

@@ -1,10 +1,8 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.Label;
@@ -76,7 +74,9 @@ public class LoginDialog extends Widget
 			public void run()
 			{
 				if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
+				{
 					login();
+				}
 			}
 		});
 		add(m_login);
@@ -96,7 +96,7 @@ public class LoginDialog extends Widget
 
 		setVisible(false);
 	}
-	
+
 	@Override
 	public void layout()
 	{
@@ -125,7 +125,9 @@ public class LoginDialog extends Widget
 	public void goLogin()
 	{
 		if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
+		{
 			login();
+		}
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class LoginDialog extends Widget
 	private void login()
 	{
 		m_login.setEnabled(false);
-		//GameClient.getInstance().getLoadingScreen().setVisible(true);
+		// GameClient.getInstance().getLoadingScreen().setVisible(true);
 		GameClient.getInstance().getUserManager().login(m_username.getText(), m_password.getText());
 	}
 

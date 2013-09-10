@@ -312,8 +312,6 @@ public class BattleNarrator
 	{
 		m_trainer = GameClient.getInstance().getOurPlayer().getUsername();
 		addSpeech(m_translator.get(10));
-		BattleManager.getInstance().endBattle();
-		BattleManager.getInstance().setFinish(true);
 		m_isBattling = false;
 	}
 

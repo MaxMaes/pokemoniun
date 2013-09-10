@@ -12,6 +12,6 @@ public class BattleRequestMoveEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informMoveRequested();
+		BattleManager.getInstance().getNarrator().informMoveRequested();
 	}
 }

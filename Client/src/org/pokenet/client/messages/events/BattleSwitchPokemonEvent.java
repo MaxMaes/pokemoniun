@@ -12,6 +12,6 @@ public class BattleSwitchPokemonEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informSwitchRequested();
+		BattleManager.getInstance().getNarrator().informSwitchRequested();
 	}
 }

@@ -227,20 +227,7 @@ public class BattleCanvas extends Widget
 		enemyHP = new ProgressBar(0, BattleManager.getInstance().getCurEnemyPoke().getMaxHP());
 		enemyHP.setSize(72, 5);
 		enemyHP.setValue(BattleManager.getInstance().getCurEnemyPoke().getCurHP());
-		System.out.println("Current HP " + BattleManager.getInstance().getCurEnemyPoke().getCurHP());
-		if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
-		{
-			setEnemyHPColor(Color.green);
-		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-		{
-			setEnemyHPColor(Color.orange);
-		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-		{
-			setEnemyHPColor(Color.red);
-		}
+		updateEnemyHPBarColor();
 
 		enemyHP.setPosition(36, 27);
 		add(enemyHPBar);
@@ -256,19 +243,7 @@ public class BattleCanvas extends Widget
 		playerHP = new ProgressBar(0, BattleManager.getInstance().getCurPoke().getMaxHP());
 		playerHP.setSize(72, 5);
 		playerHP.setValue(BattleManager.getInstance().getCurPoke().getCurHP());
-		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
-		{
-			setPlayerHPColor(Color.green);
-		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-		{
-			setPlayerHPColor(Color.orange);
-		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-		{
-			setPlayerHPColor(Color.red);
-		}
+		updatePlayerHPBarColor();
 
 		playerHP.setPosition(170, 125);
 		add(playerHP);
@@ -422,8 +397,6 @@ public class BattleCanvas extends Widget
 
 		initComponents();
 		positionCanvas();
-		// drawBackground();
-		// drawOurPoke();
 		try
 		{
 			drawOurInfo();
@@ -439,9 +412,6 @@ public class BattleCanvas extends Widget
 		}
 		initPlayerHPBar();
 		initPlayerXPBar();
-		// drawEnemyPoke();
-		// drawEnemyInfo();
-
 	}
 
 	/**
@@ -508,20 +478,7 @@ public class BattleCanvas extends Widget
 			else
 				currentHP -= 1.00f;
 			enemyHP.setValue(currentHP);
-
-			if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
-			{
-				setEnemyHPColor(Color.green);
-			}
-			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-					&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-			{
-				setEnemyHPColor(Color.orange);
-			}
-			else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
-			{
-				setEnemyHPColor(Color.red);
-			}
+			updateEnemyHPBarColor();
 			mTimer.reset();
 		}
 	}
@@ -548,21 +505,8 @@ public class BattleCanvas extends Widget
 			else
 				currentHP -= 1.00f;
 			playerHP.setValue(currentHP);
-			// playerHP.setText(BattleManager.getInstance().getCurPoke().getCurHP() + "/" + BattleManager.getInstance().getCurPoke().getMaxHP());
+			updatePlayerHPBarColor();
 
-			if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
-			{
-				setPlayerHPColor(Color.green);
-			}
-			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-					&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-			{
-				setPlayerHPColor(Color.orange);
-			}
-			else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
-			{
-				setPlayerHPColor(Color.red);
-			}
 			mTimer.reset();
 		}
 	}
@@ -598,6 +542,40 @@ public class BattleCanvas extends Widget
 	public void setPlayerMaxHP(int maxHP)
 	{
 		playerHP.setMaximum(maxHP);
+	}
+
+	public void updatePlayerHPBarColor()
+	{
+		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
+		{
+			setPlayerHPColor(Color.green);
+		}
+		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
+				&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		{
+			setPlayerHPColor(Color.orange);
+		}
+		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		{
+			setPlayerHPColor(Color.red);
+		}
+	}
+
+	public void updateEnemyHPBarColor()
+	{
+		if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
+		{
+			setEnemyHPColor(Color.green);
+		}
+		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
+				&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		{
+			setEnemyHPColor(Color.orange);
+		}
+		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		{
+			setEnemyHPColor(Color.red);
+		}
 	}
 
 	public void setPlayerHPColor(Color c)

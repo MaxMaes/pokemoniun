@@ -12,6 +12,6 @@ public class BattleFaintEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informFaintedPoke(Request.readString());
+		BattleManager.getInstance().getNarrator().informFaintedPoke(Request.readString());
 	}
 }

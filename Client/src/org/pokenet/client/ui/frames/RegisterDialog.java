@@ -618,33 +618,38 @@ public class RegisterDialog extends ResizableFrame
 							if(!m_terms.isEnabled())
 							{
 								m_register.setEnabled(false);
-								GameClient.getInstance().getGUIPane().showLoadingScreen();
 								String bday = m_day.getText() + "/" + m_month.getText() + "/" + m_year.getText();
 								GameClient.getInstance().getUserManager().register(m_username.getText(), m_password.getText(), m_email.getText(), bday, m_starter, m_gender == 0 ? 11 : 20, m_region);
 							}
 							else
-								System.out.println(translated.get(28));
-							GameClient.getInstance().showMessageDialog(translated.get(28));
+							{
+								GameClient.getInstance().showMessageDialog(translated.get(28));
+							}
 						}
 						else
-							System.out.println(translated.get(28));
-						GameClient.getInstance().showMessageDialog("No starter selected");
+						{
+							GameClient.getInstance().showMessageDialog("No starter selected");
+						}
 					}
 					else
-						System.out.println(translated.get(28));
-					GameClient.getInstance().showMessageDialog(translated.get(29));
+					{
+						GameClient.getInstance().showMessageDialog(translated.get(29));
+					}
 				}
 				else
-					System.out.println(translated.get(28));
-				GameClient.getInstance().showMessageDialog(translated.get(30));
+				{
+					GameClient.getInstance().showMessageDialog(translated.get(30));
+				}
 			}
 			else
-				System.out.println(translated.get(28));
-			GameClient.getInstance().showMessageDialog(translated.get(31));
+			{
+				GameClient.getInstance().showMessageDialog(translated.get(31));
+			}
 		}
 		else
-			System.out.println(translated.get(28));
-		GameClient.getInstance().showMessageDialog(translated.get(32));
+		{
+			GameClient.getInstance().showMessageDialog(translated.get(32));
+		}
 	}
 
 	/**

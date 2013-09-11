@@ -291,10 +291,9 @@ public class LoginScreen extends DesktopArea
 		gui.setBackground(i);
 	}
 
-	public Object getRegistration()
+	public RegisterDialog getRegistration()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return m_register;
 	}
 
 	/**

@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
-
-<properties>
- 
- <property name="dayPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
- 
- <property name="dayPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
- 
- <property name="fishPokemonChances" value=""/>
+ <properties>
+  <property name="dayPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
+  <property name="dayPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
+  <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
- 
- <property name="nightPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
- 
- <property name="nightPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
+  <property name="nightPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,10;Sandslash,20;"/>
+  <property name="nightPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
   <property name="pvp" value="yes"/>
- 
- <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
- 
- <property name="wildProbability" value="4"/>
+  <property name="wildProbability" value="4"/>
   <property name="xOffsetModifier" value="0"/>
- 
- <property name="yOffsetModifier" value="0"/>
-
-</properties>
-
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Cliffs02.tsx"/>
  <tileset firstgid="343" source="SinnohInteriorSet1.tsx"/>
@@ -42,7 +31,7 @@
  </layer>
  <layer name="Collisions" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Zuw7CMAxFvcFaGEEqfAQbK6zw/19DIlERWSLvxE57j3SXqkOPnMStS9SHyeTQML2ABzzgsX6Pk8n5m+vAHi4taiOBFo97wr0Pk2ehx0y/NfkvrXmZvNm1Za/E7pNjh+csIbYu8OgDPHQxikfofI7t8dIePnhf8dVGswfvK6N6cOBRh5R3LR/SHrWAhy624GGzD0QLbm/PCQBANzsKn0cjnFcpcyA7A7qwSJ9XSx1uFO+hsSfmzBXh0Q546MHu8ZT9rdUj99+BtEfKnEfKI+Yb3Z3z5K4pDfVwKfkftTWPWnMcH6gHPFoAj/V7fACv/RdCECcAAA==
+   H4sIAAAAAAAAC+2ZQQ4CIQxF2alLdamJegh3bnWr9z+NkEgkJAMUaCn6X/I3ZmLmpVPKMMbIsLXZMUYKeMADHr/vcbA5fnKZ2COEozYj0OJxI1x7t3k0epzM95lcCjdPm1f0m++V0j7ZC9xnC6V1gYcM8NDFLB659bl0xo/2SBHPlVRtNHvEc2VWjxh49IGy10ox2qMX8NDFP3i4rDPRQjjbawIA0M3K5NejGdYryjmQOwM6R3HrVcpxw3z/vg5XgsfSTBz5PllzrggPPqQ8/L6Gq08kPbjq4nqc0t89PML9Zq/a1H47aPVorQ3lnGeUR8k7enjOU/tMaahHSMv3KHjAAx7wmN2D+p9aPd40LofvECcAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="50">

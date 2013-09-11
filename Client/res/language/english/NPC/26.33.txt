@@ -1,0 +1,3 @@
+Welcome to the Storage System
+You cleared Area 1.
+Your Pokemon now are fully healed.

@@ -104,6 +104,16 @@ public class NetworkService
 	}
 
 	/**
+	 * Returns the save manager.
+	 * 
+	 * @return
+	 */
+	public SaveManager getSaveManager()
+	{
+		return m_saveManager;
+	}
+
+	/**
 	 * Logs out all players and stops login/logout/registration managers and the autosaver
 	 */
 	public void logoutAll()

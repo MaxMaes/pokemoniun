@@ -159,24 +159,25 @@ public class AdvanceMechanics extends BattleMechanics
 	}
 
 	@Override
+	/* TODO: http://bulbapedia.bulbagarden.net/wiki/Individual_values#Generation_III Check please! */
 	public int calculateStat(Pokemon p, int i) throws StatException
 	{
 		if(i < 0 || i > 5)
 			throw new StatException();
-		int common = (int) ((int) (2.0 * p.getBase(i) + p.getIv(i) + p.getEv(i) / 4.0) * (p.getLevel() / 100.0));
 		if(i == Pokemon.S_HP)
 		{
+			/* HP is calculated differently. */
+			double ivAlgorithmHP = (((p.getIv(i) + (2.0 * p.getBase(i)) + (p.getEv(i) / 4.0) + 100) * p.getLevel()) / 100.0) + 10;
 			if(p.getSpeciesName().equals("Shedinja"))
 			{
-				// Shedinja always has 1 hp.
+				/* Shedinja always has 1 hp. */
 				return 1;
 			}
-			else
-			{
-				return common + 10 + p.getLevel();
-			}
+			return (int) ivAlgorithmHP;
 		}
-		return (int) ((common + 5) * p.getNature().getEffect(i));
+		/* Calculate value for other stats. */
+		double ivAlgorithm = ((((p.getIv(i) + (2.0 * p.getBase(i)) + (p.getEv(i) / 4.0)) * p.getLevel()) / 100.0) + 5) * p.getNature().getEffect(i);
+		return (int) ivAlgorithm;
 	}
 
 	public boolean isCriticalHit(PokemonMove move, Pokemon user, Pokemon target)

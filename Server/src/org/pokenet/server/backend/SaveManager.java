@@ -27,15 +27,24 @@ public class SaveManager
 	 * @param bag
 	 * @return
 	 */
-	public boolean saveBag(Bag bag)
+	public void saveBag(Bag bag)
 	{
 		for(BagItem item : bag.getItems())
 		{
-			if(item != null)
+			if(item != null && item.getQuantity() > 0)
 				m_database.query("INSERT INTO pn_bag (member,item,quantity) VALUES (" + bag.getMemberId() + ", " + item.getItemNumber() + ", " + item.getQuantity()
 						+ ") ON DUPLICATE KEY UPDATE quantity = " + item.getQuantity() + ";");
 		}
-		return true;
+	}
+
+	public void updateBagItem(int memberId, int itemNumber, int quantity)
+	{
+		m_database.query("UPDATE pn_bag SET quantity = " + quantity + " WHERE member = " + memberId + " AND item = " + itemNumber + ";");
+	}
+
+	public void removeBagItem(int memberId, int itemNumber)
+	{
+		m_database.query("DELETE FROM pn_bag WHERE member = " + memberId + " AND item = " + itemNumber + ";");
 	}
 
 	/**
@@ -104,95 +113,95 @@ public class SaveManager
 	/**
 	 * Saves a player object to the database (Updates an existing player)
 	 * 
-	 * @param p
+	 * @param player
 	 * @return
 	 */
-	public int savePlayer(Player p)
+	public int savePlayer(Player player)
 	{
-		try(ResultSet data = m_database.query("SELECT lastLoginTime FROM `pn_members` WHERE id='" + p.getId() + "'"))
+		try(ResultSet data = m_database.query("SELECT lastLoginTime FROM `pn_members` WHERE id='" + player.getId() + "'"))
 		{
 			fail = 0;
 			/* First, check if they have logged in somewhere else. This is useful for when a server loses it's internet connection. */
-			if(data.first() && data.getLong("lastLoginTime") == p.getLastLoginTime())
+			if(data.first() && data.getLong("lastLoginTime") == player.getLastLoginTime())
 			{
 				/* Check they are not trading */
-				if(p.isTrading())
+				if(player.isTrading())
 					/* If the trade is still executing, don't save them yet */
-					if(!p.getTrade().endTrade())
+					if(!player.getTrade().endTrade())
 						fail++;
 				// return false;
 				/* Update the player row */
 				String badges = "";
-				for(int i = 0; i < p.getBadges().length; i++)
-					if(p.hasBadge(i))
+				for(int i = 0; i < player.getBadges().length; i++)
+					if(player.hasBadge(i))
 						badges += "1";
 					else
 						badges += "0";
-				m_database.query("UPDATE pn_members SET " + "muted='" + p.isMuted() + "', " + "sprite='" + p.getRawSprite() + "', " + "money='" + p.getMoney() + "', " + "skHerb='"
-						+ p.getHerbalismExp() + "', " + "skCraft='" + p.getCraftingExp() + "', " + "skFish='" + p.getFishingExp() + "', " + "skTrain='" + p.getTrainingExp() + "', " + "skCoord='"
-						+ p.getCoordinatingExp() + "', " + "skBreed='" + p.getBreedingExp() + "', " + "x='" + p.getX() + "', " + "y='" + p.getY() + "', " + "mapX='" + p.getMapX() + "', " + "mapY='"
-						+ p.getMapY() + "', " + "healX='" + p.getHealX() + "', " + "healY='" + p.getHealY() + "', " + "healMapX='" + p.getHealMapX() + "', " + "healMapY='" + p.getHealMapY() + "', "
-						+ "isSurfing='" + String.valueOf(p.isSurfing()) + "', " + "badges='" + badges + "' " + "WHERE id='" + p.getId() + "';");
+				m_database.query("UPDATE pn_members SET " + "muted='" + player.isMuted() + "', " + "sprite='" + player.getRawSprite() + "', " + "money='" + player.getMoney() + "', " + "skHerb='"
+						+ player.getHerbalismExp() + "', " + "skCraft='" + player.getCraftingExp() + "', " + "skFish='" + player.getFishingExp() + "', " + "skTrain='" + player.getTrainingExp()
+						+ "', " + "skCoord='" + player.getCoordinatingExp() + "', " + "skBreed='" + player.getBreedingExp() + "', " + "x='" + player.getX() + "', " + "y='" + player.getY() + "', "
+						+ "mapX='" + player.getMapX() + "', " + "mapY='" + player.getMapY() + "', " + "healX='" + player.getHealX() + "', " + "healY='" + player.getHealY() + "', " + "healMapX='"
+						+ player.getHealMapX() + "', " + "healMapY='" + player.getHealMapY() + "', " + "isSurfing='" + String.valueOf(player.isSurfing()) + "', " + "badges='" + badges + "' "
+						+ "WHERE id='" + player.getId() + "';");
 				/* Second, update the party */
 				// Save all the Pokemon
 				for(int i = 0; i < 6; i++)
-					if(p.getParty() != null && p.getParty()[i] != null)
-						if(p.getParty()[i].getDatabaseID() < 1)
+					if(player.getParty() != null && player.getParty()[i] != null)
+						if(player.getParty()[i].getDatabaseID() < 1)
 						{
 							// This is a new Pokemon, add it to the database
-							if(saveNewPokemon(p.getParty()[i], p.getName()) < 1)
+							if(saveNewPokemon(player.getParty()[i], player.getName()) < 1)
 							{
-								System.out.println("failed to save pokemon: " + p.getParty()[i].getName() + " of " + p.getName());
+								System.out.println("failed to save pokemon: " + player.getParty()[i].getName() + " of " + player.getName());
 								fail++;
 								// return false;
 							}
 						}
 						else // Old Pokemon, just update
-						if(!savePokemon(p.getParty()[i], p.getName()))
+						if(!savePokemon(player.getParty()[i], player.getName()))
 						{
 							fail++;
 							// return false;
 						}
 				// Save all the Pokemon id's in the player's party
-				if(p.getParty() != null)
-					m_database.query("UPDATE pn_party SET " + "pokemon0='" + (p.getParty()[0] != null ? p.getParty()[0].getDatabaseID() : -1) + "', " + "pokemon1='"
-							+ (p.getParty()[1] != null ? p.getParty()[1].getDatabaseID() : -1) + "', " + "pokemon2='" + (p.getParty()[2] != null ? p.getParty()[2].getDatabaseID() : -1) + "', "
-							+ "pokemon3='" + (p.getParty()[3] != null ? p.getParty()[3].getDatabaseID() : -1) + "', " + "pokemon4='" + (p.getParty()[4] != null ? p.getParty()[4].getDatabaseID() : -1)
-							+ "', " + "pokemon5='" + (p.getParty()[5] != null ? p.getParty()[5].getDatabaseID() : -1) + "' " + "WHERE member='" + p.getId() + "';");
+				if(player.getParty() != null)
+					m_database.query("UPDATE pn_party SET " + "pokemon0='" + (player.getParty()[0] != null ? player.getParty()[0].getDatabaseID() : -1) + "', " + "pokemon1='"
+							+ (player.getParty()[1] != null ? player.getParty()[1].getDatabaseID() : -1) + "', " + "pokemon2='"
+							+ (player.getParty()[2] != null ? player.getParty()[2].getDatabaseID() : -1) + "', " + "pokemon3='"
+							+ (player.getParty()[3] != null ? player.getParty()[3].getDatabaseID() : -1) + "', " + "pokemon4='"
+							+ (player.getParty()[4] != null ? player.getParty()[4].getDatabaseID() : -1) + "', " + "pokemon5='"
+							+ (player.getParty()[5] != null ? player.getParty()[5].getDatabaseID() : -1) + "' " + "WHERE member='" + player.getId() + "';");
 				else
 					return fail;
 				/* Save the player's bag */
-				if(p.getBag() == null || !saveBag(p.getBag()))
-				{
-					fail++;
-					// return false;
-				}
+				if(player.getBag() != null)
+					saveBag(player.getBag());
 				/* Finally, update all the boxes */
-				if(p.getBoxes() != null)
+				if(player.getBoxes() != null)
 					for(int i = 0; i < 9; i++)
-						if(p.getBoxes()[i] != null)
+						if(player.getBoxes()[i] != null)
 							/* Save all pokemon in box */
-							for(int j = 0; j < p.getBoxes()[i].getPokemon().length; j++)
-								if(p.getBoxes()[i].getPokemon()[j] != null)
-									if(p.getBoxes()[i].getPokemon()[j].getDatabaseID() < 1)
+							for(int j = 0; j < player.getBoxes()[i].getPokemon().length; j++)
+								if(player.getBoxes()[i].getPokemon()[j] != null)
+									if(player.getBoxes()[i].getPokemon()[j].getDatabaseID() < 1)
 									{
 										/* This is a new Pokemon, create it in the database */
-										if(saveNewPokemon(p.getBoxes()[i].getPokemon(j), p.getName()) < 1)
+										if(saveNewPokemon(player.getBoxes()[i].getPokemon(j), player.getName()) < 1)
 										{
-											System.out.println("failed to save pokemon: " + p.getBoxes()[i].getPokemon(j).getName() + " of " + p.getName());
+											System.out.println("failed to save pokemon: " + player.getBoxes()[i].getPokemon(j).getName() + " of " + player.getName());
 											fail++;
 											// return false;
 										}
 									}
 									else /* Update an existing pokemon */
-									if(!savePokemon(p.getBoxes()[i].getPokemon()[j], p.getName()))
+									if(!savePokemon(player.getBoxes()[i].getPokemon()[j], player.getName()))
 									{
 										fail++;
 										// return false;
 									}
 				// Dispose of the player object
-				if(p.getMap() != null)
-					p.getMap().removeChar(p);
+				if(player.getMap() != null)
+					player.getMap().removeChar(player);
 				return fail;
 			}
 			else
@@ -200,12 +209,13 @@ public class SaveManager
 		}
 		catch(Exception e)
 		{
-			System.err.println("UPDATE pn_members SET " + "muted='" + p.isMuted() + "', " + "sprite='" + p.getRawSprite() + "', " + "money='" + p.getMoney() + "', " + "skHerb='" + p.getHerbalismExp()
-					+ "', " + "skCraft='" + p.getCraftingExp() + "', " + "skFish='" + p.getFishingExp() + "', " + "skTrain='" + p.getTrainingExp() + "', " + "skCoord='" + p.getCoordinatingExp()
-					+ "', " + "skBreed='" + p.getBreedingExp() + "', " + "x='" + p.getX() + "', " + "y='" + p.getY() + "', " + "mapX='" + p.getMapX() + "', " + "mapY='" + p.getMapY() + "', "
-					+ "healX='" + p.getHealX() + "', " + "healY='" + p.getHealY() + "', " + "healMapX='" + p.getHealMapX() + "', " + "healMapY='" + p.getHealMapY() + "', " + "isSurfing='"
-					+ String.valueOf(p.isSurfing()) + "', " + "badges='" + "' " + "WHERE id='" + p.getId() + "'");
-			System.err.println(p.getName() + " has " + fail + " fails.");
+			System.err.println("UPDATE pn_members SET " + "muted='" + player.isMuted() + "', " + "sprite='" + player.getRawSprite() + "', " + "money='" + player.getMoney() + "', " + "skHerb='"
+					+ player.getHerbalismExp() + "', " + "skCraft='" + player.getCraftingExp() + "', " + "skFish='" + player.getFishingExp() + "', " + "skTrain='" + player.getTrainingExp() + "', "
+					+ "skCoord='" + player.getCoordinatingExp() + "', " + "skBreed='" + player.getBreedingExp() + "', " + "x='" + player.getX() + "', " + "y='" + player.getY() + "', " + "mapX='"
+					+ player.getMapX() + "', " + "mapY='" + player.getMapY() + "', " + "healX='" + player.getHealX() + "', " + "healY='" + player.getHealY() + "', " + "healMapX='"
+					+ player.getHealMapX() + "', " + "healMapY='" + player.getHealMapY() + "', " + "isSurfing='" + String.valueOf(player.isSurfing()) + "', " + "badges='" + "' " + "WHERE id='"
+					+ player.getId() + "'");
+			System.err.println(player.getName() + " has " + fail + " fails.");
 			e.printStackTrace();
 			return fail;
 		}

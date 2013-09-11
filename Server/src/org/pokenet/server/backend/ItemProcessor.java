@@ -225,9 +225,11 @@ public class ItemProcessor implements Runnable
 							returnValue = evolveWithItem(evolution, poke, player);
 						else if(itemId == ItemID.DAWN_STONE && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
 							returnValue = evolveWithItem(evolution, poke, player);
-						return returnValue;
+
 					}
+
 				}
+				return returnValue;
 			}
 			else if(item.getCategory().equalsIgnoreCase("MEDICINE"))
 			{

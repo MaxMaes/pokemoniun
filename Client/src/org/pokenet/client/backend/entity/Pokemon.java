@@ -67,7 +67,7 @@ public class Pokemon
 		else
 			index = String.valueOf(i);
 
-		path = respath + "res/pokemon/icons/" + index + ".gif";
+		path = respath + "res/pokemon/icons/" + index + ".png";
 		return path;
 	}
 

@@ -21,6 +21,7 @@ public class OurPlayer extends Player
 	private int[] m_pokedex = new int[494];
 	private OurPokemon[] m_pokemon;
 	private int m_trainerLvl = -1;
+	private boolean isBoxing;
 
 	/**
 	 * Default constructor
@@ -31,6 +32,7 @@ public class OurPlayer extends Player
 		m_items = new ArrayList<PlayerItem>();
 		m_badges = new int[42];
 		m_money = 0;
+		isBoxing = false;
 	}
 
 	/**
@@ -436,5 +438,15 @@ public class OurPlayer extends Player
 			if(m_pokemon[i] != null)
 				r++;
 		return r;
+	}
+
+	public boolean isBoxing()
+	{
+		return isBoxing;
+	}
+
+	public void setBoxing(boolean isBoxing)
+	{
+		this.isBoxing = isBoxing;
 	}
 }

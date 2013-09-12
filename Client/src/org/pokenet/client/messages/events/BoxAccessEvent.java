@@ -30,8 +30,11 @@ public class BoxAccessEvent implements MessageEvent
 		else
 			for(int i = 0; i < pokes.length; i++)
 				pokes[i] = -1;
-		if(GameClient.getInstance().getHUD().hasBoxDialog())
+		if(!GameClient.getInstance().getHUD().hasBoxDialog())
+		{
 			GameClient.getInstance().getHUD().showBoxDialog(pokes);
+			GameClient.getInstance().getOurPlayer().setBoxing(true);
+		}
 		else
 			GameClient.getInstance().getHUD().getBoxDialog().changeBox(pokes);
 	}

@@ -24,7 +24,7 @@ public enum ServerPacket
 	RELEASE_POKEMON(20),
 	SWAP_POKEMON_FROM_BOX(21),
 	FINISH_BOX_INTERACTION(22),
-	//X(23),
+	SUMMARY_POKEMON_IN_BOX(23), //not used yet
 	//X(24),
 	//X(25),
 	//X(26),

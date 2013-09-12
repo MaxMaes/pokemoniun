@@ -1860,7 +1860,19 @@ public class Player extends Character implements Battleable, Tradeable
 		m_pokemon[partySlot] = m_boxes[box].getPokemon(boxSlot);
 		m_boxes[box].setPokemon(boxSlot, temp);
 		if(m_pokemon[partySlot] != null)
+		{
 			updateClientParty(partySlot);
+			String packet = "";
+			for(int i = 0; i < m_boxes[box].getPokemon().length; i++)
+				if(m_boxes[box].getPokemon(i) != null)
+					packet += m_boxes[box].getPokemon(i).getSpeciesNumber() + ",";
+				else
+					packet += ",";
+			ServerMessage message = new ServerMessage(ClientPacket.ACCESS_BOX);
+			message.addInt(1);
+			message.addString(packet);
+			getSession().Send(message);
+		}
 		else
 		{
 			ServerMessage partyLeave = new ServerMessage(ClientPacket.POKE_LEAVE_PARTY);

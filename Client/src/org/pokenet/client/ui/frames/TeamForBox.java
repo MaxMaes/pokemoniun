@@ -63,6 +63,8 @@ public class TeamForBox extends ResizableFrame
 		setPosition(GameClient.getInstance().getHUD().getWidth() / 2 - (parent.getWidth() + getWidth()) / 2 + parent.getWidth(), 200 - getHeight() / 2);
 		parent.setPosition(GameClient.getInstance().getHUD().getWidth() / 2 - (parent.getWidth() + getWidth()) / 2, 200 - getHeight() / 2);
 		m_accept.setEnabled(true);
+		for(int i = 0; i < 6; i++)
+			m_pokeIcon[i].setEnabled(true);
 	}
 
 	/**
@@ -110,6 +112,8 @@ public class TeamForBox extends ResizableFrame
 			public void run()
 			{
 				switchPokes(m_boxNumber, m_boxIndex, m_teamIndex);
+				for(int i = 0; i < 6; i++)
+					m_pokeIcon[i].setEnabled(false);
 				m_accept.setEnabled(false);
 			}
 		});

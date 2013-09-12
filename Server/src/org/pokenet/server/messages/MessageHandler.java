@@ -91,7 +91,7 @@ public class MessageHandler
 		messages.put(20, new ReleasePokemonEvent());
 		messages.put(21, new SwapPokemonBoxPartyEvent());
 		messages.put(22, new FinishBoxingEvent());
-		// messages.put(23, new ());
+		// messages.put(23, new ()); //TODO: summary pokemon in box
 		// messages.put(24, new ());
 		// messages.put(25, new ());
 		// messages.put(26, new ());

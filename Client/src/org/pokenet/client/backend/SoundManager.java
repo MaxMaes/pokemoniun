@@ -66,9 +66,9 @@ public class SoundManager extends Thread
 	@Override
 	public void run()
 	{
-		while(m_isRunning && ! m_mute)
+		while(m_isRunning)
 		{
-			if(m_trackChanged && m_trackName != null)
+			if(m_trackChanged && m_trackName != null && !m_mute)
 			{
 				if(!m_fileList.containsKey(m_trackName))
 				{
@@ -193,30 +193,6 @@ public class SoundManager extends Thread
 		catch(IOException ioe)
 		{
 			ioe.printStackTrace();
-		}
-	}
-	
-	private class SoundThread implements Runnable
-	{
-		private String key;
-		private Audio music;
-
-		public SoundThread(String audioKey)
-		{
-			key = audioKey;
-		}
-
-		public void run()
-		{
-			try
-			{
-				music = AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(key)));
-				m_files.put(key, (AudioImpl) music);
-			}
-			catch(IOException ioe)
-			{
-				ioe.printStackTrace();
-			}
 		}
 	}
 }

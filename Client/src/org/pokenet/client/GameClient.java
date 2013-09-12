@@ -1160,6 +1160,8 @@ public class GameClient extends BasicGame
 		{
 			GameClient.setOptions(new Options());
 			setFullscreen(options.isFullscreenEnabled());
+			m_soundPlayer.mute(options.isSoundMuted());
+			m_weather.setEnabled(options.isWeatherEnabled());
 		}
 		catch(Exception e)
 		{

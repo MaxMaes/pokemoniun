@@ -54,20 +54,13 @@ public class OptionsDialog extends ResizableFrame
 			public void run()
 			{
 				List<String> translated = Translator.translate("_GUI");
-
 				m_options.setFullscreenEnabled(m_fullScreen.isActive());
 				if(m_muteSound.isActive())
 					m_options.setVolume(0);
 				else
 					m_options.setVolume(100);
-				GameClient.getInstance().getSoundPlayer().mute(m_options.isSoundMuted());
-
 				m_options.setSurroundingMapsEnabled(!m_disableMaps.isActive());
-				GameClient.getInstance().setLoadSurroundingMaps(m_options.isSurroundingMapsEnabled());
-
 				m_options.setWeatherEnabled(!m_disableWeather.isActive());
-				GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isActive());
-
 				m_options.saveSettings();
 				// GameClient.getInstance().messageDialog(translated.get(19),
 				// getDisplay()); TODO
@@ -89,6 +82,7 @@ public class OptionsDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
+		setTitle("Settings");
 		m_fullScreen.setPosition(10, 30);
 		m_muteSound.setPosition(150, 30);
 		m_disableMaps.setPosition(10, 65);

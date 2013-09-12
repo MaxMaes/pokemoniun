@@ -1,7 +1,7 @@
 [npc]
 New Bark Town citizen
 right
-72
+373
 15
 18
 NULL

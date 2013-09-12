@@ -1,7 +1,7 @@
 [npc]
 Psychic Mark
 left
-97
+321
 19
 13
 Abra,13,Abra,13,Kadabra,15
@@ -15,7 +15,7 @@ false
 [npc]
 Schoolboy Alan
 down
-121
+261
 43
 8
 Tangela,16

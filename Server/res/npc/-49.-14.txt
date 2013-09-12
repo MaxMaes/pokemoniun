@@ -1,7 +1,7 @@
 [npc]
 Youngster Johnson
 right
-210
+353
 26
 26
 Ekans,33,Ekans,33,Raticate,34
@@ -15,7 +15,7 @@ false
 [npc]
 Scientist Ted
 right
-169
+344
 32
 19
 Electrode,29,Weezing,29
@@ -29,7 +29,7 @@ false
 [npc]
 Burglar Lewis
 right
-195
+314
 19
 21
 Growlithe,34,Ponyta,34
@@ -43,7 +43,7 @@ false
 [npc]
 Scientist Ivan
 down
-169
+344
 27
 9
 Magnemite,34,Electrode,34

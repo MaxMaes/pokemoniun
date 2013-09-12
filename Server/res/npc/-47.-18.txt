@@ -29,7 +29,7 @@ false
 [npc]
 Receptionist
 right
-70
+328
 6
 406
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Pokemaniac Winston
 down
-195
+278
 29
 35
 Slowpoke,25
@@ -15,7 +15,7 @@ false
 [npc]
 Picnicker Martha
 right
-30
+357
 15
 33
 Oddish,22,Bulbasaur,22
@@ -29,7 +29,7 @@ false
 [npc]
 Pokemaniac Steve
 right
-195
+279
 23
 23
 Charmander,22,Cubone,22
@@ -43,7 +43,7 @@ false
 [npc]
 Hiker Allen
 down
-101
+365
 36
 11
 Geodude,25
@@ -57,7 +57,7 @@ false
 [npc]
 Hiker Eric
 right
-101
+366
 41
 5
 Machop,20,Onix,20
@@ -71,7 +71,7 @@ false
 [npc]
 Picnicker Sofia
 down
-30
+357
 11
 15
 Jigglypuff,21,Pidgey,21,Meowth,21
@@ -85,7 +85,7 @@ false
 [npc]
 Hiker Dudley
 down
-101
+365
 5
 11
 Geodude,21,Geodude,21,Graveler,21
@@ -99,7 +99,7 @@ false
 [npc]
 Pokemaniac Cooper
 right
-195
+278
 1
 6
 Slowpoke,20,Slowpoke,20,Slowpoke,20

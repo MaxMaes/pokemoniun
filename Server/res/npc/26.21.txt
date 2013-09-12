@@ -1,7 +1,7 @@
 [npc]
 Triathlete Dylan
 right
-212
+361
 51
 10
 Doduo,18
@@ -29,7 +29,7 @@ false
 [npc]
 Pokemon Breeder Lydia
 down
-156
+383
 43
 14
 Wingull,12,Shroomish,12,Marill,12,Roselia,12,Skitty,12,Goldeen,12
@@ -43,7 +43,7 @@ false
 [npc]
 Bug Maniac Derek
 down
-24
+354
 28
 10
 Nincada,15,Dustox,15,Beautifly,15
@@ -57,7 +57,7 @@ false
 [npc]
 Triathlete Maria
 left
-58
+362
 8
 9
 Doduo,18

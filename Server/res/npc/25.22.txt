@@ -1,7 +1,7 @@
 [npc]
-Aroma lady Daisy
+Aroma Lady Daisy
 down
-20
+382
 37
 63
 Roselia,16
@@ -15,7 +15,7 @@ false
 [npc]
 Twin Amy
 down
-129
+262
 24
 66
 Plusle,16
@@ -29,7 +29,7 @@ false
 [npc]
 Twin Liv
 down
-129
+262
 25
 66
 Minum,16
@@ -43,7 +43,7 @@ false
 [npc]
 Pokefan Miguel
 up
-152
+274
 11
 68
 Skitty,16

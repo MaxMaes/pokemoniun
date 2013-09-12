@@ -1,7 +1,7 @@
 [npc]
 Citizen
 down
-57
+382
 5
 5
 NULL

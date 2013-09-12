@@ -1,7 +1,7 @@
 [npc]
 Receptionist
 down
-70
+328
 31
 8
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Trainer
 left
-210
+116
 46
 13
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Security Guard Barney
 down
-36
+327
 20
 8
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Engineer
 up
-195
+279
 12
 7
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Engineer
 up
-195
+343
 9
 7
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Engineer
 up
-195
+344
 6
 7
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Engineer
 up
-195
+344
 3
 7
 NULL
@@ -113,7 +113,7 @@ false
 [npc]
 Scientist
 up
-169
+279
 8
 13
 NULL

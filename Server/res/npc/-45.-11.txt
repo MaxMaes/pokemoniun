@@ -1,7 +1,7 @@
 [npc]
 Gary
 down
-49
+305
 6
 7
 Pidgeot,64,Alakazam,63,Tyranitar,63,Exeggutor,66,Gyarados,66,Charizard,70

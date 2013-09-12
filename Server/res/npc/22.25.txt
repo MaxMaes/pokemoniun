@@ -1,7 +1,7 @@
 [npc]
 Swimmer Douglas
 left
--1
+281
 46
 48
 Tentacool,24,Tentacool,24
@@ -14,7 +14,7 @@ false
 [/npc]
 Swimmer Kyla
 right
-198
+282
 69
 12
 Wailmer,26
@@ -28,7 +28,7 @@ false
 [npc]
 Fisherman Ned
 right
-219
+368
 65
 13
 Tentacool,11
@@ -42,7 +42,7 @@ false
 [npc]
 Fisherman Elliot
 right
-219
+368
 52
 14
 Magikarp,10,Tentacool,7,Magikarp,10

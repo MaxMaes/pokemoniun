@@ -1,7 +1,7 @@
 [npc]
 Game Corner Owner
 down
-166
+332
 7
 3
 NULL

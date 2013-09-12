@@ -1,7 +1,7 @@
 [npc]
 Citizen
 right
-72
+325
 5
 5
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Citizen
 down
-210
+261
 8
 3
 NULL

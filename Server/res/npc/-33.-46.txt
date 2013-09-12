@@ -19,7 +19,7 @@
 [npc]
 Fishing Guru
 down
-47
+368
 4
 6
 NULL

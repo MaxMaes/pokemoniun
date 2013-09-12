@@ -1,7 +1,7 @@
 [npc]
 Aroma Lady Celina
 Right
-20
+382
 18
 118
 Roselia,18
@@ -15,7 +15,7 @@ false
 [npc]
 Camper Tyron
 left
-28
+355
 14
 76
 Sandshrew,19
@@ -29,7 +29,7 @@ false
 [npc]
 Picknicker Bianca
 up
-30
+357
 13
 76
 Shroomish,18
@@ -43,7 +43,7 @@ false
 [npc]
 Interviewer Gabby
 down
-147
+358
 10
 50
 Exploud,53,Wigglytuff,54
@@ -57,7 +57,7 @@ false
 [npc]
 Interviewer Ty
 down
-26
+356
 11
 50
 Magneton,54,Manetric,54,
@@ -71,7 +71,7 @@ false
 [npc]
 Picknicker Irene
 left
-30
+357
 10
 16
 Shroomish,17,Marril,17
@@ -85,7 +85,7 @@ false
 [npc]
 Camper Travis
 right
-28
+355
 30
 33
 Sandshrew,18
@@ -99,7 +99,7 @@ false
 [npc]
 Picknicker Heidi
 left
-30
+357
 20
 25
 Sandshrew,22,Baltoy,22
@@ -113,7 +113,7 @@ false
 [npc]
 Camper Beau
 down
-28
+355
 18
 29
 Baltoy,21,Baltoy,21,Sandshrew,21
@@ -127,7 +127,7 @@ false
 [npc]
 Ruin Maniac Dusty
 up
-44
+365
 32
 84
 Sandslash,23
@@ -141,7 +141,7 @@ false
 [npc]
 Ruin Maniac Bryan
 right
-44
+365
 38
 18
 Sandshrew,24,Sandslash,24
@@ -155,7 +155,7 @@ false
 [npc]
 Cooltrainer Wilton
 down
-81
+268
 13
 20
 Electrike,17,Wailmer,17,Makuhita,17
@@ -169,7 +169,7 @@ false
 [npc]
 Cooltrainer Brooke
 up
-57
+266
 17
 30
 Wingull,17,Numel,17,Roselia,17

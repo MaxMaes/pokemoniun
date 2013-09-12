@@ -57,7 +57,7 @@ false
 [npc]
 Director
 down
-97
+274
 4
 8
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Hiker Daniel
 right
-101
+366
 6
 5
 Onix,11
@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Rusell
 left
-101
+366
 16
 10
 Geodude,4,Geodude,6,Geodude,8
@@ -29,7 +29,7 @@ false
 [npc]
 Firebreather Bill
 up
-44
+314
 16
 21
 Koffing,6,Koffing,6
@@ -43,7 +43,7 @@ false
 [npc]
 Pokemaniac Larry
 down
-152
+317
 6
 21
 Slowpoke,10
@@ -57,7 +57,7 @@ false
 [npc]
 Firebreather Ray
 left
-44
+320
 17
 28
 Vulpix,9

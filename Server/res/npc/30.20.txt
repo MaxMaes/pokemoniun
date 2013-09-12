@@ -1,7 +1,7 @@
 [npc]
 Parasol Lady Clarissa
 left
-53
+346
 19
 6
 Goldeen,29,Wailmer,29
@@ -15,7 +15,7 @@ false
 [npc]
 Bird Keeper Robert
 up
-80
+269
 30
 7
 Swablu,30
@@ -29,7 +29,7 @@ false
 [npc]
 Bird Keeper Colin
 down
-80
+269
 33
 12
 Natu,29,Swellow,29
@@ -43,7 +43,7 @@ false
 [npc]
 Parasol Lady
 right
-53
+346
 26
 36
 Castform,30
@@ -57,7 +57,7 @@ false
 [npc]
 Cooltrainer Jenn
 up
-57
+268
 25
 40
 Milotic,31
@@ -71,7 +71,7 @@ false
 [npc]
 Bug Maniac Brandon
 up
-24
+354
 28
 59
 Surskit,28,Surskit,28,Surskit,28
@@ -85,7 +85,7 @@ false
 [npc]
 Ruin Maniac Chip
 up
-44
+265
 7
 64
 Sandshrew,28,Sandshrew,28,Sandslash,28

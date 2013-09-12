@@ -1,7 +1,7 @@
 [npc]
 Camper Larry
 down
-28
+355
 28
 49
 Zigzagoon,18,Nuzleaf,18
@@ -15,7 +15,7 @@ false
 [npc]
 Pickniker Carol
 left
-30
+357
 33
 47
 Tailow,18,Lombre,18
@@ -29,7 +29,7 @@ false
 [npc]
 Hiker Trent
 left
-101
+365
 18
 47
 Geodude,16,Geodude,16,Geodude,16,Geodude,16
@@ -43,7 +43,7 @@ false
 [npc]
 Hiker Brice
 right
-101
+366
 22
 39
 Numel,18,Machop,18

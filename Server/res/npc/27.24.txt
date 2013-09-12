@@ -29,7 +29,7 @@ false
 [npc]
 Seasond_Sailor
 down
-142
+395
 28
 12
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 citizen
 down
-61
+332
 11
 38
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 citizen
 down
-61
+347
 5
 50
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 citizen
 down
-61
+351
 5
 42
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 citizen
 right
-61
+375
 6
 37
 NULL

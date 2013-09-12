@@ -1,7 +1,7 @@
 [npc]
 Guide Gent
 right
-167
+332
 10
 12
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Gambler
 right
-141
+274
 2
 6
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Gambler
 up
-166
+277
 7
 7
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Prize Exchange
 down
-96
+279
 3
 2
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Prize Exchange
 down
-96
+279
 5
 2
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Prize Exchange
 down
-96
+279
 7
 2
 NULL

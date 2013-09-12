@@ -1,7 +1,7 @@
 [npc]
 Black Belt Daisuke
 down
-104
+367
 20
 11
 Machoke,43,Machop,43,Machoke,43
@@ -15,7 +15,7 @@ false
 [npc]
 Juggler Nelson
 down
-42
+320
 31
 16
 Drowzee,41,Hypno,41,Kadabra,41,Kadabra,41
@@ -29,7 +29,7 @@ false
 [npc]
 Tamer Vincent
 right
-79
+345
 26
 10
 Persian,44,Golduck,44
@@ -43,7 +43,7 @@ false
 [npc]
 Juggler Gregory
 up
-42
+117
 36
 5
 Mr.Mime,48
@@ -57,7 +57,7 @@ false
 [npc]
 Pokemaniac Dawson
 down
-195
+278
 7
 4
 Charmeleon,40,Lapras,40,Lickitung,40

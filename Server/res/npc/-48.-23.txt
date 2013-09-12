@@ -15,7 +15,7 @@ false
 [npc]
 Receptionist
 up
-70
+328
 17
 13
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Visitor
 right
-141
+325
 7
 12
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Visitor
 down
-112
+332
 4
 8
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Visitor
 up
-51
+320
 14
 6
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Channeler
 left
-63
+259
 17
 7
 NULL

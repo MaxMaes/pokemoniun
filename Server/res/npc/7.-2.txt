@@ -1,7 +1,7 @@
 [npc]
 Lass Julia
 right
-72
+272
 92
 13
 Clefairy,22,Clefairy,22
@@ -15,7 +15,7 @@ false
 [npc]
 Gamer Rich
 down
-167
+341
 86
 14
 Growlithe,24,Vulpix,24
@@ -29,7 +29,7 @@ false
 [npc]
 Supernerd Glenn
 right
-169
+352
 79
 9
 Grimer,22,Muk,22,Grimer,22
@@ -43,7 +43,7 @@ false
 [npc]
 Twin Anne
 down
-132
+340
 71
 6
 Clefairy,22
@@ -57,7 +57,7 @@ false
 [npc]
 Twin Eli
 up
-132
+340
 70
 5
 Jigglypuff,22
@@ -71,7 +71,7 @@ false
 [npc]
 Lass Paige
 left
-72
+272
 59
 8
 Nidoran-f,23,Nidorina,23
@@ -85,7 +85,7 @@ false
 [npc]
 Supernerd Leslie
 right
-169
+352
 59
 9
 Koffing,26
@@ -99,7 +99,7 @@ false
 [npc]
 Lass Andrea
 left
-72
+272
 59
 10
 Meowth,24,Meowth,24,Meowth,24
@@ -113,7 +113,7 @@ false
 [npc]
 Lass Megan
 right
-72
+272
 59
 11
 Pidgey,19,Pikachu,19,Rattata,19,Nidoran-m,19,Meowth,19
@@ -127,7 +127,7 @@ false
 [npc]
 Biker Jaren
 up
-95
+339
 52
 18
 Grimer,24,Grimer,24
@@ -141,7 +141,7 @@ false
 [npc]
 Biker Ricardo
 down
-95
+315
 51
 14
 Koffing,22,Koffing,22,Grimer,23
@@ -155,7 +155,7 @@ false
 [npc]
 Gamer Stan
 down
-167
+341
 50
 2
 Poliwag,22,Poliwag,22,Poliwhirl,22
@@ -169,7 +169,7 @@ false
 [npc]
 Supernerd Aidan
 right
-169
+352
 39
 6
 Voltorb,20,Magnemite,20,Voltorb,20,Koffing,20

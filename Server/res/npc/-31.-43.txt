@@ -1,7 +1,7 @@
 [npc]
 Bill's Sister
 down
-70
+262
 5
 5
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Bill's Mother
 down
-112
+275
 6
 3
 NULL

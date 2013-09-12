@@ -15,7 +15,7 @@ false
 [npc]
 Picnicker Heidi
 down
-30
+357
 9
 29
 Pikachu,20,Clefairy,20
@@ -43,7 +43,7 @@ false
 [npc]
 Pokemaniac Mark
 left
-195
+352
 13
 44
 Rhyhorn,29,Lickitung,29

@@ -1,7 +1,7 @@
 [npc]
 Lass Janice
 left
-72
+266
 18
 10
 Pidgey,9,Pidgey,9
@@ -15,7 +15,7 @@ false
 [npc]
 Bug Catcher Colton
 right
-23
+354
 12
 7
 Caterpie,10,Weedle,10,Caterpie,10
@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Ben
 down
-210
+353
 17
 4
 Rattata,11,Ekans,11
@@ -43,7 +43,7 @@ false
 [npc]
 Bug Catcher Greg
 down
-23
+354
 24
 4
 Weedle,9,Caterpie,9,Kakuna,9,Metapod,9
@@ -57,7 +57,7 @@ false
 [npc]
 Youngster Calvin
 left
-210
+353
 28
 11
 Spearow,14
@@ -71,7 +71,7 @@ false
 [npc]
 Lass Sally
 left
-72
+266
 29
 3
 Rattata,10,Nidoran-f,10
@@ -85,7 +85,7 @@ false
 [npc]
 Bug Catcher James
 right
-23
+354
 31
 7
 Caterpie,11,Metapod,11
@@ -99,7 +99,7 @@ false
 [npc]
 Lass Robin
 up
-72
+266
 35
 12
 Jigglypuff,14

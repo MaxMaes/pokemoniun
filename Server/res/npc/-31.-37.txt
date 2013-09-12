@@ -1,7 +1,7 @@
 [npc]
 Super Nerd Eric
 left
-195
+352
 4
 31
 Grimer,11,Grimer,11
@@ -15,7 +15,7 @@ false
 [npc]
 Pokemaniac Issac
 down
-152
+351
 2
 27
 Lickitung,12
@@ -29,7 +29,7 @@ false
 [npc]
 Super Nerd Teru
 up
-195
+352
 5
 8
 Magnemite,7,Voltorb,11,Magnemite,7,Magnemite,9
@@ -43,7 +43,7 @@ false
 [npc]
 Pokemaniac Donald
 right
-152
+351
 1
 6
 Slowpoke,10,Slowpoke,10

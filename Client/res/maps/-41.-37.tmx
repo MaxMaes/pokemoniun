@@ -2,9 +2,9 @@
 <map version="1.0" orientation="orthogonal" width="70" height="90" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Voltorb,20;Grimer,20;Magnemite,20;Electrode,10;Muk,10;Magneton,10;Meowth,10;"/>
-  <property name="dayPokemonLevels" value="20-20;20-20;20-20;30-30;30-30;40-40;40-40;20-20;"/>
+  <property name="dayPokemonLevels" value="20-20;20-20;30-30;30-30;40-40;40-40;20-20;"/>
   <property name="nightPokemonChances" value="Voltorb,20;Grimer,20;Magnemite,20;Electrode,10;Muk,10;Magneton,10;Meowth,10;"/>
-  <property name="nightPokemonLevels" value="20-20;20-20;20-20;30-30;30-30;40-40;40-40;20-20;"/>
+  <property name="nightPokemonLevels" value="20-20;20-20;30-30;30-30;40-40;40-40;20-20;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>

@@ -1,7 +1,7 @@
 [npc]
 Goldenrod Citizen
 left
-61
+270
 6
 3
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Goldenrod Citizen
 down
-45
+268
 3
 4
 NULL

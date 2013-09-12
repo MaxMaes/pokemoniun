@@ -1,7 +1,7 @@
 [npc]
 Swimmer Charlie
 up
-200
+281
 30
 6
 Shellder,21,Tentacool,19,Tentacruel,19
@@ -15,7 +15,7 @@ false
 [npc]
 Swimmer George
 left
-200
+281
 46
 8
 Tentacool,16,Staryu,19,Remoraid,19,Tentacool,17,Tentacool,16,Tentacool,17
@@ -29,7 +29,7 @@ false
 [npc]
 Swimmer Kara
 right
-197
+282
 44
 28
 Staryu,20,Starmie,20
@@ -43,7 +43,7 @@ false
 [npc]
 Swimmer Mathew
 down
-200
+281
 18
 48
 Krabby,23
@@ -57,7 +57,7 @@ false
 [npc]
 Swimmer Denise
 left
-197
+282
 26
 36
 Seel,22
@@ -71,7 +71,7 @@ false
 [npc]
 Swimmer Kirk
 up
-200
+281
 30
 32
 Gyarados,20,Gyarados,20
@@ -85,7 +85,7 @@ false
 [npc]
 Swimmer Berke
 right
-200
+281
 19
 27
 Qwilfish,23
@@ -99,7 +99,7 @@ false
 [npc]
 Swimmer Susie
 up
-197
+282
 22
 20
 Psyduck,20,Goldeen,22
@@ -113,7 +113,7 @@ false
 [npc]
 Swimmer Kaylee
 down
-197
+281
 16
 5
 Goldeen,18,Goldeen,20,Seaking,20
@@ -127,7 +127,7 @@ false
 [npc]
 Swimmer Wendy
 down
-197
+282
 8
 52
 Horsea,21,Horsea,21

@@ -15,7 +15,7 @@ false
 [npc]
 NPC
 down
-43
+308
 43
 34
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 NPC
 left
-7
+343
 9
 43
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 NPC
 right
-42
+269
 35
 43
 NULL
@@ -113,7 +113,7 @@ false
 [npc]
 NPC
 down
-42
+366
 28
 24
 NULL
@@ -127,7 +127,7 @@ false
 [npc]
 NPC
 right
-42
+341
 29
 31
 NULL

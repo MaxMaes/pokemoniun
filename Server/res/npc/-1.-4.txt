@@ -29,7 +29,7 @@ false
 [npc]
 Psychic Phil
 down
-97
+321
 10
 9
 Natu,24,Kadabra,24
@@ -43,7 +43,7 @@ false
 [npc]
 Fisher Edgar
 right
-46
+368
 19
 13
 Remoraid,25,Remoraid,25
@@ -57,7 +57,7 @@ false
 [npc]
 Cooltrainer Cybil
 left
-55
+266
 31
 14
 Butterfree,25,Bellossom,25
@@ -71,7 +71,7 @@ false
 [npc]
 Cooltrainer Allen
 left
-81
+265
 41
 15
 Charmeleon,27
@@ -85,7 +85,7 @@ false
 [npc]
 Pokemaniac Zach
 down
-152
+320
 43
 2
 Rhyhorn,27
@@ -99,7 +99,7 @@ false
 [npc]
 Fisher Wilton
 down
-46
+368
 35
 3
 Goldeen,23,Goldeen,23,Seaking,25
@@ -113,7 +113,7 @@ false
 [npc]
 Bird Keeper Vance
 down
-94
+269
 51
 5
 Pidgeotto,25,Pidgeotto,25

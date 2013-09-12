@@ -1,7 +1,7 @@
 [npc]
 Professor Elm
 down
-171
+256
 20
 17
 NULL

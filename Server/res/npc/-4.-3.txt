@@ -1,7 +1,7 @@
 [npc]
 Twin Ann
 down
-127
+262
 6
 15
 Clefairy,16
@@ -15,7 +15,7 @@ false
 [npc]
 Twin Anne
 down
-127
+262
 7
 15
 Jigglypuff,16
@@ -29,7 +29,7 @@ false
 [npc]
 Psychic Greg
 right
-97
+321
 6
 8
 Drowzee,17

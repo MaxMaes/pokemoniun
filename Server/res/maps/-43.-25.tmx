@@ -4,7 +4,7 @@
  <tileset firstgid="1639" source="SinnohSet7.tsx"/>
  <tileset firstgid="3415" source="InteriorFloor 1.tsx"/>
  <tileset firstgid="3745" source="SinnohInteriorSet4.tsx"/>
- <tileset firstgid="4433" source="SinnohInteriorSet3.tsx"/>
+ <tileset firstgid="4233" source="SinnohInteriorSet5.tsx"/>
  <layer name="Walkable" width="35" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3OwQkAMAzEsKyd7TtEezQBGfxXlSTpZx2chYWFhYWFhSVhSXlumuJ46dnaAXSD9KBoEAAA
@@ -12,17 +12,17 @@
  </layer>
  <layer name="Collisions" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAvqALUC8lQBNjBpsNKngNhDfIUATowYbPZeNeHfA1KoxMjDECaDKxSPxyZUjxy0gkIlmZo4A5XLkuqUQaEYJ1JxQJDYlcuS6hRZg1C2Um49P7UJO4szAp45abrlIpFvwqRuOcUQNMOoWys0fdQvpaodT+fJIiHS30CqeyDWb2u6h1DxquYea5uDDxKghxS0AT9tMpGgQAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMAvqALUC8lQBNjBpsNKngNhDfIUATowYbPZeNeHfA1KoxMjDME0CVm4/EJ1eOHLeAwEI0M5cIUC5HrltWAs3oh5rTC6TXCFAuR65bSAWr+ahrPiVuobb5Q8UtCzmJMwOfOmq55SKRbsGnbjjGETXAqFsoN3/ULaSrHenlC63iiVyzqe0eSs2jlnuoaQ4+TIwaUtwCAAlPtc1oEAAA
   </data>
  </layer>
  <layer name="Walkable" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3US2rCQBzH8Um0igspeIEufVQ9itW24kl8Fy/g2xO48QI+2noHF12ooK2Po/jduDAwIXYMAZkffBaBSf4/wswIoaOjo6Nzj5lHvG6go3N9CgrvPj1ePg9Dzt6TrWsodLHmx2EX2bqRwmzrfzmnaQjRQhsddNFDHwND/r2FQhdZxsybYIoZPvGFb8xturiRDfO2+MUfdtjjgKNLXaT73hTCgAkf/HhAAEHzH99zENm+jzIvhjgSeEYSKaRtuqicI9m+zzDvBVnk8Io3vCNv00XlHFn3/fneKDKvhDIqqKKGOj5M+f1yy3Oker/oeJNlWIgV1mGvm7iTEyO1vgFoEAAA
+   H4sIAAAAAAAAC+3US0oDQRSF4dsdNWQQ6F1ojGYpeWlwJfERgxvIOyBOM3EBajRxDw4cqKAxxqX4gygYqKaxqsjkHvjohn7cM6gqEY1Go9FoNElyFYlcRN/351zHkf0zzd8cOPzXKGP33pm7KvKYsIvpvUt3VX7TCkTa6KCLHvoYYBiYv3vw0OWaeTcY4xZ3mGCK+5guPvLKvDfM8I45PrDAp6cuxnUfigQIkcIa1rGBdPiP/yWIad1vMm8LOWwjjx3sohDTxWYfmdZ9kXkllFFBFXvYRy2mi80+Wl73P+dGnXmHOMIxTtDAKZqh+XxxuY9szxfNavKUFXnGS3bVTfzkC7Ok5iJoEAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="35" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAvoDOyC2B2IHKsqRCv5D6VQgTgPidCxqSJXbKEQFhw0S4C8AoX0FqCc3nIAAJwODIBALcVJHHSXAAWi2IxA7EbCDWHWUgAKg2YVAXETADmLVjYJRMBLBaPmCHYyWL6NgFAwdAAB4hQvzaBAAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMAvoDOyC2B2IHKsqRCv5D6VQgTgPidCxqyJUbBQMHFvPRxx4BTgYGQSAW4qSOOkqAA9BsRyB2ImAHseooAQVAswuBuIiAHcSqGwWjYCSC0fIFOxgtX0bBKBg6AAD27lP4aBAAAA==
   </data>
  </layer>
 </map>

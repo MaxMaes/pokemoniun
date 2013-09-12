@@ -1,7 +1,7 @@
 [npc]
 Sprout Tower Monk
 down
-164
+276
 6
 5
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Sprout Tower Monk
 down
-164
+276
 5
 9
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Sprout Tower Visitor
 up
-113
+381
 8
 10
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Sprout Tower Visitor
 left
-161
+277
 10
 13
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Sage Chow
 up
-164
+332
 2
 6
 Bellsprout,3,Bellsprout,3,Bellsprout,3

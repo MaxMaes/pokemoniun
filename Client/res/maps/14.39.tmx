@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
+
+<properties>
+
+ <property name="dayPokemonChances" value="Oddish,30;Vileplume,20;Spearow,30;Fearow,20;"/>
+ 
+ <property name="dayPokemonLevels" value="30-30;45-50;35-40;50-50;"/>
+ 
+ <property name="fishPokemonChances" value="Magikarp,60;Staryu,20;Starmie,5;Qwilfish,13;Feebas,2;"/>
+ 
+ <property name="fishPokemonLevels" value="15-20;20-35;40-40;25-30;15-20;"/>
+ 
+ <property name="nightPokemonChances" value="Gloom,30;Vileplume,20;Hoothoot,30;Noctowl,20;"/>
+ 
+ <property name="nightPokemonLevels" value="30-30;45-50;35-40;50-50;"/>
+ 
+ <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,80;Tentacruel,20;"/>
+ 
+ <property name="waterPokemonLevels" value="35-40;40-40;"/>
+ 
+ <property name="wildProbability" value="4"/>
+ 
+ <property name="xOffsetModifier" value="0"/>
+ 
+ <property name="yOffsetModifier" value="0"/>
+
+</properties>
+
  <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Cliffs02.tsx"/>
  <tileset firstgid="343" source="SinnohInteriorSet1.tsx"/>

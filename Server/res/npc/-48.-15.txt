@@ -10,7 +10,7 @@
 [npc]
 Daisy
 right
-59
+267
 5
 4
 NULL

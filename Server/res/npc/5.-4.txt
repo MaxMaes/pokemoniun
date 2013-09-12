@@ -24,10 +24,38 @@ false
 [npc]
 Lass Crissy
 right
-72
+346
 47
 3
 Paras,31,Paras,31,Parasect,31
+3
+-1
+1
+false
+false
+false
+[/npc]
+[npc]
+Lass Betty
+right
+346
+13
+5
+Paras,16
+3
+-1
+1
+false
+false
+false
+[/npc]
+[npc]
+Combat Katy
+right
+273
+30
+10
+Machop,16
 3
 -1
 1

@@ -1,7 +1,7 @@
 [npc]
 Receptionist
 down
-163
+277
 6
 4
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Tourist
 right
-120
+261
 3
 6
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Tourist
 down
-64
+272
 4
 6
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Tourist
 down
-79
+317
 10
 7
 NULL

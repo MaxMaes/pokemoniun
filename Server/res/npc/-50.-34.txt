@@ -1,7 +1,7 @@
 [npc]
 Traveler
 down
-51
+365
 6
 6
 NULL

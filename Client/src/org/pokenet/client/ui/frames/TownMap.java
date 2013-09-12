@@ -1,62 +1,72 @@
 package org.pokenet.client.ui.frames;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import org.lwjgl.util.Timer;
+
+import javax.swing.Timer;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
-import org.pokenet.client.ui.components.Image;
+
 import de.matthiasmann.twl.Event;
-import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.Image;
+import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 
 /**
  * Town Map
  * 
- * @author Myth1c
+ * @author Myth1c, Chappie112
  */
 public class TownMap extends ResizableFrame
 {
-	private HashMap<String, Widget> m_containers;
-	private List<String> m_locations;
+	private HashMap<Integer,String> locations_Name;
+	private HashMap<Integer,Integer> locations_X;
+	private HashMap<Integer,Integer> locations_Y;
+	private HashMap<Integer,Integer> locations_Width;
+	private HashMap<Integer,Integer> locations_Height;
+	private int mouseX = 0;
+	private int mouseY = 0;
 	private Image m_map;
-	private Label m_mapName;
-	private Label m_playerLoc;
+	private boolean locationVisable = false;
 	private Timer m_timer;
 
 	/**
 	 * Default constructor
 	 */
-	public TownMap()
+	public TownMap(Widget root)
 	{
 		setTitle("World Map");
-		m_mapName = new Label();
-		m_playerLoc = new Label();
-		m_timer = new Timer();
+		m_timer = new Timer(500, new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				locationVisable = !locationVisable;
+			}
+		});
+		
 
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 
-		m_map = new Image(respath + "res/ui/worldmap.png");
+		m_map = FileLoader.loadImage(respath + "res/ui/worldmap.png");
 		LoadingList.setDeferredLoading(false);
-
-		m_map.setSize(700, 500);
-		m_map.setPosition(0, 0);
-		m_mapName.setPosition(10, 0);
-
-		add(m_map);
-		add(m_mapName);
-
-		setSize(700, 500 + 48);
+		
+		setSize(m_map.getWidth(), m_map.getHeight()-25); // minus 24 to compensate for the titlebar
+		
 		loadLocations();
 		setResizableAxis(ResizableAxis.NONE);
-		setVisible(true);
+		setVisible(false);
 	}
 
 	/**
@@ -79,20 +89,25 @@ public class TownMap extends ResizableFrame
 			{
 				reader = new BufferedReader(new InputStreamReader(FileLoader.loadFile(respath + "res/language/english/UI/_MAP.txt")));
 			}
-			m_containers = new HashMap<String, Widget>();
-			m_locations = new ArrayList<String>();
+			locations_Name = new HashMap<Integer,String>();
+			locations_X = new HashMap<Integer, Integer>();
+			locations_Y = new HashMap<Integer, Integer>();
+			locations_Width = new HashMap<Integer, Integer>();
+			locations_Height = new HashMap<Integer, Integer>();
 
 			String f;
+			int i = 0;
 			while((f = reader.readLine()) != null)
 				if(f.charAt(0) != '*')
 				{
+					
 					final String[] details = f.split(",");
-					m_locations.add(details[0]);
-					Widget m_surface = new Widget();
-					m_surface.setSize(Integer.parseInt(details[1]), Integer.parseInt(details[2]));
-					m_surface.setPosition(Integer.parseInt(details[3]) * 8, Integer.parseInt(details[4]) * 8);
-					m_containers.put(details[0], m_surface);
-					add(m_containers.get(details[0]));
+					locations_Name.put(i, details[0]);
+					locations_Width.put(i,Integer.parseInt(details[1]));
+					locations_Height.put(i, Integer.parseInt(details[2]));
+					locations_X.put(i,( Integer.parseInt(details[3]) *9 )+ getX());
+					locations_Y.put(i, (Integer.parseInt(details[4])*12 )+ getY());
+					i++;
 				}
 		}
 		catch(Exception e)
@@ -105,66 +120,72 @@ public class TownMap extends ResizableFrame
 	@Override
 	public boolean handleEvent(Event e)
 	{
-		int i = 0;
-		boolean widgetFound = false;
-		for(Widget w : m_containers.values())
-		{
-			if(w.isInside(e.getMouseX(), e.getMouseY()))
-			{
-				widgetFound = true;
-				m_mapName.setText(m_locations.get(i));
-			}
-			i++;
-		}
-		if(!widgetFound)
-		{
-			m_mapName.setText("");
-		}
+
+		mouseX = e.getMouseX();
+		mouseY = e.getMouseY();
 		return true;
 	}
 
-	/**
-	 * Set's the players current location
-	 */
-	public void setPlayerLocation()
+//	/**
+//	 * Set's the players current location    <!! OLD CODE !!!>
+//	 */
+//	public void setPlayerLocation()
+//	{
+//		removeChild(m_playerLoc);
+//		m_playerLoc = new Label();
+//		String currentLoc = GameClient.getInstance().getMapMatrix().getCurrentMap().getName();
+//		// m_playerLoc.setBackground(new Color(255, 0, 0, 130)); TODO:
+//		
+//			m_playerLoc.setSize(m_containers.get(currentLoc).getWidth(), m_containers.get(currentLoc).getHeight());
+//			m_playerLoc.setPosition(m_containers.get(currentLoc).getX(), m_containers.get(currentLoc).getY());
+//			add(m_playerLoc);
+//	}
+	
+	@Override
+	protected void paintWidget(GUI gui) 
 	{
-		try
+		super.paintWidget(gui);
+		m_map.draw(getAnimationState(), getX(), getY()+24, 700, 450); // draw the map / add the 24 for compensation for the title bar
+		LWJGLRenderer renderer = (LWJGLRenderer)gui.getRenderer(); // get the renderer
+		renderer.pauseRendering(); // tell the LWJGL renderer to pause so that we can draw our blip
+		try 
 		{
-			removeChild(m_playerLoc);
-			m_playerLoc = new Label();
+			Color c = GameClient.getInstance().getGraphics().getColor(); // retrieve the previous used color to reset later
+			GameClient.getInstance().getGraphics().setColor(Color.black);
+			for(int id : locations_Name.keySet())
+				if(mouseY <= locations_Y.get(id) + locations_Height.get(id) && mouseY >= locations_Y.get(id)
+				&& mouseX <= locations_X.get(id) + locations_Width.get(id) && mouseX >= locations_X.get(id))
+				GameClient.getInstance().getGraphics().drawString(locations_Name.get(id), locations_X.get(id), locations_Y.get(id));
+			//GameClient.getInstance().getGraphics().drawString("pallet", this.getX() + 44*11,this.getY() + 12*11);
+			if(locationVisable)
+			{
+				GameClient.getInstance().getGraphics().setColor(Color.red); // set the red color for the blip 
+				String currentLoc = GameClient.getInstance().getMapMatrix().getCurrentMap().getName(); // get the current map of the player
+				for(int id2 : locations_Name.keySet())
+					if(locations_Name.get(id2) == currentLoc)
+					{
+						GameClient.getInstance().getGraphics().fillOval(locations_X.get(id2), locations_X.get(id2), 10, 10); // draw the Blip
+						break;
+					}
+			}
+			
+			GameClient.getInstance().getGraphics().setColor(c); // reset the color 
 		}
-		catch(Exception e)
+		finally
 		{
+			renderer.resumeRendering(); // tell LWJGL that we are done, and that it can resume it's business
 		}
-		String currentLoc = GameClient.getInstance().getMapMatrix().getCurrentMap().getName();
-		// m_playerLoc.setBackground(new Color(255, 0, 0, 130)); TODO:
-		try
-		{
-			m_playerLoc.setSize(m_containers.get(currentLoc).getWidth(), m_containers.get(currentLoc).getHeight());
-			m_playerLoc.setPosition(m_containers.get(currentLoc).getX(), m_containers.get(currentLoc).getY());
-			add(m_playerLoc);
-		}
-		catch(Exception e)
-		{
-		}
+	
 	}
-
-	/* TODO:
-	 * @SuppressWarnings("static-access")
-	 * @Override
-	 * public void update(GUIContext container, int delta)
-	 * {
-	 * if(isVisible())
-	 * {
-	 * m_timer.tick();
-	 * if(m_timer.getTime() >= 0.5)
-	 * {
-	 * if(m_playerLoc.isVisible())
-	 * m_playerLoc.setVisible(false);
-	 * else
-	 * m_playerLoc.setVisible(true);
-	 * m_timer.reset();
-	 * }
-	 * }
-	 * } */
+	
+	@Override
+	public void setVisible(boolean b)
+	{
+		
+		if(b)
+			m_timer.start();
+		else
+			m_timer.stop();
+		super.setVisible(b);
+	}
 }

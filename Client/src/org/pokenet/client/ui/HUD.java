@@ -83,7 +83,7 @@ public class HUD extends DesktopArea
 		add(chat);
 		requests = new RequestDialog();
 		add(requests);
-		map = new TownMap();
+		map = new TownMap(this);
 		add(map);
 
 		pokedex.setVisible(false);
@@ -222,7 +222,7 @@ public class HUD extends DesktopArea
 		else
 		{
 			hideHUDElements();
-			map.setPosition(150, 50);
+			map.setPosition(50, 50);
 			map.setVisible(true);
 		}
 	}

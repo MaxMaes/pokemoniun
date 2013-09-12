@@ -2,13 +2,8 @@ package org.pokenet.client.backend;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import org.newdawn.slick.openal.Audio;
+
 import org.newdawn.slick.openal.AudioImpl;
 import org.newdawn.slick.openal.AudioLoader;
 
@@ -91,8 +86,8 @@ public class SoundManager extends Thread
 
 	private void loadFile(String track) 
 	{
-		BufferedReader readerStream = FileLoader.loadTextFile(m_audioPath + "index.txt");
-		try {
+		try (BufferedReader readerStream = FileLoader.loadTextFile(m_audioPath + "index.txt"))
+		{
 			String f;
 			while((f = readerStream.readLine()) != null)
 			{
@@ -106,20 +101,20 @@ public class SoundManager extends Thread
 					continue;
 			}
 		} 
-		catch (IOException e)
+		catch (IOException e1) 
 		{
-			e.printStackTrace();
+			e1.printStackTrace();
 			System.err.println("ERROR: Failed to open music index!");
 		}
-		try 
-		{
+		try
+		{	
 			m_files.put(track,(AudioImpl)AudioLoader.getAudio("OGG", FileLoader.loadFile(m_audioPath + m_fileList.get(track))));
-		} 
+		}
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-			System.err.println("Could nOt get audio:" + track);
-		}
+			System.err.println("Could not get audio:" + track);
+		}			
 	}
 
 	/**
@@ -145,20 +140,13 @@ public class SoundManager extends Thread
 	{
 		if(track != null)
 		{
-			try
+			String key = track;
+			if(key.contains("Route"))
+				key = "Route";
+			if(!m_locations.get(key).equalsIgnoreCase(m_trackName) && m_locations.get(key) != null)
 			{
-				String key = track;
-				if(key.contains("Route"))
-					key = "Route";
-				if(!m_locations.get(key).equalsIgnoreCase(m_trackName) && m_locations.get(key) != null)
-				{
-					m_trackName = m_locations.get(key);
-					m_trackChanged = true;
-				}
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
+				m_trackName = m_locations.get(key);
+				m_trackChanged = true;
 			}
 		}
 	}

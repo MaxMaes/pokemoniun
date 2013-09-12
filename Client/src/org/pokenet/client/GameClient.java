@@ -121,6 +121,7 @@ public class GameClient extends BasicGame
 	private boolean m_started = false;
 	private TimeService m_time;// = new TimeService();
 	private WeatherService m_weather;// = new WeatherService();
+	private Graphics graphics;
 
 	private static boolean started = false;
 
@@ -587,6 +588,11 @@ public class GameClient extends BasicGame
 	{
 		return lwjglRenderer;
 	}
+	
+	public Graphics getGraphics()
+	{
+		return graphics;
+	}
 
 	public Session getSession()
 	{
@@ -863,6 +869,7 @@ public class GameClient extends BasicGame
 		m_loadBarLeft = new Image("res/ui/loadbar/left.png");
 		m_loadBarRight = new Image("res/ui/loadbar/right.png");
 		m_loadBarMiddle = new Image("res/ui/loadbar/middle.png");
+		graphics = gc.getGraphics();
 
 		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() /
 		// m_loadImage.getWidth());
@@ -1434,7 +1441,7 @@ public class GameClient extends BasicGame
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
 				m_mapMatrix.getCurrentMap().setYOffset(300 - m_ourPlayer.getY(), false);
 				m_mapMatrix.recalibrate();
-				getHUD().getMap().setPlayerLocation();
+				//getHUD().getMap().setPlayerLocation();
 				m_isNewMap = false;
 				getGUIPane().hideLoadingScreen();
 				getGUIPane().showHUD();

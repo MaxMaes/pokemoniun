@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="53" height="45" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonChances" value="Bulbasaur,15;Charmander,15;Squirtle,15;Chikorita,15;Cyndaquil,15;Totodile,15;Pikachu,10;"/>
-  <property name="dayPokemonLevels" value="5-5;5-5;5-5;5-5;5-5;5-5;10-35;"/>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value="Treecko,15;Torchic,15;Mudkip,15;Turtwig,15;Chimchar,15;Piplup,15;Eevee,10;"/>
-  <property name="nightPokemonLevels" value="5-5;5-5;5-5;5-5;5-5;5-5;10-35;"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
   <property name="pvp " value="yes"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
-  <property name="wildProbability" value="10"/>
+  <property name="wildProbability" value="0"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
@@ -26,7 +26,7 @@
  <tileset firstgid="7323" source="Deep Water.tsx"/>
  <layer name="Walkable" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YXVKDMBAHcF4w+PHqg9MZr9jWZ+/jBXyi5SDeRjK4w7pskk2yCVDdmf9gK9r83JAg7WPTfDw1i3p9mfJ+mN87Hpbn5Zb9nTS51W7MpFF/3cSNJ7fWMtkj1Nk0zduYo5nGgF+fjPx1aZON1HQdxzOM6cdcTPprzqNlsj3ymSB2LNaHc2Lec6XtpqMZj11X1hTqE+4XZPixXCJMEDz3OJOGD/pEXT5TTujcg0qxub5f22RD555vvBITPa+2SXvd24KJroN0fCkW6pKaNGzWAuueXQfvOrkh1YT33hImGm4vgIKv8REntJ6ACfeqhskVzhBjgv6sYRoc+1uuyXrWMpXqE72mtmKilWOCdeLfJAt3H7x3U40++a6pNU2S7M30+TznVky32Cd8P6hh2sIaAc9ktPoUY7qa3+HWJ3zeWnMvZAqF+/yTmRNrM475Rw2+e/MSJhx83+q6h9XqUy0TTspzJwjtTe25VyKciRY1ca7+YflzpU1nz/9YUpPr+TnMT660TLR8czPFBKlpKjH3ONfeTfhZC2dyFTa5qlfecyUmlyvWVGs9jDGl9OvrPmzCdlp4nDFrSWh/AhN9NuZaL3yVu6eFbLhCJnBJ1gt8voapRvnmIeeWPEfbikkS7LKRXF+StXJtl5ZPI6VsnE87rs/VMuX6Nf9W30J6pC5EJQAA
+   H4sIAAAAAAAAC+3Y2w3CMAwF0P7wwWMBVIkVuwD7sAObsA2KkIVxncSpnVfJlSwoFMjBTQo9nKfpcZlWuV0/dZ+/jy3zej9t3HvS0ubQmMki/27ixqNNLZO7hbhtqGX+3U6p3CZXW0ya4jxWJtejkAnbLCunKdan0iYLH/SJukqZIFtsvudrm3xjTjHR/WqaQuOSpiUTtcH4tlioS2rK3a/USE343FvK5DPCfXyLK7aegAn3qpbJZ0gxQX/2ZHKevZnonGrFRKMxwToxTMOU0xSaUzVNkhqmYerB1MIaMUx6U6xqmFxCv817NMX+b/Rior3Zw7HHmWioiXM9T+vX9WDyXT+H45NLLyao3k2cq3cTvtbCmXxp1eRzpZpKrYcppi39eh3jJmynweOUejgTZ8PreWy9CEV7TovZcGImcEnWC7y/halEQsch55ZcR2vFJCnsciWZX3SulUqKy8pnUblsnM+6fJ9rZdL6Lb+rN1Vc7DdEJQAA
   </data>
  </layer>
  <layer name="Walkable" width="53" height="45">
@@ -46,7 +46,7 @@
  </layer>
  <layer name="Collisions" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+WZy04UQRSGj85oZFywIHEw7dKI7+KFZ5gx0YQohIQMC+IKfQWjvoYMiONloTIkElwTLhvRjcFn8O+kCspDXburei6e5EvPAN2pr/+qQ09N/wbRpavnuQxWMqJ5sCBQX8cm5rX7/7lTBywrLI6BU8pxDIsTzy0UNefYTl2Nl3QqO25fj9hO2wanVfz+GWiB9nWiB+BKk2iiII2m2aMqJ1l5Xo/h8wRca1LhmrY4dbJ4PcfXSeaUyomvzzJ+g8zJlk3IOubXGGROsbLh18yddL3PlVO3RrQONsBbsFnzc+pYxlY0G5MTz0p1UvvfaU51ogvgIqiBev3s70298ZY4N7T/83MWM/u69HFS85JOd+BwF9wD98Gs4hQ6P+W8bot7x8lLvm4Jh5hONzHe2+CFcHiJ4yvwWryfUfI4Has4mkrO66eZ238lgVNIybHKo6mk8yg4+dYo5eRbqXLi/XwccuJZFXF6M0W0BrpgHWxM+TmlzKmokxxTDw7vwQfwEXzydEqZkzr/QpzkmD7D4Qv4CrZAfwhyUrMqMve+wWFHeOzi+H1IcirjVLaWsvP4OPHnRO60P0AnXfHsdE66z0+x+l6KSu20yq7PnzVbCZxTO7lKl+P+JNEBOARHk+Ph9AMex+An+BXRSfYF3Wfj1E6/hccJjn8iOpn6eBVOZSum094E0bvGv+gq/3mvMRpOOnSlZlrWqa2cL3vp85JOpr3zqpxCno1CnGxeo+xkmoMuJ7lnpvtfzPdbdPsvKZ1MWbmcbOPg+y26/ZfUTrqsTE55qf2xx3qkKT+Z4UPwKIC5gk66rExOtr320Pseim4/2ubk6oMmqnRyPe+ZWPPAtedkc4r9/aqPky+qn2lt8bKttaLEdHL5VUUqp9C5G4ptnVfhVPW9+gvJHamsRCUAAA==
+   H4sIAAAAAAAAC+WZyW4TQRCGC2wQMYccIuGg4YiAd2F7BhuJSIhFkcAcIk6BV0DAaxAngCEcWIwEgjMKcGG5IHgG/pG6Q1Op3ma6xwslfRon8Uz6m7+7Mu6MjxEdOLyXg2CtILoKrinM16lJee3xf+40ADcNVufAKec4psWJ5xaLmXNqp6HgpZ3qjjvUI7XTG4vTOn5+G/RA/yjRBXCoS7RQkU7X7tGUk64yr8vwuQKOdKlyLTucBkW6nhPqpHPK5cTXZx2/SebkyiZmHfNrTDKnVNnwa5ZOUu/z5TRsEW2CLfAIPG6FOQ0cY6uajc2JZ2U6mf1vN6c20T6wH7RAu/33/bbeeEKdG9v/+TmrhXtdhjiZeWmn03A4A86Cc+C84RQ7P/W87qt7xylLv+4ph5ROxzHeU+CucriH433wQH190shjd6zqaCs9r28Vfv+1DE4xpceqj7bSzrPgFFqzlFNo5cqJ9/N5yIlnVcXp4RLRBhiCTbC1FOaUM6eqTnpMIzg8Bc/ANnge6JQzJ3P+xTjpMb2Aw0vwCrwG4ynIycyqytx7C4d3yuM9jh+mJKc6TnXrerGXG+x3Sk78OZE77UzQSSqeneQkfX5K1fdyVG6ndXZ9/qzZy+Cc28lXUo47i0SfwGfwZXE+nL7C4xv4Dn4kdNJ9QfpsnNvpp/L4hePvhE62Pt6EU91K6fRxgehJ51+kKr8/6syGk4RUZqZ1nfrG+bqX3qnpZNs7b8op5tkoxsnlNctOtjnoc9J7ZtLfYr7fIu2/5HSyZeVzco2D77dI+y+5naSsbE5lmf1xxHqkLT+d4UWwEsGlik5SVjYn11577H2PRdqPdjn5+qCNJp18z3s2NgLw7Tm5nFL/fzXEKRTTz7a2eLnWWlVSOvn8miKXU+zcjcW1zptwavpe/QFTBkkFRCUAAA==
   </data>
  </layer>
  <layer name="Collisions" width="53" height="45">

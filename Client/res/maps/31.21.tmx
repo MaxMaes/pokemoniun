@@ -64,7 +64,7 @@
    H4sIAAAAAAAAC+2VQQ7CMAwE8wwOcMkj+C4X1BP8ghfwIpQDKkiNm7XXqSlZyVKlNvF2um6mQ0oTWJ665Pn6muvP9RTKxYPTL3PxzNDeuLDYRORStDWbqFwk9eATmUvtPXvkJzKXIhYXlM0/cUH4sLhYcyutYXNpYWXlwppnaZ1mX5TLM891PqZ0/2Bxy9/3a+Uxz2trkLxouJR6nGSP5b5XPqX3tsjCRdunB5e31r5Zi1/JP0OWb8/0oZUHk6V9W/MRhQtTUo635KKdL6aY/6Y9yHr2Le2D9Ea8aYRmTjMf7POIde5p5o3RF+3Tw1trP1YPb59RPQ8ug0u0GlxsXF4UYUPxWBsAAA==
   </data>
  </layer>
- <layer name="WalkBehind" width="70" height="25">
+ <layer name="WalkBehind" width="70" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2VSw6AMAhEewwXnsHjel6XJsYSPgMllEm60jLTJ9gxXt0Hb33fry4uF4pVRVm4NJt92cy0O5/ZObt/cFyqsUFyWcHH6k3tQXOJYIXyofZp6lq4XKc8v8RTU5PznOPr1TPR/WntZQsXrU+mueXkpfKjvbSzvVJe30jbH1m4RGl3Lsh/UwVZ776/OhJvSbYIaeYDfR+tvPOivKO5cP1QHt45s2ZuLs0l22ouzcWDywP3w1mLWBsAAA==
   </data>

@@ -13,7 +13,7 @@
  <tileset firstgid="6401" source="Path0.tsx"/>
  <layer name="Walkable" width="44" height="39">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PsQkAIBAEwe/C/ouyga/EwEx4I0HBOZh8L1tEAgAAAEBh3e2en3tf+HV6evXq1at36nq3G7dRV8vQGgAA
+   H4sIAAAAAAAAC+3SsQkAIQxAURsrB3D/oW4BJ7Gw8Di0UDhEeIHXhfCLlBxCAQAAAICJ7+zciKnTu9872zvZuzq39D650fvfP+jV+27V22/qHfdWTbCZn9AaAAA=
   </data>
  </layer>
  <layer name="Walkable" width="44" height="39">
@@ -28,12 +28,12 @@
  </layer>
  <layer name="Collisions" width="44" height="39">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Yy04TURzH8T/T2laujWPtAi8voNweApWVKLe4g63iBkXu74DClgBGxYcQdWEiiRDCbUVEbvIQIPptTiclZch0aObMaeAkn/wXh7S//kJPc0aktNaPlMhCqnTmClZLaIbdVzH9HpaJHOEvjvGvzN++zn6/o9kSuY8HeIgWq/B93f1m8ozz/m/wFhOYtArf1zVbbSWTZ9NSZ8Yv5hZ+W7lzxGtf17kT1Aqq36CWCf1+jojM4wu+4lvk9N88tdU0od9EVOQqylGBSjwj33P04oWdy2tCv0/I14Z2dKATfeR7iVfot83qdyqq5jRzBrMYzuYbZY5p6Nc5z/KddwXd71mfo+ucmYPu96zPUWzesPvdjovsYBd72McfHMTVfret9BjS792EyD3UoR4NaERTItfpyRV2v6/JNYBBDGEYIxjN5g37fpGf911MzffMD/iIOXyKqbxh3y/8fN9M7Ncr72W/F7PfSFIkiiuIIZ5UeX+mRRY18NtvBfkqUYVq1GTzrvFa6xr47dcm33WkcANpzXn99ltLvpu4hdu4E1K/bs9C/HzfdPfr9izExLxOv27PQkzM6/Rb6LOQ5DUz+i1mhdFvqeT1undmPM472x7ZufuEc6cwqd/8+0OXy+/vsqa8Xr/XS2n3vE6fJ3PryOtlwyOvrv8Dx39dWCxm0BoAAA==
+   H4sIAAAAAAAAC+3Yy04TYRjG8Ze2tkVOjSN0gdEbEBAuwgMrFFDCDraCGzkj3AMgW+IhClwEKgsSTJQYBFZGUBAvwuN/8nXSZhjoDPDNfA28yS8vZAh95klo+Wa9VuQz1ktkr+J9Ce2o+zpL/f4qE/mNP/iLf2XBrofZ7wpuxkRu4TbuoDXm/3rY/dp5pnj9aczgKWZj/q+Hte9aip3nC69vz1f2NnZy39tT7Lp7dPWra3T1q2tM6HcpLvIGb/EOy/GDP9NtqW1Cv+mESDkuogKVeEi+PvTjkZXPa0K/7eTrQCfu4wEek28AgxiyzOp3LqH2M/ZzvMB4Lt8EezKEfp33M7fjju5+D7uPrmNm1t3vYfdx0rxR9/stJfIdu9jDD+zjZ0pd77GUXkP6vZ4WaUAjmnADzWhJ5zstnKj7HSbXCEYxhnE8wUQub9TnC3fel0m1X7FfYx4LWEyqvFGfL4L8vZnYb7G85/2ezX7jGZEELiCJVEbl/ZAV+RiCoP1WkK8SVahGTS7vBr9rUyNngvZrke8yalGHrOa8W9gtyBu033ryXcmor6+yr4Wc1+nT61mI34miX69nISbmdfr1ehZiYl6nX7/PQjKXzOj3JBNFv6WSt9i503bP9d7WZuXPE86ZwqR+3eeHLo/P308h5S32eb2W9c7r9FmY+7Szrnnk9XN/R+XV+X/Dlkfe/9V51UnQGgAA
   </data>
  </layer>
  <layer name="Collisions" width="44" height="39">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XwQnAIAxGYZco3X+H9mon6E4VehFBEOWPCbwHIQdPfhfbfKT0lMlB9lXmDrR3e8369ho9t/btNXputVWpfFXhi28dvvjW4RvTV3UP6+8zfPFd8d39f+HFE9+YvlZZv9Or4avNu2ebd882fLXhqw1for/31E+0PukHkTTQGgAA
+   H4sIAAAAAAAAC+3XQQqAIBBGYS8R3f8OtbUT1JkS2oggWPaPDrwHwywkom9TxSWEI010src0u6M92uurb63Wc2vfWq3nVluVylcVvvjm4YtvHr4+fVXPYf19hi++Pb6j/y9m8cTXp69V1u/p3vDVNrtn2eyeZfhqw1cbvkRP5/rvvL3HVblmZDfHCloO0BoAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="44" height="39">

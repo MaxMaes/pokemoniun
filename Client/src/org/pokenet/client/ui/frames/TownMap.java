@@ -62,8 +62,8 @@ public class TownMap extends ResizableFrame
 		m_map = FileLoader.loadImage(respath + "res/ui/worldmap.png");
 		LoadingList.setDeferredLoading(false);
 		
-		setSize(m_map.getWidth(), m_map.getHeight()-25); // minus 24 to compensate for the titlebar
-		
+		setSize(m_map.getWidth(), m_map.getHeight()); // minus 25 to compensate for the titlebar
+		System.out.println("Width: " + m_map.getWidth() + " Height: " + m_map.getHeight());
 		loadLocations();
 		setResizableAxis(ResizableAxis.NONE);
 		setVisible(false);
@@ -105,8 +105,8 @@ public class TownMap extends ResizableFrame
 					locations_Name.put(i, details[0]);
 					locations_Width.put(i,Integer.parseInt(details[1]));
 					locations_Height.put(i, Integer.parseInt(details[2]));
-					locations_X.put(i,( Integer.parseInt(details[3]) *9 )+ getX());
-					locations_Y.put(i, (Integer.parseInt(details[4])*12 )+ getY());
+					locations_X.put(i, Integer.parseInt(details[3]) *8);
+					locations_Y.put(i, Integer.parseInt(details[4]) *8);
 					i++;
 				}
 		}
@@ -145,7 +145,7 @@ public class TownMap extends ResizableFrame
 	protected void paintWidget(GUI gui) 
 	{
 		super.paintWidget(gui);
-		m_map.draw(getAnimationState(), getX(), getY()+24, 700, 450); // draw the map / add the 24 for compensation for the title bar
+		m_map.draw(getAnimationState(), getX(), getY()+24, m_map.getWidth(), m_map.getHeight()); // draw the map / add the 24 for compensation for the title bar
 		LWJGLRenderer renderer = (LWJGLRenderer)gui.getRenderer(); // get the renderer
 		renderer.pauseRendering(); // tell the LWJGL renderer to pause so that we can draw our blip
 		try 
@@ -153,18 +153,21 @@ public class TownMap extends ResizableFrame
 			Color c = GameClient.getInstance().getGraphics().getColor(); // retrieve the previous used color to reset later
 			GameClient.getInstance().getGraphics().setColor(Color.black);
 			for(int id : locations_Name.keySet())
-				if(mouseY <= locations_Y.get(id) + locations_Height.get(id) && mouseY >= locations_Y.get(id)
-				&& mouseX <= locations_X.get(id) + locations_Width.get(id) && mouseX >= locations_X.get(id))
-				GameClient.getInstance().getGraphics().drawString(locations_Name.get(id), locations_X.get(id), locations_Y.get(id));
-			//GameClient.getInstance().getGraphics().drawString("pallet", this.getX() + 44*11,this.getY() + 12*11);
+			{
+				GameClient.getInstance().getGraphics().fillRect(locations_X.get(id) + getX() , locations_Y.get(id) + getY()+24, locations_Width.get(id), locations_Height.get(id));
+				if(mouseY <= (locations_Y.get(id) + getY()+24) + locations_Height.get(id) && mouseY >= (locations_Y.get(id) + getY()+24)
+				&& mouseX <= (locations_X.get(id)+getX()) + locations_Width.get(id) && mouseX >= (locations_X.get(id)+getX()))
+				GameClient.getInstance().getGraphics().drawString(locations_Name.get(id), locations_X.get(id) + getX() +25, locations_Y.get(id) + getY()+24 );
+			}
 			if(locationVisable)
 			{
 				GameClient.getInstance().getGraphics().setColor(Color.red); // set the red color for the blip 
 				String currentLoc = GameClient.getInstance().getMapMatrix().getCurrentMap().getName(); // get the current map of the player
+				//GameClient.getInstance().getGraphics().fillOval(getX() + 10, getY() + 20, 10, 10);
 				for(int id2 : locations_Name.keySet())
-					if(locations_Name.get(id2) == currentLoc)
+					if(locations_Name.get(id2).contains(currentLoc))
 					{
-						GameClient.getInstance().getGraphics().fillOval(locations_X.get(id2), locations_X.get(id2), 10, 10); // draw the Blip
+						GameClient.getInstance().getGraphics().fillOval(locations_X.get(id2) + getX(), locations_Y.get(id2) + getY()+24, 10, 10); // draw the Blip						
 						break;
 					}
 			}

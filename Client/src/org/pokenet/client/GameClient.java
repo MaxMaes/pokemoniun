@@ -1079,9 +1079,8 @@ public class GameClient extends BasicGame
 					if(!p.isOurPlayer())
 					{
 						if(root.getHUD().getPlayerPopupDialog() != null)
-							root.getHUD().destroyPlayerPopupDialog();
-						root.getHUD().createPlayerPopupDialog(p.getUsername());
-						root.getHUD().showPlayerPopupDialogAt(x, y);
+							root.getHUD().hidePlayerPopupDialog();
+						root.getHUD().showPlayerPopupDialog(p.getUsername(),x,y);
 					}
 				}
 			}
@@ -1097,7 +1096,7 @@ public class GameClient extends BasicGame
 					if(x > dialog.getInnerX() || x < dialog.getInnerX() + dialog.getWidth())
 						dialog.destroy();
 					else if(y > dialog.getInnerY() || y < dialog.getInnerY() + dialog.getHeight())
-						root.getHUD().destroyPlayerPopupDialog();
+						root.getHUD().hidePlayerPopupDialog();
 			}
 			// repeats space bar items (space bar emulation for mouse. In case
 			// you do not have a space bar!)

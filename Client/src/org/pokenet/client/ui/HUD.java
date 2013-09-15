@@ -328,23 +328,22 @@ public class HUD extends DesktopArea
 
 	/**
 	 * functions for player popup
+	 * @param y 
+	 * @param x 
 	 */
-	public void createPlayerPopupDialog(String player)
+	public void showPlayerPopupDialog(String player, int x, int y)
 	{
-		playerPopupDialog = new PlayerPopupDialog(player, this);
-		playerPopupDialog.setVisible(false);
-		add(playerPopupDialog);
+		if(playerPopupDialog != null)
+			removeChild(playerPopupDialog);
+		playerPopupDialog = new PlayerPopupDialog(this);
+		//add(playerPopupDialog);
+		playerPopupDialog.setPlayerName(player);
+		playerPopupDialog.showPopupAt(x, y);
 	}
 
-	public void destroyPlayerPopupDialog()
+	public void hidePlayerPopupDialog()
 	{
-		removeChild(playerPopupDialog);
-		playerPopupDialog = null;
-	}
-
-	public void showPlayerPopupDialogAt(int x, int y)
-	{
-
+		playerPopupDialog.destroy();
 	}
 
 	public void showShop(HashMap<Integer, Integer> stock)
@@ -363,13 +362,8 @@ public class HUD extends DesktopArea
 	public boolean hasShop()
 	{
 		if(shop != null)
-		{
 			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 
 	public void showMoveLearning()

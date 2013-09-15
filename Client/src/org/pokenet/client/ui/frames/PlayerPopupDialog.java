@@ -3,9 +3,11 @@ package org.pokenet.client.ui.frames;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
+
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.PopupWindow;
+import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -13,7 +15,7 @@ import de.matthiasmann.twl.Widget;
  * 
  * @author Myth1c
  */
-public class PlayerPopupDialog extends Widget
+public class PlayerPopupDialog extends ResizableFrame
 {
 	private Button m_battle, m_trade, m_addFriend, m_whisper, m_cancel;
 	private Label m_name;
@@ -24,33 +26,31 @@ public class PlayerPopupDialog extends Widget
 	 * 
 	 * @param player
 	 */
-	public PlayerPopupDialog(String player, Widget root)
+	public PlayerPopupDialog( Widget root)
 	{
-		m_name = new Label(player);
-		m_name.setPosition(0, 0);
+		m_name = new Label("");
 		add(m_name);
 
 		m_battle = new Button("Battle");
-		m_battle.setSize(100, 25);
+		m_battle.setSize(75, 25);
 		add(m_battle);
 
 		m_trade = new Button("Trade");
-		m_trade.setSize(100, 25);
+		m_trade.setSize(75, 25);
 		add(m_trade);
 
 		m_whisper = new Button("Whisper");
-		m_whisper.setSize(100, 25);
+		m_whisper.setSize(75, 25);
 		add(m_whisper);
 
 		m_addFriend = new Button("Add Friend");
-		m_addFriend.setSize(100, 25);
+		m_addFriend.setSize(75, 25);
 		add(m_addFriend);
 
 		m_cancel = new Button("Cancel");
-		m_cancel.setSize(100, 25);
+		m_cancel.setSize(75, 25);
 		add(m_cancel);
 		setVisible(true);
-		// setAlwaysOnTop(true); TODO: CHAPPIE MAGIC :D
 
 		m_battle.addCallback(new Runnable()
 		{
@@ -105,10 +105,17 @@ public class PlayerPopupDialog extends Widget
 			}
 		});
 
+		setTheme("playerpopupdialog");
 		popup = new PopupWindow(root);
 		popup.setTheme("PlayerPopup");
 		popup.add(this);
 		popup.adjustSize();
+	}
+
+	public void showPopupAt(int x, int y)
+	{
+		popup.setPosition(x, y);
+		popup.openPopup();
 	}
 
 	/**
@@ -116,18 +123,25 @@ public class PlayerPopupDialog extends Widget
 	 */
 	public void destroy()
 	{
-		popup.destroy();
+		popup.closePopup();
 	}
 
 	@Override
 	public void layout()
 	{
-		m_battle.setPosition(0, m_name.getY() + m_name.getHeight() + 3);
-		m_trade.setPosition(0, m_battle.getY() + 25);
-		m_whisper.setPosition(0, m_trade.getY() + 25);
-		m_addFriend.setPosition(0, m_whisper.getY() + 25);
-		m_cancel.setPosition(0, m_addFriend.getY() + 25);
-		setSize(100, 150 + m_name.computeTextHeight());
+		m_name.adjustSize();
+		m_name.setPosition(getX(), getY());
+		m_battle.setPosition(getX(), m_name.getY() + m_name.getHeight());
+		m_trade.setPosition(getX(), m_battle.getY() + m_battle.getHeight());
+		m_whisper.setPosition(getX(), m_trade.getY() + m_trade.getHeight());
+		m_addFriend.setPosition(getX(), m_whisper.getY() + m_whisper.getHeight());
+		m_cancel.setPosition(getX(), m_addFriend.getY() + m_addFriend.getHeight());
+		//setSize(100, 150 + m_name.computeTextHeight());
 		popup.adjustSize();
+	}
+
+	public void setPlayerName(String player) 
+	{
+		m_name.setText(player);
 	}
 }

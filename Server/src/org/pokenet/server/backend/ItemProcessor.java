@@ -225,9 +225,7 @@ public class ItemProcessor implements Runnable
 							returnValue = evolveWithItem(evolution, poke, player);
 						else if(itemId == ItemID.DAWN_STONE && evolution.getAttribute().equalsIgnoreCase("DAWNSTONE"))
 							returnValue = evolveWithItem(evolution, poke, player);
-
 					}
-
 				}
 				return returnValue;
 			}
@@ -552,7 +550,7 @@ public class ItemProcessor implements Runnable
 	/**
 	 * Processes the type of fishing rod and fishes if the player can use it.
 	 * 
-	 * @param player Reference to the player.
+	 * @param player The player using the fishing rod.
 	 * @param rodLvl The required lvl to use the fishing rod.
 	 * @return True is the player can use the fishing rod, otherwise false.
 	 */
@@ -577,12 +575,12 @@ public class ItemProcessor implements Runnable
 	/**
 	 * Processes the potion's effects and sends them to the client.
 	 * 
-	 * @param player Reference to the player.
+	 * @param player The player using the potion.
 	 * @param pokeHp The pokemons current HP.
 	 * @param itemId The id of the used item.
 	 * @param pokeId The pokemons position in the players party.
 	 * @param message The message to be sent to the client.
-	 * @return True, unless an exception is thrown.
+	 * @return Always true.
 	 */
 	private boolean processPotion(Player player, int pokeHp, int itemId, int pokeId, String message)
 	{
@@ -601,18 +599,45 @@ public class ItemProcessor implements Runnable
 		return true;
 	}
 
+	/**
+	 * Processes status removal from item usage.
+	 * 
+	 * @param player The player using the item.
+	 * @param poke The Pokemon to remove statusses from.
+	 * @param itemId The id of the used item.
+	 * @param effect The effect to be removed.
+	 * @param message The message to be sent to the client.
+	 * @return Always true.
+	 */
 	private boolean processStatusRemoval(Player player, Pokemon poke, int itemId, Class<?> effect, String message)
 	{
 		poke.removeStatus(effect);
 		return itemUsedMessage(player, itemId, message);
 	}
 
+	/**
+	 * Processes status curing from item usage.
+	 * 
+	 * @param player The player using the item.
+	 * @param poke The Pokemon to cure.
+	 * @param itemId The id of the used item.
+	 * @param message The message to be sent to the client.
+	 * @return Always true.
+	 */
 	private boolean processCureStatus(Player player, Pokemon poke, int itemId, String message)
 	{
 		poke.removeStatusEffects(true);
 		return itemUsedMessage(player, itemId, message);
 	}
 
+	/**
+	 * Processes the usage of Pokeballs for catching Pokemon.
+	 * 
+	 * @param player The player throwing the ball.
+	 * @param pokeball The type of ball that is thrown.
+	 * @return True if the player is in a WildBattle, otherwise false.
+	 * @throws MoveQueueException If queueing the move fails.
+	 */
 	private boolean processBallUsage(Player player, PokeBall pokeball) throws MoveQueueException
 	{
 		if(player.getBattleField() instanceof WildBattleField)
@@ -625,6 +650,14 @@ public class ItemProcessor implements Runnable
 		return false;
 	}
 
+	/**
+	 * Helper function that uses an item.
+	 * 
+	 * @param player The player using the item.
+	 * @param itemId The id of the used item.
+	 * @param message The message to be sent to the client.
+	 * @return Always true.
+	 */
 	private boolean itemUsedMessage(Player player, int itemId, String message)
 	{
 		if(!player.isBattling())
@@ -639,12 +672,12 @@ public class ItemProcessor implements Runnable
 	}
 
 	/**
-	 * Starts the evolution progress for the Pokemon.
+	 * Starts the evolution process for the Pokemon.
 	 * 
 	 * @param evolution The evolution type.
 	 * @param poke The Pokemon to evolve.
 	 * @param player The owner of the Pokemon
-	 * @return True in all cases.
+	 * @return Always true.
 	 */
 	private boolean evolveWithItem(PokemonEvolution evolution, Pokemon poke, Player player)
 	{

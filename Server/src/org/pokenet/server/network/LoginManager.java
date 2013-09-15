@@ -84,26 +84,26 @@ public class LoginManager implements Runnable
 	 */
 	public void run()
 	{
-		Object[] o;
+		Object[] obj;
 		Session session;
 		String username;
 		String password;
 		String newPassword;
-		char l;
+		char lang;
 		while(m_isRunning)
 		{
 			synchronized(m_loginQueue)
 			{
 				try
 				{
-					if(m_loginQueue.peek() != null)
+					if(m_loginQueue.peek() != null && ActiveConnections.getActiveConnections() < GameServer.getMaxPlayers())
 					{
-						o = m_loginQueue.poll();
-						session = (Session) o[0];
-						l = ((String) o[1]).charAt(0);
-						username = ((String) o[1]).substring(1);
-						password = (String) o[2];
-						attemptLogin(session, l, username, password);
+						obj = m_loginQueue.poll();
+						session = (Session) obj[0];
+						lang = ((String) obj[1]).charAt(0);
+						username = ((String) obj[1]).substring(1);
+						password = (String) obj[2];
+						attemptLogin(session, lang, username, password);
 					}
 				}
 				catch(Exception e)
@@ -115,7 +115,7 @@ public class LoginManager implements Runnable
 			{
 				Thread.sleep(500);
 			}
-			catch(InterruptedException e)
+			catch(InterruptedException ie)
 			{
 			}
 			synchronized(m_passChangeQueue)
@@ -124,11 +124,11 @@ public class LoginManager implements Runnable
 				{
 					if(m_passChangeQueue.peek() != null)
 					{
-						o = m_passChangeQueue.poll();
-						session = (Session) o[0];
-						username = (String) o[1];
-						newPassword = (String) o[2];
-						password = (String) o[3];
+						obj = m_passChangeQueue.poll();
+						session = (Session) obj[0];
+						username = (String) obj[1];
+						newPassword = (String) obj[2];
+						password = (String) obj[3];
 						changePass(username, newPassword, password, session);
 					}
 				}
@@ -141,7 +141,7 @@ public class LoginManager implements Runnable
 			{
 				Thread.sleep(500);
 			}
-			catch(InterruptedException e)
+			catch(InterruptedException ie)
 			{
 			}
 		}

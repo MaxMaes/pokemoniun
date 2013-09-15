@@ -266,7 +266,7 @@ public class BattleManager
 	 */
 	public void startBattle(boolean isWild, int pokeAmount)
 	{
-		/* boolean was a char with the TcpProtocolHandler system. */
+		/* Boolean was a char with the TcpProtocolHandler system. */
 		m_isBattling = true;
 		GameClient.getInstance().getHUD().hideHUDElements();
 		if(isWild)

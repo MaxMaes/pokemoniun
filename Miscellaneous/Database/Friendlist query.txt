@@ -1,5 +1,3 @@
-67.170.124.23
-
 INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = 'Remyoman'), (SELECT id FROM `pn_members` WHERE username = 'sadhi'));
 
 DELETE FROM `pn_friends` WHERE id = (SELECT id FROM `pn_members` WHERE username = 'Remyoman') AND friendId = (SELECT id FROM `pn_members` WHERE username = 'sadhi');

@@ -26,7 +26,7 @@
  <tileset firstgid="8817" source="Path0.tsx"/>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4vbBhkfdPup2ELYfBGEyikfxYMHujAg80G4ZSW4nxY8D7YaR6PZRTD98SZR4tUeZKcOk2EUuBgBQ0nX9KBAAAA==
+   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt1MbI7sd5u+BdLsdFrsdcLhn1O0D73YYHipuH2x41O2jbgdh+0EQJqN4FA8W7M6IwAPtlpHkdlL8ONBuGIluH8WDEx9lpgzTw40APF2yKigQAAA=
   </data>
  </layer>
  <layer name="Grass" width="47" height="22">
@@ -41,12 +41,12 @@
  </layer>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TzQmAMAxGc/dngqI9CG4hBdEpBB1anccUQUWoqVZphTz4yCnkERKAlVjAb2F3hmGOjBnAhJmJuFK9/L9RDpBgUovqytldCbu9majRqcG0FvULd2pfVzvT/T7dqZm6x3Rrur+QdEoZpnsn6fQe3U2oG78/yEfKGz7dv4C605DdqTsN2Z1hGDv4V3cWL3Dr+igQAAA=
+   H4sIAAAAAAAAC2NggAAeGYYhC0bdPgpGwShABlfkGBiuAvE1AphSYEfl/Mstz8DAC8R8RNCUAnS3O8gQF264gDPQTa5A7EYETQu3EwovfGEG0j+QbidkJ0gPrrQG0q+iQBirKwxOt8coEMbxA+h2XMCBhLyfoECWk+FgIN1OC0AonQ5mtxNKp4PZ7aNg5IBIYFqLAuJoOqW5KCrakwg0KwmIk+ngdlx2kZtXzYH6smQgND0AyC5TGtsFAGZ3s6ooEAAA
   </data>
  </layer>
  <layer name="Collisions" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WMQ6DMAxFUVnLyNZztJ2Aqc3YS/ZmPUiNBAK5PyGOkxShfOlLSAT7EQfj/lJVPflMfjI3070U7sif+jenIQ/CWANg7xKyP0C+NT96hu+vhB3VJpVRzTmjhH1ck0uoLqawH5L9SmtuFt8F7y5l5wphd/UmSd207Px5U9hV7OszGZt965+jZUd7szd22zfvW89/skvmkcKuY3+dFmvZQxSL3RWHz2l7YPdVjlmF9wrJTOBSDvZUOVDc+azF0pHYbfOlj0fN1y3oNZrYKNe79u9zIf4CaJGfVCgQAAA=
+   H4sIAAAAAAAAC+2WOw7CMAyGK7HSkS3ngE5tJ0jZ4BaIa3MQjJQhMs7DcR0qFEv/UDmxv8aN68l03QTagy5IvfNpaAS9dt85LWhmxpoJ9lGR/Uzk8/mpPfh8OexUbbRE1Rwzctg/a2oZVRfb2P+S/QhrTgENjHfnsmMrYY/1Jk7dpOx4v23sInb/m1ybPfXPkbJTZ7M19tCdz63nL9k580hjl7Ev4L+addhLTMJ+A//dpOPgOW0L7LlWY1bBvYIzE8SsBrtWDiquf1e0cmjF9e+KRo7QfJnSwzE93fOB6DWlsWO5cvtcid7wKXV3KBAAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="47" height="22">

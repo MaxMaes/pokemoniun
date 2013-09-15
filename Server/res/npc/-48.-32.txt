@@ -10,9 +10,9 @@
 [npc]
 Pewter City citizen
 up
-141
+274
 2
-2
+3
 NULL
 0
 -1

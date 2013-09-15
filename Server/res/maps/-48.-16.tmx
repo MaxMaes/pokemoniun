@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="14" height="9" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
@@ -15,33 +14,33 @@
   <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="normal2.tsx"/>
- <tileset firstgid="1025" source="normal3.tsx"/>
- <tileset firstgid="2049" source="normal4.tsx"/>
- <tileset firstgid="3073" source="normal6.tsx"/>
- <tileset firstgid="4097" source="normal9.tsx"/>
+ <tileset firstgid="1025" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="1355" source="InteriorWalls 1.tsx"/>
+ <tileset firstgid="1655" source="Interior - Furniture.tsx"/>
+ <tileset firstgid="1955" source="InteriorObjects1.tsx"/>
  <layer name="Walkable" width="14" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgoD/oYWFgeCeIHfMLMTAICEHUwDAMgOQFhLBjPiA2wKHPQAgTC2ARg2F8+vBhZHfSUx85AADmGRw++AEAAA==
+   H4sIAAAAAAAAC2NgoD9gZyENI+vjIAGPFH3kAACRg/Vo+AEAAA==
   </data>
  </layer>
- <layer name="random" width="14" height="9">
+ <layer name="Walkable" width="14" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGJzgjSACU10fNw42IUCuPjKAJxMDgxcQezORpi8TqD4LiLMJ6AMAIYmQRfgBAAA=
+   H4sIAAAAAAAAC2NgGHlgKxt2Nq30kQPqWBgY6oG4gYU25gMA44v73fgBAAA=
   </data>
  </layer>
  <layer name="Collisions" width="14" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAOtiYGBYL8jAsA4L3gDFyGIbgbiLAYLPA9nnsOALUIwsdhFJ33sgmxB4zgOh1yLpIwaw80JoDl6EPn8s9s3lYmCYx4Up7o9kXz4WfXuBevZh0ZdPojuRAUzfBibi9YDUwvShYwYc4sgYAHXyMxn4AQAA
+   H4sIAAAAAAAAC2NkYWDYw8rAsJdIvA+IGVkg+AKQfZFIfAlJH6mAUn3r2DHlHrMxMDxhwxQHqcVn31ugnndY9NHKnbgAsjvRMbKZuDAAdX1g1PgBAAA=
   </data>
  </layer>
- <layer name="random2" width="14" height="9">
+ <layer name="Collisions" width="14" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgQAWebAwMXkDsy8ZAFPAGqvMB4kwgzgLiXCL1ZQPV5QBxJxB3AXEvkfqoBWwZ6WvfYAMACe8s3vgBAAA=
+   H4sIAAAAAAAAC2NgoAw8ZGNgeATENUBcC8QfgfgTG2F9r4Fq3gBxGxC3A/FvIP5DhD5qAVtG+tk1GAEAIbY8nvgBAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="14" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAXUBhOYaKOWmgAAr71eQPgBAAA=
+   H4sIAAAAAAAAC2NgGDpgCTum2E02BoZbbMSppRcgxe6BcicA1hKeCfgBAAA=
   </data>
  </layer>
 </map>

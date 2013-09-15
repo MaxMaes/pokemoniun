@@ -15,7 +15,7 @@ false
 [npc]
 Warden
 down
-166
+332
 4
 5
 NULL

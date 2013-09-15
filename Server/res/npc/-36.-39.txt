@@ -81,3 +81,17 @@ false
 false
 false
 [/npc]
+[npc]
+Ticket_Vendor
+down
+36
+30
+42
+NULL
+0
+-1
+0
+false
+false
+false
+[/npc]

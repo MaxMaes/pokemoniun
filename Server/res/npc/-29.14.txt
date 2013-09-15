@@ -25,3 +25,17 @@
 -21
 0
 [/warp]
+[npc]
+Seasond_Sailor
+up
+395
+16
+62
+NULL
+0
+-1
+0
+false
+false
+false
+[/npc]

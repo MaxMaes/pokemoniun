@@ -2,8 +2,8 @@
 Aroma Lady Daisy
 down
 382
-37
-63
+19
+61
 Roselia,16
 1
 -1
@@ -16,8 +16,8 @@ false
 Twin Amy
 down
 262
-24
-66
+9
+60
 Plusle,16
 1
 -1
@@ -30,8 +30,8 @@ false
 Twin Liv
 down
 262
-25
-66
+10
+60
 Minum,16
 1
 -1

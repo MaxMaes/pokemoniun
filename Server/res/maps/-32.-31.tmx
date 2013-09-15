@@ -1,65 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="34" height="35" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value=""/>
   <property name="dayPokemonChances" value=""/>
-  <property name="nightPokemonLevels" value=""/>
+  <property name="dayPokemonLevels" value=""/>
   <property name="nightPokemonChances" value=""/>
-  <property name="waterPokemonLevels" value=""/>
-  <property name="waterPokemonChances" value=""/>
-  <property name="wildProbability" value="0"/>
+  <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="disabled"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
- </properties> 
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal2.tsx"/>
- <tileset firstgid="2049" source="normal3.tsx"/>
- <tileset firstgid="3073" source="normal4.tsx"/>
+ </properties>
+ <tileset firstgid="1" source="Interior - Furniture.tsx"/>
+ <tileset firstgid="301" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="631" source="InteriorFloor2.tsx"/>
+ <tileset firstgid="1327" source="InteriorWalls 1.tsx"/>
  <layer name="Walkable" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3OsQ0AIAwDwbRI0LD/sCwAUarQ3Emu/REAAG9r5OvsmMl06NBxt//cAkDJAT9E4w2YEgAA
+   H4sIAAAAAAAAC+3OsQkAMAwEsc/cwbt7grg0BCS4/hIAgLd75jY/asiHDx8A8J8Gq0qm7JgSAAA=
   </data>
  </layer>
  <layer name="Walkable" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3OoQ0AIAxE0dqargIWmATYfw/qCKICheC/5JKKS3oiAAAAuJV031nj3i87cComUj3N3u7o/n945uMdAABEFhJ6TG2YEgAA
+   H4sIAAAAAAAAC+3OoQ0AIBAEwf+iaBooEiwCgQHETHLJyY0AAOBU2fzbfulgVTOizfV8XQIAfxt3f1GDmBIAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3UsQkAMAgAQWfI/sOmT6UYtLkDO8GvjACAfSc5Ex0/drp01G/oqO906ajfmOp4/+bGPwWAjAuuHGd3mBIAAA==
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
   </data>
  </layer>
  <layer name="LedgesRight" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3UsQkAMAgAQWfI/sOmT6UYtLkDO8GvjACAfSc5Ex0/drp01G/oqO906ajfmOp4/+bGPwWAjAuuHGd3mBIAAA==
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
   </data>
  </layer>
  <layer name="LedgesLeft" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3UsQkAMAgAQWfI/sOmT6UYtLkDO8GvjACAfSc5Ex0/drp01G/oqO906ajfmOp4/+bGPwWAjAuuHGd3mBIAAA==
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
   </data>
  </layer>
  <layer name="Water" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
   </data>
  </layer>
  <layer name="Collisions" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3GwQkAIAwEwfRfkmAjgr34yeMqCAgzsLBVAEDa3YrPptzuxGcAAPC7B7fysGWYEgAA
+   H4sIAAAAAAAAC+3UMQ6AIAxG4TpwHO9/B3BUR+Qolo3BBmJCw/C+5F8MSd+kCAAAa4hBJBk7gl/HqbcuY7du33w6st56jBWnjpEb9c3sFjr+dcxGx7od7b6+ef3HAADoeQF/yk/JmBIAAA==
   </data>
  </layer>
  <layer name="Collisions" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSMglEwCkYBMkjgYWAQQcKxPBDxSCAdxUM/dzSguaMWiPcCcSUQV9HRHQvQ7JoL5N8F4plAPIuO7hiMQA7of/lBEAZ2QDfYDwJ3jIJRMApGwSgYBaNgFJAKANmn7kGYEgAA
+   H4sIAAAAAAAAC+3Ouw2AMBRDUSsFUAKLQsunJfvBFjAFLrIATXjFPdKVXFoCAAARTW4ue3O761zj2oo/FreWfbjsRte7oeKPiM4kXenvF9LtD0+AHwAAAF+93/iGEZgSAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="34" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAO3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQsvoAAAAADgb0htOb6YEgAA
   </data>
  </layer>
 </map>

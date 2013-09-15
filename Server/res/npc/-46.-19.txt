@@ -1,9 +1,9 @@
 [npc]
 Teacher
 down
-51
+343
 7
-2
+3
 NULL
 0
 -1
@@ -15,7 +15,7 @@ false
 [npc]
 Schoolgirl
 up
-72
+340
 5
 5
 NULL

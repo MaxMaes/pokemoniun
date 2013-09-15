@@ -15,7 +15,7 @@ false
 [npc]
 Mikey
 down
-88
+317
 17
 25
 Pidgey,4,Rattata,4

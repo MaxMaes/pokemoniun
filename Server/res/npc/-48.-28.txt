@@ -85,7 +85,7 @@ false
 [npc]
 Burglar Quinn
 left
-195
+352
 8
 19
 Growlithe,36,Vulpix,36,Ninetales,36

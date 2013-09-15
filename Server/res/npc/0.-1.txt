@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Erik
 right
-102
+366
 13
 16
 Machop,24,Graveler,27,Machop,27
@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Ryan
 left
-81
+355
 20
 18
 Pidgeot,25,Electabuzz,27
@@ -43,7 +43,7 @@ false
 [npc]
 Hiker Parry
 up
-102
+366
 8
 28
 Onix,29
@@ -57,7 +57,7 @@ false
 [npc]
 Cooltrainer Kelly
 right
-55
+357
 8
 36
 Marill,27,Wartortle,24,Wartortle,24
@@ -71,7 +71,7 @@ false
 [npc]
 Blackbelt Kenji
 up
-104
+367
 14
 50
 Machoke,28
@@ -85,7 +85,7 @@ false
 [npc]
 Hiker Timothy
 left
-102
+366
 12
 65
 Diglett,27,Dugtrio,27
@@ -99,7 +99,7 @@ false
 [npc]
 Hiker Michael
 right
-102
+365
 18
 65
 Geodude,25,Graveler,25,Golem,25
@@ -113,7 +113,7 @@ false
 [npc]
 Camper Quentin
 down
-28
+345
 7
 70
 Fearow,30,Primeape,30,Tauros,30

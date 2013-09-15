@@ -57,9 +57,9 @@ false
 [npc]
 Resting person
 down
-42
+274
 9
-3
+4
 NULL
 0
 -1

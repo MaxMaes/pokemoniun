@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="17" height="16" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
@@ -12,28 +11,28 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal2.tsx"/>
- <tileset firstgid="2049" source="normal3.tsx"/>
- <tileset firstgid="3073" source="normal4.tsx"/>
- <tileset firstgid="4097" source="normal5.tsx"/>
- <tileset firstgid="5121" source="normal6.tsx"/>
- <tileset firstgid="6145" source="normal7.tsx"/>
- <tileset firstgid="7169" source="normal8.tsx"/>
- <tileset firstgid="8193" source="normal5.tsx"/>
+ <tileset firstgid="1" source="SinnohInteriorSet0.tsx"/>
+ <tileset firstgid="369" source="SinnohInteriorSet4.tsx"/>
+ <tileset firstgid="857" source="InteriorWalls 1.tsx"/>
+ <tileset firstgid="1157" source="InteriorFloor 1.tsx"/>
  <layer name="Walkable" width="17" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGDzgEAV4pJixiAkVj5oxagYyrmRlYKhiRdCEzMAGhNAwPgAAg7J37UAEAAA=
+   H4sIAAAAAAAAC2NgGJ6gkUhMyIwqIjA9zehAw6NmjJpBDTPIBQDdAz92QAQAAA==
   </data>
  </layer>
  <layer name="Walkable" width="17" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAUjGeyXGGgXjIKhDAAPKGHJQAQAAA==
+   H4sIAAAAAAAAC2NgGAUjFWxiheBRMHzAbkYGhj1AvBeI9zHS3j4AvvsGNkAEAAA=
   </data>
  </layer>
  <layer name="Collisions" width="17" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAABNiYGCooQALQfEcCjDMjAQWBpIBSA8Iw8ygBNDSDJAb45kgGOZmXP7FZQZILzFitDYDm7tJ9QspYNQM7GZQI79gw7jsw4YB+IJmmUAEAAA=
+   H4sIAAAAAAAAC2NgoB4QAWINFgYGTQJYiwWiFpcZRkB5YwLYhIAZpLiZHmbIMDMwSAKxFBRLM0PESDUDBpazMjCsYKXMDBDYTKEZe4H692ExA5s5pIYpLczAZS4+M4gxd6iagWwOMiZGDgQAzxiCzkAEAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="17" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWEgAgzA4MgEAtBsTAzRIxUM4gRGwpmjIJRAAMA4L0O0EAEAAA=
   </data>
  </layer>
 </map>

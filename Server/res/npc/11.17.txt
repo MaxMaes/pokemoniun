@@ -15,7 +15,7 @@ false
 [npc]
 Bird Keeper Jacob
 left
-42
+269
 46
 14
 Spearow,26,Spearow,26,Fearow,26,Spearow,26
@@ -29,7 +29,7 @@ false
 [npc]
 Bird Keeper Wilton
 right
-42
+269
 38
 12
 Spearow,29,Fearow,29
@@ -43,7 +43,7 @@ false
 [npc]
 Bird Keeper Ramiro
 right
-42
+269
 40
 15
 Dodrio,34

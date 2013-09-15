@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="20" height="14" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
@@ -12,27 +11,26 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal2.tsx"/>
- <tileset firstgid="2049" source="normal3.tsx"/>
- <tileset firstgid="3073" source="normal4.tsx"/>
- <tileset firstgid="4097" source="normal5.tsx"/>
- <tileset firstgid="5121" source="normal6.tsx"/>
- <tileset firstgid="6145" source="normal7.tsx"/>
- <tileset firstgid="7169" source="normal8.tsx"/>
+ <tileset firstgid="1" source="InteriorFloor2.tsx"/>
+ <tileset firstgid="697" source="SinnohInteriorSet2.tsx"/>
  <layer name="Walkable" width="20" height="14">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgoC5wZxzFlGBsQJaRNEwIjJo38szz5Gdg8OInzzxsQAiKCQEASblPt2AEAAA=
+   H4sIAAAAAAAAC2NgGAWDHXxmJA0TY95XEvCoeSPbPEoAAPdUXjxgBAAA
   </data>
  </layer>
  <layer name="Walkable" width="20" height="14">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAHNiYmBwIgODADn6RjHhcB1qQJ8TwTbgJF2e1uZRG4w0/1ICAOCMrDVgBAAA
+   H4sIAAAAAAAAC2NgGAXYwAlGBoYbjBCaGuAC0JwHjBB6uAFjJuxsYuVpbR61wVD071kgPkeeVooAAMjqikhgBAAA
   </data>
  </layer>
  <layer name="Collisions" width="20" height="14">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAHNiYmBwoiK+L0s9/ACI/1MRM8gxEA3WMqLSuEAqM3H4LNQcEI1PnRADJk5ggeiF0QxYxJBpbGYgY1IBMeZxsjIwcLHiNgNZnhjzNIFqtfCYhyw/6l/a+hefHYTUAQBY+bLRYAQAAA==
+   H4sIAAAAAAAAC2NgGAU3GBkYTjCi0vjkTzPhN+8BUM0FRlTaloWBwY4Fuzw+80ByslB5dBqbGIgmZB6pgBjzVIC0Kh51yPLEmGcCpE3xqEOWH/UvpnmkAELmYcPEygMApCfe+2AEAAA=
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="20" height="14">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAXYgCkLA4MZC3l6RZmw04TkRsEoGG4AAFsnOx1gBAAA
   </data>
  </layer>
 </map>

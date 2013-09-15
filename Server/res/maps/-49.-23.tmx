@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="13" height="10" tilewidth="16" tileheight="16">
-<properties>
+ <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value=""/>
@@ -14,29 +13,35 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal2.tsx"/>
- <tileset firstgid="1025" source="normal3.tsx"/>
- <tileset firstgid="2049" source="normal5.tsx"/>
- <tileset firstgid="3073" source="normal18.tsx"/>
- <tileset firstgid="4097" source="normal15.tsx"/>
-  <layer name="Walkable" width="13" height="10">
+ <tileset firstgid="1" source="normal18.tsx"/>
+ <tileset firstgid="1025" source="normal15.tsx"/>
+ <tileset firstgid="2049" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="2379" source="InteriorWalls 1.tsx"/>
+ <tileset firstgid="2679" source="InteriorObjects1.tsx"/>
+ <tileset firstgid="2779" source="SinnohInteriorSet1.tsx"/>
+ <layer name="Walkable" width="13" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgoB/gZGNg0GIlDsOAD5CtSSQeSXosGRkYrBhx6yEVAADJ7gRkCAIAAA==
+   H4sIAAAAAAAAC2NgoB+Q5iAeI+uRIRKP6iE/bgAsX2wtCAIAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="13" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAVDDdRxMDDUQ3EDB3XMBAB+wM7YCAIAAA==
   </data>
  </layer>
  <layer name="Collisions" width="13" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAMtnYmA4ycrA4E8EPgXE+UwQ/BLEJgK/QtIDAhY8DAyWPAgaGdRB+VxsqHoqgeJVPAj6AytCzz4gn4eDgYGPA6GnGihWA8ReAgg2MrgH5HMC1XNzoNoDU4tNDwxoCaDqwQdA9sMANnsIAVL0wOyC6cGG0c1FxgBhouPNCAIAAA==
+   H4sIAAAAAAAAC2PkYGCQ4mJgkCYCywAxIwcEqwDZqkRgNSQ9IGABxJZINDawVQhVTyUQVyHRTVyYer4i6akG8muA2IsFwYYBI2EGBmMgNgFiU2FUe2Bq0fUgAy0WVD34AMh+GMBmDyFAih6YXTA92DC6ucgYAKLnGGAIAgAA
   </data>
  </layer>
- <layer name="random" width="13" height="10">
+ <layer name="Collisions" width="13" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgIB9I8DAwSPIg6FEwdAEARh3++wgCAAA=
+   H4sIAAAAAAAAC2NgIB9IALEkEo0NlApRYMEooBsAAJSN7Z4IAgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="13" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGFhwgXWAHTAKwAAACij/sAgCAAA=
+   H4sIAAAAAAAAC2NgoB0oESKspoILlb+FCD0w8Amo9jMQfyFBzyjADgBWtO8mCAIAAA==
   </data>
  </layer>
 </map>

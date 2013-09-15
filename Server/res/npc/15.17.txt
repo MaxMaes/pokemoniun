@@ -1,7 +1,7 @@
 [npc]
 Picnicker Alma
 right
-30
+357
 62
 6
 Goldeen,28,Poliwag,28,Horsea,28
@@ -15,7 +15,7 @@ false
 [npc]
 Bird Keeper Sebastian
 down
-42
+269
 62
 11
 Pidgey,29,Pidgeotto,29
@@ -29,7 +29,7 @@ false
 [npc]
 Picnicker Susie
 down
-30
+357
 55
 11
 Pidgey,24,Pikachu,24,Meowth,24,Rattata,24,Meowth,24
@@ -43,7 +43,7 @@ false
 [npc]
 Picnicker Valerie
 down
-30
+357
 36
 10
 Poliwag,30,Poliwag,30
@@ -57,7 +57,7 @@ false
 [npc]
 Picnicker Gwen
 left
-30
+357
 30
 11
 Pidgey,27,Meowth,27,Pidgey,27,Pidgeotto,27
@@ -71,7 +71,7 @@ false
 [npc]
 Bird Keeper Robert
 up
-42
+269
 9
 14
 Pidgey,26,Pidgeotto,26,Spearow,26,Fearow,26
@@ -85,7 +85,7 @@ false
 [npc]
 Bird Keeper Perry
 right
-42
+269
 16
 5
 Spearow,25,Pidgey,25,Pidgey,25,Spearow,25,Spearow,25
@@ -99,7 +99,7 @@ false
 [npc]
 Biker Jared
 down
-95
+339
 14
 8
 Koffing,28,Koffing,28,Koffing,28
@@ -113,7 +113,7 @@ false
 [npc]
 Beauty Sheila
 down
-64
+382
 42
 7
 Clefairy,29,Meowth,29
@@ -127,7 +127,7 @@ false
 [npc]
 Beauty Lola
 down
-64
+381
 43
 7
 Rattata,27,Pikachu,27,Rattata,27

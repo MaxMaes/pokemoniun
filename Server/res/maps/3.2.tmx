@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="28-32;28-32;"/>
   <property name="fishPokemonChances" value="Magikarp,10;Chinchou,64;Shellder,23;Lanturn,3;"/>
   <property name="fishPokemonLevels" value="10-20;10-40;20-40;40-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Tangela,99;Mr.Mime,1;"/>
   <property name="nightPokemonLevels" value="28-32;28-32;"/>
   <property name="waterPokemonChances" value="Tentacool,90;Tentacruel,10;"/>
@@ -35,7 +36,7 @@
  </layer>
  <layer name="Collisions" width="23" height="99">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Z0Q7CIAxFzUz2oP//Hz7pnjb9M9kDGcF2bel1E8dNyIyD9iAX2LDrTqdzKF12tShvG6+XUK7ENderp8ut52NwObUaej/3WuzG3bj35B5D7IkpHu57qPcIZWDqe7jHUG8K5cnUL+WWmD1tJGapjZTHwp7Xldgs7BbmUn4Pk5S7xAN5DC63hTmNV+KdNeXxkN6y5vL2LcZDxMoV43n6T2mrsW3ci2JMNPesGDPN42Wn4qDYrfNfKw1zaS6u7yhPpnGk9cSzV01JG8QYa/adUmn67/GO1H9PH77lcSoWck1BeY7Sll458joYxa1NiDzcb4B6nhqI38T7fpSzeee6NH7I8Vxj94riRLFTnAj2GpmjOM6a5iWKl2M7ur8pxprXk7XvLWr+/tQ/+AT97IN6jteyos6o0s/os46UEX3WsdU+X4u3Z+3hb/R7GvodQjMvUWcQv7rfaDyNOqdq83JR7T7R3vPwSvc02vL/HOt9SbV5BMnHieN7A3FcorqUIwAA
+   H4sIAAAAAAAAC+2Z0Q7CIAxFzUz2oP//Hz7pnpz+meyBSLClLb3bRLkJmXHQHuQCGw7D4XAMZciuFuVt4/UUypm45nqOdLmMfAwup1bT6Ocuxe7cnXtP7nuIPTPFw30N9W6hTEx9D/c91JtDeTD1a7klZk8biVlqI+WxsOd1JTYLu4W5lt/DJOWu8UAeg8ttYU7j1XinpDwe0lvWXN6+xXiIWLliPE//KW01tp37rRgTzb0oxkzzeNmpOCh26/zXSsNcm4vrO8qTaRxpPfHsVXPSBjHGmn2nVpr+e7wj9d/Th7U8TsVCrikoz1Ha0iv/vA5GcWsTIg/3G6CepybiN/G+H+Vs3rkujR9yPEvsXlGcKHaKE8HeInMUx9nSvETxcmz/7m+KseX1pPS9Rd3fn/oFn6CffVDP8VpW1BlV+hl91pEyos86ttrnW/H2oj38jX5PQ79DaOYl6gziW/cbjadR51R9Xr7Vuk+09zy80j2Ntvw/x3pfUmsekfjW2tsXvQCNlMfElCMAAA==
   </data>
  </layer>
  <layer name="Collisions" width="23" height="99">

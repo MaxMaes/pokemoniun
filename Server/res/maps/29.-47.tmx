@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="28-30;28-30;28-28;30-30;30-31;30-31;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Wooper,35;Noctowl,20;Bibarel,20;Quasire,10;Tangela,5;Yanma,5;"/>
   <property name="nightPokemoneLevels" value="28-30;28-30;28-28;30-30;30-31;30-31;"/>
   <property name="pvp" value="disabled"/>

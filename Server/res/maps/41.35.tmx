@@ -5,11 +5,12 @@
   <property name="dayPokemonLevels" value="14-20;14-18;14-18;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Barboach,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Zubat,60;Solrock,20;Lunatone,20;"/>
   <property name="nightPokemonLevels" value="14-20;14-18;14-18;"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Golbat,80;Solrock,10;Lunatone,10;"/>
   <property name="waterPokemonLevels" value="5-35;5-35;5-35;"/>
-  <property name="pvp" value="enforced"/>
   <property name="wildModifier" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
@@ -20,9 +21,9 @@
  <tileset firstgid="2859" source="normal5.tsx"/>
  <tileset firstgid="3883" source="normal3.tsx"/>
  <tileset firstgid="4907" source="normal12.tsx"/>
- <layer name="Layer 0" width="30" height="50">
+ <layer name="Water" width="30" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Y0Q6AIAhFXb209R/9bX5zTy5HDkWBNnbP1lPFES3IUgLXzp8/j+/hAfVoevP2xuzl1/OWWKOMzqFWvneV64jTYn25mF7PEwCrSN5dzboZ+d5W/Zyp/eWa1TH31oyOV8M7A/VK+5CG1zPn2vX3XAMAZFh+z8MLr6eX2yda9uFWbtZ9mItv+W9AEiuCFwAAIvMA7XTMfXAXAAA=
+   H4sIAAAAAAAAC+2Y0QqAMAhFR70E/Ud/W9/c02jYckrqQO6BnipPdyuFSgHHyp/ft/cRAfVYeq/lqTnKN/LWWlKka2iV92yySpwe+8vVjHqfAPiL5tu17JuZ7+31T8/ezyHZM/q89ZroPka92jlk4Y3M3LpmrzUAQMfMng4vvNbOL6/nHO5l857DXH3PfwOaWhm8AACQmRtfAHyEcBcAAA==
   </data>
  </layer>
  <layer name="Grass" width="30" height="50">
@@ -40,7 +41,7 @@
    H4sIAAAAAAAAC+2YUQ6CMAyG98aSLQYOQgwexFuoJ1FPoh4ODuEmNJZmUwNrMbo/+V984LOy9l9VKuudmlKpVfX0ppTh1o5ldO+2UGpdpWfQ2h71VT2vG5ya65meAc+3undXjD9Lza2HumL23G3F8zvjd0nNwQPtTNh754Ph4x5N2CfnMzMXGCFzcpeo9+KefXW+RUwF53yqYF7gXg2ZzpS5c7MemK/6l/YyzJU5/QXcWO9SW52OC7VwzwgsP/+wP+HCbJP6jt/A9e+3EbwLYC5HNn7KluZKZFVIErM7c5fj4tyUks9OnJGSe0SqPJzCNX/EhbuHZC5BDlqBfQIEO1xbyOwxIMghfN/izmFaqyVsrv8G6M5o9fh8pbprxri4TsyTPmtZWVlZv6A7gGJXpXAXAAA=
   </data>
  </layer>
- <layer name="Layer 6" width="30" height="50">
+ <layer name="Walkable" width="30" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3UoREAIAwEwbSQQmiF/suJRyMS2NXvfuYi4A877+4AXrKO9mlhH74AAACYowB7SqkacBcAAA==
   </data>

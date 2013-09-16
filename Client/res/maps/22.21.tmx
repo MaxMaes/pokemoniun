@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="59" tilewidth="16" tileheight="16">
  <properties>
+  <property name="isCave" value="false"/>
+  <property name="pvp" value="disabled"/>
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="-512"/>
  </properties>
@@ -19,7 +21,7 @@
  <tileset firstgid="16967" source="Hoenn Gyms.tsx"/>
  <layer name="Walkable" width="40" height="59">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZvQ6CMBAHcFb6Ij4Jo7MSSYwDKjH4MaGT+ua20SakaeF6pXCYa/JfGMov16alJUngbZOOH5/GPj/fFB6ob2pXDN9FJMk1MDcB82HelcncA/MA+hpk/yuZdUDyyL6tzFnmiEw1gm9HeHzZ5/bpRtVHvX7s+w+feu7r0/tGKbMXuH0jpu8gvut/LXD7RxXZR3185+x7AdPnaz8fyqfed0phaQD1i+ErelzFL+xzj682hPimnn+LCXyumDZ1HsuI+rSta30xz7Jj+do2Sj7XmZmKz5W5+GwmSr6+sI99FHy+92XlyD597oGmjuQz70ux/ccaX+x8Yx/72DdPn23thtxf5R19DunD/uuoOvoc2hcylirmHcybkA+617Iv3Pe0zAUzS6APet/nmmvYmDW2+XxqMnTMGmtfzJqERH27mv9rObTyAUWWosvgJAAA
+   H4sIAAAAAAAAC+3ZuwrCMBQG4K7Ni/gkHZ21WBAHL0XqZapO6puboIESmvTk5Fo4hX/pkHzkhKRJiwL+bMr4sXnIZ+dL4YH6UrtC+K6sKG6OuTOYD9NXxfNwzBPo65Htr3jWDqkD+7Y8F54TMm0E3y7j+pKPfOQjn8kn3tv65L6x5zkw3L4R0ndkv/W/Y7j9ow3sy72+c/a9gZnyDd/78on+ziUsPWD8QviaCVfzD/n09ZUGF1/q+bdI4NNFtYnzWJWpT9pM64t6lo3lG9py8unOzLn4dJmbTxfykY980z7b+7J9ZJ8890DTBfKp96XY9kPVFzvfyEc+8s3TN7Z2Q+6vakObPn3Yfx2toU3fPpdaiqh3MJ+MfNC9lnzuvtfIXFCzBPqg9326uYaNOsZjPpsx8R11jKUv5Ji4RHy7qv9rKXnlCwIvFaTgJAAA
   </data>
  </layer>
  <layer name="Walkable" width="40" height="59">

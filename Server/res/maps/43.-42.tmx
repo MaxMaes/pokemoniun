@@ -5,12 +5,13 @@
   <property name="dayPokemonLevels" value="21-22;20-20;21-22;21-22;21-22;22-22;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Girafarig,30;Geodude,20;Graveler,15;Staravia,15;Bibarel,15;Kricketune,5;"/>
   <property name="nightPokemonLevels" value="21-22;20-20;21-22;21-22;21-22;22-22;"/>
-  <property name="pvp" value="enforced"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
-  <property name="wildProbability" value="1"/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="2176"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

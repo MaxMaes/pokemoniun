@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="44-46;45-48;44-46;45-45;48-48;46-48;46-48;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Graveler,30;Onix,20;Medicham,10;Rhyhorn,5;Steelix,5;Kadabra,10;Golbat,20;"/>
   <property name="nightPokemonLevels" value="44-46;45-48;44-46;45-45;48-48;46-48;46-48;"/>
   <property name="pvp" value="yes"/>
@@ -16,6 +17,7 @@
  </properties>
  <tileset firstgid="1" source="normal12.tsx"/>
  <tileset firstgid="1025" source="normal7.tsx"/>
+ <tileset firstgid="2049" source="Caveset 2.tsx"/>
  <layer name="Grass" width="110" height="75">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3ZSwrCMBRGYcWV6cj9r0icCYJ9xDb3T74DZ2rknqY07eUCAAAAAAAAAACA0Xjc2KJumeqWqW6Z6pbpTN2e1/7z1m1udctUt0x1y3TGbu/nkyV7dxm5W9qsdaNumeqWqW6Z6papbpkmdNtyzqp0JlhzTtx7jknu1rvLr/979BoJ3ajbp95z1ey21CH5HWVit+oz1Y26fXvWvt16Hlhzn565WyW3ttOtlrN1S3sebLV6tzPnn9S8erczTdqvumWqW6azdrsXvw+mdjvim9VIVuzWq9OW3+99zVTs1jr7qvv0n2uP1m0WdctUtz730Nb1Rui29zvJmc6+33rPv0rXtG7ULVndMgUAAAAAAAAAAMB4vADJbXOE6IAAAA==
@@ -23,7 +25,7 @@
  </layer>
  <layer name="Walkable" width="110" height="75">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YQQ0AAAgDMR74t4Q1VBBCaBXcd4sAAAAAAAAAAACAGZXbBQAAAADAZz5KAAAAmGN3AwAAAAAAAAAAAAAAANzWN44a4OiAAAA=
+   H4sIAAAAAAAAC+3YMQ0AIBADwJ8xAk7AvyKwwARN7hQ06dRWAQAAAAAAAAAA/K+3qtFep+DWPJ0tvQEAAAAQzj+ZyT8JAACQwe7OZHcDAAAAAAAAAAAAAAAA5NsB/HHe6IAAAA==
   </data>
  </layer>
  <layer name="Collisions" width="110" height="75">

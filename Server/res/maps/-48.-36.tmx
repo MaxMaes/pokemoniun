@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="waterPokemonChances" value=""/>
@@ -24,7 +25,7 @@
  </layer>
  <layer name="Walkable" width="12" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGL6gnnVg7a9jAboBiBtYqGcmAGToJS+wAQAA
+   H4sIAAAAAAAAC2NgoAy8YaTQABqCetaBtb+OBegGIG5goZ6ZAM7KrBSwAQAA
   </data>
  </layer>
  <layer name="Collisions" width="12" height="9">
@@ -34,7 +35,7 @@
  </layer>
  <layer name="Collisions" width="12" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgQIDTjAwMZ4D4LBB3MkLEYDQyOMnKwHAKiF8D5d4A8VsgXglVB6IvQDEMXAaqvcKKac4oIB0AAPobVYKwAQAA
+   H4sIAAAAAAAAC2NgQIDTjAwMZ4D4LBB3MkLEYDQyOMnKwHAKiF9D5d4C6ZVQNoi+AMUwcBmo9gorpjmjgHQAAFA53LmwAQAA
   </data>
  </layer>
  <layer name="WalkBehind" width="12" height="9">

@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="5-35;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Dunsparce,100;"/>
   <property name="nightPokemonLevels" value="5-35;"/>
   <property name="pvp" value="yes"/>

@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="13-16;10-16;13-16;12-14;13-13;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Hoothoot,23;Mankey,22;Oddish,23;Abra,10;Meowth,22;"/>
   <property name="nightPokemonLevels" value="13-16;10-16;13-16;12-14;13-13;"/>
   <property name="waterPokemonChances" value=""/>
@@ -22,7 +23,7 @@
  <tileset firstgid="13161" source="Pokemon Day Care Remake.tsx"/>
  <layer name="Walkable" width="48" height="41">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XQQqAIBBAUTfd/wweoF1mi6KO1iwKXFiEkM7gH/g7hYfgYvzgnO+0SQpXc4V7+PHjx48fP378+P/132PVb/398ePHjx8/fvzt/Olo9S/S+LGo0F8a/vJWaXtpT5zHw5ncfqAlLf8UP378+Ft78Nuqhv8EGIXjrcAeAAA=
+   H4sIAAAAAAAAC+3RKw6AQAxAwTXc/wwcAMdP8DsaKxAYCCBYyI54rk0mbVmEUGZaHWu22hf2+Pn5+fn5+fn5+fn5+fn5+fn5c/X3sepi3Qf9T+N/3hAbT5p3zuVgZkrov/OflHfm5+fnT+3h/1dv+FeEdUlRwB4AAA==
   </data>
  </layer>
  <layer name="Walkable" width="48" height="41">

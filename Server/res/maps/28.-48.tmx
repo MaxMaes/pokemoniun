@@ -3,10 +3,11 @@
  <properties>
   <property name="dayPokemonChances" value="Wooper,30;Bibarel,30;Quasire,10;Tangela,25;Yanma,5;"/>
   <property name="dayPokemonLevels" value="28-30;28-28;30-30;30-31;30-31;"/>
-  <property name="nightPokemonChances" value="Wooper,30;Noctowl,10;Bibarel,20;Quasire,10;Tangela,15;Yanma,5;Hoothoot,10;"/>
-  <property name="nightPokemoneLevels" value="28-30;28-30;28-28;30-30;30-31;30-31;27-27;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Wooper,30;Noctowl,10;Bibarel,20;Quasire,10;Tangela,15;Yanma,5;Hoothoot,10;"/>
+  <property name="nightPokemoneLevels" value="28-30;28-30;28-28;30-30;30-31;30-31;27-27;"/>
   <property name="pvp" value="disabled"/>
   <property name="waterPokemonChances" value="Wooper,60;Maril.15;Psyduck,5;Quagsire,5;"/>
   <property name="waterPokemonLevels" value="20-30;20-30;20-40;20-40;"/>

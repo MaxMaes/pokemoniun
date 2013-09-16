@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Sentret,30;Spearow,20;Fearow,15;Phanpy,15;Meowth,10;Persian,5;Psyduck,5;"/>
+  <property name="dayPokemonLevels" value="10-15;44-44;48-50;10-15;41-41;47-50;41-41;"/>
+  <property name="fishPokemonChances" value="Magikarp,40;Horsea,20;Qwilfish,20;Staryu,10;Chinchou,10;"/>
+  <property name="fishPokemonLevels" value="5-5;15-25;15-25;15-25;15-25;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Sentret,30;Spearow,20;Fearow,15;Phanpy,15;Meowth,10;Persian,5;Psyduck,5;"/>
+  <property name="nightPokemonLevels" value="10-15;44-44;48-50;10-15;41-41;47-50;41-41;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,95;Tentacruel,5;"/>
+  <property name="waterPokemonLevels" value="5-40;35-40;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Path0.tsx"/>
  <tileset firstgid="527" source="various3.tsx"/>
@@ -9,7 +24,7 @@
  <tileset firstgid="5560" source="Water02.tsx"/>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WV0Q2AIAxEcQPiKCZOyX7OwBj6Q6wEWjip0kvuQ0LeHRAkeOfC5ZKCv82NceLm/sHvzcjnReLDP7+TKV/K4Picv+JLynv08FuE8EPhXNaK0f6tfLoG63yUbYWfZLX/jHx6vzT5tXMbwUfZSVp87f4W+HSPLfafhV/Ki4r8qMzfFuf2BecnSRlv/2tStgY/3390/W/42v1Lrt0hzj1vlyYfYfe8vyP4XA7Kp5LWgfBPhpZ+2AAPAAA=
+   H4sIAAAAAAAAC+3V2w2AIAwF0LIBcRQSp+x+zsAY+mOsBAoU6yO2yf2QkFPQIOgBcEuu0B/hxrji5j7h9/ZI50WSxZ+f91C/1oPzudzl1ypdR4/fUhIfM99lKkS6/laf7uHrvtQ2/78+PV+aPgzYNX/UNt/8t/u5flHRj8p+cACz011/cOP/tZb3Y/41fukMcem5uzR9id1z/17hc32kPq3aPiT+Cgxd6jEADwAA
   </data>
  </layer>
  <layer name="Grass" width="24" height="40">

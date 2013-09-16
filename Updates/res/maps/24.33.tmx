@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="yes"/>
@@ -25,7 +26,7 @@
  <tileset firstgid="9834" source="Piryte Set.tsx"/>
  <layer name="Walkable" width="80" height="90">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YMU7DMBiG4V6AARYWJKSWg3ABLgArjHREjLDCCisXY+YepCKlTRS7sT+7v528r/QNiKo0D05VdbEgIiIiIiKibd/LsFG3UD8cu+EXV6wbfn/hp4WfFn5a+GmpfnO3xE/rZ5lmc/XzddHO1ZzP3ZgO+ZE//IiIiIio1D5W+XaSeK6/c9pcx1ngri67Dpuf+4+x9tss5fcs/efeFuM3FH74hfjtz+L+zW2X2s9l2FzrdeCSnL8Qh7eEexdch/43MX6e/T8upV3KM/lp79e3HPyd9b079jyHnMcMfs6V7Bd7HkPfW33nK9bP2ivl/YwffvhN3i/KED/88DP3S/75z9qrND+X05z9cmbtlXL45VnurK8Pv7KHH374+ffQ7LXdfQFmtfk9r3afF14KM6zNrzTDY6S+xrtm6wFDa7ta/FyGT/hJhvjFGT62u8Wv6h0r6+us3W+qhvjV4zc1Q6usr7t2vykYlpK1Q+1++4197V8Dm7vd2G7O/SN3h+zw84efFn5a+Gnhp4WfFn5a+Gnhp4WfFn5a+Gnhp4WfFn5a+GlN2e8XahIayIBwAAA=
+   H4sIAAAAAAAAC+3YMU7DMBiG4V6AgS4sSEgtB+ECXABWGGFEjLDCCisXY+YepGoKURW7sT+7v+28r/QNCAT1g4MqFgsiIiIiIiLa9b2KG23DTwu/uGLd8NuGnxZ+Wvhp4ael+s3dEj+tn1WazdXP13k/V3O+d1M65Ef+8CMiIiKiUvtY59tJ4rl+zml3jmXgLi/8Hy8L8Nss5f9Z9r/3rhi/sfDDL8RvuJjnd1jM85vbLrWfy7A761Xgkty/EIe3hHsXXMd+NzF+nv19XUq7lHfy095v33L0c9bP7tT7HHIfM/g5V7Jf7H0M/dvqu1+xftZeKZ9n/PDDr3m/KEP88MPP3C/5+z9rr9L8XE5z9suZtVfK4ZdnubM+H35lDz/88PPvvttrv7sCzGrze17/v194KcywNr/SDI+R+hpvuz2OGFrb1eLnMnzCTzLEL87wod8NflXvWFmfs3a/Vg3xq8evNUOrrM9du18LhqVk7VC737Cpr/1rZHO3m9r1mX/k7pAdfv7w08JPCz8t/LTw08JPCz8t/LTw08JPCz8t/LTw08JPCz+tlv1+AUwNfs2AcAAA
   </data>
  </layer>
  <layer name="Walkable" width="80" height="90">

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="23" height="27" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Clefairy,10;Cleffa,10;Zubat,10;Machop,20;Geodude,15;Nosepass,5;Meditite,10;Chingling,10;Bronzor,10;"/>
+  <property name="dayPokemonLevels" value="17-17;12-14;14-19;13-10;12-19;14-18;14-20;13-19;14-18;"/>
+  <property name="isCave" value="true"/>
+  <property name="nightPokemonChances" value="Zubat,30;Machop,20;Geodude,15;Nosepass,5;Meditite,10;Chingling,10;Bronzor,10;"/>
+  <property name="nightPokemonLevels" value="14-19;13-10;12-19;14-18;14-20;13-19;14-18;"/>
+  <property name="wildProbability" value="7"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="SinnohCaveset.tsx"/>
  <tileset firstgid="1081" source="SinnohCaveset2.tsx"/>
  <tileset firstgid="1785" source="normal7.tsx"/>

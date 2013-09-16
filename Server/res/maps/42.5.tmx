@@ -5,7 +5,8 @@
   <property name="dayPokemonLevels" value="27-29;29-31;27-29;29-31;27-29;27-29;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value="Oddish,30;Gloom,15;Natu,15;Xatu,5;Hoothoot,30;Noctow,10;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Oddish,30;Gloom,15;Natu,15;Xatu,5;Hoothoot,30;Noctowl,10;"/>
   <property name="nightPokemonLevels" value="27-29;29-31;27-29;29-31;27-29;27-29;"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>

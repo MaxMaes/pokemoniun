@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="45" height="45" tilewidth="16" tileheight="16">
- 
-<properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties>  <tileset firstgid="1" source="Sinnoh Interiors.tsx"/>
- <tileset firstgid="33946" source="InteriorObjects1.tsx"/>
- <tileset firstgid="34046" source="InteriorFloor 1.tsx"/>
- <tileset firstgid="34376" source="SinnohInteriorSet4.tsx"/>
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Sinnoh Interiors.tsx"/>
+ <tileset firstgid="17826" source="InteriorObjects1.tsx"/>
+ <tileset firstgid="17926" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="18256" source="SinnohInteriorSet4.tsx"/>
  <layer name="Walkable" width="45" height="45">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3TR1JUARSG0bcDUYLk4DZIzUAFQXJwIWYkNd2NiY1gJEf3IhgQMOEKPBYzJs7e06r7VZ3x/Sc3SaIoiqI/3W5Nkjvc5R73ecBDJnnEFNPMMMsceeYpUKTEQms6my+0JUkZF7lEORVUUsVlqqmhljrqaaCRJppp4UpbOpuX3HnBS17xmje8ZZkVVlljnQ022WKbHXbZ411Km6+2J8k1rtNNDzfopY+b9DPAIEMMM8IoY4wzwa32dDa/d2efAz7wkU985pAvHHHMSUqb/tZkhz9jimlmmGWOPPMUKFLqyHrtWVWd/oxqaqiljnoaaKSJZlo6s1571rIdK6yyxjobbLLFNjvssvePbO7L+TP6GWCQIYYZYZQxxpnIZbPxfIc5f8YRx5zwlW985wc/OeVXLpuN58t3+TMKFCmxwGOe8JRnPGexK+u1URRFURRFURRFURRFUfT/9hsI56SPpB8AAA==

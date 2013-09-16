@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="7-7;7-7;12-14;12-13;8-8;8-8;8-12;12-12;"/>
   <property name="fishPokemonChances" value="Magikarp,43;Krabby,20;Horsea,20;Gyarados,15;Psyduck,1;Slowpoke,1;"/>
   <property name="fishPokemonLevels" value="5-15;5-35;5-35;15-25;25-35;25-35;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Oddish,33;Venonat,33;Abra,32;Venomoth,1;Gloom,1;"/>
   <property name="nightPokemonLevels" value="12-14;13-16;8-12;10-10;12-12;"/>
   <property name="waterPokemonChances" value="Tentacool,50;Goldeen,49;Seaking,1;"/>
@@ -23,7 +24,7 @@
  <tileset firstgid="2385" source="GrassFlowers.tsx"/>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC92UsQ7DIAxEw9Dv6PfjzN3aqkvVflaDFCRigQ/HRkK1dMqA87gcwcsyT10v8pq0nuoR9HpuirtSxXBUub+VX5On/yRq8M+wSz7nkjMf5XOW/9p0E2TlI+V6B1mfvf8L+rhypazWcHyWunfm3co/Cmxy4q+M6eU/3V3Ux/m1e5RnUCnknxp8ac7USuufC83PVu4SnxhfKg//Fj7qRTUbvzXnR/kflT8N5v/L+aKMrP7RN3jwW+/1zOcaX3MHZsundr4j/FMnH+1hzUfL1+aD/iGr/zN8zxlt9a/la/OfzX8v/wejsp88AA8AAA==
+   H4sIAAAAAAAAC82UTQoCMQxGpwvP4WFEXIh4znbW7lTciB7LFqbQCflpm1Qm8HAx5U38psk0baf2O/4Z9zzVw7XzjPiFVN6tKd+v9WNY9p8IhL/HXfqhNxj7pXx6/a/IjUHrl8j1djyf5fxXOAfJlbKa3fq35F6ZN5W/Z9zByD8Dp1X/aXalc9CPzVHeQSVS/4Hwc3sGq9b+IdL+pHLn/AH4ubLoX+M/Ry6Rq5B/r/8QOUZOg/ywf2rPj8pHmz+VTzDyj/6+/74/2BzWzG9v/9J/sPBT76zZz9j9aZmBreWDfV+NX5ov7R3V5tPqb81HukPSftb6sXwsd/To/Gv2z5b77/X/AHjqErUADwAA
   </data>
  </layer>
  <layer name="Walkable" width="24" height="40">

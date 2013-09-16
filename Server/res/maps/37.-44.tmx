@@ -5,8 +5,9 @@
   <property name="dayPokemonLevels" value="8-8;12-12;9-11;9-11;9-11;21-21;"/>
   <property name="fishPokemonChances" value="Magikarp,35;Finneon,18;Gyarados,27;Lumineon,10;Staryu,10;"/>
   <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
-  <property name="nightPokemonChances" value="Bidoof,20;Shinx,20;Pachirisu,20;Buizel,20;Shellos,20;"/>
-  <property name="nightPokemonLevels" value="8-8;12-12;9-11;9-11;9-11;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Bidoof,20;Shinx,20;Pachirisu,20;Buizel,20;Shellos,19;Drifloon,1;"/>
+  <property name="nightPokemonLevels" value="8-8;12-12;9-11;9-11;9-11;21-21;"/>
   <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,5;Gastrodon,1;"/>
   <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>

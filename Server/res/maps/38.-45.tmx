@@ -5,9 +5,10 @@
   <property name="dayPokemonLevels" value="13-15;14-14;14-15;14-16;16-16"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Meditite,20;Bidoof,20;Machop,15;Chingling,15;Zubat,10;Noctowl,10;Bronzor,10;"/>
   <property name="nightPokemonLevels" value="13-13;14-14;14-15;14-16;14-14;15-15;16-16;"/>
-  <property name="pvp" value="enabled"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>
@@ -36,7 +37,7 @@
  </layer>
  <layer name="Collisions" width="50" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YzWoCMRAA4Ox9fQdv7T6GvaQ92EvpM6w+iyCCF5+gfbBSWuilj9AEdug4nYnZ/O1aMjAgKiRfZicm6kap+wz54MinhVLPHrk0qRs+YRzuveqojuqojuqojikda5PbkY6vVqn94jwPCRx2LhuSjyNq4bJwDrv2N+azW5KrSIcdj4Zv7WC+kkVyaDQmNnGWGEfvWRc8Z87i47CvXZYYh29d6PpTy254/r9bt0M3f8dN6YC6SH3D9QRY7ob17UhdpnBcqo+0T+Ggzxd1SOPkdND6SPtUqujRM5DSgWPtsKQMndkBvcBZQuY6pUOy0O/R/sD7Otfn2FbKwVlcjqPJD7MPf7a/88Iu+1uyQraeeHM6qMXl4M6GdE8CCwQ20L1mI4wb6pDWI8Th+j2h8WLyNYxQzAFzdDlig3NI9Y6th1JlHW+md9+ZPF2Rw56nduRM6HsHjOmPa4rqmFdgB75zxWY39EPH9HrIfyRcf/jcEWNTMqR00PnmcMB55j874E5+KQ8zdsCd3DfhuZ+TY6wBW+biCDVI9ZnCkcrAWUo5UhuopYQjlwFbOMcP+FGwsEAfAAA=
+   H4sIAAAAAAAAC+3YXUoDMRAH8Cx93d7BN11vUV+iD+2L9Axtr2JBCr54Aj2YiIIvHsEEdug4nUmz+dpVMvAHUSH57WzSpLpR6jZD7hy5nyu19siFiW74wDjc76qjOqqjOqqjOsZ0LE12Ax1frVKP8985JHDYuWxJVgN64bJwDvvsL83frkgWkQ47Hi3f3sF8JYvk0GhMbOIsMY6NZ1/wnDmLj8P+7LLEOHz7Qp8/tez79/+7dTt0czpuSgf0RVo33JoAy03/fDvSlzEc5/oj7VO46PtFHdI4OR20P9I+het6xsd3vFUGB66lw5KydGYHrAXOguthxofOdUyHZKH/R9cH3te5dY5tpRycxeV4Mvkw+/Bne5wXdtnPkgWybYg3p4NaXA7ubEj3JLBAYQPda7bCuKEO6XmEOFyfJ7ReTF7DCMUcMEeXI7Y4h9Tv2H4oVdbxZtbuO5PnP+Sw56k9ORP63gFj1kdsSeeNVCnlKFk5HdJ5I1UkB75zxabr10PHrPWQ70i49eFzR4yNZEjpoPPN4YDzzH92wJ38XA4TdsCd3Dfw3k/JMdSALVNxhBqk/ozhSGXgLKUcqQ3UUsKRy4AtnOMHoqA5rkAfAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="50" height="40">

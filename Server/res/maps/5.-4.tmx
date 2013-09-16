@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="8-12;8-12;6-12;6-12;10-10;"/>
   <property name="fishPokemonChances" value="Magikarp,43;Krabby,20;Horsea,20;Gyarados,15;Psyduck,1;Slowpoke,1;"/>
   <property name="fishPokemonLevels" value="5-15;5-35;5-35;15-25;25-35;25-35;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Rattata,43;Zubat,30;Ekans,13;Sandshrew,13;Raticate,1;"/>
   <property name="nightPokemonLevels" value="8-12;8-12;6-12;6-12;10-10;"/>
   <property name="waterPokemonChances" value="Tentacool,50;Goldeen,49;Seaking,1;"/>

@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="45-45;48-48;47-48;48-48;48-48;15-20;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Quagsire,30;Steelix,20;Ursaring,20;Golduck,10;Misdreavus,10;Golbat,5;Larvitar,5;"/>
   <property name="nightPokemonLevels" value="45-45;48-48;47-48;48-48;45-45;48-48;15-20;"/>
   <property name="waterPokemonChances" value=""/>

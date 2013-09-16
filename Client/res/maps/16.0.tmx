@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="31-31;31-31;24-25;25-25;22-22;30-30;23-23;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,40;"/>
   <property name="fishPokemonLevels" value="20-30;20-30;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Nidorino,20;Nidorina,15;Exeggcute,20;Rhyhorn,20;Venonat,15;Parasect,5;Pinsir,5;"/>
   <property name="nightPokemonLevels" value="31-31;31-31;24-25;25-25;22-22;30-30;23-23;"/>
   <property name="pvp" value="enabled"/>

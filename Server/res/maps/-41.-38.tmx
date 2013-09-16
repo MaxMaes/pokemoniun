@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="120" height="200" tilewidth="16" tileheight="16">
  <properties>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="enforced"/>
   <property name="wildProbability" value="0"/>
   <property name="xOffsetModifier" value="0"/>

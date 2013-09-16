@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="80" height="80" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="isCave" value="true"/>
+  <property name="pvp" value="disabled"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Fire Red Tileset 2.tsx"/>
  <layer name="Grass" width="80" height="80">
   <data encoding="base64" compression="gzip">

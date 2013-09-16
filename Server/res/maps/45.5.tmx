@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="40-40;37-37;40-40;38-38;39-39;39-39;40-40;39-39;"/>
   <property name="fishPokemonChances" value="Magikarp,30;Gyarados,10;Poliwag,40;Poliwhirl,20;"/>
   <property name="fishPokemonLevels" value="10-10;40-40;20-20;40-40;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Wobbuffet,10;Machoke,20;Parasect,20;Primeape,20;Magneton,10;Golbat,20;"/>
   <property name="nightPokemonLevels" value="37-37;40-40;39-39;39-39;40-40;40-40;"/>
   <property name="pvp" value="yes"/>

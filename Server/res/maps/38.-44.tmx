@@ -5,9 +5,10 @@
   <property name="dayPokemonLevels" value="14-16;14-16;14-14;14-14;15-15;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Ponyta,35;Stunky,25;Geodude,10;Kricketune,10;Bronzor,10;Zubat,10;"/>
   <property name="nightPokemonLevels" value="14-16;14-16;14-14;14-14;15-15;15-15;"/>
-  <property name="pvp" value="enabled"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value=""/>
   <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="10"/>

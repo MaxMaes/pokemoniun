@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="46" height="50" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Psyduck,5;Golduck,15;Sneasel,10;Bibarel,25;Snover,45;"/>
+  <property name="dayPokemonLevels" value="38-38;38-40;41-41;39-40;38-39;"/>
+  <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Gyarados,10;Seaking,10;"/>
+  <property name="fishPokemonLevels" value="3-10;10-25;30-55;30-55;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Psyduck,5;Golduck,15;Sneasel,10;Bibarel,25;Snover,25;Snorunt,20;"/>
+  <property name="nightPokemonLevels" value="38-38;38-40;41-41;39-40;38-39;39-40;"/>
+  <property name="waterPokemonChances" value="Psyduck,90;Golduck,10;"/>
+  <property name="waterPokemonLevels" value="20-40;38-40;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" name="1" tilewidth="16" tileheight="16">
   <image source="normal5.png" trans="000000" width="512" height="512"/>
  </tileset>

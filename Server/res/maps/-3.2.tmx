@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Rattata,30;Hoppip,25;Spearow,10;Zubat,5;Ekans,20;Geodude,10;"/>
   <property name="dayPokemonLevels" value="6-7;6-8;6-6;4-4;7-7;6-6;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Zubat,40;Rattata,30;Ekans,15;Geodude,15;"/>
   <property name="nightPokemonLevels" value="6-8;6-6;7-7;6-6;"/>
   <property name="waterPokemonChances" value=""/>
@@ -11,47 +12,43 @@
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="1376"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal2.tsx"/>
- <tileset firstgid="2049" source="normal16.tsx"/>
- <tileset firstgid="3073" source="normal3.tsx"/>
- <tileset firstgid="4097" source="Buildings7.tsx"/>
- <tileset firstgid="4449" source="Cliffs01.tsx"/>
- <tileset firstgid="4679" source="Path0.tsx"/>
- <tileset firstgid="4975" source="GrassFlowers.tsx"/>
+ <tileset firstgid="1" source="Buildings7.tsx"/>
+ <tileset firstgid="353" source="Cliffs01.tsx"/>
+ <tileset firstgid="583" source="Path0.tsx"/>
+ <tileset firstgid="879" source="GrassFlowers.tsx"/>
  <layer name="Walkable" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NmYGA4yszAwMJAGgbp8RAiDdPTHuZh5J9eQcKYGvaQ499Re0aePaD0BjIXhmFpkNr2wPBqGpo9GDB6XqalPchxRmt/EWNPMBYcQgN7orHgGDLjCZ+aZCw4hQb2jOJRPIoHPwYAQ0imX2ALAAA=
+   H4sIAAAAAAAAC2NgIB94MJGGR+0hz55eRsKYGvaQ699Re0aWPejpDZYGqW0PDK+modmDAaPnZVragxxntPYXMfYEY8EhNLAnGguOITOe8KlJxoJTaGDPKB7Fo3jwYwBdQsYcYAsAAA==
   </data>
  </layer>
  <layer name="Grass" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgpEH0oVobzYt7aCnXfT0D7GAnmFLKcgHmlNAABdSwa56oBkNBHDjIIrDUTAKhjMAABPG8VJgCwAA
+   H4sIAAAAAAAAC2NgGAWjYBSMgpEH0plobzYt7aCnXfT0D7GAnmFLKcgHmlNAABdSwa56oBkNBHDjIIrDUTAKhjMAACFaMJdgCwAA
   </data>
  </layer>
  <layer name="LedgesDown" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwXIAWM33s4RBCYEMh+tg5CkbBKBgFQwUAAKLG6KdgCwAA
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkgDHEwIbMg00K4ZBaNgFIyCwQUA0GgrqWALAAA=
   </data>
  </layer>
  <layer name="LedgesLeft" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgpEJPgvSx56/w8yeUTAKRsEoGAX4AQDQg4THYAsAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMgpEJPjPSx56/w8yeUTAKRsEoGAX4AQB4SmpPYAsAAA==
   </data>
  </layer>
  <layer name="Collisions" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UMQ/CIBCF2dwM6qab/k+HatLldKwdjToZ9Td6pJBcSHscBYxDL3m5oYTHd7wCC6UAdYrU2WqtldrocIdEny3usdPhnurzjzwN6sKozsAj8ejjjeUZO9dYnrE5ieW549oHc65cPG9c+2HOlYtHcj8mK1eUqZvNR2t9QvOQ3o/L49P6vEgWjVdoHkM8+1WnUFW498HTkeHyfbmak+9mnpXnwd2X83NzlhZ9R2pB/pyfm7Nfs2W/D/UAQf5SCzyfIZ7cPiV5GvI/leKh730ryFvpLn2fUvvEM/H8kucLBnADsGALAAA=
+   H4sIAAAAAAAAC+2UMQ7CMAxFDQxsHAA2uCdDQepiGEtHBEwIOCOOmkhW1DpOkyCGWvpyhyg/z/kNzgCQdIrU2WoNABsId0z02dIeOwj3VJ9/5GlIF0F1Bh6NRx9vLM/YucbyjM1JLM+d1j6Ec+XiedPaj3CuXDya+zFZuZJM3Ww+WusTmof2flwen9bnxbJovELzGOLZLzqFqqK9D56OApfvK9WKfZt5Vp6HdF/Oz81ZW/wdqRX5c35uzn4t5/0+3AMV+Ust9HyGeHL7lORp2P9Uioe/960ib6W79n1K7RPPxPNLni8QnXWgYAsAAA==
   </data>
  </layer>
  <layer name="Walkable" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBpUBEgD72yNDJnlH/kAdG/UMeGG7+AQAZ+n3VYAsAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBpUCETvbI0MmeUf+QB0b9Qx4Ybv4BAHfhWsVgCwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="26" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UsQqAMAwE0EwOurTqIvjz/ql1E8HLNYmi0APJJN4zpSK+9ElkSPr0JJf3x/JMxPRkIRxvezw9ajxajxl8y7Kfux4r+E6N5+iLekV5jr6ol+bR/kfEfmpc2vk6e7Zsd1n6W1xXB9pHp3RAe45wMB7GwQZ5IsN4IvIFD3s/MZM5b0/PSI/nfmue5vmjZwcAZWY3YAsAAA==
+   H4sIAAAAAAAAC+3UsQqAMAwE0Lo46KR2Efrz/qlZCiI0uTYnVOhByeg9UxqCL4ucFZiebHJ2OQcwPTlDfx5PjxqP1SOSPDmlHonkiUYvlicZvSyP9T8Y+6lxWffr6bmmdldL/1I019uh7WM2vqPtmeHI0Tw5mgON5mEG8TDSgwd9n5CJ3LevJ9Pjed+GZ3j+6LkBUTRLuGALAAA=
   </data>
  </layer>
 </map>

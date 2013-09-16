@@ -1,40 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="49" height="50" tilewidth="16" tileheight="16">
-
-<properties>
-  
-<property name="dayPokemonChances" value=""/>
- 
- <property name="dayPokemonLevels" value=""/>
- 
- <property name="fishPokemonChances" value=""/>
- 
- <property name="fishPokemonLevels" value=""/>
- 
- <property name="nightPokemonChances" value=""/>
- 
- <property name="nightPokemonLevels" value=""/>
- 
- <property name="pvp" value="yes"/>
- 
- <property name="waterPokemonChances" value=""/>
- 
- <property name="waterPokemonLevels" value=""/>
- 
- <property name="wildProbability" value="0"/>
- 
- <property name="xOffsetModifier" value="0"/>
-
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
-
  </properties>
- 
  <tileset firstgid="1" source="Mt Battle Tileset.tsx"/>
  <tileset firstgid="346" source="SinnohSet11.tsx"/>
  <tileset firstgid="1466" source="Caveset.tsx"/>
- <tileset firstgid="1658" source="NumberTileset2.tsx"/>
- <tileset firstgid="1856" source="Vulcano Tileset.tsx"/>
- <tileset firstgid="1934" source="Buildings7.tsx"/>
+ <tileset firstgid="1690" source="NumberTileset2.tsx"/>
+ <tileset firstgid="1888" source="Vulcano Tileset.tsx"/>
+ <tileset firstgid="1966" source="Buildings7.tsx"/>
  <layer name="Walkable" width="49" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2WTRKCMAyFWdj7X8o7iDuXHkO76AhImoTmr9A38xaM7fC+JinOaZrm4eHh4a/fN/8Mw/+myDujJKt3hh4yXYVBosc950Tjnb3W8qwcZ7F1PfL/jRZ7n1drfisOqK61TJC8OLgMUF6MJQoDdt7RGSj9UlsXhYE6w4MhBgN1HqS+ddLzwKkDlWG7DntuZeDcS5QsRRIM1Lu1pZcsGbIe6ZftmfAaeTBAHHu5jsyzFQOWj7NGk4FiyfsUywsxlN/2mDwMZeDKm0OCwYOj9s4WeeeXknZvaJw9l+MIJ2WPhqxnQ1NStfDITuHIuqe1KXut89dy9HD+GhwRtMzxSrBr+yKJwxBVV2WINBdLcbJHm++iHntoK0uGD73FTrBIJgAA
@@ -47,12 +33,12 @@
  </layer>
  <layer name="Walkable" width="49" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RRU4DcRiG8WkCSXG5AG5HwKEsWMACaNEL4HYB3C6A6wFwPQCua4Jrwha3DU9CSGgDmbLpn4HvSX6LmdX7zWiaJEmSJEmSJEmS9B+LRRzikYBEJCEZKUiFBWmK9n3VlZv9cxaykQMrbMhFHvJRgEIUuXKkTo43FKMEpShDOSpQiSpUowa1rhz5w+pQjwY0ognNaEEr2tCODkX7nKkTXehGD3rRh34MYBBDGMaImom6jWIM45jAJKYwjRnMYg7zWFC0Ua9FLGEZK1jFGtaxgU1sYRs7ijbqtYd9HOAQRzjGCU5xhnNc4FLNRN2ucYNb3OEeD3jEE57xgldVA53IbNI0D3jCC97wgS/84I8ABJpUL/2+ILYFIwShCEM4IhCJKEQj5hffIP3Odt3tSZIkSZKkvgyzpmV+Ic2sepnzfdxg+8SoN/yF/+D4L4x0g9VhuxFvSDe/s3za/vHOaFkM+P0dkxt+1hutwEDTSCYAAA==
+   H4sIAAAAAAAAC+3RNU4EcRiG8SGBZHG5AG5HwO0CuJVQYIsFatwugOsBcD0ArjXBNaHFreFJyCYwWTJLw5+B70l+xUz1fjOaJkmSJEmSJEmSJP3HohCNGMQiDvFIQCKSkIwURfvsdeX8+TkVaUhHBjKRhWzkIBd5yP/JkQbpbyhCMUpQijJYUY4KVKIK1T858pvVoR4NaEQTmtGCVrShHR2K9jlSJ7rQjR70og/9GMAghjCMETUTDRvFGMYxgUlMYRozmMUc5rGgaKNRi1jCMlawijWsYwOb2MI2dhRtNGoP+zjAIY5wjBOc4gznuMClmomGXeMGt7jDPR7wiCc84wWvqgY6kMVJ01zhBnd4wBNe8IYPfOHnpHrp1/mzLQCBCEIwQhCKMIQjApG/+Abpd7br8pkkSZIkSeors2ia1Y5Ci+pljme7ofYDs97wF/6D/l+Y6YYa3XYz3lBkeVfwYbvtndkqMOH31yc3fK83p01FmEgmAAA=
   </data>
  </layer>
  <layer name="Walkable" width="49" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OsQ2AMBRDwV9l/zHICmEVskJYATdIaRgA6U56cusqAAAAAF5Xq5rpSH3bP1n5e6eRzm0BAAAAAL48Vzla7kgmAAA=
+   H4sIAAAAAAAAC+3OsQmAQBREwY3OTPvvSFs4W7kDfyKaWIAwA49NNwEAAADgNloyq706Xvsn65JsVa/fZ3sWAAAAAODLBWXaakxIJgAA
   </data>
  </layer>
 </map>

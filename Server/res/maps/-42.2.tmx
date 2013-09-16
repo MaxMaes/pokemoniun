@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="32-36;30-34;38-42;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Machop,40;Geodude,40;Machoke,20;"/>
   <property name="nightPokemonLevels" value="32-36;30-34;38-42;"/>
   <property name="waterPokemonChances" value=""/>

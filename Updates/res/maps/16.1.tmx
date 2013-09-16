@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="33-33;33-33;26-26;23-25;22-22;25-25;25-25;28-28;"/>
   <property name="fishPokemonChances" value="Seaking,50;Goldeen,45;Slowpoke,5;"/>
   <property name="fishPokemonLevels" value="20-30;15-25;15-35;"/>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="enabled"/>
   <property name="waterPokemonChances" value="Psyduck,65;Slowpoke,35;"/>
   <property name="waterPokemonLevels" value="20-30;20-40;"/>

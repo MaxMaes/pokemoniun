@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="160" height="100" tilewidth="16" tileheight="16">
-<properties>
-
- <property name="dayPokemonChances" value=""/>
-
- <property name="dayPokemonLevels" value=""/>
-
- <property name="fishPokemonChances" value=""/>
- 
- <property name="fishPokemonLevels" value=""/>
-  
- <property name="nightPokemonChances" value=""/>
- 
- <property name="nightPokemonLevels" value=""/>
- 
- <property name="pvp" value="yes"/>
- 
- <property name="waterPokemonChances" value=""/>
- 
- <property name="waterPokemonLevels" value=""/>
- 
- <property name="wildProbability" value="0"/>
- 
- <property name="xOffsetModifier" value="0"/>
- 
- <property name="yOffsetModifier" value="0"/>
- 
-</properties>
-<tileset firstgid="1" source="Boat Interior Set 1.tsx"/>
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Boat Interior Set 1.tsx"/>
  <tileset firstgid="161" source="Boat Interior Set 2.tsx"/>
  <tileset firstgid="417" source="Hoenn Interior Set 6.tsx"/>
  <tileset firstgid="673" source="InteriorFloor2.tsx"/>

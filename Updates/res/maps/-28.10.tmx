@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="115" height="131" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="fishPokemonChances" value="Magikarp,70;Gyarados,10;Staryu,10;Horsea,10;"/>
+  <property name="fishPokemonLevels" value="10-15;30-40;20-30;20-30;"/>
+  <property name="isCave" value="false"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,90;Tentacruel,10;"/>
+  <property name="waterPokemonLevels" value="30-30;40-40;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Tileset 6.tsx"/>
  <tileset firstgid="1025" source="Sevii Island Set 1.tsx"/>
  <tileset firstgid="5075" source="various3.tsx"/>

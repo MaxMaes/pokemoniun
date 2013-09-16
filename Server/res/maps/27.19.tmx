@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="19-21;19-21;19-21;20-22;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Barboach,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Sandshrew,35;Trapinch,35;Cacnea,20;Baltoy,10;"/>
   <property name="nightPokemonLevels" value="19-21;19-21;19-21;20-22;"/>
   <property name="waterPokemonChances" value="Marill,98;Surskit,1;Goldeen,1;"/>
@@ -12,80 +13,42 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" name="PGTileseti" tilewidth="16" tileheight="16">
-  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1025" name="PGTilesetii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2049" name="PGTilesetiii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3073" name="PGTilesetiv" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4097" name="PGTilesetv" tilewidth="16" tileheight="16">
-  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5121" name="PGTilesetvi" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6145" name="PGTilesetvii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7169" name="PGTilesetviii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8193" name="PGTilesetviiii" tilewidth="16" tileheight="16">
-  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="9217" name="PGTilesetviiiii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
- </tileset>
- <tileset firstgid="10027" name="PGTilsetzkantotowns1" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="11051" name="PGTilesetx" tilewidth="16" tileheight="16">
-  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="12075" name="PGTilesetzkantoroutes1" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="13099" source="Path0.tsx"/>
- <tileset firstgid="13395" source="Cliffs01.tsx"/>
- <tileset firstgid="13625" source="Sinnoh Land Sea 3.tsx"/>
- <tileset firstgid="15417" source="Cliffs02.tsx"/>
- <tileset firstgid="15529" source="Buildings7.tsx"/>
- <tileset firstgid="15881" source="Trees0.tsx"/>
- <tileset firstgid="16191" source="Buildings11.tsx"/>
+ <tileset firstgid="1" source="Path0.tsx"/>
+ <tileset firstgid="297" source="Cliffs01.tsx"/>
+ <tileset firstgid="527" source="Sinnoh Land Sea 3.tsx"/>
+ <tileset firstgid="2319" source="Cliffs02.tsx"/>
+ <tileset firstgid="2431" source="Buildings7.tsx"/>
+ <tileset firstgid="2783" source="Trees0.tsx"/>
+ <tileset firstgid="3093" source="Buildings11.tsx"/>
+ <tileset firstgid="14517" source="Path1.tsx"/>
  <layer name="Walkable" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC93VTQ5AMBAGUHEeO4IdsfBzD8cVR3EG7aJJMxnMdKojmnw79HWmrbXKsvXHsUPbIPXDkWpO7bU/9RNzcoZG/4qSHrheTvzv3A2O58ronHvBq6907pAcTGNt3mmYaSN6KcbRPDcRs5h0JkNEd+xeY+tx7v4jxjv3/KLRz5anPz+UO866nA9GywidzoM5qfPYuyH0zHCN0MnZk7H3I2bEaqm5J30nrGPI/0/Sa6pRWgdJr6l7MlVPQ40nkAsfm9AMAAA=
+   H4sIAAAAAAAAC7NiZGCwGsWjeJhgJgbi8GBzD7XdSKw5lLgP2WwXKKZX2JCDYW4kJXx5gOp4ScR8VHQzMW6UAaqTJRLLA7EoEEtQ0d3Ujmts/oG5W2yQuBGfu+Vo6MaBzkMDWR4ONjeCygZa5hlquFGGgvRIqTuHQpqkR1wT60ZKw4EecU2vOCXXjQDuamHL0AwAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgYYGfDwGCPA9vaDLTrRgGtAHq8O4zG9bAHdjSMbwCROfAq0AwAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgYIMLJwCCKAwtzDrTrRgGtAHq8i43G9bAHIjSMbwAiK+DA0AwAAA==
   </data>
  </layer>
  <layer name="LedgesRight" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBNYGbzUC7gDDwGwJuHAWjYBSMAmIAAC6z08fQDAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkYBNYEM50C7gDBQGQJuHAWjYBSMAmIAACr16fHQDAAA
   </data>
  </layer>
  <layer name="Collisions" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WS4oCMRAG4EJv4OMmLlyIW4/Qzgi6aAVnoaFxITN7ER/X0Rt4L6tpA2Wmkqq0wZUFPxJMJ5+Vpu15D2D+YlaYNZNNgrXrplA6tHbtejE+o3BwLlvuNYZ8lyfom6m5Rk4cvvrCOXvm2lCPC8FF7VIPNUaph9yZGcFjhH0vfYBRu9p75Zw3V3aOr4+h+7UgnutA7gc1lrF72z6Uxd2nvl66v4M7K6lfktE6146RuwckY+qixjJu5R/jW43fTiYJ3amNk8d4R8ah9d9ptFkwY3ePWG8do+8ZGWvUOjVG7tnu6+WOnLfGqLHaOa0MoI3pYLrZ/55J5+3777PmFMYDuo6YE+acPc+JOe+yuHccznVrVNEaYVyNG/jZHMtGrpcaF810CDAbho10/vbh+sXPvxpGrYtmib6fCGPoPURjvAPIwmtu0AwAAA==
+   H4sIAAAAAAAAC+3WSwrCMBAG4LhwIR6jutaCLlTQRQ3FhehexMd19HyiN/BxCUdscEgnmUkNrgz8lGqafM6U2mFNqeGXySBTIrMIa1dNLnRI7dL1Qnxa4KBcZtjXaPTdIELddMU1BsjhGh2Ysyau9dU4Z1zYztVQYuRqSPVMMx7N7Huof/bOrH5Tw8xx1dF3v+bIc2zw9cDGV8zeGTJS96mrlvbvoHrF1YszGufUMlL3AGeMPbDR9N32/I2/M3atpBHdsY1pcb5C5771f2k0GRHn9h6h3ipG1zMy1Ch1SozUs91VyxXqt8QosZo510SpG+QOeSTlmnH9dv33GXMM46al1Bayg+xbZY+0369BvePEMJ4K1xmOF4GRqmWoq9dUqt/0G/H8efv92QKOy3a4UerCGYNvEmD0vYdIjE92iODy0AwAAA==
   </data>
  </layer>
  <layer name="Walkable" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBgFo2AUwECY3UC7ADuIRXJXAglurIigvlsGEwAA0k39ItAMAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMAsqAnhUDg4HVQLsCPxgKbhwFo2AUjIJRMDiADvdAuwA7MEZylxkJbvRTpb5bBhMAAOxiRcjQDAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="41" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGSAZRYDY+86G+LVgtw4UO4kFsDcOJjdiezGwerOUTdSB9DDjZSaT283kmPXQLqRWPsG2o3E2AtTMzuMgWEOEM8F4nlh9HcnMXppDQarGwm5K8SOgSHUDr/96P5gjKC9u7CFHbFuJKUdQqnbyC13KAUAHcH5ANAMAAA=
+   H4sIAAAAAAAAC2NgGAWjYGSAGtaBsbeFk3i1IDcOlDuJBTA3DmZ3IrtxsLpz1I3UAfRwI6Xm09uN5Ng1kG4k1r6BdiMx9sLUFCozMBQBcTEQlyjT353E6KU1GKxuJOQuLW4GBm1u/Paj++O6Cu3dhS3siHUjKe0QSt1GbrlDKQAAD5cnR9AMAAA=
   </data>
  </layer>
 </map>

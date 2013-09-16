@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16"> 
-<properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties> 
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Sinnoh Interiors.tsx"/>
- <tileset firstgid="33946" source="SinnohInteriorSet1.tsx"/>
+ <tileset firstgid="17826" source="SinnohInteriorSet1.tsx"/>
  <layer name="Walkable" width="40" height="40">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3O2QmEQBBF0dI2j3HJyS0eUXNyiUiNYR60oAx+T4PcA5eq+iszAG+1RWa7OqLQn1y62M9ec1Bj7Pf7HdLHmaUqU7kqzv1+hzQ536wWtT7cIZWJr1K1alT7EwAAAAAAAPAPXwxuncoAGQAA
@@ -11,12 +23,12 @@
  </layer>
  <layer name="Collisions" width="40" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OzQ2CQBCG4VkLREWlHD2xrVCA/5hoPeIB7YCXxIMYoh7QxeR7kvcAM8mOmUh/ZLSkFa1pQ1va0Z5yOtz3Qt0XObMhjWhMMU1oSjNKXNj7zrxf0MU1ZyXfV7oFvq+WDj7b+7VX78692cK/3/um+t0ibZ8due3Ug/u63Ota9lTbv8eZiIiIiIiIiIj8twr2d08vABkAAA==
+   H4sIAAAAAAAAC+3OSQ6CQBBG4WoPJzvF8UbKUfoAKjjs9SzKwuEEPhIXaoiwQBuT/0veAqqSLjOR9vC0oCWtKKWM1rShLe0ee6Hu6zmzPsU0oCGNaEwTmrqw9x15/0S5e52d+b7QNfB9hVmn3t6vfXp3HpklUfXeNxXv3rrlsz23HVpwX5N7TfNvlf17nomIiIiIiIiIyH+7A24+910AGQAA
   </data>
  </layer>
  <layer name="Walkbehind" width="40" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OQQ0AIBADsCkDdZwYVGKCZJ9WQROAvjXJnvYiuac9AAAAAAB+eA4rvgYAGQAA
+   H4sIAAAAAAAAC+3OMQ0AMAwDsKBr+RbhSEzKYyNwAtA3m+y2F8lNewAAAAAA/PAArn6UDwAZAAA=
   </data>
  </layer>
 </map>

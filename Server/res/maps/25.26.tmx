@@ -3,6 +3,7 @@
  <properties>
   <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Wailmer,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="yes"/>
   <property name="surfProbability" value="10"/>
   <property name="waterPokemonChances" value="Wingull,50;Tentacool,45;Pelipper,5;"/>
@@ -11,19 +12,17 @@
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="-544"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal18.tsx"/>
- <tileset firstgid="2049" source="Water02.tsx"/>
- <tileset firstgid="2241" source="Cliffs02.tsx"/>
- <tileset firstgid="2329" source="Deep Water.tsx"/>
+ <tileset firstgid="1" source="Water02.tsx"/>
+ <tileset firstgid="193" source="Cliffs02.tsx"/>
+ <tileset firstgid="305" source="Deep Water.tsx"/>
  <layer name="Walkable" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNqgn4N0TKy5pLphoM3F5c9NWMwgxR247EE2fxOJ4UuM+dQwbxQMf0CrtELL9Deatoc2AABB4UE6OAcAAA==
+   H4sIAAAAAAAAC2NgGNqgnwxMrLmkumGgzcXlz00UugOXPcjmb8IiTqn51DBvFAx/QKu0Qsv0N5q2hzYAAA+roFc4BwAA
   </data>
  </layer>
  <layer name="Walkable" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNpgJQcDwyoS8GoO4szdCFS3iQS8eYDN3QlUtwsJT0Uyo4iTfHNx2TMVzbwpUPHdZJqLyx+UmjcKhj9ALgOoCXYipXNs4CgLZWbvGk3bQxYAAHg1A084BwAA
+   H4sIAAAAAAAAC2NgGNpgJRCvIgGvJtLcjUC8iQS8eYDN3QnEu5DwVCQzuhjJNxeXPcjmg/AUqPhuMs1FNx+GKTVvFAx/gFwGUBOA0iIsnVMbwNL5KBiaAAAOM6OvOAcAAA==
   </data>
  </layer>
  <layer name="Grass" width="22" height="21">
@@ -33,7 +32,7 @@
  </layer>
  <layer name="Water" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+vnYGDoH8KYHDBqLvHmkmMPteNzoNPYKB7cmFZphZZpcDRtD20MAIn8oKk4BwAA
+   H4sIAAAAAAAAC+tnYGDoH8KYHDBqLvHmkmMPteNzoNPYKB7cGBkMBXP7aWjuKKYPBgDJ/OS/OAcAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="22" height="21">
@@ -53,12 +52,12 @@
  </layer>
  <layer name="Collisions" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2USwoCMRBEsxXd6aX8ewD/HkBFvb9v4WAoujszzoAuLHiEpJNOpQmd0lvDXkoj6MPAGDWuc0t5rNqvo97vzXNFsTpSz/pW1Zi1CUxhBnNYwBJWhmetked3zdoGtrCDPRzgCCdjf54nqvuZ9QtcX/Eb4x0exn7N07a2Xef563cV/cE26uLvlLx5PeBTb6U+2dSjdz7qAdYZr4/XeWOUL+ptpVpaZ5r4+raetCUSSTgHAAA=
+   H4sIAAAAAAAAC+2USw7CMAxEwxp2cEH+HIA/BwAE3Jm3oCIa2U5LK8GCkZ6ixIkzsSKn9Nawl9II+jAwRo3r3FIeq/brqPd781xRrI7Us75VNWZtAlOYwRwWsISV4Vlr5Plds7aBLexgDwc4wsnYn+eJ6n5m/QLXV/zGeIeHsV/ztK1t13n++l1Ff7CNuvg7JW9eD/jUW6lPNvXonY96gHXG6+N13hjli3pbqZbWmSa+vq0nMcZS+jgHAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="22" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3MuxGAIBRE0ZdSBwhKAfLT/tvy0gIGJHtnTrhrtifvzAIORCScuJDd+u/NtqCioWPgwfvjVymllJp9yAK03jgHAAA=
+   H4sIAAAAAAAAC+3MyRGAIBQE0U9cICgByKb5p2KTAh64TFe944zZnrwzCzgQkXDiQnbrvzfbgoqGjoEH749fpZRSavYB1WOygjgHAAA=
   </data>
  </layer>
 </map>

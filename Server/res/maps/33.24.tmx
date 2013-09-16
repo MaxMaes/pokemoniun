@@ -3,6 +3,7 @@
  <properties>
   <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Wailmer,15;Sharpedo,5"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;30-35;"/>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Tentacool,60;Wingull,35;Pelipper,5;"/>
   <property name="waterPokemonLevels" value="5-35;10-30;25-30;"/>
@@ -10,68 +11,17 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" name="PGTileseti" tilewidth="16" tileheight="16">
-  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1025" name="PGTilesetii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2049" name="PGtilesetiii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3073" name="PGTilesetiv" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4097" name="PGTilesetv" tilewidth="16" tileheight="16">
-  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5121" name="PGTilesetvi" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6145" name="PGTilesetvii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7169" name="PGTilesetviii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8193" name="PGTilesetviiii" tilewidth="16" tileheight="16">
-  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="9217" name="PGTilesetviiiii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviiiii.PNG" trans="050536" width="480" height="432"/>
- </tileset>
- <tileset firstgid="10027" name="PGTilesetX" tilewidth="16" tileheight="16">
-  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="11051" name="PGTilesetxi" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="12075" name="PGTilesetxii" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="13099" name="PGTilesetzkantoroutes1" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="14123" name="PGTilesetzkantotowns1" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="15147" name="normal5" tilewidth="16" tileheight="16">
-  <image source="normal5.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="16171" name="normal18" tilewidth="16" tileheight="16">
-  <image source="normal18.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="17195" source="Water02.tsx"/>
- <tileset firstgid="17387" source="Cliffs02.tsx"/>
- <tileset firstgid="17499" source="SinnohWaterSet.tsx"/>
+ <tileset firstgid="1" source="Water02.tsx"/>
+ <tileset firstgid="193" source="Cliffs02.tsx"/>
+ <tileset firstgid="305" source="SinnohWaterSet.tsx"/>
  <layer name="Water" width="80" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DAQ0AAAwCILs9te0MctjoJVVVVVVVVVVVVVVVVVVVVfX9AQE1JN6APgAA
+   H4sIAAAAAAAAC+3DQQ0AAAwDofP/qeUJGSSsmqqqqqqqqqqqqqqqqqqqqu8fWKe054A+AAA=
   </data>
  </layer>
  <layer name="Collisions" width="80" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ax27DMAyGfet8k85Le2tPzrnzfTvfpPMxSiAJYKvi1LAM8wMIxLEl079JSpHSde3w1HfdM9gL2CvYG9h7P7VX8+EDtPoE+wL7BvsB+3X9xOysum4XbA9sH+wA7HC1PuexyXMEWh2DnYCdgp2BnW/089jkuQGtbsHuwO7BHsAeN/pRsemMieUqFZvOmFiuUrHpjPFcTWMJuXoBOXVZaPybW67GtAi/C4+v4PN1j7fX3KsVrL7FtNh+hx3HrqV8ofqpDeebpA12PuyDOo7pzukf9lNTR4lv2vcu6QPzY8i2Pad/CHfeCuUjdW/te6f6wJDkK/e99hot2DNwdZ1rH57X+i69n6amUHXAAjUeavMD61PyfDGk11t1w+qABqpfK1bdNUhjR1ozcsQglhdcO0nfqWBzwlzvRjMvCo8xH3KMZ7mfr+QchJq3x3woNZ5r/dRoUtJnbt5VwwcK6Xx3amrUbwut+uU4jlOKltfhWqbV8XUuuG558Pz9j+a3r8fhmqFmlt++S49DTRxJ935qkmO9tDQxrSR7JjV9Kv0eY7GDnQ/RruVz61Ipa4xTxT0XO9J1nhCqfmJ9ptTZ2vUXizvpPrdm3xIDy3XN/xas68Gp+mJxp9nnHh5b/wdA1dBYDGvej2a/TNo+5ToK6zopdR2lo8WnsD0W09JnKFFzS9TvXHuEWL2lxmyq7k89R6uNpVam1qelIt2fc+K4Po7jOI7jODr+AKN3QuGAPgAA
+   H4sIAAAAAAAAC+2aWW6EMAyGgS4v7Vt7ha737XqTrjfpepJamhkJ0njNQhD+JEsTIMH8OE5Ipuva4abvuluwO7B7sAewx35ur5bDE2j1DPYC9gr2Bvbu+on5AK0+wb7AvsF+wH63+nls8vRD1w1ge2D7YAdgh8PmnMcmzxlodQ52AXYJdgV2vdWPik1nSqyvUrHpTIn1VSo2nSneV9NYQ189gng4LhQTS+urMS3CY2H5BH6f9nh9zb1awepbTIvdMawcu5byhWqnNpxvkjrY+bANqhzTndM/bKemjhLftO9d0gbmx5hdfU7/EO68FcpH6t7a9061gSHpr9xx7TVasGfg8jpXPzyv9V16P01OofKABWo81PYPrE3J88WQXm/VDcsDGqh2rVh11yCNHWnOyBGDWL/g6knaTgWbE+Z6N5p5UVjGfMgxnuV+vpJzEGreHvOh1Hiu9VOjSUmfuXlXDR8opPPduamRvy206pfjOE4pWl6Ha5lWx9el4LrlwfvvfzTfvh6HG8aaWb591x6HmjiS7v3UJMd6aWliWkn2TGr6VPo9xmIHOx+iXcvn1qVS1hjninsudqTrPCFU/sTaTMmztfMvFnfSfW7NviUG1tc1/1uwrgen6ovFnWafe1y2/g+AyqGxGNa8H81+mbR+ynUU1nVS6jpKR4tPYX0spqXPUCLnlsjfufYIsXxLjdlU3p97jlYbS65MzU9rRbo/58RxfRzHcRzHcXT8ARXNmLaAPgAA
   </data>
  </layer>
 </map>

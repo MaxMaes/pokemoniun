@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="22-25;22-25;22-25;22-25;"/>
   <property name="fishPokemonChances" value="Magikarp,90;Gyarados,10;"/>
   <property name="fishPokemonLevels" value="22-25;40-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Zubat,30;Slowpoke,30;Krabby,30;Budew,10;"/>
   <property name="nightPokemonLevels" value="22-25;22-25;22-25;22-25;"/>
   <property name="waterPokemonChances" value="Goldeen,90;Seaking,10;"/>

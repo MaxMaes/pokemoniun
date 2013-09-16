@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="21-21;21-25;22-24;20-20;21-25;25-25;20-24;20-22;20-20;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Fearow,10;Murkrow,10;Gloom,20;Diglett,10;Hoppip,20;Girafarig,20;Houndour,10;"/>
   <property name="nightPokemonLevels" value="21-21;21-25;22-24;20-20;21-25;25-25;20-24;"/>
   <property name="waterPokemonChances" value=""/>

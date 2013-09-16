@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Spearow,43;Jigglypuff,18;Pidgey,38;Arbok,1;"/>
   <property name="dayPokemonLevels" value="6-8;3-7;6-7;10-10;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Zubat,44;Clefairy,18;Rattata,38;"/>
   <property name="nightPokemonLevels" value="6-8;3-7;6-7;"/>
   <property name="waterPokemonChances" value=""/>

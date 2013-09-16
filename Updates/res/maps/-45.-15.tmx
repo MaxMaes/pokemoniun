@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="22-25;22-25;22-26;31-34;32-35;33-36;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Magnemite,30;Voltorb,30;Pikachu,24;Magneton,10;Electabuzz,5;Raichu,1;"/>
   <property name="nightPokemonLevels" value="22-25;22-25;22-26;31-34;32-35;33-36;"/>
   <property name="waterPokemonChances" value=""/>
@@ -16,14 +17,15 @@
  <tileset firstgid="1" source="normal3.tsx"/>
  <tileset firstgid="1025" source="normal14.tsx"/>
  <tileset firstgid="2049" source="Legendaries.tsx"/>
+ <tileset firstgid="2907" source="InteriorFloor 1.tsx"/>
  <layer name="Walkable" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TwQkAIAzFUC9u4ihuovvPIM5QwbTkQ+59h7bm3LutnjcNjDQw0sDobgDuiBom4I6oYQPuiBoq/IOG/2lgpIGRBkYaGGlgpIGRBkYaGGlgpIGRBkaVDNl3AGmzNmygHgAA
+   H4sIAAAAAAAAC+3PsQ2AMAADwTRMyqyMkj2omCBIedBZ+t43htl7O4/vxtCIoRFDo2dX4MuqYQa+MOz/wcBQiKERQyOGRgyNGBoxNGJoxNCIoRFDI4ZGf9kNKnjR06AeAAA=
   </data>
  </layer>
  <layer name="Grass" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YbQ6CMAyG+eNJjBeReBAw3lRuIvdwREiapd3abi0f8iZvwsfa9QE60KY5daqu2svPtcflrInBYvuw/0S8aNnOjcvlo6yJiefmxE/cHSMXVOpcfN6DQVofzOvBIK2NU9/eGe7Rs0f1oxXDJxwfM7Wl6uPWU5vhFravwUPwe2YYEA5ubWswPGaGMfKeGF4VGeBz5slgpdw8pec9JFlbNfEe8mSAayZlzTju+4HKlYqHeSBvrV6VrkslljBsZZ2I2TljpNfNQz1jPuy+UMePysDpfa0phnhOrHe5DFR8zX7DGDj3RjLOqn5Phprr3L8ytIS149Zg4MamxllL2pccbZVB8s3IzVlLHgyW77jJHcKAzRl/96ZqgznjfWtj17G0p70tZYCyev5Tc6akYbD6ratdH/6JgfNfpdRUXm5uKYNFT5fmPRLD3vUFBzjkpqAeAAA=
+   H4sIAAAAAAAAC+2YPQ6DMAyFWZi4VTkJ9G7du3csN2nvURBFsiI7sZ3Y/D7pSQVixx/gAK2qS5fKqq1nlx6XsiYGi+3H7TviRcvv1LhUPsqamHBuTvzE3TFyQcWOhcc9GKT1wbweDNLaOPXtneEW3HtUP1oxfMb930Rtsfq49ZRmeDRVNdSz33+GAeHg1rYGw7OZ6w69J4ZXQQZ4n3kyWCk1T+5xD0nWVk28hzwZ4JpJWTOO+3ygcsXiYR7IW6pXpetSjiUMW1knQnbOGOl581DPmA+7LtT+ozJwel9riiGcE+tdLgMVX7LfMAbOtZGMs6rfk6HkOndWhpawdtwaDNzY2DhrSfuSo60ySN4ZuTlLyYPB8hk3uUMYsDnD995YbTBnuG1t7Dzm9rS3pQxQVvd/bM6YNAxW37ra9eFMDJz/KqWm8nJzSxksejo375EY9q4ftrK7+qAeAAA=
   </data>
  </layer>
  <layer name="random" width="49" height="40">

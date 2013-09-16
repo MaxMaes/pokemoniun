@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Whismur,75;Zubat,20;Aron,5;"/>
   <property name="dayPokemonLevels" value="15-16;15-16;15-16;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Whismur,50;Zubat,50;"/>
   <property name="nightPokemonLevels" value="15-16;15-16;"/>
   <property name="pvp" value="yes"/>

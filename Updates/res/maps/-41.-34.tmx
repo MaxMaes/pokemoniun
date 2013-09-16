@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="60" tilewidth="16" tileheight="16">
- 
-<properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties>  <tileset firstgid="1" source="Sinnoh Interiors 2.tsx"/>
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Sinnoh Interiors 2.tsx"/>
  <layer name="Walkable" width="60" height="60">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3V1//OBRjH4a/t3MrIzPpNZYvsvTctZK8ShXOEVMg8t0fZe+9NtlRoGOcyo1z9AY/T5zm436/XdX5/ju4kiaIoiqIoiqIoiqIoen29s5KkD33pR38GMJD3+YAP+YiPGcRghvAJQxnGcEYwklFZ6V6VuiNuO8oxjnOCk5ziNGc4yznOc4GfuMglLnOFq1zjOjcyeG/d7CSpR30a0JBGNKYJ79KUZrxHc1rQkla0pg1taUd7OmSne1XqlrltOStYySpWs4a1rGM9P/AjG9jIJjazha1sYzs72JnBe0vkJElJSlGaMrxBWcpRngq8SUUqUZkqVKUab1GdGtSkVk66V6VumtumM4OvmMksZvM1c/iGb/mOucxjPt+zgIUsYjFLWJrBex+67W8e8ZgnPOUZz/mHF7zkX/77f0tukhSgIIUoTBGKUoziuelelbqhbhvGcEYwklGMZgxjGcd4PuUzJvA5E5nEF3zJZKYwNYP3XnbbFa5yjevc4Gdu8gu/8hu3uM0dfucP/uQv7nKP+zzI4L2t8/wT2tKO9nSgI53oTBe60o3u9KAnvehNH/rSj/4MyEv3qtRtcdtWtrGdHexkF7vZw172sZ8DHOQQhznCUY5xnBOczOC91fL9E6pTg5rUojZZZJNDLnnkU4e3eYe61KM+DWhIo/x0r4qiKIqiKIqiKIqiKIqiKIqiKIqiKMr8XgHJwWBsQDgAAA==

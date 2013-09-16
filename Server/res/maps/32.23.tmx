@@ -1,72 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="19" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="isCave" value="false"/>
+  <property name="pvp" value="yes"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1025" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2049" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3073" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4097" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5121" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6145" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7169" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8193" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="9217" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
- </tileset>
- <tileset firstgid="10027" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="11051" name="Untitled" tilewidth="16" tileheight="16">
   <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
  </tileset>
- <tileset firstgid="12075" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="13099" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="14123" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="15147" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="16171" name="10" tilewidth="16" tileheight="16">
-  <image source="normal18.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="17195" source="Water02.tsx"/>
- <tileset firstgid="17387" source="Cliffs01.tsx"/>
- <tileset firstgid="17617" source="Cliffs02.tsx"/>
+ <tileset firstgid="1025" source="Water02.tsx"/>
+ <tileset firstgid="1217" source="Cliffs01.tsx"/>
+ <tileset firstgid="1447" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="60" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VwQmAMAxFi3cvTuFNcAW9uIFDO5IHCSUQS4mpIvJTHwSxBuHxmzaEb1jm6/LA2sWy+HIvFRolnh6yvuv5+2KgubSDL999is+a8iVq8OVsiSe+8j8o1JAvY5nhrTkXqqvE6orqS7lytlrG9I0ce/GO6MtYnKnGzNwinlWSkvuY+1GdS+6ntB8ZLeO0Bx1tlnldunrwTvd1bv0NDg02gcjQEQAA
+   H4sIAAAAAAAAC+2VDQqAIAxGhQy6Rfe/TlfoHhEjRmPIckXEt/VARB3C4/OnlG+Yx+sWiSy+PZ4R3O96/r4YWC7rEMt3qUefKV8igy9nSzzxlfugkCFfpucOa1BdJZ78EH0pV87WypjXtnqOEX2ZHmdqUyN3xLdK4vmPuR7V2fM/6XpkrIx1DTrWXeZ56RrBW5/r1vwb7D5y4R3QEQAA
   </data>
  </layer>
  <layer name="Water" width="60" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3T0QrAIAgF0P6t/bS/tdcxiD0EI6LVsHuNFHxJIg+axBCElF/B6ks7rw7rE7eBXhHO1eetHWwP0mrZOzPYNrSZ7XKvey16z6Nda9VX9dZM+Xwnb88OILyIf/ieL3PGCKsl905etLU0j95zL95b7udI/nmPPdsEypJI5tARAAA=
+   H4sIAAAAAAAAC+3TMQrAIAwFUAd7/lyra+mFpINQRKyW+H/EBLIYxDwSJYYgpPwKVl/aeXVYn7gN9Ipwrj5v7WB7kFbL3pnBtqHNbJd73WvRex7tWqu+qrdmyuc7eXt2AOFF/MP3fJkzRlgtuXfyoq2lefSee/Hecj9H8s977NkmPN1MLNARAAA=
   </data>
  </layer>
  <layer name="Collisions" width="60" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9XWW0rEMBQG4LxYGRRdgm+KLy3iEtrdeFuIt4V4W4i3dTj1QqeP04J/SA8eDkmTjmFmeuAnTKaUfpwmqVLLrypXaoacpEqdImfIOXKRmnlKna/g4SJWxSy6LuG7Qq6RG+Q2NfP7hRnHapdOqjv47pEH5BF5St33aEfi1ta5eEbq3zN8L8gr8oa8W7x0rfY2uRnX1UxW6aUq4ftEvpBv5Id5yUnFve2aeucOr7bobGVKbWdmbgfjbvb3n6wxeTe0rTPYLLYac3+bbgy1UvHrx+Kl3rrWsK+0eYJssjGW9wP3mnpSDugRt4Z4+blV5/a9uYnY36roN5cL+G1r2GXdK4xHnjsxvfL5XWbtqpGZSB3obXp6XLFruLddgpfMNhe307yvx7y3rh7TNQfdf4dinepRruGY3qnF29fnvh5Lq82s5xLkqJs/7n7LPeq/Vl3S5Yutz74eh5h5yXMo5r481Ovqs28dS2vIfh27t4t4uW+IVxfft2w9pr5O2Psc+xsjljf0bGrE/pUIN9+XEuZe5TeVzTvknSZzItyyp9Ico34B+RBU0dARAAA=
+   H4sIAAAAAAAAC9XWWU7DMBAGYEtJhDgW20HYDsJ2ELZz0EBRmsc6jw2qQHAE3orgt+JRRyM7cYrVNiP9suqkUT5N7ESp9VeRKjVB9hKl9pED5BA5Spp5Splu4OYiVsEspo7hO0FOkTPkPGnmF/b4UO3SSXUB3yVyhVwjN4n/GtVA3MY6FfdI/buF7w65Rx6QR4eXzjVenTbjtprJKr1UOXzPyAsyRl6ZdyH+w73VlnqnHq+xmLzD92GNnxi/kuUxWUPyzozN3qPL4qoh91fbMdRKxc8fipd661vDXWXMc+SNjbG8T5lSo47kWfj1uDXEy99bZerem3VEb5G1m/MV/K417LN+W49878T0yvv3mY2rRCYiZaBXt/S4YOdwb7UGL5ldLm6n+a4e8976ekzn/Nhjv2KdVo41HNM7cnjb+tzWY2l1mc1cjezY6+xmzW+5R/3Xakq6uuLqc1ePQ8y85Hso5r7c1+vrc9c6ltaQ/Tp2b1fxcl8frym+b7l6TH2dp8vnOfY3Rixv6LtJi+e6Fm6+L9XMvclvKpe3zzOthXUmbNRTaY5Rfz8yzBvQEQAA
   </data>
  </layer>
 </map>

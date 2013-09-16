@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Swinub,40;Golbat,30;Delibird,20;Zubat,5;Jynx,5;"/>
   <property name="dayPokemonLevels" value="21-23;22-22;22-22;22-22;22-22;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Swinub,40;Golbat,30;Delibird,20;Zubat,5;Jynx,5;"/>
   <property name="nightPokemonLevels" value="21-23;22-22;22-22;22-22;22-22;"/>
   <property name="waterPokemonChances" value=""/>

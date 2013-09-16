@@ -5,9 +5,10 @@
   <property name="dayPokemonLevels" value="23-26;24-26;23-25;24-25;"/>
   <property name="fishPokemonChances" value="Magikarp,35;Gyarados,10;Seaking,10;Whiscash,20;Goldeen,15;Barboach,10;"/>
   <property name="fishPokemonLevels" value="10-25;30-55;30-55;20-50;10-25;10-25;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Shellos,45;Quagsire,30;Buizel,15;Grimer,10;"/>
   <property name="nightPokemonLevels" value="23-26;24-26;23-25;24-26;"/>
-  <property name="pvp" value="enforced"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Wooper,90;Quagsire,10;"/>
   <property name="waterPokemonLevels" value="20-40;20-40;"/>
   <property name="wildProbability" value="10"/>

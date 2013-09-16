@@ -3,17 +3,16 @@ package org.pokenet.client.ui.frames;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Popup;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.MoveLearningManager;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.components.Image;
 import de.matthiasmann.twl.Alignment;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
-import de.matthiasmann.twl.PopupWindow;
 import de.matthiasmann.twl.ResizableFrame;
 import de.matthiasmann.twl.Widget;
 
@@ -25,18 +24,20 @@ import de.matthiasmann.twl.Widget;
 public class MoveLearningDialog extends ResizableFrame
 {
 	public List<Button> m_moveButtons = new ArrayList<Button>();
+	private List<Label> m_moveTypeLabels = new ArrayList<Label>();
 	public List<Label> m_pp = new ArrayList<Label>();
 	private Button m_cancel;
 	private MoveLearnCanvas m_canvas;
 	private String m_move;
 	private Widget m_movePane;
 	private int m_pokeIndex;
-	private Button move1, move2, move3, move4;
-	private Label pp1, pp2, pp3, pp4;
-	private PopupWindow popup;
+	// private Button move1, move2, move3, move4;
+	// private Label pp1, pp2, pp3, pp4;
+	// private PopupWindow popup;
 	InputStream f;
 	// Image Loading tools
 	String m_path = "res/battle/";
+	private Widget pane;
 
 	/**
 	 * Default Constructor
@@ -47,13 +48,21 @@ public class MoveLearningDialog extends ResizableFrame
 	 */
 	public MoveLearningDialog(Widget root)
 	{
+		setTheme("movelearndialog");
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(259, 369);
+		pane.setPosition(0, 0);
+		m_canvas = new MoveLearnCanvas();
+		pane.add(m_canvas);
+		m_canvas.setPosition(0, 0);
+		m_canvas.setSize(257, 144);
 		m_path = respath + m_path;
 		setPosition(getX() - 1, getY() + 1);
-		m_canvas = new MoveLearnCanvas();
-		add(m_canvas);
+		add(pane);
 		setSize(259, 369);
 		initGUI(root);
 		setCenter();
@@ -66,29 +75,27 @@ public class MoveLearningDialog extends ResizableFrame
 	 */
 	public void initGUI(Widget root)
 	{
-		/* TRUE = Move Learning, FALSE = Evolution TODO: Whut is this comment? */
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 
 		m_movePane = new Widget();
+		m_movePane.setTheme("attackpane");
 		m_movePane.setSize(257, 201);
 		m_movePane.setPosition(2, 140);
 
-		move1 = new Button("");
+		Button move1 = new Button("");
 		move1.setTheme("battlebutton");
-		move2 = new Button("");
+		Button move2 = new Button("");
 		move2.setTheme("battlebutton");
-		move3 = new Button("");
+		Button move3 = new Button("");
 		move3.setTheme("battlebutton");
-		move4 = new Button("");
+		Button move4 = new Button("");
 		move4.setTheme("battlebutton");
-
-		setResizableAxis(ResizableAxis.NONE);
 
 		// start attackPane
 		m_movePane.add(move1);
-		move1.setPosition(7, 10);
+		move1.setPosition(7, 140);
 		move1.setSize(116, 51);
 		move1.addCallback(new Runnable()
 		{
@@ -98,14 +105,23 @@ public class MoveLearningDialog extends ResizableFrame
 				replaceMove(0);
 			}
 		});
-		pp1 = new Label();
-		pp1.setAlignment(Alignment.RIGHT);
-		pp1.setSize(110, 20);
-		pp1.setPosition(7, 40);
+		Label pp1 = new Label();
+		pp1.setText("10/10");
+		pp1.setTheme("pplabel");
+		// pp1.setAlignment(Alignment.RIGHT);
+		pp1.setSize(GameClient.getInstance().getFontSmall().getWidth(pp1.getText()), GameClient.getInstance().getFontSmall().getHeight(pp1.getText()));
+		pp1.setPosition(85, 35);
+		Label move1Type = new Label();
+		move1Type.setTheme("movetypelabel");
+		// move1Type.setAlignment(Alignment.LEFT);
+		move1Type.setText("???");
+		move1Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move1Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move1Type.getText()));
+		move1Type.setPosition(12, 35);
+		m_movePane.add(move1Type);
 		m_movePane.add(pp1);
 
 		m_movePane.add(move2);
-		move2.setPosition(130, 10);
+		move2.setPosition(130, 140);
 		move2.setSize(116, 51);
 		move2.addCallback(new Runnable()
 		{
@@ -115,14 +131,24 @@ public class MoveLearningDialog extends ResizableFrame
 				replaceMove(1);
 			}
 		});
-		pp2 = new Label();
-		pp2.setAlignment(Alignment.RIGHT);
-		pp2.setSize(110, 20);
-		pp2.setPosition(130, 40);
+		Label pp2 = new Label();
+		pp2.setTheme("pplabel");
+		pp2.setText("10/10");
+		// pp2.setAlignment(Alignment.RIGHT);
+		pp2.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
+		pp2.setSize(GameClient.getInstance().getFontSmall().getWidth(pp2.getText()), GameClient.getInstance().getFontSmall().getHeight(pp2.getText()));
+		pp2.setPosition(210, 35);
+		Label move2Type = new Label();
+		move2Type.setTheme("movetypelabel");
+		move2Type.setText("???");
+		// move2Type.setAlignment(Alignment.LEFT);
+		move2Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move2Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move2Type.getText()));
+		move2Type.setPosition(135, 35);
+		m_movePane.add(move2Type);
 		m_movePane.add(pp2);
 
 		m_movePane.add(move3);
-		move3.setPosition(7, 65);
+		move3.setPosition(7, 205);
 		move3.setSize(116, 51);
 		move3.addCallback(new Runnable()
 		{
@@ -132,14 +158,24 @@ public class MoveLearningDialog extends ResizableFrame
 				replaceMove(2);
 			}
 		});
-		pp3 = new Label();
-		pp3.setAlignment(Alignment.RIGHT);
-		pp3.setSize(110, 20);
-		pp3.setPosition(7, 95);
+		Label pp3 = new Label();
+		pp3.setTheme("pplabel");
+		pp3.setText("10/10");
+		// pp3.setAlignment(Alignment.RIGHT);
+		pp3.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
+		pp3.setSize(GameClient.getInstance().getFontSmall().getWidth(pp3.getText()), GameClient.getInstance().getFontSmall().getHeight(pp3.getText()));
+		pp3.setPosition(86, 95);
+		Label move3Type = new Label();
+		move3Type.setTheme("movetypelabel");
+		move3Type.setText("???");
+		move3Type.setAlignment(Alignment.LEFT);
+		move3Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move3Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move3Type.getText()));
+		move3Type.setPosition(12, 95);
+		m_movePane.add(move3Type);
 		m_movePane.add(pp3);
 
 		m_movePane.add(move4);
-		move4.setPosition(130, 65);
+		move4.setPosition(130, 205);
 		move4.setSize(116, 51);
 		move4.addCallback(new Runnable()
 		{
@@ -149,10 +185,20 @@ public class MoveLearningDialog extends ResizableFrame
 				replaceMove(3);
 			}
 		});
-		pp4 = new Label();
-		pp4.setAlignment(Alignment.RIGHT);
-		pp4.setPosition(130, 95);
-		pp4.setSize(110, 20);
+		Label pp4 = new Label();
+		pp4.setTheme("pplabel");
+		pp4.setText("10/10");
+		// pp4.setAlignment(Alignment.RIGHT);
+		pp4.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
+		pp4.setSize(GameClient.getInstance().getFontSmall().getWidth(pp4.getText()), GameClient.getInstance().getFontSmall().getHeight(pp4.getText()));
+		pp4.setPosition(210, 95);
+		Label move4Type = new Label();
+		move4Type.setTheme("movetypelabel");
+		move4Type.setText("???");
+		// move4Type.setAlignment(Alignment.LEFT);
+		move4Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move4Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move4Type.getText()));
+		move4Type.setPosition(135, 950);
+		m_movePane.add(move4Type);
 		m_movePane.add(pp4);
 
 		m_moveButtons.add(move1);
@@ -164,6 +210,11 @@ public class MoveLearningDialog extends ResizableFrame
 		m_pp.add(pp2);
 		m_pp.add(pp3);
 		m_pp.add(pp4);
+
+		m_moveTypeLabels.add(move1Type);
+		m_moveTypeLabels.add(move2Type);
+		m_moveTypeLabels.add(move3Type);
+		m_moveTypeLabels.add(move4Type);
 
 		m_cancel = new Button("Cancel");
 		m_cancel.setSize(246, 77);
@@ -183,14 +234,8 @@ public class MoveLearningDialog extends ResizableFrame
 		});
 		m_movePane.add(m_cancel);
 
-		add(m_movePane);
-		popup = new PopupWindow(root);
-		popup.setTheme("MoveLearningPopup");
-		popup.add(this);
-		popup.setCloseOnClickedOutside(false);
-		popup.setCloseOnEscape(false);
-		popup.adjustSize();
-		
+		pane.add(m_movePane);
+
 	}
 
 	public void learnMove(int pokeIndex, String move)
@@ -201,19 +246,24 @@ public class MoveLearningDialog extends ResizableFrame
 
 		m_move = move;
 
-		move1.setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[0]);
-		move2.setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[1]);
-		move3.setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[2]);
-		move4.setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[3]);
+		m_moveButtons.get(0).setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[0]);
+		m_moveButtons.get(1).setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[1]);
+		m_moveButtons.get(2).setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[2]);
+		m_moveButtons.get(3).setText(GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].getMoves()[3]);
 
 		for(int i = 0; i < 4; i++)
 			if(m_moveButtons.get(i).getText().equals(""))
+			{
 				m_pp.get(i).setVisible(false);
+				m_moveTypeLabels.get(i).setVisible(false);
+			}
 			else
 			{
 				m_pp.get(i).setText(
 						GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getMoveCurPP()[i] + "/" + GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getMoveMaxPP()[i]);
 				m_pp.get(i).setVisible(true);
+				m_moveTypeLabels.get(i).setText(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getMoveType(i));
+				m_moveTypeLabels.get(i).setVisible(true);
 			}
 
 		m_movePane.setVisible(true);
@@ -251,6 +301,7 @@ public class MoveLearningDialog extends ResizableFrame
 			message.addInt(i);
 			message.addString(m_move);
 			GameClient.getInstance().getSession().send(message);
+			m_canvas.removeChild(m_canvas.poke);
 			MoveLearningManager.getInstance().removeMoveLearning();
 		}
 		else
@@ -268,6 +319,7 @@ public class MoveLearningDialog extends ResizableFrame
 					message.addInt(j);
 					message.addString(m_move);
 					GameClient.getInstance().getSession().send(message);
+					m_canvas.removeChild(m_canvas.poke);
 					MoveLearningManager.getInstance().removeMoveLearning();
 					GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 				}
@@ -293,18 +345,38 @@ public class MoveLearningDialog extends ResizableFrame
  */
 class MoveLearnCanvas extends Widget
 {
-	private Image poke = new Image();
+	protected Image poke = new Image();
 
 	public MoveLearnCanvas()
 	{
-		setSize(257, 144);
+		setTheme("pokemonpane");
 		setVisible(true);
 	}
 
 	public void draw(int pokeIndex)
 	{
-		poke.setImage(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getSprite());
+		try
+		{
+			poke.setImage(PokemonSpriteDatabase.getNormalFront(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getGender(),
+					GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getSpriteNumber()));
+		}
+		catch(Exception e)
+		{
+			System.err.println("failed to load moveLearningDialog, couldn't load sprite");
+		}
 		poke.setPosition(getWidth() / 2 - 40, getHeight() / 2 - 40);
-		this.add(poke);
+		poke.setSize(80, 80);
+		try
+		{
+			this.add(poke);
+		}
+		catch(Exception e)
+		{
+			this.removeChild(poke);
+			poke.setPosition(getWidth() / 2 - 40, getHeight() / 2 - 40);
+			poke.setSize(80, 80);
+			this.add(poke);
+		}
+
 	}
 }

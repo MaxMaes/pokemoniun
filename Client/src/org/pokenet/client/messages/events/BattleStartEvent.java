@@ -12,7 +12,7 @@ public class BattleStartEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		// dit heb ik veranderd van char naar bool! Want we kunnen nu bools lezen ;)
+		/* Dit heb ik veranderd van char naar bool! Want we kunnen nu bools lezen. */
 		BattleManager.getInstance().startBattle(Request.readBool(), Request.readInt());
 	}
 }

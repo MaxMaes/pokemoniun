@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PokenetClient/lib/native"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="src/|lib/|res/" kind="src" path="">
-		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PokemoniumClient/lib/native"/>
 		</attributes>
 	</classpathentry>
@@ -41,7 +36,6 @@
 	<classpathentry kind="lib" path="lib/TWL.jar"/>
 	<classpathentry kind="lib" path="lib/TWLEffects.jar"/>
 	<classpathentry kind="lib" path="lib/xpp3-1.1.4c.jar"/>
-	<classpathentry kind="lib" path="lib/PNGDecoder.jar"/>
 	<classpathentry kind="lib" path="lib/netty-3.6.5.final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -154,7 +154,7 @@ public class TownMap extends ResizableFrame
 			GameClient.getInstance().getGraphics().setColor(Color.black);
 			for(int id : locations_Name.keySet())
 			{
-				GameClient.getInstance().getGraphics().fillRect(locations_X.get(id) + getX() , locations_Y.get(id) + getY()+24, locations_Width.get(id), locations_Height.get(id));
+				//GameClient.getInstance().getGraphics().fillRect(locations_X.get(id) + getX() , locations_Y.get(id) + getY()+24, locations_Width.get(id), locations_Height.get(id));
 				if(mouseY <= (locations_Y.get(id) + getY()+24) + locations_Height.get(id) && mouseY >= (locations_Y.get(id) + getY()+24)
 				&& mouseX <= (locations_X.get(id)+getX()) + locations_Width.get(id) && mouseX >= (locations_X.get(id)+getX()))
 				GameClient.getInstance().getGraphics().drawString(locations_Name.get(id), locations_X.get(id) + getX() +25, locations_Y.get(id) + getY()+24 );

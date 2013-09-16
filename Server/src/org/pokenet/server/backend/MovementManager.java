@@ -175,12 +175,12 @@ public class MovementManager implements Runnable
 						queueLock.readLock().unlock();
 					}
 				}
-
-				synchronized(m_moving)
-				{
-					/* Get character */
-					tmp = m_moving.poll();
-				}
+				if(!m_moving.isEmpty())
+					synchronized(m_moving)
+					{
+						/* Get character */
+						tmp = m_moving.poll();
+					}
 				/* Move character */
 				if(!tmp.move())
 				{

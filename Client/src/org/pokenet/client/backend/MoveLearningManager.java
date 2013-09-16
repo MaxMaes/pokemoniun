@@ -60,7 +60,16 @@ public class MoveLearningManager extends Thread
 	{
 		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false); // TODO: Chappie magic :D
 		m_moveLearning.learnMove(pokeIndex, move);
-		GameClient.getInstance().getGUIPane().add(m_moveLearning);
+		try
+		{
+			GameClient.getInstance().getGUIPane().add(m_moveLearning);
+		}
+		catch(Exception e)
+		{
+			System.err.println("movelearningdialog was already in tree, retrying");
+			GameClient.getInstance().getGUIPane().removeChild(m_moveLearning);
+			GameClient.getInstance().getGUIPane().add(m_moveLearning);
+		}
 	}
 
 	/**

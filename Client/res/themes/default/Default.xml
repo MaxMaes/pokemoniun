@@ -787,5 +787,47 @@
         <theme name="loadingscreen" ref="-defaults">
             <param name="background"><image>loadingscreen</image></param>
         </theme>
+        <theme name="movelearndialog" ref="resizableframe">
+            <theme name="content" ref="-defaults">
+                <theme name="attackpane" ref="-defaults">
+                    <param name="background"><image>interfacebackground</image></param>
+                    <theme name="battlebutton_small" ref="button">
+                        <param name="background"><image>battlebutton_small_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="battlebutton" ref="button">
+                        <param name="background"><image>battlebutton_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="label" ref="label"/>
+                    <theme name="pplabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="movetypelabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                    <theme name="title" ref="title"/>
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                </theme>
+                <theme name="pokemonpane" ref="-defaults">
+                    <theme name="image" ref="image"/>
+                    <theme name="title" ref="title"/>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                    <param name="background"><image>battlebutton_pressed</image></param>
+                </theme>
+            </theme>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="title" ref="title"/>
+        </theme>
     </theme>
 </themes>

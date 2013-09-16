@@ -119,6 +119,7 @@ public class GameClient extends BasicGame
 	private MoveLearningManager m_moveLearningManager;
 	private OurPlayer m_ourPlayer = null;
 	private boolean m_started = false;
+	private boolean reloadPokemon = false;
 	private TimeService m_time;// = new TimeService();
 	private WeatherService m_weather;// = new WeatherService();
 	private Graphics graphics;
@@ -588,7 +589,7 @@ public class GameClient extends BasicGame
 	{
 		return lwjglRenderer;
 	}
-	
+
 	public Graphics getGraphics()
 	{
 		return graphics;
@@ -717,6 +718,22 @@ public class GameClient extends BasicGame
 		{
 			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove() && !getHUD().hasShop())
 			{
+				try
+				{
+					if(reloadPokemon)
+					{
+						for(int j = 0; j < m_ourPlayer.getPartyCount(); j++)
+						{
+							m_ourPlayer.getPokemon()[j].getIcon();
+							m_ourPlayer.getPokemon()[j].getSprite();
+						}
+						reloadPokemon = false;
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
@@ -1080,7 +1097,7 @@ public class GameClient extends BasicGame
 					{
 						if(root.getHUD().getPlayerPopupDialog() != null)
 							root.getHUD().hidePlayerPopupDialog();
-						root.getHUD().showPlayerPopupDialog(p.getUsername(),x,y);
+						root.getHUD().showPlayerPopupDialog(p.getUsername(), x, y);
 					}
 				}
 			}
@@ -1440,7 +1457,7 @@ public class GameClient extends BasicGame
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
 				m_mapMatrix.getCurrentMap().setYOffset(300 - m_ourPlayer.getY(), false);
 				m_mapMatrix.recalibrate();
-				//getHUD().getMap().setPlayerLocation();
+				// getHUD().getMap().setPlayerLocation();
 				m_isNewMap = false;
 				getGUIPane().hideLoadingScreen();
 				getGUIPane().showHUD();
@@ -1476,5 +1493,15 @@ public class GameClient extends BasicGame
 				m_daylight = new Color(0, 0, 0, a);
 			}
 		}
+	}
+
+	public boolean isReloadPokemon()
+	{
+		return reloadPokemon;
+	}
+
+	public void setReloadPokemon(boolean reloadPokemon)
+	{
+		this.reloadPokemon = reloadPokemon;
 	}
 }

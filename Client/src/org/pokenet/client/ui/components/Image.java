@@ -68,14 +68,7 @@ public class Image extends de.matthiasmann.twl.Widget
 	 */
 	public void setImage(de.matthiasmann.twl.renderer.Image image)
 	{
-		if(image != null)
-		{
-			img = image;
-		}
-		else
-		{
-			throw new IllegalArgumentException("Image cannot be null");
-		}
+		img = image;
 	}
 
 	@Override

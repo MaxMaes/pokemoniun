@@ -334,28 +334,6 @@ public class GameClient extends BasicGame
 						move(Direction.Left);
 	}
 
-	public int getGameContainerWidth()
-	{
-		return gameContainer.getWidth();
-	}
-
-	public int getGameContainerHeight()
-	{
-		return gameContainer.getHeight();
-	}
-
-	public void setFullscreen(boolean toSet)
-	{
-		try
-		{
-			gameContainer.setFullscreen(toSet);
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void controllerRightPressed(int controller)
 	{
@@ -378,6 +356,28 @@ public class GameClient extends BasicGame
 						move(Direction.Up);
 					else if(m_ourPlayer.getDirection() != Direction.Up)
 						move(Direction.Up);
+	}
+
+	public int getGameContainerWidth()
+	{
+		return gameContainer.getWidth();
+	}
+
+	public int getGameContainerHeight()
+	{
+		return gameContainer.getHeight();
+	}
+
+	public void setFullscreen(boolean toSet)
+	{
+		try
+		{
+			gameContainer.setFullscreen(toSet);
+		}
+		catch(SlickException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void disableKeyRepeat()
@@ -588,7 +588,7 @@ public class GameClient extends BasicGame
 	{
 		return lwjglRenderer;
 	}
-	
+
 	public Graphics getGraphics()
 	{
 		return graphics;
@@ -1289,7 +1289,7 @@ public class GameClient extends BasicGame
 	{
 		m_session = null;
 		m_ourPlayer = null;
-		if(BattleManager.getInstance() != null)
+		if(BattleManager.getInstance().isBattling())
 			BattleManager.getInstance().endBattle();
 		if(getHUD().getNPCSpeech() != null)
 			getHUD().removeNPCSpeechFrame();
@@ -1441,7 +1441,7 @@ public class GameClient extends BasicGame
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
 				m_mapMatrix.getCurrentMap().setYOffset(300 - m_ourPlayer.getY(), false);
 				m_mapMatrix.recalibrate();
-				//getHUD().getMap().setPlayerLocation();
+				// getHUD().getMap().setPlayerLocation();
 				m_isNewMap = false;
 				getGUIPane().hideLoadingScreen();
 				getGUIPane().showHUD();
@@ -1451,8 +1451,9 @@ public class GameClient extends BasicGame
 			{
 				m_animator.animate();
 				/* update battle */
-				if(BattleManager.getInstance().isBattling() && BattleManager.getInstance().getCurEnemyPoke() != null && BattleManager.getInstance().getCurPoke() != null)
-					BattleManager.getInstance().getBattleWindow().getCanvas().update();
+				/*
+				 * if(BattleManager.getInstance().isBattling() && BattleManager.getInstance().getCurEnemyPoke() != null && BattleManager.getInstance().getCurPoke() != null)
+				 * BattleManager.getInstance().getBattleWindow().getCanvas().update(); */
 			}
 			/* Update weather and daylight */
 			if(!m_isNewMap)

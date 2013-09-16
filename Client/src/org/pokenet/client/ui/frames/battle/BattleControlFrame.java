@@ -33,7 +33,6 @@ public class BattleControlFrame extends Widget
 	private Button btnBag;
 	private Button btnPoke;
 	private Button btnRun;
-	// private Button cancel;
 	private boolean isWild;
 	private Button pokeCancelBtn;
 	private Widget attackPane;
@@ -53,8 +52,6 @@ public class BattleControlFrame extends Widget
 		m_path = respath + m_path;
 		loadStatusIcons();
 		initComponents();
-		setPosition(272, 224);
-		setSize(259, 200);
 		setVisible(true);
 	}
 
@@ -72,7 +69,6 @@ public class BattleControlFrame extends Widget
 		btnPoke.setEnabled(false);
 		btnBag.setEnabled(false);
 		btnRun.setEnabled(false);
-		// cancel.setVisible(false);
 	}
 
 	/**
@@ -80,19 +76,33 @@ public class BattleControlFrame extends Widget
 	 */
 	public void enableMoves()
 	{
-		attackPane.setVisible(true);
-		btnPoke.setEnabled(true);
-		btnBag.setEnabled(true);
-		btnRun.setEnabled(isWild);
-
-		pokeCancelBtn.setEnabled(true);
-		for(int idx = 0; idx < 4; idx++)
-			if(!m_moveButtons.get(idx).getText().equals(""))
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
 			{
-				m_moveButtons.get(idx).setEnabled(true);
-				m_ppLabels.get(idx).setEnabled(true);
+				attackPane.setVisible(true);
+				btnPoke.setEnabled(true);
+				btnBag.setEnabled(true);
+				btnRun.setEnabled(isWild);
+
+				pokeCancelBtn.setEnabled(true);
+				for(int idx = 0; idx < 4; idx++)
+				{
+					System.out.println(m_moveButtons.get(idx).getText());
+					if(!m_moveButtons.get(idx).getText().equals(""))
+					{
+						m_moveButtons.get(idx).setEnabled(true);
+						m_ppLabels.get(idx).setEnabled(true);
+					}
+					else
+					{
+						m_moveButtons.get(idx).setEnabled(false);
+						m_ppLabels.get(idx).setEnabled(false);
+					}
+				}
 			}
-		// cancel.setVisible(false);
+		});
 	}
 
 	public HashMap<String, de.matthiasmann.twl.renderer.Image> getStatusIcons()
@@ -198,7 +208,6 @@ public class BattleControlFrame extends Widget
 	{
 		attackPane = new Widget();
 		attackPane.setTheme("attackPane");
-		// attackPane.setTheme("battlecontrolframe");
 		Button move1 = new Button("");
 		move1.setTheme("battlebutton");
 		Button move2 = new Button("");
@@ -221,15 +230,11 @@ public class BattleControlFrame extends Widget
 			}
 		});
 		Label pp1 = new Label();
-		pp1.setText("10/10");
 		pp1.setTheme("pplabel");
-		// pp1.setAlignment(Alignment.RIGHT);
 		pp1.setSize(GameClient.getInstance().getFontSmall().getWidth(pp1.getText()), GameClient.getInstance().getFontSmall().getHeight(pp1.getText()));
 		pp1.setPosition(85, 40);
 		Label move1Type = new Label();
 		move1Type.setTheme("movetypelabel");
-		// move1Type.setAlignment(Alignment.LEFT);
-		move1Type.setText("???");
 		move1Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move1Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move1Type.getText()));
 		move1Type.setPosition(12, 40);
 		attackPane.add(move1Type);
@@ -248,15 +253,11 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp2 = new Label();
 		pp2.setTheme("pplabel");
-		pp2.setText("10/10");
-		// pp2.setAlignment(Alignment.RIGHT);
 		pp2.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp2.setSize(GameClient.getInstance().getFontSmall().getWidth(pp2.getText()), GameClient.getInstance().getFontSmall().getHeight(pp2.getText()));
 		pp2.setPosition(210, 40);
 		Label move2Type = new Label();
 		move2Type.setTheme("movetypelabel");
-		move2Type.setText("???");
-		// move2Type.setAlignment(Alignment.LEFT);
 		move2Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move2Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move2Type.getText()));
 		move2Type.setPosition(135, 40);
 		attackPane.add(move2Type);
@@ -275,20 +276,16 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp3 = new Label();
 		pp3.setTheme("pplabel");
-		pp3.setText("10/10");
-		// pp3.setAlignment(Alignment.RIGHT);
 		pp3.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp3.setSize(GameClient.getInstance().getFontSmall().getWidth(pp3.getText()), GameClient.getInstance().getFontSmall().getHeight(pp3.getText()));
 		pp3.setPosition(86, 95);
 		Label move3Type = new Label();
 		move3Type.setTheme("movetypelabel");
-		move3Type.setText("???");
 		move3Type.setAlignment(Alignment.LEFT);
 		move3Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move3Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move3Type.getText()));
 		move3Type.setPosition(12, 95);
 		attackPane.add(move3Type);
 		attackPane.add(pp3);
-
 		attackPane.add(move4);
 		move4.setPosition(130, 65);
 		move4.setSize(116, 51);
@@ -302,15 +299,11 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp4 = new Label();
 		pp4.setTheme("pplabel");
-		pp4.setText("10/10");
-		// pp4.setAlignment(Alignment.RIGHT);
 		pp4.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp4.setSize(GameClient.getInstance().getFontSmall().getWidth(pp4.getText()), GameClient.getInstance().getFontSmall().getHeight(pp4.getText()));
 		pp4.setPosition(210, 95);
 		Label move4Type = new Label();
 		move4Type.setTheme("movetypelabel");
-		move4Type.setText("???");
-		// move4Type.setAlignment(Alignment.LEFT);
 		move4Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move4Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move4Type.getText()));
 		move4Type.setPosition(135, 950);
 		attackPane.add(move4Type);
@@ -369,24 +362,8 @@ public class BattleControlFrame extends Widget
 				showPokePane(false);
 			}
 		});
-		/* why is there a cancel button on the attack pane? */
 
-		// cancel = new Button("Cancel");
-		// cancel.setTheme("battlebutton_small");
-		// attackPane.add(cancel);
-		// cancel.setVisible(false);
-		// cancel.setPosition(162, 110);
-		// cancel.setSize(82, 48);
-		// cancel.addCallback(new Runnable()
-		// {
-		// @Override
-		// public void run()
-		// {
-		//
-		// }
-		// });
 		attackPane.setSize(257, 201);
-		// attackPane.setPosition(2, 140);
 		add(attackPane);
 
 		pokePane = new Widget();
@@ -495,7 +472,7 @@ public class BattleControlFrame extends Widget
 		pokeCancelBtn.setTheme("battlebutton_small");
 		pokePane.add(pokeCancelBtn);
 		pokeCancelBtn.setPosition(162, 161);
-		pokeCancelBtn.setSize(82, 48);
+		pokeCancelBtn.setSize(82, 35);
 		pokeCancelBtn.addCallback(new Runnable()
 		{
 			@Override
@@ -561,5 +538,15 @@ public class BattleControlFrame extends Widget
 	public List<Label> getPokeInfo()
 	{
 		return m_pokeInfo;
+	}
+
+	@Override
+	public void layout()
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			m_moveTypeLabels.get(i).adjustSize();
+			m_ppLabels.get(i).adjustSize();
+		}
 	}
 }

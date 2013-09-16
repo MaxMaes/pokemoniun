@@ -26,7 +26,6 @@ import org.pokenet.client.ui.frames.TopBar;
 import org.pokenet.client.ui.frames.TownMap;
 import org.pokenet.client.ui.frames.TradeDialog;
 import org.pokenet.client.ui.frames.TrainChooserDialog;
-import org.pokenet.client.ui.frames.battle.BattleCanvas;
 import org.pokenet.client.ui.frames.battle.BattleDialog;
 import org.pokenet.client.ui.frames.shop.ShopDialog;
 import org.pokenet.client.ui.frames.speechframes.BattleSpeechFrame;
@@ -64,7 +63,6 @@ public class HUD extends DesktopArea
 	private SpriteChooserDialog spriteChooser;
 	private TradeDialog tradeDialog;
 	private PokeStorageBoxFrame boxDialog;
-	private BattleCanvas battleCanvas;
 
 	public HUD()
 	{
@@ -436,15 +434,32 @@ public class HUD extends DesktopArea
 
 	/**
 	 * Creates a new BattleDialog dialog with given parameters.
-	 * 
-	 * @param travel
-	 * @param p
 	 */
 	public void showBattleDialog()
 	{
-		if(battleDialog == null)
-			battleDialog = new BattleDialog();
-		add(battleDialog.getControlFrame());
+		if(battleDialog != null)
+		{
+			GameClient.getInstance().getGUI().invokeLater(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					removeChild(battleDialog);
+				}
+			});
+		}
+
+		battleDialog = new BattleDialog();
+		battleDialog.setPosition(272, 100);
+
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				add(battleDialog);
+			}
+		});
 	}
 
 	/**
@@ -452,7 +467,7 @@ public class HUD extends DesktopArea
 	 */
 	public void removeBattleDialog()
 	{
-		removeChild(battleDialog.getControlFrame());
+		removeChild(battleDialog);
 		battleDialog = null;
 	}
 
@@ -622,18 +637,15 @@ public class HUD extends DesktopArea
 		boxDialog = null;
 	}
 
-	public void setBattleSpeechFrame()
+	public void showBattleSpeechFrame()
 	{
 		if(battleSpeechFrame != null)
 		{
 			removeChild(this.battleSpeechFrame);
 		}
-		else
-		{
 
-			battleSpeechFrame = new BattleSpeechFrame();
-			add(battleSpeechFrame);
-		}
+		battleSpeechFrame = new BattleSpeechFrame();
+		add(battleSpeechFrame);
 	}
 
 	public void removeBattleSpeechFrame()
@@ -905,29 +917,6 @@ public class HUD extends DesktopArea
 			}
 		};
 		GameClient.getInstance().getGUIPane().showConfirmationDialog(GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].getName() + " is trying to evolve.", yes, no);
-	}
-
-	public void setBattleDialog(BattleDialog m_battle)
-	{
-		this.battleDialog = m_battle;
-		// this.add(m_battle);
-	}
-
-	public void setBattleCanvas(BattleCanvas battleCanvas)
-	{
-		this.battleCanvas = battleCanvas;
-		this.add(battleCanvas);
-	}
-
-	public void removeBattleCanvas()
-	{
-		this.removeChild(this.battleCanvas);
-		this.battleCanvas = null;
-	}
-
-	public boolean hasBattleCanvas()
-	{
-		return (this.battleCanvas != null) ? true : false;
 	}
 
 	public boolean hasNPCSpeechFrame()

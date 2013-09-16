@@ -47,17 +47,7 @@ public class BattleNarrator
 	 */
 	public void endBattle()
 	{
-		BattleManager.getInstance().getBattleWindow().getCanvas().stop();
-		GameClient.getInstance().getHUD().removeBattleCanvas();
-		while(GameClient.getInstance().getHUD().hasBattleCanvas())
-			;
-		// m_narrator = null;
 		GameClient.getInstance().getHUD().removeBattleSpeechFrame();
-		while(GameClient.getInstance().getHUD().hasBattleSpeechFrame())
-			;
-		GameClient.getInstance().getHUD().removeBattleDialog();
-		while(GameClient.getInstance().getHUD().hasBattleDialog())
-			;
 	}
 
 	/**
@@ -70,7 +60,7 @@ public class BattleNarrator
 		m_pokeName = data[0];
 		m_exp = (int) Double.parseDouble(data[1]);
 		m_expRemaining = (int) Double.parseDouble(data[2]);
-		BattleManager.getInstance().getBattleWindow().getCanvas().updatePlayerXP(BattleManager.getInstance().getCurPoke().getExp() + m_exp);
+		BattleManager.getInstance().getBattleWindow().getCanvas().updatePlayerXPValue(BattleManager.getInstance().getCurPoke().getExp() + m_exp);
 		addSpeech(m_translator.get(3));
 	}
 
@@ -84,11 +74,14 @@ public class BattleNarrator
 		m_pokeName = poke;
 		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++)
 		{
-			int counter = 0;
+			int faintedAmount = 0;
 			if(GameClient.getInstance().getOurPlayer().getPokemon()[i] != null && GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() <= 0)
-				counter++;
-			if(counter < i)
 			{
+				faintedAmount++;
+			}
+			if(faintedAmount < i)
+			{
+				BattleManager.getInstance().getBattleWindow().disableAllPokemon();
 				BattleManager.getInstance().getBattleWindow().showPokePane(true);
 				addSpeech(m_translator.get(0));
 				break;
@@ -132,7 +125,7 @@ public class BattleNarrator
 		}
 
 		if(i == 1 && m_newHPValue == 0)
-			BattleManager.getInstance().getBattleWindow().getCanvas().setPokeballImage(BattleManager.getInstance().getCurEnemyIndex(), "fainted");
+			BattleManager.getInstance().getBattleWindow().getCanvas().setEnemyPokeballImage(BattleManager.getInstance().getCurEnemyIndex(), "fainted");
 
 		if(Integer.parseInt(data[1]) <= 0)
 		{
@@ -264,7 +257,7 @@ public class BattleNarrator
 		else if(effect.equalsIgnoreCase("sleep"))
 			addSpeech(m_translator.get(18));
 		if(trainer == 1)
-			BattleManager.getInstance().getBattleWindow().getCanvas().setPokeballImage(BattleManager.getInstance().getCurEnemyIndex(), "status");
+			BattleManager.getInstance().getBattleWindow().getCanvas().setEnemyPokeballImage(BattleManager.getInstance().getCurEnemyIndex(), "status");
 	}
 
 	/**
@@ -289,10 +282,10 @@ public class BattleNarrator
 		m_trainer = trainerName;
 		m_pokeName = pokeName;
 		BattleManager.getInstance().switchPoke(Trainer, pIndex);
-		BattleManager.getInstance().getBattleWindow().getCanvas().drawOurPoke();
-		BattleManager.getInstance().getBattleWindow().getCanvas().drawEnemyPoke();
-		BattleManager.getInstance().getBattleWindow().getCanvas().drawOurInfo();
-		BattleManager.getInstance().getBattleWindow().getCanvas().drawEnemyInfo();
+		BattleManager.getInstance().getBattleWindow().getCanvas().setPlayerPokemonSprite();
+		BattleManager.getInstance().getBattleWindow().getCanvas().setEnemyPokeSprite();
+		BattleManager.getInstance().getBattleWindow().getCanvas().setPlayerInfo();
+		BattleManager.getInstance().getBattleWindow().getCanvas().setEnemyInfo();
 		addSpeech(m_translator.get(5));
 	}
 
@@ -367,8 +360,7 @@ public class BattleNarrator
 	{
 		BattleManager.getInstance().getBattleWindow().getCanvas().startBattle();
 		m_isBattling = true;
-		GameClient.getInstance().getHUD().setBattleCanvas(BattleManager.getInstance().getBattleWindow().getCanvas());
-		GameClient.getInstance().getHUD().setBattleSpeechFrame();
+		GameClient.getInstance().getHUD().showBattleSpeechFrame();
 		GameClient.getInstance().getHUD().getBattleSpeechFrame().setVisible(true);
 	}
 }

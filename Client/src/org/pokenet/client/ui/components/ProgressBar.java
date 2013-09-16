@@ -8,6 +8,7 @@ public class ProgressBar extends de.matthiasmann.twl.ProgressBar
 	private float min;
 	private float max;
 	private float value;
+	private float twlVal;
 	private boolean reversed;
 
 	public ProgressBar(float minValue, float maxValue)
@@ -28,8 +29,10 @@ public class ProgressBar extends de.matthiasmann.twl.ProgressBar
 	public void setValue(float newVal)
 	{
 		value = newVal;
-		float twlval = newVal / (max - min);
-		super.setValue(twlval);
+		float val = newVal - min;
+		val = (val >= 0) ? val : 0;
+		twlVal = val / (max - min);
+		super.setValue(twlVal);
 	}
 
 	public void setMinimum(float newVal)
@@ -71,18 +74,16 @@ public class ProgressBar extends de.matthiasmann.twl.ProgressBar
 			Image progressImage = getProgressImage();
 			if(progressImage != null && value >= 0)
 			{
-				int imageWidth = progressImage.getWidth();
-				int progressWidth = width - imageWidth;
-				int scaledWidth = (int) (progressWidth * value);
-				if(scaledWidth < 0)
+				int barWidth = (int) (twlVal * width);
+				if(barWidth < 0)
 				{
-					scaledWidth = 0;
+					barWidth = 0;
 				}
-				else if(scaledWidth > progressWidth)
+				else if(barWidth > width)
 				{
-					scaledWidth = progressWidth;
+					barWidth = width;
 				}
-				progressImage.draw(getAnimationState(), getInnerX() + width - scaledWidth, getInnerY(), imageWidth + scaledWidth, height);
+				progressImage.draw(getAnimationState(), getInnerX() + width - barWidth, getInnerY(), barWidth, height);
 			}
 		}
 	}

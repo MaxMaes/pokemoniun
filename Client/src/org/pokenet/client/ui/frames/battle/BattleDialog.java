@@ -15,6 +15,8 @@ public class BattleDialog extends Widget
 	{
 		canvas = new BattleCanvas();
 		control = new BattleControlFrame();
+		add(canvas);
+		add(control);
 	}
 
 	public BattleCanvas getCanvas()
@@ -90,5 +92,24 @@ public class BattleDialog extends Widget
 	public HashMap<String, de.matthiasmann.twl.renderer.Image> getStatusIcons()
 	{
 		return control.getStatusIcons();
+	}
+
+	@Override
+	public void layout()
+	{
+		canvas.setPosition(getInnerX(), getInnerY());
+		canvas.setSize(257, 144);
+		control.setPosition(getInnerX(), getInnerY() + canvas.getHeight());
+		control.setSize(259, 200);
+
+		setSize(257 + 259, 144 + 200);
+	}
+
+	public void disableAllPokemon()
+	{
+		for(Button btn : control.getPokeButtons())
+		{
+			btn.setEnabled(false);
+		}
 	}
 }

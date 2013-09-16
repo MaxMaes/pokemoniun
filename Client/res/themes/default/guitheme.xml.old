@@ -107,8 +107,8 @@
             </grid>
         </select>
         <area name="listbox_background" xywh="64,137,9,4"/>
-        <area name="listbox_display_background" xywh="77,136,24,6" splitx="L2,R2" splity="T2,B2"/>
-        <alias name="listbox_display_overlay" ref="none"/>
+        <area name="listbox.display.background" xywh="77,136,24,6" splitx="L2,R2" splity="T2,B2" if="selected"/>
+        <alias name="listbox.display.overlay" ref="none"/>
     
     
         <select name="combobox_button_background">
@@ -249,7 +249,8 @@
         <area name="battlebutton_pressed" xywh="8,246,116,51"/>
         <select name="battlebutton_background">
             <alias ref="battlebutton_pressed" if="pressed"/>
-            <alias ref="battlebutton"/>
+            <alias ref="battlebutton_pressed" if="disabled"/>
+            <area xywh="0,0,1,1"/>
         </select>
     
         <area name="battlebutton_small_pressed" xywh="42,197,82,48"/>

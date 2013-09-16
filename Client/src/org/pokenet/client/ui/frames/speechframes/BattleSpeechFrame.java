@@ -79,25 +79,6 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 			;
 		while(!getAdvancedLine().equalsIgnoreCase(newMsg))
 			;
-
-		/* if(BattleManager.getInstance().canFinish())
-		 * {
-		 * System.out.println("Battle over, no more speech!");
-		 * GameClient.getInstance().getUi().hideHUD(false);
-		 * BattleManager.getInstance().getTimeLine().endBattle();
-		 * BattleManager.getInstance().getBattleWindow().setVisible(false);
-		 * BattleManager.getInstance().setBattling(false);
-		 * BattleManager.getInstance().setFinish(false);
-		 * if(GameClient.getInstance().getDisplay().containsChild(BattleManager.getInstance().getBattleWindow().m_bag))
-		 * GameClient.getInstance().getDisplay().remove(BattleManager.getInstance().getBattleWindow().m_bag);
-		 * GameClient.getInstance().getDisplay().remove(BattleManager.getInstance().getBattleWindow());
-		 * while(GameClient.getInstance().getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
-		 * ;
-		 * GameClient.getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
-		 * if(GameClient.getSoundPlayer().getTrack() == Music.PVNPC)
-		 * GameClient.getSoundPlayer().setTrack(BattleManager.getInstance().getCurrentTrack());
-		 * m_thread = null;
-		 * } */
 	}
 
 	public void start()

@@ -38,11 +38,7 @@ public class BattleManager
 	 */
 	private BattleManager()
 	{
-		m_battle = new BattleDialog();
-		GameClient.getInstance().getHUD().setBattleDialog(m_battle);
-		GameClient.getInstance().getGUIPane().getHUD().add(m_battle);
 		m_narrator = new BattleNarrator();
-		m_battle.setVisible(false);
 	}
 
 	/**
@@ -77,27 +73,35 @@ public class BattleManager
 	 */
 	public void endBattle()
 	{
-		setFinish(true);
-		GameClient.getInstance().getGUIPane().showHUD();
-		m_narrator.endBattle();
-		if(m_battle.getControlFrame() != null)
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
-			for(int i = 0; i < m_battle.getControlFrame().getNumChildren(); i++)
-				m_battle.getControlFrame().removeChild(i);
-			// m_battle.getControlFrame();//TODO
-		}
-		m_battle.setVisible(false);
-		m_isBattling = false;
-		if(GameClient.getInstance().getHUD().hasBattlebag())
-			GameClient.getInstance().getHUD().removeBattlebag();
-		GameClient.getInstance().getGUIPane().removeChild(m_battle);
-		while(GameClient.getInstance().getHUD().hasBattleDialog())
-			;
-		GameClient.getInstance().getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
-		if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
-			GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
-		m_battle = null;
-		m_narrator = null;
+			@Override
+			public void run()
+			{
+				setFinish(true);
+				m_narrator.endBattle();
+				if(m_battle.getControlFrame() != null)
+				{
+					for(int i = 0; i < m_battle.getControlFrame().getNumChildren(); i++)
+					{
+						m_battle.getControlFrame().removeChild(i);
+					}
+				}
+				m_battle.setVisible(false);
+				m_isBattling = false;
+				if(GameClient.getInstance().getHUD().hasBattlebag())
+				{
+					GameClient.getInstance().getHUD().removeBattlebag();
+				}
+				GameClient.getInstance().getGUIPane().removeChild(m_battle);
+				GameClient.getInstance().getSoundPlayer().setTrackByLocation(GameClient.getInstance().getMapMatrix().getCurrentMap().getName());
+				if(GameClient.getInstance().getSoundPlayer().m_trackName == Music.PVNPC)
+				{
+					GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
+				}
+				GameClient.getInstance().getGUIPane().showHUD();
+			}
+		});
 	}
 
 	/**
@@ -225,9 +229,13 @@ public class BattleManager
 	public void setEnemyPoke(int index, String name, int level, int gender, int maxHP, int curHP, int spriteNum, boolean isShiny)
 	{
 		if(curHP != 0)
-			getBattleWindow().getCanvas().setPokeballImage(index, "normal");
+		{
+			m_battle.getCanvas().setEnemyPokeballImage(index, "normal");
+		}
 		else
-			getBattleWindow().getCanvas().setPokeballImage(index, "fainted");
+		{
+			m_battle.getCanvas().setEnemyPokeballImage(index, "fainted");
+		}
 
 		m_enemyPokes[index] = new Pokemon();
 		m_enemyPokes[index].setName(name);
@@ -239,7 +247,9 @@ public class BattleManager
 		m_enemyPokes[index].setSpriteNumber(spriteNum);
 
 		if(index + 1 == m_enemyPokes.length)
+		{
 			setEnemyData();
+		}
 	}
 
 	public void setFinish(boolean bool)
@@ -266,17 +276,19 @@ public class BattleManager
 	 */
 	public void startBattle(boolean isWild, int pokeAmount)
 	{
-		/* boolean was a char with the TcpProtocolHandler system. */
 		m_isBattling = true;
-		GameClient.getInstance().getHUD().hideHUDElements();
+		GameClient.getInstance().getHUD().showBattleDialog();
+		m_battle = GameClient.getInstance().getHUD().getBattleDialog();
 		if(isWild)
+		{
 			setWild(true);
+		}
 		else
+		{
 			setWild(false);
-		m_battle.setPosition(272, 40);
+		}
+
 		m_battle.showAttack();
-		getBattleWindow().getCanvas().setVisible(true);
-		m_battle.getControlFrame().setVisible(true);
 		m_enemyPokes = new Pokemon[pokeAmount];
 		getPlayerData();
 		m_battle.disableMoves();
@@ -285,8 +297,6 @@ public class BattleManager
 		m_narrator.startTimeline();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
 		System.out.println("Before Battle Music Name:" + m_curTrack);
-		// GameClient.getInstance().getHUD().setBattleDialog(m_battle);
-		GameClient.getInstance().getHUD().showBattleDialog();
 		m_battle.enableMoves();
 		GameClient.getInstance().changeTrack(Music.PVNPC);
 	}
@@ -328,6 +338,7 @@ public class BattleManager
 	public void updateMoves()
 	{
 		for(int i = 0; i < 4; i++)
+		{
 			if(m_curPoke != null && m_curPoke.getMoves()[i] != null && !m_curPoke.getMoves()[i].equals(""))
 			{
 				m_battle.getMoveButton(i).setText(m_curPoke.getMoves()[i]);
@@ -344,6 +355,7 @@ public class BattleManager
 				m_battle.getPPLabel(i).setText("");
 				m_battle.getMoveButton(i).setEnabled(false);
 			}
+		}
 	}
 
 	/**
@@ -372,6 +384,7 @@ public class BattleManager
 	public void updatePokePane()
 	{
 		for(int i = 0; i < 6; i++)
+		{
 			try
 			{
 				m_battle.getPokeButton(i).setText(m_ourPokes[i].getName());
@@ -394,6 +407,7 @@ public class BattleManager
 			catch(Exception e)
 			{
 			}
+		}
 	}
 
 	/**
@@ -424,7 +438,7 @@ public class BattleManager
 			// getBattleWindow().getCanvas().drawEnemyPoke();
 			try
 			{
-				getBattleWindow().getCanvas().drawEnemyInfo();
+				getBattleWindow().getCanvas().setEnemyInfo();
 			}
 			catch(Exception e)
 			{
@@ -432,7 +446,7 @@ public class BattleManager
 				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyNameLabel);
 				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyLv);
 				getBattleWindow().getCanvas().removeChild(getBattleWindow().getCanvas().enemyGender);
-				getBattleWindow().getCanvas().drawEnemyInfo();
+				getBattleWindow().getCanvas().setEnemyInfo();
 			}
 			getBattleWindow().getCanvas().initEnemyHPBar();
 			if(m_isWild)

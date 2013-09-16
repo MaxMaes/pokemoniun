@@ -1,4 +1,8 @@
-/Client/bin
-/Client/logs
-/PokemoniumUpdater/bin
-/Server/bin/org/pokenet/server
+#Folder ignores
+/bin
+/obj
+/updates
+
+#Filetypes and file ignores
+*.class
+thumbs.db

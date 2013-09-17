@@ -30,7 +30,7 @@
  </layer>
  <layer name="WalkBehind" width="45" height="85">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XsQkAIAwEwDiC7j+TIziLEwgSBEHvui8eUqT5CAAAgLVx+wAAAADY1JM92/cftUS0ks+8y28AAMB52Z0OAAAA8JIJrfWHTMQ7AAA=
+   H4sIAAAAAAAAC+3XOQqAQAwF0HgEvf+ZPIK96xm0FJdmGBiX9+AXgQRSpEkEAADAva70ArzGtGW+yHLoWc6jAAAAWbSJc37f/6iriKZKr/kutwEAAPml/um8U79l2GUsuw4AAAA8xgrl7yaPxDsAAA==
   </data>
  </layer>
 </map>

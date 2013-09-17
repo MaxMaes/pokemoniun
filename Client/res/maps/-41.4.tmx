@@ -2,7 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Spheal,10;Zubat,45;Golbat,20;Sealeo,5;Snorunt,20;"/>
-  <property name="dayPokemonLevels" value="26-32;26-32;32-32:32-32;25-25;"/>
+  <property name="dayPokemonLevels" value="26-32;26-32;32-32;32-32;25-25;"/>
   <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Spheal,10;Zubat,45;Golbat,20;Sealeo,5;Snorunt,20;"/>
   <property name="nightPokemonLevels" value="26-32;26-32;32-32;32-32;25-25;"/>

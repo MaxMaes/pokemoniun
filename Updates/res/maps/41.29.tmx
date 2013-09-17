@@ -38,12 +38,12 @@
    H4sIAAAAAAAAC+3XuwqAMBAEwBQ2/qf/X/kqxUKwSDAqJhJmINjGO5fFEAAAAIDWLH38UMeY2MdkJzyQyre81zNn7EPey5EPvpDq8vNZfVvFpHIt5zxx1Rct9PnQ1b7Bfee5H/ffn3LOGzl9rtO/FZvz3PjsY/+LLb4nAAAAwB9sKPwIwyA1AAA=
   </data>
  </layer>
- <layer name="LedgesRight" width="50" height="68">
+ <layer name="LedgesLeft" width="50" height="68">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3VsREAIAwDsZQ59h+YHdIEfNIEdvVVAAAAAG/qs70AAHakNDDlBwCMhHRQzwEAAACAH1yn4zhWIDUAAA==
   </data>
  </layer>
- <layer name="LedgesLeft" width="50" height="68">
+ <layer name="LedgesRight" width="50" height="68">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3VMREAMAgDQKYO+BeMixbov4JkyCUCAAAAYJaTrxMAt9g7AD/b8oNbegAAAAAAAH0VZ886jyA1AAA=
   </data>

@@ -19,12 +19,12 @@
  <tileset firstgid="3356" source="Buildings7.tsx"/>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAX0BEos5MmRaya6PCl2kOsecgA5dtEiLEcBZeD/aLiTBR5RWd1QAsPRT6NgZIHRNDwKRsEoGAVDCwAA1yEn5AAPAAA=
+   H4sIAAAAAAAAC2NgGAX0BEos5MmRaya6PCl2kOsecgA5dtEiLEcBZeD/aLiTBYgNt+EYvsPRT6NgZIGRnIZp7feRHLajYBSMAtoBAASAiUwADwAA
   </data>
  </layer>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UQQoAIQhFC+YUc7ZO30WmxRCIpH5tgln4wEWhPzWrlCRJ/kgH/Z5LX+/GoXpS3F0x/enn1ZfWkX2659HnRqF1rTRafQ3pczN6JNW0ykuKj1oUq6ZddnI7oW/NHV9b+p73v3pjaP7e98n1o//U9JXmjevzPD3nanejxaEz7NH3zAD1Q3qF5IXSlXO/+B+SJElOMABCHQ2+AA8AAA==
+   H4sIAAAAAAAAC+2U0QrAIAhFC/YV+7a+fj+yHkYgknmvEezBAz4YeqfOKiVJkj/ygHHvtfZ381A9K++umP6IY/UtP3Iuzxh9bRLZ10yj1c+QOTdnRlZPs7qs/KhF8XraZae2E/re3mnf02fu/+yOofWz91PrR9+pEWvtm9bXdTLfXf2bVR66w4w+swMyDpkVUhfDyfchSZLkBB0fmMs3AA8AAA==
   </data>
  </layer>
  <layer name="Walkable" width="24" height="40">
@@ -39,7 +39,7 @@
  </layer>
  <layer name="Water" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TwQ6AIAxDOfj/v6x34mpXnRnal+zEeCwFxjBGZ9+edWUK7Zlny7pXKjVLdh/qU9cYf8RX/Oxbjvqq/Cp33m/1/+juR3le+Zm76OCPejr4URaMBznf9ise1p8992wGV23OmeyN+TMHDdDXdAAPAAA=
+   H4sIAAAAAAAAC+2TSw7AIAhEXfT+V7b7JozD1A8SXsJKeBLE1opCpz9zXZ5ANd/evO6bQp0lW4fy1DPGb5HFz+6ylbfKr/Jnf1f/j+h+NM+Rn3mLCH4rJ4IfzYLxIOduv+Jh/Z47rR5O/K8soTLbVxQZeAHXLvWWAA8AAA==
   </data>
  </layer>
  <layer name="Collisions" width="24" height="40">

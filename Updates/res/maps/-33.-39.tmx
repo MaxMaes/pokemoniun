@@ -16,9 +16,10 @@
  <tileset firstgid="932" source="SinnohSet7.tsx"/>
  <tileset firstgid="2708" source="InteriorFloor 1.tsx"/>
  <tileset firstgid="3038" source="Caveset 2.tsx"/>
+ <tileset firstgid="4062" source="Buildings8.tsx"/>
  <layer name="Walkable" width="26" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC1vMxcCweBSP4lE8bDA6GLVnFI/iwYnJTdP0AgBk4HQqIAgAAA==
+   H4sIAAAAAAAAC1vMxcCweBSP4lE8bDA6GLVnFI/i4YXpBQAiYzq/IAgAAA==
   </data>
  </layer>
  <layer name="Walkable" width="26" height="20">
@@ -33,12 +34,12 @@
  </layer>
  <layer name="Collisions" width="26" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC1NmYmBQoTFWBeIQIMYFWlgYGFpZcMsTqy6MgD1bgHq3EmEPIXWE7KEWGCz2KJMY1+TaQ4pfwwjYE04He0B24EuTyPZcYWVguArE15DwDVbC9sDMx5cmke1hYWNgYAViNiTMwUbYHpj5akSGmwnQTFMgNkPCFkTYAwJqJKSDFKCZqUCchoQziLSHlHQwBWjmVCCehoRnEGkPKemAEKAkHbQC9bYRidspSAfUAoTSAbUAKEyJCZtOLPEI43dQEKbYAHo8Els30RsAAFbPETMgCAAA
+   H4sIAAAAAAAAC1NmYmBQoTFWBeIQIMYFnggyMDwVxC1PrLowAva8Aep9S4Q9hNQRsodaYLDYo0xiXJNrDyl+DSNgTzgd7AHZgS9NIttzhZWB4SoQX0PCN1gJ2wMzH1+aRLaHhY2BgRWI2ZAwBxthe2DmqxEZbiZAM02B2AwJWxBhDwiokZAOUoBmpgJxGhLOINIeUtLBFKCZU4F4GhKeQaQ9pKQDQoCSdNAK1NtGJG6nIB1QCxBKB9QCoDAlJmw6scQjjN9BQZhiA+jxSGzdRG8AABHEN5wgCAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="26" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA1CWBgYQlnwKCBRHamAnY/6Zo6CkQFolSYpMT+NDRWPAtqDwZgORgHpAD2cR8OdPgAAWeVNASAIAAA=
+   H4sIAAAAAAAAC2NgwA3uCDIw3BXEo4BEdaQCdj7qmzkKRgagVZqkxPw0NlQ8CmgPBmM6GAWkA/RwHg13+gAA8+CD8CAIAAA=
   </data>
  </layer>
 </map>

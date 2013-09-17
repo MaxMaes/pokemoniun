@@ -15,7 +15,6 @@ public class InitPokemonEvent implements MessageEvent
 		int i = Request.readInt();
 		String[] details = Request.readString().split(",");
 		GameClient.getInstance().getOurPlayer().setPokemon(i, details);
-		GameClient.getInstance().setReloadPokemon(true);
 		if(GameClient.getInstance().getOurPlayer().isBoxing())
 			GameClient.getInstance().getHUD().getBoxDialog().getTeamPanel().reloadPokemon();
 	}

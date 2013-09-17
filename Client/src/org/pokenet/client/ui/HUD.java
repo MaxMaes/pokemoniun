@@ -326,15 +326,16 @@ public class HUD extends DesktopArea
 
 	/**
 	 * functions for player popup
-	 * @param y 
-	 * @param x 
+	 * 
+	 * @param y
+	 * @param x
 	 */
 	public void showPlayerPopupDialog(String player, int x, int y)
 	{
 		if(playerPopupDialog != null)
 			removeChild(playerPopupDialog);
 		playerPopupDialog = new PlayerPopupDialog(this);
-		//add(playerPopupDialog);
+
 		playerPopupDialog.setPlayerName(player);
 		playerPopupDialog.showPopupAt(x, y);
 	}

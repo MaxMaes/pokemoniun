@@ -574,10 +574,16 @@
                 </theme>
             </theme>
             <theme name="requestdialog" ref="resizableframe_titled">
-                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>true</bool></param>
                 <param name="hasResizeHandle"><bool>false</bool></param>
                 <theme name="title" ref="title"/>
                 <theme name="label" ref="label"/>
+                <theme name="widget" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                    <theme name="requestlabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                </theme>
             </theme>
             <theme name="townmap" ref="resizableframe_titled">
                 <theme name="widget" ref="-defaults"/>

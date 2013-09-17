@@ -100,7 +100,7 @@ public class GameClient extends BasicGame
 	private boolean m_loadSurroundingMaps = false;
 	private DeferredResource m_nextResource;
 	private SoundManager m_soundPlayer;
-	private Image[] m_spriteImageArray = new Image[400];
+	private Image[] m_spriteImageArray = new Image[500];
 	private UserManager m_userManager;
 	private static Options options;
 	private final long startTime = System.currentTimeMillis();
@@ -362,7 +362,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess(): "Warning the Session was not closed";
+			assert channelFuture.isSuccess() : "Warning the Session was not closed";
 		}
 	}
 
@@ -969,7 +969,7 @@ public class GameClient extends BasicGame
 			 * the load bar only works when we don't make a new SpriteSheet ie.
 			 * ss = new SpriteSheet(temp, 41, 51); needs to be commented out in
 			 * order for the load bar to work. */
-			for(int i = -7; i < 385; i++)
+			for(int i = -7; i < 474; i++)
 			{
 				final String location = respath + "res/characters/" + i + ".png";
 				m_spriteImageArray[i + 7] = new Image(location);

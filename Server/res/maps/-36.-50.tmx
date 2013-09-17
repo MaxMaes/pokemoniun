@@ -12,32 +12,27 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal7.tsx"/>
- <tileset firstgid="2049" source="normal10.tsx"/>
- <layer name="Layer 6" width="20" height="28">
+ <tileset firstgid="1" source="Ruin Of Alph Set.tsx"/>
+ <tileset firstgid="267" source="Caveset 2.tsx"/>
+ <tileset firstgid="1291" source="Path2.tsx"/>
+ <layer name="Grass" width="20" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAtKAK9NAu2AUjIJRMNIBAPYrDDzACAAA
+   H4sIAAAAAAAAC2NgoD6oYKcOHjVv1LxR80bNGzVv1LxR84aPedQEANx3dpfACAAA
   </data>
  </layer>
  <layer name="Walkable" width="20" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBQMd+DKNNAuGAWjYBSMAuoCAK8RQ83ACAAA
-  </data>
- </layer>
- <layer name="Grass" width="20" height="28">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC5wZRrFo3gUDzZM7by5n3Xg/TSKR/EoHtkYAFZlqLzACAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMAtJACPNAu2AUjIJRMNIBAIFSTwLACAAA
   </data>
  </layer>
  <layer name="Collisions" width="20" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC6tkY2AQ5YTgXigdyIldDMRm5ULInYSKw8QqgWbNBGJlLurgmVDzqAVoad56JHFy2bRyHygsfyKZ+5PMOBqND+q4j5ywxxZ/9Ao/ogEjqt4RlZ4ZR9PzYE7Pg908asXvTiq6D2TWTSqaBzKL3LyKKw0BANRhpz7ACAAA
+   H4sIAAAAAAAAC9NlYGDQphIGAV0gtqMS1oViagFk85yRxMll08p9oLDUQRLXYiAvPmDmgcLSHsk8W4bR+CAGIMcHqRhb/CHHB6kYW/zRKz5IBaP5g7r+BYHR/DF488dwiA9C+YMaGOZGagIAyq/bacAIAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="20" height="28">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+WT0QkDIQyGfbmC934TdISb5Ca5SaQjdAAncYRO4BpFzMcFEQutgtAfJDGJL19+jflPPTrlI7Ssxrxu1z3lm83HSTwkT7P0gtSptbTbfLzEU3Ldi1KnNlIz7wOmhzAmh3mQPNWd7KDcX+ohmJ7C+L7mHObRXry92kFLnxg8l+/f/qoaD3jhaby7qUg/yAyq8YAXnsa7u4r0o/L6KM3sZ2fr/GvsuZf7C4qft3X+Nfb6rhUH76O3Zt5vb7mGL/ibeKqc0d5CvuEL/iaeKme0t5LeZqHRgMAIAAA=
+   H4sIAAAAAAAAC+WV3QqCUBCED/RCXfROlVl6XZl/L94O7Qebqd14Iw4M5O45IPM5lFJKZ/PRfDLn5qv5Zs7MF5+xZ1cO5pqhp/lufphrc2NuzZX55TP27PrBvE3f2i/0ew1StkV4FgMxgknMPvd96bvCz+bhvrLtwrMYiBFMYva173vfdX62HrzjlnjwjSvX2Am6oMzLkTniLuIbV66xE036MFHm/cgccTfqX6aH3fRubTzIGM31AF5wgmUW7pMxmusBvOAEy2rwjlvqh3JVnrEPsTMwmeoHZ5FyVZ5N+s1ZDGAy1Q/ORm2Jxxr+z5fSG9UBvRjACAAA
   </data>
  </layer>
 </map>

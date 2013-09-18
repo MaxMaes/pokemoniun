@@ -276,20 +276,27 @@ public class PokeStorageBoxFrame extends ResizableFrame
 	 */
 	public void loadImages()
 	{
-		for(int i = 0; i <= 29; i++)
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
-			m_buttons[i].setImage(null);
-			if(m_pokeNums[i] >= 0)
+			@Override
+			public void run()
 			{
-				int p = 0;
-				if(m_pokeNums[i] + 1 > 493)
-					p = m_pokeNums[i] - 3;
-				else
-					p = m_pokeNums[i] + 1;
+				for(int i = 0; i <= 29; i++)
+				{
+					m_buttons[i].setImage(null);
+					if(m_pokeNums[i] >= 0)
+					{
+						int p = 0;
+						if(m_pokeNums[i] + 1 > 493)
+							p = m_pokeNums[i] - 3;
+						else
+							p = m_pokeNums[i] + 1;
 
-				m_buttons[i].setImage(PokemonSpriteDatabase.getIcon(p));
+						m_buttons[i].setImage(PokemonSpriteDatabase.getIcon(p));
+					}
+				}
 			}
-		}
+		});
 	}
 
 	/**

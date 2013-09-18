@@ -161,7 +161,6 @@ public class PokedexDialog extends ResizableFrame
 		{
 			pokemonNameList[i] = new Label();
 			pokemonNameList[i].setTheme("label_small");
-			pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 67 + (22 * i));
 			pokemonCaughtIcons[i] = new Image(icon_caught);
 		}
 
@@ -183,7 +182,7 @@ public class PokedexDialog extends ResizableFrame
 			add(pokemonNameList[i]);
 			add(pokemonCaughtIcons[i]);
 		}
-		setDraggable(true);
+		setBackgroundDraggable(true);
 		setResizableAxis(ResizableAxis.NONE);
 		initialized = true;
 	}
@@ -319,9 +318,8 @@ public class PokedexDialog extends ResizableFrame
 		if(getPokemon(selection) < PokedexData.POKEMON_SEEN)
 		{
 			pokemonname.setText("???");
-			pokemonname.setPosition(getInnerX() + 178 - pokemonname.getWidth() / 2, getInnerY() + 75);
 			pokemontypes.setText("???");
-			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.getWidth() / 2, pokemonname.getY() + 17);
+
 			for(int i = 0; i < pokemonMoveLabels.length; i++)
 				removeChild(pokemonMoveLabels[i]);
 			for(int i = 0; i < loreLabels.length; i++)
@@ -721,6 +719,7 @@ public class PokedexDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
+		super.layout();
 		if(initialized)
 		{
 			down.setSize(29, 26);
@@ -741,11 +740,15 @@ public class PokedexDialog extends ResizableFrame
 			inc50.setSize(36, 14);
 			inc50.setPosition(inc10.getX(), inc10.getY() + inc10.getHeight() + 5);
 
-			tabname.setPosition(getInnerX() + 133 - tabname.computeTextWidth() / 2, left.getY() + 15);
+			tabname.adjustSize();
+			tabname.setPosition(getInnerX() + 133 - tabname.getWidth() / 2, left.getInnerY() + 5);
 
-			pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.computeTextWidth() / 2, pokemonname.getY() - 25);
-			pokemonname.setPosition(getInnerX() + 178 - pokemonname.computeTextWidth() / 2, getInnerY() + 75);
-			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.computeTextWidth() / 2, pokemonname.getY() + 17);
+			pokemonname.adjustSize();
+			pokemonname.setPosition(getInnerX() + 178 - pokemonname.getWidth() / 2, getInnerY() + 75);
+			pokemonnumber.adjustSize();
+			pokemonnumber.setPosition(getInnerX() + 178 - pokemonnumber.getWidth() / 2, pokemonname.getInnerY() - 25);
+			pokemontypes.adjustSize();
+			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.getWidth() / 2, pokemonname.getInnerY() + 17);
 
 			if(loreLabels != null)
 			{
@@ -798,6 +801,13 @@ public class PokedexDialog extends ResizableFrame
 			for(int i = 0; i < pokemonCaughtIcons.length; i++)
 			{
 				pokemonCaughtIcons[i].setPosition(getInnerX() + 299, getInnerY() + 60 + 22 * i);
+			}
+
+			for(int i = 0; i < 13; i++)
+			{
+				System.out.print(getInnerY());
+				pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 60 + 22 * i);
+				pokemonNameList[i].adjustSize();
 			}
 
 			setSize(519, 377);

@@ -3,7 +3,6 @@ package org.pokenet.client.ui.frames;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.PopupWindow;
@@ -26,7 +25,7 @@ public class PlayerPopupDialog extends ResizableFrame
 	 * 
 	 * @param player
 	 */
-	public PlayerPopupDialog( Widget root)
+	public PlayerPopupDialog(Widget root)
 	{
 		m_name = new Label("");
 		add(m_name);
@@ -136,11 +135,11 @@ public class PlayerPopupDialog extends ResizableFrame
 		m_whisper.setPosition(getX(), m_trade.getY() + m_trade.getHeight());
 		m_addFriend.setPosition(getX(), m_whisper.getY() + m_whisper.getHeight());
 		m_cancel.setPosition(getX(), m_addFriend.getY() + m_addFriend.getHeight());
-		//setSize(100, 150 + m_name.computeTextHeight());
+		setSize(86, 128 + m_name.computeTextHeight());
 		popup.adjustSize();
 	}
 
-	public void setPlayerName(String player) 
+	public void setPlayerName(String player)
 	{
 		m_name.setText(player);
 	}

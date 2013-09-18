@@ -198,7 +198,6 @@ public class BigBagDialog extends ResizableFrame
 			final int j = i;
 			// Starts the item buttons
 			ImageButton item = new ImageButton();
-			item.setSize(60, 60);
 			item.addCallback(new Runnable()
 			{
 				@Override
@@ -213,8 +212,6 @@ public class BigBagDialog extends ResizableFrame
 			add(item);
 			// Starts the item labels
 			Label stock = new Label();
-			stock.setSize(60, 40);
-
 			stock.setAlignment(Alignment.CENTER);
 			m_stockLabels.add(stock);
 			add(stock);
@@ -452,6 +449,7 @@ public class BigBagDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
+		super.layout();
 		for(int i = 0; i < m_categoryButtons.length; i++)
 		{
 			m_categoryButtons[i].setSize(40, 40);
@@ -468,13 +466,16 @@ public class BigBagDialog extends ResizableFrame
 		for(int i = 0; i < m_itemBtns.size(); i++)
 		{
 			Button btn = m_itemBtns.get(i);
+			btn.setSize(60, 60);
 			btn.setPosition(50 + 80 * i + getInnerX(), 95 + getInnerY());
 		}
 
-		for(int i = 0; i < m_stockLabels.size(); i++)
+		int idx = 0;
+		for(Label stockLabel : m_stockLabels)
 		{
-			Label btn = m_stockLabels.get(i);
-			btn.setPosition(50 + 80 * i + getInnerX(), 145 + getInnerY());
+			stockLabel.setSize(60, 40);
+			stockLabel.setPosition(50 + 80 * idx + getInnerX(), 145 + getInnerY());
+			idx++;
 		}
 		m_leftButton.setSize(20, 40);
 		m_leftButton.setPosition(15 + getInnerX(), 105 + getInnerY());
@@ -680,6 +681,7 @@ class ItemPopup extends Widget
 		m_cancel.setPosition(getInnerX() + 5, m_destroy.getInnerY() + 25);
 
 		// popup.adjustSize();
+
 	}
 
 	public void setItemUsedCallback(Runnable callback)

@@ -1,11 +1,8 @@
 package org.pokenet.client.ui.frames;
 
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.PokemonSpriteDatabase;
-import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.components.ImageButton;
@@ -279,7 +276,6 @@ public class PokeStorageBoxFrame extends ResizableFrame
 	 */
 	public void loadImages()
 	{
-		LoadingList.setDeferredLoading(true);
 		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
 			@Override
@@ -290,21 +286,17 @@ public class PokeStorageBoxFrame extends ResizableFrame
 					m_buttons[i].setImage(null);
 					if(m_pokeNums[i] >= 0)
 					{
-						m_buttons[i].setImage(FileLoader.loadImage(Pokemon.getIconPathByIndex(m_pokeNums[i] + 1)));
-						// System.out.println(m_pokeNums[i] + 1);
 						int p = 0;
 						if(m_pokeNums[i] + 1 > 493)
 							p = m_pokeNums[i] - 3;
 						else
 							p = m_pokeNums[i] + 1;
-						PokemonSpriteDatabase.getIcon(p);
+
+						m_buttons[i].setImage(PokemonSpriteDatabase.getIcon(p));
 					}
 				}
-				for(int j = 0; j < GameClient.getInstance().getOurPlayer().getPartyCount(); j++)
-					GameClient.getInstance().getOurPlayer().getPokemon()[j].getIcon();
 			}
 		});
-		LoadingList.setDeferredLoading(false);
 	}
 
 	/**

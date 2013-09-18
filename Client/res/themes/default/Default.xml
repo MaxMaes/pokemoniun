@@ -725,6 +725,15 @@
                     <param name="font"><font>pokefont</font></param>
                 </theme>
                 <theme name="listbox" ref="listbox"/>
+                <theme name="partydialog" ref="resizableframe">
+                    <theme name="button" ref="button"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                </theme>
+            
             </theme>
             <theme name="pokemonstoragebox" ref="resizableframe_titled">
                 <theme name="content" ref="-defaults">

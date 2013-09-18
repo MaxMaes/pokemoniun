@@ -1,5 +1,5 @@
 [npc]
-Move Relearner
+MoveRelearner_1-Black Sludge
 right
 141
 5

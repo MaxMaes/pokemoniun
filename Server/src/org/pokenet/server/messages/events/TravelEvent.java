@@ -398,6 +398,64 @@ public class TravelEvent implements MessageEvent
 					session.Send(message);
 				}
 			}
+			else if(travel.contains("Gateon Port"))
+			{
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 20000 && p.getBadgeCount() >= 17))
+				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 20000);
+						p.updateClientMoney();
+					}
+					p.setIsTaveling(false);
+					p.setX(1088);
+					p.setY(888);
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(10, 41), null);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+			else if(travel.contains("Pyrite Town"))
+			{
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 20000 && p.getBadgeCount() >= 17))
+				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 20000);
+						p.updateClientMoney();
+					}
+					p.setIsTaveling(false);
+					p.setX(736);
+					p.setY(1368);
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(21, 38), null);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+			else if(travel.contains("Phenac City"))
+			{
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 17500 && p.getBadgeCount() >= 17))
+				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 17500);
+						p.updateClientMoney();
+					}
+					p.setIsTaveling(false);
+					p.setX(960);
+					p.setY(1368);
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-36, -39), null);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+
 		}
 	}
 }

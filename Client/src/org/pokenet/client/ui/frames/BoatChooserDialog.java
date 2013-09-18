@@ -78,6 +78,10 @@ public class BoatChooserDialog extends ResizableFrame
 				{
 					txt = "at least 16 badges";
 				}
+				else if(choice.contains("Gateon"))
+				{
+					txt = "at least 17 badges";
+				}
 				else if(choice.contains("Canalave") || choice.contains("Snowpoint"))
 				{
 					txt = "at least 20 badges and trainer level 40";
@@ -132,6 +136,10 @@ public class BoatChooserDialog extends ResizableFrame
 		{
 			m_locations.addElement("Olivine City - $10k");
 		}
+		else
+		{
+			m_locations.addElement("Gateon Port - $20k");
+		}
 		if(!currentLocation.equalsIgnoreCase("slateport"))
 		{
 			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
@@ -146,6 +154,7 @@ public class BoatChooserDialog extends ResizableFrame
 		else
 		{
 			m_locations.addElement("Battlefrontier - canceled");
+			m_locations.addElement("Gateon Port - $20k");
 		}
 		if(!currentLocation.equalsIgnoreCase("lilycove"))
 		{
@@ -161,6 +170,7 @@ public class BoatChooserDialog extends ResizableFrame
 		else
 		{
 			m_locations.addElement("Battlefrontier - canceled");
+			m_locations.addElement("Gateon Port - $20k");
 		}
 		if(!currentLocation.equalsIgnoreCase("canalave"))
 		{

@@ -21,11 +21,13 @@ import org.pokenet.server.messages.events.GiveItemEvent;
 import org.pokenet.server.messages.events.LoginEvent;
 import org.pokenet.server.messages.events.LogoutRequestEvent;
 import org.pokenet.server.messages.events.MoveDownEvent;
+import org.pokenet.server.messages.events.MoveLearnRequestEvent;
 import org.pokenet.server.messages.events.MoveLeftEvent;
 import org.pokenet.server.messages.events.MoveRightEvent;
 import org.pokenet.server.messages.events.MoveUpEvent;
 import org.pokenet.server.messages.events.PartySwapEvent;
 import org.pokenet.server.messages.events.PlayerCommandEvent;
+import org.pokenet.server.messages.events.PokemonInfoRequestEvent;
 import org.pokenet.server.messages.events.PokemonSwitchEvent;
 import org.pokenet.server.messages.events.RegisterEvent;
 import org.pokenet.server.messages.events.ReleasePokemonEvent;
@@ -91,8 +93,8 @@ public class MessageHandler
 		messages.put(20, new ReleasePokemonEvent());
 		messages.put(21, new SwapPokemonBoxPartyEvent());
 		messages.put(22, new FinishBoxingEvent());
-		// messages.put(23, new ()); //TODO: summary pokemon in box
-		// messages.put(24, new ());
+		messages.put(23, new PokemonInfoRequestEvent()); // TODO: request pokemon info (can be all kinds of things. request a summary, info on stats, movesets, etc ...)
+		messages.put(24, new MoveLearnRequestEvent()); // only for movetutor/moverelearner
 		// messages.put(25, new ());
 		// messages.put(26, new ());
 		// messages.put(27, new ());

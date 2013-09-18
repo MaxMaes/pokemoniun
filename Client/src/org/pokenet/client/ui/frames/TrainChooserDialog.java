@@ -36,10 +36,14 @@ public class TrainChooserDialog extends ResizableFrame
 		if(travel.equalsIgnoreCase("kanto"))
 		{
 			m_locations.addElement("Goldenrod City - $10k");
+			m_locations.addElement("Phenac City - $17.5k");
+			m_locations.addElement("Pyrite Town - $20k");
 		}
 		else if(travel.equalsIgnoreCase("johto"))
 		{
 			m_locations.addElement("Saffron City - $10k");
+			m_locations.addElement("Phenac City - $15k");
+			m_locations.addElement("Pyrite Town - $17.5k");
 		}
 		else if(travel.equalsIgnoreCase("sinnoh"))
 		{
@@ -75,6 +79,7 @@ public class TrainChooserDialog extends ResizableFrame
 		setDraggable(true);
 		setVisible(true);
 		initUse();
+		add(pane);
 		// System.out.println("end dialog");
 	}
 
@@ -104,7 +109,7 @@ public class TrainChooserDialog extends ResizableFrame
 			{
 				choice = m_locations.getEntry(getChoice());
 				setVisible(false);
-				String txt = "Do you wish to go to " + choice + "? You need a trainer level of atleast 25.";
+				String txt = "Do you wish to go to " + choice + "?\nYou need a trainer level of atleast 25.\nBut for Pyrite Town and Phenac City you also need 17 badges.";
 				if(choice.contains("Snowpoint"))
 				{
 					txt = "Are you sure you want to go back to snowpoint?";

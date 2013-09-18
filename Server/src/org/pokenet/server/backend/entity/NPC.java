@@ -1325,6 +1325,35 @@ public class NPC extends Character
 				player.getSession().Send(message);
 				return;
 			}
+			// @author sadhi
+			/**
+			 * This NPC is the moverelearner.
+			 * For the price of what is behind the name: "MoveRelearner_[xx-ItemName]"
+			 * In which xx stands for the ammount and ItemName for the item he wants in return
+			 */
+			if(m_name.contains("MoveRelearner"))
+			{
+				player.setShopping(true);
+				ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
+				message.addString(m_name);
+				player.getSession().Send(message);
+				return;
+			}
+			// @author sadhi
+			/**
+			 * This NPC is the moveretutor.
+			 * He will teach the move that is behind his name: "MoveTutor_[Move]"
+			 * [move] can also be a number in this case he will teach more than one move.
+			 * check the code to see which number corresponds to which move.
+			 */
+			// if(m_name.contains("MoveTutor"))
+			// {
+			// player.setShopping(true);
+			// ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
+			// String tmp = m_name.split("_")[1].split("-")[1];
+			// player.getSession().Send(message);
+			// return;
+			// }
 			/* Box access */
 			if(m_isBox)
 			{

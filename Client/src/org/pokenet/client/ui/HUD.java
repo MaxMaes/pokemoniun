@@ -14,6 +14,7 @@ import org.pokenet.client.ui.frames.ChatDialog;
 import org.pokenet.client.ui.frames.FriendsListDialog;
 import org.pokenet.client.ui.frames.HelpWindow;
 import org.pokenet.client.ui.frames.MoveLearningDialog;
+import org.pokenet.client.ui.frames.MoveRelearnDialog;
 import org.pokenet.client.ui.frames.OptionsDialog;
 import org.pokenet.client.ui.frames.PartyInfoDialog;
 import org.pokenet.client.ui.frames.PlayerInfoDialog;
@@ -63,6 +64,7 @@ public class HUD extends DesktopArea
 	private SpriteChooserDialog spriteChooser;
 	private TradeDialog tradeDialog;
 	private PokeStorageBoxFrame boxDialog;
+	private MoveRelearnDialog relearnDialog;
 
 	public HUD()
 	{
@@ -326,15 +328,16 @@ public class HUD extends DesktopArea
 
 	/**
 	 * functions for player popup
-	 * @param y 
-	 * @param x 
+	 * 
+	 * @param y
+	 * @param x
 	 */
 	public void showPlayerPopupDialog(String player, int x, int y)
 	{
 		if(playerPopupDialog != null)
 			removeChild(playerPopupDialog);
 		playerPopupDialog = new PlayerPopupDialog(this);
-		//add(playerPopupDialog);
+		// add(playerPopupDialog);
 		playerPopupDialog.setPlayerName(player);
 		playerPopupDialog.showPopupAt(x, y);
 	}
@@ -923,5 +926,23 @@ public class HUD extends DesktopArea
 		{
 			return false;
 		}
+	}
+
+	public MoveRelearnDialog getRelearnDialog()
+	{
+		return relearnDialog;
+	}
+
+	public void setRelearnDialog(String price)
+	{
+		if(relearnDialog == null)
+			relearnDialog = new MoveRelearnDialog(price);
+		add(relearnDialog);
+	}
+
+	public void removeRelearnDialog()
+	{
+		removeChild(relearnDialog);
+		relearnDialog = null;
 	}
 }

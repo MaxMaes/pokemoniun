@@ -26,7 +26,7 @@
  <tileset firstgid="7390" source="Hoenn Set 5.tsx"/>
  <layer name="Walkable" width="80" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2aOwrDMAxAk7lr1/YUHXK03iU36tgTFREErnHin2xJth6YQoiJ/CJ/m2UxXB63tPve97ZxaCTVHWD+DsADltx6o/DMyBuXEm9uXY1sa/yeK59uvp05cPux36f3wnyVQoq/ECn9FFyFxkC8xuEN2ottdn/PPISu4/1X9UbHdzgL2N7P+l+446GmVb+Uli/a/I3MnjAX19Ay90LzSm7dWLliV7wGAfw29h4nNLvrQex9cPnLyROqflmCVH8pxBzE+i3FWjHmv9c+TNr6BaDch7T2yOmv137tbC6mWNu0jl9SfvtnM+hN8lgpHe3rRG5mdueOnzn/bQDaz0kpqJl/tO2HpdAq72Y5/5WSd1o9t8g7bnrGQOlPgjug5x5k5vm2FFsjl8Gdc9rfGXf83M+vhTt+7ufXwhH/dz0KPp9q/HgVfkNVA+f7p15TjOgv5xsfwzAMYy5+A9oDbwAyAAA=
+   H4sIAAAAAAAAC+2aOw7DIAxAk7lr1/YUHXK03iU36tgTVVaE5CISfgbb4CehShEo8GLApFkWA/O4pdV739v2QyOp7gDzdwAeXMltNwrPjLjBlHjDbTWyrfE6Vz5xvJ05wPPYn9N7YbxKIcVfiJR5Cq5Ca6C7xuENxuvGjH/PPISuu/pX7UbHdzgLbryf9b9w94eaVvNSWrxo8zcye8JeXEPL2AvtK7ltY+WKXXEOAvhj7L1OaHbXg9jz4PKXEydU87IEqf5SiDmIzVuKXDHmv9c5TFr+AlCeQ1p75PTX67x2thdT5Dat+y8hvsGfnwtib5LXSulozxO5mdkdXj9z/tsAtL8npaBm/9F2HpZCq7ib5f2vlLjT6rlF3HHTsw+U/iS4A3qeQWbeb0uxHLkM7pjT/sy4+899/1q4+899/1o4+v9dj+LuT7V+vAq/oaqB8/lT5xQj+sv5xscwDMOYix9N3R2zADIAAA==
   </data>
  </layer>
  <layer name="Walkable" width="80" height="40">

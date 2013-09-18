@@ -15,6 +15,7 @@
   <property name="yOffsetModifier" value="0"/>
  </properties>
  <tileset firstgid="1" source="Caveset 2.tsx"/>
+ <tileset firstgid="1025" source="Hoenn Set 15.tsx"/>
  <layer name="Walkable" width="54" height="45">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3YyQkAIBADwLXV/dh/ByLYgXjhBOafb5IlImHoOd0BAAAAmLNq3/sNAICX1As6AHvYKgD8qgH2t95l+CUAAA==
@@ -25,14 +26,14 @@
    H4sIAAAAAAAAC+3XbQqAIBBFUXOp7X8RESFE2ahNavPmXfBPhXb6IAqBMdxivA+EUF3MT+tyHwh5clk2ljyornSMlWrvk7X7RRddf8ijCzFkF6rNa9r/1t7vdmnOtD33H66xeXD1TnLt0fU8z4xvJV3tz+BfXdp3i67vk9am60g6drZLOj/LrhoTXfNc1zV7uPYx0pVb07LrfF5vXTkbXWNc53V7uUZkxdU6zyiXNs31aXFYckm20j70NjtfOXP4JQAA
   </data>
  </layer>
- <layer name="Walkable" width="54" height="45">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YvQ2EMAyG4UDNHrAJf2PQMdgdm1ADC2GkUNBAgU/2Re8jWRSRnC+VhUMA0rZIrVKbdRAAAAx1uV6vUnpViv28qOVNTYLvAgDgXwzZ/fmv/u/ZGwAAcNXGbyfVWwaJNPOMsbw48xTWQQBH2D3Cg2P2eJmD2jzNwdR8shC+UtPDfsOq35s7ZuUM2v2s7vBiBycz/EX4JQAA
-  </data>
- </layer>
  <layer name="Water" width="54" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZQQqAMAwF0eJN1fvfQboTpIW0IYmfGeiymidYBFsj2us6vivyXqN1D+Y4DdeIsuEaz7BjquKazVPFFO2KTNHl/V4omCyuyDxcmefCaoqmnqqrp+oiIiIi8k712x4XLly4cOHChSvTtbtf0ZUdLtv+7KxnQPXz4t1svpX/5pXyclXM8vz/YqrcAz7j4Eb4JQAA
+   H4sIAAAAAAAAC+2ZSQ7CMBAELQ7xheVTLO8AvsXyCLaPsHyHzi0elAgnkT0edUl9GI0CXRAspDhHyDB2k9+kfK+27Ft6bCNeI5Ubvdo7DHHS4tXVR4tTaq+UWPQa+3dhwSnGKyVjeOU8F/pi0anGqleNVS/JoXLuiJyQcxXOclcST/R9IW/kU4Wz3JXE1Ds3Q+bIwoez3JXEEn1XyBrZ+HCWu5LgfZi7aRxW70N+X7mb/s8FXa/IDbkjDzHLnSas/renF73oRS960Yte9MrpNfR6i165oVfc9bmJPQO0nxdNuvr1eW6uibG8NBLz+ZfipJkvQ3aHAfglAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="54" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YwQnCQBCF4Y2XXOxDO0mMZXizMLWAgCV4VttQ04IjGW8SBUdnsvwfPBIIzL49LdmUgLwdJSfJ2bsIAACOmondrJnMmhvOi6KSPdUZ7gsAgLFYFcPff/V/z73B/7Vln0/syz5j0EnPi+Yquenz1XunAYCIFvpsJEvPIsqyz1oTxbPP1LsIEAh3j4jgcfZEOQetRToHc7MpUtpKdm/uN7zmfbPGwbiD9TyvNaK4A7Lfuvf4JQAA
   </data>
  </layer>
  <layer name="Collisions" width="54" height="45">

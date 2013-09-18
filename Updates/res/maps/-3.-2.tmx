@@ -24,7 +24,7 @@
  <tileset firstgid="14329" source="Cliffs01.tsx"/>
  <layer name="Walkable" width="44" height="38">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2W2Q6CMBBFL4QEtwRRXxT//zuVpMRxtC1daAsZkpOUB5rDdHrbCkClABnXZFw6UL5rcq4ZuX1cvXN7CL+gAAcXV/rk9rHRv7korhHX4GDgGOgLi69P3R8aOktdQuvr4zrCc3aiF98oiO82fJsFfLEi3z2+s7eN7Bu7H+4Iz184+MJx7jn9u4P5/DPREl/dPD7np86X19uVjvjq8OkTnW8otB84Z/VPQ0G+fH1C67q0r6ne4pvPl58DNEtOBfrq9un4zW1BP5OHKddpbqf05d7Ud8ozGwMbPxP4Nop/9x96B6LvqXp0AoG+KZ11+5v2Jd9vqetJmXPvGPDp7ZyugiBsixfx9CIOIBoAAA==
+   H4sIAAAAAAAAC+2W3Q6CMAxGO0KCfwmi3uh8/+dUk2Fqsxal2ximFycBEsbhW9fNAYCL0DDPa6VZmXNDWNrnX3M2jBQMT06Bc8JxdwJ7pa/L4Htj6JXfyZUv7bMjg/mar/m+fdsMvvi+dt8tfPbeLrFv6nq4wvr77wbk/U+iQ77cOHP2T86X5v0rPfLlmJM756sF1wPlGP7JV+RL50eba25fKW/zXc6X7gO4lxwq9OXW6eudS0Y/yUPq67hvl/Sl3th37GdTeHJ9L+DbBmLnH3wGwvelahRnqvEt6cytb1yXdL2VzhPzzbnDR+bBMAxDywOZgQfwIBoAAA==
   </data>
  </layer>
  <layer name="Walkable" width="44" height="38">

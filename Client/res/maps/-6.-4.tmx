@@ -18,6 +18,7 @@
  <tileset firstgid="959" source="Cliffs02.tsx"/>
  <tileset firstgid="1071" source="Daycare Johto.tsx"/>
  <tileset firstgid="2002" source="Buildings4.tsx"/>
+ <tileset firstgid="2690" source="Poke Sprites 1.tsx"/>
  <layer name="Walkable" width="24" height="36">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2X2wqAIAxALQK7PHR7qv7/P1NQqKFzjkGEPpxHj8zNTVulVPtgMIxEJrCWwmrYiOzVj9Iz8pDj58RRot/nIUTIvxjOBDNx75DfxtskoMYp4cfilfDn5rf6cT9Wzx7N9B8qXfvwHnD6aIzOAc/zL344n7Xzw325hPrTJeyXPI/qL9svVZfV/yb2D7D9Bs4Hzj8AzgHsvSNRT9h750v/Df81RE2ADQAA
@@ -45,7 +46,7 @@
  </layer>
  <layer name="Collisions" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WTQrCMBCFo0LB41W9gVtPUesvKioqutGtrv3bezJfMcUyJs0kTUHBB4+hpjP9xoyp+4oQB3gvYxgI0WC6GbzzdPEInzIxQk6iqC5EF47hHtyHB/AQHtVf98TBZz6N9Hlp/bGsMUGcwjN5PUdcZOq78i9ljRXiGt7I6y3izgM/R7Hi3pb8TMd/xvpF+q55VqcqxA1rV8V6yqfjLyraP+UvoqSvbP8Xxf6Hhu/nRubfJN38cKTaXyrf80P1a/wh2V/f/DTfN3+abzp/itYv6/wx8dPfX55dzh9TNMnEb4rc+lx+W9ny26pXEj/3/avjf9Ty63Pfv3/+7+BvS5fFb1Pbld9GtvxZJf9rfPPbqgg/R67zz+3Hdf65/ejynjY4Ef6ADQAA
+   H4sIAAAAAAAAC+2Wy27CMBBFDUiRkPi5AH/QLV8B4SlaFQSIbui2XbDitefLuBFGtaZ2ZmwnEguudDVKnBkfP+JkV1PqG97pmCZKtYXuJH95rvgD/xqxj5xc/aZSAziDh/AIHsMTeNq8P5Ml//NppP096s90jTniO/yhrz8RF0b9UP6lrrFCXMMbfb1F/CqBX6LM8mxX33PxH9B+1L44+urVlTqj7WRpf/C5+GNFx0/5Y5SPyxz/0bL+KTM/Z7L/Obn2j0S29aUqe/9Qcfz7Vlx9H37al61+Sta37Pmn+UX8Jq9tnorqc+dPLH9V5w/HT9+/IoecP1zkxPFzUVpfyu8rX35fDSvil35/XfzXRnF96ff3xf8c/G/aVfH71A7l95Evv6n8v6Zsfl/F8EsUuv+l4wnd/9LxuPJuzkk49YANAAA=
   </data>
  </layer>
  <layer name="Walkable" width="24" height="36">
@@ -55,7 +56,7 @@
  </layer>
  <layer name="WalkBehind" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WPQ6AIAxGixv39BT+Ozu46BlMPKVdjAYRKRTFhJd8YbH6iNAUQE8hAUpMhakxDabFdJhe3hRpmATALI51Ffa1i7jWq6uJQfEcCd5c/k/vdSHP7J/18X8b3b7+5K8j+X9LKH+f++vyHU7/c18NzVP/pvTznZj8XYjJ3/Y8ce6fAoe/aY5I/m7+FGL055pDbaDMayox+PvA0ff/4G/6Hyb/DWiWN+SADQAA
+   H4sIAAAAAAAAC+2WwQ6CMAxAO25L+Ey/AlHw7IELfoOJMXyjPWBc5ujarcpIeEmzy7q+hdEUIExjAY4YLcYJ44zRYfQYF7uQFGA0ADfzWR+Gn3s33/n+SnH1PAeBt5Z/7NwUDhV/b47/vwnda0v+Idb2b+u8fMr/OZ891Tq1KPxaXCh/11fqHvt/Xd9Ud7eO5vtx++qvifVvST9/U5J/CiX5c9+T5v0laPhTc8Tun+YvoUR/rTmUg2Re8ynBPweNvr8Ff+p7UP4v3fh1U4ANAAA=
   </data>
  </layer>
 </map>

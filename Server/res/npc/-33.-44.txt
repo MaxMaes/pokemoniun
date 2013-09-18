@@ -12,6 +12,20 @@ false
 false
 false
 [/npc]
+[npc]
+Blackbelt Kiyo
+down
+367
+36
+8
+Hitmonchan,40,Hitmonlee,40
+1
+-1
+1
+false
+false
+false
+[/npc]
 [warp]
 17
 34

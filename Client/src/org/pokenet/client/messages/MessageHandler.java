@@ -128,6 +128,8 @@ public class MessageHandler
 		messages.put(97, new LoggedElsewhereEvent());
 		messages.put(98, new ItemCantUseEvent());
 		messages.put(99, new BattlefrontierEvent());
+		// messages.put(100, new ...Event()); //100 is used for server revision
+		messages.put(101, new KurtEvent());
 		/* TODO: Use commented numbers for future messages. */
 	}
 }

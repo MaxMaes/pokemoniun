@@ -101,7 +101,8 @@ public enum ClientPacket
 	LOGGED_ELSEWHERE(97),
 	CANT_USE_ITEM(98),
 	BATTLEFRONTIER_EVENT(99),
-	SERVER_REVISION(100);
+	SERVER_REVISION(100),
+	KURT(101);
 
 	private int code = -1;
 

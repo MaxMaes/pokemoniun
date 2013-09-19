@@ -336,9 +336,37 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void buyItem(int id, int q)
 	{
-		/* If the player isn't shopping, ignore this */
+		/* If the player isn't shopping, in a normal shop */
 		if(m_currentShop == null)
+		{
+			/* First, check if the player can afford this */
+			int price = GameServer.getServiceManager().getItemDatabase().getItem(id).getPrice();
+			if(m_money - q * price >= 0)
+			{
+				/* Finally, if the item is in stock, buy it */
+
+				m_money = m_money - q * price;
+				m_bag.addItem(id, q);
+				updateClientMoney();
+				/* Let player know he bought the item. */
+				ServerMessage message = new ServerMessage(ClientPacket.BOUGHT_ITEM);
+				message.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
+				getSession().Send(message);
+				/* Update player inventory. */
+				ServerMessage update = new ServerMessage(ClientPacket.UPDATE_ITEM_TOT);
+				update.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
+				update.addInt(q);
+				getSession().Send(update);
+
+			}
+			else
+			{
+				/* Return You have no money, fool! */
+				ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+				getSession().Send(message);
+			}
 			return;
+		}
 		if(m_bag.hasSpace(id))
 		{
 			/* First, check if the player can afford this */

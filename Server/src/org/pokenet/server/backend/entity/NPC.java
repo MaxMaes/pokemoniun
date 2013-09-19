@@ -1,6 +1,7 @@
 package org.pokenet.server.backend.entity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
@@ -1252,6 +1253,10 @@ public class NPC extends Character
 		{
 			/* If this NPC wasn't a trainer, handle other possibilities */
 			String speech = getSpeech();
+			if(m_name.equals("Kurt"))
+			{
+				speech = getKurtSpeech();
+			}
 			if(!speech.equalsIgnoreCase(""))
 			{
 				if(!player.isShopping())
@@ -1354,6 +1359,287 @@ public class NPC extends Character
 			// player.getSession().Send(message);
 			// return;
 			// }
+			/**
+			 * This is Kurt.
+			 * He will make a different pokeball each day for you if you bring him the correct apricorn.
+			 */
+			if(m_name.contains("Kurt"))
+			{
+				player.setShopping(true);
+				int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+				int pos = -1;
+				int quantity = 0;
+				switch(day)
+				{
+					case Calendar.MONDAY:
+						pos = player.getBag().containsItem(500);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("White Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Fast Ball");
+								message.addString("White Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.TUESDAY:
+						pos = player.getBag().containsItem(501);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Red Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Level Ball");
+								message.addString("Red Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.WEDNESDAY:
+						pos = player.getBag().containsItem(502);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Blue Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Lure Ball");
+								message.addString("Blue Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.THURSDAY:
+						pos = player.getBag().containsItem(503);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Black Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Heavy Ball");
+								message.addString("Black Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.FRIDAY:
+						pos = player.getBag().containsItem(504);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Pink Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Love Ball");
+								message.addString("Pink Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.SATURDAY:
+						pos = player.getBag().containsItem(505);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Green Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Friend Ball");
+								message.addString("Green Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+					case Calendar.SUNDAY:
+						player.getBag().containsItem(506);
+						if(pos == -1)
+						{
+							player.setShopping(false);
+							/* Return You don't have that item, fool! */
+							ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+							msg.addString("Yellow Apricorn");
+							player.getSession().Send(msg);
+						}
+						else
+						{
+							quantity = player.getBag().getItems().get(pos).getQuantity();
+							if(player.getMoney() >= 1000)
+							{
+								ServerMessage message = new ServerMessage(ClientPacket.KURT);
+								message.addString("Moon Ball");
+								message.addString("Yellow Apricorn");
+								if(player.getMoney() >= quantity * 1000)
+								{
+									message.addInt(quantity);
+								}
+								else
+								{
+									int m = (int) Math.ceil(player.getMoney() / 1000);
+									message.addInt(m);
+								}
+								player.getSession().Send(message);
+							}
+							else
+							{
+								/* Return You have no money, fool! */
+								ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+								player.getSession().Send(message);
+								player.setShopping(false);
+							}
+						}
+						break;
+				}
+				return;
+			}
 			/* Box access */
 			if(m_isBox)
 			{
@@ -1383,6 +1669,29 @@ public class NPC extends Character
 				}
 			}
 		}
+	}
+
+	private String getKurtSpeech()
+	{
+		int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		switch(day)
+		{
+			case Calendar.MONDAY:
+				return "0,2,3,10";
+			case Calendar.TUESDAY:
+				return "0,2,4,10";
+			case Calendar.WEDNESDAY:
+				return "0,2,5,10";
+			case Calendar.THURSDAY:
+				return "0,2,6,10";
+			case Calendar.FRIDAY:
+				return "0,2,7,10";
+			case Calendar.SATURDAY:
+				return "0,2,8,10";
+			case Calendar.SUNDAY:
+				return "0,2,9,10";
+		}
+		return "0";
 	}
 
 	/**

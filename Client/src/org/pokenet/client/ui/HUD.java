@@ -13,6 +13,7 @@ import org.pokenet.client.ui.frames.BoatChooserDialog;
 import org.pokenet.client.ui.frames.ChatDialog;
 import org.pokenet.client.ui.frames.FriendsListDialog;
 import org.pokenet.client.ui.frames.HelpWindow;
+import org.pokenet.client.ui.frames.KurtDialog;
 import org.pokenet.client.ui.frames.MoveLearningDialog;
 import org.pokenet.client.ui.frames.MoveRelearnDialog;
 import org.pokenet.client.ui.frames.OptionsDialog;
@@ -65,6 +66,7 @@ public class HUD extends DesktopArea
 	private TradeDialog tradeDialog;
 	private PokeStorageBoxFrame boxDialog;
 	private MoveRelearnDialog relearnDialog;
+	private KurtDialog kurtDialog;
 
 	public HUD()
 	{
@@ -944,5 +946,18 @@ public class HUD extends DesktopArea
 	{
 		removeChild(relearnDialog);
 		relearnDialog = null;
+	}
+
+	public void setKurtDialog(String pokeball, String item, int max)
+	{
+		if(kurtDialog == null)
+			kurtDialog = new KurtDialog(pokeball, item, max);
+		add(kurtDialog);
+	}
+
+	public void removeKurtDialog()
+	{
+		removeChild(kurtDialog);
+		kurtDialog = null;
 	}
 }

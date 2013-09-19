@@ -26,12 +26,4 @@ false
 false
 false
 [/npc]
-[warp]
-33
-5
-15
-21
--46
--43
-0
-[/warp]
+

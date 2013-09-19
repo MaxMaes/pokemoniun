@@ -24,7 +24,7 @@
  <tileset firstgid="5832" source="Sevii Island Set 2.tsx"/>
  <layer name="Walkable" width="30" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TwQ3DIAxFUSfIIsySGdqe2kzQjNJRc0pyQELEILDBVtWP9BTlQJ6/7fibc55gc/2gDuWE9ze9lFvLm9ag7bXK+2/ereDs4XVG3tK3c5RqHeXVmGHO2aMGTm/De3jW9l06z5o783RFMs/ae9/pimSXNL0crLyOsUcAAAAAAABocz94JDwVvK+Dd8I6uJYz64fwUiyDs+ZYO2Vuydozc0vWdO6c3GF/W7NK/Zyc3L7H/6gkJ+VNz6iMJWIvZ28laGeNveex8mo6rb0WbmuvN+ozvPDCC28tO6KlW7TQIAAA
+   H4sIAAAAAAAAC+2TwQ3CMAxFIyboIpmFGYATMAEdhVE5tT1EilInSuzYFtKP9FT1kD5/242XECLBL8yDOpQT3v/0Um4rb1mDtdcrr6e35tSer6Y3OHlb367RqlXLazHDmnNGDZzepvf07O27dJ49d67LGck8e+99lzOSXbL0cvDyBsYeAQAAAAAAYM1t517wMPA+d14Fq3ItR9YP4aV4K2etsU7KPJJ1ZuaRrOXcObnT/o5mlfo5Obl9z/9RSU7KWx6tjC1yL2dvJVhnzb3H8fJaOr29Hm5vb3TqM7zwwgtvLxv7RtSR0CAAAA==
   </data>
  </layer>
  <layer name="Walkable" width="30" height="70">
@@ -34,7 +34,7 @@
  </layer>
  <layer name="Water" width="30" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VUQ6CMAyGl+wAeDL1FbyC4wrqMZTzeQ8hgWTgtpaxtlH6JX0i8O1fO2YMPa/DvLjYk3fp5MwbWot61Vuat+BMKwonx37WT4kK4T8/Z56VZ+Aege4U/3mX4R2yumqbt62+92jag9j7UFaMN1Sd5w31Dspawptb6l3nbawxF7ttDdjyva53thleTNbaznP5ZyvXm6rJ52z8+xTeq+ecatlLLq8b96Dx9oLLu6zS3puQF+um8GLcVF6o15ReKDPlv1Iq8968qR4/iO/CUGbKrJLeWqC3qbnCeGNIeTFric0zNMtrwWQunRWbGfLmEvrW4L6PReVN+YeK9bY02DPH6eVE2suNpFcC9f63V1EU5Vf4ACgWqGvQIAAA
+   H4sIAAAAAAAAC+2VbQ6CMAyGl+wAeDL1L3gFxxXUYyjn8x5CAknBfZSxtlH6JP1F2LN33Ycx9LwO8+JiT96lkzOvby7qpect2GNFUeg49mf7FCkf8Ps58254et6R1JsCv3cZ3iGrq7Z52+p7jaY1CP2fyorx+qoDXl/vUllLeHNLveu8jTXmYrfNAVvQ63pnm+HFZK3tPBc8W7neWE0+Z8PjU3ivwDnVspdcXjeuQQPWgsu7rNLem5AX66bwYtxU3lSvKb2pzJR3pVTmvXljPX4Qv4W+zJRZJb21QG9j+wrjDSHlxcwltJ9Te3ktmMyls2Izp7y5+MYa3PexqLwx/1Ch3pYGe+Y4vZxIe7mR9Eqg3v/2Koqi/AofOBFA1tAgAAA=
   </data>
  </layer>
  <layer name="Grass" width="30" height="70">

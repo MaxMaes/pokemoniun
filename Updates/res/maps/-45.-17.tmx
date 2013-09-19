@@ -14,31 +14,25 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal7.tsx"/>
- <tileset firstgid="1025" source="normal9.tsx"/>
- <layer name="Walkable" width="49" height="40">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WQQrAIAwEfZfQ/3+rJy9Cg22tbrYzIHgJyZiAKUWL48YZif06Jw5xbDVwaB7ZHRz6MJpTCRw0wEEDHDRof3Nmh37PmHVWMrNuHJ4T1fFmvlbi0AdlHN4FBw1w0AAHDXDQoN97MuLWBweHHbPksAvjgMMsolrqxV3NAf7DCSPFLZmgHgAA
-  </data>
- </layer>
+ <tileset firstgid="1" source="Caveset 2.tsx"/>
  <layer name="Grass" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YXw6DIAzGe425k4xl2a7h03b/I2wv0kSSpgP/FBRK+ku+F6OlXypYC2D0xIPo6/Vj10rFXooXro9eblbOGrn5S+LRe4KP3LXomnu88Oe2xuP33Xasl1pLUo8tcVLxpB5agnsY66YjotRerIn2/JEe6nAF+VnYCnfQXQMEv2kD/NdDE45omKUNF5E2Yh6C+F6J9aUl+z0pSx5QdJ/k9DRHsuaB16J0r2oYZ9DD+6m9j0PMQxs8vV6g28Pb6wO6PdD36FI5Fyk0f429KELnReahLmHmpd2D1vljoIX5Y8lZcA1SueJZGeYPe/4Tz4b3zfysj81T1vwYxlFM3mUhg6AeAAA=
+   H4sIAAAAAAAAC+3XwQmAMBAAwWAd9l+nJegj4prMwH1zLNwnY7CC83g+b7/3xU4NGqo0NGho0NCgoWHVhhmjYb8GuLPCfWpo0NCgoUFDg4YGDfP3//FPoqHRwD4uoZo+JqAeAAA=
   </data>
  </layer>
  <layer name="Collisions" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZYQ7CIAxG8STjQLsKR/Bou4heRkkkmqYNBQp8El7SPyz7uufUFXWujftNX9Z5QXFujphxMfV415NZpz05uDypOIeLuJyZfvH48akch9PneVKaPClb01Pqkesp5SWHHN7ZOZRg+ZrQPCSH2rwWh9LqlVfrgMSqDl5YR2XF++CFdWS4a9U8k5BY8b2UKJkhW2bVGQ5pLq2Zj0c7oGeP6rMdyvr0rFasvieC+34+6fUFctyamj0tEtx9/KfnVmQ7YLAdMNgOGGwHDFZx8MzaKOJcY7EXnOlwLuKg/X/il/T7vXTuDIceuaPo1Wu0A+recDYrOFBeUoo4+KAeAAA=
+   H4sIAAAAAAAAC+2ZSw7DIAxEo5yrR+iKq+T+UhcVSoQwDPaYj8JIbPg8M6WGkByHrG+hLbZ/Trx48qSxb/EQzn+pKTTwrqQgPImNxJRi1GJKvFCY91MX0UOLmL9JypvJg5Zn8dBaEF7rPEttb1kHbUw2Lzc2zXt2TDZv9XXI5VHc3xgx0ZxEebn+0n6BnkloHKQ/24OGWWOMyIeW5y/tc17NA3omrOpB00+j7WE9D9rx6f7kVSwekBybfR0s+wRDHv+l7YEzB+v4nh6s+RwZSJ2XtoebgdR5aXu4GUidl9j3DybXEp/BWNFD+v6ytwfGPWp7sHtAv088Fd/fS2NHePDg9pJXrBFn3Gx3w9b5e7F7qZeHH7QBBBSgHgAA
   </data>
  </layer>
- <layer name="random" width="49" height="40">
+ <layer name="Walkable" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XSREAIAwEMPAvAim1hgeOAUoioNerWwq3afX0BPMiwQ67jN4mFtcb6QUAQG7+wLzkTAAA+INcxws6nJhSbqAeAAA=
+   H4sIAAAAAAAAC+3X2xGAIAxE0R0oRjvRnrATLFYoAEYFNTL3FLB5fCUSrAle2vzXXbSJqf/9oRmu7mZy0uz65bXUyu7sZkmZayG3965rtQAAAFB25ha0jltwXOHnP2YWB5gBAAAAdvHTAe85AChwZP+gHgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="49" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3MQQ0AAAgEoLN/CKuawL9uEIAE/ui6/QEAAAAAAAC7AQaJBxSgHgAA
+   H4sIAAAAAAAAC+3XOwrAIAwAUGmP6HF6eSkuiosOjVjeg2whH8QhKfGFfPUR0W9HzYjdWs89nzsz20o9oIr+94y8AQAAAJzvD/e9HfY5dW6AVwEnOChjoB4AAA==
   </data>
  </layer>
 </map>

@@ -23,7 +23,7 @@
  <tileset firstgid="2363" source="Fences01.tsx"/>
  <layer name="Walkable" width="48" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WXwQ7CIAxAm+17uPgpetPpQTdO6nf7GWJCY0W2UQoDmrzES8sDutkBfOPFoMbg+Cubo/7LsEKaT+tw/Ok+YhzcnNA7960V452yv2Jqqoh8DkMPcBZy6cPOJIfnzjAJ0f36+lL/u1njkYkn0z/0zt173Yp9B3BwoP6hZxlyLkvQZw9/h+Qdje/JQdo/MfiC468NN0uL/kP3W6tVf05ujf6lzp/OTpzn92p7fnT8sc7W+0h9l6VdJO7on2JuyQ3+f/r8xwRzS25wLvL555xnUs9FS98QtI9KzTtr+L5l8D1E+0jP7LfWmPNvJVr2b6l/Pj5vbwe87wASAAA=
+   H4sIAAAAAAAAC+2WQRLCIAxFM3AeNh5Fd1q70NqVeu4eoyzoTMsUTSakAe3iLSFvSIDvAMAFBgKuQLT8c9Ws1Z/ircmW/o0FuDJprbx/yvPgeTDp7ff6XP+nr/ES4k30x/Y87utWHA3AKWLujz1LzLlQ7iF23dn7XiI03h+uf++5B2r0b8xyr1r9tf6vf/W/hZnvDG+fUvhF/xy5RZrp/1zz7zLkFmmmXLTmL5lncueiT/M/nyOtvEOd/9QcpfpVKrv/7o9lBMWHnxoAEgAA
   </data>
  </layer>
  <layer name="Walkable" width="48" height="24">

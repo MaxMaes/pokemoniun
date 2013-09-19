@@ -14,22 +14,23 @@
  </properties>
  <tileset firstgid="1" source="normal9.tsx"/>
  <tileset firstgid="1025" source="normal7.tsx"/>
+ <tileset firstgid="2049" source="Caveset 2.tsx"/>
  <layer name="Walkable" width="10" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIA1MZ4LgGUBcjYSxqZkFxDvQ1KGrxaUGXR26fROZsavDZRa6OmLUIINeZuziAB086i1AAQAA
+   H4sIAAAAAAAAC1vHycCwbhQTxL3M2MUBKqyipEABAAA=
   </data>
  </layer>
  <layer name="Collisions" width="10" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC7vAzMBwAQuOZMIUywXij0zYcR6SvnNAGhcoYCJeHcwN1FIH8wex6jYA8VogjmKCyPVB+WuhciA1ABToPZNAAQAA
+   H4sIAAAAAAAAC+PjZGDgIxILA7EeDiyEpI4fiHEB3iGkzhiI33EwMBRB1ZdA+SBsBFUDALsOI2tAAQAA
+  </data>
+ </layer>
+ <layer name="Walkable" width="10" height="8">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGFzgMicDwxVOwuo+A9V8IUIdPhAE1B8MxCEEzCkCyhcDcQkWdQA6mnVKQAEAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="10" height="8">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWUAABNV8etQAEAAA==
-  </data>
- </layer>
- <layer name="random" width="10" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWUAABNV8etQAEAAA==
   </data>

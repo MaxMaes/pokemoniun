@@ -14,26 +14,25 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal7.tsx"/>
- <tileset firstgid="1025" source="normal1.tsx"/>
+ <tileset firstgid="1" source="Caveset 2.tsx"/>
  <layer name="Grass" width="25" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WT0Q2AIAxE+XIbNwAnse4/hpr4cTYUPCxEL7lEYttX4hnCGKWMvXty9VaPVVvr9ar12o9xjfFGDCOSey8fYGjOqfWwXE7wLFCH562BgZqn+znC3vq9V/aR0ZpfS94M/OY4788M3ZPLKjMfGVKwzmoLQ+fV0hMG8y8z+e7JYO7rNXsko6d2rsPkOJgIAAA=
-  </data>
- </layer>
- <layer name="Walkable" width="25" height="22">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGH5gP+NAu2AUjIJRMApGwSgY2UCOiTx9ABEupGWYCAAA
+   H4sIAAAAAAAAC1vHyMCwbhSPYjpiPjLwSLWDGPvpEVdDwQ58YT1qB347sGFaxvkoHsX4MAAC6wX7mAgAAA==
   </data>
  </layer>
  <layer name="Collisions" width="25" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC7VWgW3DMAwT+kcb35ktzSNt8kibS3pMbUzEOJVyM2AjQCRwJFOyJTujmd0FPyqvlQ9/MseOj7JfKofKubL4e+ONdKCFuTf7QnE/4JboLW672k8oHdgWsln9yX7t+0XkMQRbxMixbbYPMb6p8mzf68RAjEzOw4QPx6hyYXxWHn/Jk8cLQOORaFyS+N5hERq8l/+hgdriPflrjdgnWa3ffYxrHxjDd649pRFrPQPnqNZZaah9V3V1Jl/WQE0zSpIH1mowvR+wURqzk3spWyvOU2msQqP4eOxZ7o+2b5u9rytet6jBaPm0tZ6s3+d7a3cRY8iV74J41uFMa1D3BHMjH86j1+OxRtSZ3EMReUBjTnzU/MXynmjj2It4jqwdPzUPx4Q7FHPzXnP/FXu9IzJNvv/w3mxjPzCnHTwefP5D3079ZzwBiudkA5gIAAA=
+   H4sIAAAAAAAAC7VVQQ6DMAyDBwyk9R2AtH2Cr/Q67duML6yVGsmyHFqmYckXSOo6SdvQd90seE8cHIaTOWPiKjiJHFt7ScywWMPk6GWNSLEZUehYbAQNzrVvtwMfqGE6treF9uGB6/BM3DvtRdUQfViMgucFsSV+fuAOa9Q0bo11YYyQxxrxYg3syVUaql44T3P5jrNvCPR/adDw5gSBHlWdW32oudohFzVWocOzyxprr/the1YaijUfZzRig0YovarNVZ6/XLNHpR95/a3E/eMMjiLO88AxE82rR7znPQ32yjOi7uQjWG+UhreGWp/vXv7HvbB7RM24B9a1XDtTuL7ygm+Ep+m9K3weBvJSexdeRe99EKv2n/kFjJiNEpgIAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="22">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGH7gG+NAu2AUjCTgCcReQOxNpjwxIBOIs4A4m0z5UTAKYIAa6ZEQGE2PgxsEAevIYCAOoXFdWUym+QCcvp/LmAgAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="25" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC+Yz0hnC0fBKBgFo2AUjIJRMGQAAFNL48uYCAAA
+   H4sIAAAAAAAAC2NgoA/wZITQ1xgxxbCp9SSgDpdeQmZRA1Dbbmq7bzABevltOIchMWCgwpkSe+nhZkrKDlLVUkMfvYAXFc2iR5og1Ux8ZS8hs2idptHrNlLrqMGetqgBAH5OpW2YCAAA
   </data>
  </layer>
 </map>

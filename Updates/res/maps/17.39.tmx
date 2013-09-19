@@ -27,7 +27,7 @@
  <tileset firstgid="6796" source="SinnohInteriorSet1.tsx"/>
  <layer name="Walkable" width="50" height="129">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2aQW7CMBBF2aQr1mVDlz0Rp+zlOAO10kiVgsA23/b38J70lyR+8ThxhhwOADAr12WfGXH1+Pwdx6lgLPc8XFxKwKMtpXWVcPSoAQ8v8PACDy8ie8zoMsLjuKxRMsLja1kzK9u+6fsvAAAAsKemzwDwDOoKAECHur8wipn7C4n/PYaZifKMdvSI0EdN0BP2oqVH73UUwYO68iLC+mg9F1E8ehHZY0Yiz8c7eUTZt6s9FDXhUFeK+n5njx51xXzgcY/te6acnqOzx/Y9U07PsZWHwin1GnPvB6+e+5lDr7USxePRWFr/NoeS50ztWHpc/ygepeDh41A7JkePGvBYUezdFdfSYT7w0B0jSl05e/SuLTweH0Plkd5lc+pOdf5WHudMDxWtPEreaRWMXh8qoni0xPG/BYASoqxzPPaMvD857BUVRPFIqDxGP/eizAeM5eeDEEIIIYQQQgghhBAyKpdzXZTHKxnvDXBTORbIZAAA
+   H4sIAAAAAAAAC+2aS47CMBAF2WRWrGc2sOREnHIuxxkYK0RCSghuz7Pdbqqkt8Rxxe18mhwOADAqt2mdEfHq8f03jx/DXLY8vLhYwKMu1rpKePQoAQ9f4OELPHwR2WNElx4ex2mOkh4e52nOqCzPTZdHAAAAYE1JnwHgHdQVAIAOdX+hFyP3FxLPPYaRiXKP9ugRoY+aoCfsi5oerfdRBA/qyhcR9kfttYji0YrIHiMSeT0+ySPKc7vaQ1ETHupKUd+f7NGirlgPPLZYvmfK6Tl69li+Z8rpOdbyUDilXmPu9eC/x37n0GqvRPHYm0vt3+Zguc+UzqXF+Y/iYQUPPw6lc/LoUQIeM4pnd8W59LAeeOjGiFJXnj1a1xYe+2OoPNK7bE7dqY5fy+OU6aGiloflnVZB7/2hIopHTTz+twBgIco+x2NNz+uTh2dFBVE8EiqP3ve9KOuReFVflijH6pnWHr9fhBBCCCGEEEIIIYSQXrmeyqIczzLfOyp69onIZAAA
   </data>
  </layer>
  <layer name="Walkable" width="50" height="129">

@@ -23,7 +23,7 @@
  </layer>
  <layer name="Grass" width="18" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoB4QZKEMI5sjQAEeauagg4EyB5s+QRzixJqDrGagzcGV3oZqfA3W9IwNY1NLbXOoAQCJjEZGEAUAAA==
+   H4sIAAAAAAAAC2NgoB4QZKEMI5sjQAEeiuYIotEDbQ66eaSaI4hDDTa19DAHpgcZD4ZwpnZ8DZb0TEw6orY51AAAxjgiWRAFAAA=
   </data>
  </layer>
  <layer name="Walkable" width="18" height="18">
@@ -53,12 +53,12 @@
  </layer>
  <layer name="Collisions" width="18" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoA5gZGFguMTOwJAHxLlQmhicD6Uvs0PMAGEYmMdOvP0LkNSSaw7I/RepYA46IGTOew5UPFDmwPTJcTMwyAOxIhArceM2j5A5fkC9/kAcCMRBJJoDSg8w9euAetcD8UYg3oRkDii+LkAxvvQDU38PqPc+ED8E4kdo7ikgId7xhTMp6ZBa5uAD+Mw5jxR+hDC+fEEInOME2sWJKU6qOf+AZvzHYw41MABQ8/TyEAUAAA==
+   H4sIAAAAAAAAC2NgoA5gZGFguMTOwJAHxLlQmhicD6Uvs0PMAGEYmMdOvP0LkNSSaw7I/RepYA46IGTOOU4GhvOcCJpcc/4B9f7nRNCkmvOeA4LluBkY5IFYEYiVuBHixJoD84cfUK8/EAcCcRA3bv9hMweUHmD+WAfUux6INwLxJm6EOCi+LkAxvvQDc/89oN77QPwQiB+h+auAhHjHF1+kpEN88UWN9EzInPNI4UcI48sXhACx8U4I4ErXMHOogQEXiJNWEAUAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="18" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjABNs4IbgUTDygBYThJ7HycAwn3Ng3UJvAADj7FMyEAUAAA==
+   H4sIAAAAAAAAC2NgGAXkgnmcDAzzORH0UAfI/tjADcHo4kMZDLf4ohXQYoLQIzGcAJx5HHEQBQAA
   </data>
  </layer>
 </map>

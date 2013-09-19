@@ -27,7 +27,7 @@
  <tileset firstgid="7323" source="Deep Water.tsx"/>
  <layer name="Walkable" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Y2w3CMAwF0P7wwWMBVIkVuwD7sAObsA2KkIVxncSpnVfJlSwoFMjBTQo9nKfpcZlWuV0/dZ+/jy3zej9t3HvS0ubQmMki/27ixqNNLZO7hbhtqGX+3U6p3CZXW0ya4jxWJtejkAnbLCunKdan0iYLH/SJukqZIFtsvudrm3xjTjHR/WqaQuOSpiUTtcH4tlioS2rK3a/USE343FvK5DPCfXyLK7aegAn3qpbJZ0gxQX/2ZHKevZnonGrFRKMxwToxTMOU0xSaUzVNkhqmYerB1MIaMUx6U6xqmFxCv817NMX+b/Rior3Zw7HHmWioiXM9T+vX9WDyXT+H45NLLyao3k2cq3cTvtbCmXxp1eRzpZpKrYcppi39eh3jJmynweOUejgTZ8PreWy9CEV7TovZcGImcEnWC7y/halEQsch55ZcR2vFJCnsciWZX3SulUqKy8pnUblsnM+6fJ9rZdL6Lb+rN1Vc7DdEJQAA
+   H4sIAAAAAAAAC+3Y2w3CMAwF0P70g8cCqBIrdgH2YQc2YRtkIYvgOg8nTupArmShQoEc3BrofJqm+3na5Hp512353Lcu2/1KA69JqzSzMZNG/t3Erac0e5ngFgPbWOvyvS2p2iaokKlGcR4tE/QoZKplq2mK9am1ScOHfaKuViZMjs33+N4m35olJrrfnqbQulJjyURtuL4cC3Wlmmr3S5pUk/vd28qU6qb3xeYJmtxeWTJxFTJhfyyZuL5ITOD5NRM9p6yYaEpMOCeGaZhqmkLnVK+zfJiGyZLJwowYpnJTrPYwQUK/zXs0xf5v9GKivfmFY48z0aSYHsft83ow+a6f4/HJpRcTVu8mztW7yb3Wwpl8sWryuaSmVvNQYsrp1/OQP/tzvZyJs7nzPDYvSvsWMkFiHkzM5PYqNi/c/TVMLRI6Djl3ynU0K6aUcl1Q0vOrZSQuLZ9G1bJxPu3yva+WqdSv+Vm9ABTf/WZEJQAA
   </data>
  </layer>
  <layer name="Walkable" width="53" height="45">

@@ -14,9 +14,10 @@
  <tileset firstgid="1025" source="Cliffs01.tsx"/>
  <tileset firstgid="1255" source="Path0.tsx"/>
  <tileset firstgid="1551" source="various3.tsx"/>
+ <tileset firstgid="2087" source="normal17.tsx"/>
  <layer name="Walkable" width="50" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WQQrEMAhFu+gJcv8D9hjDLALiGP0xJspQQWhpoz6/0j73dT2v/41/7eS511+PdGrWO5VrlM7Q+xYQM4phJWcT2NDcO7TwcjUSb9cMnIjH58qTVzKr58iz0xzRcxXJMYqn9X2Fw8q7U4+RzZ6bzR/BgbB4zp3WY6dzrhm9EA5vj7xzSTlm9Nitiddmc1SaLXQuaN3t/uXw9CLKpX6O/jd63d0lPTQOr+6rOtB8TfDOwTVDY2bMlMaB/vdW5eBMlibZHHwvuBYSh1RvBgeva1aPqhwoCzctbjWO/kyrf7ceWk6e39KEcyD6nNKD1o5ynK4V5eEs1oxJOmbzSRyr38NsDn6NaFLFRzOF7Ep27RqDpE3lvR/tgbUrkmdzIDvNDf3OS4bUM2tInz/dkCkQ6BwAAA==
+   H4sIAAAAAAAAC+2WUQrEMAhE+9G//ev9r9R77DGWLgTCrDGjNTGUFYRCSZznKO352rbzn9987/bM1ox5xcocHm0j8gkMT+Kw8njnPCLrsJyp9R8Bd0YxeGrWHNbzkZzIYOVCP1hd0X5F3Ydz5akrRa/nzLvZHNFzFcnRuk/r+x2OXt2RfrTCes5aP4KDYfGcm+3HyEQui18Mh7dH3rmsOSx+jPbEG9YaK80WOxe17mP/5fD0Iiqlfrb+N4rukpIfGofX97s+1PUOIQsHesbemTFTGgf737sqBzL1PMnmwL1ALyQOSW8GB+qy+rEqB8uCod27Gkd5p+kf7YdWE+v3PEEOxp9ZftTaWY7ZWlkeZOnNmORjNp/Ecfd7mM2Bz4wnq2RrpphdydauMUjerLz3rT3o7YqU2RzMTmOw33kpGD3WYPr8AXd2Mf3oHAAA
   </data>
  </layer>
  <layer name="Grass" width="50" height="37">

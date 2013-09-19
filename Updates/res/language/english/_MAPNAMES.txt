@@ -73,6 +73,10 @@
 -2,-1,Route 30
 -2,-2,Route 31
 -2,-4,Mahogany Town
+-33,-42,Mt. Mortar
+-33,-43,Mt. Mortar
+-33,-44,Mt. Mortar
+-33,-45,Mt. Mortar
 -32,-46,Ice Path
 -32,-47,Ice Path
 -32,-48,Ice Path

@@ -166,7 +166,24 @@ false
 false
 false
 [/npc]
-
+[warp]
+7
+3
+10
+23
+-48
+-27
+0
+[/warp]
+[warp]
+11
+3
+38
+23
+-48
+-27
+0
+[/warp]
 
 
 

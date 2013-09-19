@@ -145,3 +145,4 @@ Granite Cave:rocktunnel
 Shop:shop
 Mt. Moon:rocktunnel
 Tanoby Ruins:ruinsofalph
+Mt. Mortar:rocktunnel

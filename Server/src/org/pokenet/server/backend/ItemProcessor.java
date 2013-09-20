@@ -35,7 +35,7 @@ public class ItemProcessor implements Runnable
 	/* The enum that handles Pokeball types */
 	public enum PokeBall
 	{
-		CHERISHBALL, DIVEBALL, DUSKBALL, FASTBALL, FRIENDBALL, GREATBALL, HEALBALL, HEAVYBALL, LEVELBALL, LOVEBALL, LUREBALL, LUXURY, MASTERBALL, MOONBALL, NESTBALL, NETBALL, PARKBALL, POKEBALL, PREMIERBALL, QUICKBALL, REPEATBALL, SAFARIBALL, TIMERBALL, ULTRABALL,
+		CHERISHBALL, DIVEBALL, DUSKBALL, FASTBALL, FRIENDBALL, GREATBALL, HEALBALL, HEAVYBALL, LEVELBALL, LOVEBALL, LUREBALL, MASTERBALL, MOONBALL, NESTBALL, NETBALL, PARKBALL, POKEBALL, PREMIERBALL, QUICKBALL, REPEATBALL, SAFARIBALL, TIMERBALL, ULTRABALL, LUXURYBALL,
 	};
 
 	private final Player m_player;
@@ -504,7 +504,7 @@ public class ItemProcessor implements Runnable
 						returnValue = processBallUsage(player, PokeBall.LOVEBALL);
 						break;
 					case ItemID.LUXURY_BALL:
-						returnValue = processBallUsage(player, PokeBall.LUXURY);
+						returnValue = processBallUsage(player, PokeBall.LUXURYBALL);
 						break;
 					case ItemID.PREMIER_BALL:
 						returnValue = processBallUsage(player, PokeBall.PREMIERBALL);

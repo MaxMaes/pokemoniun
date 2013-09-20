@@ -98,7 +98,6 @@ public class GameClient extends BasicGame
 	private Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private volatile static GameClient m_instance;
 	private String m_language = Language.ENGLISH;
-	private Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 	private Image m_loadImage; // Made these static to prevent memory leak.
 	private boolean m_loadSurroundingMaps = false;
 	private DeferredResource m_nextResource;
@@ -393,7 +392,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess(): "Warning the Session was not closed";
+			assert channelFuture.isSuccess() : "Warning the Session was not closed";
 		}
 	}
 
@@ -866,9 +865,6 @@ public class GameClient extends BasicGame
 
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
-		m_loadBarLeft = new Image("res/ui/loadbar/left.png");
-		m_loadBarRight = new Image("res/ui/loadbar/right.png");
-		m_loadBarMiddle = new Image("res/ui/loadbar/middle.png");
 		graphics = gc.getGraphics();
 
 		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() /
@@ -1035,30 +1031,38 @@ public class GameClient extends BasicGame
 	}
 
 	/** Creates a message Box */
-	public void showMessageDialog(String message)
+	public void showMessageDialog(final String message)
 	{
-		if(!root.getMessageDialog().isVisible())
+		// Do this every time because it will mostly be called by events send from Netty and this makes it Gui Thread..
+		gui.invokeLater(new Runnable()
 		{
-			root.showMessageDialog(message, new Runnable()
+			@Override
+			public void run()
 			{
-				@Override
-				public void run()
+				if(!root.getMessageDialog().isVisible())
 				{
-					root.hideMessageDialog();
+					root.showMessageDialog(message, new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							root.hideMessageDialog();
+						}
+					});
 				}
-			});
-		}
-		else
-		{
-			root.getMessageDialog().queue(message, new Runnable()
-			{
-				@Override
-				public void run()
+				else
 				{
-					root.hideMessageDialog();
+					root.getMessageDialog().queue(message, new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							root.hideMessageDialog();
+						}
+					});
 				}
-			});
-		}
+			}
+		});
 	}
 
 	/** Accepts the mouse input */
@@ -1182,32 +1186,10 @@ public class GameClient extends BasicGame
 	{
 		g.setColor(Color.white);
 
-		int total = LoadingList.get().getTotalResources();
-		int maxWidth = gc.getWidth() - 20;
-		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
-
 		if(!m_started)
 		{
-			/* float bar = 0;
-			 * if(m_nextResource != null)
-			 * {
-			 * g.drawImage(m_loadImage, 0, 0);
-			 * g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
-			 * bar = loaded / (float) total;
-			 * g.drawImage(m_loadBarLeft, 13, gc.getHeight() - 120);
-			 * g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
-			 * m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
-			 * g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
-			 * g.drawString("Loading,  please wait ... ", 10, gc.getHeight() - 90); */
 			if(LoadingList.get().getRemainingResources() < 1)
 				m_started = true;
-			/* }
-			 * // g.drawString("Loading: " + m_nextResource.getDescription(), 10, gc.getHeight() - 90);
-			 * // non-imagy loading bar
-			 * g.setColor(Color.red);
-			 * g.setAntiAlias(true);
-			 * g.fillRoundRect(15, gc.getHeight() - 120, bar*(maxWidth - 10),
-			 * 20, 10); */
 		}
 		else
 		{

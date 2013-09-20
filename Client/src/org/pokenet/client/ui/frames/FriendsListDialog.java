@@ -21,7 +21,6 @@ public class FriendsListDialog extends ResizableFrame
 	private List<String> m_friends = new ArrayList<String>();
 	private int m_index;
 	private List<String> m_online = new ArrayList<String>();
-	private PopUp m_popup;
 	private Label[] m_shownFriends = new Label[10];
 	private Button m_up, m_down;
 
@@ -129,7 +128,6 @@ public class FriendsListDialog extends ResizableFrame
 			m_down.setEnabled(true);
 		for(int i = 0; i < m_shownFriends.length; i++)
 		{
-			final int j = i;
 			if(m_shownFriends[i] != null)
 			{
 				removeChild(m_shownFriends[i]);

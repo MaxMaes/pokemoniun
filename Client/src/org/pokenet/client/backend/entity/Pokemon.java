@@ -32,7 +32,7 @@ public class Pokemon
 
 	private Enums.Pokenum m_species;
 	// load sprite and icon
-	private Image m_sprite;
+	private Image m_frontSprite;
 	private int m_spriteNum;
 	// load trainer data
 	private int m_trainerID;
@@ -200,13 +200,13 @@ public class Pokemon
 	 * 
 	 * @return
 	 */
-	public Image getSprite()
+	public Image getFrontSprite()
 	{
-		if(m_sprite == null)
+		if(m_frontSprite == null)
 		{
-			setSprite();
+			setFrontSprite();
 		}
-		return m_sprite;
+		return m_frontSprite;
 	}
 
 	/**
@@ -469,15 +469,15 @@ public class Pokemon
 	/**
 	 * Loads the sprite
 	 */
-	private void setSprite()
+	private void setFrontSprite()
 	{
 		if(isShiny())
 		{
-			m_sprite = PokemonSpriteDatabase.getShineyBack(m_gender, m_spriteNum);
+			m_frontSprite = PokemonSpriteDatabase.getShineyFront(m_gender, m_spriteNum);
 		}
 		else
 		{
-			m_sprite = PokemonSpriteDatabase.getNormalBack(m_gender, m_spriteNum);
+			m_frontSprite = PokemonSpriteDatabase.getNormalFront(m_gender, m_spriteNum);
 		}
 	}
 }

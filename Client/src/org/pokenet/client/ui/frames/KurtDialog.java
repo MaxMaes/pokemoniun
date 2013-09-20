@@ -19,19 +19,26 @@ import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 public class KurtDialog extends ResizableFrame
 {
 	private String pokeball, item;
-	private int max, quantity;
+	private int max, quantity, price;
 	private TextArea dialogText;
 	private SimpleTextAreaModel textModel;
 	// private Button
 	private Widget pane;
 	private Button buy1, buy5, buy10, buyMax, cancel;
 
-	public KurtDialog(String pokeball, String item, int max)
+	/**
+	 * @param pokeball. the pokeball you get if you pay
+	 * @param item. the name of the apricorn required
+	 * @param max. max represends the maximum ammount you can buy.
+	 * @param price. the price of one pokeball
+	 */
+	public KurtDialog(String pokeball, String item, int max, int price)
 	{
 		setTheme("chooserDialog");
 		this.pokeball = pokeball;
 		this.item = item;
 		this.max = max;
+		this.price = price;
 		quantity = 0;
 		initUse();
 		setTitle("Please choose how many you want to buy");
@@ -40,7 +47,6 @@ public class KurtDialog extends ResizableFrame
 		setDraggable(true);
 		// setVisible(false);
 		add(pane);
-		layout();
 	}
 
 	private void initUse()
@@ -48,7 +54,7 @@ public class KurtDialog extends ResizableFrame
 		pane = new Widget();
 		pane.setTheme("content");
 
-		String text = "1 " + pokeball + " = $1000 + 1 " + item + "\nMax => " + max + " " + pokeball + "s = $" + (max * 1000) + " " + max + " " + item + "s.";
+		String text = "1 " + pokeball + " = $" + price + " + 1 " + item + "\nMax => " + max + " " + pokeball + "s = $" + (max * price) + " " + max + " " + item + "s.";
 		textModel = new SimpleTextAreaModel(text);
 		dialogText = new TextArea(textModel);
 		pane.add(dialogText);

@@ -1,6 +1,7 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.ui.components.Image;
@@ -12,9 +13,11 @@ public class PokemonInfoDialog extends ResizableFrame
 	private Label data[] = new Label[24];
 	private Image icon;
 	private Label labels[] = new Label[24];
+	private int index;
 
-	public PokemonInfoDialog(OurPokemon poke)
+	public PokemonInfoDialog(OurPokemon poke, int idx)
 	{
+		index = idx;
 		initGUI(poke);
 	}
 
@@ -123,11 +126,20 @@ public class PokemonInfoDialog extends ResizableFrame
 				data[23].setText("-");
 			}
 
-			icon = new Image(poke.getSprite());
+			icon = new Image(poke.getFrontSprite());
 			add(icon);
 
 			setVisible(true);
 			setTitle(poke.getName());
+			addCloseCallback(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					GameClient.getInstance().getHUD().removePokemonInfoDialog(index);
+				}
+
+			});
 		}
 		catch(Exception e)
 		{

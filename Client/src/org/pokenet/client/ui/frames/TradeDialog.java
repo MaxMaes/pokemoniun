@@ -63,7 +63,7 @@ public class TradeDialog extends ResizableFrame
 				OurPokemon tempPoke = new OurPokemon().initTradePokemon(data);
 
 				// Create a pokemon information panel with stats for informed decisions during trade
-				m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke);
+				m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke, 6);
 				m_theirPokes[index].setTooltipContent(m_theirPokeInfo[index]);
 				// Commented because line above should do the same, to be tested /*m_theirPokes[index].getModel().addStateCallback(new Runnable(){@Override public void run(){if(m_theirPokes[index].getModel().isHover()){m_theirPokeInfo[j].setVisible(true);} else{m_theirPokeInfo[j].setVisible(false);}}});*/
 				add(m_theirPokes[index]);

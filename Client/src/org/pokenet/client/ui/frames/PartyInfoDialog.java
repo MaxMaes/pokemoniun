@@ -9,7 +9,9 @@ import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.components.Image;
 import org.pokenet.client.ui.components.ProgressBar;
 import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.CallbackWithReason;
 import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.Label.CallbackReason;
 import de.matthiasmann.twl.Widget;
 
 /**
@@ -80,6 +82,20 @@ public class PartyInfoDialog extends Widget
 				m_container[i].add(m_hpBar[i]);
 				m_container[i].add(m_pokeIcon[i]);
 				m_container[i].add(m_pokeName[i]);
+				final int p = i;
+				m_pokeName[i].addCallback(new CallbackWithReason<Label.CallbackReason>()
+				{
+
+					@Override
+					public void callback(CallbackReason arg0)
+					{
+						if(arg0 == CallbackReason.CLICK)
+						{
+							GameClient.getInstance().getHUD().showPokemonInfoDialogs(p, m_pokes[p]);
+						}
+
+					}
+				});
 				m_container[i].add(m_level[i]);
 				m_container[i].add(m_hp[i]);
 				m_hp[i].setSize(72, 5);
@@ -107,7 +123,7 @@ public class PartyInfoDialog extends Widget
 					m_switchUp[i].setSize(16, 16);
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != pokemonCount-1)
+				if(i != pokemonCount - 1)
 				{
 					m_switchDown[i] = new Button();
 					m_switchDown[i].setTheme("arrow_down");
@@ -243,7 +259,7 @@ public class PartyInfoDialog extends Widget
 					m_hp[i].setVisible(true);
 					if(i != 0)
 						m_switchUp[i].setVisible(true);
-					if(i != pokemonCount-1)
+					if(i != pokemonCount - 1)
 						m_switchDown[i].setVisible(true);
 				}
 				else

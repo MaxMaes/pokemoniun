@@ -4,6 +4,7 @@ import java.util.HashMap;
 import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
+import org.pokenet.client.backend.entity.OurPokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.ui.frames.BattleBag;
@@ -22,6 +23,7 @@ import org.pokenet.client.ui.frames.PlayerInfoDialog;
 import org.pokenet.client.ui.frames.PlayerPopupDialog;
 import org.pokenet.client.ui.frames.PokeStorageBoxFrame;
 import org.pokenet.client.ui.frames.PokedexDialog;
+import org.pokenet.client.ui.frames.PokemonInfoDialog;
 import org.pokenet.client.ui.frames.RequestDialog;
 import org.pokenet.client.ui.frames.SpriteChooserDialog;
 import org.pokenet.client.ui.frames.TopBar;
@@ -67,6 +69,7 @@ public class HUD extends DesktopArea
 	private PokeStorageBoxFrame boxDialog;
 	private MoveRelearnDialog relearnDialog;
 	private KurtDialog kurtDialog;
+	private PokemonInfoDialog pokemonInfoDialogs[] = new PokemonInfoDialog[7];
 
 	public HUD()
 	{
@@ -935,7 +938,7 @@ public class HUD extends DesktopArea
 		return relearnDialog;
 	}
 
-	public void setRelearnDialog(String price)
+	public void showRelearnDialog(String price)
 	{
 		if(relearnDialog == null)
 			relearnDialog = new MoveRelearnDialog(price);
@@ -948,10 +951,10 @@ public class HUD extends DesktopArea
 		relearnDialog = null;
 	}
 
-	public void setKurtDialog(String pokeball, String item, int max)
+	public void showKurtDialog(String pokeball, String item, int max, int price)
 	{
 		if(kurtDialog == null)
-			kurtDialog = new KurtDialog(pokeball, item, max);
+			kurtDialog = new KurtDialog(pokeball, item, max, price);
 		add(kurtDialog);
 	}
 
@@ -959,5 +962,31 @@ public class HUD extends DesktopArea
 	{
 		removeChild(kurtDialog);
 		kurtDialog = null;
+	}
+
+	/**
+	 * @return the pokemonInfoDialogs
+	 */
+	public PokemonInfoDialog[] getPokemonInfoDialogs()
+	{
+		return pokemonInfoDialogs;
+	}
+
+	/**
+	 * @param i, the index of the party pokemon
+	 */
+	public void showPokemonInfoDialogs(int i, OurPokemon p)
+	{
+		if(pokemonInfoDialogs[i] == null)
+		{
+			this.pokemonInfoDialogs[i] = new PokemonInfoDialog(p, i);
+			add(pokemonInfoDialogs[i]);
+		}
+	}
+
+	public void removePokemonInfoDialog(int i)
+	{
+		removeChild(pokemonInfoDialogs[i]);
+		pokemonInfoDialogs[i] = null;
 	}
 }

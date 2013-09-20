@@ -16,20 +16,7 @@ public class MoveTutorEvent implements MessageEvent
 		String name = s.split("_")[0];
 		if(name.equals("MoveRelearner"))
 		{
-			// String price = s.split("_")[1];
-			// !!!!!!!!!!!!!!!!!!!!!THIS IS ILLIGAL SADHI!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// MoveRelearnDialog dialog = new MoveRelearnDialog(s.split("_")[1]); //
-			GameClient.getInstance().getHUD().setRelearnDialog(s.split("_")[1]); //
-			// GameClient.getInstance().getHUD().add(dialog); //
-			// !!!!!!!!!!!!!!!!!!!!!THIS IS ILLIGAL SADHI!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// ik fix dat nog wel
-			// maar daar gaat het nu niet over
-			// echt wel/
-
-			// gelijk goed implementeren boy
-			// nu?
-			// ja
-			// -_- ...
+			GameClient.getInstance().getHUD().showRelearnDialog(s.split("_")[1]);
 		}
 		else if(name.equals("MoveTutor"))
 		{

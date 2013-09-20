@@ -47,6 +47,7 @@ public class MoveRelearnDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
+		super.layout();
 		if(l == 0)
 		{
 			setSize(250, 230);
@@ -72,14 +73,19 @@ public class MoveRelearnDialog extends ResizableFrame
 		}
 	}
 
-	public void initUse(SimpleChangableListModel<String> movelist)
+	public void initUse(String movelist)
 	{
 		l = 1;
 		dialog.setVisible(false);
 		removeChild(dialog);
 		pane = new Widget();
 		pane.setTheme("content");
-		m_moves = movelist;
+		for(String s : movelist.split(", "))
+		{
+			if(s.equals("/END"))
+				break;
+			m_moves.addElement(s);
+		}
 		use = new Button("Learn!");
 		use.setTheme("button");
 		pane.add(use);
@@ -215,9 +221,5 @@ class PartyDialog extends Widget
 		}
 
 		setSize(110, GameClient.getInstance().getOurPlayer().getPartyCount() * 25 + 20);
-	}
-
-	public void setItemUsedCallback(Runnable callback)
-	{
 	}
 }

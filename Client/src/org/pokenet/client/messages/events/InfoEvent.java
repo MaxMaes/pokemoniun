@@ -5,7 +5,6 @@ import org.pokenet.client.Session;
 import org.pokenet.client.messages.MessageEvent;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
-import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 public class InfoEvent implements MessageEvent
 {
@@ -17,15 +16,7 @@ public class InfoEvent implements MessageEvent
 		switch(name)
 		{
 			case "MoveRelearner":
-				String moves = Request.readString();
-				SimpleChangableListModel<String> m_moves = new SimpleChangableListModel<>();
-				for(String s : moves.split(", "))
-				{
-					if(s.equals("/END"))
-						break;
-					m_moves.addElement(s);
-				}
-				GameClient.getInstance().getHUD().getRelearnDialog().initUse(m_moves);
+				GameClient.getInstance().getHUD().getRelearnDialog().initUse(Request.readString());
 				break;
 			default:
 				break;

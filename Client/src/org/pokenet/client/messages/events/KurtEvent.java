@@ -14,7 +14,9 @@ public class KurtEvent implements MessageEvent
 	{
 		String pokeball = Request.readString();
 		String item = Request.readString();
+		// max represents the maximum number of items you can buy
 		int max = Request.readInt();
-		GameClient.getInstance().getHUD().setKurtDialog(pokeball, item, max);
+		int price = Request.readInt();
+		GameClient.getInstance().getHUD().showKurtDialog(pokeball, item, max, price);
 	}
 }

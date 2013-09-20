@@ -1,7 +1,7 @@
 [npc]
 NPC
 left
-45
+351
 23
 21
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Megan
 left
-55
+267
 40
 16
 Bulbasaur,32,Ivysaur,32,Venusaur,32
@@ -43,7 +43,7 @@ false
 [npc]
 Cooltrainer Blake
 up
-81
+319
 51
 18
 Magneton,33,Quagsire,31,Exeggcute,31
@@ -57,7 +57,7 @@ false
 [npc]
 Cooltrainer Brian
 right
-81
+319
 60
 16
 Sandslash,35
@@ -71,7 +71,7 @@ false
 [npc]
 Psychic Gilbert
 left
-83
+320
 67
 18
 Starmie,30,Girafarig,34,Exeggcute,30
@@ -85,7 +85,7 @@ false
 [npc]
 Cooltrainer Reena
 up
-55
+267
 74
 21
 Starmie,31,Starmie,31,Nidoqueen,33
@@ -99,7 +99,7 @@ false
 [npc]
 Bird Keeper Jose
 right
-94
+269
 60
 24
 Farfetch'd,34

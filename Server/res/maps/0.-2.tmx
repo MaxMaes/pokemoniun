@@ -22,7 +22,7 @@
  <tileset firstgid="13159" source="Path0.tsx"/>
  <layer name="Walkable" width="47" height="47">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZMQ7CMAwF0F4oUwaOxAEYGXtx1AkLRbGduPk/yF/6C1TwcC2o6HHEphj7rN8yRHqkq/X4DnZLGcJq9+4wi33WhrBHzBRhX2G+077C7bXLXegFZZfP9b4TtKDt8hjP+WKY++iupX1Pu/U1rpSB92WY++i1BYM9atfSPud5Vb0yrd9ZlP1d9bbsq64dI+zonZ2xW3ZrZT12y3GMZbIXp4XJ/gDZETNgmrvXw2bfee5p52/a0/5v9t51wg72XpjPqfafKXq22udPe+w+5Ny5+ht2u3bvk9nemrclaPOM3Zqz2royHxH8zFiEIgAA
+   H4sIAAAAAAAAC+3ZPQ7CMAyG4VwoUw/VAzAycvGyVETIcm3s+gd9lt6pDI8iA5E6hu9MYfv2aTobfpnVowl221S1a3e4it1qy7B7nGmGPcJ8pz3CrbWvu1DFvlqoZ9T+VrdzwQ57Nzv1u9HRrv1PybZbgt2v57uHoNNIfV8y7ZIoe9Td0cOevbMWu2S3ItPYpZ+tViX7VFoq2TufO+w9gh122HsE+31x94QOdm6yfVd2zp/t4xqww/7n9u+pbr9691nZTp23ZLLNFrt0XpusyDkALM7dxoQiAAA=
   </data>
  </layer>
  <layer name="Walkable" width="47" height="47">

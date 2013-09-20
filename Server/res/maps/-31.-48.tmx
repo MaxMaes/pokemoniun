@@ -17,7 +17,7 @@
  <tileset firstgid="1262" source="InteriorWalls 1.tsx"/>
  <layer name="Walkable" width="10" height="9">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIB5sZsaPB0IdLd1HTQAAgPqGC2gBAAA=
+   H4sIAAAAAAAAC2NgIB5sZsaPh5s6agIAGJzRrWgBAAA=
   </data>
  </layer>
  <layer name="Walkable" width="10" height="9">

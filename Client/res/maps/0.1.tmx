@@ -21,7 +21,7 @@
  <tileset firstgid="1471" source="Sinnoh Land Sea 3.tsx"/>
  <layer name="Walkable" width="60" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZUQ6DIBBEp96xJ+n9k36ZGtJYoezOyA7J+9Eo83QF1A3AZowxRoLn4wM7C9O9Jaufnr5Hj1Ovp5Hsmb4QyJ7le+b6T/beuriz7whXnuvecWR0jMnyvbota7xrz4+T/jOuR6Tft/0vkTlEDZW5NdNXbY2BYve9mi+j1ph1rjSmVPRdYT5XoqIvBHLYN86XnWG2zx2+H/WAi14r+e6NncW+9p3ly85h3xgqrhmq+MK+S2Pftanqy85h3zgq+u6NnSUa4Pf7/LFF/yfPdm/v88ysx2vGds2uJ3YO+8aR7fsGsQWSP+AuAAA=
+   H4sIAAAAAAAAC+2ZwQ6DIBBEp/5j//9XejI1HCxQdmZlh+RdTJR5sCLqAeAwxhiTgvfrizqL0r2F1c9I37PnZa+nmexMXyTIzvK9c/0n+2hdPNl3hp77enQdmV1jWL69x1jrXXt93PTPGI9IP8Yc70K18cq4x0Cxea/mq6g1ZZ1nWlMq+u7wPM9ERV8kyGHfOF91htU+T/h+NAI6vXbyPZs6i33tu8pXncO+MVTcM1TxhX23xr57U9VXncO+cVT0PZs6SzTA7/f5a4v+T852b+d5ZdbrmKld2fWkzmHfONi+HwQBYCTgLgAA
   </data>
  </layer>
  <layer name="Walkable" width="60" height="50">
@@ -41,7 +41,7 @@
  </layer>
  <layer name="Collisions" width="60" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YS07EMAyGC1lxCG7CCWBGbJguGc6AuA+vBa8FCBaMhsvhikaKQpw6zstqY+lXpT7ifvkTN+nmoOs2DvXI+dh7Y3WRqd3G23gbb+OVwLsGbUctgdd8vy2iq4S8a08eTOdIW5eMZ1L7MdUeJx/HR+yZxiuP1x632FidCy/Hb2xum7UotI5walspXinSvK46PQSl3sby6tw5OXUO7X9v8VyPvDcIr8kYy1tijWDn6Ec+V5wc/deSebFaRKnbEniPD8N4MVF9r80b6q9EXrv+2t+pHLzUcZ6Dl7LuSM1L9b0Ur+m5L1Lz2r6H7PdieIdzJkMI763qujvQPegB9Kjo9biEUvM+Ad8z6AX0CnpTuOfUPbZk3nfg+1B/1z/h+OXhtfNguUrzYu/juv4NfLuRdw/HH+XfA031qSTeFNF4p3k5/9Z8Nb8Gr27blZPiUaznjbfMeJ4bL8aXipczt4c5nSuw8ZuK17ferxEleHPPwZDwvQc2h6TwYh5ReSnrNUnjmdOPjRe/Jo2XE0vjnYql8bqi8frXh2cVtIrs51OjrVDeGjK/+5zw/edcGm/pMbsSwFvaO8p9MX1am5HDOxc13rz6Bb4OoHrgLgAA
+   H4sIAAAAAAAAC+3YS07DMBAG4IBXHIKbcILSig3NkvYMiPvwWvBaUMGCCi7HVMSSZTzOePwaJbb0q1LT2vkyjut0fdR1a0d65P3Yz8bmMlO/zdu8zdu8ErwryGbIHLzm+W2QbBN6V55xsFwgfV0xvpO6HmP9ccbj1BH7TvPK89rzFpurU/Fy6o3d2+ZaFLqOcNa2Ul4p0V7XOn1olPU21qvHzunUY+j695bnevDeIF7TGOstsUewx+gHn6udnfzPnL3YWkRZtyV4T4/DvFioda/tDa2vRK+9/tq/Uzm81Hmew0vZd6T2UuteymvWfFvQa9c95Hkvxnt4zzSEeG9V191B7iEPkEdFX49LJLX3CXzPkBfIK+RN4TWnPmNL9r6Db6f+jn/A66fHa4+DjVXai52P6/gX+PaD9xtef5T/GWjsmkrypmjNO+7l/LfmW/NreHXfrjEpNYqtefOWmc9T82K+VF7Ove3bQ6by2vM3lde336/RSnhz34MhzXce2D0kxYvViOql7NckzWfOdWxe/Jg0L6fNzTvW5uZ1teb17w/PK2QZeZ0XRl+h3hoxf/c5zfc/59y8pefsUoC3dO0on4u5prWNHO9U0rx58wt8WCq14C4AAA==
   </data>
  </layer>
  <layer name="Collisions" width="60" height="50">

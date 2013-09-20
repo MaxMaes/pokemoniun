@@ -14,26 +14,25 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal14.tsx"/>
+ <tileset firstgid="1" source="Lost Tower (Sinnoh) Set.tsx"/>
  <layer name="Walkable" width="21" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGB6gkY2BoQkNU2oWCxAvQsMwsxcRaT4+s3CZjQuA1DQSaRY2s3G5jxzz8Jm7kALzYJiabsRmLjXciM3M44PQnZl08DssfVLTPFqZSam5hAA1zSLWfEIAAF/qp7boBQAA
+   H4sIAAAAAAAAC2NgGB6gBAumplnkmk+sWcSYS45ZhMyl1Exs5lLbTGqYh27uqJmDM57QAS3MpNRcQoCaZhFrPiEAAPPrwGnoBQAA
   </data>
  </layer>
- <layer name="random" width="21" height="18">
+ <layer name="Walkable" width="21" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYOSCFWzUN/MEmWZ64NH3gkwzM2jgvw4amDkKaAsAUmjVsOgFAAA=
+   H4sIAAAAAAAAC2NgGAWjYBRQCyQOtAOwAKeBdsAoGHAAADaFjhboBQAA
   </data>
  </layer>
  <layer name="Collisions" width="21" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC6WRzQ3CMAyFXQ4ZIBsgJimcYIv2yCZlENiDA6PAGriCSE/WS5ykT3pKlNif/COS1xBEjsS7UEhyWKN6Jj41sJE1/f0krmUPGVZJyLZc5NmaasS4+w085B4gZ+zYI9Naa5SfJ8Jku/H6mIHJYlpnkGIT8673R8jX59XPmK/g53j/Zz0vwHzr/bOx91VXYJbmU8tcNO4GzMTt2TUKWbj7WiZ7jxl+rxjDzqGVVcqLxqx/G2P1BbK3tYfoBQAA
+   H4sIAAAAAAAAC62R0QmAMAxE++MKLuQI+l9X0Jkc1AoNhOMSm9AHB5U2z7QpxWchySL1K0nUja6HJOJmLg/t9nzY0wiWN+vT9djjDLQH//HBZvN3D+1hZ6JvgGdx7fVj7cu69u9zglMQ59VyO7WjbN1Zjf2oc285lFO8mVlrsMcRnzdLcVr+DMyB7xB1eXUVwu6PZ5AX+bwUrOgFAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="21" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYHCDNraBdsEoGAVDGwAA3p1Ac+gFAAA=
+   H4sIAAAAAAAAC2NgGAWjYOQBfyAOGGhHYAGGQGw00I4YBcMOAACA+1WD6AUAAA==
   </data>
  </layer>
 </map>

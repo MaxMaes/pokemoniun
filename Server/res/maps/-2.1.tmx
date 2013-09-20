@@ -21,7 +21,7 @@
  <tileset firstgid="953" source="Buildings8.tsx"/>
  <layer name="Walkable" width="48" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3QwQkAIAwEwdhqsP8aJCXkE0TnYP7H5opIAJ6wL/jwM/1n1fQHoOMASWm/1AAPAAA=
+   H4sIAAAAAAAAC+3QMQ0AAAjAMLBK8K8BGwR69F9WGVEAnNALGj7z338AdhtWJD8LAA8AAA==
   </data>
  </layer>
  <layer name="Walkable" width="48" height="20">

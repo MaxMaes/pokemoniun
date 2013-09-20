@@ -116,5 +116,6 @@ marinemuseum:119-Marine_Museum.ogg
 weatherinstitute:120-Weather_Institute.ogg
 birchlab:121-Birch_Lab.ogg
 shoalcave:122-Shoal_Cave.ogg
+redtheme:123-Red_Theme.ogg
 
 

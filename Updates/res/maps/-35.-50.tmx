@@ -30,7 +30,7 @@
  </layer>
  <layer name="Water" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjgLbAjI2BwZzG2IKNNm63A5prT2PsMOp2ktzuB8TueOz1H8RuJ2QnSA0x8TbqduqCoex2EBh1+8CA4eh2WPkKwh5kuB25vqd3vUxpWCObG8aGva0RTmFc08PttKrLB4vbkdMosemUVm53g7qBlu0OWrmdkPnUsA8WPuiYnLKFFPNpZd9IBADRVS8AKBAAAA==
+   H4sIAAAAAAAAC2NgGAWjgLbAjI2BwZzG2IKNNm63A5prT2PsMOp2ktzuB8TueOwFyfkPUrcTshOkhph4G3X7qNuJ1T/q9lG3k6IfVr6CsAcZbkeu73HVy7RyO6VhjWxuGBv2tkb4EHA7OXgouR05jRKbTmnldjc24tsc5NpHK7cTMp8a9sHCBx2TU7aQYj6t7BuJAABwgaAUKBAAAA==
   </data>
  </layer>
  <layer name="Walkable" width="47" height="22">

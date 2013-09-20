@@ -9,7 +9,7 @@ Dark Cave:darkcave
 Sprout Tower:sprouttower
 Olivine City:violet
 Cianwood City:ecruteak
-Mahogany Town:cherrywood
+Mahogany Town:cherrygrove
 Blackthorn City:azalea
 Burned Tower:burnedtower
 Tin Tower:tintower
@@ -146,3 +146,5 @@ Shop:shop
 Mt. Moon:rocktunnel
 Tanoby Ruins:ruinsofalph
 Mt. Mortar:rocktunnel
+Slowpoke Well:darkcave
+Red:redtheme

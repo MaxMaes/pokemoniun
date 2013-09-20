@@ -23,7 +23,7 @@
  <tileset firstgid="14792" source="Buildings8.tsx"/>
  <layer name="Walkable" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WUQQ7CMAwE8yR4bcUVemopByj8pn9pIhERreyNE8wBSyNVpPU4xkkIcmyHz/N0DGEuuEYGhRzSb56O9K3mSGsluR5Ph+TpdWCtZX7puxYHy+/lsOyr1XEyONDzi33gLHs7Ut0jWT9HLpHlC8dQeR/rtzrwP6o5XpEHsFZyIrd3PySWjr5IYI0lTycHm63J0cHOBeulFbaPu9K/WZkFDes5xHn2POu43uLAe5fl73VgePQK80iR7ydGvrvYvI1K/hTSHPWwEsc/xw4U6IB7xAkAAA==
+   H4sIAAAAAAAAC82VSQ6DMAwA8yR4Leq15VRKD5T2N/ylQWDJsryRBWFpLpBkEmOcEPhYmo2uDeEZGRCvdnvOgecBUuQ6sIeuSclxwPzajhUuN5SrOTzOo47bCQ7POTzjch298v4eeUTGDEdnjKf79zroN7Icv8iHMBtrUt57PjjGhLxw0D1ivoUcVj2VcFj/hZZLL9BHOMck5G8QakFCc2j1fCSHlgMixYH7ruTAkerAfb1GrvAZwAH9SQN6l1ZvveLg6iiFWXGUhrtna7DGH0c8Q9XECQAA
   </data>
  </layer>
  <layer name="Walkable" width="25" height="25">

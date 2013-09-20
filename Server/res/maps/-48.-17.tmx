@@ -14,30 +14,26 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal14.tsx"/>
- <layer name="Walkable" width="19" height="19">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGJpgERMCUwLYmVHNAvEHg1nI5lDqz1GzBsYsbOZQ4i709DVczUI3jxKgRiWz3JghmFruIgUAAIe+/kKkBQAA
-  </data>
- </layer>
+ <tileset firstgid="1" source="Lost Tower (Sinnoh) Set.tsx"/>
+ <tileset firstgid="205" source="Ruin Of Alph Set.tsx"/>
  <layer name="Grass" width="19" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+XUOw6CMBzHccLfVRMHvYUaD+Jbj+HrCLgjPtBdd53UWzDqLXwsMvtrKLE2rSGWzSafhdBvCsm/rm1ZrmAKHsxgDgtYgg8rWINu7exPSXuqZ4GE9fa86cBEomoc4QRXSSA0MrCVxM2D0DjDBbL09q2ha7LGE0IoUcRJ2FA1C9hfhJpBR+yxf9dHa2PQifm2+ZnEs6Vxptg/tIaUTidP6bWqfHZyhr0m9rf4/JShQtFcy++xpWsM+HeNYMxnqA4Niu6JG9zhoWmFwjna0IEu9Eh/R/6yXiIz5e6kBQAA
+   H4sIAAAAAAAAC2NgGHqgBAumhhmkmkmMGcSYSY452MyjxBx086hlFjXMGcUDG/4MNDCLUvNwAWqYQay59AIAqojdYKQFAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="19" height="19">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMguEJ6qlo1gQqmkUKAADKQjRopAUAAA==
   </data>
  </layer>
  <layer name="Collisions" width="19" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5WSUQrCMAyGuxb26pMHEPEg2u15DvQAju18+uIFejITSDHEpLaB72Hkz0eyzTm9Ou/cRRAB740Bw4EzZ2BRiOQtOfMe6HgQA5AYQ4WzE45co8jxZ+7MPu55Ai9gJTbh2liPO7PvwDyrQCuZedN+R9pJy9S6si/STlo/Ga5k5Bdjp/THpfl4T6PkaqXVZb2r1huRXaj3lTx78PTGd9b+i1IOPcjV2K3WdQ9fFzIrPu1OmbkxzyScPHcKv+9eu6unHrrwxlk4kVFxyUxNyZma+Q9dMpPXpAUAAA==
-  </data>
- </layer>
- <layer name="random" width="19" height="19">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgsEF2JmpZ5Y6Fc1yp6JZxAIAKRBvIaQFAAA=
+   H4sIAAAAAAAAC+WSQQ6AIAwE8eDZm8/1C76AG9En6POExE1qs23h7CYbgrTTQk3J1kw8KuStxL1MzWgqwqmTqRmRJJNxjupTrMv0jWt7HaN56OWqvsXKxGKQD6au54nF4m6snnxvCN+s3opjJi/+D6wmNhfv7a2Z52TPcGSO+TWk67F7ej1JXs8/FvWkmdBG+pKy8tj5HpxbjJ7aUf4DCPKia6QFAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="19" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgsEBWJkZGNiYB9oVgwsAAB1XW4WkBQAA
+   H4sIAAAAAAAAC2NgGNngDwH+KBgFo4B+IBeI8wbaEYMMAADDY3JSpAUAAA==
   </data>
  </layer>
 </map>

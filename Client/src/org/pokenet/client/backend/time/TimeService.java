@@ -1,15 +1,13 @@
 package org.pokenet.client.backend.time;
 
-import mdes.slick.sui.Label;
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 
 /**
  * Handles time and rendering of night. Also acts as a label for usage in GUI.
  * 
- * @author shadowkanji
+ * @author Myth1c
  **/
-public class TimeService extends Label implements Runnable
+public class TimeService implements Runnable
 {
 	private int m_hour, m_minutes, m_daylight, m_targetDaylight;
 	private boolean m_running = true;
@@ -18,12 +16,6 @@ public class TimeService extends Label implements Runnable
 	/** Default constructor **/
 	public TimeService()
 	{
-		super("00:00");
-		pack();
-		this.setLocation(4, 4);
-		setVisible(true);
-		setFont(GameClient.getInstance().getFontLarge());
-		setForeground(new Color(255, 255, 255));
 		m_thread = new Thread(this);
 	}
 
@@ -107,8 +99,7 @@ public class TimeService extends Label implements Runnable
 			}
 			hour = m_hour < 10 ? "0" + String.valueOf(m_hour) : String.valueOf(m_hour);
 			min = m_minutes < 10 ? "0" + String.valueOf(m_minutes) : String.valueOf(m_minutes);
-			setText(hour + ":" + min);
-			pack();
+			GameClient.getInstance().getHUD().getTopBar().getTimeLabel().setText(hour + ":" + min);
 			try
 			{
 				Thread.sleep(10 * 1000); // Sleep for 10 seconds
@@ -179,7 +170,7 @@ public class TimeService extends Label implements Runnable
 			m_daylight = 175;
 			m_targetDaylight = 175;
 		}
-		setText(hour + ":" + minutes);
+		GameClient.getInstance().getHUD().getTopBar().getTimeLabel().setText(hour + ":" + minutes);
 		/* TODO: (IllegalStateExceptions may be generated here.) Stop was causing this next part not to work for some reason... hopefully this doesn't cause any problems if setTime gets called in the future. Seems to generate IllegalStateExceptions */
 		if(!m_thread.isAlive())
 			m_thread.start();

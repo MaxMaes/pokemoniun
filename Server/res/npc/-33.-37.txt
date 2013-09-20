@@ -1,7 +1,7 @@
 [npc]
 Move Deleter
 right
-100
+278
 4
 6
 NULL

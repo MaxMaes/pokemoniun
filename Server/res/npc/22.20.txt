@@ -1,7 +1,7 @@
 [npc]
 Black Belt Noob
 right
-104
+367
 21
 12
 Machop,20
@@ -15,7 +15,7 @@ false
 [npc]
 Collector Hector
 down
-195
+366
 13
 7
 Zangoose,20,Selviper,20
@@ -29,7 +29,7 @@ false
 [npc]
 Battle Girl Cindy
 left
-61
+273
 10
 15
 Meditite,19,Makuhita,19
@@ -42,7 +42,7 @@ false
 [/npc]
 Expert Timothy
 down
-167
+280
 6
 3
 Hariyama,73

@@ -1,7 +1,7 @@
 [npc]
 Youngster Billy
-Left
-110
+left
+353
 27
 18
 Seedot,6,Tailow,8
@@ -15,7 +15,7 @@ false
 [npc]
 Lady Cindy
 right
-20
+381
 15
 18
 Zigzagoon,7
@@ -29,7 +29,7 @@ false
 [npc]
 Rich Boy Winston
 right
-96
+375
 12
 5
 Zigzagoon,7
@@ -43,7 +43,7 @@ false
 [npc]
 Lass Haley
 up
-119
+272
 16
 26
 Lotad,7,Shroomish,7

@@ -1,7 +1,7 @@
 [npc]
 Cherrygrove citizen
 left
-51
+382
 15
 13
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Cherrygrove citizen
 right
-96
+351
 14
 13
 NULL

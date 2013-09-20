@@ -36,6 +36,7 @@ import org.pokenet.server.battle.mechanics.moves.MoveListEntry;
 import org.pokenet.server.battle.mechanics.moves.PokemonMove;
 import org.pokenet.server.battle.mechanics.statuses.StatusEffect;
 import org.pokenet.server.battle.mechanics.statuses.field.FieldEffect;
+import org.pokenet.server.battle.mechanics.statuses.field.RainEffect;
 
 /**
  * @author Colin
@@ -73,8 +74,23 @@ public abstract class BattleField
 				return 1;
 			if(p2 == null)
 				return -1;
-			final int s1 = p1.getStat(Pokemon.S_SPEED);
-			final int s2 = p2.getStat(Pokemon.S_SPEED);
+			int s1, s2;
+			if(p1.getAbility().getName().equalsIgnoreCase("Swift swim") && p1.getField().getEffectByType(RainEffect.class) != null)
+			{
+				s1 = p1.getStat(Pokemon.S_SPEED) * 2;
+			}
+			else
+			{
+				s1 = p1.getStat(Pokemon.S_SPEED);
+			}
+			if(p2.getAbility().getName().equalsIgnoreCase("Swift swim") && p2.getField().getEffectByType(RainEffect.class) != null)
+			{
+				s2 = p2.getStat(Pokemon.S_SPEED) * 2;
+			}
+			else
+			{
+				s2 = p2.getStat(Pokemon.S_SPEED);
+			}
 			int comp = 0;
 			if(s1 > s2)
 				comp = -1;
@@ -791,6 +807,119 @@ public abstract class BattleField
 			return;
 		}
 		psource.useMove(move, ptarget);
+		if(psource.getItem() != null)
+		{
+			ArrayList<StatusEffect> tmp = psource.getStatusEffects();// getNormalStatuses(0);
+			for(StatusEffect e : tmp)
+			{
+				switch(e.getName())
+				{
+					case "Sleep":
+						if(psource.getItemName().equalsIgnoreCase("Chesto Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.m_name + "ate the " + psource.getItemName() + " it was holding");
+							this.informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					case "Poison":
+						if(psource.getItemName().equalsIgnoreCase("Pecha Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+							this.informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					case "Freeze":
+						if(psource.getItemName().equalsIgnoreCase("Aspear Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+							informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					case "Confusion":
+						if(psource.getItemName().equalsIgnoreCase("Persim Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+							this.informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					case "Burn":
+						if(psource.getItemName().equalsIgnoreCase("Rawst Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+							this.informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					case "Paralysis":
+						if(psource.getItemName().equalsIgnoreCase("Cheri Berry"))
+						{
+							psource.removeStatus(e);
+							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+							this.informStatusRemoved(psource, e);
+							psource.setItem(null);
+						}
+						break;
+					default:
+						break;
+				}
+				if(psource.getHealth() < (psource.getRawStat(psource.S_HP) * 0.5))
+				{
+					if(psource.getItemName().equalsIgnoreCase("Oran Berry"))
+					{
+						this.showMessage(psource.getName() + " ate the Oran Berry it was holding/nThe Oran Berry restored 10HP");
+						psource.changeHealth(10);
+						psource.setItem(null);
+						break;
+					}
+					else if(psource.getItemName().equalsIgnoreCase("Sitrus Berry"))
+					{
+						this.showMessage(psource.getName() + " ate the Sitrus Berry it was holding/nThe Sitrus Berry restored 30HP");
+						psource.changeHealth(30);
+						psource.setItem(null);
+						break;
+					}
+				}
+				else
+				{
+					switch(psource.getItemName())
+					{
+						case "Leftovers":
+							psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+							System.out.println(psource.getStat(psource.S_HP) / 16);
+							this.showMessage(psource.getName() + "'s leftovers heals a bit of HP");
+							break;
+						case "Black Sludge":
+							if(psource.m_type1.equalsIgnoreCase("Poison") || psource.m_type2.equalsIgnoreCase("Poison"))
+							{
+								psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								this.showMessage(psource.getName() + "'s black sludge heals a bit of HP");
+							}
+							else
+							{
+								psource.changeHealth(-psource.getStat(psource.S_HP) / 16);
+								this.showMessage(psource.getName() + " is hurt by black sludge");
+							}
+							break;
+						case "Sticky Barb":
+							psource.changeHealth(-psource.getStat(psource.S_HP) / 8);
+							this.showMessage(psource.getName() + " is hurt by Sticky Barb");
+							break;
+						default:
+							break;
+					}
+					break;
+				}
+			}
+		}
 	}
 
 	/**

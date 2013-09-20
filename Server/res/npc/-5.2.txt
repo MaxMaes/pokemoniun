@@ -1,7 +1,7 @@
 [npc]
 Bug Catcher Wayne
-up
-24
+down
+354
 25
 10
 Ledyba,8,Paras,10

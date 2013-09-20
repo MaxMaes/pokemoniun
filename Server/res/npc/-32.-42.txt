@@ -1,7 +1,7 @@
 [npc]
 Town Inhabitant
 right
-104
+367
 3
 5
 NULL

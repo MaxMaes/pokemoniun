@@ -1,7 +1,7 @@
 [npc]
 Daughter
 left
-72
+262
 6
 5
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Citizen
 right
-101
+274
 3
 4
 NULL

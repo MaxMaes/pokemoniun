@@ -128,7 +128,7 @@ public class LogoutManager implements Runnable
 		/* Remove player from their map if it hasn't been done already. */
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);
-		/* TODO: Test if people are saved correctly and won't need kicking. */
+		/* TODO: Fix saving issues, issues may be players or pokemon. */
 		/* Store all player information. */
 		if(m_saveManager.savePlayer(player) > 0)
 			return false;

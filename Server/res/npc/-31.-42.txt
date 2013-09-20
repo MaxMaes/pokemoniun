@@ -43,7 +43,7 @@ false
 [npc]
 Radio Tower Visitor
 left
-113
+369
 17
 3
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Radio Tower Visitor
 left
-82
+384
 8
 7
 NULL

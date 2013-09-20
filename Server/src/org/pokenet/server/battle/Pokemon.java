@@ -705,6 +705,7 @@ public class Pokemon extends PokemonSpecies
 			if(m_field != null)
 				m_field.informStatusApplied(this, applied);
 			informStatusListeners(source, applied, true);
+
 		}
 		return applied;
 	}
@@ -781,12 +782,12 @@ public class Pokemon extends PokemonSpecies
 				m_ability = (IntrinsicAbility) addStatus(this, m_originalAbility);
 		}
 
-		if(m_itemName != null && m_itemName.length() != 0)
-		{
-			IntrinsicAbility item = IntrinsicAbility.getInstance(m_itemName);
-			if(item != null && item instanceof HoldItem)
-				m_item = (HoldItem) addStatus(this, item);
-		}
+		// if(m_itemName != null && m_itemName.length() != 0)
+		// {
+		// IntrinsicAbility item = IntrinsicAbility.getInstance(m_itemName);
+		// if(item != null && item instanceof HoldItem)
+		// addStatus(this, item);
+		// }
 	}
 
 	/**
@@ -2337,7 +2338,10 @@ public class Pokemon extends PokemonSpecies
 	{
 		removeStatus(m_item);
 		if(item != null)
-			m_item = (HoldItem) addStatus(this, item);
+		{
+			m_item = item;// (HoldItem)
+			addStatus(this, item);
+		}
 		m_itemName = getItemName();
 	}
 

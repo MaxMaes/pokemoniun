@@ -15,7 +15,7 @@ false
 [npc]
 Receptionist
 down
-64
+328
 11
 4
 NULL

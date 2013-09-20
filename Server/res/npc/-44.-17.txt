@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer Naomi
 down
-57
+265
 14
 6
 Persian,42,Ponyta,42,Rapidash,42,Vulpix,42,Ninetales,42
@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Rolando
 down
-83
+268
 5
 2
 Raticate,42,Charmeleon,42,Charizard,42,Ivysaur,42,Wartortle,42

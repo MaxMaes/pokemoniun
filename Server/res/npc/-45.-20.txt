@@ -1,7 +1,7 @@
 [npc]
 Bruno
 down
-22
+294
 6
 4
 Hariyama,64,Hitmonchan,63,Hitmontop,63,Hitmonlee,66,Machamp,66,Lucario,70

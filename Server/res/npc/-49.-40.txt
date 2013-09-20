@@ -1,7 +1,7 @@
 [npc]
 Daughter
 down
-128
+362
 8
 13
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Wife
 down
-115
+275
 3
 13
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Violet City Citizen
 down
-141
+274
 3
 12
 NULL

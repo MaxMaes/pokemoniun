@@ -1,7 +1,7 @@
 [npc]
 Sailor
 left
-184
+395
 6
 5
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Sailor
 up
-184
+395
 8
 10
 NULL
@@ -29,7 +29,7 @@ false
 [npc]
 Bar Keeper
 left
-186
+326
 9
 6
 NULL

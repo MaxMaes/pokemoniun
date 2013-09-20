@@ -1,7 +1,7 @@
 [npc]
 Channeler Angelica
 right
-63
+259
 12
 10
 Gastly,22,Gastly,22,Gastly,22
@@ -15,7 +15,7 @@ false
 [npc]
 Channeler Jennifer
 left
-63
+260
 17
 6
 Gastly,24
@@ -29,7 +29,7 @@ false
 [npc]
 Channeler Emilia
 down
-63
+259
 8
 6
 Gastly,24

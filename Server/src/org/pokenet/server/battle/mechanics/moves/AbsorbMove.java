@@ -45,6 +45,8 @@ public class AbsorbMove extends PokemonMove
 	public int use(BattleMechanics mech, Pokemon user, Pokemon target)
 	{
 		int damage = mech.calculateDamage(this, user, target);
+		if(user.getItemName().equalsIgnoreCase("big root"))
+			damage *= 1.3;
 		int health = target.getHealth();
 		if(damage > health)
 			damage = health;

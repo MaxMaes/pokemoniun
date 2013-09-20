@@ -1,6 +1,6 @@
 [warp]
-8
 22
+32
 9
 33
 12
@@ -8,39 +8,11 @@
 0
 [/warp]
 [npc]
-NULL
-down
-0
-5
-19
-NULL
-0
--1
-0
-false
-false
-false
-[/npc]
-[npc]
-NULL
-down
-0
-11
-19
-NULL
-0
--1
-0
-false
-false
-false
-[/npc]
-[npc]
 Advisor
 down
-195
-12
-19
+344
+26
+29
 NULL
 0
 -1
@@ -51,10 +23,10 @@ false
 [/npc]
 [npc]
 Juggler Nate
-down
-42
-3
-16
+right
+320
+26
+24
 Drowzee,34,Kadabra,34
 2
 -1
@@ -65,10 +37,10 @@ false
 [/npc]
 [npc]
 Juggler Kayden
-right
-42
-13
-16
+down
+117
+28
+15
 Hypno,38
 1
 -1
@@ -79,10 +51,10 @@ false
 [/npc]
 [npc]
 Juggler Kirk
-right
-42
-12
-11
+down
+322
+21
+19
 Drowzee,31,Drowzee,31,Kadabra,31,Drowzee,31
 4
 -1
@@ -93,10 +65,10 @@ false
 [/npc]
 [npc]
 Tamer Edgar
-down
-79
-14
-4
+right
+321
+16
+22
 Arbok,33,Sandslash,33,Arbok,33
 3
 -1
@@ -107,10 +79,10 @@ false
 [/npc]
 [npc]
 Tamer Phil
-down
-79
-5
-5
+right
+320
+17
+19
 Sandslash,34,Arbok,34
 2
 -1
@@ -121,10 +93,10 @@ false
 [/npc]
 [npc]
 Juggler Shawn
-left
-42
-3
-11
+down
+293
+21
+22
 Drowzee,34,Hypno,34
 2
 -1
@@ -136,9 +108,9 @@ false
 [npc]
 Koga
 down
-107
-8
-13
+293
+24
+22
 Arbok,37,Muk,37,Weezing,37,Drapion,37,Swalot,37,Skuntank,37
 6
 4

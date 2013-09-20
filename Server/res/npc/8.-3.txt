@@ -15,7 +15,7 @@ false
 [npc]
 Picnicker Carol
 up
-30
+357
 8
 7
 Pidgey,21,Pidgeotto,21
@@ -29,7 +29,7 @@ false
 [npc]
 Hiker Clark
 left
-101
+365
 4
 9
 Geodude,21,Onix,21
@@ -43,7 +43,7 @@ false
 [npc]
 Hiker Trent
 left
-101
+366
 4
 15
 Onix,19,Graveler,19
@@ -57,7 +57,7 @@ false
 [npc]
 Pokemaniac Herman
 left
-195
+274
 16
 17
 Cubone,20,Slowpoke,20

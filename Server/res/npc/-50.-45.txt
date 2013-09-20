@@ -1,7 +1,7 @@
 [npc]
 Sage Nico
 right
-164
+276
 11
 4
 Bellsprout,3,Bellsprout,3,Bellsprout,3
@@ -15,7 +15,7 @@ false
 [npc]
 Sage Edmond
 left
-164
+276
 8
 15
 Bellsprout,3,Bellsprout,3,Bellsprout,3

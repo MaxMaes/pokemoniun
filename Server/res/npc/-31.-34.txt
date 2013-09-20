@@ -15,7 +15,7 @@ false
 [npc]
 Kurt's granddaughter
 down
-68
+262
 6
 4
 NULL

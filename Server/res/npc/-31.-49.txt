@@ -1,7 +1,7 @@
 [npc]
 Ecruteak Citizen
 down
-96
+277
 3
 4
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Fishing Guru's Brother
 down
-47
+368
 4
 4
 NULL

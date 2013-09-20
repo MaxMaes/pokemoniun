@@ -1,7 +1,7 @@
 [npc]
 Channeler
 right
-63
+259
 2
 7
 NULL

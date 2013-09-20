@@ -43,7 +43,7 @@ false
 [npc]
 Coins Seller
 down
-185
+319
 4
 2
 NULL
@@ -57,7 +57,7 @@ false
 [npc]
 Prize Exchange
 down
-64
+328
 17
 2
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Prize Exchange
 down
-64
+328
 20
 2
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Gambler
 down
-141
+274
 4
 11
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Gambler
 right
-159
+369
 7
 14
 NULL
@@ -113,7 +113,7 @@ false
 [npc]
 Gambler
 down
-57
+375
 12
 3
 NULL
@@ -141,7 +141,7 @@ false
 [npc]
 Gambler
 left
-88
+278
 16
 12
 NULL
@@ -155,7 +155,7 @@ false
 [npc]
 Gambler
 right
-112
+360
 19
 10
 NULL
@@ -169,7 +169,7 @@ false
 [npc]
 Gambler
 right
-145
+274
 19
 14
 NULL

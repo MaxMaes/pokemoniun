@@ -15,8 +15,6 @@ public class TopBar extends Widget
 	public TopBar()
 	{
 		initTopbar();
-		setPosition(0, 0);
-		setSize(800, 47);
 	}
 
 	private void initTopbar()
@@ -129,10 +127,16 @@ public class TopBar extends Widget
 		for(int i = 0; i < barbuttons.length; i++)
 		{
 			barbuttons[i].setImagePosition(-2, 1);
-			barbuttons[i].setSize(28, 35);
-			barbuttons[i].setPosition(5 + 35 * i + 5 * i, 7);
 			add(barbuttons[i]);
 		}
+
+		moneyLabel = new Label();
+		moneyLabel.setTheme("moneylabel");
+		add(moneyLabel);
+
+		timeLabel = new Label();
+		timeLabel.setTheme("timelabel");
+		add(timeLabel);
 	}
 
 	public ImageButton[] getBarButtons()
@@ -148,5 +152,30 @@ public class TopBar extends Widget
 	public Label getMoneyLabel()
 	{
 		return moneyLabel;
+	}
+
+	public Label getTimeLabel()
+	{
+		return timeLabel;
+	}
+
+	@Override
+	public void layout()
+	{
+		super.layout();
+		setPosition(0, 0);
+		setSize(800, 47);
+		for(int i = 0; i < barbuttons.length; i++)
+		{
+			barbuttons[i].setSize(35, 35);
+			barbuttons[i].setPosition(getInnerX() + 5 + 35 * i + 5 * i, getInnerY() + 7);
+		}
+
+		moneyLabel.adjustSize();
+		ImageButton lastButton = barbuttons[barbuttons.length - 1];
+		moneyLabel.setPosition(getInnerX() + lastButton.getInnerX() + lastButton.getWidth(), lastButton.getInnerY() + moneyLabel.getHeight() / 4);
+
+		timeLabel.adjustSize();
+		timeLabel.setPosition(getInnerX() + getWidth() - timeLabel.getWidth(), moneyLabel.getInnerY());
 	}
 }

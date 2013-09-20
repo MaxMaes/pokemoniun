@@ -1,7 +1,7 @@
 [npc]
 Hiker Leonard
 down
-101
+365
 16
 15
 Geodude,23,Machop,25
@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Phillip
 right
-101
+366
 10
 14
 Geodude,23,Geodude,23,Graveler,23
@@ -29,7 +29,7 @@ false
 [npc]
 Pokemaniac Andrew
 left
-152
+319
 6
 7
 Marowak,24,Marowak,24
@@ -43,7 +43,7 @@ false
 [npc]
 Pokemaniac Calvin
 left
-152
+351
 21
 5
 Kangaskhan,26

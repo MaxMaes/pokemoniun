@@ -71,7 +71,7 @@ false
 [npc]
 Pokemaniac Shane
 down
-152
+117
 53
 8
 Nidorina,16,Nidorino,16
@@ -85,7 +85,7 @@ false
 [npc]
 Fisher Tully
 left
-47
+368
 46
 10
 Qwilfish,18
@@ -99,7 +99,7 @@ false
 [npc]
 Hiker Benjamin
 up
-102
+366
 57
 9
 Diglett,14,Geodude,14,Dugtrio,16

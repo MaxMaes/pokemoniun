@@ -1,7 +1,7 @@
 [npc]
 Gold's mom
 left
-67
+326
 20
 18
 NULL

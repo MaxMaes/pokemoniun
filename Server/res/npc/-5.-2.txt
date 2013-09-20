@@ -1,7 +1,7 @@
 [npc]
 Pokefan Beverly
-Down
-115
+down
+374
 32
 6
 Snubbull,14
@@ -14,8 +14,8 @@ false
 [/npc]
 [npc]
 Schoolboy Jack
-Down
-121
+down
+375
 25
 6
 Oddish,12,Voltorb,15
@@ -28,8 +28,8 @@ false
 [/npc]
 [npc]
 Lass Krise
-Down
-57
+down
+382
 24
 12
 Oddish,12,Cubone,15
@@ -42,8 +42,8 @@ false
 [/npc]
 [npc]
 Pokefan William
-Down
-89
+down
+278
 10
 8
 Raichu,14

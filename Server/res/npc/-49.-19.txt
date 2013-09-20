@@ -1,7 +1,7 @@
 [npc]
 Citizen
 right
-159
+331
 7
 4
 NULL

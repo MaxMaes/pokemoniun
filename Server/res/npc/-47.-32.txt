@@ -1,7 +1,7 @@
 [npc]
 Traveler
 down
-141
+366
 6
 6
 NULL

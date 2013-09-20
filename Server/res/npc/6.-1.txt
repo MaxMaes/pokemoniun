@@ -15,7 +15,7 @@ false
 [npc]
 Bug Catcher Keigo
 right
-23
+354
 3
 16
 Weedle,16,Caterpie,16,Weedle,16
@@ -29,7 +29,7 @@ false
 [npc]
 Camper Ricky
 right
-28
+355
 12
 21
 Squirtle,20
@@ -43,7 +43,7 @@ false
 [npc]
 Picnicker Nancy
 left
-30
+357
 13
 21
 Rattata,16,Pikachu,16
@@ -57,7 +57,7 @@ false
 [npc]
 Bug Catcher Elijah
 left
-23
+354
 20
 25
 Butterfree,20
@@ -71,7 +71,7 @@ false
 [npc]
 Picnicker Isabelle
 left
-30
+357
 13
 32
 Pidgey,16,Pidgey,16,Pidgey,16
@@ -85,7 +85,7 @@ false
 [npc]
 Camper Jeff
 left
-28
+341
 13
 33
 Spearow,16,Raticate,16

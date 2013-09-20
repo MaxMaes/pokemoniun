@@ -1,7 +1,7 @@
 [npc]
 Channeler Ruth
 down
-63
+259
 10
 4
 Gastly,22
@@ -15,7 +15,7 @@ false
 [npc]
 Channeler Tammy
 left
-63
+260
 18
 7
 Haunter,23
@@ -29,7 +29,7 @@ false
 [npc]
 Channeler Karina
 right
-63
+259
 6
 12
 Gastly,24
@@ -43,7 +43,7 @@ false
 [npc]
 Channeler Janae
 up
-63
+260
 10
 16
 Gastly,22
@@ -57,7 +57,7 @@ false
 [npc]
 Channeler 
 right
-63
+259
 11
 8
 NULL

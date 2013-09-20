@@ -1,7 +1,7 @@
 [npc]
 Fisherman Nolan
 right
-219
+368
 22
 23
 Barboach,19
@@ -15,7 +15,7 @@ false
 [npc]
 Fisherman Kai
 right
-219
+368
 23
 9
 Barboach,20
@@ -29,7 +29,7 @@ false
 [npc]
 Picnicker Charlotte
 up
-30
+357
 18
 40
 Nuzleaf,19
@@ -43,7 +43,7 @@ false
 [npc]
 Camper Shane
 down
-28
+355
 25
 41
 Sandshrew,18,Nuzleaf,18
@@ -57,7 +57,7 @@ false
 [npc]
 Hiker Lucas
 left
-101
+366
 32
 58
 Geodude,18,Numel,18
@@ -71,7 +71,7 @@ false
 [npc]
 Hiker Lenny
 right
-101
+365
 5
 68
 Geodude,18,Machop,18

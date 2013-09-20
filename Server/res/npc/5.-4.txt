@@ -24,7 +24,7 @@ false
 [npc]
 Lass Crissy
 right
-72
+346
 47
 3
 Paras,31,Paras,31,Parasect,31

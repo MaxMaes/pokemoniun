@@ -13,9 +13,9 @@ false
 false
 [/npc]
 [npc]
-NULL
+Kathy
 down
-61
+337
 13
 11
 NULL
@@ -27,9 +27,9 @@ false
 false
 [/npc]
 [npc]
-NULL
+John
 down
-57
+369
 15
 4
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Swimmer Simon
 right
-200
+281
 16
 13
 Tentacool,20,Tentacool,20
@@ -57,7 +57,7 @@ false
 [npc]
 Swimmer Elaine
 right
-197
+282
 3
 20
 Staryu,21
@@ -71,7 +71,7 @@ false
 [npc]
 Swimmer Paula
 down
-197
+282
 10
 28
 Staryu,19,Shellder,19
@@ -85,7 +85,7 @@ false
 [npc]
 Swimmer Randall
 left
-200
+281
 18
 31
 Shellder,18,Wartortle,20,Shellder,18

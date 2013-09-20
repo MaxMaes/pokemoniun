@@ -1,7 +1,7 @@
 [npc]
 Tin Tower Sage
 down
-164
+276
 13
 2
 NULL

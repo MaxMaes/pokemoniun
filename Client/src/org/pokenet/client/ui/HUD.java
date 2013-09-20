@@ -783,6 +783,11 @@ public class HUD extends DesktopArea
 		return tradeDialog;
 	}
 
+	public TopBar getTopBar()
+	{
+		return topbar;
+	}
+
 	/**
 	 * Starts to talk to an NPC
 	 * 

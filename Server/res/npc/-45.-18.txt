@@ -1,7 +1,7 @@
 [npc]
 Lass Iris
 down
-72
+272
 20
 26
 Clefairy,14
@@ -15,7 +15,7 @@ false
 [npc]
 Bug Catcher Kent
 down
-23
+354
 7
 26
 Weedle,11,Kakuna,11
@@ -29,7 +29,7 @@ false
 [npc]
 Super Nerd Jovan
 up
-169
+352
 30
 34
 Magnemite,11,Voltorb,11
@@ -43,7 +43,7 @@ false
 [npc]
 Bug Catcher Robby
 right
-23
+354
 36
 30
 Caterpie,10,Caterpie,10,Metapod,10
@@ -57,7 +57,7 @@ false
 [npc]
 Lass Miriam
 right
-72
+272
 30
 5
 Oddish,11,Bellsprout,11
@@ -71,7 +71,7 @@ false
 [npc]
 Youngster Josh
 right
-210
+353
 13
 17
 Rattata,10,Rattata,10,Zubat,10
@@ -85,7 +85,7 @@ false
 [npc]
 Hiker Marcos
 left
-101
+365
 7
 11
 Geodude,10,Geodude,10,Onix,10

@@ -1,7 +1,7 @@
 [npc]
 Psychic Norman
 down
-97
+321
 17
 7
 Slowpoke,17,Slowpoke,20
@@ -15,7 +15,7 @@ false
 [npc]
 Pokefan Ruth
 right
-110
+272
 15
 19
 Pikachu,17
@@ -29,7 +29,7 @@ false
 [npc]
 Pokefan Derek
 up
-143
+274
 14
 22
 Pikachu,17
@@ -43,7 +43,7 @@ false
 [npc]
 Pokefan Jaime
 down
-110
+276
 8
 22
 Meowth,16
@@ -57,7 +57,7 @@ false
 [npc]
 Sailor Eugene
 left
-184
+395
 17
 29
 Poliwhirl,17,Krabby,19,Raticate,17

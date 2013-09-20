@@ -393,7 +393,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess() : "Warning the Session was not closed";
+			assert channelFuture.isSuccess(): "Warning the Session was not closed";
 		}
 	}
 

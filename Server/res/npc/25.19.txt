@@ -1,7 +1,7 @@
 [npc]
 Ninja Boy Lung
 down
-222
+261
 36
 3
 Nincada,19,Ninjask,20
@@ -15,7 +15,7 @@ false
 [npc]
 Youngster Dillion
 down
-210
+353
 4
 8
 Aron,20

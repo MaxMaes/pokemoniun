@@ -1,7 +1,7 @@
 [npc]
 Kind Lady
 down
-114
+382
 3
 5
 NULL

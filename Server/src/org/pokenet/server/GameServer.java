@@ -59,6 +59,7 @@ public class GameServer
 	public static double RATE_GOLD = 1.0;
 	public static double RATE_EXP_POKE = 1.0;
 	public static double RATE_EXP_TRAINER = 1.0;
+	public static final int AUTOSAVE_INTERVAL = 15; // Autosave interval in minutes
 	public static int REVISION = getServerRevision();
 
 	/**

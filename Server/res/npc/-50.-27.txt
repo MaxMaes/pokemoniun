@@ -1,7 +1,7 @@
 [npc]
 PN Staff
 up
-44
+278
 1
 13
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 PN Staff
 down
-71
+271
 3
 9
 NULL

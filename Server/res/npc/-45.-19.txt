@@ -1,7 +1,7 @@
 [npc]
 Lance
 down
-118
+296
 6
 4
 Aerodactyl,64,Dragonite,64,Gyarados,64,Salamence,66,Kingdra,66,Flygon,70

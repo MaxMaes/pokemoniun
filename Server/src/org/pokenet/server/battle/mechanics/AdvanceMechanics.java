@@ -72,6 +72,7 @@ public class AdvanceMechanics extends BattleMechanics
 		else
 		{
 			double evasion = 1;
+
 			if(target.hasAbility("Snow Cloak") && field.getEffectByType(HailEffect.class) != null)
 			{
 				evasion = target.getEvasion().getMultiplier() * 1.2;
@@ -84,6 +85,25 @@ public class AdvanceMechanics extends BattleMechanics
 			{
 				evasion = target.getEvasion().getMultiplier();
 			}
+
+			// check if items make a difference
+			if(target.hasItem("Lax Incense"))
+			{
+				evasion *= 1.05;
+			}
+			else if(user.hasItem("Wide Lens"))
+			{
+				accuracy *= 1.1;
+			}
+			else if(target.hasItem("BrightPowder"))
+			{
+				evasion *= 1.1;
+			}
+			else if(user.hasItem("Zoom Lens"))
+			{
+				accuracy *= 1.2;
+			}
+
 			double effective = accuracy * user.getAccuracy().getMultiplier() / evasion;
 			if(effective > 1.0)
 				effective = 1.0;
@@ -102,11 +122,16 @@ public class AdvanceMechanics extends BattleMechanics
 		final BattleField field = attacker.getField();
 		PokemonType moveType = move.getType();
 		final boolean special = isMoveSpecial(move);
-
+		int power = move.getPower();
 		boolean isCritical = move.canCriticalHit() && isCriticalHit(move, attacker, defender);
 
 		double attack = attacker.getStat(special ? Pokemon.S_SPATTACK : Pokemon.S_ATTACK);
 
+		if((attacker.getName().equalsIgnoreCase("Cubone") || attacker.getName().equalsIgnoreCase("Marowak")) && attacker.hasItem("Thick Club"))
+		{
+			if(!special)
+				attack *= 2;
+		}
 		int defStat = special ? Pokemon.S_SPDEFENCE : Pokemon.S_DEFENCE;
 
 		StatMultiplier mul = defender.getMultiplier(defStat);
@@ -123,6 +148,8 @@ public class AdvanceMechanics extends BattleMechanics
 		{
 			if(!silent)
 				field.showMessage("It's super effective!");
+			if(attacker.getItemName().equalsIgnoreCase("Expert Belt"))
+				power *= 1.2;
 		}
 		else if(multiplier == 0.0)
 		{
@@ -138,7 +165,195 @@ public class AdvanceMechanics extends BattleMechanics
 		final boolean stab = attacker.isType(moveType);
 		double stabFactor = attacker.hasAbility("Adaptability") ? 2.0 : 1.5;
 
-		int damage = (int) (((int) ((int) ((int) (2 * attacker.getLevel() / 5.0 + 2.0) * attack * move.getPower() / defence) / 50.0) + 2) * (random / 100.0) * (stab ? stabFactor : 1.0) * multiplier);
+		// check if the user is holding an item
+		// and if the item it is holding effects his power
+		switch(attacker.getItemName())
+		{
+			case "Adamant Orb":
+				if(attacker.getName().equalsIgnoreCase("Dialga") && (move.getType() == PokemonType.T_DRAGON || move.getType() == PokemonType.T_STEEL))
+					power *= 1.2;
+				break;
+			case "Black Belt":
+				if(move.getType() == PokemonType.T_FIGHTING)
+					power *= 1.2;
+				break;
+			case "BlackGlasses":
+				if(move.getType() == PokemonType.T_DARK)
+					power *= 1.2;
+				break;
+			case "Charcoal":
+				if(move.getType() == PokemonType.T_FIRE)
+					power *= 1.2;
+				break;
+			case "Draco Plate":
+				if(move.getType() == PokemonType.T_DRAGON)
+					power *= 1.2;
+				break;
+			case "Dragon Fang":
+				if(move.getType() == PokemonType.T_DRAGON)
+					power *= 1.2;
+				break;
+			case "Dread Plate":
+				if(move.getType() == PokemonType.T_DARK)
+					power *= 1.2;
+				break;
+			case "Earth Plate":
+				if(move.getType() == PokemonType.T_GROUND)
+					power *= 1.2;
+				break;
+			case "Fist Plate":
+				if(move.getType() == PokemonType.T_FIGHTING)
+					power *= 1.2;
+				break;
+			case "Flame Plate":
+				if(move.getType() == PokemonType.T_FIRE)
+					power *= 1.2;
+				break;
+			case "Griseous Orb":
+				if(attacker.getName().equalsIgnoreCase("Giratina") && (move.getType() == PokemonType.T_DRAGON || move.getType() == PokemonType.T_GHOST))
+					power *= 1.2;
+				break;
+			case "Hard Stone":
+				if(move.getType() == PokemonType.T_ROCK)
+					power *= 1.2;
+				break;
+			case "Icicle Plate":
+				if(move.getType() == PokemonType.T_ICE)
+					power *= 1.2;
+				break;
+			case "Insect Plate":
+				if(move.getType() == PokemonType.T_BUG)
+					power *= 1.2;
+				break;
+			case "Iron Plate":
+				if(move.getType() == PokemonType.T_STEEL)
+					power *= 1.2;
+				break;
+			case "Light Ball":
+				if(attacker.getName().equalsIgnoreCase("Pikachu"))
+					attack *= 2;
+				break;
+			case "Lustrous Orb":
+				if(attacker.getName().equalsIgnoreCase("Palkia") && (move.getType() == PokemonType.T_DRAGON || move.getType() == PokemonType.T_WATER))
+					power *= 1.2;
+				break;
+			case "Magnet":
+				if(move.getType() == PokemonType.T_ELECTRIC)
+					power *= 1.2;
+				break;
+			case "Meadow Plate":
+				if(move.getType() == PokemonType.T_GRASS)
+					power *= 1.2;
+				break;
+			case "Metal Coat":
+				if(move.getType() == PokemonType.T_STEEL)
+					power *= 1.2;
+				break;
+			case "Mind Plate":
+				if(move.getType() == PokemonType.T_PSYCHIC)
+					power *= 1.2;
+				break;
+			case "Miracle Seed":
+				if(move.getType() == PokemonType.T_GRASS)
+					power *= 1.2;
+				break;
+			case "Muscle Band":
+				if(!special)
+					power *= 1.1;
+				break;
+			case "Mystic Water":
+				if(move.getType() == PokemonType.T_WATER)
+					power *= 1.2;
+				break;
+			case "NeverMeltIce":
+				if(move.getType() == PokemonType.T_ICE)
+					power *= 1.2;
+				break;
+			case "Odd Incense":
+				if(move.getType() == PokemonType.T_PSYCHIC)
+					power *= 1.2;
+				break;
+			case "Pink Bow":
+				if(move.getType() == PokemonType.T_NORMAL)
+					power *= 1.1;
+				break;
+			case "Poison Barb":
+				if(move.getType() == PokemonType.T_BUG)
+					power *= 1.2;
+				break;
+			case "Polkadot Bow":
+				if(move.getType() == PokemonType.T_BUG)
+					power *= 1.1;
+				break;
+			case "Rock Incense":
+				if(move.getType() == PokemonType.T_ROCK)
+					power *= 1.2;
+				break;
+			case "Sea Incense":
+				if(move.getType() == PokemonType.T_WATER)
+					power *= 1.2;
+				break;
+			case "Sharp Beak":
+				if(move.getType() == PokemonType.T_FLYING)
+					power *= 1.2;
+				break;
+			case "Silk Scarf":
+				if(move.getType() == PokemonType.T_NORMAL)
+					power *= 1.2;
+				break;
+			case "SilverPowder":
+				if(move.getType() == PokemonType.T_BUG)
+					power *= 1.2;
+				break;
+			case "Sky Plate":
+				if(move.getType() == PokemonType.T_FLYING)
+					power *= 1.2;
+				break;
+			case "Soft Sand":
+				if(move.getType() == PokemonType.T_GROUND)
+					power *= 1.2;
+				break;
+			case "Spell Tag":
+				if(move.getType() == PokemonType.T_GHOST)
+					power *= 1.2;
+				break;
+			case "Splash Plate":
+				if(move.getType() == PokemonType.T_WATER)
+					power *= 1.2;
+				break;
+			case "Spooky Plate":
+				if(move.getType() == PokemonType.T_GHOST)
+					power *= 1.2;
+				break;
+			case "Stone Plate":
+				if(move.getType() == PokemonType.T_ROCK)
+					power *= 1.2;
+				break;
+			case "Toxic Plate":
+				if(move.getType() == PokemonType.T_POISON)
+					power *= 1.2;
+				break;
+			case "TwistedSpoon":
+				if(move.getType() == PokemonType.T_PSYCHIC)
+					power *= 1.2;
+				break;
+			case "Wave Incense":
+				if(move.getType() == PokemonType.T_WATER)
+					power *= 1.2;
+				break;
+			case "Wise Glasses":
+				if(special)
+					power *= 1.1;
+				break;
+			case "Zap Plate":
+				if(move.getType() == PokemonType.T_ELECTRIC)
+					power *= 1.2;
+				break;
+			default:
+				break;
+		}
+
+		int damage = (int) (((int) ((int) ((int) (2 * attacker.getLevel() / 5.0 + 2.0) * attack * power / defence) / 50.0) + 2) * (random / 100.0) * (stab ? stabFactor : 1.0) * multiplier);
 
 		if(isCritical)
 		{
@@ -197,7 +412,7 @@ public class AdvanceMechanics extends BattleMechanics
 		if(move.hasHighCriticalHitRate())
 			moveFactor = this instanceof JewelMechanics ? 1 : 3;
 
-		int factor = user.getCriticalHitFactor() + (user.hasItem("Scope Lens") ? 1 : 0) /* TODO: + (FE/L * 1) */
+		int factor = user.getCriticalHitFactor() + (user.hasItem("Scope Lens") ? 1 : 0) + (user.hasItem("Stick") && user.getName().equalsIgnoreCase("Farfetch'd") ? 2 : 0) /* TODO: + (FE/L * 1) */
 				+ moveFactor;
 		double chance = 0.0;
 		switch(factor)

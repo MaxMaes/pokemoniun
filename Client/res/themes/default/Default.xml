@@ -11,6 +11,9 @@
     <fontDef name="pokefont_large" filename="pokefont-large.fnt" color="#000000">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
+    <fontDef name="pokefont_large_white" filename="pokefont-large.fnt" color="#FFFFFF">
+        <fontParam if="textSelection" color="#A3A8BF"/>
+    </fontDef>
     <fontDef name="normal" filename="font.fnt" color="#49432D">
         <fontParam if="error" color="red"/>
         <fontParam if="warning" color="orange"/>
@@ -469,7 +472,12 @@
         <theme name="hud" ref="-defaults">
             <theme name="topbar" ref="resizableframe_borderless">
                 <theme name="imagebutton" ref="imagebutton"/>
-                <theme name="label" ref="label"/>
+                <theme name="moneylabel" ref="label">
+                    <param name="font"><font>pokefont_large_white</font></param>
+                </theme>
+                <theme name="timelabel" ref="label">
+                    <param name="font"><font>pokefont_large_white</font></param>
+                </theme>
             </theme>
             <theme name="pokedexdialog" ref="resizableframe">
                 <param name="background"><image>pokedex</image></param>

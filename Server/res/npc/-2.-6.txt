@@ -1,7 +1,7 @@
 [npc]
 Fisher Raymond
 up
-46
+368
 26
 29
 Magikarp,22,Magikarp,22,Magikarp,22,Magikarp,22
@@ -15,7 +15,7 @@ false
 [npc]
 Fisher Andre
 left
-46
+368
 32
 26
 Gyarados,27
@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Lois
 left
-55
+266
 38
 9
 Skiploom,25,Ninetales,25
@@ -43,7 +43,7 @@ false
 [npc]
 Cooltrainer Aaron
 right
-81
+265
 6
 17
 Ivysaur,24,Charmeleon,24,Wartortle,24

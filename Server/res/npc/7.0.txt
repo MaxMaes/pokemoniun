@@ -15,7 +15,7 @@ false
 [npc]
 Gamer Dirk
 left
-167
+341
 57
 17
 Voltorb,18,Magnemite,18
@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Yasu
 down
-210
+353
 50
 15
 Rattata,17,Rattata,17,Raticate,17
@@ -43,7 +43,7 @@ false
 [npc]
 Gamer Darian
 left
-167
+336
 51
 5
 Growlithe,18,Vulpix,18
@@ -57,7 +57,7 @@ false
 [npc]
 Engineer Braxton
 left
-141
+344
 43
 9
 Magnemite,21
@@ -71,7 +71,7 @@ false
 [npc]
 Gamer Jasper
 up
-167
+340
 39
 16
 Bellsprout,18,Oddish,18
@@ -85,7 +85,7 @@ false
 [npc]
 Engineer Bernie
 up
-141
+343
 33
 19
 Magnemite,18,Magnemite,18,Magneton,18
@@ -99,7 +99,7 @@ false
 [npc]
 Gamer Hugo
 down
-167
+352
 16
 18
 Poliwag,18,Horsea,18
@@ -113,7 +113,7 @@ false
 [npc]
 Youngster Dillion
 up
-210
+253
 32
 9
 Sandshrew,19,Zubat,19
@@ -127,7 +127,7 @@ false
 [npc]
 Youngster Eddie
 down
-210
+253
 19
 8
 Ekans,21
@@ -141,7 +141,7 @@ false
 [npc]
 Youngster Dave
 up
-210
+353
 29
 11
 Nidoran-m,18,Nidorino,18

@@ -1,7 +1,7 @@
 [npc]
 Ecruteak Citizen
 right
-167
+274
 3
 4
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Ecruteak Citizen
 left
-81
+261
 6
 5
 NULL

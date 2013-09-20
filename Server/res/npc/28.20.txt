@@ -1,7 +1,7 @@
 [npc]
 Bug Catcher Kent
 left
-23
+354
 44
 124
 Ninjask,26
@@ -15,7 +15,7 @@ false
 [npc]
 Bug Maniac Donald
 down
-24
+354
 49
 121
 Wurmple,25,Silcoon,25,Beautifly,25
@@ -29,7 +29,7 @@ false
 [npc]
 Bug Catcher Greg
 right
-23
+354
 58
 129
 Volbeat,26,Illumise,26
@@ -43,7 +43,7 @@ false
 [npc]
 Bug Maniac Taylor
 down
-24
+354
 62
 120
 Wurmple,25,Cascoon,25,Dustox,25
@@ -57,7 +57,7 @@ false
 [npc]
 Fisherman Eugene
 down
-46
+368
 48
 105
 Magikarp,30,Tentacool,21,Feebas,27,Carvanha,24
@@ -71,7 +71,7 @@ false
 [npc]
 Pokemon Ranger Catherine
 right
-55
+357
 70
 93
 Gloom,27,Roselia,27
@@ -85,7 +85,7 @@ false
 [npc]
 Pokemon Ranger Jackson
 left
-86
+355
 43
 65
 Breloom,28
@@ -99,7 +99,7 @@ false
 [npc]
 Bird Keeper Phil
 up
-80
+269
 52
 48
 Tailow,25,Wingull,25,Swellow,25
@@ -113,7 +113,7 @@ false
 [npc]
 Ninja Boy Takashi
 down
-126
+261
 48
 19
 Ninjask,27
@@ -127,10 +127,10 @@ false
 [npc]
 Ninja Boy Hideo
 left
-126
+261
 49
 35
-koffing,26,Koffing,26
+Koffing,26,Koffing,26
 2
 -1
 0
@@ -141,7 +141,7 @@ false
 [npc]
 Ninja Master Sasuke
 down
-221
+261
 43
 2
 Ninjask,79,Shedinja,80

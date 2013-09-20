@@ -1,7 +1,7 @@
 [npc]
 Youngster Albert
 right
-210
+353
 18
 22
 Rattata,6,Zubat,8
@@ -15,7 +15,7 @@ false
 [npc]
 Picnicker Liz
 left
-30
+273
 16
 30
 Nidoran-f,9
@@ -29,7 +29,7 @@ false
 [npc]
 Camper Roland
 up
-28
+355
 9
 45
 Nidoran-m,9
@@ -43,7 +43,7 @@ false
 [npc]
 Youngster Gordon
 up
-210
+353
 10
 63
 Wooper,10
@@ -57,7 +57,7 @@ false
 [npc]
 Fisher Ralph
 up
-46
+368
 18
 56
 Goldeen,10
@@ -71,7 +71,7 @@ false
 [npc]
 Fisher Justin
 down
-46
+368
 14
 49
 Magikarp,5,Magikarp,5,Magikarp,15,Magikarp,5
@@ -85,7 +85,7 @@ false
 [npc]
 Fisher Henry
 left
-46
+368
 12
 48
 Poliwag,8,Poliwag,8
@@ -99,7 +99,7 @@ false
 [npc]
 Bird Keeper Peter
 up
-94
+269
 17
 82
 Pidgey,6,Pidgey,6,Spearow,8
@@ -173,7 +173,7 @@ false
 [warp]
 2
 3
-22
+19
 20
 -36
 -49
@@ -182,7 +182,7 @@ false
 [warp]
 2
 2
-22
+19
 20
 -36
 -49
@@ -191,8 +191,8 @@ false
 [warp]
 2
 4
-22
-20
+19
+21
 -36
 -49
 0

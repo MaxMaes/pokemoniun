@@ -1,7 +1,7 @@
 [npc]
 Blackbelt Kiyo
 up
-105
+367
 13
 2
 NULL

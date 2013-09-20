@@ -28,7 +28,7 @@
 [npc]
 Fisher Scott
 down
-46
+368
 10
 93
 Qwilfish,30,Qwilfish,30,Seaking,34
@@ -42,7 +42,7 @@ false
 [npc]
 Psychic Richard
 right
-83
+321
 13
 80
 Espeon,36
@@ -56,7 +56,7 @@ false
 [npc]
 Cooltrainer Joyce
 right
-55
+266
 8
 52
 Pikachu,32,Blastoise,36
@@ -70,7 +70,7 @@ false
 [npc]
 Cooltrainer Gaven
 left
-81
+265
 9
 38
 Victreebel,32,Kingler,32,Flareon,32
@@ -84,7 +84,7 @@ false
 [npc]
 Cooltrainer Jake
 left
-81
+268
 14
 24
 Parasect,33,Golduck,35
@@ -98,7 +98,7 @@ false
 [npc]
 Cooltrainer Beth
 right
-55
+267
 5
 8
 Rapidash,36

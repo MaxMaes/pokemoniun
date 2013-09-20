@@ -22,7 +22,7 @@ public class Character implements Positionable
 	protected int m_sprite, m_mapX, m_mapY, m_x, m_y, m_id;
 	private boolean m_boostPriority = false;
 	protected Direction m_facing = Direction.Down;
-	private boolean m_isVisible, m_isSurfing;
+	private boolean m_isVisible, m_isSurfing, isMoving = false;
 	private int TRANSPORT_MULTIPLIER = 1;
 
 	/**
@@ -123,9 +123,17 @@ public class Character implements Positionable
 	 */
 	public Direction getNextMovement()
 	{
-		if(m_movementQueue.size() == 0)
-			return null;
 		return m_movementQueue.poll();
+	}
+	
+	public Direction peekNextMovement()
+	{
+		return m_movementQueue.peek();
+	}
+	
+	public boolean isMoving()
+	{
+		return isMoving;
 	}
 
 	/**
@@ -197,15 +205,23 @@ public class Character implements Positionable
 	}
 
 	/**
-	 * Processes and checks all movements queued
+	 * Processes and checks the top movement queued
+	 * @return 
 	 */
-	public void move()
+	public boolean move()
 	{
-		/* Moves player until queue becomes empty,
-		 * collision encountered or pokemon encountered */
-		while(move(getNextMovement()))
+		/* Moves player with the movement with the most priority*/
+		if(m_facing == peekNextMovement())
 		{
+			move(getNextMovement());
+			isMoving = true;
+			return true;
 		}
+		else
+		{
+			isMoving = false;
+			return false;			
+		}		
 	}
 
 	/**

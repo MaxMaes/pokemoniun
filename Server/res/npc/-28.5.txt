@@ -1,7 +1,7 @@
 [npc]
 Seasond_Sailor
 up
-142
+395
 13
 14
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Bug Catcher Cale
 left
-23
+354
 12
 31
 Caterpie,10,Weedle,10,Metapod,10,Kakuna,10
@@ -15,7 +15,7 @@ false
 [npc]
 Lass Ali
 right
-72
+272
 10
 28
 Pidgey,12,Oddish,12,Bellsprout,12
@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Timmy
 left
-210
+353
 12
 25
 Sandshrew,14,Ekans,14
@@ -43,7 +43,7 @@ false
 [npc]
 Lass Reli
 right
-72
+272
 10
 22
 Nidoran-m,16,Nidoran-f,16
@@ -57,7 +57,7 @@ false
 [npc]
 Camper Ethan
 left
-28
+355
 12
 19
 Mankey,18
@@ -71,7 +71,7 @@ false
 [npc]
 Camper Shane
 up
-28
+357
 5
 21
 Rattata,14,Ekans,14

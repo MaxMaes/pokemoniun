@@ -717,6 +717,8 @@ public class GameClient extends BasicGame
 		{
 			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove() && !getHUD().hasShop())
 			{
+			{
+				System.out.println("Direction" + m_ourPlayer.getDirection());
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
@@ -737,7 +739,7 @@ public class GameClient extends BasicGame
 						move(Direction.Up);
 						m_ourPlayer.queueMovement(Direction.Up);
 					}
-					else if(m_ourPlayer.getDirection() != Direction.Up)
+					else if (m_ourPlayer.getDirection() != Direction.Up)
 					{
 						move(Direction.Up);
 						m_ourPlayer.queueMovement(Direction.Up);
@@ -769,6 +771,7 @@ public class GameClient extends BasicGame
 						m_ourPlayer.queueMovement(Direction.Right);
 					}
 				}
+			}
 				else if(key == Input.KEY_C)
 					getHUD().toggleChat();
 				else if(key == Input.KEY_1)

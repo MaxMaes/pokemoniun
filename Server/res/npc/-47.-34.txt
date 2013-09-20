@@ -2,8 +2,8 @@
 Pokemon League Officer
 down
 36
-9
-2
+20
+10
 NULL
 0
 -1
@@ -16,8 +16,8 @@ false
 Ticket_Vendor
 right
 36
-6
-6
+12
+24
 NULL
 0
 -1
@@ -27,8 +27,8 @@ false
 false
 [/npc]
 [warp]
-8
-11
+19
+28
 8
 6
 2
@@ -36,8 +36,8 @@ false
 0
 [/warp]
 [warp]
-8
-1
+19
+9
 8
 153
 2
@@ -45,8 +45,8 @@ false
 0
 [/warp]
 [warp]
-5
-6
+11
+24
 52
 27
 1

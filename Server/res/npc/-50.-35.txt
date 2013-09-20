@@ -1,7 +1,7 @@
 [npc]
 Citizen
 down
-72
+382
 3
 4
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Citizen
 left
-100
+261
 8
 4
 NULL

@@ -1,7 +1,7 @@
 [npc]
 Bird Keeper Denis
 left
-83
+269
 8
 3
 Spearow,18,Fearow,20,Spearow,18
@@ -15,7 +15,7 @@ false
 [npc]
 Sailor Ernest
 down
-184
+395
 8
 11
 Machop,18,Poliwhirl,18,Machop,18

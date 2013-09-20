@@ -1,10 +1,10 @@
 [npc]
 Pokemon Trainer Brendan
 down
-19
+385
 31
 10
-Aggron,85,Breloom,82,Swellow,83,Wailord,87,Manetric,86,Blaziken,88
+Aggron,85,Shiftry,82,Swellow,83,Swampert,87,Manetric,86,Rhyperior,88
 6
 -1
 0

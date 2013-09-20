@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="100" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Cliffs01.tsx"/>
+ <tileset firstgid="231" source="Path0.tsx"/>
+ <tileset firstgid="527" source="various3.tsx"/>
+ <tileset firstgid="1063" source="Buildings7.tsx"/>
+ <tileset firstgid="1415" source="Deep Water.tsx"/>
+ <tileset firstgid="1510" source="Sevii Island Set 1.tsx"/>
+ <layer name="Walkable" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2YTRLCIAyF6Q08gCt11aqL+nP/4ziewjKamZQBAiWhZcybeQu1zUdCihRjVCqVSqVSta6XuikP3dzXyadOliHBsTH35msfb0hgUfeFfi9lnIn7cF4ptXgsqHfvyeEQyal34qeM0WXY+JcIY+z8uYSuP6J4cI37mbOXffPJ+dxgSTGW9nGuoT+449Zi5PQ551y0yDAeltScS+cCjOfkmyDDxr4L1mnLtjWlxNkjEs9AbQZ8x7nmhcZbg0E5thfhYvTK2BRjrMDIcSsM6j6XAaLiYlHjC62BlHLXzpR1N9VUPSUZnLlJM0p7mptTc07Avv/Emowl8VLGWhp3DQbszcGcDBgzdUbDkYPk/l86h1qMtd+TpHrZ7m/d8ytujntmJ8GIndlx1mv8PesuS2LOgQVeq/fUdZzzvms2MN6WjPWvjJT+eu/mlsjBxjWIxV0zNy7+zJ0DFmftIF5MpRxclw+j3diZECcAAA==
+  </data>
+ </layer>
+ <layer name="Grass" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YywqAIBRFURv1/3/cVEgi8b487gUNa5ehUq0BAACggvt6HxEdT5UbM+etPMfovY6utTJOfxvAqbznRMT8y2pYt1QafSdaxDpP47yGpYj7VBn3zIZl92vdtepENAAAeRT2XZV/emrftp5ozDUAFbvvV30DtSit+VX2lQejue+GECcAAA==
+  </data>
+ </layer>
+ <layer name="Water" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3ROwqAQAxF0Wmsnf0Xjm5BbXU/6iZM0MAgIvgJNvdA2jxeEgIAAAAAAAAAAAAAAADwrzr67q9k/+KcMcn+sQwhxW08OmnGnI1HJ+8M/cVQ+mZoh1TID2SaYsuw33zxF+vQyu5uH8v5oo/tT9l+nT7LeNvH/tweMrr9bnV2P816knOVcdbr7t3O7rQCW8JdXxAnAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2YCwrCMAxACzuB81LeWL2dCA5Gyf/TzpIHg8nWvGRrY7W1oiiKoigKnv13ZDuy41F1WPyYIxJpPI9XMha657m19t7iHF6iHFRdV6lD8+ytDi//5KDiQH1jFxwaB3Td05Ow+cHVocnp7KDiUNcejA9zQHlytUjQOjL6/d6dc46X4D1DjqwaIFcmIx2Zrj729/x++nxj3Jq8tL0LGueB2oeNdmg8fV8d4cAYsY5XcUCeLFbref/uODxXQrJ/lD4b6j5rXGwPF8XMuRXZb2Y6pNc1Hs4R8Z0sfV7n+7T/NWQ4JO/UuoY1Yz1zK9Nh6TXannR1hwRLz4+aS5GOYwzl5/LyAMXwrD/Kk+2AnNGePka0A4sR4ZDM51mO6HXp7UEzHZo8DqDf1JKcMuqgiBqzgoNjhEM6DptfWqz5WT3ZSN/HynwAn+xs2hAnAAA=
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2ZzW7bQAyEdSiQ5Jj46BqFn8HNsb0Gff8Xqo1qgOlohkspTosAIrCIfxR+y58lKXmadtlll1122WWXzy7P83r5wPW/Gd+u6+vKdQ6MY7j+tJJzDvt1+nkvBx9GK8knTj9zT3dmqH4sSPJPl5H0s4609xHDXctS2YUYv5dRCXR2Gdgv7/HeDJVObLqMtefr4boe5/VqGMdpedYfG+uJ9qicizBepqUtHf0HYVQ5mOpJtQ6Gofmh/lR/sXCt/XFdP6c/tYQZnAvMUP1sC/wBOcyct/n9r5nj6jPE6WfGTf9l+tv3F+FOpN+dG9b5PC0ZSX+q6S7eI0bSnxjH+a/WW/WT5pbTP+pNbI/Trwynfw0D7ysGn4N/ydDc4vqBWsXfoXYlxu084KxBf1VbnE2OozaAM9LvfMi1kjnOhpG4ODm9ymAbtjB0//xaY82CugjhWcsxEqdiwDZluJlOe5faUDG6M6jmq9qwhsHng/N3zdkbMTSGn52hea763ezTZaAPVnmVZp975lWafe7JcHWkYlS1UWt8NZNon4XwHJFmO517nU2uz6qM9p/8lnLLzVRrZZRbPGulfvdAn7vXFUPjW/U7fH7zx0leV4zO2QfDzRJP9H33/iAx3FlXe1L+phlli1S10fV3fh4D0ftPN3d1GI4DQd5rz3P3oiM/IZ9Tjee9an91/Zb1M8fNRC6uuudkA+uscgu2VAy9p9M4dHKrYrjndo4xmh219uGvy0dldO7VmAG/gMN+Zo6r8R0G12/1P/xcnY0Ow+nWZ50jRtVP0nMnnY8qRtUbK9vASDbwfVT1vGELg+OUcuxeDI5ZN4chet/BZ9k9Pz5Py/h3bMB513oEOzgnuNfxLFfFhRnsJ7zmZ0+a46y/ir9jsD2q381fo/izD7g/IB6sX/2l53bESH1CnwWm30u4B0PS7yp8Lfp00s/2pDxz8627Nunn+SAxUg/p9FHXG9z/ff+yzKtuH3X9v5pROa86fVRzmWPizgn7tTNnJv18vjS/8L3OTyNRf2m/Psi1GouOVGe/YmyZxd39hGNwvLeI5ppjcLzfy3B5w73JyW+kXxMCECcAAA==
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <layer name="WalkBehind" width="25" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OIQEAAAgDsAvi0D8fES4xW4IlAAAAAAAAAABAs/M9AJoD5s4CPxAnAAA=
+  </data>
+ </layer>
+</map>

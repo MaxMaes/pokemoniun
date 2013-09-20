@@ -1,7 +1,7 @@
 [npc]
 Medium
 down
-163
+260
 3
 5
 NULL

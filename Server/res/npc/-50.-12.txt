@@ -1,7 +1,7 @@
 [npc]
 Mr. Psychic
 left
-141
+274
 8
 5
 NULL

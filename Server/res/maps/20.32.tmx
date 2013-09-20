@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="49" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="Mt Battle Tileset.tsx"/>
+ <tileset firstgid="346" source="SinnohSet11.tsx"/>
+ <tileset firstgid="1466" source="Caveset.tsx"/>
+ <tileset firstgid="1658" source="NumberTileset2.tsx"/>
+ <tileset firstgid="1856" source="Vulcano Tileset.tsx"/>
+ <tileset firstgid="1934" source="Buildings7.tsx"/>
+ <layer name="Walkable" width="49" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WTRKCMAyFWdj7X8o7iDuXHkO76AhImoTmr9A38xaM7fC+JinOaZrm4eHh4a/fN/8Mw/+myDujJKt3hh4yXYVBosc950Tjnb3W8qwcZ7F1PfL/jRZ7n1drfisOqK61TJC8OLgMUF6MJQoDdt7RGSj9UlsXhYE6w4MhBgN1HqS+ddLzwKkDlWG7DntuZeDcS5QsRRIM1Lu1pZcsGbIe6ZftmfAaeTBAHHu5jsyzFQOWj7NGk4FiyfsUywsxlN/2mDwMZeDKm0OCwYOj9s4WeeeXknZvaJw9l+MIJ2WPhqxnQ1NStfDITuHIuqe1KXut89dy9HD+GhwRtMzxSrBr+yKJwxBVV2WINBdLcbJHm++iHntoK0uGD73FTrBIJgAA
+  </data>
+ </layer>
+ <layer name="Collisions" width="49" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+WYTU7DMBBGsyD3PxVsKWVRWNHuOAZ4MdIwnf8ZO5X4pKitnUTvZWwn6bb9zXnfttO+sfl+ut9WZnC9C2wQjR/nUT28/COPWA8vP+zHOcB22mubNVY4jyg/zox6ZDyy/JBqPTjeqEeW3xpX3nR4aLH4IZH5EeGtenj5PR4V3qxHlP9srFWrPaL8IxeHA/X4FM5V9YjwQ5t3Xkj14NiyHhl+mqiDxhb16OD3ekipeHTyexw8Hh/7fRsNnk+XRv6qg8TMtWkOUf6X3/Yr2ijvlemH78+BtYm2aQ4eJ8x/K9xHv4IemBv3Ww7cWBvR+CNjSPOg9xD6Gzw8Dl4erV/rk66T5QBtlkPkmlpzdqVDZm3xPnNz+3U7ePglB29mOGis3vMf6WAx/zcHr8fs+TDb4Yi11Xt+4LPWVi6P6BBde49yGHlT+vBx0nvnyKvS1+WgPc+MSB4eB42fex7LOoxYHtz/d5l9NH7NYfDh53mJ1/LoisQP7fR95SbwH+Xh4ec8JP7VHhF+6qHxr/LI8GMPi1/zsN6LLW48pjP88Onht667dg+Rot0zIvy3AL/mER1b2rt4lD9ahw6Pbv5MHSwPGOM4dD3v5M/WYda6tLoOXR5V/mod8NjhxhAN3feqcK2qA8cUdejw6OTPOlQ9OvkrDhWPTn7JxXtM1mMGf8Uh4zGDv+oQ9fgBw0mDfUgmAAA=
+  </data>
+ </layer>
+ <layer name="Walkable" width="49" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RRU4DcRiG8WkCSXG5AG5HwKEsWMACaNEL4HYB3C6A6wFwPQCua4Jrwha3DU9CSGgDmbLpn4HvSX6LmdX7zWiaJEmSJEmSJEmS9B+LRRzikYBEJCEZKUiFBWmK9n3VlZv9cxaykQMrbMhFHvJRgEIUuXKkTo43FKMEpShDOSpQiSpUowa1rhz5w+pQjwY0ognNaEEr2tCODkX7nKkTXehGD3rRh34MYBBDGMaImom6jWIM45jAJKYwjRnMYg7zWFC0Ua9FLGEZK1jFGtaxgU1sYRs7ijbqtYd9HOAQRzjGCU5xhnNc4FLNRN2ucYNb3OEeD3jEE57xgldVA53IbNI0D3jCC97wgS/84I8ABJpUL/2+ILYFIwShCEM4IhCJKEQj5hffIP3Odt3tSZIkSZKkvgyzpmV+Ic2sepnzfdxg+8SoN/yF/+D4L4x0g9VhuxFvSDe/s3za/vHOaFkM+P0dkxt+1hutwEDTSCYAAA==
+  </data>
+ </layer>
+ <layer name="Walkable" width="49" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OsQ2AMBRDwV9l/zHICmEVskJYATdIaRgA6U56cusqAAAAAF5Xq5rpSH3bP1n5e6eRzm0BAAAAAL48Vzla7kgmAAA=
+  </data>
+ </layer>
+</map>

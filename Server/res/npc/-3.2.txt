@@ -1,7 +1,7 @@
 [npc]
 Hiker Anthony
 down
-101
+365
 5
 15
 Geodude,11,Machop,11

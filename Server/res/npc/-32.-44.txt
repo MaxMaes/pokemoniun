@@ -29,7 +29,7 @@ false
 [npc]
 Radio Tower Staff
 up
-45
+351
 6
 6
 NULL
@@ -43,7 +43,7 @@ false
 [npc]
 Mary
 down
-64
+382
 15
 8
 NULL

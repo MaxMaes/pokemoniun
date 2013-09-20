@@ -1,7 +1,7 @@
 [npc]
 Hiker Franklin
 right
-101
+365
 11
 4
 Machop,15,Geodude,15
@@ -29,7 +29,7 @@ false
 [npc]
 Youngster Joey
 down
-210
+353
 18
 2
 Rattata,15,Spearow,15
@@ -43,7 +43,7 @@ false
 [npc]
 Youngster Dan
 left
-210
+353
 22
 4
 Slowpoke,17
@@ -57,7 +57,7 @@ false
 [npc]
 Picnicker Kelsey
 right
-30
+357
 22
 8
 Nidoran-m,15,Nidoran-f,15
@@ -71,7 +71,7 @@ false
 [npc]
 Hiker Nob
 up
-101
+366
 27
 9
 Geodude,13,Geodude,13,Geodude,13,Machop,13
@@ -85,7 +85,7 @@ false
 [npc]
 Camper Flint
 down
-28
+355
 28
 4
 Rattata,14,Ekans,14
@@ -99,7 +99,7 @@ false
 [npc]
 Youngster Chad
 up
-210
+353
 34
 6
 Ekans,14,Sandshrew,14
@@ -113,7 +113,7 @@ false
 [npc]
 Lass Haley
 down
-72
+272
 42
 5
 Oddish,13,Oddish,13,Pidgey,13

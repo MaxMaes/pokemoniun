@@ -1,7 +1,7 @@
 [npc]
 Olivine Citizen
 down
-141
+274
 3
 4
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Daughter
 down
-128
+262
 8
 8
 NULL

@@ -9,7 +9,6 @@ import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
 import org.pokenet.server.protocol.ServerMessage;
 
-/* TODO: Rewrite to Switch case for Java 1.7 Readability. */
 public class TravelEvent implements MessageEvent
 {
 

@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer Darin
 up
-81
+265
 19
 8
 Dragonair,37
@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Cara
 down
-55
+375
 8
 8
 Horsea,33,Horsea,33,Seadra,35
@@ -29,7 +29,7 @@ false
 [npc]
 Twin Lea
 down
-129
+374
 4
 17
 Dratini,35
@@ -43,7 +43,7 @@ false
 [npc]
 Twin Pia
 down
-129
+373
 5
 17
 Dratini,35

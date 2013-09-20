@@ -1,7 +1,7 @@
 [npc]
 Joey
 left
-100
+341
 20
 32
 Rattata,5
@@ -29,7 +29,7 @@ false
 [npc]
 Don
 down
-23
+357
 18
 8
 Caterpie,3,Caterpie,3

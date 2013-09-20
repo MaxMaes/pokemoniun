@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer Emma
 up
-55
+266
 4
 32
 Poliwhirl,28
@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Gwen
 down
-55
+267
 6
 16
 Eevee,26,Flareon,22,Vaporeon,22,Jolteon,22
@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Nick
 down
-81
+265
 16
 22
 Charmander,26,Squirtle,26,Bulbasaur,26

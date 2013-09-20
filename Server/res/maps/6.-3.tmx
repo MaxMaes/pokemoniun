@@ -22,7 +22,7 @@
  <tileset firstgid="13161" source="Pokemon Day Care Remake.tsx"/>
  <layer name="Walkable" width="48" height="41">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XTQqAIBBAYTfd/wweoF1/i0KP1iwUIipCSGfoDbydwofgYnznnP9pgzSmpgr38OPHjx8/fvz48X/rz2PVb/398ePHjx8/fvzt/OfR6F+k/mWzQn9p+Mtbpe2hcHDGmzNX+4GWtPxT/Pjx42/twW+rGv4dN18SYcAeAAA=
+   H4sIAAAAAAAAC+3XQQqAIBBAUTfd/wweoF1mi6KO1iwKXFiEkM7gH/g7hYfgYvzgnO+0SQpXc4V7+PHjx48fP378+P/132PVb/398ePHjx8/fvzt/Olo9S/S+LGo0F8a/vJWaXtpT5zHw5ncfqAlLf8UP378+Ft78Nuqhv8EGIXjrcAeAAA=
   </data>
  </layer>
  <layer name="Walkable" width="48" height="41">

@@ -19,7 +19,7 @@
 [npc]
 Red's Mother
 left
-10
+297
 8
 4
 NULL

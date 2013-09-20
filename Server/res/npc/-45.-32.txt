@@ -1,7 +1,7 @@
 [npc]
 Name Rater
 down
-159
+280
 5
 5
 NULL

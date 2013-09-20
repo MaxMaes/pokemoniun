@@ -1,7 +1,7 @@
 [npc]
 Sage Troy
 down
-164
+276
 7
 11
 Bellsprout,7,Hoothoot,7
@@ -15,7 +15,7 @@ false
 [npc]
 Sage Jin
 right
-164
+276
 7
 14
 Bellsprout,6
@@ -29,7 +29,7 @@ false
 [npc]
 Sage Neal
 left
-164
+276
 12
 12
 Bellsprout,6
@@ -43,7 +43,7 @@ false
 [npc]
 Sage Li
 down
-164
+276
 10
 3
 Bellsprout,7,Hoothoot,10,Bellsprout,7

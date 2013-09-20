@@ -1,7 +1,7 @@
 [npc]
 Supernerd Hugh
 right
-195
+352
 12
 26
 Seadra,39

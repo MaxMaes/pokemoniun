@@ -1,7 +1,7 @@
 [npc]
 Camper Spencer
 down
-28
+357
 15
 44
 Sandshrew,17,Sandslash,17,Zubat,19
@@ -15,7 +15,7 @@ false
 [npc]
 Picnicker Tiffany
 down
-30
+358
 11
 29
 Clefairy,20
@@ -29,7 +29,7 @@ false
 [npc]
 Pokemaniac Brent
 down
-152
+320
 15
 24
 Lickitung,19
@@ -43,7 +43,7 @@ false
 [npc]
 Pokemaniac Ben
 left
-152
+117
 15
 9
 Slowbro,19
@@ -57,7 +57,7 @@ false
 [npc]
 Pokemaniac Ron
 down
-152
+351
 16
 11
 Nidoking,19
@@ -71,7 +71,7 @@ false
 [npc]
 Fisher Marvin
 right
-46
+368
 6
 20
 Magikarp,10,Gyarados,10,Magikarp,15,Gyarados,15

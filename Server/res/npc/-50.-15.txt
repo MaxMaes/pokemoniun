@@ -1,7 +1,7 @@
 [npc]
 Know It All
 down
-104
+367
 4
 5
 NULL

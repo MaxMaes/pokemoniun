@@ -10,7 +10,7 @@
 [npc]
 Pewter City citizen
 right
-167
+332
 4
 3
 NULL
@@ -24,7 +24,7 @@ FALSE
 [npc]
 Grandson
 left
-120
+261
 6
 3
 NULL

@@ -51,7 +51,6 @@ public class PartyInfoDialog extends Widget
 	/** Initializes interface */
 	public void initGUI()
 	{
-		int y = -8;
 		pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
@@ -69,7 +68,6 @@ public class PartyInfoDialog extends Widget
 			m_container[i].setVisible(true);
 
 			add(m_container[i]);
-			y += 41;
 			String respath = System.getProperty("res.path");
 			if(respath == null)
 				respath = "";

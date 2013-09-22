@@ -2029,7 +2029,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(getParty()[i] != null)
 		{
-			String data = PokemonSpecies.getDefaultData().getPokemonByName(getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + getParty()[i].getName() + "," + getParty()[i].getHealth() + ","
+			String data = PokemonSpecies.getDefaultData().getPokemonByName(getParty()[i].getSpeciesName()).getPokedexNumber() + "," + getParty()[i].getName() + "," + getParty()[i].getHealth() + ","
 					+ getParty()[i].getGender() + "," + (getParty()[i].isShiny() ? 1 : 0) + "," + getParty()[i].getStat(0) + "," + getParty()[i].getStat(1) + "," + getParty()[i].getStat(2) + ","
 					+ getParty()[i].getStat(3) + "," + getParty()[i].getStat(4) + "," + getParty()[i].getStat(5) + "," + getParty()[i].getTypes()[0] + ","
 					+ (getParty()[i].getTypes().length > 1 && getParty()[i].getTypes()[1] != null ? getParty()[i].getTypes()[1] + "," : ",") + getParty()[i].getExp() + "," + getParty()[i].getLevel()

@@ -698,7 +698,6 @@ class ItemPopup extends Widget
 class TeamPopup extends Widget
 {
 	private Button[] pokeButtons;
-	private Label m_details;
 	private ItemPopup m_parent;
 	private int item;
 	private boolean use;

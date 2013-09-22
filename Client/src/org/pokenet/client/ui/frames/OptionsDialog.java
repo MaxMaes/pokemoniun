@@ -62,8 +62,7 @@ public class OptionsDialog extends ResizableFrame
 				m_options.setSurroundingMapsEnabled(!m_disableMaps.isActive());
 				m_options.setWeatherEnabled(!m_disableWeather.isActive());
 				m_options.saveSettings();
-				// GameClient.getInstance().messageDialog(translated.get(19),
-				// getDisplay()); TODO
+				GameClient.getInstance().showMessageDialog(translated.get(19));
 				GameClient.getInstance().reloadOptions();
 				GameClient.getInstance().getHUD().toggleOptions();
 			}

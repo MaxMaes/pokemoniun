@@ -325,11 +325,11 @@ public class OurPlayer extends Player
 		{
 			/* Set sprite, name, gender and hp */
 			m_pokemon[i] = new OurPokemon();
+			m_pokemon[i].setSpriteNumber(Integer.parseInt(info[0]));
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));
 			m_pokemon[i].setGender(Integer.parseInt(info[3]));
 			m_pokemon[i].setShiny(info[4].equals("1"));
-			m_pokemon[i].setSpriteNumber(Integer.parseInt(info[0]) + 1);
 			m_pokemon[i].setMaxHP(Integer.parseInt(info[5]));
 			/* Stats */
 			m_pokemon[i].setAtk(Integer.parseInt(info[6]));

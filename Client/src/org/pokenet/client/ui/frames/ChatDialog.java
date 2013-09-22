@@ -87,7 +87,8 @@ public class ChatDialog extends Widget
 							addWhisperLine(getSelectedChatboxName(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + input.getText());
 						}
 					input.setText("");
-					input.requestKeyboardFocus();
+					input.giveupKeyboardFocus();
+					giveupKeyboardFocus();
 				}
 			}
 		};
@@ -124,19 +125,28 @@ public class ChatDialog extends Widget
 	 * 
 	 * @param text
 	 */
-	public void addLineTo(String text, String chatbox)
+	public void addLineTo(final String text, final String chatbox)
 	{
-		SimpleTextAreaModel chat = chats.get(chatbox);
-		ArrayList<String> lines = chatlines.get(chatbox);
-		lines.add(text);
-
-		String txt = "";
-		for(String s : lines)
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
-			txt += s;
-			txt += "\n";
-		}
-		chat.setText(txt);
+			@Override
+			public void run()
+			{
+				SimpleTextAreaModel chatModel = chats.get(chatbox);
+				ArrayList<String> lines = chatlines.get(chatbox);
+				lines.add(text);
+
+				String txt = "";
+				for(String s : lines)
+				{
+					txt += s;
+					txt += "\n";
+				}
+				chatModel.setText(txt);
+				chat.validateLayout();
+				chat.setScrollPositionY(chat.getMaxScrollPosY());
+			}
+		});
 	}
 
 	/**

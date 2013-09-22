@@ -219,8 +219,10 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
-			m_locations.addElement("Four Island - canceled");
-			m_locations.addElement("Five Island - canceled");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
 		}
 		if(currentLocation.equalsIgnoreCase("two"))
 		{
@@ -228,8 +230,10 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Three Island - $5k");
-			m_locations.addElement("Four Island - canceled");
-			m_locations.addElement("Five Island - canceled");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
 		}
 		if(currentLocation.equalsIgnoreCase("three"))
 		{
@@ -237,8 +241,10 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
-			m_locations.addElement("Four Island - canceled");
-			m_locations.addElement("Five Island - canceled");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
 		}
 		if(currentLocation.equalsIgnoreCase("four"))
 		{
@@ -248,7 +254,9 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
 			m_locations.addElement("Five Island - $5k");
-			m_locations.addElement("Navel Rock");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
 		}
 		if(currentLocation.equalsIgnoreCase("five"))
 		{
@@ -258,7 +266,48 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
 			m_locations.addElement("Four Island - $5k");
-			m_locations.addElement("Navel Rock");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("six"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Vermillion City - $5k");
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("five"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Vermillion City - $5k");
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("gateon"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Olivine City - $10k");
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
+			{
+				m_locations.addElement("Lilycove - $10k");
+				m_locations.addElement("Slateport - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Lilycove - $125k");
+				m_locations.addElement("Slateport - $125k");
+			}
 		}
 	}
 

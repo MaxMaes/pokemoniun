@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="16" tileheight="16">
+<properties>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Path0.tsx"/>
  <tileset firstgid="527" source="various3.tsx"/>

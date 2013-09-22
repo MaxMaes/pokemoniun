@@ -55,6 +55,14 @@ public class BoatEvent implements MessageEvent
 		{
 			boat = "five";
 		}
+		else if(mapx == -28 && mapy == 12)
+		{
+			boat = "six";
+		}
+		else if(mapx == -28 && mapy == 15)
+		{
+			boat = "seven";
+		}
 		else if(mapx == 40 && mapy == -47)
 		{
 			boat = "snowpoint";
@@ -66,6 +74,10 @@ public class BoatEvent implements MessageEvent
 		else if(mapx == 2 && mapy == -45)
 		{
 			boat = "iron";
+		}
+		else if(mapx == 11 && mapy == 42)
+		{
+			boat = "gateon";
 		}
 		GameClient.getInstance().getHUD().showBoatDialog(boat);
 

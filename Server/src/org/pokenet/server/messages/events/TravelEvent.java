@@ -324,8 +324,13 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Four"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(416);
 					p.setY(1048);
@@ -338,12 +343,55 @@ public class TravelEvent implements MessageEvent
 			}
 			else if(travel.contains("Five"))
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR)
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
 				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
 					p.setIsTaveling(false);
 					p.setX(512);
 					p.setY(664);
 					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 8), null);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+			else if(travel.contains("Six"))
+			{
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
+				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
+					p.setIsTaveling(false);
+					p.setX(416);
+					p.setY(760);
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 11), null);
+					message.init(ClientPacket.UPDATE_COORDS.getValue());
+					message.addInt(p.getX());
+					message.addInt(p.getY());
+					session.Send(message);
+				}
+			}
+			else if(travel.contains("Seven"))
+			{
+				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
+				{
+					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					{
+						p.setMoney(p.getMoney() - 5000);
+						p.updateClientMoney();
+					}
+					p.setIsTaveling(false);
+					p.setX(512);
+					p.setY(1944);
+					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 14), null);
 					message.init(ClientPacket.UPDATE_COORDS.getValue());
 					message.addInt(p.getX());
 					message.addInt(p.getY());

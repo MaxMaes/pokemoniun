@@ -122,8 +122,8 @@
         <param name="titleAreaRight"><int>-8</int></param>
         <param name="titleAreaBottom"><int>20</int></param>
         <theme name="closeButton" ref="closeButton"/>
-        <param name="closeButtonX"><int>0</int></param>
-        <param name="closeButtonY"><int>0</int></param>
+        <param name="closeButtonX"><int>-19</int></param>
+        <param name="closeButtonY"><int>5</int></param>
         <param name="resizeHandleX"><int>0</int></param>
         <param name="resizeHandleY"><int>0</int></param>
     </theme>
@@ -397,8 +397,6 @@
                     <theme name="textarea" ref="textarea">
                     </theme>
                 </theme>
-                <param name="closeButtonX"><int>270</int></param>
-                <param name="closeButtonY"><int>5</int></param>
             </theme>
             <theme name="tosdialog" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>true</bool></param>
@@ -408,8 +406,6 @@
                     <theme name="textarea" ref="textarea">
                     </theme>
                 </theme>
-                <param name="closeButtonX"><int>270</int></param>
-                <param name="closeButtonY"><int>5</int></param>
             </theme>
             <theme name="alertpopupdialog" ref="popup_titled">
                 <param name="defaultGap"><dimension>0,5</dimension></param>
@@ -621,6 +617,14 @@
                     <theme name="arrow_up" ref="upbutton"/>
                     <theme name="arrow_down" ref="downbutton"/>
                 </theme>
+            </theme>
+            <theme name="pokemoninfodialog" ref="resizableframe_titled">
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <theme name="title" ref="title"/>
             </theme>
             <theme name="playerinfodialog" ref="resizableframe">
                 <theme name="label" ref="label">

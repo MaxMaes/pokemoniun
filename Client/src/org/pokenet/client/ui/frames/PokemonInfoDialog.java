@@ -59,7 +59,6 @@ public class PokemonInfoDialog extends ResizableFrame
 			labels[21].setText("Type:");
 			labels[22].setText("Move 4:");
 			labels[23].setText("Type:");
-			// labels[13].setText("Exp to next level:");
 			data[0].setText(String.valueOf(poke.getLevel()));
 			data[1].setText(poke.getName());
 			data[2].setText(String.valueOf(poke.getCurHP()) + "/" + String.valueOf(poke.getMaxHP()));
@@ -129,7 +128,6 @@ public class PokemonInfoDialog extends ResizableFrame
 			icon = new Image(poke.getFrontSprite());
 			add(icon);
 
-			setVisible(true);
 			setTitle(poke.getName());
 			addCloseCallback(new Runnable()
 			{
@@ -168,15 +166,23 @@ public class PokemonInfoDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
+		super.layout();
 		int x = 70;
-		int y = 5;
+		int y = 30;
+		int width = 0;
 		for(int i = 0; i < 24; i++)
 		{
-			data[i].setPosition(x + 80, y);
-			labels[i].setPosition(x, y);
+			data[i].adjustSize();
+			if(data[i].getWidth() + getX() > width)
+			{
+				width = data[i].getWidth() + getX();
+			}
+			data[i].setPosition(getInnerX() + x + 80, getInnerY() + y);
+			labels[i].adjustSize();
+			labels[i].setPosition(getInnerX() + x, data[i].getInnerY());
 			y += 20;
 		}
-		icon.setPosition(5, 5);
-		setSize(270, 510);
+		icon.setPosition(getInnerX(), getInnerY() + 15);
+		setSize(width, 510);
 	}
 }

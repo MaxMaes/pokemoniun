@@ -69,7 +69,7 @@ public class HUD extends DesktopArea
 	private PokeStorageBoxFrame boxDialog;
 	private MoveRelearnDialog relearnDialog;
 	private KurtDialog kurtDialog;
-	private PokemonInfoDialog pokemonInfoDialogs[] = new PokemonInfoDialog[7];
+	private PokemonInfoDialog pokemonInfoDialogs[] = new PokemonInfoDialog[6];
 
 	public HUD()
 	{
@@ -984,9 +984,11 @@ public class HUD extends DesktopArea
 	{
 		if(pokemonInfoDialogs[i] == null)
 		{
-			this.pokemonInfoDialogs[i] = new PokemonInfoDialog(p, i);
+			pokemonInfoDialogs[i] = new PokemonInfoDialog(p, i);
+			pokemonInfoDialogs[i].setPosition(200, 50);
 			add(pokemonInfoDialogs[i]);
 		}
+		pokemonInfoDialogs[i].setVisible(true);
 	}
 
 	public void removePokemonInfoDialog(int i)

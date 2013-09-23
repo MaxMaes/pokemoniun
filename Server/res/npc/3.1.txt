@@ -95,3 +95,17 @@ false
 -14
 0
 [/warp]
+[npc]
+Fat Man
+down
+351
+17
+17
+NULL
+0
+-1
+6,7
+false
+false
+false
+[/npc]

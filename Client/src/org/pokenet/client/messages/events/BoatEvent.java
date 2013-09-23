@@ -67,6 +67,10 @@ public class BoatEvent implements MessageEvent
 		{
 			boat = "snowpoint";
 		}
+		else if(mapx == 44 && mapy == -46)
+		{
+			boat = "resort";
+		}
 		else if(mapx == -38 && mapy == 13)
 		{
 			boat = "navel";

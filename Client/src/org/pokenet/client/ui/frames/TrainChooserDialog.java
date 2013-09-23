@@ -45,13 +45,17 @@ public class TrainChooserDialog extends ResizableFrame
 			m_locations.addElement("Phenac City - $15k");
 			m_locations.addElement("Pyrite Town - $17.5k");
 		}
-		else if(travel.equalsIgnoreCase("sinnoh"))
+		else if(travel.equalsIgnoreCase("phenac"))
 		{
-			m_locations.addElement("Resort Area - $100k");
+			m_locations.addElement("Saffron City - $17.5k");
+			m_locations.addElement("Goldenrod City - $15k");
+			m_locations.addElement("Pyrite Town - $2.5k");
 		}
-		else if(travel.equalsIgnoreCase("Resort"))
+		else if(travel.equalsIgnoreCase("pyrite"))
 		{
-			m_locations.addElement("Snowpoint City - $10k");
+			m_locations.addElement("Saffron City - $20k");
+			m_locations.addElement("Goldenrod City - $17.5k");
+			m_locations.addElement("Phenac City - $2.5k");
 		}
 		else if(travel.equalsIgnoreCase("Fuchsia"))
 		{

@@ -25,6 +25,14 @@ public class TravelEvent implements MessageEvent
 		{
 			travel = "johto";
 		}
+		else if(mapx == -35 && mapy == -38)
+		{
+			travel = "phenac";
+		}
+		else if(mapx == 22 && mapy == 39)
+		{
+			travel = "pyrite";
+		}
 		else if(mapx == 13 && mapy == 18)
 		{
 			travel = "Fuchsia";

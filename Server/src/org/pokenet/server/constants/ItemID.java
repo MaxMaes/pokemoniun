@@ -317,10 +317,10 @@ public class ItemID
 	public static final int FLAME_MAIL = 553;
 	public static final int GRASS_MAIL = 554;
 	public static final int HEARTH_MAIL = 555;
-	public static final int SNOM_MAIL = 556;
-	public static final int SAPCE_MAIL = 557;
+	public static final int SNOW_MAIL = 556;
+	public static final int SINNOH_TICKET = 557;
 	public static final int STEEL_MAIL = 558;
-	public static final int TUNNEL_MAIL = 559;
+	public static final int HOENN_TICKET = 559;
 	public static final int TM01 = 576;
 	public static final int TM02 = 577;
 	public static final int TM03 = 578;

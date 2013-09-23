@@ -200,13 +200,18 @@ public class BoatChooserDialog extends ResizableFrame
 		}
 		else
 		{
-			m_locations.addElement("Resort Area - canceled");
+			m_locations.addElement("Resort Area - $25k");
 		}
 		if(currentLocation.equalsIgnoreCase("navel"))
 		{
 			m_locations.clear();
 			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
+		}
+		if(currentLocation.equalsIgnoreCase("resort"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Snowpoint - $0");
 		}
 		if(currentLocation.equalsIgnoreCase("iron"))
 		{
@@ -227,7 +232,6 @@ public class BoatChooserDialog extends ResizableFrame
 		if(currentLocation.equalsIgnoreCase("two"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Three Island - $5k");
 			m_locations.addElement("Four Island - $5k");
@@ -238,7 +242,6 @@ public class BoatChooserDialog extends ResizableFrame
 		if(currentLocation.equalsIgnoreCase("three"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Four Island - $5k");
@@ -249,7 +252,6 @@ public class BoatChooserDialog extends ResizableFrame
 		if(currentLocation.equalsIgnoreCase("four"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $10k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
@@ -261,7 +263,6 @@ public class BoatChooserDialog extends ResizableFrame
 		if(currentLocation.equalsIgnoreCase("five"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $5k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
@@ -273,7 +274,6 @@ public class BoatChooserDialog extends ResizableFrame
 		if(currentLocation.equalsIgnoreCase("six"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $5k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");
@@ -282,10 +282,9 @@ public class BoatChooserDialog extends ResizableFrame
 			m_locations.addElement("Seven Island - $5k");
 			m_locations.addElement("Navel Rock - canceled");
 		}
-		if(currentLocation.equalsIgnoreCase("five"))
+		if(currentLocation.equalsIgnoreCase("seven"))
 		{
 			m_locations.clear();
-			m_locations.addElement("Vermillion City - $5k");
 			m_locations.addElement("One Island - $5k");
 			m_locations.addElement("Two Island - $5k");
 			m_locations.addElement("Three Island - $5k");

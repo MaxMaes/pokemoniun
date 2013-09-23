@@ -4,6 +4,7 @@ import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.entity.Player;
 import org.pokenet.server.client.Session;
 import org.pokenet.server.constants.ClientPacket;
+import org.pokenet.server.constants.ItemID;
 import org.pokenet.server.constants.UserClasses;
 import org.pokenet.server.messages.MessageEvent;
 import org.pokenet.server.protocol.ClientMessage;
@@ -18,491 +19,215 @@ public class TravelEvent implements MessageEvent
 		String travel = request.readString();
 		if(p.getIsTaveling())
 		{
-			boolean ticket = false;
-			if(travel.contains("Vermillion City"))
+			int money = 0;
+			switch(travel.split(" - ")[0])
 			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
+				case "Vermillion City":
+					handleTravel(p, 10000, 25, 736, 1048, 6, 0, 0, UserClasses.DONATOR);
+					break;
+				case "Saffron City":
+					if(p.getMapX() == -31 && p.getMapY() == -39) // goldenrod city
 					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
+						money = 10000;
 					}
-					p.setIsTaveling(false);
-					p.setX(736);
-					p.setY(1048);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(6, 0), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Saffron City"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					else if(p.getMapX() == -36 && p.getMapY() == -39) // Phenac city
 					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
+						money = 17500;
 					}
-					p.setIsTaveling(false);
-					p.setX(128);
-					p.setY(56);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-50, -13), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			// Fuchsia City kanto
-			else if(travel.contains("Safari Zone"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 30000 && p.getTrainingLevel() >= 25))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
+					else if(p.getMapX() == 21 && p.getMapY() == 38) // Pyrite Town
 					{
-						p.setMoney(p.getMoney() - 30000);
-						p.updateClientMoney();
+						money = 20000;
 					}
-					p.setIsTaveling(false);
-					p.setX(800);
-					p.setY(952);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(16, 0), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Mt.Silver"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getTrainingLevel() >= 25 && p.getBadgeCount() >= 16))
-				{
-					p.setIsTaveling(false);
-					p.setX(1664);
-					p.setY(888);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(1, 1), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Olivine City"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
-				{
-					if(p.getAdminLevel() > UserClasses.DEFAULT)
+					handleTravel(p, money, 25, 128, 56, -50, -13, 0, UserClasses.DEFAULT);
+					break;
+				case "Safari Zone":
+					handleTravel(p, 30000, 25, 800, 952, 16, 0, 0, UserClasses.DEFAULT);
+					break;
+				case "Mt.Silver":
+					handleTravel(p, 0, 25, 1664, 888, 1, 1, 16, UserClasses.DEFAULT);
+					break;
+				case "Olivine City":
+					handleTravel(p, 10000, 25, 640, 664, -6, -3, 0, UserClasses.DONATOR);
+					break;
+				case "Goldenrod City":
+					if(p.getMapX() == -50 && p.getMapY() == -13)// saffron city
 					{
+						money = 10000;
 					}
-					else if(!ticket)
+					else if(p.getMapX() == -36 && p.getMapY() == -39) // Phenac city
 					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
+						money = 15000;
 					}
-					p.setIsTaveling(false);
-					p.setX(640);
-					p.setY(664);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-6, -3), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Goldenrod City"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 10000 && p.getTrainingLevel() >= 25))
-				{
-					if(!(p.getAdminLevel() > UserClasses.DEFAULT))
+					else if(p.getMapX() == 21 && p.getMapY() == 38) // Pyrite Town
 					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
+						money = 17500;
 					}
-					p.setIsTaveling(false);
-					p.setX(352);
-					p.setY(152);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-31, -39), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Slateport"))
-			{
-				if(p.getBag().containsItem(559) != -1)
-				{
-					ticket = true;
-				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() >= UserClasses.MODERATOR)
+					handleTravel(p, money, 25, 352, 152, -31, -39, 0, UserClasses.DEFAULT);
+					break;
+				case "Slateport":
+					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 896, 408, 27, 24, 16, UserClasses.SUPER_MOD);
+					break;
+				case "Lilycove":
+					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 384, 1112, 32, 20, 16, UserClasses.SUPER_MOD);
+					break;
+				case "Canalave":
+					// player is on iron island, free travel back
+					if(p.getMapX() == 1 && p.getMapY() == -46)
 					{
-					}
-					else if(ticket)
-					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
+						money = 0;
 					}
 					else
 					{
-						p.setMoney(p.getMoney() - 125000);
-						p.updateClientMoney();
+						money = 10000;
+					}
+					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, money, 40, 384, 1112, 33, -42, 20, UserClasses.SUPER_MOD);
+					break;
+				case "Snowpoint":
+					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, 10000, 40, 192, 1880, 39, -48, 20, UserClasses.SUPER_MOD);
+					break;
+				case "Resort Area":
+					handleTravel(p, 25000, 40, 448, 504, 43, -47, 24, UserClasses.DONATOR);
+					break;
+				case "One Island":
+					handleTravel(p, 5000, 25, 512, 568, -29, 2, 16, UserClasses.DONATOR);
+					break;
+				case "Two Island":
+					handleTravel(p, 5000, 25, 320, 1336, -44, 5, 16, UserClasses.DONATOR);
+					break;
+				case "Three Island":
+					handleTravel(p, 5000, 25, 416, 408, -28, 5, 16, UserClasses.DONATOR);
+					break;
+				case "Four Island":
+					handleTravel(p, 5000, 25, 416, 1048, -44, 10, 16, UserClasses.DONATOR);
+					break;
+				case "Five Island":
+					handleTravel(p, 5000, 25, 512, 664, -29, 8, 16, UserClasses.DONATOR);
+					break;
+				case "Six Island":
+					handleTravel(p, 5000, 25, 416, 760, -29, 11, 16, UserClasses.DONATOR);
+					break;
+				case "Seven Island":
+					handleTravel(p, 5000, 25, 512, 1944, -29, 14, 16, UserClasses.DONATOR);
+					break;
+				case "Iron Island":
+					handleTravel(p, 15000, 25, 2752, 568, 1, -46, 24, UserClasses.DEFAULT);
+					break;
+				case "Battlefrontier":
+					if(p.getAdminLevel() >= UserClasses.SUPER_MOD)
+					{
+						p.setIsTaveling(false);
+						p.setX(512);
+						p.setY(2520);
+						p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(29, 26), null);
+						message.init(ClientPacket.UPDATE_COORDS.getValue());
+						message.addInt(p.getX());
+						message.addInt(p.getY());
+						session.Send(message);
+					}
+					break;
+				case "Navel Rock":
+					if(p.getAdminLevel() >= UserClasses.DEVELOPER)
+					{
+						p.setIsTaveling(false);
+						p.setX(672);
+						p.setY(3192);
+						p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-39, 12), null);
+						message.init(ClientPacket.UPDATE_COORDS.getValue());
+						message.addInt(p.getX());
+						message.addInt(p.getY());
+						session.Send(message);
+					}
+				case "Gateon Port":
+					handleTravel(p, 20000, 25, 1088, 888, 10, 41, 17, UserClasses.DONATOR);
+					break;
+				case "Pyrite Town":
+					if(p.getMapX() == -50 && p.getMapY() == -13)// saffron city
+					{
+						money = 20000;
+					}
+					else if(p.getMapX() == -31 && p.getMapY() == -39) // goldenrod city
+					{
+						money = 17500;
+					}
+					else if(p.getMapX() == -36 && p.getMapY() == -39) // Phenac city
+					{
+						money = 2500;
+					}
+					handleTravel(p, money, 25, 736, 1368, 21, 38, 17, UserClasses.DONATOR);
+					break;
+				case "Phenac City":
+					if(p.getMapX() == -50 && p.getMapY() == -13)// saffron city
+					{
+						money = 17500;
+					}
+					else if(p.getMapX() == -31 && p.getMapY() == -39) // goldenrod city
+					{
+						money = 15000;
+					}
+					else if(p.getMapX() == 21 && p.getMapY() == 38) // Pyrite Town
+					{
+						money = 2500;
+					}
+					handleTravel(p, money, 25, 960, 1368, -36, -39, 17, UserClasses.DONATOR);
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
-					}
-					p.getBag().addItem(559, 1);
-					p.setIsTaveling(false);
-					p.setX(896);
-					p.setY(408);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(27, 24), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Lilycove"))
+	public void handleTravel(Player p, int money, int trainerLvl, int x, int y, int mapX, int mapY, int badges, int userclass)
+	{
+		if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= money && p.getTrainingLevel() >= trainerLvl) && p.getBadgeCount() >= badges)
+		{
+			if(p.getAdminLevel() <= userclass && money > 0)
 			{
-				if(p.getBag().containsItem(559) != -1)
-				{
-					ticket = true;
-				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 125000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() >= UserClasses.MODERATOR)
-					{
-					}
-					else if(ticket)
-					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
-					}
-					else
-					{
-						p.setMoney(p.getMoney() - 125000);
-						p.updateClientMoney();
+				p.setMoney(p.getMoney() - money);
+				p.updateClientMoney();
+			}
+			p.setIsTaveling(false);
+			p.setX(x);
+			p.setY(y);
+			p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(mapX, mapY), null);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
+			message.addInt(p.getX());
+			message.addInt(p.getY());
+			p.getSession().Send(message);
+		}
+	}
 
-					}
-					p.getBag().addItem(559, 1);
-					p.setIsTaveling(false);
-					p.setX(384);
-					p.setY(1112);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(32, 20), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Canalave"))
+	public void handleTicketTravel(Player p, int itemID, int ticketMoney, int money, int trainerLvl, int x, int y, int mapX, int mapY, int badges, int userclass)
+	{
+		boolean ticket = false;
+		if(p.getBag().containsItem(itemID) != -1)
+		{
+			ticket = true;
+		}
+		if(p.getAdminLevel() >= userclass || ((p.getMoney() >= (ticketMoney + money) || (ticket && p.getMoney() >= money)) && p.getTrainingLevel() >= trainerLvl && p.getBadgeCount() >= badges))
+		{
+			if(p.getAdminLevel() >= userclass || money == 0)
 			{
-				if(p.getBag().containsItem(557) != -1)
-				{
-					ticket = true;
-				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46)
-						|| ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
-				{
+			}
+			else if(ticket)
+			{
+				p.setMoney(p.getMoney() - money);
+				p.updateClientMoney();
+			}
+			else
+			{
+				p.setMoney(p.getMoney() - (ticketMoney + money));
+				p.updateClientMoney();
 
-					if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMapX() == 1 && p.getMapY() == -46))
-					{
-					}
-					else if(ticket)
-					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
-					}
-					else
-					{
-						p.setMoney(p.getMoney() - 175000);
-						p.updateClientMoney();
-						p.getBag().addItem(557, 1);
-					}
-					p.setIsTaveling(false);
-					p.setX(384);
-					p.setY(1336);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(33, -42), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
 			}
-			else if(travel.contains("Snowpoint"))
-			{
-				if(p.getBag().containsItem(557) != -1)
-				{
-					ticket = true;
-				}
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || ((p.getMoney() >= 175000 || (ticket && p.getMoney() >= 10000)) && p.getBadgeCount() >= 20 && p.getTrainingLevel() >= 40))
-				{
-					if(p.getAdminLevel() >= UserClasses.MODERATOR)
-					{
-					}
-					else if(ticket)
-					{
-						p.setMoney(p.getMoney() - 10000);
-						p.updateClientMoney();
-					}
-					else
-					{
-						p.setMoney(p.getMoney() - 175000);
-						p.updateClientMoney();
-
-					}
-					p.getBag().addItem(557, 1);
-					p.setIsTaveling(false);
-					p.setX(192);
-					p.setY(1880);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(39, -48), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("One"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(512);
-					p.setY(568);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 2), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Two"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(320);
-					p.setY(1336);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-44, 5), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Three"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(416);
-					p.setY(408);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-28, 5), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Four"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(416);
-					p.setY(1048);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-44, 10), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Five"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(512);
-					p.setY(664);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 8), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Six"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(416);
-					p.setY(760);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 11), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Seven"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 5000 && p.getBadgeCount() >= 16))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 5000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(512);
-					p.setY(1944);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-29, 14), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Navel"))
-			{
-				if(p.getAdminLevel() >= UserClasses.DEVELOPER)
-				{
-					p.setIsTaveling(false);
-					p.setX(672);
-					p.setY(3192);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-39, 12), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Iron"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 15000 && p.getBadgeCount() >= 24))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 15000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(2752);
-					p.setY(568);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(1, -46), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Battlefrontier"))
-			{
-				if(p.getAdminLevel() >= UserClasses.SUPER_MOD)
-				{
-					p.setIsTaveling(false);
-					p.setX(512);
-					p.setY(2520);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(29, 26), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Gateon Port"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 20000 && p.getBadgeCount() >= 17))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 20000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(1088);
-					p.setY(888);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(10, 41), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Pyrite Town"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 20000 && p.getBadgeCount() >= 17))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 20000);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(736);
-					p.setY(1368);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(21, 38), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-			else if(travel.contains("Phenac City"))
-			{
-				if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= 17500 && p.getBadgeCount() >= 17))
-				{
-					if(p.getAdminLevel() <= UserClasses.DONATOR)
-					{
-						p.setMoney(p.getMoney() - 17500);
-						p.updateClientMoney();
-					}
-					p.setIsTaveling(false);
-					p.setX(960);
-					p.setY(1368);
-					p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(-36, -39), null);
-					message.init(ClientPacket.UPDATE_COORDS.getValue());
-					message.addInt(p.getX());
-					message.addInt(p.getY());
-					session.Send(message);
-				}
-			}
-
+			p.getBag().addItem(itemID, 1);
+			p.setIsTaveling(false);
+			p.setX(x);
+			p.setY(y);
+			p.setMap(GameServer.getServiceManager().getMovementService().getMapMatrix().getMapByGamePosition(mapX, mapY), null);
+			ServerMessage message = new ServerMessage(ClientPacket.UPDATE_COORDS);
+			message.addInt(p.getX());
+			message.addInt(p.getY());
+			p.getSession().Send(message);
 		}
 	}
 }

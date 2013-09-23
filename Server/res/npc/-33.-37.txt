@@ -1,6 +1,6 @@
 [npc]
 Move Deleter
-right
+down
 278
 4
 6
@@ -8,20 +8,6 @@ NULL
 0
 -1
 0,1,2
-false
-false
-false
-[/npc]
-[npc]
-MoveRelearner_1-Lava Cookie
-left
-144
-7
-6
-NULL
-0
--1
-3,4,5
 false
 false
 false

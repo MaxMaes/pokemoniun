@@ -63,6 +63,8 @@ public class DataLoader implements Runnable
 					else
 						npc.setFacing(Direction.Down);
 					npc.setSprite(Integer.parseInt(reader.nextLine()));
+					if(npc.getName().equalsIgnoreCase("NULL") && npc.getSprite() != 0)
+						npc.setName("NPC");
 					npc.setX(Integer.parseInt(reader.nextLine()) * 32);
 					npc.setY(Integer.parseInt(reader.nextLine()) * 32 - 8);
 					npc.setOriginalDirection(npc.getFacing());

@@ -665,6 +665,14 @@ public class NpcBattleField extends BattleField
 	{
 		if(trainer == 0)
 		{
+			/* pp might be out of sync lets update it */
+			ServerMessage ppUpdate = new ServerMessage(m_player.getSession());
+			ppUpdate.init(ClientPacket.BATTLE_PP_UPDATE.getValue());
+			ppUpdate.addInt(getActivePokemon()[0].getPp(0));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(1));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(2));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(3));
+			ppUpdate.sendResponse();
 			/* Request move from player */
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
 			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());

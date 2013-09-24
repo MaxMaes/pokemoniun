@@ -808,9 +808,27 @@ public class PvPBattleField extends BattleField
 		clearQueue();
 		if(getActivePokemon()[0].isActive() && getActivePokemon()[1].isActive())
 		{
+			/* pp might be out of sync lets update it */
+			ServerMessage ppUpdate0 = new ServerMessage(m_players[0].getSession());
+			ppUpdate0.init(ClientPacket.BATTLE_PP_UPDATE.getValue());
+			ppUpdate0.addInt(getActivePokemon()[0].getPp(0));
+			ppUpdate0.addInt(getActivePokemon()[0].getPp(1));
+			ppUpdate0.addInt(getActivePokemon()[0].getPp(2));
+			ppUpdate0.addInt(getActivePokemon()[0].getPp(3));
+			ppUpdate0.sendResponse();
+
 			ServerMessage moveRequestFirst = new ServerMessage(m_players[0].getSession());
 			moveRequestFirst.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequestFirst.sendResponse();
+
+			/* pp might be out of sync lets update it */
+			ServerMessage ppUpdate1 = new ServerMessage(m_players[1].getSession());
+			ppUpdate1.init(ClientPacket.BATTLE_PP_UPDATE.getValue());
+			ppUpdate1.addInt(getActivePokemon()[0].getPp(0));
+			ppUpdate1.addInt(getActivePokemon()[0].getPp(1));
+			ppUpdate1.addInt(getActivePokemon()[0].getPp(2));
+			ppUpdate1.addInt(getActivePokemon()[0].getPp(3));
+			ppUpdate1.sendResponse();
 
 			ServerMessage moveRequestSecond = new ServerMessage(m_players[1].getSession());
 			moveRequestSecond.init(ClientPacket.MOVE_REQUESTED.getValue());

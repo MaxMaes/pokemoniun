@@ -823,7 +823,7 @@ public class WildBattleField extends BattleField
 				showMessage(m_player.getName() + " threw a Net Ball!");
 				m_wildPoke.setCaughtWith(50);
 				if(m_wildPoke.getType1().equalsIgnoreCase("BUG") || m_wildPoke.getType2().equalsIgnoreCase("BUG") || m_wildPoke.getType1().equalsIgnoreCase("WATER")
-						|| m_wildPoke.getType2().equalsIgnoreCase("BUG"))
+						|| m_wildPoke.getType2().equalsIgnoreCase("WATER"))
 					catchRate = 3.5;
 				break;
 			case DIVEBALL:
@@ -941,6 +941,14 @@ public class WildBattleField extends BattleField
 		if(getActivePokemon()[0].isActive() && getActivePokemon()[1].isActive())
 		{
 			getWildPokemonMove();
+			ServerMessage ppUpdate = new ServerMessage(m_player.getSession());
+			ppUpdate.init(ClientPacket.BATTLE_PP_UPDATE.getValue());
+			ppUpdate.addInt(getActivePokemon()[0].getPp(0));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(1));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(2));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(3));
+			ppUpdate.sendResponse();
+
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
 			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
 			moveRequest.sendResponse();

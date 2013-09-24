@@ -45,6 +45,7 @@ import org.pokenet.server.battle.mechanics.statuses.BurnEffect;
 import org.pokenet.server.battle.mechanics.statuses.ChargeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ConfuseEffect;
 import org.pokenet.server.battle.mechanics.statuses.FlinchEffect;
+import org.pokenet.server.battle.mechanics.statuses.FreezeEffect;
 import org.pokenet.server.battle.mechanics.statuses.MultipleStatChangeEffect;
 import org.pokenet.server.battle.mechanics.statuses.ParalysisEffect;
 import org.pokenet.server.battle.mechanics.statuses.PercentEffect;
@@ -2155,12 +2156,12 @@ public class Pokemon extends PokemonSpecies
 			removeStatus(ChargeEffect.class);
 			removeStatus(ConfuseEffect.class);
 			removeStatus(FlinchEffect.class);
+			removeStatus(FreezeEffect.class);
 			removeStatus(MultipleStatChangeEffect.class);
 			removeStatus(ParalysisEffect.class);
 			removeStatus(PercentEffect.class);
 			removeStatus(PoisonEffect.class);
 			removeStatus(ToxicEffect.class);
-			removeStatus(ConfuseEffect.class);
 			removeStatus(StatusEffect.class);
 			removeStatus(StatChangeEffect.class);
 			removeStatus(AttractEffect.class);
@@ -2168,13 +2169,18 @@ public class Pokemon extends PokemonSpecies
 		}
 		else
 		{
-			removeStatus(MoveList.LeechSeedEffect.class);
-			removeStatus(AttractEffect.class);
+			removeStatus(AwesomeEffect.class);
 			removeStatus(ChargeEffect.class);
 			removeStatus(ConfuseEffect.class);
 			removeStatus(FlinchEffect.class);
 			removeStatus(MultipleStatChangeEffect.class);
+			removeStatus(PercentEffect.class);
+			removeStatus(ToxicEffect.class);
+			removeStatus(ConfuseEffect.class);
+			removeStatus(StatusEffect.class);
 			removeStatus(StatChangeEffect.class);
+			removeStatus(AttractEffect.class);
+			removeStatus(MoveList.LeechSeedEffect.class);
 		}
 	}
 

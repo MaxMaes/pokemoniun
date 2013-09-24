@@ -102,7 +102,8 @@ public enum ClientPacket
 	CANT_USE_ITEM(98),
 	BATTLEFRONTIER_EVENT(99),
 	SERVER_REVISION(100),
-	KURT(101);
+	KURT(101),
+	BATTLE_PP_UPDATE(102);
 
 	private int code = -1;
 

@@ -31,7 +31,7 @@
  </layer>
  <layer name="Collisions" width="25" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgYGDYx8/AsJ8G+AAQw8AJIPskDfApJDvCWBnIAtt4EexOXkx5cs1FBt+QzD2JxQ5qADM+BgZzIOYAYk4+8s1hZIFgWgJ62LEPLQ0iAw8eBgZPHtx8YsEJtDSIDDqA5nXy4OYPR0CNvEJPc7EBAM6l/gcUBQAA
+   H4sIAAAAAAAAC2NkYWDYx8/AsJ8G+AAQM7JA8Akg+yQN8CkkO8JYGcgC23gR7E5eTHmQuTA7yAXfkMw9icUOEKDUDjM+BgZzIOYAYk4+8u2g1B2DxY590DSIDXjwMDB48uDmE2vHCWgaxAY6gOZ18uDmE2sHpYCedpCbBwkB5DxIawwAGjlOHRQFAAA=
   </data>
  </layer>
  <layer name="Collisions" width="25" height="13">

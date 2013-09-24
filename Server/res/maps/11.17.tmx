@@ -22,7 +22,7 @@
  <tileset firstgid="1541" source="Fences01.tsx"/>
  <layer name="Walkable" width="61" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3TvQqAMAxG0aCrOvm3CL7/U9pAB4ekDUhtAl/ggtAup0EifYbc+PqWqp17qzQWVzSv1Yw9x/Ziz7oZe47vtpi5KTULLQ4MLczsPVKb0Km8hecs5lXxRs2b+U5djauZ6WfzTn3/514DM8wwwwwzzN7NPF8tpXsPrDCeZRATAAA=
+   H4sIAAAAAAAAC+3TuwqAMAyF4aCrOnlbBN//KU3BwSHRLKUncgI/CIXC16CIP91d//i2+jpH620irmzeqJl7zu3lnn0z95zfHTGXBm00mgAMNczFu2mL0e68BXIR8+x4s4ZmPrWjcmjmVdr+z62GZppppplmmv9qjt5xAYF6RzsQEwAA
   </data>
  </layer>
  <layer name="Walkable" width="61" height="20">

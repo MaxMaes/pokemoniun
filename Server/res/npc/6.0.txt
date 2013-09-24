@@ -160,7 +160,7 @@ CUT_TREE
 24
 [/hmobject]
 [npc]
-Old Man
+NPC
 down
 276
 33
@@ -174,7 +174,7 @@ false
 false
 [/npc]
 [npc]
-False_Police
+NPC
 down
 36
 24

@@ -58,7 +58,7 @@
  </layer>
  <layer name="Collisions" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WuwqAMAxFOzno5GOp+P9/5mMRXURHA7ZLqU1a28GSA5eLYNNrCBIhHkpQ5fA3sPcbUEvwN7BzWL5QdF0sXyi55E8N99/O3/KPoAk0g5aIdTWr8g20g3r1HOueQ/kJukTa/heC5weD/z9ueH7cpJ4f7r+bXPKnwsxP3ZepmP2n7vtYXtNj5cf2f9MHj9ryQ/7OUq/2yI9h+w5JOMfQuAGbyzQCAA8AAA==
+   H4sIAAAAAAAAC2NggAAuIObGQ+MChNQLAbEwETQuQEgfIfeRC2DmEnIfuWC4uJ/WYDT8sYOh5v6nQPwMiJ8D8QsqmgsDb6H0eyD+AMRSUD617PkKpb8D8Q8G2oY/G8No+iEERssf/GA0/eAHtE4/o+GPHwwX99MK0Dv8iW3v4wK4zCG1vU/Ivbja/+i0DAlmS1LgfhEs5gmS4H5CAJs/JInQNwqIAwB0hQj/AA8AAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="40">

@@ -16,3 +16,8 @@
 -49
 0
 [/warp]
+[hmobject]
+CUT_TREE
+50
+32
+[/hmobject]

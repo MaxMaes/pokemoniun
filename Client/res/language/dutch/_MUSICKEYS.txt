@@ -148,3 +148,4 @@ Tanoby Ruins:ruinsofalph
 Mt. Mortar:rocktunnel
 Slowpoke Well:darkcave
 Red:redtheme
+Whirlwind Islands:unioncave

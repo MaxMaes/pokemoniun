@@ -19,7 +19,7 @@
  <tileset firstgid="1427" source="InteriorWalls 1.tsx"/>
  <layer name="Walkable" width="11" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoB3Yy8TAsI8JPw0DW4HsbUz46VFzqWMuDOAyl1gAAOSjZCk8AgAA
+   H4sIAAAAAAAAC2NgoB3Yy8TAsI8JPw0DW4HsbUz46VFzqWMuTA6XucQCAMUW0DQ8AgAA
   </data>
  </layer>
  <layer name="Walkable" width="11" height="13">

@@ -19,7 +19,7 @@
  <tileset firstgid="1439" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="52" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2V3QqAIAxG863stoKorOj3/R+lRUklTKQu2mrCQUQvvsPY1CqKNEIOFJ57brRARyCH8B/sejuH+Fwdzjt3vuYj0CUBUoeMQK67lEDlYJC3MYG8IT4zMOxMiA8HF+tjPGduTqE+HFxs/kYds6BGfLj8Tb3aemadA7aPRgK5ntbIN9e41SjUhwviQ4cFys0MyBARAAA=
+   H4sIAAAAAAAAC+3UTQqAIBAFYL2VbSuIyop+73+UJkoCwUFqMw9m8S1EF+8hM84a4xIa0jL3aCYyC8ihlFJKoSlJFakF5PqqI33EJ94WAvLm9DnI+tgTfRC6hD6eOaN1yu2D0CXkH+27CwbmfxAs9p6Zaw+EOdoE5Pr7R9xeQ6N9ZEPucwLJk+f4EBEAAA==
   </data>
  </layer>
  <layer name="Grass" width="52" height="21">
@@ -49,7 +49,7 @@
  </layer>
  <layer name="WalkBehind" width="52" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGF4gB4hzsdDIoJ4EfQNNk+rvwQ7I8V89Fn2DhcYGUphwu7+JSD8PFED3H7nuHeh4ITd9wfzLw8rAwMtKjs9pC6gRP4MpP5Hr78EKRuNncJdzIyV+0OVH42dwxQ8t/E0PMBo/Qyt+KNU/0PRwA9RKf4OFHm4AAO+lisUQEQAA
+   H4sIAAAAAAAAC+2UuwqAMAxFg9BN/9JRR8FN6Jdrh0K8tpqKmFQ8IPHRSC5HS5RmZudTZo1Fhu0YE5WzFPRp1xwzXPP1ln1J8vH5Q84l0WelImHevtnf4/N7qsuPT6xBP5L3WPKDoJ9A64g6d8yrzRN+LP1PiPR7yuXVptRPhOf+gh+e+/fzvh98XrMf3M++4EeSO2LdD/L70eMqX+DMj7aPu36kObWR+JH0WamIxI9FL5EVGD22SRARAAA=
   </data>
  </layer>
 </map>

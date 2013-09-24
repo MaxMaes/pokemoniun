@@ -28,7 +28,7 @@
  </layer>
  <layer name="Collisions" width="11" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIA0IszAwiODBoiwItbJAthweLI+kVgCIBYFYCIhbgbiNRHfRAsxmYmCYw0Sc2sVAdUuIVDsQQIqVMnlsAACN/96rPAIAAA==
+   H4sIAAAAAAAAC2NgIA0IszAwiODBoiCaFYJlgWw5PFgeSa0A0GxBIBYC4lYgbsNiN0wtMYAaamczMTDMYSJO7WKguiVEqqWVe/GplSKgXooVoRYZo5uDjAE9irZYPAIAAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="11" height="13">

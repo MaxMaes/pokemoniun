@@ -21,7 +21,7 @@
  <tileset firstgid="1209" source="GrassFlowers.tsx"/>
  <layer name="Walkable" width="28" height="38">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UYQvCIBAG4PlTBwOrsViLBTa2355+OAy7qdhNiN6D55Pg68lpq5qmBQAAEd2f5dY4y9m6BPpIrqtv8m7WFLgfcE/Ul2byTkzPqf5Dw5vrTl+5qP9Yzcp7VMhblbcV5o3W01qE5iS3rxKGuQ86P8eV5Nym9vvVvCmxX2q9ZG7c+9bq853TX0DrEnmGmY09Je8AAEDaCzWpDqKgEAAA
+   H4sIAAAAAAAAC+3UbQtAMBQFYPupSnnLexTit5tyo5ltzUg56vm02tlZu3zmeT4AADgR/Cz3jbPEXCJIH8ytuFrQPHBP1CuU5EWSzrr+ouwgv+hlivqrvpbtuhfyJrabLfNKbuBGR+/EtJeNfjsrKQ7nlylu5sn6qvbTrX81r9bsp1u36bXOd8jOc07/Alp3kSe+GxWbOQAAcG0BNyQkhqAQAAA=
   </data>
  </layer>
  <layer name="Walkable" width="28" height="38">

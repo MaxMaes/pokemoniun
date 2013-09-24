@@ -109,6 +109,16 @@
 -7,-2,Route 41
 -7,-3,Route 40
 -8,-2,Cianwood City
+-32,-35,Whirlwind Islands
+-35,-38,Whirlwind Islands
+-35,-39,Whirlwind Islands
+-35,-40,Whirlwind Islands
+-35,-41,Whirlwind Islands
+-35,-42,Whirlwind Islands
+-35,-43,Whirlwind Islands
+-35,-44,Whirlwind Islands
+-35,-45,Whirlwind Islands
+-35,-46,Whirlwind Islands
 -50,-42,Dark Cave
 -50,-43,Dark Cave
 -50,-44,Sprout Tower

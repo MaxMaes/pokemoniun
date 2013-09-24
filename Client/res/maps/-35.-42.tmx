@@ -16,9 +16,10 @@
  </properties>
  <tileset firstgid="1" source="Caveset.tsx"/>
  <tileset firstgid="225" source="Path0.tsx"/>
+ <tileset firstgid="521" source="Legendaries.tsx"/>
  <layer name="Walkable" width="17" height="17">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5NnYGCQH8WjeBSTjUMZMTE5ZmAzixJ3IJtLKmagY/gBALJOniiEBAAA
+   H4sIAAAAAAAAC5NnYGCQH8UjDocyQjCl+ikxhxpmDAaM7g9y/ALTQ4k52PSSG64MdAw/AISknW+EBAAA
   </data>
  </layer>
  <layer name="Grass" width="17" height="17">
@@ -28,17 +29,17 @@
  </layer>
  <layer name="Water" width="17" height="17">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAXEACssmFL9xJqBSy8pZpFrBrH6RjJWBGInNKxEohnWWMLeko5mwAAlaYBcMwAoQn5HhAQAAA==
+   H4sIAAAAAAAAC2NgGAXEACssmFL9xJqBSy8pZsHUKAKxExpWwmMGNnussaizJMGd1DJDE4iN0LAWiWZQAxMKU3qFByVmwACxaYCaZgAAhfvKY4QEAAA=
   </data>
  </layer>
  <layer name="Collisions" width="17" height="17">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5WSQQ6AIAwEeQAaT+oJOaH/f6EloUmzaUtpsgdLd1IWa0ppI72LyqRCaqSPVBc50s+9FQ76s/BFOJq/gM/jWH4tD/7GsvxWHp/C8PzImZXll5xZaX6uk3QHGN4c5xvZA+c69xqK7oHzPaNnqAYY2jz2rPtyX2Pgf2Ll0sS59Y7ynl376B/Q93KTO85UwfsDVc9rQIQEAAA=
+   H4sIAAAAAAAAC5WSSw6DMAxELbGlVVelK8iKcnS4ST+XwpFiyRqNQ2LpLTCeiTOQROSmvDsZlVlZlU1JnT5eb70eH9SPTtfiw/Qz6Go+kZ7lYc9YkT7KYyMeNT36+NoHkWOI92H48z+q/So/5e98mN7qqbzIHbBqc5bvVbG57DsVWvfA+ZzRUkgNHmwee9F9rc888D+Jclnde/Yd8Z6Ze+k/oF/Lze94RQLtCfg90+GEBAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="17" height="17">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgoEDAJPZHwSEBAAA
+   H4sIAAAAAAAAC2NgGAX0BGnMDAzpzJSZ0Q7U30GBGcuR9K6i0C2jYBRQCgBQOWUAhAQAAA==
   </data>
  </layer>
 </map>

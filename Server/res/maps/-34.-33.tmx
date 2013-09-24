@@ -18,6 +18,7 @@
  <tileset firstgid="1655" source="InteriorFloor2.tsx"/>
  <tileset firstgid="2351" source="InteriorWalls 1.tsx"/>
  <tileset firstgid="2651" source="Caveset 2.tsx"/>
+ <tileset firstgid="3675" source="Poke Sprites 1.tsx"/>
  <layer name="Walkable" width="20" height="18">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC7WUSwrAIAxEgxSaRe9/3iI1UMKMJn6EWZjPS4yoyLfKJVOr5qFcsyM9QD6GcVBuT70+SjAmomg9X5flZfsaxXv/3aRNtl/hKVCWZ/NgvOjdej9i6YDBeDavHec9wVuxn+L949AbnXm7mbpMkf8qw9nNewFHwfTeoAUAAA==
@@ -35,12 +36,12 @@
  </layer>
  <layer name="Collisions" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NggICrnJRhdAATZ+IiDaObR8geQgCXe2H2kQrQ3Umse4kNL1z60N2LK7yINQ8diLMxMEiwkW4ernBUBJqlxIZbntJ4HSjzYPyLQL9dYsOtj1TzXgLNekVF86iV/tDzJyFxXOZRK/8SSvfEmofubmqXf6SWe7jCEwCjbo/ZoAUAAA==
+   H4sIAAAAAAAAC2NggICrnJRhdAATZ+IiDaObR8geQgCXe2H2kQrQ3Umse4kNL1z60N2LK7yINQ8diLMxMEiwkW4ernBUBJqlxIZbnth49RPELUeOecQCQuF3Eei3S2y49ZFq3kugWa+oaB610h96/iQkjss8auVfQumeWPPQ3U3t8o/Ucg9XeAIAt6pibqAFAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAVDEfCyMTDwsQ20K0bBKBgFtAQAdmOhSqAFAAA=
+   H4sIAAAAAAAAC2NgGAVDEfCyMTDwsQ20K1CBjCADgywQywlS11x/Kps3CkbBUAEAXZk3waAFAAA=
   </data>
  </layer>
 </map>

@@ -18,17 +18,17 @@
  <tileset firstgid="931" source="Caveset 2.tsx"/>
  <layer name="Walkable" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoD9YyUQaHmr64phIw6P6aKOvhIk0jE8fMXLkAABucwMvgAMAAA==
+   H4sIAAAAAAAAC2NgoD9YyUQaHmr64phIw6P6aKOvhIk0PBAAABHjO6WAAwAA
   </data>
  </layer>
  <layer name="Walkable" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAX4AA8LBJMrTyowRaOJlRu1j3bgGhMDw3UovsFEXbMBqOQMp4ADAAA=
+   H4sIAAAAAAAAC2NgGAX4AA8LBJMrTyowRaOJlRu1jzC4xsTAcB2KbzDRyBISAQDe/a9ygAMAAA==
   </data>
  </layer>
  <layer name="Collisions" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgYGC4xMjAcJlIfAWII5kg+A6QfZdIfA9JH6lgoPQlMiLE4oHsBDSMLk8Ld+YCcR4Z+sqBuIIMffjAqD78+rBhQmoAeOy5e4ADAAA=
+   H4sIAAAAAAAAC2NgYGC4xMjAcJlIfAWII5kg+A6QfZdIfA9JH6lgoPQlMiLE4oHsBDSMLk8Ld+YCcR4Z+sqBuIIMffjASNGHDROjhhx9ABjO91GAAwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="14" height="16">

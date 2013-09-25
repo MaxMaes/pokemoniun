@@ -623,8 +623,9 @@
                     <param name="font"><font>pokefont</font></param>
                 </theme>
                 <theme name="image" ref="image"/>
-                <param name="hasCloseButton"><bool>true</bool></param>
                 <theme name="title" ref="title"/>
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
             </theme>
             <theme name="playerinfodialog" ref="resizableframe">
                 <theme name="label" ref="label">
@@ -807,6 +808,15 @@
                 <param name="hasResizeHandle"><bool>false</bool></param>
                 <param name="hasCloseButton"><bool>false</bool></param>
             </theme>
+            <theme name="tradedialog" ref="resizableframe_titled">
+                <theme name="button" ref="button"/>
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="label" ref="label"/>
+                <theme name="editfield" ref="editfield"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+            </theme>
+        
         
         
         

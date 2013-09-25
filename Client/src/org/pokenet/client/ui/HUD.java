@@ -560,10 +560,17 @@ public class HUD extends DesktopArea
 		}
 	}
 
-	public void showTradeDialog(String trainername)
+	public void showTradeDialog(final String trainername)
 	{
-		tradeDialog = new TradeDialog(trainername);
-		add(tradeDialog);
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				tradeDialog = new TradeDialog(trainername);
+				add(tradeDialog);
+			}
+		});
 	}
 
 	/**

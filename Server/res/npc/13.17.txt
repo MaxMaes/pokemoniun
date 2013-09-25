@@ -1,7 +1,7 @@
 [npc]
 Biker Ernest
 up
-95
+339
 64
 14
 Koffing,25,Koffing,25,Weezing,25,Koffing,25,Grimer,25
@@ -15,7 +15,7 @@ false
 [npc]
 Biker Alex
 down
-95
+315
 60
 10
 Koffing,28,Grimer,28,Weezing,28
@@ -29,7 +29,7 @@ false
 [npc]
 Beauty Grace
 down
-64
+382
 55
 12
 Pidgeotto,29,Wigglytuff,29
@@ -43,7 +43,7 @@ false
 [npc]
 Beauty Olivia
 down
-64
+381
 51
 12
 Bulbasaur,24,Ivysaur,29
@@ -57,7 +57,7 @@ false
 [npc]
 Picnicker Kindra
 down
-30
+357
 46
 10
 Gloom,28,Oddish,28,Oddish,28
@@ -71,7 +71,7 @@ false
 [npc]
 Bird Keeper Chester
 up
-42
+269
 37
 14
 Dodrio,28,Doduo,28,Doduo,28
@@ -85,7 +85,7 @@ false
 [npc]
 Bird Keeper Edwin
 left
-42
+269
 31
 12
 Pidgeotto,26,Farfetch'd,26,Doduo,26,Pidgey,26
@@ -99,7 +99,7 @@ false
 [npc]
 Picnicker Yazmin
 up
-30
+357
 21
 14
 Bellsprout,29,Tangela,29,Oddish,29
@@ -113,7 +113,7 @@ false
 [npc]
 Picnicker Becky
 down
-30
+357
 52
 5
 Pikachu,29,Raichu,29
@@ -127,7 +127,7 @@ false
 [npc]
 Picnicker Celia
 down
-30
+357
 27
 5
 Clefairy,33
@@ -141,7 +141,7 @@ false
 [npc]
 Blackbelt Ron
 down
-104
+367
 39
 5
 Hitmonlee,29
@@ -155,7 +155,7 @@ false
 [npc]
 Blackbelt Mya
 down
-54
+273
 40
 5
 Hitmonchan,29

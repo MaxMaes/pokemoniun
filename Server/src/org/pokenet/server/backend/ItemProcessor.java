@@ -256,7 +256,7 @@ public class ItemProcessor implements Runnable
 						case ItemID.FULL_HEAL:
 							returnValue = processClearEffects(itemId, "You used Full Heal on " + poke.getName() + "/nThe Full Heal restored " + poke.getName() + " status to normal", poke, player);
 							break;
-						case ItemID.LAVA_COOKIES:
+						case ItemID.LAVA_COOKIE:
 							returnValue = processClearEffects(itemId, "You used Lava Cookies on " + poke.getName() + "/nThe Lava Cookies restored " + poke.getName() + " status to normal", poke,
 									player);
 							break;

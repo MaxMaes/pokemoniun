@@ -24,7 +24,7 @@
  <tileset firstgid="5832" source="Sevii Island Set 2.tsx"/>
  <layer name="Walkable" width="30" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TwQ3CMAxFIyboIpmFGYATMAEdhVE5tT1EilInSuzYFtKP9FT1kD5/242XECLBL8yDOpQT3v/0Um4rb1mDtdcrr6e35tSer6Y3OHlb367RqlXLazHDmnNGDZzepvf07O27dJ49d67LGck8e+99lzOSXbL0cvDyBsYeAQAAAAAAYM1t517wMPA+d14Fq3ItR9YP4aV4K2etsU7KPJJ1ZuaRrOXcObnT/o5mlfo5Obl9z/9RSU7KWx6tjC1yL2dvJVhnzb3H8fJaOr29Hm5vb3TqM7zwwgtvLxv7RtSR0CAAAA==
+   H4sIAAAAAAAAC+2UwQ3CMAxFLSboIpmFGYATMAEdhVE5tT0gRamDEtuxAf1I7+g8f8dtOhAlhhfZwR3OCe9verk+4P1fb80Jr+3d3+T1mGXNadFDq5OKGo/ZkqD+OO3RvGdr3XPao9klT6+EKC8p/g0AAAAAAAB4cVo5F1wcvNeVW8E8uJct64PxctwHZ60xG2XuyWqZuSdr+e6S3O/97c2q9UtySueef6OanJy3PKMyfiL3SvZWg3fW3LudKK+nM9ob4Y72pqA5wwsvvPC2sgCC61hw0CAAAA==
   </data>
  </layer>
  <layer name="Walkable" width="30" height="70">

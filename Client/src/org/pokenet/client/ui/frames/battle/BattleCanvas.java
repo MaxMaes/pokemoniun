@@ -80,6 +80,7 @@ public class BattleCanvas extends Widget
 		loadImages();
 		initPlayerComponents();
 		initEnemyComponents();
+		setClip(true);
 	}
 
 	/**
@@ -370,7 +371,7 @@ public class BattleCanvas extends Widget
 		}
 		else if(status.equalsIgnoreCase("normal"))
 		{
-			enemyStatus = null;
+			enemyStatus.setImage(null);
 		}
 	}
 
@@ -558,16 +559,16 @@ public class BattleCanvas extends Widget
 	@Override
 	public void layout()
 	{
-		enemyDataBG.setPosition(getInnerX(), getInnerY());
-		enemyHPBar.setPosition(getInnerX() + 15, getInnerY() + 25);
+		enemyDataBG.setPosition(getInnerX() - 10, getInnerY() + 10);
+		enemyHPBar.setPosition(enemyDataBG.getX() + 15, enemyDataBG.getY() + 25);
+		enemyHP.setPosition(enemyHPBar.getX() + 23, enemyHPBar.getY() + 3);
+		enemyHP.setSize(72, 5);
 		enemyNameLabel.setSize(enemyNameLabel.computeTextWidth(), enemyNameLabel.computeTextHeight());
 		enemyNameLabel.setPosition(enemyDataBG.getX() + 15, enemyDataBG.getY() + 7);
 		enemyGender.setPosition(enemyNameLabel.getX() + GameClient.getInstance().getFontSmall().getWidth(enemyNameLabel.getText()), enemyNameLabel.getY());
 		enemyLv.setSize(GameClient.getInstance().getFontSmall().getWidth(enemyLv.getText()), GameClient.getInstance().getFontSmall().getHeight(enemyLv.getText()));
 		enemyLv.setPosition(enemyDataBG.getX() + 105, enemyDataBG.getY() + 7);
 		enemyStatus.setPosition(105 + getInnerX(), 40 + getInnerY());
-		enemyHP.setPosition(getInnerX() + 37, getInnerY() + 27);
-		enemyHP.setSize(72, 5);
 
 		playerDataBG.setPosition(getInnerX() + 90, getInnerY() + 98);
 		playerNameLabel.setSize(GameClient.getInstance().getFontSmall().getWidth(playerNameLabel.getText()), GameClient.getInstance().getFontSmall().getHeight(playerNameLabel.getText()));
@@ -586,7 +587,7 @@ public class BattleCanvas extends Widget
 
 		for(int i = 0; i < 6; i++)
 		{
-			m_enemyPokeballs.get(i).setPosition((125 + 14 * i + i * 5) + getInnerX(), 3 + getInnerY());
+			m_enemyPokeballs.get(i).setPosition((145 + 14 * i + i * 5) + getInnerX(), 3 + getInnerY());
 		}
 
 		enemyPokeSprite.setPosition(getInnerX() + 150, getInnerY() + 21);

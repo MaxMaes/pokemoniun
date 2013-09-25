@@ -12,6 +12,7 @@ import org.pokenet.server.battle.PokemonSpecies;
 import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.battle.mechanics.PokemonNature;
+import org.pokenet.server.battle.mechanics.statuses.abilities.IntrinsicAbility;
 import org.pokenet.server.constants.ClientPacket;
 import org.pokenet.server.constants.ItemID;
 import org.pokenet.server.protocol.ServerMessage;
@@ -518,10 +519,13 @@ public class NPC extends Character
 						poke = Pokemon.getGymLeaderPokemon("Heracross", lvl, PokemonNature.N_JOLLY, 0, 0, 0, 0, 0, 0, "Close Combat", "Megahorn", "Stone Edge", "Toxic");
 						party[1] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Butterfree", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Sleep Powder", "Stun Spore", "Bug Buzz", "Confusion");
+						poke.setAbility(IntrinsicAbility.getInstance("Compoundeyes"), true);
 						party[2] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Beedrill", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Swords Dance", "X-Scissor", "Poison Jab", "Brick Break");
 						party[3] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Yanma", lvl, PokemonNature.N_TIMID, 0, 0, 0, 0, 0, 0, "Bug Buzz", "Air Slash", "Protect", "Hypnosis");
+						if(poke.getAbility() == null)
+							poke.setAbility(IntrinsicAbility.getInstance("Compoundeyes"), true);
 						party[0] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Parasect", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Spore", "Seed Bomb", "Brick Break", "Synthesis");
 						party[5] = poke;

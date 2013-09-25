@@ -128,7 +128,29 @@ public class HMObject extends NPC
 					}, 30000);
 					break;
 				case CUT_TREE:
+					getMap().removeChar(this);
+					// Regrow tree after 30 seconds
+					timer.schedule(new TimerTask()
+					{
+						@Override
+						public void run()
+						{
+							m_map.addChar(hmObj);
+						}
+					}, 30000);
+					break;
 				case ROCKSMASH_ROCK:
+					getMap().removeChar(this);
+					// Regrow tree after 30 seconds
+					timer.schedule(new TimerTask()
+					{
+						@Override
+						public void run()
+						{
+							m_map.addChar(hmObj);
+						}
+					}, 30000);
+					break;
 				case WHIRLPOOL:
 					getMap().removeChar(this);
 					// Regrow tree after 30 seconds

@@ -1154,7 +1154,18 @@ public class WildBattleField extends BattleField
 					/* Move learning */
 					poke.getMovesLearning().clear();
 					for(int i = oldLevel + 1; i <= level; i++)
-						if(pokeData.getLevelMoves().get(i) != null)
+					{
+						// don't learn moves you already know
+						boolean learn = true;
+						for(int j = 0; j < poke.getMoves().length; j++)
+						{
+							if(poke.getMove(j).getName().equalsIgnoreCase(pokeData.getLevelMoves().get(i)))
+							{
+								learn = false;
+								break;
+							}
+						}
+						if(pokeData.getLevelMoves().get(i) != null && learn)
 						{
 							move = pokeData.getLevelMoves().get(i);
 							poke.getMovesLearning().add(move);
@@ -1164,7 +1175,7 @@ public class WildBattleField extends BattleField
 							moveLearn.addString(move);
 							moveLearn.sendResponse();
 						}
-
+					}
 					/* Save the level and update the client */
 					poke.setLevel(level);
 					ServerMessage levelMessage = new ServerMessage(m_player.getSession());

@@ -3734,7 +3734,7 @@ public class MoveList
 			}
 		}));
 
-		/* TODO: Create the option to return to the untransformed Pokemon. */
+		/* TODO: implement. */
 		m_moves.add(new MoveListEntry("Transform", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 20)
 		{
 			@Override
@@ -3748,7 +3748,7 @@ public class MoveList
 			}
 		}));
 
-		/* TODO: test sketch and transform. */
+		/* TODO: implement. */
 		m_moves.add(new MoveListEntry("Sketch", new PokemonMove(PokemonType.T_NORMAL, 0, 1.0, 1)
 		{
 			@Override
@@ -5365,17 +5365,25 @@ public class MoveList
 			public void beginTurn(BattleTurn[] turn, int index, Pokemon source)
 			{
 				// Note: assumes two pokemon.
+				// opp might be null if an item such as a pokeball was used
 				BattleTurn opp = turn[1 - index];
 				Pokemon target = source.getOpponent();
 				boolean damageNow = false;
-				if(!opp.isMoveTurn())
-					damageNow = true;
+				if(opp != null)
+				{
+					if(!opp.isMoveTurn())
+						damageNow = true;
+					else
+					{
+						MoveListEntry entry = target.getMove(opp.getId());
+						if(entry.getName().equals("U-turn"))
+							if(target.getStat(Pokemon.S_SPEED) > source.getStat(Pokemon.S_SPEED))
+								damageNow = true;
+					}
+				}
 				else
 				{
-					MoveListEntry entry = target.getMove(opp.getId());
-					if(entry.getName().equals("U-turn"))
-						if(target.getStat(Pokemon.S_SPEED) > source.getStat(Pokemon.S_SPEED))
-							damageNow = true;
+					damageNow = true;
 				}
 
 				if(!damageNow)

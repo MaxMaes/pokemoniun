@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="49-49;53-53;51-51;49-49;53-53;23-23;23-23;23-23;53-54;"/>
   <property name="fishPokemonChances" value="Magikarp,45;Remoraid,35;Luvdisc,5;Octillery,5;Gyarados,10;"/>
   <property name="fishPokemonLevels" value="3-10;10-25;20-30;20-50;40-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Oddish,10;Gloom,5;Bellsprout,20;Weepinbell,5;Beautifly,5;Dustox,5;Roselia,20;Shellos.20;Gastrodon,10;"/>
   <property name="nightPokemonLevels" value="49-49;53-53;51-51;49-49;53-53;23-23;23-23;23-23;53-54;"/>
   <property name="pvp" value="yes"/>

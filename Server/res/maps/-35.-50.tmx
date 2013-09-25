@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="22-22;22-22;24-24;21-23;20-20;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,37;Seaking,3;"/>
   <property name="fishPokemonLevels" value="10-40;10-40;40-40;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Zubat,30;Raticate,30;Golbat,20;Slowpoke,15;Rattata,5;"/>
   <property name="nightPokemonLevels" value="22-22;22-22;24-24;21-23;20-20;"/>
   <property name="waterPokemonChances" value="Goldeen,60;Slowpoke,30;Seaking,10;"/>
@@ -13,40 +14,33 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal4.tsx"/>
- <tileset firstgid="2049" source="normal6.tsx"/>
- <tileset firstgid="3073" source="normal7.tsx"/>
- <tileset firstgid="4097" source="normal5.tsx"/>
- <tileset firstgid="5121" source="normal3.tsx"/>
- <tileset firstgid="6145" source="normal18.tsx"/>
- <tileset firstgid="7169" source="Cliffs02.tsx"/>
- <tileset firstgid="7281" source="Hoenn Set 15.tsx"/>
- <tileset firstgid="8625" source="Water02.tsx"/>
- <tileset firstgid="8817" source="Path0.tsx"/>
+ <tileset firstgid="1" source="Cliffs02.tsx"/>
+ <tileset firstgid="113" source="Hoenn Set 15.tsx"/>
+ <tileset firstgid="1457" source="Water02.tsx"/>
+ <tileset firstgid="1649" source="Path0.tsx"/>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC3uqxMDwFIjtZSD4qRICo/OphWF24cOkmocuxksntxPjFhBuZsYuzkNHt5OLQYCQ22H+Hki322Gx2wGHe0bdPvBuh+Gh4vbBhkfdPup2ELYfBGEyikfxYMHujAg80G4ZSW4nxY8D7YaR6PZRTD98SZR4tUeZKcOk2EUuBgBQ0nX9KBAAAA==
+   H4sIAAAAAAAAC+3QMQ6AIAxA0U5MeCXg/vfoPdSQRkOUaEIAzR/eAEP7QZ2IbqJk6g7luRXbVfN2Xnm3dGp/0lLjO7a3dm63d49sDxe7000P7ePbzVfaZ0M77bs4wZ8AAID/WQH2H7P5KBAAAA==
   </data>
  </layer>
  <layer name="Grass" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglFADHiqhIqHEhh1+8CAUbcPDBh1+8gEQznchovb8WF62E+JXnq4nZp2UOJ2cuwcdfvIAwD3os7qKBAAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMglFADHjKhoqHEhh1+8CAUbcPDBh1+8gEQznchovb8WF62E+JXnq4nZp2UOJ2cuwcdfvIAwAgXOLKKBAAAA==
   </data>
  </layer>
  <layer name="Water" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjgLbATImBwZzG2EKJNm63A5prT2PsMOp2ktzuB8TueOz1H8RuJ2QnSA0x8TbqdkwQJ4AfD1e3g8Co20fdTi23w8pXEPYgw+3I9T2ueplWbqc0rJHNDVPC3tYIpzCu6eF2WtXlg8XtyGmU2HRKK7e7Qd1Ay3YHrdxOyHxq2AcLH3RMTtlCivm0sm8kAgCyHiJGKBAAAA==
+   H4sIAAAAAAAAC2NgGAWjgLbAjI2BwZzG2IKNNm63A5prT2PsMOp2ktzuB8TueOwFyfkPUrcTshOkhph4G3X7qNuJ1T/q9lG3k6IfVr6CsAcZbkeu73HVy7RyO6VhjWxuGBv2tkb4EHA7OXgouR05jRKbTmnldjc24tsc5NpHK7cTMp8a9sHCBx2TU7aQYj6t7BuJAABwgaAUKBAAAA==
   </data>
  </layer>
  <layer name="Walkable" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TzQmAMAxGc/dngqI9CG4hBdEpBB1anccUQUWoqVZphTz4yCnkERKAlVjAb2F3hmGOjBnAhJmJuFK9/L9RDpBgUovqytldCbu9majRqcG0FvULd2pfVzvT/T7dqZm6x3Rrur+QdEoZpnsn6fQe3U2oG78/yEfKGz7dv4C605DdqTsN2Z1hGDv4V3cWL3Dr+igQAAA=
+   H4sIAAAAAAAAC2NggAAehqELRt1OWzAU3DgKRgEyuMLEwHAViK8RwJQCO8qNQAHczAwMvEDMRwRNKUB3uwMDceGGCzgD3eQKxG5E0LRwO6HwwhdmIP0D6XZCdtph0YesX4WFMFZnGZxuj2EhjOMH0O24gAMJdidQ6P6BdDstAKF0OpjdTiidDma3j4KRAyKBOIqO9lHTrkQgTgLiZCqaSapdDmSaZw7EWVCa1oBedgEATdTPlCgQAAA=
   </data>
  </layer>
  <layer name="Collisions" width="47" height="22">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WMQ6DMAxFUVnLyNZztJ2Aqc3YS/ZmPUiNBAK5PyGOkxShfOlLSAT7EQfj/lJVPflMfjI3070U7sif+jenIQ/CWANg7xKyP0C+NT96hu+vhB3VJpVRzTmjhH1ck0uoLqawH5L9SmtuFt8F7y5l5wphd/UmSd207Px5U9hV7OszGZt965+jZUd7szd22zfvW89/skvmkcKuY3+dFmvZQxSL3RWHz2l7YPdVjlmF9wrJTOBSDvZUOVDc+azF0pHYbfOlj0fN1y3oNZrYKNe79u9zIf4CaJGfVCgQAAA=
+   H4sIAAAAAAAAC+2WMQ7CMAxFfQAYexVgajtBYINboN5/x4gMkXFSO4lDhWLpD1Wa76e4cT0BwITaoS5Ee79moRE+QXM61Kz0mhmf0ZD9zOQL+bk99Hw17FxtrMTVnDJq2N/vtAquLq6z/yX7AXWM6GTITiOHPdWbJPtrsdP9rrMXsYffZG32tX9OKTt3Nltjj915aT1/ya6ZRzp7GfsVdavEnhMl7HfUQ+BD57QtsEujxaxCe4VmJkhFC3arHJxveFesclj5hnfFIkdsvlzT0/st/nmA716T653KJe1zOXoBugEO3igQAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="47" height="22">

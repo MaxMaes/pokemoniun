@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="150" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Zubat,90;Golbat,9;Smeargle,1;"/>
+  <property name="dayPokemonLevels" value="30-40;45-45;15-20;"/>
+  <property name="isCave" value="true"/>
+  <property name="nightPokemonChances" value="Zubat,90;Golbat,9;Smeargle,1;"/>
+  <property name="nightPokemonLevels" value="30-40;45-45;15-20;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Artisan Cave 1F.tsx"/>
  <tileset firstgid="6861" source="Artisan Cave 2F.tsx"/>
  <layer name="Grass" width="100" height="150">

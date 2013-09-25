@@ -1,6 +1,7 @@
 package org.pokenet.server.backend.entity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
@@ -12,6 +13,7 @@ import org.pokenet.server.battle.impl.NpcBattleField;
 import org.pokenet.server.battle.impl.NpcSleepTimer;
 import org.pokenet.server.battle.mechanics.PokemonNature;
 import org.pokenet.server.constants.ClientPacket;
+import org.pokenet.server.constants.ItemID;
 import org.pokenet.server.protocol.ServerMessage;
 
 /**
@@ -1252,6 +1254,10 @@ public class NPC extends Character
 		{
 			/* If this NPC wasn't a trainer, handle other possibilities */
 			String speech = getSpeech();
+			if(m_name.equals("Kurt"))
+			{
+				speech = getKurtSpeech();
+			}
 			if(!speech.equalsIgnoreCase(""))
 			{
 				if(!player.isShopping())
@@ -1325,6 +1331,69 @@ public class NPC extends Character
 				player.getSession().Send(message);
 				return;
 			}
+			// @author sadhi
+			/**
+			 * This NPC is the moverelearner.
+			 * For the price of what is behind the name: "MoveRelearner_[xx-ItemName]"
+			 * In which xx stands for the ammount and ItemName for the item he wants in return
+			 */
+			if(m_name.contains("MoveRelearner"))
+			{
+				player.setShopping(true);
+				ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
+				message.addString(m_name);
+				player.getSession().Send(message);
+				return;
+			}
+			// @author sadhi
+			/**
+			 * This NPC is the moveretutor.
+			 * He will teach the move that is behind his name: "MoveTutor_[Move]"
+			 * [move] can also be a number in this case he will teach more than one move.
+			 * check the code to see which number corresponds to which move.
+			 */
+			// if(m_name.contains("MoveTutor"))
+			// {
+			// player.setShopping(true);
+			// ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
+			// String tmp = m_name.split("_")[1].split("-")[1];
+			// player.getSession().Send(message);
+			// return;
+			// }
+			/**
+			 * This is Kurt.
+			 * He will make a different pokeball each day for you if you bring him the correct apricorn.
+			 */
+			if(m_name.contains("Kurt"))
+			{
+				player.setShopping(true);
+				int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+				switch(day)
+				{
+					case Calendar.MONDAY:
+						switchDailyApricorn("White Apricorn", "Fast Ball", player, ItemID.WHITE_APRICORN);
+						break;
+					case Calendar.TUESDAY:
+						switchDailyApricorn("Red Apricorn", "Level Ball", player, ItemID.RED_APRICORN);
+						break;
+					case Calendar.WEDNESDAY:
+						switchDailyApricorn("Blue Apricorn", "Lure Ball", player, ItemID.BLUE_APRICORN);
+						break;
+					case Calendar.THURSDAY:
+						switchDailyApricorn("Black Apricorn", "Heavy Ball", player, ItemID.BLACK_APRICORN);
+						break;
+					case Calendar.FRIDAY:
+						switchDailyApricorn("Pink Apricorn", "Love Ball", player, ItemID.PINK_APRICORN);
+						break;
+					case Calendar.SATURDAY:
+						switchDailyApricorn("Green Apricorn", "Friend Ball", player, ItemID.GREEN_APRICORN);
+						break;
+					case Calendar.SUNDAY:
+						switchDailyApricorn("Yellow Apricorn", "Moon Ball", player, ItemID.YELLOW_APRICORN);
+						break;
+				}
+				return;
+			}
 			/* Box access */
 			if(m_isBox)
 			{
@@ -1352,6 +1421,77 @@ public class NPC extends Character
 					player.setShopping(true);
 					player.setShop(m_shop);
 				}
+			}
+		}
+	}
+
+	private String getKurtSpeech()
+	{
+		int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		switch(day)
+		{
+			case Calendar.MONDAY:
+				return "0,2,3,10";
+			case Calendar.TUESDAY:
+				return "0,2,4,10";
+			case Calendar.WEDNESDAY:
+				return "0,2,5,10";
+			case Calendar.THURSDAY:
+				return "0,2,6,10";
+			case Calendar.FRIDAY:
+				return "0,2,7,10";
+			case Calendar.SATURDAY:
+				return "0,2,8,10";
+			case Calendar.SUNDAY:
+				return "0,2,9,10";
+		}
+		return "0";
+	}
+
+	/**
+	 * @param apricorn, the apricorn being sold today
+	 * @param pokeball, the pokeball being made today
+	 * @param player, the player that is talking with kurt
+	 * @param id, the ID of the apricorn
+	 */
+	public void switchDailyApricorn(String apricorn, String pokeball, Player player, int id)
+	{
+		int pos = -1;
+		int quantity = 0;
+		pos = player.getBag().containsItem(id);
+		if(pos == -1)
+		{
+			player.setShopping(false);
+			/* Return You don't have that item, fool! */
+			ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+			msg.addString(apricorn);
+			player.getSession().Send(msg);
+		}
+		else
+		{
+			quantity = player.getBag().getItems().get(pos).getQuantity();
+			if(player.getMoney() >= 1000)
+			{
+				ServerMessage message = new ServerMessage(ClientPacket.KURT);
+				message.addString(pokeball);
+				message.addString(apricorn);
+				if(player.getMoney() >= quantity * 1000)
+				{
+					message.addInt(quantity);
+				}
+				else
+				{
+					int m = (int) Math.ceil(player.getMoney() / 1000);
+					message.addInt(m);
+				}
+				player.getSession().Send(message);
+			}
+			else
+			{
+				/* Return You have no money, fool! */
+				ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+				player.getSession().Send(message);
+				player.setShopping(false);
 			}
 		}
 	}

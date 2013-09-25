@@ -1,16 +1,13 @@
 package org.pokenet.client.backend.entity;
 
-import java.io.InputStream;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
-import org.pokenet.client.backend.FileLoader;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
+import de.matthiasmann.twl.renderer.Image;
 
 public class Pokemon
 {
-	public static final int MALE = 0;
-	public static final int FEMALE = 1;
-	
+	public static final int MALE = 1;
+	public static final int FEMALE = 0;
+
 	static final long serialVersionUID = 1;
 
 	private int m_gender;
@@ -35,8 +32,7 @@ public class Pokemon
 
 	private Enums.Pokenum m_species;
 	// load sprite and icon
-	private Image m_sprite;
-	private de.matthiasmann.twl.renderer.Image m_twlsprite; //TODO
+	private Image m_frontSprite;
 	private int m_spriteNum;
 	// load trainer data
 	private int m_trainerID;
@@ -71,7 +67,7 @@ public class Pokemon
 		else
 			index = String.valueOf(i);
 
-		path = respath + "res/pokemon/icons/" + index + ".gif";
+		path = respath + "res/pokemon/icons/" + index + ".png";
 		return path;
 	}
 
@@ -102,6 +98,10 @@ public class Pokemon
 	 */
 	public Image getIcon()
 	{
+		if(m_icon == null)
+		{
+			setIcon();
+		}
 		return m_icon;
 	}
 
@@ -200,19 +200,13 @@ public class Pokemon
 	 * 
 	 * @return
 	 */
-	public Image getSprite()
+	public Image getFrontSprite()
 	{
-		return m_sprite;
-	}
-	
-	/**
-	 * Returns the sprite
-	 * 
-	 * @return
-	 */
-	public de.matthiasmann.twl.renderer.Image getTWLSprite()
-	{
-		return m_twlsprite;
+		if(m_frontSprite == null)
+		{
+			setFrontSprite();
+		}
+		return m_frontSprite;
 	}
 
 	/**
@@ -282,7 +276,14 @@ public class Pokemon
 	 */
 	public void setGender(int gender)
 	{
-		m_gender = gender;
+		if(gender == 0 || gender == 2)
+		{
+			m_gender = FEMALE;
+		}
+		else
+		{
+			m_gender = MALE;
+		}
 	}
 
 	/**
@@ -417,7 +418,7 @@ public class Pokemon
 	}
 
 	/**
-	 * Sets sprite number and loads sprites
+	 * Sets sprite number
 	 * 
 	 * @param x
 	 * @return
@@ -425,24 +426,6 @@ public class Pokemon
 	public void setSpriteNumber(int x)
 	{
 		m_spriteNum = x;
-		try
-		{
-			setSprite();
-			setTWLSprite();
-		}
-		catch(Exception e)
-		{
-			setSprite();
-			setTWLSprite();
-		}
-		try
-		{
-			setIcon();
-		}
-		catch(Exception e)
-		{
-			setIcon();
-		}
 	}
 
 	/**
@@ -480,202 +463,21 @@ public class Pokemon
 	 */
 	private void setIcon()
 	{
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		try
-		{
-			LoadingList.setDeferredLoading(true);
-			String path = new String();
-			String index = new String();
-
-			if(m_spriteNum < 10)
-				index = "00" + String.valueOf(m_spriteNum);
-			else if(m_spriteNum < 100)
-				index = "0" + String.valueOf(m_spriteNum);
-			else if(m_spriteNum > 389)
-			{
-				if(m_spriteNum < 419)
-					index = String.valueOf(m_spriteNum - 3);
-				else
-					index = String.valueOf(m_spriteNum - 5);
-			}
-			else
-				index = String.valueOf(m_spriteNum);
-
-			path = respath + "res/pokemon/icons/" + index + ".gif";
-			m_icon = new Image(path, false);
-			LoadingList.setDeferredLoading(false);
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
+		m_icon = PokemonSpriteDatabase.getIcon(m_spriteNum);
 	}
 
 	/**
 	 * Loads the sprite
 	 */
-	private void setSprite() {
-        	String respath = System.getProperty("res.path");
-			if(respath==null)
-				respath="";
-    		LoadingList.setDeferredLoading(true);
-        	try{
-        		InputStream f;
-        		String path = new String();
-        		String index, isShiny = new String();
-
-        		if (!isShiny()){
-        			isShiny = "normal/";
-        		} else {
-        			isShiny = "shiny/";
-        		}
-
-        		if (m_spriteNum < 10) {
-        			index = "00" + String.valueOf(m_spriteNum);
-        		} else if (m_spriteNum < 100) {
-        			index = "0" + String.valueOf(m_spriteNum);
-        		} else {
-        			if(m_spriteNum > 389)
-        			{
-        				if(m_spriteNum < 413)
-        				{
-        					index = String.valueOf(m_spriteNum - 3);
-        				}
-        				else if(m_spriteNum < 416)
-        				{
-        					index = String.valueOf(413);
-        				}
-        				else	
-        				{
-//        					if(m_spriteNum <440 && m_spriteNum< )
-//        					{
-//        						index = String.valueOf(m_spriteNum - 3);
-//        					}
-//        					if(m_spriteNum > 479 )
-//            				{
-//            					index = String.valueOf(m_spriteNum - 5);
-//            				}
-//        					else 
-//        						if(m_spriteNum > 475 && m_spriteNum < 477)
-//        					{
-//        						index = String.valueOf(m_spriteNum - 3);
-//        					}
-//        					else
-//        					{
-        						index = String.valueOf(m_spriteNum - 5);
-//        					}
-        					
-        				}
-        			}
-    				else
-    					index = String.valueOf(getSpriteNumber());
-        		}
-        		
-        		int pathGender;
-        		if (getGender() != 2)
-        			pathGender = 3;
-        		else
-        			pathGender = 2;
-
-        		try {
-        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
-        				+ pathGender + ".png";
-        			f = FileLoader.loadFile(path);
-        			m_sprite = new Image(f, path.toString(), false);
-        		} catch (Exception e) {
-        			if(pathGender == 3)
-        				pathGender = 2;
-        			else
-        				pathGender = 3;
-        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
-        				+ pathGender + ".png";
-        			m_sprite = new Image(path.toString(), false);
-        			e.printStackTrace();
-        		}
-        		LoadingList.setDeferredLoading(false);
-        	}catch (SlickException e){e.printStackTrace();}
-        }
-	
-	/**
-	 * Loads the sprite
-	 */
-	private void setTWLSprite() {
-        	String respath = System.getProperty("res.path");
-			if(respath==null)
-				respath="";
-        	try{
-        		String path = new String();
-        		String index, isShiny = new String();
-
-        		if (!isShiny()){
-        			isShiny = "normal/";
-        		} else {
-        			isShiny = "shiny/";
-        		}
-
-        		if (m_spriteNum < 10) {
-        			index = "00" + String.valueOf(m_spriteNum);
-        		} else if (m_spriteNum < 100) {
-        			index = "0" + String.valueOf(m_spriteNum);
-        		} else {
-        			if(m_spriteNum > 389)
-        			{
-        				if(m_spriteNum < 413)
-        				{
-        					index = String.valueOf(m_spriteNum - 3);
-        				}
-        				else if(m_spriteNum < 416)
-        				{
-        					index = String.valueOf(413);
-        				}
-        				else	
-        				{
-//        					if(m_spriteNum <440 && m_spriteNum< )
-//        					{
-//        						index = String.valueOf(m_spriteNum - 3);
-//        					}
-//        					if(m_spriteNum > 479 )
-//            				{
-//            					index = String.valueOf(m_spriteNum - 5);
-//            				}
-//        					else 
-//        						if(m_spriteNum > 475 && m_spriteNum < 477)
-//        					{
-//        						index = String.valueOf(m_spriteNum - 3);
-//        					}
-//        					else
-//        					{
-        						index = String.valueOf(m_spriteNum - 5);
-//        					}
-        					
-        				}
-        			}
-    				else
-    					index = String.valueOf(getSpriteNumber());
-        		}
-        		
-        		int pathGender;
-        		if (getGender() != 2)
-        			pathGender = 3;
-        		else
-        			pathGender = 2;
-
-        		try {
-        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
-        				+ pathGender + ".png";
-        			m_twlsprite = FileLoader.loadImage(path);
-        		} catch (Exception e) {
-        			if(pathGender == 3)
-        				pathGender = 2;
-        			else
-        				pathGender = 3;
-        			path = respath+"res/pokemon/front/" + isShiny + index + "-"
-        				+ pathGender + ".png";
-        			m_sprite = new Image(path.toString(), false);
-        			e.printStackTrace();
-        		}
-        	}catch (SlickException e){e.printStackTrace();}
-        }
+	private void setFrontSprite()
+	{
+		if(isShiny())
+		{
+			m_frontSprite = PokemonSpriteDatabase.getShineyFront(m_gender, m_spriteNum);
+		}
+		else
+		{
+			m_frontSprite = PokemonSpriteDatabase.getNormalFront(m_gender, m_spriteNum);
+		}
+	}
 }

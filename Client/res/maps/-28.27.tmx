@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="34" height="28" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="isCave" value="false"/>
+  <property name="pvp" value="disabled"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Legendaries.tsx"/>
  <tileset firstgid="859" source="Tileset 1.tsx"/>
  <tileset firstgid="1883" source="Sevii Island Set 1.tsx"/>

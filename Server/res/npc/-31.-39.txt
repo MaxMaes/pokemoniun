@@ -2,8 +2,8 @@
 Ticket_Vendor
 down
 36
-11
-4
+10
+5
 NULL
 0
 -1

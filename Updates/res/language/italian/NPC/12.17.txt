@@ -4,13 +4,13 @@ Casa del guardiano della Zona Safari
 Gioco Safari - Pokemon-U-Catch!
 Palestra di Fucsiapoli - Capopalestra: Janine 
 La velenosa figlia del Maestro dei veleni.
-Name: Lapras ,il re dei mari.
-Name: Omanyte 
-Pokemon raro rigenerato dai fossili.
-Name: Kangaskhan 
+N0me: Lapras ,il re dei mari.
+N0me: Staryu 
+Pokemon Stella Marina.
+Nome: Kangaskhan 
 Pokemon materno ,che cresce il suo cucciolo nel suo marsupio.
-Name: Chansey - Catturarne uno e' tutta questione di fortuna.
-Name: Voltorb - Identico a una Poke Ball.
-Name: Slowpoke - Amichevole e lento.
+Nome: Chansey - Catturarne uno e' tutta questione di fortuna.
+Nome: Roselia - Il suo odore e' fantastico!
+Nome: Bronzor - Piu' duro dell'acciaio.
 La Zona Safari e' aperta. 
 Sono ammessi tutti gli allenatori con Trainer LV 25.

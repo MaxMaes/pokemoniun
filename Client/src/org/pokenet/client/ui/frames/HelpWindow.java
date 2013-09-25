@@ -1,19 +1,19 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.TextArea;
-import org.newdawn.slick.Color;
 import org.pokenet.client.backend.Translator;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.TextArea;
+import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
+import de.matthiasmann.twl.textarea.TextAreaModel;
 
 /**
  * Instructions for new players
  * 
  * @author ZombieBear
  */
-public class HelpWindow extends Frame
+public class HelpWindow extends ResizableFrame
 {
-
 	private TextArea helptext;
 
 	/**
@@ -27,34 +27,30 @@ public class HelpWindow extends Frame
 	/**
 	 * Sets the height
 	 */
-	@Override
-	public void setHeight(float height)
+	public void setHeight(int height)
 	{
-		super.setHeight(height);
 		if(helptext != null)
-			helptext.setHeight(height - 5);
+			helptext.setSize(helptext.getWidth(), height - 5);
 	}
 
 	/**
 	 * Sets the size
 	 */
 	@Override
-	public void setSize(float width, float height)
+	public boolean setSize(int width, int height)
 	{
-		super.setSize(width, height);
-		if(helptext != null)
-			helptext.setSize(width - 5, height - 5);
+		if(helptext != null && width >= 10 && height >= 10)
+			helptext.setSize(width - 10, height - 10);
+		return super.setSize(width, height);
 	}
 
 	/**
 	 * Sets the width
 	 */
-	@Override
-	public void setWidth(float width)
+	public void setWidth(int width)
 	{
-		super.setWidth(width);
 		if(helptext != null)
-			helptext.setWidth(width - 5);
+			helptext.setSize(width - 5, helptext.getHeight());
 	}
 
 	/**
@@ -62,29 +58,23 @@ public class HelpWindow extends Frame
 	 */
 	private void initGUI()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
 		List<String> translated = Translator.translate("_GUI");
-		getTitleBar().getCloseButton().setVisible(false);
 		setTitle(translated.get(20));
-		setBackground(new Color(0, 0, 0, 85));
-		setForeground(new Color(255, 255, 255));
-
-		this.setLocation(200, 0);
-		setResizable(false);
-
+		setResizableAxis(ResizableAxis.NONE);
 		helptext = new TextArea();
 		helptext.setSize(355, 455);
 		// setText Mover stuff to help panel.
-		helptext.setText(translated.get(21) + translated.get(22) + translated.get(23) + translated.get(24) + translated.get(25) + translated.get(26));
-		// helptext.setFont(GlobalGame.getDPFontSmall());
-		helptext.setForeground(new Color(255, 255, 255));
-		helptext.setBackground(new Color(0, 0, 0, 18));
-		helptext.setBorderRendered(false);
-		helptext.setEditable(false);
-		helptext.setWrapEnabled(true);
-		this.setSize(360, 460);
-		this.add(helptext);
-		setDraggable(false);
+		TextAreaModel model = new SimpleTextAreaModel(translated.get(21) + translated.get(22) + translated.get(23) + translated.get(24) + translated.get(25) + translated.get(26));
+		helptext.setModel(model);
+		add(helptext);
+		setDraggable(true);
+	}
+
+	@Override
+	public void layout()
+	{
+		setPosition(200, 0);
+		setSize(360, 460);
+		helptext.setPosition(getInnerX() + 5, getInnerY() + 40);
 	}
 }

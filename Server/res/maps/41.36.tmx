@@ -5,11 +5,12 @@
   <property name="dayPokemonLevels" value="33-40;33-39;33-39;"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Barboach15;Whishcash,5;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;30-45;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Golbat,60;Solrock,15;Lunatone,15;"/>
   <property name="nightPokemonLevels" value="33-40;33-39;33-39;"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Golbat,80;Solrock,10;Lunatone,10;"/>
   <property name="waterPokemonLevels" value="5-35;5-35;5-35;"/>
-  <property name="pvp" value="enforced"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
@@ -20,7 +21,7 @@
  <tileset firstgid="2859" source="normal5.tsx"/>
  <tileset firstgid="3883" source="normal3.tsx"/>
  <tileset firstgid="4907" source="normal12.tsx"/>
- <layer name="Layer 6" width="30" height="42">
+ <layer name="Water" width="30" height="42">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGHygj2mgXTD8wUCGce8Iit/h7NeB8ttgCFNqu2Ew+AkXGEi3qTHTxtzBHN4jDQxEXAwGO2mVtokFr9kxMT3sQLeLFm4g1Rxs6smJH2rYSw4g1pyBCGdapSt0Pr3SM7J99AK09tcoGAWjYBSMgsENAOcRHjewEwAA
   </data>
@@ -45,7 +46,7 @@
    H4sIAAAAAAAAC+2RSwqAMAwFs1Pwgz1HW0QP4sX1JuodbKDFUBBcpCD4BmbbSVIiAAAAAADwF9aBqDe321C+wc7BtibqolOBGXxsNEIbdEEv3CuiIzgava6LLSvePzN5Hp5Ps5tuys2n7mJutbrppunO8m87xR3zbtqR7yz30t4x72r/3dtuyb0AAAB8mwsHTi4ysBMAAA==
   </data>
  </layer>
- <layer name="Layer 7" width="30" height="42">
+ <layer name="Walkable" width="30" height="42">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3PsQkAIAxEUVfIJG6S/cexECGlhSCE9+D6+2MAAABdZezN+P3krdNV16kxS0unLgDuLG4Zi+CwEwAA
   </data>

@@ -5958,91 +5958,91 @@
 		<entry>
 			<integer>669</integer>
 			<item>
-				<name>TM94 Cut</name>
-				<description>Teaches Cut</description>
-				<id>669</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM94 Cut</m_name>
+				<m_description>Teaches Cut</m_description>
+				<m_id>669</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 			</item>
 		</entry>
 		<entry>
 			<integer>670</integer>
 			<item>
-				<name>TM95 Fly</name>
-				<description>Teaches Fly</description>
-				<id>670</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM95 Fly</m_name>
+				<m_description>Teaches Fly</m_description>
+				<m_id>670</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 			</item>
 		</entry>
 		<entry>
 			<integer>671</integer>
 			<item>
-				<name>TM96 Strength</name>
-				<description>Teaches Strength</description>
-				<id>671</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM96 Strength</m_name>
+				<m_description>Teaches Strength</m_description>
+				<m_id>671</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 			</item>
 		</entry>
 		<entry>
 			<integer>672</integer>
 			<item>
-				<name>TM97 Rocksmash</name>
-				<description>Teaches Rocksmash</description>
-				<id>672</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM97 Rocksmash</m_name>
+				<m_description>Teaches Rocksmash</m_description>
+				<m_id>672</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 			</item>
 		</entry>
 		<entry>
 			<integer>673</integer>
 			<item>
-				<name>TM98 Waterfall</name>
-				<description>Teaches Waterfall</description>
-				<id>673</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM98 Waterfall</m_name>
+				<m_description>Teaches Waterfall</m_description>
+				<m_id>673</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 			</item>
 		</entry>
 		<entry>
 			<integer>674</integer>
 			<item>
-				<name>TM99 Dive</name>
-				<description>Teaches Dive</description>
-				<id>674</id>
-				<category>TM</category>
-				<shop>0</shop>
-				<price>7500</price>
-				<attributes>
+				<m_name>TM99 Dive</m_name>
+				<m_description>Teaches Dive</m_description>
+				<m_id>674</m_id>
+				<m_category>TM</m_category>
+				<m_shop>0</m_shop>
+				<m_price>7500</m_price>
+				<m_attributes>
 					<itemAttribute>POKEMON</itemAttribute>
 					<itemAttribute>MOVESLOT</itemAttribute>
-				</attributes>
+				</m_attributes>
 				</item>
 		</entry>
 		<entry>

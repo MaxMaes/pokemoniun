@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value="Poliwag,85;Magikarp,15;"/>
   <property name="fishPokemonLevels" value="20-40;9-20;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="waterPokemonChances" value="Poliwag,65;Magikarp,15;Poliwhirl,20;"/>

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="45" height="45" tilewidth="16" tileheight="16"> 
-<properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties> 
+<map version="1.0" orientation="orthogonal" width="45" height="45" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Sinnoh Interiors.tsx"/>
- <tileset firstgid="33946" source="InteriorObjects1.tsx"/>
- <tileset firstgid="34046" source="InteriorFloor 1.tsx"/>
- <tileset firstgid="34376" source="SinnohInteriorSet4.tsx"/>
+ <tileset firstgid="17826" source="InteriorObjects1.tsx"/>
+ <tileset firstgid="17926" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="18256" source="SinnohInteriorSet4.tsx"/>
  <layer name="Walkable" width="45" height="45">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3TVW6VYRSG0Y+64APB/SjOJPBSN3wgeN3xgQAt7i6TwMvqCJqQ8Dch+0nW9X5vdkpRFEX/tv25lA5wkEMc5ghHaeIYzbTQShvtdNBJF9300JvLZvNXd77xnR/85Be/mZ3bkE9pERVUUkU1NdRSRz0NNOaz2XzOnfNc4CKXuMwV+uhngEGGGGaEUcYYZ4JJpjLavKqQ0mrWsJZ1rGcDG9nEZrawlW3kyFOgSIky2wvZbL7jzl3uMc0M93nAQx7xmCc85RnPecFLXvGaN7zNaHNT0Z/RTAuttNFOB5100U0PvRznBCc5xWnOcLaYzebZuTslf0YFlVRRTQ211FFPA40sZglLWcZyVrCylM3mPnf6GWCQIYYZYZQxxplgkimuco3r3OAmt7id0ea/aUc5pZ3sYjd72Mu+8sJtmq935ZTe84GPfOIzX8oLt2m+YnMURVEURVEURVEURVEU/b/9AUuZQBmkHwAA
@@ -13,7 +25,7 @@
  </layer>
  <layer name="Walkable" width="45" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQrAIAADwHyjb9WO4rcVXKRz0eUOMiRTEgAA/lRaUmfedvsJnPP0lW/fNwAAAAAgGeNp7qqkHwAA
+   H4sIAAAAAAAAC+3OMQrAIAADwHylnxH/Vf23got0LrrcQYZkSgIAwJ/ekrSZXm4/gXOeuvLt+wYAAAAAJAN6VQ9WpB8AAA==
   </data>
  </layer>
  <layer name="Collisions" width="45" height="45">

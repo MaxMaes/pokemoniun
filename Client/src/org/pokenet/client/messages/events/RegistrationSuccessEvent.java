@@ -15,12 +15,18 @@ public class RegistrationSuccessEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		List<String> translated = new ArrayList<String>();
-		translated = Translator.translate("_LOGIN");
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				List<String> translated = new ArrayList<String>();
+				translated = Translator.translate("_LOGIN");
 
-		GameClient.getInstance().messageDialog(translated.get(23));
-		GameClient.getInstance().getLoadingScreen().setVisible(false);
-		GameClient.getInstance().getLoginScreen().showLogin();
-		//GameClient.getInstance().getLoginScreen().getRegistration().clear();
+				GameClient.getInstance().showMessageDialog(translated.get(23));
+				GameClient.getInstance().getLoginScreen().showLogin();
+				GameClient.getInstance().getLoginScreen().getRegistration().clear();
+			}
+		});
 	}
 }

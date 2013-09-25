@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value="Magikarp,35;Finneon,18;Gyarados,27;Lumineon,10;Staryu,10;"/>
   <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="disabled"/>
@@ -24,7 +25,7 @@
  <tileset firstgid="8608" source="SinnohSet5.tsx"/>
  <layer name="Walkable" width="38" height="56">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YwQmAMAyF4a6gE3jx7kTuP0bxUNCCYJqmJvp/0JOojyhJNSVAbp3fThCP15p5znVeuNbhjzVZeBfCOZ5ZWXfHi20ak0mKXDK701yIo57/mn2A15nhKRf7LQBPWfcJyfXr7yKLXC39sdf8suY1F9DTiP8n2ntY5tL0Icu+2npehN4KAAC+JQPdX0QiQCEAAA==
+   H4sIAAAAAAAAC+3YSwqAIBSF4bZQK2jSvBW1/2WEAyFCMR9Xj/R/4CjSg8rVWpbxjm38+KEMubl8P7H+SnOF2kgKGUKsM6XWILVeinPmKOdS2fMqnvPwxznZ2QvTcWvmW+y5d659MuUiV55LNBfm0fLuq3pmKOXivgXgK+s6kdP/+7vIIldJfVT7dxOjmgtoqcf/k9oxLHPV1CHLulr63gy1FQCAVjjrNNwuDrBTQCEAAA==
   </data>
  </layer>
  <layer name="Layer 5" width="38" height="56">
@@ -60,11 +61,6 @@
  <layer name="WalkBehind" width="38" height="56">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3ZN1MCQRjG8Rcac+lgQFHBQ63MpZ2Yc2VtKM05VNoZWnNj+B6G0vA9FENjaP1TIQoHyt14wD4zv9lhlnn3vT1mZ2cQCc2aTWTdJioxppm98tl+joEMZsdfP1yNWOqO0MOoLTh+zaoBfQVqbDBuYgvbv6w7RE/DFv6d+R0ij3jCM14cwTm9/TfinevFnSfiQTk0ePOCc3r7b8Q7V0m9ODWRIhTDhRKUogxueFAODV5UoBJVWrDGnl1kHwc4xJE9/r6aqe9DC1rRhnZ0oBNd6EYPetGHfgxo0WvHkzHqj2MCk5jCNGYwiznMYwGLWMIyVkzua4f6u9jDfpS1jpk/wSnOTO7rnPoXuMRVlLWumb/BLe5M7uue+g/w4xG5XpEmb+h3fHwuwivzb3jHh8F9pblE0pGBTGQhGzmu8D19782sVLN+DWpRh3o0oNEVuaevvbWY2Fuy5vt9S0VFxfj85/1eL+p+HznJdjbmc0cuQCGcBtyXVVT+O1Y9V62SZDrDkulZVFQSNVY9V1P9vqqSWNH7n8+K+WufkZ4z2qiikor5BMpbodtAIQAA
-  </data>
- </layer>
- <layer name="WalkBehind" width="38" height="56">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OoRGAMBAAwS8ASoDIVBBKgC6g/y54E00MDGJXn7gIAAD+bioRc3nulhqx1vd/upZP28DXnk/Hh19nPl0DXwAAAAAA0N0oPFDyQCEAAA==
   </data>
  </layer>
 </map>

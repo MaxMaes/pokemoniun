@@ -14,9 +14,9 @@ public class BattleNotifyHealthEvent implements MessageEvent
 	{
 		if(Request.readInt() == 0)
 			// Our pokemon's health
-			BattleManager.getInstance().getTimeLine().informHealthChanged(Request.readString().split(","), 0);
+			BattleManager.getInstance().getNarrator().informHealthChanged(Request.readString().split(","), 0);
 		else
 			// Enemy pokemon's health
-			BattleManager.getInstance().getTimeLine().informHealthChanged(Request.readString().split(","), 1);
+			BattleManager.getInstance().getNarrator().informHealthChanged(Request.readString().split(","), 1);
 	}
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="21" height="19" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value="Gastly,86;Cubone,9;Haunter,5;"/>
   <property name="dayPokemonLevels" value="18-24;20-22;25-25;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="fale"/>
   <property name="nightPokemonChances" value="Gastly,86;Cubone,9;Haunter,5;"/>
   <property name="nightPokemonLevels" value="18-24;20-22;25-25;"/>
   <property name="waterPokemonChances" value=""/>
@@ -14,30 +14,25 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
-<tileset firstgid="1" source="normal14.tsx"/> 
- <layer name="Walkable" width="21" height="19">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGB5gERN2TE2zyDGXGLNIMZsc8/CZS4l5uMyltpnUMA/d3MFqZuYQcSet4omYtESqXcSke1LMJATQzTxOgVnEuJ1ccygFAEsec+Q8BgAA
-  </data>
- </layer>
+ <tileset firstgid="1" source="Lost Tower (Sinnoh) Set.tsx"/>
  <layer name="Grass" width="21" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAALXUuQ3CMBiGYSumBYkCtgDEINwwBtcIoedO6KGHCtgiJWzB0ZCazwoWf6xcKMbSU/rNn0Q2Y4xNDb8ZzGEBS1jBGiywYQNxa2/4Je1GPcsx/ET38GmbMFEEtU5wJs2b4eeQVgZ2Ctk+ktYFrqSZ5V9RrbC2aL3AJc0S95gJW0HtAvYX+bdZS9GjXZvM2Udzm6InWaSZdkY6q1w6ZpR0NsXS3fzHnGpzyPX08jy+Kb9RUlXSFGcyF9D9pdnE/hZpinNZhgr37o+gfxnWGnDvPUcwVs5mHRrcu5fu8IBnSMclc7WhA13okabu9Qa5Gv1oPAYAAA==
+   H4sIAAAAAAAAC2NgGB6gBAumplnkmk2MWaSYTY55+MylxDxc5lLbTGqYh27uqJmDM57QAS41lJiJTT8pZhICpJhJDqCWOZQCAGA58lY8BgAA
   </data>
  </layer>
- <layer name="random" width="21" height="19">
+ <layer name="Walkable" width="21" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSQCjyYqG9mBg3M7KCBmcMdsDNT30x1GpjpTgMzSQEAGuEMZDwGAAA=
+   H4sIAAAAAAAAC2NgGAWjYBQMFuA00A4YBVQHiQPtABoBAEW3xMI8BgAA
   </data>
  </layer>
  <layer name="Collisions" width="21" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAKWTwQ3CMAxF3SDlwhSISaCTwJFN6CCwRw6MAmsQi1iyzHfigqWvpm79/O2qRH5MiehoNFel1CnqsLj2UHUGmhs/whZfzDo1FaAoezKsSGi25Wpe+WFXiLszPDurDi/H3H3LZ/p4jAZiSp695saM7g8x7bcT5prwfEoIE+3Oq+vNXtKYidSLS2D2Ncxrfbb8uU/dQ58zfc/v1Xtsfa89el5Rr57PbGql3r5zq9c7YKL+1lsGeT4/Bv8mqvP6iZ61/gX8a203HeCAH/HE8QbqOOwfPAYAAA==
+   H4sIAAAAAAAAC52R0Q3DMAhE+ckKXagjpAN0BNKZPGj9UUuny4GhJ50UW+ZxELNch/C/WvUP4S6bWUO4w0ZWRcjOeKPIY7biIo9nRUV3PFtn34q57pFT3Z9i8r/znzuKci4tptpdVJfNPgpM5UxP28/eYZ7TrwKz0sfo2+0+f1QfsfGMGaOsqtcuJ9a6eJMxVf8ol9P5TW+YifvLhO+u6Y/IX2Xt+lT1BbPZ82g8BgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="21" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBSQAzyZGBi8mAbaFSMTtI2G+4ADABUxsxQ8BgAA
+   H4sIAAAAAAAAC2NgGAWjYBSQAwyB2GigHTEKqAb8gThgoB0xhAAAFfgfpjwGAAA=
   </data>
  </layer>
 </map>

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="45" height="38" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value=""/>
-  <property name="dayPokemonChances" value=""/>
-  <property name="nightPokemonLevels" value=""/>
-  <property name="nightPokemonChances" value=""/>
-  <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
-  <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,5;Gastrodon,1;"/>
-  <property name="wildProbability" value="1"/>
-  <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="dayPokemonChances" value="Machop,15;Geodude,10;Ponyta,10;Meditite,10;Bidoof,20;Chingling,15;Bronzor,10;"/>
+  <property name="dayPokemonLevels" value="14-15;13-13M13-13;12-14;14-14;13-13;16-16;"/>
   <property name="fishPokemonChances" value="Magikarp,35;Finneon,18;Gyarados,27;Lumineon,10;Staryu,10;"/>
-  <property name="pvp" value="disabled"/>
+  <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Machop,15;Geodude,10;Ponyta,10;Meditite,10;Bidoof,20;Zubat,15;Bronzor,10;"/>
+  <property name="nightPokemonLevels" value="14-15;13-13M13-13;12-14;14-14;13-13;16-16;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Tentacool,60;Shellos,30;Tentacruel,5;Gastrodon,1;"/>
+  <property name="waterPokemonLevels" value="20-30;20-30;;20-40;;20-40;"/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
-<tileset firstgid="1" source="normal12.tsx"/>
+ <tileset firstgid="1" source="normal12.tsx"/>
  <tileset firstgid="1025" source="SinnohSet7.tsx"/>
  <tileset firstgid="2801" source="normal7.tsx"/>
  <tileset firstgid="3825" source="normal5.tsx"/>
@@ -37,12 +38,12 @@
  </layer>
  <layer name="Collisions" width="45" height="38">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WSw4CIQyGRxO9iRpP4rjxGo4n05voOTyJuGhCCI8CpaUT/qQLHmm/dhjKvJmmeZi4lao102CWZ87lxvrsibkFr+vTN/bVjVs1zLBOEZurztSiPL/2POi7TcfHKuSrtM41LLWiYqZS6jtJM5f60siM9c15T4DuQve8Zu1MzfbK6nYwvEdlzCDfXbaYXB7K8nka3pcy5rfh/Qj20d4V6j+9Mdlca2M+Rd4CZ8aejWGG9UuE+crEDGNsTv+3wuLYjZjZdxZzmO1xSJBHy/6RYrb3uPul/su1M8dMgrdHZmxcbcyh+Dn5UlkNMyVHaxvMPPYDHvk54LgaAAA=
+   H4sIAAAAAAAAC+2XXQ7CIAzHp4neRI0ncb54DbeT6U30HJ5EfGhCCB8FSksN/6QPDNL+2jHK5s00zcPErVStmQazPHMuN9ZnT8wteF2fvrGvbtyqYYZ5ithcdaYW5f61n4M+23R8rEK+Sutcw1IrKmYqpd6TNHOpL43MWN+c5wToLnTOa9bO1GyvrG4Hw3tUxgzynWWLyWVVls/D8D6VMb8M71uwj/auUP/pWT0yx3p5aB50itwFzow9G8MM85cI85WJGcbYnH53hcWxGzGzby/mMNvjkCCPlv0jxWyvcddLfZf/zpz6Z+Dm7ZEZG1cbcyh+Tr5UVsNMydHaBjOPfQG3ZCbBuBoAAA==
   </data>
  </layer>
  <layer name="Collisions" width="45" height="38">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YzW3DMAyFI6BdoSukGcO5tD6kaziZpJm0c9Q6EGCJJ4r6o10kDxDsRLb0iSIlysdwOLx3Lqe1tGoO+D7qI9P+sYJX9uHNnKtHfT2ZH4N5WeuvhhIVr7cdMF8KmYnbk1kyxv4t3Jy5R+HjzjHPgNHCjZi/OtjbypziLpWMhdoxSGbZLsVQLo5orynZ82rHIFnQnFtiP87PZ+MaYV1HZR/IDyy+sDVzivvKnpXzuLCxST9BbSE/aGWm/39e8Hta+1Q3i2vufet+JedcMr+91jFfWNuIOdqCz1vL2m3NDzTmJeh7QFTKFjXqwYzaHCnpGymR71nW1L0wkzR7R5/+Xst9Z8yavUfbl/dTk6ejdapHDmoR8Z7DmPPzCGk29pprJO28v1dmGes8P7Ayp8bsxczzg/9iZ8TM/efE6j2Ezg8WZv6Mlp+NEMrFa5m91j+ei7cyI3naHv1+MtcptXdM4W/9lGE+K37bm7n0G2eKWWNDcdlSJgdmb2nfjCSz5h9bi5i3zIdL9QvA8frwuBoAAA==
+   H4sIAAAAAAAAC+2YW47CMAxFicRsgS0Ayyg/0A9mG4WVMCudddB8WPJYN47zbKThShaPtMmJ4zhuj263O1W282qlmh3+7nWN9H/M4JVj9GaOtaOxPsz/g3lZ2x8G8/KfzwGY74nMxN2TWTL68S3cnLmG8XnHmGfAaOFGzN8V/G1lDnGnSu6F3DlIZtkv7aHYPqKzJuXMy52DZEFrbtn7fn1uhTnCmkflGCgOLLGwNXOI+8Guleu4sLnJOEF9oTgoZab/f/f4Pq1/apvFZ+x+63kl11wyH77ymO+sb8TsfcHXrSR3W+sDjXlx+hngFfJFjmowoz5bSsZGSBR7lpw6CjNJ87eP6ddqP4Mxa/5u7V8+Tk6djvJUjRrUIuK9uDbPzy2k+bjXWqdqVGbtHYWVOXR/K8n8xGuaUf0smXlNQ8bX4szaewg9P1iY+TVafdZCqBbPZe6V/3gtXsqM1NP36PeHOU+hPDy5v+1ThPmixG1t5tR3nCFmjQ3tyxKbOjD3lvbOSDJr8bG1iHnLejhVb9fooYq4GgAA
   </data>
  </layer>
 </map>

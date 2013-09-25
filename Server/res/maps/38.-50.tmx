@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="54" height="52" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Starly,50;Bidoof,50;"/>
+  <property name="dayPokemonLevels" value="2-4;2-4;"/>
+  <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Seaking,10;Gyarados,10;"/>
+  <property name="fishPokemonLevels" value="3-15;10-25;30-5;30-55;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Starly,50;Bidoof,50;"/>
+  <property name="nightPokemonLevels" value="2-4;2-4;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Psyduck,90;Golduck,10;"/>
+  <property name="waterPokemonLevels" value="20-30;20-40;"/>
+  <property name="wildProbability" value="7"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="normal12.tsx"/>
  <tileset firstgid="1025" source="SinnohWaterSet.tsx"/>
  <tileset firstgid="1709" name="1" tilewidth="16" tileheight="16">
@@ -7,7 +22,7 @@
  </tileset>
  <layer name="Walkable" width="54" height="52">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UQQqAMAxFwYjH8RZC738lt1lVBaH4mcLs80joqKoBAAAQ7tzvrZ7xq6b+/tjWO5J21ncz211C17FldKXeYeJ/+KRt9XwAAAAAAABvXMHh1XjgKwAA
+   H4sIAAAAAAAAC+3UsQnAMBADwA8ZJ1sEvP9KaY1J8UXARJzhegk9HlU1AAAAgt1n3+6sX/Sa3597zflT9lp3edsuodd1ZPRKvcPE/7DbbXdGAAAAAACArgeqcJsj4CsAAA==
   </data>
  </layer>
  <layer name="Walkable" width="54" height="52">

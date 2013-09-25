@@ -1,46 +1,39 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.loading.LoadingList;
+import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.backend.entity.OurPokemon;
+import org.pokenet.client.ui.components.Image;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ResizableFrame;
 
-public class PokemonInfoDialog extends Frame
+public class PokemonInfoDialog extends ResizableFrame
 {
 	private Label data[] = new Label[24];
-	private Label icon = new Label();
+	private Image icon;
 	private Label labels[] = new Label[24];
+	private int index;
 
-	public PokemonInfoDialog(OurPokemon poke)
+	public PokemonInfoDialog(OurPokemon poke, int idx)
 	{
+		index = idx;
 		initGUI(poke);
 	}
 
 	public void initGUI(OurPokemon poke)
 	{
-
 		try
 		{
-			getContentPane().setX(getContentPane().getX() - 1);
-			getContentPane().setY(getContentPane().getY() + 1);
 			List<String> translated = Translator.translate("_GUI");
-			setBackground(new Color(255, 255, 255, 200));
-			int x = 70;
-			int y = 5;
+
 			for(int i = 0; i < 24; i++)
 			{
 				data[i] = new Label();
 				labels[i] = new Label();
-				data[i].setX(x + 80);
-				data[i].setY(y);
-				labels[i].setX(x);
-				labels[i].setY(y);
-				y += 20;
-				getContentPane().add(labels[i]);
-				getContentPane().add(data[i]);
+
+				add(labels[i]);
+				add(data[i]);
 			}
 			labels[0].setText(translated.get(1));
 			labels[1].setText(translated.get(2));
@@ -66,7 +59,6 @@ public class PokemonInfoDialog extends Frame
 			labels[21].setText("Type:");
 			labels[22].setText("Move 4:");
 			labels[23].setText("Type:");
-			// labels[13].setText("Exp to next level:");
 			data[0].setText(String.valueOf(poke.getLevel()));
 			data[1].setText(poke.getName());
 			data[2].setText(String.valueOf(poke.getCurHP()) + "/" + String.valueOf(poke.getMaxHP()));
@@ -85,7 +77,7 @@ public class PokemonInfoDialog extends Frame
 				data[12].setText(String.valueOf(poke.getType2()));
 			if(poke.getGender() == 1)
 				data[13].setText(translated.get(29));
-			else if(poke.getGender() == 2)
+			else if(poke.getGender() == 0)
 				data[13].setText(translated.get(30));
 			else
 				data[13].setText(translated.get(31));
@@ -133,30 +125,24 @@ public class PokemonInfoDialog extends Frame
 				data[23].setText("-");
 			}
 
-			for(int i = 0; i < data.length; i++)
-				data[i].pack();
-			for(int i = 0; i < labels.length; i++)
-				labels[i].pack();
-			loadImage(poke);
-			setVisible(true);
-			setSize(270, 510);
-			setResizable(false);
+			icon = new Image(poke.getFrontSprite());
+			add(icon);
+
 			setTitle(poke.getName());
+			addCloseCallback(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					GameClient.getInstance().getHUD().removePokemonInfoDialog(index);
+				}
+
+			});
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public void loadImage(OurPokemon poke)
-	{
-		LoadingList.setDeferredLoading(true);
-		icon.setImage(poke.getSprite());
-		icon.setSize(60, 60);
-		icon.setLocation(5, 5);
-		this.add(icon);
-		LoadingList.setDeferredLoading(false);
 	}
 
 	public int setSpriteNumber(int x)
@@ -175,5 +161,28 @@ public class PokemonInfoDialog extends Frame
 		else
 			i = x - 4;
 		return i;
+	}
+
+	@Override
+	public void layout()
+	{
+		super.layout();
+		int x = 70;
+		int y = 30;
+		int width = 0;
+		for(int i = 0; i < 24; i++)
+		{
+			data[i].adjustSize();
+			if(data[i].getWidth() + getX() > width)
+			{
+				width = data[i].getWidth() + getX();
+			}
+			data[i].setPosition(getInnerX() + x + 80, getInnerY() + y);
+			labels[i].adjustSize();
+			labels[i].setPosition(getInnerX() + x, data[i].getInnerY());
+			y += 20;
+		}
+		icon.setPosition(getInnerX(), getInnerY() + 15);
+		setSize(width, 510);
 	}
 }

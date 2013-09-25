@@ -15,7 +15,7 @@ false
 [npc]
 Hiker Wayne
 right
-101
+365
 17
 7
 Onix,17
@@ -138,3 +138,12 @@ false
 false
 false
 [/npc]
+[warp]
+51
+4
+24
+24
+-40
+-9
+0
+[/warp]

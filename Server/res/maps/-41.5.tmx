@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Spheal,15;Zubat,25;Golbat,25;Sealeo,10;Snorunt,25;"/>
   <property name="dayPokemonLevels" value="26-32;26-32;26-30;30-32;25-25;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Spheal,15;Zubat,25;Golbat,25;Sealeo,10;Snorunt,25;"/>
   <property name="nightPokemonLevels" value="26-32;26-32;26-30;30-32;25-25;"/>
   <property name="wildProbability" value="10"/>

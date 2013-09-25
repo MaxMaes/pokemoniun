@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="20-50;70-78;75-80;40-85;80-85;40-70;"/>
   <property name="fishPokemonChances" value="Qyarados,35;Finneon,40;Lumineon,20;Qwilfish,5;"/>
   <property name="fishPokemonLevels" value="40-85;40-55;45-65;40-55;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Sableye,4;Riolu,1;Graveler,25;Onix,30;Golbat,20;Steelix,10;Geodude,10;"/>
   <property name="nightPokemonLevels" value="20-50;20-30;70-78;75-80;40-85;80-85;40-70;"/>
   <property name="waterPokemonChances" value="Tentacool,60;Tentacruel,5;Wingull,30;Pelipper,5;"/>

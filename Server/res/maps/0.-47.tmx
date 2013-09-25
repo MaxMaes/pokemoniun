@@ -3,10 +3,11 @@
  <properties>
   <property name="dayPokemonChances" value="Pichu,30;Roselia,30;Staravia,30;Pikachu,10;"/>
   <property name="dayPokemonLevels" value="21-22;22-23;22-24;22-24;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Pichu,30;Roselia,30;Kricketune,20;Pikachu,10;Staravia,10;"/>
   <property name="nightPokemoneLevels" value="21-22;22-23;22-23;22-24;24-24;"/>
   <property name="pvp" value="disabled"/>
-  <property name="wildModifer" value="10"/>
+  <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

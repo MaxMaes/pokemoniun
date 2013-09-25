@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="54-56;54-56;54-56;54-60;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Golbat,50;Sableye,10;Banette,20;Dusclops,20;"/>
   <property name="nightPokemonLevels" value="54-60;54-56;58-62;58-62;"/>
   <property name="waterPokemonChances" value=""/>
@@ -17,58 +18,16 @@
   <image source="PGTileseti.png" trans="000000" width="512" height="512"/>
  </tileset>
  <tileset firstgid="1025" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2049" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3073" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetiv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4097" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetv.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5121" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvi.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6145" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetvii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7169" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8193" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGtilesetviiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="9217" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetviiiii.PNG" trans="000000" width="480" height="432"/>
- </tileset>
- <tileset firstgid="10027" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetX.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="11051" name="Untitled" tilewidth="16" tileheight="16">
   <image source="PGTilesetxi.PNG" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="12075" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="13099" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetxiii.png" trans="000000" width="512" height="512"/>
- </tileset>
- <tileset firstgid="14123" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantoroutes1.png" trans="ffffff" width="512" height="512"/>
- </tileset>
- <tileset firstgid="15147" name="Untitled" tilewidth="16" tileheight="16">
-  <image source="PGTilesetzkantotowns1.png" trans="ffffff" width="512" height="512"/>
  </tileset>
  <layer name="Grass" width="35" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCoYmmKKHyp+uh51NK/BThzxMCyCpSx6mh1t+6SBoZPZAuIVSdcPRLb/wpMlRtwwOtwy29IKLjy5Ha7cMtrJuIN0yCkbBKBgFo4A6AAD9gKzIJBMAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCoYmyGJH5eeyY2fTCpxnJQ/TArxnJQ/Twy0XkOgLaGL0dgul6oajWy6MumXQu2WwpRdcfHQ5WrtlsJV1A+mWUTAKRsEoGAXUAQCa8RgqJBMAAA==
   </data>
  </layer>
  <layer name="Collisions" width="35" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UWw7CIBBFYRuuQWdt1g8fu9A2JroLdXv+OKQSpg1TSWTUmHuS+1EocDpQnAMAAPBr+G8LCILLjvqsORvOllLbVJ+Fy5n6dM/5j5Taxn0n0Va7ptp8s8Xw+T4vH1vDZbz+lIe1S2DJtW+UrGjoa+Eiv3vP6x2UtB9wccJH84hx4n3rPSp1yY39V5dwFkpc4n7WdPGZ+V65yHNu4SL/jQuvd1VyM9yjXF00ZD2iu5VLyZ2fG18T/2YAAAAkHqAT4Y8kEwAA
+   H4sIAAAAAAAAC+2USQ7CMAxFk0XlmwELhlswCAluAVyvN+kRcFSiuCUukYgBof+kv2jG1zitcwAAAH4N/20BQXDZUJ8lZ8VZU2qb6rNwOVOfw2P9I6W2cd9JtNU+U229rhk+t83zGEuX8f5THtYugRmf/VzJgoa+Fi7yvbe8307J/gMuTvhoHjFOjLeuUalLbu6/uoS7UOIS61nTxWfWe+XSGt3d6CK/jQvvd1VyM6xR7lw05Hl0xjUq+efn5tfEvxkAAACJO3ArWNkkEwAA
   </data>
  </layer>
 </map>

@@ -16,6 +16,6 @@ public class PokemonGainExpEvent implements MessageEvent
 		int exp = GameClient.getInstance().getOurPlayer().getPokemon()[p1].getExp() + Request.readInt();
 
 		GameClient.getInstance().getOurPlayer().getPokemon()[p1].setExp(exp);
-		GameClient.getInstance().getUi().update(false);
+		GameClient.getInstance().getHUD().update(false);
 	}
 }

@@ -16,6 +16,6 @@ public class TradeAddPokemonEvent implements MessageEvent
 		// String[] offerData = Request.readString().split(",");
 		int index = Request.readInt();
 		String[] data = Request.readString().split(",");
-		GameClient.getInstance().getUi().getTrade().addPoke(index, data);
+		GameClient.getInstance().getHUD().getTradeDialog().addPoke(index, data);
 	}
 }

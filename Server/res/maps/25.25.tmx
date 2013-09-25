@@ -5,49 +5,43 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value="Magikarp,35;Tentacool,18;Tentacruel,17;Chinchou,10;Lanturn,10;Shellder,10;"/>
   <property name="fishPokemonLevels" value="10-20;10-20;40-40;20-40;40-40;20-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
+  <property name="pvp" value="disabled"/>
   <property name="waterPokemonChances" value="Tentacool,90;Tentacruel,10;"/>
   <property name="waterPokemonLevels" value="15-24;20-24;"/>
   <property name="wildProbability" value="10"/>
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="224"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal2.tsx"/>
- <tileset firstgid="2049" source="normal5.tsx"/>
- <tileset firstgid="3073" source="normal5.tsx"/>
- <tileset firstgid="4097" source="normal7.tsx"/>
- <tileset firstgid="5121" name="normal3" tilewidth="16" tileheight="16">
-  <image source="normal3.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6145" source="Hoenn Set 14.tsx"/>
- <tileset firstgid="6810" source="Path0.tsx"/>
- <tileset firstgid="7106" source="Buildings7.tsx"/>
- <tileset firstgid="7458" source="Trees0.tsx"/>
+ <tileset firstgid="1" source="Hoenn Set 14.tsx"/>
+ <tileset firstgid="666" source="Path0.tsx"/>
+ <tileset firstgid="962" source="Buildings7.tsx"/>
+ <tileset firstgid="1314" source="Trees0.tsx"/>
  <layer name="Walkable" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5stxcAwexSP4hGE5+ARWwrE64B4OQnmIevBZjYy3grE24B4OwnmI+uZRYQdhOTx6SFH7ygenHiwxyU5eWG4h8lQw6NgFIyCUTAKBicAANSSbebgDQAA
+   H4sIAAAAAAAAC5vNxMAwexSP4hGE5+ARWwrE64B4OQnmIevBZjYy3grE24B4OwnmI+uZRYQdhOTx6SFH7ygenHiwxyU5eWG4h8lQw6NgFIyCUTAKBicAAEkQDdvgDQAA
   </data>
  </layer>
  <layer name="Walkable" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGF5AX5a25lvS2PxRMPBgkwTpenaRoWcUjAJs4JI0bc03w1KG4So3P0gSb64OnrKRGuUmNnejA3LKf3zuRgfk+IMYd4+CUTAKRsEoGAXUBABAcTf94A0AAA==
+   H4sIAAAAAAAAC2NgGF5An5W25lvS2PxRMPBgExl6dlHdFaNgpIJLzLQ13wxLGYar3PzASLy5OnjKRmqUm9jcjQ7IKf/xuRsdkOMPYtw9CkbBKBgFo2AUUBMAAA+Ib2DgDQAA
   </data>
  </layer>
  <layer name="Collisions" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VR0qDQRjG8VnaDvAF8QS2ZdzGlQ3bCdRYFjZsJ7C7EBVLTmB3ISoqnsCC8SAW1Av4X8xAMJnh/eKILuaBH7OYNy9PSPIlVaVUI1LC00Q6n0RDjNNEOi/t4at/nJRESpWiDOWoiPLfn62fJNXsq0Et6lCfs/97f5MmZprRgla0Rfl7Tdq560AnutDt6G8yzMwIRjGGccf+Ce4mMYVpzAj6r+qZNc51bDj2b3K3hW3sICPof6pnzjjPcYFsZeH9l9xd4Vq/5kbQ31ds/X3lr/r3JJTqRR/S6McABjGU+Hn/WXbMYR4LWMQSlrFi2V/o87f132XHHvZxgEMc4RgnHvrfsuMO93jQ+x45s3iKsd/W/5kdL3jFm973zvmBTw/9c2P7XUl6/9b33+fz39Xbx/Pf1bvY/99i/69DQkJCQv5XvgD4av9s4A0AAA==
+   H4sIAAAAAAAAC+3VyUpCURzH8SvS05i1zK2ummh6AoeyRRNNT2BZuhCVpidIy1pERUVP0ID2IFlUL+B3cS5IeC7/q0dqcX7w4SBefvzA4UQHHCeGqPB0I31+BBEfpxvp89Idpvabim6/n4QwiDCGMNz23u/9bkYxhnFMYNKjfwrTmMEs5jz2u1nCMlawijWP/nVsYBNb2BbsL6iziBLKHv0HOMQRjnEi2H+lzmvc4BaNYOf+O9zjQb1+FOw3Fd1+U/mr/fGA4ySQRArzWEAai4He92fo2MEustjDPnLIa/o7ff66/ad0VFDFGc5RwwUuDex/ouMZL3hVfXXOBt589Ov2v9PRxAc+Vd8X5zd+DOxvj+53Jdndr+9/v/7/pfeXqd3d3r/d3tc2NjY2Nv8rLXaEG1HgDQAA
   </data>
  </layer>
  <layer name="Collisions" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9OVZWDQA2JdImkYIFa9MhCrINHUAjDzcLmPUoDufmoDdPdTG4y6Hz8YdT9+MOp+/GDU/fgBrdyPXp/QqtwfLuE/CkbBKBgFo2BkAgBsk9gs4A0AAA==
+   H4sIAAAAAAAAC9NlZWDQA2JdImkYIFa9MhCrINHUAjDzcLmPUoDufmoDdPdTG4y6Hz8YdT9+MOp+/GDU/fgBrdyPXp/QqtwfLuE/CkbBKBgFo2BkAgBF8G9o4A0AAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="37">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TywrCMBBFB1/f0CJd+Qa1O6EL3/6fn+XKpf/jFcwmTJoZGynoHLgECjm5mRIiHWVBtCyUmxRUcG++6JdQd79ORtRFekgfGWR6P3e/8v1tAt8UmSFzZPGBn+tfJZxpXf8UxPpfvZnchjp/2/2b0mb/bU60Q/bIATkiJ+SMXHKZP3V/////8vx97sKZO0bwjBnXg3lD2nf1YgX3mvGHzpXi9oc8oXOluP2x/qnW2PlNV8MwDOO/eQJQwSz04A0AAA==
+   H4sIAAAAAAAAC+2TywrCMBBFp9YKPv7CN6jdCV347v/5Wa5c+j/eQoMQkmaGRgo6Bw6BtLm5SSmRjDwj2mTCRQIKZO+/mM+h6Xw9mMI+rF4bBLKGcATHcFLPuc6X13NzuIBLuIJrdusPrv5FxDtt6h+DUP+79eyRyvK77t+WLvsfEqIjPMEzvMArvMEy4eXH7m9//1++f5sn884NU+TMHFkvxz8k/a8qtsjeOfJ9+3Ix6305vn25mPWh/rHG0P5tR0VRFOW/eQP2PxQC4A0AAA==
   </data>
  </layer>
 </map>

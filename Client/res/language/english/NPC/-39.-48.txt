@@ -1,0 +1,3 @@
+Welcome to the Pokemon storage system.
+This is the Pokemon Day Care,
+can I breed some Pokemon for you?

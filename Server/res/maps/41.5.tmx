@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="27-29;29-31;27-29;29-31;27-29;27-29;"/>
   <property name="fishPokemonChances" value="Goldeen,80;Seaking,20;"/>
   <property name="fishPokemonLevels" value="29-35;33-33;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Hoothoot,20;Noctowl,10;Oddish,30;Gloom,10;Doduo,30;"/>
   <property name="nightPokemonLevels" value="15-20;25-30;27-29;29-31;27-29;"/>
   <property name="waterPokemonChances" value="Psyduck,95;Golduck,5;"/>

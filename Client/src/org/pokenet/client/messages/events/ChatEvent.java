@@ -12,6 +12,6 @@ public class ChatEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().messageReceived(Request.readInt(), Request.readString());
+		GameClient.getInstance().getHUD().messageReceived(Request.readInt(), Request.readString());
 	}
 }

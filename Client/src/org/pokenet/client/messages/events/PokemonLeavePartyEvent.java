@@ -14,6 +14,6 @@ public class PokemonLeavePartyEvent implements MessageEvent
 	{
 		int i = Request.readInt();
 		GameClient.getInstance().getOurPlayer().setPokemon(i, null);
-		GameClient.getInstance().getUi().refreshParty();
+		GameClient.getInstance().getHUD().refreshParty();
 	}
 }

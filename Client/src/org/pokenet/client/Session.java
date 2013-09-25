@@ -37,7 +37,6 @@ public class Session
 	public void send(ClientMessage msg)
 	{
 		channel.write(msg);
-		System.out.println("Sent: " + msg.getMessage());
 	}
 
 	public void setLoggedIn(boolean state)

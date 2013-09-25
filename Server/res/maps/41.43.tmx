@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Aron,9;Beldum,1;"/>
   <property name="dayPokemonLevels" value="6-10;7-8;8-8;7-8;10-15;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Makuhita,50;Zubat,30;Abra,10;Aron,10;"/>
   <property name="nightPokemonLevels" value="6-10;7-8;8-8;7-8;"/>
   <property name="pvp" value="yes"/>

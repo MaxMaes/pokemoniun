@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="25" height="70" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="fishPokemonChances" value="Magikarp,90;Horsea,10;"/>
+  <property name="fishPokemonLevels" value="15-20;25-30;"/>
+  <property name="isCave" value="false"/>
+  <property name="pvp" value="disabled"/>
+  <property name="waterPokemonChances" value="Tentacool,95;Tentacruel,5;"/>
+  <property name="waterPokemonLevels" value="30-35;40-40;"/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Fire Red Tileset 5.tsx"/>
  <tileset firstgid="257" source="Sevii Island Set 1.tsx"/>
  <tileset firstgid="4307" source="Water02.tsx"/>
@@ -11,7 +22,7 @@
  <tileset firstgid="6338" source="Buildings8.tsx"/>
  <layer name="Walkable" width="25" height="70">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSw6CMBCG2bhzIwmX9HjqSkhM1JWH4AIuuYAYaDI003n0QUnDn0wwpTPfzLRIqar0OhyXdm4m85HxtWPmZGg50C8FA/rkYnDzd8a2GfaYPd+H4WMcI4RlRDGwcU1sLcPcW4Ph6l87WsfsO2mv7nM8l1EcGAv73zJ6jjFehL09GbG0JoPqUypGTOWsIzUjtkrt087Ix6A4JTBiq1QG1GV8f14D7NbwDO6cwFnnYMDcP4kYobmXzLD3l2F86/iG1THUk7VzPpS/5jmhesUx+nppWnF9sGNinNBeSxiY+kCGRGszXIIMzZqb+xqGVhRD+oxwecF6pXXAeVxdWD6YD7cHOAbWG2ls6frYdadkSHxiMbT5bJGhzSdGHbHWnItpy7wvB2Fs7CzH5fc4La9axv+3Nk8tA46Z8dBzd2qG62ydg+HLob4RsPy3yvgBOGunv1gbAAA=
+   H4sIAAAAAAAAC+2XTQ6CMBCF3bhzIwmX9HjqSkhM1JWH4AIuuYAYbDI00/lpp5QQXvKiqXS+mWmButvl1/4w9akeHSM3149ZkqHlwHk5GHBOKQZ3/cZYNsMf86+PYcSYY6SwnCgGNq6JrWW43+ZghPrXDG6ZfSft1e0fL2SKA2Nhzy2nxxDjSfgVybDSnAyqT7kYlipZR26Gtdbap41RjkFx1sCw1loZUOfh/XlJ8LXmGdw5gXMbYMDc35kYqbmvmeHvL8f4VPbG6uir0Y2Aq7lPqF5xjK6aOqQQg+uDHxPjpPZawsDUJTIkmpsREmRI1xzmoGFoRTGk9wiXF6xXWge8jqsLywebw+0BjoH1Rhpbuj5+3TkZkjlWDG0+S2Ro87Gow2rNuZi+3PuyF8bGznJcfvfj9FPL+H3X5qllwDE3nnruzs0Ina1LMGI51H8ELP+lMr4rdEmxWBsAAA==
   </data>
  </layer>
  <layer name="Walkable" width="25" height="70">

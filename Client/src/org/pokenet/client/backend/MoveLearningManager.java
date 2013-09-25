@@ -3,7 +3,7 @@ package org.pokenet.client.backend;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.ui.MoveLearning;
+import org.pokenet.client.ui.frames.MoveLearningDialog;
 
 /**
  * Handles move learning, and allowis for queing items.
@@ -15,7 +15,7 @@ public class MoveLearningManager extends Thread
 	private static MoveLearningManager m_instance;
 	private boolean m_canLearn = false;
 	private boolean m_running = true;
-	private MoveLearning m_moveLearning;
+	private MoveLearningDialog m_moveLearning;
 	private Queue<MoveLearnQueueObject> m_moveLearningQueue;
 
 	/**
@@ -24,7 +24,7 @@ public class MoveLearningManager extends Thread
 	private MoveLearningManager()
 	{
 		m_moveLearningQueue = new LinkedList<MoveLearnQueueObject>();
-		m_moveLearning = new MoveLearning();
+		m_moveLearning = new MoveLearningDialog(GameClient.getInstance().getHUD());
 		System.out.println("Move Learning Manager started.");
 	}
 
@@ -45,7 +45,7 @@ public class MoveLearningManager extends Thread
 	 * 
 	 * @return the Move Learning window
 	 */
-	public MoveLearning getMoveLearning()
+	public MoveLearningDialog getMoveLearning()
 	{
 		return m_moveLearning;
 	}
@@ -58,9 +58,18 @@ public class MoveLearningManager extends Thread
 	 */
 	public void learnMove(int pokeIndex, String move)
 	{
-		BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false);
+		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false); // TODO: Chappie magic :D
 		m_moveLearning.learnMove(pokeIndex, move);
-		GameClient.getInstance().getDisplay().add(m_moveLearning);
+		try
+		{
+			GameClient.getInstance().getGUIPane().add(m_moveLearning);
+		}
+		catch(Exception e)
+		{
+			System.err.println("movelearningdialog was already in tree, retrying");
+			GameClient.getInstance().getGUIPane().removeChild(m_moveLearning);
+			GameClient.getInstance().getGUIPane().add(m_moveLearning);
+		}
 	}
 
 	/**
@@ -82,11 +91,10 @@ public class MoveLearningManager extends Thread
 	 */
 	public void removeMoveLearning()
 	{
-		BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(true);
+		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(true); TODO: //Chappie magic :D
 		if(!m_moveLearningQueue.isEmpty())
 			m_canLearn = true;
-		GameClient.getInstance().getUi().nullSpeechFrame();
-		GameClient.getInstance().getDisplay().remove(m_moveLearning);
+		GameClient.getInstance().getGUIPane().removeChild(m_moveLearning);
 	}
 
 	/**

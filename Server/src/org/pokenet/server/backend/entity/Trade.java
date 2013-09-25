@@ -319,16 +319,16 @@ public class Trade implements Runnable
 					{
 						Player p = (Player) player1;
 						p.addPokemon(temp[1]);
-						if(!p.isPokemonCaught(temp[1].getSpeciesNumber() + 1))
-							p.setPokemonCaught(temp[1].getSpeciesNumber() + 1);
+						if(!p.isPokemonCaught(temp[1].getPokedexNumber()))
+							p.setPokemonCaught(temp[1].getPokedexNumber());
 					}
 				if(temp[0] != null)
 					if(player2 instanceof Player)
 					{
 						Player p = (Player) player2;
 						p.addPokemon(temp[0]);
-						if(!p.isPokemonCaught(temp[0].getSpeciesNumber() + 1))
-							p.setPokemonCaught(temp[0].getSpeciesNumber() + 1);
+						if(!p.isPokemonCaught(temp[0].getPokedexNumber()))
+							p.setPokemonCaught(temp[0].getPokedexNumber());
 					}
 				/* Evolution checks */
 				for(Pokemon curPokemon : temp)

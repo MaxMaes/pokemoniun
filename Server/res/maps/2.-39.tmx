@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="22" height="31" tilewidth="16" tileheight="16">
-  <properties>
-  <property name="pvp" value="enforced"/>
+ <properties>
+  <property name="dayPokemonChances" value="Clefairy,15;Golbat,20;Machoke,10;Graveler,20;Nosepass,5;Meditite,20;Chingling,10;"/>
+  <property name="dayPokemonLevels" value="40-42;41-42;41-45;40-40;37-37;41-42;30-30;"/>
+  <property name="isCave" value="true"/>
+  <property name="nightPokemonChances" value="Bronzong,15;Golbat,20;Machoke,10;Graveler,20;Nosepass,5;Meditite,20;Chingling,10;"/>
+  <property name="nightPokemonLevels" value="40-42;41-42;41-45;40-40;37-37;41-42;30-30;"/>
+  <property name="pvp" value="yes"/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

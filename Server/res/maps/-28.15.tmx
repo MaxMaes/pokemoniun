@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="25" height="100" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value="Geodude,20;Phanpy,20;Fearow,10;Meowth,10;Cubone,10;Marowak,10;Persian,5Onix,5;Skarmory,5;Larvitar,5;"/>
+  <property name="dayPokemonLevels" value="46-46;15-15;50-50;43-43;46-46;52-52;49-52;54-54;30-30;15-20;"/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Geodude,20;Phanpy,20;Fearow,10;Meowth,10;Cubone,10;Marowak,10;Persian,5Onix,5;Skarmory,5;Larvitar,5;"/>
+  <property name="nightPokemonLevels" value="46-46;15-15;50-50;43-43;46-46;52-52;49-52;54-54;30-30;15-20;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="10"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Path0.tsx"/>
  <tileset firstgid="527" source="various3.tsx"/>
@@ -8,7 +23,7 @@
  <tileset firstgid="1510" source="Sevii Island Set 1.tsx"/>
  <layer name="Walkable" width="25" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YTRLCIAyF6Q08gCt11aqL+nP/4ziewjKamZQBAiWhZcybeQu1zUdCihRjVCqVSqVSta6XuikP3dzXyadOliHBsTH35msfb0hgUfeFfi9lnIn7cF4ptXgsqHfvyeEQyal34qeM0WXY+JcIY+z8uYSuP6J4cI37mbOXffPJ+dxgSTGW9nGuoT+449Zi5PQ551y0yDAeltScS+cCjOfkmyDDxr4L1mnLtjWlxNkjEs9AbQZ8x7nmhcZbg0E5thfhYvTK2BRjrMDIcSsM6j6XAaLiYlHjC62BlHLXzpR1N9VUPSUZnLlJM0p7mptTc07Avv/Emowl8VLGWhp3DQbszcGcDBgzdUbDkYPk/l86h1qMtd+TpHrZ7m/d8ytujntmJ8GIndlx1mv8PesuS2LOgQVeq/fUdZzzvms2MN6WjPWvjJT+eu/mlsjBxjWIxV0zNy7+zJ0DFmftIF5MpRxclw+j3diZECcAAA==
+   H4sIAAAAAAAAC+2YTQ6CMBCFyw08gCt1BeoCf+5/HOMppNFJyqS0pbwp1MxL3kKl8zEzpdQao1KpVCqVqna91FW5a8a+Dj41sgwJjo25N1/7eF0CKzZu6veljHNknJtXSi0eGfVuPTkcAjm1LH7KPXKGjX8JMPrGn8vU9UcnHl3DPyPnsq+f0s9NjQyXg45bilGyRv/A4Czpnkv3/jn4Jsiwse/Cz8dWbWvqE6qviPf21hj0Hb13UX1YixFzaC+CYrTK2BSjL8CY41oYsXG569OcMVOMkHLWzpR1N9WxekoykLlJM5bOaTSnZE84M/U+0IyceIg1YIsM2puTkQy659gZDSIHyf2/dA6lGGv/T5Kay3Z/y8+v0Bx+ZifBCJ3ZIevV/551zpLoObHIa809tbp2u1LGtN+7saUYxmGh8+Fx3c/oHFwha0fxQlrKcevyAdOFIpkQJwAA
   </data>
  </layer>
  <layer name="Grass" width="25" height="100">

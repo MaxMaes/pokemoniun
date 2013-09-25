@@ -17,6 +17,6 @@ public class PokemonLevelChangeEvent implements MessageEvent
 		GameClient.getInstance().getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setLevel(Integer.parseInt(levelData[1]));
 		GameClient.getInstance().getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setExpLvlUp(Integer.parseInt(levelData[2]));
 		GameClient.getInstance().getOurPlayer().getPokemon()[Integer.parseInt(levelData[0])].setExpLvl((Integer.parseInt(levelData[3])));
-		GameClient.getInstance().getUi().update(false);
+		GameClient.getInstance().getHUD().update(false);
 	}
 }

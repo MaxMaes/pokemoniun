@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value="Magikarp,10;Gyarados,10;Poliwag,30;Poliwhirl,30;Goldeen,10;Psyduck,5;Slowpoke,5;"/>
   <property name="fishPokemonLevels" value="10-20;40-40;20-40;40-40;20-20;40-40;40-40;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="disabled"/>
@@ -50,7 +51,7 @@
  </layer>
  <layer name="Collisions" width="48" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZyU/CQByFh+UAYuK+7wIuCXBRQeJ20OhBI0eP/tmiF4QLggfFSKLGg6/JTDIOUzrTTqEkvOTLrx5sv74OpdokISTJkQJZSg68g5bCjEaJNF/gm5uq+1OdWQH+HHKS49tNmX9bcjzV/anOTUn3OW6qRrV/t7HrP0M6u2fThL+p2PXP+4vdWySiaoz67K/Sv8w/KHHbv5WfiPN94Dfir7+X/q217XQfCFvrKOSfv5f+LX+n/sMBWP9pcGjj76Z/6+dKjJBnUAW1mHt/lf5zwraJ/utwfgEN0JT4l+Nq/nbHzYMChXXProOJ/t+ocwvzw4f+xecHcQ0xfxPr3zoft59xu+MWBJi76B/U+4/YP7sG7FyYv1P6df8R++e9WVT9+f7H8LkcBxNgEkyBaTADZkEprv5skuhy/VUyovH880l/Zw5+82ABLIIlsAxWwCq4U7zvsNj171fW4LcONjjPFLbTYAvcC/4POP8yeARPkuvtpX832YbfDtjlPDNdOq9Q5ypmTeLf6/51U6fODcwmeBXOwa7/pIRUj5x1otN/kJ77WZzWf5bbDqK/U//su8uKSf+9IiH74ADkQaHobj8q/f/zx3dRKCSZmjmC7zE4AafgzKW/bv8xuMZDnVM35/C9oM6XmFcD1v81fG+o8y1macD6N5V+9W8qw/6D2T9zNtV/27Q4Tbe/vwgZ9u93hv0PVv9O/+/Rjen3Xk79e30vJcb0ey+v/eten2H/8vkHZWy1WgAeAAA=
+   H4sIAAAAAAAAC+2ZS0/CQBhFp8ACxMT3+y1gYgJsVJD4Wmh0oZGlS3+26AZhg+BCMZKoceFtMpOMw5TOtFMoCTc5+erC9vR2KNWmCCEpjjTIUfLgHbQVZixGpPkC39xU3Z/qzAnw55CXHN9pyvw7kuOp7k91bku6z3NTNar9e41T/1nS3T2bJvxNxal/3l/s3iYZU2M8YH+V/mX+YYnX/u38RN3vA7/RYP399G+vbbf7QMReR1Zw/n76t/3d+o+EYP1nwKGDv5f+7Z+rcUKeQQ3U4979VfrPC9sm+m/A+QU0QUviX0mo+TsdtwCKFNY9uw4m+n+jzm3MjwD6F58fxDXE/E2sf/t8vH7GnY5bFGDuon9Y7z9i/+wasHNh/m4Z1P1H7J/3ZlH15/ufwOdyEkyBaTADZsEcmAflhPqzSbLH9VfJmMbzzyf9nQX4LYIlsAxWwCpYA+vgTvG+w+LUf1DZgN8m2OI809jOgB1wL/g/4Pwr4BE8Sa63n/79ZJfzzPbovEqda5h1iX+/+9dNgzo3MVvgVTgHp/5TEtJ9ctaJTv9heu5ncVv/OW47jP5u/bPvLjsm/fdKhOyDA1AAxZK3/aj0/88f30WWJZmaOYLvMTgBp+DMo79u/3G4JqzuqZtz+F5Q50vMqyHr/xq+N9T5FrM8ZP2byqD6N5VR/+Hsnzmb6r9jWpym199fhIz6Dzqj/oerf7f/9+jG9Hsvt/79vpcSY/q9l9/+da/PqH/5/APDco1WAB4AAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="48" height="40">

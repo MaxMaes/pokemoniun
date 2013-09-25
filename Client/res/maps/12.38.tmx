@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="16" tileheight="16">
-<properties>
- 
-<property name="dayPokemonChances" value="Oddish,15;Vileplume,20;Spearow,15;Fearow,20;Spinarak,10;Ariados,20;"/>
-
-<property name="dayPokemonLevels" value="30-30;45-50;35-40;50-50;30-30;50-50;"/>
-
-<property name="fishPokemonChances" value="Magikarp,90;Luvdisc,10;"/>
-
-<property name="fishPokemonLevels" value="15-20;20-35;"/>
-
-<property name="nightPokemonChances" value="Gloom,30;Vileplume,20;Hoothoot,30;Noctowl,20;Spinarak,10;Ariados,20;"/>
-
-<property name="nightPokemonLevels" value="30-30;45-50;35-40;50-50;30-30;50-50;"/>
-<property name="pvp" value="yes"/>
-<property name="waterPokemonChances" value="Magikarp,40;Psyduck,60;"/>
-
-<property name="waterPokemonLevels" value="35-40;40-40;"/>
-<property name="wildProbability" value="4"/>
-<property name="xOffsetModifier" value="0"/>
-
-<property name="yOffsetModifier" value="0"/>
-
-</properties>
-
- 
-<tileset firstgid="1" source="Cliffs01.tsx"/>
+ <properties>
+  <property name="dayPokemonChances" value="Oddish,15;Vileplume,20;Spearow,15;Fearow,20;Spinarak,10;Ariados,20;"/>
+  <property name="dayPokemonLevels" value="30-30;45-50;35-40;50-50;30-30;50-50;"/>
+  <property name="fishPokemonChances" value="Magikarp,90;Luvdisc,10;"/>
+  <property name="fishPokemonLevels" value="15-20;20-35;"/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Gloom,30;Vileplume,20;Hoothoot,30;Noctowl,20;Spinarak,10;Ariados,20;"/>
+  <property name="nightPokemonLevels" value="30-30;45-50;35-40;50-50;30-30;50-50;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value="Magikarp,40;Psyduck,60;"/>
+  <property name="waterPokemonLevels" value="35-40;40-40;"/>
+  <property name="wildProbability" value="4"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Cliffs01.tsx"/>
  <tileset firstgid="231" source="Cliffs02.tsx"/>
  <tileset firstgid="343" source="SinnohInteriorSet1.tsx"/>
  <tileset firstgid="2711" source="Water02.tsx"/>
@@ -60,7 +50,7 @@
  </layer>
  <layer name="WalkBehind" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XOQ4DIQxFfYRoymz3v0dSZWkizX1iiilSgLExjHH8JcsFEvD9WAEAPgeAG8Z94pz0wPzEeE2cIXiYysHDVg4etnLwsJWDh61M8eil4wJwwjhjXDCuy2+7No93Ry85SdZHUonHuoMPyX6l/HvnIalXrUbxkNSLw1XSf/LD5SGpF2efSfqX1NEqD24dg0e9PPBI8sBDen+UlOPBrWPv/aH5HtR6F7ScVxrSeqe1nFca7ygLPFaF9WeBh8a5Y4GHxj0QPNp5bJqdB9e/ZR4c/8Gj3ocnHjnNxEPS/+bfEg9J/5TPf+OR2ikerf+E3jxG/NepcSifNTxG/Nepcbj19M6DK4s8Rqk0T+qc6XEPSFWa54h1rSVqf3C0Nw/v+gJ1zuV0ECcAAA==
+   H4sIAAAAAAAAC+2XPQ7DIAyFfYQqY//uf4926s9SKfcJDBk6EGNjwoP4SZYHJMjzhwkQEf1ORI8Qz45z1Cvkd4hPx5mcB1R2HljZeWBl54GVnQdW5njU0nkiuoS4hriFuE//49Y8vhW9pKTZH1FbPOYGPjT9yvkfnYemXrnai4emXhKumvmjHykPTb0kfaaZX1NHVB7SOjoP53EUHpxSPFJqxcNSVveCkv6wkNU9raQ/LO5RCDxmg32IwMPi3EHgYfEfcB7lPFb1zkPqH5mHxL/zyPcxEo+UeuKhmX/1j8RDMz/n82g84jjHo/S9UJtH7fdhzjqcT4T3es460nqOzkMqRB57aes7uXOmxn9Aq63v3GNfW4nrD4la8xhdC5SvpI0QJwAA
   </data>
  </layer>
 </map>

@@ -34,6 +34,15 @@
 15
 0
 [/warp]
+[warp]
+11
+5
+4
+11
+-46
+-21
+0
+[/warp]
 [npc]
 Biker Dale
 down

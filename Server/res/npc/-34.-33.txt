@@ -25,3 +25,17 @@
 -34
 0
 [/warp]
+[npc]
+Amphy
+down
+0
+8
+8
+NULL
+0
+-1
+0
+false
+false
+false
+[/npc]

@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Duskull,50;Shuppet,50;"/>
   <property name="dayPokemonLevels" value="22-29;22-29;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Duskull,50;Shuppet,50;"/>
   <property name="nightPokemonLevels" value="22-29;22-29;"/>
   <property name="pvp" value="yes"/>

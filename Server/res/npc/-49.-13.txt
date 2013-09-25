@@ -15,7 +15,7 @@ false
 [npc]
 Fanclub member
 left
-282
+373
 8
 14
 NULL

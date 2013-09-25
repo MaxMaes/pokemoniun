@@ -18,6 +18,6 @@ public class BattleWonItemEvent implements MessageEvent
 		int itemID = Request.readInt();
 		Item item = ItemDatabase.getInstance().getItem(itemID);
 		GameClient.getInstance().getOurPlayer().addItem(item.getId(), 1);
-		BattleManager.getInstance().getTimeLine().informItemDropped(item.getName());
+		BattleManager.getInstance().getNarrator().informItemDropped(item.getName());
 	}
 }

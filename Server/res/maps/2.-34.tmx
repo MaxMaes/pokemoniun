@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="90" height="50" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value="17-20;18-20;17-19;18-20;"/>
   <property name="dayPokemonChances" value="Geodude,40;Bronzor,50;Zubat,15;Onix,15;"/>
-  <property name="nightPokemonLevels" value="17-20;18-20;17-19;18-20;"/>
-  <property name="nightPokemonChances" value="Geodude,40;Bronzor,50;Zubat,15;Onix,15;"/>
-  <property name="waterPokemonLevels" value=""/>
-  <property name="waterPokemonChances" value=""/>
-  <property name="wildProbability" value="7"/>
-  <property name="fishPokemonLevels" value=""/>
+  <property name="dayPokemonLevels" value="17-20;18-20;17-19;18-20;"/>
   <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
+  <property name="nightPokemonChances" value="Geodude,40;Bronzor,50;Zubat,15;Onix,15;"/>
+  <property name="nightPokemonLevels" value="17-20;18-20;17-19;18-20;"/>
   <property name="pvp" value="disabled"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>

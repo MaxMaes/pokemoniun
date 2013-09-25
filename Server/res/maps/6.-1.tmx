@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="13-16;10-16;13-16;12-14;13-13;"/>
   <property name="fishPokemonChances" value="Magikarp,20;Poliwag,20;Goldeen,20;Shellder,20;Krabby,20;"/>
   <property name="fishPokemonLevels" value="5-15;5-25;5-15;15-25;15-25;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Hoothoot,23;Mankey,22;Oddish,23;Abra,10;Meowth,22;"/>
   <property name="nightPokemonLevels" value="13-16;10-16;13-16;12-14;13-13;"/>
   <property name="waterPokemonChances" value="Psyduck,99;Golduck,1;"/>
@@ -27,7 +28,7 @@
  </layer>
  <layer name="Walkable" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OsQkAIAxE0VRxc8FaHEpdwimstbOOCLH4D667hBMBgGN4D/jU9B4AAA/EYOun3c+GFON/ALhVVaTtdLXdLYuBpfEADwAA
+   H4sIAAAAAAAAC2NgGAWjYBSMAgR4MNAOGKTg20A7YBSMglEwCqgA2thJU98JVD+ZBDyVRPOHOuAaaAeMglEwgsFJNgaGU0B8mo00fQAz9kLoAA8AAA==
   </data>
  </layer>
  <layer name="Grass" width="24" height="40">
@@ -57,12 +58,12 @@
  </layer>
  <layer name="Collisions" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XuwqAMAxFOzno5GOp+P9/5mMRXURHA7ZLqUlbWsGSA5eLYuNtCGKFeChBFeJvUM83oNbB36DWUflC0XWpfKHkkj813H87f8s/gibQDFoi1tWsyjfQDurVdaz3HMpP0CXS9r8QPD8U/P3B4fnBST0/3H+cXPKnwsxveudRq7bcM/tv+uBRXyJ1YuWn/v+/zq+x7QPrt+u5R2Pbh3RYx7hxAyAHIqMADwAA
+   H4sIAAAAAAAAC2NggAAuIObGQ+MChNQLAbEwETQuQEgfIfeRC2DmEnIfuWC4uJ/WYDT8sYOh5v6nQPwMiJ8D8QsqmgsDb6H0eyD+AMRSUD617PkKpb8D8Q8G2oY/G8No+iEERssf/GA0/eAHtE4/o+GPHwwX99MK0Dv8iW3v4wK4zCG1vU/Ivbja/+i0DAlmS1LgfhEs5gmS4H5CAJs/JInQNwqIAwB0hQj/AA8AAA==
   </data>
  </layer>
  <layer name="WalkBehind" width="24" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2RTQqAIBBGXdeqn03Q/W9V3aAzNIKR2MyoYwuleTB8YEw8P41JY0XOlsTdFGbkbPjw/6X+mJ8U7F6YnxTsXur/oP5vNpgd5iC+1+5vOV222L+P+vOoP4/686g/j/rzUP49TOcyl3vPJuY/wkxe5lK63xqxd/D7lrxXrMe/9Z1L2D+VUsL+qbwA+Po+lAAPAAA=
+   H4sIAAAAAAAAC+2XMQqAMAxFO+tUdRG8/63UG3gGU6hYapI20UExD0KgpfLyM+lcHRNyNla+rWFAzvyD37/rj/lpwebC/LRgc5n/iflfmaEWqJW4f7t/YIv9i/mnmD+P+fOYP4/585g/D+XfQjWxSznehY75d1B90iXzeOR9Cck+NP8BUn8ppT2keWv2VcpRmvffyPOnupY8f6rvQzYoNQAPAAA=
   </data>
  </layer>
 </map>

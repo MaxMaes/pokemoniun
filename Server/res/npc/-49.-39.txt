@@ -57,7 +57,7 @@ false
 [npc]
 Schoolboy
 down
-96
+263
 3
 20
 NULL
@@ -71,7 +71,7 @@ false
 [npc]
 Schoolboy
 down
-96
+261
 4
 20
 NULL
@@ -85,7 +85,7 @@ false
 [npc]
 Schoolboy
 up
-100
+264
 5
 16
 NULL
@@ -99,7 +99,7 @@ false
 [npc]
 Schoolboy
 up
-210
+279
 3
 14
 NULL

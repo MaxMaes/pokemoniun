@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="35" height="35" tilewidth="16" tileheight="16">
+<properties>
+  
+ <property name="isCave" value="false"/>
+
+ <property name="pvp" value="disabled"/>
+
+ <property name="xOffsetModifier" value="0"/>
+
+ <property name="yOffsetModifier" value="0"/>
+
+</properties>
+
  <tileset firstgid="1" source="Hoenn Interior Set 13.tsx"/>
  <tileset firstgid="257" source="Hoenn Interior Set 8.tsx"/>
  <layer name="Walkable" width="35" height="35">

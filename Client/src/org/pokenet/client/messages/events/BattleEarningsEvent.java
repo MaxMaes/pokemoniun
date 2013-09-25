@@ -12,6 +12,6 @@ public class BattleEarningsEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informMoneyGain(Request.readInt());
+		BattleManager.getInstance().getNarrator().informMoneyGain(Request.readInt());
 	}
 }

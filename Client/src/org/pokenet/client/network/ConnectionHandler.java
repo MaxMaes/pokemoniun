@@ -16,7 +16,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 	public void channelClosed(ChannelHandlerContext channelContext, ChannelStateEvent channelState)
 	{
 		GameClient.getInstance().reset();
-		GameClient.getInstance().showAlert("Session closed", "You have been disconnected from the server");
+		GameClient.getInstance().showMessageDialog("You have been disconnected from the server");
 	}
 
 	@Override

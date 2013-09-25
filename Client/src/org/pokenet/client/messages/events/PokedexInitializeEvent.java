@@ -12,7 +12,6 @@ public class PokedexInitializeEvent implements MessageEvent
 	@Override
 	public void parse(Session session, ServerMessage Request, ClientMessage Message)
 	{
-		/* TODO: Is this still Todo, if yes. What? */
 		String[] details = Request.readString().split(",");
 		GameClient.getInstance().getOurPlayer().initializePokedex(details);
 	}

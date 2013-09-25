@@ -12,6 +12,6 @@ public class PokemonRemoveEffectEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informStatusHealed(Request.readInt(), Request.readString(), Request.readString());
+		BattleManager.getInstance().getNarrator().informStatusHealed(Request.readInt(), Request.readString(), Request.readString());
 	}
 }

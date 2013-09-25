@@ -55,7 +55,7 @@ false
 false
 [/npc]
 [warp]
-10
+9
 2
 15
 10
@@ -64,7 +64,7 @@ false
 0
 [/warp]
 [warp]
-18
+17
 2
 25
 10
@@ -73,16 +73,16 @@ false
 0
 [/warp]
 [warp]
-1
 2
-1
+2
+2
 3
 -32
 -45
 0
 [/warp]
 [warp]
-13
+14
 2
 13
 3

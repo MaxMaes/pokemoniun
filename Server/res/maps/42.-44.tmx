@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="92" height="38" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value="19-22;20-22;19-19;21-22;20-20;20-20;"/>
   <property name="dayPokemonChances" value="Staravia,40;Marill,25;Abra,10;Kadabra,10;Lickitung,10;Scyther,5;"/>
-  <property name="nightPokemonLevels" value="19-22;20-22;19-19;21-22;20-20;20-20;"/>
-  <property name="nightPokemonChances" value="Staravia,40;Marill,25;Abra,10;Kadabra,10;Lickitung,10;Scyther,5;"/>
-  <property name="waterPokemonLevels" value=""/>
-  <property name="waterPokemonChances" value=""/>
-  <property name="wildProbability" value="1"/>
-  <property name="fishPokemonLevels" value=""/>
+  <property name="dayPokemonLevels" value="19-22;20-22;19-19;21-22;20-20;20-20;"/>
   <property name="fishPokemonChances" value=""/>
-  <property name="pvp" value="enforced"/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value="Staravia,40;Marill,25;Abra,10;Kadabra,10;Lickitung,10;Scyther,5;"/>
+  <property name="nightPokemonLevels" value="19-22;20-22;19-19;21-22;20-20;20-20;"/>
+  <property name="pvp" value="yes"/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="7"/>
   <property name="xOffsetModifier" value="2176"/>
   <property name="yOffsetModifier" value="896"/>
  </properties>

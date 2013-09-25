@@ -9,7 +9,7 @@ Dark Cave:darkcave
 Sprout Tower:sprouttower
 Olivine City:violet
 Cianwood City:ecruteak
-Mahogany Town:cherrywood
+Mahogany Town:cherrygrove
 Blackthorn City:azalea
 Burned Tower:burnedtower
 Tin Tower:tintower
@@ -57,3 +57,95 @@ Fallarbor Town:fallarbor
 Fortree City:fortree
 Lilycove City:lilycove
 Mossdeep City:rustboro
+Sky Pillar:skypillar
+Boat:boat
+Indigo Plateau:indigoplateau
+Elm Lab:elmlab
+Meteor Falls:meteorfalls
+Oak Lab:oaklab
+Silph Co:silph
+Viridian City:viridian
+Celadon City:celadon
+Cinnabar Island:cinnabar
+Cerulean City:cerulean
+Viridian Forest:viridianforest
+Cianwood City:cianwood
+Dance Theater:dancetheater
+Union Cave:unioncave
+Rock Tunnel:rocktunnel
+Safari Zone:safari
+Ice Path:icepath
+Celadon Game:celadongame
+Goldenrod Game:goldenrodgame
+Mt Silver:mtsilver
+Power Plant:abandonedplace
+Cinnabar Mansion:abandonedplace
+Seafom Islands:viridianforest
+Diglett Cave:viridianforest
+Victory Road:mtsilver
+Orre Desert:orredesert
+Orre Forest:viridianforest
+Outskirt Stand:outskirt
+Kaminko Yard:kaminkoyard
+Kaminko Lab:kaminkolab
+Phenac City:phenac
+Mayor House:mayor
+Pre Gym:pregym
+Gateon Port:gateon
+Krubby Klub:krubby
+Pyrite Town:pyrite
+Pyrite Cave:pyritecave
+HQ Lab:hqlab
+Agate Village:agate
+Relic Forest:relic
+Reception:reception
+Mt Battle:mtbattle
+The Under:theunder
+Shadow Lab:shadowlab
+Realgam Tower:realgam
+Snagem Hideout:snagem
+ONBS Building:onbs
+Final Battle:finalbattle
+SS Libra:sslibra
+Cipher Key Lair:cipherkey
+Orre Colosseum:orredesert
+Pyrite Colosseum:colosseuma
+Phenac Colosseum:colosseumb
+The Under Colosseum:colosseumc
+Lake of Rage:lakerage
+One Island:lakerage
+Two Island:lakerage
+Three Island:lakerage
+Four Island:azalea
+Five Island:azalea
+Six Island:violet
+Seven Island:violet
+Cave of Origin:meteorfalls
+Hoenn Victory Road:hoennvictory
+Battle Frontier:battlefront
+Contest Lobby:contestlobby
+Evergrande City:evergrande
+Sootopolis City:sootopolis
+Pacifidlog Town:sootopolis
+Aqua Hideout:teamhideout
+Magma Hideout:teamhideout
+Mt Pyre:mtpyre
+Art Museum:artmuseum
+Hoenn Safari Zone:hoennsafari
+Johto Safari Zone:hoennsafari
+Cerulean Cave:ancientcave
+Mt Chimney:mtchimney
+Mauville Game:mauvillegame
+Marine Museum:marinemuseum
+Weather Institute:weatherinstitute
+Birch Lab:birchlab
+Rusturf Tunnel:unioncave
+Shoal Cave:shoalcave
+Granite Cave:rocktunnel
+Shop:shop
+Mt. Moon:rocktunnel
+Tanoby Ruins:ruinsofalph
+Mt. Mortar:rocktunnel
+Slowpoke Well:darkcave
+Red:redtheme
+Whirlwind Islands:unioncave

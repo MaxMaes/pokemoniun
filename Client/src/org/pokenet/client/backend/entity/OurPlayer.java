@@ -3,6 +3,7 @@ package org.pokenet.client.backend.entity;
 import java.util.ArrayList;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.Enums.Poketype;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Represents our player
@@ -20,6 +21,7 @@ public class OurPlayer extends Player
 	private int[] m_pokedex = new int[494];
 	private OurPokemon[] m_pokemon;
 	private int m_trainerLvl = -1;
+	private boolean isBoxing;
 
 	/**
 	 * Default constructor
@@ -30,6 +32,7 @@ public class OurPlayer extends Player
 		m_items = new ArrayList<PlayerItem>();
 		m_badges = new int[42];
 		m_money = 0;
+		isBoxing = false;
 	}
 
 	/**
@@ -76,14 +79,14 @@ public class OurPlayer extends Player
 			{
 				m_items.get(i).setQuantity(m_items.get(i).getQuantity() + quantity);
 				exists = true;
-				if(GameClient.getInstance().getUi().getBag() != null)
-					GameClient.getInstance().getUi().getBag().addItem(number, false);
+				if(GameClient.getInstance().getHUD().getBag() != null)
+					GameClient.getInstance().getHUD().getBag().addItem(number, false);
 			}
 		if(!exists)
 		{
 			m_items.add(new PlayerItem(number, quantity));
-			if(GameClient.getInstance().getUi().getBag() != null)
-				GameClient.getInstance().getUi().getBag().addItem(number, true);
+			if(GameClient.getInstance().getHUD().getBag() != null)
+				GameClient.getInstance().getHUD().getBag().addItem(number, true);
 		}
 	}
 
@@ -224,7 +227,7 @@ public class OurPlayer extends Player
 			id++;
 		}
 
-		GameClient.getInstance().getUi().getPokedex().initGUI();
+		GameClient.getInstance().getHUD().getPokedex().initGUI();
 	}
 
 	/**
@@ -233,7 +236,7 @@ public class OurPlayer extends Player
 	 * @param number
 	 * @param quantity
 	 */
-	public void removeItem(int number, int quantity)
+	public void removeItem(int number, int quantity, Widget root)
 	{
 		for(int i = 0; i < m_items.size(); i++)
 			if(m_items.get(i) != null && m_items.get(i).getNumber() == number)
@@ -241,14 +244,14 @@ public class OurPlayer extends Player
 				if(m_items.get(i).getQuantity() - quantity > 0)
 				{
 					m_items.get(i).setQuantity(m_items.get(i).getQuantity() - quantity);
-					if(GameClient.getInstance().getUi().getBag() != null)
-						GameClient.getInstance().getUi().getBag().removeItem(number, false);
+					if(GameClient.getInstance().getHUD().getBag() != null)
+						GameClient.getInstance().getHUD().getBag().removeItem(number, false, root);
 				}
 				else
 				{
 					m_items.remove(i);
-					if(GameClient.getInstance().getUi().getBag() != null)
-						GameClient.getInstance().getUi().getBag().removeItem(number, true);
+					if(GameClient.getInstance().getHUD().getBag() != null)
+						GameClient.getInstance().getHUD().getBag().removeItem(number, true, root);
 				}
 				return;
 			}
@@ -322,11 +325,11 @@ public class OurPlayer extends Player
 		{
 			/* Set sprite, name, gender and hp */
 			m_pokemon[i] = new OurPokemon();
+			m_pokemon[i].setSpriteNumber(Integer.parseInt(info[0]));
 			m_pokemon[i].setName(info[1]);
 			m_pokemon[i].setCurHP(Integer.parseInt(info[2]));
 			m_pokemon[i].setGender(Integer.parseInt(info[3]));
 			m_pokemon[i].setShiny(info[4].equals("1"));
-			m_pokemon[i].setSpriteNumber(Integer.parseInt(info[0]) + 1);
 			m_pokemon[i].setMaxHP(Integer.parseInt(info[5]));
 			/* Stats */
 			m_pokemon[i].setAtk(Integer.parseInt(info[6]));
@@ -395,7 +398,7 @@ public class OurPlayer extends Player
 		OurPokemon temp1 = m_pokemon[Poke1];
 		m_pokemon[Poke1] = m_pokemon[Poke2];
 		m_pokemon[Poke2] = temp1;
-		GameClient.getInstance().getUi().refreshParty();
+		GameClient.getInstance().getHUD().refreshParty();
 	}
 
 	public void updatePokedex(int id, int value)
@@ -422,7 +425,7 @@ public class OurPlayer extends Player
 			m_pokemon[i].setSpdef(Integer.parseInt(info[6]));
 		}
 	}
-	
+
 	/**
 	 * Returns the amount of Pokemon in this player's party
 	 * 
@@ -435,5 +438,15 @@ public class OurPlayer extends Player
 			if(m_pokemon[i] != null)
 				r++;
 		return r;
+	}
+
+	public boolean isBoxing()
+	{
+		return isBoxing;
+	}
+
+	public void setBoxing(boolean isBoxing)
+	{
+		this.isBoxing = isBoxing;
 	}
 }

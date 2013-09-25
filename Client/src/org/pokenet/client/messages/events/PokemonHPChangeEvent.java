@@ -13,6 +13,6 @@ public class PokemonHPChangeEvent implements MessageEvent
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getOurPlayer().getPokemon()[Request.readInt()].setCurHP(Request.readInt());
-		GameClient.getInstance().getUi().update(false);
+		GameClient.getInstance().getHUD().update(false);
 	}
 }

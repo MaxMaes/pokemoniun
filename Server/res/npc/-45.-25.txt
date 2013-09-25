@@ -1,7 +1,7 @@
 [npc]
 Hiker
 down
-101
+366
 4
 4
 NULL

@@ -99,7 +99,7 @@
 [/warp]
 [warp]
 31
-9
+8
 5
 2
 -50
@@ -110,7 +110,7 @@
 NULL
 down
 0
-11
+16
 28
 NULL
 0
@@ -174,7 +174,7 @@ CUT_TREE
 32
 45
 5
-24
+16
 [/warp]
 [npc]
 Police Man

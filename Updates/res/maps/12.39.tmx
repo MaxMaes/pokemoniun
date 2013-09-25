@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value=""/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="pvp" value="yes"/>
@@ -37,7 +38,7 @@
  </layer>
  <layer name="WalkBehind" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1Zy04UQRStFQlOz8hsJmEn8vgHWbrTpUuUh+5R+QF2ujQhmYjgIz5gwcOP0KWJiXHJHpQdLkmAeDqB2Cnq1j1V1T1OAyc56ZnpvnUfZ+pWpcuY+qPdMeZgyJg/Q+evdcJwR753VMhFyrVfcmf0OAyI74h8lq0HW6dUPUL95WDqkvt2PSfVKVWPUH82tHqUrYfkJwXF/KV6MDHlCOlXKXWvGqF69Csuy/rxvmnMB/AT+LFH1zVwvRmWx2XRQ8J8y5jH4BPwKbjQ+nfvRmbMCHgTHAXHwPFMt0tBrB4b8L8JboHb4GdwCrHeBx+A0+AMOAvOgQ/BR5nbTgMTF6PHksPXLn7bA3+Bv8F98CXiXAZfgSvgKvgafAO+Bd9lbjsb3cJvbK9n9Pju8DVyHf8bcBQcA8fBn5lckxw7mdvOxg9BI58usXpMw//MaQxzuDbRX1pKj+k0z9u50HX403SJ1cPGHcR4V8njnnB/wspH0sOHWD1sPEOMz5U8XpBrgksPDWXp8QUxflXi/EbmUaUeWt8/RownSpwDlo00pqSHb56zemh9/xa+Typ1vG3dl8Z06aHNc1YPpu9rWLRspDGr1IPp+6GQxqxSD6bvh0Ia09aD2ZeU1a/KRFEPdl9S1vpRJrT1I2V+2IjdfzN2vvXDfjdxhlg9YvbfrB3br4r1jtUjtg8zdmy/OkNe71g9YvswY8fur8rQI7YPM3bM/sqeJ3XsVy70+/rB4kqP6lCVHoOYj9fAxil9n31g7BuRe7c6vU9MfV/SD2D2ixdBDx+Y86iYnGPOzlL0CD0nZJBydibFyyLk3JZByhm8T5e66JFaw6rObVPnhx1fqM5lnNvGaFuFHr2Glnfbsw7WCb71/Ar/B38BjRzqOxAnAAA=
+   H4sIAAAAAAAAC+1Zu04bQRSdKlJgbUhjyR3EJv8AZbpQUhIeDj0QfiBdUiIhIRKegkCKBPiIpIwUCaVMz6sLJRJEOSuBWA1zd8481vJijnS0ttd37uN47ox3lCo/6jWl/vYrddF//1omPKvJ964yuUi5dkrujB6XDvFdkd9l68HWKVQPV38pmLqkvk3fk+oUqoerPx22esTWQ/ITgmz+Uj2YmFK49KuQuhcNVz06Fd2yfmxXlNoBd8HPbbrugV8qbnl0ix4SZqtKzYHz4FtwoXp3byBRahB8DjbAJjiU2O1C4KvHV/j/Bu6DB+AhOI5YX4MT4CQ4BU6DLfANOJOY7Wxg4mL0WDL4OsZnJ+ApeAaegyuI8yP4CVwF18B1cAPcBLcSs52O5cxnbK9n9Phl8DXYh98N2ACb4BD4O5FrkuJPYrbTcSRolKeLrx6T8D91E0ML1wr6S9XSY2qV+3YmLBv82XTx1UPHK8Q4asljTLj/QstH0iMPvnroeI8YP1jyWCTXBJMeNsTS4zti/GGJ8yeZR5F62Pr+NWL8Z4nziWYjjSnpkTfPWT1sfX8Y70csdXyp3ZfGNOlhm+esHkzft+GdZiONWaQeTN93hTRmkXowfd8V0pi6Hsy+JFa/iomsHuy+JNb6ERO29SNkfujw3X8zdnnrh/5s4ha+evjsv1k7tl9l6+2rh28fZuzYfnWLtN6+evj2YcaO3V/F0MO3DzN2zP5Knydl7FcmdPr6weJRj+JQlB5PMR97wN4b5r3OA2Pf67l3K9PzRN/4Oul5O7Nf7EY9YuTsc3YWoofrOSGDkLMzKV4WLue2DELO4PN0KYseoTUs6tw2dH7o8bnqHOPc1kfbIvRoN0L+R5UJ9QeSx0PCf63lB60QJwAA
   </data>
  </layer>
 </map>

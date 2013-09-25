@@ -56,6 +56,8 @@ public class OurPokemon extends Pokemon
 	 */
 	public Image getBackSprite()
 	{
+		if(m_backSprite == null)
+			setBackSprite();
 		return m_backSprite;
 	}
 
@@ -306,67 +308,84 @@ public class OurPokemon extends Pokemon
 	/**
 	 * Sets back sprite
 	 */
-	private void setBackSprite() {
+	private void setBackSprite()
+	{
 		LoadingList.setDeferredLoading(true);
-		try {
+		try
+		{
 			String respath = System.getProperty("res.path");
-			if(respath==null)
-				respath="";
+			if(respath == null)
+				respath = "";
 			InputStream f;
 			String path = new String();
 			String index, isShiny = new String();
 
-			if (!isShiny()) {
+			if(!isShiny())
+			{
 				isShiny = "normal/";
-			} else {
+			}
+			else
+			{
 				isShiny = "shiny/";
 			}
 
-			if (getSpriteNumber() <= 9) {
+			if(getSpriteNumber() <= 9)
+			{
 				index = "00" + String.valueOf(getSpriteNumber());
-			} else if (getSpriteNumber() <= 99) {
+			}
+			else if(getSpriteNumber() <= 99)
+			{
 				index = "0" + String.valueOf(getSpriteNumber());
-			} else {
+			}
+			else
+			{
 				if(getSpriteNumber() > 389)
-    			{
+				{
 					if(getSpriteNumber() < 413)
-    				{
-    					index = String.valueOf(getSpriteNumber() - 3);
-    				}
-    				else if(getSpriteNumber() < 416)
-    				{
-    					index = String.valueOf(413);
-    				}
-    				else	
-    				{
-    					index = String.valueOf(getSpriteNumber() - 5);
-    				}
-    			}
+					{
+						index = String.valueOf(getSpriteNumber() - 3);
+					}
+					else if(getSpriteNumber() < 416)
+					{
+						index = String.valueOf(413);
+					}
+					else
+					{
+						index = String.valueOf(getSpriteNumber() - 5);
+					}
+				}
 				else
 					index = String.valueOf(getSpriteNumber());
 			}
 
 			int gender;
-			if (getGender() == 1)
+			if(getGender() == 1)
 				gender = 1;
 			else
 				gender = 0;
 
-			try {
-				path = respath+"res/pokemon/back/" + isShiny + index + "-"
-						+ String.valueOf(gender) + ".png";
+			try
+			{
+				path = respath + "res/pokemon/back/" + isShiny + index + "-" + String.valueOf(gender) + ".png";
 				f = FileLoader.loadFile(path);
 				m_backSprite = new Image(f, path.toString(), false);
-			} catch (Exception e) {
-				if (gender == 3) {
-					path = respath+"res/pokemon/back/" + isShiny + index + "-1.png";
-				} else {
-					path = respath+"res/pokemon/back/" + isShiny + index + "-0.png";
+			}
+			catch(Exception e)
+			{
+				if(gender == 3)
+				{
+					path = respath + "res/pokemon/back/" + isShiny + index + "-1.png";
+				}
+				else
+				{
+					path = respath + "res/pokemon/back/" + isShiny + index + "-0.png";
 				}
 				m_backSprite = new Image(path.toString(), false);
 				e.printStackTrace();
 			}
-		} catch (SlickException e) {
+		}
+		catch(SlickException e)
+		{
 			e.printStackTrace();
 		}
 		LoadingList.setDeferredLoading(false);

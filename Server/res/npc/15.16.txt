@@ -1,7 +1,7 @@
 [npc]
 Fisherman Ned
 down
-47
+368
 31
 12
 Goldeen,22,Poliwag,22,Goldeen,22
@@ -15,7 +15,7 @@ false
 [npc]
 Fisherman Chip
 right
-47
+368
 23
 20
 Tentacool,24,Goldeen,24
@@ -29,7 +29,7 @@ false
 [npc]
 Fisherman Hank
 left
-47
+368
 30
 27
 Goldeen,27
@@ -43,7 +43,7 @@ false
 [npc]
 Fisherman Elliot
 down
-47
+368
 27
 39
 Poliwag,21,Shellder,21,Goldeen,21,Horsea,21
@@ -57,7 +57,7 @@ false
 [npc]
 Youngster Jes
 right
-79
+353
 33
 43
 Nidoran-m,24
@@ -71,7 +71,7 @@ false
 [npc]
 Lass Gia
 right
-64
+382
 33
 44
 Nidoran-f,24
@@ -85,7 +85,7 @@ false
 [npc]
 Rocker Luca
 up
-42
+319
 23
 67
 Voltorb,29,Electrode,29
@@ -99,7 +99,7 @@ false
 [npc]
 Camper Justin
 down
-28
+345
 24
 79
 Nidoran-m,29,Nidorino,29
@@ -113,7 +113,7 @@ false
 [npc]
 Fisherman Andrew
 left
-47
+368
 32
 88
 Magikarp,24,Magikarp,24

@@ -1,7 +1,7 @@
 [npc]
 Pokemaniac
 down
-152
+344
 23
 5
 NULL

@@ -1,218 +1,86 @@
 package org.pokenet.client.ui.frames;
 
-import java.util.ArrayList;
-import java.util.List;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
-import org.pokenet.client.ui.base.ListBox;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.ListBox;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.model.SimpleChangableListModel;
 
-// @author sadhi
-public class BoatChooserDialog extends Frame
+/**
+ * Class which displays and controls the dialog for traveling via boat.
+ * 
+ * @author Myth1c, Sadhi
+ */
+
+public class BoatChooserDialog extends ResizableFrame
 {
-
-	protected ListBox m_travelList;
-	protected Label m_travelDisplay;
-	private List<String> m_locations;
+	protected ListBox<String> m_travelList;
+	// protected Label m_travelDisplay;
+	private SimpleChangableListModel<String> m_locations;
 	private String choice;
+	private Widget pane;
 
-	public BoatChooserDialog(String travel, final OurPlayer p)
+	public BoatChooserDialog(String currentLocation)
 	{
-		m_locations = new ArrayList<String>();
-		if(!travel.equalsIgnoreCase("kanto"))
-		{
-			m_locations.add("Vermillion City - $10k");
-		}
-		else
-		{
-			m_locations.add("One Island - $5k");
-		}
-		if(!travel.equalsIgnoreCase("johto"))
-		{
-			m_locations.add("Olivine City - $10k");
-		}
-		if(!travel.equalsIgnoreCase("slateport"))
-		{
-			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
-			{
-				m_locations.add("Slateport - $10k");
-			}
-			else
-			{
-				m_locations.add("Slateport - $125k");
-			}
-		}
-		else
-		{
-			m_locations.add("Battlefrontier - canceled");
-		}
-		if(!travel.equalsIgnoreCase("lilycove"))
-		{
-			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
-			{
-				m_locations.add("Lilycove - $10k");
-			}
-			else
-			{
-				m_locations.add("Lilycove - $125k");
-			}
-		}
-		else
-		{
-			m_locations.add("Battlefrontier - canceled");
-		}
-		if(!travel.equalsIgnoreCase("canalave"))
-		{
-			if(GameClient.getInstance().getOurPlayer().getItemQuantity(557) != 0)
-			{
-				m_locations.add("Canalave - $10k");
-			}
-			else
-			{
-				m_locations.add("Canalave - $175k");
-			}
-		}
-		else
-		{
-			m_locations.add("Iron Island - $15k");
-		}
-		if(!travel.equalsIgnoreCase("snowpoint"))
-		{
-			if(GameClient.getInstance().getOurPlayer().getItemQuantity(557) != 0)
-			{
-				m_locations.add("Snowpoint - $10k");
-			}
-			else
-			{
-				m_locations.add("Snowpoint - $175k");
-			}
-		}
-		else
-		{
-			m_locations.add("Resort Area - canceled");
-		}
-		if(travel.equalsIgnoreCase("navel"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $10k");
-			m_locations.add("One Island - $5k");
-		}
-		if(travel.equalsIgnoreCase("iron"))
-		{
-			m_locations.clear();
-			m_locations.add("Canalave - $0");
-		}
-		if(travel.equalsIgnoreCase("one"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $10k");
-			m_locations.add("Two Island - $5k");
-			m_locations.add("Three Island - $5k");
-			m_locations.add("Four Island - canceled");
-			m_locations.add("Five Island - canceled");
-		}
-		if(travel.equalsIgnoreCase("two"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $10k");
-			m_locations.add("One Island - $5k");
-			m_locations.add("Three Island - $5k");
-			m_locations.add("Four Island - canceled");
-			m_locations.add("Five Island - canceled");
-		}
-		if(travel.equalsIgnoreCase("three"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $10k");
-			m_locations.add("One Island - $5k");
-			m_locations.add("Two Island - $5k");
-			m_locations.add("Four Island - canceled");
-			m_locations.add("Five Island - canceled");
-		}
-		if(travel.equalsIgnoreCase("four"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $10k");
-			m_locations.add("One Island - $5k");
-			m_locations.add("Two Island - $5k");
-			m_locations.add("Three Island - $5k");
-			m_locations.add("Five Island - $5k");
-			m_locations.add("Navel Rock");
-		}
-		if(travel.equalsIgnoreCase("five"))
-		{
-			m_locations.clear();
-			m_locations.add("Vermillion City - $5k");
-			m_locations.add("One Island - $5k");
-			m_locations.add("Two Island - $5k");
-			m_locations.add("Three Island - $5k");
-			m_locations.add("Four Island - $5k");
-			m_locations.add("Navel Rock");
-		}
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		// m_travelDisplay = new Label();
-		// m_travelDisplay.setSize(124,204);
-		// m_travelDisplay.setLocation(105, 20);
-		// getContentPane().add(m_travelDisplay);
-		m_travelList = new ListBox(m_locations, false)
-		{
-			@Override
-			protected void itemClicked(String itemName, int idx)
-			{
-				super.itemClicked(itemName, idx);
-
-			}
-		};
+		setTheme("chooserDialog");
+		initUse(currentLocation);
+		m_travelList = new ListBox<String>(m_locations);
+		m_travelList.setTheme("listbox");
 		m_travelList.setSize(245, 70);
-		getContentPane().add(m_travelList);
+		m_travelList.setPosition(2, 25);
+		pane.add(m_travelList);
 		setTitle("Please choose your destination..");
-		getCloseButton().setVisible(false);
+		setVisible(false);
 		setSize(250, 130);
-		setLocation(300, 150);
-		setResizable(false);
+		setPosition(300, 150);
+		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(true);
-		setVisible(true);
-		initUse();
+		setVisible(false);
+		add(pane);
 	}
 
-	public void initUse()
+	private void initUse(String currentLocation)
 	{
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(250, 130);
+		pane.setPosition(0, 0);
 
-		final BoatChooserDialog thisDialog = this;
+		initList(currentLocation);
 		Button use = new Button("Let's travel!");
-		use.pack();
-		use.setLocation(25, 75);
-		getContentPane().add(use);
+		use.setTheme("button");
+		use.setSize(70, 20);
+		use.setPosition(25, 100);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.pack();
-		cancel.setLocation(150, 75);
-		getContentPane().add(cancel);
+		cancel.setPosition(150, 100);
+		cancel.setSize(70, 20);
+		cancel.setTheme("button");
+		pane.add(cancel);
 
-		cancel.addActionListener(new ActionListener()
+		cancel.addCallback(new Runnable()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				GameClient.getInstance().getDisplay().remove(thisDialog);
+				setVisible(false);
 			}
 		});
-		use.addActionListener(new ActionListener()
+		use.addCallback(new Runnable()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				choice = m_travelList.getSelectedName();
-				GameClient.getInstance().getDisplay().remove(thisDialog);
+				choice = m_locations.getEntry(m_travelList.getSelected());
 				String txt = "a trainer level > 24";
 				if(choice.contains("Slateport") || choice.contains("Lilycove") || choice.contains("One"))
 				{
 					txt = "at least 16 badges";
+				}
+				else if(choice.contains("Gateon"))
+				{
+					txt = "at least 17 badges";
 				}
 				else if(choice.contains("Canalave") || choice.contains("Snowpoint"))
 				{
@@ -227,34 +95,223 @@ public class BoatChooserDialog extends Frame
 				{
 					note = "This trip is canceled.\nWe will resume travel when the weather calms down.\nPick another one.";
 				}
-				final ConfirmationDialog confirm = new ConfirmationDialog(note);
-				confirm.addYesListener(new ActionListener()
+
+				Runnable yes = new Runnable()
 				{
-					public void actionPerformed(ActionEvent e)
+					@Override
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
-						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_travelList.getSelectedName());
+						setVisible(false);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						ClientMessage message = new ClientMessage(ServerPacket.TRAVEL);
 						message.addString(choice);
 						GameClient.getInstance().getSession().send(message);
 					}
-				});
-				confirm.addNoListener(new ActionListener()
+				};
+				Runnable no = new Runnable()
 				{
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
-				});
-				GameClient.getInstance().getDisplay().add(confirm);
+				};
+				GameClient.getInstance().getGUIPane().showConfirmationDialog(note, yes, no);
 			}
 		});
 	}
 
+	private void initList(String currentLocation)
+	{
+		m_locations = new SimpleChangableListModel<>();
+
+		if(!currentLocation.equalsIgnoreCase("kanto"))
+		{
+			m_locations.addElement("Vermillion City - $10k");
+		}
+		else
+		{
+			m_locations.addElement("One Island - $5k");
+		}
+		if(!currentLocation.equalsIgnoreCase("johto"))
+		{
+			m_locations.addElement("Olivine City - $10k");
+		}
+		else
+		{
+			m_locations.addElement("Gateon Port - $20k");
+		}
+		if(!currentLocation.equalsIgnoreCase("slateport"))
+		{
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
+			{
+				m_locations.addElement("Slateport - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Slateport - $125k");
+			}
+		}
+		else
+		{
+			m_locations.addElement("Battlefrontier - canceled");
+			m_locations.addElement("Gateon Port - $20k");
+		}
+		if(!currentLocation.equalsIgnoreCase("lilycove"))
+		{
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
+			{
+				m_locations.addElement("Lilycove - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Lilycove - $125k");
+			}
+		}
+		else
+		{
+			m_locations.addElement("Battlefrontier - canceled");
+			m_locations.addElement("Gateon Port - $20k");
+		}
+		if(!currentLocation.equalsIgnoreCase("canalave"))
+		{
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(557) != 0)
+			{
+				m_locations.addElement("Canalave - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Canalave - $175k");
+			}
+		}
+		else
+		{
+			m_locations.addElement("Iron Island - $15k");
+		}
+		if(!currentLocation.equalsIgnoreCase("snowpoint"))
+		{
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(557) != 0)
+			{
+				m_locations.addElement("Snowpoint - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Snowpoint - $175k");
+			}
+		}
+		else
+		{
+			m_locations.addElement("Resort Area - $25k");
+		}
+		if(currentLocation.equalsIgnoreCase("navel"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Vermillion City - $10k");
+			m_locations.addElement("One Island - $5k");
+		}
+		if(currentLocation.equalsIgnoreCase("resort"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Snowpoint - $0");
+		}
+		if(currentLocation.equalsIgnoreCase("iron"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Canalave - $0");
+		}
+		if(currentLocation.equalsIgnoreCase("one"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Vermillion City - $10k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+		}
+		if(currentLocation.equalsIgnoreCase("two"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+		}
+		if(currentLocation.equalsIgnoreCase("three"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+		}
+		if(currentLocation.equalsIgnoreCase("four"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("five"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("six"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Seven Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("seven"))
+		{
+			m_locations.clear();
+			m_locations.addElement("One Island - $5k");
+			m_locations.addElement("Two Island - $5k");
+			m_locations.addElement("Three Island - $5k");
+			m_locations.addElement("Four Island - $5k");
+			m_locations.addElement("Five Island - $5k");
+			m_locations.addElement("Six Island - $5k");
+			m_locations.addElement("Navel Rock - canceled");
+		}
+		if(currentLocation.equalsIgnoreCase("gateon"))
+		{
+			m_locations.clear();
+			m_locations.addElement("Olivine City - $10k");
+			if(GameClient.getInstance().getOurPlayer().getItemQuantity(559) != 0)
+			{
+				m_locations.addElement("Lilycove - $10k");
+				m_locations.addElement("Slateport - $10k");
+			}
+			else
+			{
+				m_locations.addElement("Lilycove - $125k");
+				m_locations.addElement("Slateport - $125k");
+			}
+		}
+	}
+
 	public int getChoice()
 	{
-		return m_travelList.getSelectedIndex();
+		return m_travelList.getSelected();
 	}
 }

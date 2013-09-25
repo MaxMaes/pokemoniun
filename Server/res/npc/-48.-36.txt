@@ -1,7 +1,7 @@
 [npc]
 Fishing Guru's brother
 right
-47
+368
 7
 4
 NULL

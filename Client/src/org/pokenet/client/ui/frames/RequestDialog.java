@@ -3,33 +3,26 @@ package org.pokenet.client.ui.frames;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Container;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Request dialog
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-public class RequestDialog extends Frame
+public class RequestDialog extends ResizableFrame
 {
-	private List<Container> m_containers = new ArrayList<Container>();
-	private Label m_noOffers = new Label("There are no offers");
+	private List<Widget> m_Widgets = new ArrayList<Widget>();
+	private Label m_noOffers;
 	private HashMap<String, Button> m_offers = new HashMap<String, Button>();
 	private List<String> m_offerUser = new ArrayList<String>();
-	private boolean m_update = false;
 
 	/**
 	 * Default Constructor
@@ -37,6 +30,17 @@ public class RequestDialog extends Frame
 	public RequestDialog()
 	{
 		initGUI();
+	}
+
+	/**
+	 * Initializes the user interface
+	 */
+	public void initGUI()
+	{
+		List<String> translated = Translator.translate("_GUI");
+		setTitle(translated.get(33));
+		m_noOffers = new Label("There are no offers");
+		setResizableAxis(ResizableAxis.NONE);
 	}
 
 	/**
@@ -48,13 +52,12 @@ public class RequestDialog extends Frame
 	{
 		if(m_offerUser != null && m_offerUser.size() > 0)
 		{
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("15" + m_offerUser.get(userIndex));
 			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_ACCEPTED);
 			message.addString(m_offerUser.get(userIndex));
 			GameClient.getInstance().getSession().send(message);
 			m_offers.remove(m_offerUser.get(userIndex));
 			m_offerUser.remove(userIndex);
-			m_update = true;
+			update();
 		}
 	}
 
@@ -66,6 +69,7 @@ public class RequestDialog extends Frame
 	 */
 	public void addRequest(final String username, String request)
 	{
+		boolean updated = false;
 		if(request.equalsIgnoreCase("trade"))
 		{
 			// TRADE
@@ -73,9 +77,9 @@ public class RequestDialog extends Frame
 			{
 				m_offerUser.add(username);
 				m_offers.put(username, new Button("Trade"));
-				m_update = true;
+				updated = true;
 			}
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + username + " sent you a trade request.");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " sent you a trade request.");
 		}
 		else if(request.equalsIgnoreCase("battle"))
 		{
@@ -83,9 +87,13 @@ public class RequestDialog extends Frame
 			{
 				m_offerUser.add(username);
 				m_offers.put(username, new Button("Battle"));
-				m_update = true;
+				updated = true;
 			}
-			GameClient.getInstance().getUi().getChat().addSystemMessage("*" + username + " would like to battle!");
+			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " would like to battle!");
+		}
+		if(updated)
+		{
+			update();
 		}
 	}
 
@@ -96,14 +104,13 @@ public class RequestDialog extends Frame
 	{
 		for(String name : m_offerUser)
 		{
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + name);
 			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 			message.addString(name);
 			GameClient.getInstance().getSession().send(message);
-			m_offers.remove(name);
-			m_offerUser.remove(name);
-			m_update = true;
 		}
+		m_offers.clear();
+		m_offerUser.clear();
+		update();
 	}
 
 	/**
@@ -113,34 +120,12 @@ public class RequestDialog extends Frame
 	 */
 	public void declineOffer(int userIndex)
 	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("16" + m_offerUser.get(userIndex));
 		ClientMessage message = new ClientMessage(ServerPacket.REQUEST_DECLINED);
 		message.addString(m_offerUser.get(userIndex));
 		GameClient.getInstance().getSession().send(message);
 		m_offers.remove(m_offerUser.get(userIndex));
 		m_offerUser.remove(userIndex);
-		m_update = true;
-	}
-
-	/**
-	 * Initializes the user interface
-	 */
-	public void initGUI()
-	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		List<String> translated = Translator.translate("_GUI");
-		getTitleBar().getCloseButton().setVisible(false);
-		setTitle(translated.get(33));
-		setBackground(new Color(0, 0, 0, 85));
-		setForeground(new Color(255, 255, 255));
-		setHeight(getTitleBar().getHeight() + 25);
-		m_noOffers.setFont(GameClient.getInstance().getFontSmall());
-		m_noOffers.setForeground(Color.white);
-		m_noOffers.pack();
-		m_noOffers.setY(10 - m_noOffers.getTextHeight() / 2);
-		getContentPane().add(m_noOffers);
-		setResizable(false);
+		update();
 	}
 
 	/**
@@ -154,85 +139,90 @@ public class RequestDialog extends Frame
 		{
 			m_offers.remove(username);
 			m_offerUser.remove(username);
-			m_update = true;
 		}
 	}
 
-	@Override
-	public void update(GUIContext container, int delta)
+	public void update()
 	{
-		super.update(container, delta);
-		if(isVisible())
-			if(m_update)
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
 			{
-				m_update = false;
-				for(int i = 0; i < m_containers.size(); i++)
+				for(int i = 0; i < m_Widgets.size(); i++)
 				{
-					m_containers.get(i).removeAll();
+					m_Widgets.get(i).removeAllChildren();
 					try
 					{
-						getContentPane().remove(m_containers.get(i));
+						removeChild(m_Widgets.get(i));
 					}
 					catch(Exception e)
 					{
+						e.printStackTrace();
 					}
 				}
-
+				removeChild(m_noOffers);
 				if(m_offerUser.size() == 0)
 				{
-					setHeight(getTitleBar().getHeight() + 25);
-					m_containers.clear();
-					getContentPane().add(m_noOffers);
+					m_Widgets.clear();
+					add(m_noOffers);
 				}
 				else
 				{
-					int y = 0;
-					if(getContentPane().containsChild(m_noOffers))
-						getContentPane().remove(m_noOffers);
-					setHeight(getTitleBar().getHeight() + 25 * m_offers.size());
-					m_containers.clear();
+					m_Widgets.clear();
 					for(int i = 0; i < m_offers.size(); i++)
 					{
 						final int j = i;
 						final Label m_label = new Label(m_offerUser.get(i));
 						final Button m_offerBtn = m_offers.get(m_offerUser.get(i));
 						final Button m_cancel = new Button("Cancel");
-						m_cancel.setHeight(25);
-						m_cancel.setWidth(45);
-						m_cancel.addActionListener(new ActionListener()
+						m_cancel.setSize(35, 25);
+						m_cancel.setPosition(getInnerX() + getWidth() - 47, getInnerY());
+						m_cancel.addCallback(new Runnable()
 						{
 							@Override
-							public void actionPerformed(ActionEvent e)
+							public void run()
 							{
 								declineOffer(j);
 							}
 						});
-						m_label.setFont(GameClient.getInstance().getFontSmall());
-						m_label.setForeground(Color.white);
-						m_label.pack();
-						m_label.setY(10 - m_label.getTextHeight() / 2);
-						m_offerBtn.setHeight(25);
-						m_offerBtn.setX(getWidth() - 92);
-						m_offerBtn.setWidth(45);
-						m_offerBtn.addActionListener(new ActionListener()
+						m_label.setTheme("requestlabel");
+						m_label.adjustSize();
+						m_label.setPosition(getInnerX(), getInnerY() + 10 - m_label.computeTextHeight() / 2);
+						m_offerBtn.setSize(35, 25);
+						m_offerBtn.setPosition(getInnerX() + getWidth() - 92, getInnerY());
+						m_offerBtn.addCallback(new Runnable()
 						{
 							@Override
-							public void actionPerformed(ActionEvent e)
+							public void run()
 							{
 								acceptOffer(j);
 							}
 						});
-						m_containers.add(new Container());
-						m_containers.get(i).setSize(getWidth(), 25);
-						m_containers.get(i).setLocation(0, y);
-						m_containers.get(i).add(m_label);
-						m_containers.get(i).add(m_offerBtn);
-						m_containers.get(i).add(m_cancel);
-						m_cancel.setX(getWidth() - 47);
-						getContentPane().add(m_containers.get(i));
-						y += 25;
+						Widget container = new Widget();
+						container.add(m_label);
+						container.add(m_offerBtn);
+						container.add(m_cancel);
+						m_Widgets.add(container);
+						add(container);
 					}
 				}
 			}
+		});
+	}
+
+	@Override
+	public void layout()
+	{
+		setSize(200, 48 + 25 * m_Widgets.size());
+		setPosition(getInnerX(), getInnerY());
+		m_noOffers.setPosition(getInnerX() + 5, getInnerY() + 30 + (10 - m_noOffers.computeTextHeight() / 2));
+		int y = 28;
+		for(Widget widget : m_Widgets)
+		{
+			widget.adjustSize();
+			widget.setPosition(0, y);
+			y += 25;
+		}
 	}
 }

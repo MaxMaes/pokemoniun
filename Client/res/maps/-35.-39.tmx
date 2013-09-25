@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Krabby,40;Zubat,30;Seel,25;Golbat,5;"/>
   <property name="dayPokemonLevels" value="22-24;23-23;22-24;25-25;"/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Krabby,40;Zubat,30;Seel,25;Golbat,5;"/>
   <property name="nightPokemonLevels" value="22-24;23-23;22-24;25-25;"/>
   <property name="waterPokemonChances" value=""/>

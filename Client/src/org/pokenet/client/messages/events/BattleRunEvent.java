@@ -14,6 +14,6 @@ public class BattleRunEvent implements MessageEvent
 	{
 		// hier in server bool van maken ;) Die kunnen we nu tenslotte lezen! :)
 		boolean canRun = Request.readBool();
-		BattleManager.getInstance().getTimeLine().informRun(canRun);
+		BattleManager.getInstance().getNarrator().informRun(canRun);
 	}
 }

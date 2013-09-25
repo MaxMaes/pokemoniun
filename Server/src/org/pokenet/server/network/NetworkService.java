@@ -2,7 +2,6 @@ package org.pokenet.server.network;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import javax.swing.Timer;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
@@ -20,7 +19,7 @@ import org.pokenet.server.protocol.ServerMessage;
 public class NetworkService
 {
 	private static Connection _connection;
-	private final ChatManager[] m_chatManager;
+	private final ChatManager[] m_chatManagers;
 	private final LoginManager m_loginManager;
 	private final LogoutManager m_logoutManager;
 	private final RegistrationManager m_registrationManager;
@@ -38,8 +37,8 @@ public class NetworkService
 		m_logoutManager = new LogoutManager(m_saveManager);
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
-		m_chatManager = new ChatManager[3];
-		autosaver = new Timer(1000 * 60 * GameServer.AUTOSAVE_INTERVAL, new ActionListener()
+		m_chatManagers = new ChatManager[3];
+		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
 				{
 					public void actionPerformed(ActionEvent arg0)
 					{
@@ -57,10 +56,10 @@ public class NetworkService
 	public ChatManager getChatManager()
 	{
 		int smallest = 0;
-		for(int i = 1; i < m_chatManager.length; i++)
-			if(m_chatManager[i].getProcessingLoad() < m_chatManager[smallest].getProcessingLoad())
+		for(int i = 1; i < m_chatManagers.length; i++)
+			if(m_chatManagers[i].getProcessingLoad() < m_chatManagers[smallest].getProcessingLoad())
 				smallest = i;
-		return m_chatManager[smallest];
+		return m_chatManagers[smallest];
 	}
 
 	/**
@@ -104,6 +103,16 @@ public class NetworkService
 	}
 
 	/**
+	 * Returns the save manager.
+	 * 
+	 * @return
+	 */
+	public SaveManager getSaveManager()
+	{
+		return m_saveManager;
+	}
+
+	/**
 	 * Logs out all players and stops login/logout/registration managers and the autosaver
 	 */
 	public void logoutAll()
@@ -111,11 +120,10 @@ public class NetworkService
 		m_loginManager.stop();
 		autosaver.stop();
 		/* Queue all players to be saved */
-		Iterator<Session> it = ActiveConnections.allSessions().values().iterator();
-		while(it.hasNext())
+		for(Session session : ActiveConnections.allSessions().values())
 		{
-			Session p = it.next();
-			m_logoutManager.queuePlayer(p.getPlayer());
+			if(session.getPlayer() != null)
+				m_logoutManager.queuePlayer(session.getPlayer());
 		}
 		/* Since the method is called during a server shutdown, wait for all players to be logged out */
 		while(m_logoutManager.getPlayerAmount() > 0)
@@ -141,10 +149,10 @@ public class NetworkService
 		{
 			System.out.println("INFO: Server started on port " + GameServer.getPort());
 			/* Start the chat managers */
-			for(int i = 0; i < m_chatManager.length; i++)
+			for(int i = 0; i < m_chatManagers.length; i++)
 			{
-				m_chatManager[i] = new ChatManager();
-				m_chatManager[i].start();
+				m_chatManagers[i] = new ChatManager();
+				m_chatManagers[i].start();
 			}
 			System.out.println("INFO: Network Service started.");
 		}
@@ -157,34 +165,31 @@ public class NetworkService
 	{
 		System.out.println("Saving all players");
 		/* Queue all players to be saved */
-		Iterator<Session> it = ActiveConnections.allSessions().values().iterator();
-		Session s;
-		while(it.hasNext())
+		for(Session session : ActiveConnections.allSessions().values())
 		{
-			s = it.next();
-			if(s.getPlayer() != null)
+			if(session.getPlayer() != null)
 			{
 				ServerMessage message = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 				message.addString("Saving...");
-				s.Send(message);
+				session.Send(message);
 
-				if(m_saveManager.savePlayer(s.getPlayer()) == 0)
+				if(m_saveManager.savePlayer(session.getPlayer()) == 0)
 				{
 					ServerMessage succesmg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 					succesmg.addString("Save succesfull.");
-					s.Send(succesmg);
+					session.Send(succesmg);
 				}
 				else
 				{
 					ServerMessage failmsg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
 					failmsg.addString("Save Failed.");
-					s.Send(failmsg);
-					System.err.println("Error saving player" + s.getPlayer().getName() + " " + s.getPlayer().getId());
+					session.Send(failmsg);
+					System.err.println("Error saving player" + session.getPlayer().getName() + " " + session.getPlayer().getId());
 				}
 			}
 			else
 			{
-				/* Attempted save before the client logged in. */
+				/* Attempted save before the client logged in, or session is not a Player. */
 			}
 		}
 	}
@@ -197,8 +202,8 @@ public class NetworkService
 		_connection.StopSocket();
 		logoutAll();
 		System.out.println("Logged out all players.");
-		for(int i = 0; i < m_chatManager.length; i++)
-			m_chatManager[i].stop();
+		for(ChatManager chatMngr : m_chatManagers)
+			chatMngr.stop();
 		System.out.println("INFO: Network Service stopped.");
 	}
 }

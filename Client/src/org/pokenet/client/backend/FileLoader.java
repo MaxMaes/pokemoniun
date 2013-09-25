@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.Language;
 import de.matthiasmann.twl.renderer.DynamicImage;
@@ -63,6 +64,10 @@ public class FileLoader
 	{
 		File fl = new File(path);
 		Image img = null;
+		if(!fl.exists())
+		{
+			return null;
+		}
 		try
 		{
 			URL flURL = fl.getAbsoluteFile().toURI().toURL();
@@ -76,35 +81,73 @@ public class FileLoader
 		return img;
 	}
 
-	public static de.matthiasmann.twl.renderer.Image toTWLImage(org.newdawn.slick.Image image, boolean hasAlpha)
+	/**
+	 * Returns an Image object
+	 */
+	public static Texture loadImageAsTexture(String path)
 	{
-		// conver the image into a byte buffer by reading each pixel in turn
-		int len = 4 * image.getWidth() * image.getHeight();
-		if(!hasAlpha)
+		File fl = new File(path);
+		Texture text = null;
+		try
 		{
-			len = 3 * image.getWidth() * image.getHeight();
+			URL flURL = fl.getAbsoluteFile().toURI().toURL();
+			text = GameClient.getInstance().getRenderer().loadTexture(flURL, "RGBA", "linear");
 		}
-
-		ByteBuffer out = ByteBuffer.allocate(len);
-		org.newdawn.slick.Color c;
-
-		for(int y = image.getHeight() - 1; y >= 0; y--)
+		catch(IOException ioe)
 		{
-			for(int x = 0; x < image.getWidth(); x++)
-			{
-				c = image.getColor(x, y);
+			ioe.printStackTrace();
+		}
+		return text;
+	}
 
-				out.put((byte) (c.r * 255.0f));
-				out.put((byte) (c.g * 255.0f));
-				out.put((byte) (c.b * 255.0f));
-				if(hasAlpha)
-				{
-					out.put((byte) (c.a * 255.0f));
-				}
+	public static Image toTWLImage(org.newdawn.slick.Image image)
+	{
+		ByteBuffer bb = ByteBuffer.allocateDirect(image.getWidth() * image.getHeight() * 4);
+
+		for(int i = 0; i < image.getHeight(); i++)
+		{
+			for(int j = 0; j < image.getWidth(); j++)
+			{
+				Color c = image.getColor(j, i);
+				byte alpha = (byte) c.getAlphaByte();
+				byte red = (byte) c.getRedByte();
+				byte green = (byte) c.getGreenByte();
+				byte blue = (byte) c.getBlueByte();
+
+				bb.put(red);
+				bb.put(green);
+				bb.put(blue);
+				bb.put(alpha);
 			}
 		}
-		DynamicImage dynImage = GameClient.getInstance().getRenderer().createDynamicImage(image.getWidth(), image.getHeight());
-		dynImage.update(out, de.matthiasmann.twl.renderer.DynamicImage.Format.RGBA);
-		return dynImage;
+		bb.flip();
+
+		DynamicImage dymage = GameClient.getInstance().getRenderer().createDynamicImage(image.getWidth(), image.getHeight());
+		dymage.update(bb, DynamicImage.Format.RGBA);
+		return dymage;
+	}
+
+	public static ByteBuffer loadImageAsByteBuffer(org.newdawn.slick.Image image)
+	{
+		ByteBuffer bb = ByteBuffer.allocateDirect(image.getWidth() * image.getHeight() * 4);
+
+		for(int i = 0; i < image.getHeight(); i++)
+		{
+			for(int j = 0; j < image.getWidth(); j++)
+			{
+				Color c = image.getColor(j, i);
+				byte alpha = (byte) c.getAlphaByte();
+				byte red = (byte) c.getRedByte();
+				byte green = (byte) c.getGreenByte();
+				byte blue = (byte) c.getBlueByte();
+
+				bb.put(red);
+				bb.put(green);
+				bb.put(blue);
+				bb.put(alpha);
+			}
+		}
+		bb.flip();
+		return bb;
 	}
 }

@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="10-15;44-44;48-50;10-15;41-41;47-50;41-41;41-41;"/>
   <property name="fishPokemonChances" value="Magikarp,100;"/>
   <property name="fishPokemonLevels" value="5-30;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Sentret,30;Pidgey,20;Pidgeotto,15;Hoppip,15;Meowth,10;Persian,3;Psyduck,5;Slowpoke,2;"/>
   <property name="nightPokemonLevels" value="10-15;44-44;48-50;10-15;41-41;47-50;41-41;41-41;"/>
   <property name="waterPokemonChances" value="Tentacool,65;Hoppip,30;Tentactruel,5;"/>
@@ -23,7 +24,7 @@
  <tileset firstgid="6200" source="Water02.tsx"/>
  <layer name="Walkable" width="57" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XPQ7DIAwFYJZOXTr2/rep1ENFVYWELDA2fjZJ4Ele0ibhCz8hKaX0eP4LlXw99HUtQbeHGrmKykxj1DOYNa7Qz4EzIIyfd72inD2D1NhyaAodqbNnRNi8jJy3d3ym8fuql9bJHdMYW+2JKonz6saycptWN47Mx9muVY2li87Ru4zVsi9XMNLxajXOdnsZtX1b+x9qXEQaLYUwlqZtjDHSe3iNVYkTGa91WWqMdm7jNlqMEU5PI/WU2cZzGbn9ksQYEaSx9s5dwdjy0HXHy4zYA6CNaCc3lxDG0llLtHF0T24xcua7GqmzV1c1apxWo9TrYZS4pbEaJed6Ga392fJrbEif1Kpdq6SOaGPONspyduMv1vcMwhj9LTw6Vy19GG2kQewT6XnINQ8VzXjWfjucxTjaVq0j/3YAeHvaYBQoAAA=
+   H4sIAAAAAAAAC+3XwQ7CIAwGYC6evHj0/d/GxIdajCEhDZSW/i3b4E96mW7yjQ5ZSik9nv9CJV8PfV1L0OOhRq6iMtMYdQ9m9RX6PnAGhPHzrleUs2eQGlsOTaEjdfaMCJuXkfP2js80fl/10jq5YxpjazxRJXFe3VhWHtPqxpHncbZrVWPpos/oXXq1nMsVjLRfrcbZbi+jdm5r30P1RaTRUghjadrG6xprvSpxIuO1LkuN0c5t3EaLMcLpaaSeMtt4LiO3X5IYI4I00lrF2PLQdcfLjNgDoI1oJ/csIYyls5Zo4+h+1WLkzHc1UmevrmrUOK1GqdfDKHFLYzVKzvUyWuez5dfYkD6pVbtWSR3RxpxtlOXsxl+s/zMIY/S7cLSz9pvRQewT6XnINQ8VTT9r3x3OYhwdq9aRPzsAY8q+wBQoAAA=
   </data>
  </layer>
  <layer name="Walkable" width="57" height="45">

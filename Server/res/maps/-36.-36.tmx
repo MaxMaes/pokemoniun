@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="14" height="16" tilewidth="16" tileheight="16">
  <properties>
-  <property name="dayPokemonLevels" value=""/>
   <property name="dayPokemonChances" value=""/>
-  <property name="nightPokemonLevels" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value=""/>
-  <property name="waterPokemonLevels" value=""/>
+  <property name="nightPokemonLevels" value=""/>
   <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
   <property name="wildProbability" value="0"/>
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/> 
- <tileset firstgid="1025" source="normal2.tsx"/> 
- <tileset firstgid="2049" source="normal3.tsx"/> 
- <tileset firstgid="3073" source="normal4.tsx"/> 
- <tileset firstgid="4097" source="normal5.tsx"/> 
- <tileset firstgid="5121" source="normal16.tsx"/> 
+ <tileset firstgid="1" source="Interior - Furniture.tsx"/>
+ <tileset firstgid="301" source="InteriorWalls 1.tsx"/>
+ <tileset firstgid="601" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="931" source="Caveset 2.tsx"/>
  <layer name="Walkable" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgIB+YsjIwmBGJzVkR+v6SiIeaPk9OBgYvIrE3J0JfJpDNSyTOxqIPn73eePThszebCH2eOOwhpC8Thz3U0jedmTQMA9uZMbEnP9B//NjlKAEAUDYXJ4ADAAA=
+   H4sIAAAAAAAAC2NgoD9YyUQaHmr64phIw6P6aKOvhIk0PBAAABHjO6WAAwAA
   </data>
  </layer>
  <layer name="Walkable" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAX4gI8oBJMrPwpGAT4AAPq4BcyAAwAA
+   H4sIAAAAAAAAC2NgGAX4AA8LBJMrTyowRaOJlRu1jzC4xsTAcB2KbzDRyBISAQDe/a9ygAMAAA==
   </data>
  </layer>
  <layer name="Collisions" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNkYGDoIREzQvEaEjFMH6lgoPS1iSHEQGxsGFmeGu6cz4RKO7ExMLiwYZfDZ18SUE8KG+n2NQL1NJNhHz6Azz5kQAv76KmPHAwAD5upOIADAAA=
+   H4sIAAAAAAAAC2NgYGC4xMjAcJlIfAWII5kg+A6QfZdIfA9JH6lgoPQlMiLE4oHsBDSMLk8Ld+YCcR4Z+sqBuIIMffjASNGHDROjhhx9ABjO91GAAwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="14" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWDGexhg2BSwR02CB4FgxsAAEeVvIiAAwAA
+   H4sIAAAAAAAAC2NgGAX0AMlAnDLQjhgFgw4AAFUE51OAAwAA
   </data>
  </layer>
 </map>

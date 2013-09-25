@@ -4,10 +4,11 @@
   <property name="dayPokemonChances" value="Electabuzz,30;Floatzel,20;Magnemite,10;Wingull,10;Luxio,10;Chatot,10;Magneton,5;Pelipper,5;"/>
   <property name="dayPokemonLevels" value="39-41;40-40;39-39;38-38;38-40;38-38;41-41;40-40;"/>
   <property name="fishPokemonChances" value="Gyarados,50;Octillery,30;Remoraid,20;"/>
-  <property name="fishPokemonLevels" value="0-40;20-50;10-25;"/>
+  <property name="fishPokemonLevels" value="20-40;20-50;10-25;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Gastrodon,10;Floatzel,25;Glameow,20;Chatot,20;Purugly,15;Wingull,10;"/>
   <property name="nightPokemonLevels" value="40-42;40-42;40-40;40-41;41-42;41-41;"/>
-  <property name="pvp" value="enforced"/>
+  <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Tentacool,60;Wingull,30;Tentacruel,9;Pelipper,1;"/>
   <property name="waterPokemonLevels" value="30-40;30-40;30-50;30-50;"/>
   <property name="wildProbability" value="10"/>

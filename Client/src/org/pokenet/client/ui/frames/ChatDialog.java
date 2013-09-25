@@ -2,103 +2,170 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.TextField;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import mdes.slick.sui.event.MouseAdapter;
-import mdes.slick.sui.event.MouseEvent;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.ModerationManager;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ComboBox;
+import de.matthiasmann.twl.ComboBox;
+import de.matthiasmann.twl.EditField;
+import de.matthiasmann.twl.Event;
+import de.matthiasmann.twl.ScrollPane;
+import de.matthiasmann.twl.TextArea;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.model.SimpleChangableListModel;
+import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
 /**
- * Chat Dialog
+ * The dialog which controls and displays chat.
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-public class ChatDialog extends Frame
+public class ChatDialog extends Widget
 {
-	private HashMap<String, ArrayList<String>> m_availableChats = new HashMap<String, ArrayList<String>>();
-	private Color m_backColor = new Color(0, 0, 0, 85);
-	private ArrayList<ArrayList<String>> m_chatList = new ArrayList<ArrayList<String>>();
+	private ScrollPane chat;
+	private TextArea chatView;
+	private EditField input;
+	private ComboBox<String> possibleBoxes;
 
-	private ChatWidget m_chatWidget = new ChatWidget();
-	private String m_curChat = "";
-	private Color m_foreColor = new Color(255, 255, 255);
-	private TextField m_inputBox = new TextField();
-	private ComboBox m_possibleChats = new ComboBox();
+	private HashMap<String, SimpleTextAreaModel> chats;
+	private HashMap<String, ArrayList<String>> chatlines;
+
+	private EditField.Callback enterCallback;
+	private SimpleChangableListModel<String> possibleBoxesModel;
 
 	public ChatDialog()
 	{
-		initGUI();
-		addChat("Global", false);
-	}
+		chats = new HashMap<String, SimpleTextAreaModel>();
+		chatlines = new HashMap<String, ArrayList<String>>();
 
-	/**
-	 * Adds a server announcement
-	 * 
-	 * @param message
-	 */
-	public void addAnnouncement(String message)
-	{
-		for(String s : m_availableChats.keySet())
-			m_availableChats.get(s).add('%' + message);
-		m_chatWidget.addLine();
-	}
+		chatView = new TextArea(chats.get("Global"));
+		input = new EditField();
 
-	/**
-	 * Creates a new private chat channel
-	 * 
-	 * @param chat
-	 */
-	public void addChat(String chat, boolean isWhisper)
-	{
-		if(!m_availableChats.containsKey(chat))
+		chat = new ScrollPane(chatView);
+
+		possibleBoxesModel = new SimpleChangableListModel<>();
+		possibleBoxes = new ComboBox<String>(possibleBoxesModel);
+		possibleBoxes.addCallback(new Runnable()
 		{
-			m_availableChats.put(chat, new ArrayList<String>());
-			m_possibleChats.addElement(chat);
-			m_possibleChats.setSelected(chat);
-			if(!isWhisper)
-				m_chatList.add(m_availableChats.get(chat));
+			@Override
+			public void run()
+			{
+				updateChatview();
+			}
+		});
+
+		enterCallback = new EditField.Callback()
+		{
+			@Override
+			public void callback(int key)
+			{
+				if(key == Event.KEY_RETURN)
+				{
+					if(input.getText() != null && input.getText().length() != 0)
+						if(input.getText().charAt(0) == '/')
+						{
+							ClientMessage message = new ClientMessage(ServerPacket.PLAYER_COMMAND);
+							message.addString(input.getText().substring(1));
+							GameClient.getInstance().getSession().send(message);
+						}
+						else if(getSelectedChatboxName().equalsIgnoreCase("Global"))
+						{
+							ClientMessage message = new ClientMessage(ServerPacket.CHAT);
+							message.addInt(1);
+							message.addString(input.getText());
+							GameClient.getInstance().getSession().send(message);
+						}
+						else if(getSelectedChatboxName().equalsIgnoreCase("System"))
+						{
+							// Ignore
+						}
+						else
+						{
+							ClientMessage message = new ClientMessage(ServerPacket.CHAT);
+							message.addInt(2);
+							message.addString(getSelectedChatboxName() + "," + input.getText());
+							GameClient.getInstance().getSession().send(message);
+							addWhisperLine(getSelectedChatboxName(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + input.getText());
+						}
+					input.setText("");
+					input.giveupKeyboardFocus();
+					giveupKeyboardFocus();
+				}
+			}
+		};
+		input.addCallback(enterCallback);
+
+		addChatChannel("Global", false);
+		addChatChannel("System", false);
+		possibleBoxes.setSelected(0);
+
+		// add(chatView);
+		add(possibleBoxes);
+		add(input);
+		add(chat);
+	}
+
+	private void updateChatview()
+	{
+		String selected = possibleBoxesModel.getEntry(possibleBoxes.getSelected());
+		chatView.setModel(chats.get(selected));
+		if(selected.equalsIgnoreCase("System"))
+		{
+			input.setEnabled(false);
+			input.setVisible(false);
 		}
 		else
-			m_possibleChats.setSelected(chat);
+		{
+			input.setEnabled(true);
+			input.setVisible(true);
+		}
 	}
 
 	/**
-	 * Adds a line to a chat channel, creates the channel if it doesn't exist
+	 * Adds a line to the given chatbox
+	 * 
+	 * @param text
+	 */
+	public void addLineTo(final String text, final String chatbox)
+	{
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				SimpleTextAreaModel chatModel = chats.get(chatbox);
+				ArrayList<String> lines = chatlines.get(chatbox);
+				lines.add(text);
+
+				String txt = "";
+				for(String s : lines)
+				{
+					txt += s;
+					txt += "\n";
+				}
+				chatModel.setText(txt);
+				chat.validateLayout();
+				chat.setScrollPositionY(chat.getMaxScrollPosY());
+			}
+		});
+	}
+
+	/**
+	 * Creates a new chat channel
 	 * 
 	 * @param chat
-	 * @param line
 	 */
-	public void addChatLine(int chat, String line)
+	public void addChatChannel(String chattitle, boolean isWhisper)
 	{
-		try
+		if(!chats.containsKey(chattitle))
 		{
-			m_chatList.get(chat).add(line);
-			m_chatWidget.addLine();
+			SimpleTextAreaModel newModel = new SimpleTextAreaModel();
+			chats.put(chattitle, newModel);
+			ArrayList<String> newLines = new ArrayList<String>();
+			chatlines.put(chattitle, newLines);
+			possibleBoxesModel.addElement(chattitle);
 		}
-		catch(Exception e)
-		{
 
-		}
-	}
-
-	/**
-	 * Adds a system message to your chat
-	 * 
-	 * @param message
-	 */
-	public void addSystemMessage(String message)
-	{
-		for(String s : m_availableChats.keySet())
-			m_availableChats.get(s).add('*' + message);
-		m_chatWidget.addLine();
+		possibleBoxes.setSelected(possibleBoxesModel.findElement(chattitle));
 	}
 
 	/**
@@ -109,161 +176,54 @@ public class ChatDialog extends Frame
 	 */
 	public void addWhisperLine(String chat, String line)
 	{
-		if(m_availableChats.containsKey(chat))
+		if(!chats.containsKey(chat))
 		{
-			m_availableChats.get(chat).add(line);
-			m_chatWidget.addLine();
+			addChatChannel(chat, true);
 		}
-		else
-		{
-			addChat(chat, true);
-			m_availableChats.get(chat).add(line);
-			m_chatWidget.addLine();
-		}
+		addLineTo(line, chat);
 	}
 
-	/**
-	 * Drops focus
-	 */
-	public void dropFocus()
+	private String getSelectedChatboxName()
 	{
-		m_inputBox.releaseFocus();
+		return possibleBoxesModel.getEntry(possibleBoxes.getSelected());
 	}
 
 	/**
-	 * Returns the chat box
+	 * Add a line to the System chatbox and change to it.
 	 * 
-	 * @return the chat box
+	 * @param text
 	 */
-	public TextField getChatBox()
+	public void addSystemMessage(String text)
 	{
-		return m_inputBox;
+		addLineTo(text, "System");
+		possibleBoxes.setSelected(possibleBoxesModel.findElement("System"));
+		setVisible(true);
 	}
 
 	/**
-	 * Repositions UI elements
-	 */
-	public void repositionUI()
-	{
-		try
-		{
-			m_possibleChats.setSize(getWidth(), 15);
-			m_possibleChats.setLocation(0, 0);
-
-			m_chatWidget.setLocation(0, 15);
-			m_chatWidget.setSize(getWidth(), getHeight() - getTitleBar().getHeight() - 40);
-
-			m_inputBox.setSize(getWidth(), 25);
-			m_inputBox.setLocation(0, getHeight() - m_inputBox.getHeight() - getTitleBar().getHeight());
-		}
-		catch(Exception e)
-		{
-
-		}
-	}
-
-	@Override
-	public void setForeground(Color c)
-	{
-		super.setForeground(c);
-		try
-		{
-			m_chatWidget.setForeColor(c);
-		}
-		catch(Exception e)
-		{
-
-		}
-	}
-
-	@Override
-	public void setSize(float width, float height)
-	{
-		super.setSize(width, height);
-		repositionUI();
-	}
-
-	@Override
-	public void update(GUIContext container, int delta)
-	{
-		super.update(container, delta);
-		if(!m_curChat.equalsIgnoreCase(m_possibleChats.getSelected()))
-		{
-			m_curChat = m_possibleChats.getSelected();
-			m_chatWidget.setContents(m_availableChats.get(m_possibleChats.getSelected()));
-			setTitle("Chat: " + m_possibleChats.getSelected());
-		}
-	}
-
-	/**
-	 * Sends the packet over to the server
+	 * Adds a line to the global chat
 	 * 
-	 * @param evt
+	 * @param text
 	 */
-	private void chatTypeActionPerformed(ActionEvent evt)
+	public void addLine(String text)
 	{
-		if(m_inputBox.getText() != null && m_inputBox.getText().length() != 0)
-			if(m_inputBox.getText().charAt(0) == '/')
-				ModerationManager.parseLine(m_inputBox.getText().substring(1));
-			else if(m_possibleChats.getSelected().equalsIgnoreCase("global"))
-			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("39" + m_inputBox.getText());
-				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
-				message.addInt(1);
-				message.addString(m_inputBox.getText());
-				GameClient.getInstance().getSession().send(message);
-			}
-			else
-			{
-				ClientMessage message = new ClientMessage(ServerPacket.CHAT);
-				message.addInt(2);
-				message.addString(m_possibleChats.getSelected() + "," + m_inputBox.getText());
-				GameClient.getInstance().getSession().send(message);
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("3B" + m_possibleChats.getSelected() + "," + m_inputBox.getText());
-				addWhisperLine(m_possibleChats.getSelected(), "<" + GameClient.getInstance().getOurPlayer().getUsername() + "> " + m_inputBox.getText());
-			}
-		m_inputBox.setText("");
-		m_inputBox.grabFocus();
+		addLineTo(text, "Global");
 	}
 
-	/**
-	 * Initializes the user interface
-	 */
-	private void initGUI()
+	@Override
+	public void layout()
 	{
-		// Hack to properly align the content pane in a slick frame
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		// Sets the frame's colors
-		setBackground(m_backColor);
-		setForeground(m_foreColor);
-		// Chat Selection
-		m_possibleChats.setForeground(m_foreColor);
-		getContentPane().add(m_possibleChats);
-		// Chat Widget
-		m_chatWidget.setForeColor(m_foreColor);
-		getContentPane().add(m_chatWidget);
-		// Input box
-		getContentPane().add(m_inputBox);
-		m_inputBox.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent evt)
-			{
-				chatTypeActionPerformed(evt);
-			}
-		});
-		m_inputBox.grabFocus();
-		// Repositions UI dynamically when the user resizes the window
-		getResizer().addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseDragged(MouseEvent event)
-			{
-				repositionUI();
-			}
-		});
-		setMinimumSize(80, 80);
-		setSize(400, 195);
+		setSize(300, 200);
+		setPosition(0, GameClient.getInstance().getGUI().getHeight() - getHeight());
+		input.setSize(getWidth(), 25);
+		possibleBoxes.setSize(getWidth(), 22);
+		possibleBoxes.setPosition(getInnerX(), getInnerY());
+		input.setPosition(getInnerX(), getInnerY() + getHeight() - input.getHeight());
+
+		chatView.setSize(getWidth() - 25, getHeight() - possibleBoxes.getHeight() - input.getHeight() - 10);
+		chatView.setPosition(0, 0);
+
+		chat.setPosition(getInnerX(), getInnerY() + possibleBoxes.getHeight() + 2);
+		chat.setSize(getWidth(), getHeight() - possibleBoxes.getHeight() - input.getHeight() - 4);
 	}
 }

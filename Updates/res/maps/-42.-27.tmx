@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="30" height="40" tilewidth="16" tileheight="16">
- <properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties> <tileset firstgid="1" source="../../res/maps/Sinnoh Interiors 2.tsx"/>
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
+ <tileset firstgid="1" source="Sinnoh Interiors 2.tsx"/>
  <layer name="Walkable" width="30" height="40">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3WVZBQdRwF4J2RFJHuUqlNFImlQ5qlY5dGkE6VbhAMFHAclVDBoFul02CX7m4MulG69Hvb+8KMD46+7G/mmzlP9zz975yQkP/vqoSGhFSlGtWpQU1qUZsY6lCXetSnAQ1pRGOa0JRY4mhGc1rQkla0pk1oYu8SeSnLWM4KVrKK1axhLetYzw/8yE/8zAbiSWAjm9jMFrayje3sYGegN39YSEgBClKIwoQSRjgRRBJFEV7kJYryMsUoTglKEk0pSlOGspSjPBXCEns/lj/hUyYyiclM4TM+5wumMo0v+Yqv+YbpzGAms5jNHOYyj/ksYCGLAr1PhYeEJCM5KUhJKlLzNGl4hrQ8SzrSk4GMZCIzWchKNrKTg5zkIjd5yBue2NtH7ks/+jOAgQxiMEMYyjCGM4KRjOItRjOGt3mHd3mPsbzPB4xjPBMCvb/LpznDWc5xngtc5BKXucJVrnGdG/zBn9zkFre5w13ucZ8HPOQRjwO9jSO8A5oSSxzNaE4LWtKK1rShLa/Sjva8Rgc60onOdKEr3ehOD3rSKyKxd4McTwIb2cRmtrCVbWxnBzvZxW72sJd97OcABznEYY5wlGMc5wQnA73FIr0DSlCSaEpRmjKUpRzlqUBFKlGZV6hCVapRnRrUpBa1iaEOdakXmdg7XZ7BTGYxmznMZR7zWcBCFrGYb/mO71nCUpaxnBWsZBWrWcNa1rE+0JspyjsgC1nJRnZykJNc5CYPecnHczzPC+SnAAUpRGFCCSOcCCKJokjUP/9/P+k++he+kXRJl3RJl3RPvg62ZUc60ZkudKUb3elBT3rRm9d5gzfpQ1/60Z8BDGQQgxnCUIYxnBGBHbtfPsBBDnGYIxzlGMc5wUlO8Qu/8hu/c5oznOUc57nARS5xmStc5Vqgt6ptWY3q1KAmtahNDHWoSz3q04CGNKIxTWhKLHE0ozktaEkrWtOGtoEdu1RexnJWsJJVrGYNa1nHen7gR37iZzYQTwIb2cRmtrCVbWxnBzvZFegtYOMVpBCFCSWMcCKIJIoivMhLFOVlilGcEpQkmlKUpgxlKUd5KlAxsCc/kT9lIpOYzBQ+43O+YCrT+JKv+JpvmM4MZjKL2cxhLvOYzwIWsojFgd5kNl5yUpCSVKTmadLwDGl5lnSkJwMZyURmspCVbGQnBznJRW7ykJd8gT3ZV+5HfwYwkEEMZghDGcZwRjCSUbzFaMbwNu/wLu8xlvf5gHGMZwIfBnpPy2c4yznOc4GLXOIyV7jKNa5zgz/4k5vc4jZ3uMs97vOAhzziMX8FepvYlk2JJY5mNKcFLWlFa9rQlldpR3teowMd6URnutCVbnSnBz3pRe/Ajo2XE9jIJjazha1sYzs72MkudrOHvexjPwc4yCEOc4SjHOM4JzjJqUBvcXu0BCWJphSlKUNZylGeClSkEpV5hSpUpRrVqUFNalGbGOpQl3rUT9q+/+n9DYf45GTAEgAA

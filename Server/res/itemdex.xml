@@ -49,7 +49,7 @@
 			<description>What happens when a max potion and a full heal
 				have a baby.</description>
 			<id>5</id>
-			<category>Potion</category>
+			<category>POTIONS</category>
 			<shop>0</shop>
 			<price>3000</price>
 			<attributes>

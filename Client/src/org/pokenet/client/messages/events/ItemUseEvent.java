@@ -15,12 +15,12 @@ public class ItemUseEvent implements MessageEvent
 		String message = Request.readString();
 		try
 		{
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
 		}
 		catch(Exception e)
 		{
 		}
-		GameClient.getInstance().getUi().talkToNPC(message);
+		GameClient.getInstance().getHUD().talkToNPC(message);
 	}
 }

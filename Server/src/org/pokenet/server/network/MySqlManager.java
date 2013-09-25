@@ -75,13 +75,14 @@ public class MySqlManager
 			catch(Exception e)
 			{
 				e.printStackTrace();
+				return null;
 			}
 			return mysql_result;
 		}
 		else
 		{
 			/* It's an UPDATE, INSERT, or DELETE statement.
-			 * Use the"executeUpdaye" function and return a null result. */
+			 * Use the"executeUpdate" function and return a null result. */
 			try
 			{
 				stmt = mysql_connection.createStatement();

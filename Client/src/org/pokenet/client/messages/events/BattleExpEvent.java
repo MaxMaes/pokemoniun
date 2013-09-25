@@ -12,6 +12,6 @@ public class BattleExpEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informExperienceGained(Request.readString().split(","));
+		BattleManager.getInstance().getNarrator().informExperienceGained(Request.readString().split(","));
 	}
 }

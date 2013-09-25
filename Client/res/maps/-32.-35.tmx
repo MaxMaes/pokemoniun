@@ -3,6 +3,7 @@
  <properties>
   <property name="dayPokemonChances" value="Krabby,40;Zubat,30;Seel,25;Golbat,5;"/>
   <property name="dayPokemonLevels" value="22-24;23-23;22-24;25-25;"/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Krabby,40;Zubat,30;Seel,25;Golbat,5;"/>
   <property name="nightPokemonLevels" value="22-24;23-23;22-24;25-25;"/>
   <property name="waterPokemonChances" value=""/>
@@ -11,27 +12,26 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal7.tsx"/>
- <tileset firstgid="2049" source="Caveset 2.tsx"/>
+ <tileset firstgid="1" source="Caveset 2.tsx"/>
+ <tileset firstgid="1025" source="Cliffs02.tsx"/>
  <layer name="Grass" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2PiYmBgGsWjeBQPOszHiR0PFvPQsS4TfnkQGOgwHWoYAFWSgEagBQAA
+   H4sIAAAAAAAAC2NiYmBgGsWjeBQPOszHiB0PFvPQMQhQIj+KMTEAO4hnbqAFAAA=
   </data>
  </layer>
  <layer name="Walkable" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAsqBBAd+eTk2+rhjOAEATrQIDqAFAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMAsqBxEA7YBgCAJ+dWf+gBQAA
   </data>
  </layer>
  <layer name="Walkable" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGN7gMicDwxVO6pn3GWjWFyqaNwqGFxhNb5jgEDMEF3NCaHLNoDcgxk5auwsAIq39maAFAAA=
+   H4sIAAAAAAAAC2NgGN7gMiMDwxVG6pn3GWjWFyqaNwqGFxhNb7hB8TDxBz0BAAvB4D2gBQAA
   </data>
  </layer>
  <layer name="LedgesRight" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYHCBFUyUyaODEwTUv6CyeaQCUu0f7oDU+CUEhnL4AgAyl5vToAUAAA==
+   H4sIAAAAAAAAC2NgGAWjYHABPhbK5NGBGAH1clQ2j1RAqv3DHZAav4TAUA5fAJX2eUqgBQAA
   </data>
  </layer>
  <layer name="Water" width="20" height="18">
@@ -41,12 +41,12 @@
  </layer>
  <layer name="Collisions" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+PjZGDgGyRYGIj1oFiICubxAzEM8A4h83CFA7I4NnmQeR6cmObhsgemHhkTqw8GdJHcoo9kDi55QuaRA7C524NMMwmFAy7wloOB4R0O/J6DdPN48ajhJ+C+t0j2UsM8XiziyPEKwyAAi2dk84yBuAgqXwKkjcgMV2LyE6F4JyXf4opPdExpOYAPAwAjkdc3oAUAAA==
+   H4sIAAAAAAAAC+NjZGDgGyRYGIj1oFiICubxAzEM8A4h83CFA7I4NnmQeR6MmObhsgemHhkTqw8GdJHcoo9kDi55QuaRA7C524NMMwmFAy7wFojf4cDvGUg3jxePGn4C7oO55T2VzOPFIo4crzAMArB4RjbPGIiLoPIlQNqIzHAlJj8RindS8i2u+ETHlJYD+DAA4X8AuaAFAAA=
   </data>
  </layer>
  <layer name="WalkBehind" width="20" height="18">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBRQC1zmZGC4wjnQrhgFwwUAADfODnegBQAA
+   H4sIAAAAAAAAC2NgGAWjYBRQC1xmZGC4wjjQrhgFwwUAACPizNygBQAA
   </data>
  </layer>
 </map>

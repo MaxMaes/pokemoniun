@@ -1,128 +1,120 @@
 package org.pokenet.client.ui.frames;
 
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Popup for right click on players
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-public class PlayerPopupDialog extends Frame
+public class PlayerPopupDialog extends ResizableFrame
 {
-	Button m_battle, m_trade, m_addFriend, m_whisper, m_cancel;
-	Label m_name;
+	private Button m_battle, m_trade, m_addFriend, m_whisper, m_cancel;
+	private Label m_name;
+	private PopupWindow popup;
 
 	/**
 	 * Default Constructor
 	 * 
 	 * @param player
 	 */
-	public PlayerPopupDialog(String player)
+	public PlayerPopupDialog(Widget root)
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		m_name = new Label(player);
-		m_name.setFont(GameClient.getInstance().getFontSmall());
-		m_name.setForeground(Color.white);
-		m_name.pack();
-		m_name.setLocation(0, 0);
-		getContentPane().add(m_name);
+		m_name = new Label("");
+		add(m_name);
 
 		m_battle = new Button("Battle");
-		m_battle.setSize(100, 25);
-		m_battle.setLocation(0, m_name.getY() + m_name.getHeight() + 3);
-		getContentPane().add(m_battle);
+		m_battle.setSize(75, 25);
+		add(m_battle);
 
 		m_trade = new Button("Trade");
-		m_trade.setSize(100, 25);
-		m_trade.setLocation(0, m_battle.getY() + 25);
-		getContentPane().add(m_trade);
+		m_trade.setSize(75, 25);
+		add(m_trade);
 
 		m_whisper = new Button("Whisper");
-		m_whisper.setSize(100, 25);
-		m_whisper.setLocation(0, m_trade.getY() + 25);
-		getContentPane().add(m_whisper);
+		m_whisper.setSize(75, 25);
+		add(m_whisper);
 
 		m_addFriend = new Button("Add Friend");
-		m_addFriend.setSize(100, 25);
-		m_addFriend.setLocation(0, m_whisper.getY() + 25);
-		getContentPane().add(m_addFriend);
+		m_addFriend.setSize(75, 25);
+		add(m_addFriend);
 
 		m_cancel = new Button("Cancel");
-		m_cancel.setSize(100, 25);
-		m_cancel.setLocation(0, m_addFriend.getY() + 25);
-		getContentPane().add(m_cancel);
-		setBackground(new Color(0, 0, 0, 150));
-		setSize(100, 150 + m_name.getTextHeight());
-		getTitleBar().setVisible(false);
+		m_cancel.setSize(75, 25);
+		add(m_cancel);
 		setVisible(true);
-		setResizable(false);
-		setAlwaysOnTop(true);
 
-		m_battle.addActionListener(new ActionListener()
+		m_battle.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("13" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_BATTLE);
 				message.addString(m_name.getText());
 				GameClient.getInstance().getSession().send(message);
 				destroy();
 			}
 		});
-		m_trade.addActionListener(new ActionListener()
+		m_trade.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("14" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_TRADE);
 				message.addString(m_name.getText());
 				GameClient.getInstance().getSession().send(message);
 				destroy();
 			}
 		});
-		m_whisper.addActionListener(new ActionListener()
+		m_whisper.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				GameClient.getInstance().getUi().getChat().addChat(m_name.getText(), true);
+				GameClient.getInstance().getHUD().getChat().addChatChannel(m_name.getText(), true);
 				destroy();
 			}
 		});
-		m_addFriend.addActionListener(new ActionListener()
+		m_addFriend.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2F" + m_name.getText());
 				ClientMessage message = new ClientMessage(ServerPacket.FRIEND_ADD);
 				message.addString(m_name.getText());
 				GameClient.getInstance().getSession().send(message);
-				GameClient.getInstance().getUi().getFriendsList().addFriend(m_name.getText());
-				GameClient.getInstance().getUi().getFriendsList().setFriendOnline(m_name.getText(), true);
+				GameClient.getInstance().getHUD().getFriendsList().addFriend(m_name.getText());
+				GameClient.getInstance().getHUD().getFriendsList().setFriendOnline(m_name.getText(), true);
 				destroy();
 			}
 		});
-		m_cancel.addActionListener(new ActionListener()
+		m_cancel.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
 				destroy();
 			}
 		});
+
+		setTheme("playerpopupdialog");
+		popup = new PopupWindow(root);
+		popup.setTheme("PlayerPopup");
+		popup.add(this);
+		popup.adjustSize();
+	}
+
+	public void showPopupAt(int x, int y)
+	{
+		popup.setPosition(x, y);
+		popup.openPopup();
 	}
 
 	/**
@@ -130,6 +122,25 @@ public class PlayerPopupDialog extends Frame
 	 */
 	public void destroy()
 	{
-		GameClient.getInstance().getDisplay().remove(this);
+		popup.closePopup();
+	}
+
+	@Override
+	public void layout()
+	{
+		m_name.adjustSize();
+		m_name.setPosition(getX(), getY());
+		m_battle.setPosition(getX(), m_name.getY() + m_name.getHeight());
+		m_trade.setPosition(getX(), m_battle.getY() + m_battle.getHeight());
+		m_whisper.setPosition(getX(), m_trade.getY() + m_trade.getHeight());
+		m_addFriend.setPosition(getX(), m_whisper.getY() + m_whisper.getHeight());
+		m_cancel.setPosition(getX(), m_addFriend.getY() + m_addFriend.getHeight());
+		setSize(86, 128 + m_name.computeTextHeight());
+		popup.adjustSize();
+	}
+
+	public void setPlayerName(String player)
+	{
+		m_name.setText(player);
 	}
 }

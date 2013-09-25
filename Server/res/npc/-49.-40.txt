@@ -1,7 +1,7 @@
 [npc]
 Daughter
 down
-362
+340
 8
 13
 NULL

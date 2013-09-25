@@ -1,7 +1,7 @@
 [npc]
 Underground Visitor
 down
-79
+268
 6
 9
 NULL
@@ -51,8 +51,8 @@ false
 [warp]
 9
 7
-2
 3
+2
 -31
 -37
 0

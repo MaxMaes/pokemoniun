@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="13" height="23" tilewidth="16" tileheight="16">
  <properties>
   <property name="dayPokemonChances" value=""/>
   <property name="dayPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value=""/>
   <property name="nightPokemonLevels" value=""/>
   <property name="waterPokemonChances" value=""/>
@@ -12,29 +12,27 @@
   <property name="xOffsetModifier" value="0"/>
   <property name="yOffsetModifier" value="0"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal8.tsx"/>
- <tileset firstgid="2049" source="normal9.tsx"/>
- <tileset firstgid="3073" source="normal2.tsx"/>
- <tileset firstgid="4097" source="normal7.tsx"/>
+ <tileset firstgid="1" source="Cliffs02.tsx"/>
+ <tileset firstgid="113" source="Caveset 2.tsx"/>
+ <tileset firstgid="1137" source="Caveset.tsx"/>
  <layer name="Walkable" width="13" height="23">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGBqgnxUTjyQ9yOrkhEizC5s5o4D6AFucEgrvwaoHmzpK0h01AAC8lWobrAQAAA==
+   H4sIAAAAAAAAC2NgGBqgjhETjyQ96OpIsWsU0Adgi1NCcTRY9eBSN5DpDgCj43NUrAQAAA==
   </data>
  </layer>
  <layer name="Walkable" width="13" height="23">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGN5gv8BAu2AUjALiwX7BgXbB4AUAvXV8cKwEAAA=
+   H4sIAAAAAAAAC2NgGBpgOhMDwwwm0vRsB6rfQaIeSkAUieoTgTgJiJNJ0FPHwsBQD8QNLCRaNgqGBEgjI73SI91lMkDSXTaJdlETAACxQ+arrAQAAA==
   </data>
  </layer>
  <layer name="Collisions" width="13" height="23">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAADvEzMBwiI64GYgfYcEtePQcBmJ0EMDEwHCQRD0gQA895LiNkB4QXgrFILAUiU/P+BsJGFcaxZdWQXEKikMQJjZuYXqwAXx68AFS7cGlZykWPNDpDgD3YDYQrAQAAA==
+   H4sIAAAAAAAAC+tnYWDopyOuBeLpWHANHj0TgBgd3GBiYOgjUQ8I0EMPOW4jpKcdiuugehuQxOgZfyMB40qj+NIqKE5BcQjCxMYtTA82gE8PPkCqPbj0tKPhwZDuAHFNeousBAAA
   </data>
  </layer>
  <layer name="WalkBehind" width="13" height="23">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBTQAswXHGgXDC8AAAXPKcCsBAAA
+   H4sIAAAAAAAAC2NgGAWjYBTQArgxDbQLhhcAAOTgxpasBAAA
   </data>
  </layer>
 </map>

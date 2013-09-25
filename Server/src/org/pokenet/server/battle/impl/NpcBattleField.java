@@ -29,6 +29,7 @@ import org.pokenet.server.protocol.ServerMessage;
  */
 public class NpcBattleField extends BattleField
 {
+	private static final int BASE_GOLD_REWARD = 30;
 	private boolean m_finished = false;
 	private NPC m_npc;
 	private Player m_player;
@@ -56,8 +57,8 @@ public class NpcBattleField extends BattleField
 		startBattle.addInt(getAliveCount(1));
 		startBattle.sendResponse();
 		/* Check if this player has seen this wild pokemon before, if not, update pokedex */
-		if(!m_player.isPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1))
-			m_player.setPokemonSeen(getActivePokemon()[1].getSpeciesNumber() + 1);
+		if(!m_player.isPokemonSeen(getActivePokemon()[1].getPokedexNumber()))
+			m_player.setPokemonSeen(getActivePokemon()[1].getPokedexNumber());
 		/* Send enemy name */
 		ServerMessage enemyName = new ServerMessage(m_player.getSession());
 		enemyName.init(ClientPacket.ENEMY_TRAINER_NAME.getValue());
@@ -200,7 +201,6 @@ public class NpcBattleField extends BattleField
 		if(m_player != null)
 			if(getActivePokemon()[0].equals(pokemon))
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), false));
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
 				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(0);
@@ -213,7 +213,6 @@ public class NpcBattleField extends BattleField
 			}
 			else if(pokemon.equals(getActivePokemon()[1]))
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), false));
 				ServerMessage receiveEffect = new ServerMessage(m_player.getSession());
 				receiveEffect.init(ClientPacket.STATUS_RECEIVED.getValue());
 				receiveEffect.addInt(1);
@@ -235,7 +234,6 @@ public class NpcBattleField extends BattleField
 		if(m_player != null)
 			if(getActivePokemon()[0].equals(pokemon) && !getActivePokemon()[0].isFainted())
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(0, pokemon.getSpeciesName(), eff.getName(), true));
 				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
 				removeEffect.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffect.addInt(0);
@@ -248,7 +246,6 @@ public class NpcBattleField extends BattleField
 			}
 			else if(pokemon.equals(getActivePokemon()[1]) && !getActivePokemon()[1].isFainted())
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new StatusChangeMessage(1, pokemon.getSpeciesName(), eff.getName(), true));
 				ServerMessage removeEffect = new ServerMessage(m_player.getSession());
 				removeEffect.init(ClientPacket.STATUS_REMOVED.getValue());
 				removeEffect.addInt(1);
@@ -267,7 +264,6 @@ public class NpcBattleField extends BattleField
 		if(m_player != null)
 			if(trainer == 0)
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_player.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
 				ServerMessage switchInform = new ServerMessage(m_player.getSession());
 				switchInform.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInform.addString(m_player.getName());
@@ -299,7 +295,6 @@ public class NpcBattleField extends BattleField
 			}
 			else
 			{
-				// TcpProtocolHandler.writeMessage(m_player.getTcpSession(), new SwitchMessage(m_npc.getName(), poke.getSpeciesName(), trainer, getPokemonPartyIndex(trainer, poke)));
 				ServerMessage switchInform = new ServerMessage(m_player.getSession());
 				switchInform.init(ClientPacket.SWITCHED_POKE.getValue());
 				switchInform.addString(m_npc.getName());
@@ -351,7 +346,7 @@ public class NpcBattleField extends BattleField
 	public void informVictory(int winner)
 	{
 		m_finished = true;
-		int money = (int) ((30 * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);	// The magic cookie is used as a base to reward gold (replace later).
+		int money = (int) ((BASE_GOLD_REWARD * (getMechanics().getRandom().nextInt(5) + 1)) * GameServer.RATE_GOLD);	// The magic cookie is used as a base to reward gold (replace later).
 		if(winner == 0)
 		{
 			int trainerExp = 0;
@@ -670,6 +665,14 @@ public class NpcBattleField extends BattleField
 	{
 		if(trainer == 0)
 		{
+			/* pp might be out of sync lets update it */
+			ServerMessage ppUpdate = new ServerMessage(m_player.getSession());
+			ppUpdate.init(ClientPacket.BATTLE_PP_UPDATE.getValue());
+			ppUpdate.addInt(getActivePokemon()[0].getPp(0));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(1));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(2));
+			ppUpdate.addInt(getActivePokemon()[0].getPp(3));
+			ppUpdate.sendResponse();
 			/* Request move from player */
 			ServerMessage moveRequest = new ServerMessage(m_player.getSession());
 			moveRequest.init(ClientPacket.MOVE_REQUESTED.getValue());
@@ -752,8 +755,8 @@ public class NpcBattleField extends BattleField
 				switchInPokemon(1, BattleTurn.getSwitchTurn(index).getId());
 
 				// Check if this player has seen this wild pokemon before, if not, update pokedex
-				if(!m_player.isPokemonSeen(m_pokemon[1][index].getSpeciesNumber() + 1))
-					m_player.setPokemonSeen(m_pokemon[1][index].getSpeciesNumber() + 1);
+				if(!m_player.isPokemonSeen(m_pokemon[1][index].getPokedexNumber()))
+					m_player.setPokemonSeen(m_pokemon[1][index].getPokedexNumber());
 				requestMoves();
 			}
 			catch(Exception e)

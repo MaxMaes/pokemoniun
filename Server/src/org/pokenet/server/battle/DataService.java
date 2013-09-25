@@ -2,7 +2,6 @@ package org.pokenet.server.battle;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -30,7 +29,9 @@ public class DataService
 	private static JewelMechanics m_mechanics;
 	private static MoveList m_moveList;
 	private static MoveSetData m_moveSetData;
-	private static final String[] m_nonTrades = new String[] { "Bulbasaur", "Ivysaur", "Venusaur", "Wartortle", "Blastoise", "Charmander", "Charmeleon", "Charizard", "Chikorita", "Bayleef", "Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon" };
+	private static final String[] m_nonTrades = new String[] { "Bulbasaur", "Ivysaur", "Venusaur", "Wartortle", "Blastoise", "Charmander", "Charmeleon", "Charizard", "Chikorita", "Bayleef",
+			"Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp",
+			"Swampert", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon" };
 	private PokemonSpeciesData m_speciesData;
 
 	/**
@@ -43,7 +44,7 @@ public class DataService
 			Persister stream = new Persister();
 			/* Load all of shoddy's databases */
 			m_moveList = DataService.getMovesList();
-			m_moveSetData =  DataService.getMoveSetData();
+			m_moveSetData = DataService.getMoveSetData();
 			m_speciesData = new PokemonSpeciesData();
 			m_mechanics = DataService.getBattleMechanics();
 			m_fishingData = DataService.getFishDatabase();

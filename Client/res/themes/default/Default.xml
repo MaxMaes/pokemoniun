@@ -2,13 +2,16 @@
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
     <include filename="guitheme.xml"/>
-    <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
-        <fontParam if="textSelection" color="#A3A8BF"/>
-    </fontDef>
     <fontDef name="battlebuttonfont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
-    <fontDef name="pokefont_large" filename="dp.fnt" color="#FFFFFF">
+    <fontDef name="pokefont" filename="dp-small.fnt" color="#FFFFFF" offsetY="-4">
+        <fontParam if="textSelection" color="#A3A8BF"/>
+    </fontDef>
+    <fontDef name="pokefont_large" filename="pokefont-large.fnt" color="#000000">
+        <fontParam if="textSelection" color="#A3A8BF"/>
+    </fontDef>
+    <fontDef name="pokefont_large_white" filename="pokefont-large.fnt" color="#FFFFFF">
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
     <fontDef name="normal" filename="font.fnt" color="#49432D">
@@ -74,7 +77,7 @@
         <param name="maxHeight"><int>14</int></param>
         <param name="background"><image>closebutton_background</image></param>
     </theme>
-    <theme name="twlimagebutton" ref="button">
+    <theme name="imagebutton" ref="button">
     </theme>
     <theme name="editfield" ref="-defaults">
         <param name="background"><image>editfield</image></param>
@@ -119,8 +122,8 @@
         <param name="titleAreaRight"><int>-8</int></param>
         <param name="titleAreaBottom"><int>20</int></param>
         <theme name="closeButton" ref="closeButton"/>
-        <param name="closeButtonX"><int>0</int></param>
-        <param name="closeButtonY"><int>0</int></param>
+        <param name="closeButtonX"><int>-19</int></param>
+        <param name="closeButtonY"><int>5</int></param>
         <param name="resizeHandleX"><int>0</int></param>
         <param name="resizeHandleY"><int>0</int></param>
     </theme>
@@ -176,7 +179,11 @@
     </theme>
     <theme name="tooltipwindow" ref="-defaults">
         <param name="background"><image>resizableframe</image></param>
-        <param name="fadeInTime"><int>250</int></param>
+        <param name="fadeInTime"><int>500</int></param>
+        <theme name="label" ref="label">
+            <param name="font"><font>normal_white</font></param>
+        </theme>
+        <param name="border"><border>2</border></param>
     </theme>
     <theme name="textarea" ref="-defaults">
         <param name="fonts">
@@ -198,7 +205,7 @@
             <param name="background"><image>checkbox_background</image></param>
         </theme>
         <theme name="label" ref="label">
-            <param name="font"><font>normal_black</font></param>
+            <param name="font"><font>normal_white</font></param>
         </theme>
     </theme>
     <theme name="listbox" ref="-defaults">
@@ -210,7 +217,7 @@
         <param name="fixedCellHeight"><bool>false</bool></param>
         <theme name="vscrollbar" ref="vscrollbar"/>
         <theme name="display" ref="label">
-            <param name="background"><image>listbox_display_background</image></param>
+            <param name=""><image>listbox.display.*</image></param>
             <param name="border"><border>5,0</border></param>
         </theme>
         <param name="minDisplayedRows"><int>0</int></param>
@@ -235,6 +242,102 @@
     <theme name="progressbar" ref="-defaults">
         <param name="progressImage"><image>hpbar_high</image></param>
     </theme>
+    <theme name="image" ref="-defaults"/>
+    <theme name="confirmationPopup" ref="-defaults">
+        <theme name="confirmationdialog" ref="popup_untitled">
+            <theme name="content" ref="-defaults">
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="title" ref="title"/>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>normal_black</font></param>
+                    </map>
+                </param>
+                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+        </theme>
+    </theme>
+    <theme name="alertpopup" ref="-defaults">
+        <theme name="alertdialog" ref="popup_untitled">
+            <theme name="title" ref="title"/>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <theme name="textarea" ref="textarea">
+                <param name="fonts">
+                    <map>
+                        <param name="default"><font>normal_black</font></param>
+                    </map>
+                </param>
+                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+            </theme>
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+        </theme>
+    </theme>
+    <theme name="PlayerPopup" ref="-defaults">
+        <theme name="playerpopupdialog" ref="resizableframe_borderless">
+            <theme name="button" ref="button">
+                <param name="font"><font>normal</font></param>
+            </theme>
+            <theme name="label" ref="editfield">
+                <param name="font"><font>normal</font></param>
+            </theme>
+            <param name="hasCloseButton"><bool>false</bool></param>
+            <param name="hasResizeHandle"><bool>false</bool></param>
+            <param name="titleAreaTop"><int>0</int></param>
+            <param name="titleAreaLeft"><int>0</int></param>
+            <param name="titleAreaRight"><int>0</int></param>
+            <param name="titleAreaBottom"><int>0</int></param>
+            <param name="closeButtonX"><int>0</int></param>
+            <param name="closeButtonY"><int>0</int></param>
+            <param name="resizeHandleX"><int>0</int></param>
+            <param name="resizeHandleY"><int>0</int></param>
+            <param name="fadeDurationActivate"><int>0</int></param>
+            <param name="fadeDurationDeactivate"><int>0</int></param>
+            <param name="fadeDurationShow"><int>0</int></param>
+            <param name="fadeDurationHide"><int>0</int></param>
+            <param name="fadeColorInactive"><color>#666666</color></param>
+        
+        
+        
+        </theme>
+    </theme>
+
+    <theme name="bigbagdialogpopup" ref="-defaults">
+        <theme name="itempopup" ref="resizableframe">
+            <theme name="button" ref="button"/>
+            <theme name="label" ref="label">
+                <param name="font"><font>pokefont</font></param>
+            </theme>
+        </theme>
+    </theme>
+    <theme name="itemuseteampopup" ref="-defaults">
+        <theme name="teampopup" ref="resizableframe">
+            <theme name="button" ref="button"/>
+            <theme name="label" ref="label"/>
+        </theme>
+    </theme>
+    <theme name="speechframe" ref="-defaults">
+        <param name="background"><image>speechframe</image></param>
+        <theme name="textarea" ref="textarea">
+            <param name="fonts">
+                <map>
+                    <param name="default"><font>pokefont_large</font></param>
+                </map>
+            </param>
+        </theme>
+        <theme name="image" ref="image"/>
+    </theme>
+
+
 
 
 
@@ -294,8 +397,6 @@
                     <theme name="textarea" ref="textarea">
                     </theme>
                 </theme>
-                <param name="closeButtonX"><int>270</int></param>
-                <param name="closeButtonY"><int>5</int></param>
             </theme>
             <theme name="tosdialog" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>true</bool></param>
@@ -305,8 +406,6 @@
                     <theme name="textarea" ref="textarea">
                     </theme>
                 </theme>
-                <param name="closeButtonX"><int>270</int></param>
-                <param name="closeButtonY"><int>5</int></param>
             </theme>
             <theme name="alertpopupdialog" ref="popup_titled">
                 <param name="defaultGap"><dimension>0,5</dimension></param>
@@ -362,11 +461,20 @@
                     <theme name="label" ref="label">
                         <param name="font"><font>pokefont</font></param>
                     </theme>
-                    <theme name="twlimagebutton" ref="twlimagebutton"/>
+                    <theme name="imagebutton" ref="imagebutton"/>
                 </theme>
             </theme>
         </theme>
         <theme name="hud" ref="-defaults">
+            <theme name="topbar" ref="resizableframe_borderless">
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="moneylabel" ref="label">
+                    <param name="font"><font>pokefont_large_white</font></param>
+                </theme>
+                <theme name="timelabel" ref="label">
+                    <param name="font"><font>pokefont_large_white</font></param>
+                </theme>
+            </theme>
             <theme name="pokedexdialog" ref="resizableframe">
                 <param name="background"><image>pokedex</image></param>
                 <theme name="label_small" ref="label">
@@ -404,6 +512,8 @@
                 <param name="hasCloseButton"><bool>false</bool></param>
                 <param name="hasResizeHandle"><bool>false</bool></param>
                 <theme name="label" ref="label"/>
+                <theme name="image" ref="image"/>
+                <theme name="pokemonlocationicon" ref="image"/>
             </theme>
             <theme name="helpwindow" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>false</bool></param>
@@ -418,18 +528,288 @@
                 <theme name="title" ref="title"/>
             </theme>
             <theme name="battledialog" ref="-defaults">
-                <theme name="battlecanvas" ref="-defaults"/>
                 <theme name="battlecontrolframe" ref="-defaults">
-                    <theme name="battlebutton" ref="button">
-                        <param name="background"><image>battlebutton_background</image></param>
+                    <param name="background"><image>interfacebackground</image></param>
+                    <theme name="attackPane" ref="-defaults">
+                        <theme name="battlebutton" ref="button">
+                            <param name="background"><image>battlebutton_background</image></param>
+                            <param name="font"><font>pokefont</font></param>
+                            <theme name="image" ref="image"/>
+                            <theme name="label" ref="label"/>
+                        </theme>
+                        <theme name="pplabel" ref="label">
+                            <param name="font"><font>normal_white</font></param>
+                        </theme>
+                        <theme name="movetypelabel" ref="label">
+                            <param name="font"><font>normal_white</font></param>
+                        </theme>
+                        <theme name="battlebutton_small" ref="button">
+                            <param name="background"><image>battlebutton_small_background</image></param>
+                            <param name="font"><font>pokefont</font></param>
+                        </theme>
+                    </theme>
+                </theme>
+                <theme name="battlecanvas" ref="-defaults">
+                    <param name="background"><image>battleground</image></param>
+                    <theme name="label_enemyname" ref="label">
                         <param name="font"><font>pokefont</font></param>
                     </theme>
-                    <theme name="battlebutton_small" ref="button">
-                        <param name="background"><image>battlebutton_small_background</image></param>
+                    <theme name="label_enemy_level" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="label_playerlevel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="label_playername" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="progressbar" ref="progressbar"/>
+                    <theme name="expbar" ref="progressbar">
+                        <param name="progressImage"><image>expbar</image></param>
+                    </theme>
+                    <theme name="image" ref="image"/>
+                </theme>
+            </theme>
+            <theme name="chatdialog" ref="resizableframe_borderless">
+                <theme name="combobox" ref="combobox"/>
+                <theme name="editfield" ref="editfield"/>
+                <theme name="scrollpane" ref="scrollpane">
+                    <theme name="textarea" ref="textarea"/>
+                    <param name="autoScrollArea"><int>498</int></param>
+                </theme>
+            </theme>
+            <theme name="requestdialog" ref="resizableframe_titled">
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="label" ref="label"/>
+                <theme name="widget" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                    <theme name="requestlabel" ref="label">
                         <param name="font"><font>pokefont</font></param>
                     </theme>
                 </theme>
             </theme>
+            <theme name="townmap" ref="resizableframe_titled">
+                <theme name="widget" ref="-defaults"/>
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <theme name="title" ref="title"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label"/>
+            </theme>
+            <theme name="friendslistdialog" ref="resizableframe_titled">
+                <theme name="label" ref="label"/>
+                <theme name="upbutton" ref="upbutton"/>
+                <theme name="downbutton" ref="downbutton"/>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+            
+            </theme>
+            <theme name="partyinfodialog" ref="-defaults">
+                <theme name="partyslot" ref="-defaults">
+                    <param name="background"><image>party_active</image></param>
+                    <theme name="image" ref="image"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="progressbar" ref="progressbar"/>
+                    <theme name="arrow_up" ref="upbutton"/>
+                    <theme name="arrow_down" ref="downbutton"/>
+                </theme>
+            </theme>
+            <theme name="pokemoninfodialog" ref="resizableframe_titled">
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+                <param name="hasCloseButton"><bool>true</bool></param>
+                <theme name="title" ref="title"/>
+            </theme>
+            <theme name="playerinfodialog" ref="resizableframe">
+                <theme name="label" ref="label">
+                    <param name="font"><font>normal_white</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+            </theme>
+            <theme name="bigbagdialog" ref="resizableframe_titled">
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="button" ref="button"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <theme name="itempopup" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                    <theme name="label" ref="label"/>
+                    <param name="background"><image>resizableframe</image></param>
+                </theme>
+            </theme>
+            <theme name="battlecontrolframe" ref="-defaults">
+                <theme name="battlebutton" ref="button">
+                    <param name="background"><image>battlebutton_background</image></param>
+                    <param name="font"><font>pokefont</font></param>
+                    <theme name="label" ref="label"/>
+                </theme>
+            
+                <theme name="battlebutton_small" ref="button">
+                    <param name="background"><image>battlebutton_small_background</image></param>
+                    <param name="font"><font>pokefont</font></param>
+                    <theme name="label" ref="label"/>
+                </theme>
+                <param name="background"><image>interfacebackground</image></param>
+                <theme name="attackPane" ref="-defaults">
+                    <param name="background"><image>interfacebackground</image></param>
+                    <theme name="battlebutton_small" ref="button">
+                        <param name="background"><image>battlebutton_small_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="battlebutton" ref="button">
+                        <param name="background"><image>battlebutton_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="label" ref="label"/>
+                    <theme name="pplabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="movetypelabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                </theme>
+            </theme>
+            <theme name="battlebag" ref="resizableframe_titled">
+                <theme name="imagebutton" ref="imagebutton"/>
+                <theme name="button" ref="button"/>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label"/>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <theme name="itempopup" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                    <theme name="label" ref="label"/>
+                    <param name="background"><image>resizableframe</image></param>
+                </theme>
+            </theme>
+            <theme name="shopdialog" ref="resizableframe_titled">
+                <theme name="mainscreen" ref="-defaults">
+                    <theme name="button" ref="button"/>
+                </theme>
+                <theme name="buydialog" ref="-defaults">
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="label" ref="label"/>
+                    <theme name="button" ref="button"/>
+                    <theme name="image" ref="image"/>
+                </theme>
+                <theme name="selldialog" ref="-defaults">
+                    <theme name="listbox" ref="listbox"/>
+                    <theme name="button" ref="button"/>
+                </theme>
+                <theme name="buycategorydialog" ref="-defaults">
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="label" ref="label"/>
+                    <theme name="button" ref="button"/>
+                </theme>
+            </theme>
+            <theme name="battlespeechframe" ref="speechframe">
+            </theme>
+            <theme name="npcspeechframe" ref="speechframe">
+            </theme>
+            <theme name="chooserDialog" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                    <theme name="image" ref="image"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="listbox" ref="listbox"/>
+                    <theme name="textarea" ref="textarea">
+                        <param name="fonts">
+                            <map>
+                                <param name="default"><font>normal_white</font></param>
+                            </map>
+                        </param>
+                        <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
+                    </theme>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+                <theme name="button" ref="button">
+                    <param name="font"><font>normal</font></param>
+                </theme>
+                <theme name="image" ref="image"/>
+                <theme name="label" ref="label">
+                    <param name="font"><font>pokefont</font></param>
+                </theme>
+                <theme name="listbox" ref="listbox"/>
+                <theme name="partydialog" ref="resizableframe">
+                    <theme name="button" ref="button"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                </theme>
+            
+            </theme>
+            <theme name="pokemonstoragebox" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                    <theme name="image" ref="image"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="listbox" ref="listbox"/>
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="combobox" ref="combobox"/>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+            </theme>
+            <theme name="teambox" ref="resizableframe_titled">
+                <theme name="content" ref="-defaults">
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                    <theme name="image" ref="image"/>
+                    <theme name="label" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="listbox" ref="listbox"/>
+                    <theme name="imagebutton" ref="imagebutton"/>
+                    <theme name="combobox" ref="combobox"/>
+                    <theme name="widget" ref="-defaults">
+                        <theme name="button" ref="button">
+                            <param name="font"><font>normal</font></param>
+                        </theme>
+                        <theme name="image" ref="image"/>
+                        <theme name="label" ref="label">
+                            <param name="font"><font>pokefont</font></param>
+                        </theme>
+                        <theme name="imagebutton" ref="imagebutton"/>
+                        <theme name="progressbar" ref="progressbar"/>
+                    </theme>
+                </theme>
+                <theme name="title" ref="title"/>
+                <param name="hasResizeHandle"><bool>false</bool></param>
+                <param name="hasCloseButton"><bool>false</bool></param>
+            </theme>
+        
+        
+        
         </theme>
         <theme name="confirmationdialog" ref="popup_titled">
             <theme name="content" ref="-defaults">
@@ -450,26 +830,50 @@
             <param name="hasCloseButton"><bool>false</bool></param>
             <param name="hasResizeHandle"><bool>false</bool></param>
         </theme>
-    </theme>
-    <theme name="confirmationPopup" ref="-defaults">
-        <theme name="confirmationdialog" ref="popup_untitled">
+        <theme name="loadingscreen" ref="-defaults">
+            <param name="background"><image>loadingscreen</image></param>
+        </theme>
+        <theme name="movelearndialog" ref="resizableframe">
             <theme name="content" ref="-defaults">
-                <theme name="label" ref="label"/>
+                <theme name="attackpane" ref="-defaults">
+                    <param name="background"><image>interfacebackground</image></param>
+                    <theme name="battlebutton_small" ref="button">
+                        <param name="background"><image>battlebutton_small_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="battlebutton" ref="button">
+                        <param name="background"><image>battlebutton_background</image></param>
+                        <param name="font"><font>pokefont</font></param>
+                        <theme name="label" ref="label"/>
+                        <theme name="image" ref="image"/>
+                    </theme>
+                    <theme name="label" ref="label"/>
+                    <theme name="pplabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <theme name="movetypelabel" ref="label">
+                        <param name="font"><font>pokefont</font></param>
+                    </theme>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                    <theme name="title" ref="title"/>
+                    <theme name="button" ref="button">
+                        <param name="font"><font>normal</font></param>
+                    </theme>
+                </theme>
+                <theme name="pokemonpane" ref="-defaults">
+                    <theme name="image" ref="image"/>
+                    <theme name="title" ref="title"/>
+                    <param name="hasResizeHandle"><bool>false</bool></param>
+                    <param name="hasCloseButton"><bool>false</bool></param>
+                    <param name="background"><image>battlebutton_pressed</image></param>
+                </theme>
             </theme>
-            <theme name="title" ref="title"/>
             <param name="hasCloseButton"><bool>false</bool></param>
             <param name="hasResizeHandle"><bool>false</bool></param>
-            <theme name="textarea" ref="textarea">
-                <param name="fonts">
-                    <map>
-                        <param name="default"><font>normal_black</font></param>
-                    </map>
-                </param>
-                <param name="textAlignment"><enum type="alignment">CENTER</enum></param>
-            </theme>
-            <theme name="button" ref="button">
-                <param name="font"><font>normal</font></param>
-            </theme>
+            <theme name="title" ref="title"/>
         </theme>
     </theme>
 </themes>

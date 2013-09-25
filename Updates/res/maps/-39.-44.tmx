@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="16" tileheight="16"> 
-<properties> <property name="dayPokemonChances" value=""/> <property name="dayPokemonLevels" value=""/> <property name="fishPokemonChances" value=""/> <property name="fishPokemonLevels" value=""/> <property name="nightPokemonChances" value=""/> <property name="nightPokemonLevels" value=""/> <property name="waterPokemonChances" value=""/> <property name="waterPokemonLevels" value=""/> <property name="wildProbability" value="0"/> <property name="xOffsetModifier" value="0"/> <property name="yOffsetModifier" value="0"/>
-</properties> 
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="dayPokemonChances" value=""/>
+  <property name="dayPokemonLevels" value=""/>
+  <property name="fishPokemonChances" value=""/>
+  <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
+  <property name="nightPokemonChances" value=""/>
+  <property name="nightPokemonLevels" value=""/>
+  <property name="waterPokemonChances" value=""/>
+  <property name="waterPokemonLevels" value=""/>
+  <property name="wildProbability" value="0"/>
+  <property name="xOffsetModifier" value="0"/>
+  <property name="yOffsetModifier" value="0"/>
+ </properties>
  <tileset firstgid="1" source="Sinnoh Interiors.tsx"/>
- <tileset firstgid="33946" source="InteriorObjects1.tsx"/>
- <tileset firstgid="34046" source="InteriorFloor 1.tsx"/>
- <tileset firstgid="34376" source="SinnohInteriorSet4.tsx"/>
+ <tileset firstgid="17826" source="InteriorObjects1.tsx"/>
+ <tileset firstgid="17926" source="InteriorFloor 1.tsx"/>
+ <tileset firstgid="18256" source="SinnohInteriorSet4.tsx"/>
  <layer name="Walkable" width="20" height="20">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3MSxLBYBRE4c5jQhBWJAh2I94rEpGwmyDBZpwt3KHyd9U36zqS2z+u9qQ7HniiQYsX3vh4tt7KlzKsscEWO+xxwNG39TqB1EWEHvoYIMYQo8DWO/HPcUaBC0pUuOJm7I1DKcEEU8yQYo4FlqGt5+b2i/sCbdZA+EAGAAA=

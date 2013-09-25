@@ -1,7 +1,7 @@
 [npc]
 Bird Keeper Carter
 right
-42
+269
 7
 6
 Pidgey,28,Doduo,28,Pidgeotto,28
@@ -15,7 +15,7 @@ false
 [npc]
 Bird Keeper Mitch
 right
-42
+269
 8
 9
 Pidgey,26,Spearow,26,Pidgey,26,Fearow,26
@@ -29,7 +29,7 @@ false
 [npc]
 Bird Keeper Beck
 right
-42
+269
 10
 14
 Pidgeotto,29,Fearow,29
@@ -43,7 +43,7 @@ false
 [npc]
 Bird Keeper Marlon
 left
-42
+269
 16
 16
 Spearow,28,Doduo,28,Fearow,28
@@ -57,7 +57,7 @@ false
 [npc]
 Bird Keeper Donald
 left
-42
+269
 18
 36
 Farfetch'd,33
@@ -71,7 +71,7 @@ false
 [npc]
 Bird Keeper Benny
 left
-42
+269
 19
 44
 Spearow,29,Fearow,29
@@ -85,7 +85,7 @@ false
 [npc]
 Biker Gerald
 right
-95
+315
 7
 37
 Koffing,29,Muk,29
@@ -99,7 +99,7 @@ false
 [npc]
 Biker Malik
 right
-95
+339
 7
 34
 Koffing,29,Grimer,29
@@ -113,7 +113,7 @@ false
 [npc]
 Biker Isaac
 right
-95
+315
 7
 31
 Grimer,28,Grimer,28,Koffing,28
@@ -127,7 +127,7 @@ false
 [npc]
 Biker Lukas
 right
-95
+339
 7
 28
 Koffing,26,Koffing,26,Grimer,26,Koffing,26
@@ -141,7 +141,7 @@ false
 [npc]
 Twin Kiri
 down
-132
+262
 12
 51
 Charmander,29
@@ -155,7 +155,7 @@ false
 [npc]
 Twin Jan
 down
-132
+262
 13
 51
 Squirtle,29

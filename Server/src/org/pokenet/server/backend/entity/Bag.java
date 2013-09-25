@@ -1,6 +1,7 @@
 package org.pokenet.server.backend.entity;
 
 import java.util.ArrayList;
+import org.pokenet.server.GameServer;
 
 /**
  * Represents a player's bag
@@ -112,23 +113,32 @@ public class Bag
 	}
 
 	/**
-	 * Removes an item. Returns true on success.
+	 * Removes an item.
 	 * 
 	 * @param itemNumber
 	 * @param quantity
-	 * @return
+	 * @return Returns true if the item is succesfully removed, otherwise false.
 	 */
 	public boolean removeItem(int itemNumber, int quantity)
 	{
 		for(int i = 0; i < m_items.size(); i++)
-			if(m_items.get(i).getItemNumber() == itemNumber)
+		{
+			BagItem item = m_items.get(i);
+			if(item.getItemNumber() == itemNumber)
 			{
-				if(m_items.get(i).getQuantity() - quantity > 0)
-					m_items.get(i).decreaseQuantity(quantity);
+				if(item.getQuantity() - quantity > 0)
+				{
+					item.decreaseQuantity(quantity);
+					GameServer.getServiceManager().getNetworkService().getSaveManager().updateBagItem(m_memberId, item.getItemNumber(), item.getQuantity());
+				}
 				else
-					m_items.remove(i);
+				{
+					m_items.remove(item);
+					GameServer.getServiceManager().getNetworkService().getSaveManager().removeBagItem(m_memberId, item.getItemNumber());
+				}
 				return true;
 			}
+		}
 		return false;
 	}
 }

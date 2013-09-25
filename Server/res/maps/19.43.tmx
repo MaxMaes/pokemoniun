@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="false"/>
   <property name="nightPokemonChances" value="Cacnea,20;Baltoy,20;Claydol,10;Cacturne,20;Sandshrew,20;Sandslash,10;"/>
   <property name="nightPokemonLevels" value="35-35;35-35;65-65;65-65;35-35;65-65;"/>
   <property name="pvp" value="yes"/>

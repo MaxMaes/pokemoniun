@@ -13,7 +13,7 @@ public class ItemID
 	public static final int BURN_HEAL = 19;
 	public static final int ICE_HEAL = 20;
 	public static final int FULL_HEAL = 21;
-	public static final int LAVA_COOKIES = 22;
+	public static final int LAVA_COOKIE = 22;
 	public static final int OLD_GATEAU = 23;
 	public static final int POKE_BALL = 35;
 	public static final int GREAT_BALL = 36;
@@ -317,10 +317,10 @@ public class ItemID
 	public static final int FLAME_MAIL = 553;
 	public static final int GRASS_MAIL = 554;
 	public static final int HEARTH_MAIL = 555;
-	public static final int SNOM_MAIL = 556;
-	public static final int SAPCE_MAIL = 557;
+	public static final int SNOW_MAIL = 556;
+	public static final int SINNOH_TICKET = 557;
 	public static final int STEEL_MAIL = 558;
-	public static final int TUNNEL_MAIL = 559;
+	public static final int HOENN_TICKET = 559;
 	public static final int TM01 = 576;
 	public static final int TM02 = 577;
 	public static final int TM03 = 578;

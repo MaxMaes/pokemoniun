@@ -59,7 +59,7 @@ Lt. Surge
 down
 298
 23
-24
+16
 Electrode,26,Raichu,26,Electabuzz,26,Jolteon,26,Ampharos,26,Electrode,26
 6
 2

@@ -4,54 +4,49 @@
   <property name="WildProbability" value="10"/>
   <property name="fishPokemonChances" value="Magikarp,60;Goldeen,20;Corphish,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30"/>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="yes"/>
   <property name="waterPokemonChances" value="Goldeen,100;"/>
   <property name="waterPokemonLevels" value="5-35;"/>
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="-32"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal3.tsx"/>
- <tileset firstgid="2049" source="normal2.tsx"/>
- <tileset firstgid="3073" source="normal5.tsx"/>
- <tileset firstgid="4097" source="normal18.tsx"/>
- <tileset firstgid="5121" source="normal6.tsx"/>
- <tileset firstgid="6145" source="Hoenn Set 5.tsx"/>
- <tileset firstgid="6810" source="Path0.tsx"/>
- <tileset firstgid="7106" source="Trees0.tsx"/>
- <tileset firstgid="7416" source="Cliffs01.tsx"/>
- <tileset firstgid="7646" source="Buildings7.tsx"/>
- <tileset firstgid="7998" source="Buildings8.tsx"/>
- <tileset firstgid="8590" source="Buildings11.tsx"/>
- <tileset firstgid="20014" source="Hoenn Gyms.tsx"/>
+ <tileset firstgid="1" source="Hoenn Set 5.tsx"/>
+ <tileset firstgid="666" source="Path0.tsx"/>
+ <tileset firstgid="962" source="Trees0.tsx"/>
+ <tileset firstgid="1272" source="Cliffs01.tsx"/>
+ <tileset firstgid="1502" source="Buildings7.tsx"/>
+ <tileset firstgid="1854" source="Buildings8.tsx"/>
+ <tileset firstgid="2446" source="Buildings11.tsx"/>
+ <tileset firstgid="13870" source="Hoenn Gyms.tsx"/>
  <layer name="Walkable" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WSwqAIBBAhe7QwjN2I91Wq36LfrfLWQgi+UmaqcjgQTThy/mQgjMmMr9BGvcFo/UCtaIl3i/QKYYH8v1WL9ShQahFyAvxHiEnVF6dN82omKxndvwO76xYLrJFeu+eydieD71nXl/zViWN19d7do+6apzi3Xl8H67E9Q2RvfTeGDeW1/cd5tlAOtaTnliqV+/3bH5bRC+s5/qXuOY0k8HmAI/iLvCIDgAA
+   H4sIAAAAAAAAC+2WSQrAIAwAxf//QK9tT90O3X5XcxBEjFpxKRhhLo04mIUqOGOC6AbZ0AsMiqmBd1asDe79Vy/UYSxQi5AX4kuBnNTy6rxpNsVufbPjObyH4vzIHenNPZOxPR/aZy7yus/z9Z7do1iNU7wPj+/Dq3KeQ5C3H69rmXvNtwH2NpKeWKpX39c1v1NBL5yH/UuwOSWI0rzzQ/f6iA4AAA==
   </data>
  </layer>
  <layer name="Water" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGF7ASZqBwRmKXaTpZ5cvEHtDsQ+N7fVCsst71N5hZ28Q0PxgLDiExvaOglGADpDLOHqUqTCAnvdonedG7R21d9Re2tnrh1aO0KoswVVn0zoMRpq9uNooo+2VUUAOAABftNvLiA4AAA==
+   H4sIAAAAAAAAC2NgGF7AiZmBwRmKXZjpZ5cvEHtDsQ+N7fVCsst71N5hZ28Q0PxgLDiExvaOglGADpDLOHqUqTCAnvdonedG7R21d9Re2tnrh1aO0KoswVVn0zoMRpq9uNooo+2VUUAOAAAYl5aWiA4AAA==
   </data>
  </layer>
  <layer name="Collisions" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82XS07DMBRFs4BSCqNEqMoS+HQECJhB+Tb8KlgDvxEINoGAEQg2AW2BncAMUmDEJjhVHQlK7Dg4jnjS0VVrO/fdxrXkcMhx2hDmrE/w/E1V1TvXZG1vH6pKypBmbZqeTcokb6fuao7TgCa04B4e4LGmXmea94Xnv0IIbXiDd/hI8DXNWwgcpw+KQfdzCR2AwcBu3nGePwGTwmcKnYaZBN+0eT/Lyb3olCyvSS378rFZxuagCvP+77y2akX0FKCrfvZ+BY/9BkXoh5LX/b4ufLfQbT/7c2IYnxEYhTGoePHzdN5vmt7W8FmHDdiEusRX5/2meReH+BwJr2P0JIO8VZe9CAuwCEvuz3md/9olPlfC6xq9kfjqZIrGdvDZhT3YhwM3fn6a0sl7KnzO0HO4yMBXJ++t8GmgTWhZzptlyc7nLEq1/2ycz1Gp9p/NvKr9Z5pXNV+1/0zz/vX3sZlXZ91/zCu7D1TKyXcGXY3rX3UfsHU/ykvzvgdG+gXcpPyPiA4AAA==
+   H4sIAAAAAAAAC82X3S4DQRiGZyPNnlSVG/HTgy6CM1pK/DZcg78jwk0Ijgg3QVvcCWdsceQmPE2niazO7KzZ2fiSJ99O5+f93u50mgkHhGhDmHF+hpcfWRfRsTZzo3XoIs5DkrlJarYJG7+duC8L0YAmtOABHuGprJ9n6/eV9d8ghDa8wwd8xuja+s0HQgxCIei2i+RhGAnc+p1k/SmYljoz5FmYi9FN6vcrF1+LSaj82sSyr+6bp28BKlD1f/t1FSuyplXymp++Xt5jv0EBhqDodT+vS91t8o6f/jkxis4YjMMElLz+40zeb5La1tHZgE3YgrpC1+T9JnkXR+gcS60T8mkKfis8V2ERlqAWGdf5rV2hcy21bsi3Ct2ovq5vl+c92IcDONQvaRQmfs9k+xwu4DIFXRO/d7LdgCa0UtB1/b8b1XFxXun2n4vzuRe6/efSr27/2frVjdftP1u/f/1+XPo1mfcf/aruA6Vc/J3BNPerX3cfcHU/yipnfQ/s5W+ANw2jiA4AAA==
   </data>
  </layer>
  <layer name="Collisions" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSQrCQBREe+u4DngFx5M4nkQcTiIOV1FXuo1Lz+MLJBibpBM69hc1BY+CpEn96hCa+C2lbuCHHqjiKVWFGtShAU3vuSbNTdLXXuAa80BtMjrQhR70YeCZn5slPSdp5iEZIxjDBKYwK5ibp+88zFjgS1jBWqDvJszY4jvYw0Ggb1xH8k5wFujrQml9paT3lZJ0XiTp/Y30r31N+S5nM+23y3dR9pXRr39PaeeRa33qPPrWvrb7U7Sv7f6UfV/n1+eK378nXLd1ff6sf5+sf6S8/q75bftK+wOmuVb5iA4AAA==
+   H4sIAAAAAAAAC+2XWQrCMBRFC345rsRxJY4rEYeViMNW1C/9rZ+ux1NoMYY2CYmJqL1weNA+et99pYTGlSi6QZzWRFWoQR0a0IRW9OwpqirJvRe4CjVRGzrQhR70YaB+rFayT97MQxjBGCYwhZmjr0needq7gCWsYO3oa5J3k/ZuYQd7ODj6muQVdYQTnB19TfL6UFHeUJLzhlJov0yh95vpX/Oq/H3Optq3z3dR5g2jX/+eis4j3/rUefSteW3345rXdj9l3tf55bnE+/ec67ZVnl/376P7RzKt75rfNm/o+gBFMs8siA4AAA==
   </data>
  </layer>
  <layer name="Walkable" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAUjEUyTGDi7dw2g3YMR2AQMtAuIA2ekB8beawNkL7UBtyR++XB52tirR8BeWoFAGtl7nkB6KKGRvTdJSIez6Bzmu4H27QHivUC8D4j3D1CcUwtsGq0jRsEAgsGU/qhZ7x4mwSxK611atBeIKYNJKadHweAAAJZ2shKIDgAA
+   H4sIAAAAAAAAC2NgGAUjEUwbQLt3DaDdgxHYWAy0C4gDZ5gHxt5rA2QvtQE3I375cHba2KtHwF5agUAa2XueQHoooZG9N0lIh7PoHOa7gfbtAeK9QLwPiPcPUJxTC2waaAeMghENBlP6o2a9e5gEsyitd2nRXiCmDCalnB4FgwMAAExKEgmIDgAA
   </data>
  </layer>
  <layer name="WalkBehind" width="30" height="31">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VO24CMRCGLV4tLWiFqMLjEiEpUi93oeAESXgUORQpE+iQUqeCwB34V8KSMTO21w8kpHzSL680Xu/8jGcQ4pJNJrzh3v1yOPMn4Lvcu1uHM0P8cpTxO2nR8ddciDfoHZpBc2gBLXP+zHvwG5PYfptjt30+fn877nlwmPyG1PWly8ceERtBT9AzsS9FXW/BDn23h/6gA3RU+jA/+1TrvMLzJ+PVFPNBrfM3ntfZdX2L3LiYL9S91uur5lbEqvjdalAdajCzzAZ1rym/kgd8pwf1oQE01L6r9tq0XS4Xk9+UmPymmNkSW30/PGsqkb2h90gMT5UWff/U3pCrJMa84u5fqvlsw/R/5OrXZ4aF+nWZYdT9C/Wr33FXYvgts98FNX+91+Sq+6X2cCuHzJ/qNaqm3B5u5aA8UfHY2PKyxf8xcwKzl0RdiA4AAA==
+   H4sIAAAAAAAAC+2VOQ4CMQxFw15yCrYTQMVSUHMYCk7AXnAoKFk6JGoqtjvwRyJSCHYmk2SQkHjSVwY5k/GX7SDEO4eccIZ7d2tx5snju9y7R4szffxyJPE7ZOLjphATaArNoDm0gJZN/sxf8BuS0H7LLbt9Ln7PBfs8OEx+feraL/GxNmIdqAv1iH1p1PUbXKArdIPu0EOJDV4+1Tqv8bxhvJpiLqh13uF5n/usb5QbF3OF6mu9vmpuUSz6mYei9i46fpfqa8qvpAJVoRpUhxrau+qsjTLJcjH5TROT3zTubElcfVee58vZ0GckhKesoPtPnQ25SkLcV1z/pXU/x2H6P7L163KH+fq1ucOo/vP1q/e4LSH8Jtlvg5q/Pmty1f1Se7iVQ+ZPzRpVU24Pt3JQnqh4aOLyiov/MfMEfv7mDIgOAAA=
   </data>
  </layer>
 </map>

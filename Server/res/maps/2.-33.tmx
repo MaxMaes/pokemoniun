@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="17-20;18-20;17-19;18-20;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Geodude,29;Bronzor,40;Zubat,15;Onix,15;Gible,1;"/>
   <property name="nightPokemonLevels" value="17-20;18-20;17-19;18-20;15-17"/>
   <property name="pvp" value="disabled"/>
@@ -31,7 +32,7 @@
    H4sIAAAAAAAAC+3VwQ2AIBBE0U1UGtFq7FMtRGMjUoibeDZGAV3wvzuEIcsgAgB5WxsbewBIhzeKK/3XBwAMu9uhdC5yw8wCOPOkHwZdMxXQK6XkQDpjpPn42z88a97FQObQe990vTeQI1TlRGoXf9+357rVDF2CHLDPSqeEolNsoVMAADjsCFK5LhAnAAA=
   </data>
  </layer>
- <layer name="LedgesDown" width="50" height="50" visible="0">
+ <layer name="LedgesDown" width="50" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3PQQ0AIAwEwXvVJFLqFDV8UQBpMpOsgE0AAAAAYL5VyX5c1+9rAAAAAOB2AOgEu6kQJwAA
   </data>

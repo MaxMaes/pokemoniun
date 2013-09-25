@@ -5,6 +5,7 @@
   <property name="dayPokemonLevels" value="25-30;20-25;40-45;50-60;35-40;40-40;30-35;30-35;"/>
   <property name="fishPokemonChances" value=""/>
   <property name="fishPokemonLevels" value=""/>
+  <property name="isCave" value="true"/>
   <property name="nightPokemonChances" value="Onix,20;Geodude,20;Graveler,20;Golem,10;Grimer,10;Muk,5;Rhyhorn,5;Magnemite,10;"/>
   <property name="nightPokemonLevels" value="25-30;20-25;40-45;50-60;35-40;40-40;30-35;30-35;"/>
   <property name="pvp" value="yes"/>

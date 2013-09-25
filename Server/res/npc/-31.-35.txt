@@ -163,11 +163,8 @@ false
 -35
 0
 [/warp]
-
-
-
 [npc]
-NULL
+Beauty Samantha
 left
 326
 15
@@ -181,8 +178,8 @@ false
 false
 [/npc]
 [npc]
-NULL
-left
+Beauty Samantha
+right
 349
 21
 35
@@ -195,7 +192,7 @@ false
 false
 [/npc]
 [npc]
-NULL
+Beauty Samantha
 down
 347
 34
@@ -209,7 +206,7 @@ false
 false
 [/npc]
 [npc]
-NULL
+Beauty Samantha
 right
 382
 36
@@ -223,7 +220,7 @@ false
 false
 [/npc]
 [npc]
-NULL
+Beauty Samantha
 down
 286
 23

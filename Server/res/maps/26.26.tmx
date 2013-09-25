@@ -3,6 +3,7 @@
  <properties>
   <property name="fishPokemonChances" value="Magikarp,60;Tentacool,20;Wailmer,20;"/>
   <property name="fishPokemonLevels" value="10-30;10-30;10-30;"/>
+  <property name="isCave" value="false"/>
   <property name="pvp" value="yes"/>
   <property name="surfProbability" value="10"/>
   <property name="waterPokemonChances" value="Wingull,50;Tentacool,45;Pelipper,5;"/>
@@ -11,23 +12,21 @@
   <property name="xOffsetModifier" value="32"/>
   <property name="yOffsetModifier" value="-544"/>
  </properties>
- <tileset firstgid="1" source="normal1.tsx"/>
- <tileset firstgid="1025" source="normal18.tsx"/>
- <tileset firstgid="2049" source="Water02.tsx"/>
- <tileset firstgid="2241" source="Cliffs02.tsx"/>
+ <tileset firstgid="1" source="Water02.tsx"/>
+ <tileset firstgid="193" source="Cliffs02.tsx"/>
  <layer name="Walkable" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAtqCfg5UTK4Z+MwFgU1kmo/LbGLEyDUbGx4FIxcAAD0ReyOMBwAA
+   H4sIAAAAAAAAC2NgGAWjYBSMAtqCfjRMrhn4zN0ExeSYj8vsTWiYmmZjw6Ng5AIApkbGI4wHAAA=
   </data>
  </layer>
  <layer name="Water" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+vnYGDoH8XDBj9hGXg3jOJRjI7RAblmEDKXXPOHqtmjePhgAFQ0a/+MBwAA
+   H4sIAAAAAAAAC+tnYGDoH8XDBjMMAjeM4lGMjtEBuWYQMpdc84eq2aN4+GAAFJdjT4wHAAA=
   </data>
  </layer>
  <layer name="Walkable" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMAtqClRwMDKugeDUHeWZg0wcydy4Qb4LiOWSavxmLno1I5sIwNnWEwG4senYCxXahYWzqRsHIAQDZ1f8AjAcAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMAtqClUC8CopXk2kGNn0gc+cC8SYonkOm+ZuxiG1EMheGsakjBHZjEdsJxLvQMDZ1o2DkAADsxrzQjAcAAA==
   </data>
  </layer>
  <layer name="LedgesDown" width="23" height="21">
@@ -47,7 +46,7 @@
  </layer>
  <layer name="Collisions" width="23" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGN6Am5OBgYeTNvqFgeIiRJqNbA6MjU0/Lvuw6cdmDjIb3SyYHC5xZDa620g1C5t7cQFc4UiMOClxMApGwUACcsoiYvMRrvyIj48tH+GzD10NLj6yXkL24fIHNj66PYTKKFIAoXKEHuUMAH9VIOqMBwAA
+   H4sIAAAAAAAAC2NgGN6Am5GBgYeRNvqFgeIiRJqNbA6MjU0/Lvuw6cdmDjIb3SyYHC5xZDa620g1C5t7cQFc4UiMOClxMApGwUACcsoiYvMRrvyIj48tH+GzD10NLj6yXkL24fIHNj66PYTKKFIAoXKEHuUMAC5V7lWMBwAA
   </data>
  </layer>
  <layer name="WalkBehind" width="23" height="21">

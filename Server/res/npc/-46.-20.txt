@@ -1,7 +1,7 @@
 [npc]
 Citizen
 left
-141
+274
 8
 4
 NULL
@@ -15,7 +15,7 @@ false
 [npc]
 Daughter
 down
-132
+262
 3
 5
 NULL

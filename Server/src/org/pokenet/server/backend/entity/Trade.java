@@ -61,11 +61,12 @@ public class Trade implements Runnable
 			/* Send the pokemon data of player 2 to player 1 */
 			Pokemon[] player2Party = player2.getParty();
 			for(int i = 0; i < player2Party.length; i++)
+			{
 				if(player2Party[i] != null)
 				{
 					ServerMessage addPoke = new ServerMessage(ClientPacket.TRADE_ADD_POKE);
 					addPoke.addInt(i);
-					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player2Party[i].getSpeciesName()).getSpeciesNumber() + "," + player2Party[i].getName() + ","
+					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player2Party[i].getSpeciesName()).getPokedexNumber() + "," + player2Party[i].getName() + ","
 							+ player2Party[i].getHealth() + "," + player2Party[i].getGender() + "," + (player2Party[i].isShiny() ? 1 : 0) + "," + player2Party[i].getStat(0) + ","
 							+ player2Party[i].getStat(1) + "," + player2Party[i].getStat(2) + "," + player2Party[i].getStat(3) + "," + player2Party[i].getStat(4) + "," + player2Party[i].getStat(5)
 							+ "," + player2Party[i].getTypes()[0] + "," + (player2Party[i].getTypes().length > 1 && player2Party[i].getTypes()[1] != null ? player2Party[i].getTypes()[1] + "," : ",")
@@ -76,6 +77,7 @@ public class Trade implements Runnable
 							+ (player2Party[i].getMoves()[3] != null ? player2Party[i].getMoves()[3].getName() : "") + "," + player2Party[i].getItemName());
 					p.getSession().Send(addPoke);
 				}
+			}
 		}
 		if(player2 instanceof Player)
 		{
@@ -92,7 +94,7 @@ public class Trade implements Runnable
 				{
 					ServerMessage addPoke = new ServerMessage(ClientPacket.TRADE_ADD_POKE);
 					addPoke.addInt(i);
-					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getPokemonNumber() + "," + player1Party[i].getName() + ","
+					addPoke.addString(PokemonSpecies.getDefaultData().getPokemonByName(player1Party[i].getSpeciesName()).getPokedexNumber() + "," + player1Party[i].getName() + ","
 							+ player1Party[i].getHealth() + "," + player1Party[i].getGender() + "," + (player1Party[i].isShiny() ? 1 : 0) + "," + player1Party[i].getStat(0) + ","
 							+ player1Party[i].getStat(1) + "," + player1Party[i].getStat(2) + "," + player1Party[i].getStat(3) + "," + player1Party[i].getStat(4) + "," + player1Party[i].getStat(5)
 							+ "," + player1Party[i].getTypes()[0] + "," + (player1Party[i].getTypes().length > 1 && player1Party[i].getTypes()[1] != null ? player1Party[i].getTypes()[1] + "," : ",")

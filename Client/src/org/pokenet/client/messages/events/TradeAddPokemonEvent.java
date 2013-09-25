@@ -12,10 +12,15 @@ public class TradeAddPokemonEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		// CHECK THIS ONE
-		// String[] offerData = Request.readString().split(",");
-		int index = Request.readInt();
-		String[] data = Request.readString().split(",");
-		GameClient.getInstance().getHUD().getTradeDialog().addPoke(index, data);
+		final int index = Request.readInt();
+		final String[] data = Request.readString().split(",");
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				GameClient.getInstance().getHUD().getTradeDialog().addPoke(index, data);
+			}
+		});
 	}
 }

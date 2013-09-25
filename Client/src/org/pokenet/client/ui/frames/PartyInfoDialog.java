@@ -31,8 +31,6 @@ public class PartyInfoDialog extends Widget
 	private Button[] m_switchDown;
 	private Button[] m_switchUp;
 
-	private int pokemonCount = 0;
-
 	/**
 	 * Default constructor
 	 * 
@@ -51,15 +49,7 @@ public class PartyInfoDialog extends Widget
 	/** Initializes interface */
 	public void initGUI()
 	{
-		pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
-		{
-			if(m_pokes[i] != null)
-			{
-				pokemonCount++;
-			}
-		}
-		for(int i = 0; i < pokemonCount; i++)
 		{
 			final int j = i;
 			m_container[i] = new Widget();
@@ -94,7 +84,7 @@ public class PartyInfoDialog extends Widget
 				m_container[i].add(m_level[i]);
 				m_container[i].add(m_hp[i]);
 
-				if(i != 0)
+				if(i != 0 && m_pokes[i] != null)
 				{
 					m_switchUp[i] = new Button();
 					m_switchUp[i].setTheme("arrow_up");
@@ -116,7 +106,7 @@ public class PartyInfoDialog extends Widget
 					});
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != pokemonCount - 1)
+				if(i != 5 && m_pokes[i] != null)
 				{
 					m_switchDown[i] = new Button();
 					m_switchDown[i].setTheme("arrow_down");
@@ -154,10 +144,10 @@ public class PartyInfoDialog extends Widget
 	 */
 	public void loadImages(OurPokemon[] pokes)
 	{
-		for(int i = 0; i < pokes.length; i++)
+		for(int i = 0; i < 6; i++)
 		{
 			m_pokeName[i] = new Label();
-
+			m_pokeIcon[i] = new Image();
 			m_level[i] = new Label();
 			m_hp[i] = new ProgressBar(0, 0);
 			m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
@@ -172,7 +162,7 @@ public class PartyInfoDialog extends Widget
 				{
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_pokeName[i].setText(pokes[i].getName());
-					m_pokeIcon[i] = new Image(pokes[i].getIcon());
+					m_pokeIcon[i].setImage(pokes[i].getIcon());
 					m_hp[i].setMaximum(pokes[i].getMaxHP());
 					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
 					m_hp[i].setValue(pokes[i].getCurHP());
@@ -284,11 +274,10 @@ public class PartyInfoDialog extends Widget
 	public void layout()
 	{
 		super.layout();
-		// setClip(true);
-		setSize(170, 42 * pokemonCount);
+		setSize(170, 42 * 6);
 		int containerHeight = 42;
 		int containerOffset;
-		for(int i = 0; i < pokemonCount; i++)
+		for(int i = 0; i < 6; i++)
 		{
 			containerOffset = containerHeight * i;
 			m_container[i].setPosition(getInnerX(), 5 + getInnerY() + containerOffset);
@@ -299,11 +288,11 @@ public class PartyInfoDialog extends Widget
 			m_pokeIcon[i].setSize(32, 32);
 			m_container[i].setSize(170, 42);
 			m_hpBar[i].setSize(98, 11);
-			if(i != 0)
+			if(i != 0 && m_pokes[i] != null)
 			{
 				m_switchUp[i].setSize(16, 16);
 			}
-			if(i != pokemonCount - 1)
+			if(i != 5 && m_pokes[i] != null)
 			{
 				m_switchDown[i].setSize(16, 16);
 			}
@@ -314,12 +303,15 @@ public class PartyInfoDialog extends Widget
 			m_hp[i].setPosition(m_hpBar[i].getX() + 23, m_hpBar[i].getY() + 3);
 			if(m_switchDown[i] != null)
 				m_switchDown[i].setPosition(24 + getInnerX(), 0 + getInnerY() + containerOffset);
-			if(m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 2)
-				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
-			else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 2 && m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 3)
-				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
-			else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 3)
-				m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
+			if(m_pokes[i] != null)
+			{
+				if(m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 2)
+					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
+				else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 2 && m_pokes[i].getCurHP() > m_pokes[i].getMaxHP() / 3)
+					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_middle"));
+				else if(m_pokes[i].getCurHP() < m_pokes[i].getMaxHP() / 3)
+					m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_low"));
+			}
 		}
 	}
 }

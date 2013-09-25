@@ -791,7 +791,7 @@ public class NpcBattleField extends BattleField
 				enemyData.addInt(p.getGender());
 				enemyData.addInt(p.getHealth());
 				enemyData.addInt(p.getHealth());
-				enemyData.addInt(p.getSpeciesNumber());
+				enemyData.addInt(p.getPokedexNumber());
 				enemyData.addBool(p.isShiny());
 				enemyData.sendResponse();
 			}

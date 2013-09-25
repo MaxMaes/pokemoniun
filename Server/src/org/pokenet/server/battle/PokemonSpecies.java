@@ -332,9 +332,20 @@ public class PokemonSpecies
 		return m_pokedex;
 	}
 
+	/**
+	 * @return The number of the pokemon starting from 0 (bulbasaur) to 492 (arceus)
+	 */
 	public int getPokemonNumber()
 	{
 		return m_number;
+	}
+
+	/**
+	 * @return The number of the pokemon as registered in the pokedex 1 (bulbasaur) to 493 (arceus)
+	 */
+	public int getPokedexNumber()
+	{
+		return m_number + 1;
 	}
 
 	/**
@@ -391,7 +402,7 @@ public class PokemonSpecies
 	}
 
 	/**
-	 * Returns the pokedex number
+	 * Returns the number of the pokemon, not taking into account multiple forms of pokemon (eg deoxys ranges from 385-388)
 	 * 
 	 * @return
 	 */
@@ -634,12 +645,12 @@ public class PokemonSpecies
 	{
 		out.defaultWriteObject();
 	}
-	
+
 	public int getTier()
 	{
 		return tier;
 	}
-	
+
 	public void setTier(int t)
 	{
 		tier = t;

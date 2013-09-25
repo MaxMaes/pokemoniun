@@ -14,12 +14,12 @@ public class ItemCantUseEvent implements MessageEvent
 		String msg = "You can't use this now.";
 		try
 		{
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
-			GameClient.getInstance().getUi().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
+			GameClient.getInstance().getHUD().getNPCSpeech().advance();
 		}
 		catch(Exception e)
 		{
 		}
-		GameClient.getInstance().getUi().talkToNPC(msg);
+		GameClient.getInstance().getHUD().talkToNPC(msg);
 	}
 }

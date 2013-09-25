@@ -1,12 +1,10 @@
 package org.pokenet.client.backend.entity;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.loading.LoadingList;
-import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
+import org.pokenet.client.backend.ItemSpriteDatabase;
+import de.matthiasmann.twl.renderer.Image;
 
 public class PlayerItem
 {
@@ -29,36 +27,6 @@ public class PlayerItem
 		m_number = number;
 		m_quantity = quantity;
 		m_item = getItem(m_number);
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		try
-		{
-			InputStream f;
-			LoadingList.setDeferredLoading(true);
-			if(m_item.getCategory().equalsIgnoreCase("TM"))
-				f = FileLoader.loadFile(respath + "res/items/48/TM.png");
-			else
-				f = FileLoader.loadFile(respath + "res/items/48/" + m_item.getId() + ".png");
-			m_bagImage = new Image(f, respath + "res/items/48/" + m_item.getId() + ".png", false);
-			LoadingList.setDeferredLoading(false);
-
-		}
-		catch(Exception e)
-		{
-			try
-			{
-				InputStream f;
-				LoadingList.setDeferredLoading(true);
-				f = FileLoader.loadFile(respath + "res/items/48/0.png");
-				m_bagImage = new Image(f, respath + "res/items/48/0.png", false);
-				LoadingList.setDeferredLoading(false);
-			}
-			catch(Exception e2)
-			{
-				e2.printStackTrace();
-			}
-		}
 	}
 
 	public static List<Item> generateFieldItems()
@@ -103,6 +71,28 @@ public class PlayerItem
 
 	public Image getBagImage()
 	{
+		try
+		{
+			if(m_item.getCategory().equalsIgnoreCase("TM"))
+			{
+				m_bagImage = ItemSpriteDatabase.getTM48();
+			}
+			else
+			{
+				m_bagImage = ItemSpriteDatabase.getItemsprite48(m_item.getId());
+			}
+		}
+		catch(Exception e)
+		{
+			try
+			{
+				m_bagImage = ItemSpriteDatabase.getItemsprite48(0);
+			}
+			catch(Exception e2)
+			{
+				e2.printStackTrace();
+			}
+		}
 		return m_bagImage;
 	}
 

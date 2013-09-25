@@ -1,56 +1,61 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.TextArea;
-import org.newdawn.slick.Color;
-import org.pokenet.client.GameClient;
+
 import org.pokenet.client.backend.Translator;
+
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.TextArea;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
 /**
  * A window with information about the game
  * 
- * @author shadowkanji
+ * @author Myth1c
  */
-public class ToSDialog extends Frame
+public class ToSDialog extends ResizableFrame
 {
-	private Color m_bg, m_white;
 	private TextArea m_info;
+	private Widget panel;
 
 	/**
 	 * Default constructor
 	 */
 	public ToSDialog()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		m_bg = new Color(0, 0, 0, 70);
-		m_white = new Color(255, 255, 255);
 		List<String> translated = Translator.translate("_LOGIN");
 		setTitle(translated.get(18));
-		this.setLocation(128, 256);
-		setBackground(m_bg);
-		setResizable(false);
-
+		setPosition(128, 256);
+		setResizableAxis(ResizableAxis.NONE);
+		setSize(288, 320);
+		setVisible(false);
+		
+		panel = new Widget();
+		panel.setTheme("content");
 		m_info = new TextArea();
 		m_info.setSize(280, 320);
-		m_info.setLocation(4, 4);
-		m_info.setWrapEnabled(true);
-		m_info.setText(translated.get(33));
-		m_info.setFont(GameClient.getInstance().getFontSmall());
-		m_info.setBackground(m_bg);
-		m_info.setForeground(m_white);
-		this.add(m_info);
-
-		this.setSize(288, 320);
-
-		setVisible(false);
+		m_info.setPosition(0, 25);
+		
+		SimpleTextAreaModel tam = new SimpleTextAreaModel();
+		tam.setText(translated.get(33));
+		m_info.setModel(tam);
+		panel.add(m_info);
+		add(panel);
+		
+		addCloseCallback(new Runnable() {
+			@Override
+			public void run() {
+				setVisible(false);
+			}
+		});
 	}
-
+	
 	public void reloadStrings()
 	{
 		List<String> translated = Translator.translate("_LOGIN");
 		setTitle(translated.get(18));
-		m_info.setText(translated.get(33));
+		SimpleTextAreaModel tam = new SimpleTextAreaModel();
+		tam.setText(translated.get(33));
 	}
 }

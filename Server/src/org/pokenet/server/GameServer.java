@@ -28,7 +28,12 @@ import org.pokenet.server.connections.ActiveConnections;
 import org.pokenet.server.network.MySqlManager;
 
 /**
- * Represents a game server. Starting a server requires a parameter to be passed in, i.e. java GameServer -s low -p 500 Here are the different settings: -low < 1.86ghz < 256MB Ram < 1mbps Up/Down Connection 75 Players -medium < 2ghz 512MB - 1GB Ram 1mbps Up/Down Connection 200 Players -high > 1.86ghz > 1GB Ram > 1mbps Up/Down Connection > 500 Players
+ * Represents a game server.
+ * Starting a server requires a parameter to be passed in, i.e. java GameServer -s low -p 500
+ * Here are the different settings:
+ * -low < 1.86ghz < 256MB Ram < 1mbps Up/Down Connection 75 Players
+ * -medium < 2ghz 512MB - 1GB Ram 1mbps Up/Down Connection 200 Players
+ * -high > 1.86ghz > 1GB Ram > 1mbps Up/Down Connection > 500 Players
  * 
  * @author shadowkanji
  * @author Nushio
@@ -36,7 +41,8 @@ import org.pokenet.server.network.MySqlManager;
 public class GameServer
 {
 	/* The revision of the game server */
-	private static final int SERVER_REVISION = 1910;
+	private static final int SERVER_REVISION = 0;
+	public static final int MOVEMENT_THREADS = 12;
 	private static boolean m_boolGui = false;
 	private static String m_dbServer, m_dbName, m_dbUsername, m_dbPassword, m_serverName;
 	private static GameServer m_instance;
@@ -49,15 +55,20 @@ public class GameServer
 	private JPasswordField m_dbP;
 	private JTextField m_dbS, m_dbN, m_dbU, m_name;
 	private int m_highest;
+
 	public static double RATE_GOLD = 1.0;
 	public static double RATE_EXP_POKE = 1.0;
 	public static double RATE_EXP_TRAINER = 1.0;
-
-	public static final int MOVEMENT_THREADS = 12; // default to high
 	public static final int AUTOSAVE_INTERVAL = 15; // Autosave interval in minutes
 	public static int REVISION = getServerRevision();
 
-	/** Default constructor. */
+	/**
+	 * Default constructor.
+	 * Starts the server after checking if it runs from command line or GUI.
+	 * It automatically loads settings if possible.
+	 * 
+	 * @param autorun True if the server should autostart, otherwise false.
+	 */
 	public GameServer(boolean autorun)
 	{
 		if(autorun)
@@ -89,9 +100,9 @@ public class GameServer
 	 */
 	public void updatePlayerCount()
 	{
+		int amount = ActiveConnections.getActiveConnections();
 		if(m_boolGui)
 		{
-			int amount = ActiveConnections.getActiveConnections();
 			m_pAmount.setText(amount + " players online");
 			if(amount > m_highest)
 			{
@@ -101,7 +112,6 @@ public class GameServer
 		}
 		else
 		{
-			int amount = ActiveConnections.getActiveConnections();
 			System.out.println(amount + " players online");
 			if(amount > m_highest)
 			{
@@ -114,7 +124,7 @@ public class GameServer
 	/**
 	 * Returns the database host.
 	 * 
-	 * @return
+	 * @return The hostname or IP address of the database to connect to.
 	 */
 	public static String getDatabaseHost()
 	{
@@ -124,7 +134,7 @@ public class GameServer
 	/**
 	 * Returns the selected database.
 	 * 
-	 * @return
+	 * @return The name of the database to connect to.
 	 */
 	public static String getDatabaseName()
 	{
@@ -134,7 +144,7 @@ public class GameServer
 	/**
 	 * Returns the database password.
 	 * 
-	 * @return
+	 * @return The password for the database.
 	 */
 	public static String getDatabasePassword()
 	{
@@ -144,7 +154,7 @@ public class GameServer
 	/**
 	 * Returns the database username.
 	 * 
-	 * @return
+	 * @return The username for the database.
 	 */
 	public static String getDatabaseUsername()
 	{
@@ -154,7 +164,7 @@ public class GameServer
 	/**
 	 * Returns the instance of game server.
 	 * 
-	 * @return
+	 * @return An instance of the GameServer.
 	 */
 	public static GameServer getInstance()
 	{
@@ -162,7 +172,9 @@ public class GameServer
 	}
 
 	/**
-	 * Initializes the gameserver object
+	 * Initializes the gameserver object.
+	 * 
+	 * @param autorun True if the server should autostart, otherwise false.
 	 */
 	public static void initGameServer(boolean autorun)
 	{
@@ -172,7 +184,7 @@ public class GameServer
 	/**
 	 * Returns the amount of players this server will allow.
 	 * 
-	 * @return
+	 * @return The maximum amount of players simultaneously allowed.
 	 */
 	public static int getMaxPlayers()
 	{
@@ -180,9 +192,9 @@ public class GameServer
 	}
 
 	/**
-	 * Returns connection port for this server.
+	 * Returns the connection port for this server.
 	 * 
-	 * @return
+	 * @return The port clients should connect to.
 	 */
 	public static int getPort()
 	{
@@ -192,7 +204,7 @@ public class GameServer
 	/**
 	 * Returns the name of this server.
 	 * 
-	 * @return
+	 * @return The server's name.
 	 */
 	public static String getServerName()
 	{
@@ -210,19 +222,19 @@ public class GameServer
 	}
 
 	/**
-	 * If you don't know what this method does, you clearly don't know enough Java to be working on this.
+	 * The main entry point for the application.
+	 * Reads the commandline arguments and starts the server.
 	 * 
-	 * @param args
+	 * @param args Optional commandline arguments.
 	 */
 	public static void main(String[] args)
 	{
 		/* Pipe errors to a file. */
-		try
+		try(PrintStream errorPrinter = new PrintStream(new File("./errors.txt")))
 		{
-			PrintStream p = new PrintStream(new File("./errors.txt"));
-			System.setErr(p);
+			System.setErr(errorPrinter);
 		}
-		catch(Exception e)
+		catch(IOException | SecurityException e)
 		{
 			e.printStackTrace();
 		}
@@ -236,11 +248,10 @@ public class GameServer
 		options.addOption("rates", "serverrates", true, "Gives the file to be used for server rates config");
 		if(args.length > 0)
 		{
-
 			CommandLineParser parser = new GnuParser();
 			try
 			{
-				// parse the command line arguments
+				/* Parse the command line arguments. */
 				CommandLine line = parser.parse(options, args);
 				if(line.hasOption("players"))
 				{
@@ -259,7 +270,6 @@ public class GameServer
 				/* Create the server gui */
 				if(!line.hasOption("nogui"))
 					m_boolGui = true;
-
 				/* Load the server rates file */
 				if(line.hasOption("rates"))
 				{
@@ -270,31 +280,25 @@ public class GameServer
 					RATE_EXP_POKE = Double.parseDouble(s.get("EXP_POKE"));
 					RATE_EXP_TRAINER = Double.parseDouble(s.get("EXP_TRAINER"));
 				}
-
-				// No else since it's set to default 'false'
+				/* No else since it's set to default 'false'. */
 				boolean autorun = line.hasOption("autorun");
 				GameServer.initGameServer(autorun);
 			}
-			catch(ParseException exp)
+			catch(ParseException pe)
 			{
-				// oops, something went wrong
-				System.err.println("Parsing failed.  Reason: " + exp.getMessage());
-				// automatically generate the help statement
+				/* Oops, something went wrong, automatically generate the help statement. */
+				System.err.println("Parsing failed.  Reason: " + pe.getMessage());
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp("java GameServer [param] <args>", options);
 			}
-			catch(InvalidIniFormatException e)
+			catch(InvalidIniFormatException iife)
 			{
-				e.printStackTrace();
+				iife.printStackTrace();
 				System.err.println("Error in server rates format, using default 1.0");
 			}
-			catch(FileNotFoundException e)
+			catch(IOException ioe)
 			{
-				e.printStackTrace();
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
+				ioe.printStackTrace();
 			}
 		}
 		else
@@ -309,7 +313,7 @@ public class GameServer
 	/**
 	 * Gets the SVN revision for the server.
 	 * 
-	 * @return The number in the rev.txt file.
+	 * @return Returns the number in the rev.txt file, otherwise 0.
 	 */
 	private static int getServerRevision()
 	{
@@ -329,10 +333,13 @@ public class GameServer
 		return rev;
 	}
 
-	/** Starts the game server. */
+	/**
+	 * Starts the GameServer.
+	 * This function fills the GUI fields (if any), checks the database connection and starts the servicemanager.
+	 * Once the servicemanager is started, the server will start booting up.
+	 **/
 	public void start()
 	{
-		/* Store locally */
 		if(m_boolGui)
 		{
 			m_dbServer = m_dbS.getText();
@@ -344,13 +351,16 @@ public class GameServer
 			m_start.setEnabled(false);
 			m_stop.setEnabled(true);
 		}
-		// Check if we can connect to the database BEFORE we start the server :)
 		MySqlManager.getInstance();
 		m_serviceManager = new ServiceManager();
 		m_serviceManager.start();
 	}
 
-	/** Stops the game server. */
+	/**
+	 * Stops the GameServer.
+	 * This function stops the servicemanager and waits for the processes to terminate.
+	 * Finally, the database connection is closed and the application shutdown.
+	 **/
 	public void stop()
 	{
 		m_serviceManager.stop();
@@ -368,8 +378,9 @@ public class GameServer
 				MySqlManager.getInstance().close();
 				System.exit(0);
 			}
-			catch(InterruptedException e)
+			catch(InterruptedException ie)
 			{
+				ie.printStackTrace();
 			}
 		}
 	}
@@ -380,7 +391,7 @@ public class GameServer
 	private void createGui()
 	{
 		m_gui = new JFrame();
-		m_gui.setTitle("Pokenet Server");
+		m_gui.setTitle("Pokemonium Server");
 		m_gui.setSize(148, 340);
 		m_gui.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		m_gui.getContentPane().setLayout(null);
@@ -477,20 +488,20 @@ public class GameServer
 		/* Load pre-existing settings if any */
 		File f = new File("res/settings.txt");
 		if(f.exists())
-			try
+		{
+			try(Scanner s = new Scanner(f))
 			{
-				Scanner s = new Scanner(f);
 				m_dbS.setText(s.nextLine());
 				m_dbN.setText(s.nextLine());
 				m_dbU.setText(s.nextLine());
 				m_dbP.setText(s.nextLine());
 				m_name.setText(s.nextLine());
-				s.close();
 			}
-			catch(Exception e)
+			catch(IOException ioe)
 			{
-				e.printStackTrace();
+				ioe.printStackTrace();
 			}
+		}
 		m_gui.setVisible(true);
 	}
 
@@ -540,20 +551,20 @@ public class GameServer
 	{
 		File settings = new File("res/settings.txt");
 		if(settings.exists())
-			try
+		{
+			try(Scanner s = new Scanner(settings))
 			{
-				Scanner s = new Scanner(settings);
 				m_dbServer = s.nextLine();
 				m_dbName = s.nextLine();
 				m_dbUsername = s.nextLine();
 				m_dbPassword = s.nextLine();
 				m_serverName = s.nextLine();
-				s.close();
 			}
-			catch(Exception e)
+			catch(IOException ioe)
 			{
-				e.printStackTrace();
+				ioe.printStackTrace();
 			}
+		}
 	}
 
 	/**
@@ -562,33 +573,30 @@ public class GameServer
 	 **/
 	private void saveSettings()
 	{
-		try
+		/* Store globally */
+		if(m_boolGui)
 		{
-			/* Store globally */
-			if(m_boolGui)
-			{
-				m_dbServer = m_dbS.getText();
-				m_dbName = m_dbN.getText();
-				m_dbUsername = m_dbU.getText();
-				m_dbPassword = new String(m_dbP.getPassword());
-				m_serverName = m_name.getText();
-			}
-			/* Write settings to file */
-			File settings = new File("res/settings.txt");
-			if(settings.exists())
-				settings.delete();
-			PrintWriter settingsWriter = new PrintWriter(settings);
+			m_dbServer = m_dbS.getText();
+			m_dbName = m_dbN.getText();
+			m_dbUsername = m_dbU.getText();
+			m_dbPassword = new String(m_dbP.getPassword());
+			m_serverName = m_name.getText();
+		}
+		/* Write settings to file */
+		File settings = new File("res/settings.txt");
+		if(settings.exists())
+			settings.delete();
+		try(PrintWriter settingsWriter = new PrintWriter(settings))
+		{
 			settingsWriter.println(m_dbServer);
 			settingsWriter.println(m_dbName);
 			settingsWriter.println(m_dbUsername);
 			settingsWriter.println(m_serverName);
 			settingsWriter.println(" ");
-			settingsWriter.flush();
-			settingsWriter.close();
 		}
-		catch(Exception e)
+		catch(IOException ioe)
 		{
-			e.printStackTrace();
+			ioe.printStackTrace();
 		}
 	}
 }

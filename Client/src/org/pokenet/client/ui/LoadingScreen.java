@@ -1,18 +1,14 @@
 package org.pokenet.client.ui;
 
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.pokenet.client.GameClient;
+import de.matthiasmann.twl.Widget;
 
 /**
  * The loading screen
  * 
- * @author shadowkanji
+ * @author Myth1c
  */
-public class LoadingScreen extends Frame
+public class LoadingScreen extends Widget
 {
 
 	/**
@@ -20,32 +16,11 @@ public class LoadingScreen extends Frame
 	 */
 	public LoadingScreen()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		String respath = System.getProperty("res.path");
-		if(respath == null)
-			respath = "";
-		try
-		{
-			this.setSize(800, 632);
-			setBackground(new Color(0, 0, 0, 50));
-			this.setLocation(0, -32);
-			setResizable(false);
-			getTitleBar().setVisible(false);
+		this.setSize(800, 632);
+		this.setPosition(0, -32);
 
-			Label m_bg = new Label(new Image(respath + "res/ui/loading.png", false));
-			m_bg.pack();
-			m_bg.setLocation(400 - m_bg.getWidth() / 2, 300 - m_bg.getHeight() / 2);
-			m_bg.setVisible(true);
-			this.add(m_bg);
-
-			setVisible(false);
-			// setAlwaysOnTop(true);
-		}
-		catch(SlickException e)
-		{
-			e.printStackTrace();
-		}
+		setVisible(false);
+		// setAlwaysOnTop(true);
 	}
 
 	@Override

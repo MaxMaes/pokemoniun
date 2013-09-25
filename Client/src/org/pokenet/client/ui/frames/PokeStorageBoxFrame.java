@@ -1,41 +1,33 @@
 package org.pokenet.client.ui.frames;
 
-import java.io.InputStream;
-
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Container;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.ToggleButton;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.GUIContext;
-import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.FileLoader;
-import org.pokenet.client.backend.entity.Pokemon;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ComboBox;
-import org.pokenet.client.ui.base.ProgressBar;
+import org.pokenet.client.ui.components.ImageButton;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.ComboBox;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 /**
  * Storage Box
  * 
- * @author ZombieBear
+ * @author ZombieBear / sadhi
  */
-public class PokeStorageBoxFrame extends Frame
+public class PokeStorageBoxFrame extends ResizableFrame
 {
 	private int m_boxNum, m_boxIndex;
 	private int m_buttonChosen = 0;
-	private ToggleButton[] m_buttons = new ToggleButton[30];
-	private ComboBox m_changeBox;
+	private ImageButton[] m_buttons = new ImageButton[30];
+	private ComboBox<String> m_changeBox;
+	private SimpleChangableListModel<String> boxmodel;
 	private int[] m_pokeNums = new int[30];
 	private Button m_switchPoke, m_close, m_release;
+	private TeamForBox teamPanel;
+	private Widget pane;
 
 	/**
 	 * Default constructor
@@ -44,22 +36,33 @@ public class PokeStorageBoxFrame extends Frame
 	 * @param pokes
 	 * @throws SlickException
 	 */
-	public PokeStorageBoxFrame(int[] pokes)
+	public PokeStorageBoxFrame(int[] pokes, Widget root)
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(250, 130);
+		pane.setPosition(0, 0);
+		add(pane);
+
+		setPosition(getX() - 1, getY() + 1);
+		setTheme("pokemonstoragebox");
 		m_pokeNums = pokes;
 		m_boxIndex = 0;
 		m_boxNum = m_boxIndex + 1;
 
 		initGUI();
 
-		setSize(231, 248);
-		setLocation(400 - getWidth() / 2, 300 - getHeight() / 2);
+		setSize(370, 225);
+		setPosition(400 - getWidth() / 2, 200 - getHeight() / 2);
 		setTitle("Box Number " + String.valueOf(m_boxNum));
-		getTitleBar().getCloseButton().setVisible(false);
-		setResizable(false);
+		setResizableAxis(ResizableAxis.NONE);
 		setVisible(true);
+
+		// partybox
+		teamPanel = new TeamForBox(this);
+		GameClient.getInstance().getHUD().add(teamPanel);
+		teamPanel.setPosition(getWidth() / 2 - teamPanel.getWidth() / 2, getHeight() / 2 - teamPanel.getHeight() / 2);
+		teamPanel.setVisible(false);
 	}
 
 	/**
@@ -74,19 +77,29 @@ public class PokeStorageBoxFrame extends Frame
 		enableButtons();
 	}
 
+	protected ImageButton[] getButtons()
+	{
+		return m_buttons;
+	}
+
+	protected int[] getPokeNums()
+	{
+		return m_pokeNums;
+	}
+
 	/**
 	 * Disables all buttons
 	 */
 	public void disableButtons()
 	{
-//		for(int i = 0; i <= 29; i++)
-//		{
-//			m_buttons[i].setEnabled(false);
-			m_switchPoke.setEnabled(false);
-//			m_close.setEnabled(false);
-			//m_changeBox.setEnabled(false);
-			m_release.setEnabled(false);
-//		}
+		// for(int i = 0; i <= 29; i++)
+		// {
+		// m_buttons[i].setEnabled(false);
+		m_switchPoke.setEnabled(false);
+		// m_close.setEnabled(false);
+		// m_changeBox.setEnabled(false);
+		m_release.setEnabled(false);
+		// }
 	}
 
 	/**
@@ -109,18 +122,18 @@ public class PokeStorageBoxFrame extends Frame
 	 */
 	public void initGUI()
 	{
-		int buttonX = 7;
-		int buttonY = 5;
+		int buttonX = 15;
+		int buttonY = 37;
 		int buttonCount = 0;
 
 		for(int i = 0; i <= 29; i++)
 		{
-			m_buttons[i] = new ToggleButton();
+			m_buttons[i] = new ImageButton();
 			final int j = i;
-			m_buttons[i].addActionListener(new ActionListener()
+			m_buttons[i].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent evt)
+				public void run()
 				{
 					setChoice(j);
 				}
@@ -132,129 +145,129 @@ public class PokeStorageBoxFrame extends Frame
 		{
 			for(int column = 0; column < 6; column++)
 			{
-				m_buttons[buttonCount].setLocation(buttonX, buttonY);
-				buttonX += 37;
+				m_buttons[buttonCount].setPosition(buttonX, buttonY);
+				buttonX += 45;
 				buttonCount += 1;
 			}
-			buttonX = 7;
+			buttonX = 15;
 			buttonY += 37;
 		}
 
 		for(int i = 0; i <= 29; i++)
-			add(m_buttons[i]);
+			pane.add(m_buttons[i]);
 		m_switchPoke = new Button();
 		m_close = new Button();
-		m_changeBox = new ComboBox();
+		boxmodel = new SimpleChangableListModel<String>();
+		m_changeBox = new ComboBox<String>(boxmodel);
 		m_release = new Button();
 
 		m_switchPoke.setText("Switch");
-		m_switchPoke.pack();
-		m_switchPoke.setLocation(5, 192);
+		m_switchPoke.setPosition(290, 74);
+		m_switchPoke.setSize(70, 20);
 		m_switchPoke.setEnabled(false);
-		m_switchPoke.addActionListener(new ActionListener()
+		m_switchPoke.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
-				setVisible(false);
-				TeamForBox teamPanel = new TeamForBox(m_boxNum, m_buttonChosen);
-				getDisplay().add(teamPanel);
-				teamPanel.setLocation(getDisplay().getWidth() / 2 - teamPanel.getWidth() / 2, getDisplay().getHeight() / 2 - teamPanel.getHeight() / 2);
+				// setVisible(false);
+				teamPanel.startPartySwitch(m_boxNum, m_buttonChosen);
+
+				// GameClient.getInstance().getHUD().add(teamPanel);
+				// teamPanel.setPosition(getWidth() / 2 - teamPanel.getWidth() / 2, getHeight() / 2 - teamPanel.getHeight() / 2);
+				// teamPanel.setVisible(true);
 			}
 		});
 
-		m_changeBox.addElement("Box 1");
-		m_changeBox.addElement("Box 2");
-		m_changeBox.addElement("Box 3");
-		m_changeBox.addElement("Box 4");
-		m_changeBox.addElement("Box 5");
-		m_changeBox.addElement("Box 6");
-		m_changeBox.addElement("Box 7");
-		m_changeBox.addElement("Box 8");
-		m_changeBox.addElement("Box 9");
+		boxmodel.addElement("Box 1");
+		boxmodel.addElement("Box 2");
+		boxmodel.addElement("Box 3");
+		boxmodel.addElement("Box 4");
+		boxmodel.addElement("Box 5");
+		boxmodel.addElement("Box 6");
+		boxmodel.addElement("Box 7");
+		boxmodel.addElement("Box 8");
+		boxmodel.addElement("Box 9");
 
-		m_changeBox.setSize(55, 15);
-		m_changeBox.setLocation(m_switchPoke.getX() + m_switchPoke.getWidth(), 197);
-		m_release.setText("Release");
-		m_release.pack();
-		m_release.setLocation(m_changeBox.getX() + m_changeBox.getWidth(), 192);
-		m_release.addActionListener(new ActionListener()
+		m_changeBox.setSize(70, 20);
+		m_changeBox.setPosition(m_switchPoke.getX(), 37);
+		m_changeBox.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
+			{
+				m_boxIndex = m_changeBox.getSelected();
+				m_boxNum = m_boxIndex + 1;
+				disableButtons();
+				ClientMessage message = new ClientMessage(ServerPacket.REQUEST_INFO_BOX_NUMBER);
+				message.addInt(m_boxIndex);
+				GameClient.getInstance().getSession().send(message);
+				setTitle("Box Number " + String.valueOf(m_boxNum));
+			}
+		});
+		m_release.setText("Release");
+		m_release.setSize(70, 20);
+		m_release.setPosition(m_switchPoke.getX(), 111);
+		m_release.addCallback(new Runnable()
+		{
+			@Override
+			public void run()
 			{
 				setVisible(false);
-				final Frame confirm = new Frame("Release");
-				confirm.getCloseButton().setVisible(false);
-				confirm.setResizable(false);
-				confirm.setSize(370, 70);
-				confirm.setLocationRelativeTo(null);
-				Label yousure = new Label("Are you sure you want to release your Pokemon?");
-				yousure.pack();
-				Button yes = new Button("Release");
-				yes.pack();
-				yes.setLocation(0, confirm.getHeight() - confirm.getTitleBar().getHeight() - yes.getHeight());
-				yes.addActionListener(new ActionListener()
+
+				Runnable yes = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						getDisplay().remove(confirm);
-						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("18" + m_boxIndex + "," + m_buttonChosen);
-						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						ClientMessage message = new ClientMessage(ServerPacket.RELEASE_POKEMON);
 						message.addInt(m_boxIndex);
 						message.addInt(m_buttonChosen);
 						GameClient.getInstance().getSession().send(message);
 						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getInstance().getSession().send(finishBoxing);
-						GameClient.getInstance().getUi().stopUsingBox();
+						GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 					}
-				});
-				Button no = new Button("Keep");
-				no.pack();
-				no.setLocation(yes.getWidth(), confirm.getHeight() - confirm.getTitleBar().getHeight() - no.getHeight());
-				no.addActionListener(new ActionListener()
+				};
+
+				Runnable no = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						getDisplay().remove(confirm);
-						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 						GameClient.getInstance().getSession().send(finishBoxing);
-						GameClient.getInstance().getUi().stopUsingBox();
+						GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
 					}
-				});
-				confirm.getContentPane().add(yousure);
-				confirm.getContentPane().add(yes);
-				confirm.getContentPane().add(no);
-				getDisplay().add(confirm);
+				};
+				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to release your Pokemon?", yes, no);
 			}
 		});
 		m_release.setEnabled(false);
 
 		m_close.setText("Bye");
-		m_close.pack();
-		m_close.setLocation(m_release.getX() + m_release.getWidth(), 192);
-		m_close.addActionListener(new ActionListener()
+		m_close.setSize(70, 20);
+		m_close.setPosition(m_switchPoke.getX(), 148);
+		m_close.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				setVisible(false);
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
+				teamPanel.setVisible(false);
 				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
+				GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
+				GameClient.getInstance().getHUD().removeChild(teamPanel);
+				GameClient.getInstance().getOurPlayer().setBoxing(false);
 			}
 		});
-		add(m_switchPoke);
-		add(m_close);
-		add(m_changeBox);
-		add(m_release);
+		pane.add(m_switchPoke);
+		pane.add(m_close);
+		pane.add(m_changeBox);
+		pane.add(m_release);
 		loadImages();
 	}
 
@@ -263,25 +276,37 @@ public class PokeStorageBoxFrame extends Frame
 	 */
 	public void loadImages()
 	{
-		LoadingList.setDeferredLoading(true);
-		InputStream f;
-		for(int i = 0; i <= 29; i++)
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
-			m_buttons[i].setImage(null);
-			try
+			@Override
+			public void run()
 			{
-				if(m_pokeNums[i] >= 0)
+				for(int i = 0; i <= 29; i++)
 				{
-					f = FileLoader.loadFile(Pokemon.getIconPathByIndex(m_pokeNums[i] + 1));
-					m_buttons[i].setImage(new Image(f, "boxPoke" + i + " " + Pokemon.getIconPathByIndex(m_pokeNums[i] + 1), false));
+					m_buttons[i].setImage(null);
+					if(m_pokeNums[i] >= 0)
+					{
+						int p = 0;
+						if(m_pokeNums[i] + 1 > 493)
+							p = m_pokeNums[i] - 3;
+						else
+							p = m_pokeNums[i] + 1;
+
+						m_buttons[i].setImage(PokemonSpriteDatabase.getIcon(p));
+					}
 				}
 			}
-			catch(SlickException se)
-			{
-				se.printStackTrace();
-			}
-		}
-		LoadingList.setDeferredLoading(false);
+		});
+	}
+
+	/**
+	 * return the team panel
+	 * 
+	 * @return
+	 */
+	public TeamForBox getTeamPanel()
+	{
+		return teamPanel;
 	}
 
 	/**
@@ -292,7 +317,7 @@ public class PokeStorageBoxFrame extends Frame
 	public void setChoice(int x)
 	{
 		untoggleButtons();
-		m_buttons[x].setSelected(true);
+		m_buttons[x].setEnabled(false);
 		m_switchPoke.setEnabled(true);
 		m_release.setEnabled(true);
 		m_buttonChosen = x;
@@ -305,225 +330,6 @@ public class PokeStorageBoxFrame extends Frame
 	public void untoggleButtons()
 	{
 		for(int i = 0; i <= 29; i++)
-			m_buttons[i].setSelected(false);
-	}
-
-	@Override
-	public void update(GUIContext container, int delta)
-	{
-		super.update(container, delta);
-		if(m_changeBox.getSelectedIndex() != m_boxIndex)
-		{
-			m_boxIndex = m_changeBox.getSelectedIndex();
-			m_boxNum = m_boxIndex + 1;
-			disableButtons();
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("17" + (m_boxIndex));
-			ClientMessage message = new ClientMessage(ServerPacket.REQUEST_INFO_BOX_NUMBER);
-			message.addInt(m_boxIndex);
-			GameClient.getInstance().getSession().send(message);
-			setTitle("Box Number " + String.valueOf(m_boxNum));
-		}
-	}
-}
-
-/**
- * Team panel for storage purposes
- * 
- * @author ZombieBear
- */
-class TeamForBox extends Frame
-{
-	private int m_teamIndex = 0, m_boxNumber = 0, m_boxIndex = 0;
-	Button m_accept = new Button();
-	Button m_cancel = new Button();
-	ProgressBar[] m_hp = new ProgressBar[6];
-	Label[] m_level = new Label[6];
-	ToggleButton[] m_pokeIcon = new ToggleButton[6];
-	Label[] m_pokeName = new Label[6];
-	Container[] m_pokes = new Container[6];
-
-	/**
-	 * Default Constractor
-	 * 
-	 * @param boxNum
-	 * @param boxInd
-	 */
-	public TeamForBox(int boxNum, int boxInd)
-	{
-		m_boxNumber = boxNum;
-		m_boxIndex = boxInd;
-		loadPokes();
-		initGUI();
-		setVisible(true);
-	}
-
-	/**
-	 * Initializes the interface
-	 */
-	public void initGUI()
-	{
-		int y = 0;
-		for(int i = 0; i < 6; i++)
-		{
-			m_pokes[i] = new Container();
-			m_pokes[i].setSize(170, 42);
-			m_pokes[i].setVisible(true);
-			m_pokes[i].setLocation(0, y);
-
-			y += 41;
-			getContentPane().add(m_pokes[i]);
-			m_pokes[i].setOpaque(true);
-			try
-			{
-				m_pokes[i].add(m_pokeIcon[i]);
-				m_pokeIcon[i].setLocation(2, 3);
-				m_pokes[i].add(m_pokeName[i]);
-				m_pokeName[i].setLocation(40, 5);
-				m_pokes[i].add(m_level[i]);
-				m_level[i].setLocation(m_pokeName[i].getX() + m_pokeName[i].getWidth() + 10, 5);
-				m_hp[i].setSize(114, 10);
-				m_hp[i].setLocation(40, m_pokeName[i].getY() + m_pokeName[i].getHeight() + 5);
-				m_pokes[i].add(m_hp[i]);
-			}
-			catch(NullPointerException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		m_accept.setSize(80, 30);
-		m_accept.setLocation(3, 245);
-		m_accept.setText("Accept");
-		m_accept.setEnabled(false);
-		m_accept.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent evt)
-			{
-				switchPokes(m_boxNumber, m_boxIndex, m_teamIndex);
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
-				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
-				setVisible(false);
-			}
-		});
-		add(m_accept);
-		m_cancel.setSize(80, 30);
-		m_cancel.setLocation(86, 245);
-		m_cancel.setText("Cancel");
-		m_cancel.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent evt)
-			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
-				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getUi().stopUsingBox();
-				setVisible(false);
-			}
-		});
-		add(m_cancel);
-		getTitleBar().setVisible(false);
-		setResizable(false);
-		setSize(170, 302);
-		setAlwaysOnTop(true);
-		setOpaque(true);
-	}
-
-	/**
-	 * Loads the necessary data
-	 */
-	public void loadPokes()
-	{
-		LoadingList.setDeferredLoading(true);
-		for(int i = 0; i < 6; i++)
-		{
-			m_pokeIcon[i] = new ToggleButton();
-			m_pokeName[i] = new Label();
-			m_level[i] = new Label();
-			m_hp[i] = new ProgressBar(0, 0);
-			m_hp[i].setForeground(Color.green);
-			final int j = i;
-			m_pokeIcon[i].addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent evt)
-				{
-					setChoice(j);
-				}
-			});
-			m_pokeIcon[i].setSize(32, 32);
-			m_pokeName[i].pack();
-			try
-			{
-				if(GameClient.getInstance().getOurPlayer().getPokemon()[i] != null)
-				{
-					m_level[i].setText("Lv: " + String.valueOf(GameClient.getInstance().getOurPlayer().getPokemon()[i].getLevel()));
-					m_level[i].pack();
-					m_pokeName[i].setText(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
-					m_pokeIcon[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
-					m_hp[i].setMaximum(GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP());
-					m_hp[i].setForeground(Color.green);
-					m_hp[i].setValue(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP());
-					if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2)
-						m_hp[i].setForeground(Color.green);
-					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 2
-							&& GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() > GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
-						m_hp[i].setForeground(Color.orange);
-					else if(GameClient.getInstance().getOurPlayer().getPokemon()[i].getCurHP() < GameClient.getInstance().getOurPlayer().getPokemon()[i].getMaxHP() / 3)
-						m_hp[i].setForeground(Color.red);
-					m_pokeIcon[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
-					m_pokeIcon[i].setSize(32, 32);
-					m_pokeName[i].setText(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
-					m_pokeName[i].pack();
-					m_level[i].setText("Lv: " + String.valueOf(GameClient.getInstance().getOurPlayer().getPokemon()[i].getLevel()));
-					m_level[i].pack();
-				}
-				else
-					m_hp[i].setVisible(false);
-			}
-			catch(NullPointerException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		LoadingList.setDeferredLoading(false);
-	}
-
-	/**
-	 * Sets the choice
-	 * 
-	 * @param x
-	 */
-	public void setChoice(int x)
-	{
-		for(int i = 0; i < 6; i++)
-			m_pokeIcon[i].setSelected(false);
-		m_pokeIcon[x].setSelected(true);
-		m_accept.setEnabled(true);
-		m_teamIndex = x;
-	}
-
-	/**
-	 * Performs the switch
-	 * 
-	 * @param boxNum
-	 * @param boxIndex
-	 * @param teamIndex
-	 */
-	public void switchPokes(int boxNum, int boxIndex, int teamIndex)
-	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("19" + (boxNum - 1) + "," + boxIndex + "," + teamIndex);
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("1A");
-		ClientMessage message = new ClientMessage(ServerPacket.SWAP_POKEMON_FROM_BOX);
-		message.addInt(boxNum - 1);
-		message.addInt(boxIndex);
-		message.addInt(teamIndex);
-		GameClient.getInstance().getSession().send(message);
-
-		ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
-		GameClient.getInstance().getSession().send(finishBoxing);
-		GameClient.getInstance().getUi().update(false);
+			m_buttons[i].setEnabled(true);
 	}
 }

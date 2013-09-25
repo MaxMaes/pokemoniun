@@ -1,7 +1,10 @@
 package org.pokenet.server.backend;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.pokenet.server.GameServer;
@@ -18,7 +21,6 @@ import tiled.io.xml.XMLMapTransformer;
  */
 public class MovementService
 {
-	public static final int MAX_MAP_THREADS = 10;
 	private final ServerMapMatrix m_mapMatrix;
 	private final MovementManager[] m_movementManager;
 	private final NpcSleepTimer m_sleepTimer;
@@ -55,15 +57,11 @@ public class MovementService
 			for(int i = 0; i < m_movementManager.length; i++)
 				if(m_movementManager[i].getProcessingLoad() < m_movementManager[smallest].getProcessingLoad())
 					smallest = i;
+		if(m_movementManager[smallest] == null)
+			m_movementManager[smallest] = new MovementManager();
+		if(!m_movementManager[smallest].isRunning())
+			m_movementManager[smallest].start();
 		return m_movementManager[smallest];
-	}
-
-	/**
-	 * Reloads all maps while the server is still running.
-	 */
-	public void reloadMaps()
-	{
-		this.reloadMaps(false);
 	}
 
 	/**
@@ -84,23 +82,28 @@ public class MovementService
 					if(m_mapMatrix.getMapByRealPosition(x, y) != null)
 					{
 						players = m_mapMatrix.getMapByRealPosition(x, y).getPlayers();
-						for(Player p : players.values())
+						for(Player player : players.values())
 						{
-							p.setLastHeal(p.getX(), p.getY(), p.getMapX(), p.getMapY());
-							p.setMap(m_mapMatrix.getMapByRealPosition(x, y), null);
+							player.setLastHeal(player.getX(), player.getY(), player.getMapX(), player.getMapY());
+							player.setMap(m_mapMatrix.getMapByRealPosition(x, y), player.getFacing());
 						}
 					}
 		}
 		/* Reload all the maps */
-		ExecutorService mapLoader = Executors.newFixedThreadPool(MAX_MAP_THREADS);
+		ExecutorService mapLoader = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		List<Callable<Object>> mapsToLoad = new ArrayList<Callable<Object>>();
 		for(int x = -50; x < 50; x++)
 			for(int y = -50; y < 50; y++)
-				mapLoader.submit(new MapThread(x, y));
-		mapLoader.shutdown();
-		while(!mapLoader.isTerminated())
+				mapsToLoad.add(Executors.callable(new MapThread(x, y)));
+		try
 		{
-			/* Wait for the mapLoader to finish loading the maps. */
+			mapLoader.invokeAll(mapsToLoad);
 		}
+		catch(InterruptedException ie)
+		{
+			ie.printStackTrace();
+		}
+		mapLoader.shutdown();
 		System.out.println("INFO: Maps loaded");
 	}
 
@@ -121,7 +124,6 @@ public class MovementService
 		public void run()
 		{
 			nextMap = new File("res/maps/" + String.valueOf(x) + "." + String.valueOf(y) + ".tmx");
-			// System.out.println("trying: " + x + ", " + y);
 			if(nextMap.exists())
 				try
 				{

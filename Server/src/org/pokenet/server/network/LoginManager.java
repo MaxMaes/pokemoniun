@@ -84,26 +84,26 @@ public class LoginManager implements Runnable
 	 */
 	public void run()
 	{
-		Object[] o;
+		Object[] obj;
 		Session session;
 		String username;
 		String password;
 		String newPassword;
-		char l;
+		char lang;
 		while(m_isRunning)
 		{
 			synchronized(m_loginQueue)
 			{
 				try
 				{
-					if(m_loginQueue.peek() != null)
+					if(m_loginQueue.peek() != null && ActiveConnections.getActiveConnections() < GameServer.getMaxPlayers())
 					{
-						o = m_loginQueue.poll();
-						session = (Session) o[0];
-						l = ((String) o[1]).charAt(0);
-						username = ((String) o[1]).substring(1);
-						password = (String) o[2];
-						attemptLogin(session, l, username, password);
+						obj = m_loginQueue.poll();
+						session = (Session) obj[0];
+						lang = ((String) obj[1]).charAt(0);
+						username = ((String) obj[1]).substring(1);
+						password = (String) obj[2];
+						attemptLogin(session, lang, username, password);
 					}
 				}
 				catch(Exception e)
@@ -115,7 +115,7 @@ public class LoginManager implements Runnable
 			{
 				Thread.sleep(500);
 			}
-			catch(InterruptedException e)
+			catch(InterruptedException ie)
 			{
 			}
 			synchronized(m_passChangeQueue)
@@ -124,11 +124,11 @@ public class LoginManager implements Runnable
 				{
 					if(m_passChangeQueue.peek() != null)
 					{
-						o = m_passChangeQueue.poll();
-						session = (Session) o[0];
-						username = (String) o[1];
-						newPassword = (String) o[2];
-						password = (String) o[3];
+						obj = m_passChangeQueue.poll();
+						session = (Session) obj[0];
+						username = (String) obj[1];
+						newPassword = (String) obj[2];
+						password = (String) obj[3];
 						changePass(username, newPassword, password, session);
 					}
 				}
@@ -141,7 +141,7 @@ public class LoginManager implements Runnable
 			{
 				Thread.sleep(500);
 			}
-			catch(InterruptedException e)
+			catch(InterruptedException ie)
 			{
 			}
 		}
@@ -179,30 +179,30 @@ public class LoginManager implements Runnable
 	 */
 	private void attemptLogin(Session session, char language, String username, String password)
 	{
-		m_database = MySqlManager.getInstance();
 		/* Now, check that they are not banned. */
-		try
+		try(ResultSet rs = m_database.query("SELECT * FROM `pn_bans` WHERE ip = '" + session.getIpAddress() + "' OR playername = '" + username + "';"))
 		{
-			ResultSet rs = m_database.query("SELECT * FROM `pn_bans` WHERE ip = '" + session.getIpAddress() + "' OR playername = '" + username + "';");
 			/* Make sure they are not banned. */
-			if(rs != null && rs.first())
+			if(rs == null)
+			{
+				ServerMessage message = new ServerMessage(ClientPacket.LOGIN_FAILED);
+				session.Send(message);
+				return;
+			}
+			if(rs.first() && rs.getString("username").equalsIgnoreCase(username))
 			{
 				ServerMessage message = new ServerMessage(ClientPacket.PLAYER_BANNED);
 				session.Send(message);
-				rs.close();
 				return;
 			}
-			if(rs != null)
-				rs.close();
 		}
 		catch(SQLException sqle)
 		{
 			sqle.printStackTrace();
 		}
 		/* Find the member's information. */
-		try
+		try(ResultSet rs = m_database.query("SELECT * FROM `pn_members` WHERE username = '" + username + "';"))
 		{
-			ResultSet rs = m_database.query("SELECT * FROM `pn_members` WHERE username = '" + username + "';");
 			if(!rs.first())
 			{
 				/* Member doesn't exist, say user or pass wrong. We don't want someone to guess usernames. */
@@ -249,7 +249,6 @@ public class LoginManager implements Runnable
 				session.Send(message);
 				return;
 			}
-			rs.close();
 			/* Something went wrong, make sure the player is registered as logged out. */
 		}
 		catch(SQLException sqle)
@@ -269,7 +268,6 @@ public class LoginManager implements Runnable
 	 */
 	private void changePass(String username, String newPassword, String oldPassword, Session session)
 	{
-		m_database = MySqlManager.getInstance();
 		ResultSet result = m_database.query("SELECT password FROM `pn_members` WHERE `username` = '" + MySqlManager.parseSQL(username) + "';");
 		try
 		{
@@ -315,22 +313,22 @@ public class LoginManager implements Runnable
 			while(pokemons.next())
 			{
 				String pokemonSpecie = pokemons.getString("speciesName");
-				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getPokemonNumber() + 1;
+				int pokemonNumber = PokemonSpecies.getDefaultData().getPokemonByName(pokemonSpecie).getPokedexNumber();
 				if(isThirdStageStarter(pokemonNumber))
 					for(int i = 0; i < 3; i++)
 					{
 						int tempNumber = pokemonNumber - i;
-						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "';");
 					}
 				else if(isSecondStageStarter(pokemonNumber))
 					for(int i = 0; i < 2; i++)
 					{
 						int tempNumber = pokemonNumber - i;
-						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+						m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + tempNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "';");
 					}
 				else
 					// Regular pokemon or 1st stage starter
-					m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+					m_database.query("UPDATE `pn_pokedex` SET " + "`" + MySqlManager.parseSQL("" + pokemonNumber) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "';");
 			}
 		}
 		catch(SQLException sqle)

@@ -5,7 +5,6 @@ import org.pokenet.client.Session;
 import org.pokenet.client.messages.MessageEvent;
 import org.pokenet.client.protocol.ClientMessage;
 import org.pokenet.client.protocol.ServerMessage;
-import org.pokenet.client.ui.frames.SpriteChooserDialog;
 
 public class ShopSelectSpriteEvent implements MessageEvent
 {
@@ -13,6 +12,6 @@ public class ShopSelectSpriteEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getDisplay().add(new SpriteChooserDialog());
+		GameClient.getInstance().getHUD().showSpritechooser();
 	}
 }

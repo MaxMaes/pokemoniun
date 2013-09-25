@@ -1,49 +1,43 @@
 package org.pokenet.client.ui.frames;
 
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.constants.Language;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Handles language selection
  * 
- * @author Nushio
+ * @author Myth1c
  */
-public class LanguageDialog extends Frame
+public class LanguageDialog extends ResizableFrame
 {
-	private Color m_black;
 	private Label m_info;
 	private Button[] m_languages;
+	private Widget pane;
 
 	/**
 	 * Default constructor
 	 */
 	public LanguageDialog()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		m_black = new Color(0, 0, 0);
-
-		this.setSize(350, 320);
-		this.setLocation(400 - 170, 250);
+		setSize(350, 320);
+		setPosition(400 - 170, 250);
+		setTheme("languagedialog");
 		setTitle("Pokemonium Language Selection");
-		setBackground(new Color(0, 0, 0, 140));
-		getTitleBar().setForeground(m_black);
+		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(false);
-		setResizable(false);
-		getTitleBar().getCloseButton().setVisible(false);
+		pane = new Widget();
+		pane.setSize(350, 320);
+		pane.setTheme("content");
 
 		/* Create the info label */
 		m_info = new Label("  Welcome | Bienvenido | Bienvenue \n         Bem-vindo | Tervetuloa");
-		m_info.pack();
-		m_info.setLocation(60, 8);
-		m_info.setForeground(new Color(255, 255, 255));
-		this.add(m_info);
+		m_info.setPosition(60, 40);
+		m_info.setTheme("label_welcome");
+		pane.add(m_info);
 
 		/* Create all the server buttons */
 		try
@@ -51,127 +45,102 @@ public class LanguageDialog extends Frame
 			m_languages = new Button[8];
 
 			m_languages[0] = new Button("English");
-			m_languages[0].setSize(280, 24);
-			m_languages[0].setLocation(30, 42);
-			m_languages[0].setVisible(true);
-			m_languages[0].addActionListener(new ActionListener()
+			m_languages[0].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.ENGLISH);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[0]);
 
 			m_languages[1] = new Button("Espanol");
-			m_languages[1].setSize(280, 24);
-			m_languages[1].setLocation(30, 70);
-			m_languages[1].setVisible(true);
-			m_languages[1].addActionListener(new ActionListener()
+			m_languages[1].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.SPANISH);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[1]);
 
 			m_languages[2] = new Button("Francais");
-			m_languages[2].setSize(280, 24);
-			m_languages[2].setLocation(30, 98);
-			m_languages[2].setVisible(true);
-			m_languages[2].addActionListener(new ActionListener()
+			m_languages[2].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.FRENCH);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[2]);
 
 			m_languages[3] = new Button("Portugues");
-			m_languages[3].setSize(280, 24);
-			m_languages[3].setLocation(30, 126);
-			m_languages[3].setVisible(true);
-			m_languages[3].addActionListener(new ActionListener()
+			m_languages[3].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.PORTUGESE);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[3]);
 
 			m_languages[4] = new Button("Suomi");
-			m_languages[4].setSize(280, 24);
-			m_languages[4].setLocation(30, 154);
-			m_languages[4].setVisible(true);
-			m_languages[4].addActionListener(new ActionListener()
+			m_languages[4].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.FINNISH);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[4]);
 
 			m_languages[5] = new Button("Italiano");
-			m_languages[5].setSize(280, 24);
-			m_languages[5].setLocation(30, 182);
-			m_languages[5].setVisible(true);
-			m_languages[5].addActionListener(new ActionListener()
+			m_languages[5].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.ITALIAN);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[5]);
 
 			m_languages[6] = new Button("Nederlands");
-			m_languages[6].setSize(280, 24);
-			m_languages[6].setLocation(30, 210);
-			m_languages[6].setVisible(true);
-			m_languages[6].addActionListener(new ActionListener()
+			m_languages[6].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.DUTCH);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[6]);
 
 			m_languages[7] = new Button("Deutsch");
-			m_languages[7].setSize(280, 24);
-			m_languages[7].setLocation(30, 238);
-			m_languages[7].setVisible(true);
-			m_languages[7].addActionListener(new ActionListener()
+			m_languages[7].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					GameClient.getInstance().setLanguage(Language.GERMAN);
-					GameClient.getInstance().getLoginScreen().showServerSelect();
+					GameClient.getInstance().getGUIPane().getLoginScreen().showServerSelect();
 				}
 			});
-			this.add(m_languages[7]);
 
-			setVisible(true);
-
+			for(int i = 0; i < m_languages.length; i++)
+			{
+				m_languages[i].setTheme("button_language");
+				m_languages[i].setPosition(30, 62 + (28 * i));
+				m_languages[i].setSize(280, 24);
+				m_languages[i].setVisible(true);
+				pane.add(m_languages[i]);
+			}
+			add(pane);
 		}
 		catch(Exception e)
 		{
@@ -179,5 +148,4 @@ public class LanguageDialog extends Frame
 		}
 		setVisible(true);
 	}
-
 }

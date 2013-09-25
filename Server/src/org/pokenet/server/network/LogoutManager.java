@@ -125,7 +125,6 @@ public class LogoutManager implements Runnable
 	 */
 	private boolean attemptLogout(Player player)
 	{
-		m_database = MySqlManager.getInstance();
 		/* Remove player from their map if it hasn't been done already. */
 		if(player.getMap() != null)
 			player.getMap().removeChar(player);

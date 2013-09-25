@@ -12,18 +12,20 @@ public class BattleVictoryEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		// also, change this in server message ;)
 		int condition = Request.readInt();
 		switch(condition)
 		{
-			case 0: // YOU WIN!
-				BattleManager.getInstance().getTimeLine().informVictory();
+			case 0: /* You won! */
+				BattleManager.getInstance().getNarrator().informVictory();
+				BattleManager.getInstance().deleteInstance();
 				break;
-			case 1: // YOU LOSE
-				BattleManager.getInstance().getTimeLine().informLoss();
+			case 1: /* You lost! */
+				BattleManager.getInstance().getNarrator().informLoss();
+				BattleManager.getInstance().deleteInstance();
 				break;
-			case 2: // WE CAUGHT HE WOKEMON
+			case 2: /* We caught the Pokemon! */
 				BattleManager.getInstance().endBattle();
+				BattleManager.getInstance().deleteInstance();
 				break;
 		}
 	}

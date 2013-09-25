@@ -13,6 +13,6 @@ public class MoneyChangeEvent implements MessageEvent
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
 		GameClient.getInstance().getOurPlayer().setMoney(Request.readInt());
-		GameClient.getInstance().getUi().update(true);
+		GameClient.getInstance().getHUD().update(true);
 	}
 }

@@ -15,6 +15,6 @@ public class StatsUpdateEvent implements MessageEvent
 		int i = Request.readInt();
 		String[] details = Request.readString().split(",");
 		GameClient.getInstance().getOurPlayer().updatePokemon(i, details);
-		GameClient.getInstance().getUi().refreshParty();
+		GameClient.getInstance().getHUD().refreshParty();
 	}
 }

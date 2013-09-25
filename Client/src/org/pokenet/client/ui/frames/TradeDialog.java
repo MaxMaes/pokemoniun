@@ -1,44 +1,36 @@
 package org.pokenet.client.ui.frames;
 
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.TextField;
-import mdes.slick.sui.ToggleButton;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import mdes.slick.sui.event.MouseAdapter;
-import mdes.slick.sui.event.MouseEvent;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.backend.entity.OurPokemon;
-import org.pokenet.client.backend.entity.Pokemon;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
+import org.pokenet.client.ui.components.ImageButton;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.EditField;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ResizableFrame;
 
 /**
  * The trade interface
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-public class TradeDialog extends Frame
+public class TradeDialog extends ResizableFrame
 {
 	private Button m_cancelBtn;
 	private ConfirmationDialog m_confirm;
 	private boolean m_madeOffer = false;
 	private Button m_makeOfferBtn;
-	private ActionListener m_offerListener;
+	private Runnable m_offerListener;
 	private int m_offerNum = 6;
 	private Label m_ourCashLabel;
-	private TextField m_ourMoneyOffer;
-	private ToggleButton[] m_ourPokes;
+	private EditField m_ourMoneyOffer;
+	private ImageButton[] m_ourPokes;
 	private boolean m_receivedOffer = false;
 	private Label m_theirMoneyOffer;
 	private PokemonInfoDialog[] m_theirPokeInfo;
-	private ToggleButton[] m_theirPokes;
+	private ImageButton[] m_theirPokes;
 	private Button m_tradeBtn;
 
 	/**
@@ -46,13 +38,10 @@ public class TradeDialog extends Frame
 	 */
 	public TradeDialog(String trainerName)
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
 		initGUI();
 		setVisible(true);
 		setTitle("Trade with " + trainerName);
 		setCenter();
-		GameClient.getInstance().getDisplay().add(this);
 	}
 
 	/**
@@ -60,48 +49,24 @@ public class TradeDialog extends Frame
 	 * 
 	 * @param data
 	 */
-	public void addPoke(int index, String[] data)
+	public void addPoke(final int index, final String[] data)
 	{
-		final int j = index;
-		LoadingList.setDeferredLoading(true);
-		int ic = Integer.parseInt(data[0]);
-		if(ic > 389)
-			ic -= 2;
-		else
-			ic++;
-		try
-		{
-			m_theirPokes[index].setImage(new Image(Pokemon.getIconPathByIndex(ic)));
-		}
-		catch(SlickException e)
-		{
-		}
-		LoadingList.setDeferredLoading(false);
-
-		// Load pokemon data
-		OurPokemon tempPoke = new OurPokemon().initTradePokemon(data);
-
-		// Create a pokemon information panel with stats
-		// for informed decisions during trade
-		m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke);
-		m_theirPokeInfo[index].setVisible(false);
-		m_theirPokeInfo[index].setAlwaysOnTop(true);
-		m_theirPokeInfo[index].setLocation(m_theirPokes[index].getX(), m_theirPokes[index].getY() + 32);
-		GameClient.getInstance().getDisplay().add(m_theirPokeInfo[index]);
-		m_theirPokes[index].addMouseListener(new MouseAdapter()
+		final int iconID = Integer.parseInt(data[0]);
+		/* if(iconID > 389){iconID -= 2;}else{iconID++;} */
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
 		{
 			@Override
-			public void mouseEntered(MouseEvent e)
+			public void run()
 			{
-				super.mouseEntered(e);
-				m_theirPokeInfo[j].setVisible(true);
-			}
+				m_theirPokes[index].setImage(PokemonSpriteDatabase.getIcon(iconID));
+				// Load pokemon data
+				OurPokemon tempPoke = new OurPokemon().initTradePokemon(data);
 
-			@Override
-			public void mouseExited(MouseEvent e)
-			{
-				super.mouseExited(e);
-				m_theirPokeInfo[j].setVisible(false);
+				// Create a pokemon information panel with stats for informed decisions during trade
+				m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke, 6);
+				m_theirPokes[index].setTooltipContent(m_theirPokeInfo[index]);
+				// Commented because line above should do the same, to be tested /*m_theirPokes[index].getModel().addStateCallback(new Runnable(){@Override public void run(){if(m_theirPokes[index].getModel().isHover()){m_theirPokeInfo[j].setVisible(true);} else{m_theirPokeInfo[j].setVisible(false);}}});*/
+				add(m_theirPokes[index]);
 			}
 		});
 	}
@@ -112,7 +77,7 @@ public class TradeDialog extends Frame
 	public void cancelTheirOffer()
 	{
 		for(int i = 0; i < 6; i++)
-			m_theirPokes[i].setSelected(false);
+			m_theirPokes[i].setEnabled(false);
 		m_theirMoneyOffer.setText("$0");
 		m_tradeBtn.setEnabled(false);
 	}
@@ -127,13 +92,11 @@ public class TradeDialog extends Frame
 	{
 		for(int i = 0; i < 6; i++)
 		{
-			m_theirPokes[i].setBorderRendered(false);
-			m_theirPokes[i].setSelected(false);
+			m_theirPokes[i].setEnabled(false);
 		}
 		if(index < 6)
 		{
-			m_theirPokes[index].setSelected(true);
-			m_theirPokes[index].setBorderRendered(true);
+			m_theirPokes[index].setEnabled(true);
 		}
 		m_theirMoneyOffer.setText("$" + cash);
 		m_receivedOffer = true;
@@ -146,11 +109,11 @@ public class TradeDialog extends Frame
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int height = (int) GameClient.getInstance().getGUIPane().getHeight();
+		int width = (int) GameClient.getInstance().getGUIPane().getWidth();
 		int x = width / 2 - (int) getWidth() / 2;
 		int y = height / 2 - (int) getHeight() / 2;
-		this.setLocation(x, y);
+		this.setPosition(x, y);
 	}
 
 	/**
@@ -162,18 +125,13 @@ public class TradeDialog extends Frame
 		ClientMessage message = new ClientMessage(ServerPacket.CANCEL_OFFER);
 		GameClient.getInstance().getSession().send(message);
 		m_makeOfferBtn.setText("Make Offer");
-		for(int i = 0; i < 6; i++) {
-			m_ourPokes[i].setGlassPane(false);
-		}
+
 		m_tradeBtn.setEnabled(false);
 	}
-	
+
 	public void cancelOurOffer()
 	{
 		m_makeOfferBtn.setText("Make Offer");
-		for(int i = 0; i < 6; i++) {
-			m_ourPokes[i].setGlassPane(false);
-		}
 		m_tradeBtn.setEnabled(false);
 	}
 
@@ -182,35 +140,34 @@ public class TradeDialog extends Frame
 	 */
 	private void cancelTrade()
 	{
-		ActionListener yes = new ActionListener()
+		Runnable yes = new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
-				// GameClient.getInstance().getPacketGenerator().writeTcpMessage("38");
 				ClientMessage message = new ClientMessage(ServerPacket.TRADE_CANCEL);
-				//message.addInt(m_offerNum);
-				//message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
+				// message.addInt(m_offerNum);
+				// message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
 				GameClient.getInstance().getSession().send(message);
 				m_confirm.setVisible(false);
-				getDisplay().remove(m_confirm);
+				GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 				m_confirm = null;
 				setVisible(false);
-				GameClient.getInstance().getUi().stopTrade();
+				GameClient.getInstance().getGUIPane().getHUD().removeTradeDialog();
 				System.out.println("Trade Cancelled");
 			}
 
 		};
-		ActionListener no = new ActionListener()
+		Runnable no = new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
-				getDisplay().remove(m_confirm);
+				GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 				m_confirm = null;
 			}
 		};
-		m_confirm = new ConfirmationDialog("Are you sure you want to cancel the trade?", yes, no);
+		GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to cancel the trade?", yes, no);
 	}
 
 	/**
@@ -218,71 +175,51 @@ public class TradeDialog extends Frame
 	 */
 	private void initGUI()
 	{
-		m_ourPokes = new ToggleButton[6];
-		m_theirPokes = new ToggleButton[6];
+		m_ourPokes = new ImageButton[6];
+		m_theirPokes = new ImageButton[6];
 		m_theirPokeInfo = new PokemonInfoDialog[6];
-		m_ourMoneyOffer = new TextField();
+		m_ourMoneyOffer = new EditField();
 		m_makeOfferBtn = new Button();
 		m_tradeBtn = new Button();
 		m_cancelBtn = new Button();
 
 		// Action Listener for the offer button
-		m_offerListener = new ActionListener()
+		m_offerListener = new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_makeOfferBtn.getText().equalsIgnoreCase("Make Offer"))
 				{
 					if(m_ourMoneyOffer.getText().equals("") || m_ourMoneyOffer.getText() == null)
+					{
 						m_ourMoneyOffer.setText("0");
+					}
 					makeOffer();
 				}
 				else
+				{
 					cancelOffer();
+				}
 			}
 		};
 
-		int x = 10, y = 10;
 		for(int i = 0; i < 6; i++)
 		{
 			// Show Our Pokemon for Trade
-			m_ourPokes[i] = new ToggleButton();
-			m_ourPokes[i].setSize(32, 32);
+			m_ourPokes[i] = new ImageButton(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
 			m_ourPokes[i].setVisible(true);
-			try
-			{
-				m_ourPokes[i].setImage(GameClient.getInstance().getOurPlayer().getPokemon()[i].getIcon());
-			}
-			catch(NullPointerException e)
-			{
-				m_ourPokes[i].setGlassPane(true);
-			}
-			getContentPane().add(m_ourPokes[i]);
-			if(i < 3)
-				m_ourPokes[i].setLocation(x, y);
-			else
-				m_ourPokes[i].setLocation(x + 40, y);
+			add(m_ourPokes[i]);
+
 			// Show the Other Character's Pokemon for Trade
-			m_theirPokes[i] = new ToggleButton();
-			m_theirPokes[i].setSize(32, 32);
+			m_theirPokes[i] = new ImageButton();
 			m_theirPokes[i].setVisible(true);
-			m_theirPokes[i].setGlassPane(true);
-			getContentPane().add(m_theirPokes[i]);
-			// Item Location Algorithms
-			if(i < 3)
-				m_theirPokes[i].setLocation(x + 178, y);
-			else
-				m_theirPokes[i].setLocation(x + 218, y);
-			if(i == 2)
-				y = 10;
-			else
-				y += 40;
+			add(m_theirPokes[i]);
 		}
-		m_ourPokes[0].addActionListener(new ActionListener()
+		m_ourPokes[0].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 0)
 				{
@@ -298,10 +235,10 @@ public class TradeDialog extends Frame
 
 			};
 		});
-		m_ourPokes[1].addActionListener(new ActionListener()
+		m_ourPokes[1].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 1)
 				{
@@ -317,10 +254,10 @@ public class TradeDialog extends Frame
 
 			};
 		});
-		m_ourPokes[2].addActionListener(new ActionListener()
+		m_ourPokes[2].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 2)
 				{
@@ -336,10 +273,10 @@ public class TradeDialog extends Frame
 
 			};
 		});
-		m_ourPokes[3].addActionListener(new ActionListener()
+		m_ourPokes[3].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 3)
 				{
@@ -355,10 +292,10 @@ public class TradeDialog extends Frame
 
 			};
 		});
-		m_ourPokes[4].addActionListener(new ActionListener()
+		m_ourPokes[4].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 4)
 				{
@@ -374,10 +311,10 @@ public class TradeDialog extends Frame
 				m_makeOfferBtn.setEnabled(true);
 			};
 		});
-		m_ourPokes[5].addActionListener(new ActionListener()
+		m_ourPokes[5].addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				if(m_offerNum == 5)
 				{
@@ -395,79 +332,69 @@ public class TradeDialog extends Frame
 		});
 		// UI Buttons
 		m_makeOfferBtn.setText("Make Offer");
-		m_makeOfferBtn.setSize(90, 30);
-		m_makeOfferBtn.setLocation(90, 10);
 		m_makeOfferBtn.setEnabled(false);
-		m_makeOfferBtn.addActionListener(m_offerListener);
-		getContentPane().add(m_makeOfferBtn);
+		m_makeOfferBtn.addCallback(m_offerListener);
+		add(m_makeOfferBtn);
 		m_tradeBtn.setText("Trade");
 		m_tradeBtn.setEnabled(false);
-		m_tradeBtn.setSize(90, 30);
-		m_tradeBtn.setLocation(90, 50);
-		m_tradeBtn.addActionListener(new ActionListener()
+		m_tradeBtn.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
-				ActionListener yes = new ActionListener()
+				Runnable yes = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent evt)
+					public void run()
 					{
 						performTrade();
-						getDisplay().remove(m_confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						m_confirm = null;
 						setVisible(false);
 					}
 
 				};
-				ActionListener no = new ActionListener()
+				Runnable no = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent evt)
+					public void run()
 					{
 						m_confirm.setVisible(false);
-						getDisplay().remove(m_confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						m_confirm = null;
 						setVisible(true);
 					}
 
 				};
-				m_confirm = new ConfirmationDialog("Are you sure you want to trade?", yes, no);
+				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to trade?", yes, no);
 				setVisible(false);
 			}
 		});
-		getContentPane().add(m_tradeBtn);
+		add(m_tradeBtn);
 		m_cancelBtn.setText("Cancel Trade");
-		m_cancelBtn.setSize(90, 30);
-		m_cancelBtn.setLocation(90, 90);
-		m_cancelBtn.addActionListener(new ActionListener()
+		m_cancelBtn.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				cancelTrade();
 			};
 		});
-		getContentPane().add(m_cancelBtn);
+		add(m_cancelBtn);
+
 		// Our money trade info
 		m_ourCashLabel = new Label("$");
-		m_ourCashLabel.pack();
-		m_ourCashLabel.setLocation(10, 130);
-		getContentPane().add(m_ourCashLabel);
-		m_ourMoneyOffer = new TextField();
-		m_ourMoneyOffer.setSize(60, 20);
-		m_ourMoneyOffer.setLocation(20, 128);
-		getContentPane().add(m_ourMoneyOffer);
+		add(m_ourCashLabel);
+
+		m_ourMoneyOffer = new EditField();
+		add(m_ourMoneyOffer);
+
 		// Their money trade info
 		m_theirMoneyOffer = new Label("$0");
-		m_theirMoneyOffer.pack();
-		m_theirMoneyOffer.setLocation(188, 130);
-		getContentPane().add(m_theirMoneyOffer);
+		add(m_theirMoneyOffer);
+
 		// Window Settings
-		getTitleBar().remove(getCloseButton());
-		setSize(270, 178);
-		setResizable(false);
+		setResizableAxis(ResizableAxis.NONE);
 	}
 
 	/**
@@ -476,11 +403,11 @@ public class TradeDialog extends Frame
 	private void makeOffer()
 	{
 		if(m_ourMoneyOffer.getText().equals(""))
+		{
 			m_ourMoneyOffer.setText("0");
-
+		}
 		if(!m_ourMoneyOffer.getText().equals(""))
 		{
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("35" + m_offerNum + "," + m_ourMoneyOffer.getText());
 			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(Integer.parseInt(m_ourMoneyOffer.getText()));
@@ -488,18 +415,17 @@ public class TradeDialog extends Frame
 		}
 		else
 		{
-			// GameClient.getInstance().getPacketGenerator().writeTcpMessage("35" + m_offerNum + ",0");
 			ClientMessage message = new ClientMessage(ServerPacket.TRADE_OFFER);
 			message.addInt(m_offerNum);
 			message.addInt(0);
 			GameClient.getInstance().getSession().send(message);
 		}
 		m_makeOfferBtn.setText("Cancel Offer");
-		for(int i = 0; i < 6; i++)
-			m_ourPokes[i].setGlassPane(true);
 		m_madeOffer = true;
 		if(m_receivedOffer)
+		{
 			m_tradeBtn.setEnabled(true);
+		}
 	}
 
 	/**
@@ -507,7 +433,6 @@ public class TradeDialog extends Frame
 	 */
 	private void performTrade()
 	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("36");
 		ClientMessage message = new ClientMessage(ServerPacket.TRADE_ACCEPTED);
 		GameClient.getInstance().getSession().send(message);
 		System.out.println("Trade complete");
@@ -522,22 +447,70 @@ public class TradeDialog extends Frame
 	private void untoggleOthers(int btnIndex)
 	{
 		for(int i = 0; i < 6; i++)
+		{
 			if(i != btnIndex)
 			{
-				m_ourPokes[i].setSelected(false);
-				m_ourPokes[i].setBorderRendered(false);
+				m_ourPokes[i].setEnabled(true);
 			}
 			else
 			{
-				m_ourPokes[btnIndex].setBorderRendered(true);
-				m_ourPokes[btnIndex].setSelected(true);
+				m_ourPokes[btnIndex].setEnabled(false);
 			}
+		}
 	}
-	
+
 	public void forceCancelTrade()
 	{
 		setVisible(false);
-		GameClient.getInstance().getUi().stopTrade();
+		GameClient.getInstance().getHUD().removeTradeDialog();
 		System.out.println("Trade Cancelled");
+	}
+
+	@Override
+	public void layout()
+	{
+		int x = 10, y = 10;
+		for(int i = 0; i < 6; i++)
+		{
+			m_ourPokes[i].setSize(32, 32);
+			if(i < 3)
+			{
+				m_ourPokes[i].setPosition(x, y);
+			}
+			else
+			{
+				m_ourPokes[i].setPosition(x + 40, y);
+			}
+			m_theirPokes[i].setSize(32, 32);
+			if(i < 3)
+			{
+				m_theirPokes[i].setPosition(x + 178, y);
+			}
+			else
+			{
+				m_theirPokes[i].setPosition(x + 218, y);
+			}
+			if(i == 2)
+			{
+				y = 10;
+			}
+			else
+			{
+				y += 40;
+			}
+		}
+
+		m_makeOfferBtn.setSize(90, 30);
+		m_makeOfferBtn.setPosition(90, 10);
+		m_tradeBtn.setSize(90, 30);
+		m_tradeBtn.setPosition(90, 50);
+		m_cancelBtn.setSize(90, 30);
+		m_cancelBtn.setPosition(90, 90);
+		m_ourCashLabel.setPosition(10, 130);
+		m_ourMoneyOffer.setSize(60, 20);
+		m_ourMoneyOffer.setPosition(20, 128);
+		m_theirMoneyOffer.setPosition(188, 130);
+		setSize(270, 178);
+		setCenter();
 	}
 }

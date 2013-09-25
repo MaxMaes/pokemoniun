@@ -304,6 +304,7 @@ public class PokemonSpeciesData
 		m_unimplemented = new TreeSet<String>();
 		m_database = new PokemonSpecies[size];
 		for(int i = 0; i < size; ++i)
+		{
 			try
 			{
 				String name = (String) stream.readObject();
@@ -325,6 +326,7 @@ public class PokemonSpeciesData
 				e.printStackTrace();
 				throw new InternalError();
 			}
+		}
 
 		Iterator<String> i = m_unimplemented.iterator();
 		while(i.hasNext())

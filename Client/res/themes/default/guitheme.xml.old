@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
+<themes>
+    <images file="guitheme.png">
+        <area name="close" xywh="3,3,14,14"/>
+        <area name="close_pressed" xywh="3,20,14,14"/>
+        <area name="button" xywh="20,2,23,17" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button_pressed" xywh="20,22,23,17" splitx="L6,R6" splity="T6,B6"/>
+        <area name="button_disabled" xywh="20,42,23,17" splitx="L6,R6" splity="T6,B6"/>
+        <select name="button_background">
+            <alias ref="button_pressed" if="pressed"/>
+            <alias ref="button_disabled" if="disabled"/>
+            <alias ref="button"/>
+        </select>
+        <select name="closebutton_background">
+            <alias ref="close_pressed" if="pressed"/>
+            <alias ref="close"/>
+        </select>
+        <area name="checkmark" xywh="35,142,14,14"/>
+        <area name="checkbox" xywh="20,142,14,14"/>
+        <area name="checkbox_pressed" xywh="20,125,14,14"/>
+        <composed name="checkbox_active">
+            <alias ref="checkbox"/>
+            <alias ref="checkmark"/>
+        </composed>
+        <composed name="checkbox_active_pressed">
+            <alias ref="checkbox_pressed"/>
+            <alias ref="checkmark"/>
+        </composed>
+        <select name="checkbox_background">
+            <alias ref="checkbox_active_pressed" if="pressed"/>
+            <alias ref="checkbox_active" if="selected"/>
+            <alias ref="checkbox"/>
+        </select>
+    
+    
+        <cursor name="cursor" hotSpotX="0" hotSpotY="0" xywh="112,2,12,19"/>
+        <cursor name="cursor_text" hotSpotX="0" hotSpotY="0" xywh="93,3,7,16"/>
+        <area name="editfield" xywh="55,4,23,15" splitx="L2,R2" splity="T2,B2"/>
+        <area name="resizableframe" xywh="55,63,24,7" splitx="L2,R2" splity="T2,B2"/>
+        <area name="resizableframe_titled" xywh="55,26,24,30" splitx="L2,R2" splity="T25,B2"/>
+        <area name="resizableframe_borderless" xywh="57,65,20,3"/>
+        <area name="popup_titled" xywh="90,40,24,30" splitx="L2,R2" splity="T25,B2"/>
+        <area name="popup_untitled" xywh="117,63,24,7" splitx="L2,R2" splity="T5,B5"/>
+        <area name="scrollbar_horizontal_button_left" xywh="60,78,14,14"/>
+        <area name="scrollbar_horizontal_button_left_pressed" xywh="60,96,14,14"/>
+        <area name="scrollbar_horizontal_button_right" xywh="83,78,14,14"/>
+        <area name="scrollbar_horizontal_button_right_pressed" xywh="83,96,14,14"/>
+        <area name="scrollbar_horizontal_bar" xywh="75,78,7,14"/>
+        <area name="scrollbar_horizontal_thumb" xywh="111,78,7,14" splitx="L3,R3" splity="T3,B3"/>
+        <area name="scrollbar_horizontal_thumb_pressed" xywh="101,78,7,14" splitx="L3,R3" splity="T3,B3"/>
+        <select name="scrollbar_horizontal_button_left_background">
+            <alias ref="scrollbar_horizontal_button_left_pressed" if="pressed"/>
+            <alias ref="scrollbar_horizontal_button_left"/>
+        </select>
+        <select name="scrollbar_horizontal_button_right_background">
+            <alias ref="scrollbar_horizontal_button_right_pressed" if="pressed"/>
+            <alias ref="scrollbar_horizontal_button_right"/>
+        </select>
+        <select name="scrollbar_horizontal_thumb_background">
+            <grid weightsX="0,1,0,1,0" weightsY="1" if="pressed">
+                <area xywh="101,78,2,14"/>
+                <area xywh="103,78,1,14"/>
+                <area xywh="104,78,1,14"/>
+                <area xywh="105,78,1,14"/>
+                <area xywh="106,78,2,14"/>
+            </grid>
+            <grid weightsX="0,1,0,1,0" weightsY="1">
+                <area xywh="111,78,2,14"/>
+                <area xywh="113,78,1,14"/>
+                <area xywh="114,78,1,14"/>
+                <area xywh="115,78,1,14"/>
+                <area xywh="116,78,2,14"/>
+            </grid>
+        </select>
+        <area name="scrollbar_vertical_button_up" xywh="20,76,14,14"/>
+        <area name="scrollbar_vertical_button_down" xywh="20,99,14,14"/>
+        <area name="scrollbar_vertical_button_up_pressed" xywh="38,76,14,14"/>
+        <area name="scrollbar_vertical_button_down_pressed" xywh="38,99,14,14"/>
+        <area name="scrollbar_vertical_bar" xywh="20,91,14,7"/>
+        <area name="scrollbar_vertical_thumb" xywh="101,95,14,7" splitx="L3,R3" splity="T3,B3"/>
+        <area name="scrollbar_vertical_thumb_pressed" xywh="101,105,14,7" splitx="L3,R3" splity="T4,B4"/>
+        <area name="editfield_cursor" xywh="97,23,1,12"/>
+        <area name="editfield_selection" xywh="93,23,1,12"/>
+        <select name="scrollbar_vertical_button_up_background">
+            <alias ref="scrollbar_vertical_button_up_pressed" if="pressed"/>
+            <alias ref="scrollbar_vertical_button_up"/>
+        </select>
+        <select name="scrollbar_vertical_button_down_background">
+            <alias ref="scrollbar_vertical_button_down_pressed" if="pressed"/>
+            <alias ref="scrollbar_vertical_button_down"/>
+        </select>
+        <select name="scrollbar_vertical_thumb_background">
+            <grid weightsX="1" weightsY="0,1,0,1,0" if="pressed">
+                <area xywh="101,105,14,2"/>
+                <area xywh="101,107,14,1"/>
+                <area xywh="101,108,14,1"/>
+                <area xywh="101,109,14,1"/>
+                <area xywh="101,110,14,2"/>
+            </grid>
+            <grid weightsX="1" weightsY="0,1,0,1,0">
+                <area xywh="101,95,14,2"/>
+                <area xywh="101,97,14,1"/>
+                <area xywh="101,98,14,1"/>
+                <area xywh="101,99,14,1"/>
+                <area xywh="101,100,14,2"/>
+            </grid>
+        </select>
+        <area name="listbox_background" xywh="64,137,9,4"/>
+        <area name="listbox.display.background" xywh="77,136,24,6" splitx="L2,R2" splity="T2,B2" if="selected"/>
+        <alias name="listbox.display.overlay" ref="none"/>
+    
+    
+        <select name="combobox_button_background">
+            <grid weightsX="0,0,1,0,1,0,0" weightsY="0,0,1,0,1,0,0" if="pressed">
+                <area xywh="81,115,1,1"/>
+                <area xywh="82,115,1,1"/>
+                <area xywh="83,115,1,1"/>
+                <area xywh="84,115,5,1"/>
+                <area xywh="89,115,1,1"/>
+                <area xywh="90,115,1,1"/>
+                <area xywh="91,115,1,1"/>
+                <area xywh="81,116,1,1"/>
+                <area xywh="82,116,1,1"/>
+                <area xywh="83,116,1,1"/>
+                <area xywh="84,116,5,1"/>
+                <area xywh="89,116,1,1"/>
+                <area xywh="90,116,1,1"/>
+                <area xywh="91,116,1,1"/>
+                <area xywh="81,117,1,1"/>
+                <area xywh="82,117,1,1"/>
+                <area xywh="83,117,1,1"/>
+                <area xywh="84,117,5,1"/>
+                <area xywh="89,117,1,1"/>
+                <area xywh="90,117,1,1"/>
+                <area xywh="91,117,1,1"/>
+                <area xywh="81,118,1,4"/>
+                <area xywh="82,118,1,4"/>
+                <area xywh="83,118,1,4"/>
+                <area xywh="84,118,5,4"/>
+                <area xywh="89,118,1,4"/>
+                <area xywh="90,118,1,4"/>
+                <area xywh="91,118,1,4"/>
+                <area xywh="81,122,1,1"/>
+                <area xywh="82,122,1,1"/>
+                <area xywh="83,122,1,1"/>
+                <area xywh="84,122,5,1"/>
+                <area xywh="89,122,1,1"/>
+                <area xywh="90,122,1,1"/>
+                <area xywh="91,122,1,1"/>
+                <area xywh="81,123,1,1"/>
+                <area xywh="82,123,1,1"/>
+                <area xywh="83,123,1,1"/>
+                <area xywh="84,123,5,1"/>
+                <area xywh="89,123,1,1"/>
+                <area xywh="90,123,1,1"/>
+                <area xywh="91,123,1,1"/>
+                <area xywh="81,124,1,1"/>
+                <area xywh="82,124,1,1"/>
+                <area xywh="83,124,1,1"/>
+                <area xywh="84,124,5,1"/>
+                <area xywh="89,124,1,1"/>
+                <area xywh="90,124,1,1"/>
+                <area xywh="91,124,1,1"/>
+            </grid>
+            <grid weightsX="0,0,1,0,1,0,0" weightsY="0,0,1,0,1,0,0">
+                <area xywh="63,115,1,1"/>
+                <area xywh="64,115,1,1"/>
+                <area xywh="65,115,1,1"/>
+                <area xywh="66,115,5,1"/>
+                <area xywh="71,115,1,1"/>
+                <area xywh="72,115,1,1"/>
+                <area xywh="73,115,1,1"/>
+                <area xywh="63,116,1,1"/>
+                <area xywh="64,116,1,1"/>
+                <area xywh="65,116,1,1"/>
+                <area xywh="66,116,5,1"/>
+                <area xywh="71,116,1,1"/>
+                <area xywh="72,116,1,1"/>
+                <area xywh="73,116,1,1"/>
+                <area xywh="63,117,1,1"/>
+                <area xywh="64,117,1,1"/>
+                <area xywh="65,117,1,1"/>
+                <area xywh="66,117,5,1"/>
+                <area xywh="71,117,1,1"/>
+                <area xywh="72,117,1,1"/>
+                <area xywh="73,117,1,1"/>
+                <area xywh="63,118,1,4"/>
+                <area xywh="64,118,1,4"/>
+                <area xywh="65,118,1,4"/>
+                <area xywh="66,118,5,4"/>
+                <area xywh="71,118,1,4"/>
+                <area xywh="72,118,1,4"/>
+                <area xywh="73,118,1,4"/>
+                <area xywh="63,122,1,1"/>
+                <area xywh="64,122,1,1"/>
+                <area xywh="65,122,1,1"/>
+                <area xywh="66,122,5,1"/>
+                <area xywh="71,122,1,1"/>
+                <area xywh="72,122,1,1"/>
+                <area xywh="73,122,1,1"/>
+                <area xywh="63,123,1,1"/>
+                <area xywh="64,123,1,1"/>
+                <area xywh="65,123,1,1"/>
+                <area xywh="66,123,5,1"/>
+                <area xywh="71,123,1,1"/>
+                <area xywh="72,123,1,1"/>
+                <area xywh="73,123,1,1"/>
+                <area xywh="63,124,1,1"/>
+                <area xywh="64,124,1,1"/>
+                <area xywh="65,124,1,1"/>
+                <area xywh="66,124,5,1"/>
+                <area xywh="71,124,1,1"/>
+                <area xywh="72,124,1,1"/>
+                <area xywh="73,124,1,1"/>
+            </grid>
+        </select>
+        <area name="combobox_background" xywh="64,128,9,4"/>
+        <area name="speechframe" xywh="97,420,401,78"/>
+        <area name="speechframe_triangle" xywh="79,478,10,10"/>
+    
+    
+    
+    
+    </images>
+    <images file="pokedex.png">
+        <area name="incrementer" xywh="11,34,36,14"/>
+        <area name="incrementer_pressed" xywh="11,13,36,14"/>
+        <area name="button_up" xywh="68,8,29,26"/>
+        <area name="button_down" xywh="68,38,29,26"/>
+        <area name="button_right" xywh="141,16,20,35"/>
+        <area name="button_left" xywh="111,16,20,35"/>
+        <area name="pokemoncaught" xywh="11,58,19,19"/>
+        <area name="pokemonlocation" xywh="39,63,11,9"/>
+        <area name="map_hoenn" xywh="226,9,199,98"/>
+        <area name="map_kantojohto" xywh="226,115,199,98"/>
+        <area name="map_sinnoh" xywh="11,115,199,98"/>
+        <area name="pokemonselection" xywh="11,82,173,21"/>
+        <area name="pokedex" xywh="3,232,500,363"/>
+        <select name="incrementer_background">
+            <alias ref="incrementer_pressed" if="pressed"/>
+            <alias ref="incrementer"/>
+        </select>
+    </images>
+    <images file="battle.png">
+        <area name="battleground" xywh="125,1,256,144"/>
+        <area name="interfacebackground" xywh="126,146,255,203"/>
+        <area name="battlebutton" xywh="8,298,116,51"/>
+        <area name="battlebutton_pressed" xywh="8,246,116,51"/>
+        <select name="battlebutton_background">
+            <alias ref="battlebutton_pressed" if="pressed"/>
+            <alias ref="battlebutton_pressed" if="disabled"/>
+            <area xywh="0,0,1,1"/>
+        </select>
+    
+        <area name="battlebutton_small_pressed" xywh="42,197,82,48"/>
+        <area name="battlebutton_small" xywh="42,148,82,48"/>
+        <select name="battlebutton_small_background">
+            <alias ref="battlebutton_small" if="pressed"/>
+            <alias ref="battlebutton_small_pressed"/>
+        </select>
+    
+        <area name="enemyhp" xywh="25,134,98,11"/>
+    
+        <area name="playerhp" xywh="12,112,111,17"/>
+        <area name="battle_enemydata_background" xywh="2,350,164,48"/>
+        <area name="battle_playerdata_background" xywh="2,399,164,48"/>
+        <area name="pokeball_empty" xywh="1,1,14,14"/>
+        <area name="pokeball_fainted" xywh="16,1,14,14"/>
+        <area name="pokeball_normal" xywh="31,1,14,14"/>
+        <area name="pokeball_status" xywh="46,1,14,14"/>
+        <area name="gender_female" xywh="67,2,10,14"/>
+        <area name="gender_male" xywh="78,2,14,14"/>
+        <area name="status_brn" xywh="1,22,30,12"/>
+        <area name="status_frz" xywh="1,35,30,12"/>
+        <area name="status_par" xywh="1,48,30,12"/>
+        <area name="status_psn" xywh="1,61,30,12"/>
+        <area name="status_slp" xywh="1,74,30,12"/>
+        <area name="hpbar_high" xywh="13,139,1,5"/>
+        <area name="hpbar_middle" xywh="15,139,1,5"/>
+        <area name="hpbar_low" xywh="17,139,1,5"/>
+        <area name="expbar" xywh="19,139,1,5"/>
+    
+    </images>
+    <images file="bag.png">
+        <area name="bag_topright" xywh="1,1,56,57"/>
+        <area name="bag_topleft" xywh="58,1,56,59"/>
+        <area name="bag_middle" xywh="115,1,56,58"/>
+        <area name="bag_front" xywh="172,1,56,58"/>
+        <area name="bag_bottom" xywh="229,1,56,58"/>
+        <area name="tm_pressed" xywh="1,60,32,31"/>
+        <area name="potion_pressed" xywh="34,60,32,31"/>
+        <area name="pokeball_pressed" xywh="67,60,32,31"/>
+        <area name="berrie_pressed" xywh="100,60,32,30"/>
+        <area name="item_pressed" xywh="133,60,32,30"/>
+        <area name="tm_hover" xywh="1,125,32,31"/>
+        <area name="potion_hover" xywh="34,125,32,31"/>
+        <area name="pokeball_hover" xywh="67,125,32,31"/>
+        <area name="berrie_hover" xywh="100,124,32,31"/>
+        <area name="item_hover" xywh="133,124,32,31"/>
+        <area name="tm" xywh="1,92,32,32"/>
+        <area name="potion" xywh="34,92,32,32"/>
+        <area name="pokeball" xywh="66,92,32,32"/>
+        <area name="berrie" xywh="100,91,32,32"/>
+        <area name="item" xywh="133,91,32,32"/>
+    </images>
+    <images file="loading.png">
+        <area name="loadingscreen" xywh="*"/>
+    </images>
+    <images file="topbarbuttons.png">
+        <area name="topbar_stats" xywh="0,0,32,32"/>
+        <area name="topbar_stats_pressed" xywh="0,32,32,32"/>
+        <area name="topbar_stats_hover" xywh="0,64,32,32"/>
+        <area name="topbar_pokemon" xywh="65,0,32,32"/>
+        <area name="topbar_pokemon_pressed" xywh="65,32,32,32"/>
+        <area name="topbar_pokemon_hover" xywh="65,64,32,32"/>
+        <area name="topbar_requests" xywh="192,0,32,32"/>
+        <area name="topbar_requests_pressed" xywh="192,32,32,32"/>
+        <area name="topbar_requests_hover" xywh="192,64,32,32"/>
+        <area name="topbar_options" xywh="224,0,32,32"/>
+        <area name="topbar_options_pressed" xywh="224,32,32,32"/>
+        <area name="topbar_options_hover" xywh="224,64,32,32"/>
+        <area name="topbar_bag" xywh="97,0,32,32"/>
+        <area name="topbar_bag_pressed" xywh="97,32,32,32"/>
+        <area name="topbar_bag_hover" xywh="97,64,32,32"/>
+        <area name="topbar_map" xywh="128,0,32,32"/>
+        <area name="topbar_map_pressed" xywh="128,32,32,32"/>
+        <area name="topbar_map_hover" xywh="128,64,32,32"/>
+        <area name="topbar_friends" xywh="160,0,32,32"/>
+        <area name="topbar_friends_pressed" xywh="160,32,32,32"/>
+        <area name="topbar_friends_hover" xywh="160,64,32,32"/>
+        <area name="topbar_help" xywh="255,0,32,32"/>
+        <area name="topbar_help_pressed" xywh="255,32,32,32"/>
+        <area name="topbar_help_hover" xywh="255,64,32,32"/>
+        <area name="topbar_disconnect" xywh="288,0,32,32"/>
+        <area name="topbar_disconnect_pressed" xywh="288,32,32,32"/>
+        <area name="topbar_disconnect_hover" xywh="288,64,32,32"/>
+        <area name="topbar_pokedex" xywh="32,0,32,32"/>
+        <area name="topbar_pokedex_pressed" xywh="32,32,32,32"/>
+        <area name="topbar_pokedex_hover" xywh="32,64,32,32"/>
+    </images>
+    <images file="partyinfo.png">
+        <area name="party_active" xywh="1,1,171,42"/>
+        <area name="party_inactive" xywh="1,44,169,42"/>
+        <area name="party_hpbar" xywh="1,87,98,11"/>
+    </images>
+</themes>

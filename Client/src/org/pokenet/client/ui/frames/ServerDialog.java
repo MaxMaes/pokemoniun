@@ -7,53 +7,51 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.TextField;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import org.newdawn.slick.Color;
+
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
+
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.EditField;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Handles server selection
  * 
  * @author shadowkanji
  **/
-public class ServerDialog extends Frame
+public class ServerDialog extends ResizableFrame
 {
-	private Color m_black;
 	private String[] m_host;
 	private Label m_info;
 	private Button[] m_servers;
-	private TextField privateIP;
+	private EditField privateIP;
 	private Button privateServer, m_back;
 	private final GameClient m_client;
+	
+	private Widget panel;
 
 	/** Default constructor **/
 	public ServerDialog()
 	{
 		m_client = GameClient.getInstance(); // hacky, rewrite.
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-		m_black = new Color(0, 0, 0);
 		List<String> translate = Translator.translate("_LOGIN");
-		this.setSize(316, 300);
-		this.setLocation(400 - 160, 280);
+		setSize(316, 300);
+		setPosition(400 - 160, 280);
 		setTitle(translate.get(0));
-		setBackground(new Color(0, 0, 0, 140));
-		getTitleBar().setForeground(m_black);
 		setDraggable(false);
-		setResizable(false);
-		getTitleBar().getCloseButton().setVisible(false);
+		setResizableAxis(ResizableAxis.NONE);
+		
+		panel = new Widget();
+		panel.setTheme("content");
+		
 		/* Create the info label */
 		m_info = new Label(translate.get(1));
-		m_info.pack();
-		m_info.setLocation(24, 8);
-		m_info.setForeground(new Color(255, 255, 255));
-		this.add(m_info);
+		m_info.setPosition(24, 40);
+		m_info.setTheme("label_info");
+		panel.add(m_info);
 
 		/* Create all the server buttons */
 		String respath = System.getProperty("res.path");
@@ -69,77 +67,72 @@ public class ServerDialog extends Frame
 			BufferedReader in = new BufferedReader(new InputStreamReader(stream));
 			m_servers[0] = new Button(in.readLine());
 			m_servers[0].setSize(280, 24);
-			m_servers[0].setLocation(16, 32);
 			m_servers[0].setVisible(true);
-			m_servers[0].addActionListener(new ActionListener()
+			m_servers[0].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[0]);
 				}
 			});
-			this.add(m_servers[0]);
+			panel.add(m_servers[0]);
 			m_host[0] = in.readLine();
 
 			m_servers[1] = new Button(in.readLine());
 			m_servers[1].setSize(280, 24);
-			m_servers[1].setLocation(16, 64);
 			m_servers[1].setVisible(true);
-			m_servers[1].addActionListener(new ActionListener()
+			m_servers[1].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[1]);
 				}
 			});
-			this.add(m_servers[1]);
+			panel.add(m_servers[1]);
 			m_host[1] = in.readLine();
 
 			m_servers[2] = new Button(in.readLine());
 			m_servers[2].setSize(280, 24);
-			m_servers[2].setLocation(16, 96);
 			m_servers[2].setVisible(true);
-			m_servers[2].addActionListener(new ActionListener()
+			m_servers[2].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[2]);
 				}
 			});
-			this.add(m_servers[2]);
+			panel.add(m_servers[2]);
 			m_host[2] = in.readLine();
 
 			m_servers[3] = new Button(in.readLine());
 			m_servers[3].setSize(280, 24);
-			m_servers[3].setLocation(16, 128);
 			m_servers[3].setVisible(true);
-			m_servers[3].addActionListener(new ActionListener()
+			m_servers[3].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[3]);
 				}
 			});
-			this.add(m_servers[3]);
+			panel.add(m_servers[3]);
 			m_host[3] = in.readLine();
 
 			m_servers[4] = new Button(in.readLine());
 			m_servers[4].setSize(280, 24);
-			m_servers[4].setLocation(16, 160);
 			m_servers[4].setVisible(true);
-			m_servers[4].addActionListener(new ActionListener()
+			m_servers[4].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[4]);
 				}
 			});
-			this.add(m_servers[4]);
+			panel.add(m_servers[4]);
 			m_host[4] = in.readLine();
 			/* Finally, check which servers don't exist and disable their buttons */
 			for(int i = 0; i < m_host.length; i++)
@@ -149,10 +142,13 @@ public class ServerDialog extends Frame
 					m_host[i] = "";
 					m_servers[i].setEnabled(false);
 				}
-				m_servers[i].setForeground(m_black);
 			}
 			in.close();
 			stream.close();
+			for(int i = 0; i < m_servers.length; i++)
+			{
+				m_servers[i].setPosition(16, 64 + 32*i);
+			}
 		}
 		catch(MalformedURLException mue)
 		{
@@ -165,49 +161,49 @@ public class ServerDialog extends Frame
 			m_host[0] = "s1.pokemonium.com";
 			m_servers[0] = new Button("Pokemonium Server");
 			m_servers[0].setSize(280, 24);
-			m_servers[0].setLocation(16, 32);
+			m_servers[0].setPosition(16, 64);
 			m_servers[0].setVisible(true);
-			m_servers[0].addActionListener(new ActionListener()
+			m_servers[0].addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent arg0)
+				public void run()
 				{
 					m_client.connect(m_host[0]);
 				}
 			});
-			this.add(m_servers[0]);
+			panel.add(m_servers[0]);
 		}
-		privateIP = new TextField();
-		privateIP.setLocation(16, 204);
+		privateIP = new EditField();
+		privateIP.setPosition(16, 236);
 		privateIP.setSize(128, 24);
-		this.add(privateIP);
+		panel.add(privateIP);
 		privateServer = new Button();
 		privateServer.setText(translate.get(2));
 		privateServer.setSize(128, 24);
-		privateServer.setLocation(168, 204);
-		privateServer.addActionListener(new ActionListener()
+		privateServer.setPosition(168, 236);
+		privateServer.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				m_client.connect(getPrivateServer());
 			}
 		});
-		this.add(privateServer);
-		setVisible(false);
+		panel.add(privateServer);
 		m_back = new Button();
 		m_back.setText("Back");
 		m_back.setSize(128, 24);
-		m_back.setLocation(94, 235);
-		m_back.addActionListener(new ActionListener()
+		m_back.setPosition(94, 267);
+		m_back.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent evt)
+			public void run()
 			{
 				m_client.returnToLanguageSelect();
 			}
 		});
-		this.add(m_back);
+		panel.add(m_back);
+		add(panel);
 		setVisible(false);
 	}
 

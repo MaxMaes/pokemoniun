@@ -1,153 +1,160 @@
 package org.pokenet.client.ui.frames;
 
-import java.util.ArrayList;
-import java.util.List;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.entity.OurPlayer;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
-import org.pokenet.client.ui.base.ListBox;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.ListBox;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.model.SimpleChangableListModel;
 
-//@author sadhi
-public class TrainChooserDialog extends Frame {
+/**
+ * @author sadhi
+ * @author Myth1c
+ */
+public class TrainChooserDialog extends ResizableFrame
+{
 
-	protected ListBox m_travelList;
+	protected ListBox<String> m_travelList;
 	protected Label m_travelDisplay;
-	private List<String> m_locations;
+	private SimpleChangableListModel<String> m_locations;
 	private String choice;
-	
+	private Widget pane;
+
 	public TrainChooserDialog(String travel, final OurPlayer p)
 	{
-		m_locations = new ArrayList<String>();
-		if (travel.equalsIgnoreCase("kanto"))
+		setTheme("chooserDialog");
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(getWidth(), 190);
+		pane.setPosition(0, 0);
+
+		m_locations = new SimpleChangableListModel<String>();
+		if(travel.equalsIgnoreCase("kanto"))
 		{
-			m_locations.add("Goldenrod City - $10k") ;
+			m_locations.addElement("Goldenrod City - $10k");
+			m_locations.addElement("Phenac City - $17.5k");
+			m_locations.addElement("Pyrite Town - $20k");
 		}
-		else if (travel.equalsIgnoreCase("johto"))
+		else if(travel.equalsIgnoreCase("johto"))
 		{
-			m_locations.add("Saffron City - $10k") ;
+			m_locations.addElement("Saffron City - $10k");
+			m_locations.addElement("Phenac City - $15k");
+			m_locations.addElement("Pyrite Town - $17.5k");
 		}
-		else if (travel.equalsIgnoreCase("sinnoh"))
+		else if(travel.equalsIgnoreCase("phenac"))
 		{
-			m_locations.add("Resort Area - $100k") ;
+			m_locations.addElement("Saffron City - $17.5k");
+			m_locations.addElement("Goldenrod City - $15k");
+			m_locations.addElement("Pyrite Town - $2.5k");
 		}
-		else if (travel.equalsIgnoreCase("Resort"))
+		else if(travel.equalsIgnoreCase("pyrite"))
 		{
-			m_locations.add("Snowpoint City - $10k") ;
+			m_locations.addElement("Saffron City - $20k");
+			m_locations.addElement("Goldenrod City - $17.5k");
+			m_locations.addElement("Phenac City - $2.5k");
 		}
-		else if (travel.equalsIgnoreCase("Fuchsia"))
+		else if(travel.equalsIgnoreCase("Fuchsia"))
 		{
-			m_locations.add("Safari Zone - $30k") ;
+			m_locations.addElement("Safari Zone - $30k");
 		}
-		else if (travel.equalsIgnoreCase("mt.silver"))
+		else if(travel.equalsIgnoreCase("mt.silver"))
 		{
-			m_locations.add("Mt.Silver") ;
+			m_locations.addElement("Mt.Silver");
 		}
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
-//		m_travelDisplay = new Label();
-//		m_travelDisplay.setSize(124,204);
-//		m_travelDisplay.setLocation(105, 20);
-//		getContentPane().add(m_travelDisplay);
-		m_travelList = new ListBox(m_locations, false)
-		{
-			@Override
-			protected void itemClicked(String itemName, int idx)
-			{
-				super.itemClicked(itemName, idx);
-				
-			}
-		};
+
+		// m_travelDisplay = new Label();
+		// m_travelDisplay.setSize(124,204);
+		// m_travelDisplay.setPosition(105, 20);
+		// add(m_travelDisplay);
+		m_travelList = new ListBox<String>(m_locations);
+		m_travelList.setTheme("listbox");
 		m_travelList.setSize(245, 70);
-		getContentPane().add(m_travelList);
+		m_travelList.setPosition(2, 25);
+		pane.add(m_travelList);
+
 		setTitle("Please choose your destination..");
-		getCloseButton().setVisible(false);
 		setSize(250, 130);
-		setLocation(300,150);
-		setResizable(false);
+		setPosition(300, 150);
+		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(true);
 		setVisible(true);
 		initUse();
-//		System.out.println("end dialog");
+		add(pane);
+		// System.out.println("end dialog");
 	}
-	
+
 	public void initUse()
 	{
-		final TrainChooserDialog thisDialog = this;
 		Button use = new Button("Let's travel!");
-		use.pack();
-		use.setLocation(25, 75);
-		getContentPane().add(use);
+		use.setTheme("button");
+		use.setSize(70, 20);
+		use.setPosition(25, 100);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.pack();
-		cancel.setLocation(150, 75);
-		getContentPane().add(cancel);
+		cancel.setPosition(150, 100);
+		cancel.setSize(70, 20);
+		cancel.setTheme("button");
+		pane.add(cancel);
 
-		cancel.addActionListener(new ActionListener()
+		cancel.addCallback(new Runnable()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				GameClient.getInstance().getDisplay().remove(thisDialog);
+				setVisible(false);
 			}
 		});
-		use.addActionListener(new ActionListener()
+		use.addCallback(new Runnable()
 		{
-
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				choice = m_travelList.getSelectedName();
-				GameClient.getInstance().getDisplay().remove(thisDialog);
-				String txt = "Do you wish to go to "+ choice +"? You need a trainer level of atleast 25.";
-				if (choice.contains("Snowpoint"))
+				choice = m_locations.getEntry(getChoice());
+				setVisible(false);
+				String txt = "Do you wish to go to " + choice + "?\nYou need a trainer level of atleast 25.\nBut for Pyrite Town and Phenac City you also need 17 badges.";
+				if(choice.contains("Snowpoint"))
 				{
 					txt = "Are you sure you want to go back to snowpoint?";
 				}
-				else if (choice.contains("Resort Area"))
+				else if(choice.contains("Resort Area"))
 				{
 					txt = "Are you sure you wish to go there?\nThe Trainers and Pokémon there are quite strong.\nThat is why you need atleast 30 badges";
 				}
-				else if (choice.contains("Safari Zone"))
+				else if(choice.contains("Safari Zone"))
 				{
 					txt = "Entry to the safari zone costs 30k,\nYou also need to be atleast trainer level 25.\nDo you wish to enter?";
 				}
-				else if (choice.contains("Mt.Silver"))
+				else if(choice.contains("Mt.Silver"))
 				{
 					txt = "To enter Mt.Silver you need the 16 badges of Kanto and Johto.\nDo you wish to enter?";
 				}
-				final ConfirmationDialog confirm = new ConfirmationDialog(txt);
-				confirm.addYesListener(new ActionListener()
+				Runnable yes = new Runnable()
 				{
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
-						//GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_travelList.getSelectedName());
+						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("S" + m_travelList.getSelectedName());
 						ClientMessage message = new ClientMessage(ServerPacket.TRAVEL);
 						message.addString(choice);
 						GameClient.getInstance().getSession().send(message);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
-				});
-				confirm.addNoListener(new ActionListener()
+				};
+				Runnable no = new Runnable()
 				{
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
-				});
-				GameClient.getInstance().getDisplay().add(confirm);
+				};
+				GameClient.getInstance().getGUIPane().showConfirmationDialog(txt, yes, no);
 			}
 		});
 	}
 
 	public int getChoice()
 	{
-		return m_travelList.getSelectedIndex();
+		return m_travelList.getSelected();
 	}
 }

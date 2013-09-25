@@ -12,6 +12,6 @@ public class BattleUnknownMessageEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().showMessage(Request.readString());
+		BattleManager.getInstance().getNarrator().showMessage(Request.readString());
 	}
 }

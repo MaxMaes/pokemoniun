@@ -12,6 +12,6 @@ public class StartTradeEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getUi().startTrade(Request.readString());
+		GameClient.getInstance().getHUD().showTradeDialog(Request.readString());
 	}
 }

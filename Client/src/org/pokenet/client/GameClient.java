@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
-import mdes.slick.sui.Display;
 import org.jboss.netty.channel.ChannelFuture;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.AppGameContainer;
@@ -28,12 +29,15 @@ import org.pokenet.client.backend.Animator;
 import org.pokenet.client.backend.BattleManager;
 import org.pokenet.client.backend.ClientMap;
 import org.pokenet.client.backend.ClientMapMatrix;
+import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
+import org.pokenet.client.backend.ItemSpriteDatabase;
 import org.pokenet.client.backend.KeyManager;
 import org.pokenet.client.backend.KeyManager.Action;
 import org.pokenet.client.backend.MoveLearningManager;
 import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.PokedexData;
+import org.pokenet.client.backend.PokemonSpriteDatabase;
 import org.pokenet.client.backend.SoundManager;
 import org.pokenet.client.backend.SpriteFactory;
 import org.pokenet.client.backend.TWLInputAdapter;
@@ -48,11 +52,10 @@ import org.pokenet.client.constants.Music;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.network.Connection;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.twl.ui.GUIPane;
-import org.pokenet.client.twl.ui.LoginScreen;
-import org.pokenet.client.twl.ui.frames.PlayerPopupDialog;
-import org.pokenet.client.ui.LoadingScreen;
-import org.pokenet.client.ui.UserInterface;
+import org.pokenet.client.ui.GUIPane;
+import org.pokenet.client.ui.HUD;
+import org.pokenet.client.ui.LoginScreen;
+import org.pokenet.client.ui.frames.PlayerPopupDialog;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
@@ -88,14 +91,13 @@ public class GameClient extends BasicGame
 	private Session m_session;
 	private static boolean debug = false;
 	private final static int FPS = 60;
-	private final static String GAME_TITLE = "Pokemonium 1.5.0.3";
+	private final static String GAME_TITLE = "Pokemonium 1.6";
 	private static AppGameContainer gameContainer;
 	private Connection m_connection;
 	private String m_filepath;
 	private Font m_fontLarge, m_fontSmall, m_trueTypeFont, m_pokedexfontsmall, m_pokedexfontmedium, m_pokedexfontlarge, m_pokedexfontmini, m_pokedexfontbetweenminiandsmall;
 	private volatile static GameClient m_instance;
 	private String m_language = Language.ENGLISH;
-	private Image m_loadBarLeft, m_loadBarRight, m_loadBarMiddle;
 	private Image m_loadImage; // Made these static to prevent memory leak.
 	private boolean m_loadSurroundingMaps = false;
 	private DeferredResource m_nextResource;
@@ -110,17 +112,15 @@ public class GameClient extends BasicGame
 	private boolean m_chatServerIsActive;
 	private boolean m_close = false; // Used to tell the game to close or not.
 	private Color m_daylight;
-	private Display m_display;
 	private boolean m_isNewMap = false;
-	private LoadingScreen m_loading;
 	private ClientMapMatrix m_mapMatrix;
 	private int m_mapX, m_mapY, m_playerId;
 	private MoveLearningManager m_moveLearningManager;
 	private OurPlayer m_ourPlayer = null;
 	private boolean m_started = false;
 	private TimeService m_time;// = new TimeService();
-	private UserInterface m_ui;
 	private WeatherService m_weather;// = new WeatherService();
+	private Graphics graphics;
 
 	private static boolean started = false;
 
@@ -166,20 +166,28 @@ public class GameClient extends BasicGame
 		{
 			e.printStackTrace();
 		}
+
 		try
 		{
 			gameContainer = new AppGameContainer(GameClient.getInstance(), 800, 600, fullscreen);
-			gameContainer.setTargetFrameRate(FPS);
-
-			if(!fullscreen)
-				gameContainer.setAlwaysRender(true);
-			gameContainer.start();
-			started = true;
 		}
-		catch(Exception e)
+		catch(SlickException se)
 		{
-			e.printStackTrace();
+			se.printStackTrace();
 		}
+		gameContainer.setTargetFrameRate(FPS);
+
+		if(!fullscreen)
+			gameContainer.setAlwaysRender(true);
+		try
+		{
+			gameContainer.start();
+		}
+		catch(SlickException se)
+		{
+			se.printStackTrace();
+		}
+		started = true;
 	}
 
 	/**
@@ -296,8 +304,8 @@ public class GameClient extends BasicGame
 		}
 		catch(Exception e)
 		{
-			GameClient.getInstance().messageDialog("The server is offline, please check back later.");
-			m_loading.setVisible(false);
+			GameClient.getInstance().showMessageDialog("The server is offline, please check back later.");
+			getGUIPane().hideLoadingScreen();
 		}
 	}
 
@@ -305,7 +313,7 @@ public class GameClient extends BasicGame
 	public void controllerDownPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
 						move(Direction.Down);
@@ -317,7 +325,7 @@ public class GameClient extends BasicGame
 	public void controllerLeftPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
 						move(Direction.Left);
@@ -329,7 +337,7 @@ public class GameClient extends BasicGame
 	public void controllerRightPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
 						move(Direction.Right);
@@ -341,12 +349,34 @@ public class GameClient extends BasicGame
 	public void controllerUpPressed(int controller)
 	{
 		if(started)
-			if(m_ui.getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
 						move(Direction.Up);
 					else if(m_ourPlayer.getDirection() != Direction.Up)
 						move(Direction.Up);
+	}
+
+	public int getGameContainerWidth()
+	{
+		return gameContainer.getWidth();
+	}
+
+	public int getGameContainerHeight()
+	{
+		return gameContainer.getHeight();
+	}
+
+	public void setFullscreen(boolean toSet)
+	{
+		try
+		{
+			gameContainer.setFullscreen(toSet);
+		}
+		catch(SlickException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void disableKeyRepeat()
@@ -421,12 +451,6 @@ public class GameClient extends BasicGame
 		return m_connection;
 	}
 
-	/** Returns the display */
-	public Display getDisplay()
-	{
-		return m_display;
-	}
-
 	/** Returns the File Path, if any */
 	public String getFilePath()
 	{
@@ -471,16 +495,6 @@ public class GameClient extends BasicGame
 	public String getLanguage()
 	{
 		return m_language;
-	}
-
-	/**
-	 * Returns the loading screen
-	 * 
-	 * @return
-	 */
-	public LoadingScreen getLoadingScreen()
-	{
-		return m_loading;
 	}
 
 	/**
@@ -574,6 +588,11 @@ public class GameClient extends BasicGame
 		return lwjglRenderer;
 	}
 
+	public Graphics getGraphics()
+	{
+		return graphics;
+	}
+
 	public Session getSession()
 	{
 		return m_session;
@@ -610,9 +629,9 @@ public class GameClient extends BasicGame
 	}
 
 	/** Returns the user interface */
-	public UserInterface getUi()
+	public HUD getHUD()
 	{
-		return m_ui;
+		return getGUIPane().getHUD();
 	}
 
 	public UserManager getUserManager()
@@ -651,7 +670,7 @@ public class GameClient extends BasicGame
 		}
 
 		if(key == Input.KEY_ESCAPE)
-
+		{
 			if(!root.getConfirmationDialog().isVisible())
 			{
 				Runnable yes = new Runnable()
@@ -689,12 +708,14 @@ public class GameClient extends BasicGame
 				root.showConfirmationDialog("Are you sure you want to exit?", yes, no);
 			}
 			else
+			{
 				root.hideConfirmationDialog();
-
-		if(m_ui.getNPCSpeech() == null && !m_ui.getChat().isActive() && !root.getLoginScreen().isVisible() && !BattleManager.getInstance().isBattling() && !m_isNewMap)
-			if(m_ourPlayer != null && !m_isNewMap
-			/* && m_loading != null && !m_loading.isVisible() */
-			&& !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove())
+			}
+		}
+		if(getHUD().getNPCSpeech() == null && !getHUD().getChat().hasKeyboardFocus() && !root.getLoginScreen().isVisible() && !BattleManager.getInstance().isBattling() && !m_isNewMap)
+		{
+			if(m_ourPlayer != null && !m_isNewMap && !BattleManager.getInstance().isBattling() && m_ourPlayer.canMove() && !getHUD().hasShop())
+			{
 				if(key == KeyManager.getKey(Action.WALK_DOWN))
 				{
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
@@ -748,27 +769,27 @@ public class GameClient extends BasicGame
 					}
 				}
 				else if(key == Input.KEY_C)
-					m_ui.toggleChat();
+					getHUD().toggleChat();
 				else if(key == Input.KEY_1)
-					m_ui.toggleStats();
+					getHUD().togglePlayerStats();
 				else if(key == Input.KEY_2)
-					m_ui.togglePokedex();
+					getHUD().togglePokedex();
 				else if(key == Input.KEY_3)
-					m_ui.togglePokemon();
+					getHUD().togglePokemon();
 				else if(key == Input.KEY_4)
-					m_ui.toggleBag();
+					getHUD().toggleBag();
 				else if(key == Input.KEY_5)
-					m_ui.toggleMap();
+					getHUD().toggleMap();
 				else if(key == Input.KEY_6)
-					m_ui.toggleFriends();
+					getHUD().toggleFriends();
 				else if(key == Input.KEY_7)
-					m_ui.toggleRequests();
+					getHUD().toggleRequests();
 				else if(key == Input.KEY_8)
-					m_ui.toggleOptions();
+					getHUD().toggleOptions();
 				else if(key == Input.KEY_9)
-					m_ui.toggleHelp();
+					getHUD().toggleHelp();
 				else if(key == Input.KEY_0)
-					m_ui.disconnect();
+					getHUD().disconnect();
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
@@ -793,34 +814,38 @@ public class GameClient extends BasicGame
 					message.addString("100");
 					m_session.send(message);
 				}
-		if(key == KeyManager.getKey(Action.POKEMOVE_1) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+			}
+		}
+		if(key == KeyManager.getKey(Action.POKEMOVE_1) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(0);
-		if(key == KeyManager.getKey(Action.POKEMOVE_2) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_2) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(1);
-		if(key == KeyManager.getKey(Action.POKEMOVE_3) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_3) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(2);
-		if(key == KeyManager.getKey(Action.POKEMOVE_4) && BattleManager.getInstance().isBattling() && !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
+		if(key == KeyManager.getKey(Action.POKEMOVE_4) && !root.getLoginScreen().isVisible() && BattleManager.getInstance().isBattling() && !getHUD().hasMoveLearning())
 			BattleManager.getInstance().getBattleWindow().useMove(3);
-		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !m_ui.getChat().isActive()
-				&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()) && !getDisplay().containsChild(getUi().getShop()))
+		if(key == KeyManager.getKey(Action.INTERACTION) && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !getHUD().hasMoveLearning())
 		{
-			if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
+			if(getHUD().getNPCSpeech() == null && !BattleManager.getInstance().isBattling())// BattleManager.getInstance().getBattleWindow()))
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
 			}
-			if(BattleManager.getInstance().isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
-					&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
-				BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+			if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
+			{
+				getHUD().getBattleSpeechFrame().advance();
+			}
 			else
+			{
 				try
 				{
-					m_ui.getNPCSpeech().advance();
+					getHUD().getNPCSpeech().advance();
 				}
 				catch(Exception e)
 				{
-					m_ui.nullSpeechFrame();
+					getHUD().removeNPCSpeechFrame();
 				}
+			}
 		}
 	}
 
@@ -828,13 +853,19 @@ public class GameClient extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
-		// gc.getGraphics().setBackground(Color.white);
+		Image x16 = new Image("res/icon_16.png");
+		Image x32 = new Image("res/icon_32.png");
+		Image x128 = new Image("res/icon_128.png");
+
+		ByteBuffer[] buff = new ByteBuffer[3];
+		buff[0] = FileLoader.loadImageAsByteBuffer(x16);
+		buff[1] = FileLoader.loadImageAsByteBuffer(x32);
+		buff[2] = FileLoader.loadImageAsByteBuffer(x128);
+		Display.setIcon(buff);
 
 		// Load the images.
 		m_loadImage = new Image("res/load.jpg");
-		m_loadBarLeft = new Image("res/ui/loadbar/left.png");
-		m_loadBarRight = new Image("res/ui/loadbar/right.png");
-		m_loadBarMiddle = new Image("res/ui/loadbar/middle.png");
+		graphics = gc.getGraphics();
 
 		// m_loadImage = m_loadImage.getScaledCopy(gc.getWidth() /
 		// m_loadImage.getWidth());
@@ -843,8 +874,7 @@ public class GameClient extends BasicGame
 		LoadingList.setDeferredLoading(true);
 
 		gc.getGraphics().setWorldClip(-32, -32, 832, 832);
-		gc.setShowFPS(false); /* Toggle this to show FPS */
-		m_display = new Display(gc);
+		gc.setShowFPS(false); /* Toggle this to show FPS TODO: include in options */
 
 		/* Setup variables */
 		m_fontLarge = new AngelCodeFont(m_filepath + "res/fonts/dp.fnt", m_filepath + "res/fonts/dp.png");
@@ -887,6 +917,7 @@ public class GameClient extends BasicGame
 			root = new GUIPane();
 			gui = new GUI(root, lwjglRenderer);
 			gui.applyTheme(theme);
+			gui.setSize(800, 600);
 		}
 		catch(LWJGLException e)
 		{
@@ -898,7 +929,6 @@ public class GameClient extends BasicGame
 		}
 		finally
 		{
-			// restore Slick's GL state
 			GL11.glPopAttrib();
 		}
 
@@ -907,12 +937,6 @@ public class GameClient extends BasicGame
 		gc.getInput().addPrimaryListener(twlInputAdapter);
 		root.getLoginScreen().setServerRevision(2000);
 		root.showLoginScreen();
-
-		m_loading = new LoadingScreen();
-		m_display.add(m_loading);
-
-		// m_ui = new UserInterface(m_display);
-		// m_ui.setAllVisible(false);
 
 		/* Item DB */
 		ItemDatabase m_itemdb = new ItemDatabase();
@@ -927,8 +951,17 @@ public class GameClient extends BasicGame
 		m_animator = new Animator(m_mapMatrix);
 
 		gc.getInput().enableKeyRepeat();
-		// LoadingList.setDeferredLoading(false);
 
+		setPlayerSpriteFactory();
+		PokemonSpriteDatabase.Init();
+		ItemSpriteDatabase.Init();
+
+		m_weather = new WeatherService();
+		m_time = new TimeService();
+		if(options != null)
+			m_weather.setEnabled(options.isWeatherEnabled());
+
+		System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start until you get the language select screen)");
 	}
 
 	/** Load options */
@@ -998,17 +1031,38 @@ public class GameClient extends BasicGame
 	}
 
 	/** Creates a message Box */
-	public void messageDialog(String message)
+	public void showMessageDialog(final String message)
 	{
-		if(!root.getMessageDialog().isVisible())
-			root.showMessageDialog(message, new Runnable()
+		// Do this every time because it will mostly be called by events send from Netty and this makes it Gui Thread..
+		gui.invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
 			{
-				@Override
-				public void run()
+				if(!root.getMessageDialog().isVisible())
 				{
-					root.hideMessageDialog();
+					root.showMessageDialog(message, new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							root.hideMessageDialog();
+						}
+					});
 				}
-			});
+				else
+				{
+					root.getMessageDialog().queue(message, new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							root.hideMessageDialog();
+						}
+					});
+				}
+			}
+		});
 	}
 
 	/** Accepts the mouse input */
@@ -1017,19 +1071,24 @@ public class GameClient extends BasicGame
 	{
 		// Right Click
 		if(button == 1)
+		{
 			// loop through the players and look for one that's in the
 			// place where the user just right-clicked
 			for(Player p : m_mapMatrix.getPlayers())
+			{
 				if(x >= p.getX() + m_mapMatrix.getCurrentMap().getXOffset() && x <= p.getX() + 32 + m_mapMatrix.getCurrentMap().getXOffset()
 						&& y >= p.getY() + m_mapMatrix.getCurrentMap().getYOffset() && y <= p.getY() + 40 + m_mapMatrix.getCurrentMap().getYOffset())
+				{
 					// Brings up a popup menu with player options
 					if(!p.isOurPlayer())
 					{
 						if(root.getHUD().getPlayerPopupDialog() != null)
-							root.getHUD().destroyPlayerPopupDialog();
-						root.getHUD().createPlayerPopupDialog(p.getUsername());
-						root.getHUD().showPlayerPopupDialogAt(x, y);
+							root.getHUD().hidePlayerPopupDialog();
+						root.getHUD().showPlayerPopupDialog(p.getUsername(), x, y);
 					}
+				}
+			}
+		}
 		// Left click
 		if(button == 0)
 		{
@@ -1041,36 +1100,42 @@ public class GameClient extends BasicGame
 					if(x > dialog.getInnerX() || x < dialog.getInnerX() + dialog.getWidth())
 						dialog.destroy();
 					else if(y > dialog.getInnerY() || y < dialog.getInnerY() + dialog.getHeight())
-						root.getHUD().destroyPlayerPopupDialog();
+						root.getHUD().hidePlayerPopupDialog();
 			}
 			// repeats space bar items (space bar emulation for mouse. In case
 			// you do not have a space bar!)
 			try
 			{
-				if(getDisplay().containsChild(m_ui.getChat()))
-					m_ui.getChat().dropFocus();
-				if(m_ui.getNPCSpeech() == null && !getDisplay().containsChild(BattleManager.getInstance().getBattleWindow()))
+				if(getHUD().getChat().isVisible())
 				{
-					// m_Session.writeTcpMessage("3C");
+					getHUD().getChat().giveupKeyboardFocus();
+				}
+				if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog())
+				{
 					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
 				}
-				if(BattleManager.getInstance().isBattling() && getDisplay().containsChild(BattleManager.getInstance().getTimeLine().getBattleSpeech())
-						&& !getDisplay().containsChild(MoveLearningManager.getInstance().getMoveLearning()))
-					BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
-				else
+				if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
+				{
+					getHUD().getBattleSpeechFrame().advance();
+				}
+				else if(getHUD().hasNPCSpeechFrame())
+				{
 					try
 					{
-						m_ui.getNPCSpeech().advance();
+						System.out.println("Advancing from 1108");
+						getHUD().getNPCSpeech().advance();
 					}
 					catch(Exception e)
 					{
-						m_ui.nullSpeechFrame();
-						// m_Session.write("F");
+
+						e.printStackTrace();
 					}
+				}
 			}
 			catch(Exception e)
 			{
+				e.printStackTrace();
 			}
 		}
 	}
@@ -1104,6 +1169,9 @@ public class GameClient extends BasicGame
 		try
 		{
 			GameClient.setOptions(new Options());
+			setFullscreen(options.isFullscreenEnabled());
+			m_soundPlayer.mute(options.isSoundMuted());
+			m_weather.setEnabled(options.isWeatherEnabled());
 		}
 		catch(Exception e)
 		{
@@ -1118,34 +1186,10 @@ public class GameClient extends BasicGame
 	{
 		g.setColor(Color.white);
 
-		int total = LoadingList.get().getTotalResources();
-		int maxWidth = gc.getWidth() - 20;
-		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
 		if(!m_started)
 		{
-			if(m_nextResource != null)
-			{
-				g.drawImage(m_loadImage, 0, 0);
-				g.drawRoundRect(10, gc.getHeight() - 122, maxWidth - 9, 24, 14);
-
-				float bar = loaded / (float) total;
-				g.drawImage(m_loadBarLeft, 13, gc.getHeight() - 120);
-				g.drawImage(m_loadBarMiddle, 11 + m_loadBarLeft.getWidth(), gc.getHeight() - 120, bar * (maxWidth - 13), gc.getHeight() - 120 + m_loadBarMiddle.getHeight(), 0, 0,
-						m_loadBarMiddle.getWidth(), m_loadBarMiddle.getHeight());
-				g.drawImage(m_loadBarRight, bar * (maxWidth - 13), gc.getHeight() - 120);
-				g.drawString("Loading,  please wait ... ", 10, gc.getHeight() - 90);
-				if(LoadingList.get().getRemainingResources() < 1)
-					m_started = true;
-			}
-
-			// g.drawString("Loading: " + m_nextResource.getDescription(), 10,
-			// gc.getHeight() - 90);
-
-			// non-imagy loading bar
-			// g.setColor(m_loadColor);
-			// g.setAntiAlias(true);
-			// g.fillRoundRect(15, gc.getHeight() - 120, bar*(maxWidth - 10),
-			// 20, 10);
+			if(LoadingList.get().getRemainingResources() < 1)
+				m_started = true;
 		}
 		else
 		{
@@ -1202,19 +1246,17 @@ public class GameClient extends BasicGame
 			/* Render the UI layer */
 			try
 			{
-				synchronized(m_display)
+				// synchronized(twlInputAdapter)
+				// {
+				try
 				{
-					try
-					{
-						twlInputAdapter.render();
-						m_display.render(gc, g);
-					}
-					catch(ConcurrentModificationException e)
-					{
-						twlInputAdapter.render();
-						m_display.render(gc, g);
-					}
+					twlInputAdapter.render();
 				}
+				catch(ConcurrentModificationException e)
+				{
+					twlInputAdapter.render();
+				}
+				// }
 			}
 			catch(Exception e)
 			{
@@ -1228,20 +1270,13 @@ public class GameClient extends BasicGame
 	{
 		m_session = null;
 		m_ourPlayer = null;
-		try
-		{
-			if(BattleManager.getInstance() != null)
-				BattleManager.getInstance().endBattle();
-			if(getUi().getNPCSpeech() != null)
-				getUi().getNPCSpeech().setVisible(false);
-			if(getUi().getChat() != null)
-				getUi().getChat().setVisible(false);
-			getUi().hideHUD(true);
-			getUi().setVisible(false);
-		}
-		catch(Exception e)
-		{
-		}
+		if(BattleManager.getInstance().isBattling())
+			BattleManager.getInstance().endBattle();
+		if(getHUD().getNPCSpeech() != null)
+			getHUD().removeNPCSpeechFrame();
+		if(getHUD().getChat() != null)
+			getHUD().hideChat();
+		root.hideHUD();
 		m_soundPlayer.setTrack(Music.INTRO_AND_GYM);
 		root.showLoginScreen();
 		root.getLoginScreen().showLanguageSelect();
@@ -1264,6 +1299,7 @@ public class GameClient extends BasicGame
 		getLoginScreen().hideServerRevision();
 		disconnect();
 		getLoginScreen().showServerSelect();
+		root.hideHUD();
 	}
 
 	/**
@@ -1297,8 +1333,8 @@ public class GameClient extends BasicGame
 		m_mapX = x;
 		m_mapY = y;
 		m_isNewMap = true;
-		m_loading.setVisible(true);
-		m_ui.getReqWindow().clearOffers();
+		getGUIPane().showLoadingScreen();
+		getHUD().getRequestDialog().clearOffers();
 		m_soundPlayer.setTrackByLocation(m_mapMatrix.getMapName(x, y));
 	}
 
@@ -1332,21 +1368,20 @@ public class GameClient extends BasicGame
 		m_session = session;
 	}
 
-	public void showAlert(String title, String text)
-	{
-		if(root.getAlertDialog().isVisible())
-			root.hideAlertDialog();
-		Runnable ok = new Runnable()
-		{
-
-			@Override
-			public void run()
-			{
-				root.hideAlertDialog();
-			}
-		};
-		root.showAlertDialog(title, text, ok);
-	}
+	// public void showAlert(String title, String text)
+	// {
+	// if(root.getAlertDialog().isVisible())
+	// root.hideAlertDialog();
+	// Runnable ok = new Runnable()
+	// {
+	// @Override
+	// public void run()
+	// {
+	// root.hideAlertDialog();
+	// }
+	// };
+	// root.showAlertDialog(title, text, ok);
+	// }
 
 	/** Updates the game window */
 	/* ! Keep in mind, no calculations in here. Only repaint ! */
@@ -1367,38 +1402,8 @@ public class GameClient extends BasicGame
 			}
 			return;
 		}
-		if(!m_started)
+		if(m_started)
 		{
-			if(m_ui == null)
-			{
-				LoadingList.setDeferredLoading(false);
-
-				setPlayerSpriteFactory();
-
-				m_weather = new WeatherService();
-				m_time = new TimeService();
-				if(options != null)
-					m_weather.setEnabled(options.isWeatherEnabled());
-
-				m_ui = new UserInterface(m_display);
-				m_ui.setAllVisible(false);
-				System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start until you get the language select screen)");
-			}
-		}
-		else
-		{
-			/* Update the gui layer */
-			try
-			{
-				synchronized(m_display)
-				{
-					m_display.update(gc, delta);
-				}
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
 			if(lastPressedKey > -2)
 			{
 				if(gc.getInput().isKeyDown(lastPressedKey))
@@ -1408,20 +1413,28 @@ public class GameClient extends BasicGame
 					lastPressedKey = -2;
 			}
 			/* Check if we need to loads maps */
-			if(m_isNewMap && m_loading.isVisible() && m_ourPlayer != null)
+			if(m_isNewMap && m_ourPlayer != null)
 			{
+				getGUIPane().hideHUD();
+				getGUIPane().showLoadingScreen();
 				m_mapMatrix.loadMaps(m_mapX, m_mapY, gc.getGraphics());
 				m_mapMatrix.getCurrentMap().setName(m_mapMatrix.getMapName(m_mapX, m_mapY));
 				m_mapMatrix.getCurrentMap().setXOffset(400 - m_ourPlayer.getX(), false);
 				m_mapMatrix.getCurrentMap().setYOffset(300 - m_ourPlayer.getY(), false);
 				m_mapMatrix.recalibrate();
-				m_ui.getMap().setPlayerLocation();
+				// getHUD().getMap().setPlayerLocation();
 				m_isNewMap = false;
-				m_loading.setVisible(false);
+				getGUIPane().hideLoadingScreen();
+				getGUIPane().showHUD();
 			}
 			/* Animate the player */
 			if(m_ourPlayer != null)
+			{
 				m_animator.animate();
+				/* update battle */
+				/* if(BattleManager.getInstance().isBattling() && BattleManager.getInstance().getCurEnemyPoke() != null && BattleManager.getInstance().getCurPoke() != null)
+				 * BattleManager.getInstance().getBattleWindow().getCanvas().update(); */
+			}
 			/* Update weather and daylight */
 			if(!m_isNewMap)
 			{

@@ -32,9 +32,9 @@ Keine gueltige Email.
 Passwoerter stimmen nicht ueberein.
 Username muss mindestens 4 Zeichen enthalten. Max. 12 Buchstaben.
 1. No swearing./n2. No spamming./n3. One account per person./n4. No scamming./n5. Do not talk in all capitals./n6. No botting./n7. No hacking./n/nBreaking any of these rules may/nresult in a ban. We would also like/nour members to note that thisis a/nbeta release, your account may be/ndeleted at anytime to facilitate improvements. Any bugs or issues should be reported to developers.
-About Pokenet
-Pokenet is a free, non-profit, open-source Pokemon MMORPG. 
-Pokenet is in no way affiliated with or officially supported by Nintendo.
+About Pokemonium
+Pokemonium is a free, non-profit, open-source Pokemon MMORPG. 
+Pokemonium is in no way affiliated with or officially supported by Nintendo.
 Pokemon is a registered trademark of Nintendo (1995 - Present)./n/n
 Contributors:
 -DefaulT, Fshy, ZombieBear, Ryan, Pivot,/nIlentcape, Sienide, TMKCodes, Drawig,/nLordAdmiral, Psycho, Dragina,/nOblivion, Lastplacer, Firefly17, Gama,/nJacobe, Latias, Callagan, xkendrickx,/nMewtwo, PheonixClaw, JayJay, May, Nushio, PokeRemixStudio

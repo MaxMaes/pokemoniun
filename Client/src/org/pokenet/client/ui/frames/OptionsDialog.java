@@ -1,113 +1,74 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.CheckBox;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.muffin.FileMuffin;
-import org.newdawn.slick.muffin.Muffin;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Options;
 import org.pokenet.client.backend.Translator;
+import org.pokenet.client.ui.components.Checkbox;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.ResizableFrame;
 
-public class OptionsDialog extends Frame
+public class OptionsDialog extends ResizableFrame
 {
-	private CheckBox m_disableMaps;
-	private CheckBox m_disableWeather;
+	private Checkbox m_disableMaps;
+	private Checkbox m_disableWeather;
+	private Checkbox m_fullScreen;
 
-	private CheckBox m_fullScreen;
-
-	private Muffin m_muffin = new FileMuffin();
-	private CheckBox m_muteSound;
+	private Checkbox m_muteSound;
 	private Options m_options;
 	private Button m_save;
-
-	// private SimpleColorPicker learnColor;
 
 	public OptionsDialog()
 	{
 		m_options = GameClient.getInstance().getOptions();
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
 		initGUI();
 	}
 
 	public void initGUI()
 	{
-		/* { learnColor = new SimpleColorPicker(); try { learnColor.setSelectedColor(Color.decode(options.get("learnColor"))); } catch (RuntimeException e) { e.printStackTrace(); } learnColor.setLocation(10, 70); getContentPane().add(learnColor); } */
 		List<String> translated = Translator.translate("_GUI");
-		setBackground(new Color(0, 0, 0, 70));
-		{
+		m_fullScreen = new Checkbox(translated.get(16));
 
-			m_fullScreen = new CheckBox(translated.get(16));
-			m_fullScreen.pack();
-			m_fullScreen.setLocation(10, 10);
+		m_fullScreen.setActive(m_options.isFullscreenEnabled());
+		add(m_fullScreen);
+		m_muteSound = new Checkbox(translated.get(17));
 
-			m_fullScreen.setSelected(m_options.isFullscreenEnabled());
-			getContentPane().add(m_fullScreen);
-		}
-		{
-			m_muteSound = new CheckBox(translated.get(17));
-			m_muteSound.pack();
-			m_muteSound.setLocation(150, 10);
+		m_muteSound.setActive(m_options.isSoundMuted());
+		add(m_muteSound);
+		m_disableMaps = new Checkbox(translated.get(48));
+		m_disableMaps.setActive(!m_options.isSurroundingMapsEnabled());
+		add(m_disableMaps);
 
-			m_muteSound.setSelected(m_options.isSoundMuted());
-			getContentPane().add(m_muteSound);
-		}
-		{
-			m_disableMaps = new CheckBox(translated.get(48));
-			m_disableMaps.pack();
-			m_disableMaps.setLocation(10, 45);
-			m_disableMaps.setSelected(!m_options.isSurroundingMapsEnabled());
-			getContentPane().add(m_disableMaps);
-		}
-		{
-			m_disableWeather = new CheckBox("Disable Weather");
-			m_disableWeather.pack();
-			m_disableWeather.setLocation(10, 78);
-			m_disableWeather.setSelected(!m_options.isWeatherEnabled());
-			getContentPane().add(m_disableWeather);
-		}
-		{
-			m_save = new Button(translated.get(18));
-			m_save.setSize(50, 25);
-			m_save.setLocation(88, 108);
-			getContentPane().add(m_save);
+		m_disableWeather = new Checkbox("Disable Weather");
 
-			m_save.addActionListener(new ActionListener()
+		m_disableWeather.setActive(!m_options.isWeatherEnabled());
+		add(m_disableWeather);
+
+		m_save = new Button(translated.get(18));
+
+		add(m_save);
+
+		m_save.addCallback(new Runnable()
+		{
+			@Override
+			public void run()
 			{
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					List<String> translated = Translator.translate("_GUI");
-					/* options.remove("learnColor"); options.put("learnColor", learnColor.getColorHexLabel(). getText()); */
-
-					m_options.setFullscreenEnabled(m_fullScreen.isSelected());
-					if(m_muteSound.isSelected())
-						m_options.setVolume(0);
-					else
-						m_options.setVolume(100);
-					GameClient.getInstance().getSoundPlayer().mute(m_options.isSoundMuted());
-
-					m_options.setSurroundingMapsEnabled(!m_disableMaps.isSelected());
-					GameClient.getInstance().setLoadSurroundingMaps(m_options.isSurroundingMapsEnabled());
-
-					m_options.setWeatherEnabled(!m_disableWeather.isSelected());
-					GameClient.getInstance().getWeatherService().setEnabled(!m_disableWeather.isSelected());
-
-					m_options.saveSettings();
-					GameClient.getInstance().messageDialog(translated.get(19));
-					GameClient.getInstance().reloadOptions();
-				}
-			});
-		}
+				List<String> translated = Translator.translate("_GUI");
+				m_options.setFullscreenEnabled(m_fullScreen.isActive());
+				if(m_muteSound.isActive())
+					m_options.setVolume(0);
+				else
+					m_options.setVolume(100);
+				m_options.setSurroundingMapsEnabled(!m_disableMaps.isActive());
+				m_options.setWeatherEnabled(!m_disableWeather.isActive());
+				m_options.saveSettings();
+				GameClient.getInstance().showMessageDialog(translated.get(19));
+				GameClient.getInstance().reloadOptions();
+				GameClient.getInstance().getHUD().toggleOptions();
+			}
+		});
 		setTitle(translated.get(15));
-		setSize(400, 160);
-		setResizable(false);
-		getTitleBar().getCloseButton().setVisible(false);
+		setResizableAxis(ResizableAxis.NONE);
 	}
 
 	@Override
@@ -115,5 +76,18 @@ public class OptionsDialog extends Frame
 	{
 		m_options = GameClient.getInstance().getOptions();
 		super.setVisible(state);
+	}
+
+	@Override
+	public void layout()
+	{
+		setTitle("Settings");
+		m_fullScreen.setPosition(10, 30);
+		m_muteSound.setPosition(150, 30);
+		m_disableMaps.setPosition(10, 65);
+		m_disableWeather.setPosition(10, 98);
+		m_save.setSize(50, 25);
+		m_save.setPosition(88, 128);
+		setSize(400, 160);
 	}
 }

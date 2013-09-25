@@ -2,52 +2,43 @@ package org.pokenet.client.ui.frames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import mdes.slick.sui.event.MouseAdapter;
-import mdes.slick.sui.event.MouseEvent;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.GUIContext;
-import org.newdawn.slick.loading.LoadingList;
 import org.pokenet.client.GameClient;
-import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.backend.ItemDatabase;
 import org.pokenet.client.backend.entity.PlayerItem;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ImageButton;
+import org.pokenet.client.ui.components.ImageButton;
+import de.matthiasmann.twl.Alignment;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.PopupWindow;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.Image;
 
 /**
  * The big bag dialog
  * 
- * @author Nushio
- * @author ZombieBear
+ * @author Myth1c
  */
-public class BigBagDialog extends Frame
+public class BigBagDialog extends ResizableFrame
 {
 	protected ImageButton[] m_categoryButtons;
 	protected int m_curCategory = 0;
-	protected ArrayList<Button> m_itemBtns;
+	protected ArrayList<ImageButton> m_itemBtns;
 	protected Button m_leftButton, m_rightButton, m_cancel;
 	protected ItemPopup m_popup;
 	protected ArrayList<Label> m_stockLabels;
-	protected boolean m_update = false;
 	private HashMap<Integer, ArrayList<PlayerItem>> m_items;
-	private HashMap<Integer, Integer> m_scrollIndex;
+	private HashMap<Integer, Integer> m_scrollIndex; // Used to memorize scrolling through different categories
+	private Image[] bagicons;
+	private org.pokenet.client.ui.components.Image bagicon;
 
-	public BigBagDialog()
+	public BigBagDialog(Widget root)
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
 		setCenter();
-		initGUI();
+		initGUI(root);
 		loadItems();
-		getTitleBar().getCloseButton().setVisible(false);
 	}
 
 	/**
@@ -59,20 +50,36 @@ public class BigBagDialog extends Frame
 	public void addItem(int id, boolean newItem)
 	{
 		if(newItem)
+		{
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				if(item.getNumber() == id)
+				{
 					// Potions and medicine
 					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					{
 						m_items.get(1).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+					{
 						m_items.get(2).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+					{
 						m_items.get(3).add(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+					{
 						m_items.get(4).add(item);
+					}
 					else
+					{
 						m_items.get(0).add(item);
-		m_update = true;
+					}
+				}
+			}
+		}
+		update();
 	}
 
 	/**
@@ -80,53 +87,48 @@ public class BigBagDialog extends Frame
 	 */
 	public void closeBag()
 	{
-		setVisible(false);
-		GameClient.getInstance().getDisplay().remove(this);
+		GameClient.getInstance().getHUD().toggleBag();
 	}
 
 	/**
 	 * Destroys the item popup
 	 */
-	public void destroyPopup()
+	public void destroyPopup(Widget root)
 	{
-		if(getDisplay().containsChild(m_popup))
-		{
-			m_popup.destroyPopup();
-			m_popup = null;
-		}
+		root.removeChild(m_popup);
+		m_popup = null;
 	}
 
 	/** Initializes the interface */
-	public void initGUI()
+	public void initGUI(final Widget root)
 	{
-		/* Does this cause a memory leak in JAVA if called more than once? If so does java have a delete keyword? */
 		m_items = new HashMap<Integer, ArrayList<PlayerItem>>();
 		m_scrollIndex = new HashMap<Integer, Integer>();
-		m_itemBtns = new ArrayList<Button>();
+		m_itemBtns = new ArrayList<ImageButton>();
 		m_stockLabels = new ArrayList<Label>();
 		m_categoryButtons = new ImageButton[5];
 		// remove any existing Bag gui content
-		getContentPane().removeAll();
+		removeAllChildren();
 		String respath = System.getProperty("res.path");
 		if(respath == null)
 			respath = "";
 		try
 		{
-			Image[] bagcat = new Image[] { new Image(FileLoader.loadFile(respath + "res/ui/bag/bag_normal.png"), "res/ui/bag/bag_normal.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/bag_hover.png"), "res/ui/bag/bag_hover.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/bag_pressed.png"), "res/ui/bag/bag_pressed.png", false) };
-			Image[] potioncat = new Image[] { new Image(FileLoader.loadFile(respath + "res/ui/bag/potions_normal.png"), "res/ui/bag/potions_normal.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/potions_hover.png"), "res/ui/bag/potions_hover.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/potions_pressed.png"), "res/ui/bag/potions_pressed.png", false) };
-			Image[] berriescat = new Image[] { new Image(FileLoader.loadFile(respath + "res/ui/bag/berries_normal.png"), "res/ui/bag/berries_normal.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/berries_hover.png"), "res/ui/bag/berries_hover.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/berries_pressed.png"), "res/ui/bag/berries_pressed.png", false) };
-			Image[] pokecat = new Image[] { new Image(FileLoader.loadFile(respath + "res/ui/bag/pokeballs_normal.png"), "res/ui/bag/pokeballs_normal.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/pokeballs_hover.png"), "res/ui/bag/pokeballs_hover.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/pokeballs_pressed.png"), "res/ui/bag/pokeballs_pressed.png", false) };
-			Image[] tmscat = new Image[] { new Image(FileLoader.loadFile(respath + "res/ui/bag/tms_normal.png"), "res/ui/bag/tms_normal.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/tms_hover.png"), "res/ui/bag/tms_hover.png", false),
-					new Image(FileLoader.loadFile(respath + "res/ui/bag/tms_pressed.png"), "res/ui/bag/tms_pressed.png", false) };
+			Image[] bagcat = new Image[] { GameClient.getInstance().getTheme().getImage("item"), GameClient.getInstance().getTheme().getImage("item_hover"),
+					GameClient.getInstance().getTheme().getImage("item_pressed") };
+
+			Image[] potioncat = new Image[] { GameClient.getInstance().getTheme().getImage("potion"), GameClient.getInstance().getTheme().getImage("potion_hover"),
+					GameClient.getInstance().getTheme().getImage("potion_pressed") };
+
+			Image[] berriescat = new Image[] { GameClient.getInstance().getTheme().getImage("berrie"), GameClient.getInstance().getTheme().getImage("berrie_hover"),
+					GameClient.getInstance().getTheme().getImage("berrie_pressed") };
+
+			Image[] pokecat = new Image[] { GameClient.getInstance().getTheme().getImage("pokeball"), GameClient.getInstance().getTheme().getImage("pokeball_hover"),
+					GameClient.getInstance().getTheme().getImage("pokeball_pressed") };
+
+			Image[] tmscat = new Image[] { GameClient.getInstance().getTheme().getImage("tm"), GameClient.getInstance().getTheme().getImage("tm_hover"),
+					GameClient.getInstance().getTheme().getImage("tm_pressed") };
+
 			for(int i = 0; i < m_categoryButtons.length; i++)
 			{
 				final int j = i;
@@ -134,45 +136,38 @@ public class BigBagDialog extends Frame
 				{
 					case 0:
 						m_categoryButtons[i] = new ImageButton(bagcat[0], bagcat[1], bagcat[2]);
-						m_categoryButtons[i].setToolTipText("Bag");
+						m_categoryButtons[i].setTooltipContent("Bag");
 						break;
 					case 1:
 						m_categoryButtons[i] = new ImageButton(potioncat[0], potioncat[1], potioncat[2]);
-						m_categoryButtons[i].setToolTipText("Potions");
+						m_categoryButtons[i].setTooltipContent("Potions");
 						break;
 					case 2:
 						m_categoryButtons[i] = new ImageButton(berriescat[0], berriescat[1], berriescat[2]);
-						m_categoryButtons[i].setToolTipText("Food");
+						m_categoryButtons[i].setTooltipContent("Food");
 						break;
 					case 3:
 						m_categoryButtons[i] = new ImageButton(pokecat[0], pokecat[1], pokecat[2]);
-						m_categoryButtons[i].setToolTipText("Pokeballs");
+						m_categoryButtons[i].setTooltipContent("Pokeballs");
 						break;
 					case 4:
 						m_categoryButtons[i] = new ImageButton(tmscat[0], tmscat[1], tmscat[2]);
-						m_categoryButtons[i].setToolTipText("TMs");
+						m_categoryButtons[i].setTooltipContent("TMs");
 						break;
 				}
 				m_items.put(i, new ArrayList<PlayerItem>());
 				m_scrollIndex.put(i, 0);
-				m_categoryButtons[i].setSize(40, 40);
-				if(i == 0)
-					m_categoryButtons[i].setLocation(80, 10);
-				else
-					m_categoryButtons[i].setLocation(m_categoryButtons[i - 1].getX() + 65, 10);
-				m_categoryButtons[i].setFont(GameClient.getInstance().getFontLarge());
-				m_categoryButtons[i].setOpaque(false);
-				m_categoryButtons[i].addActionListener(new ActionListener()
+				m_categoryButtons[i].addCallback(new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						destroyPopup();
+						destroyPopup(root);
 						m_curCategory = j;
-						m_update = true;
+						update();
 					}
 				});
-				getContentPane().add(m_categoryButtons[i]);
+				add(m_categoryButtons[i]);
 			}
 		}
 		catch(Exception e)
@@ -180,125 +175,103 @@ public class BigBagDialog extends Frame
 			e.printStackTrace();
 		}
 		// Bag Image
-		Label bagicon = new Label("");
-		bagicon.setSize(40, 40);
-		LoadingList.setDeferredLoading(true);
-		try
-		{
-			bagicon.setImage(new Image(respath + "res/ui/bag/front.png", false));
-		}
-		catch(SlickException e1)
-		{
-		}
-		LoadingList.setDeferredLoading(false);
-		bagicon.setLocation(18, 0);
-		bagicon.setFont(GameClient.getInstance().getFontLarge());
-		getContentPane().add(bagicon);
+		loadBagIcons();
+
 		// Scrolling Button LEFT
 		m_leftButton = new Button("<");
-		m_leftButton.setSize(20, 40);
-		m_leftButton.setLocation(15, 95);
-		m_leftButton.addActionListener(new ActionListener()
+		m_leftButton.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				int i = m_scrollIndex.get(m_curCategory) - 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
-				m_update = true;
+				update();
 			}
 		});
-		getContentPane().add(m_leftButton);
+		add(m_leftButton);
 		// Item Buttons and Stock Labels
 		for(int i = 0; i < 4; i++)
 		{
 			final int j = i;
 			// Starts the item buttons
-			Button item = new Button();
-			item.setSize(60, 60);
-			item.setLocation(50 + 80 * i, 85);
-			item.addActionListener(new ActionListener()
+			ImageButton item = new ImageButton();
+			item.addCallback(new Runnable()
 			{
 				@Override
-				public void actionPerformed(ActionEvent e)
+				public void run()
 				{
-					destroyPopup();
-					useItem(j);
+					destroyPopup(root);
+					useItem(j, root);
+					update();
 				}
 			});
 			m_itemBtns.add(item);
-			getContentPane().add(item);
+			add(item);
 			// Starts the item labels
 			Label stock = new Label();
-			stock.setSize(60, 40);
-			stock.setLocation(50 + 80 * i, 135);
-			stock.setHorizontalAlignment(Label.CENTER_ALIGNMENT);
-			stock.setFont(GameClient.getInstance().getFontLarge());
-			stock.setForeground(Color.white);
+			stock.setAlignment(Alignment.CENTER);
 			m_stockLabels.add(stock);
-			getContentPane().add(stock);
+			add(stock);
 		}
 
 		// Scrolling Button Right
 		m_rightButton = new Button(">");
-		m_rightButton.setSize(20, 40);
-		m_rightButton.setLocation(365, 95);
-		m_rightButton.addActionListener(new ActionListener()
+
+		m_rightButton.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				int i = m_scrollIndex.get(m_curCategory) + 1;
 				m_scrollIndex.remove(m_curCategory);
 				m_scrollIndex.put(m_curCategory, i);
-				m_update = true;
+				update();
 			}
 		});
-		getContentPane().add(m_rightButton);
+		add(m_rightButton);
 		// Close Button
 		m_cancel = new Button("Close");
-		m_cancel.setSize(400, 32);
-		m_cancel.setLocation(0, 195);
-		m_cancel.addActionListener(new ActionListener()
+
+		m_cancel.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				closeBag();
 			}
 		});
-		getContentPane().add(m_cancel);
+		add(m_cancel);
 		// Frame properties
-		getResizer().setVisible(false);
-		getCloseButton().addActionListener(new ActionListener()
+		addCloseCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				destroyPopup();
+				destroyPopup(root);
 				closeBag();
 			}
 		});
-		getContentPane().addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseReleased(MouseEvent e)
-			{
-				super.mouseReleased(e);
-				destroyPopup();
-			}
-		});
-		setBackground(new Color(0, 0, 0, 75));
+		update();
 		setTitle("Bag");
-		setResizable(false);
-		setHeight(250);
-		setWidth(m_categoryButtons.length * 80);
+		setResizableAxis(ResizableAxis.NONE);
+		setDraggable(true);
+		setSize(m_categoryButtons.length * 80, 250);
 		setVisible(true);
 		setCenter();
+	}
+
+	private void loadBagIcons()
+	{
+		bagicons = new Image[] { GameClient.getInstance().getTheme().getImage("bag_topleft"), GameClient.getInstance().getTheme().getImage("bag_topright"),
+				GameClient.getInstance().getTheme().getImage("bag_middle"), GameClient.getInstance().getTheme().getImage("bag_front"), GameClient.getInstance().getTheme().getImage("bag_bottom"),
+				GameClient.getInstance().getTheme().getImage("bag_topleft") };
+		bagicon = new org.pokenet.client.ui.components.Image(bagicons[3]);
+		add(bagicon);
 	}
 
 	/**
@@ -307,31 +280,46 @@ public class BigBagDialog extends Frame
 	 * @param id
 	 * @param amount
 	 */
-	public void removeItem(int id, boolean remove)
+	public void removeItem(int id, boolean remove, Widget root)
 	{
 		/* The remove variable indicates that this is the last of the item, and it should be removed from the inventory */
 		if(remove)
 		{
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				if(item.getNumber() == id)
+				{
 					// Potions and medicine
 					if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine"))
+					{
 						m_items.get(1).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+					{
 						m_items.get(2).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+					{
 						m_items.get(3).remove(item);
+					}
 					else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+					{
 						m_items.get(4).remove(item);
+					}
 					else
+					{
 						m_items.get(0).remove(item);
-			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The affect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
+					}
+				}
+			}
+			/* There is probably a better way to do the code below, but what essentially occurs is a re-initialization of the bag screen. Then the category is set back to the previous category. The effect this has for the user is, the item is instantly removed from the players bag screen when the last of the item is used. */
 			int tmpCurCategory = m_curCategory;
-			initGUI();
+			initGUI(root);
 			loadItems();
 			m_curCategory = tmpCurCategory;
+
 		}
-		m_update = true;
+		update();
 	}
 
 	/**
@@ -339,51 +327,54 @@ public class BigBagDialog extends Frame
 	 */
 	public void setCenter()
 	{
-		int height = (int) GameClient.getInstance().getDisplay().getHeight();
-		int width = (int) GameClient.getInstance().getDisplay().getWidth();
+		int height = (int) GameClient.getInstance().getGUIPane().getHeight();
+		int width = (int) GameClient.getInstance().getGUIPane().getWidth();
 		int x = width / 2 - 200;
 		int y = height / 2 - 200;
-		setBounds(x, y, getWidth(), getHeight());
+		setSize(getWidth(), getHeight());
+		setPosition(x, y);
 	}
 
-	@Override
-	public void update(GUIContext gc, int delta)
+	public void update()
 	{
-		super.update(gc, delta);
-		if(m_update)
+		// Enable/disable scrolling
+		if(m_scrollIndex.get(m_curCategory) == 0)
 		{
-			m_update = false;
-			// Enable/disable scrolling
-			if(m_scrollIndex.get(m_curCategory) == 0)
-				m_leftButton.setEnabled(false);
-			else
-				m_leftButton.setEnabled(true);
-
-			if(m_scrollIndex.get(m_curCategory) + 4 >= m_items.get(m_curCategory).size())
-				m_rightButton.setEnabled(false);
-			else
-				m_rightButton.setEnabled(true);
-			// Update items and stocks
-			System.out.println("Looping through items to display");
-			for(int i = 0; i < 5; i++)
-				try
-				{
-					m_itemBtns.get(i).setName(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
-					m_itemBtns.get(i).setToolTipText(
-							m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getName() + "\n"
-									+ m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getDescription());
-					m_itemBtns.get(i).setImage(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getBagImage());
-					m_stockLabels.get(i).setText("x" + m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getQuantity());
-					m_itemBtns.get(i).setEnabled(true);
-				}
-				catch(Exception e)
-				{
-					m_itemBtns.get(i).setImage(null);
-					m_itemBtns.get(i).setToolTipText("");
-					m_itemBtns.get(i).setText("");
-					m_stockLabels.get(i).setText("");
-					m_itemBtns.get(i).setEnabled(false);
-				}
+			m_leftButton.setEnabled(false);
+		}
+		else
+		{
+			m_leftButton.setEnabled(true);
+		}
+		if(m_scrollIndex.get(m_curCategory) + 4 >= m_items.get(m_curCategory).size())
+		{
+			m_rightButton.setEnabled(false);
+		}
+		else
+		{
+			m_rightButton.setEnabled(true);
+		}
+		// Update items and stocks
+		for(int i = 0; i < 4; i++)
+		{
+			try
+			{
+				m_itemBtns.get(i).setText(String.valueOf(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getNumber()));
+				m_itemBtns.get(i).setTooltipContent(
+						m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getName() + "\n"
+								+ m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getItem().getDescription());
+				m_itemBtns.get(i).setImage(m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getBagImage());
+				m_stockLabels.get(i).setText("x" + m_items.get(m_curCategory).get(m_scrollIndex.get(m_curCategory) + i).getQuantity());
+				m_itemBtns.get(i).setEnabled(true);
+			}
+			catch(Exception e)
+			{
+				m_itemBtns.get(i).setImage(null);
+				m_itemBtns.get(i).setTooltipContent("");
+				m_itemBtns.get(i).setText("");
+				m_stockLabels.get(i).setText("");
+				m_itemBtns.get(i).setEnabled(false);
+			}
 		}
 	}
 
@@ -392,29 +383,28 @@ public class BigBagDialog extends Frame
 	 * 
 	 * @param i
 	 */
-	public void useItem(int i)
+	public void useItem(int i, Widget root)
 	{
-		destroyPopup();
+		destroyPopup(root);
 		if(m_curCategory == 3)
-//		if(m_curCategory == 0 || m_curCategory == 3)
+		// if(m_curCategory == 0 || m_curCategory == 3)
 		{
-			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName())).getCategory().equalsIgnoreCase("Field"))
-				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), false, false);
-			// System.out.println("win " + i);
+			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getText())).getCategory().equalsIgnoreCase("Field"))
+			{
+				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), false, false, root);
+			}
 			else
-				m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), true, false);
-			// System.out.println("fail " + i);
-			// System.out.println(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getName()))
-			// .getCategory());
-			m_popup.setLocation(m_itemBtns.get(i).getAbsoluteX(), m_itemBtns.get(i).getAbsoluteY() + m_itemBtns.get(i).getHeight() - getTitleBar().getHeight());
-			getDisplay().add(m_popup);
+			{
+				m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
+			}
+
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
+
 		}
 		else
 		{
-			m_popup = new ItemPopup(m_itemBtns.get(i).getToolTipText().split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getName()), true, false);
-			m_popup.setLocation(m_itemBtns.get(i).getAbsoluteX(), m_itemBtns.get(i).getAbsoluteY() + m_itemBtns.get(i).getHeight() - getTitleBar().getHeight());
-			getDisplay().add(m_popup);
-			// System.out.println("check " + i);
+			m_popup = new ItemPopup(((String) m_itemBtns.get(i).getTooltipContent()).split("\n")[0], Integer.parseInt(m_itemBtns.get(i).getText()), true, false, root);
+			m_popup.setPopupPosition(m_itemBtns.get(i).getInnerX(), m_itemBtns.get(i).getInnerY() + m_itemBtns.get(i).getHeight() - 48);
 		}
 	}
 
@@ -424,19 +414,30 @@ public class BigBagDialog extends Frame
 		{
 			// Load the player's items and sort them by category
 			for(PlayerItem item : GameClient.getInstance().getOurPlayer().getItems())
+			{
 				// Field items
 				if(item.getItem().getCategory().equalsIgnoreCase("Field") || item.getItem().getCategory().equalsIgnoreCase("Evolution") || item.getItem().getCategory().equalsIgnoreCase("Held"))
+				{
 					m_items.get(0).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Potions") || item.getItem().getCategory().equalsIgnoreCase("Medicine")
 						|| item.getItem().getCategory().equalsIgnoreCase("Vitamins"))
+				{
 					m_items.get(1).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Food"))
+				{
 					m_items.get(2).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("Pokeball"))
+				{
 					m_items.get(3).add(item);
+				}
 				else if(item.getItem().getCategory().equalsIgnoreCase("TM"))
+				{
 					m_items.get(4).add(item);
-			m_update = true;
+				}
+			}
 		}
 		catch(Exception e)
 		{
@@ -444,14 +445,53 @@ public class BigBagDialog extends Frame
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void layout()
+	{
+		super.layout();
+		for(int i = 0; i < m_categoryButtons.length; i++)
+		{
+			m_categoryButtons[i].setSize(40, 40);
+			if(i == 0)
+			{
+				m_categoryButtons[i].setPosition(80 + getInnerX(), 37 + getInnerY());
+			}
+			else
+			{
+				m_categoryButtons[i].setPosition(m_categoryButtons[i - 1].getX() + 65, m_categoryButtons[i - 1].getY());
+			}
+		}
+		bagicon.setPosition(10 + getInnerX(), 30 + getInnerY());
+		for(int i = 0; i < m_itemBtns.size(); i++)
+		{
+			Button btn = m_itemBtns.get(i);
+			btn.setSize(60, 60);
+			btn.setPosition(50 + 80 * i + getInnerX(), 95 + getInnerY());
+		}
+
+		int idx = 0;
+		for(Label stockLabel : m_stockLabels)
+		{
+			stockLabel.setSize(60, 40);
+			stockLabel.setPosition(50 + 80 * idx + getInnerX(), 145 + getInnerY());
+			idx++;
+		}
+		m_leftButton.setSize(20, 40);
+		m_leftButton.setPosition(15 + getInnerX(), 105 + getInnerY());
+		m_rightButton.setSize(20, 40);
+		m_rightButton.setPosition(365 + getInnerX(), 105 + getInnerY());
+		m_cancel.setSize(400, 32);
+		m_cancel.setPosition(0 + getInnerX(), 218 + getInnerY());
+	}
 }
 
 /**
  * The use dialog for items
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-class ItemPopup extends Frame
+class ItemPopup extends Widget
 {
 	private Button m_cancel;
 	private Button m_destroy;
@@ -459,6 +499,14 @@ class ItemPopup extends Frame
 	private Label m_name;
 	private TeamPopup m_team;
 	private Button m_use;
+
+	private boolean isInBattle;
+	private boolean usedOnPokemon;
+	private int itemID;
+
+	private PopupWindow popup;
+	private Widget rootWidget;
+	private Runnable usedCallback;
 
 	/**
 	 * Default Constructor
@@ -468,100 +516,85 @@ class ItemPopup extends Frame
 	 * @param useOnPokemon
 	 * @param isBattle
 	 */
-	public ItemPopup(String item, int id, boolean useOnPokemon, boolean isBattle)
+	public ItemPopup(String item, int id, boolean useOnPokemon, boolean isBattle, Widget root)
 	{
-		final int m_id = id;
-		final boolean m_useOnPoke = useOnPokemon;
-		final boolean m_isBattle = isBattle;
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
+		rootWidget = root;
+		itemID = id;
+		usedOnPokemon = useOnPokemon;
+		isInBattle = isBattle;
+
 		// Item name label
 		m_name = new Label(item.split("\n")[0]);
-		m_name.setFont(GameClient.getInstance().getFontSmall());
-		m_name.setForeground(Color.white);
-		m_name.pack();
-		m_name.setLocation(0, 0);
-		getContentPane().add(m_name);
+		add(m_name);
+
 		// Use button
 		m_use = new Button("Use");
-		m_use.setSize(100, 25);
-		m_use.setLocation(0, m_name.getY() + m_name.getHeight() + 3);
-		m_use.addActionListener(new ActionListener()
+
+		m_use.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				useItem(m_id, m_useOnPoke, m_isBattle);
+				useItem(itemID, usedOnPokemon, isInBattle);
 			}
 		});
-		getContentPane().add(m_use);
-		if(!isBattle)
-		{
-			m_give = new Button("Give");
-			m_give.setSize(100, 25);
-			m_give.setLocation(0, m_use.getY() + 25);
-			// m_give.setEnabled(false);
-			m_give.addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					giveItem(m_id);
-				}
-			});
-			getContentPane().add(m_give);
-		}
-		// Destroy the item
-		m_destroy = new Button("Drop");
-		m_destroy.setSize(100, 25);
-		if(!isBattle)
-			m_destroy.setLocation(0, m_give.getY() + 25);
-		else
-			m_destroy.setLocation(0, m_use.getY() + 25);
-		m_destroy.addActionListener(new ActionListener()
+		add(m_use);
+
+		m_give = new Button("Give");
+		m_give.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
+			{
+				giveItem(itemID);
+			}
+		});
+		if(isBattle)
+		{
+			m_give.setEnabled(false);
+		}
+		add(m_give);
+
+		// Destroy the item
+		m_destroy = new Button("Drop");
+		m_destroy.addCallback(new Runnable()
+		{
+			@Override
+			public void run()
 			{
 				ClientMessage message = new ClientMessage(ServerPacket.ITEM_DESTROY);
-				message.addInt(m_id);
+				message.addInt(itemID);
 				GameClient.getInstance().getSession().send(message);
 				destroyPopup();
 			}
 		});
-		getContentPane().add(m_destroy);
+		add(m_destroy);
 
 		// Close the popup
 		m_cancel = new Button("Cancel");
-		m_cancel.setSize(100, 25);
-		m_cancel.setLocation(0, m_destroy.getY() + 25);
-		m_cancel.addActionListener(new ActionListener()
+		m_cancel.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
 				destroyPopup();
 			}
 		});
-		getContentPane().add(m_cancel);
-		// Frame configuration
-		addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mousePressed(MouseEvent e)
-			{
-				destroyPopup();
-			}
-		});
-		setBackground(new Color(0, 0, 0, 150));
-		if(!isBattle)
-			setSize(100, 140);
-		else
-			setSize(100, 115);
-		getTitleBar().setVisible(false);
+		add(m_cancel);
+
 		setVisible(true);
-		setResizable(false);
-		setAlwaysOnTop(true);
+
+		popup = new PopupWindow(root);
+		popup.setTheme("bigbagdialogpopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(true);
+		popup.setCloseOnEscape(true);
+		popup.openPopup();
+	}
+
+	public void setPopupPosition(int x, int y)
+	{
+		popup.setPosition(x, y);
 	}
 
 	/**
@@ -569,9 +602,14 @@ class ItemPopup extends Frame
 	 */
 	public void destroyPopup()
 	{
-		getDisplay().remove(m_team);
-		m_team = null;
-		getDisplay().remove(this);
+		if(m_team != null)
+		{
+			m_team.destroy();
+			m_team = null;
+		}
+		removeChild(this);
+		popup.closePopup();
+		popup.destroy();
 	}
 
 	/**
@@ -581,14 +619,12 @@ class ItemPopup extends Frame
 	 */
 	public void giveItem(int id)
 	{
-		setAlwaysOnTop(false);
-		if(getDisplay().containsChild(m_team))
-			getDisplay().remove(m_team);
-		m_team = null;
-		m_team = new TeamPopup(this, id, false, false);
-		m_team.setLocation(m_give.getAbsoluteX() + getWidth(), m_give.getAbsoluteY() - 15);
-		getDisplay().add(m_team);
-
+		if(m_team != null)
+		{
+			m_team.destroy();
+		}
+		m_team = new TeamPopup(this, id, false, false, rootWidget);
+		m_team.setPopupPosition(popup.getInnerX() + popup.getWidth() - 1, m_give.getInnerY() - 15);
 	}
 
 	/**
@@ -599,16 +635,18 @@ class ItemPopup extends Frame
 	 */
 	public void useItem(int id, boolean usedOnPoke, boolean isBattle)
 	{
-		if(getDisplay().containsChild(m_team))
-			getDisplay().remove(m_team);
-		m_team = null;
+		if(m_team != null)
+		{
+			m_team.destroy();
+		}
 		if(usedOnPoke)
 		{
-			setAlwaysOnTop(false);
-			m_team = new TeamPopup(this, id, true, isBattle);
-			m_team.setLocation(m_use.getAbsoluteX() + getWidth(), m_use.getAbsoluteY() - 15);
-			getDisplay().add(m_team);
-			// System.out.println("i use");
+			m_team = new TeamPopup(this, id, true, isBattle, rootWidget);
+			m_team.setPopupPosition(popup.getInnerX() + popup.getWidth() - 1, m_use.getInnerY() - 15);
+			if(usedCallback != null)
+			{
+				m_team.setItemUsedCallback(usedCallback);
+			}
 		}
 		else
 		{
@@ -618,17 +656,55 @@ class ItemPopup extends Frame
 			destroyPopup();
 		}
 	}
+
+	@Override
+	public void layout()
+	{
+		m_name.setPosition(getInnerX() + getWidth() / 2 - m_name.computeTextWidth() / 2, getInnerY() + m_name.computeTextHeight());
+		m_use.setSize(100, 25);
+		m_use.setPosition(getInnerX() + 5, m_name.getInnerY() + m_name.computeTextHeight() + 3);
+		m_give.setSize(100, 25);
+		m_give.setPosition(getInnerX() + 5, m_use.getInnerY() + 25);
+		m_destroy.setSize(100, 25);
+		// if(!isInBattle)
+		// {
+		m_destroy.setPosition(getInnerX() + 5, m_give.getInnerY() + 25);
+		setSize(110, 140);
+		popup.setSize(110, 140);
+		// }
+		// else
+		// {
+		// m_destroy.setPosition(0, m_use.getY() + 25);
+		// setSize(100, 115);
+		// }
+		m_cancel.setSize(100, 25);
+		m_cancel.setPosition(getInnerX() + 5, m_destroy.getInnerY() + 25);
+
+		// popup.adjustSize();
+
+	}
+
+	public void setItemUsedCallback(Runnable callback)
+	{
+		usedCallback = callback;
+	}
 }
 
 /**
  * PopUp that lists the player's pokemon in order to use/give an item
  * 
- * @author ZombieBear
+ * @author Myth1c
  */
-class TeamPopup extends Frame
+class TeamPopup extends Widget
 {
-	Label m_details;
-	ItemPopup m_parent;
+	private Button[] pokeButtons;
+	private ItemPopup m_parent;
+	private int item;
+	private boolean use;
+	private boolean isBattle;
+
+	private PopupWindow popup;
+	private Runnable itemUsedCallback;
 
 	/**
 	 * Default constructor
@@ -637,61 +713,40 @@ class TeamPopup extends Frame
 	 * @param use
 	 * @param useOnPoke
 	 */
-	public TeamPopup(ItemPopup parent, int itemId, boolean use, boolean isBattle)
+	public TeamPopup(ItemPopup parent, int itemId, boolean isuse, boolean isbattle, Widget root)
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
+		setPosition(getX() - 1, getY() + 1);
 
 		m_parent = parent;
-		final int m_item = itemId;
-		final boolean m_use = use;
-		final boolean m_isBattle = isBattle;
-		int y = 0;
-		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPokemon().length; i++)
-			try
+		item = itemId;
+		use = isuse;
+		isBattle = isbattle;
+		pokeButtons = new Button[GameClient.getInstance().getOurPlayer().getPokemon().length];
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPartyCount(); i++)
+		{
+			final int idx = i;
+			pokeButtons[i] = new Button(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
+			pokeButtons[i].addCallback(new Runnable()
 			{
-				final Label tempLabel = new Label(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
-				final int j = i;
-				tempLabel.setSize(100, 15);
-				tempLabel.setFont(GameClient.getInstance().getFontSmall());
-				tempLabel.setForeground(Color.white);
-				tempLabel.setLocation(0, y);
-				tempLabel.addMouseListener(new MouseAdapter()
+				@Override
+				public void run()
 				{
-					@Override
-					public void mouseEntered(MouseEvent e)
-					{
-						super.mouseEntered(e);
-						tempLabel.setForeground(new Color(255, 215, 0));
-					}
+					destroyPopup();
+					processItemUse(use, item, idx, isBattle);
+				}
+			});
+			add(pokeButtons[i]);
+		}
 
-					@Override
-					public void mouseExited(MouseEvent e)
-					{
-						super.mouseExited(e);
-						tempLabel.setForeground(new Color(255, 255, 255));
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent e)
-					{
-						super.mouseReleased(e);
-						processItemUse(m_use, m_item, j, m_isBattle);
-					}
-				});
-				y += 18;
-				getContentPane().add(tempLabel);
-			}
-			catch(Exception e)
-			{
-			}
 		// Frame configuration
-		setBackground(new Color(0, 0, 0, 150));
-		setSize(100, 135);
-		getTitleBar().setVisible(false);
 		setVisible(true);
-		setResizable(false);
-		setAlwaysOnTop(true);
+
+		popup = new PopupWindow(root);
+		popup.setTheme("itemuseteampopup");
+		popup.add(this);
+		popup.setCloseOnClickedOutside(true);
+		popup.setCloseOnEscape(true);
+		popup.openPopup();
 	}
 
 	/**
@@ -709,6 +764,10 @@ class TeamPopup extends Frame
 			ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);
 			message.addString(id + "," + pokeIndex);
 			GameClient.getInstance().getSession().send(message);
+			if(itemUsedCallback != null)
+			{
+				itemUsedCallback.run();
+			}
 		}
 		else
 		{
@@ -718,5 +777,35 @@ class TeamPopup extends Frame
 			GameClient.getInstance().getOurPlayer().getPokemon()[pokeIndex].setHoldItem(ItemDatabase.getInstance().getItem(id).getName());
 		}
 		m_parent.destroyPopup();
+	}
+
+	public void destroyPopup()
+	{
+		popup.closePopup();
+		popup.destroy();
+	}
+
+	public void setPopupPosition(int x, int y)
+	{
+		popup.setPosition(x, y);
+	}
+
+	@Override
+	public void layout()
+	{
+		int y = 10;
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPartyCount(); i++)
+		{
+			pokeButtons[i].setSize(100, 25);
+			pokeButtons[i].setPosition(getInnerX() + 5, getInnerY() + y);
+			y += 25;
+		}
+
+		setSize(110, GameClient.getInstance().getOurPlayer().getPartyCount() * 25 + 20);
+	}
+
+	public void setItemUsedCallback(Runnable callback)
+	{
+		itemUsedCallback = callback;
 	}
 }

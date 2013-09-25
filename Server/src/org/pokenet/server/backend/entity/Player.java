@@ -77,7 +77,6 @@ public class Player extends Character implements Battleable, Tradeable
 	private int m_repel = 0;
 	/* Stores the list of requests the player has sent */
 	private HashMap<String, RequestType> m_requests;
-	// private IoSession m_tcpSession = null;
 	private Session m_Session = null;
 	private int m_skillBreedExp = 0;
 	private int m_skillCoordExp = 0;
@@ -97,7 +96,6 @@ public class Player extends Character implements Battleable, Tradeable
 	/** Constructor NOTE: Minimal initialisations should occur here */
 	public Player(String username)
 	{
-		// m_database = MySqlManager.getInstance();
 		m_username = username;
 		m_requests = new HashMap<String, RequestType>();
 	}
@@ -216,7 +214,8 @@ public class Player extends Character implements Battleable, Tradeable
 		{
 			m_friends.add(friend);
 			m_database.query("INSERT INTO `pn_friends` VALUES ((SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(m_username)
-					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "'));");
+					+ "'), (SELECT id FROM `pn_members` WHERE username = '" + MySqlManager.parseSQL(friend) + "')) ON DUPLICATE KEY UPDATE friendId = (SELECT id FROM `pn_members` WHERE username = '"
+					+ MySqlManager.parseSQL(friend) + "');");
 			ServerMessage addFriend = new ServerMessage(ClientPacket.FRIEND_ADDED);
 			addFriend.addString(friend);
 			getSession().Send(addFriend);
@@ -337,9 +336,37 @@ public class Player extends Character implements Battleable, Tradeable
 	 */
 	public void buyItem(int id, int q)
 	{
-		/* If the player isn't shopping, ignore this */
+		/* If the player isn't shopping, in a normal shop */
 		if(m_currentShop == null)
+		{
+			/* First, check if the player can afford this */
+			int price = GameServer.getServiceManager().getItemDatabase().getItem(id).getPrice();
+			if(m_money - q * price >= 0)
+			{
+				/* Finally, if the item is in stock, buy it */
+
+				m_money = m_money - q * price;
+				m_bag.addItem(id, q);
+				updateClientMoney();
+				/* Let player know he bought the item. */
+				ServerMessage message = new ServerMessage(ClientPacket.BOUGHT_ITEM);
+				message.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
+				getSession().Send(message);
+				/* Update player inventory. */
+				ServerMessage update = new ServerMessage(ClientPacket.UPDATE_ITEM_TOT);
+				update.addInt(GameServer.getServiceManager().getItemDatabase().getItem(id).getId());
+				update.addInt(q);
+				getSession().Send(update);
+
+			}
+			else
+			{
+				/* Return You have no money, fool! */
+				ServerMessage message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+				getSession().Send(message);
+			}
 			return;
+		}
 		if(m_bag.hasSpace(id))
 		{
 			/* First, check if the player can afford this */
@@ -424,8 +451,8 @@ public class Player extends Character implements Battleable, Tradeable
 		p.setDatabaseID(-1);
 		addPokemon(p);
 		addTrainingExp(1000 / p.getRareness());
-		if(!isPokemonCaught(p.getSpeciesNumber() + 1))
-			setPokemonCaught(p.getSpeciesNumber() + 1);
+		if(!isPokemonCaught(p.getPokedexNumber()))
+			setPokemonCaught(p.getPokedexNumber());
 	}
 
 	/**
@@ -1861,7 +1888,19 @@ public class Player extends Character implements Battleable, Tradeable
 		m_pokemon[partySlot] = m_boxes[box].getPokemon(boxSlot);
 		m_boxes[box].setPokemon(boxSlot, temp);
 		if(m_pokemon[partySlot] != null)
+		{
 			updateClientParty(partySlot);
+			String packet = "";
+			for(int i = 0; i < m_boxes[box].getPokemon().length; i++)
+				if(m_boxes[box].getPokemon(i) != null)
+					packet += m_boxes[box].getPokemon(i).getSpeciesNumber() + ",";
+				else
+					packet += ",";
+			ServerMessage message = new ServerMessage(ClientPacket.ACCESS_BOX);
+			message.addInt(1);
+			message.addString(packet);
+			getSession().Send(message);
+		}
 		else
 		{
 			ServerMessage partyLeave = new ServerMessage(ClientPacket.POKE_LEAVE_PARTY);
@@ -1897,7 +1936,6 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(m_map != null)
 			getMap().talkToNpc(this);
-		System.out.println("TALK");
 	}
 
 	/**
@@ -1991,7 +2029,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		if(getParty()[i] != null)
 		{
-			String data = PokemonSpecies.getDefaultData().getPokemonByName(getParty()[i].getSpeciesName()).getSpeciesNumber() + "," + getParty()[i].getName() + "," + getParty()[i].getHealth() + ","
+			String data = PokemonSpecies.getDefaultData().getPokemonByName(getParty()[i].getSpeciesName()).getPokedexNumber() + "," + getParty()[i].getName() + "," + getParty()[i].getHealth() + ","
 					+ getParty()[i].getGender() + "," + (getParty()[i].isShiny() ? 1 : 0) + "," + getParty()[i].getStat(0) + "," + getParty()[i].getStat(1) + "," + getParty()[i].getStat(2) + ","
 					+ getParty()[i].getStat(3) + "," + getParty()[i].getStat(4) + "," + getParty()[i].getStat(5) + "," + getParty()[i].getTypes()[0] + ","
 					+ (getParty()[i].getTypes().length > 1 && getParty()[i].getTypes()[1] != null ? getParty()[i].getTypes()[1] + "," : ",") + getParty()[i].getExp() + "," + getParty()[i].getLevel()

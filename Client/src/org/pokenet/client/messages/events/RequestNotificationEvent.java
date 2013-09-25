@@ -19,18 +19,18 @@ public class RequestNotificationEvent implements MessageEvent
 				break;
 			case 1:
 				// Players must stand beside each other to battle
-				GameClient.getInstance().getUi().getChat().addSystemMessage("You must be standing next to and facing the person you want to battle.");
+				GameClient.getInstance().getHUD().getChat().addSystemMessage("You must be standing next to and facing the person you want to battle.");
 				break;
 			case 2:
 				// PvP is disabled on this map
-				GameClient.getInstance().getUi().getChat().addSystemMessage("You are not allowed to PvP in this map.");
+				GameClient.getInstance().getHUD().getChat().addSystemMessage("You are not allowed to PvP in this map.");
 				break;
 			case 3:
 				// You must be within 3 squares to force this player to battle
-				GameClient.getInstance().getUi().getChat().addSystemMessage("You must be within 3 squares of this player to battle.");
+				GameClient.getInstance().getHUD().getChat().addSystemMessage("You must be within 3 squares of this player to battle.");
 				break;
 			case 4:
-				GameClient.getInstance().getUi().getChat().addSystemMessage("You need to have more than one pokemon and/or you must wait 1 minute before trading again.");
+				GameClient.getInstance().getHUD().getChat().addSystemMessage("You need to have more than one pokemon and/or you must wait 1 minute before trading again.");
 				break;
 		}
 	}

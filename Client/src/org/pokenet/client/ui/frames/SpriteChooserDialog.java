@@ -4,37 +4,38 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.GUIContext;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.FileLoader;
 import org.pokenet.client.constants.ServerPacket;
 import org.pokenet.client.protocol.ClientMessage;
-import org.pokenet.client.ui.base.ConfirmationDialog;
-import org.pokenet.client.ui.base.ListBox;
+import org.pokenet.client.ui.components.Image;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.CallbackWithReason;
+import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.ListBox;
+import de.matthiasmann.twl.ListBox.CallbackReason;
+import de.matthiasmann.twl.ResizableFrame;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.model.SimpleChangableListModel;
 
-public class SpriteChooserDialog extends Frame
+public class SpriteChooserDialog extends ResizableFrame
 {
 	protected String m_mustLoadSprite;
-	protected Label m_spriteDisplay;
-	protected ListBox m_spriteList;
+	protected Image m_spriteDisplay;
+	protected ListBox<String> m_spriteList;
+	private SimpleChangableListModel<String> spritelistmodel;
 	private String m_respath;
 	private List<String> m_sprites;
-	private InputStream m_stream;
+	private Widget pane;
 
 	public SpriteChooserDialog()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
+		setTheme("chooserDialog");
+		pane = new Widget();
+		pane.setTheme("content");
+		pane.setSize(265, 340);
+		pane.setPosition(0, 0);
+
 		m_sprites = new ArrayList<String>();
 		m_respath = System.getProperty("res.path");
 		if(m_respath == null)
@@ -48,103 +49,99 @@ public class SpriteChooserDialog extends Frame
 		while(s.hasNextLine())
 			m_sprites.remove(s.nextLine());
 		s.close();
-		m_spriteDisplay = new Label();
+		m_spriteDisplay = new Image();
 		m_spriteDisplay.setSize(124, 204);
-		m_spriteDisplay.setLocation(105, 20);
-		getContentPane().add(m_spriteDisplay);
-		m_spriteList = new ListBox(m_sprites, false)
+		m_spriteDisplay.setPosition(105, 20);
+		pane.add(m_spriteDisplay);
+		spritelistmodel = new SimpleChangableListModel<>();
+		for(String sp : m_sprites)
+			spritelistmodel.addElement(sp);
+		m_spriteList = new ListBox<String>(spritelistmodel);
+		m_spriteList.addCallback(new CallbackWithReason<ListBox.CallbackReason>()
 		{
+
 			@Override
-			protected void itemClicked(String itemName, int idx)
+			public void callback(CallbackReason arg0)
 			{
-				super.itemClicked(itemName, idx);
-				m_mustLoadSprite = m_respath + "res/characters/" + itemName + ".png";
+				if(arg0 == CallbackReason.KEYBOARD || arg0 == CallbackReason.MOUSE_CLICK)
+				{
+					m_mustLoadSprite = m_respath + "res/characters/" + spritelistmodel.getEntry(m_spriteList.getSelected()) + ".png";
+				}
 			}
-		};
+		});
+		m_spriteList.setPosition(2, 25);
 		m_spriteList.setSize(105, 317);
-		getContentPane().add(m_spriteList);
+		pane.add(m_spriteList);
 		setTitle("Please choose your character..");
-		getCloseButton().setVisible(false);
 		setSize(265, 340);
-		setResizable(false);
-		setDraggable(false);
+		setResizableAxis(ResizableAxis.NONE);
+		setDraggable(true);
 		setVisible(true);
 		initUse();
+		add(pane);
 	}
 
 	public int getChoice()
 	{
-		return m_spriteList.getSelectedIndex();
+		return m_spriteList.getSelected();
 	}
 
 	public void initUse()
 	{
-		final SpriteChooserDialog thisDialog = this;
 		Button use = new Button("Use new sprite!");
-		use.pack();
-		use.setLocation(130, 245);
-		getContentPane().add(use);
+		use.setPosition(130, 245);
+		use.setSize(80, 20);
+		pane.add(use);
 		Button cancel = new Button("Cancel");
-		cancel.pack();
-		cancel.setLocation(130, 280);
-		getContentPane().add(cancel);
-		cancel.addActionListener(new ActionListener()
+		cancel.setPosition(130, 280);
+		cancel.setSize(80, 20);
+		pane.add(cancel);
+		cancel.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				GameClient.getInstance().getDisplay().remove(thisDialog);
+				GameClient.getInstance().getHUD().removeSpritechooser();
 			}
 		});
-		use.addActionListener(new ActionListener()
+		use.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e)
+			public void run()
 			{
-				GameClient.getInstance().getDisplay().remove(thisDialog);
-				final ConfirmationDialog confirm = new ConfirmationDialog("Are you sure you want to change sprites?\nIt'll cost you P500!");
-				confirm.addYesListener(new ActionListener()
+				GameClient.getInstance().getHUD().removeSpritechooser();
+				Runnable yes = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 						// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0E" + m_spriteList.getSelectedName());
 						ClientMessage message = new ClientMessage(ServerPacket.BUY_SPRITE);
-						message.addInt(Integer.parseInt(m_spriteList.getSelectedName()));
+						message.addInt(Integer.parseInt(spritelistmodel.getEntry(m_spriteList.getSelected())));
 						GameClient.getInstance().getSession().send(message);
 					}
-				});
-				confirm.addNoListener(new ActionListener()
+				};
+				Runnable no = new Runnable()
 				{
 					@Override
-					public void actionPerformed(ActionEvent e)
+					public void run()
 					{
-						confirm.setVisible(false);
-						GameClient.getInstance().getDisplay().remove(confirm);
+						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 					}
-				});
-				GameClient.getInstance().getDisplay().add(confirm);
+				};
+				GameClient.getInstance().getGUIPane().showConfirmationDialog("Are you sure you want to change sprites?\nIt'll cost you P500!", yes, no);
 			}
 		});
 	}
 
 	@Override
-	public void render(GUIContext container, Graphics g)
+	public void paintWidget(GUI gui)
 	{
-		super.render(container, g);
+		super.paintWidget(gui);
 		if(m_mustLoadSprite != null)
 		{
-			try
-			{
-				m_stream = FileLoader.loadFile(m_mustLoadSprite);
-				m_spriteDisplay.setImage(new Image(m_stream, m_mustLoadSprite, false));
-			}
-			catch(SlickException se)
-			{
-				se.printStackTrace();
-			}
+			m_spriteDisplay.setImage(FileLoader.loadImage(m_mustLoadSprite));
 			m_mustLoadSprite = null;
 		}
 	}

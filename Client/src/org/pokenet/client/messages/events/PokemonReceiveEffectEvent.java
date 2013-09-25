@@ -12,6 +12,6 @@ public class PokemonReceiveEffectEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		BattleManager.getInstance().getTimeLine().informStatusChanged(Request.readInt(), Request.readString(), Request.readString());
+		BattleManager.getInstance().getNarrator().informStatusChanged(Request.readInt(), Request.readString(), Request.readString());
 	}
 }

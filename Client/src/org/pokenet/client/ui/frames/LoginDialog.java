@@ -1,122 +1,110 @@
 package org.pokenet.client.ui.frames;
 
 import java.util.List;
-import mdes.slick.sui.Button;
-import mdes.slick.sui.Frame;
-import mdes.slick.sui.Label;
-import mdes.slick.sui.TextField;
-import mdes.slick.sui.event.ActionEvent;
-import mdes.slick.sui.event.ActionListener;
-import org.newdawn.slick.Color;
 import org.pokenet.client.GameClient;
 import org.pokenet.client.backend.Translator;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.EditField;
+import de.matthiasmann.twl.Label;
+import de.matthiasmann.twl.Widget;
 
 /**
  * Handles the login box
  * 
- * @author shadowkanji
+ * @author Myth1c
  */
-public class LoginDialog extends Frame
+public class LoginDialog extends Widget
 {
 	private Button m_login, m_register, m_back;
 	private Label m_userLabel, m_passLabel;
-	private TextField m_username, m_password;
-	private Color m_white;
+	private EditField m_username, m_password;
 
 	/**
 	 * Default constructor
 	 */
 	public LoginDialog()
 	{
-		getContentPane().setX(getContentPane().getX() - 1);
-		getContentPane().setY(getContentPane().getY() + 1);
 		List<String> translated = Translator.translate("_LOGIN");
-		setBorderRendered(false);
-		getTitleBar().setVisible(false);
-		this.setSize(320, 160);
-		this.setLocation(480, 424);
-		setBackground(new Color(0, 0, 0, 140));
-		setDraggable(false);
-		setResizable(false);
+		setSize(320, 160);
+		setPosition(480, 424);
 
 		/* Set up the components */
-		m_white = new Color(255, 255, 255);
 
-		m_username = new TextField();
+		m_username = new EditField();
 		m_username.setSize(132, 24);
-		m_username.setLocation(128, 8);
+		m_username.setPosition(128, 8);
 		m_username.setVisible(true);
-		this.add(m_username);
+		add(m_username);
 
-		m_password = new TextField();
+		m_password = new EditField();
 		m_password.setSize(132, 24);
-		m_password.setLocation(128, 40);
+		m_password.setPosition(128, 40);
 		m_password.setVisible(true);
-		m_password.setMaskCharacter('*');
-		m_password.setMaskEnabled(true);
-		this.add(m_password);
+		m_password.setPasswordMasking(true);
+		add(m_password);
 
 		m_userLabel = new Label(translated.get(5));
-		m_userLabel.pack();
-		m_userLabel.setLocation(m_username.getX() - m_userLabel.getWidth() - 24, 12);
 		m_userLabel.setVisible(true);
-		m_userLabel.setFont(GameClient.getInstance().getFontSmall());
-		m_userLabel.setForeground(m_white);
-		this.add(m_userLabel);
+		add(m_userLabel);
 
 		m_passLabel = new Label(translated.get(6));
-		m_passLabel.pack();
-		m_passLabel.setLocation(m_userLabel.getX(), 40);
 		m_passLabel.setVisible(true);
-		m_passLabel.setFont(GameClient.getInstance().getFontSmall());
-		m_passLabel.setForeground(m_white);
-		this.add(m_passLabel);
+		add(m_passLabel);
 
 		m_back = new Button("Back");
 		m_back.setSize(64, 32);
-		m_back.setLocation(m_userLabel.getX(), m_password.getY() + m_password.getHeight() + 8);
 		m_back.setVisible(true);
-		m_back.addActionListener(new ActionListener()
+		m_back.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void run()
 			{
 				GameClient.getInstance().returnToServerSelect();
 			}
 		});
 
-		this.add(m_back);
+		add(m_back);
 
 		m_login = new Button(translated.get(7));
 		m_login.setSize(64, 32);
-		m_login.setLocation(m_password.getX(), m_password.getY() + m_password.getHeight() + 8);
 		m_login.setVisible(true);
-		m_login.addActionListener(new ActionListener()
+		m_login.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void run()
 			{
 				if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
+				{
 					login();
+				}
 			}
 		});
-		this.add(m_login);
+		add(m_login);
 
 		m_register = new Button(translated.get(8));
 		m_register.setSize(64, 32);
-		m_register.setLocation(m_login.getX() + m_login.getWidth() + 8, m_login.getY());
 		m_register.setVisible(true);
-		m_register.addActionListener(new ActionListener()
+		m_register.addCallback(new Runnable()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void run()
 			{
 				register();
 			}
 		});
-		this.add(m_register);
+		add(m_register);
 
 		setVisible(false);
+	}
+
+	@Override
+	public void layout()
+	{
+		m_userLabel.setPosition(m_username.getX() - m_userLabel.computeTextWidth() - 24, m_username.getY() + 12);
+		m_passLabel.setPosition(m_userLabel.getX(), m_password.getY() + 12);
+		m_back.setPosition(m_userLabel.getX(), m_password.getY() + m_password.getHeight() + 8);
+		m_login.setPosition(m_password.getX(), m_password.getY() + m_password.getHeight() + 8);
+		m_register.setPosition(m_login.getX() + m_login.getWidth() + 8, m_login.getY());
 	}
 
 	/**
@@ -137,27 +125,9 @@ public class LoginDialog extends Frame
 	public void goLogin()
 	{
 		if(m_username.getText() != null && m_password.getText() != null && !m_username.getText().equals("") && !m_password.getText().equals(""))
+		{
 			login();
-	}
-
-	/**
-	 * Tab to pass
-	 * 
-	 * @return
-	 */
-	public void goToPass()
-	{
-		if(m_username.hasFocus())
-		{
-			m_username.releaseFocus();
-			m_password.grabFocus();
 		}
-		else
-		{
-			m_password.releaseFocus();
-			m_username.grabFocus();
-		}
-
 	}
 
 	/**
@@ -178,8 +148,7 @@ public class LoginDialog extends Frame
 	private void login()
 	{
 		m_login.setEnabled(false);
-		GameClient.getInstance().getLoadingScreen().setVisible(true);
-		// GameClient.getInstance().getPacketGenerator().login(m_username.getText(), m_password.getText());
+		// GameClient.getInstance().getLoadingScreen().setVisible(true);
 		GameClient.getInstance().getUserManager().login(m_username.getText(), m_password.getText());
 	}
 
@@ -188,6 +157,6 @@ public class LoginDialog extends Frame
 	 */
 	private void register()
 	{
-		GameClient.getInstance().getLoginScreen().showRegistration();
+		GameClient.getInstance().getGUIPane().getLoginScreen().showRegistration();
 	}
 }

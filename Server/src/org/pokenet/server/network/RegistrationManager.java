@@ -51,7 +51,6 @@ public class RegistrationManager implements Runnable
 	 */
 	public void register(Session session, int region, String packet /* IoSession session */) throws Exception
 	{
-		m_database = MySqlManager.getInstance();
 		if(session.getChannel() == null)
 			return;
 		String[] info = packet.split(",");
@@ -126,7 +125,6 @@ public class RegistrationManager implements Runnable
 					return;
 				}
 			}
-
 			catch(Exception e)
 			{
 			}
@@ -219,7 +217,7 @@ public class RegistrationManager implements Runnable
 		int pokedexid = data.getInt("pokedexid");
 		/* Bind the pokedex ID to the member and add the starter to the Pokedex. */
 		m_database.query("UPDATE pn_members SET pokedexId = " + MySqlManager.parseSQL("" + pokedexid) + " WHERE id = '" + playeridsql + "'");
-		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getPokemonNumber() + 1)) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
+		m_database.query("UPDATE pn_pokedex SET " + "`" + MySqlManager.parseSQL("" + (p.getPokedexNumber())) + "`" + " = '2' WHERE pokedexid = '" + MySqlManager.parseSQL("" + pokedexid) + "'");
 		ServerMessage message = new ServerMessage(ClientPacket.REGISTER_SUCCESS);
 		session.Send(message);
 	}

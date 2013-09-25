@@ -13,6 +13,8 @@ import org.pokenet.server.protocol.ServerMessage;
  */
 public class Character implements Positionable
 {
+
+	private static final int WALKING_DISTANCE = 32;
 	protected ServerMap m_map;
 	/* Stores a queue of movements for processing */
 	protected Queue<Direction> m_movementQueue = new LinkedList<Direction>();
@@ -20,7 +22,8 @@ public class Character implements Positionable
 	protected int m_sprite, m_mapX, m_mapY, m_x, m_y, m_id;
 	private boolean m_boostPriority = false;
 	protected Direction m_facing = Direction.Down;
-	private boolean m_isVisible, m_isSurfing;
+	private boolean m_isVisible, m_isSurfing, isMoving = false;
+	private int TRANSPORT_MULTIPLIER = 1;
 
 	/**
 	 * Boost the char's movement priority
@@ -120,9 +123,17 @@ public class Character implements Positionable
 	 */
 	public Direction getNextMovement()
 	{
-		if(m_movementQueue.size() == 0)
-			return null;
 		return m_movementQueue.poll();
+	}
+	
+	public Direction peekNextMovement()
+	{
+		return m_movementQueue.peek();
+	}
+	
+	public boolean isMoving()
+	{
+		return isMoving;
 	}
 
 	/**
@@ -194,15 +205,23 @@ public class Character implements Positionable
 	}
 
 	/**
-	 * Processes and checks all movements queued
+	 * Processes and checks the top movement queued
+	 * @return 
 	 */
-	public void move()
+	public boolean move()
 	{
-		/* Moves player until queue becomes empty,
-		 * collision encountered or pokemon encountered */
-		while(move(getNextMovement()))
+		/* Moves player with the movement with the most priority*/
+		if(m_facing == peekNextMovement())
 		{
+			move(getNextMovement());
+			isMoving = true;
+			return true;
 		}
+		else
+		{
+			isMoving = false;
+			return false;			
+		}		
 	}
 
 	/**
@@ -227,22 +246,22 @@ public class Character implements Positionable
 				switch(d)
 				{
 					case Up:
-						m_y -= 32;
+						m_y -= WALKING_DISTANCE * TRANSPORT_MULTIPLIER;
 						m_facing = Direction.Up;
 						m_map.sendMovementToAll(d, this);
 						break;
 					case Down:
-						m_y += 32;
+						m_y += WALKING_DISTANCE * TRANSPORT_MULTIPLIER;
 						m_facing = Direction.Down;
 						m_map.sendMovementToAll(d, this);
 						break;
 					case Left:
-						m_x -= 32;
+						m_x -= WALKING_DISTANCE * TRANSPORT_MULTIPLIER;
 						m_facing = Direction.Left;
 						m_map.sendMovementToAll(d, this);
 						break;
 					case Right:
-						m_x += 32;
+						m_x += WALKING_DISTANCE * TRANSPORT_MULTIPLIER;
 						m_facing = Direction.Right;
 						m_map.sendMovementToAll(d, this);
 						break;

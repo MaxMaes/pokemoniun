@@ -129,7 +129,7 @@ public class HMObject extends NPC
 					break;
 				case CUT_TREE:
 					getMap().removeChar(this);
-					// Regrow tree after 30 seconds
+					// Regrow tree after 10 seconds
 					timer.schedule(new TimerTask()
 					{
 						@Override
@@ -137,7 +137,7 @@ public class HMObject extends NPC
 						{
 							m_map.addChar(hmObj);
 						}
-					}, 30000);
+					}, 10000);
 					break;
 				case ROCKSMASH_ROCK:
 					getMap().removeChar(this);

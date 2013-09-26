@@ -1,3 +1,17 @@
+[npc]
+MoveRelearner_1-Big Root
+left
+160
+20
+23
+NULL
+0
+-1
+0,1,2
+false
+false
+false
+[/npc]
 [warp]
 16
 27

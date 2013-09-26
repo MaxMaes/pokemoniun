@@ -20,7 +20,7 @@ public class MoveTutorEvent implements MessageEvent
 		}
 		else if(name.equals("MoveTutor"))
 		{
-			String moves = s.split("_")[1];
+			GameClient.getInstance().getHUD().showTutorDialog(s.split("_")[1]);
 		}
 	}
 }

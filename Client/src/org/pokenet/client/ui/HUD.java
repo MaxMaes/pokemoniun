@@ -17,6 +17,7 @@ import org.pokenet.client.ui.frames.HelpWindow;
 import org.pokenet.client.ui.frames.KurtDialog;
 import org.pokenet.client.ui.frames.MoveLearningDialog;
 import org.pokenet.client.ui.frames.MoveRelearnDialog;
+import org.pokenet.client.ui.frames.MoveTutorDialog;
 import org.pokenet.client.ui.frames.OptionsDialog;
 import org.pokenet.client.ui.frames.PartyInfoDialog;
 import org.pokenet.client.ui.frames.PlayerInfoDialog;
@@ -70,6 +71,7 @@ public class HUD extends DesktopArea
 	private MoveRelearnDialog relearnDialog;
 	private KurtDialog kurtDialog;
 	private PokemonInfoDialog pokemonInfoDialogs[] = new PokemonInfoDialog[6];
+	private MoveTutorDialog tutorDialog;
 
 	public HUD()
 	{
@@ -1002,5 +1004,23 @@ public class HUD extends DesktopArea
 	{
 		removeChild(pokemonInfoDialogs[i]);
 		pokemonInfoDialogs[i] = null;
+	}
+
+	public MoveTutorDialog getTutorDialog()
+	{
+		return tutorDialog;
+	}
+
+	public void showTutorDialog(String moves)
+	{
+		if(tutorDialog == null)
+			tutorDialog = new MoveTutorDialog(moves);
+		add(tutorDialog);
+	}
+
+	public void removeTutorDialog()
+	{
+		removeChild(tutorDialog);
+		tutorDialog = null;
 	}
 }

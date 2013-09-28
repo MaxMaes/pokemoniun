@@ -69,6 +69,7 @@ public class Image extends de.matthiasmann.twl.Widget
 	public void setImage(de.matthiasmann.twl.renderer.Image image)
 	{
 		img = image;
+		invalidateLayout();
 	}
 
 	@Override

@@ -538,16 +538,8 @@ public class PokedexDialog extends ResizableFrame
 		left = new Button();
 		right = new Button();
 
-		inc1 = new Button();
-		inc1.setTheme("button_incrementer");
-		inc5 = new Button();
-		inc5.setTheme("button_incrementer");
-		inc10 = new Button();
-		inc10.setTheme("button_incrementer");
-		inc50 = new Button();
-		inc50.setTheme("button_incrementer");
-
 		down.setTheme("button_down");
+		down.setCanAcceptKeyboardFocus(false);
 		down.addCallback(new Runnable()
 		{
 			@Override
@@ -577,6 +569,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		up.setTheme("button_up");
+		up.setCanAcceptKeyboardFocus(false);
 		up.addCallback(new Runnable()
 		{
 			@Override
@@ -606,6 +599,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		left.setTheme("button_left");
+		left.setCanAcceptKeyboardFocus(false);
 		left.addCallback(new Runnable()
 		{
 			@Override
@@ -620,6 +614,7 @@ public class PokedexDialog extends ResizableFrame
 		});
 
 		right.setTheme("button_right");
+		right.setCanAcceptKeyboardFocus(false);
 		right.addCallback(new Runnable()
 		{
 			@Override
@@ -633,10 +628,9 @@ public class PokedexDialog extends ResizableFrame
 			}
 		});
 
+		inc1 = new Button("1");
 		inc1.setTheme("button_incrementer");
-		inc1.setText("1");
-		currIncButton = inc1;
-		currIncButton.setEnabled(false);
+		inc1.setCanAcceptKeyboardFocus(false);
 		inc1.addCallback(new Runnable()
 		{
 			@Override
@@ -652,8 +646,9 @@ public class PokedexDialog extends ResizableFrame
 			}
 		});
 
+		inc5 = new Button("5");
+		inc5.setCanAcceptKeyboardFocus(false);
 		inc5.setTheme("button_incrementer");
-		inc5.setText("5");
 		inc5.addCallback(new Runnable()
 		{
 			@Override
@@ -669,8 +664,10 @@ public class PokedexDialog extends ResizableFrame
 			}
 		});
 
+		inc10 = new Button("10");
 		inc10.setTheme("button_incrementer");
-		inc10.setText("10");
+		inc10.setCanAcceptKeyboardFocus(false);
+		inc10.setTheme("button_incrementer");
 		inc10.addCallback(new Runnable()
 		{
 			@Override
@@ -686,8 +683,10 @@ public class PokedexDialog extends ResizableFrame
 			}
 		});
 
+		inc50 = new Button("50");
 		inc50.setTheme("button_incrementer");
-		inc50.setText("50");
+		inc50.setCanAcceptKeyboardFocus(false);
+		inc50.setTheme("button_incrementer");
 		inc50.addCallback(new Runnable()
 		{
 			@Override
@@ -711,6 +710,9 @@ public class PokedexDialog extends ResizableFrame
 		add(inc5);
 		add(inc10);
 		add(inc50);
+
+		currIncButton = inc1;
+		currIncButton.setEnabled(false);
 	}
 
 	private void updateNameList()

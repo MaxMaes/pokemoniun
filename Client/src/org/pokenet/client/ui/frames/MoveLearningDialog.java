@@ -66,12 +66,16 @@ public class MoveLearningDialog extends ResizableFrame
 		m_movePane.setTheme("attackpane");
 
 		Button move1 = new Button("");
+		move1.setCanAcceptKeyboardFocus(false);
 		move1.setTheme("battlebutton");
 		Button move2 = new Button("");
+		move2.setCanAcceptKeyboardFocus(false);
 		move2.setTheme("battlebutton");
 		Button move3 = new Button("");
+		move3.setCanAcceptKeyboardFocus(false);
 		move3.setTheme("battlebutton");
 		Button move4 = new Button("");
+		move4.setCanAcceptKeyboardFocus(false);
 		move4.setTheme("battlebutton");
 
 		// start attackPane
@@ -174,6 +178,7 @@ public class MoveLearningDialog extends ResizableFrame
 		m_moveTypeLabels.add(move4Type);
 
 		m_cancel = new Button("Cancel");
+		m_cancel.setCanAcceptKeyboardFocus(false);
 		m_cancel.addCallback(new Runnable()
 		{
 			@Override

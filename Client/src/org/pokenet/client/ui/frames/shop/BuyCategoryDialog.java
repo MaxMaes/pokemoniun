@@ -107,6 +107,7 @@ public class BuyCategoryDialog extends Widget
 		add(categoryLabels[3]);
 
 		cancelButton = new Button("Cancel");
+		cancelButton.setCanAcceptKeyboardFocus(false);
 		add(cancelButton);
 		cancelButton.addCallback(new Runnable()
 		{
@@ -116,6 +117,11 @@ public class BuyCategoryDialog extends Widget
 				shopDialog.switchUI(ShopDialog.SHOPSTATE_MAIN);
 			}
 		});
+
+		for(ImageButton imgbtn : categoryButtons)
+		{
+			imgbtn.setCanAcceptKeyboardFocus(false);
+		}
 	}
 
 	/**

@@ -31,22 +31,27 @@ public class PlayerPopupDialog extends ResizableFrame
 		add(m_name);
 
 		m_battle = new Button("Battle");
+		m_battle.setCanAcceptKeyboardFocus(false);
 		m_battle.setSize(75, 25);
 		add(m_battle);
 
 		m_trade = new Button("Trade");
+		m_trade.setCanAcceptKeyboardFocus(false);
 		m_trade.setSize(75, 25);
 		add(m_trade);
 
 		m_whisper = new Button("Whisper");
+		m_whisper.setCanAcceptKeyboardFocus(false);
 		m_whisper.setSize(75, 25);
 		add(m_whisper);
 
 		m_addFriend = new Button("Add Friend");
+		m_addFriend.setCanAcceptKeyboardFocus(false);
 		m_addFriend.setSize(75, 25);
 		add(m_addFriend);
 
 		m_cancel = new Button("Cancel");
+		m_cancel.setCanAcceptKeyboardFocus(false);
 		m_cancel.setSize(75, 25);
 		add(m_cancel);
 		setVisible(true);

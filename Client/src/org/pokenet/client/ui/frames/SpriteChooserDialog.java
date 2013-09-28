@@ -89,10 +89,12 @@ public class SpriteChooserDialog extends ResizableFrame
 	public void initUse()
 	{
 		Button use = new Button("Use new sprite!");
+		use.setCanAcceptKeyboardFocus(false);
 		use.setPosition(130, 245);
-		use.setSize(80, 20);
+		use.adjustSize();
 		pane.add(use);
 		Button cancel = new Button("Cancel");
+		cancel.setCanAcceptKeyboardFocus(false);
 		cancel.setPosition(130, 280);
 		cancel.setSize(80, 20);
 		pane.add(cancel);

@@ -88,6 +88,7 @@ public class PartyInfoDialog extends Widget
 				{
 					m_switchUp[i] = new Button();
 					m_switchUp[i].setTheme("arrow_up");
+					m_switchUp[i].setCanAcceptKeyboardFocus(false);
 					m_switchUp[i].addCallback(new Runnable()
 					{
 						@Override
@@ -110,6 +111,7 @@ public class PartyInfoDialog extends Widget
 				{
 					m_switchDown[i] = new Button();
 					m_switchDown[i].setTheme("arrow_down");
+					m_switchDown[i].setCanAcceptKeyboardFocus(false);
 					m_switchDown[i].addCallback(new Runnable()
 					{
 						@Override

@@ -44,6 +44,7 @@ public class ChatDialog extends Widget
 
 		possibleBoxesModel = new SimpleChangableListModel<>();
 		possibleBoxes = new ComboBox<String>(possibleBoxesModel);
+		possibleBoxes.setCanAcceptKeyboardFocus(false);
 		possibleBoxes.addCallback(new Runnable()
 		{
 			@Override

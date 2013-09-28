@@ -60,15 +60,19 @@ public class KurtDialog extends ResizableFrame
 		pane.add(dialogText);
 
 		buy1 = new Button("  1  ");
+		buy1.setCanAcceptKeyboardFocus(false);
 		buy1.setTheme("button");
 		pane.add(buy1);
 		buy5 = new Button("  5  ");
+		buy5.setCanAcceptKeyboardFocus(false);
 		buy5.setTheme("button");
 		pane.add(buy5);
 		buy10 = new Button(" 10 ");
+		buy10.setCanAcceptKeyboardFocus(false);
 		buy10.setTheme("button");
 		pane.add(buy10);
 		buyMax = new Button("Max");
+		buyMax.setCanAcceptKeyboardFocus(false);
 		buyMax.setTheme("button");
 		pane.add(buyMax);
 
@@ -80,6 +84,7 @@ public class KurtDialog extends ResizableFrame
 			buy10.setEnabled(false);
 
 		cancel = new Button("Cancel");
+		cancel.setCanAcceptKeyboardFocus(false);
 		cancel.setTheme("button");
 		pane.add(cancel);
 

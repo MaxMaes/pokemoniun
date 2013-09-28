@@ -128,8 +128,9 @@ public class PokeStorageBoxFrame extends ResizableFrame
 
 		for(int i = 0; i <= 29; i++)
 		{
-			m_buttons[i] = new ImageButton();
 			final int j = i;
+			m_buttons[i] = new ImageButton();
+			m_buttons[i].setCanAcceptKeyboardFocus(false);
 			m_buttons[i].addCallback(new Runnable()
 			{
 				@Override
@@ -161,6 +162,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 		m_changeBox = new ComboBox<String>(boxmodel);
 		m_release = new Button();
 
+		m_switchPoke.setCanAcceptKeyboardFocus(false);
 		m_switchPoke.setText("Switch");
 		m_switchPoke.setPosition(290, 74);
 		m_switchPoke.setSize(70, 20);
@@ -190,6 +192,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 		boxmodel.addElement("Box 9");
 
 		m_changeBox.setSize(70, 20);
+		m_changeBox.setCanAcceptKeyboardFocus(false);
 		m_changeBox.setPosition(m_switchPoke.getX(), 37);
 		m_changeBox.addCallback(new Runnable()
 		{
@@ -207,6 +210,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 		});
 		m_release.setText("Release");
 		m_release.setSize(70, 20);
+		m_release.setCanAcceptKeyboardFocus(false);
 		m_release.setPosition(m_switchPoke.getX(), 111);
 		m_release.addCallback(new Runnable()
 		{
@@ -248,6 +252,7 @@ public class PokeStorageBoxFrame extends ResizableFrame
 		m_release.setEnabled(false);
 
 		m_close.setText("Bye");
+		m_close.setCanAcceptKeyboardFocus(false);
 		m_close.setSize(70, 20);
 		m_close.setPosition(m_switchPoke.getX(), 148);
 		m_close.addCallback(new Runnable()

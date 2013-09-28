@@ -40,27 +40,6 @@ public class MoveTutorDialog extends ResizableFrame
 		// add(pane);
 	}
 
-	@Override
-	public void layout()
-	{
-		super.layout();
-		setSize(250, 230);
-		setPosition(300, 150);
-		dialog.setSize(250, 130);
-		dialog.setPosition(getInnerX(), getInnerY() + 20);
-		pane.setSize(250, 230);
-		pane.setPosition(getInnerX(), getInnerY() + 20);
-
-		use.setSize(70, 20);
-		use.setPosition(getInnerX() + 25, getInnerY() + 200);
-
-		cancel.setSize(70, 20);
-		cancel.setPosition(getInnerX() + 150, getInnerY() + 200);
-
-		m_moveList.setSize(245, 170);
-		m_moveList.setPosition(getInnerX() + 2, getInnerY() + 25);
-	}
-
 	public void initUse(String movelist)
 	{
 		pane = new Widget();
@@ -141,5 +120,26 @@ public class MoveTutorDialog extends ResizableFrame
 		removeChild(dialog);
 		add(pane);
 		pane.setVisible(true);
+	}
+
+	@Override
+	public void layout()
+	{
+		super.layout();
+		setSize(250, 230);
+		setPosition(300, 150);
+		dialog.setSize(250, 130);
+		dialog.setPosition(getInnerX(), getInnerY() + 20);
+		pane.setSize(250, 230);
+		pane.setPosition(getInnerX(), getInnerY() + 20);
+
+		use.setSize(70, 20);
+		use.setPosition(getInnerX() + 25, getInnerY() + 200);
+
+		cancel.setSize(70, 20);
+		cancel.setPosition(getInnerX() + 150, getInnerY() + 200);
+
+		m_moveList.setSize(245, 170);
+		m_moveList.setPosition(getInnerX() + 2, getInnerY() + 25);
 	}
 }

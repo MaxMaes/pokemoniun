@@ -52,6 +52,7 @@ public class LoginDialog extends Widget
 		add(m_passLabel);
 
 		m_back = new Button("Back");
+		m_back.setCanAcceptKeyboardFocus(false);
 		m_back.setSize(64, 32);
 		m_back.setVisible(true);
 		m_back.addCallback(new Runnable()
@@ -66,6 +67,7 @@ public class LoginDialog extends Widget
 		add(m_back);
 
 		m_login = new Button(translated.get(7));
+		m_login.setCanAcceptKeyboardFocus(false);
 		m_login.setSize(64, 32);
 		m_login.setVisible(true);
 		m_login.addCallback(new Runnable()
@@ -82,6 +84,7 @@ public class LoginDialog extends Widget
 		add(m_login);
 
 		m_register = new Button(translated.get(8));
+		m_register.setCanAcceptKeyboardFocus(false);
 		m_register.setSize(64, 32);
 		m_register.setVisible(true);
 		m_register.addCallback(new Runnable()

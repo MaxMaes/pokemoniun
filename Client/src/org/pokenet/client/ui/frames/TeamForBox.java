@@ -16,7 +16,7 @@ import de.matthiasmann.twl.Widget;
 /**
  * Team panel for storage purposes
  * 
- * @author ZombieBear / sadhi
+ * @author sadhi
  */
 public class TeamForBox extends ResizableFrame
 {
@@ -64,7 +64,9 @@ public class TeamForBox extends ResizableFrame
 		parent.setPosition(GameClient.getInstance().getHUD().getWidth() / 2 - (parent.getWidth() + getWidth()) / 2, 200 - getHeight() / 2);
 		m_accept.setEnabled(true);
 		for(int i = 0; i < 6; i++)
+		{
 			m_pokeIcon[i].setEnabled(true);
+		}
 	}
 
 	/**
@@ -102,6 +104,7 @@ public class TeamForBox extends ResizableFrame
 				e.printStackTrace();
 			}
 		}
+		m_accept.setCanAcceptKeyboardFocus(false);
 		m_accept.setSize(60, 30);
 		m_accept.setPosition(3, 268);
 		m_accept.setText("Accept");
@@ -113,7 +116,9 @@ public class TeamForBox extends ResizableFrame
 			{
 				switchPokes(m_boxNumber, m_boxIndex, m_teamIndex);
 				for(int i = 0; i < 6; i++)
+				{
 					m_pokeIcon[i].setEnabled(false);
+				}
 				m_accept.setEnabled(false);
 			}
 		});
@@ -137,6 +142,7 @@ public class TeamForBox extends ResizableFrame
 			m_hp[i] = new ProgressBar(0, 0);
 			m_hp[i].setProgressImage(GameClient.getInstance().getTheme().getImage("hpbar_high"));
 			final int j = i;
+			m_pokeIcon[i].setCanAcceptKeyboardFocus(false);
 			m_pokeIcon[i].addCallback(new Runnable()
 			{
 				@Override

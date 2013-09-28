@@ -51,6 +51,7 @@ public class BoatChooserDialog extends ResizableFrame
 
 		initList(currentLocation);
 		Button use = new Button("Let's travel!");
+		use.setCanAcceptKeyboardFocus(false);
 		use.setTheme("button");
 		use.setSize(70, 20);
 		use.setPosition(25, 100);

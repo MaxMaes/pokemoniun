@@ -41,6 +41,7 @@ public class MessageDialog extends ResizableFrame
 		pane.add(label);
 
 		ok = new Button("Ok");
+		ok.setCanAcceptKeyboardFocus(false);
 		ok.addCallback(new Runnable()
 		{
 

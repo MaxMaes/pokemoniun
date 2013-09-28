@@ -17,13 +17,13 @@ import de.matthiasmann.twl.model.SimpleChangableListModel;
  */
 public class BattleFrontierDialog extends ResizableFrame
 {
-
 	protected ListBox<String> m_travelList;
 	protected Label m_travelDisplay;
 	private SimpleChangableListModel<String> m_locations;
 	private String choice, pick;
 	private OurPlayer p;
 	private Widget pane;
+	private Button use;
 
 	public BattleFrontierDialog(String battle, final OurPlayer p)
 	{
@@ -39,10 +39,6 @@ public class BattleFrontierDialog extends ResizableFrame
 		pane.setSize(180, 130);
 		pane.setPosition(0, 0);
 
-		// m_travelDisplay = new Label();
-		// m_travelDisplay.setSize(124,204);
-		// m_travelDisplay.setPosition(105, 20);
-		// add(m_travelDisplay);
 		m_travelList = new ListBox<String>(m_locations);
 		m_travelList.setTheme("listbox");
 		m_travelList.setPosition(2, 25);
@@ -56,12 +52,12 @@ public class BattleFrontierDialog extends ResizableFrame
 		setVisible(true);
 		initUse();
 		add(pane);
-		// System.out.println("end dialog");
 	}
 
 	public void initUse()
 	{
-		Button use = new Button("Ok");
+		use = new Button("Ok");
+		use.setCanAcceptKeyboardFocus(false);
 		use.setTheme("button");
 		use.setSize(60, 20);
 		use.setPosition(10, 100);

@@ -76,7 +76,9 @@ public class RequestDialog extends ResizableFrame
 			if(!m_offerUser.contains(username))
 			{
 				m_offerUser.add(username);
-				m_offers.put(username, new Button("Trade"));
+				Button trade = new Button("Trade");
+				trade.setCanAcceptKeyboardFocus(false);
+				m_offers.put(username, trade);
 				updated = true;
 			}
 			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " sent you a trade request.");
@@ -86,7 +88,9 @@ public class RequestDialog extends ResizableFrame
 			if(!m_offerUser.contains(username))
 			{
 				m_offerUser.add(username);
-				m_offers.put(username, new Button("Battle"));
+				Button battle = new Button("Battle");
+				battle.setCanAcceptKeyboardFocus(false);
+				m_offers.put(username, battle);
 				updated = true;
 			}
 			GameClient.getInstance().getHUD().getChat().addSystemMessage("*" + username + " would like to battle!");

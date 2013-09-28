@@ -127,6 +127,7 @@ public class TopBar extends Widget
 		for(int i = 0; i < barbuttons.length; i++)
 		{
 			barbuttons[i].setImagePosition(-2, 1);
+			barbuttons[i].setCanAcceptKeyboardFocus(false);
 			add(barbuttons[i]);
 		}
 

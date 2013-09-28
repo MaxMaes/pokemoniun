@@ -177,8 +177,11 @@ public class TradeDialog extends ResizableFrame
 		m_theirPokeInfo = new PokemonInfoDialog[6];
 		m_ourMoneyOffer = new EditField();
 		m_makeOfferBtn = new Button();
+		m_makeOfferBtn.setCanAcceptKeyboardFocus(false);
 		m_tradeBtn = new Button();
+		m_tradeBtn.setCanAcceptKeyboardFocus(false);
 		m_cancelBtn = new Button();
+		m_cancelBtn.setCanAcceptKeyboardFocus(false);
 
 		// Action Listener for the offer button
 		m_offerListener = new Runnable()
@@ -205,11 +208,13 @@ public class TradeDialog extends ResizableFrame
 		{
 			// Show Our Pokemon for Trade
 			m_ourPokes[i] = new ImageButton();
+			m_ourPokes[i].setCanAcceptKeyboardFocus(false);
 			m_ourPokes[i].setVisible(true);
 			add(m_ourPokes[i]);
 
 			// Show the Other Character's Pokemon for Trade
 			m_theirPokes[i] = new ImageButton();
+			m_theirPokes[i].setCanAcceptKeyboardFocus(false);
 			m_theirPokes[i].setVisible(true);
 			add(m_theirPokes[i]);
 		}

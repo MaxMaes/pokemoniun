@@ -21,12 +21,9 @@ public class ConfirmationDialog extends ResizableFrame
 	private SimpleTextAreaModel textModel;
 	private PopupWindow popup;
 
-	/*
-	 * Creates a new ConfirmationDialog
+	/* Creates a new ConfirmationDialog
 	 * - This Dialog is only used for questions as "Do you really want to exit".
-	 * 
-	 * note: this constructor should only be called by GuiPane!
-	 */
+	 * note: this constructor should only be called by GuiPane! */
 	public ConfirmationDialog(String text, Widget guiPane)
 	{
 		setTheme("confirmationdialog");
@@ -35,7 +32,9 @@ public class ConfirmationDialog extends ResizableFrame
 		dialogText = new TextArea(textModel);
 
 		yesButton = new Button("Yes");
+		yesButton.setCanAcceptKeyboardFocus(false);
 		noButton = new Button("No");
+		noButton.setCanAcceptKeyboardFocus(false);
 
 		popup = new PopupWindow(guiPane);
 		popup.setTheme("confirmationPopup");
@@ -75,6 +74,7 @@ public class ConfirmationDialog extends ResizableFrame
 		yesButton.addCallback(callback);
 		yesCallback = callback;
 	}
+
 	/* removes the callback method for the "yes" button */
 	private void removeYesCallback()
 	{
@@ -89,7 +89,7 @@ public class ConfirmationDialog extends ResizableFrame
 		noButton.addCallback(callback);
 		noCallback = callback;
 	}
-	
+
 	/* Removes the callback method for the "no" button */
 	private void removeNoCallback()
 	{
@@ -124,9 +124,9 @@ public class ConfirmationDialog extends ResizableFrame
 	{
 		yesCallback.run();
 	}
-	
+
 	/* Simulates the events for the "no" button */
-	
+
 	public void runNo()
 	{
 		noCallback.run();

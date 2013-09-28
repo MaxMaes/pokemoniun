@@ -138,6 +138,7 @@ public class LanguageDialog extends ResizableFrame
 				m_languages[i].setPosition(30, 62 + (28 * i));
 				m_languages[i].setSize(280, 24);
 				m_languages[i].setVisible(true);
+				m_languages[i].setCanAcceptKeyboardFocus(false);
 				pane.add(m_languages[i]);
 			}
 			add(pane);

@@ -44,35 +44,6 @@ public class MoveRelearnDialog extends ResizableFrame
 		// add(pane);
 	}
 
-	@Override
-	public void layout()
-	{
-		super.layout();
-		if(l == 0)
-		{
-			setSize(250, 230);
-			setPosition(300, 150);
-			dialog.setSize(250, 130);
-			dialog.setPosition(getInnerX(), getInnerY() + 20);
-			this.setTitle("Please choose your Pokemon..");
-		}
-		else if(l != 0)
-		{
-			this.setTitle("Please choose your move..");
-			pane.setSize(250, 230);
-			pane.setPosition(getInnerX(), getInnerY() + 20);
-
-			use.setSize(70, 20);
-			use.setPosition(getInnerX() + 25, getInnerY() + 200);
-
-			cancel.setSize(70, 20);
-			cancel.setPosition(getInnerX() + 150, getInnerY() + 200);
-
-			m_moveList.setSize(245, 170);
-			m_moveList.setPosition(getInnerX() + 2, getInnerY() + 25);
-		}
-	}
-
 	public void initUse(String movelist)
 	{
 		l = 1;
@@ -87,9 +58,12 @@ public class MoveRelearnDialog extends ResizableFrame
 			m_moves.addElement(s);
 		}
 		use = new Button("Learn!");
+		use.setCanAcceptKeyboardFocus(false);
 		use.setTheme("button");
 		pane.add(use);
+
 		cancel = new Button("Cancel");
+		cancel.setCanAcceptKeyboardFocus(false);
 		cancel.setTheme("button");
 		pane.add(cancel);
 
@@ -155,6 +129,35 @@ public class MoveRelearnDialog extends ResizableFrame
 	{
 		this.idx = idx;
 	}
+
+	@Override
+	public void layout()
+	{
+		super.layout();
+		if(l == 0)
+		{
+			setSize(250, 230);
+			setPosition(300, 150);
+			dialog.setSize(250, 130);
+			dialog.setPosition(getInnerX(), getInnerY() + 20);
+			this.setTitle("Please choose your Pokemon..");
+		}
+		else if(l != 0)
+		{
+			this.setTitle("Please choose your move..");
+			pane.setSize(250, 230);
+			pane.setPosition(getInnerX(), getInnerY() + 20);
+
+			use.setSize(70, 20);
+			use.setPosition(getInnerX() + 25, getInnerY() + 200);
+
+			cancel.setSize(70, 20);
+			cancel.setPosition(getInnerX() + 150, getInnerY() + 200);
+
+			m_moveList.setSize(245, 170);
+			m_moveList.setPosition(getInnerX() + 2, getInnerY() + 25);
+		}
+	}
 }
 
 /**
@@ -181,6 +184,7 @@ class PartyDialog extends Widget
 		{
 			final int idx = i;
 			pokeButtons[i] = new Button(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
+			pokeButtons[i].setCanAcceptKeyboardFocus(false);
 			pokeButtons[i].addCallback(new Runnable()
 			{
 				@Override

@@ -17,7 +17,6 @@ import de.matthiasmann.twl.model.SimpleChangableListModel;
  */
 public class TrainChooserDialog extends ResizableFrame
 {
-
 	protected ListBox<String> m_travelList;
 	protected Label m_travelDisplay;
 	private SimpleChangableListModel<String> m_locations;
@@ -90,11 +89,13 @@ public class TrainChooserDialog extends ResizableFrame
 	public void initUse()
 	{
 		Button use = new Button("Let's travel!");
+		use.setCanAcceptKeyboardFocus(false);
 		use.setTheme("button");
 		use.setSize(70, 20);
 		use.setPosition(25, 100);
 		pane.add(use);
 		Button cancel = new Button("Cancel");
+		cancel.setCanAcceptKeyboardFocus(false);
 		cancel.setPosition(150, 100);
 		cancel.setSize(70, 20);
 		cancel.setTheme("button");

@@ -39,6 +39,7 @@ public class AlertDialog extends ResizableFrame
 		dialogText = new TextArea(textModel);
 
 		okButton = new Button("Ok");
+		okButton.setCanAcceptKeyboardFocus(false);
 
 		this.add(dialogText);
 		this.add(okButton);

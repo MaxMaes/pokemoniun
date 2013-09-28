@@ -210,12 +210,16 @@ public class BattleControlFrame extends Widget
 		attackPane.setTheme("attackPane");
 		Button move1 = new Button("");
 		move1.setTheme("battlebutton");
+		move1.setCanAcceptKeyboardFocus(false);
 		Button move2 = new Button("");
 		move2.setTheme("battlebutton");
+		move2.setCanAcceptKeyboardFocus(false);
 		Button move3 = new Button("");
 		move3.setTheme("battlebutton");
+		move3.setCanAcceptKeyboardFocus(false);
 		Button move4 = new Button("");
 		move4.setTheme("battlebutton");
+		move4.setCanAcceptKeyboardFocus(false);
 
 		// start attackPane
 		attackPane.add(move1);
@@ -324,6 +328,7 @@ public class BattleControlFrame extends Widget
 
 		btnRun = new Button("Run");
 		btnRun.setTheme("battlebutton_small");
+		btnRun.setCanAcceptKeyboardFocus(false);
 		btnRun.addCallback(new Runnable()
 		{
 			@Override
@@ -337,6 +342,7 @@ public class BattleControlFrame extends Widget
 		btnRun.setPosition(97, 148);
 		btnBag = new Button("Bag");
 		btnBag.setTheme("battlebutton_small");
+		btnBag.setCanAcceptKeyboardFocus(false);
 		attackPane.add(btnBag);
 		btnBag.setPosition(3, 122);
 		btnBag.setSize(82, 48);
@@ -351,6 +357,7 @@ public class BattleControlFrame extends Widget
 
 		btnPoke = new Button("Pokemon");
 		btnPoke.setTheme("battlebutton_small");
+		btnPoke.setCanAcceptKeyboardFocus(false);
 		attackPane.add(btnPoke);
 		btnPoke.setPosition(168, 122);
 		btnPoke.setSize(82, 48);

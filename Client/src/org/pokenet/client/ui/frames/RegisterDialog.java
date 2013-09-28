@@ -137,6 +137,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_g);
 
 		m_male = new Button(translated.get(16));
+		m_male.setCanAcceptKeyboardFocus(false);
 		m_male.setSize(54, 24);
 		m_male.setPosition(170, 150 + 17);
 		m_male.addCallback(new Runnable()
@@ -152,6 +153,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_male);
 
 		m_female = new Button(translated.get(17));
+		m_female.setCanAcceptKeyboardFocus(false);
 		m_female.setSize(54, 24);
 		m_female.setPosition(234, 150 + 17);
 		m_female.addCallback(new Runnable()
@@ -174,6 +176,7 @@ public class RegisterDialog extends ResizableFrame
 		/* Generate region selection */
 		m_regions = new Button[4];
 		m_regions[0] = new Button("Kanto");
+		m_regions[0].setCanAcceptKeyboardFocus(false);
 		m_regions[0].setSize(54, 24);
 		m_regions[0].setPosition(170, 206 + 17);
 		m_regions[0].setTooltipContent("A town-filled region\nconnected to the\neast of Johto");
@@ -193,6 +196,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_regions[0]);
 
 		m_regions[1] = new Button("Johto");
+		m_regions[1].setCanAcceptKeyboardFocus(false);
 		m_regions[1].setSize(54, 24);
 		m_regions[1].setPosition(234, 206 + 17);
 		m_regions[1].setTooltipContent("A city-filled\nregion connected\nto the west\nof Kanto");
@@ -212,6 +216,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_regions[1]);
 
 		m_regions[2] = new Button("Hoenn");
+		m_regions[2].setCanAcceptKeyboardFocus(false);
 		m_regions[2].setSize(54, 24);
 		m_regions[2].setPosition(170, 230 + 17);
 		m_regions[2].setTooltipContent("An island region\nsouth-west\nof Johto");
@@ -232,6 +237,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_regions[2]);
 
 		m_regions[3] = new Button("Sinnoh");
+		m_regions[3].setCanAcceptKeyboardFocus(false);
 		m_regions[3].setSize(54, 24);
 		m_regions[3].setPosition(234, 230 + 17);
 		m_regions[3].setTooltipContent("A mountainous\nregion north\nof Kanto");
@@ -256,6 +262,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_tos);
 
 		m_terms = new Button(translated.get(19));
+		m_terms.setCanAcceptKeyboardFocus(false);
 		m_terms.setSize(118, 24);
 		m_terms.setPosition(170, 276 + 22);
 		m_terms.addCallback(new Runnable()
@@ -269,6 +276,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_terms);
 
 		m_register = new Button(translated.get(8));
+		m_register.setCanAcceptKeyboardFocus(false);
 		m_register.setSize(49, 24);
 		m_register.setPosition(96, 308 + 22);
 		m_register.addCallback(new Runnable()
@@ -282,6 +290,7 @@ public class RegisterDialog extends ResizableFrame
 		pane.add(m_register);
 
 		m_cancel = new Button(translated.get(20));
+		m_cancel.setCanAcceptKeyboardFocus(false);
 		m_cancel.setSize(49, 24);
 		m_cancel.setPosition(160, 308 + 22);
 		m_cancel.addCallback(new Runnable()

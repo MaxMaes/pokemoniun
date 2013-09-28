@@ -45,7 +45,7 @@ public class OptionsDialog extends ResizableFrame
 		add(m_disableWeather);
 
 		m_save = new Button(translated.get(18));
-
+		m_save.setCanAcceptKeyboardFocus(false);
 		add(m_save);
 
 		m_save.addCallback(new Runnable()

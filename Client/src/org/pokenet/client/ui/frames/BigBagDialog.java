@@ -157,6 +157,7 @@ public class BigBagDialog extends ResizableFrame
 				}
 				m_items.put(i, new ArrayList<PlayerItem>());
 				m_scrollIndex.put(i, 0);
+				m_categoryButtons[i].setCanAcceptKeyboardFocus(false);
 				m_categoryButtons[i].addCallback(new Runnable()
 				{
 					@Override
@@ -179,6 +180,7 @@ public class BigBagDialog extends ResizableFrame
 
 		// Scrolling Button LEFT
 		m_leftButton = new Button("<");
+		m_leftButton.setCanAcceptKeyboardFocus(false);
 		m_leftButton.addCallback(new Runnable()
 		{
 			@Override
@@ -198,6 +200,7 @@ public class BigBagDialog extends ResizableFrame
 			final int j = i;
 			// Starts the item buttons
 			ImageButton item = new ImageButton();
+			item.setCanAcceptKeyboardFocus(false);
 			item.addCallback(new Runnable()
 			{
 				@Override
@@ -219,7 +222,7 @@ public class BigBagDialog extends ResizableFrame
 
 		// Scrolling Button Right
 		m_rightButton = new Button(">");
-
+		m_rightButton.setCanAcceptKeyboardFocus(false);
 		m_rightButton.addCallback(new Runnable()
 		{
 			@Override
@@ -493,12 +496,12 @@ public class BigBagDialog extends ResizableFrame
  */
 class ItemPopup extends Widget
 {
+	private Button m_use;
 	private Button m_cancel;
 	private Button m_destroy;
 	private Button m_give;
 	private Label m_name;
 	private TeamPopup m_team;
-	private Button m_use;
 
 	private boolean isInBattle;
 	private boolean usedOnPokemon;
@@ -529,7 +532,7 @@ class ItemPopup extends Widget
 
 		// Use button
 		m_use = new Button("Use");
-
+		m_use.setCanAcceptKeyboardFocus(false);
 		m_use.addCallback(new Runnable()
 		{
 			@Override
@@ -541,6 +544,7 @@ class ItemPopup extends Widget
 		add(m_use);
 
 		m_give = new Button("Give");
+		m_give.setCanAcceptKeyboardFocus(false);
 		m_give.addCallback(new Runnable()
 		{
 			@Override
@@ -557,6 +561,7 @@ class ItemPopup extends Widget
 
 		// Destroy the item
 		m_destroy = new Button("Drop");
+		m_destroy.setCanAcceptKeyboardFocus(false);
 		m_destroy.addCallback(new Runnable()
 		{
 			@Override
@@ -572,6 +577,7 @@ class ItemPopup extends Widget
 
 		// Close the popup
 		m_cancel = new Button("Cancel");
+		m_cancel.setCanAcceptKeyboardFocus(false);
 		m_cancel.addCallback(new Runnable()
 		{
 			@Override
@@ -726,6 +732,7 @@ class TeamPopup extends Widget
 		{
 			final int idx = i;
 			pokeButtons[i] = new Button(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
+			pokeButtons[i].setCanAcceptKeyboardFocus(false);
 			pokeButtons[i].addCallback(new Runnable()
 			{
 				@Override

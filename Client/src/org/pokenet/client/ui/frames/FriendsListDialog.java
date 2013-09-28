@@ -60,6 +60,7 @@ public class FriendsListDialog extends ResizableFrame
 		setTitle("Friends");
 		setSize(170, 180);
 		m_up = new Button();
+		m_up.setCanAcceptKeyboardFocus(false);
 		m_up.setTheme("upbutton");
 		m_up.addCallback(new Runnable()
 		{
@@ -70,9 +71,10 @@ public class FriendsListDialog extends ResizableFrame
 			}
 		});
 		m_up.setEnabled(false);
-
 		add(m_up);
+
 		m_down = new Button();
+		m_down.setCanAcceptKeyboardFocus(false);
 		m_down.setTheme("downbutton");
 		if(m_friends.size() <= 10)
 		{

@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import org.pokenet.server.backend.entity.Character;
 import org.pokenet.server.backend.entity.HMObject;
 import org.pokenet.server.backend.entity.HMObject.ObjectType;
@@ -17,6 +19,9 @@ import org.pokenet.server.backend.entity.HMObject.ObjectType;
 public class MovementManager implements Runnable
 {
 	/** Comparator for comparing chars */
+	private final ReentrantReadWriteLock queueLock = new ReentrantReadWriteLock(true);
+	private final ReadLock qReadLock = queueLock.readLock();
+	private final WriteLock qWriteLock = queueLock.writeLock();
 	private Comparator<Character> m_comp;
 	private boolean m_isRunning = true;
 	private Queue<Character> m_done;
@@ -24,7 +29,6 @@ public class MovementManager implements Runnable
 	private Thread m_thread;
 	private Queue<Character> m_waiting;
 	private Queue<Character> m_moving;
-	private ReentrantReadWriteLock queueLock = new ReentrantReadWriteLock(true);
 
 	/**
 	 * Default constructor.
@@ -45,7 +49,7 @@ public class MovementManager implements Runnable
 
 	public void addHMObject(HMObject obj)
 	{
-		queueLock.writeLock().lock();
+		qWriteLock.lock();
 		try
 		{
 			if(obj.getType() == ObjectType.STRENGTH_BOULDER)
@@ -56,7 +60,7 @@ public class MovementManager implements Runnable
 		}
 		finally
 		{
-			queueLock.writeLock().unlock();
+			qWriteLock.unlock();
 		}
 	}
 
@@ -67,7 +71,7 @@ public class MovementManager implements Runnable
 	 */
 	public void addPlayer(Character player)
 	{
-		queueLock.writeLock().lock();
+		qWriteLock.lock();
 		try
 		{
 			m_pLoad++;
@@ -75,7 +79,7 @@ public class MovementManager implements Runnable
 		}
 		finally
 		{
-			queueLock.writeLock().unlock();
+			qWriteLock.unlock();
 		}
 	}
 
@@ -105,8 +109,7 @@ public class MovementManager implements Runnable
 	public boolean removePlayer(String player)
 	{
 		/* Check waiting list */
-		queueLock.writeLock().lock();
-		try
+		synchronized(m_waiting)
 		{
 			for(Character c : m_waiting)
 				if(c.getName().equalsIgnoreCase(player))
@@ -115,10 +118,6 @@ public class MovementManager implements Runnable
 					m_pLoad--;
 					return true;
 				}
-		}
-		finally
-		{
-			queueLock.writeLock().unlock();
 		}
 		/* Check done list */
 		synchronized(m_done)
@@ -165,14 +164,14 @@ public class MovementManager implements Runnable
 				if(tmp.move())
 				{
 					/* Place him in moving queue */
-					queueLock.readLock().lock();
+					qReadLock.lock();
 					try
 					{
 						m_moving.offer(tmp);
 					}
 					finally
 					{
-						queueLock.readLock().unlock();
+						qReadLock.unlock();
 					}
 				}
 				if(!m_moving.isEmpty())
@@ -185,27 +184,27 @@ public class MovementManager implements Runnable
 				if(!tmp.move())
 				{
 					/* Place him in the done queue */
-					queueLock.readLock().lock();
+					qReadLock.lock();
 					try
 					{
 						m_done.offer(tmp);
 					}
 					finally
 					{
-						queueLock.readLock().unlock();
+						qReadLock.unlock();
 					}
 				}
 				else
 				{
 					/* Keep him in the Moving queue, but place him last */
-					queueLock.readLock().lock();
+					qReadLock.lock();
 					try
 					{
 						m_moving.offer(tmp);
 					}
 					finally
 					{
-						queueLock.readLock().unlock();
+						qReadLock.unlock();
 					}
 				}
 
@@ -225,7 +224,7 @@ public class MovementManager implements Runnable
 							/* Character has no movement remaining. Removing from movement service */
 							m_done.poll();
 					}
-					queueLock.readLock().lock();
+					qReadLock.lock();
 					try
 					{
 						m_waiting.addAll(transfer);
@@ -234,7 +233,7 @@ public class MovementManager implements Runnable
 					}
 					finally
 					{
-						queueLock.readLock().unlock();
+						qReadLock.unlock();
 					}
 				}
 			}

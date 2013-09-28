@@ -138,6 +138,7 @@ public class PokemonSpecies
 		m_base = i.m_base;
 		m_type = i.m_type;
 		m_genders = i.m_genders;
+		m_number = i.m_number;
 	}
 
 	/**

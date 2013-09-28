@@ -128,63 +128,65 @@ public class PokedexDialog extends ResizableFrame
 
 	public void initGUI()
 	{
-		// This one has to be initialized fist, since it's the 'background'
-		initPokedexSprite();
-
-		pokemonname = new Label();
-		pokemonname.setTheme("label_medium");
-
-		pokemontypes = new Label();
-		pokemontypes.setTheme("label_small");
-
-		pokemonnumber = new Label();
-		pokemonnumber.setTheme("label_large");
-
-		tabname = new Label();
-		tabname.setTheme("label_large");
-
-		loreLabels = new Label[0];
-		pokemonNameList = new Label[13];
-		pokemonCaughtIcons = new Image[13];
-		pokemonLocationLabels = new PokemonLocationIcon[0];
-		pokemonMoveLabels = new Label[0];
-		pokemonBiologyLabels = new Label[14];
-
-		for(int i = 0; i < 14; i++)
+		if(!initialized)
 		{
-			pokemonBiologyLabels[i] = new Label();
-			pokemonBiologyLabels[i].setTheme("label_minismall");
-			add(pokemonBiologyLabels[i]);
-		}
+			// This one has to be initialized fist, since it's the 'background'
+			initPokedexSprite();
 
-		for(int i = 0; i < 13; i++)
-		{
-			pokemonNameList[i] = new Label();
-			pokemonNameList[i].setTheme("label_small");
-			pokemonCaughtIcons[i] = new Image(icon_caught);
-		}
+			pokemonname = new Label();
+			pokemonname.setTheme("label_medium");
 
-		add(pokemonname);
-		add(pokemontypes);
-		add(pokemonnumber);
-		add(tabname);
-		add(map_kantojohto);
-		add(map_hoenn);
-		add(map_sinnoh);
-		add(selectionFrame);
+			pokemontypes = new Label();
+			pokemontypes.setTheme("label_small");
+
+			pokemonnumber = new Label();
+			pokemonnumber.setTheme("label_large");
+
+			tabname = new Label();
+			tabname.setTheme("label_large");
+
+			loreLabels = new Label[0];
+			pokemonNameList = new Label[13];
+			pokemonCaughtIcons = new Image[13];
+			pokemonLocationLabels = new PokemonLocationIcon[0];
+			pokemonMoveLabels = new Label[0];
+			pokemonBiologyLabels = new Label[14];
+
+			for(int i = 0; i < 14; i++)
+			{
+				pokemonBiologyLabels[i] = new Label();
+				pokemonBiologyLabels[i].setTheme("label_minismall");
+				add(pokemonBiologyLabels[i]);
+			}
+
+			for(int i = 0; i < 13; i++)
+			{
+				pokemonNameList[i] = new Label();
+				pokemonNameList[i].setTheme("label_small");
+				pokemonCaughtIcons[i] = new Image(icon_caught);
+			}
+
+			add(pokemonname);
+			add(pokemontypes);
+			add(pokemonnumber);
+			add(tabname);
+			add(map_kantojohto);
+			add(map_hoenn);
+			add(map_sinnoh);
+			add(selectionFrame);
+
+			for(int i = 0; i < 13; i++)
+			{
+				add(pokemonNameList[i]);
+				add(pokemonCaughtIcons[i]);
+			}
+			setBackgroundDraggable(true);
+			setResizableAxis(ResizableAxis.NONE);
+			initialized = true;
+		}
 
 		updateNameList();
-
 		updatePokemonInfo();
-
-		for(int i = 0; i < 13; i++)
-		{
-			add(pokemonNameList[i]);
-			add(pokemonCaughtIcons[i]);
-		}
-		setBackgroundDraggable(true);
-		setResizableAxis(ResizableAxis.NONE);
-		initialized = true;
 	}
 
 	public de.matthiasmann.twl.renderer.Image loadImage(String path)

@@ -306,12 +306,7 @@ public class AutoUpdater
 			{
 				e.printStackTrace();
 			}
-
 			System.out.println("The updater was updated, please restart the game to resume...");
-			System.out.println("Press any key to continue");
-			Scanner s = new Scanner(System.in);
-			s.nextLine();
-			s.close();
 			System.exit(1);
 		}
 	}

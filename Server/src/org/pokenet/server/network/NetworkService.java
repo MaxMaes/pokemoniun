@@ -1,8 +1,5 @@
 package org.pokenet.server.network;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import org.pokenet.server.GameServer;
 import org.pokenet.server.backend.SaveManager;
 import org.pokenet.server.client.Session;
@@ -25,7 +22,8 @@ public class NetworkService
 	private final RegistrationManager m_registrationManager;
 	private final SaveManager m_saveManager;
 	private MySqlManager m_database;
-	private Timer autosaver;
+	private Thread autosaver;
+	protected boolean shouldSave = true;
 
 	/**
 	 * Default constructor
@@ -38,13 +36,7 @@ public class NetworkService
 		m_loginManager = new LoginManager(m_logoutManager);
 		m_registrationManager = new RegistrationManager();
 		m_chatManagers = new ChatManager[3];
-		autosaver = new Timer(1000 * 60 * 10, new ActionListener() // Change last number to the minutes for the interval
-				{
-					public void actionPerformed(ActionEvent arg0)
-					{
-						saveAll();
-					}
-				});
+		autosaver = new Thread(new SaveThread());
 		autosaver.start();
 	}
 
@@ -118,7 +110,7 @@ public class NetworkService
 	public void logoutAll()
 	{
 		m_loginManager.stop();
-		autosaver.stop();
+		autosaver.interrupt();
 		/* Queue all players to be saved */
 		for(Session session : ActiveConnections.allSessions().values())
 		{
@@ -159,42 +151,6 @@ public class NetworkService
 	}
 
 	/**
-	 * Saves all players and logs failures
-	 */
-	public void saveAll()
-	{
-		System.out.println("Saving all players");
-		/* Queue all players to be saved */
-		for(Session session : ActiveConnections.allSessions().values())
-		{
-			if(session.getPlayer() != null)
-			{
-				ServerMessage message = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
-				message.addString("Saving...");
-				session.Send(message);
-
-				if(m_saveManager.savePlayer(session.getPlayer()) == 0)
-				{
-					ServerMessage succesmg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
-					succesmg.addString("Save succesfull.");
-					session.Send(succesmg);
-				}
-				else
-				{
-					ServerMessage failmsg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
-					failmsg.addString("Save Failed.");
-					session.Send(failmsg);
-					System.err.println("Error saving player" + session.getPlayer().getName() + " " + session.getPlayer().getId());
-				}
-			}
-			else
-			{
-				/* Attempted save before the client logged in, or session is not a Player. */
-			}
-		}
-	}
-
-	/**
 	 * Stop this network service by stopping all threads.
 	 */
 	public void stop()
@@ -205,5 +161,58 @@ public class NetworkService
 		for(ChatManager chatMngr : m_chatManagers)
 			chatMngr.stop();
 		System.out.println("INFO: Network Service stopped.");
+	}
+
+	private class SaveThread implements Runnable
+	{
+		private int saveInterval = 1000 * 60 * 10;
+
+		@Override
+		public void run()
+		{
+			while(shouldSave)
+			{
+				if(ActiveConnections.getActiveConnections() > 0)
+				{
+					System.out.println("Saving all players");
+					/* Queue all players to be saved */
+					for(Session session : ActiveConnections.allSessions().values())
+					{
+						if(session.getPlayer() != null)
+						{
+							ServerMessage message = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
+							message.addString("Saving...");
+							session.Send(message);
+							if(m_saveManager.savePlayer(session.getPlayer()) == 0)
+							{
+								ServerMessage succesmg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
+								succesmg.addString("Save succesfull.");
+								session.Send(succesmg);
+							}
+							else
+							{
+								ServerMessage failmsg = new ServerMessage(ClientPacket.SERVER_ANNOUNCEMENT);
+								failmsg.addString("Save Failed.");
+								session.Send(failmsg);
+								System.err.println("Error saving player" + session.getPlayer().getName() + " " + session.getPlayer().getId());
+							}
+						}
+						else
+						{
+							/* Attempted save before the client logged in, or session is not a Player. */
+						}
+					}
+				}
+				try
+				{
+					Thread.sleep(saveInterval);
+				}
+				catch(InterruptedException ie)
+				{
+					shouldSave = false;
+					System.err.println("Autosaver has been stopped!");
+				}
+			}
+		}
 	}
 }

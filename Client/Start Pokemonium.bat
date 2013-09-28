@@ -5,32 +5,28 @@ SET UPDATER=updater.jar
 
 IF EXIST "%ProgramFiles%\Java\jre7" goto Java1.7
 IF EXIST "%ProgramFiles(x86)%\Java\jre7" goto Java1.7x32
-IF EXIST "%ProgramFiles%\Java\jre6" goto Java1.6
-IF EXIST "%ProgramFiles(x86)%\Java\jre6" goto Java1.6x32
+IF EXIST "%ProgramFiles%\Java\jre6" goto Unsupported
+IF EXIST "%ProgramFiles(x86)%\Java\jre6" goto Unsupported
 
 :Java1.7	
 "%ProgramFiles%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-IF errorlevel 1 Goto End
+msg * "The updater has been updated, please restart the game!"
+IF errorlevel 1 Goto Stop
 "%ProgramFiles%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
-Goto End
-
-:Java1.6
-"%ProgramFiles%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-IF errorlevel 1 Goto End
-"%ProgramFiles%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
-Goto End
+Goto Wait
 
 :Java1.7x32
 "%ProgramFiles(x86)%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-IF errorlevel 1 Goto End
+msg * "The updater has been updated, please restart the game!"
+IF errorlevel 1 Goto Stop
 "%ProgramFiles(x86)%\Java\jre7\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
-Goto End
+Goto Wait
 
-:Java1.6x32
-"%ProgramFiles(x86)%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %UPDATER%
-IF errorlevel 1 Goto End
-"%ProgramFiles(x86)%\Java\jre6\bin\java.exe" %LIBRARY_PATH% -jar %CLIENT%
-Goto End
+:Unsupported
+msg * "This version of Java is unsupported, please download Java 7!"
+Goto Stop
 
-:End
+:Wait
 Pause
+
+:Stop

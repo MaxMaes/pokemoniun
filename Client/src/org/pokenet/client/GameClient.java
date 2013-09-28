@@ -392,7 +392,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess() : "Warning the Session was not closed";
+			assert channelFuture.isSuccess(): "Warning the Session was not closed";
 		}
 	}
 
@@ -1112,6 +1112,7 @@ public class GameClient extends BasicGame
 				}
 				if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog())
 				{
+					/* TODO: Check why the session sometimes throws a NPE. */
 					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
 				}
@@ -1121,16 +1122,8 @@ public class GameClient extends BasicGame
 				}
 				else if(getHUD().hasNPCSpeechFrame())
 				{
-					try
-					{
-						System.out.println("Advancing from 1108");
-						getHUD().getNPCSpeech().advance();
-					}
-					catch(Exception e)
-					{
-
-						e.printStackTrace();
-					}
+					System.out.println("Advancing from 1108");
+					getHUD().getNPCSpeech().advance();
 				}
 			}
 			catch(Exception e)

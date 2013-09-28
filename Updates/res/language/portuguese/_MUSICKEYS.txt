@@ -18,14 +18,15 @@ Dragons Den:dragonsden
 Pokemon Center:pokecenter
 Gym:introandgym
 RoA:ruinsofalph
+Ilex Forest:unioncave
 Route:route
 Pallet Town:pallet
 Pewter City:pewter
 Viridian City:pewter
 Saffron City:pewter
 Vermilion City:vermillion
-Cerulean City:vermillion
 Lavender Town:lavender
+Fuchsia City:cerulean
 Canalave City:canalave
 Jubilife City:jubilife
 Sandgem Town:twinleaf

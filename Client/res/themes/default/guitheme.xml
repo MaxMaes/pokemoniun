@@ -344,4 +344,10 @@
         <area name="party_inactive" xywh="1,44,169,42"/>
         <area name="party_hpbar" xywh="1,87,98,11"/>
     </images>
+    <images file="battle_arena.png">
+        <area name="battlearena_window" xywh="1,0,312,216"/>
+        <area name="battlearena_pass" xywh="360,112,30,30"/>
+        <area name="battlearena_draw" xywh="360,40,30,28"/>
+        <area name="battlearena_fail" xywh="360,8,30,28"/>
+    </images>
 </themes>

@@ -1356,14 +1356,15 @@ public class NPC extends Character
 			 * [move] can also be a number in this case he will teach more than one move.
 			 * check the code to see which number corresponds to which move.
 			 */
-			// if(m_name.contains("MoveTutor"))
-			// {
-			// player.setShopping(true);
-			// ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
-			// String tmp = m_name.split("_")[1].split("-")[1];
-			// player.getSession().Send(message);
-			// return;
-			// }
+			if(m_name.contains("MoveTutor"))
+			{
+				player.setShopping(true);
+				ServerMessage message = new ServerMessage(ClientPacket.MOVERETUTOR);
+				String tmp = parseMoveTutor(m_name.split("_")[1]);
+				message.addString(tmp);
+				player.getSession().Send(message);
+				return;
+			}
 			/**
 			 * This is Kurt.
 			 * He will make a different pokeball each day for you if you bring him the correct apricorn.
@@ -1522,5 +1523,75 @@ public class NPC extends Character
 		for(int i = 0; i < m_speech.size(); i++)
 			result += m_speech.get(i) + ",";
 		return result;
+	}
+
+	public String parseMoveTutor(String s)
+	{
+		String moves = "";
+		int shop = 1; // default is one
+		try
+		{
+			shop = Integer.parseInt(s);
+		}
+		catch(Exception e)
+		{
+			System.err.println("movetutor has to end with an integer");
+		}
+		switch(shop)
+		{
+			case 0:
+				moves += "Draco Meteor - $25k, ";
+				moves += "Blast Burn - $25k, ";
+				moves += "Frenzy Plant - $25k, ";
+				moves += "Hydro Cannon - $25k";
+				break;
+			case 1:
+				moves += "Blast Burn - $25k, ";
+				moves += "Frenzy Plant - $25k, ";
+				moves += "Hydro Cannon - $25k";
+				break;
+			case 2:
+				moves += "Counter - 48BP, ";
+				moves += "Defense Curl - 16BP, ";
+				moves += "Dream Eater - 24BP, ";
+				moves += "Icy Wind - 24BP, ";
+				moves += "Mud-Slap - 24BP, ";
+				moves += "Psych Up - 48BP, ";
+				moves += "Rock Slide - 48BP, ";
+				moves += "Snore - 24BP, ";
+				moves += "Softboiled - 16BP, ";
+				moves += "Swift - 24BP, ";
+				moves += "Swords Dance - 48BP, ";
+				moves += "Thunder Wave - 48BP";
+				break;
+			case 3:
+				moves += "Fire Punch - 48BP, ";
+				moves += "Ice Punch - 48BP, ";
+				moves += "ThunderPunch - 48BP, ";
+				moves += "Mega Kick - 48BP, ";
+				moves += "Mega Punch - 24BP, ";
+				moves += "Seismic Toss - 24BP, ";
+				moves += "Endure - 48BP, ";
+				moves += "Body Slam - 48BP";
+				break;
+			case 4:
+				moves += "Body Slam - $20k, ";
+				moves += "Double-Edge - $20k, ";
+				moves += "Dream Eater - $10k, ";
+				moves += "Icy Wind - $20k, ";
+				moves += "Mimic - $10k, ";
+				moves += "Nightmare - $10k, ";
+				moves += "Seismic Toss - $20k, ";
+				moves += "Selfdestruct - $20k, ";
+				moves += "Sky Attack - $20k, ";
+				moves += "Substitute - $25k, ";
+				moves += "Swagger - $20k, ";
+				moves += "Thunder Wave - $10k";
+				break;
+			default:
+				break;
+		}
+
+		return moves;
 	}
 }

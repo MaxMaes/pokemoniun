@@ -165,18 +165,15 @@ public class MoveRelearnDialog extends ResizableFrame
 class PartyDialog extends Widget
 {
 	private Button[] pokeButtons;
-	private MoveRelearnDialog parent;
+	private MoveRelearnDialog parentRelearn;
+	private MoveTutorDialog parentTutor;
 
 	/**
-	 * Default constructor
-	 * 
-	 * @param itemId
-	 * @param use
-	 * @param useOnPoke
+	 * @param w, make a partyDialog with the MoveRelearnDialog as parent
 	 */
 	public PartyDialog(MoveRelearnDialog w)
 	{
-		parent = w;
+		parentRelearn = w;
 		setPosition(getX() - 1, getY() + 1);
 
 		pokeButtons = new Button[GameClient.getInstance().getOurPlayer().getPokemon().length];
@@ -193,8 +190,36 @@ class PartyDialog extends Widget
 					message.addString("MoveRelearner");
 					message.addInt(idx);
 					GameClient.getInstance().getSession().send(message);
-					parent.setPartyIndex(idx);
+					parentRelearn.setPartyIndex(idx);
 					// parent.initUse(idx);
+				}
+			});
+			add(pokeButtons[i]);
+		}
+
+		// Frame configuration
+		setVisible(true);
+	}
+
+	/**
+	 * @param w, make a partyDialog with the MoveTutorDialog as parent
+	 */
+	public PartyDialog(MoveTutorDialog w)
+	{
+		parentTutor = w;
+		setPosition(getX() - 1, getY() + 1);
+
+		pokeButtons = new Button[GameClient.getInstance().getOurPlayer().getPokemon().length];
+		for(int i = 0; i < GameClient.getInstance().getOurPlayer().getPartyCount(); i++)
+		{
+			final int idx = i;
+			pokeButtons[i] = new Button(GameClient.getInstance().getOurPlayer().getPokemon()[i].getName());
+			pokeButtons[i].addCallback(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					parentTutor.setPartyIndex(idx);
 				}
 			});
 			add(pokeButtons[i]);

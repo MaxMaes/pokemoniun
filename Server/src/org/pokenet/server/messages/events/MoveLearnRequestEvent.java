@@ -20,30 +20,59 @@ public class MoveLearnRequestEvent implements MessageEvent
 		String moveName = request.readString();
 		String price = request.readString();
 		int idx = request.readInt();
-		Item i = GameServer.getServiceManager().getItemDatabase().getItem(price);
 		Pokemon poke = p.getParty()[idx];
-		if(p.getBag().containsItem(i.getId()) != -1)
+		if(price.charAt(0) == '$')
 		{
-			if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
+			p.setShopping(false);
+			int money = Integer.parseInt(price.substring(1, 3));
+			money *= 1000;
+			if(p.getMoney() >= money)
 			{
-				p.setShopping(false);
-				poke.getMovesLearning().add(moveName);
+				p.setMoney(p.getMoney() - money);
+				p.updateClientMoney();
+
 				ServerMessage msg = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
 				msg.addInt(idx);
 				msg.addString(moveName);
 				session.Send(msg);
-				p.getBag().removeItem(i.getId(), 1);
-
 			}
+			else
+			{
+				message = new ServerMessage(ClientPacket.NOT_ENOUGH_MONEY);
+				p.getSession().Send(message);
+				p.setShopping(false);
+			}
+		}
+		else if(price.charAt(2) == 'B' && price.charAt(2) == 'P')
+		{
+			p.setShopping(false);
+			// this is BP. TODO: not implemented yet
 		}
 		else
 		{
-			p.setShopping(false);
-			/* Return You don't have that item, fool! */
-			ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
-			msg.addString(price);
-			p.getSession().Send(msg);
-		}
+			Item i = GameServer.getServiceManager().getItemDatabase().getItem(price);
+			if(p.getBag().containsItem(i.getId()) != -1)
+			{
+				if(DataService.getMoveSetData().getMoveSet(poke.getSpeciesNumber()).canLearn(moveName))
+				{
+					p.setShopping(false);
+					poke.getMovesLearning().add(moveName);
+					ServerMessage msg = new ServerMessage(ClientPacket.MOVE_LEARN_LVL);
+					msg.addInt(idx);
+					msg.addString(moveName);
+					session.Send(msg);
+					p.getBag().removeItem(i.getId(), 1);
 
+				}
+			}
+			else
+			{
+				p.setShopping(false);
+				/* Return You don't have that item, fool! */
+				ServerMessage msg = new ServerMessage(ClientPacket.DONT_HAVE_ITEM);
+				msg.addString(price);
+				p.getSession().Send(msg);
+			}
+		}
 	}
 }

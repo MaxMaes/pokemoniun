@@ -188,19 +188,19 @@ public class SpeechFrame extends Widget
 
 			if(canAdvance())
 			{
-				if(triangleY > 590)
-				{
-					triangleY = 590;
-				}
-				else if(triangleY < 580)
+				if(triangleY > 580)
 				{
 					triangleY = 580;
 				}
-				if(triangleY == 580)
+				else if(triangleY < 570)
+				{
+					triangleY = 570;
+				}
+				if(triangleY == 570)
 				{
 					isGoingDown = true;
 				}
-				else if(triangleY == 590)
+				else if(triangleY == 580)
 				{
 					isGoingDown = false;
 				}

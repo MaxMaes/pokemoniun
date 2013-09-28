@@ -250,7 +250,7 @@
         <select name="battlebutton_background">
             <alias ref="battlebutton_pressed" if="pressed"/>
             <alias ref="battlebutton_pressed" if="disabled"/>
-            <area xywh="0,0,1,1"/>
+            <alias ref="battlebutton"/>
         </select>
     
         <area name="battlebutton_small_pressed" xywh="42,197,82,48"/>
@@ -343,5 +343,11 @@
         <area name="party_active" xywh="1,1,171,42"/>
         <area name="party_inactive" xywh="1,44,169,42"/>
         <area name="party_hpbar" xywh="1,87,98,11"/>
+    </images>
+    <images file="battle_arena.png">
+        <area name="battlearena_window" xywh="1,0,312,216"/>
+        <area name="battlearena_pass" xywh="360,112,30,30"/>
+        <area name="battlearena_draw" xywh="360,40,30,28"/>
+        <area name="battlearena_fail" xywh="360,8,30,28"/>
     </images>
 </themes>

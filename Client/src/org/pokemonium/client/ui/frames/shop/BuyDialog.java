@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.pokemonium.client.GameClient;
 import org.pokemonium.client.backend.entity.Item;
 import org.pokemonium.client.constants.ServerPacket;
+import org.pokemonium.client.constants.ShopInteraction;
 import org.pokemonium.client.protocol.ClientMessage;
 import org.pokemonium.client.ui.components.Image;
 import de.matthiasmann.twl.Button;
@@ -131,9 +132,8 @@ public class BuyDialog extends Widget
 
 	public void itemClicked(int itemid)
 	{
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("0F" + itemid + ",1");
-		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-		message.addInt(0);
+		ClientMessage message = new ClientMessage(ServerPacket.SHOPPING);
+		message.addInt(ShopInteraction.BUY_ITEM);
 		message.addInt(itemid);
 		GameClient.getInstance().getSession().send(message);
 	}

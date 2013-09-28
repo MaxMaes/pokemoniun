@@ -3,6 +3,7 @@ package org.pokemonium.client.ui.frames;
 import org.pokemonium.client.GameClient;
 import org.pokemonium.client.backend.ItemDatabase;
 import org.pokemonium.client.constants.ServerPacket;
+import org.pokemonium.client.constants.ShopInteraction;
 import org.pokemonium.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ResizableFrame;
@@ -22,7 +23,6 @@ public class KurtDialog extends ResizableFrame
 	private int max, quantity, price;
 	private TextArea dialogText;
 	private SimpleTextAreaModel textModel;
-	// private Button
 	private Widget pane;
 	private Button buy1, buy5, buy10, buyMax, cancel;
 
@@ -42,10 +42,8 @@ public class KurtDialog extends ResizableFrame
 		quantity = 0;
 		initUse();
 		setTitle("Please choose how many you want to buy");
-		// setVisible(false);
 		setResizableAxis(ResizableAxis.NONE);
 		setDraggable(true);
-		// setVisible(false);
 		add(pane);
 	}
 
@@ -92,9 +90,8 @@ public class KurtDialog extends ResizableFrame
 		{
 			public void run()
 			{
-				// stop shopping
-				ClientMessage msg = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-				msg.addInt(2);
+				ClientMessage msg = new ClientMessage(ServerPacket.SHOPPING);
+				msg.addInt(ShopInteraction.DONE_SHOPPING);
 				GameClient.getInstance().getSession().send(msg);
 				GameClient.getInstance().getHUD().removeKurtDialog();
 			}
@@ -110,19 +107,7 @@ public class KurtDialog extends ResizableFrame
 					@Override
 					public void run()
 					{
-						// notify that you bought the pokeballs
-						GameClient.getInstance().getHUD().removeKurtDialog();
-						ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						message.addInt(3);
-						message.addInt(ItemDatabase.getInstance().getItem(pokeball).getId());
-						message.addInt(quantity);
-						GameClient.getInstance().getSession().send(message);
-
-						// stop shopping
-						ClientMessage msg = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						msg.addInt(2);
-						GameClient.getInstance().getSession().send(msg);
-						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+						buyAmountOfBalls(quantity, pokeball);
 					}
 				};
 				Runnable no = new Runnable()
@@ -146,18 +131,7 @@ public class KurtDialog extends ResizableFrame
 					@Override
 					public void run()
 					{
-						GameClient.getInstance().getHUD().removeKurtDialog();
-						ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						message.addInt(3);
-						message.addInt(ItemDatabase.getInstance().getItem(pokeball).getId());
-						message.addInt(quantity);
-						GameClient.getInstance().getSession().send(message);
-
-						// stop shopping
-						ClientMessage msg = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						msg.addInt(2);
-						GameClient.getInstance().getSession().send(msg);
-						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+						buyAmountOfBalls(quantity, pokeball);
 					}
 				};
 				Runnable no = new Runnable()
@@ -181,18 +155,7 @@ public class KurtDialog extends ResizableFrame
 					@Override
 					public void run()
 					{
-						GameClient.getInstance().getHUD().removeKurtDialog();
-						ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						message.addInt(3);
-						message.addInt(ItemDatabase.getInstance().getItem(pokeball).getId());
-						message.addInt(quantity);
-						GameClient.getInstance().getSession().send(message);
-
-						// stop shopping
-						ClientMessage msg = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						msg.addInt(2);
-						GameClient.getInstance().getSession().send(msg);
-						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+						buyAmountOfBalls(quantity, pokeball);
 					}
 				};
 				Runnable no = new Runnable()
@@ -216,18 +179,7 @@ public class KurtDialog extends ResizableFrame
 					@Override
 					public void run()
 					{
-						GameClient.getInstance().getHUD().removeKurtDialog();
-						ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						message.addInt(3);
-						message.addInt(ItemDatabase.getInstance().getItem(pokeball).getId());
-						message.addInt(quantity);
-						GameClient.getInstance().getSession().send(message);
-
-						// stop shopping
-						ClientMessage msg = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-						msg.addInt(2);
-						GameClient.getInstance().getSession().send(msg);
-						GameClient.getInstance().getGUIPane().hideConfirmationDialog();
+						buyAmountOfBalls(quantity, pokeball);
 					}
 				};
 				Runnable no = new Runnable()
@@ -241,6 +193,26 @@ public class KurtDialog extends ResizableFrame
 			}
 		});
 		layout();
+	}
+
+	/**
+	 * Helper function to send the messages with the shoppingn information.
+	 * 
+	 * @param quantity The amount of balls to buy.
+	 * @param pokeball The type of Pokeball.
+	 */
+	private void buyAmountOfBalls(int quantity, String pokeball)
+	{
+		GameClient.getInstance().getHUD().removeKurtDialog();
+		ClientMessage message = new ClientMessage(ServerPacket.SHOPPING);
+		message.addInt(ShopInteraction.BUY_MULTIPLE_ITEM);
+		message.addInt(ItemDatabase.getInstance().getItem(pokeball).getId());
+		message.addInt(quantity);
+		GameClient.getInstance().getSession().send(message);
+		ClientMessage msg = new ClientMessage(ServerPacket.SHOPPING);
+		msg.addInt(ShopInteraction.DONE_SHOPPING);
+		GameClient.getInstance().getSession().send(msg);
+		GameClient.getInstance().getGUIPane().hideConfirmationDialog();
 	}
 
 	@Override

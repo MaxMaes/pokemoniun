@@ -2,6 +2,7 @@ package org.pokemonium.server.messages.events;
 
 import org.pokemonium.server.backend.entity.Player;
 import org.pokemonium.server.client.Session;
+import org.pokemonium.server.constants.ShopInteraction;
 import org.pokemonium.server.messages.MessageEvent;
 import org.pokemonium.server.protocol.ClientMessage;
 import org.pokemonium.server.protocol.ServerMessage;
@@ -11,30 +12,30 @@ public class ShopEvent implements MessageEvent
 
 	public void Parse(Session session, ClientMessage request, ServerMessage message)
 	{
-		Player p = session.getPlayer();
-		int i = request.readInt();
-		int item;
+		Player player = session.getPlayer();
+		int action = request.readInt();
 		int quantity = 1;
-		switch(i)
+		int item;
+		switch(action)
 		{
-			case 0:
+			case ShopInteraction.BUY_ITEM:
 				item = request.readInt();
-				p.buyItem(item, quantity);
+				player.buyItem(item, quantity);
 				break;
-			case 1:
+			case ShopInteraction.SELL_ITEM:
 				item = request.readInt();
-				p.sellItem(item, quantity);
+				player.sellItem(item, quantity);
 				break;
-			case 2:
-				p.setShopping(false);
+			case ShopInteraction.DONE_SHOPPING:
+				player.setShopping(false);
 				break;
-			case 3:
+			case ShopInteraction.BUY_MULTIPLE_ITEM:
 				item = request.readInt();
 				quantity = request.readInt();
-				p.buyItem(item, quantity);
+				player.buyItem(item, quantity);
 				break;
 			default:
-				p.setShopping(false);
+				player.setShopping(false);
 				break;
 		}
 	}

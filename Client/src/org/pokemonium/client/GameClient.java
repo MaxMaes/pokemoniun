@@ -33,6 +33,7 @@ import org.pokemonium.client.backend.FileLoader;
 import org.pokemonium.client.backend.ItemDatabase;
 import org.pokemonium.client.backend.ItemSpriteDatabase;
 import org.pokemonium.client.backend.KeyManager;
+import org.pokemonium.client.backend.KeyManager.Action;
 import org.pokemonium.client.backend.MoveLearningManager;
 import org.pokemonium.client.backend.Options;
 import org.pokemonium.client.backend.PokedexData;
@@ -40,7 +41,6 @@ import org.pokemonium.client.backend.PokemonSpriteDatabase;
 import org.pokemonium.client.backend.SoundManager;
 import org.pokemonium.client.backend.SpriteFactory;
 import org.pokemonium.client.backend.TWLInputAdapter;
-import org.pokemonium.client.backend.KeyManager.Action;
 import org.pokemonium.client.backend.entity.OurPlayer;
 import org.pokemonium.client.backend.entity.Player;
 import org.pokemonium.client.backend.entity.Player.Direction;
@@ -66,10 +66,9 @@ import de.matthiasmann.twl.theme.ThemeManager;
 public class GameClient extends BasicGame
 {
 	/**
-	 * Returns this instance of game client
-	 * Before Battle Music Name
+	 * Returns this instance of the GameClient.
 	 * 
-	 * @return
+	 * @return The GameClient instance.
 	 */
 	public static GameClient getInstance()
 	{

@@ -1,7 +1,8 @@
 #Folder ignores
-/bin
-/obj
-/updates
+/PokemoniumUpdater/bin
+/Server/bin
+/Client/bin
+/Client/updates
 
 #Filetypes and file ignores
 *.class

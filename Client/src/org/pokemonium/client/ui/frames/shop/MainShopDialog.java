@@ -2,6 +2,7 @@ package org.pokemonium.client.ui.frames.shop;
 
 import org.pokemonium.client.GameClient;
 import org.pokemonium.client.constants.ServerPacket;
+import org.pokemonium.client.constants.ShopInteraction;
 import org.pokemonium.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Widget;
@@ -65,8 +66,8 @@ public class MainShopDialog extends Widget
 
 	public void cancelled()
 	{
-		ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-		message.addInt(2);
+		ClientMessage message = new ClientMessage(ServerPacket.SHOPPING);
+		message.addInt(ShopInteraction.DONE_SHOPPING);
 		GameClient.getInstance().getSession().send(message);
 		GameClient.getInstance().getGUIPane().getHUD().removeShop();
 	}

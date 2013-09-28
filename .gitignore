@@ -1,11 +1,10 @@
 #Folder ignores
-/bin
-/obj
-/updates
+/PokemoniumUpdater/bin
+/Server/bin
+/Client/bin
+/Client/updates
+/Client/logs
 
 #Filetypes and file ignores
 *.class
-thumbs.db
-/Client/logs
-
 /Client/betaclient.jar

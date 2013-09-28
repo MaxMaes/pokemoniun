@@ -3,6 +3,7 @@ package org.pokemonium.client.ui.frames.shop;
 import org.pokemonium.client.GameClient;
 import org.pokemonium.client.backend.entity.PlayerItem;
 import org.pokemonium.client.constants.ServerPacket;
+import org.pokemonium.client.constants.ShopInteraction;
 import org.pokemonium.client.protocol.ClientMessage;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.ListBox;
@@ -46,8 +47,8 @@ public class SellDialog extends Widget
 						@Override
 						public void run()
 						{
-							ClientMessage message = new ClientMessage(ServerPacket.BUY_SELL_ITEMS);
-							message.addInt(1);
+							ClientMessage message = new ClientMessage(ServerPacket.SHOPPING);
+							message.addInt(ShopInteraction.SELL_ITEM);
 							PlayerItem selectedItem = getSelectedItem();
 							message.addInt(selectedItem.getItem().getId());
 							GameClient.getInstance().getSession().send(message);
@@ -65,9 +66,9 @@ public class SellDialog extends Widget
 					GameClient.getInstance().getGUIPane()
 							.showConfirmationDialog("Are you sure you want to sell " + selectedItem.getItem().getName() + " for $" + selectedItem.getItem().getPrice() / 2 + "?", yes, no);
 				}
-				catch(Exception e2)
+				catch(Exception e)
 				{
-					e2.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 		});

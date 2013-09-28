@@ -22,7 +22,6 @@ public class ItemSpriteDatabase
 	{
 		if(items_24[num] == null)
 		{
-			System.out.println("Loading item sprite with itemid: " + num);
 			loadItemSpriteWithNumber(num);
 		}
 		return items_24[num];
@@ -32,7 +31,6 @@ public class ItemSpriteDatabase
 	{
 		if(items_48[num] == null)
 		{
-			System.out.println("Loading item sprite with itemid: " + num);
 			loadItemSpriteWithNumber(num);
 		}
 		return items_48[num];
@@ -63,7 +61,6 @@ public class ItemSpriteDatabase
 			items_24[idx] = FileLoader.loadImage(respath + "res/items/24/" + idx + ".png");
 			items_48[idx] = FileLoader.loadImage(respath + "res/items/48/" + idx + ".png");
 		}
-
 	}
 
 	private static void loadItemSpriteWithNumber(int num)

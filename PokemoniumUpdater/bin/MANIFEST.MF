@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Sealed: true
+Class-Path: lib/ini4j-0.3.2-jdk14.jar
+Main-Class: com.pokemonium.autoupdater.Main
+

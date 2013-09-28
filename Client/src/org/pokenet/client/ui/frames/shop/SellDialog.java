@@ -32,6 +32,7 @@ public class SellDialog extends Widget
 		loadBag();
 		sellList = new ListBox<String>(sellModel);
 		sellButton = new Button("Sell");
+		sellButton.setCanAcceptKeyboardFocus(false);
 		sellButton.addCallback(new Runnable()
 		{
 			@Override
@@ -73,6 +74,7 @@ public class SellDialog extends Widget
 
 		// Start the UI
 		cancelButton = new Button("Cancel");
+		cancelButton.setCanAcceptKeyboardFocus(false);
 		cancelButton.addCallback(new Runnable()
 		{
 			@Override

@@ -49,6 +49,7 @@ public class BuyDialog extends Widget
 		{
 			final int itemChosen = items.get(i).getId();
 			itemButtons[i] = new Button("");
+			itemButtons[i].setCanAcceptKeyboardFocus(false);
 			itemButtons[i].addCallback(new Runnable()
 			{
 				@Override
@@ -116,6 +117,7 @@ public class BuyDialog extends Widget
 		}
 
 		cancelButton = new Button("Cancel");
+		cancelButton.setCanAcceptKeyboardFocus(false);
 		cancelButton.addCallback(new Runnable()
 		{
 			@Override

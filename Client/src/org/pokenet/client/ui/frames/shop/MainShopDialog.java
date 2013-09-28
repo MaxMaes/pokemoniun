@@ -26,6 +26,7 @@ public class MainShopDialog extends Widget
 	{
 		setTheme("mainscreen");
 		gotoBuyButton = new Button("Buy");
+		gotoBuyButton.setCanAcceptKeyboardFocus(false);
 		gotoBuyButton.addCallback(new Runnable()
 		{
 			@Override
@@ -37,6 +38,7 @@ public class MainShopDialog extends Widget
 		add(gotoBuyButton);
 
 		gotoSellButton = new Button("Sell");
+		gotoSellButton.setCanAcceptKeyboardFocus(false);
 		gotoSellButton.addCallback(new Runnable()
 		{
 			@Override
@@ -48,6 +50,7 @@ public class MainShopDialog extends Widget
 		add(gotoSellButton);
 
 		cancelButton = new Button("Cancel");
+		cancelButton.setCanAcceptKeyboardFocus(false);
 		cancelButton.addCallback(new Runnable()
 		{
 			@Override

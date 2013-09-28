@@ -6,3 +6,6 @@
 #Filetypes and file ignores
 *.class
 thumbs.db
+/Client/logs
+
+/Client/betaclient.jar

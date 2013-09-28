@@ -329,7 +329,17 @@ public abstract class BattleField
 			{
 				PokemonMove pokemonMove = turn.getMove(active[i]);
 				if(pokemonMove != null)
-					pokemonMove.beginTurn(move, i, active[i]);
+				{
+					try
+					{
+						pokemonMove.beginTurn(move, i, active[i]);
+					}
+					catch(Exception e)
+					{
+						System.err.println("A pokemon tried to use a move and something went wrong, check this error:");
+						System.err.println(e);
+					}
+				}
 			}
 		}
 		for(int i = 0; i < active.length; ++i)

@@ -11,7 +11,6 @@ import org.pokemonium.client.protocol.ClientMessage;
 import org.pokemonium.client.ui.components.Image;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.CallbackWithReason;
-import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.ListBox;
 import de.matthiasmann.twl.ListBox.CallbackReason;
 import de.matthiasmann.twl.ResizableFrame;
@@ -20,13 +19,14 @@ import de.matthiasmann.twl.model.SimpleChangableListModel;
 
 public class SpriteChooserDialog extends ResizableFrame
 {
-	protected String m_mustLoadSprite;
 	protected Image m_spriteDisplay;
 	protected ListBox<String> m_spriteList;
 	private SimpleChangableListModel<String> spritelistmodel;
 	private String m_respath;
 	private List<String> m_sprites;
 	private Widget pane;
+	private Button use;
+	private Button cancel;
 
 	public SpriteChooserDialog()
 	{
@@ -47,30 +47,29 @@ public class SpriteChooserDialog extends ResizableFrame
 		in = FileLoader.loadFile(m_respath + "res/characters/sprites.txt");
 		Scanner s = new Scanner(in);
 		while(s.hasNextLine())
+		{
 			m_sprites.remove(s.nextLine());
+		}
 		s.close();
 		m_spriteDisplay = new Image();
-		m_spriteDisplay.setSize(124, 204);
-		m_spriteDisplay.setPosition(105, 20);
 		pane.add(m_spriteDisplay);
 		spritelistmodel = new SimpleChangableListModel<>();
 		for(String sp : m_sprites)
+		{
 			spritelistmodel.addElement(sp);
+		}
 		m_spriteList = new ListBox<String>(spritelistmodel);
 		m_spriteList.addCallback(new CallbackWithReason<ListBox.CallbackReason>()
 		{
-
 			@Override
 			public void callback(CallbackReason arg0)
 			{
 				if(arg0 == CallbackReason.KEYBOARD || arg0 == CallbackReason.MOUSE_CLICK)
 				{
-					m_mustLoadSprite = m_respath + "res/characters/" + spritelistmodel.getEntry(m_spriteList.getSelected()) + ".png";
+					loadSprite(m_respath + "res/characters/" + spritelistmodel.getEntry(m_spriteList.getSelected()) + ".png");
 				}
 			}
 		});
-		m_spriteList.setPosition(2, 25);
-		m_spriteList.setSize(105, 317);
 		pane.add(m_spriteList);
 		setTitle("Please choose your character..");
 		setSize(265, 340);
@@ -81,6 +80,11 @@ public class SpriteChooserDialog extends ResizableFrame
 		add(pane);
 	}
 
+	protected void loadSprite(String spriteToLoad)
+	{
+		m_spriteDisplay.setImage(FileLoader.loadImage(spriteToLoad));
+	}
+
 	public int getChoice()
 	{
 		return m_spriteList.getSelected();
@@ -88,15 +92,11 @@ public class SpriteChooserDialog extends ResizableFrame
 
 	public void initUse()
 	{
-		Button use = new Button("Use new sprite!");
+		use = new Button("Use new sprite!");
 		use.setCanAcceptKeyboardFocus(false);
-		use.setPosition(130, 245);
-		use.adjustSize();
 		pane.add(use);
-		Button cancel = new Button("Cancel");
+		cancel = new Button("Cancel");
 		cancel.setCanAcceptKeyboardFocus(false);
-		cancel.setPosition(130, 280);
-		cancel.setSize(80, 20);
 		pane.add(cancel);
 		cancel.addCallback(new Runnable()
 		{
@@ -138,13 +138,16 @@ public class SpriteChooserDialog extends ResizableFrame
 	}
 
 	@Override
-	public void paintWidget(GUI gui)
+	public void layout()
 	{
-		super.paintWidget(gui);
-		if(m_mustLoadSprite != null)
-		{
-			m_spriteDisplay.setImage(FileLoader.loadImage(m_mustLoadSprite));
-			m_mustLoadSprite = null;
-		}
+		super.layout();
+		use.setSize(115, 20);
+		use.setPosition(getInnerX() + 130, getInnerY() + 245);
+		cancel.setPosition(getInnerX() + 145, getInnerY() + 280);
+		cancel.setSize(80, 20);
+		m_spriteList.setPosition(getInnerX() + 0, getInnerY() + 23);
+		m_spriteList.setSize(105, 317);
+		m_spriteDisplay.setSize(124, 204);
+		m_spriteDisplay.setPosition(getInnerX() + 125, getInnerY() + 40);
 	}
 }

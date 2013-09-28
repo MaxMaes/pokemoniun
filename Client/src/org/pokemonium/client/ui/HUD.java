@@ -532,6 +532,10 @@ public class HUD extends DesktopArea
 
 	public void showSpritechooser()
 	{
+		if(spriteChooser != null)
+		{
+			removeChild(spriteChooser);
+		}
 		spriteChooser = new SpriteChooserDialog();
 		add(spriteChooser);
 	}

@@ -57,7 +57,6 @@ public class PokemonSpriteDatabase
 	{
 		if(icons[pokenum] == null)
 		{
-			System.out.println("Loading sprite for pokemon: " + pokenum);
 			loadSpriteWithNumber(pokenum);
 		}
 		return icons[pokenum];
@@ -67,7 +66,6 @@ public class PokemonSpriteDatabase
 	{
 		if(back[gender][pokenum] == null)
 		{
-			System.out.println("Loading sprite for pokemon: " + pokenum);
 			loadSpriteWithNumber(pokenum);
 		}
 		return back[gender][pokenum];
@@ -77,7 +75,6 @@ public class PokemonSpriteDatabase
 	{
 		if(back_shiney[gender][pokenum] == null)
 		{
-			System.out.println("Loading sprite for pokemon: " + pokenum);
 			loadSpriteWithNumber(pokenum);
 		}
 		return back_shiney[gender][pokenum];
@@ -87,7 +84,6 @@ public class PokemonSpriteDatabase
 	{
 		if(front[gender][pokenum] == null)
 		{
-			System.out.println("Loading sprite for pokemon: " + pokenum);
 			loadSpriteWithNumber(pokenum);
 		}
 		return front[gender][pokenum];
@@ -97,7 +93,6 @@ public class PokemonSpriteDatabase
 	{
 		if(front_shiney[gender][pokenum] == null)
 		{
-			System.out.println("Loading sprite for pokemon: " + pokenum);
 			loadSpriteWithNumber(pokenum);
 		}
 		return front_shiney[gender][pokenum];

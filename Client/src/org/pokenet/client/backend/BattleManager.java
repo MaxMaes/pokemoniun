@@ -296,7 +296,7 @@ public class BattleManager
 		updatePokePane();
 		m_narrator.startTimeline();
 		m_curTrack = GameClient.getInstance().getSoundPlayer().m_trackName;
-		System.out.println("Before Battle Music Name:" + m_curTrack);
+		/* System.out.println("Before Battle Music Name:" + m_curTrack); */
 		m_battle.enableMoves();
 		GameClient.getInstance().changeTrack(Music.PVNPC);
 	}
@@ -319,8 +319,6 @@ public class BattleManager
 			getBattleWindow().getCanvas().setPlayerMaxHP(m_curPoke.getCurHP());
 			getBattleWindow().getCanvas().updatePlayerHPBarColor();
 			getBattleWindow().getCanvas().initPlayerXPBar();
-			// getBattleWindow().getCanvas().drawOurPoke();
-			// getBattleWindow().getCanvas().drawOurInfo();
 		}
 		else
 		{
@@ -435,7 +433,6 @@ public class BattleManager
 		m_curEnemyIndex = 0;
 		try
 		{
-			// getBattleWindow().getCanvas().drawEnemyPoke();
 			try
 			{
 				getBattleWindow().getCanvas().setEnemyInfo();
@@ -478,5 +475,4 @@ public class BattleManager
 			}
 		});
 	}
-
 }

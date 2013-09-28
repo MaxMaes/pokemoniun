@@ -1,0 +1,8 @@
+#Folder ignores
+/bin
+/obj
+/updates
+
+#Filetypes and file ignores
+*.class
+thumbs.db

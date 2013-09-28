@@ -67,6 +67,7 @@ public class GameClient extends BasicGame
 {
 	/**
 	 * Returns this instance of game client
+	 * Before Battle Music Name
 	 * 
 	 * @return
 	 */
@@ -1112,7 +1113,6 @@ public class GameClient extends BasicGame
 				}
 				if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog())
 				{
-					/* TODO: Check why the session sometimes throws a NPE. */
 					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
 				}
@@ -1122,7 +1122,6 @@ public class GameClient extends BasicGame
 				}
 				else if(getHUD().hasNPCSpeechFrame())
 				{
-					System.out.println("Advancing from 1108");
 					getHUD().getNPCSpeech().advance();
 				}
 			}

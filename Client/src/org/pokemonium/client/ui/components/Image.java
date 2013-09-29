@@ -72,6 +72,11 @@ public class Image extends de.matthiasmann.twl.Widget
 		invalidateLayout();
 	}
 
+	public de.matthiasmann.twl.renderer.Image getImage()
+	{
+		return img;
+	}
+
 	@Override
 	public int getPreferredHeight()
 	{
@@ -115,10 +120,5 @@ public class Image extends de.matthiasmann.twl.Widget
 		{
 			img.draw(getAnimationState(), getX(), getY(), getWidth(), getHeight());
 		}
-	}
-
-	public de.matthiasmann.twl.renderer.Image getImage()
-	{
-		return img;
 	}
 }

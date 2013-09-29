@@ -65,6 +65,7 @@ public class BattleControlFrame extends Widget
 		{
 			m_moveButtons.get(idx).setEnabled(false);
 			m_ppLabels.get(idx).setEnabled(false);
+			m_moveTypeLabels.get(idx).setEnabled(false);
 		}
 		btnPoke.setEnabled(false);
 		btnBag.setEnabled(false);
@@ -89,7 +90,6 @@ public class BattleControlFrame extends Widget
 				pokeCancelBtn.setEnabled(true);
 				for(int idx = 0; idx < 4; idx++)
 				{
-					System.out.println(m_moveButtons.get(idx).getText());
 					if(!m_moveButtons.get(idx).getText().equals(""))
 					{
 						m_moveButtons.get(idx).setEnabled(true);
@@ -152,7 +152,6 @@ public class BattleControlFrame extends Widget
 	public void showAttack()
 	{
 		pokePane.setVisible(false);
-		// bagPane.setVisible(false);
 		attackPane.setVisible(true);
 	}
 
@@ -194,11 +193,10 @@ public class BattleControlFrame extends Widget
 			BattleManager.getInstance().getCurPoke().setMoveCurPP(i, BattleManager.getInstance().getCurPoke().getMoveCurPP()[i] - 1);
 			BattleManager.getInstance().updateMoves();
 		}
-		// GameClient.getInstance().getPacketGenerator().writeTcpMessage("2C" + i);
 		ClientMessage message = new ClientMessage(ServerPacket.MOVE_SELECTED);
 		message.addInt(i);
 		GameClient.getInstance().getSession().send(message);
-		// BattleManager.getInstance().getTimeLine().getBattleSpeech().advance();
+		GameClient.getInstance().getHUD().getBattleSpeechFrame().advance();
 	}
 
 	/**
@@ -257,7 +255,6 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp2 = new Label();
 		pp2.setTheme("pplabel");
-		pp2.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp2.setSize(GameClient.getInstance().getFontSmall().getWidth(pp2.getText()), GameClient.getInstance().getFontSmall().getHeight(pp2.getText()));
 		pp2.setPosition(210, 40);
 		Label move2Type = new Label();
@@ -266,8 +263,8 @@ public class BattleControlFrame extends Widget
 		move2Type.setPosition(135, 40);
 		attackPane.add(move2Type);
 		attackPane.add(pp2);
-
 		attackPane.add(move3);
+
 		move3.setPosition(7, 65);
 		move3.setSize(116, 51);
 		move3.addCallback(new Runnable()
@@ -280,7 +277,6 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp3 = new Label();
 		pp3.setTheme("pplabel");
-		pp3.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp3.setSize(GameClient.getInstance().getFontSmall().getWidth(pp3.getText()), GameClient.getInstance().getFontSmall().getHeight(pp3.getText()));
 		pp3.setPosition(86, 95);
 		Label move3Type = new Label();
@@ -303,7 +299,6 @@ public class BattleControlFrame extends Widget
 		});
 		Label pp4 = new Label();
 		pp4.setTheme("pplabel");
-		pp4.setFont(GameClient.getInstance().getTheme().getFont("normal_white"));
 		pp4.setSize(GameClient.getInstance().getFontSmall().getWidth(pp4.getText()), GameClient.getInstance().getFontSmall().getHeight(pp4.getText()));
 		pp4.setPosition(210, 95);
 		Label move4Type = new Label();
@@ -470,6 +465,7 @@ public class BattleControlFrame extends Widget
 			m_pokeStatus.add(status);
 			Label info = new Label();
 			m_pokeButtons.get(i).add(info);
+			info.setTheme("pokeinfolabel");
 			info.setText("                               ");
 			info.setPosition(m_pokeButtons.get(i).getX() + 3, m_pokeButtons.get(i).getY() + 34);
 			info.setSize(107, 14);

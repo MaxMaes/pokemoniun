@@ -343,14 +343,15 @@ public class BattleManager
 				m_battle.getPPLabel(i).setText(m_curPoke.getMoveCurPP()[i] + "/" + m_curPoke.getMoveMaxPP()[i]);
 				m_battle.getMoveTypeLabel(i).setText(m_curPoke.getMoveType(i));
 
-				m_battle.getMoveButton(i).setVisible(true);
-				m_battle.getPPLabel(i).setVisible(true);
-				m_battle.getMoveTypeLabel(i).setVisible(true);
+				m_battle.getPPLabel(i).setEnabled(true);
+				m_battle.getMoveTypeLabel(i).setEnabled(true);
+				m_battle.getMoveButton(i).setEnabled(true);
 			}
 			else
 			{
 				m_battle.getMoveButton(i).setText("");
 				m_battle.getPPLabel(i).setText("");
+				m_battle.getMoveTypeLabel(i).setText("");
 				m_battle.getMoveButton(i).setEnabled(false);
 			}
 		}
@@ -364,16 +365,20 @@ public class BattleManager
 	public void updateMoves(int pokeIndex)
 	{
 		for(int i = 0; i < 4; i++)
+		{
 			if(m_ourPokes[pokeIndex].getMoves()[i] != null)
 			{
 				m_battle.getMoveButton(i).setText(m_ourPokes[pokeIndex].getMoves()[i]);
 				m_battle.getPPLabel(i).setText(m_ourPokes[pokeIndex].getMoveCurPP()[i] + "/" + m_ourPokes[pokeIndex].getMoveMaxPP()[i]);
+				m_battle.getMoveTypeLabel(i).setText(m_ourPokes[pokeIndex].getMoveType(i));
 			}
 			else
 			{
 				m_battle.getMoveButton(i).setText("");
 				m_battle.getPPLabel(i).setText("");
+				m_battle.getMoveTypeLabel(i).setText("");
 			}
+		}
 	}
 
 	/**
@@ -383,27 +388,36 @@ public class BattleManager
 	{
 		for(int i = 0; i < 6; i++)
 		{
-			try
+			if(m_ourPokes[i] == null)
+			{
+				m_battle.getPokeButton(i).setEnabled(false);
+			}
+			else
 			{
 				m_battle.getPokeButton(i).setText(m_ourPokes[i].getName());
 				m_battle.getPokeInfo(i).setText("Lv: " + m_ourPokes[i].getLevel() + " HP:" + m_ourPokes[i].getCurHP() + "/" + m_ourPokes[i].getMaxHP());
 				try
 				{
 					if(m_ourStatuses.containsKey(i) && m_battle.getStatusIcons().containsKey(m_ourStatuses.get(i)))
+					{
 						m_battle.getPokeStatus(i).setImage(m_battle.getStatusIcons().get(m_ourStatuses.get(i)));
+					}
 					else
+					{
 						m_battle.getPokeStatus(i).setImage(null);
+					}
 				}
 				catch(Exception e2)
 				{
 				}
-				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i || m_ourPokes[i] == null)
+				if(m_ourPokes[i].getCurHP() <= 0 || m_curPokeIndex == i)
+				{
 					m_battle.getPokeButton(i).setEnabled(false);
+				}
 				else
+				{
 					m_battle.getPokeButton(i).setEnabled(true);
-			}
-			catch(Exception e)
-			{
+				}
 			}
 		}
 	}

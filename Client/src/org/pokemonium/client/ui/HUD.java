@@ -352,6 +352,7 @@ public class HUD extends DesktopArea
 	public void hidePlayerPopupDialog()
 	{
 		playerPopupDialog.destroy();
+		playerPopupDialog = null;
 	}
 
 	public void showShop(HashMap<Integer, Integer> stock)

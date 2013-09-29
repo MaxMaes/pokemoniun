@@ -21,7 +21,9 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 
 		newMsg = speech;
 		if(stringToPrint != null && (stringToPrint.equals("Awaiting your move.") || stringToPrint.equals("Awaiting players' moves.")) && speechQueue.peek() == null)
+		{
 			loadTriangle();
+		}
 		speechQueue.add(speech);
 		if(stringToPrint == null || stringToPrint.equals(""))
 		{

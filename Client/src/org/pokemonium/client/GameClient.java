@@ -187,7 +187,6 @@ public class GameClient extends BasicGame
 		{
 			se.printStackTrace();
 		}
-		started = true;
 	}
 
 	/**
@@ -313,48 +312,64 @@ public class GameClient extends BasicGame
 	public void controllerDownPressed(int controller)
 	{
 		if(started)
-			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && root.getHUD().getPlayerPopupDialog() == null)
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
+					{
 						move(Direction.Down);
+					}
 					else if(m_ourPlayer.getDirection() != Direction.Down)
+					{
 						move(Direction.Down);
+					}
 	}
 
 	@Override
 	public void controllerLeftPressed(int controller)
 	{
 		if(started)
-			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && root.getHUD().getPlayerPopupDialog() == null)
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
+					{
 						move(Direction.Left);
+					}
 					else if(m_ourPlayer.getDirection() != Direction.Left)
+					{
 						move(Direction.Left);
+					}
 	}
 
 	@Override
 	public void controllerRightPressed(int controller)
 	{
 		if(started)
-			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && root.getHUD().getPlayerPopupDialog() == null)
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
+					{
 						move(Direction.Right);
+					}
 					else if(m_ourPlayer.getDirection() != Direction.Right)
+					{
 						move(Direction.Right);
+					}
 	}
 
 	@Override
 	public void controllerUpPressed(int controller)
 	{
 		if(started)
-			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && !root.getHUD().getPlayerPopupDialog().isVisible())
+			if(getHUD().getNPCSpeech() == null && !root.getLoginScreen().isVisible() && !getHUD().getChat().hasKeyboardFocus() && root.getHUD().getPlayerPopupDialog() == null)
 				if(m_ourPlayer != null && !m_isNewMap && m_ourPlayer.canMove())
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
+					{
 						move(Direction.Up);
+					}
 					else if(m_ourPlayer.getDirection() != Direction.Up)
+					{
 						move(Direction.Up);
+					}
 	}
 
 	public int getGameContainerWidth()
@@ -392,7 +407,7 @@ public class GameClient extends BasicGame
 			ChannelFuture channelFuture = m_session.getChannel().close();
 			m_session = null;
 			channelFuture.awaitUninterruptibly();
-			assert channelFuture.isSuccess(): "Warning the Session was not closed";
+			assert channelFuture.isSuccess() : "Warning the Session was not closed";
 		}
 	}
 
@@ -721,12 +736,10 @@ public class GameClient extends BasicGame
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Down))
 					{
 						move(Direction.Down);
-						m_ourPlayer.queueMovement(Direction.Down);
 					}
 					else if(m_ourPlayer.getDirection() != Direction.Down)
 					{
 						move(Direction.Down);
-						m_ourPlayer.queueMovement(Direction.Down);
 					}
 				}
 				else if(key == KeyManager.getKey(Action.WALK_UP))
@@ -734,12 +747,10 @@ public class GameClient extends BasicGame
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Up))
 					{
 						move(Direction.Up);
-						m_ourPlayer.queueMovement(Direction.Up);
 					}
 					else if(m_ourPlayer.getDirection() != Direction.Up)
 					{
 						move(Direction.Up);
-						m_ourPlayer.queueMovement(Direction.Up);
 					}
 				}
 				else if(key == KeyManager.getKey(Action.WALK_LEFT))
@@ -747,12 +758,10 @@ public class GameClient extends BasicGame
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Left))
 					{
 						move(Direction.Left);
-						m_ourPlayer.queueMovement(Direction.Left);
 					}
 					else if(m_ourPlayer.getDirection() != Direction.Left)
 					{
 						move(Direction.Left);
-						m_ourPlayer.queueMovement(Direction.Left);
 					}
 				}
 				else if(key == KeyManager.getKey(Action.WALK_RIGHT))
@@ -760,12 +769,10 @@ public class GameClient extends BasicGame
 					if(!m_mapMatrix.getCurrentMap().isColliding(m_ourPlayer, Direction.Right))
 					{
 						move(Direction.Right);
-						m_ourPlayer.queueMovement(Direction.Right);
 					}
 					else if(m_ourPlayer.getDirection() != Direction.Right)
 					{
 						move(Direction.Right);
-						m_ourPlayer.queueMovement(Direction.Right);
 					}
 				}
 				else if(key == Input.KEY_C)
@@ -950,7 +957,7 @@ public class GameClient extends BasicGame
 		m_mapMatrix = new ClientMapMatrix();
 		m_animator = new Animator(m_mapMatrix);
 
-		gc.getInput().enableKeyRepeat();
+		gc.getInput().enableKeyRepeat(100, 100);
 
 		setPlayerSpriteFactory();
 		PokemonSpriteDatabase.Init();
@@ -962,6 +969,7 @@ public class GameClient extends BasicGame
 			m_weather.setEnabled(options.isWeatherEnabled());
 
 		System.out.println("Loading the files took " + (System.currentTimeMillis() - startTime) + " ms (time from start until you get the language select screen)");
+		started = true;
 	}
 
 	/** Load options */
@@ -1152,6 +1160,7 @@ public class GameClient extends BasicGame
 				m_session.send(right);
 				break;
 		}
+		m_ourPlayer.queueMovement(d);
 	}
 
 	/** Reloads options */

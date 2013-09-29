@@ -26,7 +26,7 @@
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="#A3A8BF"/>
     </fontDef>
-    <fontDef name="normal_white" filename="font.fnt" color="#E9E9E9" default="true">
+    <fontDef name="normal_white" filename="font.fnt" color="#FFFFFF" default="true">
         <fontParam if="error" color="red"/>
         <fontParam if="warning" color="orange"/>
         <fontParam if="disabled" color="gray"/>
@@ -535,17 +535,31 @@
                             <param name="background"><image>battlebutton_background</image></param>
                             <param name="font"><font>pokefont</font></param>
                             <theme name="image" ref="image"/>
-                            <theme name="label" ref="label"/>
+                            <theme name="label" ref="label">
+                                <param name="font"><font>normal_black</font></param>
+                            </theme>
+                            <theme name="pokeinfolabel" ref="label">
+                                <param name="font"><font>normal_white</font></param>
+                            </theme>
+                            <theme name="movetypelabel" ref="label">
+                                <param name="font"><font>normal_white</font></param>
+                            </theme>
+                            <theme name="pplabel" ref="label">
+                                <param name="font"><font>normal_white</font></param>
+                            </theme>
                         </theme>
-                        <theme name="pplabel" ref="label">
+                        <theme name="battlebutton_small" ref="button">
+                            <param name="background"><image>battlebutton_small_background</image></param>
+                            <param name="font"><font>pokefont</font></param>
+                        </theme>
+                        <theme name="pokeinfolabel" ref="label">
                             <param name="font"><font>normal_white</font></param>
                         </theme>
                         <theme name="movetypelabel" ref="label">
                             <param name="font"><font>normal_white</font></param>
                         </theme>
-                        <theme name="battlebutton_small" ref="button">
-                            <param name="background"><image>battlebutton_small_background</image></param>
-                            <param name="font"><font>pokefont</font></param>
+                        <theme name="pplabel" ref="label">
+                            <param name="font"><font>normal_white</font></param>
                         </theme>
                     </theme>
                 </theme>
@@ -647,42 +661,6 @@
                     <theme name="button" ref="button"/>
                     <theme name="label" ref="label"/>
                     <param name="background"><image>resizableframe</image></param>
-                </theme>
-            </theme>
-            <theme name="battlecontrolframe" ref="-defaults">
-                <theme name="battlebutton" ref="button">
-                    <param name="background"><image>battlebutton_background</image></param>
-                    <param name="font"><font>pokefont</font></param>
-                    <theme name="label" ref="label"/>
-                </theme>
-            
-                <theme name="battlebutton_small" ref="button">
-                    <param name="background"><image>battlebutton_small_background</image></param>
-                    <param name="font"><font>pokefont</font></param>
-                    <theme name="label" ref="label"/>
-                </theme>
-                <param name="background"><image>interfacebackground</image></param>
-                <theme name="attackPane" ref="-defaults">
-                    <param name="background"><image>interfacebackground</image></param>
-                    <theme name="battlebutton_small" ref="button">
-                        <param name="background"><image>battlebutton_small_background</image></param>
-                        <param name="font"><font>pokefont</font></param>
-                        <theme name="label" ref="label"/>
-                        <theme name="image" ref="image"/>
-                    </theme>
-                    <theme name="battlebutton" ref="button">
-                        <param name="background"><image>battlebutton_background</image></param>
-                        <param name="font"><font>pokefont</font></param>
-                        <theme name="label" ref="label"/>
-                        <theme name="image" ref="image"/>
-                    </theme>
-                    <theme name="label" ref="label"/>
-                    <theme name="pplabel" ref="label">
-                        <param name="font"><font>pokefont</font></param>
-                    </theme>
-                    <theme name="movetypelabel" ref="label">
-                        <param name="font"><font>pokefont</font></param>
-                    </theme>
                 </theme>
             </theme>
             <theme name="battlebag" ref="resizableframe_titled">

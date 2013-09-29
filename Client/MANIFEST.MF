@@ -9,4 +9,4 @@ Class-Path: lib/ini4j-0.3.2-jdk14.jar lib/simple-xml-2.0.2.jar lib/slf4j-api-1.5
  lib/native/libopenal.so lib/native/libopenal.so.0 lib/native/libopenal64.so 
  lib/native/lwjgl.dll lib/native/lwjgl64.dll lib/native/openal.dylib 
  lib/native/OpenAL32.dll lib/native/OpenAL64.dll lib/native/OpenAL64.dll
-Main-Class: org.pokenet.client.GameClient
+Main-Class: org.pokemonium.client.GameClient

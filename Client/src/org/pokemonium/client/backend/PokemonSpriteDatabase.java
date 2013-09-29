@@ -11,9 +11,9 @@ public class PokemonSpriteDatabase
 	public static int FEMALE = 1;
 	private static int spriteamount = 494;
 	private static Image[][] front = new Image[2][spriteamount];
-	private static Image[][] front_shiney = new Image[2][spriteamount];
+	private static Image[][] front_shiny = new Image[2][spriteamount];
 	private static Image[][] back = new Image[2][spriteamount];
-	private static Image[][] back_shiney = new Image[2][spriteamount];
+	private static Image[][] back_shiny = new Image[2][spriteamount];
 	private static Image[] icons = new Image[spriteamount];
 	private static String respath;
 	private static ArrayList<HashMap<String, Image[]>> overworldnormal;
@@ -71,13 +71,13 @@ public class PokemonSpriteDatabase
 		return back[gender][pokenum];
 	}
 
-	public static Image getShineyBack(int gender, int pokenum)
+	public static Image getShinyBack(int gender, int pokenum)
 	{
-		if(back_shiney[gender][pokenum] == null)
+		if(back_shiny[gender][pokenum] == null)
 		{
 			loadSpriteWithNumber(pokenum);
 		}
-		return back_shiney[gender][pokenum];
+		return back_shiny[gender][pokenum];
 	}
 
 	public static Image getNormalFront(int gender, int pokenum)
@@ -89,13 +89,13 @@ public class PokemonSpriteDatabase
 		return front[gender][pokenum];
 	}
 
-	public static Image getShineyFront(int gender, int pokenum)
+	public static Image getShinyFront(int gender, int pokenum)
 	{
-		if(front_shiney[gender][pokenum] == null)
+		if(front_shiny[gender][pokenum] == null)
 		{
 			loadSpriteWithNumber(pokenum);
 		}
-		return front_shiney[gender][pokenum];
+		return front_shiny[gender][pokenum];
 	}
 
 	public static void loadAllPokemonSprites()
@@ -194,17 +194,17 @@ public class PokemonSpriteDatabase
 
 	private static void loadMaleSprites(int pokenum)
 	{
-		front_shiney[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/shiny/" + getSpriteIndex(pokenum) + "-3.png");
+		front_shiny[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/shiny/" + getSpriteIndex(pokenum) + "-3.png");
 		front[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/normal/" + getSpriteIndex(pokenum) + "-3.png");
-		back_shiney[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/shiny/" + getSpriteIndex(pokenum) + "-1.png");
+		back_shiny[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/shiny/" + getSpriteIndex(pokenum) + "-1.png");
 		back[MALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/normal/" + getSpriteIndex(pokenum) + "-1.png");
 	}
 
 	private static void loadFemaleSprites(int pokenum)
 	{
-		front_shiney[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/shiny/" + getSpriteIndex(pokenum) + "-2.png");
+		front_shiny[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/shiny/" + getSpriteIndex(pokenum) + "-2.png");
 		front[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/front/normal/" + getSpriteIndex(pokenum) + "-2.png");
-		back_shiney[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/shiny/" + getSpriteIndex(pokenum) + "-0.png");
+		back_shiny[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/shiny/" + getSpriteIndex(pokenum) + "-0.png");
 		back[FEMALE][pokenum] = FileLoader.loadImage(respath + "res/pokemon/back/normal/" + getSpriteIndex(pokenum) + "-0.png");
 	}
 

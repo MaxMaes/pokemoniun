@@ -202,7 +202,7 @@ public class BattleCanvas extends Widget
 			{
 				if(BattleManager.getInstance().getCurEnemyPoke().isShiny())
 				{
-					enemyPokeSprite.setImage(PokemonSpriteDatabase.getShineyFront(BattleManager.getInstance().getCurEnemyPoke().getGender(), BattleManager.getInstance().getCurEnemyPoke()
+					enemyPokeSprite.setImage(PokemonSpriteDatabase.getShinyFront(BattleManager.getInstance().getCurEnemyPoke().getGender(), BattleManager.getInstance().getCurEnemyPoke()
 							.getSpriteNumber()));
 				}
 				else
@@ -247,7 +247,7 @@ public class BattleCanvas extends Widget
 			{
 				if(BattleManager.getInstance().getCurPoke().isShiny())
 				{
-					playerPokeSprite.setImage(PokemonSpriteDatabase.getShineyBack(BattleManager.getInstance().getCurPoke().getGender(), BattleManager.getInstance().getCurPoke().getSpriteNumber()));
+					playerPokeSprite.setImage(PokemonSpriteDatabase.getShinyBack(BattleManager.getInstance().getCurPoke().getGender(), BattleManager.getInstance().getCurPoke().getSpriteNumber()));
 				}
 				else
 				{
@@ -477,16 +477,17 @@ public class BattleCanvas extends Widget
 
 	public void updatePlayerHPBarColor()
 	{
-		if(BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 2)
+		int currentHp = BattleManager.getInstance().getCurPoke().getCurHP();
+		int maxHp = BattleManager.getInstance().getCurPoke().getMaxHP();
+		if(currentHp > maxHp / 2)
 		{
 			setPlayerHPColor(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurPoke().getCurHP() > BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(currentHp < maxHp / 2 && currentHp > maxHp / 3)
 		{
 			setPlayerHPColor(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurPoke().getCurHP() < BattleManager.getInstance().getCurPoke().getMaxHP() / 3)
+		else if(currentHp < maxHp / 3)
 		{
 			setPlayerHPColor(Color.red);
 		}
@@ -494,16 +495,17 @@ public class BattleCanvas extends Widget
 
 	public void updateEnemyHPBarColor()
 	{
-		if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2)
+		int enemyCurHp = BattleManager.getInstance().getCurEnemyPoke().getCurHP();
+		int enemyMaxHp = BattleManager.getInstance().getCurEnemyPoke().getMaxHP();
+		if(enemyCurHp > enemyMaxHp / 2)
 		{
 			setEnemyHPColor(Color.green);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 2
-				&& BattleManager.getInstance().getCurEnemyPoke().getCurHP() > BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(enemyCurHp < enemyMaxHp / 2 && enemyCurHp > enemyMaxHp / 3)
 		{
 			setEnemyHPColor(Color.orange);
 		}
-		else if(BattleManager.getInstance().getCurEnemyPoke().getCurHP() < BattleManager.getInstance().getCurEnemyPoke().getMaxHP() / 3)
+		else if(enemyCurHp < enemyMaxHp / 3)
 		{
 			setEnemyHPColor(Color.red);
 		}

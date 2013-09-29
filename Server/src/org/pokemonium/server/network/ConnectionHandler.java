@@ -93,8 +93,7 @@ public class ConnectionHandler extends SimpleChannelHandler
 		catch(Exception e)
 		{
 			channelContext.getChannel().close();
-			System.err.println(name + "'s connection terminated");
-			// e.printStackTrace();
+			// System.err.println(name + "'s connection terminated");
 			System.out.println(channelState);
 		}
 

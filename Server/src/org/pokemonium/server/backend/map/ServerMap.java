@@ -304,7 +304,6 @@ public class ServerMap
 					String name = c.getName();
 					if(c instanceof NPC)
 						name = "!NPC!";
-					/* p.getTcpSession().write("ma" + name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + "," + (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R")); */
 					ServerMessage message = new ServerMessage(ClientPacket.ADD_PLAYER_MAP);
 					message.addString(name + "," + c.getId() + "," + c.getSprite() + "," + c.getX() + "," + c.getY() + ","
 							+ (c.getFacing() == Direction.Down ? "D" : c.getFacing() == Direction.Up ? "U" : c.getFacing() == Direction.Left ? "L" : "R") + ","
@@ -355,19 +354,19 @@ public class ServerMap
 	/**
 	 * Returns true if a fishing attempt was deemed successful(Will the player pull up any pogey or find nothing?)
 	 * 
-	 * @param c
-	 * @param d
+	 * @param player
+	 * @param direction
 	 * @param rod
 	 */
-	public boolean caughtFish(Player c, Direction d, int rod)
+	public boolean caughtFish(Player player, Direction direction, int rod)
 	{
 		int failureRate = 75;
 		// Subtract the rod's power from the failure rate.
 		failureRate -= rod;
 		// If that tile is a water tile, determine if you pulled anything, if not, autofail(You can't fish on dry land)
-		if(facingWater(c, d))
-		{ // If facing water
-			c.setFishing(true);
+		if(facingWater(player, direction))
+		{
+			player.setFishing(true);
 			if((int) (Math.random() * 101) > failureRate)
 				return true;
 			else
@@ -377,7 +376,7 @@ public class ServerMap
 		{
 			/* Tell the player he can't fish on land. */
 			ServerMessage message = new ServerMessage(ClientPacket.CANT_FISH_LAND);
-			c.getSession().Send(message);
+			player.getSession().Send(message);
 		}
 		return false;
 	}
@@ -590,57 +589,58 @@ public class ServerMap
 	/**
 	 * Starts an npc battle with the player if the player was challenged
 	 * 
-	 * @param p
+	 * @param player
 	 * @return
 	 */
-	public boolean isNpcBattle(Player p)
+	public boolean isNpcBattle(Player player)
 	{
-		NPC n = null;
+		NPC npc = null;
 		for(int i = 0; i < m_npcs.size(); i++)
 		{
-			n = m_npcs.get(i);
-			if(n != null && n.isTrainer() && !n.isGymLeader())
+			npc = m_npcs.get(i);
+			if(npc != null && npc.isTrainer() && !npc.isGymLeader())
+			{
 				/* For the npc to be able to challenge the player, the must be on the same axis as the player, the x axis or the y axis */
-				if(n.getX() == p.getX())
+				if(npc.getX() == player.getX())
 				{
 					/* Same column */
-					if(n.getY() > p.getY())
+					if(npc.getY() > player.getY())
 					{
 						/* NPC is above the player */
-						if(n.getFacing() == Direction.Up && n.canSee(p))
+						if(npc.getFacing() == Direction.Up && npc.canSee(player))
 						{
-							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
+							NpcBattleLauncher l = new NpcBattleLauncher(npc, player);
 							l.start();
 							return true;
 						}
 					}
-					else /* NPC is below the player */
-					if(n.getFacing() == Direction.Down && n.canSee(p))
+					else if(npc.getFacing() == Direction.Down && npc.canSee(player))
 					{
-						NpcBattleLauncher l = new NpcBattleLauncher(n, p);
+						NpcBattleLauncher l = new NpcBattleLauncher(npc, player);
 						l.start();
 						return true;
 					}
 				}
-				else if(n.getY() == p.getY())
-					/* Same row */
-					if(n.getX() > p.getX())
+				else if(npc.getY() == player.getY())
+				{
+					/* Same row. Check if the NPC is to the right of the player, or the left. */
+					if(npc.getX() > player.getX())
 					{
-						/* NPC is right of the player */
-						if(n.getFacing() == Direction.Left && n.canSee(p))
+						if(npc.getFacing() == Direction.Left && npc.canSee(player))
 						{
-							NpcBattleLauncher l = new NpcBattleLauncher(n, p);
+							NpcBattleLauncher l = new NpcBattleLauncher(npc, player);
 							l.start();
 							return true;
 						}
 					}
-					else /* NPC is left of the player */
-					if(n.getFacing() == Direction.Right && n.canSee(p))
+					else if(npc.getFacing() == Direction.Right && npc.canSee(player))
 					{
-						NpcBattleLauncher l = new NpcBattleLauncher(n, p);
+						NpcBattleLauncher l = new NpcBattleLauncher(npc, player);
 						l.start();
 						return true;
 					}
+				}
+			}
 		}
 		return false;
 	}
@@ -920,7 +920,6 @@ public class ServerMap
 			for(Player p : list)
 				if(p.getLanguage() == l)
 				{
-					/* TcpProtocolHandler.writeMessage( p.getTcpSession(), new ChatMessage(ChatMessageType.LOCAL, message)); */
 					ServerMessage chatMessage = new ServerMessage(p.getSession());
 					chatMessage.init(ClientPacket.CHAT_PACKET.getValue());
 					chatMessage.addInt(0);

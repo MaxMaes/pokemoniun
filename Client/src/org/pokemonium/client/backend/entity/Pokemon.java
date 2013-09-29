@@ -473,7 +473,7 @@ public class Pokemon
 	{
 		if(isShiny())
 		{
-			m_frontSprite = PokemonSpriteDatabase.getShineyFront(m_gender, m_spriteNum);
+			m_frontSprite = PokemonSpriteDatabase.getShinyFront(m_gender, m_spriteNum);
 		}
 		else
 		{

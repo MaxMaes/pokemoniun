@@ -22,9 +22,7 @@ public class HMObject extends NPC
 	private boolean addToMovementManager = true;
 	private final HMObject hmObj = this;
 	private ObjectType m_HMType;
-
 	private int m_objId;
-
 	private int originalX, originalY;
 	private Timer timer = new Timer();
 
@@ -105,7 +103,8 @@ public class HMObject extends NPC
 	@Override
 	public void talkToPlayer(Player p)
 	{
-		// Handle event
+		/* Handle event.
+		 * Returns the object to the map after 30 secs. */
 		if(p.getTrainingLevel() >= getRequiredTrainerLevel(getType()))
 			switch(m_HMType)
 			{
@@ -116,7 +115,6 @@ public class HMObject extends NPC
 						GameServer.getServiceManager().getMovementService().getMovementManager().addHMObject(this);
 						addToMovementManager = false;
 					}
-					// Return to original position 30 seconds after last movement
 					timer.schedule(new TimerTask()
 					{
 						@Override
@@ -127,33 +125,11 @@ public class HMObject extends NPC
 						}
 					}, 30000);
 					break;
+				/* TODO: Fix and thoroughly test better implementation. */
 				case CUT_TREE:
-					getMap().removeChar(this);
-					// Regrow tree after 10 seconds
-					timer.schedule(new TimerTask()
-					{
-						@Override
-						public void run()
-						{
-							m_map.addChar(hmObj);
-						}
-					}, 10000);
-					break;
 				case ROCKSMASH_ROCK:
-					getMap().removeChar(this);
-					// Regrow tree after 30 seconds
-					timer.schedule(new TimerTask()
-					{
-						@Override
-						public void run()
-						{
-							m_map.addChar(hmObj);
-						}
-					}, 30000);
-					break;
 				case WHIRLPOOL:
 					getMap().removeChar(this);
-					// Regrow tree after 30 seconds
 					timer.schedule(new TimerTask()
 					{
 						@Override
@@ -166,8 +142,7 @@ public class HMObject extends NPC
 			}
 		else
 		{
-			// The player isn't strong enough to do this. Alert client
-			// p.getTcpSession().write("ch" + getRequiredTrainerLevel(m_HMType));
+			/* The player isn't strong enough to do this. Alert client. */
 			ServerMessage message = new ServerMessage(ClientPacket.TRAIN_LVL_LOW);
 			message.addInt(getRequiredTrainerLevel(m_HMType));
 			p.getSession().Send(message);

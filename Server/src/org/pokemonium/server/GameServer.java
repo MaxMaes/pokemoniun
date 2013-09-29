@@ -230,8 +230,9 @@ public class GameServer
 	public static void main(String[] args)
 	{
 		/* Pipe errors to a file. */
-		try(PrintStream errorPrinter = new PrintStream(new File("./errors.txt")))
+		try
 		{
+			PrintStream errorPrinter = new PrintStream(new File("./errors.txt"));
 			System.setErr(errorPrinter);
 		}
 		catch(IOException | SecurityException e)

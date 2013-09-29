@@ -33,7 +33,7 @@ public class NpcSleepTimer extends Thread
 		Random r = new Random();
 		while(m_running)
 		{
-			// Loop through every sleeping NPC
+			/* Loop through every sleeping NPC. */
 			Iterator<NPC> iterator = m_npcSleeping.iterator();
 			while(iterator.hasNext())
 			{
@@ -44,27 +44,6 @@ public class NpcSleepTimer extends Thread
 					iterator.remove();
 				}
 			}
-			/* Loop through every map */
-			/* for(int x = 0; x < 100; x++) {
-			 * for(int y = 0; y < 100; y++) {
-			 * ServerMap m = GameServer.getServiceManager().
-			 * getMovementService().getMapMatrix().getMapByRealPosition(x, y);
-			 * if(m != null) {
-			 * for(int i = 0; i < m.getNpcs().size(); i++) {
-			 * NPC npc = m.getNpcs().get(i);
-			 * if(npc != null && !npc.canBattle() &&
-			 * System.currentTimeMillis() - npc.getLastBattleTime()
-			 * >= 5 * 60 * 1000 + r.nextInt(5 * 60 * 1000)) {
-			 * npc.resetLastBattleTime();
-			 * }
-			 * }
-			 * try {
-			 * Thread.sleep(500);
-			 * } catch (InterruptedException e) {}
-			 * }
-			 * }
-			 * }
-			 * // It takes 100 * 100 * 500ms to get here (83 minutes ...) */
 			try
 			{
 				Thread.sleep(r.nextInt(5 * 60 * 1000)); // ~5 minutes

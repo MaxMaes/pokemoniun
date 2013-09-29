@@ -679,6 +679,7 @@ public class NpcBattleField extends BattleField
 			moveRequest.sendResponse();
 		}
 		else
+		{
 			/* Request move from npc */
 			try
 			{
@@ -712,6 +713,7 @@ public class NpcBattleField extends BattleField
 			{
 				e.printStackTrace();
 			}
+		}
 	}
 
 	@Override

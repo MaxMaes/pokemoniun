@@ -8,7 +8,6 @@ import org.pokemonium.client.protocol.ServerMessage;
 
 public class LevelLearnMoveEvent implements MessageEvent
 {
-
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{

@@ -44,7 +44,6 @@ public class ConfirmationDialog extends ResizableFrame
 		this.add(noButton);
 
 		popup.add(this);
-
 		popup.setCloseOnClickedOutside(false);
 		popup.setCloseOnEscape(true);
 

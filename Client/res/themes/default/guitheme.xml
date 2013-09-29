@@ -218,6 +218,8 @@
         <area name="combobox_background" xywh="64,128,9,4"/>
         <area name="speechframe" xywh="97,420,401,78"/>
         <area name="speechframe_triangle" xywh="82,480,10,10"/>
+        <area name="movelearning_background" xywh="20,161,1,1"/>
+    
     
     
     

@@ -84,7 +84,7 @@ public class PartyInfoDialog extends Widget
 				m_container[i].add(m_level[i]);
 				m_container[i].add(m_hp[i]);
 
-				if(i != 0 && m_pokes[i] != null)
+				if(i != 0)
 				{
 					m_switchUp[i] = new Button();
 					m_switchUp[i].setTheme("arrow_up");
@@ -107,7 +107,7 @@ public class PartyInfoDialog extends Widget
 					});
 					m_container[i].add(m_switchUp[i]);
 				}
-				if(i != 5 && m_pokes[i] != null)
+				if(i != 5)
 				{
 					m_switchDown[i] = new Button();
 					m_switchDown[i].setTheme("arrow_down");
@@ -219,13 +219,8 @@ public class PartyInfoDialog extends Widget
 	{
 		m_pokes = pokes;
 		List<String> translated = Translator.translate("_GUI");
-		int pokemonCount = 0;
 		for(int i = 0; i < 6; i++)
 		{
-			if(m_pokes[i] != null)
-				pokemonCount++;
-		}
-		for(int i = 0; i < pokemonCount; i++)
 			try
 			{
 				if(pokes[i] != null)
@@ -237,17 +232,26 @@ public class PartyInfoDialog extends Widget
 					m_level[i].setText(translated.get(32) + String.valueOf(pokes[i].getLevel()));
 					m_hpBar[i].setVisible(true);
 					m_hp[i].setVisible(true);
-					if(i != 0)
+					if(i != 0 && m_pokes[i] != null)
+					{
 						m_switchUp[i].setVisible(true);
-					if(i != pokemonCount - 1)
+					}
+					if(i != 5 && m_pokes[i] != null)
+					{
 						m_switchDown[i].setVisible(true);
+					}
 				}
 				else
 				{
-					if(i != 0)
+					if(i != 0 && m_switchUp[i] != null)
+					{
 						m_switchUp[i].setVisible(false);
-					if(i != 5)
+					}
+					if(i != 5 && m_switchUp[i] != null)
+					{
 						m_switchDown[i].setVisible(false);
+					}
+					m_pokeName[i].setText("");
 					m_hpBar[i].setVisible(false);
 					m_hp[i].setVisible(false);
 					m_level[i].setText("");
@@ -258,6 +262,7 @@ public class PartyInfoDialog extends Widget
 			{
 				npe.printStackTrace();
 			}
+		}
 	}
 
 	private void allocateVariables()

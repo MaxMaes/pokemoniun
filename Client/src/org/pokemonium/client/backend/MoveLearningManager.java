@@ -58,7 +58,10 @@ public class MoveLearningManager extends Thread
 	 */
 	public void learnMove(int pokeIndex, String move)
 	{
-		// BattleManager.getInstance().getBattleWindow().setAlwaysOnTop(false); // TODO: Chappie magic :D
+		if(BattleManager.getInstance().getBattleWindow() != null)
+		{
+			BattleManager.getInstance().getBattleWindow().setVisible(false);
+		}
 		m_moveLearning.learnMove(pokeIndex, move);
 		try
 		{

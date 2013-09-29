@@ -358,6 +358,7 @@ public class HUD extends DesktopArea
 	{
 		shop = new ShopDialog(stock);
 		add(shop);
+
 	}
 
 	public void removeShop()

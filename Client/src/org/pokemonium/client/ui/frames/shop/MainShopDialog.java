@@ -69,6 +69,8 @@ public class MainShopDialog extends Widget
 		ClientMessage message = new ClientMessage(ServerPacket.SHOPPING);
 		message.addInt(ShopInteraction.DONE_SHOPPING);
 		GameClient.getInstance().getSession().send(message);
+		message = new ClientMessage(ServerPacket.TALKING_FINISH);
+		GameClient.getInstance().getSession().send(message);
 		GameClient.getInstance().getGUIPane().getHUD().removeShop();
 	}
 

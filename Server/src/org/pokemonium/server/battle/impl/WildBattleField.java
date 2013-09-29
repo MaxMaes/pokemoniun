@@ -11,10 +11,11 @@ import org.pokemonium.server.battle.BattleTurn;
 import org.pokemonium.server.battle.DataService;
 import org.pokemonium.server.battle.Pokemon;
 import org.pokemonium.server.battle.PokemonEvolution;
-import org.pokemonium.server.battle.PokemonSpecies;
 import org.pokemonium.server.battle.PokemonEvolution.EvolutionTypes;
+import org.pokemonium.server.battle.PokemonSpecies;
 import org.pokemonium.server.battle.mechanics.BattleMechanics;
 import org.pokemonium.server.battle.mechanics.MoveQueueException;
+import org.pokemonium.server.battle.mechanics.moves.MoveListEntry;
 import org.pokemonium.server.battle.mechanics.statuses.BurnEffect;
 import org.pokemonium.server.battle.mechanics.statuses.FreezeEffect;
 import org.pokemonium.server.battle.mechanics.statuses.ParalysisEffect;
@@ -1150,16 +1151,16 @@ public class WildBattleField extends BattleField
 					int level = DataService.getBattleMechanics().calculateLevel(poke);
 					m_player.addTrainingExp(level * 5);
 					int oldLevel = poke.getLevel();
-					String move = "";
+					String moveString = "";
 					/* Move learning */
 					poke.getMovesLearning().clear();
 					for(int i = oldLevel + 1; i <= level; i++)
 					{
-						// don't learn moves you already know
+						/* Prevent people from learning the same move twice. */
 						boolean learn = true;
-						for(int j = 0; j < poke.getMoves().length; j++)
+						for(MoveListEntry move : poke.getMoves())
 						{
-							if(poke.getMove(j).getName().equalsIgnoreCase(pokeData.getLevelMoves().get(i)))
+							if(move != null && move.getName().equalsIgnoreCase(pokeData.getLevelMoves().get(i)))
 							{
 								learn = false;
 								break;
@@ -1167,12 +1168,12 @@ public class WildBattleField extends BattleField
 						}
 						if(pokeData.getLevelMoves().get(i) != null && learn)
 						{
-							move = pokeData.getLevelMoves().get(i);
-							poke.getMovesLearning().add(move);
+							moveString = pokeData.getLevelMoves().get(i);
+							poke.getMovesLearning().add(moveString);
 							ServerMessage moveLearn = new ServerMessage(m_player.getSession());
 							moveLearn.init(ClientPacket.MOVE_LEARN_LVL.getValue());
 							moveLearn.addInt(index);
-							moveLearn.addString(move);
+							moveLearn.addString(moveString);
 							moveLearn.sendResponse();
 						}
 					}

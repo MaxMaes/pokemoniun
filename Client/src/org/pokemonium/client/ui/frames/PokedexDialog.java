@@ -809,7 +809,6 @@ public class PokedexDialog extends ResizableFrame
 
 			for(int i = 0; i < 13; i++)
 			{
-				System.out.print(getInnerY());
 				pokemonNameList[i].setPosition(getInnerX() + 322, getInnerY() + 60 + 22 * i);
 				pokemonNameList[i].adjustSize();
 			}

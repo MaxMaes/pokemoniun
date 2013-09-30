@@ -12,8 +12,6 @@ import org.pokemonium.client.ui.components.PokemonLocationIcon.PokedexMap;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
-import de.matthiasmann.twl.TextArea;
-import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 
 /**
  * Pokedex dialog
@@ -38,8 +36,7 @@ public class PokedexDialog extends ResizableFrame
 	private Button up, down, left, right;
 
 	// Labels
-	private TextArea lore;
-	private SimpleTextAreaModel loreModel;
+	private Label[] loreLabels;
 	private Label[] pokemonBiologyLabels;
 	private Image[] pokemonCaughtIcons;
 	private PokemonLocationIcon[] pokemonLocationLabels;
@@ -148,9 +145,7 @@ public class PokedexDialog extends ResizableFrame
 			tabname = new Label();
 			tabname.setTheme("label_large");
 
-			loreModel = new SimpleTextAreaModel();
-			lore = new TextArea(loreModel);
-			add(lore);
+			loreLabels = new Label[0];
 			pokemonNameList = new Label[13];
 			pokemonCaughtIcons = new Image[13];
 			pokemonLocationLabels = new PokemonLocationIcon[0];
@@ -232,6 +227,8 @@ public class PokedexDialog extends ResizableFrame
 
 	public void updateInfoTab()
 	{
+		for(Label l : loreLabels)
+			l.setVisible(false);
 		for(Label l : pokemonMoveLabels)
 			l.setVisible(false);
 		for(Label l : pokemonBiologyLabels)
@@ -242,7 +239,6 @@ public class PokedexDialog extends ResizableFrame
 		map_kantojohto.setVisible(false);
 		map_hoenn.setVisible(false);
 		map_sinnoh.setVisible(false);
-		lore.setVisible(false);
 
 		if(tabindex == 1)
 		{
@@ -285,7 +281,8 @@ public class PokedexDialog extends ResizableFrame
 			tabname.setText("Lore");
 			if(getPokemon(selection) == PokedexData.POKEMON_CAUGHT)
 			{
-				lore.setVisible(true);
+				for(Label l : loreLabels)
+					l.setVisible(true);
 			}
 		}
 		else if(tabindex == 5)
@@ -327,8 +324,8 @@ public class PokedexDialog extends ResizableFrame
 
 			for(int i = 0; i < pokemonMoveLabels.length; i++)
 				removeChild(pokemonMoveLabels[i]);
-			/* for(int i = 0; i < loreLabels.length; i++)
-			 * removeChild(loreLabels[i]); */
+			for(int i = 0; i < loreLabels.length; i++)
+				removeChild(loreLabels[i]);
 			for(int i = 0; i < pokemonBiologyLabels.length; i++)
 				pokemonBiologyLabels[i].setVisible(false);
 
@@ -490,9 +487,25 @@ public class PokedexDialog extends ResizableFrame
 
 	private void initLoreLabels()
 	{
+		for(int i = 0; i < loreLabels.length; i++)
+			removeChild(loreLabels[i]);
+		int charsPerLine = 35;
 		String loreString = PokedexData.getStory(selection);
-		loreModel.setText(loreString);
-		// lore.invalidateLayout();
+		int loreLength = loreString.length();
+		int lines = loreLength / charsPerLine + 1;
+
+		loreLabels = new Label[lines];
+		for(int i = 0; i < loreLabels.length; i++)
+		{
+			loreLabels[i] = new Label();
+			int begin = i * charsPerLine;
+			int end = (i + 1) * charsPerLine;
+			if(end > loreString.length())
+				end = loreString.length();
+			loreLabels[i].setTheme("label_minismall");
+			loreLabels[i].setText(loreString.substring(begin, end));
+			add(loreLabels[i]);
+		}
 	}
 
 	private void initMoveLabels()
@@ -741,17 +754,28 @@ public class PokedexDialog extends ResizableFrame
 			pokemontypes.adjustSize();
 			pokemontypes.setPosition(getInnerX() + 178 - pokemontypes.getWidth() / 2, pokemonname.getInnerY() + 17);
 
-			lore.setSize(192, 90);
-			lore.setPosition(getInnerX() + 36, getInnerY() + 132);
-
+			if(loreLabels != null)
+			{
+				for(int i = 0; i < loreLabels.length; i++)
+				{
+					loreLabels[i].adjustSize();
+					loreLabels[i].setPosition(getInnerX() + 36, getInnerY() + 136 + 10 * i);
+				}
+			}
 			if(pokemonBiologyLabels != null)
 			{
 				for(int i = 0; i < pokemonBiologyLabels.length; i++)
 				{
 					if(i < 9)
+					{
+						pokemonBiologyLabels[i].adjustSize();
 						pokemonBiologyLabels[i].setPosition(getInnerX() + 35 + 15 * (i / 9), getInnerY() + 136 + 10 * i);
+					}
 					else
+					{
+						pokemonBiologyLabels[i].adjustSize();
 						pokemonBiologyLabels[i].setPosition(getInnerX() + 125, getInnerY() + 136 + 10 * (i % 9));
+					}
 				}
 			}
 			if(pokemonMoveLabels != null)
@@ -761,12 +785,12 @@ public class PokedexDialog extends ResizableFrame
 					if(i < 9)
 					{
 						pokemonMoveLabels[i].adjustSize();
-						pokemonMoveLabels[i].setPosition(getInnerX() + 34 + 15 * (i / 9), getInnerY() + 132 + 10 * i);
+						pokemonMoveLabels[i].setPosition(getInnerX() + 34 + 15 * (i / 9), getInnerY() + 136 + 10 * i);
 					}
 					else
 					{
 						pokemonMoveLabels[i].adjustSize();
-						pokemonMoveLabels[i].setPosition(getInnerX() + 135, getInnerY() + 132 + 10 * (i % 9));
+						pokemonMoveLabels[i].setPosition(getInnerX() + 135, getInnerY() + 136 + 10 * (i % 9));
 					}
 				}
 			}

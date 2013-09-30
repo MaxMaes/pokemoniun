@@ -15,7 +15,7 @@ false
 [npc]
 Goldenrod Citizen
 down
-268
+122
 3
 4
 NULL

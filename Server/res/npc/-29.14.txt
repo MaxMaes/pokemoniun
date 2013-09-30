@@ -39,3 +39,17 @@ false
 false
 false
 [/npc]
+[npc]
+NULL
+down
+0
+17
+58
+NULL
+0
+-1
+1
+false
+false
+false
+[/npc]

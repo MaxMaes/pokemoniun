@@ -1,7 +1,7 @@
 [npc]
 Underground Visitor
 down
-268
+122
 6
 9
 NULL

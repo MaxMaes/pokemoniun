@@ -84,7 +84,7 @@ false
 [npc]
 Cooltrainer Jake
 left
-268
+122
 14
 24
 Parasect,33,Golduck,35

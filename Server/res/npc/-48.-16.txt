@@ -15,7 +15,7 @@ false
 [npc]
 Boy
 left
-268
+122
 10
 5
 NULL

@@ -23,7 +23,7 @@
  <tileset firstgid="1510" source="Sevii Island Set 1.tsx"/>
  <layer name="Walkable" width="25" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YTQ6CMBCFyw08gCt1BeoCf+5/HOMppNFJyqS0pbwp1MxL3kKl8zEzpdQao1KpVCqVqna91FW5a8a+Dj41sgwJjo25N1/7eF0CKzZu6veljHNknJtXSi0eGfVuPTkcAjm1LH7KPXKGjX8JMPrGn8vU9UcnHl3DPyPnsq+f0s9NjQyXg45bilGyRv/A4Czpnkv3/jn4Jsiwse/Cz8dWbWvqE6qviPf21hj0Hb13UX1YixFzaC+CYrTK2BSjL8CY41oYsXG569OcMVOMkHLWzpR1N9WxekoykLlJM5bOaTSnZE84M/U+0IyceIg1YIsM2puTkQy659gZDSIHyf2/dA6lGGv/T5Kay3Z/y8+v0Bx+ZifBCJ3ZIevV/551zpLoObHIa809tbp2u1LGtN+7saUYxmGh8+Fx3c/oHFwha0fxQlrKcevyAdOFIpkQJwAA
+   H4sIAAAAAAAAC+2YTQ7CIBCF2xt4AFfqqlUX9ef+xzGewhIl4oTClL6hYGaSt1DL+xgGKNI0GhoaGhoaGrXHQ1WV+vZX51GHVpYhwTGe2+YtH69nsGLtpn5fyjhG2rl5ccbiljDenSeHXSCnjvhz+kgZxv8UYAytP5ep5/eOn32GfkbOZV89pddNjQyXg/bNxcg5Rv/AoCzpmkvX/j7qIsgw3lfh9VGqzJj6AlVXxHu7NIb9zr53UXVYixFT6CyCYnTKKIoxZGDMUS2MWLvU/WlOmylGKFL2Ts6+y1VsPCUZyNykGUvnNJqTsyaUye0HmpHih9gDSmTYs7kVkmH7HLujQeQgef6XziEXY+3/SVJz2Zxv6f0VmkPv7CQYoTs75HgNn7VOWRI1tyyrteaeSlW7npuvlMHzz8VAs6b8UYyQP4rFZSzhuB4vyje7wRAnAAA=
   </data>
  </layer>
  <layer name="Grass" width="25" height="100">
@@ -33,7 +33,7 @@
  </layer>
  <layer name="Water" width="25" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ROwqAQAxF0Wmsnf0Xjm5BbXU/6iZM0MAgIvgJNvdA2jxeEgIAAAAAAAAAAAAAAADwrzr67q9k/+KcMcn+sQwhxW08OmnGnI1HJ+8M/cVQ+mZoh1TID2SaYsuw33zxF+vQyu5uH8v5oo/tT9l+nT7LeNvH/tweMrr9bnV2P816knOVcdbr7t3O7rQCW8JdXxAnAAA=
+   H4sIAAAAAAAAC+3RwQmEMBQE0HSg/R/URrQftYk1SCCIwq7rx8t7kOsMk58SAAAAAAAAAAC8a2hj87stfw3umLf8qUmpb/cXsSl3LNWL2BTdkW8xNrEd8yFvqW7zxF3KhqOn9lzl1z3/7il3/kbuutPzS8edfzv7pw/8P9SoECcAAA==
   </data>
  </layer>
  <layer name="Walkable" width="25" height="100">

@@ -29,7 +29,7 @@ false
 [npc]
 Cooltrainer Ray
 right
-268
+122
 34
 13
 Nidoking,45

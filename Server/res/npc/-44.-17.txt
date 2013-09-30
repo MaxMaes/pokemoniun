@@ -15,7 +15,7 @@ false
 [npc]
 Cooltrainer Rolando
 down
-268
+122
 5
 2
 Raticate,42,Charmeleon,42,Charizard,42,Ivysaur,42,Wartortle,42

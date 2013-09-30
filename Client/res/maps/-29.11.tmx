@@ -33,7 +33,7 @@
  </layer>
  <layer name="Collisions" width="26" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82WuU7DQBRFn0NMF4FEkO0IhERIgVIRlhJaKNl+IPAL4RvgH9g66Kj5IiABCuNQZEHcKB7JmrzMYrvIlY6e5Rm/6zuyPNMqE7UycAUuSkSbS0QrYHUKNj2vGW4MfbhnVf2mofNRPWuDzmc9ppq45qhq3knns+8QHTj6Wjfw2QC1mDXJ5xA9jhx9VWUVJJX0rFnksdFLefKeaZ62R9QBn+ALfHt23qZ5QvT9ARHogl+PzxwGmAci0A3s8/TQtw8GYAj+vMk5I/XQuw8GYBiY5xEq+ERz/vjaRZ33+fUpVMa1iOpWzPPkpTy/M5VM86h8j4tEJ+AUnIHzYvo83DqKObfoewfuwQN4ZHyy5BFz3tD3HXyANujknEeo4Y7rDuou2HPT58mqWfvesuiJ+Uct4h/eUJBU8v4CePZ4Xpl/VJ3ZK0y0FXuVwTKD/L7bzN4XYT8JQVfaV8R9Mabau/2SOZzEWKA5I9icaTiJscsZ8WmOzn+aM2AaH/l7EGdaEz8bHzmXfIZuJpB9p3mk8ZExXdOsPnJGGfEeOp9/+syQnAANAAA=
+   H4sIAAAAAAAAC82Wu07DMBSGT0vDVoFEIUkFQqJ0QJ0olxFWGLm9QEHiCcozwDtw22Bj5omAFhhCwtAL4q9aS5F76ksSIY706US2c37/lmW7WSJqpuACnBaJ1uaIFsHSBGxqXjJcGepw/6rqTUKno/rXBp3OyohK7JujopmTTmcnR7Sb0+eagc4qqI5YlnT2UGM/p88qr4J4xDWrFn5s4qk03mbqp+UStcE7+ACfrp22qZ8Adb9ACCLw7fKeAx/jQAgi395PB3W7oAf64McdHzOIDmp3QQ/0fXM/IvIe0ZQ3/HaQpz1+ffLlYS4gO2VzP1lFlvtMFaZ+VLoHBaJDcASOwUkhuR9uHcWYa9S9AbfgDtwzOmn8iDEvqPsK3kALtDP2I6LuDPMm8hbYdpL7SRs2++18IbnOX/h5YM6oWZzhdQXxiLfPgEeX55k5o2rMXWES6yOtEphnkOe7wdx9Ie6TAETSvSLaRZ/q7vaK5nAh+nzNG8HmTcOF6Dv7JzqNwftP8wZMoiPvB/GmNdGz0ZF9yW/oRgxZd5JGEh0Z0zVNqyN7lBHz0On8Ak3ak7oADQAA
   </data>
  </layer>
  <layer name="Collisions" width="26" height="32">
@@ -48,7 +48,7 @@
  </layer>
  <layer name="WalkBehind" width="26" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UuwrCMBSGT6CN1sFV+wSCjlUnq9X3fwovHdQO3lf/DKFBgii5iKE/fGTL1/+cUKImIWTK/HgKTx5ffdY9og3Ygh0owRDuEatPXbp9c/cYd09YfYrO+5ToAI6gSs0dupjs0MZeBh/Mzvc7e7drGxF9spddy0g3j4haoA0S0Im+94h7c+Xtyjmqbpd9csszlH1Ur4uE9l/z1cdVMs33u5id7r3+++x+mVNMdAYXcAU3cAeP2K5nxrE7MAcLUIAlWHG7niZh5wmgeyE4AA0AAA==
+   H4sIAAAAAAAAC+2VyQrCMBRFX6CNw8Kl2i8Q7LLqymr1R/x3p0XVhfPWm0VokCBKhmLphUN2OX0DKVGdKmTC/HgyTx5f9ax7RBuwBTuwB0O4Y1acunT65u4R7h6z4hQ15xHRARzBKTJ36GIyQxtzGXzRO9979mnWNiLqSd5mLSPdPCBqgCZogXbwu0fcmyq7K/uoul3Wk1ruoaxH9bpIGe/aquvO46seV0k03+/in6Db13/vXZk5h0QXcAU3cAcP8AzteqYcswMzMAcZWIAlt+upU+28ACcbzJkADQAA
   </data>
  </layer>
 </map>

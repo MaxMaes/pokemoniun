@@ -26,7 +26,7 @@
  <tileset firstgid="9834" source="Piryte Set.tsx"/>
  <layer name="Walkable" width="80" height="90">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YMU7DMBiG4V6AgS4sSEgtB+ECXABWGGFEjLDCCisXY+YepGoKURW7sT+7v+28r/QNCAT1g4MqFgsiIiIiIiLa9b2KG23DTwu/uGLd8NuGnxZ+Wvhp4ael+s3dEj+tn1WazdXP13k/V3O+d1M65Ef+8CMiIiKiUvtY59tJ4rl+zml3jmXgLi/8Hy8L8Nss5f9Z9r/3rhi/sfDDL8RvuJjnd1jM85vbLrWfy7A761Xgkty/EIe3hHsXXMd+NzF+nv19XUq7lHfy095v33L0c9bP7tT7HHIfM/g5V7Jf7H0M/dvqu1+xftZeKZ9n/PDDr3m/KEP88MPP3C/5+z9rr9L8XE5z9suZtVfK4ZdnubM+H35lDz/88PPvvttrv7sCzGrze17/v194KcywNr/SDI+R+hpvuz2OGFrb1eLnMnzCTzLEL87wod8NflXvWFmfs3a/Vg3xq8evNUOrrM9du18LhqVk7VC737Cpr/1rZHO3m9r1mX/k7pAdfv7w08JPCz8t/LTw08JPCz8t/LTw08JPCz8t/LTw08JPCz+tlv1+AUwNfs2AcAAA
+   H4sIAAAAAAAAC+3YMU7DMBiG4V6AgS4sSEgtB+ECXABWGOmIGGGFFVYuxsw9CGpKqxC7sT8nvx2/r/RNVLR+cKuKxYKIiIiIiIh2fa3iRtvw08Ivrlg3/Lbhp4WfFn5a+GmpfrVb4qf1vUqzWv18nbdzVfO9G9IxP/KHHxERERHl2vt6vJ0knut5TptzLAN3efF/3cdY+/0u5f9Zur97F374WfgdzsJvbLvUfi7D5qxXgZvc7zXh3gTXvr9NjJ9nf49LaZfyTn7Y+3Ute39m/d4dep9D7uMIfs7l7Bd7H0M/W333K9bP2ivl+xk//PCbvV+UIX744Wful/z7n7VXbn4up5r9lqEoBfspc/mNmfWZp9jYWZ8Pv7yHH374+Xff7KXdXQZmpfk9rfffF54zMyzNLzfDKVJf422zTY+htV0pfi7DR/wkQ/ziDB/a3eBX9KbK+pyl+83VEL9y/OZmaJX1uUv3m4NhLlk7lO532NDX/tmz2u2Gdn3mH7k7ZoefP/y08NPCTws/Lfy08NPCTws/Lfy08NPCTws/Lfy08NPCT2vOfj95zQU4gHAAAA==
   </data>
  </layer>
  <layer name="Walkable" width="80" height="90">

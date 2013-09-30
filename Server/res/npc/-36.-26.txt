@@ -30,4 +30,3 @@ false
 true
 false
 [/npc]
-[npc]

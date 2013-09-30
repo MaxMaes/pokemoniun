@@ -1,7 +1,7 @@
 [npc]
 Cooltrainer Fran
 left
-268
+122
 5
 13
 Seadra,37

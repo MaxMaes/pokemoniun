@@ -86,7 +86,7 @@ CUT_TREE
 [npc]
 NULL
 down
-268
+122
 34
 15
 NULL

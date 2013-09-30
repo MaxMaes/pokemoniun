@@ -147,7 +147,7 @@ false
 [npc]
 Seasond_Sailor
 down
-142
+395
 20
 20
 NULL

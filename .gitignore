@@ -1,5 +1,4 @@
 *.class
-/Client/betaclient.jar
 /Server/betaserver.jar
 /PokemoniumUpdater/bin
 /Server/bin

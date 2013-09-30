@@ -12,6 +12,13 @@ public class TradeEndEvent implements MessageEvent
 	@Override
 	public void parse(Session Session, ServerMessage Request, ClientMessage Message)
 	{
-		GameClient.getInstance().getHUD().removeTradeDialog();
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				GameClient.getInstance().getHUD().removeTradeDialog();
+			}
+		});
 	}
 }

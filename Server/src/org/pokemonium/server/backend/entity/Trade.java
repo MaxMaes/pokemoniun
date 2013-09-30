@@ -267,8 +267,8 @@ public class Trade implements Runnable
 								if(player1 instanceof Player && player2 instanceof Player)
 								{
 									player1.getParty()[offer1[j].getId()] = null;
-									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player1).getId() + "','1','" + ((Player) player2).getId()
-											+ "','" + timestamp + "','" + temp[0].getDatabaseID() + "')");
+									m_queries.add("INSERT into pn_history VALUES (" + ((Player) player1).getId() + ", 1, " + ((Player) player2).getId() + ", '" + timestamp + "', "
+											+ temp[0].getDatabaseID() + ");");
 								}
 
 							}
@@ -280,8 +280,8 @@ public class Trade implements Runnable
 								player1.setMoney(player1.getMoney() - offer1[j].getQuantity());
 								player2.setMoney(player2.getMoney() + offer1[j].getQuantity());
 								if(player1 instanceof Player && player2 instanceof Player)
-									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player1).getId() + "','0','" + ((Player) player2).getId()
-											+ "','" + timestamp + "','" + offer1[j].getQuantity() + "')");
+									m_queries.add("INSERT into pn_history VALUES (" + ((Player) player1).getId() + ", 0, " + ((Player) player2).getId() + ", '" + timestamp + "', "
+											+ offer1[j].getQuantity() + ");");
 							}
 							break;
 						case ITEM:
@@ -304,8 +304,8 @@ public class Trade implements Runnable
 								if(player1 instanceof Player && player2 instanceof Player)
 								{
 									player2.getParty()[offer1[j].getId()] = null;
-									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player2).getId() + "','1','" + ((Player) player1).getId()
-											+ "','" + timestamp + "','" + temp[1].getDatabaseID() + "')");
+									m_queries.add("INSERT into pn_history VALUES (" + ((Player) player2).getId() + ", 1, " + ((Player) player1).getId() + ", '" + timestamp + "','"
+											+ temp[1].getDatabaseID() + "');");
 								}
 							}
 							break;
@@ -316,8 +316,8 @@ public class Trade implements Runnable
 								player2.setMoney(player2.getMoney() - offer2[j].getQuantity());
 								player1.setMoney(player1.getMoney() + offer2[j].getQuantity());
 								if(player1 instanceof Player && player2 instanceof Player)
-									m_queries.add("INSERT into pn_history (member, action, with, timestamp, details) VALUES ('" + ((Player) player2).getId() + "','0','" + ((Player) player1).getId()
-											+ "','" + timestamp + "','" + offer2[j].getQuantity() + "')");
+									m_queries.add("INSERT into pn_history VALUES (" + ((Player) player2).getId() + ", 0, " + ((Player) player1).getId() + ", '" + timestamp + "', "
+											+ offer2[j].getQuantity() + ");");
 							}
 							break;
 						case ITEM:

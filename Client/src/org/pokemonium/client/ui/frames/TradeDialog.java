@@ -8,6 +8,7 @@ import org.pokemonium.client.protocol.ClientMessage;
 import org.pokemonium.client.ui.components.ImageButton;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
+import de.matthiasmann.twl.EditField.Callback;
 import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.ResizableFrame;
 
@@ -66,7 +67,6 @@ public class TradeDialog extends ResizableFrame
 				m_theirPokeInfo[index] = new PokemonInfoDialog(tempPoke, 6);
 				m_theirPokes[index].setTooltipContent(m_theirPokeInfo[index]);
 				// Commented because line above should do the same, to be tested /*m_theirPokes[index].getModel().addStateCallback(new Runnable(){@Override public void run(){if(m_theirPokes[index].getModel().isHover()){m_theirPokeInfo[j].setVisible(true);} else{m_theirPokeInfo[j].setVisible(false);}}});*/
-				add(m_theirPokes[index]);
 			}
 		});
 	}
@@ -383,13 +383,29 @@ public class TradeDialog extends ResizableFrame
 
 		// Our money trade info
 		m_ourCashLabel = new Label("$");
+		m_ourCashLabel.setTheme("cashlabel");
 		add(m_ourCashLabel);
 
-		m_ourMoneyOffer = new EditField();
+		m_ourMoneyOffer.addCallback(new Callback()
+		{
+			@Override
+			public void callback(int arg0)
+			{
+				if(m_ourMoneyOffer.getText().equals(""))
+				{
+					m_ourMoneyOffer.setText("0");
+				}
+				else
+				{
+					m_makeOfferBtn.setEnabled(true);
+				}
+			}
+		});
 		add(m_ourMoneyOffer);
 
 		// Their money trade info
 		m_theirMoneyOffer = new Label("$0");
+		m_theirMoneyOffer.setTheme("cashlabel");
 		add(m_theirMoneyOffer);
 
 		// Window Settings
@@ -476,7 +492,8 @@ public class TradeDialog extends ResizableFrame
 	@Override
 	public void layout()
 	{
-		int x = getInnerX() + 10, y = getInnerY() + 10;
+		super.layout();
+		int x = getInnerX() + 10, y = getInnerY() + 30;
 		for(int i = 0; i < 6; i++)
 		{
 			m_ourPokes[i].setSize(32, 32);
@@ -499,7 +516,7 @@ public class TradeDialog extends ResizableFrame
 			}
 			if(i == 2)
 			{
-				y = getInnerY() + 10;
+				y = getInnerY() + 30;
 			}
 			else
 			{
@@ -508,15 +525,17 @@ public class TradeDialog extends ResizableFrame
 		}
 
 		m_makeOfferBtn.setSize(90, 30);
-		m_makeOfferBtn.setPosition(getInnerX() + 90, getInnerY() + 10);
+		m_makeOfferBtn.setPosition(getInnerX() + 90, getInnerY() + 30);
 		m_tradeBtn.setSize(90, 30);
-		m_tradeBtn.setPosition(getInnerX() + 90, getInnerY() + 50);
+		m_tradeBtn.setPosition(getInnerX() + 90, getInnerY() + 70);
 		m_cancelBtn.setSize(90, 30);
-		m_cancelBtn.setPosition(getInnerX() + 90, getInnerY() + 90);
-		m_ourCashLabel.setPosition(getInnerX() + 10, getInnerY() + 130);
-		m_ourMoneyOffer.setSize(60, 20);
-		m_ourMoneyOffer.setPosition(getInnerX() + 20, getInnerY() + 128);
-		m_theirMoneyOffer.setPosition(getInnerX() + 188, getInnerY() + 130);
+		m_cancelBtn.setPosition(getInnerX() + 90, getInnerY() + 110);
+		m_ourCashLabel.adjustSize();
+		m_ourCashLabel.setPosition(getInnerX() + 10, getInnerY() + 148);
+		m_ourMoneyOffer.adjustSize();
+		m_ourMoneyOffer.setPosition(getInnerX() + 20, getInnerY() + 148);
+		m_theirMoneyOffer.adjustSize();
+		m_theirMoneyOffer.setPosition(getInnerX() + 188, getInnerY() + 148);
 		setSize(270, 178);
 		setCenter();
 	}

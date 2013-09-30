@@ -1250,7 +1250,7 @@ public class Player extends Character implements Battleable, Tradeable
 	{
 		ServerMessage tradeOffer = new ServerMessage(ClientPacket.TRADE_OFFER);
 		tradeOffer.addInt(o[0].getId());
-		tradeOffer.addInt(o[1].getId());
+		tradeOffer.addInt(o[1].getQuantity());
 		getSession().Send(tradeOffer);
 	}
 

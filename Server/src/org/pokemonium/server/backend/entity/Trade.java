@@ -139,6 +139,7 @@ public class Trade implements Runnable
 	{
 		Iterator<Tradeable> i = m_offers.keySet().iterator();
 		if(i.next().acceptedTradeOffer() && i.next().acceptedTradeOffer())
+		{
 			try
 			{
 				executeTrade();
@@ -147,6 +148,7 @@ public class Trade implements Runnable
 			{
 				e.printStackTrace();
 			}
+		}
 	}
 
 	/**
@@ -199,7 +201,10 @@ public class Trade implements Runnable
 		tradeOffers[0] = new TradeOffer();
 		tradeOffers[0].setId(poke);
 		tradeOffers[0].setType(TradeType.POKEMON);
-		tradeOffers[0].setInformation(tradeable.getParty()[poke].getSpeciesName());
+		if(poke > -1 && poke < 6)
+		{
+			tradeOffers[0].setInformation(tradeable.getParty()[poke].getSpeciesName());
+		}
 		if(poke > -1 && poke < 6)
 		{
 			if(!DataService.canTrade(tradeable.getParty()[poke].getSpeciesName()))
@@ -249,6 +254,7 @@ public class Trade implements Runnable
 				String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 				/* Handle player 1's offers */
 				for(int j = 0; j < offer1.length; j++)
+				{
 					switch(offer1[j].getType())
 					{
 						case POKEMON:
@@ -281,9 +287,11 @@ public class Trade implements Runnable
 						case ITEM:
 							break;
 					}
+				}
 
 				/* Handle player 2's offers */
 				for(int j = 0; j < offer2.length; j++)
+				{
 					switch(offer2[j].getType())
 					{
 						case POKEMON:
@@ -315,52 +323,65 @@ public class Trade implements Runnable
 						case ITEM:
 							break;
 					}
+				}
 				/* Execute the Pokemon swap */
 				if(temp[1] != null)
+				{
 					if(player1 instanceof Player)
 					{
 						Player p = (Player) player1;
 						p.addPokemon(temp[1]);
 						if(!p.isPokemonCaught(temp[1].getPokedexNumber()))
+						{
 							p.setPokemonCaught(temp[1].getPokedexNumber());
+						}
 					}
+				}
 				if(temp[0] != null)
+				{
 					if(player2 instanceof Player)
 					{
 						Player p = (Player) player2;
 						p.addPokemon(temp[0]);
 						if(!p.isPokemonCaught(temp[0].getPokedexNumber()))
+						{
 							p.setPokemonCaught(temp[0].getPokedexNumber());
+						}
 					}
+				}
 				/* Evolution checks */
 				for(Pokemon curPokemon : temp)
-				{ // do both pokemon
-					Player player;
-					if(curPokemon == temp[0])
-						player = (Player) player2;
-					else
-						player = (Player) player1;
-
-					int index = player.getPokemonIndex(curPokemon);
-					PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(curPokemon.getSpeciesName());
-					for(PokemonEvolution currentEvolution : pokeData.getEvolutions())
+				{
+					if(curPokemon != null) // This is null when a player didnt offer a pokemon up for trade, only money.
 					{
-						System.out.println(curPokemon.getName() + " can evolve via " + currentEvolution.getType());
-						switch(currentEvolution.getType())
+						// do both pokemon
+						Player player;
+						if(curPokemon == temp[0])
+							player = (Player) player2;
+						else
+							player = (Player) player1;
+
+						int index = player.getPokemonIndex(curPokemon);
+						PokemonSpecies pokeData = PokemonSpecies.getDefaultData().getPokemonByName(curPokemon.getSpeciesName());
+						for(PokemonEvolution currentEvolution : pokeData.getEvolutions())
 						{
-							case Trade:
-								curPokemon.setEvolution(currentEvolution);
-								ServerMessage message = new ServerMessage(ClientPacket.POKE_REQUEST_EVOLVE);
-								message.addInt(index);
-								player.getSession().Send(message);
-								break;
-							case TradeItem:
-								checkItemTradeEvolution(curPokemon, currentEvolution, player);
-								break;
-							default:
-								break;
+							System.out.println(curPokemon.getName() + " can evolve via " + currentEvolution.getType());
+							switch(currentEvolution.getType())
+							{
+								case Trade:
+									curPokemon.setEvolution(currentEvolution);
+									ServerMessage message = new ServerMessage(ClientPacket.POKE_REQUEST_EVOLVE);
+									message.addInt(index);
+									player.getSession().Send(message);
+									break;
+								case TradeItem:
+									checkItemTradeEvolution(curPokemon, currentEvolution, player);
+									break;
+								default:
+									break;
+							}
+							break;
 						}
-						break;
 					}
 				}
 			}

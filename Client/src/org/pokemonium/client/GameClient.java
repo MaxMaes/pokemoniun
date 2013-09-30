@@ -777,26 +777,29 @@ public class GameClient extends BasicGame
 				}
 				else if(key == Input.KEY_C)
 					getHUD().toggleChat();
-				else if(key == Input.KEY_1)
-					getHUD().togglePlayerStats();
-				else if(key == Input.KEY_2)
-					getHUD().togglePokedex();
-				else if(key == Input.KEY_3)
-					getHUD().togglePokemon();
-				else if(key == Input.KEY_4)
-					getHUD().toggleBag();
-				else if(key == Input.KEY_5)
-					getHUD().toggleMap();
-				else if(key == Input.KEY_6)
-					getHUD().toggleFriends();
-				else if(key == Input.KEY_7)
-					getHUD().toggleRequests();
-				else if(key == Input.KEY_8)
-					getHUD().toggleOptions();
-				else if(key == Input.KEY_9)
-					getHUD().toggleHelp();
-				else if(key == Input.KEY_0)
-					getHUD().disconnect();
+				else if(!getHUD().hasTradeDialog())
+				{
+					if(key == Input.KEY_1)
+						getHUD().togglePlayerStats();
+					else if(key == Input.KEY_2)
+						getHUD().togglePokedex();
+					else if(key == Input.KEY_3)
+						getHUD().togglePokemon();
+					else if(key == Input.KEY_4)
+						getHUD().toggleBag();
+					else if(key == Input.KEY_5)
+						getHUD().toggleMap();
+					else if(key == Input.KEY_6)
+						getHUD().toggleFriends();
+					else if(key == Input.KEY_7)
+						getHUD().toggleRequests();
+					else if(key == Input.KEY_8)
+						getHUD().toggleOptions();
+					else if(key == Input.KEY_9)
+						getHUD().toggleHelp();
+					else if(key == Input.KEY_0)
+						getHUD().disconnect();
+				}
 				else if(key == KeyManager.getKey(Action.ROD_OLD))
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.ITEM_USE);

@@ -514,6 +514,13 @@
                 <theme name="label" ref="label"/>
                 <theme name="image" ref="image"/>
                 <theme name="pokemonlocationicon" ref="image"/>
+                <theme name="textarea" ref="textarea">
+                    <param name="fonts">
+                        <map>
+                            <param name="default"><font>pokedex_betweenminiandsmall</font></param>
+                        </map>
+                    </param>
+                </theme>
             </theme>
             <theme name="helpwindow" ref="resizableframe_titled">
                 <param name="hasCloseButton"><bool>false</bool></param>

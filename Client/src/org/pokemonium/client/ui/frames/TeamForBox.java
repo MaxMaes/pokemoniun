@@ -1,6 +1,5 @@
 package org.pokemonium.client.ui.frames;
 
-import org.newdawn.slick.loading.LoadingList;
 import org.pokemonium.client.GameClient;
 import org.pokemonium.client.backend.FileLoader;
 import org.pokemonium.client.backend.entity.Pokemon;
@@ -47,9 +46,16 @@ public class TeamForBox extends ResizableFrame
 		add(pane);
 		parent = root;
 		setTheme("teambox");
-		loadPokes();
-		initGUI(parent);
-		// setVisible(true);
+		GameClient.getInstance().getGUI().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				loadPokes();
+				initGUI(parent);
+			}
+		});
+		setVisible(true);
 	}
 
 	/**
@@ -89,14 +95,14 @@ public class TeamForBox extends ResizableFrame
 				m_pokeIcon[i].setPosition(2, 3);
 				// m_pokeIcon[i].setSize(20, 20);
 				m_pokes[i].add(m_pokeIcon[i]);
-				m_pokeName[i].setPosition(40, 5);
+				m_pokeName[i].setPosition(50, 5);
 				m_pokeName[i].setSize(20, 10);
 				m_pokes[i].add(m_pokeName[i]);
 				m_level[i].setPosition(120 + 10, 5);
 				m_level[i].setSize(20, 10);
 				m_pokes[i].add(m_level[i]);
 				m_hp[i].setSize(114, 10);
-				m_hp[i].setPosition(40, 15);
+				m_hp[i].setPosition(50, 17);
 				m_pokes[i].add(m_hp[i]);
 			}
 			catch(NullPointerException e)
@@ -132,8 +138,6 @@ public class TeamForBox extends ResizableFrame
 	 */
 	public void loadPokes()
 	{
-		LoadingList.setDeferredLoading(true);
-
 		for(int i = 0; i < 6; i++)
 		{
 			m_pokeIcon[i] = new ImageButton();
@@ -182,7 +186,6 @@ public class TeamForBox extends ResizableFrame
 				e.printStackTrace();
 			}
 		}
-		LoadingList.setDeferredLoading(false);
 	}
 
 	/**

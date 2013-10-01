@@ -841,7 +841,7 @@ public class GameClient extends BasicGame
 				ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 				m_session.send(message);
 			}
-			if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning())
+			if(BattleManager.getInstance().isBattling() && getHUD().hasBattleSpeechFrame() && !getHUD().hasMoveLearning() && !getHUD().hasBoxDialog())
 			{
 				getHUD().getBattleSpeechFrame().advance();
 			}
@@ -849,7 +849,10 @@ public class GameClient extends BasicGame
 			{
 				try
 				{
-					getHUD().getNPCSpeech().advance();
+					if(!getHUD().hasBoxDialog())
+					{
+						getHUD().getNPCSpeech().advance();
+					}
 				}
 				catch(Exception e)
 				{
@@ -960,7 +963,7 @@ public class GameClient extends BasicGame
 		m_mapMatrix = new ClientMapMatrix();
 		m_animator = new Animator(m_mapMatrix);
 
-		gc.getInput().enableKeyRepeat(100, 100);
+		gc.getInput().enableKeyRepeat();
 
 		setPlayerSpriteFactory();
 		PokemonSpriteDatabase.Init();
@@ -1121,7 +1124,7 @@ public class GameClient extends BasicGame
 				{
 					getHUD().getChat().giveupKeyboardFocus();
 				}
-				if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog())
+				if(getHUD().getNPCSpeech() == null && !getHUD().hasBattleDialog() && !getHUD().hasMoveLearning() && !getHUD().hasBoxDialog())
 				{
 					ClientMessage message = new ClientMessage(ServerPacket.TALKING_START);
 					m_session.send(message);
@@ -1130,7 +1133,7 @@ public class GameClient extends BasicGame
 				{
 					getHUD().getBattleSpeechFrame().advance();
 				}
-				else if(getHUD().hasNPCSpeechFrame())
+				else if(getHUD().hasNPCSpeechFrame() && !getHUD().hasBoxDialog())
 				{
 					getHUD().getNPCSpeech().advance();
 				}

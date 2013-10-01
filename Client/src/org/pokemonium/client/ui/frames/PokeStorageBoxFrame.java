@@ -264,7 +264,8 @@ public class PokeStorageBoxFrame extends ResizableFrame
 				teamPanel.setVisible(false);
 				ClientMessage finishBoxing = new ClientMessage(ServerPacket.FINISH_BOX_INTERACTION);
 				GameClient.getInstance().getSession().send(finishBoxing);
-				GameClient.getInstance().getGUIPane().getHUD().removeBoxDialog();
+				GameClient.getInstance().getHUD().removeBoxDialog();
+				GameClient.getInstance().getHUD().getNPCSpeech().advance();
 				GameClient.getInstance().getHUD().removeChild(teamPanel);
 				GameClient.getInstance().getOurPlayer().setBoxing(false);
 			}

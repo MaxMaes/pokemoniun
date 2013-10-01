@@ -1196,12 +1196,16 @@ public class Player extends Character implements Battleable, Tradeable
 					}
 					else if(m_map.isNpcBattle(this))
 						m_movementQueue.clear();
-					/* If it wasn't a battle see should we increase happiness */
+					/* If it wasn't a battle see should we increase happiness.
+					 * Pokemon only have their happiness increased by walking if it is below 120 */
 					if(getX() % 32 == 0 || (getY() + 8) % 32 == 0)
-						for(int i = 0; i < m_pokemon.length; i++)
-							/* Pokemon only have their happiness increased by walking if it is below 120 */
-							if(m_pokemon[i] != null && m_pokemon[i].getHappiness() < 120)
-								m_pokemon[i].setHappiness(m_pokemon[i].getHappiness() + 1);
+					{
+						for(Pokemon poke : m_pokemon)
+						{
+							if(poke != null && poke.getHappiness() < 120)
+								poke.setHappiness(poke.getHappiness() + 1);
+						}
+					}
 				}
 				return true;
 			}

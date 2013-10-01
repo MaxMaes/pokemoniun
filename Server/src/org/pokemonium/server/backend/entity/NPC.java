@@ -967,6 +967,7 @@ public class NPC extends Character
 					party[1] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Bastiodon", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Ancient Power", "Iron Head", "Blizzard", "Thunderbolt");
 					party[2] = poke;
+					/* TODO: NPE on NPC line 557, get abilities. Sadhi */
 					poke = Pokemon.getGymLeaderPokemon("Metacross", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Hammer Arm", "Meteor Mash", "Zen Headbut", "Earthquake");
 					party[3] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Lucario", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Aura Sphere", "Dragon Pulse", "Extremespeed", "Ice Punch");

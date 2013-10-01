@@ -31,9 +31,9 @@ import org.pokemonium.server.battle.mechanics.PokemonType;
 import org.pokemonium.server.battle.mechanics.ValidationException;
 import org.pokemonium.server.battle.mechanics.clauses.Clause;
 import org.pokemonium.server.battle.mechanics.moves.MoveList;
+import org.pokemonium.server.battle.mechanics.moves.MoveList.SpeedSwapEffect;
 import org.pokemonium.server.battle.mechanics.moves.MoveListEntry;
 import org.pokemonium.server.battle.mechanics.moves.PokemonMove;
-import org.pokemonium.server.battle.mechanics.moves.MoveList.SpeedSwapEffect;
 import org.pokemonium.server.battle.mechanics.statuses.StatusEffect;
 import org.pokemonium.server.battle.mechanics.statuses.field.FieldEffect;
 import org.pokemonium.server.battle.mechanics.statuses.field.RainEffect;
@@ -820,68 +820,71 @@ public abstract class BattleField
 		if(psource.getItem() != null)
 		{
 			ArrayList<StatusEffect> tmp = psource.getStatusEffects();// getNormalStatuses(0);
-			for(StatusEffect e : tmp)
+			for(StatusEffect statusEff : tmp)
 			{
-				switch(e.getName())
+				if(statusEff != null)
 				{
-					case "Sleep":
-						if(psource.getItemName().equalsIgnoreCase("Chesto Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.m_name + "ate the " + psource.getItemName() + " it was holding");
-							this.informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					case "Poison":
-						if(psource.getItemName().equalsIgnoreCase("Pecha Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
-							this.informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					case "Freeze":
-						if(psource.getItemName().equalsIgnoreCase("Aspear Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
-							informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					case "Confusion":
-						if(psource.getItemName().equalsIgnoreCase("Persim Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
-							this.informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					case "Burn":
-						if(psource.getItemName().equalsIgnoreCase("Rawst Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
-							this.informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					case "Paralysis":
-						if(psource.getItemName().equalsIgnoreCase("Cheri Berry"))
-						{
-							psource.removeStatus(e);
-							this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
-							this.informStatusRemoved(psource, e);
-							psource.setItem(null);
-						}
-						break;
-					default:
-						break;
+					switch(statusEff.getName())
+					{
+						case "Sleep":
+							if(psource.getItemName().equalsIgnoreCase("Chesto Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.m_name + "ate the " + psource.getItemName() + " it was holding");
+								this.informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						case "Poison":
+							if(psource.getItemName().equalsIgnoreCase("Pecha Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+								this.informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						case "Freeze":
+							if(psource.getItemName().equalsIgnoreCase("Aspear Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+								informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						case "Confusion":
+							if(psource.getItemName().equalsIgnoreCase("Persim Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+								this.informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						case "Burn":
+							if(psource.getItemName().equalsIgnoreCase("Rawst Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+								this.informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						case "Paralysis":
+							if(psource.getItemName().equalsIgnoreCase("Cheri Berry"))
+							{
+								psource.removeStatus(statusEff);
+								this.showMessage(psource.getName() + "ate the " + psource.getItemName() + " it was holding");
+								this.informStatusRemoved(psource, statusEff);
+								psource.setItem(null);
+							}
+							break;
+						default:
+							break;
+					}
 				}
-				if(psource.getHealth() < (psource.getRawStat(psource.S_HP) * 0.5))
+				if(psource.getHealth() < (psource.getRawStat(Pokemon.S_HP) * 0.5))
 				{
 					if(psource.getItemName().equalsIgnoreCase("Oran Berry"))
 					{
@@ -903,47 +906,47 @@ public abstract class BattleField
 					switch(psource.getItemName())
 					{
 						case "Leftovers":
-							if(psource.getHealth() < psource.getRawStat(psource.S_HP))
+							if(psource.getHealth() < psource.getRawStat(Pokemon.S_HP))
 							{
-								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)
-									psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() > psource.getStat(Pokemon.S_HP) / 16)
+									psource.changeHealth(psource.getStat(Pokemon.S_HP) / 16);
 								else
-									psource.changeHealth(psource.getRawStat(psource.S_HP) - psource.getHealth());
-								System.out.println(psource.getStat(psource.S_HP) / 16);
+									psource.changeHealth(psource.getRawStat(Pokemon.S_HP) - psource.getHealth());
+								System.out.println(psource.getStat(Pokemon.S_HP) / 16);
 							}
 							this.showMessage(psource.getName() + "'s leftovers heals a bit of HP");
 							break;
 						case "Black Sludge":
 							if(psource.m_type1.equalsIgnoreCase("Poison") || psource.m_type2.equalsIgnoreCase("Poison"))
 							{
-								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)
-									psource.changeHealth(psource.getStat(psource.S_HP) / 16);
+								if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() > psource.getStat(Pokemon.S_HP) / 16)
+									psource.changeHealth(psource.getStat(Pokemon.S_HP) / 16);
 								else
-									psource.changeHealth(psource.getRawStat(psource.S_HP) - psource.getHealth());
+									psource.changeHealth(psource.getRawStat(Pokemon.S_HP) - psource.getHealth());
 								this.showMessage(psource.getName() + "'s black sludge heals a bit of HP");
 							}
 							else
 							{
-								if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 16)	// if hp is bigger than 1/16 of total just remove
-									psource.changeHealth(-psource.getStat(psource.S_HP) / 16);
-								else if(psource.getRawStat(psource.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
+								if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() > psource.getStat(Pokemon.S_HP) / 16)	// if hp is bigger than 1/16 of total just remove
+									psource.changeHealth(-psource.getStat(Pokemon.S_HP) / 16);
+								else if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
 								{
 								}
 								else
 									// less than 1/16 of hp, remove what is left but leave 1 hp
-									psource.changeHealth(-psource.getRawStat(psource.S_HP) - psource.getHealth() + 1);
+									psource.changeHealth(-psource.getRawStat(Pokemon.S_HP) - psource.getHealth() + 1);
 								this.showMessage(psource.getName() + " is hurt by black sludge");
 							}
 							break;
 						case "Sticky Barb":
-							if(psource.getRawStat(psource.S_HP) - psource.getHealth() > psource.getStat(psource.S_HP) / 8)	// if hp is bigger than 1/8 of total just remove
-								psource.changeHealth(-psource.getStat(psource.S_HP) / 8);
-							else if(psource.getRawStat(psource.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
+							if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() > psource.getStat(Pokemon.S_HP) / 8)	// if hp is bigger than 1/8 of total just remove
+								psource.changeHealth(-psource.getStat(Pokemon.S_HP) / 8);
+							else if(psource.getRawStat(Pokemon.S_HP) - psource.getHealth() == 1)	// if hp is 1 do nothing
 							{
 							}
 							else
 								// less than 1/16 of hp, remove what is left but leave 1 hp
-								psource.changeHealth(-psource.getRawStat(psource.S_HP) - psource.getHealth() + 1);
+								psource.changeHealth(-psource.getRawStat(Pokemon.S_HP) - psource.getHealth() + 1);
 							this.showMessage(psource.getName() + " is hurt by Sticky Barb");
 							break;
 						default:

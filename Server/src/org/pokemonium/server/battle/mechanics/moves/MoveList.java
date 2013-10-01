@@ -152,13 +152,13 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return "CoEffect?";
 		}
 
 		@Override
 		public String getName()
 		{
-			return null;
+			return "CoEffect?";
 		}
 
 		@Override
@@ -771,7 +771,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " was hurt by spikes.";
 		}
 
 		/**
@@ -1045,13 +1045,13 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " got countered.";
 		}
 
 		@Override
 		public String getName()
 		{
-			return null;
+			return "Counter";
 		}
 
 		@Override
@@ -1251,7 +1251,7 @@ public class MoveList
 		@Override
 		public String getName()
 		{
-			return null;
+			return "Delegation";
 		}
 
 		@Override
@@ -1335,7 +1335,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " is invulnerable.";
 		}
 
 		@Override
@@ -1509,7 +1509,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " is soundproof.";
 		}
 
 		@Override
@@ -1798,7 +1798,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " stored energy.";
 		}
 
 		public int getLevels()
@@ -1939,7 +1939,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return m_type + " attacks were weakened!";
 		}
 
 		@Override
@@ -1996,13 +1996,13 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " dealt damage";
 		}
 
 		@Override
 		public String getName()
 		{
-			return null;
+			return "Damage";
 		}
 
 		@Override
@@ -2042,7 +2042,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " defense rose";
 		}
 
 		@Override
@@ -2160,13 +2160,13 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " applied later.";
 		}
 
 		@Override
 		public String getName()
 		{
-			return null;
+			return "DelayedStatus";
 		}
 
 		@Override
@@ -2339,7 +2339,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " minimized.";
 		}
 
 		@Override
@@ -2427,7 +2427,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " must recharge";
 		}
 
 		@Override
@@ -2568,7 +2568,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return " had it's stat cutted.";
 		}
 
 		@Override
@@ -2666,7 +2666,7 @@ public class MoveList
 		@Override
 		public String getDescription()
 		{
-			return null;
+			return "A tailwind picked up!";
 		}
 
 		@Override
@@ -4364,7 +4364,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return " got converted!";
 			}
 
 			@Override
@@ -5013,7 +5013,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return " is camouflaged.";
 			}
 
 			@Override
@@ -5297,13 +5297,13 @@ public class MoveList
 					@Override
 					public String getDescription()
 					{
-						return null;
+						return " a status";
 					}
 
 					@Override
 					public String getName()
 					{
-						return null;
+						return "Status";
 					}
 
 					@Override
@@ -6502,7 +6502,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return " has lost it's flying type.";
 			}
 
 			@Override
@@ -7559,7 +7559,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return " got a move effect stolen.";
 			}
 
 			public StatusEffect[] getEffects()
@@ -7692,7 +7692,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return "'s type has been made resistant.";
 			}
 
 			@Override
@@ -7789,7 +7789,7 @@ public class MoveList
 			@Override
 			public String getDescription()
 			{
-				return null;
+				return " got slashed.";
 			}
 
 			@Override

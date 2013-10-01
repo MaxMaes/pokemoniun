@@ -51,6 +51,14 @@ public class FishDatabase
 	public FishPokemon getFish(String pokemon)
 	{
 		pokemon = pokemon.toUpperCase();
+		try
+		{
+			return m_database.get(pokemon).get(0);
+		}
+		catch(Exception e)
+		{
+			System.err.println("Pokemon: " + pokemon);
+		}
 		return m_database.get(pokemon).get(0);
 	}
 

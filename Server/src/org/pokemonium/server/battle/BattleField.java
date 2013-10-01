@@ -822,7 +822,7 @@ public abstract class BattleField
 			ArrayList<StatusEffect> tmp = psource.getStatusEffects();// getNormalStatuses(0);
 			for(StatusEffect statusEff : tmp)
 			{
-				if(statusEff != null)
+				if(statusEff.getName() != null)
 				{
 					switch(statusEff.getName())
 					{

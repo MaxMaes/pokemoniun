@@ -99,7 +99,6 @@ public class BattleManager
 				{
 					GameClient.getInstance().getSoundPlayer().setTrack(m_curTrack);
 				}
-				GameClient.getInstance().getGUIPane().showHUD();
 			}
 		});
 	}

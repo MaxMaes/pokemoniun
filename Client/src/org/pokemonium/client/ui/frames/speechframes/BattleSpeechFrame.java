@@ -71,6 +71,10 @@ public class BattleSpeechFrame extends SpeechFrame implements Runnable
 
 	public String getCurrentLine()
 	{
+		if(stringToPrint == null)
+		{
+			return "";
+		}
 		return stringToPrint;
 	}
 

@@ -112,7 +112,10 @@ public class TrainChooserDialog extends ResizableFrame
 		{
 			public void run()
 			{
-				choice = m_locations.getEntry(getChoice());
+				int c = 0;
+				if(getChoice() > -1)
+					c = getChoice();
+				choice = m_locations.getEntry(c);
 				setVisible(false);
 				String txt = "Do you wish to go to " + choice + "?\nYou need a trainer level of atleast 25.\nBut for Pyrite Town and Phenac City you also need 17 badges.";
 				if(choice.contains("Snowpoint"))

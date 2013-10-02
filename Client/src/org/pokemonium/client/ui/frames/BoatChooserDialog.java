@@ -73,7 +73,10 @@ public class BoatChooserDialog extends ResizableFrame
 		{
 			public void run()
 			{
-				choice = m_locations.getEntry(m_travelList.getSelected());
+				int c = 0;
+				if(getChoice() > -1)
+					c = getChoice();
+				choice = m_locations.getEntry(c);
 				String txt = "a trainer level > 24";
 				if(choice.contains("Slateport") || choice.contains("Lilycove") || choice.contains("One"))
 				{

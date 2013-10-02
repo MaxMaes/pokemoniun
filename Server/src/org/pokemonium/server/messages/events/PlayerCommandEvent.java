@@ -55,7 +55,7 @@ public class PlayerCommandEvent implements MessageEvent
 		else if(input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("reset "))
 		{
 			String playername = input.substring(6);
-			if(checkPermission(session, UserClasses.SUPER_MOD))
+			if(checkPermission(session, UserClasses.MODERATOR))
 				processPlayerReset(session, playername, ActiveConnections.getPlayer(playername));
 		}
 		else if(input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("unban "))

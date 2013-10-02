@@ -304,7 +304,7 @@ public class BattleControlFrame extends Widget
 		Label move4Type = new Label();
 		move4Type.setTheme("movetypelabel");
 		move4Type.setSize(GameClient.getInstance().getFontSmall().getWidth(move4Type.getText()), GameClient.getInstance().getFontSmall().getHeight(move4Type.getText()));
-		move4Type.setPosition(135, 950);
+		move4Type.setPosition(135, 95);
 		attackPane.add(move4Type);
 		attackPane.add(pp4);
 

@@ -178,7 +178,7 @@ public class TravelEvent implements MessageEvent
 
 	public void handleTravel(Player p, int money, int trainerLvl, int x, int y, int mapX, int mapY, int badges, int userclass)
 	{
-		if(p.getAdminLevel() >= UserClasses.MODERATOR || (p.getMoney() >= money && p.getTrainingLevel() >= trainerLvl) && p.getBadgeCount() >= badges)
+		if(p.getAdminLevel() > userclass || (p.getMoney() >= money && p.getTrainingLevel() >= trainerLvl) && p.getBadgeCount() >= badges)
 		{
 			if(p.getAdminLevel() <= userclass && money > 0)
 			{

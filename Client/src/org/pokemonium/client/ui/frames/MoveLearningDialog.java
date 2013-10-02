@@ -262,7 +262,8 @@ public class MoveLearningDialog extends ResizableFrame
 				public void run()
 				{
 					GameClient.getInstance().getOurPlayer().getPokemon()[m_pokeIndex].setMoves(j, m_move);
-					BattleManager.getInstance().updateMoves();
+					if(BattleManager.getInstance().isBattling())
+						BattleManager.getInstance().updateMoves();
 					ClientMessage message = new ClientMessage(ServerPacket.LEARN_MOVE);
 					message.addInt(m_pokeIndex);
 					message.addInt(j);

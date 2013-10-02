@@ -51,6 +51,7 @@ public class MoveRelearnDialog extends ResizableFrame
 		removeChild(dialog);
 		pane = new Widget();
 		pane.setTheme("content");
+		m_moves = new SimpleChangableListModel<String>();
 		for(String s : movelist.split(", "))
 		{
 			if(s.equals("/END"))

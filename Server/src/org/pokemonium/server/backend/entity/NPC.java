@@ -503,10 +503,14 @@ public class NPC extends Character
 						poke = Pokemon.getGymLeaderPokemon("Heracross", lvl, PokemonNature.N_JOLLY, 0, 255, 0, 255, 0, 0, "Close Combat", "Megahorn", "Stone Edge", "Toxic");
 						party[1] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Butterfree", lvl, PokemonNature.N_TIMID, 0, 0, 255, 0, 0, 255, "Sleep Powder", "Stun Spore", "Bug Buzz", "Confusion");
+						if(poke.getAbility() == null)
+							poke.setAbility(IntrinsicAbility.getInstance("Compoundeyes"), true);
 						party[2] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Beedrill", lvl, PokemonNature.N_ADAMANT, 0, 255, 0, 255, 0, 0, "Swords Dance", "X-Scissor", "Poison Jab", "Brick Break");
 						party[3] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Yanmega", lvl, PokemonNature.N_TIMID, 0, 0, 0, 255, 0, 255, "Bug Buzz", "Air Slash", "Protect", "Fire Fang");
+						if(poke.getAbility() == null)
+							poke.setAbility(IntrinsicAbility.getInstance("Compoundeyes"), true);
 						party[4] = poke;
 						poke = Pokemon.getGymLeaderPokemon("Parasect", lvl, PokemonNature.N_ADAMANT, 255, 255, 0, 0, 0, 0, "Spore", "Seed Bomb", "Brick Break", "Synthesis");
 						party[5] = poke;
@@ -780,7 +784,6 @@ public class NPC extends Character
 					poke = Pokemon.getGymLeaderPokemon("Breloom", lvl, PokemonNature.N_IMPISH, 255, 0, 255, 255, 0, 0, "Substitute", "Leech Seed", "Spore", "Focus Punch");
 					party[5] = poke;
 				}
-				/* TODO: Fix moves, natures and ev's. */
 				else if(m_name.equalsIgnoreCase("wattson"))
 				{
 					lvl = 78;
@@ -965,10 +968,9 @@ public class NPC extends Character
 					party[0] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Steelix", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Earthquake", "Iron Head", "Stealth Rock", "Stone Edge");
 					party[1] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Bastiodon", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Ancient Power", "Iron Head", "Blizzard", "Thunderbolt");
+					poke = Pokemon.getGymLeaderPokemon("Bastiodon", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "AncientPower", "Iron Head", "Blizzard", "Thunderbolt");
 					party[2] = poke;
-					/* TODO: NPE on NPC line 557, get abilities. Sadhi */
-					poke = Pokemon.getGymLeaderPokemon("Metacross", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Hammer Arm", "Meteor Mash", "Zen Headbut", "Earthquake");
+					poke = Pokemon.getGymLeaderPokemon("Metagross", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Hammer Arm", "Meteor Mash", "Zen Headbutt", "Earthquake");
 					party[3] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Lucario", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Aura Sphere", "Dragon Pulse", "Extremespeed", "Ice Punch");
 					party[4] = poke;
@@ -1004,7 +1006,7 @@ public class NPC extends Character
 					party[3] = poke;
 					poke = Pokemon.getGymLeaderPokemon("Magnezone", lvl, PokemonNature.N_ADAMANT, 0, 0, 0, 0, 0, 0, "Supersonic", "Magnet Bomb", "Zap Cannon", "Reflect");
 					party[4] = poke;
-					poke = Pokemon.getGymLeaderPokemon("Electrivire", lvl, PokemonNature.N_IMPISH, 0, 0, 0, 0, 0, 0, "Rain Dance", "Light Screen", "Thunderpunch", "Fire Punch");
+					poke = Pokemon.getGymLeaderPokemon("Electivire", lvl, PokemonNature.N_IMPISH, 0, 0, 0, 0, 0, 0, "Rain Dance", "Light Screen", "Thunderpunch", "Fire Punch");
 					party[5] = poke;
 				}
 			}

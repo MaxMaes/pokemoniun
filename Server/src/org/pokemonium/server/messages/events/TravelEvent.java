@@ -65,10 +65,10 @@ public class TravelEvent implements MessageEvent
 					handleTravel(p, money, 25, 352, 152, -31, -39, 0, UserClasses.DEFAULT);
 					break;
 				case "Slateport":
-					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 896, 408, 27, 24, 16, UserClasses.SUPER_MOD);
+					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 896, 408, 27, 24, 16, UserClasses.MODERATOR);
 					break;
 				case "Lilycove":
-					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 384, 1112, 32, 20, 16, UserClasses.SUPER_MOD);
+					handleTicketTravel(p, ItemID.HOENN_TICKET, 115000, 10000, 25, 384, 1112, 32, 20, 16, UserClasses.MODERATOR);
 					break;
 				case "Canalave":
 					// player is on iron island, free travel back
@@ -80,10 +80,10 @@ public class TravelEvent implements MessageEvent
 					{
 						money = 10000;
 					}
-					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, money, 40, 384, 1112, 33, -42, 20, UserClasses.SUPER_MOD);
+					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, money, 40, 384, 1112, 33, -42, 20, UserClasses.MODERATOR);
 					break;
 				case "Snowpoint":
-					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, 10000, 40, 192, 1880, 39, -48, 20, UserClasses.SUPER_MOD);
+					handleTicketTravel(p, ItemID.SINNOH_TICKET, 165000, 10000, 40, 192, 1880, 39, -48, 20, UserClasses.MODERATOR);
 					break;
 				case "Resort Area":
 					handleTravel(p, 25000, 40, 448, 504, 43, -47, 24, UserClasses.DONATOR);

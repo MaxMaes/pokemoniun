@@ -37,9 +37,9 @@ import org.pokemonium.server.battle.mechanics.StatMultiplier;
 import org.pokemonium.server.battle.mechanics.ValidationException;
 import org.pokemonium.server.battle.mechanics.clauses.Clause.PendanticDamageClause;
 import org.pokemonium.server.battle.mechanics.moves.MoveList;
+import org.pokemonium.server.battle.mechanics.moves.MoveList.AttractEffect;
 import org.pokemonium.server.battle.mechanics.moves.MoveListEntry;
 import org.pokemonium.server.battle.mechanics.moves.PokemonMove;
-import org.pokemonium.server.battle.mechanics.moves.MoveList.AttractEffect;
 import org.pokemonium.server.battle.mechanics.statuses.AwesomeEffect;
 import org.pokemonium.server.battle.mechanics.statuses.BurnEffect;
 import org.pokemonium.server.battle.mechanics.statuses.ChargeEffect;
@@ -1386,7 +1386,7 @@ public class Pokemon extends PokemonSpecies
 	}
 
 	/**
-	 * Return the name of this pokemon's item.
+	 * Return the name of this pokemon's holditem.
 	 */
 	public String getItemName()
 	{

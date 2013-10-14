@@ -1089,7 +1089,7 @@ public class WildBattleField extends BattleField
 					for(int i = 0; i < pokeData.getEvolutions().length; i++)
 					{
 						PokemonEvolution evolution = pokeData.getEvolutions()[i];
-						if(evolution.getType() == EvolutionTypes.Level)
+						if(evolution.getType() == EvolutionTypes.Level && !poke.getItemName().equalsIgnoreCase("Everstone"))
 						{
 							if(evolution.getLevel() <= poke.getLevel() + 1)
 							{
@@ -1102,7 +1102,7 @@ public class WildBattleField extends BattleField
 								i = pokeData.getEvolutions().length;
 							}
 						}
-						else if(evolution.getType() == EvolutionTypes.HappinessDay)
+						else if(evolution.getType() == EvolutionTypes.HappinessDay && !poke.getItemName().equalsIgnoreCase("Everstone"))
 						{
 							if(poke.getHappiness() > 220 && !TimeService.isNight())
 							{
@@ -1115,7 +1115,7 @@ public class WildBattleField extends BattleField
 								i = pokeData.getEvolutions().length;
 							}
 						}
-						else if(evolution.getType() == EvolutionTypes.HappinessNight)
+						else if(evolution.getType() == EvolutionTypes.HappinessNight && !poke.getItemName().equalsIgnoreCase("Everstone"))
 						{
 							if(poke.getHappiness() > 220 && TimeService.isNight())
 							{
@@ -1128,7 +1128,7 @@ public class WildBattleField extends BattleField
 								i = pokeData.getEvolutions().length;
 							}
 						}
-						else if(evolution.getType() == EvolutionTypes.Happiness)
+						else if(evolution.getType() == EvolutionTypes.Happiness && !poke.getItemName().equalsIgnoreCase("Everstone"))
 						{
 							if(poke.getHappiness() > 220)
 							{

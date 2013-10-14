@@ -389,8 +389,8 @@ public class BigBagDialog extends ResizableFrame
 	public void useItem(int i, Widget root)
 	{
 		destroyPopup(root);
-		if(m_curCategory == 3)
-		// if(m_curCategory == 0 || m_curCategory == 3)
+		// if(m_curCategory == 3)
+		if(m_curCategory == 0 || m_curCategory == 3)
 		{
 			if(ItemDatabase.getInstance().getItem(Integer.valueOf(m_itemBtns.get(i).getText())).getCategory().equalsIgnoreCase("Field"))
 			{

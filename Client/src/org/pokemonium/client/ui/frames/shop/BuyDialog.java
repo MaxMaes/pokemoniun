@@ -141,47 +141,55 @@ public class BuyDialog extends Widget
 	@Override
 	public void layout()
 	{
-		for(int i = 0; i < items.size(); i++)
+		try
 		{
-			itemButtons[i].setSize(300, 50);
-			if(i > 0)
+			for(int i = 0; i < items.size(); i++)
 			{
-				itemButtons[i].setPosition(getInnerX(), getInnerY() + itemButtons[i].getHeight());
-			}
-			else
-			{
-				itemButtons[i].setPosition(getInnerX(), getInnerY());
-			}
+				itemButtons[i].setSize(300, 50);
+				if(i > 0)
+				{
+					itemButtons[i].setPosition(getInnerX(), getInnerY() + itemButtons[i].getHeight());
+				}
+				else
+				{
+					itemButtons[i].setPosition(getInnerX(), getInnerY());
+				}
 
-			if(i > 0)
-			{
-				itemSprites[i].setPosition(getInnerX(), getInnerY() + itemButtons[i - 1].getHeight() + 12);
-			}
-			else
-			{
-				itemSprites[i].setPosition(getInnerX(), getInnerY() + 12);
-			}
+				if(i > 0)
+				{
+					itemSprites[i].setPosition(getInnerX(), getInnerY() + itemButtons[i - 1].getHeight() + 12);
+				}
+				else
+				{
+					itemSprites[i].setPosition(getInnerX(), getInnerY() + 12);
+				}
 
-			if(i > 0)
-			{
-				itemStockSprites[i].setPosition(getInnerX() + 260, getInnerY() + itemButtons[i - 1].getHeight() + 12);
+				if(i > 0)
+				{
+					itemStockSprites[i].setPosition(getInnerX() + 260, getInnerY() + itemButtons[i - 1].getHeight() + 12);
+				}
+				else
+				{
+					itemStockSprites[i].setPosition(getInnerX() + 260, getInnerY() + 12);
+				}
+				itemLabels[i].setSize(itemLabels[i].computeTextWidth(), itemLabels[i].computeTextHeight());
+				if(i > 0)
+				{
+					itemLabels[i].setPosition(getInnerX() + 30, getInnerY() + itemButtons[i - 1].getHeight() + 20);
+				}
+				else
+				{
+					itemLabels[i].setPosition(getInnerX() + 30, getInnerY() + 20);
+				}
 			}
-			else
-			{
-				itemStockSprites[i].setPosition(getInnerX() + 260, getInnerY() + 12);
-			}
-			itemLabels[i].setSize(itemLabels[i].computeTextWidth(), itemLabels[i].computeTextHeight());
-			if(i > 0)
-			{
-				itemLabels[i].setPosition(getInnerX() + 30, getInnerY() + itemButtons[i - 1].getHeight() + 20);
-			}
-			else
-			{
-				itemLabels[i].setPosition(getInnerX() + 30, getInnerY() + 20);
-			}
-			cancelButton.setSize(300, 40);
-			cancelButton.setPosition(getInnerX(), getInnerY() + 336);
 		}
+		catch(Exception e)
+		{
+			System.err.println("there were no items in this shop category");
+		}
+		cancelButton.setSize(300, 40);
+		cancelButton.setPosition(getInnerX(), getInnerY() + 336);
+
 		setSize(300, getInnerY() + 336 - 72);
 	}
 }

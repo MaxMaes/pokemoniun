@@ -1199,7 +1199,7 @@
 				<m_name>Fire Stone</m_name>
 				<m_description>Allows fire type evolution</m_description>
 				<m_id>164</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1213,7 +1213,7 @@
 				<m_name>Water Stone</m_name>
 				<m_description>Allows water type evolution</m_description>
 				<m_id>165</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1227,7 +1227,7 @@
 				<m_name>Thunder Stone</m_name>
 				<m_description>Allows electric type evolution</m_description>
 				<m_id>166</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1241,7 +1241,7 @@
 				<m_name>Sun Stone</m_name>
 				<m_description>Allows growth under the sun</m_description>
 				<m_id>167</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1255,7 +1255,7 @@
 				<m_name>Moon Stone</m_name>
 				<m_description>Allows growth under the moon</m_description>
 				<m_id>168</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1269,7 +1269,7 @@
 				<m_name>Shiny Stone</m_name>
 				<m_description>Allows evolution</m_description>
 				<m_id>169</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1283,7 +1283,7 @@
 				<m_name>Dusk Stone</m_name>
 				<m_description>Allows evolution</m_description>
 				<m_id>170</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1297,7 +1297,7 @@
 				<m_name>Dawn Stone</m_name>
 				<m_description>Allows evolution</m_description>
 				<m_id>171</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1311,7 +1311,7 @@
 				<m_name>Everstone</m_name>
 				<m_description>Prevents evolution</m_description>
 				<m_id>172</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
@@ -1325,7 +1325,7 @@
 				<m_name>Leaf Stone</m_name>
 				<m_description>Allows plant type evolution</m_description>
 				<m_id>173</m_id>
-				<m_category>Field</m_category>
+				<m_category>Evolution</m_category>
 				<m_shop>0</m_shop>
 				<m_price>1500</m_price>
 				<m_attributes>
